@@ -445,7 +445,7 @@ class AgentClient:
             client = _docker_client()
             container, create_timings = _create_container(
                 client,
-                name=f"tempo-agent-{slack_thread_key.replace(':', '-')[:40]}",
+                name=f"agent2-{slack_thread_key.replace(':', '-')[:40]}",
                 repo=repo,
             )
             log.info("spawn_container_created", request_id=rid, thread=slack_thread_key,
