@@ -824,12 +824,18 @@ class AgentClient:
                         # Append event to live turn in real-time for SSE
                         stripped = line.strip()
                         if stripped:
+                            now = datetime.now(UTC).isoformat()
+                            elapsed = round(time.monotonic() - started, 3)
                             try:
                                 evt = json.loads(stripped)
+                                evt["received_at"] = now
+                                evt["elapsed_s"] = elapsed
                                 live_turn["events"].append(evt)
                                 _emit(evt)
                             except json.JSONDecodeError:
-                                live_turn["events"].append({"type": "raw", "text": stripped})
+                                live_turn["events"].append(
+                                    {"type": "raw", "text": stripped, "received_at": now, "elapsed_s": elapsed}
+                                )
                 if stderr_chunk:
                     err_buf += stderr_decoder.decode(stderr_chunk)
                     while "\n" in err_buf:
@@ -841,10 +847,17 @@ class AgentClient:
             if buf.strip():
                 lines.append(buf)
                 stripped = buf.strip()
+                now = datetime.now(UTC).isoformat()
+                elapsed = round(time.monotonic() - started, 3)
                 try:
-                    live_turn["events"].append(json.loads(stripped))
+                    evt = json.loads(stripped)
+                    evt["received_at"] = now
+                    evt["elapsed_s"] = elapsed
+                    live_turn["events"].append(evt)
                 except json.JSONDecodeError:
-                    live_turn["events"].append({"type": "raw", "text": stripped})
+                    live_turn["events"].append(
+                        {"type": "raw", "text": stripped, "received_at": now, "elapsed_s": elapsed}
+                    )
             if err_buf.strip():
                 stderr_lines.append(err_buf)
 
@@ -884,6 +897,18 @@ class AgentClient:
                 session["state"] = "idle"
                 session["last_activity"] = time.time()
             _persist_session(session, slack_thread_key)
+            # Compute per-turn LLM stats from events
+            llm_calls = 0
+            total_input_tokens = 0
+            total_output_tokens = 0
+            for evt in live_turn["events"]:
+                usage = evt.get("message", {}).get("usage") if isinstance(evt, dict) else None
+                if usage:
+                    llm_calls += 1
+                    total_input_tokens += usage.get("input_tokens", 0) + usage.get(
+                        "cache_read_input_tokens", 0
+                    ) + usage.get("cache_creation_input_tokens", 0)
+                    total_output_tokens += usage.get("output_tokens", 0)
             log.info(
                 "exec_done",
                 request_id=rid,
@@ -893,6 +918,10 @@ class AgentClient:
                 timed_out=timed_out,
                 duration_s=live_turn["duration_s"],
                 result_len=len(result_text),
+                llm_calls=llm_calls,
+                total_input_tokens=total_input_tokens,
+                total_output_tokens=total_output_tokens,
+                event_count=len(live_turn["events"]),
             )
 
             result = {
