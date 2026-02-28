@@ -51,6 +51,18 @@ _execute_locks_guard = threading.Lock()
 # Active states that prevent engineer from overwriting a non-engineer session
 _ACTIVE_SESSION_STATES = ("working", "idle", "running")
 
+# Graceful shutdown: set by the API lifespan on SIGTERM so active executions
+# can break out of their streaming loops before DB pools are closed.
+_shutdown_event = threading.Event()
+
+
+def is_shutting_down() -> bool:
+    return _shutdown_event.is_set()
+
+
+def signal_shutdown() -> None:
+    _shutdown_event.set()
+
 
 def get_session_state(thread_key: str) -> dict[str, Any] | None:
     with _sessions_lock:
@@ -371,33 +383,6 @@ def _persist_turn(key: str, turn: dict[str, Any]) -> None:
 
 def _delete_session(key: str) -> None:
     _pg_write("DELETE FROM agent_sessions WHERE slack_thread_key = %s", (key,))
-
-
-def _post_to_slack_sync(thread_key: str, text: str) -> None:
-    """Post a message to a Slack thread. Best-effort, never raises."""
-    token = os.getenv("SLACK_BOT_TOKEN", "")
-    if not token or not text.strip():
-        return
-    try:
-        parts = thread_key.split(":")
-        if len(parts) < 2:
-            return
-        channel, thread_ts = parts[0], parts[-1]
-        safe_text = text.strip()
-        if len(safe_text) > 3900:
-            safe_text = safe_text[:3882].rstrip() + "\n\n... (truncated)"
-        with httpx.Client(timeout=20) as client:
-            resp = client.post(
-                "https://slack.com/api/chat.postMessage",
-                headers={"Authorization": f"Bearer {token}"},
-                json={"channel": channel, "thread_ts": thread_ts, "text": safe_text},
-            )
-            if resp.status_code == 200:
-                data = resp.json()
-                if not data.get("ok"):
-                    log.debug("slack_post_failed", error=data.get("error"))
-    except Exception as exc:
-        log.debug("slack_post_failed", error=str(exc))
 
 
 def _docker_client() -> docker.DockerClient:
@@ -982,6 +967,9 @@ class AgentClient:
             started = time.monotonic()
 
             for stdout_chunk, stderr_chunk in output:
+                if _shutdown_event.is_set():
+                    log.warning("agent_exec_shutdown", thread=slack_thread_key)
+                    break
                 if time.monotonic() - started > EXEC_TIMEOUT:
                     timed_out = True
                     log.warning("agent_exec_timeout", thread=slack_thread_key, timeout=EXEC_TIMEOUT)
