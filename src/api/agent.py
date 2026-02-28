@@ -13,6 +13,7 @@ import subprocess
 import tarfile
 import time
 from datetime import UTC, datetime
+from collections.abc import Callable
 from typing import Any
 
 import docker
@@ -579,12 +580,15 @@ class AgentClient:
         repo: str | None = None,
         request_id: str | None = None,
         files: list[dict[str, str]] | None = None,
+        emit: Callable[[dict[str, Any]], None] | None = None,
     ) -> dict[str, Any]:
         """Execute a message in a sandbox, spawning one if needed.
 
         Runs the harness CLI via docker exec, waits for completion,
-        and returns the final result text.
+        and returns the final result text. If *emit* is provided, progress
+        events are streamed to the caller in real-time.
         """
+        _emit = emit or (lambda _: None)
         rid = request_id or ""
         session = _sessions.get(slack_thread_key)
 
@@ -599,13 +603,16 @@ class AgentClient:
 
         if not session:
             log.info("exec_auto_spawn", request_id=rid, thread=slack_thread_key)
+            _emit({"type": "status", "stage": "container.creating"})
             self.spawn(slack_thread_key, harness, repo, request_id)
+            _emit({"type": "status", "stage": "container.ready"})
             session = _sessions[slack_thread_key]
             client = _docker_client()
             container = client.containers.get(session["container_id"])
 
         # Download and copy files into the container
         if files:
+            _emit({"type": "status", "stage": "files.downloading", "count": len(files)})
             file_paths = _download_files_to_container(container, files)
             if file_paths:
                 listing = "\n".join(f"- {p}" for p in file_paths)
@@ -646,6 +653,7 @@ class AgentClient:
             stderr=True,
         )["Id"]
 
+        _emit({"type": "status", "stage": "exec.start", "harness": session["harness"]})
         output = api.exec_start(exec_id, stream=True, demux=True)
 
         # Collect stdout and stderr separately
@@ -680,7 +688,9 @@ class AgentClient:
                     stripped = line.strip()
                     if stripped:
                         try:
-                            live_turn["events"].append(json.loads(stripped))
+                            evt = json.loads(stripped)
+                            live_turn["events"].append(evt)
+                            _emit(evt)
                         except json.JSONDecodeError:
                             live_turn["events"].append({"type": "raw", "text": stripped})
             if stderr_chunk:
@@ -746,12 +756,14 @@ class AgentClient:
             result_len=len(result_text),
         )
 
-        return {
+        result = {
             "session_id": slack_thread_key,
             "result": result_text,
             "agent_thread_id": session["agent_thread_id"],
             "harness": session["harness"],
         }
+        _emit({"type": "final", **result})
+        return result
 
     def status(self, slack_thread_key: str | None = None) -> dict[str, Any]:
         """Get session status. If no key given, list all sessions."""
