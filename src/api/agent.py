@@ -61,6 +61,7 @@ _PROMPT_FILE_MAP: dict[str, str] = {
     "legal": "sandbox/SYSTEM_PROMPT_LEGAL.md",
 }
 _PROMPT_CACHE: dict[str, str] = {}
+_PROMPT_MISSING_WARNED: set[str] = set()
 
 
 def _is_valid_engine(value: str | None) -> bool:
@@ -147,13 +148,11 @@ def _fetch_secret(key: str) -> str:
     return _sm_read(key) or os.getenv(key, "")
 
 
-def _session_mode_for(harness: str, legal_loop_enabled: bool | None = None) -> str:
-    """Map runtime controls to persisted session mode."""
-    if harness != "legal":
-        return "default"
-    if legal_loop_enabled is False:
-        return "legal-single"
-    return "legal-loop"
+def _session_mode_for(harness: str) -> str:
+    """Map harness to persisted session mode."""
+    if harness in HARNESS_CONFIG:
+        return harness
+    return "default"
 
 
 def _host_matches_suffix(host: str, suffixes: tuple[str, ...]) -> bool:
@@ -1503,9 +1502,20 @@ def _load_persona_prompt(persona: str | None) -> str | None:
     try:
         with open(prompt_path, encoding="utf-8") as f:
             prompt = f.read().strip()
-    except OSError:
+    except OSError as exc:
+        if normalized not in _PROMPT_MISSING_WARNED:
+            _PROMPT_MISSING_WARNED.add(normalized)
+            log.warning(
+                "persona_prompt_missing",
+                persona=normalized,
+                path=prompt_path,
+                error=str(exc),
+            )
         return None
     if not prompt:
+        if normalized not in _PROMPT_MISSING_WARNED:
+            _PROMPT_MISSING_WARNED.add(normalized)
+            log.warning("persona_prompt_empty", persona=normalized, path=prompt_path)
         return None
 
     _PROMPT_CACHE[normalized] = prompt
@@ -1796,7 +1806,6 @@ class AgentClient:
         repo: str | None = None,
         request_id: str | None = None,
         engine: str | None = None,
-        legal_loop_enabled: bool | None = None,
     ) -> dict[str, Any]:
         """Spawn a new sandbox container for a Slack thread.
 
@@ -1806,7 +1815,6 @@ class AgentClient:
             repo: Optional repo path to set as working directory
             request_id: Correlation ID for end-to-end latency tracing
             engine: Optional engine override (persona harnesses only)
-            legal_loop_enabled: Legal mode runtime (loop vs single) if harness is legal
         """
         rid = request_id or ""
         resolved_thread_key = _normalize_thread_key(slack_thread_key)
@@ -1925,7 +1933,7 @@ class AgentClient:
                         "ai2.thread": resolved_thread_key,
                         "ai2.harness": requested_harness,
                         "ai2.engine": effective_engine,
-                        "ai2.mode": _session_mode_for(requested_harness, legal_loop_enabled),
+                        "ai2.mode": _session_mode_for(requested_harness),
                         **({"ai2.persona": persona} if persona else {}),
                         **({"ai2.repo": effective_repo} if effective_repo else {}),
                     },
@@ -1970,7 +1978,7 @@ class AgentClient:
             "harness": requested_harness,
             "engine": effective_engine,
             "persona": persona,
-            "mode": _session_mode_for(requested_harness, legal_loop_enabled),
+            "mode": _session_mode_for(requested_harness),
             "repo": effective_repo,
             "agent_thread_id": None,
             "state": "running",
@@ -2014,7 +2022,6 @@ class AgentClient:
         model: str | None = None,
         engine: str | None = None,
         continue_session: bool = True,
-        legal_loop_enabled: bool | None = None,
     ) -> dict[str, Any]:
         """Execute a message in a sandbox, spawning one if needed.
 
@@ -2055,7 +2062,7 @@ class AgentClient:
             requested_harness = (harness or "").strip() or (
                 str(session.get("harness") or "amp") if session else "amp"
             )
-            requested_mode = _session_mode_for(requested_harness, legal_loop_enabled)
+            requested_mode = _session_mode_for(requested_harness)
             try:
                 effective_engine, effective_persona, _effective_repo = _resolve_run_profile(
                     requested_harness,
@@ -2139,7 +2146,6 @@ class AgentClient:
                     repo,
                     request_id,
                     engine=engine,
-                    legal_loop_enabled=legal_loop_enabled,
                 )
                 spawn_error = str((spawn_result or {}).get("error") or "").strip()
                 if spawn_error:
@@ -2532,7 +2538,6 @@ class AgentClient:
         user_id: str | None = None,
         model: str | None = None,
         engine: str | None = None,
-        legal_loop_enabled: bool | None = None,
     ) -> dict[str, Any]:
         resolved_thread_key = _resolve_existing_thread_key(slack_thread_key)
         found = _find_session_for_thread(resolved_thread_key) or _rehydrate_session_for_thread(
@@ -2593,7 +2598,6 @@ class AgentClient:
                     user_id,
                     model,
                     engine,
-                    legal_loop_enabled=legal_loop_enabled,
                 )
                 kickoff_error = str(result.get("error") or "").strip()
                 if kickoff_error:
