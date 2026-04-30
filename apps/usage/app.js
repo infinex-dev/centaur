@@ -150,7 +150,10 @@ function renderHead() {
 const PH = `<span class="team-emoji placeholder-icon">?</span>`;
 
 function renderTeamCell(r) {
-  return `<td class="tool-name"><span class="tool-identity"><span class="team-emoji">${r.emoji || PH}</span>${escapeHtml(r.team)}</span></td>`;
+  const icon = r.team === "Centaur"
+    ? `<img class="pfp" src="centaur.png" loading="lazy" alt="">`
+    : `<span class="team-emoji">${r.emoji || PH}</span>`;
+  return `<td class="tool-name"><span class="tool-identity">${icon}${escapeHtml(r.team)}</span></td>`;
 }
 
 function renderTeamBadge(r) {
