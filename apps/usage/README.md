@@ -33,27 +33,10 @@ ssh ubuntu@206.223.235.69 "docker exec centaur-api-1 curl -sS -X POST http://loc
   }'"
 ```
 
-Redeploy after pushing changes:
+Redeploy after pushing changes (rebuilds from latest git):
 
 ```bash
-# Delete and recreate (pulls latest from GitHub)
-ssh ubuntu@206.223.235.69 "docker exec centaur-api-1 curl -sS -X DELETE http://localhost:8000/apps/usage -H 'Content-Type: application/json' -d '{}'"
-
-ssh ubuntu@206.223.235.69 "docker exec centaur-api-1 curl -sS -X POST http://localhost:8000/apps \
-  -H 'Content-Type: application/json' \
-  -d '{
-    \"name\": \"usage\",
-    \"repo_url\": \"https://github.com/paradigmxyz/centaur-usage\",
-    \"port\": 3000,
-    \"build_cmd\": \"true\",
-    \"start_cmd\": \"python3 serve.py\"
-  }'"
-```
-
-Or restart without rebuilding:
-
-```bash
-ssh ubuntu@206.223.235.69 "docker exec centaur-api-1 curl -sS -X POST http://localhost:8000/apps/usage/restart -H 'Content-Type: application/json' -d '{}'"
+ssh ubuntu@206.223.235.69 'docker exec centaur-api-1 curl -sS -X POST http://localhost:8000/apps/_manage/usage/restart -H "Content-Type: application/json" -d "{}"'
 ```
 
 ## Stack
