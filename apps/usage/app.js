@@ -6,7 +6,7 @@ let state = {
   view: "tools",
   sort: "threads",
   dir: "desc",
-  window: "all",
+  window: "7d",
 };
 
 const TOOL_COLS = [
@@ -231,7 +231,7 @@ function syncUrl(push) {
   const p = new URLSearchParams();
   if (state.sort && state.sort !== DEFAULT_SORT[state.view]) p.set("sort", state.sort);
   if (state.dir !== "desc") p.set("dir", state.dir);
-  if (state.window !== "all") p.set("window", state.window);
+  if (state.window !== "7d") p.set("window", state.window);
   const qs = p.toString();
   const url = viewPath(state.view) + (qs ? `?${qs}` : "");
   if (push) {
@@ -253,7 +253,7 @@ function loadStateFromUrl() {
   if (p.has("dir")) state.dir = p.get("dir");
   else state.dir = "desc";
   if (p.has("window")) state.window = p.get("window");
-  else state.window = "all";
+  else state.window = "7d";
 }
 
 function syncPills(name, value) {
