@@ -703,6 +703,10 @@ class KubernetesExecutorBackend(SandboxBackend):
         for _, port in sorted(pg_listen_ports.items(), key=lambda item: item[1]):
             sandbox_to_proxy_ports.append({"protocol": "TCP", "port": port})
 
+        dns_ports = [
+            {"protocol": "UDP", "port": 53},
+            {"protocol": "TCP", "port": 53},
+        ]
         proxy_egress = [
             {
                 "to": [{"podSelector": {"matchLabels": _api_pod_match_labels()}}],
@@ -728,6 +732,7 @@ class KubernetesExecutorBackend(SandboxBackend):
                     "ports": [{"protocol": "TCP", "port": _op_connect_port()}],
                 }
             )
+        proxy_egress.append({"ports": dns_ports})
 
         await self._networking_api().create_namespaced_network_policy(
             _namespace(),
@@ -771,6 +776,9 @@ class KubernetesExecutorBackend(SandboxBackend):
                                 }
                             ],
                             "ports": sandbox_to_proxy_ports,
+                        },
+                        {
+                            "ports": dns_ports,
                         },
                     ],
                 },
