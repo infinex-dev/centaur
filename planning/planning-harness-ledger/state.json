@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "planning_run": {
+    "id": "planning-harness-ledger",
+    "created_at": "2026-05-22T00:00:00+10:00",
+    "status": "planning",
+    "canonical_human_artifact": "planning.md"
+  },
+  "objective": {
+    "summary": "Design and implement a Centaur-based planning harness that drives long-running planning workflows from Slack while preserving durable planning memory outside model context.",
+    "target_outputs": [
+      "validated planning workflow architecture",
+      "deterministic planning ledger/tooling design",
+      "eventual bare_metal implementation plan"
+    ]
+  },
+  "state_model": {
+    "human_source_of_truth": "planning.md",
+    "machine_state_source": "state.json",
+    "artifact_policy": "During manual planning, keep exactly one canonical human planning document and one machine-readable state artifact. Split only when a workflow requires independent outputs, such as diverge recommendations.",
+    "future_target": "Replace manual state maintenance with deterministic ledger tools and generated human projections."
+  },
+  "decisions": [
+    {
+      "id": "chat-context-not-durable-state",
+      "title": "Chat context is not durable planning state",
+      "status": "accepted"
+    },
+    {
+      "id": "explicit-conversation-epochs",
+      "title": "Conversation rotation should be explicit",
+      "status": "accepted"
+    },
+    {
+      "id": "deterministic-planning-tools",
+      "title": "Deterministic planning tools are needed",
+      "status": "accepted"
+    },
+    {
+      "id": "self-replication-smoke-test",
+      "title": "Self-replication is a smoke test",
+      "status": "accepted"
+    },
+    {
+      "id": "recommend-next-viable-paths",
+      "title": "The harness must recommend next viable paths",
+      "status": "accepted"
+    },
+    {
+      "id": "single-human-canonical-artifact",
+      "title": "Manual planning should use one canonical human planning document",
+      "status": "accepted"
+    },
+    {
+      "id": "structured-state-artifact",
+      "title": "Manual planning should also maintain one machine-readable state artifact",
+      "status": "accepted"
+    }
+  ],
+  "next_recommended_workflow": {
+    "type": "diverge-research",
+    "status": "ready_for_user_to_run",
+    "reason": "The product goal and core architecture direction are captured, but the solution space is broad and should be researched from multiple independent lenses before convergence.",
+    "candidate_lenses": [
+      "autonomous planning agent architectures",
+      "durable memory, ledgers, and artifact state models",
+      "human-in-the-loop workflow orchestration from Slack or chat",
+      "multi-agent divergence/convergence patterns",
+      "plan validation and execution-readiness gates for systems like bare_metal"
+    ]
+  },
+  "open_questions": [
+    "What exact workflow phases should the first planning harness support for a bare_metal plan.json outcome?",
+    "Should the harness require human approval between every phase, or only at decision/checkpoint boundaries?",
+    "Should the planning ledger live in Centaur Postgres, repo-local files, or both?",
+    "Should ledger events be exposed as Centaur tools, MCP tools, or native harness endpoints?",
+    "What policy should trigger conversation epoch rotation?",
+    "What gates should run before declaring the final plan.json ready for bare_metal execution?"
+  ],
+  "anti_patterns_observed": [
+    {
+      "id": "fragmented-markdown-artifacts",
+      "description": "The planning folder was initially split across many markdown files, creating divergent sources of truth.",
+      "correction": "Collapse manual planning into one canonical human planning document plus one structured state artifact."
+    }
+  ]
+}

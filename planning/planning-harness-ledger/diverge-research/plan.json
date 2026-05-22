@@ -1,0 +1,768 @@
+{
+  "version": "1.0",
+  "name": "planning-harness-ledger-diverge-research",
+  "description": "Read-only diverge research for a Centaur-native planning harness that drives long-running human planning workflows, maintains durable structured state, recommends next steps, and can reproduce this planning process as a smoke test. Provider matrix uses Codex, Claude, Grok, and Antigravity lanes.",
+  "baseBranch": "main",
+  "config": {
+    "maxRetries": 1,
+    "maxCost": 600,
+    "maxPlanAuditRetries": 0,
+    "autoFollowUp": false,
+    "executionMode": "auditOnly",
+    "allowedWritePaths": [
+      "planning/planning-harness-ledger/diverge-research/recommendations/"
+    ],
+    "provider": "codex/gpt-5.5",
+    "phaseProviders": {
+      "execution": "codex/gpt-5.5",
+      "executionRetry": "codex/gpt-5.5",
+      "commitHygieneRemediation": "codex/gpt-5.5",
+      "review": "codex/gpt-5.5",
+      "reviewRemediation": "codex/gpt-5.5",
+      "postValidationRemediation": "codex/gpt-5.5",
+      "taskAudit": "codex/gpt-5.5",
+      "taskAuditRemediation": "codex/gpt-5.5",
+      "planAudit": "codex/gpt-5.5",
+      "planAuditRemediation": "codex/gpt-5.5",
+      "e2e": "codex/gpt-5.5",
+      "e2eRemediation": "codex/gpt-5.5",
+      "fePolish": "codex/gpt-5.5",
+      "fePolishRemediation": "codex/gpt-5.5",
+      "merge": "codex/gpt-5.5",
+      "mergeRemediation": "codex/gpt-5.5",
+      "postRun": "codex/gpt-5.5"
+    },
+    "pauseOnTaskFailure": true,
+    "phaseAgents": {
+      "execution": "codebase-pattern-auditor",
+      "executionRetry": "codebase-pattern-auditor",
+      "commitHygieneRemediation": "git-worktree-expert",
+      "review": "codebase-pattern-auditor",
+      "reviewRemediation": "codebase-pattern-auditor",
+      "postValidationRemediation": "codebase-pattern-auditor",
+      "taskAudit": "codebase-pattern-auditor",
+      "taskAuditRemediation": "codebase-pattern-auditor",
+      "planAudit": "codebase-pattern-auditor",
+      "planAuditRemediation": "codebase-pattern-auditor",
+      "e2e": "qa-code-reviewer",
+      "e2eRemediation": "codebase-pattern-auditor",
+      "fePolish": "react-ts-frontend-architect",
+      "fePolishRemediation": "react-ts-frontend-architect",
+      "merge": "git-worktree-expert",
+      "mergeRemediation": "git-worktree-expert",
+      "postRun": "codebase-pattern-auditor"
+    }
+  },
+  "tasks": [
+    {
+      "id": "PHR-001",
+      "title": "Codex research: autonomous planning agent architectures",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for autonomous planning agent architectures.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final implementation architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/codex.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n- Do not optimize only for current bare_metal mechanics; bare_metal is local context, not the lens.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Autonomous Planning Agent Architectures. Research how systems decompose goals, maintain plan state, choose next actions, delegate specialist work, recover from context loss, and avoid path dependence. Compare plan-and-execute loops, ReAct-style loops, hierarchical planning, graph/state-machine orchestration, reflective planners, and durable workflow controllers. Explain which architecture should own the active planning loop in Centaur and which responsibilities should be tools, workflows, ledgers, or prompts.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/codex.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation separates external research, local evidence, and final recommendations.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:autonomous-planning-agent-architectures",
+        "provider:codex"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/codex.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "codex/gpt-5.5",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-002",
+      "title": "Claude research: autonomous planning agent architectures",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for autonomous planning agent architectures.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final implementation architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/claude.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n- Do not optimize only for current bare_metal mechanics; bare_metal is local context, not the lens.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Autonomous Planning Agent Architectures. Research how systems decompose goals, maintain plan state, choose next actions, delegate specialist work, recover from context loss, and avoid path dependence. Compare plan-and-execute loops, ReAct-style loops, hierarchical planning, graph/state-machine orchestration, reflective planners, and durable workflow controllers. Explain which architecture should own the active planning loop in Centaur and which responsibilities should be tools, workflows, ledgers, or prompts.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/claude.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation separates external research, local evidence, and final recommendations.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:autonomous-planning-agent-architectures",
+        "provider:claude"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/claude.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "claude/opus",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-003",
+      "title": "Grok research: autonomous planning agent architectures",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for autonomous planning agent architectures.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final implementation architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/grok.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n- Do not optimize only for current bare_metal mechanics; bare_metal is local context, not the lens.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Autonomous Planning Agent Architectures. Research how systems decompose goals, maintain plan state, choose next actions, delegate specialist work, recover from context loss, and avoid path dependence. Compare plan-and-execute loops, ReAct-style loops, hierarchical planning, graph/state-machine orchestration, reflective planners, and durable workflow controllers. Explain which architecture should own the active planning loop in Centaur and which responsibilities should be tools, workflows, ledgers, or prompts.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/grok.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation separates external research, local evidence, and final recommendations.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:autonomous-planning-agent-architectures",
+        "provider:grok"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/grok.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "grok/grok-build"
+    },
+    {
+      "id": "PHR-004",
+      "title": "Antigravity research: autonomous planning agent architectures",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for autonomous planning agent architectures.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final implementation architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/antigravity.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n- Do not optimize only for current bare_metal mechanics; bare_metal is local context, not the lens.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Autonomous Planning Agent Architectures. Research how systems decompose goals, maintain plan state, choose next actions, delegate specialist work, recover from context loss, and avoid path dependence. Compare plan-and-execute loops, ReAct-style loops, hierarchical planning, graph/state-machine orchestration, reflective planners, and durable workflow controllers. Explain which architecture should own the active planning loop in Centaur and which responsibilities should be tools, workflows, ledgers, or prompts.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/antigravity.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation separates external research, local evidence, and final recommendations.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:autonomous-planning-agent-architectures",
+        "provider:antigravity"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/autonomous-planning-agent-architectures/antigravity.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "antigravity"
+    },
+    {
+      "id": "PHR-005",
+      "title": "Codex research: durable memory and state models",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for durable memory and state models.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final ledger schema.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/codex.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Durable Memory And State Models. Research ledger/event sourcing, workflow checkpoints, artifact projections, schema versioning, content hashing, provenance, idempotency, recovery, mutable views over append-only records, and context epoch rotation. Recommend what should live in Centaur Postgres, what should live as repo artifacts, and how markdown projections should relate to structured state.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/codex.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation distinguishes ledger events, checkpoints, projections, artifacts, and markdown.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:durable-memory-state-models",
+        "provider:codex"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/codex.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "codex/gpt-5.5",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-006",
+      "title": "Claude research: durable memory and state models",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for durable memory and state models.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final ledger schema.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/claude.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Durable Memory And State Models. Research ledger/event sourcing, workflow checkpoints, artifact projections, schema versioning, content hashing, provenance, idempotency, recovery, mutable views over append-only records, and context epoch rotation. Recommend what should live in Centaur Postgres, what should live as repo artifacts, and how markdown projections should relate to structured state.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/claude.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation distinguishes ledger events, checkpoints, projections, artifacts, and markdown.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:durable-memory-state-models",
+        "provider:claude"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/claude.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "claude/opus",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-007",
+      "title": "Grok research: durable memory and state models",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for durable memory and state models.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final ledger schema.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/grok.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Durable Memory And State Models. Research ledger/event sourcing, workflow checkpoints, artifact projections, schema versioning, content hashing, provenance, idempotency, recovery, mutable views over append-only records, and context epoch rotation. Recommend what should live in Centaur Postgres, what should live as repo artifacts, and how markdown projections should relate to structured state.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/grok.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation distinguishes ledger events, checkpoints, projections, artifacts, and markdown.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:durable-memory-state-models",
+        "provider:grok"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/grok.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "grok/grok-build"
+    },
+    {
+      "id": "PHR-008",
+      "title": "Antigravity research: durable memory and state models",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for durable memory and state models.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final ledger schema.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/antigravity.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Durable Memory And State Models. Research ledger/event sourcing, workflow checkpoints, artifact projections, schema versioning, content hashing, provenance, idempotency, recovery, mutable views over append-only records, and context epoch rotation. Recommend what should live in Centaur Postgres, what should live as repo artifacts, and how markdown projections should relate to structured state.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/antigravity.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation distinguishes ledger events, checkpoints, projections, artifacts, and markdown.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:durable-memory-state-models",
+        "provider:antigravity"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/durable-memory-state-models/antigravity.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "antigravity"
+    },
+    {
+      "id": "PHR-009",
+      "title": "Codex research: human-in-the-loop orchestration",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for human-in-the-loop orchestration in Slack or chat.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final interaction architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for Slack or chat-platform claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/codex.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Human-In-The-Loop Orchestration. Research how agents should ask for decisions, present options, pause/resume, manage approvals, record dissent, handle multiple humans, avoid Slack thread overload, and recover after interruptions. Recommend a Centaur-native interaction model for long-running planning workflows.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/codex.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines concrete human decision, approval, pause, resume, and escalation semantics.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:human-in-the-loop-orchestration",
+        "provider:codex"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/codex.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "codex/gpt-5.5",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-010",
+      "title": "Claude research: human-in-the-loop orchestration",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for human-in-the-loop orchestration in Slack or chat.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final interaction architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for Slack or chat-platform claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/claude.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Human-In-The-Loop Orchestration. Research how agents should ask for decisions, present options, pause/resume, manage approvals, record dissent, handle multiple humans, avoid Slack thread overload, and recover after interruptions. Recommend a Centaur-native interaction model for long-running planning workflows.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/claude.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines concrete human decision, approval, pause, resume, and escalation semantics.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:human-in-the-loop-orchestration",
+        "provider:claude"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/claude.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "claude/opus",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-011",
+      "title": "Grok research: human-in-the-loop orchestration",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for human-in-the-loop orchestration in Slack or chat.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final interaction architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for Slack or chat-platform claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/grok.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Human-In-The-Loop Orchestration. Research how agents should ask for decisions, present options, pause/resume, manage approvals, record dissent, handle multiple humans, avoid Slack thread overload, and recover after interruptions. Recommend a Centaur-native interaction model for long-running planning workflows.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/grok.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines concrete human decision, approval, pause, resume, and escalation semantics.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:human-in-the-loop-orchestration",
+        "provider:grok"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/grok.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "grok/grok-build"
+    },
+    {
+      "id": "PHR-012",
+      "title": "Antigravity research: human-in-the-loop orchestration",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for human-in-the-loop orchestration in Slack or chat.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final interaction architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for Slack or chat-platform claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/antigravity.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Human-In-The-Loop Orchestration. Research how agents should ask for decisions, present options, pause/resume, manage approvals, record dissent, handle multiple humans, avoid Slack thread overload, and recover after interruptions. Recommend a Centaur-native interaction model for long-running planning workflows.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/antigravity.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines concrete human decision, approval, pause, resume, and escalation semantics.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:human-in-the-loop-orchestration",
+        "provider:antigravity"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/human-in-the-loop-orchestration/antigravity.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "antigravity"
+    },
+    {
+      "id": "PHR-013",
+      "title": "Codex research: workflow policy and next-step selection",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for workflow policy and next-step selection.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final policy architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/codex.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n- Do not treat divergence/convergence or bare_metal as the whole policy surface.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Workflow Policy And Next-Step Selection. Research how the harness should decide whether to research, converge, ask a question, validate, rotate context, fixture-lock, draft execution artifacts, execute, pause, or stop. Identify confidence thresholds, evidence requirements, state transitions, policy records, and user approval points. Recommend how to keep the agent from stalling, over-asking, or prematurely implementing.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/codex.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines next-step policy inputs, outputs, thresholds, and human approval points.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:workflow-policy-next-step-selection",
+        "provider:codex"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/codex.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "codex/gpt-5.5",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-014",
+      "title": "Claude research: workflow policy and next-step selection",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for workflow policy and next-step selection.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final policy architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/claude.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n- Do not treat divergence/convergence or bare_metal as the whole policy surface.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Workflow Policy And Next-Step Selection. Research how the harness should decide whether to research, converge, ask a question, validate, rotate context, fixture-lock, draft execution artifacts, execute, pause, or stop. Identify confidence thresholds, evidence requirements, state transitions, policy records, and user approval points. Recommend how to keep the agent from stalling, over-asking, or prematurely implementing.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/claude.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines next-step policy inputs, outputs, thresholds, and human approval points.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:workflow-policy-next-step-selection",
+        "provider:claude"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/claude.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "claude/opus",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-015",
+      "title": "Grok research: workflow policy and next-step selection",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for workflow policy and next-step selection.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final policy architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/grok.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n- Do not treat divergence/convergence or bare_metal as the whole policy surface.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Workflow Policy And Next-Step Selection. Research how the harness should decide whether to research, converge, ask a question, validate, rotate context, fixture-lock, draft execution artifacts, execute, pause, or stop. Identify confidence thresholds, evidence requirements, state transitions, policy records, and user approval points. Recommend how to keep the agent from stalling, over-asking, or prematurely implementing.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/grok.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines next-step policy inputs, outputs, thresholds, and human approval points.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:workflow-policy-next-step-selection",
+        "provider:grok"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/grok.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "grok/grok-build"
+    },
+    {
+      "id": "PHR-016",
+      "title": "Antigravity research: workflow policy and next-step selection",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for workflow policy and next-step selection.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current brief and accepted decisions, but advisory for final policy architecture.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/antigravity.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n- Do not treat divergence/convergence or bare_metal as the whole policy surface.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Workflow Policy And Next-Step Selection. Research how the harness should decide whether to research, converge, ask a question, validate, rotate context, fixture-lock, draft execution artifacts, execute, pause, or stop. Identify confidence thresholds, evidence requirements, state transitions, policy records, and user approval points. Recommend how to keep the agent from stalling, over-asking, or prematurely implementing.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/antigravity.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines next-step policy inputs, outputs, thresholds, and human approval points.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:workflow-policy-next-step-selection",
+        "provider:antigravity"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/workflow-policy-next-step-selection/antigravity.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "antigravity"
+    },
+    {
+      "id": "PHR-017",
+      "title": "Codex research: self-evaluation and reproducibility",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for self-evaluation and reproducibility.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current self-replication requirement, but advisory for final evaluation design.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/codex.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Self-Evaluation And Reproducibility. Research how to test whether the harness can reproduce a coherent plan from brief plus durable artifacts, including the 'build itself' smoke test. Cover golden traces, replayable workflow histories, artifact snapshots, rubric-based plan evaluation, deterministic fixtures, regression tests, observability checks, and human review gates.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/codex.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines a concrete self-replication smoke test and reproducibility evidence bundle.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:self-evaluation-reproducibility",
+        "provider:codex"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/codex.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "codex/gpt-5.5",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-018",
+      "title": "Claude research: self-evaluation and reproducibility",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for self-evaluation and reproducibility.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current self-replication requirement, but advisory for final evaluation design.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/claude.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Self-Evaluation And Reproducibility. Research how to test whether the harness can reproduce a coherent plan from brief plus durable artifacts, including the 'build itself' smoke test. Cover golden traces, replayable workflow histories, artifact snapshots, rubric-based plan evaluation, deterministic fixtures, regression tests, observability checks, and human review gates.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/claude.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines a concrete self-replication smoke test and reproducibility evidence bundle.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:self-evaluation-reproducibility",
+        "provider:claude"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/claude.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "claude/opus",
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "PHR-019",
+      "title": "Grok research: self-evaluation and reproducibility",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for self-evaluation and reproducibility.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current self-replication requirement, but advisory for final evaluation design.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/grok.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Self-Evaluation And Reproducibility. Research how to test whether the harness can reproduce a coherent plan from brief plus durable artifacts, including the 'build itself' smoke test. Cover golden traces, replayable workflow histories, artifact snapshots, rubric-based plan evaluation, deterministic fixtures, regression tests, observability checks, and human review gates.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/grok.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines a concrete self-replication smoke test and reproducibility evidence bundle.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:self-evaluation-reproducibility",
+        "provider:grok"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/grok.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "grok/grok-build"
+    },
+    {
+      "id": "PHR-020",
+      "title": "Antigravity research: self-evaluation and reproducibility",
+      "description": "You are producing an independent diverge research recommendation.\n\nGoal: research how to design a Centaur-native planning harness optimized for self-evaluation and reproducibility.\n\nSource material:\n- Read `planning/planning-harness-ledger/diverge-research/lens-rationale.md` and `planning/planning-harness-ledger/diverge-research/source-index.md`.\n- Inspect only local source/evidence paths relevant to this lens from the source index.\n- Treat `planning/planning-harness-ledger/planning.md` and `planning/planning-harness-ledger/state.json` as authoritative for the current self-replication requirement, but advisory for final evaluation design.\n- Read the Paradigm Centaur article named in the source index.\n- Perform current external research for this lens. Prefer sources from the last 30 days where available. Use official docs for tool-specific claims.\n\nConstraints:\n- Read-only except for your assigned output file.\n- Do not modify production code, tests, package metadata, config, lockfiles, plan files, source index, or lens rationale.\n- Write only to `planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/antigravity.md`.\n- Do not synthesize other providers' views.\n- Do not implement, converge, or create a remediation backlog.\n\nArchitecture-deepening frame:\n- Do not match the recommendation to the current file structure when the file structure is part of the problem.\n- Prefer deep modules: small interfaces that hide workflow, ledger, artifact, policy, Slack/chat, and harness complexity.\n- Design the durable planning interface and artifact contract first; treat current markdown files as evidence of failure modes, not the target architecture.\n- Classify important dependencies as in-process, local-substitutable, remote but owned, or true external.\n- Prefer observable boundary tests, replay tests, artifact fixtures, and workflow-level checks over shallow tests at every existing seam.\n- Preserve Centaur's durable control-plane model as a hard constraint unless you explicitly argue for changing it.\n\nOptimization lens: Self-Evaluation And Reproducibility. Research how to test whether the harness can reproduce a coherent plan from brief plus durable artifacts, including the 'build itself' smoke test. Cover golden traces, replayable workflow histories, artifact snapshots, rubric-based plan evaluation, deterministic fixtures, regression tests, observability checks, and human review gates.\n\nRequired output sections: Recent Research Inputs, Local Evidence Map, SOTA / External Workflow Findings, Recommendation, Proposed Interface, Dependency Strategy, Proposed Boundaries, Required Artifacts, Optional Artifacts, Consumption Model, Completeness Checks, Verification Strategy, Failure Modes And Anti-Patterns, Tactical Application, Non-Goals, Risks And Open Decisions.",
+      "acceptanceCriteria": [
+        "Only `planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/antigravity.md` is added or modified.",
+        "The output includes every required section from the task description.",
+        "The recommendation defines a concrete self-replication smoke test and reproducibility evidence bundle.",
+        "The recommendation applies the deep-module frame: proposed interface, dependency classification, boundaries, and boundary/replay verification.",
+        "The recommendation cites sources with URLs when available, visible publication/update dates, and access date.",
+        "The recommendation stays read-only and does not create convergence, implementation, or backlog artifacts."
+      ],
+      "dependsOn": [],
+      "priority": 1,
+      "labels": [
+        "diverge",
+        "planning-harness",
+        "lens:self-evaluation-reproducibility",
+        "provider:antigravity"
+      ],
+      "qualityGates": [
+        {
+          "command": "git diff --check",
+          "timeout": 60
+        },
+        {
+          "command": "test -f planning/planning-harness-ledger/diverge-research/recommendations/self-evaluation-reproducibility/antigravity.md",
+          "timeout": 30
+        }
+      ],
+      "allowNoChanges": true,
+      "skipCodeReview": true,
+      "skipTaskAudit": true,
+      "provider": "antigravity"
+    }
+  ]
+}
