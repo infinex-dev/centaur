@@ -138,13 +138,14 @@ smoke:
     #!/usr/bin/env bash
     set -euo pipefail
     THREAD_KEY="smoke-$(date +%s)"
+    HARNESS="${CENTAUR_SMOKE_HARNESS:-amp}"
     API_DEPLOY="deploy/{{release}}-centaur-api"
     API_KEY="$(kubectl get secret centaur-infra-env -n {{namespace}} -o jsonpath='{.data.SLACKBOT_API_KEY}' | base64 -d)"
 
     SPAWN=$(kubectl exec -n {{namespace}} "$API_DEPLOY" -- curl -s -X POST http://localhost:8000/agent/spawn \
       -H "Content-Type: application/json" \
       -H "X-Api-Key: ${API_KEY}" \
-      -d "{\"thread_key\":\"${THREAD_KEY}\"}")
+      -d "{\"thread_key\":\"${THREAD_KEY}\",\"harness\":\"${HARNESS}\"}")
     ASSIGNMENT_GENERATION=$(printf '%s' "$SPAWN" | jq -r '.assignment_generation')
 
     kubectl exec -n {{namespace}} "$API_DEPLOY" -- curl -s -X POST http://localhost:8000/agent/message \
@@ -155,7 +156,7 @@ smoke:
     EXECUTE=$(kubectl exec -n {{namespace}} "$API_DEPLOY" -- curl -s -X POST http://localhost:8000/agent/execute \
       -H "Content-Type: application/json" \
       -H "X-Api-Key: ${API_KEY}" \
-      -d "{\"thread_key\":\"${THREAD_KEY}\",\"assignment_generation\":${ASSIGNMENT_GENERATION},\"delivery\":{\"platform\":\"dev\"}}")
+      -d "{\"thread_key\":\"${THREAD_KEY}\",\"assignment_generation\":${ASSIGNMENT_GENERATION},\"harness\":\"${HARNESS}\",\"delivery\":{\"platform\":\"dev\"}}")
     EXECUTION_ID=$(printf '%s' "$EXECUTE" | jq -r '.execution_id')
 
     for _ in $(seq 1 60); do

@@ -20,9 +20,27 @@ slackbot:
 api:
   executionWorkerEnabled: true
   pluginWatcherEnabled: true
+  image:
+    pullPolicy: IfNotPresent
   egressDiscovery:
     enabled: false
 
+sandbox:
+  image:
+    pullPolicy: IfNotPresent
+
+laminar:
+  enabled: true
+
 ironProxy:
+  image:
+    pullPolicy: IfNotPresent
   manager:
     secretSource: onepassword
+
+networkPolicy:
+  # Colima/K3s exposes the Kubernetes API through a host-side endpoint port
+  # behind the in-cluster kubernetes service. Local API pods need this broad
+  # egress rule to create and attach sandbox pods during smoke tests.
+  apiAdditionalEgress:
+    - {}

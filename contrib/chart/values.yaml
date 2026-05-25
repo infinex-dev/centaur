@@ -204,6 +204,7 @@ networkPolicy:
   enabled: true
   ingressSourceNamespaces: []
   apiIngressSourceNamespaces: []
+  apiAdditionalEgress: []
   ingressControllerNamespaces:
     - kube-system
 
