@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Centaur bare_metal Monitor Loop Plan</title>
+    <style>
+      @font-face {
+        font-family: "PolySans";
+        src: url("../../docs/public/fonts/PolySans-variable.woff2") format("woff2");
+        font-weight: 300 800;
+      }
+
+      @font-face {
+        font-family: "Sagittaire";
+        src: url("../../docs/public/fonts/SagittaireText-Medium.woff2") format("woff2");
+        font-weight: 500;
+      }
+
+      :root {
+        color-scheme: light;
+        --ink: #17211b;
+        --muted: #687268;
+        --paper: #f4f1e8;
+        --paper-strong: #fffaf0;
+        --line: #d9d1bf;
+        --line-strong: #b8aa90;
+        --moss: #335f4a;
+        --moss-soft: #dfeade;
+        --rust: #a24f2b;
+        --rust-soft: #f1ded2;
+        --plum: #5e456a;
+        --plum-soft: #e7deeb;
+        --code: #20251f;
+        --code-bg: #ebe4d4;
+        --shadow: 0 22px 70px rgba(71, 62, 39, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(90deg, rgba(23, 33, 27, 0.04) 1px, transparent 1px) 0 0 / 64px 64px,
+          linear-gradient(rgba(23, 33, 27, 0.035) 1px, transparent 1px) 0 0 / 64px 64px,
+          var(--paper);
+        color: var(--ink);
+        font-family: PolySans, ui-sans-serif, system-ui, sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+        text-decoration-color: color-mix(in oklch, var(--rust), transparent 25%);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+
+      code,
+      pre {
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: clamp(34px, 7vw, 86px) 0 clamp(22px, 4vw, 44px);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 22px;
+        color: var(--moss);
+        font-size: 0.78rem;
+        font-weight: 720;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 38px;
+        height: 2px;
+        background: var(--moss);
+      }
+
+      h1 {
+        max-width: 880px;
+        margin: 0;
+        font-family: Sagittaire, Georgia, serif;
+        font-size: clamp(3rem, 8vw, 7.8rem);
+        line-height: 0.89;
+        letter-spacing: 0;
+        font-weight: 500;
+      }
+
+      .lede {
+        max-width: 760px;
+        margin: 28px 0 0;
+        color: #3e483f;
+        font-size: clamp(1.08rem, 2.2vw, 1.45rem);
+        line-height: 1.45;
+      }
+
+      .topline {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+        gap: clamp(22px, 4vw, 52px);
+        align-items: end;
+      }
+
+      .status-strip {
+        border-top: 1px solid var(--line-strong);
+        border-bottom: 1px solid var(--line-strong);
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: clamp(34px, 5vw, 58px);
+      }
+
+      .status-strip div {
+        min-height: 112px;
+        padding: 18px 20px;
+        border-right: 1px solid var(--line);
+      }
+
+      .status-strip div:last-child {
+        border-right: 0;
+      }
+
+      .status-strip span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.75rem;
+        font-weight: 720;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .status-strip strong {
+        display: block;
+        margin-top: 12px;
+        font-size: clamp(1.25rem, 2.4vw, 1.9rem);
+        line-height: 1.05;
+      }
+
+      main {
+        padding: 28px 0 80px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 1fr);
+        gap: clamp(24px, 5vw, 72px);
+        align-items: start;
+      }
+
+      nav {
+        position: sticky;
+        top: 18px;
+        padding: 20px 0;
+        border-top: 1px solid var(--line-strong);
+        border-bottom: 1px solid var(--line-strong);
+      }
+
+      nav a {
+        display: block;
+        padding: 9px 0;
+        color: #455145;
+        font-size: 0.9rem;
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        color: var(--rust);
+      }
+
+      section {
+        padding: clamp(34px, 6vw, 68px) 0;
+        border-top: 1px solid var(--line);
+      }
+
+      section:first-child {
+        border-top: 0;
+        padding-top: 18px;
+      }
+
+      h2 {
+        max-width: 820px;
+        margin: 0 0 22px;
+        font-family: Sagittaire, Georgia, serif;
+        font-size: clamp(2rem, 4vw, 4.1rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+        font-weight: 500;
+      }
+
+      h3 {
+        margin: 32px 0 10px;
+        color: #203129;
+        font-size: 1.08rem;
+        line-height: 1.2;
+      }
+
+      p {
+        max-width: 780px;
+        margin: 0 0 16px;
+        color: #414c42;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin: 24px 0 8px;
+      }
+
+      .panel {
+        background: color-mix(in oklch, var(--paper-strong), transparent 12%);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 22px;
+        box-shadow: var(--shadow);
+      }
+
+      .panel h3 {
+        margin-top: 0;
+      }
+
+      .callout {
+        margin: 26px 0;
+        padding: 24px;
+        border-left: 5px solid var(--rust);
+        background: var(--rust-soft);
+      }
+
+      .callout strong {
+        color: #6f321c;
+      }
+
+      .sequence {
+        display: grid;
+        gap: 12px;
+        margin: 24px 0;
+        counter-reset: steps;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 16px;
+        align-items: start;
+        padding: 18px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .step:first-child {
+        border-top: 0;
+      }
+
+      .step::before {
+        counter-increment: steps;
+        content: counter(steps);
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--moss);
+        color: var(--paper-strong);
+        font-weight: 760;
+      }
+
+      .step h3 {
+        margin: 0 0 8px;
+      }
+
+      ul {
+        max-width: 820px;
+        margin: 12px 0 18px;
+        padding-left: 22px;
+        color: #414c42;
+      }
+
+      li + li {
+        margin-top: 8px;
+      }
+
+      .matrix {
+        width: 100%;
+        margin: 24px 0;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: rgba(255, 250, 240, 0.72);
+      }
+
+      .matrix th,
+      .matrix td {
+        padding: 14px 16px;
+        text-align: left;
+        vertical-align: top;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .matrix th {
+        color: #26322b;
+        background: var(--moss-soft);
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .matrix tr:last-child td {
+        border-bottom: 0;
+      }
+
+      pre {
+        max-width: 100%;
+        margin: 18px 0 26px;
+        padding: 18px;
+        overflow-x: auto;
+        border: 1px solid color-mix(in oklch, var(--code), transparent 72%);
+        border-radius: 8px;
+        background: var(--code-bg);
+        color: var(--code);
+        font-size: 0.86rem;
+        line-height: 1.55;
+      }
+
+      .tag {
+        display: inline-block;
+        margin: 0 6px 8px 0;
+        padding: 5px 9px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        color: #344139;
+        background: rgba(255, 250, 240, 0.55);
+        font-size: 0.78rem;
+        font-weight: 650;
+      }
+
+      .footer-note {
+        margin-top: 42px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line-strong);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 860px) {
+        .topline,
+        .layout,
+        .split {
+          grid-template-columns: 1fr;
+        }
+
+        nav {
+          position: static;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 0 18px;
+        }
+
+        .status-strip {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .status-strip div:nth-child(2) {
+          border-right: 0;
+        }
+
+        .status-strip div:nth-child(-n + 2) {
+          border-bottom: 1px solid var(--line);
+        }
+      }
+
+      @media (max-width: 540px) {
+        .shell {
+          width: min(100% - 22px, 1180px);
+        }
+
+        nav,
+        .status-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .status-strip div {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .status-strip div:last-child {
+          border-bottom: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="shell topline">
+        <div>
+          <p class="eyebrow">Centaur planning note</p>
+          <h1>bare_metal monitor loop</h1>
+          <p class="lede">
+            A local-first plan for a Centaur-native durable workflow that watches a
+            bare_metal run, detects failure or progress, and brings an agent into
+            Slack only when judgement or operator action is needed.
+          </p>
+        </div>
+        <div class="panel">
+          <h3>Starting constraint</h3>
+          <p>
+            Keep the first version on one machine. No coder-box registry, SSH, or
+            network policy work until the loop and Slack operating model are proven.
+          </p>
+          <span class="tag">Local Centaur</span>
+          <span class="tag">Local bare_metal</span>
+          <span class="tag">Demo failure run</span>
+        </div>
+      </div>
+      <div class="shell status-strip" aria-label="Project summary">
+        <div>
+          <span>Loop owner</span>
+          <strong>Centaur workflow</strong>
+        </div>
+        <div>
+          <span>Status source</span>
+          <strong>bare_metal API</strong>
+        </div>
+        <div>
+          <span>Wake model</span>
+          <strong>Postgres sleep</strong>
+        </div>
+        <div>
+          <span>Human surface</span>
+          <strong>Slack thread</strong>
+        </div>
+      </div>
+    </header>
+
+    <main class="shell layout">
+      <nav aria-label="Document sections">
+        <a href="#summary">Summary</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#monitor-input">Monitor Input</a>
+        <a href="#mvp">MVP Scope</a>
+        <a href="#setup">Setup Steps</a>
+        <a href="#slack">Slack Agent</a>
+        <a href="#demo">Demo Run</a>
+        <a href="#next">Next Iteration</a>
+      </nav>
+
+      <div>
+        <section id="summary">
+          <h2>What we are building</h2>
+          <p>
+            The first deliverable is a Centaur workflow named
+            <code>bare_metal_monitor</code>. It runs as a durable loop: poll a
+            bare_metal run, checkpoint the observation, classify the state, sleep,
+            and resume later. The workflow is native to Centaur; the endpoint it
+            polls belongs to bare_metal.
+          </p>
+          <p>
+            The monitor is deterministic by default. It should not ask an LLM to
+            inspect every poll. It calls an agent only when there is a meaningful
+            transition: failure, completion, stale progress, budget threshold, or
+            operator-requested triage.
+          </p>
+
+          <div class="callout">
+            <strong>Lowest-risk slice:</strong> attach to an existing local
+            bare_metal run and detect a failing task. Do not start PM2, allocate
+            ports, submit plans, or talk to a remote coder box in the first pass.
+          </div>
+        </section>
+
+        <section id="architecture">
+          <h2>Architecture split</h2>
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Owns</th>
+                <th>First implementation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Centaur workflow</td>
+                <td>Durable loop, checkpoints, wake schedule, escalation policy.</td>
+                <td><code>workflows/bare_metal_monitor.py</code></td>
+              </tr>
+              <tr>
+                <td>Centaur tool</td>
+                <td>HTTP calls to bare_metal and response normalization.</td>
+                <td><code>tools/infra/bare_metal_http</code></td>
+              </tr>
+              <tr>
+                <td>bare_metal server</td>
+                <td>Run state, task state, cost, errors, pause/resume/abort.</td>
+                <td>Existing server on <code>http://localhost:4016</code> or another local port.</td>
+              </tr>
+              <tr>
+                <td>Slack thread</td>
+                <td>Operator surface: start monitor, see status, approve next action.</td>
+                <td>Existing Slackbot path through <code>slack_thread_turn</code>.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Centaur-native loop</h3>
+          <pre><code>for poll_index in range(inp.max_polls):
+    snapshot = await ctx.call_tool(
+        "bare_metal_http",
+        "get_run",
+        {"base_url": inp.base_url, "run_id": inp.run_id},
+    )
+
+    decision = classify(snapshot, previous_snapshot)
+    if decision.requires_agent:
+        await ctx.run_agent("triage", text=decision.prompt, delivery=inp.delivery)
+
+    if decision.terminal:
+        return decision.summary
+
+    await ctx.sleep("poll_delay", timedelta(seconds=inp.poll_interval_seconds))</code></pre>
+
+          <p>
+            Each <code>ctx.call_tool</code> and <code>ctx.sleep</code> is
+            checkpointed. On replay, Centaur skips completed checkpoints and
+            continues from the next unfinished poll.
+          </p>
+        </section>
+
+        <section id="monitor-input">
+          <h2>Monitor input</h2>
+          <p>
+            The monitor should receive enough information to attach to a run and
+            know when to speak up. The first version does not need to know how the
+            run was created.
+          </p>
+          <pre><code>{
+  "base_url": "http://host.docker.internal:4016",
+  "run_id": "run_abc123",
+  "poll_interval_seconds": 30,
+  "stale_after_seconds": 300,
+  "max_polls": 200,
+  "notify_on": [
+    "completed",
+    "failed",
+    "stale",
+    "task_transition"
+  ],
+  "delivery": {
+    "platform": "slack",
+    "channel": "C123",
+    "thread_ts": "1773364194.179929"
+  }
+}</code></pre>
+
+          <div class="split">
+            <div class="panel">
+              <h3>Poll source</h3>
+              <p>
+                <code>GET {base_url}/api/v1/runs/{run_id}</code> is a
+                bare_metal API call. The Centaur tool wraps it and returns a
+                compact normalized snapshot.
+              </p>
+            </div>
+            <div class="panel">
+              <h3>Time gate</h3>
+              <p>
+                <code>poll_interval_seconds</code> controls the workflow sleep.
+                This is not an in-memory daemon sleep; it is a persisted Centaur
+                workflow wake time.
+              </p>
+            </div>
+          </div>
+
+          <h3>Snapshot fields</h3>
+          <ul>
+            <li><code>status</code>: <code>running</code>, <code>paused</code>, <code>completed</code>, <code>failed</code>, or <code>aborted</code>.</li>
+            <li><code>failureReason</code> and <code>error</code>, when present.</li>
+            <li><code>totals</code>: cost, completed tasks, failed tasks, total tasks, duration.</li>
+            <li><code>tasks</code>: task id, title, status, cost, error.</li>
+            <li>A derived fingerprint used to detect progress between polls.</li>
+          </ul>
+        </section>
+
+        <section id="mvp">
+          <h2>MVP scope</h2>
+          <div class="sequence">
+            <div class="step">
+              <div>
+                <h3>Add a minimal bare_metal HTTP tool</h3>
+                <p>
+                  Create a Centaur tool with <code>get_run(base_url, run_id)</code>.
+                  For the local demo, allow only loopback-style URLs and return a
+                  normalized subset of the run response.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div>
+                <h3>Add the durable monitor workflow</h3>
+                <p>
+                  Create <code>bare_metal_monitor</code> as an external workflow.
+                  It polls, classifies, sleeps, and exits on terminal states.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div>
+                <h3>Run a local failing demo</h3>
+                <p>
+                  Start a small bare_metal run with three tasks where one task is
+                  designed to fail. The monitor should detect the failed run and
+                  produce a final summary.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div>
+                <h3>Connect Slack</h3>
+                <p>
+                  Start the workflow from a Slack thread or let an agent start it
+                  after being given a run URL. The workflow posts back into the
+                  same thread when the run changes state.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="setup">
+          <h2>Setup steps</h2>
+          <h3>1. Start Centaur locally</h3>
+          <pre><code>cd /Users/kain/Sites/Centaur
+just up</code></pre>
+
+          <h3>2. Start or reuse a local bare_metal server</h3>
+          <p>
+            For the current planning-harness run, ports <code>4016</code> and
+            <code>4017</code> are already allocated in the hard port map.
+          </p>
+          <pre><code>pm2 logs bare-metal-centaur-planning-harness-ledger-diverge --lines 20 --nostream
+curl -sS http://localhost:4016/api/v1/runs | jq</code></pre>
+
+          <h3>3. Verify Centaur API can reach the bare_metal API</h3>
+          <p>
+            From inside the API deployment, <code>localhost</code> is the API pod,
+            not the laptop host. Validate the host route before wiring the
+            workflow.
+          </p>
+          <pre><code>kubectl exec -n centaur deploy/centaur-centaur-api -- \
+  curl -sS http://host.docker.internal:4016/api/v1/runs | jq</code></pre>
+
+          <h3>4. Register the tool and workflow</h3>
+          <p>
+            Put the tool under <code>tools/infra/bare_metal_http</code> for the
+            base prototype, or in an overlay once the contract stabilizes. Put the
+            workflow under <code>workflows/bare_metal_monitor.py</code>.
+          </p>
+          <pre><code>kubectl exec -n centaur deploy/centaur-centaur-api -- \
+  curl -fsS http://localhost:8000/health/tools | jq</code></pre>
+
+          <h3>5. Start the monitor workflow</h3>
+          <pre><code>kubectl exec -n centaur deploy/centaur-centaur-api -- curl -sS \
+  -X POST http://localhost:8000/workflows/runs \
+  -H "Content-Type: application/json" \
+  -d '{
+    "workflow_name": "bare_metal_monitor",
+    "eager_start": true,
+    "input": {
+      "base_url": "http://host.docker.internal:4016",
+      "run_id": "RUN_ID",
+      "poll_interval_seconds": 30,
+      "stale_after_seconds": 300,
+      "max_polls": 200
+    }
+  }' | jq</code></pre>
+
+          <h3>6. Inspect workflow state</h3>
+          <pre><code>kubectl exec -n centaur deploy/centaur-centaur-api -- curl -sS \
+  http://localhost:8000/workflows/runs/WORKFLOW_RUN_ID | jq
+
+kubectl exec -n centaur deploy/centaur-centaur-api -- curl -sS \
+  http://localhost:8000/workflows/runs/WORKFLOW_RUN_ID/checkpoints | jq</code></pre>
+        </section>
+
+        <section id="slack">
+          <h2>Getting the agent in Slack</h2>
+          <p>
+            Slack should be the operator surface, not the execution engine. The
+            agent can help start or inspect the monitor, but the durable workflow
+            owns the loop.
+          </p>
+
+          <div class="split">
+            <div class="panel">
+              <h3>Manual workflow start</h3>
+              <p>
+                An operator starts the workflow with a curl/API call and includes
+                Slack delivery metadata. The monitor posts summaries into the
+                chosen channel and thread.
+              </p>
+            </div>
+            <div class="panel">
+              <h3>Agent-assisted start</h3>
+              <p>
+                In Slack, mention Centaur and provide the bare_metal run URL or
+                run id. The agent extracts the run id, confirms the base URL, and
+                starts <code>bare_metal_monitor</code>.
+              </p>
+            </div>
+          </div>
+
+          <h3>Suggested Slack interaction</h3>
+          <pre><code>@Centaur monitor bare_metal run
+base_url: http://host.docker.internal:4016
+run_id: RUN_ID
+poll: 30s
+alert here when it fails or completes</code></pre>
+
+          <h3>Agent prompt contract</h3>
+          <ul>
+            <li>Confirm the run id and base URL before starting a monitor.</li>
+            <li>Do not poll from the agent conversation. Start a workflow.</li>
+            <li>Summarize the workflow id and how to inspect it.</li>
+            <li>When the monitor escalates, explain the failure and propose one next operator action.</li>
+          </ul>
+        </section>
+
+        <section id="demo">
+          <h2>Failing demo run</h2>
+          <p>
+            The demo should prove the loop, not the full operator workflow. Use a
+            tiny plan with three tasks where task two fails deterministically. The
+            monitor should observe the transition from running to failed and
+            report the failed task and error.
+          </p>
+
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Expected behavior</th>
+                <th>Monitor assertion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>DEMO-001</td>
+                <td>Creates a small file and succeeds.</td>
+                <td>Task moves to <code>done</code>.</td>
+              </tr>
+              <tr>
+                <td>DEMO-002</td>
+                <td>Runs a failing gate or exits non-zero.</td>
+                <td>Run becomes <code>failed</code> with <code>tasksFailed &gt; 0</code>.</td>
+              </tr>
+              <tr>
+                <td>DEMO-003</td>
+                <td>Depends on the failed task or remains pending.</td>
+                <td>Monitor summary identifies incomplete downstream work.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Acceptance criteria</h3>
+          <ul>
+            <li>Centaur workflow run checkpoints at least two polls.</li>
+            <li>The workflow sleeps between polls instead of hot-looping.</li>
+            <li>The workflow exits when bare_metal reports a terminal status.</li>
+            <li>The final output names the failed task, failure reason, and run URL.</li>
+            <li>Slack delivery works when <code>delivery.platform</code> is <code>slack</code>.</li>
+          </ul>
+        </section>
+
+        <section id="next">
+          <h2>After the local demo</h2>
+          <p>
+            Once the local loop works, add control-plane features in small
+            increments. Remote coder-box support should wait until the local
+            behavior is boring.
+          </p>
+
+          <div class="sequence">
+            <div class="step">
+              <div>
+                <h3>Add richer notifications</h3>
+                <p>
+                  Notify on task transitions, stale progress, cost thresholds,
+                  failure, completion, and pause events.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div>
+                <h3>Add pause/resume/abort methods</h3>
+                <p>
+                  Extend the tool to call bare_metal control endpoints only after
+                  explicit operator approval.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div>
+                <h3>Add start/submit flow</h3>
+                <p>
+                  Fold in the checked-in <code>bare-metal/execute</code> workflow:
+                  preflight, PM2 backend, UI, config review, submit.
+                </p>
+              </div>
+            </div>
+            <div class="step">
+              <div>
+                <h3>Add remote machine support</h3>
+                <p>
+                  Only after local monitoring works, introduce a coder-box
+                  transport with an allowlist for hosts, repo roots, ports, and
+                  commands.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p class="footer-note">
+            Source context: Centaur workflow engine, Centaur workflow extension
+            docs, and the checked-in bare_metal skills under
+            <code>/Users/kain/Sites/bare_metal/skills</code>.
+          </p>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
