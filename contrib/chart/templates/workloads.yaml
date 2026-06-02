@@ -209,6 +209,10 @@ spec:
               value: info
             - name: CENTAUR_DEFAULT_HARNESS
               value: {{ .Values.api.defaultHarness | quote }}
+            - name: CENTAUR_ENABLED_TOOLS
+              value: {{ join "," .Values.api.enabledTools | quote }}
+            - name: CENTAUR_DISABLED_TOOLS
+              value: {{ join "," .Values.api.disabledTools | quote }}
             - name: TOOL_DIRS
 {{- if .Values.overlay.image.repository }}
               value: {{ printf "/app/tools:%s/tools" .Values.overlay.mountPath | quote }}

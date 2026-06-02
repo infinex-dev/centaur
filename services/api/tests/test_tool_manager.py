@@ -509,6 +509,33 @@ def test_discover_loads_fake_tools_with_shadowing_personas_and_failures(tmp_path
     assert "code-reviewer" not in manager.tools
 
 
+def test_discover_skips_disabled_tools(tmp_path: Path):
+    tools_dir = tmp_path / "tools"
+    _write_tool(tools_dir, "alpha", FAKE_TOOL_CLIENT)
+    _write_tool(tools_dir, "beta", FAKE_TOOL_CLIENT)
+    _write_persona(tools_dir, "code-reviewer")
+
+    manager = ToolManager(tools_dir, disabled_tools={"beta"})
+    loaded = manager.discover()
+
+    assert [tool.name for tool in loaded] == ["alpha"]
+    assert set(manager.tools) == {"alpha"}
+    assert manager.get_persona("code-reviewer") is not None
+
+
+def test_discover_respects_enabled_tools_allowlist(tmp_path: Path):
+    tools_dir = tmp_path / "tools"
+    _write_tool(tools_dir, "alpha", FAKE_TOOL_CLIENT)
+    _write_tool(tools_dir, "beta", FAKE_TOOL_CLIENT)
+    _write_tool(tools_dir, "gamma", FAKE_TOOL_CLIENT)
+
+    manager = ToolManager(tools_dir, enabled_tools={"beta"})
+    loaded = manager.discover()
+
+    assert [tool.name for tool in loaded] == ["beta"]
+    assert set(manager.tools) == {"beta"}
+
+
 @pytest.mark.asyncio
 async def test_call_tool_invokes_sync_and_async_methods_with_secret_placeholders(
     tmp_path: Path,

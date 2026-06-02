@@ -66,6 +66,8 @@ api:
   slackSyncThreadLookbackDays: 3
   companyContextDocumentsIntervalSeconds: 14400
   slackEtlExcludedChannelPatterns: ""
+  enabledTools: []
+  disabledTools: []
   victoriaMetricsPushEnabled: false
   startupProbe:
     failureThreshold: 30

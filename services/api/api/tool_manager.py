@@ -1363,15 +1363,25 @@ class ToolManager:
     def __init__(
         self,
         tools_dir: Path | list[Path],
+        *,
+        enabled_tools: set[str] | None = None,
+        disabled_tools: set[str] | None = None,
     ):
         if isinstance(tools_dir, list):
             self.tools_dirs: list[Path] = list(tools_dir)
         else:
             self.tools_dirs = [tools_dir]
+        self.enabled_tools = {name.strip() for name in (enabled_tools or set()) if name.strip()}
+        self.disabled_tools = {name.strip() for name in (disabled_tools or set()) if name.strip()}
         self.tools: dict[str, LoadedTool] = {}
         self.personas: dict[str, LoadedPersona] = {}
         self.load_failures: list[dict[str, str]] = []
         self._reload_lock = threading.Lock()
+
+    def _tool_is_enabled(self, name: str) -> bool:
+        if self.enabled_tools and name not in self.enabled_tools:
+            return False
+        return name not in self.disabled_tools
 
     def _collect_tools(self) -> list[tuple[Path, dict]]:
         """Read pyproject.toml from each tool dir.
@@ -1456,6 +1466,10 @@ class ToolManager:
 
                 # Skip persona entries — they are loaded separately
                 if tool_conf.get("type") == "persona":
+                    continue
+
+                if not self._tool_is_enabled(name):
+                    log.info("tool_disabled", tool=name)
                     continue
 
                 meta = {
