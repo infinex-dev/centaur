@@ -8,10 +8,18 @@ static domain. This is the local counterpart to `contrib/deploy-env-runsheet.md`
 ## 1. Prerequisites
 
 ```bash
-brew install just kubectl helm jq kind ngrok   # + Docker or Podman running
+brew install just kubectl helm jq kind ngrok podman
+podman machine init                            # one-time (skip if already created)
+podman machine start                           # must be running before deploy
 ngrok config add-authtoken <token>             # one-time, free signup
 ngrok config check                             # -> "Valid configuration file"
 ```
+
+We build with **podman** (no Docker on these machines). `deploy-local.sh` defaults
+to podman and exports `KIND_EXPERIMENTAL_PROVIDER=podman` so kind uses podman too;
+pass `--container-cli docker` only if you actually have Docker. Note the repo's
+`just build` / `just build-one` recipes hardcode `docker build`, so on a podman-only
+box use `deploy-local.sh` (and `--only` for single-image rebuilds) instead of those.
 
 We use the custom branded domain `infinex-centaur.ngrok.dev` (wildcard
 `*.infinex-centaur.ngrok.dev`), so the subdomain `slack.infinex-centaur.ngrok.dev`
@@ -39,8 +47,8 @@ export NGROK_DOMAIN=slack.infinex-centaur.ngrok.dev   # our custom ngrok subdoma
 ## 3. Deploy
 
 ```bash
-contrib/scripts/deploy-local.sh                 # Docker (default)
-# or: contrib/scripts/deploy-local.sh --container-cli podman
+contrib/scripts/deploy-local.sh                 # podman (default)
+# or: contrib/scripts/deploy-local.sh --container-cli docker
 ```
 
 This creates the kind cluster (if absent), builds and loads the four images,
@@ -91,14 +99,18 @@ just logs slackbot     # expect a POST to the events path
 Change code, then push it to the running `FirenzeStaging` bot:
 
 ```bash
-just build-one slackbot      # or: api / agent / iron-proxy — rebuild just what changed
-contrib/scripts/deploy-local.sh --skip-build  # reload images + redeploy + roll pods
+# Rebuild + reload + redeploy just the service you changed (podman-aware path):
+contrib/scripts/deploy-local.sh --only slackbot   # or: api / agent / iron-proxy
 # The reserved ngrok domain is stable, so the Slack Request URL never needs re-pasting.
 ```
 
-Then `@FirenzeStaging` again to exercise the new behavior. If you only touched the
-slackbot, only its pod needs to roll. The reserved ngrok domain is fixed, so
-nothing in Slack changes between iterations.
+`--only` rebuilds and reloads that single image (the heavy agent/sandbox image is
+left untouched when you're only tweaking the slackbot), then re-runs Helm and rolls
+the api + slackbot pods. Use `deploy-local.sh` with no `--only` to rebuild all four.
+(`just build-one` is Docker-only, so prefer `deploy-local.sh --only` on podman.)
+
+Then `@FirenzeStaging` again to exercise the new behavior. The reserved ngrok domain
+is fixed, so nothing in Slack changes between iterations.
 
 ## Gotchas
 

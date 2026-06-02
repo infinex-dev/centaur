@@ -8,11 +8,12 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 CLUSTER="${CENTAUR_KIND_CLUSTER:-centaur}"
 NAMESPACE="${CENTAUR_NAMESPACE:-centaur}"
 RELEASE="${CENTAUR_RELEASE:-centaur}"
-CONTAINER_CLI="${CONTAINER_CLI:-docker}"      # docker | podman
+CONTAINER_CLI="${CONTAINER_CLI:-podman}"      # podman | docker
 CHART_DIR="${CHART_DIR:-$ROOT_DIR/contrib/chart}"
 VALUES_FILE="${VALUES_FILE:-$ROOT_DIR/contrib/chart/values.local-env.yaml}"
 SECRET_NAME="${CENTAUR_INFRA_SECRET_NAME:-centaur-infra-env}"
 SKIP_BUILD=0
+ONLY_SVC=""   # empty = all four; or one of: api slackbot agent iron-proxy
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -21,10 +22,13 @@ while [[ $# -gt 0 ]]; do
     --namespace|-n)  NAMESPACE="${2:?}";     shift 2 ;;
     --release)       RELEASE="${2:?}";       shift 2 ;;
     --skip-build)    SKIP_BUILD=1;           shift ;;
+    --only)          ONLY_SVC="${2:?}";       shift 2 ;;
     --help|-h)
-      echo "Usage: contrib/scripts/deploy-local.sh [--container-cli docker|podman] [--cluster NAME] [--namespace NS] [--release NAME] [--skip-build]"
+      echo "Usage: contrib/scripts/deploy-local.sh [--container-cli podman|docker] [--cluster NAME] [--namespace NS] [--release NAME] [--skip-build] [--only api|slackbot|agent|iron-proxy]"
       echo "Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET OPENAI_API_KEY"
       echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY"
+      echo "Container CLI defaults to podman; pass --container-cli docker to override."
+      echo "--only rebuilds + reloads a single image (the rest stay as-is) for fast iteration."
       exit 0 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
   esac
@@ -33,10 +37,24 @@ done
 require_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "FATAL: missing command: $1" >&2; exit 1; }; }
 require_cmd "$CONTAINER_CLI"; require_cmd kind; require_cmd kubectl; require_cmd helm; require_cmd openssl
 
-API_IMAGE=centaur-api
-SLACKBOT_IMAGE=centaur-slackbot
-AGENT_IMAGE=centaur-agent
-IRON_PROXY_IMAGE=centaur-iron-proxy
+# kind defaults to the docker provider; with podman it must be told explicitly,
+# otherwise `kind create cluster`/`kind load` look for a docker daemon that
+# isn't there. Harmless when docker is the chosen CLI.
+if [[ "$CONTAINER_CLI" == "podman" ]]; then
+  export KIND_EXPERIMENTAL_PROVIDER=podman
+fi
+
+# Map a service name to its image + Dockerfile (+ optional build target).
+SERVICES=(api slackbot agent iron-proxy)
+if [[ -n "$ONLY_SVC" ]]; then
+  printf '%s\n' "${SERVICES[@]}" | grep -qx "$ONLY_SVC" \
+    || { echo "FATAL: --only must be one of: ${SERVICES[*]}" >&2; exit 2; }
+  SERVICES=("$ONLY_SVC")
+fi
+
+image_for()      { case "$1" in api) echo centaur-api ;; slackbot) echo centaur-slackbot ;; agent) echo centaur-agent ;; iron-proxy) echo centaur-iron-proxy ;; esac; }
+dockerfile_for() { case "$1" in api) echo "$ROOT_DIR/services/api/Dockerfile" ;; slackbot) echo "$ROOT_DIR/services/slackbot/Dockerfile" ;; agent) echo "$ROOT_DIR/services/sandbox/Dockerfile" ;; iron-proxy) echo "$ROOT_DIR/services/iron-proxy/Dockerfile" ;; esac; }
+target_for()     { case "$1" in agent) echo sandbox ;; *) echo "" ;; esac; }
 
 # 1. Ensure the kind cluster exists and is the active context.
 if ! kind get clusters 2>/dev/null | grep -qx "$CLUSTER"; then
@@ -56,10 +74,9 @@ build_image() {
 }
 
 if [[ "$SKIP_BUILD" != "1" ]]; then
-  build_image "$API_IMAGE"        "$ROOT_DIR/services/api/Dockerfile"
-  build_image "$SLACKBOT_IMAGE"   "$ROOT_DIR/services/slackbot/Dockerfile"
-  build_image "$AGENT_IMAGE"      "$ROOT_DIR/services/sandbox/Dockerfile" sandbox
-  build_image "$IRON_PROXY_IMAGE" "$ROOT_DIR/services/iron-proxy/Dockerfile"
+  for svc in "${SERVICES[@]}"; do
+    build_image "$(image_for "$svc")" "$(dockerfile_for "$svc")" "$(target_for "$svc")"
+  done
 fi
 
 # 3. Load images into the kind node image store.
@@ -76,8 +93,8 @@ load_image() {
     kind load docker-image "$image" --name "$CLUSTER"
   fi
 }
-for img in "$API_IMAGE" "$SLACKBOT_IMAGE" "$AGENT_IMAGE" "$IRON_PROXY_IMAGE"; do
-  load_image "$img"
+for svc in "${SERVICES[@]}"; do
+  load_image "$(image_for "$svc")"
 done
 
 # 4. Namespace.
