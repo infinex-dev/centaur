@@ -1,0 +1,108 @@
+# Example production values for deployments that store Centaur infra,
+# harness, and tool credentials directly in a Kubernetes Secret.
+#
+# Replace image repositories, tag, ingress host, TLS secret, and storage class
+# for your cluster before installing.
+
+global:
+  imagePullSecrets: []
+  # For a private internal registry:
+  # imagePullSecrets:
+  #   - name: regcred
+
+secretManager:
+  existingSecretName: centaur-infra-env
+  envPrefix: ""
+
+ironProxy:
+  secretSource: env
+  secretTtl: 10m
+  image:
+    repository: registry.inx.local/centaur/centaur-iron-proxy
+    tag: replace-me
+    pullPolicy: IfNotPresent
+
+api:
+  executionWorkerEnabled: true
+  workflowWorkerEnabled: true
+  warmPoolEnabled: true
+  defaultHarness: codex
+  kubernetesApiNoProxyHosts:
+    - 10.43.0.1
+    - kubernetes
+    - kubernetes.default
+    - kubernetes.default.svc
+    - kubernetes.default.svc.cluster.local
+    - .svc
+    - .svc.cluster.local
+  kubernetesApiEgress:
+    - cidr: 10.43.0.1/32
+      port: 443
+    - cidr: 10.83.80.4/32
+      port: 6443
+  image:
+    repository: registry.inx.local/centaur/centaur-api
+    tag: replace-me
+    pullPolicy: IfNotPresent
+
+slackbot:
+  enabled: true
+  image:
+    repository: registry.inx.local/centaur/centaur-slackbot
+    tag: replace-me
+    pullPolicy: IfNotPresent
+
+sandbox:
+  image:
+    repository: registry.inx.local/centaur/centaur-agent
+    tag: replace-me
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 4Gi
+  # If your cluster supports a sandboxed runtime, enable it here.
+  # runtimeClassName: gvisor
+
+postgres:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 20Gi
+    # storageClassName: your-storage-class
+
+ingress:
+  enabled: true
+  slackbot:
+    enabled: true
+    className: tailscale
+    annotations:
+      tailscale.com/funnel: "true"
+    host: centaur-slack
+    tls:
+      - hosts:
+          - centaur-slack
+  api:
+    enabled: true
+    className: traefik
+    host: centaur.inx.local
+    tls:
+      - secretName: centaur-inx-local-tls
+        hosts:
+          - centaur.inx.local
+
+networkPolicy:
+  enabled: true
+  # K3s' bundled Traefik usually runs in kube-system. If your Traefik
+  # controller runs elsewhere, set this to that namespace.
+  ingressControllerNamespaces:
+    - kube-system
+    - tailscale
+  apiIngressSourceNamespaces:
+    - kube-system
+
+runnerAccess:
+  enabled: false

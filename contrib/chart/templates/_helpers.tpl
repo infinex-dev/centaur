@@ -101,6 +101,10 @@ centaur-api-proxy
 {{- include "centaur.firewallProxyHost" . -}}
 {{- end -}}
 
+{{- define "centaur.kubernetesApiNoProxyHosts" -}}
+{{- join "," .Values.api.kubernetesApiNoProxyHosts -}}
+{{- end -}}
+
 {{- /*
 The upstream 1Password Connect subchart names its Service after
 `connect.applicationName` (default `onepassword-connect`) and exposes the

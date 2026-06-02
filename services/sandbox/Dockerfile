@@ -123,6 +123,10 @@ RUN curl -L https://foundry.paradigm.xyz | bash \
       rm -f "$HOME/.foundry/bin/$bin"; \
       ln -s "$HOME/.foundry/versions/${FOUNDRY_VERSION}/$bin" "$HOME/.foundry/bin/$bin"; \
     done
+USER root
+RUN mkdir -p /home/agent/.cache/amp /home/agent/.cache/uv /home/agent/.amp /home/agent/.local \
+    && chown -R 1001:1001 /home/agent/.cache /home/agent/.amp /home/agent/.local
+USER agent
 RUN set -eux; \
     amp_platform="$(case "$(dpkg --print-architecture)" in \
       amd64) echo linux-x64 ;; \
@@ -163,23 +167,23 @@ FROM toolchain AS sandbox
 
 USER root
 RUN rm -f /etc/sudoers.d/agent
-COPY --link --chmod=755 services/sandbox/call.sh /usr/local/bin/call
-COPY --link --chmod=755 services/sandbox/slack-upload.sh /usr/local/bin/slack-upload
-COPY --link --chmod=755 services/sandbox/md2docx.py /usr/local/bin/md2docx
-COPY --link --chmod=755 services/sandbox/amp-wrapper.py /usr/local/bin/amp-wrapper
-COPY --link --chmod=755 services/sandbox/codex-app-wrapper.py /usr/local/bin/codex-app-wrapper
-COPY --link --chmod=755 services/sandbox/claude-app-wrapper.py /usr/local/bin/claude-app-wrapper
-COPY --link --chmod=755 services/sandbox/harness_adapter.py /usr/local/bin/harness-adapter
-COPY --link --chmod=755 services/sandbox/git-branch.sh /usr/local/bin/git-branch
-COPY --link --chmod=755 services/sandbox/entrypoint.sh /entrypoint.sh
+COPY --chmod=755 services/sandbox/call.sh /usr/local/bin/call
+COPY --chmod=755 services/sandbox/slack-upload.sh /usr/local/bin/slack-upload
+COPY --chmod=755 services/sandbox/md2docx.py /usr/local/bin/md2docx
+COPY --chmod=755 services/sandbox/amp-wrapper.py /usr/local/bin/amp-wrapper
+COPY --chmod=755 services/sandbox/codex-app-wrapper.py /usr/local/bin/codex-app-wrapper
+COPY --chmod=755 services/sandbox/claude-app-wrapper.py /usr/local/bin/claude-app-wrapper
+COPY --chmod=755 services/sandbox/harness_adapter.py /usr/local/bin/harness-adapter
+COPY --chmod=755 services/sandbox/git-branch.sh /usr/local/bin/git-branch
+COPY --chmod=755 services/sandbox/entrypoint.sh /entrypoint.sh
 
 USER agent
 WORKDIR /home/agent
 
 # No RUN instructions after these — all repo-local content at the very end.
-COPY --link --chown=1001:1001 .agents/skills/ /home/agent/.agents/skills/
-COPY --link --chown=1001:1001 harness/ /home/agent/harness/
-COPY --link --chown=1001:1001 services/sandbox/SYSTEM_PROMPT.md /home/agent/AGENTS.md
+COPY --chown=1001:1001 .agents/skills/ /home/agent/.agents/skills/
+COPY --chown=1001:1001 harness/ /home/agent/harness/
+COPY --chown=1001:1001 services/sandbox/SYSTEM_PROMPT.md /home/agent/AGENTS.md
 
 ENTRYPOINT ["/entrypoint.sh"]
 # Default CMD uses Codex app-server through Centaur's NDJSON bridge.
