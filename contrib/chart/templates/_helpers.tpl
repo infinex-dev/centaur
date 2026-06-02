@@ -101,6 +101,10 @@ centaur-api-proxy
 {{- include "centaur.firewallProxyHost" . -}}
 {{- end -}}
 
+{{- define "centaur.kubernetesApiNoProxyHosts" -}}
+{{- join "," .Values.api.kubernetesApiNoProxyHosts -}}
+{{- end -}}
+
 {{- define "centaur.laminarNoProxyHosts" -}}
 {{- if .Values.laminar.enabled -}}
 {{- printf ",%s,%s,%s,%s,%s,%s" (include "centaur.componentName" (dict "root" . "component" "laminar-app-server")) (include "centaur.componentName" (dict "root" . "component" "laminar-frontend")) (include "centaur.componentName" (dict "root" . "component" "laminar-postgres")) (include "centaur.componentName" (dict "root" . "component" "laminar-clickhouse")) (include "centaur.componentName" (dict "root" . "component" "laminar-query-engine")) (include "centaur.componentName" (dict "root" . "component" "laminar-quickwit")) -}}

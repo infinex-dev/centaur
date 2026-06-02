@@ -25,9 +25,14 @@ RUN sed -i \
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --no-install-project --no-dev
 
-# 2. Install tool deps from tools/**/pyproject.toml (changes rarely — cached layer)
+# 2. Install tool deps from tools/**/pyproject.toml.
+#
+# Keep this as a plain COPY instead of a build-time bind mount. Podman and
+# Docker differ in how they resolve RUN --mount=type=bind sources during image
+# builds; copying the manifests into the build context makes plugin dependency
+# installation deterministic across both builders.
+COPY tools/ /tmp/tools/
 RUN --mount=type=cache,target=/root/.cache/uv \
-    --mount=type=bind,source=tools,target=/tmp/tools \
     python -c "\
 import tomllib, pathlib; \
 deps = set(); \
@@ -36,7 +41,7 @@ deps = set(); \
  for p in pathlib.Path(root).glob('**/pyproject.toml')]; \
 open('/tmp/pd.txt','w').write('\n'.join(sorted(deps)))" \
     && uv pip install -r /tmp/pd.txt --quiet \
-    && rm /tmp/pd.txt
+    && rm -rf /tmp/pd.txt /tmp/tools
 
 # 3. Copy source (changes often — keep last for fast rebuilds)
 COPY services/api/api/ api/
