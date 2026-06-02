@@ -6,7 +6,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 CLUSTER="${CENTAUR_KIND_CLUSTER:-centaur}"
-NAMESPACE="${CENTAUR_NAMESPACE:-centaur-system}"
+NAMESPACE="${CENTAUR_NAMESPACE:-centaur}"
 RELEASE="${CENTAUR_RELEASE:-centaur}"
 CONTAINER_CLI="${CONTAINER_CLI:-docker}"      # docker | podman
 CHART_DIR="${CHART_DIR:-$ROOT_DIR/contrib/chart}"
