@@ -1,0 +1,75 @@
+# Local laptop values for Centaur on kind/k3s using env-secret credentials.
+#
+# Reuses the env-secret path from values.production-env.example.yaml but strips
+# the internal-cluster specifics: no private registry, no Traefik/Tailscale
+# operator ingress, no cert-manager, no hardcoded Kubernetes-API CIDRs. Images are
+# built locally and loaded into kind. Slack reaches the slackbot via
+# `kubectl port-forward` + `ngrok` (see contrib/scripts/tunnel-local.sh).
+
+global:
+  imagePullSecrets: []
+
+secretManager:
+  existingSecretName: centaur-infra-env
+  envPrefix: ""
+
+ironProxy:
+  secretSource: env
+  secretTtl: 10m
+  image:
+    repository: centaur-iron-proxy
+    tag: latest
+    pullPolicy: IfNotPresent
+
+api:
+  executionWorkerEnabled: true
+  workflowWorkerEnabled: true
+  # Warm pool keeps idle sandbox pods running; off locally for a lighter laptop
+  # footprint. The first @mention then pays a one-time sandbox cold start.
+  warmPoolEnabled: false
+  defaultHarness: codex
+  image:
+    repository: centaur-api
+    tag: latest
+    pullPolicy: IfNotPresent
+
+slackbot:
+  enabled: true
+  image:
+    repository: centaur-slackbot
+    tag: latest
+    pullPolicy: IfNotPresent
+
+sandbox:
+  image:
+    repository: centaur-agent
+    tag: latest
+    pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "2"
+      memory: 2Gi
+
+postgres:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 5Gi
+
+# No ingress locally — the slackbot is reached via port-forward + tunnel, and the
+# API via kubectl exec/port-forward.
+ingress:
+  enabled: false
+
+# kind's default CNI (kindnet) does not enforce NetworkPolicy, so the egress
+# lockdown is a no-op locally; disabling it also removes the need for the
+# production CIDR/no-proxy values. NOTE: this means sandboxes are not network-
+# isolated locally — fine for laptop testing, not for shared/production use.
+networkPolicy:
+  enabled: false
+
+runnerAccess:
+  enabled: false
