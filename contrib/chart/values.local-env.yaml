@@ -28,6 +28,12 @@ api:
   # footprint. The first @mention then pays a one-time sandbox cold start.
   warmPoolEnabled: false
   defaultHarness: codex
+  # Egress discovery defaults to on and targets the `centaur-egress` namespace,
+  # which only exists on the internal cluster. Locally that namespace is absent,
+  # so leaving it enabled creates RBAC bindings to a missing namespace and runs
+  # pointless discovery — disable it (matches contrib/chart/values.dev.yaml).
+  egressDiscovery:
+    enabled: false
   image:
     repository: centaur-api
     tag: latest

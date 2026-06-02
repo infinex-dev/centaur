@@ -50,7 +50,7 @@ creates the `centaur-infra-env` + firewall CA secrets, and runs
 ## 4. Verify (no Slack)
 
 ```bash
-kubectl exec -n centaur-system deploy/centaur-centaur-api -- \
+kubectl exec -n centaur deploy/centaur-centaur-api -- \
   curl -fsS http://localhost:8000/health        # {"status":"ok"}
 just smoke                                       # result_text contains ...PONG...
 ```
@@ -129,6 +129,6 @@ nothing in Slack changes between iterations.
 
 ```bash
 # Ctrl-C tunnel-local.sh to stop ngrok + the port-forward (nothing public persists)
-helm uninstall centaur -n centaur-system
+helm uninstall centaur -n centaur
 kind delete cluster --name centaur
 ```

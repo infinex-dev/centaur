@@ -11,7 +11,7 @@ set -euo pipefail
 # Required: NGROK_DOMAIN must be your reserved free static domain, e.g.
 #   export NGROK_DOMAIN=slack.infinex-centaur.ngrok.dev
 
-NAMESPACE="${CENTAUR_NAMESPACE:-centaur-system}"
+NAMESPACE="${CENTAUR_NAMESPACE:-centaur}"
 RELEASE="${CENTAUR_RELEASE:-centaur}"
 PORT="${PORT:-3001}"
 EVENTS_PATH="${CENTAUR_SLACK_EVENTS_PATH:-/api/webhooks/slack}"
