@@ -1,0 +1,33 @@
+display_information:
+  name: FirenzeStaging
+  description: Staging instance of the Centaur agent orchestrator, run locally for development. Mention @FirenzeStaging in a thread and the locally-running stack works the task in an isolated sandbox, posting progress and the final answer back.
+  background_color: "#0b0b0f"
+features:
+  bot_user:
+    display_name: FirenzeStaging
+    always_online: true
+oauth_config:
+  scopes:
+    bot:
+      # --- Required ---
+      - app_mentions:read   # see @FirenzeStaging mentions
+      - chat:write          # post progress + answers in-thread
+      # --- DM support ---
+      - im:history          # read DM messages sent to the bot
+      - im:read             # access basic DM channel info
+      - im:write            # open/send DMs to users
+settings:
+  # PHASE 1 (first create): keep the event_subscriptions block below commented
+  #   out — the endpoint can't verify before the signing secret exists.
+  # PHASE 3 (re-apply): uncomment and re-apply via Features -> App Manifest.
+  #   The path is /api/webhooks/slack (plural) — do not change it.
+  # event_subscriptions:
+  #   request_url: https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack
+  #   bot_events:
+  #     - app_mention   # @FirenzeStaging mentions
+  #     - message.im    # DMs to the bot
+  interactivity:
+    is_enabled: false
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
