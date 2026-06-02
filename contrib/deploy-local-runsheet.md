@@ -28,11 +28,16 @@ approval. The Slack Request URL is
 `https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack`.
 
 **Create `FirenzeStaging` — PHASE 1 (scopes only).** At api.slack.com/apps ->
-"Create app -> From a manifest", paste `contrib/slack-app-manifest.yaml` with the
-`event_subscriptions` block left commented out. Install to your workspace and
-collect the Bot User OAuth Token + Signing Secret. (Event Subscriptions are added
-in Phase 3 below, once the ngrok endpoint is live with the signing secret.) This
-is a dedicated staging app — keep it separate from any production Centaur app.
+"Create app -> From a manifest", set the editor toggle to **JSON** and paste
+`contrib/slack-app-manifest.json` (it has no `event_subscriptions` — that is added
+in Phase 3, once the ngrok endpoint is live with the signing secret). Install to
+your workspace and collect the Bot User OAuth Token + Signing Secret. This is a
+dedicated staging app — keep it separate from any production Centaur app.
+
+(The manifest is JSON, not YAML: Slack's manifest editor parses JSON, and a YAML
+paste fails with `Expecting 'STRING'...got 'INVALID'`. Copy from the file —
+`pbcopy < contrib/slack-app-manifest.json` — rather than from chat, to avoid
+smart-quote/em-dash corruption.)
 
 ## 2. Export credentials
 
@@ -74,14 +79,19 @@ contrib/scripts/tunnel-local.sh
 ```
 
 Now that the endpoint is live at the stable URL **with the FirenzeStaging signing
-secret deployed**, finish the app:
-- Edit `contrib/slack-app-manifest.yaml`: set `event_subscriptions.request_url`
-  to `https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack` and uncomment the
-  block (subscribes to `app_mention` + `message.im`).
-- In api.slack.com -> your app -> **Features -> App Manifest**, paste the full
-  manifest and apply. Slack POSTs a challenge to the live ngrok URL and verifies.
-- Because the reserved domain never changes, this verification is permanent — you
-  won't touch Slack config again across restarts/reboots.
+secret deployed**, finish the app. In api.slack.com -> your app -> **Features ->
+App Manifest** (JSON), add an `event_subscriptions` key inside `settings` and apply:
+
+```json
+"event_subscriptions": {
+  "request_url": "https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack",
+  "bot_events": ["app_mention", "message.im"]
+}
+```
+
+Slack POSTs a challenge to the live ngrok URL and verifies it against the deployed
+signing secret. Because the reserved domain never changes, this verification is
+permanent — you won't touch Slack config again across restarts/reboots.
 
 ## 6. Test in Slack
 
