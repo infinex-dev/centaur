@@ -2,15 +2,17 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Stand up a dedicated **staging Slack app named `FirenzeStaging`** and run the Centaur stack **locally on the laptop wired to that bot**, so we can iterate on the bot — change code, redeploy, and `@FirenzeStaging` in Slack to see the change — without touching any production/Centaur app. The local deployment (kind + env secrets + tunnel) is just the plumbing that connects the running code to `FirenzeStaging`.
+> **⚠️ Runtime update (the plan pivoted after it was written):** `kind` does **not** work on podman's macOS VM — a kind node is a privileged systemd container that must `mount -o remount,ro /sys`, which the VM denies even rootful with full `CAP_SYS_ADMIN`. The local runtime was switched to **k3s running natively inside the podman machine VM**: the VM *is* the node, so there's no nested-container `/sys` remount (same K3s shape as production). The committed `contrib/scripts/k3s-local.sh` + `contrib/scripts/deploy-local.sh` + `contrib/deploy-local-runsheet.md` are the source of truth. The framing below is aligned to k3s, but the **embedded kind/docker script/runsheet reproductions in Tasks 1–5 are historical** — defer to the committed scripts.
 
-**The actual deliverable is the dev loop:** `FirenzeStaging` Slack app ⇄ local stack ⇄ **ngrok**. Everything else (kind, Helm values, secret bootstrap) exists only to make that loop work. Keep it as lean as possible; drop anything not needed to mention `@FirenzeStaging` and get a reply from locally-running code.
+**Goal:** Stand up a dedicated **staging Slack app named `FirenzeStaging`** and run the Centaur stack **locally on the laptop wired to that bot**, so we can iterate on the bot — change code, redeploy, and `@FirenzeStaging` in Slack to see the change — without touching any production/Centaur app. The local deployment (k3s-in-podman + env secrets + tunnel) is just the plumbing that connects the running code to `FirenzeStaging`.
+
+**The actual deliverable is the dev loop:** `FirenzeStaging` Slack app ⇄ local stack ⇄ **ngrok**. Everything else (k3s, Helm values, secret bootstrap) exists only to make that loop work. Keep it as lean as possible; drop anything not needed to mention `@FirenzeStaging` and get a reply from locally-running code.
 
 **Why ngrok (not Tailscale Funnel or cloudflared quick tunnels):** ngrok is **independent of any tailnet** — it needs no Tailscale ACL/Funnel permission (Funnel is blocked on the tailnet we'd otherwise use, and the admin who could enable it is gone). We have a **paid custom branded domain** (`infinex-centaur.ngrok.dev`, with wildcard `*.infinex-centaur.ngrok.dev`), so any concrete subdomain — we use `slack.infinex-centaur.ngrok.dev` — gives a **stable, predictable public URL** that exists before the tunnel runs and needs no per-subdomain reservation. That stability is what lets us **make the Slack manifest the source of truth for the Events API Request URL** (`event_subscriptions.request_url`) and have its verification **stick permanently** — set once, never re-paste, even across restarts. A rotating `*.trycloudflare.com` host can't be baked into a manifest at all (it changes every restart). ngrok terminates TLS with a valid public cert (passes Slack validation), and the paid plan serves no browser interstitial. (There's still a one-time two-phase create — see Task 5 — because Slack signs its validation challenge with a signing secret that only exists after the app is created; that's a Slack bootstrap constraint, independent of the tunnel.)
 
-**Architecture:** Reuse the env-secret credential path introduced in `infinex-dev/centaur#1` (`ironProxy.secretSource: env`, infra creds in the `centaur-infra-env` Kubernetes Secret), but strip the internal-cluster coupling (private registry `registry.inx.local`, Traefik API ingress, the cluster's Tailscale *operator* ingress, cert-manager, hardcoded K8s-API CIDRs). Locally we build images with Docker/Podman, load them into kind, disable ingress + NetworkPolicy, and expose the Slackbot to **`FirenzeStaging`'s Events API** through `kubectl port-forward` + **`ngrok`** running on the laptop (no in-cluster ingress, no tailnet dependency). The `SLACK_BOT_TOKEN` / `SLACK_SIGNING_SECRET` come from the `FirenzeStaging` app, not from any production Slack app — this is the isolation that makes iteration safe.
+**Architecture:** Reuse the env-secret credential path introduced in `infinex-dev/centaur#1` (`ironProxy.secretSource: env`, infra creds in the `centaur-infra-env` Kubernetes Secret), but strip the internal-cluster coupling (private registry `registry.inx.local`, Traefik API ingress, the cluster's Tailscale *operator* ingress, cert-manager, hardcoded K8s-API CIDRs). Locally we build images with podman, import them into k3s running inside the podman VM, disable ingress + NetworkPolicy, and expose the Slackbot to **`FirenzeStaging`'s Events API** through `kubectl port-forward` + **`ngrok`** running on the laptop (no in-cluster ingress, no tailnet dependency). The `SLACK_BOT_TOKEN` / `SLACK_SIGNING_SECRET` come from the `FirenzeStaging` app, not from any production Slack app — this is the isolation that makes iteration safe.
 
-**Tech Stack:** Helm, kind (or k3s), Docker/Podman, `kubectl`, **ngrok**, bash, OpenSSL. The Centaur stack itself is FastAPI (API) + a Hono/TypeScript slackbot + iron-proxy + an agent sandbox image.
+**Tech Stack:** Helm, k3s (inside the podman machine VM), podman, `kubectl`, **ngrok**, bash, OpenSSL. The Centaur stack itself is FastAPI (API) + a Hono/TypeScript slackbot + iron-proxy + an agent sandbox image.
 
 > **Future zero-ingress option (not in this plan):** Slack Socket Mode would remove the public-URL requirement entirely (the bot dials out over a WebSocket), surviving even a fully locked-down tailnet. The slackbot is HTTP-only today (`@slack/web-api` + Hono, no `@slack/socket-mode`), so that's a code change for later — out of scope here.
 
@@ -20,7 +22,7 @@
 
 These are environment/setup steps, not code changes — no commits.
 
-- [ ] **Tooling installed:** `brew install just kubectl helm jq kind ngrok podman` and a running `podman machine` (`podman machine init && podman machine start`). These machines have no Docker; the scripts default to podman and set `KIND_EXPERIMENTAL_PROVIDER=podman`. (Note: the committed `contrib/scripts/deploy-local.sh` is the source of truth and has since gained a podman default, a `--only <svc>` single-image rebuild flag, and the kind podman-provider export — the embedded script blocks below predate those.)
+- [ ] **Tooling installed:** `brew install just kubectl helm jq ngrok podman` and a running `podman machine` (`podman machine init && podman machine start`). No Docker — `contrib/scripts/k3s-local.sh` installs k3s natively inside the podman VM and `deploy-local.sh` builds with podman + imports into k3s. (Note: the committed `contrib/scripts/{k3s-local.sh,deploy-local.sh}` are the source of truth — they also add a `--only <svc>` single-image rebuild flag; the embedded script blocks below predate the kind→k3s pivot.)
 - [ ] **ngrok authtoken configured** (one-time): sign up (free) and `ngrok config add-authtoken <token>`. Verify with `ngrok config check` → "Valid configuration file".
 - [ ] **Pick the Slack subdomain:** we have the custom branded domain `infinex-centaur.ngrok.dev` with a wildcard endpoint (`*.infinex-centaur.ngrok.dev`), so any subdomain resolves with no per-subdomain reservation. Use **`slack.infinex-centaur.ngrok.dev`** for FirenzeStaging. The Slack Request URL is `https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack` — baked into the manifest in Task 5. (No tailnet, no Tailscale Funnel, no admin approval — ngrok is fully independent of the SNX/team tailnet.)
 - [ ] **Centaur checkout on the PR branch:**
@@ -44,8 +46,9 @@ All file paths below are relative to the root of this `centaur` checkout.
 
 | File | Responsibility |
 |---|---|
-| `contrib/chart/values.local-env.yaml` (create) | Helm values for local kind/k3s: env secrets, local image names, ingress/NetworkPolicy off, small resource footprint. |
-| `contrib/scripts/deploy-local.sh` (create) | One-command local deploy: build → load into kind → create/patch secrets → `helm upgrade --install`. Docker/Podman selectable. |
+| `contrib/chart/values.local-env.yaml` (create) | Helm values for local k3s: env secrets, local image names, ingress/NetworkPolicy off, small resource footprint. |
+| `contrib/scripts/deploy-local.sh` (create) | One-command local deploy: build (podman) → import into k3s → create/patch secrets → `helm upgrade --install`. |
+| `contrib/scripts/k3s-local.sh` (create) | Bring up / reconnect the k3s cluster inside the podman VM: install k3s if absent, write the kubeconfig, open the API SSH tunnel. |
 | `contrib/scripts/tunnel-local.sh` (create) | Port-forward the slackbot service and open `ngrok` on a reserved static domain for Slack's Events API Request URL. |
 | `contrib/deploy-local-runsheet.md` (create) | Human runbook: prerequisites, run order, Slack app config, teardown. |
 | `contrib/slack-app-manifest.yaml` (create) | `FirenzeStaging` Slack app manifest with scopes, bot user, **and Event Subscriptions (Request URL + bot events) baked in** — create the app from a manifest in one shot. |
@@ -649,7 +652,7 @@ git commit -m "feat(local): add FirenzeStaging staging Slack app manifest (menti
 
 ### Task 6: End-to-end local verification
 
-This task has no new files — it runs the artifacts from Tasks 1-5 against a real kind cluster and confirms a Slack round-trip. Treat each step's "Expected" as the assertion.
+This task has no new files — it runs the artifacts from Tasks 1-5 against the real k3s cluster (in the podman VM) and confirms a Slack round-trip. Treat each step's "Expected" as the assertion.
 
 **Files:**
 - (none — verification only)
@@ -657,13 +660,13 @@ This task has no new files — it runs the artifacts from Tasks 1-5 against a re
 - [ ] **Step 1: Clean deploy from scratch**
 
 ```bash
-kind delete cluster --name centaur 2>/dev/null || true
+helm uninstall centaur -n centaur 2>/dev/null || true   # clean slate (k3s cluster itself persists)
 export SLACK_BOT_TOKEN=xoxb-...        # real values
 export SLACK_SIGNING_SECRET=...
 export OPENAI_API_KEY=sk-...
 contrib/scripts/deploy-local.sh
 ```
-Expected: ends with `rollout status` succeeding for `deploy/centaur-centaur-api` and the "done" hint printed.
+Expected: brings up k3s (via `k3s-local.sh`) if needed, then ends with `rollout status` succeeding for `deploy/centaur-centaur-api` and the "done" hint printed.
 
 - [ ] **Step 2: API health**
 
@@ -702,7 +705,7 @@ replies in-thread; `just logs slackbot` shows a `POST` to `/api/webhooks/slack`.
 cat >> contrib/deploy-local-runsheet.md <<'NOTE'
 
 ## Verified
-- kind clean deploy + API health + `just smoke` PONG
+- k3s clean deploy + API health + `just smoke` PONG
 - deploy re-run preserves POSTGRES_PASSWORD (user-cred patch only)
 - live Slack @mention round-trip via stable ngrok static domain
 NOTE
@@ -715,7 +718,7 @@ git commit -m "docs(local): record local-dev verification results"
 ## Self-Review
 
 **Spec coverage** (against the five "what has to change to support local" blockers identified for PR #1):
-1. Private-registry images → Task 1 (local image names, `IfNotPresent`) + Task 2 (build + `kind load`, no push). ✓
+1. Private-registry images → Task 1 (local image names, `IfNotPresent`) + Task 2 (podman build + import into k3s, no push). ✓
 2. Traefik API ingress → Task 1 (`ingress.enabled: false`). ✓
 3. Tailscale Slackbot ingress → Task 1 (in-cluster ingress off) + Task 3 (port-forward + laptop-side `ngrok`, no tailnet dependency). ✓
 4. Hardcoded K8s-API egress CIDRs + NetworkPolicy → Task 1 (`networkPolicy.enabled: false`, with documented caveat). ✓
@@ -728,4 +731,4 @@ Plus: the webhook path is settled as `/api/webhooks/slack` (plural) from `servic
 
 **Open assumptions to validate during execution (not blockers):**
 - `api.warmPoolEnabled`, `ironProxy.secretTtl`, and `sandbox.resources` keys are taken from `values.production-env.example.yaml`; `helm lint` in Task 1 Step 2 will fail fast if any key is rejected by `values.schema.json`.
-- kind ships a default `standard` StorageClass for the Postgres PVC; if a cluster lacks one, set `postgres.persistence.enabled: false` for ephemeral local data.
+- k3s ships a default `local-path` StorageClass for the Postgres PVC; if a cluster lacks one, set `postgres.persistence.enabled: false` for ephemeral local data.
