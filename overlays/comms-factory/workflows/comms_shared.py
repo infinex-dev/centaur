@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 import json
+import os
 from typing import Any, Iterable
 
 from api import slackbot_client
@@ -196,6 +197,57 @@ async def wait_for_gate_action(
     )
 
 
+def common_service_envelope(
+    ctx: WorkflowContext,
+    inp: SlackWorkflowInput,
+    *,
+    stage: str,
+    gate_version: int = 1,
+    workflow_name: str,
+) -> dict[str, Any]:
+    return {
+        "schema_version": "comms_factory.centaur_request.v2",
+        "job_id": f"comms:{workflow_name}:{ctx.run_id}",
+        "workflow_run_id": ctx.run_id,
+        "thread_key": inp.thread_key,
+        "requester_user_id": inp.user_id,
+        "approver_user_ids": list(inp.approver_user_ids),
+        "stage": stage,
+        "gate_version": gate_version,
+        "constraints": {
+            "no_external_publish": True,
+            "human_ship_gate_required": True,
+            "director_never_self_grounds": True,
+        },
+        "trace": {"source": "centaur_workflow", "workflow_name": workflow_name},
+    }
+
+
+def capability_plane_ref(
+    ctx: WorkflowContext, *, stage: str, gate_version: int = 1
+) -> dict[str, Any] | None:
+    base_url = (
+        (
+            os.getenv("COMMS_FACTORY_CAPABILITY_BASE_URL")
+            or os.getenv("CENTAUR_CAPABILITY_BASE_URL")
+            or os.getenv("AGENT_API_URL")
+            or ""
+        )
+        .strip()
+        .rstrip("/")
+    )
+    if not base_url:
+        return None
+    return {
+        "schema_version": "centaur.capability_ref.v1",
+        "base_url": base_url,
+        "execute_url": f"{base_url}/capabilities/execute",
+        "catalog_url": f"{base_url}/capabilities/catalog?profile=comms",
+        "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+        "idempotency_prefix": f"{ctx.run_id}:{stage}:{gate_version}",
+    }
+
+
 async def call_comms_tool(
     ctx: WorkflowContext,
     name: str,
@@ -235,14 +287,14 @@ def extract_modal_value(event: dict[str, Any]) -> str:
     return ""
 
 
-def facts_from_grounding(result: dict[str, Any]) -> list[str]:
+def facts_from_grounding(result: dict[str, Any]) -> list[str | dict[str, Any]]:
     facts = (
         result.get("facts")
         or result.get("verified_facts")
         or result.get("deployed_facts")
         or []
     )
-    output: list[str] = []
+    output: list[str | dict[str, Any]] = []
     if isinstance(facts, list):
         for item in facts:
             if isinstance(item, str) and item.strip():
@@ -252,7 +304,9 @@ def facts_from_grounding(result: dict[str, Any]) -> list[str]:
                     item.get("fact") or item.get("text") or item.get("claim") or ""
                 ).strip()
                 if text:
-                    output.append(text)
+                    fact = dict(item)
+                    fact.setdefault("text", text)
+                    output.append(fact)
     return output
 
 
@@ -273,7 +327,7 @@ def candidates_from_generation(result: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def card_from_result(
-    result: dict[str, Any], brief: str, facts: list[str]
+    result: dict[str, Any], brief: str, facts: list[str | dict[str, Any]]
 ) -> dict[str, Any]:
     card = result.get("release_card") or result.get("card")
     if isinstance(card, dict):

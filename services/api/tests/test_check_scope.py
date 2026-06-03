@@ -5,7 +5,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-import pytest
 
 from api.api_keys import APIKeyInfo, check_scope
 
@@ -115,3 +114,19 @@ class TestWorkflowScopes:
         assert check_scope(key, "workflows", resource="") is True
         key = _key(["workflows"])
         assert check_scope(key, "workflows", resource="") is True
+
+
+class TestCapabilityScopes:
+    def test_capabilities_star_grants_any_capability(self):
+        key = _key(["capabilities:*"])
+        assert check_scope(key, "capabilities", resource="repo.search") is True
+        assert check_scope(key, "capabilities", resource="web.search") is True
+
+    def test_named_capability_grants_only_that_capability(self):
+        key = _key(["capabilities:repo.search"])
+        assert check_scope(key, "capabilities", resource="repo.search") is True
+        assert check_scope(key, "capabilities", resource="repo.read_file") is False
+
+    def test_capability_scope_does_not_grant_tools(self):
+        key = _key(["capabilities:comms"])
+        assert check_scope(key, "tools", resource="repo_context") is False

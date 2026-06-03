@@ -1,0 +1,13 @@
+[project]
+name = "repo-context"
+description = "Read-only commit-pinned repository search and file context"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.centaur]
+module = "client.py"

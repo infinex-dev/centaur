@@ -101,6 +101,39 @@ def test_validate_gate_event_rejects_stale_or_unauthorized_events(event, reason)
     assert exc.value.reason == reason
 
 
+def test_capability_plane_ref_uses_env_base_url(monkeypatch):
+    from comms_shared import capability_plane_ref
+
+    class Ctx:
+        run_id = "run_test"
+
+    monkeypatch.setenv("COMMS_FACTORY_CAPABILITY_BASE_URL", "http://api:8000/")
+
+    ref = capability_plane_ref(Ctx(), stage="ground", gate_version=1)
+
+    assert ref == {
+        "schema_version": "centaur.capability_ref.v1",
+        "base_url": "http://api:8000",
+        "execute_url": "http://api:8000/capabilities/execute",
+        "catalog_url": "http://api:8000/capabilities/catalog?profile=comms",
+        "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+        "idempotency_prefix": "run_test:ground:1",
+    }
+
+
+def test_capability_plane_ref_returns_none_without_base_url(monkeypatch):
+    from comms_shared import capability_plane_ref
+
+    class Ctx:
+        run_id = "run_test"
+
+    monkeypatch.delenv("COMMS_FACTORY_CAPABILITY_BASE_URL", raising=False)
+    monkeypatch.delenv("CENTAUR_CAPABILITY_BASE_URL", raising=False)
+    monkeypatch.delenv("AGENT_API_URL", raising=False)
+
+    assert capability_plane_ref(Ctx(), stage="ground") is None
+
+
 def test_validate_gate_event_rejects_missing_slack_user_when_authority_is_configured():
     gate = Gate("run_1", "facts", 1, "U123")
     event = _event()
@@ -118,12 +151,27 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
 
     calls: list[tuple[str, str]] = []
 
-    async def fake_call_comms_tool(_ctx, _name, method, _args):
+    async def fake_call_comms_tool(_ctx, _name, method, args):
+        assert "LOCAL_DEV_API_KEY" not in str(args)
+        assert "aiv2_" not in str(args)
         calls.append(("comms_factory", method))
         if method == "validate":
             return {"ok": True, "passed": True}
-        if method == "ground":
-            return {"ok": True, "facts": ["Fact A is live"]}
+        if method == "ground_from_capabilities":
+            assert args["workflow_run_id"] == "run_test"
+            assert args["job_id"] == "comms:comms_release:run_test"
+            assert args["thread_key"] == "slack:C123:1.2"
+            assert args["capability_plane"]["auth"] == {
+                "type": "bearer_env",
+                "env": "CENTAUR_CAPABILITY_TOKEN",
+            }
+            return {
+                "ok": True,
+                "verified_facts": [
+                    {"text": "Fact A is live", "evidence_ids": ["ev_1"]}
+                ],
+                "evidence": [{"id": "ev_1"}],
+            }
         if method == "build_card":
             return {
                 "ok": True,
@@ -163,6 +211,15 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
             return await fn()
 
     monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
+    monkeypatch.setattr(
+        comms_release,
+        "capability_plane_ref",
+        lambda *_args, **_kwargs: {
+            "execute_url": "http://api:8000/capabilities/execute",
+            "catalog_url": "http://api:8000/capabilities/catalog?profile=comms",
+            "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+        },
+    )
     monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
     monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
     monkeypatch.setattr(
@@ -172,6 +229,7 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
     result = await comms_release.handler(
         comms_release.Input(
             brief="generate for x: launch Fact A",
+            thread_key="slack:C123:1.2",
             user_id="U123",
             delivery={"platform": "slack", "channel": "C123", "thread_ts": "1.2"},
         ),
@@ -182,7 +240,7 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
     assert result["no_external_posting"] is True
     assert calls == [
         ("comms_factory", "validate"),
-        ("comms_factory", "ground"),
+        ("comms_factory", "ground_from_capabilities"),
         ("comms_factory", "build_card"),
         ("comms_factory", "generate"),
     ]
@@ -198,7 +256,7 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
         calls.append(method)
         if method == "validate":
             return {"ok": True, "passed": True}
-        if method == "ground":
+        if method == "ground_from_capabilities":
             return {"ok": True, "facts": ["Fact A is live"]}
         raise AssertionError(f"unexpected tool call after rejected gate: {method}")
 
@@ -218,6 +276,15 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
             return await fn()
 
     monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
+    monkeypatch.setattr(
+        comms_release,
+        "capability_plane_ref",
+        lambda *_args, **_kwargs: {
+            "execute_url": "http://api:8000/capabilities/execute",
+            "catalog_url": "http://api:8000/capabilities/catalog?profile=comms",
+            "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+        },
+    )
     monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
     monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
     monkeypatch.setattr(
@@ -227,6 +294,7 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
     result = await comms_release.handler(
         comms_release.Input(
             brief="generate for x: launch Fact A",
+            thread_key="slack:C123:1.2",
             user_id="U123",
             delivery={"platform": "slack", "channel": "C123", "thread_ts": "1.2"},
         ),
@@ -234,4 +302,4 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
     )
 
     assert result == {"status": "rejected", "stage": "facts", "error": "wrong_stage"}
-    assert calls == ["validate", "ground"]
+    assert calls == ["validate", "ground_from_capabilities"]

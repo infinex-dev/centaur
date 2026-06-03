@@ -256,9 +256,7 @@ class HmacSignSecret:
     allow_chunked_body: bool = False
 
 
-SecretDef = (
-    HttpSecret | GcpAuthSecret | PgDsnSecret | OAuthTokenSecret | HmacSignSecret
-)
+SecretDef = HttpSecret | GcpAuthSecret | PgDsnSecret | OAuthTokenSecret | HmacSignSecret
 
 # Per-grant credential fields: grant -> (required, optional). Field names are
 # the keys iron-proxy expects in each ``oauth_token`` token entry.
@@ -345,9 +343,7 @@ def _parse_oauth_fields(
                 f"oauth_token entry {secret_name!r} field {field_name!r} is not "
                 f"valid for grant {grant!r}; allowed: {sorted(allowed)}"
             )
-        parsed[field_name] = _parse_oauth_field_source(
-            secret_name, field_name, raw
-        )
+        parsed[field_name] = _parse_oauth_field_source(secret_name, field_name, raw)
     missing = required - parsed.keys()
     if missing:
         raise ValueError(
@@ -431,8 +427,7 @@ def _parse_hmac_credentials(
     """Parse ``credentials`` for an ``hmac_sign`` entry; require ``secret``."""
     if not isinstance(raw, dict) or not raw:
         raise ValueError(
-            f"hmac_sign entry {secret_name!r} 'credentials' must be a non-empty "
-            f"table"
+            f"hmac_sign entry {secret_name!r} 'credentials' must be a non-empty table"
         )
     parsed: dict[str, OAuthFieldSource] = {}
     for field_name, value in raw.items():
@@ -663,7 +658,9 @@ def _parse_secret(entry: Any, *, default_hosts: tuple[str, ...] = ()) -> SecretD
             replacer=entry,
         )
     if not isinstance(entry, dict):
-        raise ValueError(f"secret entry must be a string or table, got {type(entry).__name__}")
+        raise ValueError(
+            f"secret entry must be a string or table, got {type(entry).__name__}"
+        )
     name = entry.get("name")
     if not isinstance(name, str) or not name:
         raise ValueError(f"secret entry missing 'name': {entry!r}")
@@ -927,7 +924,9 @@ async def _capture_live_slack_send(
         return None
     active_channel = parts[2]
     active_thread_ts = parts[3]
-    requested_channel = str(args.get("channel") or args.get("channel_id") or "").lstrip("#")
+    requested_channel = str(args.get("channel") or args.get("channel_id") or "").lstrip(
+        "#"
+    )
     requested_thread_ts = str(args.get("thread_ts") or "")
     channel_is_id = bool(re.match(r"^[CDG][A-Z0-9]+$", requested_channel))
     if channel_is_id and requested_channel != active_channel:
@@ -1371,8 +1370,12 @@ class ToolManager:
             self.tools_dirs: list[Path] = list(tools_dir)
         else:
             self.tools_dirs = [tools_dir]
-        self.enabled_tools = {name.strip() for name in (enabled_tools or set()) if name.strip()}
-        self.disabled_tools = {name.strip() for name in (disabled_tools or set()) if name.strip()}
+        self.enabled_tools = {
+            name.strip() for name in (enabled_tools or set()) if name.strip()
+        }
+        self.disabled_tools = {
+            name.strip() for name in (disabled_tools or set()) if name.strip()
+        }
         self.tools: dict[str, LoadedTool] = {}
         self.personas: dict[str, LoadedPersona] = {}
         self.load_failures: list[dict[str, str]] = []
@@ -1853,6 +1856,22 @@ class ToolManager:
             }
 
         sandbox_claims = get_sandbox_claims(request) if request is not None else None
+        capability_context = (
+            getattr(request.state, "capability_context", None)
+            if request is not None
+            else None
+        )
+        capability_fields = (
+            capability_context if isinstance(capability_context, dict) else {}
+        )
+        effective_thread_key = (
+            sandbox_claims.get("thread_key")
+            if sandbox_claims
+            else str(capability_fields.get("thread_key") or "") or None
+        )
+        effective_container_id = (
+            sandbox_claims.get("container_id") if sandbox_claims else None
+        )
         call_fields = {
             "tool_name": tool_name,
             "tool_method": method_name,
@@ -1860,12 +1879,24 @@ class ToolManager:
             "arg_size_bytes": _payload_size_bytes(args),
             **(
                 {
-                    "thread_key": sandbox_claims.get("thread_key"),
-                    "sandbox_container_id": sandbox_claims.get("container_id"),
+                    "thread_key": effective_thread_key,
+                    "sandbox_container_id": effective_container_id,
                 }
                 if sandbox_claims
                 else {}
             ),
+            **{
+                key: value
+                for key, value in capability_fields.items()
+                if key
+                in {
+                    "capability",
+                    "capability_request_id",
+                    "job_id",
+                    "thread_key",
+                    "stage",
+                }
+            },
         }
         t0 = time.monotonic()
         log.info("tool_call_started", **call_fields)
@@ -1904,26 +1935,22 @@ class ToolManager:
                 ctx = ToolContext(
                     name=lt.name,
                     secrets={**lt.ctx.secrets, **resolved},
-                    thread_key=sandbox_claims.get("thread_key")
-                    if sandbox_claims
-                    else None,
-                    container_id=sandbox_claims.get("container_id")
-                    if sandbox_claims
-                    else None,
+                    thread_key=effective_thread_key,
+                    container_id=effective_container_id,
                 )
-            elif sandbox_claims:
+            elif effective_thread_key or effective_container_id:
                 ctx = ToolContext(
                     name=lt.name,
                     secrets=dict(lt.ctx.secrets),
-                    thread_key=sandbox_claims.get("thread_key"),
-                    container_id=sandbox_claims.get("container_id"),
+                    thread_key=effective_thread_key,
+                    container_id=effective_container_id,
                 )
-        elif sandbox_claims:
+        elif effective_thread_key or effective_container_id:
             ctx = ToolContext(
                 name=lt.name,
                 secrets=dict(lt.ctx.secrets),
-                thread_key=sandbox_claims.get("thread_key"),
-                container_id=sandbox_claims.get("container_id"),
+                thread_key=effective_thread_key,
+                container_id=effective_container_id,
             )
 
         token = set_tool_context(ctx)
@@ -1936,8 +1963,8 @@ class ToolManager:
                     "tool_name": tool_name,
                     "tool_method": method_name,
                     **(
-                        {"thread_key": sandbox_claims.get("thread_key")}
-                        if sandbox_claims
+                        {"thread_key": effective_thread_key}
+                        if effective_thread_key
                         else {}
                     ),
                 },
@@ -1948,8 +1975,8 @@ class ToolManager:
                         "centaur.tool.method": method_name,
                         "centaur.tool.arg_keys": ",".join(sorted(args.keys())),
                         **(
-                            {"centaur.thread_key": sandbox_claims.get("thread_key")}
-                            if sandbox_claims
+                            {"centaur.thread_key": effective_thread_key}
+                            if effective_thread_key
                             else {}
                         ),
                     }

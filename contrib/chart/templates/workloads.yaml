@@ -357,6 +357,12 @@ spec:
             - name: REPOS_PATH
               value: {{ $reposPath | quote }}
 {{- end }}
+{{- if .Values.repoCache.enabled }}
+            - name: REPO_CONTEXT_ROOT
+              value: /repo-cache
+            - name: REPO_CONTEXT_REPOSITORIES
+              value: {{ join "," .Values.repoCache.repositories | quote }}
+{{- end }}
 {{- with .Values.sandbox.extraEnv }}
 {{- $envList := list }}
 {{- range $k, $v := . }}
@@ -414,6 +420,11 @@ spec:
             - name: firewall-ca
               mountPath: /firewall-certs
               readOnly: true
+{{- if .Values.repoCache.enabled }}
+            - name: repo-cache
+              mountPath: /repo-cache
+              readOnly: true
+{{- end }}
 {{- if .Values.overlay.image.repository }}
             - name: overlay-root
               mountPath: {{ dir .Values.overlay.mountPath | quote }}
@@ -431,6 +442,12 @@ spec:
         - name: firewall-ca
           secret:
             secretName: {{ include "centaur.trustedCaSecretName" . }}
+{{- if .Values.repoCache.enabled }}
+        - name: repo-cache
+          hostPath:
+            path: {{ .Values.repoCache.hostPath | quote }}
+            type: DirectoryOrCreate
+{{- end }}
 {{- if .Values.overlay.image.repository }}
         - name: overlay-root
           emptyDir: {}

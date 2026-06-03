@@ -142,6 +142,14 @@ Centaur tool or workflow from the overlay, not direct user or agent URLs.
 `attachedServices` is a low-level chart primitive: it creates internal
 Kubernetes workloads and network policy, but it is not the WIP Apps platform.
 
+When an attached service needs Centaur-owned read-only capabilities (for example
+repo search/read or web search), give it a scoped capability key such as
+`capabilities:comms` and point it at `/capabilities/catalog` and
+`/capabilities/execute`. Do not give attached services broad `/tools` access,
+sandbox tokens, admin keys, Slack tokens, or GitHub tokens just so they can do
+research. The capability facade returns typed errors and provenance-bearing
+evidence; skills remain instructions only and do not grant capability access.
+
 Credential model: attached services can either use the standard outbound proxy
 for their own HTTPS calls (`proxy.enabled` defaults on) or receive raw env values
 through `secretEnv`. Prefer the proxy/placeholder flow for third-party API

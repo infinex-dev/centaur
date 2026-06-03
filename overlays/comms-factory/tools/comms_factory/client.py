@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from typing import Any
+from urllib.parse import urlparse
 
 import httpx
 
@@ -64,6 +65,31 @@ class CommsFactoryClient:
                 "stage": stage,
                 "gate_version": gate_version,
                 **kwargs,
+            },
+            timeout=_LONG_TIMEOUT,
+        )
+
+    def ground_from_capabilities(
+        self,
+        brief: str,
+        *,
+        run_id: str | None = None,
+        stage: str = "ground",
+        gate_version: int = 1,
+        capability_plane: dict[str, Any] | None = None,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        return self._post(
+            "/ground",
+            {
+                **kwargs,
+                "schema_version": "comms_factory.ground_from_capabilities.v1",
+                "mode": "ground_from_capabilities",
+                "brief": brief,
+                "run_id": run_id,
+                "stage": stage,
+                "gate_version": gate_version,
+                "capability_plane": _capability_plane_ref(capability_plane),
             },
             timeout=_LONG_TIMEOUT,
         )
@@ -158,6 +184,43 @@ class CommsFactoryClient:
 
 
 _SENSITIVE_KEY_RE = ("authorization", "token", "secret", "cookie", "password")
+
+
+def _capability_plane_ref(candidate: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Build a safe capability-plane reference without trusting tool callers.
+
+    The attached service reads the actual bearer token from its own
+    CENTAUR_CAPABILITY_TOKEN environment variable. Tool callers may only supply
+    an idempotency prefix; endpoint URLs and auth mode are fixed by deployment
+    configuration so the comms service cannot be tricked into sending its token
+    to an arbitrary host.
+    """
+    base_url = (
+        (
+            os.getenv("COMMS_FACTORY_CAPABILITY_BASE_URL")  # noqa: TID251
+            or os.getenv("CENTAUR_CAPABILITY_BASE_URL")  # noqa: TID251
+            or os.getenv("AGENT_API_URL")  # noqa: TID251
+            or ""
+        )
+        .strip()
+        .rstrip("/")
+    )
+    if not base_url:
+        return {"schema_version": "centaur.capability_ref.v1", "status": "unavailable"}
+    parsed = urlparse(base_url)
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        return {"schema_version": "centaur.capability_ref.v1", "status": "unavailable"}
+    idempotency_prefix = ""
+    if isinstance(candidate, dict):
+        idempotency_prefix = str(candidate.get("idempotency_prefix") or "")[:300]
+    return {
+        "schema_version": "centaur.capability_ref.v1",
+        "base_url": base_url,
+        "execute_url": f"{base_url}/capabilities/execute",
+        "catalog_url": f"{base_url}/capabilities/catalog?profile=comms",
+        "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+        **({"idempotency_prefix": idempotency_prefix} if idempotency_prefix else {}),
+    }
 
 
 def _redact_sensitive(value: Any, token: str = "") -> Any:

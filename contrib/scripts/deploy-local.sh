@@ -23,10 +23,10 @@ SERVICES_CSV=""
 WITH_COMMS_FACTORY=0
 SKIP_COMMS_FACTORY_BUILD=0
 COMMS_FACTORY_GIT_URL="${COMMS_FACTORY_GIT_URL:-https://github.com/infinex-dev/comms-factory.git}"
-# Open PR head for https://github.com/infinex-dev/comms-factory/pull/1.
-# The PR base is pinned at 3a01b3337692c64133185560b66706a28b703c4e;
+# Open PR head for https://github.com/infinex-dev/comms-factory/pull/2.
+# The PR base is pinned at 21d335869190bbba107f1c52263acfeb20e0963a;
 # deploy the PR head/merge commit, not the base commit or moving main.
-COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-21d335869190bbba107f1c52263acfeb20e0963a}"
+COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-8c98f4ab67b0fac386809209df3a63547207e287}"
 COMMS_FACTORY_IMAGE="${COMMS_FACTORY_IMAGE:-comms-factory-api}"
 COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-}"
 COMMS_FACTORY_OVERLAY_IMAGE="${COMMS_FACTORY_OVERLAY_IMAGE:-comms-factory-centaur-overlay}"
@@ -214,9 +214,13 @@ if [[ "$WITH_COMMS_FACTORY" == "1" ]]; then
   if [[ -z "$LOCAL_DEV_API_KEY_VALUE" ]]; then
     LOCAL_DEV_API_KEY_VALUE="aiv2_local_$(openssl rand -hex 24)"
   fi
+  COMMS_FACTORY_CAPABILITY_API_KEY_VALUE="${COMMS_FACTORY_CAPABILITY_API_KEY:-$(secret_key_value COMMS_FACTORY_CAPABILITY_API_KEY)}"
+  if [[ -z "$COMMS_FACTORY_CAPABILITY_API_KEY_VALUE" ]]; then
+    COMMS_FACTORY_CAPABILITY_API_KEY_VALUE="aiv2_comms_cap_$(openssl rand -hex 24)"
+  fi
   echo ">> patching comms-factory local secret keys on $SECRET_NAME"
   kubectl -n "$NAMESPACE" patch secret "$SECRET_NAME" -p "$(cat <<JSON
-{"stringData":{"COMMS_FACTORY_SERVICE_TOKEN":"${COMMS_FACTORY_SERVICE_TOKEN_VALUE}","LOCAL_DEV_API_KEY":"${LOCAL_DEV_API_KEY_VALUE}"}}
+{"stringData":{"COMMS_FACTORY_SERVICE_TOKEN":"${COMMS_FACTORY_SERVICE_TOKEN_VALUE}","LOCAL_DEV_API_KEY":"${LOCAL_DEV_API_KEY_VALUE}","COMMS_FACTORY_CAPABILITY_API_KEY":"${COMMS_FACTORY_CAPABILITY_API_KEY_VALUE}"}}
 JSON
 )" >/dev/null
 fi
@@ -265,6 +269,8 @@ attachedServices:
       port: 8080
     proxy:
       enabled: false
+    env:
+      CENTAUR_CAPABILITY_BASE_URL: http://${RELEASE}-centaur-api:8000
     secretEnv:
       COMMS_FACTORY_SERVICE_TOKEN:
         secretName: $SECRET_NAME
@@ -273,17 +279,25 @@ attachedServices:
         secretName: $SECRET_NAME
         key: ANTHROPIC_API_KEY
         optional: true
+      CENTAUR_CAPABILITY_TOKEN:
+        secretName: $SECRET_NAME
+        key: COMMS_FACTORY_CAPABILITY_API_KEY
 
 api:
   defaultHarness: $COMMS_FACTORY_DEFAULT_HARNESS
   enabledTools:
     - comms_factory
+    - repo_context
+    - websearch
+    - company_context
   extraEnv:
     COMMS_FACTORY_BASE_URL: http://${RELEASE}-centaur-attached-comms-factory:8080
+    COMMS_FACTORY_CAPABILITY_BASE_URL: http://${RELEASE}-centaur-api:8000
+    REPO_CONTEXT_REPOSITORY_ALIASES: infinex-platform=infinex-xyz/platform
 
 slackbot:
   extraEnv:
-    SLACK_WORKFLOW_COMMANDS: '[{"match":"^comms\\\\s+audit\\\\b[:\\\\s-]*(.*)$","workflow":"comms_audit","input":{"text":"$1"},"triggerSuffix":":comms_audit"},{"match":"^comms\\\\s+(?:generate|release)\\\\b[:\\\\s-]*(.*)$","workflow":"comms_release","input":{"brief":"$1"},"triggerSuffix":":comms_release"}]'
+    SLACK_WORKFLOW_COMMANDS: '[{"match":"^comms\\\\s+audit\\\\b[:\\\\s-]*(.*)$","workflow":"comms_audit","input":{"text":"\$1"},"triggerSuffix":":comms_audit"},{"match":"^comms\\\\s+(?:generate|release)\\\\b[:\\\\s-]*(.*)$","workflow":"comms_release","input":{"brief":"\$1"},"triggerSuffix":":comms_release"}]'
 YAML
   EXTRA_VALUES_ARGS=(-f "$COMMS_VALUES_FILE")
 fi
@@ -308,5 +322,7 @@ echo ">> done. verify with:"
 echo "   kubectl exec -n $NAMESPACE deploy/${RELEASE}-centaur-api -- curl -fsS http://localhost:8000/health"
 if [[ "$WITH_COMMS_FACTORY" == "1" ]]; then
   echo "   API_KEY=\$(kubectl get secret -n $NAMESPACE $SECRET_NAME -o jsonpath='{.data.LOCAL_DEV_API_KEY}' | base64 -d)"
+  echo "   CAP_KEY=\$(kubectl get secret -n $NAMESPACE $SECRET_NAME -o jsonpath='{.data.COMMS_FACTORY_CAPABILITY_API_KEY}' | base64 -d)"
   echo "   kubectl exec -n $NAMESPACE deploy/${RELEASE}-centaur-api -- curl -fsS -H \"X-Api-Key: \$API_KEY\" http://localhost:8000/tools/comms_factory/validate -H 'Content-Type: application/json' -d '{\"text\":\"Fact A is live.\"}'"
+  echo "   kubectl exec -n $NAMESPACE deploy/${RELEASE}-centaur-api -- curl -fsS -H \"X-Api-Key: \$CAP_KEY\" http://localhost:8000/capabilities/catalog?profile=comms"
 fi

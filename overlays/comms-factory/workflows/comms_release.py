@@ -14,7 +14,9 @@ from comms_shared import (
     actions_block,
     call_comms_tool,
     candidates_from_generation,
+    capability_plane_ref,
     card_from_result,
+    common_service_envelope,
     context_block,
     extract_action,
     extract_modal_value,
@@ -45,7 +47,16 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
     channels = inp.channels or _parse_channels(brief) or ["x"]
 
     validation = await call_comms_tool(
-        ctx, "validate_brief", "validate", {"text": brief, "surface": "brief"}
+        ctx,
+        "validate_brief",
+        "validate",
+        {
+            "text": brief,
+            "surface": "brief",
+            **common_service_envelope(
+                ctx, inp, stage="validate", gate_version=1, workflow_name=WORKFLOW_NAME
+            ),
+        },
     )
     if validation.get("ok") is False or validation.get("passed") is False:
         await _post_simple(
@@ -56,13 +67,50 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         return {"status": "red", "validation": validation}
 
     await _post_simple(ctx, inp.delivery, "Grounding comms facts…")
+    capability_plane = capability_plane_ref(ctx, stage="ground", gate_version=1)
+    if capability_plane is None:
+        await _post_simple(
+            ctx,
+            inp.delivery,
+            "*Comms release blocked*: Centaur capability channel is not configured.",
+        )
+        return {
+            "status": "blocked",
+            "stage": "ground",
+            "error": "capability_channel_unavailable",
+        }
     grounding = await call_comms_tool(
         ctx,
         "ground_facts",
-        "ground",
-        {"brief": brief, "run_id": ctx.run_id, "stage": "ground", "gate_version": 1},
+        "ground_from_capabilities",
+        {
+            "brief": brief,
+            "run_id": ctx.run_id,
+            "stage": "ground",
+            "gate_version": 1,
+            "capability_plane": capability_plane,
+            **common_service_envelope(
+                ctx, inp, stage="ground", gate_version=1, workflow_name=WORKFLOW_NAME
+            ),
+        },
     )
+    if grounding.get("ok") is False or grounding.get("status") == "blocked":
+        error = str(
+            grounding.get("error") or grounding.get("status") or "grounding_failed"
+        )
+        await _post_simple(
+            ctx, inp.delivery, f"*Comms release blocked at grounding*: {error}"
+        )
+        return {
+            "status": "blocked",
+            "stage": "ground",
+            "error": error,
+            "grounding": grounding,
+        }
     facts = facts_from_grounding(grounding)
+    evidence = (
+        grounding.get("evidence") if isinstance(grounding.get("evidence"), list) else []
+    )
     approver_user_ids = tuple(inp.approver_user_ids)
     facts_gate = Gate(ctx.run_id, "facts", 1, inp.user_id, approver_user_ids)
     facts_message = await post_gate_message(
@@ -113,9 +161,17 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         {
             "brief": brief,
             "facts": facts,
+            "evidence": evidence,
             "run_id": ctx.run_id,
             "stage": "build-card",
             "gate_version": 1,
+            **common_service_envelope(
+                ctx,
+                inp,
+                stage="build-card",
+                gate_version=1,
+                workflow_name=WORKFLOW_NAME,
+            ),
         },
     )
     card = card_from_result(card_result, brief, facts)
@@ -180,6 +236,9 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "run_id": ctx.run_id,
             "stage": "generate",
             "gate_version": 1,
+            **common_service_envelope(
+                ctx, inp, stage="generate", gate_version=1, workflow_name=WORKFLOW_NAME
+            ),
         },
     )
     candidates = candidates_from_generation(generation)
@@ -254,6 +313,13 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
                 "stage": "generate",
                 "gate_version": 2,
                 "feedback": retry_notes,
+                **common_service_envelope(
+                    ctx,
+                    inp,
+                    stage="generate",
+                    gate_version=2,
+                    workflow_name=WORKFLOW_NAME,
+                ),
             },
         )
         candidates = candidates_from_generation(generation)
@@ -382,10 +448,18 @@ def _parse_channels(brief: str) -> list[str]:
     return [part.strip().lower() for part in match.group(1).split(",") if part.strip()]
 
 
-def _format_facts(facts: list[str]) -> str:
+def _format_facts(facts: list[str | dict[str, Any]]) -> str:
     if not facts:
         return "_No facts returned. Approve only if this is expected._"
-    return "\n".join(f"• {fact}" for fact in facts[:20])
+    lines = []
+    for fact in facts[:20]:
+        if isinstance(fact, dict):
+            lines.append(
+                f"• {fact.get('text') or fact.get('fact') or fact.get('claim') or fact}"
+            )
+        else:
+            lines.append(f"• {fact}")
+    return "\n".join(lines)
 
 
 def _format_candidates(candidates: list[dict[str, Any]]) -> str:

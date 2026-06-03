@@ -37,11 +37,17 @@ jobs:
         working-directory: services/api
         run: uv run ruff check api/
 
-      - name: Lint overlays
+      - name: Lint overlays and capability facade
         run: |
           uv run --project services/api ruff check \
             overlays/comms-factory \
+            tools/infra/repo_context \
+            services/api/api/capability_models.py \
+            services/api/api/capability_registry.py \
+            services/api/api/routers/capabilities.py \
             services/api/api/workflow_engine.py \
+            services/api/tests/test_capabilities_router.py \
+            services/api/tests/test_check_scope.py \
             services/api/tests/test_tool_manager.py \
             services/api/tests/test_workflows.py
 
@@ -61,12 +67,15 @@ jobs:
             tests/test_agent_control_plane.py::test_worker_stops_session_when_cancel_requested_mid_stream \
             tests/test_agent_control_plane.py::test_worker_maps_amp_user_cancelled_error_to_cancelled
 
-      - name: Overlay targeted tests
+      - name: Capability and overlay targeted tests
         run: |
           uv run --project services/api pytest -q \
+            services/api/tests/test_capabilities_router.py \
+            services/api/tests/test_check_scope.py \
             services/api/tests/test_tool_manager.py::test_discover_disabled_tools_take_precedence_over_allowlist \
+            tools/infra/repo_context/tests/test_repo_context_client.py \
             overlays/comms-factory/tests/test_comms_workflows.py \
-            overlays/comms-factory/tools/comms_factory/tests/test_client.py
+            overlays/comms-factory/tools/comms_factory/tests/test_comms_factory_client.py
 
   slackbot-targeted-tests:
     name: Slackbot interface and delivery tests

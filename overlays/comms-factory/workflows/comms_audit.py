@@ -11,6 +11,7 @@ from comms_shared import (
     SlackWorkflowInput,
     actions_block,
     call_comms_tool,
+    common_service_envelope,
     context_block,
     extract_modal_value,
     extract_action,
@@ -38,7 +39,17 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         return {"status": "red", "error": "missing_text"}
 
     await ctx.step("progress_started", lambda: {"stage": "validate"})
-    validation = await call_comms_tool(ctx, "validate_copy", "validate", {"text": text})
+    validation = await call_comms_tool(
+        ctx,
+        "validate_copy",
+        "validate",
+        {
+            "text": text,
+            **common_service_envelope(
+                ctx, inp, stage="validate", gate_version=1, workflow_name=WORKFLOW_NAME
+            ),
+        },
+    )
     if validation.get("ok") is False or validation.get("passed") is False:
         await _post_result(
             ctx,
@@ -58,6 +69,9 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "surface": inp.surface,
             "voice_id": inp.voice_id,
             **({"fact_source": fact_source} if fact_source else {}),
+            **common_service_envelope(
+                ctx, inp, stage="audit", gate_version=1, workflow_name=WORKFLOW_NAME
+            ),
         },
     )
     questions = (
@@ -108,6 +122,13 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
                         "surface": inp.surface,
                         "voice_id": inp.voice_id,
                         "thread": [{"role": "human", "content": answer}],
+                        **common_service_envelope(
+                            ctx,
+                            inp,
+                            stage="audit",
+                            gate_version=2,
+                            workflow_name=WORKFLOW_NAME,
+                        ),
                     },
                 )
 

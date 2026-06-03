@@ -55,7 +55,9 @@ async def _insert_assignment(db_pool, thread_key: str, generation: int = 1) -> N
 
 
 @pytest.mark.asyncio
-async def test_spawn_assignment_defaults_to_codex_when_no_selector(db_pool, monkeypatch):
+async def test_spawn_assignment_defaults_to_codex_when_no_selector(
+    db_pool, monkeypatch
+):
     from api.runtime_control import spawn_assignment
 
     monkeypatch.delenv("CENTAUR_DEFAULT_HARNESS", raising=False)
@@ -1080,7 +1082,9 @@ async def test_mark_execution_terminal_delays_outbox_claimability(db_pool):
 
 
 @pytest.mark.asyncio
-async def test_mark_execution_terminal_skips_durable_delivery_after_live_answer(db_pool):
+async def test_mark_execution_terminal_skips_durable_delivery_after_live_answer(
+    db_pool,
+):
     from api.runtime_control import _mark_execution_terminal
 
     execution_id = f"exe-{uuid.uuid4().hex[:10]}"
@@ -3999,6 +4003,12 @@ async def test_bootstrap_service_api_keys_includes_local_dev_key(db_pool, monkey
     )
     assert row is not None
     assert row["name"] == "service:local-dev"
-    assert list(row["scopes"]) == ["admin", "agent", "threads", "tools:*"]
+    assert list(row["scopes"]) == [
+        "admin",
+        "agent",
+        "threads",
+        "tools:*",
+        "capabilities:*",
+    ]
     assert row["revoked_at"] is None
     assert row["created_by"] == "service-bootstrap"

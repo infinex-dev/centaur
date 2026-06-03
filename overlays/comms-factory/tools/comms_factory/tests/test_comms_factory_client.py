@@ -34,6 +34,48 @@ def test_validate_posts_to_service_with_auth(monkeypatch):
     assert len(calls) == 1
 
 
+def test_ground_from_capabilities_posts_versioned_contract_without_token_value(
+    monkeypatch,
+):
+    calls = []
+    monkeypatch.setenv("COMMS_FACTORY_CAPABILITY_BASE_URL", "http://api:8000")
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(request)
+        assert request.url.path == "/ground"
+        body = json.loads(request.content)
+        assert body["schema_version"] == "comms_factory.ground_from_capabilities.v1"
+        assert body["mode"] == "ground_from_capabilities"
+        assert (
+            body["capability_plane"]["execute_url"]
+            == "http://api:8000/capabilities/execute"
+        )
+        assert body["capability_plane"]["auth"] == {
+            "type": "bearer_env",
+            "env": "CENTAUR_CAPABILITY_TOKEN",
+        }
+        assert "aiv2_" not in request.content.decode()
+        return httpx.Response(200, json={"facts": ["Fact A"]})
+
+    transport = httpx.MockTransport(handler)
+    original_client = httpx.Client
+    monkeypatch.setattr(
+        httpx, "Client", lambda **_: original_client(transport=transport)
+    )
+
+    result = CommsFactoryClient("http://comms.test", "token").ground_from_capabilities(
+        "brief",
+        run_id="run_1",
+        capability_plane={
+            "execute_url": "http://api:8000/capabilities/execute",
+            "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+        },
+    )
+
+    assert result == {"facts": ["Fact A"], "ok": True}
+    assert len(calls) == 1
+
+
 def test_generate_applies_defaults_and_maps_5xx(monkeypatch):
     def handler(request: httpx.Request) -> httpx.Response:
         assert request.url.path == "/generate"
