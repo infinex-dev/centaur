@@ -36,7 +36,10 @@ def test_list_repos_returns_only_configured_repos(tmp_path: Path) -> None:
     result = client.list_repos()
 
     assert result["ok"] is True
-    assert result["repositories"] == [{"repo": "owner/repo", "available": True}]
+    assert result["aliases"] == {}
+    assert result["repositories"][0]["repo"] == "owner/repo"
+    assert result["repositories"][0]["available"] is True
+    assert result["repositories"][0]["head_commit_sha"]
 
 
 def test_repo_alias_maps_to_explicit_allowlist_entry(tmp_path: Path) -> None:

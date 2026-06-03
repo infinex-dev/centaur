@@ -217,6 +217,53 @@ async def test_execute_normalizes_evidence_and_idempotency_conflict(
 
 
 @pytest.mark.asyncio
+async def test_execute_repo_list_repos_returns_configured_repos(
+    client, managed_app, monkeypatch
+) -> None:
+    monkeypatch.setenv("REPO_CONTEXT_ROOT", "/tmp/repo-cache")
+    monkeypatch.setenv("REPO_CONTEXT_REPOSITORIES", "owner/repo")
+    manager = managed_app.state.tool_manager
+    monkeypatch.setattr(
+        manager,
+        "tools",
+        {
+            "repo_context": SimpleNamespace(
+                methods=[SimpleNamespace(method_name="list_repos")]
+            )
+        },
+    )
+
+    async def fake_call_tool_raw(tool_name, method_name, args, *, request=None):
+        assert tool_name == "repo_context"
+        assert method_name == "list_repos"
+        assert args == {}
+        return {
+            "ok": True,
+            "repositories": [{"repo": "owner/repo", "available": True}],
+            "aliases": {"platform": "owner/repo"},
+        }
+
+    monkeypatch.setattr(manager, "call_tool_raw", fake_call_tool_raw)
+
+    response = await client.post(
+        "/capabilities/execute",
+        json={
+            "request_id": "cap-test-list-repos",
+            "job_id": "job-1",
+            "stage": "ground",
+            "capability": "repo.list_repos",
+            "input": {},
+        },
+    )
+
+    assert response.status_code == 200
+    body = response.json()
+    assert body["ok"] is True
+    assert body["result"]["repositories"] == [{"repo": "owner/repo", "available": True}]
+    assert body["evidence"] == []
+
+
+@pytest.mark.asyncio
 async def test_execute_repo_search_smoke_returns_commit_pinned_evidence(
     client, managed_app, monkeypatch, tmp_path
 ) -> None:

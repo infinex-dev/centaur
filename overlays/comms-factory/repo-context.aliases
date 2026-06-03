@@ -1,0 +1,11 @@
+# Short aliases accepted by repo_context for comms grounding.
+infinex-platform=infinex-xyz/platform
+platform=infinex-xyz/platform
+agent-platform=infinex-xyz/agent-platform
+centaur=infinex-dev/centaur
+comms-factory=infinex-dev/comms-factory
+xingest=infinex-dev/xingest
+stevie=infinex-xyz/stevie
+agents=infinex-xyz/agents
+context=infinex-xyz/context
+infrastructure=infinex-xyz/infrastructure

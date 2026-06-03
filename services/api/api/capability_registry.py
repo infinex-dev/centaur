@@ -17,6 +17,15 @@ class CapabilitySpec:
 
 
 _CAPABILITIES: dict[str, CapabilitySpec] = {
+    "repo.list_repos": CapabilitySpec(
+        capability="repo.list_repos",
+        tool_name="repo_context",
+        method_name="list_repos",
+        description="List repositories and aliases configured for read-only repo_context capabilities.",
+        input_schema={"type": "object", "properties": {}},
+        evidence_types=(),
+        profiles=("default", "comms"),
+    ),
     "repo.search": CapabilitySpec(
         capability="repo.search",
         tool_name="repo_context",

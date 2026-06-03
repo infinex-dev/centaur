@@ -198,13 +198,29 @@ class RepoContextClient:
         repos: list[dict[str, Any]] = []
         for repo in self.repositories:
             path = self.root / repo if self.root_configured else Path(repo)
-            repos.append(
-                {
-                    "repo": repo,
-                    "available": self.root_configured and (path / ".git").exists(),
-                }
-            )
-        return {"ok": True, "root_configured": self.root_configured, "repositories": repos}
+            available = self.root_configured and (path / ".git").exists()
+            entry: dict[str, Any] = {"repo": repo, "available": available}
+            if available:
+                head_proc = self._git(path, ["rev-parse", "--verify", "HEAD^{commit}"], check=False)
+                if head_proc.returncode == 0:
+                    entry["head_commit_sha"] = head_proc.stdout.strip().splitlines()[-1]
+                branch_proc = self._git(path, ["branch", "--show-current"], check=False)
+                if branch_proc.returncode == 0 and branch_proc.stdout.strip():
+                    entry["current_branch"] = branch_proc.stdout.strip()
+                default_proc = self._git(
+                    path,
+                    ["symbolic-ref", "--short", "refs/remotes/origin/HEAD"],
+                    check=False,
+                )
+                if default_proc.returncode == 0 and default_proc.stdout.strip():
+                    entry["default_ref"] = default_proc.stdout.strip().removeprefix("origin/")
+            repos.append(entry)
+        return {
+            "ok": True,
+            "root_configured": self.root_configured,
+            "repositories": repos,
+            "aliases": dict(sorted(self.aliases.items())),
+        }
 
     def resolve_ref(self, repo: str, ref: str = "HEAD") -> dict[str, Any]:
         """Resolve a branch, tag, or SHA to a commit SHA."""

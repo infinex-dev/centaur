@@ -39,9 +39,9 @@ This command:
 3. Builds/imports the Centaur comms overlay image from `overlays/comms-factory`.
 4. Clones/checks out comms-factory at PR head `8c98f4ab67b0fac386809209df3a63547207e287` unless you pass `--comms-factory-repo PATH` or `--comms-factory-ref REF`.
 5. Builds/imports `comms-factory-api:8c98f4ab67b0fac386809209df3a63547207e287`.
-6. Patches `centaur-infra-env` with `COMMS_FACTORY_SERVICE_TOKEN`, `LOCAL_DEV_API_KEY`, and a scoped `COMMS_FACTORY_CAPABILITY_API_KEY` when missing.
+6. Patches `centaur-infra-env` with `COMMS_FACTORY_SERVICE_TOKEN`, `LOCAL_DEV_API_KEY`, `GITHUB_TOKEN` when supplied, and a scoped `COMMS_FACTORY_CAPABILITY_API_KEY` when missing.
 7. Mounts `ANTHROPIC_API_KEY` into the attached comms-factory service when present in `centaur-infra-env`; live generation still needs it.
-8. Deploys Helm with the comms overlay mounted, `attachedServices.comms-factory.enabled=true`, `api.enabledTools=[comms_factory, repo_context, websearch, company_context]`, `COMMS_FACTORY_BASE_URL=http://centaur-centaur-attached-comms-factory:8080`, API-side `COMMS_FACTORY_CAPABILITY_BASE_URL=http://centaur-centaur-api:8000`, attached-service `CENTAUR_CAPABILITY_BASE_URL=http://centaur-centaur-api:8000`, `REPO_CONTEXT_REPOSITORY_ALIASES=infinex-platform=infinex-xyz/platform`, comms entries in generic `SLACK_WORKFLOW_COMMANDS`, and local default harness `claude-code` so Slack turns use Anthropic rather than Codex.
+8. Deploys Helm with the comms overlay mounted, `attachedServices.comms-factory.enabled=true`, `api.enabledTools=[comms_factory, repo_context, websearch, company_context]`, `COMMS_FACTORY_BASE_URL=http://centaur-centaur-attached-comms-factory:8080`, API-side `COMMS_FACTORY_CAPABILITY_BASE_URL=http://centaur-centaur-api:8000`, attached-service `CENTAUR_CAPABILITY_BASE_URL=http://centaur-centaur-api:8000`, aliases from `overlays/comms-factory/repo-context.aliases`, comms entries in generic `SLACK_WORKFLOW_COMMANDS`, and local default harness `claude-code` so Slack turns use Anthropic rather than Codex. When `GITHUB_TOKEN` exists, it also enables repoCache for all active non-archived repos listed in `overlays/comms-factory/repo-context.repositories.txt`.
 
 Useful variants:
 
@@ -80,6 +80,21 @@ internal service: `proxy.enabled: false` and optional `ANTHROPIC_API_KEY` is
 mounted as raw env when present. If you adapt this pattern for a less-trusted
 service, prefer leaving the proxy enabled and using placeholder-based outbound
 credential injection.
+
+## Repo capability inventory
+
+The comms overlay carries a generated allowlist at
+`overlays/comms-factory/repo-context.repositories.txt` containing active,
+non-archived repositories from `infinex-xyz` and `infinex-dev`. Archived repos
+are intentionally absent unless explicitly re-added for a deployment.
+
+`repo.list_repos` exposes the configured allowlist and alias map through the
+capability plane. Repo search/read callers may omit `ref`; in that case
+`repo_context` resolves cached `HEAD` to a commit SHA before search/read. The
+repo-cache daemon updates checkouts on its configured interval, so this means
+"latest cached default checkout", not a live GitHub fetch per request. Callers
+that need a specific branch, tag, PR ref, or SHA should pass that `ref`; Centaur
+still resolves it to a commit SHA and pins evidence to that commit.
 
 ## Validation path
 

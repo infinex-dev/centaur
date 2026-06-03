@@ -173,7 +173,8 @@ if ! kubectl -n "$NAMESPACE" get secret "$SECRET_NAME" >/dev/null 2>&1; then
     --from-literal=SLACK_APP_TOKEN="${SLACK_APP_TOKEN:?set SLACK_APP_TOKEN}" \
     --from-literal=OPENAI_API_KEY="${OPENAI_API_KEY:?set OPENAI_API_KEY}" \
     --from-literal=ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}" \
-    --from-literal=AMP_API_KEY="${AMP_API_KEY:-}"
+    --from-literal=AMP_API_KEY="${AMP_API_KEY:-}" \
+    --from-literal=GITHUB_TOKEN="${GITHUB_TOKEN:-}"
 else
   user_cred_patch="$(python3 - <<'PY'
 import json
@@ -187,6 +188,7 @@ keys = [
     "ANTHROPIC_API_KEY",
     "AMP_API_KEY",
     "EXA_API_KEY",
+    "GITHUB_TOKEN",
 ]
 values = {key: os.environ[key] for key in keys if os.environ.get(key)}
 print(json.dumps({"stringData": values}) if values else "")
@@ -250,7 +252,28 @@ COMMS_VALUES_FILE=""
 if [[ "$WITH_COMMS_FACTORY" == "1" ]]; then
   COMMS_VALUES_FILE="$(mktemp)"
   trap '[[ -n "${COMMS_VALUES_FILE:-}" ]] && rm -f "$COMMS_VALUES_FILE"' EXIT
+  COMMS_REPO_LIST_FILE="$ROOT_DIR/overlays/comms-factory/repo-context.repositories.txt"
+  COMMS_REPO_ALIASES_FILE="$ROOT_DIR/overlays/comms-factory/repo-context.aliases"
+  COMMS_REPO_ALIASES="$(grep -Ev '^($|#)' "$COMMS_REPO_ALIASES_FILE" | paste -sd, -)"
+  COMMS_REPO_CACHE_VALUES=""
+  if [[ -n "${GITHUB_TOKEN:-$(secret_key_value GITHUB_TOKEN)}" ]]; then
+    COMMS_REPOSITORIES_YAML="$(awk 'NF && $1 !~ /^#/ { print "    - " $1 }' "$COMMS_REPO_LIST_FILE")"
+    COMMS_REPO_CACHE_VALUES="$(cat <<REPOYAML
+repoCache:
+  enabled: true
+  repositories:
+$COMMS_REPOSITORIES_YAML
+  githubToken:
+    existingSecretName: $SECRET_NAME
+    secretKey: GITHUB_TOKEN
+REPOYAML
+)"
+  else
+    echo ">> GITHUB_TOKEN not found; comms repoCache remains disabled and repo capabilities will stay unavailable"
+  fi
   cat > "$COMMS_VALUES_FILE" <<YAML
+$COMMS_REPO_CACHE_VALUES
+
 overlay:
   image:
     repository: $COMMS_FACTORY_OVERLAY_IMAGE
@@ -293,7 +316,7 @@ api:
   extraEnv:
     COMMS_FACTORY_BASE_URL: http://${RELEASE}-centaur-attached-comms-factory:8080
     COMMS_FACTORY_CAPABILITY_BASE_URL: http://${RELEASE}-centaur-api:8000
-    REPO_CONTEXT_REPOSITORY_ALIASES: infinex-platform=infinex-xyz/platform
+    REPO_CONTEXT_REPOSITORY_ALIASES: $COMMS_REPO_ALIASES
 
 slackbot:
   extraEnv:
