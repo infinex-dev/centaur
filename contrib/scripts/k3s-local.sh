@@ -43,6 +43,22 @@ if ! podman machine ssh "$MACHINE" 'test -x /usr/local/bin/k3s' 2>/dev/null; the
   podman machine start "$MACHINE"
 fi
 
+# 2b. Disable k3s's NetworkPolicy controller (idempotent). The API creates a
+#     per-sandbox egress NetworkPolicy unconditionally (services/api/api/sandbox/
+#     kubernetes.py) that only allows egress to the API + iron-proxy -- no DNS. In
+#     prod/kind the CNI doesn't enforce egress so it's a no-op, but k3s ships an
+#     enforcing controller, which blocks the sandbox from reaching CoreDNS and the
+#     codex/claude harness fails with "failed to lookup address information". This
+#     restores the prod-like "egress lockdown is a no-op locally" behavior.
+#     Local-only; touches no app code, chart, or prod cluster.
+if ! podman machine ssh "$MACHINE" 'sudo grep -qs "^disable-network-policy: true" /etc/rancher/k3s/config.yaml' 2>/dev/null; then
+  log "disabling k3s network-policy controller (local sandboxes are not network-isolated)"
+  podman machine ssh "$MACHINE" '
+    sudo mkdir -p /etc/rancher/k3s
+    echo "disable-network-policy: true" | sudo tee -a /etc/rancher/k3s/config.yaml >/dev/null
+    sudo systemctl restart k3s'
+fi
+
 # 3. Wait for k3s active + node Ready (checked inside the VM).
 log "waiting for k3s node to be Ready"
 podman machine ssh "$MACHINE" '

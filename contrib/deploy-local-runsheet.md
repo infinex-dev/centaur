@@ -169,8 +169,35 @@ is fixed, so nothing in Slack changes between iterations.
   or an auth/allowlist rejection. Check `just logs api` and `just logs slackbot`.
 - Wrong workspace / no response -> confirm the token belongs to `FirenzeStaging`
   (not a prod app) and that `FirenzeStaging` is invited to the channel.
-- `networkPolicy.enabled: false` means sandboxes are not network-isolated locally.
-  Acceptable for laptop testing only.
+- **Sandbox can't reach the model: `failed to lookup address information` / DNS
+  `EAI_AGAIN`.** The API creates a per-sandbox egress `NetworkPolicy`
+  *unconditionally* (`services/api/api/sandbox/kubernetes.py`) that allows egress
+  only to the API and the iron-proxy — not DNS. In prod/kind the CNI doesn't enforce
+  egress, so it's a no-op; but k3s ships an **enforcing** network-policy controller,
+  which blocks the sandbox from reaching CoreDNS. The chart's `networkPolicy.enabled:
+  false` does *not* help — it only suppresses the static chart policies, not the
+  runtime per-sandbox ones. Fix (local-only, baked into `k3s-local.sh`): disable the
+  controller — `echo "disable-network-policy: true" | sudo tee /etc/rancher/k3s/config.yaml`
+  in the VM + `sudo systemctl restart k3s`. This means sandboxes are **not
+  network-isolated locally** — acceptable for laptop testing only.
+- **`just smoke` exercises the agent loop without Slack** (spawn → message → execute
+  on `delivery.platform=dev`, asserts `result_text` contains `PONG`). It authenticates
+  with the `service:slackbot` key bootstrapped from `SLACKBOT_API_KEY`; override with
+  `CENTAUR_API_KEY`. Select a harness with `CENTAUR_HARNESS=claude-code just smoke`
+  (the harness binds at **spawn**, so it's sent on the spawn call, not execute).
+- **Choosing a harness / model.** Default is `codex` (OpenAI), set by
+  `CENTAUR_DEFAULT_HARNESS`. The agent image also ships `claude-code` (Anthropic) and
+  `amp`. To switch a single run: `CENTAUR_HARNESS=claude-code just smoke`, or in Slack
+  prefix the mention with `--claude` / `harness=claude-code`. To switch the default
+  everywhere (incl. Slack), set `CENTAUR_DEFAULT_HARNESS` in values + redeploy.
+- **Rotating an API key (OPENAI/ANTHROPIC).** The sandbox only gets a *placeholder*;
+  the iron-proxy injects the real key, which the API loads from the `centaur-infra-env`
+  secret via `envFrom` **at pod startup**. So after changing a key you must patch the
+  secret **and restart the API** — patching alone won't update a running pod:
+  `kubectl -n centaur patch secret centaur-infra-env -p '{"stringData":{"OPENAI_API_KEY":"…"}}'`
+  then `kubectl -n centaur rollout restart deploy/centaur-centaur-api`. A `401` reaching
+  the model = bad/placeholder key; `insufficient_quota` / "check your plan and billing"
+  = the key authenticates but the account has no credits (account-side, not a stack bug).
 
 ## Teardown
 
