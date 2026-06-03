@@ -23,7 +23,10 @@ SERVICES_CSV=""
 WITH_COMMS_FACTORY=0
 SKIP_COMMS_FACTORY_BUILD=0
 COMMS_FACTORY_GIT_URL="${COMMS_FACTORY_GIT_URL:-https://github.com/infinex-dev/comms-factory.git}"
-COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-3a01b3337692c64133185560b66706a28b703c4e}"
+# Open PR head for https://github.com/infinex-dev/comms-factory/pull/1.
+# The PR base is pinned at 3a01b3337692c64133185560b66706a28b703c4e;
+# deploy the PR head/merge commit, not the base commit or moving main.
+COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-21d335869190bbba107f1c52263acfeb20e0963a}"
 COMMS_FACTORY_IMAGE="${COMMS_FACTORY_IMAGE:-comms-factory-api}"
 COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-}"
 COMMS_FACTORY_REPO="${COMMS_FACTORY_REPO:-}"

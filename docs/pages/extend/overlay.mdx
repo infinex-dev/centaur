@@ -109,7 +109,7 @@ attachedServices:
     enabled: true
     image:
       repository: ghcr.io/infinex-dev/comms-factory-api
-      tag: 3a01b3337692c64133185560b66706a28b703c4e
+      tag: 21d335869190bbba107f1c52263acfeb20e0963a
       pullPolicy: IfNotPresent
     service:
       port: 8080
@@ -125,9 +125,11 @@ api:
 
 Keep the attached runtime request/response oriented and expose it through a
 Centaur tool, not direct user or agent URLs. For comms-factory, the base tool is
-`tools/comms_factory` and the attached service source must be built from
-`infinex-dev/comms-factory@3a01b3337692c64133185560b66706a28b703c4e` until the
-integration is intentionally updated.
+`tools/comms_factory` and the attached service source must be built from the
+reviewed `infinex-dev/comms-factory` PR source. The current PR head is
+`21d335869190bbba107f1c52263acfeb20e0963a`, based on
+`3a01b3337692c64133185560b66706a28b703c4e`; update to the accepted merge commit
+when that PR lands.
 
 ## Verify the overlay
 
