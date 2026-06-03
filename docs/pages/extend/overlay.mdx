@@ -9,10 +9,14 @@ Use an overlay when your deployment needs organization-specific tools,
 workflows, skills, personas, prompts, or sandbox files without turning the base
 Centaur repo into a fork.
 
-An overlay is a separate repo packaged as an image. The Helm chart mounts that
-image into the API and into sandbox pods. API-loaded extension points, such as
-tools and workflows, use the API mount. Sandbox-loaded extension points, such
-as skills and prompts, use the sandbox mount.
+An overlay is the canonical boundary for deployment-specific Centaur behavior.
+Production deployments usually keep overlays in a separate repo packaged as an
+image; this repo may also carry first-party overlay bundles under
+`overlays/<name>` when a branch needs a complete dogfood deployment. In both
+cases, the Helm chart mounts the overlay image into the API and into sandbox
+pods. API-loaded extension points, such as tools and workflows, use the API
+mount. Sandbox-loaded extension points, such as skills and prompts, use the
+sandbox mount.
 
 ## Overlay layout
 
@@ -34,7 +38,9 @@ centaur-overlay/
         └── SYSTEM_PROMPT.md
 ```
 
-Only include the directories your deployment needs.
+Only include the directories your deployment needs. Do not put
+organization-specific tools or workflows in base `tools/` or `workflows/`; put
+them in an overlay and mount it with `overlay.image.*`.
 
 ## Mount paths
 
@@ -101,39 +107,47 @@ run beside Centaur instead of inside the API image. The chart renders an
 internal Deployment, ClusterIP Service, and NetworkPolicy for each enabled
 service; no public ingress is created.
 
-Example comms-factory service pinned to the reviewed upstream commit:
+Example internal processor service:
 
 ```yaml
+overlay:
+  image:
+    repository: ghcr.io/your-org/centaur-overlay
+    tag: sha-abc123
+    sourcePath: /overlay
+
 attachedServices:
-  comms-factory:
+  example-processor:
     enabled: true
     image:
-      repository: ghcr.io/infinex-dev/comms-factory-api
-      tag: 21d335869190bbba107f1c52263acfeb20e0963a
+      repository: ghcr.io/your-org/example-processor
+      tag: sha-def456
       pullPolicy: IfNotPresent
     service:
       port: 8080
+    # Raw Kubernetes Secret refs for credentials the internal service itself
+    # needs. Use this only for privileged internal services you trust.
     secretEnv:
-      COMMS_FACTORY_SERVICE_TOKEN:
+      EXAMPLE_PROCESSOR_TOKEN:
         secretName: centaur-infra-env
-        key: COMMS_FACTORY_SERVICE_TOKEN
-      ANTHROPIC_API_KEY:
-        secretName: centaur-infra-env
-        key: ANTHROPIC_API_KEY
-        optional: true
+        key: EXAMPLE_PROCESSOR_TOKEN
 
 api:
   extraEnv:
-    COMMS_FACTORY_BASE_URL: http://centaur-centaur-attached-comms-factory:8080
+    EXAMPLE_PROCESSOR_BASE_URL: http://centaur-centaur-attached-example-processor:8080
 ```
 
 Keep the attached runtime request/response oriented and expose it through a
-Centaur tool, not direct user or agent URLs. For comms-factory, the base tool is
-`tools/comms_factory` and the attached service source must be built from the
-reviewed `infinex-dev/comms-factory` PR source. The current PR head is
-`21d335869190bbba107f1c52263acfeb20e0963a`, based on
-`3a01b3337692c64133185560b66706a28b703c4e`; update to the accepted merge commit
-when that PR lands.
+Centaur tool or workflow from the overlay, not direct user or agent URLs.
+`attachedServices` is a low-level chart primitive: it creates internal
+Kubernetes workloads and network policy, but it is not the WIP Apps platform.
+
+Credential model: attached services can either use the standard outbound proxy
+for their own HTTPS calls (`proxy.enabled` defaults on) or receive raw env values
+through `secretEnv`. Prefer the proxy/placeholder flow for third-party API
+credentials. Use raw `secretEnv` only when the attached service is treated as a
+privileged internal service and the deployment explicitly accepts that trust
+boundary.
 
 ## Verify the overlay
 

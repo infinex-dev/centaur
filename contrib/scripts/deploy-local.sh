@@ -29,6 +29,8 @@ COMMS_FACTORY_GIT_URL="${COMMS_FACTORY_GIT_URL:-https://github.com/infinex-dev/c
 COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-21d335869190bbba107f1c52263acfeb20e0963a}"
 COMMS_FACTORY_IMAGE="${COMMS_FACTORY_IMAGE:-comms-factory-api}"
 COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-}"
+COMMS_FACTORY_OVERLAY_IMAGE="${COMMS_FACTORY_OVERLAY_IMAGE:-comms-factory-centaur-overlay}"
+COMMS_FACTORY_OVERLAY_TAG="${COMMS_FACTORY_OVERLAY_TAG:-local}"
 COMMS_FACTORY_REPO="${COMMS_FACTORY_REPO:-}"
 COMMS_FACTORY_CACHE_DIR="${COMMS_FACTORY_CACHE_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/centaur/comms-factory}"
 COMMS_FACTORY_DEFAULT_HARNESS="${COMMS_FACTORY_DEFAULT_HARNESS:-claude-code}"
@@ -52,7 +54,7 @@ while [[ $# -gt 0 ]]; do
       echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY COMMS_FACTORY_SERVICE_TOKEN LOCAL_DEV_API_KEY"
       echo "--only rebuilds + reimports a single Centaur image (the rest stay as-is) for fast iteration."
       echo "--services rebuilds + reimports a comma-separated subset of Centaur images."
-      echo "--with-comms-factory builds/imports the pinned comms-factory image, patches local secrets, and enables attachedServices.comms-factory."
+      echo "--with-comms-factory builds/imports the pinned comms-factory image, builds/mounts the comms overlay, patches local secrets, and enables attachedServices.comms-factory."
       exit 0 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
   esac
@@ -141,6 +143,14 @@ fi
 if [[ "$WITH_COMMS_FACTORY" == "1" && "$SKIP_COMMS_FACTORY_BUILD" != "1" ]]; then
   comms_repo="$(resolve_comms_factory_repo)"
   build_and_import "$COMMS_FACTORY_IMAGE" "$comms_repo/services/api/Dockerfile" "" "$comms_repo" "$COMMS_FACTORY_TAG"
+fi
+if [[ "$WITH_COMMS_FACTORY" == "1" && "$SKIP_BUILD" != "1" ]]; then
+  build_and_import \
+    "$COMMS_FACTORY_OVERLAY_IMAGE" \
+    "$ROOT_DIR/overlays/comms-factory/Dockerfile" \
+    "" \
+    "$ROOT_DIR/overlays/comms-factory" \
+    "$COMMS_FACTORY_OVERLAY_TAG"
 fi
 
 # 3. Namespace.
@@ -237,6 +247,13 @@ if [[ "$WITH_COMMS_FACTORY" == "1" ]]; then
   COMMS_VALUES_FILE="$(mktemp)"
   trap '[[ -n "${COMMS_VALUES_FILE:-}" ]] && rm -f "$COMMS_VALUES_FILE"' EXIT
   cat > "$COMMS_VALUES_FILE" <<YAML
+overlay:
+  image:
+    repository: $COMMS_FACTORY_OVERLAY_IMAGE
+    tag: $COMMS_FACTORY_OVERLAY_TAG
+    pullPolicy: IfNotPresent
+    sourcePath: /overlay
+
 attachedServices:
   comms-factory:
     enabled: true
@@ -259,8 +276,14 @@ attachedServices:
 
 api:
   defaultHarness: $COMMS_FACTORY_DEFAULT_HARNESS
+  enabledTools:
+    - comms_factory
   extraEnv:
     COMMS_FACTORY_BASE_URL: http://${RELEASE}-centaur-attached-comms-factory:8080
+
+slackbot:
+  extraEnv:
+    SLACK_WORKFLOW_COMMANDS: '[{"match":"^comms\\\\s+audit\\\\b[:\\\\s-]*(.*)$","workflow":"comms_audit","input":{"text":"$1"},"triggerSuffix":":comms_audit"},{"match":"^comms\\\\s+(?:generate|release)\\\\b[:\\\\s-]*(.*)$","workflow":"comms_release","input":{"brief":"$1"},"triggerSuffix":":comms_release"}]'
 YAML
   EXTRA_VALUES_ARGS=(-f "$COMMS_VALUES_FILE")
 fi

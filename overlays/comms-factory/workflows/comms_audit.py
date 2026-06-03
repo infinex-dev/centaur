@@ -5,8 +5,9 @@ from typing import Any
 
 from api.workflow_engine import WorkflowContext
 
-from workflows.comms_shared import (
+from comms_shared import (
     Gate,
+    GateValidationError,
     SlackWorkflowInput,
     actions_block,
     call_comms_tool,
@@ -16,7 +17,7 @@ from workflows.comms_shared import (
     markdown_block,
     post_gate_message,
     update_gate_message,
-    wait_for_gate,
+    wait_for_gate_action,
 )
 
 WORKFLOW_NAME = "comms_audit"
@@ -63,7 +64,9 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         audit.get("questions") if isinstance(audit.get("questions"), list) else []
     )
     if questions:
-        gate = Gate(ctx.run_id, "audit_qna", 1, inp.user_id)
+        gate = Gate(
+            ctx.run_id, "audit_qna", 1, inp.user_id, tuple(inp.approver_user_ids)
+        )
         message = await post_gate_message(
             ctx,
             name="post_audit_qna_gate",
@@ -83,7 +86,15 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
                 "event_payload": {"run_id": ctx.run_id, "stage": gate.stage},
             },
         )
-        event = await wait_for_gate(ctx, "wait_audit_qna", gate)
+        try:
+            event = await wait_for_gate_action(
+                ctx, "wait_audit_qna", gate, {"answer_qna", "skip"}
+            )
+        except GateValidationError as exc:
+            await _mark_gate_complete(
+                ctx, message, f"Comms audit gate rejected: {exc.reason}."
+            )
+            return {"status": "rejected", "stage": gate.stage, "error": exc.reason}
         await _mark_gate_complete(ctx, message, "Fact confirmation received.")
         if extract_action(event) != "skip":
             answer = extract_modal_value(event)

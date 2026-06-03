@@ -1962,12 +1962,24 @@ async def test_handler_discovery(db_pool, monkeypatch, tmp_path):
         "WORKFLOW_NAME = 'sample_overlay_digest'\n"
         "PROMPT = 'Generate the sample overlay digest.'\n"
     )
+    shared = tmp_path / "sample_shared.py"
+    shared.write_text("VALUE = 'from sibling'\n")
+    importing_workflow = tmp_path / "sample_importing_workflow.py"
+    importing_workflow.write_text(
+        "from sample_shared import VALUE\n"
+        "WORKFLOW_NAME = 'sample_importing_workflow'\n"
+        "async def handler(inp, ctx):\n"
+        "    return {'value': VALUE}\n"
+    )
     monkeypatch.setenv("WORKFLOW_DIRS", str(tmp_path))
 
     discovered = discover_workflow_handlers()
     assert "agent_turn" in discovered
     assert "slack_thread_turn" in discovered
+    assert "comms_audit" not in discovered
+    assert "comms_release" not in discovered
     assert "sample_overlay_digest" in discovered
+    assert "sample_importing_workflow" in discovered
 
     registered = get_workflow_handler("slack_thread_turn")
     assert registered is not None

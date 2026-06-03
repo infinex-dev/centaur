@@ -124,6 +124,13 @@ The Slackbot accepts Slack events at `/api/webhooks/slack`. It also registers
 compatibility paths for `/api/slack/events`, `/api/slack/actions`,
 `/api/slack/options`, and `/api/slack/commands`.
 
+Socket Mode is supported for local, staging, and no-public-ingress deployments,
+but production values should keep it off unless you intentionally replace the
+Slack app's Request URL with Socket Mode. Enabling Socket Mode requires an
+app-level `SLACK_APP_TOKEN` with `connections:write`, and the current chart
+requires `slackbot.replicaCount: 1` because each replica would otherwise open its
+own WebSocket consumer and dedupe is in-process.
+
 ## 5. Deploy with Helm
 
 The chart lives at `contrib/chart`. Select service images, [iron-proxy](https://docs.iron.sh) secret

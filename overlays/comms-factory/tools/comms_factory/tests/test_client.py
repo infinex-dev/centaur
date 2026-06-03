@@ -1,9 +1,15 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
+import sys
 
 import httpx
-from tools.comms_factory.client import CommsFactoryClient
+
+OVERLAY_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(OVERLAY_ROOT))
+
+from tools.comms_factory.client import CommsFactoryClient  # noqa: E402
 
 
 def test_validate_posts_to_service_with_auth(monkeypatch):
@@ -18,7 +24,9 @@ def test_validate_posts_to_service_with_auth(monkeypatch):
 
     transport = httpx.MockTransport(handler)
     original_client = httpx.Client
-    monkeypatch.setattr(httpx, "Client", lambda **_: original_client(transport=transport))
+    monkeypatch.setattr(
+        httpx, "Client", lambda **_: original_client(transport=transport)
+    )
 
     result = CommsFactoryClient("http://comms.test", "token").validate("hello")
 
@@ -36,7 +44,9 @@ def test_generate_applies_defaults_and_maps_5xx(monkeypatch):
 
     transport = httpx.MockTransport(handler)
     original_client = httpx.Client
-    monkeypatch.setattr(httpx, "Client", lambda **_: original_client(transport=transport))
+    monkeypatch.setattr(
+        httpx, "Client", lambda **_: original_client(transport=transport)
+    )
 
     result = CommsFactoryClient("http://comms.test", "token").generate(
         {"kind": "feature", "deployed_facts": ["Fact A"]}
@@ -59,7 +69,9 @@ def test_error_response_redacts_auth_token(monkeypatch):
 
     transport = httpx.MockTransport(handler)
     original_client = httpx.Client
-    monkeypatch.setattr(httpx, "Client", lambda **_: original_client(transport=transport))
+    monkeypatch.setattr(
+        httpx, "Client", lambda **_: original_client(transport=transport)
+    )
 
     result = CommsFactoryClient("http://comms.test", "token").validate("hello")
 
@@ -69,12 +81,28 @@ def test_error_response_redacts_auth_token(monkeypatch):
     }
 
 
-def test_reads_base_url_from_secret_backend_environment(monkeypatch):
+def test_reads_base_url_and_token_from_deployment_environment(monkeypatch):
+    calls = []
     monkeypatch.setenv("COMMS_FACTORY_BASE_URL", "http://comms.internal/")
+    monkeypatch.setenv("COMMS_FACTORY_SERVICE_TOKEN", "env-token")
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(request)
+        assert request.headers["authorization"] == "Bearer env-token"
+        return httpx.Response(200, json={"passed": True})
+
+    transport = httpx.MockTransport(handler)
+    original_client = httpx.Client
+    monkeypatch.setattr(
+        httpx, "Client", lambda **_: original_client(transport=transport)
+    )
 
     client = CommsFactoryClient()
+    result = client.validate("hello")
 
     assert client.base_url == "http://comms.internal"
+    assert result == {"passed": True, "ok": True}
+    assert len(calls) == 1
 
 
 def test_missing_base_url_is_workflow_readable_error(monkeypatch):

@@ -250,6 +250,65 @@ describe('Slack event HTTP dedupe', () => {
     }
   })
 
+  it('parses configured workflow launch commands', async () => {
+    const { parseConfiguredWorkflowCommand } = await import('./index')
+    const event = {
+      thread_key: 'slack:C123:1.2',
+      message_id: '1.2',
+      team_id: 'T123',
+      user_id: 'U123',
+      channel_id: 'C123',
+      thread_ts: '1.2',
+      is_mention: true,
+      parts: [{ type: 'text' as const, text: '<@UBOT> comms audit tweet: Fact A' }],
+      slack: { message_ts: '1.2' }
+    }
+
+    const commands = [
+      {
+        match: '^comms\\s+audit\\b[:\\s-]*(.*)$',
+        workflow: 'comms_audit',
+        input: { text: '$1' },
+        triggerSuffix: ':comms_audit'
+      },
+      {
+        match: '^comms\\s+(?:generate|release)\\b[:\\s-]*(.*)$',
+        workflow: 'comms_release',
+        input: { brief: '$1' },
+        triggerSuffix: ':comms_release'
+      }
+    ]
+
+    expect(parseConfiguredWorkflowCommand(event)).toBeNull()
+    expect(parseConfiguredWorkflowCommand(event, commands)).toEqual({
+      workflowName: 'comms_audit',
+      input: { text: 'tweet: Fact A' },
+      triggerSuffix: ':comms_audit'
+    })
+    expect(
+      parseConfiguredWorkflowCommand(
+        {
+          ...event,
+          parts: [{ type: 'text' as const, text: '<@UBOT> comms generate for x: Fact A' }]
+        },
+        commands
+      )
+    ).toEqual({
+      workflowName: 'comms_release',
+      input: { brief: 'for x: Fact A' },
+      triggerSuffix: ':comms_release'
+    })
+    expect(
+      parseConfiguredWorkflowCommand(
+        {
+          ...event,
+          parts: [{ type: 'text' as const, text: '<@UBOT> hello' }]
+        },
+        commands
+      )
+    ).toBeNull()
+  })
+
   it('starts Socket Mode only when enabled with an app token', async () => {
     const { maybeStartSocketMode } = await import('./index')
     const starter = mock((_options: StartSocketModeOptions) => ({

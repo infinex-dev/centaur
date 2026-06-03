@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 import json
-from typing import Any
+from typing import Any, Iterable
 
 from api import slackbot_client
 from api.workflow_engine import WorkflowContext
@@ -16,6 +16,7 @@ class SlackWorkflowInput:
     text: str = ""
     brief: str = ""
     user_id: str = ""
+    approver_user_ids: list[str] = field(default_factory=list)
     metadata: dict[str, Any] = field(default_factory=dict)
     delivery: dict[str, Any] = field(default_factory=dict)
 
@@ -26,6 +27,7 @@ class Gate:
     stage: str
     gate_version: int
     requester_user_id: str = ""
+    approver_user_ids: tuple[str, ...] = ()
 
     @property
     def correlation_id(self) -> str:
@@ -47,6 +49,8 @@ def compact_ref(gate: Gate, action: str, target_id: str | None = None) -> str:
         payload["target_id"] = target_id
     if gate.requester_user_id:
         payload["requester_user_id"] = gate.requester_user_id
+    if gate.approver_user_ids:
+        payload["approver_user_ids"] = list(gate.approver_user_ids)
     return json.dumps(payload, separators=(",", ":"))
 
 
@@ -139,6 +143,56 @@ async def update_gate_message(
 async def wait_for_gate(ctx: WorkflowContext, name: str, gate: Gate) -> dict[str, Any]:
     return await ctx.wait_for_event(
         name, event_type=EVENT_TYPE, correlation_id=gate.correlation_id
+    )
+
+
+class GateValidationError(ValueError):
+    """Raised when a resumed Slack gate event does not match workflow state."""
+
+    def __init__(self, reason: str) -> None:
+        super().__init__(reason)
+        self.reason = reason
+
+
+def validate_gate_event(
+    event: dict[str, Any], gate: Gate, allowed_actions: Iterable[str]
+) -> dict[str, Any]:
+    ref = event.get("ref") if isinstance(event.get("ref"), dict) else {}
+    action = extract_action(event)
+    allowed = {str(item) for item in allowed_actions}
+    if ref.get("run_id") != gate.run_id:
+        raise GateValidationError("wrong_run_id")
+    if ref.get("stage") != gate.stage:
+        raise GateValidationError("wrong_stage")
+    try:
+        gate_version = int(ref.get("gate_version"))
+    except (TypeError, ValueError):
+        raise GateValidationError("wrong_gate_version") from None
+    if gate_version != gate.gate_version:
+        raise GateValidationError("wrong_gate_version")
+    if action not in allowed:
+        raise GateValidationError("unsupported_action")
+
+    slack = event.get("slack") if isinstance(event.get("slack"), dict) else {}
+    slack_user_id = str(slack.get("user_id") or "").strip()
+    authorized = {
+        user for user in (gate.requester_user_id, *gate.approver_user_ids) if user
+    }
+    if authorized and not slack_user_id:
+        raise GateValidationError("missing_slack_user")
+    if authorized and slack_user_id not in authorized:
+        raise GateValidationError("unauthorized_slack_user")
+    return event
+
+
+async def wait_for_gate_action(
+    ctx: WorkflowContext,
+    name: str,
+    gate: Gate,
+    allowed_actions: Iterable[str],
+) -> dict[str, Any]:
+    return validate_gate_event(
+        await wait_for_gate(ctx, name, gate), gate, allowed_actions
     )
 
 

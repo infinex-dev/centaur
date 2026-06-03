@@ -28,6 +28,38 @@ api:
   # footprint. The first @mention then pays a one-time sandbox cold start.
   warmPoolEnabled: false
   defaultHarness: claude-code
+  # Local dev allowlist: expose only tools backed by keys copied into the local
+  # centaur-infra-env Secret. A non-empty enabledTools list disables everything
+  # not listed here during API tool discovery.
+  enabledTools:
+    - chart
+    - coindesk
+    - coingecko
+    - company_context
+    - debank
+    - defillama
+    - demo
+    - dune
+    - etherscan
+    - fedreg
+    - googlenews
+    - invest_intake
+    - investmemos
+    - kalshi
+    - karma
+    - nano-banana
+    - opentable
+    - polymarket
+    - profslice
+    - reth
+    - reth-log-analyzer
+    - slack
+    - theblock
+    - transcriber
+    - veo3
+    - vlogs
+    - vmetrics
+  disabledTools: []
   # Egress discovery defaults to on and targets the `centaur-egress` namespace,
   # which only exists on the internal cluster. Locally that namespace is absent,
   # so leaving it enabled creates RBAC bindings to a missing namespace and runs

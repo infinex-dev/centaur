@@ -1,8 +1,8 @@
-# Centaur local-dev runsheet → FirenzeStaging (k3s-in-podman + Socket Mode)
+# Centaur local-dev runsheet (k3s-in-podman + Socket Mode)
 
 Run Centaur on a local **k3s cluster running natively inside the podman machine VM**
 (no docker), with credentials in a Kubernetes Secret (no 1Password). The
-`FirenzeStaging` Slack app reaches the local slackbot through **Slack Socket Mode**:
+your dedicated local/dev Slack app reaches the local slackbot through **Slack Socket Mode**:
 the slackbot pod opens an outbound WebSocket to Slack, so local development does not
 need a public tunnel or an Events API Request URL.
 
@@ -22,10 +22,10 @@ future sessions. It installs k3s inside the podman VM, waits for the node to be
 Ready, writes `~/.kube/centaur-k3s.yaml`, and opens an SSH tunnel so `kubectl` and
 `helm` on the Mac reach the k3s API on `127.0.0.1:6443`.
 
-## 2. Configure the FirenzeStaging Slack app
+## 2. Configure a local/dev Slack app
 
-At https://api.slack.com/apps, create or open the dedicated `FirenzeStaging` app.
-Do not reuse the production Centaur app.
+At https://api.slack.com/apps, create or open a dedicated local/dev app. Do not
+reuse the production Centaur app.
 
 1. Open **App Manifest**, set the editor to JSON, and paste
    `contrib/manifests/slack-app-manifest.json`.
@@ -35,7 +35,7 @@ Do not reuse the production Centaur app.
 4. In **Event Subscriptions**, ensure the bot events you need are enabled, including
    `app_mention` and the relevant `message.*` events.
 5. Reinstall the app to the workspace after changing scopes or events.
-6. Invite `@FirenzeStaging` to the test channel.
+6. Invite the local/dev bot user to the test channel.
 
 ## 3. Export credentials
 
@@ -90,8 +90,8 @@ Do not debug Slack until the local stack passes this smoke test.
 ## 6. Test in Slack
 
 ```text
-/invite @FirenzeStaging
-@FirenzeStaging reply with exactly PONG
+/invite @<your local bot>
+@<your local bot> reply with exactly PONG
 ```
 
 Watch logs:

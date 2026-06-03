@@ -7,8 +7,9 @@ from typing import Any
 
 from api.workflow_engine import WorkflowContext
 
-from workflows.comms_shared import (
+from comms_shared import (
     Gate,
+    GateValidationError,
     SlackWorkflowInput,
     actions_block,
     call_comms_tool,
@@ -21,7 +22,7 @@ from workflows.comms_shared import (
     markdown_block,
     post_gate_message,
     update_gate_message,
-    wait_for_gate,
+    wait_for_gate_action,
 )
 
 WORKFLOW_NAME = "comms_release"
@@ -62,7 +63,8 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         {"brief": brief, "run_id": ctx.run_id, "stage": "ground", "gate_version": 1},
     )
     facts = facts_from_grounding(grounding)
-    facts_gate = Gate(ctx.run_id, "facts", 1, inp.user_id)
+    approver_user_ids = tuple(inp.approver_user_ids)
+    facts_gate = Gate(ctx.run_id, "facts", 1, inp.user_id, approver_user_ids)
     facts_message = await post_gate_message(
         ctx,
         name="post_facts_gate",
@@ -84,7 +86,18 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "event_payload": {"run_id": ctx.run_id, "stage": "facts"},
         },
     )
-    facts_event = await wait_for_gate(ctx, "wait_facts_gate", facts_gate)
+    try:
+        facts_event = await wait_for_gate_action(
+            ctx, "wait_facts_gate", facts_gate, {"approve", "edit_facts", "abandon"}
+        )
+    except GateValidationError as exc:
+        await _mark_gate(
+            ctx,
+            facts_message,
+            f"Facts gate rejected: {exc.reason}.",
+            "update_facts_gate",
+        )
+        return {"status": "rejected", "stage": "facts", "error": exc.reason}
     await _mark_gate(ctx, facts_message, "Facts gate completed.", "update_facts_gate")
     if extract_action(facts_event) == "abandon":
         return {"status": "abandoned", "stage": "facts"}
@@ -106,7 +119,7 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         },
     )
     card = card_from_result(card_result, brief, facts)
-    card_gate = Gate(ctx.run_id, "card", 1, inp.user_id)
+    card_gate = Gate(ctx.run_id, "card", 1, inp.user_id, approver_user_ids)
     card_message = await post_gate_message(
         ctx,
         name="post_card_gate",
@@ -128,7 +141,24 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "event_payload": {"run_id": ctx.run_id, "stage": "card"},
         },
     )
-    card_event = await wait_for_gate(ctx, "wait_card_gate", card_gate)
+    try:
+        card_event = await wait_for_gate_action(
+            ctx, "wait_card_gate", card_gate, {"approve", "edit_card", "abandon"}
+        )
+    except GateValidationError as exc:
+        await _mark_gate(
+            ctx,
+            card_message,
+            f"ReleaseCard gate rejected: {exc.reason}.",
+            "update_card_gate",
+        )
+        return {
+            "status": "rejected",
+            "stage": "card",
+            "error": exc.reason,
+            "facts": facts,
+            "card": card,
+        }
     await _mark_gate(
         ctx, card_message, "ReleaseCard gate completed.", "update_card_gate"
     )
@@ -153,7 +183,7 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         },
     )
     candidates = candidates_from_generation(generation)
-    candidate_gate = Gate(ctx.run_id, "candidate", 1, inp.user_id)
+    candidate_gate = Gate(ctx.run_id, "candidate", 1, inp.user_id, approver_user_ids)
     candidate_message = await post_gate_message(
         ctx,
         name="post_candidate_gate",
@@ -176,7 +206,28 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "event_payload": {"run_id": ctx.run_id, "stage": "candidate"},
         },
     )
-    candidate_event = await wait_for_gate(ctx, "wait_candidate_gate", candidate_gate)
+    try:
+        candidate_event = await wait_for_gate_action(
+            ctx,
+            "wait_candidate_gate",
+            candidate_gate,
+            {"approve", "edit_candidate", "retry", "abandon"},
+        )
+    except GateValidationError as exc:
+        await _mark_gate(
+            ctx,
+            candidate_message,
+            f"Candidate gate rejected: {exc.reason}.",
+            "update_candidate_gate",
+        )
+        return {
+            "status": "rejected",
+            "stage": "candidate",
+            "error": exc.reason,
+            "facts": facts,
+            "card": card,
+            "candidates": candidates,
+        }
     await _mark_gate(
         ctx, candidate_message, "Candidate gate completed.", "update_candidate_gate"
     )
@@ -206,7 +257,7 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             },
         )
         candidates = candidates_from_generation(generation)
-        retry_gate = Gate(ctx.run_id, "candidate", 2, inp.user_id)
+        retry_gate = Gate(ctx.run_id, "candidate", 2, inp.user_id, approver_user_ids)
         retry_message = await post_gate_message(
             ctx,
             name="post_candidate_retry_gate",
@@ -230,9 +281,28 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
                 "event_payload": {"run_id": ctx.run_id, "stage": "candidate"},
             },
         )
-        candidate_event = await wait_for_gate(
-            ctx, "wait_candidate_retry_gate", retry_gate
-        )
+        try:
+            candidate_event = await wait_for_gate_action(
+                ctx,
+                "wait_candidate_retry_gate",
+                retry_gate,
+                {"approve", "edit_candidate", "abandon"},
+            )
+        except GateValidationError as exc:
+            await _mark_gate(
+                ctx,
+                retry_message,
+                f"Candidate retry gate rejected: {exc.reason}.",
+                "update_candidate_retry_gate",
+            )
+            return {
+                "status": "rejected",
+                "stage": "candidate",
+                "error": exc.reason,
+                "facts": facts,
+                "card": card,
+                "candidates": candidates,
+            }
         await _mark_gate(
             ctx,
             retry_message,

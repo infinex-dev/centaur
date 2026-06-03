@@ -587,23 +587,49 @@ async function notifyDuplicateSlackAlert(details: DuplicateSlackEventDetails): P
   }
 }
 
-function parseCommsWorkflowCommand(
-  event: NormalizedSlackEvent
-): { workflowName: 'comms_audit' | 'comms_release'; input: Record<string, unknown> } | null {
+export type WorkflowLaunchCommand = {
+  workflowName: string
+  input: Record<string, unknown>
+  triggerSuffix: string
+}
+
+export function parseConfiguredWorkflowCommand(
+  event: NormalizedSlackEvent,
+  commands = config.SLACK_WORKFLOW_COMMANDS
+): WorkflowLaunchCommand | null {
   const text = event.parts
     .filter((part): part is { type: 'text'; text: string } => part.type === 'text')
     .map(part => part.text)
     .join('\n')
     .replace(/^<@[A-Z0-9]+>\s*[:,;-]?\s*/i, '')
     .trim()
-  const match = /^comms\s+(audit|generate|release)\b[:\s-]*(.*)$/is.exec(text)
-  if (!match) return null
-  const command = match[1]?.toLowerCase()
-  const body = (match[2] ?? '').trim()
-  if (command === 'audit') {
-    return { workflowName: 'comms_audit', input: { text: body } }
+  for (const command of commands) {
+    let match: RegExpExecArray | null = null
+    try {
+      match = new RegExp(command.match, 'is').exec(text)
+    } catch (error) {
+      logWarn('slack_workflow_command_invalid_regex', {
+        workflow: command.workflow,
+        error: error instanceof Error ? error.message : String(error)
+      })
+      continue
+    }
+    if (!match) continue
+    const input: Record<string, unknown> = {}
+    for (const [key, template] of Object.entries(command.input)) {
+      input[key] = renderWorkflowCommandTemplate(template, match)
+    }
+    return {
+      workflowName: command.workflow,
+      input,
+      triggerSuffix: command.triggerSuffix ?? `:${command.workflow}`
+    }
   }
-  return { workflowName: 'comms_release', input: { brief: body } }
+  return null
+}
+
+function renderWorkflowCommandTemplate(template: string, match: RegExpExecArray): string {
+  return template.replace(/\$(\d+)/g, (_all, index: string) => (match[Number(index)] ?? '').trim())
 }
 
 function codexThreadIdFromSlackEvent(
@@ -665,13 +691,13 @@ async function processSlackEvent(envelope: SlackEnvelope): Promise<void> {
     return
   }
 
-  const commsCommand = parseCommsWorkflowCommand(normalized)
-  const result = commsCommand
+  const workflowCommand = parseConfiguredWorkflowCommand(normalized)
+  const result = workflowCommand
     ? await handoff.emitWorkflow(
-        commsCommand.workflowName,
+        workflowCommand.workflowName,
         normalized,
-        commsCommand.input,
-        `:${commsCommand.workflowName}`
+        workflowCommand.input,
+        workflowCommand.triggerSuffix
       )
     : await handoff.emit(normalized)
   if (!result.ok) {

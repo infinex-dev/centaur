@@ -1,11 +1,11 @@
-# Centaur Local-Dev → FirenzeStaging Slack Bot
+# Centaur Local-Dev Slack Bot
 
 > Historical note: the original local-dev plan used a public Slack Events API Request URL. That approach has been superseded for local development. Local and staging Slack ingest now use **Slack Socket Mode**.
 
 ## Current local-dev shape
 
 ```text
-FirenzeStaging Slack app
+Dedicated local/dev Slack app
   ⇄ Socket Mode WebSocket using SLACK_APP_TOKEN (xapp-..., connections:write)
 local slackbot pod
   ⇄ local Centaur API
@@ -16,8 +16,8 @@ Local development does **not** require local tunnels, public ingress, or a Slack
 
 ## Requirements
 
-- Dedicated staging Slack app: `FirenzeStaging`.
-- Socket Mode enabled on that staging app only.
+- Dedicated local or staging Slack app.
+- Socket Mode enabled on that non-production app only.
 - App-level token with `connections:write`, stored as `SLACK_APP_TOKEN`.
 - Bot token stored as `SLACK_BOT_TOKEN`.
 - Signing secret stored as `SLACK_SIGNING_SECRET` for the existing HTTP fallback routes and production parity.
@@ -54,7 +54,7 @@ Local development does **not** require local tunnels, public ingress, or a Slack
    slack_socket_mode_connected
    ```
 
-5. Mention the staging bot in Slack and confirm an incoming frame:
+5. Mention the local/dev bot in Slack and confirm an incoming frame:
 
    ```text
    slack_socket_mode_event_received
@@ -62,14 +62,14 @@ Local development does **not** require local tunnels, public ingress, or a Slack
 
 ## Slack app setup
 
-In the staging Slack app:
+In the local/dev Slack app:
 
 - Enable **Socket Mode**.
 - Create an app-level token with `connections:write`.
 - Enable **Event Subscriptions**.
 - Subscribe to bot events needed for testing, especially `app_mention` and the relevant `message.*` events.
 - Reinstall the app to the workspace after changing scopes or events.
-- Invite `@FirenzeStaging` to the channel.
+- Invite the local/dev bot user to the channel.
 
 `message.channels` lets Slack deliver public-channel message events for channels the bot is in. Centaur still only hands off actionable mentions, so ordinary channel chatter does not trigger agent runs.
 

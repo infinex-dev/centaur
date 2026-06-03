@@ -536,6 +536,20 @@ def test_discover_respects_enabled_tools_allowlist(tmp_path: Path):
     assert set(manager.tools) == {"beta"}
 
 
+def test_discover_disabled_tools_take_precedence_over_allowlist(tmp_path: Path):
+    tools_dir = tmp_path / "tools"
+    _write_tool(tools_dir, "alpha", FAKE_TOOL_CLIENT)
+    _write_tool(tools_dir, "beta", FAKE_TOOL_CLIENT)
+
+    manager = ToolManager(
+        tools_dir, enabled_tools={"alpha", "beta"}, disabled_tools={"beta"}
+    )
+    loaded = manager.discover()
+
+    assert [tool.name for tool in loaded] == ["alpha"]
+    assert set(manager.tools) == {"alpha"}
+
+
 @pytest.mark.asyncio
 async def test_call_tool_invokes_sync_and_async_methods_with_secret_placeholders(
     tmp_path: Path,

@@ -1,10 +1,9 @@
 from __future__ import annotations
 
+import os
 from typing import Any
 
 import httpx
-
-from centaur_sdk import secret
 
 _DEFAULT_TIMEOUT = httpx.Timeout(60.0, connect=3.0)
 _LONG_TIMEOUT = httpx.Timeout(180.0, connect=3.0)
@@ -14,10 +13,14 @@ class CommsFactoryClient:
     """Thin wrapper around the internal comms-factory attached service."""
 
     def __init__(self, base_url: str | None = None, token: str | None = None) -> None:
+        # The comms-factory attached service is an internal ClusterIP service, not an
+        # external HTTPS API routed through Centaur's secret placeholder/iron-proxy
+        # flow. Its URL is deployment config and its bearer token is raw internal
+        # service auth injected into both the API/tool pod and attached service pod.
         self.base_url = (
-            (base_url or _secret_value("COMMS_FACTORY_BASE_URL") or "").strip().rstrip("/")
+            (base_url or os.getenv("COMMS_FACTORY_BASE_URL", "")).strip().rstrip("/")
         )
-        self.token = (token or _secret_value("COMMS_FACTORY_SERVICE_TOKEN") or "").strip()
+        self.token = (token or os.getenv("COMMS_FACTORY_SERVICE_TOKEN", "")).strip()
 
     def validate(self, text: str, **kwargs: Any) -> dict[str, Any]:
         return self._post("/validate", {"text": text, **kwargs})
@@ -129,7 +132,9 @@ class CommsFactoryClient:
             if self.token:
                 headers["Authorization"] = f"Bearer {self.token}"
             with httpx.Client(timeout=timeout, trust_env=True) as client:
-                response = client.post(f"{self.base_url}{path}", json=payload, headers=headers)
+                response = client.post(
+                    f"{self.base_url}{path}", json=payload, headers=headers
+                )
             data = _read_json(response)
             if response.is_success:
                 if isinstance(data, dict):
@@ -172,11 +177,6 @@ def _redact_sensitive(value: Any, token: str = "") -> Any:
                 output[key] = _redact_sensitive(item, token)
         return output
     return value
-
-
-def _secret_value(key: str) -> str:
-    value = secret(key, "")
-    return "" if value == key else value
 
 
 def _read_json(response: httpx.Response) -> Any:

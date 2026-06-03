@@ -9,7 +9,7 @@ date: 2026-06-03
 
 ## Summary
 
-Integrate `infinex-dev/comms-factory` with Centaur by keeping the TypeScript comms domain runtime in its own internal Kubernetes service, exposing it through a thin Centaur tool, and letting Centaur workflows own Slack UX, human approval gates, checkpointed state, and final Slack delivery.
+Integrate `infinex-dev/comms-factory` with Centaur as an overlay deployment: keep the TypeScript comms domain runtime in its own internal Kubernetes service, expose it through a thin overlay Centaur tool, and let overlay Centaur workflows own Slack UX, human approval gates, checkpointed state, and final Slack delivery.
 
 The MVP is buttons-first and modal-assisted: no typed approval commands, no production Next/SQLite harness, and no external auto-posting. “Ready to ship” means Slack-visible final copy only.
 
@@ -17,7 +17,7 @@ The MVP is buttons-first and modal-assisted: no typed approval commands, no prod
 
 ## Problem Frame
 
-`comms-factory` already contains domain-specific copy validation, grounding, Actor generation, and Director judgment logic. Centaur already has durable workflows, Slack delivery, plugin tools, overlays, and Kubernetes deployment control. The integration should join those strengths without porting TypeScript code into Python, bloating the API container, or letting Slack approval state drift into an ad-hoc harness.
+`comms-factory` already contains domain-specific copy validation, grounding, Actor generation, and Director judgment logic. Centaur already has durable workflows, Slack delivery, plugin tools, overlays, and Kubernetes deployment control. The integration should join those strengths without porting TypeScript code into Python, bloating the API container, auto-loading comms-specific tools/workflows in base Centaur, or letting Slack approval state drift into an ad-hoc harness.
 
 This plan also establishes a reusable Centaur extension pattern for heavier non-Python runtimes: deploy them as internal attached services and expose them only through tools/workflows.
 
@@ -101,7 +101,7 @@ This plan also establishes a reusable Centaur extension pattern for heavier non-
 |---|---|
 | Deploy `comms-factory` as a separate internal Deployment/ClusterIP service. | Avoids porting TypeScript to Python, avoids adding Node runtime concerns to the API image, and lets comms roll out/restart independently. |
 | Add generic `attachedServices` chart support first. | The pattern is broadly useful for future TypeScript/Go/Rust/Ruby/JVM integrations; `comms-factory` is the first concrete consumer. |
-| Keep the Centaur tool as the public capability boundary. | Agents call `/tools/comms_factory/*`; the tool calls the attached service. The attached service is not public and is not an agent-facing URL. |
+| Keep the overlay Centaur tool as the public capability boundary. | In the comms overlay deployment, agents call `/tools/comms_factory/*`; the tool calls the attached service. The attached service is not public and is not an agent-facing URL. Base Centaur does not auto-load this tool. |
 | Let workflows own async state and approval state. | Centaur already has checkpoint/replay and `wait_for_event`; the comms service can remain request/response oriented for MVP. |
 | Use per-gate workflow event correlation IDs. | `workflow_events` are keyed by `(event_type, correlation_id)`, so `run_id` alone would make the first click block later gates. |
 | Make Slack interactivity reusable infrastructure before comms-specific UI. | Buttons, modals, shortcuts, and Socket Mode interactive parity are platform needs, not just comms code. |
@@ -649,7 +649,7 @@ flowchart TB
 - Test: local E2E script or documented curl/kubectl steps in the runbook
 
 **Approach:**
-- Document attached-service values and the expected `comms_factory` base URL/auth env.
+- Document attached-service values, overlay image values, optional Slack comms-command gating, and the expected `comms_factory` base URL/auth env.
 - Enable Slack interactivity in the Slack manifest and document HTTP vs Socket Mode considerations.
 - Add local validation steps: build affected services, deploy locally, render Helm, call tool endpoint, launch workflow, click/submit at least one gate.
 - Keep production rollout notes explicit: no deploy-box testing, no external posting, local Kubernetes validation first.
