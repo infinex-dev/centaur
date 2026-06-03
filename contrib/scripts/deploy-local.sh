@@ -59,7 +59,7 @@ done
 COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-$COMMS_FACTORY_REF}"
 
 require_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "FATAL: missing command: $1" >&2; exit 1; }; }
-require_cmd podman; require_cmd kubectl; require_cmd helm; require_cmd openssl
+require_cmd podman; require_cmd kubectl; require_cmd helm; require_cmd openssl; require_cmd python3
 if [[ "$WITH_COMMS_FACTORY" == "1" && "$SKIP_COMMS_FACTORY_BUILD" != "1" && -z "$COMMS_FACTORY_REPO" ]]; then
   require_cmd git
 fi
@@ -164,11 +164,28 @@ if ! kubectl -n "$NAMESPACE" get secret "$SECRET_NAME" >/dev/null 2>&1; then
     --from-literal=ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}" \
     --from-literal=AMP_API_KEY="${AMP_API_KEY:-}"
 else
-  echo ">> patching user creds on existing secret $SECRET_NAME"
-  kubectl -n "$NAMESPACE" patch secret "$SECRET_NAME" -p "$(cat <<JSON
-{"stringData":{"SLACK_BOT_TOKEN":"${SLACK_BOT_TOKEN:?}","SLACK_SIGNING_SECRET":"${SLACK_SIGNING_SECRET:?}","SLACK_APP_TOKEN":"${SLACK_APP_TOKEN:?}","OPENAI_API_KEY":"${OPENAI_API_KEY:?}"}}
-JSON
+  user_cred_patch="$(python3 - <<'PY'
+import json
+import os
+
+keys = [
+    "SLACK_BOT_TOKEN",
+    "SLACK_SIGNING_SECRET",
+    "SLACK_APP_TOKEN",
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "AMP_API_KEY",
+]
+values = {key: os.environ[key] for key in keys if os.environ.get(key)}
+print(json.dumps({"stringData": values}) if values else "")
+PY
 )"
+  if [[ -n "$user_cred_patch" ]]; then
+    echo ">> patching user creds on existing secret $SECRET_NAME"
+    kubectl -n "$NAMESPACE" patch secret "$SECRET_NAME" -p "$user_cred_patch"
+  else
+    echo ">> keeping existing user creds on secret $SECRET_NAME (no matching env vars set)"
+  fi
 fi
 
 secret_key_value() {

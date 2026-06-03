@@ -1090,6 +1090,19 @@ def _terminal_error_from_harness_event(event: dict) -> str | None:
             return result.strip()
         return "Harness reported an error"
 
+    if event_type == "turn.failed":
+        err = event.get("error")
+        if isinstance(err, str) and err.strip():
+            return err.strip()
+        if isinstance(err, dict):
+            message = err.get("message")
+            if isinstance(message, str) and message.strip():
+                return message.strip()
+        message = event.get("message")
+        if isinstance(message, str) and message.strip():
+            return message.strip()
+        return "Harness reported an error"
+
     return None
 
 

@@ -49,6 +49,19 @@ class _UnknownEventBackend:
         return "gone"
 
 
+class _CodexTurnFailedBackend:
+    async def stream_stdout(self, _session):
+        yield json.dumps(
+            {
+                "type": "turn.failed",
+                "error": {"message": "Quota exceeded. Check your plan and billing details."},
+            }
+        )
+
+    async def status(self, _session):
+        return "gone"
+
+
 def test_elapsed_since_uses_monotonic_delta_when_available() -> None:
     from api.agent import _elapsed_since
 
@@ -140,6 +153,43 @@ async def test_stream_stdout_accepts_user_events_without_warning() -> None:
         call.args and call.args[0] == "stdout_unknown_event_type"
         for call in warning.call_args_list
     )
+
+
+@pytest.mark.asyncio
+async def test_stream_stdout_surfaces_codex_turn_failed_as_terminal_error() -> None:
+    from api.agent import _stream_stdout
+
+    session = SandboxSession(
+        sandbox_id="sbx-codex-failed",
+        thread_key="test:codex-failed",
+        harness="codex",
+        engine="codex",
+    )
+    rt = RuntimeState()
+    backend = _CodexTurnFailedBackend()
+
+    with (
+        patch("api.agent._persist_turn_messages", new_callable=AsyncMock) as persist,
+        patch("api.agent._db_complete_inflight_turn", new_callable=AsyncMock),
+    ):
+        events = [
+            event
+            async for event in _stream_stdout(
+                session,
+                backend,
+                rt,
+                turn_id=1,
+                t0=time.monotonic(),
+            )
+        ]
+
+    decoded = [json.loads(item["data"]) for item in events]
+    turn_done = next(evt for evt in decoded if evt.get("type") == "turn.done")
+    assert turn_done["is_error"] is True
+    assert turn_done["result"] == "Quota exceeded. Check your plan and billing details."
+    assert turn_done["error"] == "Quota exceeded. Check your plan and billing details."
+    persist.assert_awaited_once()
+    assert persist.await_args.args[2] == "Quota exceeded. Check your plan and billing details."
 
 
 @pytest.mark.asyncio
