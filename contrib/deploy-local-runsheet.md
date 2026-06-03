@@ -1,55 +1,43 @@
-# Centaur local-dev runsheet → FirenzeStaging (k3s-in-podman + env secrets + ngrok)
+# Centaur local-dev runsheet → FirenzeStaging (k3s-in-podman + Socket Mode)
 
 Run Centaur on a local **k3s cluster running natively inside the podman machine VM**
-(no docker), with credentials in a Kubernetes Secret (no 1Password), exposed to the
-`FirenzeStaging` Slack app via ngrok on a reserved static domain. This is the local
-counterpart to `contrib/deploy-env-runsheet.md` (which targets the internal K3s
-cluster) — same K3s shape, just hosted in your laptop's podman VM.
+(no docker), with credentials in a Kubernetes Secret (no 1Password). The
+`FirenzeStaging` Slack app reaches the local slackbot through **Slack Socket Mode**:
+the slackbot pod opens an outbound WebSocket to Slack, so local development does not
+need a public tunnel or an Events API Request URL.
 
 ## 1. Prerequisites
 
 ```bash
-brew install just kubectl helm jq ngrok podman
+brew install just kubectl helm jq podman
 podman machine init --cpus 4 --memory 8192     # one-time (skip if already created)
 podman machine start                           # must be running
-ngrok config add-authtoken <token>             # one-time, free signup
-ngrok config check                             # -> "Valid configuration file"
 ```
 
-Disk size depends on your machine: the default is fine for a roomy or dedicated VM.
-Only if your podman VM is also packed with other projects' images do the centaur
-images (~8GB; the agent/sandbox image alone is ~6GB) risk tipping it into
-`disk-pressure` — see the Gotchas for how to grow it then (no need to plan for it
-up front).
+Disk size depends on your machine. The Centaur images are large, especially the
+agent/sandbox image, so grow the podman VM disk if k3s reports disk pressure.
 
-`contrib/scripts/k3s-local.sh` handles the rest of cluster setup on first deploy (and
-reconnects every session): it installs k3s **natively inside the podman VM**, waits for
-the node to be Ready, writes `~/.kube/centaur-k3s.yaml`, and opens an SSH tunnel so
-`kubectl`/`helm` on the Mac reach the k3s API on `127.0.0.1:6443`. No docker, no kind —
-k3s runs on the VM's own kernel, so the VM *is* the node (same shape as production).
-`deploy-local.sh` runs it for you; run it standalone any time to reconnect (e.g. after a
-reboot).
+`contrib/scripts/k3s-local.sh` handles cluster setup on first deploy and reconnects
+future sessions. It installs k3s inside the podman VM, waits for the node to be
+Ready, writes `~/.kube/centaur-k3s.yaml`, and opens an SSH tunnel so `kubectl` and
+`helm` on the Mac reach the k3s API on `127.0.0.1:6443`.
 
-We use the custom branded domain `infinex-centaur.ngrok.dev` (wildcard
-`*.infinex-centaur.ngrok.dev`), so the subdomain `slack.infinex-centaur.ngrok.dev`
-resolves with no extra reservation — no tailnet, no Tailscale Funnel, no admin
-approval. This ngrok Request URL remains available as an HTTP fallback when
-Socket Mode is disabled: `https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack`.
+## 2. Configure the FirenzeStaging Slack app
 
-**Create `FirenzeStaging` for Socket Mode.** At api.slack.com/apps ->
-"Create app -> From a manifest", set the editor toggle to **JSON** and paste
-`contrib/slack-app-manifest.json`. Enable Socket Mode on this staging app only,
-then create an app-level token (`xapp-...`) with `connections:write`. Install to
-your workspace and collect the Bot User OAuth Token, Signing Secret, and app-level
-token. This is a dedicated staging app — keep it separate from any production
-Centaur app.
+At https://api.slack.com/apps, create or open the dedicated `FirenzeStaging` app.
+Do not reuse the production Centaur app.
 
-(The manifest is JSON, not YAML: Slack's manifest editor parses JSON, and a YAML
-paste fails with `Expecting 'STRING'...got 'INVALID'`. Copy from the file —
-`pbcopy < contrib/slack-app-manifest.json` — rather than from chat, to avoid
-smart-quote/em-dash corruption.)
+1. Open **App Manifest**, set the editor to JSON, and paste
+   `contrib/slack-app-manifest.json`.
+2. Ensure **Socket Mode** is enabled.
+3. In **Basic Information → App-Level Tokens**, create an app-level token with
+   `connections:write`. It should start with `xapp-`.
+4. In **Event Subscriptions**, ensure the bot events you need are enabled, including
+   `app_mention` and the relevant `message.*` events.
+5. Reinstall the app to the workspace after changing scopes or events.
+6. Invite `@FirenzeStaging` to the test channel.
 
-## 2. Export credentials
+## 3. Export credentials
 
 ```bash
 export SLACK_BOT_TOKEN=xoxb-...
@@ -57,54 +45,47 @@ export SLACK_SIGNING_SECRET=...
 export SLACK_APP_TOKEN=xapp-...
 export SLACK_SOCKET_MODE=1
 export OPENAI_API_KEY=sk-...
-export NGROK_DOMAIN=slack.infinex-centaur.ngrok.dev   # only needed for HTTP fallback
 # optional: export ANTHROPIC_API_KEY=... AMP_API_KEY=...
 ```
 
-## 3. Deploy
+`SLACK_SIGNING_SECRET` is still kept in the local secret because the production HTTP
+path and local HTTP fallback routes still exist, but local Slack ingest uses Socket
+Mode.
+
+## 4. Deploy
 
 ```bash
-set -a; source .env; set +a            # or export the vars from step 2
+set -a; source .env; set +a            # or export the vars from step 3
 contrib/scripts/deploy-local.sh
 ```
 
-On first run this brings up k3s in the podman VM (via `k3s-local.sh`), then builds the
-four images with podman, imports them into k3s's containerd, creates the
-`centaur-infra-env` + firewall CA secrets, and runs `helm upgrade --install` with
+On first run this brings up k3s in the podman VM, builds the images with podman,
+imports them into k3s containerd, creates the `centaur-infra-env` and firewall CA
+secrets, and runs `helm upgrade --install` with
 `contrib/chart/values.local-env.yaml`.
 
-## 4. Verify (no Slack)
+For slackbot-only iteration, use:
+
+```bash
+just slackbot-socket-mode
+```
+
+That rebuilds and redeploys only the slackbot, waits for rollout, and tails logs.
+Look for:
+
+```text
+slack_socket_mode_connected
+```
+
+## 5. Verify without Slack
 
 ```bash
 kubectl exec -n centaur deploy/centaur-centaur-api -- \
-  curl -fsS http://localhost:8000/health        # {"status":"ok"}
-just smoke                                       # result_text contains ...PONG...
+  curl -fsS http://localhost:8000/health
+just smoke
 ```
 
-Do not continue until `just smoke` passes — it isolates the agent stack from Slack.
-
-## 5. Expose to Slack (stable ngrok URL) + finish the app (PHASE 3)
-
-```bash
-contrib/scripts/tunnel-local.sh
-# port-forwards the slackbot and runs `ngrok http 3001 --url https://$NGROK_DOMAIN`
-# stable URL: https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack
-```
-
-Now that the endpoint is live at the stable URL **with the FirenzeStaging signing
-secret deployed**, finish the app. In api.slack.com -> your app -> **Features ->
-App Manifest** (JSON), add an `event_subscriptions` key inside `settings` and apply:
-
-```json
-"event_subscriptions": {
-  "request_url": "https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack",
-  "bot_events": ["app_mention", "message.im"]
-}
-```
-
-Slack POSTs a challenge to the live ngrok URL and verifies it against the deployed
-signing secret. Because the reserved domain never changes, this verification is
-permanent — you won't touch Slack config again across restarts/reboots.
+Do not debug Slack until the local stack passes this smoke test.
 
 ## 6. Test in Slack
 
@@ -113,101 +94,47 @@ permanent — you won't touch Slack config again across restarts/reboots.
 @FirenzeStaging reply with exactly PONG
 ```
 
-```bash
-just logs slackbot     # expect a POST to the events path
-```
-
-## 7. Iterate (the point of all this)
-
-Change code, then push it to the running `FirenzeStaging` bot:
+Watch logs:
 
 ```bash
-# Rebuild + reimport + redeploy just the service you changed:
-contrib/scripts/deploy-local.sh --only slackbot   # or: api / agent / iron-proxy
-# The reserved ngrok domain is stable, so the Slack Request URL never needs re-pasting.
+kubectl logs -n centaur deploy/centaur-centaur-slackbot -f
+kubectl logs -n centaur deploy/centaur-centaur-api -f
 ```
 
-`--only` rebuilds and reimports that single image (the heavy agent/sandbox image is
-left untouched when you're only tweaking the slackbot), then re-runs Helm and rolls
-the api + slackbot pods. Use `deploy-local.sh` with no `--only` to rebuild all four.
+Expected slackbot signals:
 
-Then `@FirenzeStaging` again to exercise the new behavior. The reserved ngrok domain
-is fixed, so nothing in Slack changes between iterations.
+```text
+slack_socket_mode_connected
+slack_socket_mode_event_received
+```
+
+Expected API signals include `workflow_run_enqueued`, `sandbox_spawned`,
+`execute_started`, and `execute_completed`.
 
 ## Gotchas
 
-- **The k3s API reaches you over a per-session SSH tunnel.** k3s lives in the podman
-  VM; the tunnel (Mac:6443 → VM:6443) is set up by `k3s-local.sh` and does not survive
-  a VM reboot or a new shell — if `kubectl` hangs, just re-run
-  `contrib/scripts/k3s-local.sh` to reconnect (idempotent). k3s itself auto-starts on
-  VM boot, so the cluster and your workloads persist.
-- **Local images must be imported into k3s under the `docker.io/library` name.** The
-  chart uses bare `centaur-*:latest` (IfNotPresent), which containerd resolves to
-  `docker.io/library/centaur-*:latest` in the `k8s.io` namespace. `deploy-local.sh`
-  does this (tag → `podman save` → `k3s ctr -n k8s.io images import`); if you load
-  images by hand, match that name and namespace or pods `ImagePullBackOff`.
-- **Disk-pressure → pods stuck Pending / ImagePullBackOff.** The images (especially the
-  ~6GB agent/sandbox image) plus everything else in the VM can push the disk past k3s's
-  15% imagefs threshold, which taints the node *and* garbage-collects the imported
-  images. Grow the disk without recreating the machine:
-  `podman machine stop <m> && podman machine set --disk-size 160 <m> && podman machine start <m>`,
-  then inside the VM `sudo growpart /dev/vda 4 && sudo xfs_growfs /`.
-- **Webhook path caveat:** the Slack Events Request URL path is
-  `/api/webhooks/slack` (plural `webhooks`) — the slackbot's fixed route and the
-  `CENTAUR_SLACK_EVENTS_PATH` default in `services/slackbot/src/config.ts`. Do not
-  drop the `s` or change the path, or Slack's challenge POST 404s and verification
-  fails.
-- The ngrok domain is stable, but the laptop must be **awake, online, and running
-  `tunnel-local.sh` (ngrok)** for Slack to reach the bot. If ngrok isn't running,
-  Slack delivery fails and retries. (Unlike Tailscale `--bg`, the ngrok agent must
-  stay in the foreground — keep the script running for the whole session.)
-- Use the **fixed** `slack.infinex-centaur.ngrok.dev` subdomain across runs — the
-  manifest's baked Request URL only stays valid if you keep the same host. (The
-  wildcard means other subdomains also work, but Slack is pinned to this one.)
-- URL verification fails on Phase-3 manifest apply -> the slackbot verifies the
-  challenge signature, so the deployed `SLACK_SIGNING_SECRET` must match
-  `FirenzeStaging`'s. Confirm the endpoint is live (`curl https://<domain>/api/webhooks/slack`
-  returns a signature error, not a connection error) and `just logs slackbot`.
-- Mention lands but nothing runs -> almost always a missing/invalid OPENAI_API_KEY,
-  or an auth/allowlist rejection. Check `just logs api` and `just logs slackbot`.
-- Wrong workspace / no response -> confirm the token belongs to `FirenzeStaging`
-  (not a prod app) and that `FirenzeStaging` is invited to the channel.
-- **Sandbox can't reach the model: `failed to lookup address information` / DNS
-  `EAI_AGAIN`.** The API creates a per-sandbox egress `NetworkPolicy`
-  *unconditionally* (`services/api/api/sandbox/kubernetes.py`) that allows egress
-  only to the API and the iron-proxy — not DNS. In prod/kind the CNI doesn't enforce
-  egress, so it's a no-op; but k3s ships an **enforcing** network-policy controller,
-  which blocks the sandbox from reaching CoreDNS. The chart's `networkPolicy.enabled:
-  false` does *not* help — it only suppresses the static chart policies, not the
-  runtime per-sandbox ones. Fix (local-only, baked into `k3s-local.sh`): disable the
-  controller — `echo "disable-network-policy: true" | sudo tee /etc/rancher/k3s/config.yaml`
-  in the VM + `sudo systemctl restart k3s`. This means sandboxes are **not
-  network-isolated locally** — acceptable for laptop testing only.
-- **`just smoke` exercises the agent loop without Slack** (spawn → message → execute
-  on `delivery.platform=dev`, asserts `result_text` contains `PONG`). It authenticates
-  with the `service:slackbot` key bootstrapped from `SLACKBOT_API_KEY`; override with
-  `CENTAUR_API_KEY`. Select a harness with `CENTAUR_HARNESS=claude-code just smoke`
-  (the harness binds at **spawn**, so it's sent on the spawn call, not execute).
-- **Choosing a harness / model.** Default is `codex` (OpenAI), set by
-  `CENTAUR_DEFAULT_HARNESS`. The agent image also ships `claude-code` (Anthropic) and
-  `amp`. To switch a single run: `CENTAUR_HARNESS=claude-code just smoke`, or in Slack
-  prefix the mention with `--claude` / `harness=claude-code`. To switch the default
-  everywhere (incl. Slack), set `CENTAUR_DEFAULT_HARNESS` in values + redeploy.
-- **Rotating an API key (OPENAI/ANTHROPIC).** The sandbox only gets a *placeholder*;
-  the iron-proxy injects the real key, which the API loads from the `centaur-infra-env`
-  secret via `envFrom` **at pod startup**. So after changing a key you must patch the
-  secret **and restart the API** — patching alone won't update a running pod:
-  `kubectl -n centaur patch secret centaur-infra-env -p '{"stringData":{"OPENAI_API_KEY":"…"}}'`
-  then `kubectl -n centaur rollout restart deploy/centaur-centaur-api`. A `401` reaching
-  the model = bad/placeholder key; `insufficient_quota` / "check your plan and billing"
-  = the key authenticates but the account has no credits (account-side, not a stack bug).
+- **No incoming `slack_socket_mode_event_received`:** check Socket Mode, Event
+  Subscriptions, bot scopes, app reinstall status, and whether the bot is invited to
+  the channel.
+- **Bot receives events but does not reply:** check API logs for harness failures.
+  For local Anthropic testing, set `CENTAUR_DEFAULT_HARNESS=claude-code` on the API
+  deployment and start a new Slack thread.
+- **`users.profile.get` missing scope:** add `users.profile:read` if requester
+  profile lookup matters, then reinstall the Slack app.
+- **Local images must be imported into k3s under the `docker.io/library` name.**
+  `deploy-local.sh` handles this.
+- **Disk pressure:** grow the podman VM disk if pods are stuck Pending or images are
+  garbage-collected.
+- **k3s API tunnel:** if `kubectl` hangs after a reboot or new shell, run
+  `contrib/scripts/k3s-local.sh` to reconnect.
+- **NetworkPolicy locally:** `k3s-local.sh` disables k3s network-policy enforcement
+  for laptop testing so sandboxes can resolve DNS and reach model providers.
 
 ## Teardown
 
 ```bash
-# Ctrl-C tunnel-local.sh to stop ngrok + the port-forward (nothing public persists)
-helm uninstall centaur -n centaur            # remove the app, keep the cluster
-pkill -f '6443:127.0.0.1:6443' || true       # close the k3s API tunnel
-# k3s keeps running in the VM for next time. To remove it from the VM entirely:
+helm uninstall centaur -n centaur
+pkill -f '6443:127.0.0.1:6443' || true
+# To remove k3s entirely from the VM:
 # podman machine ssh podman-machine-default 'sudo /usr/local/bin/k3s-uninstall.sh'
 ```
