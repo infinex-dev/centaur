@@ -43,7 +43,7 @@ app.post('/api/webhooks/slack', slackSignatureMiddleware, slackHandler)         
 Receiving these in staging/local used to require a public Request URL and a local tunnel.
 Socket Mode lets the
 bot dial out over `wss://` using an app-level token (`xapp-…`, scope `connections:write`),
-needing no inbound ingress at all. `contrib/local-dev-plan.md` already flags Socket Mode as
+needing no inbound ingress at all. `contrib/docs/local-dev-plan.md` already flags Socket Mode as
 the intended future zero-ingress path.
 
 The processing core is **not** bound to Hono — only the two thin wrappers are:
@@ -344,7 +344,7 @@ Event ack mapping:
 **Dependencies:** None
 
 **Files:**
-- Modify: `contrib/local-dev-plan.md` (or a short `docs/` note) and `.env.example`
+- Modify: `contrib/docs/local-dev-plan.md` (or a short `docs/` note) and `.env.example`
 - Test: none (docs).
 
 **Approach:** Document:
@@ -391,4 +391,4 @@ Event ack mapping:
 - Investigation report (this session) — handler coupling, ack semantics, blast radius.
 - Code: `services/slackbot/src/index.ts` (`:90`, `:106`, `:139`–`144`, `:419`, `:493`, `:574`, `:677`, `:697`), `src/slack/normalize.ts:35`, `src/centaur/handoff.ts`, `src/config.ts`, `src/slack/dedup.ts`, `src/slack/signature.ts`.
 - Deploy: `services/slackbot/Dockerfile`, `contrib/chart/templates/workloads.yaml:472`–`553`, `contrib/chart/values.yaml:144`, `contrib/chart/values.local-env.yaml:42`/`:77`, `contrib/chart/values.dev.yaml:15`.
-- `contrib/local-dev-plan.md` — flags Socket Mode as the intended zero-ingress path.
+- `contrib/docs/local-dev-plan.md` — flags Socket Mode as the intended zero-ingress path.
