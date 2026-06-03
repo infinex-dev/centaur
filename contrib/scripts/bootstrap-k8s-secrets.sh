@@ -10,7 +10,7 @@ Usage: scripts/bootstrap-k8s-secrets.sh [--namespace NAMESPACE] [--force]
 
 Creates the required local-dev Kubernetes infra Secrets consumed by the Helm chart.
 Requires OP_SERVICE_ACCOUNT_TOKEN, OP_VAULT, SLACK_BOT_TOKEN,
-SLACK_SIGNING_SECRET, and SLACKBOT_API_KEY in the shell environment.
+SLACK_SIGNING_SECRET, SLACK_APP_TOKEN, and SLACKBOT_API_KEY in the shell environment.
 
 Optional 1Password Connect bootstrap (when ironProxy.manager.secretSource is
 set to onepassword-connect in the Helm values):
@@ -78,6 +78,7 @@ require_env OP_SERVICE_ACCOUNT_TOKEN
 require_env OP_VAULT
 require_env SLACK_BOT_TOKEN
 require_env SLACK_SIGNING_SECRET
+require_env SLACK_APP_TOKEN
 require_env SLACKBOT_API_KEY
 
 kubectl create namespace "$NAMESPACE" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
@@ -89,6 +90,9 @@ delete_if_forced centaur-onepassword-connect-credentials
 
 if secret_exists centaur-infra-env; then
   patch_data=()
+  if [[ -n "${SLACK_APP_TOKEN:-}" ]]; then
+    patch_data+=("\"SLACK_APP_TOKEN\":\"$(printf '%s' "$SLACK_APP_TOKEN" | base64 | tr -d '\n')\"")
+  fi
   if [[ -n "${OP_CONNECT_TOKEN:-}" ]]; then
     patch_data+=("\"OP_CONNECT_TOKEN\":\"$(printf '%s' "$OP_CONNECT_TOKEN" | base64 | tr -d '\n')\"")
   fi
@@ -109,6 +113,7 @@ else
     --from-literal=OP_VAULT="$OP_VAULT"
     --from-literal=SLACK_BOT_TOKEN="$SLACK_BOT_TOKEN"
     --from-literal=SLACK_SIGNING_SECRET="$SLACK_SIGNING_SECRET"
+    --from-literal=SLACK_APP_TOKEN="$SLACK_APP_TOKEN"
     --from-literal=SLACKBOT_API_KEY="$SLACKBOT_API_KEY"
     --from-literal=POSTGRES_PASSWORD="$POSTGRES_PASSWORD"
     --from-literal=DATABASE_URL="$DATABASE_URL"

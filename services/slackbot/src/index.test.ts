@@ -1,5 +1,6 @@
 import { createHmac } from 'node:crypto'
 import { afterEach, describe, expect, it, mock } from 'bun:test'
+import type { StartSocketModeOptions } from './slack/socket-mode'
 
 const originalEnv = { ...process.env }
 
@@ -67,6 +68,45 @@ describe('Slack event HTTP dedupe', () => {
     } finally {
       globalThis.fetch = originalFetch
     }
+  })
+
+  it('returns url_verification challenges and invalid payload errors from the shared event core', async () => {
+    const { handleSlackEventBody } = await import('./index')
+    const scheduled: Promise<void>[] = []
+
+    expect(
+      handleSlackEventBody(
+        JSON.stringify({ type: 'url_verification', challenge: 'challenge-token' }),
+        'application/json',
+        promise => scheduled.push(promise)
+      )
+    ).toEqual({ status: 200, body: { challenge: 'challenge-token' } })
+    expect(handleSlackEventBody('not-json', 'application/json')).toEqual({
+      status: 400,
+      body: { ok: false, error: 'invalid_slack_payload' }
+    })
+    expect(scheduled).toHaveLength(0)
+  })
+
+  it('returns shared slash-command core responses for unsupported and empty commands', async () => {
+    const { handleSlackCommandBody } = await import('./index')
+
+     expect(
+      handleSlackCommandBody(new URLSearchParams({ command: '/unknown', text: 'hi' }).toString())
+    ).resolves.toEqual({
+      status: 200,
+      body: { response_type: 'ephemeral', text: 'Unsupported command: /unknown' }
+    })
+     expect(
+      handleSlackCommandBody(new URLSearchParams({ command: '/website-feedback', text: '' }).toString())
+    ).resolves.toEqual({
+      status: 200,
+      body: { response_type: 'ephemeral', text: 'Usage: /website-feedback <feedback or bug report>' }
+    })
+     expect(handleSlackCommandBody('')).resolves.toEqual({
+      status: 400,
+      body: { ok: false, error: 'invalid_slack_command' }
+    })
   })
 
   it('acks duplicate Slack envelopes without scheduling duplicate processing', async () => {
@@ -207,6 +247,41 @@ describe('Slack event HTTP dedupe', () => {
       console.error = originalError
       console.log = originalLog
       console.warn = originalWarn
+    }
+  })
+
+  it('starts Socket Mode only when enabled with an app token', async () => {
+    const { maybeStartSocketMode } = await import('./index')
+    const starter = mock((_options: StartSocketModeOptions) => ({
+      on: () => undefined,
+      start: async () => undefined
+    }))
+
+    maybeStartSocketMode({ SLACK_SOCKET_MODE: false, SLACK_APP_TOKEN: undefined }, starter)
+    maybeStartSocketMode({ SLACK_SOCKET_MODE: true, SLACK_APP_TOKEN: 'xapp-test' }, starter)
+
+    expect(starter).toHaveBeenCalledTimes(1)
+    expect(starter.mock.calls[0]?.[0]).toMatchObject({ appToken: 'xapp-test' })
+  })
+
+  it('logs and leaves HTTP startup alive when Socket Mode is enabled without an app token', async () => {
+    const { maybeStartSocketMode } = await import('./index')
+    const starter = mock((_options: StartSocketModeOptions) => ({
+      on: () => undefined,
+      start: async () => undefined
+    }))
+    const originalError = console.error
+    console.error = mock(() => {}) as typeof console.error
+    try {
+      maybeStartSocketMode({ SLACK_SOCKET_MODE: true, SLACK_APP_TOKEN: undefined }, starter)
+
+      expect(starter).not.toHaveBeenCalled()
+      expect(console.error).toHaveBeenCalledWith(
+        'slack_socket_mode_app_token_missing',
+        expect.objectContaining({ message: 'SLACK_APP_TOKEN is required' })
+      )
+    } finally {
+      console.error = originalError
     }
   })
 })

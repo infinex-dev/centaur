@@ -5,7 +5,7 @@ set -euo pipefail
 # Build with podman -> import into k3s's containerd -> create/patch env secrets ->
 # helm upgrade --install. Cluster bring-up + API tunnel is handled by k3s-local.sh.
 #
-# Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET OPENAI_API_KEY
+# Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY
 # Optional env: ANTHROPIC_API_KEY AMP_API_KEY
 # Load them from .env first:  set -a; source .env; set +a
 
@@ -29,7 +29,7 @@ while [[ $# -gt 0 ]]; do
     --help|-h)
       echo "Usage: contrib/scripts/deploy-local.sh [--namespace NS] [--release NAME] [--skip-build] [--only api|slackbot|agent|iron-proxy]"
       echo "Deploys onto k3s inside the podman machine VM (no docker). See contrib/deploy-local-runsheet.md."
-      echo "Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET OPENAI_API_KEY"
+      echo "Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY"
       echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY"
       echo "--only rebuilds + reimports a single image (the rest stay as-is) for fast iteration."
       exit 0 ;;
@@ -95,13 +95,14 @@ if ! kubectl -n "$NAMESPACE" get secret "$SECRET_NAME" >/dev/null 2>&1; then
     --from-literal=SLACKBOT_API_KEY="$(openssl rand -hex 32)" \
     --from-literal=SLACK_BOT_TOKEN="${SLACK_BOT_TOKEN:?set SLACK_BOT_TOKEN}" \
     --from-literal=SLACK_SIGNING_SECRET="${SLACK_SIGNING_SECRET:?set SLACK_SIGNING_SECRET}" \
+    --from-literal=SLACK_APP_TOKEN="${SLACK_APP_TOKEN:?set SLACK_APP_TOKEN}" \
     --from-literal=OPENAI_API_KEY="${OPENAI_API_KEY:?set OPENAI_API_KEY}" \
     --from-literal=ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}" \
     --from-literal=AMP_API_KEY="${AMP_API_KEY:-}"
 else
   echo ">> patching user creds on existing secret $SECRET_NAME"
   kubectl -n "$NAMESPACE" patch secret "$SECRET_NAME" -p "$(cat <<JSON
-{"stringData":{"SLACK_BOT_TOKEN":"${SLACK_BOT_TOKEN:?}","SLACK_SIGNING_SECRET":"${SLACK_SIGNING_SECRET:?}","OPENAI_API_KEY":"${OPENAI_API_KEY:?}"}}
+{"stringData":{"SLACK_BOT_TOKEN":"${SLACK_BOT_TOKEN:?}","SLACK_SIGNING_SECRET":"${SLACK_SIGNING_SECRET:?}","SLACK_APP_TOKEN":"${SLACK_APP_TOKEN:?}","OPENAI_API_KEY":"${OPENAI_API_KEY:?}"}}
 JSON
 )"
 fi

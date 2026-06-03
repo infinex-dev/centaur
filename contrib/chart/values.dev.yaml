@@ -16,6 +16,9 @@ slackbot:
   enabled: true
   image:
     pullPolicy: IfNotPresent
+  replicaCount: 1 # Socket Mode uses in-process dedupe; keep one Slack WS consumer.
+  socketMode:
+    enabled: true
 
 api:
   executionWorkerEnabled: true
@@ -28,9 +31,6 @@ api:
 sandbox:
   image:
     pullPolicy: IfNotPresent
-
-laminar:
-  enabled: true
 
 ironProxy:
   image:
