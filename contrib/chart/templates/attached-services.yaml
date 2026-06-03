@@ -1,0 +1,107 @@
+{{- range $name, $svc := .Values.attachedServices }}
+{{- if $svc.enabled }}
+{{- $component := include "centaur.attachedServiceComponent" (dict "name" $name) -}}
+{{- $service := $svc.service | default dict -}}
+{{- $image := $svc.image | default dict -}}
+{{- $proxy := $svc.proxy | default dict -}}
+{{- $proxyEnabled := true -}}
+{{- if hasKey $proxy "enabled" }}{{- $proxyEnabled = $proxy.enabled -}}{{- end -}}
+{{- $servicePort := default 8080 $service.port -}}
+{{- $targetPort := default $servicePort $service.targetPort -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "centaur.attachedServiceName" (dict "root" $ "name" $name) }}
+  labels:
+{{ include "centaur.componentLabels" (dict "root" $ "component" $component) | nindent 4 }}
+    centaur.ai/attached-service: {{ $name | quote }}
+spec:
+  replicas: {{ default 1 $svc.replicaCount }}
+  selector:
+    matchLabels:
+{{ include "centaur.componentSelectorLabels" (dict "root" $ "component" $component) | nindent 6 }}
+  template:
+    metadata:
+      labels:
+{{ include "centaur.componentSelectorLabels" (dict "root" $ "component" $component) | nindent 8 }}
+        centaur.ai/attached-service: {{ $name | quote }}
+    spec:
+      automountServiceAccountToken: false
+      {{- with $.Values.global.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ $name | quote }}
+          image: {{ printf "%s:%s" (required (printf "attachedServices.%s.image.repository is required when enabled" $name) $image.repository) (required (printf "attachedServices.%s.image.tag is required when enabled" $name) $image.tag) | quote }}
+          imagePullPolicy: {{ default "IfNotPresent" $image.pullPolicy }}
+          ports:
+            - name: {{ default "http" $service.portName }}
+              containerPort: {{ $targetPort }}
+              protocol: TCP
+{{- if or $proxyEnabled ($svc.env | default dict) ($svc.secretEnv | default dict) }}
+          env:
+{{- if $proxyEnabled }}
+            - name: HTTPS_PROXY
+              value: {{ include "centaur.firewallProxyUrl" $ | quote }}
+            - name: HTTP_PROXY
+              value: {{ include "centaur.firewallProxyUrl" $ | quote }}
+            - name: REQUESTS_CA_BUNDLE
+              value: /firewall-certs/ca-cert.pem
+            - name: SSL_CERT_FILE
+              value: /firewall-certs/ca-cert.pem
+            - name: NODE_EXTRA_CA_CERTS
+              value: /firewall-certs/ca-cert.pem
+            - name: NO_PROXY
+              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,%s%s" (include "centaur.kubernetesApiNoProxyHosts" $) (include "centaur.componentName" (dict "root" $ "component" "api")) (include "centaur.componentName" (dict "root" $ "component" "slackbot")) (include "centaur.componentName" (dict "root" $ "component" "postgres")) (include "centaur.firewallNoProxyHosts" $) (include "centaur.laminarNoProxyHosts" $) | quote }}
+{{- end }}
+{{- range $envName, $envValue := ($svc.env | default dict) }}
+            - name: {{ $envName | quote }}
+              value: {{ $envValue | quote }}
+{{- end }}
+{{- range $envName, $ref := ($svc.secretEnv | default dict) }}
+            - name: {{ $envName | quote }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required (printf "attachedServices.%s.secretEnv.%s.secretName is required" $name $envName) $ref.secretName | quote }}
+                  key: {{ required (printf "attachedServices.%s.secretEnv.%s.key is required" $name $envName) $ref.key | quote }}
+                  {{- if hasKey $ref "optional" }}
+                  optional: {{ $ref.optional }}
+                  {{- end }}
+{{- end }}
+{{- end }}
+{{- if $proxyEnabled }}
+          volumeMounts:
+            - name: firewall-ca
+              mountPath: /firewall-certs
+              readOnly: true
+{{- end }}
+          resources:
+{{ toYaml ($svc.resources | default dict) | nindent 12 }}
+          securityContext:
+{{ toYaml $.Values.containerSecurityContext | nindent 12 }}
+{{- if $proxyEnabled }}
+      volumes:
+        - name: firewall-ca
+          secret:
+            secretName: {{ include "centaur.trustedCaSecretName" $ }}
+{{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "centaur.attachedServiceName" (dict "root" $ "name" $name) }}
+  labels:
+{{ include "centaur.componentLabels" (dict "root" $ "component" $component) | nindent 4 }}
+    centaur.ai/attached-service: {{ $name | quote }}
+spec:
+  type: ClusterIP
+  selector:
+{{ include "centaur.componentSelectorLabels" (dict "root" $ "component" $component) | nindent 4 }}
+  ports:
+    - name: {{ default "http" $service.portName }}
+      port: {{ $servicePort }}
+      targetPort: {{ $targetPort }}
+---
+{{- end }}
+{{- end }}

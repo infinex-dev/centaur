@@ -6,6 +6,7 @@ import { requestId } from 'hono/request-id'
 import { prettyJSON } from 'hono/pretty-json'
 import { startFinalDeliveryPoller } from './centaur/final-delivery'
 import { CentaurHandoff } from './centaur/handoff'
+import { CentaurWorkflowEvents } from './centaur/workflow-events'
 import { loadConfig, type AppConfig } from './config'
 import { logError, logWarn, sanitizeLogValue } from './logging'
 import { AgentSessionRenderer, withAgentSessionLock } from './slack/agent-session'
@@ -14,6 +15,7 @@ import { CodexSessionRenderer, hasActiveCodexSession } from './slack/codex-sessi
 import { EventDeduper, slackDedupKey } from './slack/dedup'
 import { duplicateSlackAlertText, type DuplicateSlackEventDetails } from './slack/duplicate-alert'
 import { EnvSlackInstallationStore, SlackClientResolver } from './slack/installations'
+import { handleSlackInteractionBody, type ParsedSlackInteraction } from './slack/interactivity'
 import { normalizeSlackEnvelope } from './slack/normalize'
 import { markdownToStreamChunks } from './slack/render'
 import { verifySlackSignature } from './slack/signature'
@@ -35,6 +37,7 @@ const resolver = new SlackClientResolver(
   { slackApiUrl: config.SLACK_API_URL }
 )
 const handoff = new CentaurHandoff(config)
+const workflowEvents = new CentaurWorkflowEvents(config)
 const deduper = new EventDeduper(config.SLACK_EVENT_DEDUP_TTL_MS)
 const CODEX_THREAD_RE = /\b(?:codex|agent|amp)\s+thread\b[^A-Z0-9]*(T-[A-Z0-9-]+)/i
 
@@ -160,10 +163,79 @@ const slackHandler = async (c: Context<{ Variables: Variables }>) => {
   return c.json(result.body)
 }
 
+const slackInteractionHandler = async (c: Context<{ Variables: Variables }>) => {
+  const { client } = await resolver.resolve({})
+  const result = await handleSlackInteractionBody(
+    c.get('slackRawBody'),
+    c.req.header('content-type'),
+    {
+      client,
+      authorize: authorizeSlackInteraction,
+      dispatch: interaction => dispatchSlackInteraction(c, interaction)
+    }
+  )
+  if (result.status === 400) return c.json(result.body, 400)
+  return c.json(result.body)
+}
+
+async function handleSlackInteractionBodyForSocket(
+  rawBody: string,
+  contentType: string | undefined
+) {
+  const { client } = await resolver.resolve({})
+  return handleSlackInteractionBody(rawBody, contentType, {
+    client,
+    authorize: authorizeSlackInteraction,
+    dispatch: dispatchWorkflowInteraction
+  })
+}
+
+function authorizeSlackInteraction(interaction: ParsedSlackInteraction) {
+  const authorization = authorizeSlackOrg({
+    envelope: {
+      team_id: interaction.slack_team_id,
+      event: {
+        user_team: interaction.slack_user_team_id,
+        source_team: interaction.slack_source_team_id
+      }
+    },
+    allowedExternalTeamIds: config.SLACKBOT_EXTERNAL_ORG_ALLOWLIST
+  })
+  if (authorization.ok) return null
+  logWarn('slack_interaction_ignored_external_org_not_allowlisted', {
+    external_team_id: authorization.externalTeamId,
+    team_id: interaction.slack_team_id
+  })
+  return {
+    status: 200 as const,
+    body: {
+      response_type: 'ephemeral',
+      replace_original: false,
+      text: 'This Slack action is not enabled for your workspace.'
+    }
+  }
+}
+
+function dispatchSlackInteraction(
+  c: Context,
+  interaction: ParsedSlackInteraction
+): Promise<void> {
+  const promise = dispatchWorkflowInteraction(interaction)
+  runInBackground(c, promise)
+  return Promise.resolve()
+}
+
+async function dispatchWorkflowInteraction(interaction: ParsedSlackInteraction): Promise<void> {
+  const result = await workflowEvents.dispatchInteraction(interaction)
+  if (!result.ok) {
+    throw new Error(`Centaur workflow event dispatch failed: ${result.status}`)
+  }
+}
+
 app.post(config.CENTAUR_SLACK_EVENTS_PATH, slackSignatureMiddleware, slackHandler)
 app.post('/api/slack/events', slackSignatureMiddleware, slackHandler)
-app.post('/api/slack/actions', slackSignatureMiddleware, slackHandler)
-app.post('/api/slack/options', slackSignatureMiddleware, slackHandler)
+app.post('/api/slack/actions', slackSignatureMiddleware, slackInteractionHandler)
+app.post('/api/slack/options', slackSignatureMiddleware, slackInteractionHandler)
 app.post('/api/slack/commands', slackSignatureMiddleware, slackCommandHandler)
 app.post('/api/webhooks/slack', slackSignatureMiddleware, slackHandler)
 
@@ -173,13 +245,15 @@ app.post('/api/slack/messages', apiKeyMiddleware, async c => {
     thread_ts?: string
     text: string
     blocks?: AnyBlock[]
+    metadata?: Record<string, unknown>
   }>()
   const { client } = await resolver.resolve({})
   const response = await client.chat.postMessage({
     channel: body.channel,
     thread_ts: body.thread_ts,
     text: body.text,
-    blocks: body.blocks
+    blocks: body.blocks,
+    metadata: body.metadata as never
   })
   if (!response.ok) return c.json(response, 502)
   return c.json({ ok: true, channel: response.channel, ts: response.ts })
@@ -191,6 +265,7 @@ app.patch('/api/slack/messages', apiKeyMiddleware, async c => {
     ts: string
     text: string
     blocks?: AnyBlock[]
+    metadata?: Record<string, unknown>
   }>()
   const { client } = await resolver.resolve({})
   try {
@@ -198,7 +273,8 @@ app.patch('/api/slack/messages', apiKeyMiddleware, async c => {
       channel: body.channel,
       ts: body.ts,
       text: body.text,
-      blocks: body.blocks
+      blocks: body.blocks,
+      metadata: body.metadata as never
     })
     if (!response.ok) return c.json(response, 502)
     return c.json({ ok: true, channel: response.channel, ts: response.ts })
@@ -463,7 +539,8 @@ export function maybeStartSocketMode(
   starter({
     appToken: socketConfig.SLACK_APP_TOKEN,
     handleEvent: handleSlackEventBody,
-    handleCommand: handleSlackCommandBody
+    handleCommand: handleSlackCommandBody,
+    handleInteraction: handleSlackInteractionBodyForSocket
   })
 }
 
@@ -508,6 +585,25 @@ async function notifyDuplicateSlackAlert(details: DuplicateSlackEventDetails): P
       error: error instanceof Error ? error.message : String(error)
     })
   }
+}
+
+function parseCommsWorkflowCommand(
+  event: NormalizedSlackEvent
+): { workflowName: 'comms_audit' | 'comms_release'; input: Record<string, unknown> } | null {
+  const text = event.parts
+    .filter((part): part is { type: 'text'; text: string } => part.type === 'text')
+    .map(part => part.text)
+    .join('\n')
+    .replace(/^<@[A-Z0-9]+>\s*[:,;-]?\s*/i, '')
+    .trim()
+  const match = /^comms\s+(audit|generate|release)\b[:\s-]*(.*)$/is.exec(text)
+  if (!match) return null
+  const command = match[1]?.toLowerCase()
+  const body = (match[2] ?? '').trim()
+  if (command === 'audit') {
+    return { workflowName: 'comms_audit', input: { text: body } }
+  }
+  return { workflowName: 'comms_release', input: { brief: body } }
 }
 
 function codexThreadIdFromSlackEvent(
@@ -569,7 +665,15 @@ async function processSlackEvent(envelope: SlackEnvelope): Promise<void> {
     return
   }
 
-  const result = await handoff.emit(normalized)
+  const commsCommand = parseCommsWorkflowCommand(normalized)
+  const result = commsCommand
+    ? await handoff.emitWorkflow(
+        commsCommand.workflowName,
+        normalized,
+        commsCommand.input,
+        `:${commsCommand.workflowName}`
+      )
+    : await handoff.emit(normalized)
   if (!result.ok) {
     if (result.status === 409) {
       logWarn('centaur_slack_handoff_conflict', result.body)

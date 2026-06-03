@@ -40,7 +40,8 @@ describe('startSocketMode', () => {
       handleCommand: async (): Promise<SlackCommandBodyResult> => ({
         status: 200,
         body: { response_type: 'ephemeral', text: 'unused' }
-      })
+      }),
+      handleInteraction: async () => ({ status: 200, body: { ok: true } })
     })
 
     await handlers.get('slack_event')?.({
@@ -80,7 +81,8 @@ describe('startSocketMode', () => {
       handleCommand: async (): Promise<SlackCommandBodyResult> => ({
         status: 200,
         body: { response_type: 'ephemeral', text: 'unused' }
-      })
+      }),
+      handleInteraction: async () => ({ status: 200, body: { ok: true } })
     })
 
     await handlers.get('slack_event')?.({
@@ -111,7 +113,8 @@ describe('startSocketMode', () => {
       appToken: 'xapp-test',
       client,
       handleEvent: (): SlackEventBodyResult => ({ status: 200, body: { ok: true } }),
-      handleCommand
+      handleCommand,
+      handleInteraction: async () => ({ status: 200, body: { ok: true } })
     })
 
     await handlers.get('slash_commands')?.({
@@ -141,7 +144,8 @@ describe('startSocketMode', () => {
         handleEvent: (): SlackEventBodyResult => ({ status: 200, body: { ok: true } }),
         handleCommand: async (): Promise<SlackCommandBodyResult> => {
           throw new Error('linear down')
-        }
+        },
+        handleInteraction: async () => ({ status: 200, body: { ok: true } })
       })
 
       await handlers.get('slash_commands')?.({
@@ -158,10 +162,11 @@ describe('startSocketMode', () => {
     }
   })
 
-  it('acks interactive and options frames without routing them to the event core', async () => {
+  it('acks interactive and options frames through the shared interaction core', async () => {
     const { client, handlers } = fakeClient()
-    const ack = mock(async () => {})
+    const ack = mock(async (_body?: unknown) => {})
     const handleEvent = mock((): SlackEventBodyResult => ({ status: 200, body: { ok: true } }))
+    const handleInteraction = mock(async () => ({ status: 200, body: { ok: true } }))
 
     startSocketMode({
       appToken: 'xapp-test',
@@ -170,13 +175,15 @@ describe('startSocketMode', () => {
       handleCommand: async (): Promise<SlackCommandBodyResult> => ({
         status: 200,
         body: { response_type: 'ephemeral', text: 'unused' }
-      })
+      }),
+      handleInteraction
     })
 
-    await handlers.get('interactive')?.({ ack })
-    await handlers.get('options')?.({ ack })
+    await handlers.get('interactive')?.({ ack, body: { type: 'block_actions' } })
+    await handlers.get('options')?.({ ack, body: { type: 'block_suggestion' } })
 
     expect(ack).toHaveBeenCalledTimes(2)
+    expect(handleInteraction).toHaveBeenCalledTimes(2)
     expect(handleEvent).not.toHaveBeenCalled()
   })
 
@@ -195,7 +202,8 @@ describe('startSocketMode', () => {
         handleCommand: async (): Promise<SlackCommandBodyResult> => ({
           status: 200,
           body: { response_type: 'ephemeral', text: 'unused' }
-        })
+        }),
+        handleInteraction: async () => ({ status: 200, body: { ok: true } })
       })
 
       await handlers.get('slack_event')?.({

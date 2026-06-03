@@ -41,7 +41,8 @@
       "bot_events": ["app_mention", "message.channels", "message.im"]
     },
     "interactivity": {
-      "is_enabled": false
+      "is_enabled": true,
+      "request_url": "https://centaur.example.com/api/slack/actions"
     },
     "org_deploy_enabled": false,
     "socket_mode_enabled": true,

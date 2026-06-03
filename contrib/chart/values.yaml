@@ -47,6 +47,8 @@ onepasswordConnect:
 secrets:
   bootstrapSecretName: ""
 
+attachedServices: {}
+
 api:
   replicaCount: 1
   image:

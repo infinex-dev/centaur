@@ -25,6 +25,7 @@ type SlackHandlerResult = {
 type SocketModeHandlers = {
   handleEvent(rawBody: string, contentType: string | undefined): SlackHandlerResult
   handleCommand(rawBody: string): Promise<SlackHandlerResult>
+  handleInteraction(rawBody: string, contentType: string | undefined): Promise<SlackHandlerResult>
 }
 
 export type StartSocketModeOptions = SocketModeHandlers & {
@@ -55,8 +56,16 @@ export function startSocketMode(options: StartSocketModeOptions): SocketModeClie
   client.on('slash_commands', frame =>
     handleSlashCommandFrame(frame, rawBody => options.handleCommand(rawBody))
   )
-  client.on('interactive', frame => handleAckOnlyFrame(frame))
-  client.on('options', frame => handleAckOnlyFrame(frame))
+  client.on('interactive', frame =>
+    handleInteractiveFrame(frame, (rawBody, contentType) =>
+      options.handleInteraction(rawBody, contentType)
+    )
+  )
+  client.on('options', frame =>
+    handleInteractiveFrame(frame, (rawBody, contentType) =>
+      options.handleInteraction(rawBody, contentType)
+    )
+  )
 
   void startWithRetry(client)
 
@@ -106,8 +115,26 @@ async function handleSlashCommandFrame(
   }
 }
 
-async function handleAckOnlyFrame(frame: SocketModeFrame): Promise<void> {
-  await safeAck(frame.ack)
+async function handleInteractiveFrame(
+  frame: SocketModeFrame,
+  handleInteraction: SocketModeHandlers['handleInteraction']
+): Promise<void> {
+  logSocketFrame('slack_socket_mode_interaction_received', frame)
+  try {
+    const payload = frame.body ?? frame.event
+    const result = await withAckDeadline(
+      handleInteraction(JSON.stringify(payload ?? {}), 'application/json'),
+      { status: 200, body: { ok: true } },
+      2500
+    )
+    await safeAck(frame.ack, result.body)
+  } catch (error) {
+    logError('slack_socket_mode_interaction_handler_failed', error)
+    await safeAck(frame.ack, {
+      response_type: 'ephemeral',
+      text: 'Could not process the Slack action. The error was logged for follow-up.'
+    })
+  }
 }
 
 async function startWithRetry(client: SocketModeClientLike, attempt = 0): Promise<void> {

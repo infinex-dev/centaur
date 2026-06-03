@@ -94,6 +94,41 @@ overlay:
     sourcePath: /overlay
 ```
 
+## Attached services
+
+Use `attachedServices` for heavier organization-specific runtimes that should
+run beside Centaur instead of inside the API image. The chart renders an
+internal Deployment, ClusterIP Service, and NetworkPolicy for each enabled
+service; no public ingress is created.
+
+Example comms-factory service pinned to the reviewed upstream commit:
+
+```yaml
+attachedServices:
+  comms-factory:
+    enabled: true
+    image:
+      repository: ghcr.io/infinex-dev/comms-factory-api
+      tag: 3a01b3337692c64133185560b66706a28b703c4e
+      pullPolicy: IfNotPresent
+    service:
+      port: 8080
+    secretEnv:
+      COMMS_FACTORY_SERVICE_TOKEN:
+        secretName: centaur-infra-env
+        key: COMMS_FACTORY_SERVICE_TOKEN
+
+api:
+  extraEnv:
+    COMMS_FACTORY_BASE_URL: http://centaur-centaur-attached-comms-factory:8080
+```
+
+Keep the attached runtime request/response oriented and expose it through a
+Centaur tool, not direct user or agent URLs. For comms-factory, the base tool is
+`tools/comms_factory` and the attached service source must be built from
+`infinex-dev/comms-factory@3a01b3337692c64133185560b66706a28b703c4e` until the
+integration is intentionally updated.
+
 ## Verify the overlay
 
 Check the runtime payload for a thread:

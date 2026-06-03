@@ -201,6 +201,18 @@ spec:
         - protocol: TCP
           port: 3001
 {{- end }}
+{{- range $name, $svc := .Values.attachedServices }}
+{{- if $svc.enabled }}
+{{- $service := $svc.service | default dict }}
+    - to:
+        - podSelector:
+            matchLabels:
+{{ include "centaur.componentSelectorLabels" (dict "root" $ "component" (include "centaur.attachedServiceComponent" (dict "name" $name))) | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ default 8080 $service.port }}
+{{- end }}
+{{- end }}
     - to:
         - podSelector:
             matchLabels:
@@ -235,6 +247,50 @@ spec:
           port: {{ .port | default 443 }}
 {{- end }}
 ---
+{{- range $name, $svc := .Values.attachedServices }}
+{{- if $svc.enabled }}
+{{- $component := include "centaur.attachedServiceComponent" (dict "name" $name) -}}
+{{- $service := $svc.service | default dict -}}
+{{- $proxy := $svc.proxy | default dict -}}
+{{- $proxyEnabled := true -}}
+{{- if hasKey $proxy "enabled" }}{{- $proxyEnabled = $proxy.enabled -}}{{- end -}}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "centaur.attachedServiceName" (dict "root" $ "name" $name) }}
+  labels:
+{{ include "centaur.componentLabels" (dict "root" $ "component" $component) | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+{{ include "centaur.componentSelectorLabels" (dict "root" $ "component" $component) | nindent 6 }}
+  policyTypes:
+    - Ingress
+{{- if $proxyEnabled }}
+    - Egress
+{{- end }}
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+{{ include "centaur.componentSelectorLabels" (dict "root" $ "component" "api") | nindent 14 }}
+      ports:
+        - protocol: TCP
+          port: {{ default 8080 $service.port }}
+{{- if $proxyEnabled }}
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              centaur.ai/iron-proxy: "true"
+              centaur.ai/sandbox-id: api
+      ports:
+        - protocol: TCP
+          port: {{ $.Values.ironProxy.service.proxyPort }}
+{{- end }}
+---
+{{- end }}
+{{- end }}
 {{- if .Values.slackbot.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

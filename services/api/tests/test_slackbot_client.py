@@ -99,3 +99,27 @@ async def test_post_returns_none_after_exhausting_retries():
 
     assert result is None
     assert len(fake.calls) == 3
+
+
+@pytest.mark.asyncio
+async def test_post_message_forwards_blocks_and_metadata():
+    fake = _FakeClient([_response(200, {"ok": True, "channel": "C123", "ts": "1.2"})])
+    with patch("api.slackbot_client.httpx.AsyncClient", return_value=fake):
+        from api import slackbot_client
+
+        result = await slackbot_client.post_message(
+            {"platform": "slack", "channel": "C123", "thread_ts": "1.1"},
+            text="hello",
+            blocks=[{"type": "section"}],
+            metadata={"event_type": "comms_gate"},
+        )
+
+    assert result == {"ok": True, "channel": "C123", "ts": "1.2"}
+    assert fake.calls[0]["url"] == "http://slackbot.test/api/slack/messages"
+    assert fake.calls[0]["json"] == {
+        "channel": "C123",
+        "thread_ts": "1.1",
+        "text": "hello",
+        "blocks": [{"type": "section"}],
+        "metadata": {"event_type": "comms_gate"},
+    }
