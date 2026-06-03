@@ -49,7 +49,7 @@ while [[ $# -gt 0 ]]; do
       echo "       contrib/scripts/deploy-local.sh [--services api,slackbot] [--with-comms-factory] [--comms-factory-repo PATH] [--comms-factory-ref REF]"
       echo "Deploys onto k3s inside the podman machine VM (no docker). See contrib/docs/deploy-local-runsheet.md."
       echo "Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY"
-      echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY COMMS_FACTORY_SERVICE_TOKEN LOCAL_DEV_API_KEY"
+      echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY COMMS_FACTORY_SERVICE_TOKEN LOCAL_DEV_API_KEY"
       echo "--only rebuilds + reimports a single Centaur image (the rest stay as-is) for fast iteration."
       echo "--services rebuilds + reimports a comma-separated subset of Centaur images."
       echo "--with-comms-factory builds/imports the pinned comms-factory image, patches local secrets, and enables attachedServices.comms-factory."
@@ -176,6 +176,7 @@ keys = [
     "OPENAI_API_KEY",
     "ANTHROPIC_API_KEY",
     "AMP_API_KEY",
+    "EXA_API_KEY",
 ]
 values = {key: os.environ[key] for key in keys if os.environ.get(key)}
 print(json.dumps({"stringData": values}) if values else "")
