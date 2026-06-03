@@ -3,9 +3,8 @@
 # Reuses the env-secret path from values.production-env.example.yaml but strips
 # the internal-cluster specifics: no private registry, no Traefik/Tailscale
 # operator ingress, no cert-manager, no hardcoded Kubernetes-API CIDRs. Images are
-# built locally and loaded into kind. Slack can reach the slackbot over Socket
-# Mode by default; the older `kubectl port-forward` + `ngrok` path remains
-# available if you turn slackbot.socketMode.enabled off.
+# built locally and loaded into kind. Slack reaches the slackbot over Socket
+# Mode by default, so local development does not need public ingress or tunnels.
 
 global:
   imagePullSecrets: []

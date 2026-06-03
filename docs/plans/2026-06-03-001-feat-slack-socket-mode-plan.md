@@ -12,7 +12,7 @@ date: 2026-06-03
 Add Slack **Socket Mode** as an env-gated ingest path to `services/slackbot`, so the
 **staging** bot (a separate Slack app that already exists) and local dev can receive Slack
 events over an outbound WebSocket instead of a public HTTP Request URL. This removes the
-ngrok/tunnel + public Request URL + signing-secret juggling for non-prod.
+public tunnel + Request URL + signing-secret juggling for non-prod.
 
 **Production is unchanged.** Prod stays on the existing HTTP Events API + signature path.
 The socket path is off unless `SLACK_SOCKET_MODE` is set, so the prod release renders
@@ -40,8 +40,8 @@ app.post('/api/slack/commands', slackSignatureMiddleware, slackCommandHandler)  
 app.post('/api/webhooks/slack', slackSignatureMiddleware, slackHandler)              // :144
 ```
 
-Receiving these in staging/local requires a public Request URL → ngrok + port-forward +
-tunnel (`contrib/scripts/tunnel-local.sh`, `values.local-env.yaml:68`). Socket Mode lets the
+Receiving these in staging/local used to require a public Request URL and a local tunnel.
+Socket Mode lets the
 bot dial out over `wss://` using an app-level token (`xapp-…`, scope `connections:write`),
 needing no inbound ingress at all. `contrib/local-dev-plan.md` already flags Socket Mode as
 the intended future zero-ingress path.
@@ -322,7 +322,7 @@ Event ack mapping:
 - Add `slackbot.socketMode.enabled: false` to `values.yaml:144`–`153`.
 - In `workloads.yaml` slackbot env (`:476`–`534`), add a conditional block: when `.Values.slackbot.socketMode.enabled`, render `SLACK_SOCKET_MODE` (value `"1"`) and a `SLACK_APP_TOKEN` `secretKeyRef` (mirror `SLACK_BOT_TOKEN` at `:482`, `optional: true`). Keep it off when the value is false so the prod render is unchanged (R2).
 - Enable in `values.local-env.yaml` (and the staging release's values, likely `values.dev.yaml`); keep `replicaCount: 1` there (R7).
-- Note in `values.local-env.yaml` that with Socket Mode on, ngrok/tunnel (`:68`) is no longer needed locally.
+- Note in `values.local-env.yaml` that Socket Mode removes the need for local tunnels.
 
 **Patterns to follow:**
 - `secretKeyRef` blocks at `workloads.yaml:482`–`496`; the `runtimeErrorAlertChannel` conditional at `:527`–`530`; the `extraEnv` range at `:531`–`534`.
