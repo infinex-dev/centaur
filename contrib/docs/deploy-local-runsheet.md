@@ -28,7 +28,7 @@ At https://api.slack.com/apps, create or open the dedicated `FirenzeStaging` app
 Do not reuse the production Centaur app.
 
 1. Open **App Manifest**, set the editor to JSON, and paste
-   `contrib/slack-app-manifest.json`.
+   `contrib/manifests/slack-app-manifest.json`.
 2. Ensure **Socket Mode** is enabled.
 3. In **Basic Information → App-Level Tokens**, create an app-level token with
    `connections:write`. It should start with `xapp-`.

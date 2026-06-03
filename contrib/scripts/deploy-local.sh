@@ -28,7 +28,7 @@ while [[ $# -gt 0 ]]; do
     --only)          ONLY_SVC="${2:?}";      shift 2 ;;
     --help|-h)
       echo "Usage: contrib/scripts/deploy-local.sh [--namespace NS] [--release NAME] [--skip-build] [--only api|slackbot|agent|iron-proxy]"
-      echo "Deploys onto k3s inside the podman machine VM (no docker). See contrib/deploy-local-runsheet.md."
+      echo "Deploys onto k3s inside the podman machine VM (no docker). See contrib/docs/deploy-local-runsheet.md."
       echo "Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY"
       echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY"
       echo "--only rebuilds + reimports a single image (the rest stay as-is) for fast iteration."
