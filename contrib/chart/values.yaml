@@ -149,6 +149,8 @@ slackbot:
     tag: latest
     pullPolicy: Always
   runtimeErrorAlertChannel: ""
+  socketMode:
+    enabled: false
   extraEnv: {}
   resources: {}
 

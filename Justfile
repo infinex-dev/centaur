@@ -71,6 +71,16 @@ deploy:
     fi
     helm upgrade --install {{release}} {{chart}} -n {{namespace}} --create-namespace -f {{dev_values}} ${extra_args[@]+"${extra_args[@]}"}
 
+slackbot-socket-mode:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    : "${SLACK_APP_TOKEN:?set SLACK_APP_TOKEN=xapp-... in .env or your shell}"
+    export SLACK_SOCKET_MODE="${SLACK_SOCKET_MODE:-1}"
+    contrib/scripts/deploy-local.sh --only slackbot
+    kubectl rollout status -n {{namespace}} deploy/{{release}}-centaur-slackbot
+    echo "Following slackbot logs. Look for: slack_socket_mode_connected"
+    kubectl logs -n {{namespace}} deploy/{{release}}-centaur-slackbot --tail=200 -f
+
 up:
     just bootstrap-secrets
     just build

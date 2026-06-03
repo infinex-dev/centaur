@@ -17,6 +17,7 @@ export OP_SERVICE_ACCOUNT_TOKEN=...
 export OP_VAULT=...
 export SLACK_BOT_TOKEN=...
 export SLACK_SIGNING_SECRET=...
+export SLACK_APP_TOKEN=...   # xapp- token with connections:write for local/staging Socket Mode
 export SLACKBOT_API_KEY=...
 ```
 
@@ -510,7 +511,7 @@ All API authentication uses **DB-backed keys** stored in the `api_keys` Postgres
 
 ### How services get their keys
 
-- **Slackbot**: `SLACK_BOT_TOKEN`, `SLACK_SIGNING_SECRET`, and `SLACKBOT_API_KEY` are injected from the local infra Secret.
+- **Slackbot**: `SLACK_BOT_TOKEN`, `SLACK_SIGNING_SECRET`, `SLACK_APP_TOKEN` (for local/staging Socket Mode), and `SLACKBOT_API_KEY` are injected from the local infra Secret.
 - **Sandbox containers**: Auto-issued `sbx1.*` token injected as `CENTAUR_API_KEY` at container creation
 - **Local testing**: Use localhost bypass (no key needed from inside the API deployment), or create a key via admin API
 

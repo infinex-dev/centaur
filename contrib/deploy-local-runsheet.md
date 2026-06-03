@@ -33,15 +33,16 @@ reboot).
 We use the custom branded domain `infinex-centaur.ngrok.dev` (wildcard
 `*.infinex-centaur.ngrok.dev`), so the subdomain `slack.infinex-centaur.ngrok.dev`
 resolves with no extra reservation — no tailnet, no Tailscale Funnel, no admin
-approval. The Slack Request URL is
-`https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack`.
+approval. This ngrok Request URL remains available as an HTTP fallback when
+Socket Mode is disabled: `https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack`.
 
-**Create `FirenzeStaging` — PHASE 1 (scopes only).** At api.slack.com/apps ->
+**Create `FirenzeStaging` for Socket Mode.** At api.slack.com/apps ->
 "Create app -> From a manifest", set the editor toggle to **JSON** and paste
-`contrib/slack-app-manifest.json` (it has no `event_subscriptions` — that is added
-in Phase 3, once the ngrok endpoint is live with the signing secret). Install to
-your workspace and collect the Bot User OAuth Token + Signing Secret. This is a
-dedicated staging app — keep it separate from any production Centaur app.
+`contrib/slack-app-manifest.json`. Enable Socket Mode on this staging app only,
+then create an app-level token (`xapp-...`) with `connections:write`. Install to
+your workspace and collect the Bot User OAuth Token, Signing Secret, and app-level
+token. This is a dedicated staging app — keep it separate from any production
+Centaur app.
 
 (The manifest is JSON, not YAML: Slack's manifest editor parses JSON, and a YAML
 paste fails with `Expecting 'STRING'...got 'INVALID'`. Copy from the file —
@@ -53,8 +54,10 @@ smart-quote/em-dash corruption.)
 ```bash
 export SLACK_BOT_TOKEN=xoxb-...
 export SLACK_SIGNING_SECRET=...
+export SLACK_APP_TOKEN=xapp-...
+export SLACK_SOCKET_MODE=1
 export OPENAI_API_KEY=sk-...
-export NGROK_DOMAIN=slack.infinex-centaur.ngrok.dev   # our custom ngrok subdomain
+export NGROK_DOMAIN=slack.infinex-centaur.ngrok.dev   # only needed for HTTP fallback
 # optional: export ANTHROPIC_API_KEY=... AMP_API_KEY=...
 ```
 

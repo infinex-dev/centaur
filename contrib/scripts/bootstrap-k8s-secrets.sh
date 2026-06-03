@@ -10,7 +10,7 @@ Usage: scripts/bootstrap-k8s-secrets.sh [--namespace NAMESPACE] [--force]
 
 Creates the required local-dev Kubernetes infra Secrets consumed by the Helm chart.
 Requires OP_SERVICE_ACCOUNT_TOKEN, OP_VAULT, SLACK_BOT_TOKEN,
-SLACK_SIGNING_SECRET, and SLACKBOT_API_KEY in the shell environment.
+SLACK_SIGNING_SECRET, SLACK_APP_TOKEN, and SLACKBOT_API_KEY in the shell environment.
 
 Optional 1Password Connect bootstrap (when ironProxy.manager.secretSource is
 set to onepassword-connect in the Helm values):
@@ -78,6 +78,7 @@ require_env OP_SERVICE_ACCOUNT_TOKEN
 require_env OP_VAULT
 require_env SLACK_BOT_TOKEN
 require_env SLACK_SIGNING_SECRET
+require_env SLACK_APP_TOKEN
 require_env SLACKBOT_API_KEY
 
 kubectl create namespace "$NAMESPACE" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
@@ -95,13 +96,14 @@ if secret_exists centaur-infra-env; then
   if [[ -n "${LMNR_BASE_URL:-}" ]]; then
     patch_data+=("\"LMNR_BASE_URL\":\"$(printf '%s' "$LMNR_BASE_URL" | base64 | tr -d '\n')\"")
   fi
+  patch_data+=("\"SLACK_APP_TOKEN\":\"$(printf '%s' "$SLACK_APP_TOKEN" | base64 | tr -d '\n')\"")
   if [[ -n "${OP_CONNECT_TOKEN:-}" ]]; then
     patch_data+=("\"OP_CONNECT_TOKEN\":\"$(printf '%s' "$OP_CONNECT_TOKEN" | base64 | tr -d '\n')\"")
   fi
   if [[ "${#patch_data[@]}" -gt 0 ]]; then
     patch_json="{\"data\":{$(IFS=,; echo "${patch_data[*]}")}}"
     kubectl -n "$NAMESPACE" patch secret centaur-infra-env --type merge -p "$patch_json" >/dev/null
-    echo "Updated optional Laminar keys in Secret centaur-infra-env in namespace $NAMESPACE"
+    echo "Updated optional/service keys in Secret centaur-infra-env in namespace $NAMESPACE"
   fi
   echo "Secret centaur-infra-env already exists in namespace $NAMESPACE; leaving unchanged"
 else
@@ -115,6 +117,7 @@ else
     --from-literal=OP_VAULT="$OP_VAULT"
     --from-literal=SLACK_BOT_TOKEN="$SLACK_BOT_TOKEN"
     --from-literal=SLACK_SIGNING_SECRET="$SLACK_SIGNING_SECRET"
+    --from-literal=SLACK_APP_TOKEN="$SLACK_APP_TOKEN"
     --from-literal=SLACKBOT_API_KEY="$SLACKBOT_API_KEY"
     --from-literal=POSTGRES_PASSWORD="$POSTGRES_PASSWORD"
     --from-literal=DATABASE_URL="$DATABASE_URL"

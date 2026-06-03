@@ -6,6 +6,11 @@ const EnvSchema = z.object({
   SLACK_BOT_TOKEN: z.string().optional(),
   SLACK_API_URL: z.string().url().optional(),
   SLACK_SIGNING_SECRET: z.string().optional(),
+  SLACK_APP_TOKEN: z.string().optional(),
+  SLACK_SOCKET_MODE: z
+    .string()
+    .default('')
+    .transform(value => ['1', 'true', 'yes', 'on'].includes(value.trim().toLowerCase())),
   SLACKBOT_API_KEY: z.string().optional(),
   CENTAUR_API_URL: z.string().url().default('http://localhost:8000'),
   CENTAUR_API_KEY: z.string().optional(),

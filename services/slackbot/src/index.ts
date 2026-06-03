@@ -6,7 +6,7 @@ import { requestId } from 'hono/request-id'
 import { prettyJSON } from 'hono/pretty-json'
 import { startFinalDeliveryPoller } from './centaur/final-delivery'
 import { CentaurHandoff } from './centaur/handoff'
-import { loadConfig } from './config'
+import { loadConfig, type AppConfig } from './config'
 import { logError, logWarn, sanitizeLogValue } from './logging'
 import { AgentSessionRenderer, withAgentSessionLock } from './slack/agent-session'
 import { authorizeSlackOrg } from './slack/authorization'
@@ -17,6 +17,7 @@ import { EnvSlackInstallationStore, SlackClientResolver } from './slack/installa
 import { normalizeSlackEnvelope } from './slack/normalize'
 import { markdownToStreamChunks } from './slack/render'
 import { verifySlackSignature } from './slack/signature'
+import { startSocketMode } from './slack/socket-mode'
 import { shouldAckWithReaction } from './slack/trivial-ack'
 import type { NormalizedSlackEvent, SlackEnvelope } from './slack/types'
 import type { AnyBlock, AnyChunk } from '@slack/types'
@@ -103,10 +104,23 @@ const slackSignatureMiddleware: MiddlewareHandler<{ Variables: Variables }> = as
   await next()
 }
 
-const slackHandler = async (c: Context<{ Variables: Variables }>) => {
-  const envelope = parseSlackBody(c.get('slackRawBody'), c.req.header('content-type'))
-  if (!envelope) return c.json({ ok: false, error: 'invalid_slack_payload' }, 400)
-  if (envelope.type === 'url_verification') return c.json({ challenge: envelope.challenge })
+type SlackBackgroundScheduler = (promise: Promise<void>) => void
+
+export type SlackEventBodyResult =
+  | { status: 200; body: { challenge: string | undefined } }
+  | { status: 200; body: { ok: true; duplicate?: true } }
+  | { status: 400; body: { ok: false; error: 'invalid_slack_payload' } }
+
+export function handleSlackEventBody(
+  rawBody: string,
+  contentType: string | undefined,
+  schedule: SlackBackgroundScheduler = scheduleSlackBackgroundTask
+): SlackEventBodyResult {
+  const envelope = parseSlackBody(rawBody, contentType)
+  if (!envelope) return { status: 400, body: { ok: false, error: 'invalid_slack_payload' } }
+  if (envelope.type === 'url_verification') {
+    return { status: 200, body: { challenge: envelope.challenge } }
+  }
 
   const event = envelope.event
   const key = slackDedupKey({
@@ -127,13 +141,23 @@ const slackHandler = async (c: Context<{ Variables: Variables }>) => {
       }
     )
     if (deploymentAlertChannel) {
-      runInBackground(c, notifyDuplicateSlackAlert(duplicate))
+      schedule(notifyDuplicateSlackAlert(duplicate))
     }
-    return c.json({ ok: true, duplicate: true })
+    return { status: 200, body: { ok: true, duplicate: true } }
   }
 
-  runInBackground(c, processSlackEvent(envelope))
-  return c.json({ ok: true })
+  schedule(processSlackEvent(envelope))
+  return { status: 200, body: { ok: true } }
+}
+
+const slackHandler = async (c: Context<{ Variables: Variables }>) => {
+  const result = handleSlackEventBody(
+    c.get('slackRawBody'),
+    c.req.header('content-type'),
+    promise => runInBackground(c, promise)
+  )
+  if (result.status === 400) return c.json(result.body, 400)
+  return c.json(result.body)
 }
 
 app.post(config.CENTAUR_SLACK_EVENTS_PATH, slackSignatureMiddleware, slackHandler)
@@ -416,10 +440,34 @@ app.post('/api/slack/assistant/title', apiKeyMiddleware, async c => {
 
 if (process.env.NODE_ENV === 'development') showRoutes(app)
 
-export default {
+const server = {
   port: config.PORT,
   fetch: app.fetch
 }
+
+export default server
+
+type SocketModeStartupConfig = Pick<AppConfig, 'SLACK_SOCKET_MODE' | 'SLACK_APP_TOKEN'>
+
+type SocketModeStarter = typeof startSocketMode
+
+export function maybeStartSocketMode(
+  socketConfig: SocketModeStartupConfig = config,
+  starter: SocketModeStarter = startSocketMode
+): void {
+  if (!socketConfig.SLACK_SOCKET_MODE) return
+  if (!socketConfig.SLACK_APP_TOKEN) {
+    logError('slack_socket_mode_app_token_missing', new Error('SLACK_APP_TOKEN is required'))
+    return
+  }
+  starter({
+    appToken: socketConfig.SLACK_APP_TOKEN,
+    handleEvent: handleSlackEventBody,
+    handleCommand: handleSlackCommandBody
+  })
+}
+
+maybeStartSocketMode()
 
 function duplicateSlackEventDetails(
   envelope: SlackEnvelope,
@@ -571,53 +619,85 @@ type SlackCommandPayload = {
   team_id?: string
 }
 
-async function slackCommandHandler(c: Context<{ Variables: Variables }>) {
-  const payload = parseSlackCommandBody(c.get('slackRawBody'))
-  if (!payload?.command) return c.json({ ok: false, error: 'invalid_slack_command' }, 400)
+type SlackCommandEphemeralBody = {
+  response_type: 'ephemeral'
+  text: string
+}
+
+export type SlackCommandBodyResult =
+  | { status: 200; body: SlackCommandEphemeralBody }
+  | { status: 400; body: { ok: false; error: 'invalid_slack_command' } }
+
+export async function handleSlackCommandBody(rawBody: string): Promise<SlackCommandBodyResult> {
+  const payload = parseSlackCommandBody(rawBody)
+  if (!payload?.command) {
+    return { status: 400, body: { ok: false, error: 'invalid_slack_command' } }
+  }
   if (!config.SLACK_FEEDBACK_COMMANDS.includes(payload.command)) {
-    return c.json({ response_type: 'ephemeral', text: `Unsupported command: ${payload.command}` })
+    return {
+      status: 200,
+      body: { response_type: 'ephemeral', text: `Unsupported command: ${payload.command}` }
+    }
   }
   if (
     config.SLACK_FEEDBACK_ALLOWED_CHANNELS.length &&
     payload.channel_id &&
     !config.SLACK_FEEDBACK_ALLOWED_CHANNELS.includes(payload.channel_id)
   ) {
-    return c.json({
-      response_type: 'ephemeral',
-      text: 'This feedback command is not enabled in this channel.'
-    })
+    return {
+      status: 200,
+      body: {
+        response_type: 'ephemeral',
+        text: 'This feedback command is not enabled in this channel.'
+      }
+    }
   }
   if (!config.LINEAR_API_KEY) {
-    return c.json({
-      response_type: 'ephemeral',
-      text: 'Linear feedback is not configured: missing LINEAR_API_KEY.'
-    })
+    return {
+      status: 200,
+      body: {
+        response_type: 'ephemeral',
+        text: 'Linear feedback is not configured: missing LINEAR_API_KEY.'
+      }
+    }
   }
 
   const text = (payload.text ?? '').trim()
   if (!text) {
-    return c.json({
-      response_type: 'ephemeral',
-      text: `Usage: ${payload.command} <feedback or bug report>`
-    })
+    return {
+      status: 200,
+      body: {
+        response_type: 'ephemeral',
+        text: `Usage: ${payload.command} <feedback or bug report>`
+      }
+    }
   }
 
   try {
     const issue = await createLinearFeedbackIssue(payload, text)
-    return c.json({
-      response_type: 'ephemeral',
-      text: `Created ${issue.identifier}: ${issue.url}`
-    })
+    return {
+      status: 200,
+      body: {
+        response_type: 'ephemeral',
+        text: `Created ${issue.identifier}: ${issue.url}`
+      }
+    }
   } catch (error) {
     logError('linear_feedback_issue_create_failed', error)
-    return c.json(
-      {
+    return {
+      status: 200,
+      body: {
         response_type: 'ephemeral',
         text: 'Could not create the Linear issue. The error was logged for follow-up.'
-      },
-      200
-    )
+      }
+    }
   }
+}
+
+async function slackCommandHandler(c: Context<{ Variables: Variables }>) {
+  const result = await handleSlackCommandBody(c.get('slackRawBody'))
+  if (result.status === 400) return c.json(result.body, 400)
+  return c.json(result.body)
 }
 
 async function createLinearFeedbackIssue(
@@ -672,6 +752,12 @@ async function createLinearFeedbackIssue(
 function firstLineTitle(text: string): string {
   const line = text.split(/\r?\n/, 1)[0]?.trim() || 'Slack feedback'
   return line.length <= 120 ? line : `${line.slice(0, 117)}...`
+}
+
+function scheduleSlackBackgroundTask(promise: Promise<void>): void {
+  void promise.catch((error: unknown) => {
+    logError('slack_event_processing_failed', error)
+  })
 }
 
 function runInBackground(c: Context, promise: Promise<void>): void {

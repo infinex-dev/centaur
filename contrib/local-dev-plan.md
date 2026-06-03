@@ -6,7 +6,7 @@
 
 **Goal:** Stand up a dedicated **staging Slack app named `FirenzeStaging`** and run the Centaur stack **locally on the laptop wired to that bot**, so we can iterate on the bot — change code, redeploy, and `@FirenzeStaging` in Slack to see the change — without touching any production/Centaur app. The local deployment (k3s-in-podman + env secrets + tunnel) is just the plumbing that connects the running code to `FirenzeStaging`.
 
-**The actual deliverable is the dev loop:** `FirenzeStaging` Slack app ⇄ local stack ⇄ **ngrok**. Everything else (k3s, Helm values, secret bootstrap) exists only to make that loop work. Keep it as lean as possible; drop anything not needed to mention `@FirenzeStaging` and get a reply from locally-running code.
+**The actual deliverable is the dev loop:** `FirenzeStaging` Slack app ⇄ local stack ⇄ **Slack Socket Mode** (or the legacy ngrok tunnel if Socket Mode is disabled). Everything else (k3s, Helm values, secret bootstrap) exists only to make that loop work. Keep it as lean as possible; drop anything not needed to mention `@FirenzeStaging` and get a reply from locally-running code.
 
 **Why ngrok (not Tailscale Funnel or cloudflared quick tunnels):** ngrok is **independent of any tailnet** — it needs no Tailscale ACL/Funnel permission (Funnel is blocked on the tailnet we'd otherwise use, and the admin who could enable it is gone). We have a **paid custom branded domain** (`infinex-centaur.ngrok.dev`, with wildcard `*.infinex-centaur.ngrok.dev`), so any concrete subdomain — we use `slack.infinex-centaur.ngrok.dev` — gives a **stable, predictable public URL** that exists before the tunnel runs and needs no per-subdomain reservation. That stability is what lets us **make the Slack manifest the source of truth for the Events API Request URL** (`event_subscriptions.request_url`) and have its verification **stick permanently** — set once, never re-paste, even across restarts. A rotating `*.trycloudflare.com` host can't be baked into a manifest at all (it changes every restart). ngrok terminates TLS with a valid public cert (passes Slack validation), and the paid plan serves no browser interstitial. (There's still a one-time two-phase create — see Task 5 — because Slack signs its validation challenge with a signing secret that only exists after the app is created; that's a Slack bootstrap constraint, independent of the tunnel.)
 
@@ -14,7 +14,7 @@
 
 **Tech Stack:** Helm, k3s (inside the podman machine VM), podman, `kubectl`, **ngrok**, bash, OpenSSL. The Centaur stack itself is FastAPI (API) + a Hono/TypeScript slackbot + iron-proxy + an agent sandbox image.
 
-> **Future zero-ingress option (not in this plan):** Slack Socket Mode would remove the public-URL requirement entirely (the bot dials out over a WebSocket), surviving even a fully locked-down tailnet. The slackbot is HTTP-only today (`@slack/web-api` + Hono, no `@slack/socket-mode`), so that's a code change for later — out of scope here.
+> **Socket Mode update:** Local and staging values now enable Slack Socket Mode by default. The bot dials out over a WebSocket with `SLACK_APP_TOKEN` (`xapp-…`, scope `connections:write`), so local/staging no longer need a public Slack Request URL. The HTTP Events API + signing-secret path remains available and production stays default-off.
 
 ---
 
@@ -23,8 +23,8 @@
 These are environment/setup steps, not code changes — no commits.
 
 - [ ] **Tooling installed:** `brew install just kubectl helm jq ngrok podman` and a running `podman machine` (`podman machine init && podman machine start`). No Docker — `contrib/scripts/k3s-local.sh` installs k3s natively inside the podman VM and `deploy-local.sh` builds with podman + imports into k3s. (Note: the committed `contrib/scripts/{k3s-local.sh,deploy-local.sh}` are the source of truth — they also add a `--only <svc>` single-image rebuild flag; the embedded script blocks below predate the kind→k3s pivot.)
-- [ ] **ngrok authtoken configured** (one-time): sign up (free) and `ngrok config add-authtoken <token>`. Verify with `ngrok config check` → "Valid configuration file".
-- [ ] **Pick the Slack subdomain:** we have the custom branded domain `infinex-centaur.ngrok.dev` with a wildcard endpoint (`*.infinex-centaur.ngrok.dev`), so any subdomain resolves with no per-subdomain reservation. Use **`slack.infinex-centaur.ngrok.dev`** for FirenzeStaging. The Slack Request URL is `https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack` — baked into the manifest in Task 5. (No tailnet, no Tailscale Funnel, no admin approval — ngrok is fully independent of the SNX/team tailnet.)
+- [ ] **Slack Socket Mode app token configured:** use the existing separate `FirenzeStaging` Slack app (never the production app), enable `settings.socket_mode_enabled: true`, then create an app-level token with `connections:write`. Put the resulting `xapp-…` token in `SLACK_APP_TOKEN` and set `SLACK_SOCKET_MODE=1`. Keep `SLACK_BOT_TOKEN` and `SLACK_SIGNING_SECRET` in the local secret bootstrap path so the HTTP fallback remains available.
+- [ ] **Legacy ngrok fallback only if Socket Mode is disabled:** sign up (free), run `ngrok config add-authtoken <token>`, and use `https://slack.infinex-centaur.ngrok.dev/api/webhooks/slack` as the Events API Request URL.
 - [ ] **Centaur checkout on the PR branch:**
 
 ```bash
@@ -35,7 +35,7 @@ git checkout pr-1-env-deploy
 git checkout -b feat/local-dev-env   # work branch for this plan
 ```
 
-- [ ] **`FirenzeStaging` Slack app (two-phase — see Task 5):** This is a NEW, dedicated staging app — do not reuse a production Centaur app. **Phase 1 (before deploy):** create it from the Task 5 manifest with the `event_subscriptions` block commented out (api.slack.com/apps → "Create app → From a manifest"), and collect its `SLACK_BOT_TOKEN` (`xoxb-…`) + `SLACK_SIGNING_SECRET`. **Phase 3 (after deploy + ngrok are live):** re-apply the full manifest with `event_subscriptions` uncommented so Slack verifies the Request URL against the live, stable ngrok endpoint. The reason for two phases: Slack validates the baked Request URL at apply time, but the signing secret it signs the challenge with only exists once the app is created. See Task 5 for the full explanation.
+- [ ] **`FirenzeStaging` Slack app:** This is a NEW, dedicated staging app — do not reuse a production Centaur app. Enable Socket Mode on that app only; enabling Socket Mode on the production app would disable its Request URL. Subscribe to the same bot events (`app_mention`, `message.*`) and commands (`/website-feedback`) you plan to test.
 - [ ] **Model key ready:** `OPENAI_API_KEY` (default harness is Codex; agent turns fail without it).
 
 All file paths below are relative to the root of this `centaur` checkout.

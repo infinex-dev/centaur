@@ -444,6 +444,12 @@ spec:
 {{- end }}
 ---
 {{- if .Values.slackbot.enabled }}
+{{- if or (hasKey .Values.slackbot.extraEnv "SLACK_SOCKET_MODE") (hasKey .Values.slackbot.extraEnv "SLACK_APP_TOKEN") }}
+{{- fail "Use slackbot.socketMode.enabled for Socket Mode; SLACK_SOCKET_MODE and SLACK_APP_TOKEN are reserved and cannot be set via slackbot.extraEnv" }}
+{{- end }}
+{{- if and .Values.slackbot.socketMode.enabled (ne (int .Values.slackbot.replicaCount) 1) }}
+{{- fail "slackbot.socketMode.enabled requires slackbot.replicaCount=1 because Slack events are deduped in-process" }}
+{{- end }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -452,6 +458,13 @@ metadata:
 {{ include "centaur.componentLabels" (dict "root" . "component" "slackbot") | nindent 4 }}
 spec:
   replicas: {{ .Values.slackbot.replicaCount }}
+{{- if .Values.slackbot.socketMode.enabled }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+{{- end }}
   selector:
     matchLabels:
 {{ include "centaur.componentSelectorLabels" (dict "root" . "component" "slackbot") | nindent 6 }}
@@ -527,6 +540,15 @@ spec:
 {{- if .Values.slackbot.runtimeErrorAlertChannel }}
             - name: RUNTIME_ERROR_ALERT_CHANNEL
               value: {{ .Values.slackbot.runtimeErrorAlertChannel | quote }}
+{{- end }}
+{{- if .Values.slackbot.socketMode.enabled }}
+            - name: SLACK_SOCKET_MODE
+              value: "1"
+            - name: SLACK_APP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "centaur.secretEnvName" . }}
+                  key: {{ printf "%sSLACK_APP_TOKEN" .Values.secretManager.envPrefix }}
 {{- end }}
 {{- range $name, $value := .Values.slackbot.extraEnv }}
             - name: {{ $name }}

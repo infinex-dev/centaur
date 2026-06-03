@@ -14,6 +14,9 @@ postgres:
 
 slackbot:
   enabled: true
+  replicaCount: 1 # Socket Mode uses in-process dedupe; keep one Slack WS consumer.
+  socketMode:
+    enabled: true
 
 api:
   executionWorkerEnabled: true
