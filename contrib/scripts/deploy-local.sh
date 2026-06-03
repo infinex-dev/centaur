@@ -31,6 +31,7 @@ COMMS_FACTORY_IMAGE="${COMMS_FACTORY_IMAGE:-comms-factory-api}"
 COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-}"
 COMMS_FACTORY_REPO="${COMMS_FACTORY_REPO:-}"
 COMMS_FACTORY_CACHE_DIR="${COMMS_FACTORY_CACHE_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/centaur/comms-factory}"
+COMMS_FACTORY_DEFAULT_HARNESS="${COMMS_FACTORY_DEFAULT_HARNESS:-claude-code}"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -252,6 +253,7 @@ attachedServices:
         key: COMMS_FACTORY_SERVICE_TOKEN
 
 api:
+  defaultHarness: $COMMS_FACTORY_DEFAULT_HARNESS
   extraEnv:
     COMMS_FACTORY_BASE_URL: http://${RELEASE}-centaur-attached-comms-factory:8080
 YAML

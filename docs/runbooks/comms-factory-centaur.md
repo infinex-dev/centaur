@@ -37,7 +37,7 @@ This command:
 3. Clones/checks out comms-factory at PR head `21d335869190bbba107f1c52263acfeb20e0963a` unless you pass `--comms-factory-repo PATH` or `--comms-factory-ref REF`.
 4. Builds/imports `comms-factory-api:21d335869190bbba107f1c52263acfeb20e0963a`.
 5. Patches `centaur-infra-env` with `COMMS_FACTORY_SERVICE_TOKEN` and `LOCAL_DEV_API_KEY` when missing.
-6. Deploys Helm with `attachedServices.comms-factory.enabled=true` and `COMMS_FACTORY_BASE_URL=http://centaur-centaur-attached-comms-factory:8080`.
+6. Deploys Helm with `attachedServices.comms-factory.enabled=true`, `COMMS_FACTORY_BASE_URL=http://centaur-centaur-attached-comms-factory:8080`, and local default harness `claude-code` so Slack turns use Anthropic rather than Codex.
 
 Useful variants:
 
