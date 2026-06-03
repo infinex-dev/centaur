@@ -251,6 +251,10 @@ attachedServices:
       COMMS_FACTORY_SERVICE_TOKEN:
         secretName: $SECRET_NAME
         key: COMMS_FACTORY_SERVICE_TOKEN
+      ANTHROPIC_API_KEY:
+        secretName: $SECRET_NAME
+        key: ANTHROPIC_API_KEY
+        optional: true
 
 api:
   defaultHarness: $COMMS_FACTORY_DEFAULT_HARNESS
