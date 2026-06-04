@@ -38,6 +38,24 @@ class ServiceAPIKeySpec:
     scopes: tuple[str, ...]
 
 
+# ---------------------------------------------------------------------------
+# Named scope bundles — expand a ``bundle:<name>`` token into concrete
+# ``tools:`` scopes so consumers get curated least-privilege access without
+# a separate profile/capability registry.
+# ---------------------------------------------------------------------------
+
+SCOPE_BUNDLES: dict[str, tuple[str, ...]] = {
+    "research": (
+        "tools:repo_context",
+        "tools:websearch",
+        "tools:web_fetch",
+        "tools:browser",
+        "tools:twitter",
+        "tools:company_context",
+    ),
+}
+
+
 _SERVICE_API_KEYS: tuple[ServiceAPIKeySpec, ...] = (
     ServiceAPIKeySpec(
         env_var="SLACKBOT_API_KEY",
@@ -47,12 +65,12 @@ _SERVICE_API_KEYS: tuple[ServiceAPIKeySpec, ...] = (
     ServiceAPIKeySpec(
         env_var="LOCAL_DEV_API_KEY",
         name="service:local-dev",
-        scopes=("admin", "agent", "threads", "tools:*", "capabilities:*"),
+        scopes=("admin", "agent", "threads", "tools:*"),
     ),
     ServiceAPIKeySpec(
         env_var="COMMS_FACTORY_CAPABILITY_API_KEY",
-        name="service:comms-factory-capabilities",
-        scopes=("capabilities:comms",),
+        name="service:comms-factory",
+        scopes=("bundle:research",),
     ),
 )
 
@@ -72,12 +90,29 @@ def hash_key(key: str) -> str:
 
 
 def _normalize_scopes(scopes: list[str] | tuple[str, ...]) -> list[str]:
-    """Deduplicate scopes while preserving declaration order."""
+    """Deduplicate and expand scopes while preserving declaration order.
+
+    ``bundle:<name>`` tokens are expanded into their constituent ``tools:``
+    scopes before deduplication.
+    """
     seen: set[str] = set()
     normalized: list[str] = []
     for scope in scopes:
         cleaned = scope.strip()
-        if not cleaned or cleaned in seen:
+        if not cleaned:
+            continue
+        # Expand bundle tokens
+        if cleaned.startswith("bundle:"):
+            bundle_name = cleaned[len("bundle:"):]
+            bundle_scopes = SCOPE_BUNDLES.get(bundle_name)
+            if bundle_scopes is None:
+                raise ValueError(f"Unknown scope bundle: {bundle_name!r}")
+            for s in bundle_scopes:
+                if s not in seen:
+                    seen.add(s)
+                    normalized.append(s)
+            continue
+        if cleaned in seen:
             continue
         seen.add(cleaned)
         normalized.append(cleaned)
@@ -301,6 +336,10 @@ def check_scope(key_info: APIKeyInfo, required: str, resource: str = "") -> bool
     "tools:*", "tools:<name>", "workflows", "workflows:*",
     "workflows:<name>", "capabilities:*", "capabilities:<name>",
     "threads", "threads:read".
+
+    ``bundle:<name>`` tokens are expanded into concrete ``tools:`` scopes at
+    key load time (see ``_normalize_scopes``), so ``check_scope`` only ever
+    sees the expanded ``tools:<name>`` entries.
 
     A bare category scope (e.g. "agent") grants all sub-actions. Resource-
     qualified categories (``tools``, ``workflows``, ``capabilities``) accept

@@ -6,7 +6,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 
-from api.api_keys import APIKeyInfo, check_scope
+import pytest
+
+from api.api_keys import SCOPE_BUNDLES, APIKeyInfo, _normalize_scopes, check_scope
 
 
 def _key(scopes: list[str]) -> APIKeyInfo:
@@ -130,3 +132,79 @@ class TestCapabilityScopes:
     def test_capability_scope_does_not_grant_tools(self):
         key = _key(["capabilities:comms"])
         assert check_scope(key, "tools", resource="repo_context") is False
+
+
+class TestScopeBundles:
+    """Tests for named scope bundles (bundle: token expansion)."""
+
+    def test_research_bundle_expands_to_tool_scopes(self):
+        scopes = _normalize_scopes(["bundle:research"])
+        assert "tools:repo_context" in scopes
+        assert "tools:websearch" in scopes
+        assert "tools:web_fetch" in scopes
+        assert "tools:browser" in scopes
+        assert "tools:twitter" in scopes
+        assert "tools:company_context" in scopes
+
+    def test_research_bundle_excludes_tools_star(self):
+        scopes = _normalize_scopes(["bundle:research"])
+        assert "tools:*" not in scopes
+
+    def test_research_bundle_excludes_unbundled_tools(self):
+        scopes = _normalize_scopes(["bundle:research"])
+        assert "tools:slack" not in scopes
+        assert "tools:linear" not in scopes
+        assert "tools:jira" not in scopes
+
+    def test_bundle_expansion_with_check_scope(self):
+        """A key with bundle:research grants access to bundled tools."""
+        scopes = _normalize_scopes(["bundle:research"])
+        key = _key(scopes)
+        assert check_scope(key, "tools", resource="repo_context") is True
+        assert check_scope(key, "tools", resource="websearch") is True
+        assert check_scope(key, "tools", resource="twitter") is True
+
+    def test_bundle_does_not_grant_unbundled_tools(self):
+        scopes = _normalize_scopes(["bundle:research"])
+        key = _key(scopes)
+        assert check_scope(key, "tools", resource="slack") is False
+        assert check_scope(key, "tools", resource="linear") is False
+
+    def test_bundle_does_not_grant_admin_or_agent(self):
+        scopes = _normalize_scopes(["bundle:research"])
+        key = _key(scopes)
+        assert check_scope(key, "admin") is False
+        assert check_scope(key, "agent:execute") is False
+
+    def test_bundle_mixed_with_other_scopes(self):
+        scopes = _normalize_scopes(["agent", "bundle:research", "threads"])
+        key = _key(scopes)
+        assert check_scope(key, "agent:execute") is True
+        assert check_scope(key, "tools", resource="repo_context") is True
+        assert check_scope(key, "threads") is True
+        assert check_scope(key, "admin") is False
+
+    def test_bundle_deduplicates_overlapping_scopes(self):
+        scopes = _normalize_scopes(["tools:repo_context", "bundle:research"])
+        assert scopes.count("tools:repo_context") == 1
+
+    def test_unknown_bundle_raises(self):
+        with pytest.raises(ValueError, match="Unknown scope bundle"):
+            _normalize_scopes(["bundle:nonexistent"])
+
+    def test_bundle_token_not_in_expanded_scopes(self):
+        """The bundle: token itself should not appear in expanded scopes."""
+        scopes = _normalize_scopes(["bundle:research"])
+        assert not any(s.startswith("bundle:") for s in scopes)
+
+    def test_research_bundle_matches_registry(self):
+        """The research bundle contains exactly the expected tools."""
+        expected = {
+            "tools:repo_context",
+            "tools:websearch",
+            "tools:web_fetch",
+            "tools:browser",
+            "tools:twitter",
+            "tools:company_context",
+        }
+        assert set(SCOPE_BUNDLES["research"]) == expected
