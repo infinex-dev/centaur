@@ -1032,6 +1032,27 @@ async def _extract_tool_attachment(
     return out
 
 
+def _trace_fields_from_request(request: Request | None) -> dict[str, str]:
+    """Read ``X-Centaur-*`` traceability headers a separate-service caller sends.
+
+    These replace the deleted capability plane's ``request.state.capability_context``:
+    a remote caller (e.g. comms-factory via ``CentaurClient.callTool``) tags each
+    ``POST /tools/{tool}/{method}`` with its job / stage / thread / trace so tool
+    calls stay traceable to the originating run (R8), without a bespoke plane.
+    Only non-empty values are returned.
+    """
+    if request is None:
+        return {}
+    headers = request.headers
+    fields = {
+        "job_id": headers.get("x-centaur-job-id"),
+        "stage": headers.get("x-centaur-stage"),
+        "thread_key": headers.get("x-centaur-thread-key"),
+        "trace": headers.get("x-centaur-trace"),
+    }
+    return {key: value for key, value in fields.items() if value}
+
+
 class ToolMethod:
     def __init__(self, method_name: str, fn: Callable):
         self.method_name = method_name
@@ -1856,18 +1877,11 @@ class ToolManager:
             }
 
         sandbox_claims = get_sandbox_claims(request) if request is not None else None
-        capability_context = (
-            getattr(request.state, "capability_context", None)
-            if request is not None
-            else None
-        )
-        capability_fields = (
-            capability_context if isinstance(capability_context, dict) else {}
-        )
+        trace_fields = _trace_fields_from_request(request)
         effective_thread_key = (
             sandbox_claims.get("thread_key")
             if sandbox_claims
-            else str(capability_fields.get("thread_key") or "") or None
+            else trace_fields.get("thread_key") or None
         )
         effective_container_id = (
             sandbox_claims.get("container_id") if sandbox_claims else None
@@ -1877,27 +1891,14 @@ class ToolManager:
             "tool_method": method_name,
             "arg_keys": sorted(args.keys()),
             "arg_size_bytes": _payload_size_bytes(args),
-            **(
-                {
-                    "thread_key": effective_thread_key,
-                    "sandbox_container_id": effective_container_id,
-                }
-                if sandbox_claims
-                else {}
-            ),
-            **{
-                key: value
-                for key, value in capability_fields.items()
-                if key
-                in {
-                    "capability",
-                    "capability_request_id",
-                    "job_id",
-                    "thread_key",
-                    "stage",
-                }
-            },
         }
+        if sandbox_claims:
+            call_fields["thread_key"] = effective_thread_key
+            call_fields["sandbox_container_id"] = effective_container_id
+        # X-Centaur-* trace headers (job_id/stage/thread_key/trace). For sandbox
+        # callers the signed thread_key wins, so don't let a header overwrite it.
+        for key, value in trace_fields.items():
+            call_fields.setdefault(key, value)
         t0 = time.monotonic()
         log.info("tool_call_started", **call_fields)
         captured_slack_send = await _capture_live_slack_send(

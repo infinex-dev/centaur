@@ -38,7 +38,6 @@ from api.vm_metrics import (
 from api.routers import (
     admin,
     attachments as attachments_mod,
-    capabilities,
     deprecated,
     health,
 )
@@ -478,7 +477,6 @@ tool_manager = ToolManager(
 tool_manager.discover()
 app.state.tool_manager = tool_manager
 app.include_router(tool_manager.create_rest_router())
-app.include_router(capabilities.router)
 
 
 def get_tool_manager() -> ToolManager:

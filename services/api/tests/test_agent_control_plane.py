@@ -4008,7 +4008,6 @@ async def test_bootstrap_service_api_keys_includes_local_dev_key(db_pool, monkey
         "agent",
         "threads",
         "tools:*",
-        "capabilities:*",
     ]
     assert row["revoked_at"] is None
     assert row["created_by"] == "service-bootstrap"

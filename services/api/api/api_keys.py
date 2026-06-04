@@ -334,17 +334,16 @@ def check_scope(key_info: APIKeyInfo, required: str, resource: str = "") -> bool
 
     Scope format: "*" (wildcard), "admin", "agent", "agent:execute",
     "tools:*", "tools:<name>", "workflows", "workflows:*",
-    "workflows:<name>", "capabilities:*", "capabilities:<name>",
-    "threads", "threads:read".
+    "workflows:<name>", "threads", "threads:read".
 
     ``bundle:<name>`` tokens are expanded into concrete ``tools:`` scopes at
     key load time (see ``_normalize_scopes``), so ``check_scope`` only ever
     sees the expanded ``tools:<name>`` entries.
 
     A bare category scope (e.g. "agent") grants all sub-actions. Resource-
-    qualified categories (``tools``, ``workflows``, ``capabilities``) accept
-    either a wildcard (``tools:*`` / ``workflows:*`` / ``capabilities:*``) or
-    an exact resource match (``workflows:my_workflow``).
+    qualified categories (``tools``, ``workflows``) accept either a wildcard
+    (``tools:*`` / ``workflows:*``) or an exact resource match
+    (``workflows:my_workflow``).
     """
     scopes = key_info.scopes
 
@@ -372,17 +371,6 @@ def check_scope(key_info: APIKeyInfo, required: str, resource: str = "") -> bool
             if (
                 scope.startswith("workflows:")
                 and resource == scope[len("workflows:") :]
-            ):
-                return True
-        return False
-
-    if category == "capabilities":
-        for scope in scopes:
-            if scope in ("capabilities", "capabilities:*"):
-                return True
-            if (
-                scope.startswith("capabilities:")
-                and resource == scope[len("capabilities:") :]
             ):
                 return True
         return False

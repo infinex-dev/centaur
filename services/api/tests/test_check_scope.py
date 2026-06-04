@@ -118,16 +118,17 @@ class TestWorkflowScopes:
         assert check_scope(key, "workflows", resource="") is True
 
 
-class TestCapabilityScopes:
-    def test_capabilities_star_grants_any_capability(self):
-        key = _key(["capabilities:*"])
-        assert check_scope(key, "capabilities", resource="repo.search") is True
-        assert check_scope(key, "capabilities", resource="web.search") is True
+class TestCapabilityScopesRemoved:
+    """The capability plane is deleted; ``capabilities:*`` grants nothing now."""
 
-    def test_named_capability_grants_only_that_capability(self):
+    def test_capabilities_scope_is_no_longer_recognized(self):
+        key = _key(["capabilities:*"])
+        assert check_scope(key, "capabilities", resource="repo.search") is False
+        assert check_scope(key, "capabilities", resource="web.search") is False
+
+    def test_named_capability_scope_grants_nothing(self):
         key = _key(["capabilities:repo.search"])
-        assert check_scope(key, "capabilities", resource="repo.search") is True
-        assert check_scope(key, "capabilities", resource="repo.read_file") is False
+        assert check_scope(key, "capabilities", resource="repo.search") is False
 
     def test_capability_scope_does_not_grant_tools(self):
         key = _key(["capabilities:comms"])
