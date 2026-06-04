@@ -14,7 +14,6 @@ from comms_shared import (
     actions_block,
     call_comms_tool,
     candidates_from_generation,
-    capability_plane_ref,
     card_from_result,
     common_service_envelope,
     context_block,
@@ -23,6 +22,7 @@ from comms_shared import (
     facts_from_grounding,
     markdown_block,
     post_gate_message,
+    tool_plane_ref,
     update_gate_message,
     wait_for_gate_action,
 )
@@ -67,28 +67,28 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         return {"status": "red", "validation": validation}
 
     await _post_simple(ctx, inp.delivery, "Grounding comms facts…")
-    capability_plane = capability_plane_ref(ctx, stage="ground", gate_version=1)
-    if capability_plane is None:
+    tool_plane = tool_plane_ref(ctx, stage="ground", gate_version=1)
+    if tool_plane is None:
         await _post_simple(
             ctx,
             inp.delivery,
-            "*Comms release blocked*: Centaur capability channel is not configured.",
+            "*Comms release blocked*: Centaur tool channel is not configured.",
         )
         return {
             "status": "blocked",
             "stage": "ground",
-            "error": "capability_channel_unavailable",
+            "error": "tool_channel_unavailable",
         }
     grounding = await call_comms_tool(
         ctx,
         "ground_facts",
-        "ground_from_capabilities",
+        "ground_from_tools",
         {
             "brief": brief,
             "run_id": ctx.run_id,
             "stage": "ground",
             "gate_version": 1,
-            "capability_plane": capability_plane,
+            "tool_plane": tool_plane,
             **common_service_envelope(
                 ctx, inp, stage="ground", gate_version=1, workflow_name=WORKFLOW_NAME
             ),

@@ -6,7 +6,7 @@ set -euo pipefail
 # helm upgrade --install. Cluster bring-up + API tunnel is handled by k3s-local.sh.
 #
 # Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY
-# Optional env: ANTHROPIC_API_KEY AMP_API_KEY
+# Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY DEEP_RESEARCH_MODEL
 # Load them from .env first:  set -a; source .env; set +a
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -51,7 +51,7 @@ while [[ $# -gt 0 ]]; do
       echo "       contrib/scripts/deploy-local.sh [--services api,slackbot] [--with-comms-factory] [--comms-factory-repo PATH] [--comms-factory-ref REF]"
       echo "Deploys onto k3s inside the podman machine VM (no docker). See contrib/docs/deploy-local-runsheet.md."
       echo "Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY"
-      echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY COMMS_FACTORY_SERVICE_TOKEN LOCAL_DEV_API_KEY"
+      echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY DEEP_RESEARCH_MODEL COMMS_FACTORY_SERVICE_TOKEN LOCAL_DEV_API_KEY"
       echo "--only rebuilds + reimports a single Centaur image (the rest stay as-is) for fast iteration."
       echo "--services rebuilds + reimports a comma-separated subset of Centaur images."
       echo "--with-comms-factory builds/imports the pinned comms-factory image, builds/mounts the comms overlay, patches local secrets, and enables attachedServices.comms-factory."
@@ -174,6 +174,8 @@ if ! kubectl -n "$NAMESPACE" get secret "$SECRET_NAME" >/dev/null 2>&1; then
     --from-literal=OPENAI_API_KEY="${OPENAI_API_KEY:?set OPENAI_API_KEY}" \
     --from-literal=ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}" \
     --from-literal=AMP_API_KEY="${AMP_API_KEY:-}" \
+    --from-literal=EXA_API_KEY="${EXA_API_KEY:-}" \
+    --from-literal=DEEP_RESEARCH_MODEL="${DEEP_RESEARCH_MODEL:-}" \
     --from-literal=GITHUB_TOKEN="${GITHUB_TOKEN:-}"
 else
   user_cred_patch="$(python3 - <<'PY'
@@ -188,6 +190,7 @@ keys = [
     "ANTHROPIC_API_KEY",
     "AMP_API_KEY",
     "EXA_API_KEY",
+    "DEEP_RESEARCH_MODEL",
     "GITHUB_TOKEN",
 ]
 values = {key: os.environ[key] for key in keys if os.environ.get(key)}
@@ -293,7 +296,7 @@ attachedServices:
     proxy:
       enabled: false
     env:
-      CENTAUR_CAPABILITY_BASE_URL: http://${RELEASE}-centaur-api:8000
+      CENTAUR_BASE_URL: http://${RELEASE}-centaur-api:8000
     secretEnv:
       COMMS_FACTORY_SERVICE_TOKEN:
         secretName: $SECRET_NAME
@@ -302,7 +305,7 @@ attachedServices:
         secretName: $SECRET_NAME
         key: ANTHROPIC_API_KEY
         optional: true
-      CENTAUR_CAPABILITY_TOKEN:
+      CENTAUR_TOKEN:
         secretName: $SECRET_NAME
         key: COMMS_FACTORY_CAPABILITY_API_KEY
 
@@ -315,7 +318,7 @@ api:
     - company_context
   extraEnv:
     COMMS_FACTORY_BASE_URL: http://${RELEASE}-centaur-attached-comms-factory:8080
-    COMMS_FACTORY_CAPABILITY_BASE_URL: http://${RELEASE}-centaur-api:8000
+    CENTAUR_BASE_URL: http://${RELEASE}-centaur-api:8000
     REPO_CONTEXT_REPOSITORY_ALIASES: $COMMS_REPO_ALIASES
 
 slackbot:
@@ -345,7 +348,8 @@ echo ">> done. verify with:"
 echo "   kubectl exec -n $NAMESPACE deploy/${RELEASE}-centaur-api -- curl -fsS http://localhost:8000/health"
 if [[ "$WITH_COMMS_FACTORY" == "1" ]]; then
   echo "   API_KEY=\$(kubectl get secret -n $NAMESPACE $SECRET_NAME -o jsonpath='{.data.LOCAL_DEV_API_KEY}' | base64 -d)"
-  echo "   CAP_KEY=\$(kubectl get secret -n $NAMESPACE $SECRET_NAME -o jsonpath='{.data.COMMS_FACTORY_CAPABILITY_API_KEY}' | base64 -d)"
+  echo "   TOOLS_KEY=\$(kubectl get secret -n $NAMESPACE $SECRET_NAME -o jsonpath='{.data.COMMS_FACTORY_CAPABILITY_API_KEY}' | base64 -d)"
   echo "   kubectl exec -n $NAMESPACE deploy/${RELEASE}-centaur-api -- curl -fsS -H \"X-Api-Key: \$API_KEY\" http://localhost:8000/tools/comms_factory/validate -H 'Content-Type: application/json' -d '{\"text\":\"Fact A is live.\"}'"
-  echo "   kubectl exec -n $NAMESPACE deploy/${RELEASE}-centaur-api -- curl -fsS -H \"X-Api-Key: \$CAP_KEY\" http://localhost:8000/capabilities/catalog?profile=comms"
+  echo "   # comms-factory's scoped research-bundle key can list + call native research tools, not /capabilities:"
+  echo "   kubectl exec -n $NAMESPACE deploy/${RELEASE}-centaur-api -- curl -fsS -H \"X-Api-Key: \$TOOLS_KEY\" http://localhost:8000/tools"
 fi

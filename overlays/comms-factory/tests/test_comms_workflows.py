@@ -101,37 +101,35 @@ def test_validate_gate_event_rejects_stale_or_unauthorized_events(event, reason)
     assert exc.value.reason == reason
 
 
-def test_capability_plane_ref_uses_env_base_url(monkeypatch):
-    from comms_shared import capability_plane_ref
+def test_tool_plane_ref_uses_env_base_url(monkeypatch):
+    from comms_shared import tool_plane_ref
 
     class Ctx:
         run_id = "run_test"
 
-    monkeypatch.setenv("COMMS_FACTORY_CAPABILITY_BASE_URL", "http://api:8000/")
+    monkeypatch.setenv("CENTAUR_BASE_URL", "http://api:8000/")
 
-    ref = capability_plane_ref(Ctx(), stage="ground", gate_version=1)
+    ref = tool_plane_ref(Ctx(), stage="ground", gate_version=1)
 
     assert ref == {
-        "schema_version": "centaur.capability_ref.v1",
+        "schema_version": "centaur.tool_plane_ref.v1",
         "base_url": "http://api:8000",
-        "execute_url": "http://api:8000/capabilities/execute",
-        "catalog_url": "http://api:8000/capabilities/catalog?profile=comms",
-        "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+        "tools_url": "http://api:8000/tools",
+        "auth": {"type": "bearer_env", "env": "CENTAUR_TOKEN"},
         "idempotency_prefix": "run_test:ground:1",
     }
 
 
-def test_capability_plane_ref_returns_none_without_base_url(monkeypatch):
-    from comms_shared import capability_plane_ref
+def test_tool_plane_ref_returns_none_without_base_url(monkeypatch):
+    from comms_shared import tool_plane_ref
 
     class Ctx:
         run_id = "run_test"
 
-    monkeypatch.delenv("COMMS_FACTORY_CAPABILITY_BASE_URL", raising=False)
-    monkeypatch.delenv("CENTAUR_CAPABILITY_BASE_URL", raising=False)
+    monkeypatch.delenv("CENTAUR_BASE_URL", raising=False)
     monkeypatch.delenv("AGENT_API_URL", raising=False)
 
-    assert capability_plane_ref(Ctx(), stage="ground") is None
+    assert tool_plane_ref(Ctx(), stage="ground") is None
 
 
 def test_validate_gate_event_rejects_missing_slack_user_when_authority_is_configured():
@@ -157,13 +155,13 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
         calls.append(("comms_factory", method))
         if method == "validate":
             return {"ok": True, "passed": True}
-        if method == "ground_from_capabilities":
+        if method == "ground_from_tools":
             assert args["workflow_run_id"] == "run_test"
             assert args["job_id"] == "comms:comms_release:run_test"
             assert args["thread_key"] == "slack:C123:1.2"
-            assert args["capability_plane"]["auth"] == {
+            assert args["tool_plane"]["auth"] == {
                 "type": "bearer_env",
-                "env": "CENTAUR_CAPABILITY_TOKEN",
+                "env": "CENTAUR_TOKEN",
             }
             return {
                 "ok": True,
@@ -213,11 +211,10 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
     monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
     monkeypatch.setattr(
         comms_release,
-        "capability_plane_ref",
+        "tool_plane_ref",
         lambda *_args, **_kwargs: {
-            "execute_url": "http://api:8000/capabilities/execute",
-            "catalog_url": "http://api:8000/capabilities/catalog?profile=comms",
-            "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+            "tools_url": "http://api:8000/tools",
+            "auth": {"type": "bearer_env", "env": "CENTAUR_TOKEN"},
         },
     )
     monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
@@ -240,7 +237,7 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
     assert result["no_external_posting"] is True
     assert calls == [
         ("comms_factory", "validate"),
-        ("comms_factory", "ground_from_capabilities"),
+        ("comms_factory", "ground_from_tools"),
         ("comms_factory", "build_card"),
         ("comms_factory", "generate"),
     ]
@@ -256,7 +253,7 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
         calls.append(method)
         if method == "validate":
             return {"ok": True, "passed": True}
-        if method == "ground_from_capabilities":
+        if method == "ground_from_tools":
             return {"ok": True, "facts": ["Fact A is live"]}
         raise AssertionError(f"unexpected tool call after rejected gate: {method}")
 
@@ -278,11 +275,10 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
     monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
     monkeypatch.setattr(
         comms_release,
-        "capability_plane_ref",
+        "tool_plane_ref",
         lambda *_args, **_kwargs: {
-            "execute_url": "http://api:8000/capabilities/execute",
-            "catalog_url": "http://api:8000/capabilities/catalog?profile=comms",
-            "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+            "tools_url": "http://api:8000/tools",
+            "auth": {"type": "bearer_env", "env": "CENTAUR_TOKEN"},
         },
     )
     monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
@@ -302,4 +298,4 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
     )
 
     assert result == {"status": "rejected", "stage": "facts", "error": "wrong_stage"}
-    assert calls == ["validate", "ground_from_capabilities"]
+    assert calls == ["validate", "ground_from_tools"]

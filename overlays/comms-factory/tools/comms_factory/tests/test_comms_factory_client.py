@@ -34,25 +34,22 @@ def test_validate_posts_to_service_with_auth(monkeypatch):
     assert len(calls) == 1
 
 
-def test_ground_from_capabilities_posts_versioned_contract_without_token_value(
+def test_ground_from_tools_posts_versioned_contract_without_token_value(
     monkeypatch,
 ):
     calls = []
-    monkeypatch.setenv("COMMS_FACTORY_CAPABILITY_BASE_URL", "http://api:8000")
+    monkeypatch.setenv("CENTAUR_BASE_URL", "http://api:8000")
 
     def handler(request: httpx.Request) -> httpx.Response:
         calls.append(request)
         assert request.url.path == "/ground"
         body = json.loads(request.content)
-        assert body["schema_version"] == "comms_factory.ground_from_capabilities.v1"
-        assert body["mode"] == "ground_from_capabilities"
-        assert (
-            body["capability_plane"]["execute_url"]
-            == "http://api:8000/capabilities/execute"
-        )
-        assert body["capability_plane"]["auth"] == {
+        assert body["schema_version"] == "comms_factory.ground_from_tools.v1"
+        assert body["mode"] == "ground_from_tools"
+        assert body["tool_plane"]["tools_url"] == "http://api:8000/tools"
+        assert body["tool_plane"]["auth"] == {
             "type": "bearer_env",
-            "env": "CENTAUR_CAPABILITY_TOKEN",
+            "env": "CENTAUR_TOKEN",
         }
         assert "aiv2_" not in request.content.decode()
         return httpx.Response(200, json={"facts": ["Fact A"]})
@@ -63,12 +60,12 @@ def test_ground_from_capabilities_posts_versioned_contract_without_token_value(
         httpx, "Client", lambda **_: original_client(transport=transport)
     )
 
-    result = CommsFactoryClient("http://comms.test", "token").ground_from_capabilities(
+    result = CommsFactoryClient("http://comms.test", "token").ground_from_tools(
         "brief",
         run_id="run_1",
-        capability_plane={
-            "execute_url": "http://api:8000/capabilities/execute",
-            "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+        tool_plane={
+            "tools_url": "http://api:8000/tools",
+            "auth": {"type": "bearer_env", "env": "CENTAUR_TOKEN"},
         },
     )
 

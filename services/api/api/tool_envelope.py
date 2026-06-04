@@ -21,7 +21,6 @@ from centaur_sdk.evidence import (
     EVIDENCE_ITEM_SCHEMA,
     TOOL_RESULT_SCHEMA,
     EvidenceItem,
-    evidence_item,
 )
 
 

@@ -223,27 +223,29 @@ def common_service_envelope(
     }
 
 
-def capability_plane_ref(
+def tool_plane_ref(
     ctx: WorkflowContext, *, stage: str, gate_version: int = 1
 ) -> dict[str, Any] | None:
+    """Reference to Centaur's native tool plane for the comms-factory service.
+
+    The comms-factory service uses this to call ``POST {base}/tools/{tool}/{method}``
+    with its own scoped research-bundle token (read from the ``CENTAUR_TOKEN`` env
+    on the service, never passed in the payload). Endpoint base + auth mode are
+    fixed by deployment config; the workflow only contributes an idempotency
+    prefix.
+    """
     base_url = (
-        (
-            os.getenv("COMMS_FACTORY_CAPABILITY_BASE_URL")
-            or os.getenv("CENTAUR_CAPABILITY_BASE_URL")
-            or os.getenv("AGENT_API_URL")
-            or ""
-        )
+        (os.getenv("CENTAUR_BASE_URL") or os.getenv("AGENT_API_URL") or "")
         .strip()
         .rstrip("/")
     )
     if not base_url:
         return None
     return {
-        "schema_version": "centaur.capability_ref.v1",
+        "schema_version": "centaur.tool_plane_ref.v1",
         "base_url": base_url,
-        "execute_url": f"{base_url}/capabilities/execute",
-        "catalog_url": f"{base_url}/capabilities/catalog?profile=comms",
-        "auth": {"type": "bearer_env", "env": "CENTAUR_CAPABILITY_TOKEN"},
+        "tools_url": f"{base_url}/tools",
+        "auth": {"type": "bearer_env", "env": "CENTAUR_TOKEN"},
         "idempotency_prefix": f"{ctx.run_id}:{stage}:{gate_version}",
     }
 
