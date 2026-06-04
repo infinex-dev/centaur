@@ -1,6 +1,8 @@
 import { EventSourceParserStream, type EventSourceMessage } from "eventsource-parser/stream";
 import axios, { type AxiosInstance } from "axios";
 
+import type { ToolResult } from "./types";
+
 export type InputContentBlock =
   | { type: "text"; text: string }
   | {
@@ -112,6 +114,38 @@ export interface StreamEvent {
   eventId: number;
   eventKind: string;
   data: Record<string, unknown>;
+}
+
+/** Traceability metadata sent as X-Centaur-* headers on a tool call (R8). */
+export interface CallToolTrace {
+  jobId?: string;
+  stage?: string;
+  threadKey?: string;
+  traceId?: string;
+}
+
+export interface CallToolOptions {
+  /** Opt-in replay key; the tool plane accepts (and currently ignores) it. */
+  idempotencyKey?: string;
+  trace?: CallToolTrace;
+}
+
+/** Build a typed error envelope for a transport-level failure (no tool ran). */
+function toolTransportError(
+  code: string,
+  message: string,
+  retryable: boolean,
+): ToolResult {
+  return {
+    schema_version: "centaur.tool_result.v1",
+    ok: false,
+    content: null,
+    text: null,
+    output: null,
+    evidence: [],
+    error: { code, message },
+    retryable,
+  };
 }
 
 export class CentaurClient {
@@ -415,5 +449,82 @@ export class CentaurClient {
   async getStatus(threadKey: string) {
     const { data } = await this.http.get("/agent/status", { params: { key: threadKey } });
     return data as Record<string, unknown>;
+  }
+
+  /**
+   * Invoke a native tool method and return the `tool_result.v1` envelope.
+   *
+   * POSTs the raw `input` (not wrapped in any envelope) to
+   * `/tools/{tool}/{method}` with Bearer auth, an optional `Idempotency-Key`,
+   * and optional `X-Centaur-*` trace headers. The response envelope is returned
+   * verbatim, including application-level `ok:false` tool errors.
+   *
+   * Transport failures never throw: a non-JSON body, a 403, an HTTP >= 500, a
+   * network error, or any other non-2xx status is mapped into a typed error
+   * envelope so callers branch on `result.ok`/`result.error.code` rather than
+   * catching exceptions. HTTP >= 500 and network failures are marked
+   * `retryable` (read-only calls are safe to re-run).
+   */
+  async callTool(
+    tool: string,
+    method: string,
+    input: Record<string, unknown> = {},
+    opts: CallToolOptions = {},
+  ): Promise<ToolResult> {
+    const headers: Record<string, string> = {};
+    if (opts.idempotencyKey) headers["Idempotency-Key"] = opts.idempotencyKey;
+    const trace = opts.trace;
+    if (trace?.jobId) headers["X-Centaur-Job-Id"] = trace.jobId;
+    if (trace?.stage) headers["X-Centaur-Stage"] = trace.stage;
+    if (trace?.threadKey) headers["X-Centaur-Thread-Key"] = trace.threadKey;
+    if (trace?.traceId) headers["X-Centaur-Trace"] = trace.traceId;
+
+    const url = `/tools/${encodeURIComponent(tool)}/${encodeURIComponent(method)}`;
+
+    let status: number;
+    let data: unknown;
+    try {
+      const res = await this.http.post(url, input ?? {}, {
+        headers,
+        validateStatus: () => true,
+      });
+      status = res.status;
+      data = res.data;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      return toolTransportError("unavailable", `tool transport failed: ${message}`, true);
+    }
+
+    if (status >= 500) {
+      return toolTransportError("unavailable", `tool plane returned HTTP ${status}`, true);
+    }
+    if (status === 403) {
+      return toolTransportError(
+        "forbidden",
+        `not authorized to call ${tool}/${method} (HTTP 403)`,
+        false,
+      );
+    }
+    if (status >= 400) {
+      return toolTransportError("http_error", `tool plane returned HTTP ${status}`, false);
+    }
+
+    // 2xx — expect a tool_result.v1 envelope. axios leaves an unparseable JSON
+    // body as a raw string, so a string here means the response was not JSON.
+    let parsed: unknown = data;
+    if (typeof data === "string") {
+      if (data.trim() === "") {
+        return toolTransportError("invalid_json", "tool plane returned an empty body", false);
+      }
+      try {
+        parsed = JSON.parse(data);
+      } catch {
+        return toolTransportError("invalid_json", "tool plane returned a non-JSON body", false);
+      }
+    }
+    if (!parsed || typeof parsed !== "object") {
+      return toolTransportError("invalid_json", "tool plane returned an unexpected body", false);
+    }
+    return parsed as ToolResult;
   }
 }
