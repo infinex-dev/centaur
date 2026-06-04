@@ -9,6 +9,17 @@ Public API:
 from __future__ import annotations
 
 from centaur_sdk.cli_tables import Table, render_text_table
+from centaur_sdk.evidence import (
+    EVIDENCE_ITEM_SCHEMA,
+    TOOL_RESULT_SCHEMA,
+    EvidenceItem,
+    ToolResult,
+    ToolResultError,
+    content_from_evidence,
+    evidence_item,
+    tool_error,
+    tool_result,
+)
 from centaur_sdk.tool_sdk import (
     ToolContext,
     current_thread_key,
@@ -21,9 +32,16 @@ from centaur_sdk.tool_sdk import (
 )
 
 __all__ = [
+    "EVIDENCE_ITEM_SCHEMA",
+    "EvidenceItem",
+    "TOOL_RESULT_SCHEMA",
     "Table",
     "ToolContext",
+    "ToolResult",
+    "ToolResultError",
+    "content_from_evidence",
     "current_thread_key",
+    "evidence_item",
     "get_tool_context",
     "render_text_table",
     "reset_tool_context",
@@ -31,4 +49,6 @@ __all__ = [
     "save_attachment_from_path",
     "secret",
     "set_tool_context",
+    "tool_error",
+    "tool_result",
 ]
