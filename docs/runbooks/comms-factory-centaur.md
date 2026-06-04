@@ -41,7 +41,7 @@ This command:
 5. Builds/imports `comms-factory-api:8c98f4ab67b0fac386809209df3a63547207e287`.
 6. Patches `centaur-infra-env` with `COMMS_FACTORY_SERVICE_TOKEN`, `LOCAL_DEV_API_KEY`, `GITHUB_TOKEN` when supplied, and a scoped `COMMS_FACTORY_CAPABILITY_API_KEY` when missing.
 7. Mounts `ANTHROPIC_API_KEY` into the attached comms-factory service when present in `centaur-infra-env`; live generation still needs it.
-8. Deploys Helm with the comms overlay mounted, `attachedServices.comms-factory.enabled=true`, `api.enabledTools=[comms_factory, repo_context, websearch, company_context]`, `COMMS_FACTORY_BASE_URL=http://centaur-centaur-attached-comms-factory:8080`, API-side `COMMS_FACTORY_CAPABILITY_BASE_URL=http://centaur-centaur-api:8000`, attached-service `CENTAUR_CAPABILITY_BASE_URL=http://centaur-centaur-api:8000`, aliases from `overlays/comms-factory/repo-context.aliases`, comms entries in generic `SLACK_WORKFLOW_COMMANDS`, and local default harness `claude-code` so Slack turns use Anthropic rather than Codex. When `GITHUB_TOKEN` exists, it also enables repoCache for all active non-archived repos listed in `overlays/comms-factory/repo-context.repositories.txt`.
+8. Deploys Helm with the comms overlay mounted, `attachedServices.comms-factory.enabled=true`, `api.enabledTools=[comms_factory, repo_context, websearch, company_context]`, `COMMS_FACTORY_BASE_URL=http://centaur-centaur-attached-comms-factory:8080`, API-side `CENTAUR_BASE_URL=http://centaur-centaur-api:8000`, attached-service `CENTAUR_BASE_URL=http://centaur-centaur-api:8000` plus `CENTAUR_TOKEN`, aliases from `overlays/comms-factory/repo-context.aliases`, comms entries in generic `SLACK_WORKFLOW_COMMANDS`, and local default harness `claude-code` so Slack turns use Anthropic rather than Codex. When `GITHUB_TOKEN` exists, it also enables repoCache for all active non-archived repos listed in `overlays/comms-factory/repo-context.repositories.txt`.
 
 Useful variants:
 
@@ -68,12 +68,15 @@ creates or reuses one value and injects it into both the API pod environment
 Centaur tool `secret(...)` placeholder/iron-proxy replacement path.
 
 `COMMS_FACTORY_CAPABILITY_API_KEY` is a separate DB-backed Centaur API key
-bootstrapped with only `capabilities:comms`. The attached service receives the
-same value as `CENTAUR_CAPABILITY_TOKEN`; the service uses server-configured
-`CENTAUR_CAPABILITY_BASE_URL` plus this token to call
-`/capabilities/catalog?profile=comms` and `/capabilities/execute`. It must not
-use `LOCAL_DEV_API_KEY`, sandbox tokens, admin scopes, Slack tokens, GitHub
-tokens, or direct `/tools` access for grounding.
+bootstrapped with only the `research` scope bundle (a curated set of `tools:`
+scopes — never `tools:*`). The attached service receives the same value as
+`CENTAUR_TOKEN`; the service uses server-configured `CENTAUR_BASE_URL` plus this
+token to call the native tool plane, `POST /tools/{tool}/{method}`, which returns
+the `tool_result.v1` envelope. It must not use `LOCAL_DEV_API_KEY`, sandbox
+tokens, admin scopes, Slack tokens, GitHub tokens, or `tools:*` for grounding.
+(The DB secret key name `COMMS_FACTORY_CAPABILITY_API_KEY` is retained for
+deployment continuity; it now carries the `research` bundle, not a capability
+scope.)
 
 For this dogfood deployment the attached service is treated as a privileged
 internal service: `proxy.enabled: false` and optional `ANTHROPIC_API_KEY` is
@@ -88,8 +91,8 @@ The comms overlay carries a generated allowlist at
 non-archived repositories from `infinex-xyz` and `infinex-dev`. Archived repos
 are intentionally absent unless explicitly re-added for a deployment.
 
-`repo.list_repos` exposes the configured allowlist and alias map through the
-capability plane. Repo search/read callers may omit `ref`; in that case
+`repo_context.list_repos` exposes the configured allowlist and alias map through
+the native tool plane. Repo search/read callers may omit `ref`; in that case
 `repo_context` resolves cached `HEAD` to a commit SHA before search/read. The
 repo-cache daemon updates checkouts on its configured interval, so this means
 "latest cached default checkout", not a live GitHub fetch per request. Callers
@@ -100,7 +103,8 @@ still resolves it to a commit SHA and pins evidence to that commit.
 
 1. Render the chart with default values and with the comms overlay plus `attachedServices.comms-factory.enabled=true`.
 2. Build/deploy the local stack.
-3. From the API deployment, discover and call the tool and capability catalog:
+3. From the API deployment, discover and call the comms tool, then confirm the
+   scoped research key sees the native tool plane:
 
 ```bash
 kubectl exec -n centaur deploy/centaur-centaur-api -- \
@@ -111,11 +115,11 @@ kubectl exec -n centaur deploy/centaur-centaur-api -- \
     -H 'Content-Type: application/json' \
     -d '{"text":"Fact A is live."}' | jq
 
-CAP_KEY=$(kubectl get secret -n centaur centaur-infra-env \
+# The scoped research-bundle key lists exactly its bundled tools (no tools:*):
+TOOLS_KEY=$(kubectl get secret -n centaur centaur-infra-env \
   -o jsonpath='{.data.COMMS_FACTORY_CAPABILITY_API_KEY}' | base64 -d)
 kubectl exec -n centaur deploy/centaur-centaur-api -- \
-  curl -s -H "X-Api-Key: $CAP_KEY" \
-    http://localhost:8000/capabilities/catalog?profile=comms | jq
+  curl -s -H "X-Api-Key: $TOOLS_KEY" http://localhost:8000/tools | jq
 ```
 
 4. Launch a Slack workflow with a mention. These commands are available only in
