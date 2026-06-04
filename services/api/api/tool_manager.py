@@ -2327,14 +2327,20 @@ class ToolManager:
             _require_tool_scope(request, tool_name)
             accept = request.headers.get("accept", "")
             want_toon = "text/plain" in accept
-            fmt = "toon" if want_toon else "json"
-            result = await pm.call_tool(
-                tool_name, method_name, body, request=request, format=fmt
-            )
             if want_toon:
+                # Sandbox agents: keep legacy TOON format unchanged.
+                result = await pm.call_tool(
+                    tool_name, method_name, body, request=request, format="toon"
+                )
                 return PlainTextResponse(
                     result if isinstance(result, str) else _to_toon(result)
                 )
-            return {"tool": tool_name, "method": method_name, "result": result}
+            # JSON consumers: wrap in tool_result.v1 envelope.
+            raw = await pm.call_tool_raw(
+                tool_name, method_name, body, request=request
+            )
+            from api.tool_envelope import wrap_tool_result
+
+            return wrap_tool_result(raw, tool_name, method_name)
 
         return router
