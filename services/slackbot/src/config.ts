@@ -1,5 +1,12 @@
 import { z } from 'zod'
 
+const WorkflowCommandSchema = z.object({
+  match: z.string().min(1),
+  workflow: z.string().min(1),
+  input: z.record(z.string(), z.string()).default({}),
+  triggerSuffix: z.string().optional()
+})
+
 const EnvSchema = z.object({
   NODE_ENV: z.string().default('development'),
   PORT: z.coerce.number().int().positive().default(3001),
@@ -11,6 +18,14 @@ const EnvSchema = z.object({
     .string()
     .default('')
     .transform(value => ['1', 'true', 'yes', 'on'].includes(value.trim().toLowerCase())),
+  SLACK_WORKFLOW_COMMANDS: z
+    .string()
+    .default('')
+    .transform(value => {
+      const raw = value.trim()
+      if (!raw) return []
+      return z.array(WorkflowCommandSchema).parse(JSON.parse(raw))
+    }),
   SLACKBOT_API_KEY: z.string().optional(),
   CENTAUR_API_URL: z.string().url().default('http://localhost:8000'),
   CENTAUR_API_KEY: z.string().optional(),
