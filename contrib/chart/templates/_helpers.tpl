@@ -39,6 +39,25 @@ app.kubernetes.io/component: {{ .component }}
 {{- printf "%s-%s" (include "centaur.fullname" .root) .component | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
+{{- define "centaur.attachedServiceComponent" -}}
+{{- printf "attached-%s" (.name | replace "_" "-" | lower) | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "centaur.attachedServiceName" -}}
+{{- include "centaur.componentName" (dict "root" .root "component" (include "centaur.attachedServiceComponent" (dict "name" .name))) -}}
+{{- end -}}
+
+{{- define "centaur.attachedServiceNoProxyHosts" -}}
+{{- $root := . -}}
+{{- $hosts := list -}}
+{{- range $name, $svc := .Values.attachedServices -}}
+{{- if $svc.enabled -}}
+{{- $hosts = append $hosts (include "centaur.attachedServiceName" (dict "root" $root "name" $name)) -}}
+{{- end -}}
+{{- end -}}
+{{- if $hosts -}},{{ join "," $hosts }}{{- end -}}
+{{- end -}}
+
 {{- define "centaur.secretEnvName" -}}
 {{- required "secretManager.existingSecretName is required" .Values.secretManager.existingSecretName | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
