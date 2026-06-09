@@ -22,7 +22,7 @@ import { verifySlackSignature } from './slack/signature'
 import { startSocketMode } from './slack/socket-mode'
 import { shouldAckWithReaction } from './slack/trivial-ack'
 import type { NormalizedSlackEvent, SlackEnvelope } from './slack/types'
-import type { AnyBlock, AnyChunk } from '@slack/types'
+import type { AnyBlock, AnyChunk, MessageMetadata } from '@slack/types'
 import type { WebClient } from '@slack/web-api'
 
 const config = loadConfig()
@@ -246,7 +246,7 @@ app.post('/api/slack/messages', apiKeyMiddleware, async c => {
     thread_ts?: string
     text: string
     blocks?: AnyBlock[]
-    metadata?: Record<string, unknown>
+    metadata?: MessageMetadata
   }>()
   const { client } = await resolver.resolve({})
   const response = await client.chat.postMessage({
@@ -254,7 +254,7 @@ app.post('/api/slack/messages', apiKeyMiddleware, async c => {
     thread_ts: body.thread_ts,
     text: body.text,
     blocks: body.blocks,
-    metadata: body.metadata as never
+    metadata: body.metadata
   })
   if (!response.ok) return c.json(response, 502)
   return c.json({ ok: true, channel: response.channel, ts: response.ts })
@@ -266,7 +266,7 @@ app.patch('/api/slack/messages', apiKeyMiddleware, async c => {
     ts: string
     text: string
     blocks?: AnyBlock[]
-    metadata?: Record<string, unknown>
+    metadata?: MessageMetadata
   }>()
   const { client } = await resolver.resolve({})
   try {
@@ -275,7 +275,7 @@ app.patch('/api/slack/messages', apiKeyMiddleware, async c => {
       ts: body.ts,
       text: body.text,
       blocks: body.blocks,
-      metadata: body.metadata as never
+      metadata: body.metadata
     })
     if (!response.ok) return c.json(response, 502)
     return c.json({ ok: true, channel: response.channel, ts: response.ts })
