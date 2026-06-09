@@ -325,11 +325,15 @@ async def instrument_requests(request, call_next):
 
     if not trace_id and thread_key:
         try:
-            trace_id = await get_or_create_thread_trace_id(request.app.state.db_pool, thread_key)
+            trace_id = await get_or_create_thread_trace_id(
+                request.app.state.db_pool, thread_key
+            )
             if trace_id:
                 structlog.contextvars.bind_contextvars(trace_id=trace_id)
         except Exception:
-            log.debug("thread_trace_lookup_failed", thread_key=thread_key, exc_info=True)
+            log.debug(
+                "thread_trace_lookup_failed", thread_key=thread_key, exc_info=True
+            )
 
     start = time.perf_counter()
     status_code = 500

@@ -255,9 +255,7 @@ class HmacSignSecret:
     allow_chunked_body: bool = False
 
 
-SecretDef = (
-    HttpSecret | GcpAuthSecret | PgDsnSecret | OAuthTokenSecret | HmacSignSecret
-)
+SecretDef = HttpSecret | GcpAuthSecret | PgDsnSecret | OAuthTokenSecret | HmacSignSecret
 
 # Per-grant credential fields: grant -> (required, optional). Field names are
 # the keys iron-proxy expects in each ``oauth_token`` token entry.
@@ -344,9 +342,7 @@ def _parse_oauth_fields(
                 f"oauth_token entry {secret_name!r} field {field_name!r} is not "
                 f"valid for grant {grant!r}; allowed: {sorted(allowed)}"
             )
-        parsed[field_name] = _parse_oauth_field_source(
-            secret_name, field_name, raw
-        )
+        parsed[field_name] = _parse_oauth_field_source(secret_name, field_name, raw)
     missing = required - parsed.keys()
     if missing:
         raise ValueError(
@@ -430,8 +426,7 @@ def _parse_hmac_credentials(
     """Parse ``credentials`` for an ``hmac_sign`` entry; require ``secret``."""
     if not isinstance(raw, dict) or not raw:
         raise ValueError(
-            f"hmac_sign entry {secret_name!r} 'credentials' must be a non-empty "
-            f"table"
+            f"hmac_sign entry {secret_name!r} 'credentials' must be a non-empty table"
         )
     parsed: dict[str, OAuthFieldSource] = {}
     for field_name, value in raw.items():
@@ -662,7 +657,9 @@ def _parse_secret(entry: Any, *, default_hosts: tuple[str, ...] = ()) -> SecretD
             replacer=entry,
         )
     if not isinstance(entry, dict):
-        raise ValueError(f"secret entry must be a string or table, got {type(entry).__name__}")
+        raise ValueError(
+            f"secret entry must be a string or table, got {type(entry).__name__}"
+        )
     name = entry.get("name")
     if not isinstance(name, str) or not name:
         raise ValueError(f"secret entry missing 'name': {entry!r}")
@@ -926,7 +923,9 @@ async def _capture_live_slack_send(
         return None
     active_channel = parts[2]
     active_thread_ts = parts[3]
-    requested_channel = str(args.get("channel") or args.get("channel_id") or "").lstrip("#")
+    requested_channel = str(args.get("channel") or args.get("channel_id") or "").lstrip(
+        "#"
+    )
     requested_thread_ts = str(args.get("thread_ts") or "")
     channel_is_id = bool(re.match(r"^[CDG][A-Z0-9]+$", requested_channel))
     if channel_is_id and requested_channel != active_channel:
@@ -1030,6 +1029,27 @@ async def _extract_tool_attachment(
     out["attachment_id"] = att_id
     out["download_url"] = f"/agent/attachments/{att_id}/download"
     return out
+
+
+def _trace_fields_from_request(request: Request | None) -> dict[str, str]:
+    """Read ``X-Centaur-*`` traceability headers a separate-service caller sends.
+
+    These replace the deleted capability plane's ``request.state.capability_context``:
+    a remote caller (e.g. an attached service via ``CentaurClient.callTool``) tags each
+    ``POST /tools/{tool}/{method}`` with its job / stage / thread / trace so tool
+    calls stay traceable to the originating run (R8), without a bespoke plane.
+    Only non-empty values are returned.
+    """
+    if request is None:
+        return {}
+    headers = request.headers
+    fields = {
+        "job_id": headers.get("x-centaur-job-id"),
+        "stage": headers.get("x-centaur-stage"),
+        "thread_key": headers.get("x-centaur-thread-key"),
+        "trace": headers.get("x-centaur-trace"),
+    }
+    return {key: value for key, value in fields.items() if value}
 
 
 class ToolMethod:
@@ -1370,8 +1390,12 @@ class ToolManager:
             self.tools_dirs: list[Path] = list(tools_dir)
         else:
             self.tools_dirs = [tools_dir]
-        self.enabled_tools = {name.strip() for name in (enabled_tools or set()) if name.strip()}
-        self.disabled_tools = {name.strip() for name in (disabled_tools or set()) if name.strip()}
+        self.enabled_tools = {
+            name.strip() for name in (enabled_tools or set()) if name.strip()
+        }
+        self.disabled_tools = {
+            name.strip() for name in (disabled_tools or set()) if name.strip()
+        }
         self.tools: dict[str, LoadedTool] = {}
         self.personas: dict[str, LoadedPersona] = {}
         self.load_failures: list[dict[str, str]] = []
@@ -1852,20 +1876,28 @@ class ToolManager:
             }
 
         sandbox_claims = get_sandbox_claims(request) if request is not None else None
+        trace_fields = _trace_fields_from_request(request)
+        effective_thread_key = (
+            sandbox_claims.get("thread_key")
+            if sandbox_claims
+            else trace_fields.get("thread_key") or None
+        )
+        effective_container_id = (
+            sandbox_claims.get("container_id") if sandbox_claims else None
+        )
         call_fields = {
             "tool_name": tool_name,
             "tool_method": method_name,
             "arg_keys": sorted(args.keys()),
             "arg_size_bytes": _payload_size_bytes(args),
-            **(
-                {
-                    "thread_key": sandbox_claims.get("thread_key"),
-                    "sandbox_container_id": sandbox_claims.get("container_id"),
-                }
-                if sandbox_claims
-                else {}
-            ),
         }
+        if sandbox_claims:
+            call_fields["thread_key"] = effective_thread_key
+            call_fields["sandbox_container_id"] = effective_container_id
+        # X-Centaur-* trace headers (job_id/stage/thread_key/trace). For sandbox
+        # callers the signed thread_key wins, so don't let a header overwrite it.
+        for key, value in trace_fields.items():
+            call_fields.setdefault(key, value)
         t0 = time.monotonic()
         log.info("tool_call_started", **call_fields)
         captured_slack_send = await _capture_live_slack_send(
@@ -1903,26 +1935,22 @@ class ToolManager:
                 ctx = ToolContext(
                     name=lt.name,
                     secrets={**lt.ctx.secrets, **resolved},
-                    thread_key=sandbox_claims.get("thread_key")
-                    if sandbox_claims
-                    else None,
-                    container_id=sandbox_claims.get("container_id")
-                    if sandbox_claims
-                    else None,
+                    thread_key=effective_thread_key,
+                    container_id=effective_container_id,
                 )
-            elif sandbox_claims:
+            elif effective_thread_key or effective_container_id:
                 ctx = ToolContext(
                     name=lt.name,
                     secrets=dict(lt.ctx.secrets),
-                    thread_key=sandbox_claims.get("thread_key"),
-                    container_id=sandbox_claims.get("container_id"),
+                    thread_key=effective_thread_key,
+                    container_id=effective_container_id,
                 )
-        elif sandbox_claims:
+        elif effective_thread_key or effective_container_id:
             ctx = ToolContext(
                 name=lt.name,
                 secrets=dict(lt.ctx.secrets),
-                thread_key=sandbox_claims.get("thread_key"),
-                container_id=sandbox_claims.get("container_id"),
+                thread_key=effective_thread_key,
+                container_id=effective_container_id,
             )
 
         token = set_tool_context(ctx)
@@ -2247,14 +2275,20 @@ class ToolManager:
             _require_tool_scope(request, tool_name)
             accept = request.headers.get("accept", "")
             want_toon = "text/plain" in accept
-            fmt = "toon" if want_toon else "json"
-            result = await pm.call_tool(
-                tool_name, method_name, body, request=request, format=fmt
-            )
             if want_toon:
+                # Sandbox agents: keep legacy TOON format unchanged.
+                result = await pm.call_tool(
+                    tool_name, method_name, body, request=request, format="toon"
+                )
                 return PlainTextResponse(
                     result if isinstance(result, str) else _to_toon(result)
                 )
-            return {"tool": tool_name, "method": method_name, "result": result}
+            # JSON consumers: wrap in tool_result.v1 envelope.
+            raw = await pm.call_tool_raw(
+                tool_name, method_name, body, request=request
+            )
+            from api.tool_envelope import wrap_tool_result
+
+            return wrap_tool_result(raw, tool_name, method_name)
 
         return router

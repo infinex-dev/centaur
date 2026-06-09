@@ -1,6 +1,25 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { CentaurClient, type StreamEvent } from "../src/client";
+import type { ToolResult } from "../src/types";
+
+const ENVELOPE: ToolResult = {
+  schema_version: "centaur.tool_result.v1",
+  ok: true,
+  content: "ev_abc — infinex-platform@sha:src/x.ts",
+  text: "ev_abc — infinex-platform@sha:src/x.ts",
+  output: { matches: 1 },
+  evidence: [
+    {
+      schema_version: "centaur.evidence_item.v1",
+      id: "ev_abc",
+      source: "repo.search",
+      source_ref: "infinex-platform@sha:src/x.ts",
+    },
+  ],
+  error: null,
+  retryable: false,
+};
 
 async function collectEvents(events: AsyncIterable<StreamEvent>): Promise<StreamEvent[]> {
   const collected: StreamEvent[] = [];
@@ -229,5 +248,145 @@ describe("CentaurClient", () => {
         error_class: "slack_rate_limit",
       },
     );
+  });
+
+  describe("callTool", () => {
+    function client() {
+      return new CentaurClient({ apiUrl: "http://api.local", apiKey: "test-key" });
+    }
+
+    it("posts raw input to /tools/{tool}/{method} and returns the envelope incl. evidence", async () => {
+      const c = client();
+      const postMock = vi
+        .spyOn(c.http, "post")
+        .mockResolvedValue({ status: 200, data: ENVELOPE });
+
+      const result = await c.callTool("repo_context", "search", { query: "foo", repo: "infinex-platform" });
+
+      expect(postMock).toHaveBeenCalledWith(
+        "/tools/repo_context/search",
+        { query: "foo", repo: "infinex-platform" },
+        expect.objectContaining({ headers: {}, validateStatus: expect.any(Function) }),
+      );
+      expect(result).toEqual(ENVELOPE);
+      expect(result.evidence[0]?.id).toBe("ev_abc");
+    });
+
+    it("URL-encodes tool/method segments", async () => {
+      const c = client();
+      const postMock = vi.spyOn(c.http, "post").mockResolvedValue({ status: 200, data: ENVELOPE });
+
+      await c.callTool("web fetch", "fetch/json", {});
+
+      expect(postMock).toHaveBeenCalledWith(
+        "/tools/web%20fetch/fetch%2Fjson",
+        {},
+        expect.anything(),
+      );
+    });
+
+    it("sends Idempotency-Key and X-Centaur-* trace headers when provided", async () => {
+      const c = client();
+      const postMock = vi.spyOn(c.http, "post").mockResolvedValue({ status: 200, data: ENVELOPE });
+
+      await c.callTool(
+        "repo_context",
+        "search",
+        { query: "foo" },
+        {
+          idempotencyKey: "job1:ground:repo_context:tu1",
+          trace: { jobId: "job1", stage: "ground", threadKey: "slack:C1:1.2", traceId: "run-9" },
+        },
+      );
+
+      expect(postMock).toHaveBeenCalledWith(
+        "/tools/repo_context/search",
+        { query: "foo" },
+        expect.objectContaining({
+          headers: {
+            "Idempotency-Key": "job1:ground:repo_context:tu1",
+            "X-Centaur-Job-Id": "job1",
+            "X-Centaur-Stage": "ground",
+            "X-Centaur-Thread-Key": "slack:C1:1.2",
+            "X-Centaur-Trace": "run-9",
+          },
+        }),
+      );
+    });
+
+    it("omits optional headers when idempotencyKey/trace are absent", async () => {
+      const c = client();
+      const postMock = vi.spyOn(c.http, "post").mockResolvedValue({ status: 200, data: ENVELOPE });
+
+      await c.callTool("repo_context", "search", { query: "foo" });
+
+      const config = postMock.mock.calls[0]?.[2] as { headers: Record<string, string> };
+      expect(config.headers).toEqual({});
+    });
+
+    it("maps HTTP >= 500 to a retryable typed error", async () => {
+      const c = client();
+      vi.spyOn(c.http, "post").mockResolvedValue({ status: 503, data: "upstream down" });
+
+      const result = await c.callTool("repo_context", "search", {});
+
+      expect(result.ok).toBe(false);
+      expect(result.error?.code).toBe("unavailable");
+      expect(result.retryable).toBe(true);
+      expect(result.evidence).toEqual([]);
+    });
+
+    it("maps 403 to a non-retryable forbidden error", async () => {
+      const c = client();
+      vi.spyOn(c.http, "post").mockResolvedValue({ status: 403, data: { detail: "nope" } });
+
+      const result = await c.callTool("slack", "send_message", {});
+
+      expect(result.ok).toBe(false);
+      expect(result.error?.code).toBe("forbidden");
+      expect(result.retryable).toBe(false);
+    });
+
+    it("maps a non-JSON 2xx body to a typed invalid_json error", async () => {
+      const c = client();
+      vi.spyOn(c.http, "post").mockResolvedValue({ status: 200, data: "<html>not json</html>" });
+
+      const result = await c.callTool("repo_context", "search", {});
+
+      expect(result.ok).toBe(false);
+      expect(result.error?.code).toBe("invalid_json");
+      expect(result.retryable).toBe(false);
+    });
+
+    it("maps a network failure to a retryable error without throwing", async () => {
+      const c = client();
+      vi.spyOn(c.http, "post").mockRejectedValue(new Error("ECONNREFUSED"));
+
+      const result = await c.callTool("repo_context", "search", {});
+
+      expect(result.ok).toBe(false);
+      expect(result.error?.code).toBe("unavailable");
+      expect(result.retryable).toBe(true);
+      expect(result.error?.message).toContain("ECONNREFUSED");
+    });
+
+    it("returns application-level ok:false envelopes verbatim", async () => {
+      const c = client();
+      const errEnvelope: ToolResult = {
+        schema_version: "centaur.tool_result.v1",
+        ok: false,
+        content: null,
+        text: null,
+        output: { error: "boom" },
+        evidence: [],
+        error: { code: "tool_failed", message: "boom" },
+        retryable: false,
+      };
+      vi.spyOn(c.http, "post").mockResolvedValue({ status: 200, data: errEnvelope });
+
+      const result = await c.callTool("repo_context", "search", {});
+
+      expect(result).toEqual(errEnvelope);
+    });
   });
 });

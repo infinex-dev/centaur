@@ -55,7 +55,9 @@ async def _insert_assignment(db_pool, thread_key: str, generation: int = 1) -> N
 
 
 @pytest.mark.asyncio
-async def test_spawn_assignment_defaults_to_codex_when_no_selector(db_pool, monkeypatch):
+async def test_spawn_assignment_defaults_to_codex_when_no_selector(
+    db_pool, monkeypatch
+):
     from api.runtime_control import spawn_assignment
 
     monkeypatch.delenv("CENTAUR_DEFAULT_HARNESS", raising=False)
@@ -1080,7 +1082,9 @@ async def test_mark_execution_terminal_delays_outbox_claimability(db_pool):
 
 
 @pytest.mark.asyncio
-async def test_mark_execution_terminal_skips_durable_delivery_after_live_answer(db_pool):
+async def test_mark_execution_terminal_skips_durable_delivery_after_live_answer(
+    db_pool,
+):
     from api.runtime_control import _mark_execution_terminal
 
     execution_id = f"exe-{uuid.uuid4().hex[:10]}"
@@ -2692,6 +2696,94 @@ async def test_steer_execution_reports_cancel_when_execution_finishes_during_inj
 
 
 @pytest.mark.asyncio
+async def test_get_or_spawn_clears_stale_claude_thread_id_without_persistence(
+    monkeypatch,
+):
+    from api.agent import get_or_spawn
+
+    thread_key = f"slack:C-test:{uuid.uuid4().hex}:claude-stale-resume"
+    trace_id = uuid.uuid4()
+    stale_thread_id = "5d7ddf96-stale-claude-session"
+    old_runtime_id = f"rt-old-{uuid.uuid4().hex[:8]}"
+    new_runtime_id = f"rt-new-{uuid.uuid4().hex[:8]}"
+    created_resume_ids: list[str | None] = []
+
+    class FakePool:
+        def __init__(self) -> None:
+            self.deleted = False
+            self.insert_args: tuple | None = None
+
+        async def fetchrow(self, query: str, *args):
+            if query.startswith("SELECT thread_key"):
+                if self.deleted:
+                    return None
+                return {
+                    "thread_key": thread_key,
+                    "sandbox_id": old_runtime_id,
+                    "harness": "claude-code",
+                    "engine": "claude-code",
+                    "state": "idle",
+                    "started_at": dt.datetime.now(dt.timezone.utc),
+                    "agent_thread_id": stale_thread_id,
+                    "last_delivered_id": None,
+                    "inflight_turn_id": None,
+                    "inflight_turn_input": None,
+                    "inflight_attempts": 0,
+                    "last_result": None,
+                    "trace_id": trace_id,
+                }
+            if query.startswith("INSERT INTO thread_traces"):
+                return {"trace_id": trace_id}
+            if query.startswith("INSERT INTO sandbox_sessions"):
+                self.insert_args = args
+                return {"thread_key": args[0]}
+            raise AssertionError(f"unexpected fetchrow query: {query}")
+
+        async def execute(self, query: str, *args) -> None:
+            if query.startswith("DELETE FROM sandbox_sessions"):
+                self.deleted = True
+                return None
+            raise AssertionError(f"unexpected execute query: {query}")
+
+    class Backend:
+        async def status(self, _session: SandboxSession) -> str:
+            return "gone"
+
+        async def create(
+            self,
+            thread_key: str,
+            harness: str,
+            engine: str,
+            **kwargs,
+        ) -> SandboxSession:
+            created_resume_ids.append(kwargs.get("resume_thread_id"))
+            return SandboxSession(
+                sandbox_id=new_runtime_id,
+                thread_key=thread_key,
+                harness=harness,
+                engine=engine,
+            )
+
+    fake_pool = FakePool()
+    monkeypatch.delenv("CLAUDE_CODE_SESSION_PERSISTENCE", raising=False)
+    monkeypatch.delenv("CLAUDE_CODE_SESSION_PERSISTENCE_ENABLED", raising=False)
+
+    with (
+        patch("api.agent._get_pool", return_value=fake_pool),
+        patch("api.agent.get_backend", return_value=Backend()),
+        patch("api.agent._evict_idle_sessions_for_capacity", new=AsyncMock()),
+        patch("api.warm_pool.claim_container", new=AsyncMock(return_value=None)),
+    ):
+        session = await get_or_spawn(thread_key, "claude-code")
+
+    assert session.sandbox_id == new_runtime_id
+    assert created_resume_ids == [None]
+    assert fake_pool.insert_args is not None
+    assert fake_pool.insert_args[1] == new_runtime_id
+    assert fake_pool.insert_args[5] is None
+
+
+@pytest.mark.asyncio
 async def test_steer_stdin_interrupts_amp_before_injecting(monkeypatch):
     from api.agent import steer_stdin
 
@@ -3999,6 +4091,11 @@ async def test_bootstrap_service_api_keys_includes_local_dev_key(db_pool, monkey
     )
     assert row is not None
     assert row["name"] == "service:local-dev"
-    assert list(row["scopes"]) == ["admin", "agent", "threads", "tools:*"]
+    assert list(row["scopes"]) == [
+        "admin",
+        "agent",
+        "threads",
+        "tools:*",
+    ]
     assert row["revoked_at"] is None
     assert row["created_by"] == "service-bootstrap"

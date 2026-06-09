@@ -1596,8 +1596,16 @@ def discover_workflow_handlers() -> dict[str, str]:
             mod_name = f"{_BUILTIN_WORKFLOWS_PACKAGE}.{py_file.stem}"
             _load_workflow_file(py_file, mod_name, discovered)
 
-    # 2. External workflow directories (WORKFLOW_DIRS)
+    # 2. External workflow directories (WORKFLOW_DIRS). Put each workflow
+    # directory itself on sys.path so overlay workflows can import sibling helper
+    # modules (for example `from shared_helpers import ...`) without being copied
+    # into the built-in `api.workflows` package.
     for wf_dir in get_workflow_dirs():
+        wf_dir_str = str(wf_dir)
+        if wf_dir_str not in sys.path:
+            sys.path.insert(0, wf_dir_str)
+        for helper_file in sorted(wf_dir.glob("*.py")):
+            sys.modules.pop(helper_file.stem, None)
         for py_file in sorted(wf_dir.glob("*.py")):
             if py_file.name.startswith("_"):
                 continue
