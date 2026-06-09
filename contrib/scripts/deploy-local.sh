@@ -27,7 +27,7 @@ COMMS_FACTORY_GIT_URL="${COMMS_FACTORY_GIT_URL:-https://github.com/infinex-dev/c
 # the Centaur integration stack rebased onto director-service-surface
 # (base director tip 0bafa817a9ee682c7a465d151c18d4ac39abb01b).
 # Deploy the PR head/merge commit, not the base commit or moving main.
-COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-6e4bc06e21f950ce8fb7318339b8555d8c8dc915}"
+COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-4d2c164c4db3eb4e549552aabe9a8c3820e663b9}"
 COMMS_FACTORY_IMAGE="${COMMS_FACTORY_IMAGE:-comms-factory-api}"
 COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-}"
 COMMS_FACTORY_OVERLAY_IMAGE="${COMMS_FACTORY_OVERLAY_IMAGE:-comms-factory-centaur-overlay}"
