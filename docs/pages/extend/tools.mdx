@@ -16,6 +16,24 @@ under `/app/overlay/org/tools` in the API container. Later tool directories can
 shadow earlier tools with the same name, so an overlay can replace a base tool
 intentionally.
 
+## Exposure controls
+
+Discovery and exposure are separate steps. The API first discovers base tools
+and overlay tools, applying overlay shadowing when names collide. It then applies
+chart-level exposure filters:
+
+- `api.enabledTools: []` means every discovered tool is eligible unless disabled.
+- A non-empty `api.enabledTools` list is an allowlist; tools not listed are not
+  exposed.
+- `api.disabledTools` is a denylist and takes precedence if a name appears in
+  both lists.
+- Overlays can still shadow a base tool before the final allow/deny filter is
+  applied.
+
+Production deployments with many built-in or overlay tools should prefer an
+explicit allowlist, or at least deny high-risk and write-capable tools that are
+not needed for the deployment's first operating loop.
+
 ## Define metadata
 
 Each tool needs `pyproject.toml` with a `[tool.centaur]` block:

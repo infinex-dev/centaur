@@ -50,17 +50,20 @@ export OP_SERVICE_ACCOUNT_TOKEN=...
 export OP_VAULT=...
 export SLACK_BOT_TOKEN=...
 export SLACK_SIGNING_SECRET=...
+export SLACK_APP_TOKEN=...   # xapp- token with connections:write for local/dev Socket Mode
 export SLACKBOT_API_KEY=...
 ```
 
 Create the Slackbot app at [api.slack.com/apps](https://api.slack.com/apps).
 Use the app's Bot User OAuth Token for `SLACK_BOT_TOKEN` and its Signing Secret
-for `SLACK_SIGNING_SECRET`.
+for `SLACK_SIGNING_SECRET`. Local/dev values enable Slack Socket Mode so the
+bot can receive events without a public Request URL; create an app-level token
+with `connections:write` and store it as `SLACK_APP_TOKEN`.
 
 `OP_SERVICE_ACCOUNT_TOKEN` and `OP_VAULT` let [iron-proxy](https://docs.iron.sh)
-resolve model and tool credentials through 1Password. `SLACK_SIGNING_SECRET`
-and `SLACKBOT_API_KEY` are API boot requirements in the current chart.
-`SLACK_BOT_TOKEN` is required by the default local bootstrap because Slackbot is
+resolve model and tool credentials through 1Password. `SLACK_SIGNING_SECRET`,
+`SLACK_APP_TOKEN`, and `SLACKBOT_API_KEY` are API boot requirements in the
+current local bootstrap. `SLACK_BOT_TOKEN` is required because Slackbot is
 enabled in `values.dev.yaml`; use a real token if you want to test Slack.
 
 `SLACKBOT_API_KEY` is a static service token. The API bootstraps that value into
