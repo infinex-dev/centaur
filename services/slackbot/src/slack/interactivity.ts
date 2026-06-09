@@ -60,6 +60,10 @@ export type SlackInteractionOptions = {
 
 const MAX_REF_BYTES = 1900
 const IDENT_RE = /^[A-Za-z0-9_.:-]{1,128}$/
+// `event_type` is a dotted lowercase identifier (e.g. `gate.action`, `<ns>.action`).
+// Constrained so a crafted button value cannot steer dispatch to an arbitrary
+// event type; full origin authenticity still rests on Slack's request signature.
+const EVENT_TYPE_RE = /^[a-z][a-z0-9_]*(?:\.[a-z0-9_]+)+$/
 // Back-compat default for `opens_modal` when the posting workflow does not set it.
 const EDIT_ACTION_RE = /^(edit|add|answer|qa|retry)(?:_|$)/i
 
@@ -164,10 +168,24 @@ export async function handleSlackInteractionBody(
         }
       }
     }
-    await options.client.views.open({
-      trigger_id: interaction.trigger_id,
-      view: buildGateModalView(interaction.ref)
-    })
+    try {
+      await options.client.views.open({
+        trigger_id: interaction.trigger_id,
+        view: buildGateModalView(interaction.ref)
+      })
+    } catch {
+      // Slack rejected views.open (commonly an expired trigger_id, valid ~3s).
+      // Surface a retryable ephemeral instead of throwing a 500; no event was
+      // dispatched, so the gate is unchanged and the user can click again.
+      return {
+        status: 200,
+        body: {
+          response_type: 'ephemeral',
+          replace_original: false,
+          text: 'Slack could not open the edit modal in time. Please click again.'
+        }
+      }
+    }
     return { status: 200, body: { ok: true } }
   }
 
@@ -200,8 +218,11 @@ export function compactRefFromValue(value: string): GateCompactRef | null {
     const opensModalRaw = data.opens_modal ?? data.opensModal
     const opens_modal = typeof opensModalRaw === 'boolean' ? opensModalRaw : undefined
     const per_item = data.per_item === true || data.perItem === true
+    // A per-item gate scopes correlation to target_id; without one the ref would
+    // silently collapse onto the run-level key and collide. Reject it loudly.
+    if (per_item && !target_id) return null
     const event_type = stringValue(data.event_type ?? data.eventType)
-    if (event_type && !IDENT_RE.test(event_type)) return null
+    if (event_type && !EVENT_TYPE_RE.test(event_type)) return null
     return {
       run_id,
       stage,

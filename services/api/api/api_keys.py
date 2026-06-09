@@ -90,23 +90,40 @@ def _load_attached_service_key_specs() -> tuple[ServiceAPIKeySpec, ...]:
         raise ValueError(f"ATTACHED_SERVICE_KEYS is not valid JSON: {exc}") from exc
     if not isinstance(entries, list):
         raise ValueError("ATTACHED_SERVICE_KEYS must be a JSON list")
+    # Built-in names are reserved: the api_keys table is unique on key_hash, not
+    # name, so a colliding attached entry would seed a phantom second key with the
+    # same identity and different scopes. Reject collisions and duplicates loudly.
+    reserved = {spec.name for spec in _SERVICE_API_KEYS}
+    seen: set[str] = set()
     specs: list[ServiceAPIKeySpec] = []
-    for entry in entries:
+    for index, entry in enumerate(entries):
         if not isinstance(entry, dict):
-            raise ValueError("ATTACHED_SERVICE_KEYS entries must be objects")
+            raise ValueError(f"ATTACHED_SERVICE_KEYS entry {index} must be an object")
         env_var = entry.get("env_var")
         name = entry.get("name")
         scopes = entry.get("scopes")
         if not env_var or not name or not isinstance(scopes, list) or not scopes:
             raise ValueError(
-                "each ATTACHED_SERVICE_KEYS entry needs env_var, name, and non-empty scopes"
+                f"ATTACHED_SERVICE_KEYS entry {index} (name={name!r}) needs "
+                "env_var, name, and non-empty scopes"
             )
+        if not all(isinstance(scope, str) and scope for scope in scopes):
+            raise ValueError(
+                f"ATTACHED_SERVICE_KEYS entry {index} (name={name!r}) scopes "
+                "must be non-empty strings"
+            )
+        if name in reserved:
+            raise ValueError(
+                f"ATTACHED_SERVICE_KEYS entry {index} name {name!r} collides with "
+                "a built-in service key"
+            )
+        if name in seen:
+            raise ValueError(
+                f"ATTACHED_SERVICE_KEYS has a duplicate service key name {name!r}"
+            )
+        seen.add(name)
         specs.append(
-            ServiceAPIKeySpec(
-                env_var=str(env_var),
-                name=str(name),
-                scopes=tuple(str(scope) for scope in scopes),
-            )
+            ServiceAPIKeySpec(env_var=str(env_var), name=str(name), scopes=tuple(scopes))
         )
     return tuple(specs)
 

@@ -277,3 +277,29 @@ class TestAttachedServiceKeySpecLoading:
         monkeypatch.setenv("ATTACHED_SERVICE_KEYS", '[{"name": "service:example"}]')
         with pytest.raises(ValueError, match="env_var, name, and non-empty scopes"):
             _load_attached_service_key_specs()
+
+    def test_rejects_non_string_scopes(self, monkeypatch):
+        monkeypatch.setenv(
+            "ATTACHED_SERVICE_KEYS",
+            '[{"env_var": "X", "name": "service:example", "scopes": [{"tools": "x"}]}]',
+        )
+        with pytest.raises(ValueError, match="scopes must be non-empty strings"):
+            _load_attached_service_key_specs()
+
+    def test_rejects_name_colliding_with_builtin_service_key(self, monkeypatch):
+        # A phantom second key under a built-in name would escalate privilege.
+        monkeypatch.setenv(
+            "ATTACHED_SERVICE_KEYS",
+            '[{"env_var": "X", "name": "service:slackbot", "scopes": ["admin"]}]',
+        )
+        with pytest.raises(ValueError, match="collides with a built-in service key"):
+            _load_attached_service_key_specs()
+
+    def test_rejects_duplicate_names(self, monkeypatch):
+        monkeypatch.setenv(
+            "ATTACHED_SERVICE_KEYS",
+            '[{"env_var": "A", "name": "service:dup", "scopes": ["agent"]},'
+            ' {"env_var": "B", "name": "service:dup", "scopes": ["admin"]}]',
+        )
+        with pytest.raises(ValueError, match="duplicate service key name"):
+            _load_attached_service_key_specs()

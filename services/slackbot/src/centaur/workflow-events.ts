@@ -6,6 +6,8 @@ import {
   type ParsedSlackInteraction
 } from '../slack/interactivity'
 
+const WORKFLOW_EVENT_TIMEOUT_MS = 8000
+
 export type WorkflowEventDispatchResult =
   | { ok: true; status: number; body: unknown }
   | { ok: false; status: number; body: unknown }
@@ -41,7 +43,11 @@ export class CentaurWorkflowEvents {
         'Content-Type': 'application/json',
         ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {})
       },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
+      // Bound the dispatch so a hung API call cannot leak a pending request past
+      // the Slack ack deadline. /workflows/events is idempotent on
+      // (event_type, correlation_id), so a timed-out retry is safe.
+      signal: AbortSignal.timeout(WORKFLOW_EVENT_TIMEOUT_MS)
     })
     const responseBody = await readResponseBody(response)
     return { ok: response.ok, status: response.status, body: responseBody }

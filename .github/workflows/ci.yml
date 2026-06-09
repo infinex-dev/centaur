@@ -94,6 +94,10 @@ jobs:
       - name: Install Node dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Typecheck Slackbot
+        working-directory: services/slackbot
+        run: pnpm exec tsc --noEmit
+
       - name: Targeted Slackbot tests
         working-directory: services/slackbot
         run: |

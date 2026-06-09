@@ -1,5 +1,6 @@
 import { createHmac } from 'node:crypto'
 import { afterEach, describe, expect, it, mock } from 'bun:test'
+import type { AppConfig } from './config'
 import type { StartSocketModeOptions } from './slack/socket-mode'
 
 const originalEnv = { ...process.env }
@@ -264,7 +265,7 @@ describe('Slack event HTTP dedupe', () => {
       slack: { message_ts: '1.2' }
     }
 
-    const commands = [
+    const commands: AppConfig['SLACK_WORKFLOW_COMMANDS'] = [
       {
         match: '^report\\s+audit\\b[:\\s-]*(.*)$',
         workflow: 'report_audit',
