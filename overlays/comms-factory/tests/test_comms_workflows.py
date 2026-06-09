@@ -470,7 +470,6 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
     card_updates = [update for update in updates if update.get("name") == "update_card_gate"]
     assert "ReleaseCard approved" in str(card_updates[-1]["blocks"])
     assert calls == [
-        ("comms_factory", "validate"),
         ("comms_factory", "ground_from_tools"),
         ("comms_factory", "build_card"),
         ("comms_factory", "generate"),
@@ -648,7 +647,7 @@ async def test_release_workflow_blocks_generate_errors_before_candidate_gate(
     assert result["status"] == "blocked"
     assert result["stage"] == "generate"
     assert result["error"] == expected_error
-    assert calls == ["validate", "ground_from_tools", "build_card", "generate"]
+    assert calls == ["ground_from_tools", "build_card", "generate"]
     assert "post_candidate_gate" not in [post.get("name") for post in posts]
     assert all("Ready to ship" not in str(post.get("text")) for post in posts)
 
@@ -800,7 +799,7 @@ async def test_release_workflow_blocks_missing_or_failed_build_card_before_gener
     assert result["status"] == "blocked"
     assert result["stage"] == "build-card"
     assert result["error"] == expected_error
-    assert calls == ["validate", "ground_from_tools", "build_card"]
+    assert calls == ["ground_from_tools", "build_card"]
     assert "post_card_gate" not in [post.get("name") for post in posts]
     assert any("Comms release blocked building ReleaseCard" in post["text"] for post in posts)
 
@@ -977,7 +976,7 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
     )
 
     assert result == {"status": "rejected", "stage": "facts", "error": "wrong_stage"}
-    assert calls == ["validate", "ground_from_tools"]
+    assert calls == ["ground_from_tools"]
 
 
 # --- Director verdict surfacing in the candidate gate (U1/U2/U3) ---
@@ -1089,28 +1088,26 @@ def test_publication_holds_only_when_gate_failed():
     assert comms_release._publication_holds(None) == []
 
 
-def test_format_validation_failure_is_human_readable_not_a_dict_dump():
+def test_format_generation_failure_is_human_readable_with_retry_hint():
     import comms_release
 
-    validation = {
-        "ok": True,
-        "passed": False,
-        "surface": "brief",
-        "failures": [
-            {"rule": "cliches", "reason": 'cliché "leverage"'},
-            {"rule": "ai-slop", "reason": "em-dash density 1 in 106 chars"},
-        ],
+    result = {
+        "error": "comms_factory_http_error",
+        "ok": False,
+        "response": {"error": "internal_error", "message": "internal server error", "ok": False},
+        "status_code": 500,
     }
-    out = comms_release._format_validation_failure(validation)
+    out = comms_release._format_generation_failure(result, "comms_factory_http_error")
     assert "{" not in out and "'ok'" not in out  # no raw dict
-    assert "*cliches*" in out and 'cliché "leverage"' in out
-    assert "*ai-slop*" in out and "em-dash density" in out
-    assert "Rephrase" in out  # actionable guidance
+    assert "comms_factory_http_error" in out
+    assert "internal server error" in out
+    assert "transient" in out.lower() and "retry" in out.lower()  # retry guidance on 500
 
 
-def test_format_validation_failure_falls_back_when_no_structured_failures():
+def test_format_generation_failure_non_transient_gives_generic_guidance():
     import comms_release
 
-    out = comms_release._format_validation_failure({"ok": False, "error": "tool_unavailable"})
-    assert "tool_unavailable" in out
+    out = comms_release._format_generation_failure({"error": "bad_request"}, "bad_request")
+    assert "bad_request" in out
     assert "{" not in out
+    assert "service logs" in out

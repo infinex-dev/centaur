@@ -61,22 +61,11 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         return {"status": "failed", "error": "missing_brief"}
     channels = inp.channels or _parse_channels(brief) or ["x"]
 
-    validation = await call_comms_tool(
-        ctx,
-        "validate_brief",
-        "validate",
-        {
-            "text": brief,
-            "surface": "brief",
-            **common_service_envelope(
-                ctx, inp, stage="validate", gate_version=1, workflow_name=WORKFLOW_NAME
-            ),
-        },
-    )
-    if validation.get("ok") is False or validation.get("passed") is False:
-        await _post_simple(ctx, inp.delivery, _format_validation_failure(validation))
-        return {"status": "red", "validation": validation}
-
+    # No brief-level validation gate. The service `validate` runs publishable-copy
+    # allergen rules (cliché, em-dash/ai-slop) and ignores `surface`, so validating
+    # the operator's brief rejected legitimate instructions (e.g. "leverage", an
+    # em-dash). Copy quality is enforced where it belongs — on the generated
+    # candidates (the generate path strips em-dashes and runs the rules + Director).
     await _post_simple(ctx, inp.delivery, "Grounding comms facts…")
     tool_plane = tool_plane_ref(ctx, stage="ground", gate_version=1)
     if tool_plane is None:
@@ -335,12 +324,8 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
     )
     generation_error = _generation_result_error(generation)
     if generation_error:
-        await _post_blocked_tool_result(
-            ctx,
-            inp.delivery,
-            message="Comms release blocked at generation",
-            error=generation_error,
-            result=generation,
+        await _post_simple(
+            ctx, inp.delivery, _format_generation_failure(generation, generation_error)
         )
         return {
             "status": "blocked",
@@ -440,12 +425,8 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         )
         generation_error = _generation_result_error(generation)
         if generation_error:
-            await _post_blocked_tool_result(
-                ctx,
-                inp.delivery,
-                message="Comms release blocked at retry generation",
-                error=generation_error,
-                result=generation,
+            await _post_simple(
+                ctx, inp.delivery, _format_generation_failure(generation, generation_error)
             )
             return {
                 "status": "blocked",
@@ -765,36 +746,29 @@ def _parse_channels(brief: str) -> list[str]:
     return [part.strip().lower() for part in match.group(1).split(",") if part.strip()]
 
 
-_VALIDATION_RULE_HINTS = {
-    "cliches": "a word the copy-style rules treat as cliché",
-    "ai-slop": "an AI-slop signal (e.g. em-dashes or banned punctuation)",
-    "listicle": "reads like a listicle",
-    "antagonism": "antagonistic / us-vs-them framing",
-}
-
-
-def _format_validation_failure(validation: dict[str, Any]) -> str:
-    """Human-readable Slack message for a failed brief validation (no raw dict dump)."""
-    lines = [
-        "⚠️ *Brief rejected before generation*",
-        "Your brief is checked against the copy-style rules and tripped:",
-    ]
-    failures = validation.get("failures")
-    if isinstance(failures, list) and failures:
-        for failure in failures:
-            if not isinstance(failure, dict):
-                continue
-            rule = str(failure.get("rule") or "rule")
-            reason = str(failure.get("reason") or "").strip()
-            detail = reason or _VALIDATION_RULE_HINTS.get(rule, "")
-            lines.append(f"• *{rule}* — {detail}" if detail else f"• *{rule}*")
-    else:
-        err = validation.get("error") or validation.get("status") or "no detail returned"
-        lines.append(f"• {err}")
-    lines.append(
-        "These rules are meant for final copy, so they can be strict on a brief. "
-        "Rephrase to avoid the flagged words/characters and re-run."
+def _format_generation_failure(result: dict[str, Any], error: str) -> str:
+    """Human-readable Slack message for a failed generation (no raw dict dump)."""
+    lines = ["⚠️ *Comms release blocked at generation*"]
+    message = ""
+    response = result.get("response") if isinstance(result, dict) else None
+    if isinstance(response, dict):
+        message = str(response.get("message") or response.get("error") or "").strip()
+    if not message:
+        message = str(result.get("message") or "").strip() if isinstance(result, dict) else ""
+    label = f"{error}" + (f" — {message}" if message and message != error else "")
+    lines.append(f"• {label}" if label else "• generation failed")
+    status = result.get("status_code") if isinstance(result, dict) else None
+    blob = f"{message} {error}".lower()
+    transient = status == 500 or any(
+        sig in blob for sig in ("internal", "overload", "timeout", "rate", "503", "529")
     )
+    if transient:
+        lines.append(
+            "This usually means a transient model overload during generation. "
+            "Re-run the command — it typically succeeds on retry."
+        )
+    else:
+        lines.append("Re-run the command; if it persists, check the comms-factory service logs.")
     return "\n".join(lines)
 
 
