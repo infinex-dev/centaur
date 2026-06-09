@@ -375,6 +375,7 @@ spec:
             - name: {{ $name }}
               value: {{ $value | quote }}
 {{- end }}
+{{- include "centaur.attachedServiceKeyEnv" . | nindent 12 }}
           envFrom:
             - secretRef:
                 name: {{ include "centaur.secretEnvName" . }}

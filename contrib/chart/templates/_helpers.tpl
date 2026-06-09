@@ -145,3 +145,34 @@ namespace as this release, so a short DNS name is enough.
 {{- define "centaur.onepasswordConnectUrl" -}}
 {{- printf "http://%s:%v" (include "centaur.onepasswordConnectHost" .) (include "centaur.onepasswordConnectPort" .) -}}
 {{- end -}}
+
+{{- /*
+Attached-service callback API keys, injected into the API container env.
+
+For each enabled attachedServices entry that declares a `serviceKey`, emit an
+unprefixed alias env var bound to the token in the centaur secret-env (the
+container also gets the prefixed name via envFrom, but the API reads the
+unprefixed name). Also emit an `ATTACHED_SERVICE_KEYS` JSON manifest of
+`{env_var, name, scopes}` so `api_keys.py` can bootstrap each key with its
+declared scopes. Generic: no attached service is named here.
+*/ -}}
+{{- define "centaur.attachedServiceKeyEnv" -}}
+{{- $root := . -}}
+{{- $specs := list -}}
+{{- range $name, $svc := .Values.attachedServices -}}
+{{- if and $svc.enabled $svc.serviceKey -}}
+{{- $sk := $svc.serviceKey -}}
+- name: {{ required (printf "attachedServices.%s.serviceKey.envVar is required" $name) $sk.envVar | quote }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ include "centaur.secretEnvName" $root }}
+      key: {{ printf "%s%s" $root.Values.secretManager.envPrefix $sk.envVar | quote }}
+      optional: true
+{{- $specs = append $specs (dict "env_var" $sk.envVar "name" (required (printf "attachedServices.%s.serviceKey.name is required" $name) $sk.name) "scopes" (required (printf "attachedServices.%s.serviceKey.scopes is required" $name) $sk.scopes)) -}}
+{{- end -}}
+{{- end -}}
+{{- if $specs }}
+- name: ATTACHED_SERVICE_KEYS
+  value: {{ toJson $specs | quote }}
+{{- end -}}
+{{- end -}}
