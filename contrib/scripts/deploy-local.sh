@@ -6,7 +6,7 @@ set -euo pipefail
 # helm upgrade --install. Cluster bring-up + API tunnel is handled by k3s-local.sh.
 #
 # Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY
-# Optional env: ANTHROPIC_API_KEY AMP_API_KEY
+# Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY DEEP_RESEARCH_MODEL
 # Load them from .env first:  set -a; source .env; set +a
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
@@ -19,6 +19,7 @@ SECRET_NAME="${CENTAUR_INFRA_SECRET_NAME:-centaur-infra-env}"
 export KUBECONFIG="${CENTAUR_KUBECONFIG:-$HOME/.kube/centaur-k3s.yaml}"
 SKIP_BUILD=0
 ONLY_SVC=""   # empty = all four; or one of: api slackbot agent iron-proxy
+SERVICES_CSV=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -26,29 +27,45 @@ while [[ $# -gt 0 ]]; do
     --release)       RELEASE="${2:?}";       shift 2 ;;
     --skip-build)    SKIP_BUILD=1;           shift ;;
     --only)          ONLY_SVC="${2:?}";      shift 2 ;;
+    --services)      SERVICES_CSV="${2:?}";  shift 2 ;;
     --help|-h)
       echo "Usage: contrib/scripts/deploy-local.sh [--namespace NS] [--release NAME] [--skip-build] [--only api|slackbot|agent|iron-proxy]"
+      echo "       contrib/scripts/deploy-local.sh [--services api,slackbot]"
       echo "Deploys onto k3s inside the podman machine VM (no docker). See contrib/docs/deploy-local-runsheet.md."
       echo "Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY"
-      echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY"
-      echo "--only rebuilds + reimports a single image (the rest stay as-is) for fast iteration."
+      echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY DEEP_RESEARCH_MODEL LOCAL_DEV_API_KEY"
+      echo "--only rebuilds + reimports a single Centaur image (the rest stay as-is) for fast iteration."
+      echo "--services rebuilds + reimports a comma-separated subset of Centaur images."
       exit 0 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
   esac
 done
 
 require_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "FATAL: missing command: $1" >&2; exit 1; }; }
-require_cmd podman; require_cmd kubectl; require_cmd helm; require_cmd openssl
+require_cmd podman; require_cmd kubectl; require_cmd helm; require_cmd openssl; require_cmd python3
 
 # 1. Ensure the k3s cluster is up and the API is reachable from the Mac.
 "$ROOT_DIR/contrib/scripts/k3s-local.sh"
 
 # Map a service name to its image + Dockerfile (+ optional build target).
 SERVICES=(api slackbot agent iron-proxy)
+if [[ -n "$ONLY_SVC" && -n "$SERVICES_CSV" ]]; then
+  echo "FATAL: use either --only or --services, not both" >&2
+  exit 2
+fi
 if [[ -n "$ONLY_SVC" ]]; then
   printf '%s\n' "${SERVICES[@]}" | grep -qx "$ONLY_SVC" \
     || { echo "FATAL: --only must be one of: ${SERVICES[*]}" >&2; exit 2; }
   SERVICES=("$ONLY_SVC")
+elif [[ -n "$SERVICES_CSV" ]]; then
+  IFS=',' read -r -a requested_services <<< "$SERVICES_CSV"
+  SERVICES=()
+  for svc in "${requested_services[@]}"; do
+    svc="$(echo "$svc" | xargs)"
+    printf '%s\n' api slackbot agent iron-proxy | grep -qx "$svc" \
+      || { echo "FATAL: --services entries must be from: api slackbot agent iron-proxy" >&2; exit 2; }
+    SERVICES+=("$svc")
+  done
 fi
 
 image_for()      { case "$1" in api) echo centaur-api ;; slackbot) echo centaur-slackbot ;; agent) echo centaur-agent ;; iron-proxy) echo centaur-iron-proxy ;; esac; }
@@ -60,16 +77,16 @@ target_for()     { case "$1" in agent) echo sandbox ;; *) echo "" ;; esac; }
 #    docker.io/library/centaur-api:latest -- so the image MUST be imported under
 #    that exact name and into the k8s.io namespace, or pods ImagePullBackOff.
 build_and_import() {
-  local image="$1" dockerfile="$2" target="${3:-}"
-  local args=(build -t "${image}:latest" -f "$dockerfile")
+  local image="$1" dockerfile="$2" target="${3:-}" context="${4:-$ROOT_DIR}" tag="${5:-latest}"
+  local args=(build -t "${image}:${tag}" -f "$dockerfile")
   [[ -n "$target" ]] && args+=(--target "$target")
-  args+=("$ROOT_DIR")
-  echo ">> build ${image}:latest (podman)"
+  args+=("$context")
+  echo ">> build ${image}:${tag} (podman)"
   podman "${args[@]}"
-  echo ">> import ${image}:latest into k3s"
+  echo ">> import ${image}:${tag} into k3s"
   podman machine ssh "$MACHINE" \
-    "podman tag localhost/${image}:latest docker.io/library/${image}:latest \
-     && podman save docker.io/library/${image}:latest | k3s ctr -n k8s.io images import -" >/dev/null
+    "podman tag localhost/${image}:${tag} docker.io/library/${image}:${tag} \
+     && podman save docker.io/library/${image}:${tag} | k3s ctr -n k8s.io images import -" >/dev/null
 }
 
 if [[ "$SKIP_BUILD" != "1" ]]; then
@@ -98,14 +115,42 @@ if ! kubectl -n "$NAMESPACE" get secret "$SECRET_NAME" >/dev/null 2>&1; then
     --from-literal=SLACK_APP_TOKEN="${SLACK_APP_TOKEN:?set SLACK_APP_TOKEN}" \
     --from-literal=OPENAI_API_KEY="${OPENAI_API_KEY:?set OPENAI_API_KEY}" \
     --from-literal=ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}" \
-    --from-literal=AMP_API_KEY="${AMP_API_KEY:-}"
+    --from-literal=AMP_API_KEY="${AMP_API_KEY:-}" \
+    --from-literal=EXA_API_KEY="${EXA_API_KEY:-}" \
+    --from-literal=DEEP_RESEARCH_MODEL="${DEEP_RESEARCH_MODEL:-}" \
+    --from-literal=GITHUB_TOKEN="${GITHUB_TOKEN:-}"
 else
-  echo ">> patching user creds on existing secret $SECRET_NAME"
-  kubectl -n "$NAMESPACE" patch secret "$SECRET_NAME" -p "$(cat <<JSON
-{"stringData":{"SLACK_BOT_TOKEN":"${SLACK_BOT_TOKEN:?}","SLACK_SIGNING_SECRET":"${SLACK_SIGNING_SECRET:?}","SLACK_APP_TOKEN":"${SLACK_APP_TOKEN:?}","OPENAI_API_KEY":"${OPENAI_API_KEY:?}"}}
-JSON
+  user_cred_patch="$(python3 - <<'PY'
+import json
+import os
+
+keys = [
+    "SLACK_BOT_TOKEN",
+    "SLACK_SIGNING_SECRET",
+    "SLACK_APP_TOKEN",
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY",
+    "AMP_API_KEY",
+    "EXA_API_KEY",
+    "DEEP_RESEARCH_MODEL",
+    "GITHUB_TOKEN",
+]
+values = {key: os.environ[key] for key in keys if os.environ.get(key)}
+print(json.dumps({"stringData": values}) if values else "")
+PY
 )"
+  if [[ -n "$user_cred_patch" ]]; then
+    echo ">> patching user creds on existing secret $SECRET_NAME"
+    kubectl -n "$NAMESPACE" patch secret "$SECRET_NAME" -p "$user_cred_patch"
+  else
+    echo ">> keeping existing user creds on secret $SECRET_NAME (no matching env vars set)"
+  fi
 fi
+
+secret_key_value() {
+  local key="$1"
+  kubectl -n "$NAMESPACE" get secret "$SECRET_NAME" -o "jsonpath={.data.${key}}" 2>/dev/null | base64 -d 2>/dev/null || true
+}
 
 # 5. Firewall CA secrets (mounted at /firewall-certs/ca-cert.pem). Create once;
 #    regenerating would break already-running pods, so skip if present.
@@ -127,14 +172,16 @@ if ! kubectl -n "$NAMESPACE" get secret centaur-firewall-ca >/dev/null 2>&1; the
 fi
 
 # 6. Deploy.
+EXTRA_VALUES_ARGS=()
+
 helm dependency update "$CHART_DIR" >/dev/null
 helm upgrade --install "$RELEASE" "$CHART_DIR" \
   --namespace "$NAMESPACE" --create-namespace \
-  -f "$VALUES_FILE"
+  -f "$VALUES_FILE" "${EXTRA_VALUES_ARGS[@]}"
 
 # 7. Roll workloads so patched creds take effect, then wait for the API.
-kubectl -n "$NAMESPACE" rollout restart \
-  "deploy/${RELEASE}-centaur-api" "deploy/${RELEASE}-centaur-slackbot" 2>/dev/null || true
+rollout_targets=("deploy/${RELEASE}-centaur-api" "deploy/${RELEASE}-centaur-slackbot")
+kubectl -n "$NAMESPACE" rollout restart "${rollout_targets[@]}" 2>/dev/null || true
 kubectl -n "$NAMESPACE" rollout status "deploy/${RELEASE}-centaur-api" --timeout=300s
 
 echo ">> done. verify with:"

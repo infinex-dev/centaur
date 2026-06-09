@@ -37,6 +37,17 @@ jobs:
         working-directory: services/api
         run: uv run ruff check api/
 
+      - name: Lint tool plane
+        run: |
+          uv run --project services/api ruff check \
+            tools/infra/repo_context \
+            services/api/api/tool_envelope.py \
+            services/api/api/workflow_engine.py \
+            services/api/tests/test_check_scope.py \
+            services/api/tests/test_tool_manager.py \
+            services/api/tests/test_tool_envelope.py \
+            services/api/tests/test_workflows.py
+
       - name: Compile
         working-directory: services/api
         run: uv run python -m compileall -q api/
@@ -52,6 +63,14 @@ jobs:
             tests/test_agent_control_plane.py::test_steer_stdin_interrupts_amp_before_injecting \
             tests/test_agent_control_plane.py::test_worker_stops_session_when_cancel_requested_mid_stream \
             tests/test_agent_control_plane.py::test_worker_maps_amp_user_cancelled_error_to_cancelled
+
+      - name: Tool plane targeted tests
+        run: |
+          uv run --project services/api pytest -q \
+            services/api/tests/test_check_scope.py \
+            services/api/tests/test_tool_envelope.py \
+            services/api/tests/test_tool_manager.py \
+            tools/infra/repo_context/tests/test_repo_context_client.py
 
   slackbot-targeted-tests:
     name: Slackbot interface and delivery tests
@@ -81,4 +100,9 @@ jobs:
           bun test \
             src/centaur/handoff.test.ts \
             src/slack/normalize.test.ts \
-            src/centaur/final-delivery.test.ts
+            src/centaur/final-delivery.test.ts \
+            src/config.test.ts \
+            src/index.test.ts \
+            src/slack/interactivity.test.ts \
+            src/slack/socket-mode.test.ts \
+            src/centaur/workflow-events.test.ts
