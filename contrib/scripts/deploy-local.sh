@@ -23,10 +23,11 @@ SERVICES_CSV=""
 WITH_COMMS_FACTORY=0
 SKIP_COMMS_FACTORY_BUILD=0
 COMMS_FACTORY_GIT_URL="${COMMS_FACTORY_GIT_URL:-https://github.com/infinex-dev/comms-factory.git}"
-# Open PR head for https://github.com/infinex-dev/comms-factory/pull/2.
-# The PR base is pinned at 21d335869190bbba107f1c52263acfeb20e0963a;
-# deploy the PR head/merge commit, not the base commit or moving main.
-COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-0c7f64a56cfa15b30570fbf52847e0342df61df3}"
+# Open PR head for https://github.com/infinex-dev/comms-factory/pull/3 —
+# the Centaur integration stack rebased onto director-service-surface
+# (base director tip 0bafa817a9ee682c7a465d151c18d4ac39abb01b).
+# Deploy the PR head/merge commit, not the base commit or moving main.
+COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-faaa22ae3008e2d84503a86c7e58c4f870a66d0c}"
 COMMS_FACTORY_IMAGE="${COMMS_FACTORY_IMAGE:-comms-factory-api}"
 COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-}"
 COMMS_FACTORY_OVERLAY_IMAGE="${COMMS_FACTORY_OVERLAY_IMAGE:-comms-factory-centaur-overlay}"
