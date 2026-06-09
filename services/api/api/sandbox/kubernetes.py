@@ -35,6 +35,7 @@ from api.proxy_config import (
 from api.sandbox.base import SandboxBackend, SandboxSession
 from api.sandbox.config import (
     build_harness_cmd,
+    claude_code_session_persistence_enabled,
     container_env,
     image,
     runtime_for_session,
@@ -1107,12 +1108,20 @@ class KubernetesExecutorBackend(SandboxBackend):
             for secret, proxy_password in pg_secrets
         }
 
+        effective_resume_thread_id = resume_thread_id
+        if (
+            engine == "claude-code"
+            and resume_thread_id
+            and not claude_code_session_persistence_enabled()
+        ):
+            effective_resume_thread_id = None
+
         env = container_env(
             thread_key,
             pod_name,
             firewall_host,
             trace_id=trace_id,
-            resume_thread_id=resume_thread_id,
+            resume_thread_id=effective_resume_thread_id,
             pg_dsns=sandbox_pg_dsns,
         )
         overlay_image = _overlay_image()
@@ -1120,8 +1129,8 @@ class KubernetesExecutorBackend(SandboxBackend):
             env.append(f"CENTAUR_OVERLAY_DIR={_SANDBOX_OVERLAY_DIR}")
         if engine == "claude-code" and model:
             env.append(f"CLAUDE_MODEL={model}")
-        if engine == "claude-code" and resume_thread_id:
-            env.append(f"CLAUDE_CONTINUE_SESSION_ID={resume_thread_id}")
+        if engine == "claude-code" and effective_resume_thread_id:
+            env.append(f"CLAUDE_CONTINUE_SESSION_ID={effective_resume_thread_id}")
         if persona:
             env.append(f"AGENT_PERSONA={persona}")
         if repo:

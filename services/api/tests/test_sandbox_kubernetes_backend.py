@@ -621,6 +621,52 @@ async def test_create_builds_pod_and_prompt_secret(
 
 
 @pytest.mark.asyncio
+async def test_create_claude_pod_skips_stale_resume_without_persistence(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    backend = KubernetesExecutorBackend()
+    fake_core = FakeCoreApi()
+    fake_networking = FakeNetworkingApi()
+    backend._core = fake_core
+    backend._networking = fake_networking
+
+    monkeypatch.delenv("CLAUDE_CODE_SESSION_PERSISTENCE", raising=False)
+    monkeypatch.delenv("CLAUDE_CODE_SESSION_PERSISTENCE_ENABLED", raising=False)
+    monkeypatch.setenv("AGENT_API_URL", "http://api.internal:8000")
+    monkeypatch.setenv("DATABASE_URL", "postgres://user:pass@db/centaur")
+    monkeypatch.setenv("FIREWALL_HOST", "firewall.internal")
+    monkeypatch.setenv("KUBERNETES_FIREWALL_CA_SECRET_NAME", "firewall-ca")
+    monkeypatch.setenv("KUBERNETES_NAMESPACE", "centaur-sandbox")
+    monkeypatch.setattr("api.sandbox.kubernetes._prompt_bundle", lambda _persona: "prompt")
+    monkeypatch.setattr("api.sandbox.kubernetes.image", lambda: "centaur-agent:test")
+
+    async def fake_ensure_clients() -> None:
+        return None
+
+    async def fake_wait_ready(_pod_name: str) -> float:
+        return 0.01
+
+    monkeypatch.setattr(backend, "_ensure_clients", fake_ensure_clients)
+    monkeypatch.setattr(backend, "_wait_pod_ready", fake_wait_ready)
+    monkeypatch.setattr(backend, "_wait_ready", fake_wait_ready)
+
+    await backend.create(
+        "slack:C123:123.456",
+        "claude-code",
+        "claude-code",
+        resume_thread_id="stale-claude-session",
+    )
+
+    pod_body = fake_core.created_pods[1][1]
+    container = pod_body["spec"]["containers"][0]
+    env = {item["name"]: item["value"] for item in container["env"]}
+
+    assert container["args"] == ["claude-app-wrapper"]
+    assert "CLAUDE_CONTINUE_SESSION_ID" not in env
+    assert "AMP_CONTINUE_THREAD_ID" not in env
+
+
+@pytest.mark.asyncio
 async def test_create_builds_per_sandbox_proxy_resources(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
