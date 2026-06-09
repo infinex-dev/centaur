@@ -74,11 +74,7 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         },
     )
     if validation.get("ok") is False or validation.get("passed") is False:
-        await _post_simple(
-            ctx,
-            inp.delivery,
-            f"*Comms release stopped at validation*\n```{validation}```",
-        )
+        await _post_simple(ctx, inp.delivery, _format_validation_failure(validation))
         return {"status": "red", "validation": validation}
 
     await _post_simple(ctx, inp.delivery, "Grounding comms facts…")
@@ -363,7 +359,10 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         delivery=inp.delivery,
         text="Choose final comms copy. This only marks copy ready in Slack.",
         blocks=[
-            markdown_block("*Choose final copy*\n" + _format_candidates(candidates)),
+            markdown_block(
+                "*Choose final copy*\n"
+                + _format_candidates(candidates, _picks_from_generation(generation))
+            ),
             actions_block(
                 candidate_gate,
                 [
@@ -467,7 +466,8 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             text="Choose final comms copy after retry. This only marks copy ready in Slack.",
             blocks=[
                 markdown_block(
-                    "*Choose final copy after retry*\n" + _format_candidates(candidates)
+                    "*Choose final copy after retry*\n"
+                    + _format_candidates(candidates, _picks_from_generation(generation))
                 ),
                 actions_block(
                     retry_gate,
@@ -519,8 +519,8 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
                 "card": card,
                 "candidates": candidates,
             }
-    final_copy = extract_modal_value(candidate_event) or _first_candidate_text(
-        candidates
+    final_copy = extract_modal_value(candidate_event) or _director_pick_text(
+        candidates, _picks_from_generation(generation)
     )
     if not final_copy:
         await _post_simple(
@@ -537,11 +537,13 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "card": card,
             "candidates": candidates,
         }
-    await _post_simple(
-        ctx,
-        inp.delivery,
-        "*Ready to ship in Slack (no external posting performed)*\n" + final_copy,
-    )
+    ship_message = "*Ready to ship in Slack (no external posting performed)*\n" + final_copy
+    holds = _publication_holds(_candidate_for_text(candidates, final_copy))
+    if holds:
+        ship_message += "\n\n⚠️ *Publication holds (verify before posting):*\n" + "\n".join(
+            f"• {hold}" for hold in holds
+        )
+    await _post_simple(ctx, inp.delivery, ship_message)
     return {
         "status": "ready_to_ship",
         "channels": channels,
@@ -763,15 +765,123 @@ def _parse_channels(brief: str) -> list[str]:
     return [part.strip().lower() for part in match.group(1).split(",") if part.strip()]
 
 
-def _format_candidates(candidates: list[dict[str, Any]]) -> str:
+_VALIDATION_RULE_HINTS = {
+    "cliches": "a word the copy-style rules treat as cliché",
+    "ai-slop": "an AI-slop signal (e.g. em-dashes or banned punctuation)",
+    "listicle": "reads like a listicle",
+    "antagonism": "antagonistic / us-vs-them framing",
+}
+
+
+def _format_validation_failure(validation: dict[str, Any]) -> str:
+    """Human-readable Slack message for a failed brief validation (no raw dict dump)."""
+    lines = [
+        "⚠️ *Brief rejected before generation*",
+        "Your brief is checked against the copy-style rules and tripped:",
+    ]
+    failures = validation.get("failures")
+    if isinstance(failures, list) and failures:
+        for failure in failures:
+            if not isinstance(failure, dict):
+                continue
+            rule = str(failure.get("rule") or "rule")
+            reason = str(failure.get("reason") or "").strip()
+            detail = reason or _VALIDATION_RULE_HINTS.get(rule, "")
+            lines.append(f"• *{rule}* — {detail}" if detail else f"• *{rule}*")
+    else:
+        err = validation.get("error") or validation.get("status") or "no detail returned"
+        lines.append(f"• {err}")
+    lines.append(
+        "These rules are meant for final copy, so they can be strict on a brief. "
+        "Rephrase to avoid the flagged words/characters and re-run."
+    )
+    return "\n".join(lines)
+
+
+def _picks_from_generation(generation: Any) -> list[dict[str, Any]]:
+    """Director-ranked picks from a generate result envelope (.output.picks or .picks)."""
+    if not isinstance(generation, dict):
+        return []
+    out = generation.get("output")
+    source = out if isinstance(out, dict) else generation
+    picks = source.get("picks")
+    return [p for p in picks if isinstance(p, dict)] if isinstance(picks, list) else []
+
+
+def _recommended_candidate(
+    candidates: list[dict[str, Any]], picks: list[dict[str, Any]] | None
+) -> dict[str, Any] | None:
+    """The candidate the Director ranked first, matched by id. None when unresolvable."""
+    if not picks:
+        return None
+    pick_id = picks[0].get("id")
+    if pick_id is not None:
+        for candidate in candidates:
+            if candidate.get("id") == pick_id:
+                return candidate
+    return None
+
+
+def _collect_issues(audit: dict[str, Any]) -> list[str]:
+    """Publication-gate + factual issues the Director raised, for operator display."""
+    issues: list[str] = []
+    for key in ("publication_gate_issues", "factual_issues"):
+        raw = audit.get(key)
+        if isinstance(raw, list):
+            issues.extend(str(i).strip() for i in raw if str(i).strip())
+    return issues
+
+
+def _publication_holds(candidate: dict[str, Any] | None) -> list[str]:
+    """Publication-gate issues, only when the Director did NOT pass the gate."""
+    if not isinstance(candidate, dict):
+        return []
+    audit = candidate.get("director_audit")
+    if not isinstance(audit, dict) or audit.get("publication_gate_passed") is not False:
+        return []
+    issues = audit.get("publication_gate_issues")
+    return [str(i).strip() for i in issues if str(i).strip()] if isinstance(issues, list) else []
+
+
+def _verdict_line(audit: dict[str, Any]) -> str:
+    """Compact one-line Director verdict: tempo + pass/fail badges."""
+
+    def badge(flag: Any) -> str:
+        return "✅" if flag is True else ("⚠️" if flag is False else "•")
+
+    tempo = audit.get("primary_tempo") or "—"
+    return (
+        f"_Director: tempo *{tempo}* · "
+        f"voice {badge(audit.get('copy_voice_passed'))} · "
+        f"factual {badge(audit.get('factual_passed'))} · "
+        f"publish {badge(audit.get('publication_gate_passed'))}_"
+    )
+
+
+def _format_candidates(
+    candidates: list[dict[str, Any]], picks: list[dict[str, Any]] | None = None
+) -> str:
     if not candidates:
         return "_No candidates returned._"
-    lines = []
+    recommended = _recommended_candidate(candidates, picks)
+    rec_id = recommended.get("id") if recommended else None
+    blocks = []
     for idx, candidate in enumerate(candidates[:8], 1):
         text = str(candidate.get("text") or candidate)[:500]
         channel = candidate.get("channel") or candidate.get("surface") or "copy"
-        lines.append(f"*{idx}. {channel}*\n>{text}")
-    return "\n\n".join(lines)
+        star = (
+            " ⭐ Director's pick"
+            if rec_id is not None and candidate.get("id") == rec_id
+            else ""
+        )
+        lines = [f"*{idx}. {channel}*{star}"]
+        audit = candidate.get("director_audit")
+        if isinstance(audit, dict):
+            lines.append(_verdict_line(audit))
+            lines.extend(f"⚠️ {issue}" for issue in _collect_issues(audit))
+        lines.append(f">{text}")
+        blocks.append("\n".join(lines))
+    return "\n\n".join(blocks)
 
 
 def _first_candidate_text(candidates: list[dict[str, Any]]) -> str:
@@ -780,3 +890,29 @@ def _first_candidate_text(candidates: list[dict[str, Any]]) -> str:
         if text:
             return text
     return ""
+
+
+def _candidate_for_text(
+    candidates: list[dict[str, Any]], text: str
+) -> dict[str, Any] | None:
+    target = str(text).strip()
+    for candidate in candidates:
+        if str(candidate.get("text") or "").strip() == target:
+            return candidate
+    return None
+
+
+def _director_pick_text(
+    candidates: list[dict[str, Any]], picks: list[dict[str, Any]] | None
+) -> str:
+    """Ship the Director's recommended copy: matched candidate text, else pick text, else #1."""
+    recommended = _recommended_candidate(candidates, picks)
+    if recommended:
+        text = str(recommended.get("text") or "").strip()
+        if text:
+            return text
+    if picks:
+        pick_text = str(picks[0].get("text") or "").strip()
+        if pick_text:
+            return pick_text
+    return _first_candidate_text(candidates)

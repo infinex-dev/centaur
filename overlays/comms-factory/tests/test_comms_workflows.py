@@ -978,3 +978,139 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
 
     assert result == {"status": "rejected", "stage": "facts", "error": "wrong_stage"}
     assert calls == ["validate", "ground_from_tools"]
+
+
+# --- Director verdict surfacing in the candidate gate (U1/U2/U3) ---
+
+
+def _candidate(idx, *, audit=None, channel="x"):
+    cand = {"id": f"actor-x-option-{idx}", "channel": channel, "text": f"copy {idx}"}
+    if audit is not None:
+        cand["director_audit"] = audit
+    return cand
+
+
+def test_format_candidates_renders_director_verdict_and_issues():
+    import comms_release
+
+    audit = {
+        "primary_tempo": "commanding",
+        "copy_voice_passed": True,
+        "factual_passed": True,
+        "publication_gate_passed": False,
+        "publication_gate_issues": ["verify $1B is publicly defensible"],
+        "factual_issues": [],
+    }
+    out = comms_release._format_candidates([_candidate(1, audit=audit)])
+    assert "tempo *commanding*" in out
+    assert "voice ✅" in out and "factual ✅" in out and "publish ⚠️" in out
+    assert "⚠️ verify $1B is publicly defensible" in out
+
+
+def test_format_candidates_stars_director_pick_by_id():
+    import comms_release
+
+    candidates = [_candidate(1), _candidate(2)]
+    picks = [{"id": "actor-x-option-2", "text": "copy 2"}]
+    out = comms_release._format_candidates(candidates, picks)
+    # The star annotates option 2's header, not option 1's.
+    option_2_header = [ln for ln in out.splitlines() if ln.startswith("*2.")][0]
+    option_1_header = [ln for ln in out.splitlines() if ln.startswith("*1.")][0]
+    assert "Director's pick" in option_2_header
+    assert "Director's pick" not in option_1_header
+
+
+def test_format_candidates_backward_compatible_without_audit_or_picks():
+    import comms_release
+
+    candidates = [{"id": "c1", "channel": "x", "text": "hello"}]
+    out = comms_release._format_candidates(candidates)
+    assert out == "*1. x*\n>hello"  # no badges, no star — identical to legacy format
+
+
+def test_format_candidates_tolerates_empty_or_unmatched_picks():
+    import comms_release
+
+    candidates = [_candidate(1), _candidate(2)]
+    assert "Director's pick" not in comms_release._format_candidates(candidates, [])
+    unmatched = [{"id": "nope", "text": "x"}]
+    assert "Director's pick" not in comms_release._format_candidates(candidates, unmatched)
+
+
+def test_director_pick_text_ships_recommended_candidate_not_first():
+    import comms_release
+
+    candidates = [_candidate(1), _candidate(2)]
+    picks = [{"id": "actor-x-option-2", "text": "copy 2"}]
+    assert comms_release._director_pick_text(candidates, picks) == "copy 2"
+
+
+def test_director_pick_text_falls_back_to_pick_text_when_id_unmatched():
+    import comms_release
+
+    candidates = [_candidate(1)]
+    picks = [{"id": "ghost", "text": "the recommended copy"}]
+    assert comms_release._director_pick_text(candidates, picks) == "the recommended copy"
+
+
+def test_director_pick_text_falls_back_to_first_candidate_without_picks():
+    import comms_release
+
+    candidates = [_candidate(1), _candidate(2)]
+    assert comms_release._director_pick_text(candidates, None) == "copy 1"
+    assert comms_release._director_pick_text([], None) == ""
+
+
+def test_picks_from_generation_digs_envelope():
+    import comms_release
+
+    assert comms_release._picks_from_generation({"output": {"picks": [{"id": "a"}]}}) == [
+        {"id": "a"}
+    ]
+    assert comms_release._picks_from_generation({"picks": [{"id": "b"}]}) == [{"id": "b"}]
+    assert comms_release._picks_from_generation({"output": {}}) == []
+    assert comms_release._picks_from_generation(None) == []
+
+
+def test_publication_holds_only_when_gate_failed():
+    import comms_release
+
+    failed = _candidate(
+        1,
+        audit={
+            "publication_gate_passed": False,
+            "publication_gate_issues": ["confirm live", "confirm $1B"],
+        },
+    )
+    assert comms_release._publication_holds(failed) == ["confirm live", "confirm $1B"]
+    passed = _candidate(2, audit={"publication_gate_passed": True, "publication_gate_issues": ["x"]})
+    assert comms_release._publication_holds(passed) == []
+    assert comms_release._publication_holds(_candidate(3)) == []  # no director_audit
+    assert comms_release._publication_holds(None) == []
+
+
+def test_format_validation_failure_is_human_readable_not_a_dict_dump():
+    import comms_release
+
+    validation = {
+        "ok": True,
+        "passed": False,
+        "surface": "brief",
+        "failures": [
+            {"rule": "cliches", "reason": 'cliché "leverage"'},
+            {"rule": "ai-slop", "reason": "em-dash density 1 in 106 chars"},
+        ],
+    }
+    out = comms_release._format_validation_failure(validation)
+    assert "{" not in out and "'ok'" not in out  # no raw dict
+    assert "*cliches*" in out and 'cliché "leverage"' in out
+    assert "*ai-slop*" in out and "em-dash density" in out
+    assert "Rephrase" in out  # actionable guidance
+
+
+def test_format_validation_failure_falls_back_when_no_structured_failures():
+    import comms_release
+
+    out = comms_release._format_validation_failure({"ok": False, "error": "tool_unavailable"})
+    assert "tool_unavailable" in out
+    assert "{" not in out
