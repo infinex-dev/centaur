@@ -199,6 +199,93 @@ async def harness_event(
     )
 
 
+async def post_message(
+    delivery: dict[str, Any],
+    *,
+    text: str,
+    blocks: list[dict[str, Any]] | None = None,
+    metadata: dict[str, Any] | None = None,
+) -> dict[str, Any] | None:
+    if not enabled() or not is_slack_delivery(delivery):
+        return None
+    channel = channel_id(delivery)
+    ts = thread_ts(delivery)
+    if not channel:
+        return None
+    body: dict[str, Any] = {
+        "channel": channel,
+        "text": sanitize_for_slack(text),
+    }
+    if ts:
+        body["thread_ts"] = ts
+    if blocks is not None:
+        body["blocks"] = blocks
+    if metadata is not None:
+        body["metadata"] = metadata
+    return await post("/api/slack/messages", body)
+
+
+async def update_message(
+    *,
+    channel: str,
+    ts: str,
+    text: str,
+    blocks: list[dict[str, Any]] | None = None,
+    metadata: dict[str, Any] | None = None,
+) -> dict[str, Any] | None:
+    if not enabled() or not channel or not ts:
+        return None
+    body: dict[str, Any] = {
+        "channel": channel,
+        "ts": ts,
+        "text": sanitize_for_slack(text),
+    }
+    if blocks is not None:
+        body["blocks"] = blocks
+    if metadata is not None:
+        body["metadata"] = metadata
+    return await _patch("/api/slack/messages", body)
+
+
+async def _patch(
+    path: str,
+    body: dict[str, Any],
+    *,
+    timeout: httpx.Timeout | None = None,
+) -> dict[str, Any] | None:
+    base_url = _base_url()
+    api_key = _api_key()
+    if not base_url or not api_key:
+        return None
+    request_timeout = timeout or httpx.Timeout(8.0, connect=2.0)
+    try:
+        async with httpx.AsyncClient(timeout=request_timeout) as client:
+            response = await client.patch(
+                f"{base_url}{path}",
+                headers={
+                    "Authorization": f"Bearer {api_key}",
+                    "Content-Type": "application/json",
+                },
+                json=body,
+            )
+            if response.is_success:
+                text = response.text
+                if not text:
+                    return {}
+                data = response.json()
+                return data if isinstance(data, dict) else {}
+            log.warning(
+                "slackbot_call_failed",
+                path=path,
+                status=response.status_code,
+                response=response.text[:500],
+            )
+            return None
+    except Exception as exc:
+        log.warning("slackbot_call_failed", path=path, error=str(exc))
+        return None
+
+
 async def set_status(delivery: dict[str, Any], status: str) -> None:
     if not enabled() or not is_slack_delivery(delivery):
         return
