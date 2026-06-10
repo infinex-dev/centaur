@@ -1,0 +1,4 @@
+# Repositories enabled for comms-factory repo_context grounding.
+# Keep this list intentionally small so local repo-cache only clones repos covered by the PAT.
+infinex-xyz/platform
+infinex-xyz/agent-platform

@@ -78,6 +78,9 @@ deploy:
     fi
     helm upgrade --install {{release}} {{chart}} -n {{namespace}} --create-namespace -f {{dev_values}} ${extra_args[@]+"${extra_args[@]}"}
 
+comms-factory-up *args:
+    contrib/scripts/deploy-local.sh --with-comms-factory --services api,slackbot {{args}}
+
 slackbot-socket-mode:
     #!/usr/bin/env bash
     set -euo pipefail
