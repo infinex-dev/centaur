@@ -1,0 +1,528 @@
+{
+  "scenarios": [
+    {
+      "idx": 1,
+      "title": "Massive swing in NJ-2 Democratic nominee",
+      "fact": "The Democratic nominee for NJ-2 was looking very certain to be John Kavanaugh. Massive swing today toward Denise Powell. Nigel was positioned for Kavanaugh and is now on the wrong side of a sudden move."
+    },
+    {
+      "idx": 2,
+      "title": "Eurovision semi-finals \u2014 3 picks right, 1 wrong (Poland)",
+      "fact": "Nigel called Georgia, Estonia, and Montenegro \u2014 all qualified. Poland didn't qualify. Process was sound on all four picks; outcome went against him on Poland. The 'wrong is different to process' commentary opportunity."
+    },
+    {
+      "idx": 3,
+      "title": "Weekly wrap-up: 100+ positions, slightly below target",
+      "fact": "Nigel took over 100 positions this week. Results came in slightly below target. Confident to go again next week."
+    }
+  ],
+  "tempi": [
+    {
+      "bucket": "near",
+      "name": "materialistic",
+      "motor": "Punching\u2192Slashing",
+      "feel": "Strong/Quick \u2014 sudden aggressive intent, sharp declarative"
+    },
+    {
+      "bucket": "near",
+      "name": "human",
+      "motor": "Floating\u2192Gliding",
+      "feel": "Light/Sustained \u2014 slow tenderness, patient observation"
+    },
+    {
+      "bucket": "near",
+      "name": "warm",
+      "motor": "Pressing\u2192Wringing",
+      "feel": "Strong/Sustained \u2014 warm consent, extended welcome"
+    },
+    {
+      "bucket": "near",
+      "name": "cool",
+      "motor": "Dabbing\u2192Flicking",
+      "feel": "Light/Quick \u2014 pert intimacy, brisk one-liner"
+    },
+    {
+      "bucket": "stable",
+      "name": "commanding",
+      "motor": "Pressing\u2192Punching",
+      "feel": "Strong/Direct \u2014 bold resolve, position-taking"
+    },
+    {
+      "bucket": "stable",
+      "name": "receptive",
+      "motor": "Floating\u2192Flicking",
+      "feel": "Light/Flexible \u2014 welcoming tenderness"
+    },
+    {
+      "bucket": "stable",
+      "name": "practical",
+      "motor": "Wringing\u2192Slashing",
+      "feel": "Strong/Flexible \u2014 spell-binding power, analytical"
+    },
+    {
+      "bucket": "stable",
+      "name": "self-contained",
+      "motor": "Gliding\u2192Dabbing",
+      "feel": "Light/Direct \u2014 gentle deference, neutral note"
+    },
+    {
+      "bucket": "adream",
+      "name": "sombre",
+      "motor": "Pressing\u2192Punching",
+      "feel": "Strong/Bound \u2014 heavy contained emotion, gravity"
+    },
+    {
+      "bucket": "adream",
+      "name": "irradiant",
+      "motor": "Floating\u2192Flicking",
+      "feel": "Light/Free \u2014 sympathetic exultation, visible delight"
+    },
+    {
+      "bucket": "adream",
+      "name": "overpowering",
+      "motor": "Wringing\u2192Slashing",
+      "feel": "Strong/Free \u2014 full-conviction-with-emotion, manifesto"
+    },
+    {
+      "bucket": "adream",
+      "name": "diffused",
+      "motor": "Gliding\u2192Dabbing",
+      "feel": "Light/Bound \u2014 soft contained welcome"
+    },
+    {
+      "bucket": "mobile",
+      "name": "unacknowledged",
+      "motor": "Punching/Slashing",
+      "feel": "Quick/Bound \u2014 self-concealed aggression, 'we told you so'"
+    },
+    {
+      "bucket": "mobile",
+      "name": "acknowledged",
+      "motor": "Floating/Gliding",
+      "feel": "Sustained/Free \u2014 easy disclosure, open admission"
+    },
+    {
+      "bucket": "mobile",
+      "name": "revealed",
+      "motor": "Dabbing/Flicking",
+      "feel": "Quick/Free \u2014 sudden bright disclosure"
+    },
+    {
+      "bucket": "mobile",
+      "name": "concealed",
+      "motor": "Pressing/Wringing",
+      "feel": "Sustained/Bound \u2014 withheld weight"
+    },
+    {
+      "bucket": "remote",
+      "name": "egocentric",
+      "motor": "Pressing\u2192Punching",
+      "feel": "Direct/Bound \u2014 unsociable solitude, cold position"
+    },
+    {
+      "bucket": "remote",
+      "name": "altruistic",
+      "motor": "Floating\u2192Flicking",
+      "feel": "Flexible/Free \u2014 warm-distant cordiality"
+    },
+    {
+      "bucket": "remote",
+      "name": "sociable",
+      "motor": "Gliding\u2192Dabbing",
+      "feel": "Direct/Free \u2014 partner credit, ecosystem warmth"
+    },
+    {
+      "bucket": "remote",
+      "name": "unsociable",
+      "motor": "Wringing\u2192Slashing",
+      "feel": "Flexible/Bound \u2014 withdrawal-as-discipline, 'we'll be over here'"
+    },
+    {
+      "bucket": "awake",
+      "name": "acute",
+      "motor": "Punching\u2192Dabbing",
+      "feel": "Direct/Quick \u2014 acute idea-decision, sharp insight cut"
+    },
+    {
+      "bucket": "awake",
+      "name": "doubting",
+      "motor": "Floating\u2192Wringing",
+      "feel": "Flexible/Sustained \u2014 slowly dawning doubt"
+    },
+    {
+      "bucket": "awake",
+      "name": "certain",
+      "motor": "Pressing\u2192Gliding",
+      "feel": "Direct/Sustained \u2014 certain awareness, settled judgement"
+    },
+    {
+      "bucket": "awake",
+      "name": "uncertain",
+      "motor": "Flicking\u2192Slashing",
+      "feel": "Flexible/Quick \u2014 sudden new idea, what-if framing"
+    }
+  ],
+  "samples": [
+    {
+      "scenario": 1,
+      "tempo": "materialistic",
+      "sample": "Kavanaugh was the bet. Powell's the move. We're on the wrong side of it now."
+    },
+    {
+      "scenario": 1,
+      "tempo": "human",
+      "sample": "You watch these things unfold slowly, don't you. The numbers drift one way, then settle somewhere else entirely. That's Powell now."
+    },
+    {
+      "scenario": 1,
+      "tempo": "warm",
+      "sample": "We took Kavanaugh. Fair bet at the time, still is in principle. Powell's the one moving now, and we're positioned wrong, but that's how it goes when you're in the arena."
+    },
+    {
+      "scenario": 1,
+      "tempo": "cool",
+      "sample": "Powell's up. We're not. Next question."
+    },
+    {
+      "scenario": 1,
+      "tempo": "commanding",
+      "sample": "We backed Kavanaugh. The market's moved to Powell. Our position stands where it is."
+    },
+    {
+      "scenario": 1,
+      "tempo": "receptive",
+      "sample": "There's a swing happening, isn't there. Powell's pulling ahead where Kavanaugh was the cert. We're watching it come in against us."
+    },
+    {
+      "scenario": 1,
+      "tempo": "practical",
+      "sample": "The line was Kavanaugh. Powell's taken the move in a matter of hours. We're positioned for the candidate who isn't moving, which means we're analyzing what shifted and why the early read didn't hold."
+    },
+    {
+      "scenario": 1,
+      "tempo": "self-contained",
+      "sample": "Powell's the swing. Kavanaugh was ours. That's the shape of it."
+    },
+    {
+      "scenario": 1,
+      "tempo": "sombre",
+      "sample": "We're on Kavanaugh. Powell's the one now. Heavy day when the certainty cracks like that."
+    },
+    {
+      "scenario": 1,
+      "tempo": "irradiant",
+      "sample": "Look at Powell go! Wasn't on our card, was it. Kavanaugh was the one we had, and now here's this magnificent swing we're entirely on the wrong side of."
+    },
+    {
+      "scenario": 1,
+      "tempo": "overpowering",
+      "sample": "Kavanaugh was the position. Powell is the move, the absolute surge that's come from nowhere and we are categorically on the wrong side of it. This is what happens when the ground shifts: you're either positioned for it or you're not, and we're not."
+    },
+    {
+      "scenario": 1,
+      "tempo": "diffused",
+      "sample": "There's Powell. There's Kavanaugh. We're with the second one, market's with the first."
+    },
+    {
+      "scenario": 1,
+      "tempo": "unacknowledged",
+      "sample": "Kavanaugh was sound. Still is. Powell's moved, market's moved, and we're where we are."
+    },
+    {
+      "scenario": 1,
+      "tempo": "acknowledged",
+      "sample": "We had Kavanaugh down as the nominee. Powell's swung the market today and we're positioned wrong for it. Happens when you take a view early."
+    },
+    {
+      "scenario": 1,
+      "tempo": "revealed",
+      "sample": "Powell! Just like that. We're on Kavanaugh and the entire thing's turned."
+    },
+    {
+      "scenario": 1,
+      "tempo": "concealed",
+      "sample": "The position is Kavanaugh. It remains Kavanaugh. Powell's movement is noted."
+    },
+    {
+      "scenario": 1,
+      "tempo": "egocentric",
+      "sample": "We took the Kavanaugh line. Powell's the market. Our read stands separate."
+    },
+    {
+      "scenario": 1,
+      "tempo": "altruistic",
+      "sample": "Powell's the move, fair play to those who caught it. We were on Kavanaugh, different read entirely, and we'll see how it settles."
+    },
+    {
+      "scenario": 1,
+      "tempo": "sociable",
+      "sample": "Credit to whoever positioned for Powell early. We took Kavanaugh, and that's left us on the wrong side of today's swing."
+    },
+    {
+      "scenario": 1,
+      "tempo": "unsociable",
+      "sample": "Powell's taken the market. We're over here with Kavanaugh. That's the distance today."
+    },
+    {
+      "scenario": 1,
+      "tempo": "acute",
+      "sample": "Powell. Now. We're not."
+    },
+    {
+      "scenario": 1,
+      "tempo": "doubting",
+      "sample": "Was Kavanaugh the right read at all, though. Watching Powell move like this, you start to wonder whether the early signals were ever as firm as they looked."
+    },
+    {
+      "scenario": 1,
+      "tempo": "certain",
+      "sample": "We took Kavanaugh. The market's moved to Powell. Our position reflects a different view of the field."
+    },
+    {
+      "scenario": 1,
+      "tempo": "uncertain",
+      "sample": "What if Powell was always the one? What if Kavanaugh's early numbers were the outlier, not today's swing?"
+    },
+    {
+      "scenario": 2,
+      "tempo": "materialistic",
+      "sample": "Georgia, Estonia, Montenegro \u2014 through. Poland \u2014 out. Three right, one wrong."
+    },
+    {
+      "scenario": 2,
+      "tempo": "human",
+      "sample": "You watch the qualifiers come in one by one, don't you. Georgia, Estonia, Montenegro \u2014 all through. Poland didn't make it, but the process was sound on all four."
+    },
+    {
+      "scenario": 2,
+      "tempo": "warm",
+      "sample": "Georgia, Estonia, Montenegro qualified. Poland didn't. We called all four the same way, same process, same reasoning. Three went our way, one didn't, and that's how semi-finals go."
+    },
+    {
+      "scenario": 2,
+      "tempo": "cool",
+      "sample": "Three through, one out. Poland's the miss."
+    },
+    {
+      "scenario": 2,
+      "tempo": "commanding",
+      "sample": "Georgia, Estonia, Montenegro \u2014 qualified. Poland \u2014 didn't. The process was identical across all four picks."
+    },
+    {
+      "scenario": 2,
+      "tempo": "receptive",
+      "sample": "Three qualifiers came through for us, didn't they. Poland's the one that went the other way. Process was the same on all four."
+    },
+    {
+      "scenario": 2,
+      "tempo": "practical",
+      "sample": "Georgia, Estonia, and Montenegro all qualified as we called them. Poland went out. Same methodology across all four picks, which tells you the process held but the outcome split. Wrong is different to process."
+    },
+    {
+      "scenario": 2,
+      "tempo": "self-contained",
+      "sample": "Three through: Georgia, Estonia, Montenegro. Poland out. Same read on all of them."
+    },
+    {
+      "scenario": 2,
+      "tempo": "sombre",
+      "sample": "Three qualifiers \u2014 Georgia, Estonia, Montenegro. Poland's the one we lost. You take the same care on all four and still one doesn't land."
+    },
+    {
+      "scenario": 2,
+      "tempo": "irradiant",
+      "sample": "Georgia! Estonia! Montenegro! All through, exactly as we called them. Poland didn't qualify, but look at those three \u2014 same process across the board, three out of four landed beautifully."
+    },
+    {
+      "scenario": 2,
+      "tempo": "overpowering",
+      "sample": "Georgia, Estonia, Montenegro \u2014 all qualified, all called correctly, all executed on the same analytical framework. Poland went out. Same process, different outcome, and that's the entire point: wrong on outcome doesn't mean wrong on process."
+    },
+    {
+      "scenario": 2,
+      "tempo": "diffused",
+      "sample": "Three through, one out. Poland's the miss, the others came in."
+    },
+    {
+      "scenario": 2,
+      "tempo": "unacknowledged",
+      "sample": "Georgia, Estonia, Montenegro qualified. Poland didn't. Process was sound across the lot."
+    },
+    {
+      "scenario": 2,
+      "tempo": "acknowledged",
+      "sample": "We called Georgia, Estonia, and Montenegro \u2014 all qualified. Poland went out. Same process on all four, so the miss on Poland doesn't change the framework."
+    },
+    {
+      "scenario": 2,
+      "tempo": "revealed",
+      "sample": "Three through! Georgia, Estonia, Montenegro. Poland's out, but look at that hit rate."
+    },
+    {
+      "scenario": 2,
+      "tempo": "concealed",
+      "sample": "The picks were Georgia, Estonia, Montenegro, Poland. Three qualified. Process was consistent throughout."
+    },
+    {
+      "scenario": 2,
+      "tempo": "egocentric",
+      "sample": "We called four. Three came through. Poland's the outlier."
+    },
+    {
+      "scenario": 2,
+      "tempo": "altruistic",
+      "sample": "Georgia, Estonia, Montenegro all made it through \u2014 credit to the delegations, all strong performances. Poland went out, but that's the semi-final draw for you. Same process on our end across all four."
+    },
+    {
+      "scenario": 2,
+      "tempo": "sociable",
+      "sample": "Hats off to Georgia, Estonia, and Montenegro \u2014 we called them and they delivered. Poland's the one we got wrong, but the process was identical on all four picks."
+    },
+    {
+      "scenario": 2,
+      "tempo": "unsociable",
+      "sample": "Three picks came through. Poland didn't. We're over here with our process either way."
+    },
+    {
+      "scenario": 2,
+      "tempo": "acute",
+      "sample": "Three qualifiers. Poland out. Process held."
+    },
+    {
+      "scenario": 2,
+      "tempo": "doubting",
+      "sample": "Poland was a sound pick on paper, wasn't it. But watching it not qualify, you wonder whether the televote dynamics were ever there at all, or if we read the room wrong from the start."
+    },
+    {
+      "scenario": 2,
+      "tempo": "certain",
+      "sample": "Georgia, Estonia, and Montenegro qualified. Poland didn't. Process was sound on all four picks. Wrong outcome on one doesn't change that."
+    },
+    {
+      "scenario": 2,
+      "tempo": "uncertain",
+      "sample": "What if Poland's miss points to something we're not seeing in the others? What if the framework that got us three right has a blind spot we haven't clocked yet?"
+    },
+    {
+      "scenario": 3,
+      "tempo": "materialistic",
+      "sample": "Over 100 positions this week. Slightly below target. Back at it next week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "human",
+      "sample": "You take over a hundred positions in a week and watch them settle, don't you. Came in a bit below target, but that's the rhythm. Go again next week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "warm",
+      "sample": "We took over 100 positions this week. Results came in slightly below target, but that's the nature of volume. We're confident to go again next week with the same approach."
+    },
+    {
+      "scenario": 3,
+      "tempo": "cool",
+      "sample": "100+ positions. Below target. Next week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "commanding",
+      "sample": "Over 100 positions taken this week. Results: slightly below target. Next week we go again."
+    },
+    {
+      "scenario": 3,
+      "tempo": "receptive",
+      "sample": "That's over 100 positions closed out this week, isn't it. Slightly below target, but we're ready to go again next week with the same setup."
+    },
+    {
+      "scenario": 3,
+      "tempo": "practical",
+      "sample": "Over 100 positions this week. Slightly below target on the returns. Volume was there, process held, outcomes just fell a bit short. Analyzing the variance and going again next week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "self-contained",
+      "sample": "100+ positions. Below target. That's the week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "sombre",
+      "sample": "Over 100 positions taken. Slightly below target on returns. You put the volume in and still come up a bit short \u2014 that's the weight of it."
+    },
+    {
+      "scenario": 3,
+      "tempo": "irradiant",
+      "sample": "Over 100 positions this week! Slightly below target on returns, but look at that volume. We're going again next week with the same confidence."
+    },
+    {
+      "scenario": 3,
+      "tempo": "overpowering",
+      "sample": "Over 100 positions taken this week. Results came in slightly below target, and that's fine because the process was sound, the volume was there, and we are absolutely going again next week. This is what consistency looks like."
+    },
+    {
+      "scenario": 3,
+      "tempo": "diffused",
+      "sample": "100+ positions. A bit below target. Next week's next week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "unacknowledged",
+      "sample": "Over 100 positions this week. Below target. Process was sound."
+    },
+    {
+      "scenario": 3,
+      "tempo": "acknowledged",
+      "sample": "We took over 100 positions this week. Returns came in slightly below target. That's the reality of volume trading, and we're confident to go again next week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "revealed",
+      "sample": "100+ positions! Below target, but look at the volume. Next week we go again."
+    },
+    {
+      "scenario": 3,
+      "tempo": "concealed",
+      "sample": "The week's positions exceeded 100. Returns were slightly below target. Process continues."
+    },
+    {
+      "scenario": 3,
+      "tempo": "egocentric",
+      "sample": "We took over 100 positions. Slightly below target. Our read continues next week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "altruistic",
+      "sample": "Over 100 positions this week \u2014 decent volume across the board. Slightly below target, but that's the game. Everyone who was positioned alongside us knows how these weeks go. Next week we're back at it."
+    },
+    {
+      "scenario": 3,
+      "tempo": "sociable",
+      "sample": "Over 100 positions taken this week. Slightly below target, but that's how it goes with volume. Thanks to everyone tracking along \u2014 we'll be back at it next week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "unsociable",
+      "sample": "Over 100 positions. Below target. We're over here going again next week."
+    },
+    {
+      "scenario": 3,
+      "tempo": "acute",
+      "sample": "100+ positions. Below target. Next."
+    },
+    {
+      "scenario": 3,
+      "tempo": "doubting",
+      "sample": "Over 100 positions this week, slightly below target. You start to wonder whether the volume itself is diluting the edge, or if we're just in a variance patch that'll settle."
+    },
+    {
+      "scenario": 3,
+      "tempo": "certain",
+      "sample": "We took over 100 positions this week. Results came in slightly below target. The process is sound. Next week we go again."
+    },
+    {
+      "scenario": 3,
+      "tempo": "uncertain",
+      "sample": "What if below target this week means something's shifting? What if the volume's right but the edge has compressed and we're not seeing it yet?"
+    }
+  ],
+  "Q1": "The old dude that lives in the pub. Newspapers next to him, a phone he places bets with.\nDispassionate. Used to be laughed at for being wrong; now he doesn't care \u2014 has been proved right\nso many times the past humiliation no longer stings. The rock in the middle of other people's\nriver: settled, immovable, water flows around him. Old-school analog tools. Pub-fixture register \u2014\nBritish, dry, vernacular, doesn't argue."
+}

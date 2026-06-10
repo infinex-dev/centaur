@@ -1,0 +1,1793 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Actor/Director Run Review - 01KS1CNF123GNFQBAV4S1P5VT0</title>
+  <style>
+    :root { color-scheme: light; --ink:#151515; --muted:#666; --rule:#ddd; --paper:#fff; --canvas:#f7f7f4; --pass:#0a7a35; --fail:#b42318; }
+    body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--canvas); }
+    main { max-width: 1180px; margin: 0 auto; padding: 32px 20px 80px; }
+    h1, h2, h3, h4, h5 { margin: 0 0 8px; }
+    h1 { font-size: 28px; }
+    h2 { margin-top: 36px; padding-top: 24px; border-top: 2px solid var(--ink); }
+    h3 { margin-top: 24px; }
+    p, li { line-height: 1.45; }
+    table { border-collapse: collapse; width: 100%; background: var(--paper); margin: 16px 0 28px; }
+    th, td { border: 1px solid var(--rule); padding: 8px; text-align: left; vertical-align: top; font-size: 13px; }
+    th { background: #eee; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
+    details { background: var(--paper); border: 1px solid var(--rule); border-radius: 6px; margin: 10px 0; }
+    summary { cursor: pointer; padding: 10px 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--muted); }
+    pre { margin: 0; padding: 12px; white-space: pre-wrap; overflow: auto; max-height: 520px; font-size: 12px; line-height: 1.45; border-top: 1px solid var(--rule); }
+    blockquote { margin: 0 0 12px; padding: 12px; border-left: 4px solid var(--ink); background: #fafafa; white-space: pre-wrap; font-size: 16px; line-height: 1.45; }
+    .meta, .director-head { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+    .badge { display: inline-block; border: 1px solid var(--rule); border-radius: 999px; padding: 2px 8px; font-size: 11px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #fff; color: var(--muted); }
+    .badge.pass { border-color: #b7e2c4; color: var(--pass); background: #effaf2; }
+    .badge.fail { border-color: #f1b8b2; color: var(--fail); background: #fff3f1; }
+    .muted { color: var(--muted); }
+    .channel { border: 1px solid var(--rule); background: #fbfbf9; border-radius: 8px; padding: 16px; margin-top: 16px; }
+    .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px; }
+	    .option { border: 1px solid var(--rule); background: var(--paper); border-radius: 6px; padding: 12px; }
+	    .option.selected { outline: 2px solid #222; }
+	    .motion-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; padding: 0 12px 12px; }
+	    .motion-grid > div { border: 1px solid var(--rule); background: #fafafa; padding: 10px; border-radius: 6px; }
+	    .proof { border: 2px solid var(--rule); background: var(--paper); border-radius: 8px; padding: 14px 16px; margin: 16px 0 28px; }
+	    .proof.fail { border-color: var(--fail); background: #fff3f1; }
+	  </style>
+	</head>
+	<body>
+	  <main>
+	    <h1>Actor/Director Run Review</h1>
+	    <p class="muted">01KS1CNF123GNFQBAV4S1P5VT0</p>
+	    <section class="proof ">
+	      <h2>Pipeline Identity</h2>
+	      <p><span class="badge pass">pipeline-3</span> Pipeline 3 - Actor/Director <span class="badge pass">proof passed</span></p>
+	      <p class="muted">entrypoint: orchestrateActorDirectorWithRetries() · generated 2026-05-28T07:27:57.944Z</p>
+	      
+	      <table>
+	        <thead><tr><th>Proof field</th><th>Status</th><th>Evidence</th></tr></thead>
+	        <tbody><tr><td>Env contains HARNESS_GENERATOR_ARCH=actor</td><td><span class="badge pass">pass</span></td><td>HARNESS_GENERATOR_ARCH=actor</td></tr><tr><td>Entry point is orchestrateActorDirectorWithRetries()</td><td><span class="badge pass">pass</span></td><td>orchestrateActorDirectorWithRetries()</td></tr><tr><td>DB has actor_attempts rows</td><td><span class="badge pass">pass</span></td><td>2</td></tr><tr><td>DB has actor_run_events rows</td><td><span class="badge pass">pass</span></td><td>52</td></tr><tr><td>Candidate rationale contains &quot;Actor option N&quot;</td><td><span class="badge pass">pass</span></td><td>present</td></tr><tr><td>Director audit JSON contains copy_voice_passed, factual_passed, publication_gate_passed</td><td><span class="badge pass">pass</span></td><td>present</td></tr></tbody>
+	      </table>
+	    </section>
+	    <h2>Director Read Summary</h2>
+    <table>
+      <thead><tr><th>Attempt</th><th>Channel</th><th>Tempo</th><th>Confidence</th><th>Director</th><th>Infinex Fit</th><th>Copy/Voice</th><th>Factual</th><th>Publish</th><th>Drive Read</th></tr></thead>
+      <tbody><tr>
+    <td>4</td>
+    <td>in-product</td>
+    <td><span class="badge pass">self-contained</span></td>
+    <td>0.45</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>doing</td>
+  </tr><tr>
+    <td>4</td>
+    <td>in-product</td>
+    <td><span class="badge pass">self-contained</span></td>
+    <td>0.45</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>doing</td>
+  </tr><tr>
+    <td>4</td>
+    <td>web</td>
+    <td><span class="badge pass">commanding</span></td>
+    <td>0.62</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>spell</td>
+  </tr><tr>
+    <td>4</td>
+    <td>web</td>
+    <td><span class="badge pass">commanding</span></td>
+    <td>0.62</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>spell</td>
+  </tr><tr>
+    <td>4</td>
+    <td>web</td>
+    <td><span class="badge pass">commanding</span></td>
+    <td>0.62</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td>spell</td>
+  </tr><tr>
+    <td>5</td>
+    <td>in-product</td>
+    <td><span class="badge pass">self-contained</span></td>
+    <td>0.45</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>doing</td>
+  </tr><tr>
+    <td>5</td>
+    <td>in-product</td>
+    <td><span class="badge pass">self-contained</span></td>
+    <td>0.45</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>doing</td>
+  </tr><tr>
+    <td>5</td>
+    <td>in-product</td>
+    <td><span class="badge pass">self-contained</span></td>
+    <td>0.55</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>doing</td>
+  </tr><tr>
+    <td>5</td>
+    <td>web</td>
+    <td><span class="badge pass">commanding</span></td>
+    <td>0.55</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>spell</td>
+  </tr><tr>
+    <td>5</td>
+    <td>web</td>
+    <td><span class="badge pass">commanding</span></td>
+    <td>0.62</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td>doing</td>
+  </tr><tr>
+    <td>5</td>
+    <td>x</td>
+    <td><span class="badge pass">commanding</span></td>
+    <td>0.72</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>spell</td>
+  </tr><tr>
+    <td>5</td>
+    <td>x</td>
+    <td><span class="badge pass">commanding</span></td>
+    <td>0.72</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>spell</td>
+  </tr><tr>
+    <td>5</td>
+    <td>x</td>
+    <td><span class="badge pass">commanding</span></td>
+    <td>0.62</td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">legal</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge pass">pass</span></td>
+    <td><span class="badge fail">warn</span></td>
+    <td>spell</td>
+  </tr></tbody>
+    </table>
+    <h2>Event Log</h2>
+    <table>
+      <thead><tr><th>Time</th><th>Attempt</th><th>Channel</th><th>Event</th><th>Message</th></tr></thead>
+      <tbody><tr><td>2026-05-28T07:16:24.087Z</td><td></td><td></td><td>run_started</td><td>Actor/Director run started for x, web, in-product</td></tr><tr><td>2026-05-28T07:16:24.089Z</td><td>1</td><td></td><td>actor_started</td><td>Actor attempt 1 started</td></tr><tr><td>2026-05-28T07:17:55.823Z</td><td>1</td><td></td><td>actor_completed</td><td>Actor attempt 1 returned 9 candidate option(s)</td></tr><tr><td>2026-05-28T07:17:55.827Z</td><td>1</td><td>x</td><td>script_validation_completed</td><td>x script validation failed</td></tr><tr><td>2026-05-28T07:17:55.828Z</td><td>1</td><td>x</td><td>script_validation_completed</td><td>x script validation failed</td></tr><tr><td>2026-05-28T07:17:55.829Z</td><td>1</td><td>x</td><td>script_validation_completed</td><td>x script validation failed</td></tr><tr><td>2026-05-28T07:17:55.830Z</td><td>1</td><td>web</td><td>director_started</td><td>web sent to blind Director</td></tr><tr><td>2026-05-28T07:17:55.830Z</td><td>1</td><td>web</td><td>script_validation_completed</td><td>web script validation passed</td></tr><tr><td>2026-05-28T07:18:35.451Z</td><td>1</td><td>web</td><td>director_completed</td><td>web Director passed as commanding</td></tr><tr><td>2026-05-28T07:18:35.464Z</td><td>1</td><td>web</td><td>script_validation_completed</td><td>web script validation passed</td></tr><tr><td>2026-05-28T07:18:35.464Z</td><td>1</td><td>web</td><td>director_started</td><td>web sent to blind Director</td></tr><tr><td>2026-05-28T07:19:17.169Z</td><td>1</td><td>web</td><td>director_completed</td><td>web Director passed as commanding</td></tr><tr><td>2026-05-28T07:19:17.170Z</td><td>1</td><td>web</td><td>director_started</td><td>web sent to blind Director</td></tr><tr><td>2026-05-28T07:19:17.170Z</td><td>1</td><td>web</td><td>script_validation_completed</td><td>web script validation passed</td></tr><tr><td>2026-05-28T07:19:57.003Z</td><td>1</td><td>web</td><td>director_completed</td><td>web Director passed as commanding</td></tr><tr><td>2026-05-28T07:19:57.005Z</td><td>1</td><td>in-product</td><td>script_validation_completed</td><td>in-product script validation passed</td></tr><tr><td>2026-05-28T07:19:57.005Z</td><td>1</td><td>in-product</td><td>director_started</td><td>in-product sent to blind Director</td></tr><tr><td>2026-05-28T07:20:29.628Z</td><td>1</td><td>in-product</td><td>director_completed</td><td>in-product Director passed as self-contained</td></tr><tr><td>2026-05-28T07:20:29.629Z</td><td>1</td><td>in-product</td><td>script_validation_completed</td><td>in-product script validation passed</td></tr><tr><td>2026-05-28T07:20:29.630Z</td><td>1</td><td>in-product</td><td>director_started</td><td>in-product sent to blind Director</td></tr><tr><td>2026-05-28T07:21:08.742Z</td><td>1</td><td>in-product</td><td>director_completed</td><td>in-product Director passed as self-contained</td></tr><tr><td>2026-05-28T07:21:08.745Z</td><td>1</td><td>in-product</td><td>script_validation_completed</td><td>in-product script validation failed</td></tr><tr><td>2026-05-28T07:21:08.748Z</td><td>1</td><td></td><td>attempt_completed</td><td>Attempt 1 completed with 2/3 channel pick(s)</td></tr><tr><td>2026-05-28T07:21:08.748Z</td><td>2</td><td></td><td>actor_started</td><td>Actor attempt 2 started</td></tr><tr><td>2026-05-28T07:22:29.850Z</td><td>2</td><td></td><td>actor_completed</td><td>Actor attempt 2 returned 9 candidate option(s)</td></tr><tr><td>2026-05-28T07:22:29.851Z</td><td>2</td><td>x</td><td>script_validation_completed</td><td>x script validation passed</td></tr><tr><td>2026-05-28T07:22:29.852Z</td><td>2</td><td>x</td><td>director_started</td><td>x sent to blind Director</td></tr><tr><td>2026-05-28T07:23:19.760Z</td><td>2</td><td>x</td><td>director_completed</td><td>x Director passed as commanding</td></tr><tr><td>2026-05-28T07:23:19.761Z</td><td>2</td><td>x</td><td>script_validation_completed</td><td>x script validation passed</td></tr><tr><td>2026-05-28T07:23:19.761Z</td><td>2</td><td>x</td><td>director_started</td><td>x sent to blind Director</td></tr><tr><td>2026-05-28T07:24:09.604Z</td><td>2</td><td>x</td><td>director_completed</td><td>x Director passed as commanding</td></tr><tr><td>2026-05-28T07:24:09.605Z</td><td>2</td><td>x</td><td>director_started</td><td>x sent to blind Director</td></tr><tr><td>2026-05-28T07:24:09.605Z</td><td>2</td><td>x</td><td>script_validation_completed</td><td>x script validation passed</td></tr><tr><td>2026-05-28T07:25:02.025Z</td><td>2</td><td>web</td><td>script_validation_completed</td><td>web script validation passed</td></tr><tr><td>2026-05-28T07:25:02.025Z</td><td>2</td><td>x</td><td>director_completed</td><td>x Director passed as commanding</td></tr><tr><td>2026-05-28T07:25:02.027Z</td><td>2</td><td>web</td><td>director_started</td><td>web sent to blind Director</td></tr><tr><td>2026-05-28T07:25:34.410Z</td><td>2</td><td>web</td><td>director_completed</td><td>web Director passed as commanding</td></tr><tr><td>2026-05-28T07:25:34.412Z</td><td>2</td><td>web</td><td>script_validation_completed</td><td>web script validation failed</td></tr><tr><td>2026-05-28T07:25:34.413Z</td><td>2</td><td>web</td><td>director_started</td><td>web sent to blind Director</td></tr><tr><td>2026-05-28T07:25:34.413Z</td><td>2</td><td>web</td><td>script_validation_completed</td><td>web script validation passed</td></tr><tr><td>2026-05-28T07:26:18.367Z</td><td>2</td><td>web</td><td>director_completed</td><td>web Director passed as commanding</td></tr><tr><td>2026-05-28T07:26:18.369Z</td><td>2</td><td>in-product</td><td>script_validation_completed</td><td>in-product script validation passed</td></tr><tr><td>2026-05-28T07:26:18.369Z</td><td>2</td><td>in-product</td><td>director_started</td><td>in-product sent to blind Director</td></tr><tr><td>2026-05-28T07:26:47.129Z</td><td>2</td><td>in-product</td><td>director_completed</td><td>in-product Director passed as self-contained</td></tr><tr><td>2026-05-28T07:26:47.131Z</td><td>2</td><td>in-product</td><td>script_validation_completed</td><td>in-product script validation passed</td></tr><tr><td>2026-05-28T07:26:47.132Z</td><td>2</td><td>in-product</td><td>director_started</td><td>in-product sent to blind Director</td></tr><tr><td>2026-05-28T07:27:20.500Z</td><td>2</td><td>in-product</td><td>director_completed</td><td>in-product Director passed as self-contained</td></tr><tr><td>2026-05-28T07:27:20.501Z</td><td>2</td><td>in-product</td><td>script_validation_completed</td><td>in-product script validation passed</td></tr><tr><td>2026-05-28T07:27:20.501Z</td><td>2</td><td>in-product</td><td>director_started</td><td>in-product sent to blind Director</td></tr><tr><td>2026-05-28T07:27:57.928Z</td><td>2</td><td>in-product</td><td>director_completed</td><td>in-product Director passed as self-contained</td></tr><tr><td>2026-05-28T07:27:57.931Z</td><td>2</td><td></td><td>attempt_completed</td><td>Attempt 2 completed with 3/3 channel pick(s)</td></tr><tr><td>2026-05-28T07:27:57.932Z</td><td></td><td></td><td>run_completed</td><td>Actor/Director run completed</td></tr></tbody>
+    </table>
+    <section class="attempt">
+    <h2>Attempt 4</h2>
+    <div class="meta">
+      <span class="badge ">anthropic</span>
+      <span class="badge ">actor-memory-v1</span>
+      <span class="badge ">f33b3b22173f</span>
+      <span class="badge ">channels [&quot;x&quot;,&quot;web&quot;,&quot;in-product&quot;]</span>
+    </div>
+    
+    <details><summary>Actor warm-up / rehearsal</summary><pre>{
+  &quot;mode&quot;: &quot;scene_rehearsal&quot;,
+  &quot;scene_rehearsal&quot;: {
+    &quot;given_circumstances&quot;: &quot;I've spent years in the old order books — bank desks, equities, perps. I already brought perps trading onto Infinex via Hyperliquid. Now the same orderbook architecture opens for spot. The reader has been swidging tokens through routers; I'm telling them there's now a real book underneath, the same one they already trust for perps. No urgency. The decision is already made — the venue is here.&quot;,
+    &quot;reader_scene_partner&quot;: &quot;Someone who already trades perps on Infinex via Hyperliquid, or who has been doing spot via swap-routing and accepting the slippage as the cost of doing business. They are not new to crypto. They do not need to be sold on CLOBs.&quot;,
+    &quot;playable_objective&quot;: &quot;to extend the book they already know onto spot&quot;,
+    &quot;false_actions_rejected&quot;: [
+      {
+        &quot;action&quot;: &quot;to hype&quot;,
+        &quot;reason&quot;: &quot;Passion drift — manufactures urgency where the decision is already taken.&quot;
+      },
+      {
+        &quot;action&quot;: &quot;to convert&quot;,
+        &quot;reason&quot;: &quot;Treats the reader as a skeptic who needs persuading; they are already inside.&quot;
+      },
+      {
+        &quot;action&quot;: &quot;to announce&quot;,
+        &quot;reason&quot;: &quot;Pure Doing. Reads as press-release surface, not as a trader showing a peer the new venue.&quot;
+      },
+      {
+        &quot;action&quot;: &quot;to celebrate&quot;,
+        &quot;reason&quot;: &quot;Off-character register. I don't congratulate myself; I open the door.&quot;
+      }
+    ],
+    &quot;rehearsal_passes&quot;: [
+      {
+        &quot;pass&quot;: 1,
+        &quot;action&quot;: &quot;to extend&quot;,
+        &quot;text_or_moment&quot;: &quot;Spot CLOB on Hyperliquid, now live&quot;,
+        &quot;self_note&quot;: &quot;I want the reader to feel this as a continuation of perps, not a separate launch. The word 'now' should sit calm, not breathless.&quot;
+      },
+      {
+        &quot;pass&quot;: 2,
+        &quot;action&quot;: &quot;to extend&quot;,
+        &quot;text_or_moment&quot;: &quot;the same orderbook as your perps, for spot&quot;,
+        &quot;self_note&quot;: &quot;I lean on 'same.' That's the through-line. The reader recognizes the architecture before they read the markets.&quot;
+      },
+      {
+        &quot;pass&quot;: 3,
+        &quot;action&quot;: &quot;to name&quot;,
+        &quot;text_or_moment&quot;: &quot;HYPE, UBTC, UETH, USOL, UZEC, PURR&quot;,
+        &quot;self_note&quot;: &quot;I list. I don't sell each ticker. The list is evidence of depth, not a menu of features.&quot;
+      },
+      {
+        &quot;pass&quot;: 4,
+        &quot;action&quot;: &quot;to refuse&quot;,
+        &quot;text_or_moment&quot;: &quot;no 'finally,' no 'introducing,' no scarcity&quot;,
+        &quot;self_note&quot;: &quot;I reject anything that admits a wait or stages a reveal. The book was always going to come; it's here.&quot;
+      }
+    ],
+    &quot;final_playable_state&quot;: &quot;Steady. I'm holding a door open for someone who already knows the room. The line is delivered like a colleague's note, not a marketing push.&quot;
+  },
+  &quot;notes&quot;: [
+    &quot;Hold the through-line 'same book, now for spot.' That is the meaning of the release.&quot;,
+    &quot;Resist listing all six tickers in every channel — web wants compression, in-product wants action, only X gets the full list.&quot;,
+    &quot;Sub-accounts (Spot vs Perps) are real product facts but belong in-product, not in headline copy.&quot;
+  ],
+  &quot;warmed_state&quot;: &quot;I am the banker who built the better venue. The book opened for perps. Today it opens for spot. I tell the reader once, evenly, and step back.&quot;
+}</pre></details>
+    <details open><summary>Table work</summary><pre>{
+  &quot;thesis&quot;: &quot;The same orderbook that runs perps now runs spot. The router era is over for the markets that matter; there is a real book underneath.&quot;,
+  &quot;through_action&quot;: &quot;to extend the orderbook onto spot&quot;,
+  &quot;obstacle&quot;: &quot;Reader assumes 'spot on Infinex' still means swap-routing (swidge), or assumes this is another aggregator. The word 'spot' is cheap; the word 'CLOB' has to do work without being technical theatre.&quot;,
+  &quot;reader_prior&quot;: &quot;I've been swidging spot tokens on Infinex. I trade perps on Hyperliquid through Infinex. I accept the routing tax on spot as the cost of staying in one place.&quot;,
+  &quot;lining&quot;: &quot;surface: a calm notice that the book is open. underneath: the routing workaround is over for the markets that count; you can stop paying that tax.&quot;,
+  &quot;not_the_point&quot;: &quot;Avoid '298 markets,' avoid TVL bragging, avoid framing this as competing with CEXes, avoid urgency vocabulary.&quot;,
+  &quot;channel_beat_plans&quot;: {
+    &quot;x&quot;: [
+      {
+        &quot;verb&quot;: &quot;to extend&quot;,
+        &quot;working_action&quot;: &quot;pressing&quot;,
+        &quot;physical_score&quot;: &quot;Steady declarative weight. The line plants the venue without effort spike.&quot;,
+        &quot;micro_objective&quot;: &quot;to lay the book down&quot;,
+        &quot;obstacle_local&quot;: &quot;Reader scrolling past another 'live now' tweet.&quot;,
+        &quot;shadow_move&quot;: &quot;none — keep it clean&quot;
+      },
+      {
+        &quot;verb&quot;: &quot;to name&quot;,
+        &quot;working_action&quot;: &quot;gliding&quot;,
+        &quot;physical_score&quot;: &quot;Even-tempo enumeration of tickers. Listed, not pitched.&quot;,
+        &quot;micro_objective&quot;: &quot;to show depth without selling each line&quot;,
+        &quot;obstacle_local&quot;: &quot;Listing risks reading as feature-spam.&quot;
+      }
+    ],
+    &quot;web&quot;: [
+      {
+        &quot;verb&quot;: &quot;to extend&quot;,
+        &quot;working_action&quot;: &quot;pressing&quot;,
+        &quot;physical_score&quot;: &quot;Single declarative surface. Weight without acceleration.&quot;,
+        &quot;micro_objective&quot;: &quot;to state the venue once&quot;,
+        &quot;obstacle_local&quot;: &quot;Reader expects either a hero pitch or technical jargon; deliver neither.&quot;
+      }
+    ],
+    &quot;in-product&quot;: [
+      {
+        &quot;verb&quot;: &quot;to open&quot;,
+        &quot;working_action&quot;: &quot;gliding&quot;,
+        &quot;physical_score&quot;: &quot;A compact UI label. Direct, light, finished.&quot;,
+        &quot;micro_objective&quot;: &quot;to make the action obvious&quot;,
+        &quot;obstacle_local&quot;: &quot;Sub-account model is new — clarity must beat cleverness.&quot;
+      }
+    ]
+  }
+}</pre></details>
+    <section class="channel">
+        <h3>x <span class="badge ">Actor selected 1</span></h3>
+        <p class="muted">Headline plants the venue, the list sits as evidence, and the closing clause names the through-line ('same orderbook as your perps, now for spot'). It carries the meaning of the release in two beats without urgency-vocabulary and without staging a reveal.</p>
+        <div class="options">
+          <article class="option selected">
+            <h4>Option 1 - Actor selected <span class="badge fail">script fail</span> </h4>
+            <blockquote>Spot CLOB on Hyperliquid is live on Infinex.
+
+HYPE, UBTC, UETH, USOL, UZEC, PURR and more — the same orderbook as your perps, now for spot.</blockquote>
+            <h5>Rationale</h5>
+            <p>Headline plants the book. List is evidence. Closing clause names the through-line: same venue, new side. No urgency vocabulary, no hype-theatre.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>Spot CLOB on Hyperliquid is live on Infinex.</q><br><span class="muted">Declarative weight; the venue is stated as fact, not staged as reveal.</span></li><li><b>gliding</b> / to name: <q>HYPE, UBTC, UETH, USOL, UZEC, PURR and more</q><br><span class="muted">Even-tempo enumeration; tickers listed without per-item emphasis.</span></li><li><b>pressing</b> / to extend: <q>the same orderbook as your perps, now for spot.</q><br><span class="muted">Returns weight to the through-line: this is continuation, not novelty.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;Hyperliquid spot market: HYPE/USDC — $97.57M 24h volume (highest; native HL token, no U-prefix)&quot;,
+    &quot;Hyperliquid spot market: UBTC/USDC (Unit Bitcoin, wrapped BTC) — $26.91M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UETH/USDC (Unit Ethereum, wrapped ETH) — $4.21M 24h volume&quot;,
+    &quot;Hyperliquid spot market: USOL/USDC (Unit Solana, wrapped SOL) — $2.73M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UZEC/USDC (Unit Zcash, wrapped ZEC) — $8.39M 24h volume&quot;,
+    &quot;Hyperliquid spot market: PURR/USDC — $2.34M 24h volume&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;21 Hyperliquid spot markets have &gt;$100K 24h volume; 298 exist on-chain but most had zero or negligible volume — do not use 298 as a market count in copy&quot;,
+      &quot;reason&quot;: &quot;Market-count framing is not the point; the through-line is the book, not the catalogue.&quot;
+    },
+    {
+      &quot;fact&quot;: &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;,
+      &quot;reason&quot;: &quot;Belongs in-product, not in a social post.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Spot CLOB on Hyperliquid is live on Infinex.\n\nHYPE, UBTC, UETH, USOL, UZEC, PURR and more — the same orderbook as your perps, now for spot.&quot;,
+  &quot;validation_passed&quot;: false,
+  &quot;validation_failures&quot;: [
+    {
+      &quot;rule&quot;: &quot;ai-slop&quot;,
+      &quot;reason&quot;: &quot;em-dash density 1 in 139 chars (&gt; 0/280)&quot;
+    }
+  ],
+  &quot;rationale&quot;: &quot;Actor option 1 (Actor recommended).\n\nHeadline plants the book. List is evidence. Closing clause names the through-line: same venue, new side. No urgency vocabulary, no hype-theatre.\n\nMovement receipt:\n- pressing / to extend: \&quot;Spot CLOB on Hyperliquid is live on Infinex.\&quot; — Declarative weight; the venue is stated as fact, not staged as reveal.\n- gliding / to name: \&quot;HYPE, UBTC, UETH, USOL, UZEC, PURR and more\&quot; — Even-tempo enumeration; tickers listed without per-item emphasis.\n- pressing / to extend: \&quot;the same orderbook as your perps, now for spot.\&quot; — Returns weight to the through-line: this is continuation, not novelty.\n\nActor recommendation: Headline plants the venue, the list sits as evidence, and the closing clause names the through-line ('same orderbook as your perps, now for spot'). It carries the meaning of the release in two beats without urgency-vocabulary and without staging a reveal.&quot;
+}</pre></details>
+            
+          </article><article class="option ">
+            <h4>Option 2 <span class="badge fail">script fail</span> </h4>
+            <blockquote>The orderbook you use for perps now runs spot.
+
+HYPE, UBTC, UETH, USOL, UZEC, PURR and more — live on Infinex via Hyperliquid.</blockquote>
+            <h5>Rationale</h5>
+            <p>Leads with the through-line rather than the venue name. Reads as a peer's note: same book, new side. List sits as evidence in the second beat.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>The orderbook you use for perps now runs spot.</q><br><span class="muted">Single steady declarative; weight on 'same book, now spot.'</span></li><li><b>gliding</b> / to name: <q>HYPE, UBTC, UETH, USOL, UZEC, PURR and more</q><br><span class="muted">Listed evenly, no per-item lift.</span></li><li><b>pressing</b> / to extend: <q>live on Infinex via Hyperliquid.</q><br><span class="muted">Closes by re-planting the venue without flourish.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid spot market: HYPE/USDC — $97.57M 24h volume (highest; native HL token, no U-prefix)&quot;,
+    &quot;Hyperliquid spot market: UBTC/USDC (Unit Bitcoin, wrapped BTC) — $26.91M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UETH/USDC (Unit Ethereum, wrapped ETH) — $4.21M 24h volume&quot;,
+    &quot;Hyperliquid spot market: USOL/USDC (Unit Solana, wrapped SOL) — $2.73M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UZEC/USDC (Unit Zcash, wrapped ZEC) — $8.39M 24h volume&quot;,
+    &quot;Hyperliquid spot market: PURR/USDC — $2.34M 24h volume&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;21 Hyperliquid spot markets have &gt;$100K 24h volume; 298 exist on-chain but most had zero or negligible volume — do not use 298 as a market count in copy&quot;,
+      &quot;reason&quot;: &quot;Catalogue framing is off-objective.&quot;
+    },
+    {
+      &quot;fact&quot;: &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;,
+      &quot;reason&quot;: &quot;Product mechanics, not social surface.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;The orderbook you use for perps now runs spot.\n\nHYPE, UBTC, UETH, USOL, UZEC, PURR and more — live on Infinex via Hyperliquid.&quot;,
+  &quot;validation_passed&quot;: false,
+  &quot;validation_failures&quot;: [
+    {
+      &quot;rule&quot;: &quot;ai-slop&quot;,
+      &quot;reason&quot;: &quot;em-dash density 1 in 126 chars (&gt; 0/280)&quot;
+    }
+  ],
+  &quot;rationale&quot;: &quot;Actor option 2.\n\nLeads with the through-line rather than the venue name. Reads as a peer's note: same book, new side. List sits as evidence in the second beat.\n\nMovement receipt:\n- pressing / to extend: \&quot;The orderbook you use for perps now runs spot.\&quot; — Single steady declarative; weight on 'same book, now spot.'\n- gliding / to name: \&quot;HYPE, UBTC, UETH, USOL, UZEC, PURR and more\&quot; — Listed evenly, no per-item lift.\n- pressing / to extend: \&quot;live on Infinex via Hyperliquid.\&quot; — Closes by re-planting the venue without flourish.\n\nActor recommended option 1 instead: Headline plants the venue, the list sits as evidence, and the closing clause names the through-line ('same orderbook as your perps, now for spot'). It carries the meaning of the release in two beats without urgency-vocabulary and without staging a reveal.&quot;
+}</pre></details>
+            
+          </article><article class="option ">
+            <h4>Option 3 <span class="badge fail">script fail</span> </h4>
+            <blockquote>Spot, on a real orderbook.
+
+HYPE, UBTC, UETH, USOL, UZEC, PURR and more — same Hyperliquid CLOB as your perps, now live on Infinex.</blockquote>
+            <h5>Rationale</h5>
+            <p>Most explicit about the swidge-to-CLOB shift without naming swidge. 'Real orderbook' carries the obstacle (the routing tax) without complaining about it.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>Spot, on a real orderbook.</q><br><span class="muted">Plants the venue with weighted brevity.</span></li><li><b>gliding</b> / to name: <q>HYPE, UBTC, UETH, USOL, UZEC, PURR and more</q><br><span class="muted">List as evidence, no per-item promotion.</span></li><li><b>pressing</b> / to extend: <q>same Hyperliquid CLOB as your perps, now live on Infinex.</q><br><span class="muted">Returns to the through-line and closes.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid spot market: HYPE/USDC — $97.57M 24h volume (highest; native HL token, no U-prefix)&quot;,
+    &quot;Hyperliquid spot market: UBTC/USDC (Unit Bitcoin, wrapped BTC) — $26.91M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UETH/USDC (Unit Ethereum, wrapped ETH) — $4.21M 24h volume&quot;,
+    &quot;Hyperliquid spot market: USOL/USDC (Unit Solana, wrapped SOL) — $2.73M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UZEC/USDC (Unit Zcash, wrapped ZEC) — $8.39M 24h volume&quot;,
+    &quot;Hyperliquid spot market: PURR/USDC — $2.34M 24h volume&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;21 Hyperliquid spot markets have &gt;$100K 24h volume; 298 exist on-chain but most had zero or negligible volume — do not use 298 as a market count in copy&quot;,
+      &quot;reason&quot;: &quot;Not the through-line.&quot;
+    },
+    {
+      &quot;fact&quot;: &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;,
+      &quot;reason&quot;: &quot;In-product detail.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Spot, on a real orderbook.\n\nHYPE, UBTC, UETH, USOL, UZEC, PURR and more — same Hyperliquid CLOB as your perps, now live on Infinex.&quot;,
+  &quot;validation_passed&quot;: false,
+  &quot;validation_failures&quot;: [
+    {
+      &quot;rule&quot;: &quot;ai-slop&quot;,
+      &quot;reason&quot;: &quot;em-dash density 1 in 131 chars (&gt; 0/280)&quot;
+    }
+  ],
+  &quot;rationale&quot;: &quot;Actor option 3.\n\nMost explicit about the swidge-to-CLOB shift without naming swidge. 'Real orderbook' carries the obstacle (the routing tax) without complaining about it.\n\nMovement receipt:\n- pressing / to extend: \&quot;Spot, on a real orderbook.\&quot; — Plants the venue with weighted brevity.\n- gliding / to name: \&quot;HYPE, UBTC, UETH, USOL, UZEC, PURR and more\&quot; — List as evidence, no per-item promotion.\n- pressing / to extend: \&quot;same Hyperliquid CLOB as your perps, now live on Infinex.\&quot; — Returns to the through-line and closes.\n\nActor recommended option 1 instead: Headline plants the venue, the list sits as evidence, and the closing clause names the through-line ('same orderbook as your perps, now for spot'). It carries the meaning of the release in two beats without urgency-vocabulary and without staging a reveal.&quot;
+}</pre></details>
+            
+          </article>
+        </div>
+      </section><section class="channel">
+        <h3>web <span class="badge ">Actor selected 1</span></h3>
+        <p class="muted">Most legible to a cold reader who lands on the page. Names the venue and the continuation in one declarative surface; doesn't require the reader to already be a perps trader to parse it.</p>
+        <div class="options">
+          <article class="option selected">
+            <h4>Option 1 - Actor selected <span class="badge pass">script pass</span> <span class="badge pass">Director: commanding</span></h4>
+            <blockquote>Spot CLOB on Hyperliquid. The same orderbook as your perps, now for spot.</blockquote>
+            <h5>Rationale</h5>
+            <p>One declarative surface. Plants the venue and the through-line in a single sentence under the limit.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>Spot CLOB on Hyperliquid.</q><br><span class="muted">Stated as fact, not staged.</span></li><li><b>pressing</b> / to extend: <q>The same orderbook as your perps, now for spot.</q><br><span class="muted">Returns weight to the continuation.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+      &quot;reason&quot;: &quot;Web is one surface; the through-line carries the meaning without history.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Spot CLOB on Hyperliquid. The same orderbook as your perps, now for spot.&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 1 (Actor recommended).\n\nOne declarative surface. Plants the venue and the through-line in a single sentence under the limit.\n\nMovement receipt:\n- pressing / to extend: \&quot;Spot CLOB on Hyperliquid.\&quot; — Stated as fact, not staged.\n- pressing / to extend: \&quot;The same orderbook as your perps, now for spot.\&quot; — Returns weight to the continuation.\n\nActor recommendation: Most legible to a cold reader who lands on the page. Names the venue and the continuation in one declarative surface; doesn't require the reader to already be a perps trader to parse it.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo commanding</span>
+                <span class="badge ">confidence 0.62</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Strong&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained — present as motor duration in 'The same orderbook as your perps', treated as Pressing motor, not a tempo-name factor&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;certain (Awake outer; Direct + Sustained)&quot;,
+      &quot;factor_shape&quot;: &quot;Space + Time&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Space + Time is an Action Attitude only; no Weight evidence would anchor a character baseline here. The copy is declaration not dawning — no perceptual awakening arc. Direct is present but Sustained reads as motor hold, not Time as co-equal factor.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;practical (Stable; Strong + Flexible)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Space (Flexible)&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. 'Spot CLOB on Hyperliquid' is a single aimed declarative — no Flexible/indirect pathing, no spell-binding register. Space reads Direct.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;sombre (Adream; Strong + Bound)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Flow&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Flow evidence is insufficient for a primary read. No dreaming unawareness quality; the copy is socially addressed and oriented outward, not inward-dwelling.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Strong</h5><ul><li>observation: 'Spot CLOB on Hyperliquid.' — a bare nominal sentence with no softening qualifier; the weight is committed, not hedged</li><li>observation: 'The same orderbook as your perps' — 'same' asserts identity without negotiation; the sentence carries its own authority</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: Both sentences are single-channel declaratives aimed at one claim each; no subordinate clauses or circling movement</li><li>observation: 'now for spot' — the directional marker 'now' narrows the channel to a single moment; no flexible multi-pathing</li></ul></div><div><h5>time: Sustained</h5><ul><li>observation: No urgency markers, no exclamation, no deadline pressure; the declarative rests without acceleration</li><li>observation: 'The same orderbook as your perps, now for spot.' — the held comparison ('same … now') is a patient unfolding, not a sudden strike; reads as Pressing motor duration</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: No affective overflow; the copy is dry and contained — it does not spill past the claim into emotional elaboration</li><li>observation: Two sentences, each sealed; syntactic containment without free extension into consequence or feeling</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>spell</p>
+              <h5>Placement read</h5><p>stable|penetrating|flow — the copy rests at Spell (the primary/resting drive for this cell). No visible Vision projection, but at one-line web scale this is legal resting character energy. The mapping (Spell → Vision axis) is structural and cumulative; it does not require per-line Vision surfacing.</p>
+              <h5>Fit reason</h5><p>commanding is a primary allowed tempo for Infinex. Spell as the visible drive surface is legal for stable|penetrating|flow. No passion/urgency/FOMO foregrounded. No off-spec markers. Lining (passion as introvert) is not surfaced. Super-objective ('take responsibility for the tech, so the user only has to want') is served: the copy does the work of declaring without asking the reader to feel urgency.</p>
+              <h5>Notes for actor</h5><ul><li>The Pressing motor is correct for the character's resting stance, but both sentences use the same action. If the brief ever wants the reader to complete a turn (Spell arcing toward Vision), the second sentence is the natural pivot point. 'The same orderbook as your perps, now for spot.' currently folds back to confirm the first claim rather than extending the character's map outward. That is not wrong here — it is a sealed beat — but name the choice before repeating the pattern across a campaign.</li><li>Confidence is softened to 0.62: the text is 17 words. Direct evidence is strong for Strong + Direct; Sustained and Bound are motor/containment reads that cannot be confirmed at high confidence from this surface area alone. The tempo is commanding; the uncertainty is about how much the Pressing motor would hold if the copy were extended.</li><li>No urgency drift detected. The absence of 'now' as a pressure word (it functions here as a scope marker, not a deadline) is correctly handled. Maintain that discipline in follow-on lines.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Live-state confirmation required: verify that Hyperliquid spot CLOB is live and accessible via Infinex at ship date (2026-05-20) before publishing.</li><li>The subhead in the release card names specific markets (HYPE, UBTC, UETH, USOL, UZEC, PURR); candidate copy omits these. This is a scoping decision (web one-liner vs. full subhead), not a factual error, but confirm with the team whether the web surface receives the headline alone or also the subhead.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article><article class="option ">
+            <h4>Option 2 <span class="badge pass">script pass</span> <span class="badge pass">Director: commanding</span></h4>
+            <blockquote>The orderbook you use for perps now runs spot. Live on Hyperliquid.</blockquote>
+            <h5>Rationale</h5>
+            <p>Leads with reader's existing relationship to the book. Compact, no list, no urgency.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>The orderbook you use for perps now runs spot.</q><br><span class="muted">Declarative weight on the continuation.</span></li><li><b>pressing</b> / to extend: <q>Live on Hyperliquid.</q><br><span class="muted">Plants the venue at the close.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+      &quot;reason&quot;: &quot;Implied by the continuation; not needed on the surface.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;The orderbook you use for perps now runs spot. Live on Hyperliquid.&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 2.\n\nLeads with reader's existing relationship to the book. Compact, no list, no urgency.\n\nMovement receipt:\n- pressing / to extend: \&quot;The orderbook you use for perps now runs spot.\&quot; — Declarative weight on the continuation.\n- pressing / to extend: \&quot;Live on Hyperliquid.\&quot; — Plants the venue at the close.\n\nActor recommended option 1 instead: Most legible to a cold reader who lands on the page. Names the venue and the continuation in one declarative surface; doesn't require the reader to already be a perps trader to parse it.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo commanding</span>
+                <span class="badge ">confidence 0.62</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Strong&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained — present as motor duration in 'now runs spot' but not a Stable tempo-name factor; treated as Pressing motor context&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;certain (Awake outer)&quot;,
+      &quot;factor_shape&quot;: &quot;Space + Time / Direct + Sustained&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Direct + Sustained is present but Awake is an action attitude, not a baseline; the line has no Space-Time load-bearing tension — the declarative weight (Strong) anchors it in Stable before Space/Time rivalry resolves.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;self-contained (Stable)&quot;,
+      &quot;factor_shape&quot;: &quot;Light + Direct&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The sentence carries force/mass — 'orderbook you use for perps now runs spot' is a load-bearing factual assertion, not a delicate glide. Light is not supported.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;warm (Near)&quot;,
+      &quot;factor_shape&quot;: &quot;Strong + Sustained&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Near requires Weight + Time as the two constitutive factors. While Sustained is present as motor, the copy does not lean on temporal durability or relational warmth — the path is aimed (Direct), not weight-plus-time intimate.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Strong</h5><ul><li>observation: 'The orderbook you use for perps now runs spot.' — unhedged declarative; full factual load placed on a single sentence with no softening. The weight of the claim is not distributed or lightened.</li><li>observation: 'Live on Hyperliquid.' — short nominal sentence used as a grounding stamp, not a qualifying clause. Adds mass rather than lift.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: Both sentences follow a single undeflected path: subject → verb → new fact. No subordinate clause, no conditional, no lateral reach. The reader is aimed at one destination.</li><li>observation: 'Live on Hyperliquid.' — two-word sentence. No flexible orbiting of the claim; venue stated, full stop.</li></ul></div><div><h5>time: Sustained</h5><ul><li>observation: No urgency syntactic markers (no exclamation, no 'now!' imperative, no deadline clause). The sentence holds its ground rather than punctuating.</li><li>observation: 'now runs spot' — 'now' marks a state-change, not a clock-pressure; the present-tense declarative is durational, not abrupt.</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: Both sentences are syntactically closed. No overflow into subordinate feeling-clauses. The second sentence ('Live on Hyperliquid.') is a hard stop — contained, not spilling.</li><li>observation: No emotional or relational elaboration after the fact-statement. Containment is structural.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>spell</p>
+              <h5>Placement read</h5><p>Stable character at rest in Spell. The copy performs a contained factual extension — the orderbook already exists, the actor simply maps where it now reaches. Drive reads as Spell (doing/spell formative Stable baseline, penetrating aspect because Direct Space is foregrounded, flow stress). Vision is not projected on the surface; the line does not need to complete the axis at this scale. Resting Spell is legal for a web line at this brevity.</p>
+              <h5>Fit reason</h5><p>commanding is a primary allowed tempo for Infinex. Stable + Penetrating + Flow baseline. Spell as visible surface is legal — the character knows the old world and maps the extension without urgency. No passion/FOMO foregrounded. No off-spec urgency vocabulary. Lining (passion) is structurally absent from the surface, as required — the copy does not perform emotional attachment or time-pressure. Drive cell: stable|penetrating|flow → primary=spell, secondary=doing, introvert=passion, extravert=vision. Surface reads spell/doing; passion (introvert) is not surfaced. Correct.</p>
+              <h5>Notes for actor</h5><ul><li>The Pressing motor is clean and correctly prepared — do not introduce a Quick attack (Punching) unless a follow-on beat demands it. The line works as Sustained/Pressing alone.</li><li>If a follow-on sentence is added, keep it Direct. Flexible pathing (subordinate clauses, qualifiers, lists) would shift the tempo toward practical or receptive and dilute the commanding read.</li><li>The Spell surface is correct at this scale. If the arc requires Vision to land (e.g., in a longer post or thread), the extravert projection needs a beat that maps consequence or horizon — not urgency. Vision reads from implication of scope, not from time-pressure.</li><li>Confidence is held at 0.62 because the copy is 14 words; microcopy surfaces cannot sustain a full-confidence tempo classification. The commanding read is the strongest available but remains provisional.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Live-state confirmation needed: copy states spot CLOB is live on Hyperliquid via Infinex — requires confirmation that the feature is deployed and accessible at ship date 2026-05-20 before publication.</li><li>Copy omits the CLOB-specific distinction (i.e., 'same orderbook architecture' is implied by 'the orderbook you use for perps' but the first-CLOB-spot-on-Infinex landmark is not surfaced). This is a copywriting choice, not a factual error, but the ship gate should confirm whether the launch tier warrants naming the distinction explicitly.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article><article class="option ">
+            <h4>Option 3 <span class="badge pass">script pass</span> <span class="badge pass">Director: commanding</span></h4>
+            <blockquote>Spot on a real orderbook. Same Hyperliquid CLOB as your perps.</blockquote>
+            <h5>Rationale</h5>
+            <p>Names the obstacle (routing tax) implicitly via 'real orderbook' without naming swidge. Tight, peer-to-peer register.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>Spot on a real orderbook.</q><br><span class="muted">Plants the venue with weighted brevity.</span></li><li><b>pressing</b> / to extend: <q>Same Hyperliquid CLOB as your perps.</q><br><span class="muted">Returns to the through-line.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+      &quot;reason&quot;: &quot;Carried by 'real orderbook' without history-stating.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Spot on a real orderbook. Same Hyperliquid CLOB as your perps.&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 3.\n\nNames the obstacle (routing tax) implicitly via 'real orderbook' without naming swidge. Tight, peer-to-peer register.\n\nMovement receipt:\n- pressing / to extend: \&quot;Spot on a real orderbook.\&quot; — Plants the venue with weighted brevity.\n- pressing / to extend: \&quot;Same Hyperliquid CLOB as your perps.\&quot; — Returns to the through-line.\n\nActor recommended option 1 instead: Most legible to a cold reader who lands on the page. Names the venue and the continuation in one declarative surface; doesn't require the reader to already be a perps trader to parse it.\n\nFinal pick rationale: score 406; image cluster market-object; script pass, factual pass, copy/voice pass, Infinex legal fit, publication gate clear, image cluster repetition penalty market-object, channel fit. Warnings: All 3 passing web candidates share image-system cluster \&quot;market-object\&quot;.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo commanding</span>
+                <span class="badge ">confidence 0.62</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge pass">publish pass</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Strong&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained (motor-level Pressing; not a Stable tempo-naming factor)&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;certain (Awake outer; Direct + Sustained)&quot;,
+      &quot;factor_shape&quot;: &quot;Space + Time&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The line carries weight — 'real orderbook' asserts substance and ground, not just clarity of attention. Awake outer tempi lack Weight/Intending; this copy's posture is declarative ground-laying, not dawning awareness. Stable reads stronger.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;self-contained (Stable; Light + Direct)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Space&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. 'Real orderbook' and the two-beat declarative structure carry load-bearing assertion, not delicacy. Light would require lift or restraint in the weight register; this is planting, not tendering.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Strong</h5><ul><li>observation: 'real orderbook' — the adjective 'real' is a weight-bearing assertion; it presses against an implicit inferior (swaps/routing). Force is in the claim.</li><li>observation: two short declarative sentences, no qualifiers, no hedging. Each lands as a planted stake, not a feather-touch.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: 'Spot on a real orderbook.' — single aimed declarative; the sentence goes straight to its claim with no detour.</li><li>observation: 'Same Hyperliquid CLOB as your perps.' — single-path equation; no circling, no elaboration. Both lines are monolinear in trajectory.</li></ul></div><div><h5>time: Sustained</h5><ul><li>observation: No attack-and-release syntax; sentences are compact but not punchy. 'Same … as your perps' holds comparison rather than detonating. Duration is compressed but not Quick in the Laban sense — no sudden pivot or stab.</li><li>observation: Treated as motor-level evidence for Pressing, not as a Stable tempo-naming factor.</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: No overflow; each sentence terminates cleanly. No cascading clause, no rhetorical run-on. The energy is contained within the period.</li><li>observation: Treated as stress/context evidence, not a Stable tempo-naming factor.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>spell</p>
+              <h5>Placement read</h5><p>Stable character at rest in its primary Spell drive. The copy maps the terrain ('real orderbook', 'same CLOB') from a position of established knowledge — the banker who already knows the infrastructure. No urgency, no demonstration of desire. The audience reads domain authority, not pitch. Spell as resting surface is legal for this character; Vision is not required at this scale.</p>
+              <h5>Fit reason</h5><p>Commanding tempo (Strong + Direct, Stable) is a primary allowed tempo for Infinex. Drive surface reads Spell — resting drive energy for stable|penetrating|flow character. No passion/urgency/FOMO foregrounded. Lining (passion) is not surfaced. The copy is one compact pair of declaratives; contained Spell without visible Vision projection is legal at this scope per Director rules.</p>
+              <h5>Notes for actor</h5><ul><li>The two-beat Pressing structure is working. Both sentences land with planted weight. Do not add connective tissue or softening qualifiers — they would shift the tempo toward self-contained (Light + Direct) and lose the Strong register.</li><li>The 'your perps' possessive is doing useful Near-adjacency work (Weight + Time, intimacy register) without pulling the line out of Stable. Preserve it; it earns the directness without cold distance.</li><li>If a third beat is ever added to this unit, the preparation motor (Pressing) is already laid. The next beat could legally release into Punching (Strong + Direct + Quick) for a sudden resolved declaration — but only if the beat genuinely needs the attack. Do not manufacture urgency to trigger that release; it would project Passion and break the Spell surface.</li><li>The copy currently rests at Spell (primary drive, resting character energy). That is legal and appropriate for a compact web placement. If the arc ever needs Vision projection — the cumulative 'this is where the map points' — it would require a subsequent beat in a wider structural context, not a rewrite of this line.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Live-state confirmation needed: Hyperliquid spot CLOB must be accessible from within Infinex UI on or before 2026-05-20 ship date. Copy asserts the venue as present fact ('Spot on a real orderbook') — requires code/live-state verification before publication.</li><li>The receipt correctly marks 'first CLOB spot on Infinex' as carried implicitly by 'real orderbook' without historical contrast. If the publication context (page, surrounding copy, or header) does not provide that contrast, the implied differentiation from swidge may be lost on new users. Not a factual error; flag for placement review.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article>
+        </div>
+      </section><section class="channel">
+        <h3>in-product <span class="badge ">Actor selected 1</span></h3>
+        <p class="muted">Tightest, most reusable UI label. Names the action, not the launch. Works across tab labels, CTAs, and entry tiles without re-write.</p>
+        <div class="options">
+          <article class="option selected">
+            <h4>Option 1 - Actor selected <span class="badge pass">script pass</span> <span class="badge pass">Director: self-contained</span></h4>
+            <blockquote>Open Spot</blockquote>
+            <h5>Rationale</h5>
+            <p>One-action UI label. Names what the user does, not what was launched. Reads as a door, not an announcement.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>gliding</b> / to open: <q>Open Spot</q><br><span class="muted">Direct, light, finished — UI action label.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+      &quot;reason&quot;: &quot;User is already inside the product context; venue name is established.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Open Spot&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 1 (Actor recommended).\n\nOne-action UI label. Names what the user does, not what was launched. Reads as a door, not an announcement.\n\nMovement receipt:\n- gliding / to open: \&quot;Open Spot\&quot; — Direct, light, finished — UI action label.\n\nActor recommendation: Tightest, most reusable UI label. Names the action, not the launch. Works across tab labels, CTAs, and entry tiles without re-write.\n\nFinal pick rationale: score 406; image cluster market-object; script pass, factual pass, copy/voice pass, Infinex legal fit, Actor recommended, image cluster repetition penalty market-object, channel fit. Warnings: All 2 passing in-product candidates share image-system cluster \&quot;market-object\&quot;.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo self-contained</span>
+                <span class="badge ">confidence 0.45</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Light&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Quick — present as micro-decisiveness of a tap label; treated as motor context, not a tempo-naming factor&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;acute&quot;,
+      &quot;factor_shape&quot;: &quot;Awake outer — Direct + Quick&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Two words, one aimed at an affordance, do carry directness and a quick motor impulse, but there is no Time-factor pressure in the syntax itself — no urgency beat, no attack register. Quick here is incidental to the UI label format, not load-bearing. Stable Light+Direct is more coherent as the resting ground for a navigational affordance.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;commanding&quot;,
+      &quot;factor_shape&quot;: &quot;Stable — Strong + Direct&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. There is no Weight-Strong evidence: no force claim, no bold-resolve assertion, no load-bearing declarative pressure. The label is minimal and frictionless, not assertive.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;sociable&quot;,
+      &quot;factor_shape&quot;: &quot;Remote outer — Direct + Free&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Two words is insufficient surface to read Free-flow overflow or Remote register. The copy does not expand or embrace; it points.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Light</h5><ul><li>observation: 'Open Spot' carries no gravitational claim, no force assertion, no Bold-resolve register — the label sits lightly on the affordance without pressing into it.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: Two-word imperative label, single aim, no qualifying clause, no indirect pathing — the copy goes straight to its object.</li></ul></div><div><h5>time: unclear</h5><ul><li>observation: No syntactic Time signal is readable at two words. A UI tap label has an implicit quickness of function, but the prose itself neither sustains nor attacks — Time pole is motor-context only and cannot drive the tempo read.</li></ul></div><div><h5>flow: unclear</h5><ul><li>observation: Copy is too short to show Bound containment or Free overflow in syntax. No clause structure, no tonal arc, no flow evidence available.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>doing</p>
+              <h5>Placement read</h5><p>Minimal navigational affordance label. Resting at Doing — a functional opening of the path without Spell elaboration or Vision projection. Legal for a UI action label; no drive axis arc is required or expected at this surface.</p>
+              <h5>Fit reason</h5><p>self-contained is a beat-only/reserve tempo in the Infinex palette. A UI action label resting at Doing is legal. No passion/urgency/FOMO foregrounded. No off-character register. The copy does not contradict the Spell→Vision axis; it simply does not move along it, which is acceptable for a two-word in-product affordance.</p>
+              <h5>Notes for actor</h5><ul><li>Two words is below the threshold for a confident full-tempo read — confidence is capped at 0.45. The label reads Light + Direct and sits cleanly in a self-contained register, which is legal for a UI affordance. No movement correction is required.</li><li>If this label is intended to carry more character weight (e.g. as a section heading rather than a button), consider whether a Light + Direct motor with a brief Gliding prep phrase alongside it would let the Stable Penetrating character surface. As a standalone tap label, the current form is appropriate.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Code/live-state confirmation required: 'Open Spot' must match the exact in-product button or tab label as implemented. If the affordance is labeled differently in the deployed UI (e.g. 'Spot', 'Trade Spot', 'Go to Spot'), copy must align before publication.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article><article class="option ">
+            <h4>Option 2 <span class="badge pass">script pass</span> <span class="badge pass">Director: self-contained</span></h4>
+            <blockquote>Trade spot on Hyperliquid</blockquote>
+            <h5>Rationale</h5>
+            <p>Verb-first action label naming the venue. Suits an entry tile or empty-state CTA.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>gliding</b> / to open: <q>Trade spot on Hyperliquid</q><br><span class="muted">Direct compact action label; states the verb and destination.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+      &quot;reason&quot;: &quot;Mechanic detail; not needed at action-label scale.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Trade spot on Hyperliquid&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 2.\n\nVerb-first action label naming the venue. Suits an entry tile or empty-state CTA.\n\nMovement receipt:\n- gliding / to open: \&quot;Trade spot on Hyperliquid\&quot; — Direct compact action label; states the verb and destination.\n\nActor recommended option 1 instead: Tightest, most reusable UI label. Names the action, not the launch. Works across tab labels, CTAs, and entry tiles without re-write.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo self-contained</span>
+                <span class="badge ">confidence 0.45</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Light&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained — present in the unhurried declarative structure; treated as motor context, not tempo-name factor&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;commanding&quot;,
+      &quot;factor_shape&quot;: &quot;Strong + Direct&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Five words, no weight/force loading. The line is a bare action label, not a demonstration of bold resolve. No Strong evidence present.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;acute (Awake outer)&quot;,
+      &quot;factor_shape&quot;: &quot;Direct + Quick&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The imperative is aimed and Direct, and could read as Quick, but at five words there is no Time evidence strong enough to override the Stable resting energy that is Infinex's character baseline. Awake outer is an Action Attitude only; no sufficient departure from resting state is shown.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;self-contained&quot;,
+      &quot;factor_shape&quot;: &quot;Light + Direct&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Kept as primary read. The line is trimmed to the minimum necessary verb + destination — no ornamentation, no force, no overflow. Direct pathing: single aim, no detour. Light: no pressure-loading, no Strong assertion. Canonical shorthand 'cautious expression or cautious acceptance of a gentle deference' fits a UI action label that simply names what is available without claiming more than it offers.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Light</h5><ul><li>observation: Five-word surface carries no force assertion, no weight-loaded vocabulary, no commanding demonstration. The line offers a path rather than pressing one.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: 'Trade spot on Hyperliquid' is a single-aim declarative. No meandering, no qualification, no indirect pathing. One verb, one object, one destination.</li></ul></div><div><h5>time: unclear</h5><ul><li>observation: No Time signal recoverable at five words. The declarative has no urgency markers (Quick) and no held-pressure duration (Sustained). Time is present as motor context in the Gliding preparation but cannot be named from the surface alone.</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: The line is tightly contained — stripped to the minimum. No release, no overflow. Consistent with the self-contained Light+Direct Stable variation whose motor runs through Gliding (controlled, continuous, containment-oriented).</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>doing</p>
+              <h5>Placement read</h5><p>Resting at Doing — the visible surface is a bare, aimed transitive action label. No Drive arc is present or required at this scale. Consistent with Infinex stable|penetrating|flow whose primary drive is Spell but whose Doing secondary can surface as the visible outer face of a single UI instruction. No Passion/urgency foregrounded.</p>
+              <h5>Fit reason</h5><p>self-contained is a beat-only/reserve tempo in the Infinex palette. It is legal for contained UI copy. The line is Direct (Penetrating aspect) and Light (non-forcing), Flow is Bound (contained). Doing as visible drive is the secondary formative for this character; it is acceptable surface for a UI action label. No off-spec urgency, FOMO, or Passion projection present. The Lining (Passion / introvert slot) is not surfaced as thesis.</p>
+              <h5>Notes for actor</h5><ul><li>The line is structurally clean and legal. Confidence is soft (0.45) because five words give minimal evidence surface — if the Director is wrong about Light vs Strong, no correction is available from the text alone.</li><li>If the intent is to carry any of the Spell primary drive (the character's resting formative energy), consider whether the label needs a second beat at the sub-head or tooltip layer — not a second sentence here, but a companion surface where the 'mapping' quality (Penetrating/Attending) of Infinex can show through. The label itself does not need to carry that weight.</li><li>The Gliding motor reads correctly as preparation without release — appropriate for a UI action label that does not need to execute a Dabbing attack. No motor correction needed.</li><li>Watch for copy that surrounds this label (headlines, tooltips, onboarding text) drifting toward Passion/urgency vocabulary. 'Trade spot now', 'Don't miss HYPE spot', or volume-scarcity framings would shift the tempo from self-contained to materialistic or acute and would read as off-character at the Drive surface layer.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Live-state confirmation needed before publish: Hyperliquid spot CLOB must be confirmed reachable and functional via Infinex UI on or before 2026-05-20 ship date. Copy implies immediate availability ('Trade spot on Hyperliquid' as an in-product action label). If the feature is not live at publish time, the label will be unreachable and the copy will be false in context.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article><article class="option ">
+            <h4>Option 3 <span class="badge fail">script fail</span> </h4>
+            <blockquote>Spot account — fund to start</blockquote>
+            <h5>Rationale</h5>
+            <p>Names the sub-account model and the next concrete action. Suits an empty-state line above Deposit/Transfer controls.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>gliding</b> / to open: <q>Spot account — fund to start</q><br><span class="muted">Compact direct line; states the object (sub-account) and the next move.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+      &quot;reason&quot;: &quot;Venue is implied by surrounding product context.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Spot account — fund to start&quot;,
+  &quot;validation_passed&quot;: false,
+  &quot;validation_failures&quot;: [
+    {
+      &quot;rule&quot;: &quot;ai-slop&quot;,
+      &quot;reason&quot;: &quot;em-dash density 1 in 28 chars (&gt; 0/280)&quot;
+    }
+  ],
+  &quot;rationale&quot;: &quot;Actor option 3.\n\nNames the sub-account model and the next concrete action. Suits an empty-state line above Deposit/Transfer controls.\n\nMovement receipt:\n- gliding / to open: \&quot;Spot account — fund to start\&quot; — Compact direct line; states the object (sub-account) and the next move.\n\nActor recommended option 1 instead: Tightest, most reusable UI label. Names the action, not the launch. Works across tab labels, CTAs, and entry tiles without re-write.&quot;
+}</pre></details>
+            
+          </article>
+        </div>
+      </section>
+  </section><section class="attempt">
+    <h2>Attempt 5</h2>
+    <div class="meta">
+      <span class="badge ">anthropic</span>
+      <span class="badge ">actor-memory-v1</span>
+      <span class="badge ">f33b3b22173f</span>
+      <span class="badge ">channels [&quot;x&quot;,&quot;web&quot;,&quot;in-product&quot;]</span>
+    </div>
+    <details open><summary>Director notes fed into this attempt</summary><pre>{
+  &quot;attempt&quot;: 1,
+  &quot;summary&quot;: &quot;Missing valid performances for channels: x.\nx: script supervisor rejected \&quot;Spot CLOB on Hyperliquid is live on Infinex. HYPE, UBTC, UETH, USOL, UZEC, PURR and more — the same orderbook as your pe\&quot; because ai-slop — em-dash density 1 in 139 chars (&gt; 0/280).\nx: script supervisor rejected \&quot;The orderbook you use for perps now runs spot. HYPE, UBTC, UETH, USOL, UZEC, PURR and more — live on Infinex via Hyperli\&quot; because ai-slop — em-dash density 1 in 126 chars (&gt; 0/280).\nx: script supervisor rejected \&quot;Spot, on a real orderbook. HYPE, UBTC, UETH, USOL, UZEC, PURR and more — same Hyperliquid CLOB as your perps, now live o\&quot; because ai-slop — em-dash density 1 in 131 chars (&gt; 0/280).\nin-product: script supervisor rejected \&quot;Spot account — fund to start\&quot; because ai-slop — em-dash density 1 in 28 chars (&gt; 0/280).&quot;,
+  &quot;notes&quot;: [
+    &quot;Missing valid performances for channels: x.&quot;,
+    &quot;x: script supervisor rejected \&quot;Spot CLOB on Hyperliquid is live on Infinex. HYPE, UBTC, UETH, USOL, UZEC, PURR and more — the same orderbook as your pe\&quot; because ai-slop — em-dash density 1 in 139 chars (&gt; 0/280).&quot;,
+    &quot;x: script supervisor rejected \&quot;The orderbook you use for perps now runs spot. HYPE, UBTC, UETH, USOL, UZEC, PURR and more — live on Infinex via Hyperli\&quot; because ai-slop — em-dash density 1 in 126 chars (&gt; 0/280).&quot;,
+    &quot;x: script supervisor rejected \&quot;Spot, on a real orderbook. HYPE, UBTC, UETH, USOL, UZEC, PURR and more — same Hyperliquid CLOB as your perps, now live o\&quot; because ai-slop — em-dash density 1 in 131 chars (&gt; 0/280).&quot;,
+    &quot;in-product: script supervisor rejected \&quot;Spot account — fund to start\&quot; because ai-slop — em-dash density 1 in 28 chars (&gt; 0/280).&quot;
+  ],
+  &quot;preserve&quot;: {
+    &quot;through_action&quot;: true,
+    &quot;beat_plan&quot;: true,
+    &quot;working_actions&quot;: true,
+    &quot;objective_verbs&quot;: true
+  },
+  &quot;change&quot;: {
+    &quot;copy&quot;: [
+      &quot;produce legal candidates for x&quot;,
+      &quot;x: em-dash density 1 in 139 chars (&gt; 0/280)&quot;,
+      &quot;x: em-dash density 1 in 126 chars (&gt; 0/280)&quot;,
+      &quot;x: em-dash density 1 in 131 chars (&gt; 0/280)&quot;,
+      &quot;in-product: em-dash density 1 in 28 chars (&gt; 0/280)&quot;
+    ],
+    &quot;metaphor_image_system&quot;: [
+      &quot;web: All 3 passing web candidates share image-system cluster \&quot;market-object\&quot;.&quot;,
+      &quot;web: All 3 passing web candidates share image-system cluster \&quot;market-object\&quot;.&quot;,
+      &quot;web: All 3 passing web candidates share image-system cluster \&quot;market-object\&quot;.&quot;,
+      &quot;in-product: All 2 passing in-product candidates share image-system cluster \&quot;market-object\&quot;.&quot;,
+      &quot;in-product: All 2 passing in-product candidates share image-system cluster \&quot;market-object\&quot;.&quot;
+    ]
+  }
+}</pre></details>
+    <details><summary>Actor warm-up / rehearsal</summary><pre>{
+  &quot;mode&quot;: &quot;scene_rehearsal&quot;,
+  &quot;scene_rehearsal&quot;: {
+    &quot;given_circumstances&quot;: &quot;Same scene. Same room. The Director says my em-dashes are reading as press-release surface, not as a colleague's note. He's right — I leaned on the dash to do work my verbs should do. And on web/in-product I clustered around 'orderbook/CLOB' as the object every time; the image-system narrowed. I need to vary the through-line's surface without losing it.&quot;,
+    &quot;reader_scene_partner&quot;: &quot;Same partner. The perps trader who has been swidging spot. They don't need a dash to slow them down; they need the line plain.&quot;,
+    &quot;playable_objective&quot;: &quot;to extend the book they already know onto spot&quot;,
+    &quot;false_actions_rejected&quot;: [
+      {
+        &quot;action&quot;: &quot;to dash-pause&quot;,
+        &quot;reason&quot;: &quot;Using em-dash as theatrical breath; that's writer-craft, not actor work. A period or a comma carries the same beat without the press-release tell.&quot;
+      },
+      {
+        &quot;action&quot;: &quot;to repeat the orderbook-object&quot;,
+        &quot;reason&quot;: &quot;Web and in-product kept naming the same object. The through-line stays; the surface should rotate — sometimes I name the venue, sometimes the action, sometimes the markets.&quot;
+      },
+      {
+        &quot;action&quot;: &quot;to compress with hype&quot;,
+        &quot;reason&quot;: &quot;Tempting to replace the dash with an exclamation or a 'finally.' Off-character.&quot;
+      }
+    ],
+    &quot;rehearsal_passes&quot;: [
+      {
+        &quot;pass&quot;: 1,
+        &quot;action&quot;: &quot;to extend&quot;,
+        &quot;text_or_moment&quot;: &quot;Spot CLOB on Hyperliquid is live on Infinex. HYPE, UBTC, UETH, USOL, UZEC, PURR and more. Same orderbook as your perps, now for spot.&quot;,
+        &quot;self_note&quot;: &quot;Period replaces dash. Reads cleaner, less staged.&quot;
+      },
+      {
+        &quot;pass&quot;: 2,
+        &quot;action&quot;: &quot;to extend&quot;,
+        &quot;text_or_moment&quot;: &quot;The orderbook you use for perps now runs spot.&quot;,
+        &quot;self_note&quot;: &quot;Single declarative. No dash needed; comma or period does it.&quot;
+      },
+      {
+        &quot;pass&quot;: 3,
+        &quot;action&quot;: &quot;to open&quot;,
+        &quot;text_or_moment&quot;: &quot;Fund your Spot account to start.&quot;,
+        &quot;self_note&quot;: &quot;Drop the dash. Imperative sentence. Action-first, no UI-label theatre.&quot;
+      },
+      {
+        &quot;pass&quot;: 4,
+        &quot;action&quot;: &quot;to vary the object&quot;,
+        &quot;text_or_moment&quot;: &quot;Web option A: name venue. Option B: name action. Option C: name markets.&quot;,
+        &quot;self_note&quot;: &quot;Rotate what the line points at, so the cluster diagnosis resolves while the through-line holds.&quot;
+      }
+    ],
+    &quot;final_playable_state&quot;: &quot;Same calm. Period-clean prose. The through-line is unchanged; the surface no longer leans on a dash to carry it.&quot;
+  },
+  &quot;notes&quot;: [
+    &quot;Remove every em-dash. Use period, comma, or restructure.&quot;,
+    &quot;Rotate the named object across web/in-product candidates: venue, action, markets. Hold the through-line stable underneath.&quot;,
+    &quot;Preserve through_action, beat plans, verbs, Working Actions, and preparation hierarchy.&quot;
+  ],
+  &quot;warmed_state&quot;: &quot;Steady. Dash-free. Same door, opened once, evenly.&quot;
+}</pre></details>
+    <details open><summary>Table work</summary><pre>{
+  &quot;thesis&quot;: &quot;The same orderbook that runs perps now runs spot. The router era is over for the markets that matter; there is a real book underneath.&quot;,
+  &quot;through_action&quot;: &quot;to extend the orderbook onto spot&quot;,
+  &quot;obstacle&quot;: &quot;Reader assumes 'spot on Infinex' still means swap-routing (swidge), or assumes this is another aggregator. The word 'spot' is cheap; the word 'CLOB' has to do work without being technical theatre.&quot;,
+  &quot;reader_prior&quot;: &quot;I've been swidging spot tokens on Infinex. I trade perps on Hyperliquid through Infinex. I accept the routing tax on spot as the cost of staying in one place.&quot;,
+  &quot;lining&quot;: &quot;surface: a calm notice that the book is open. underneath: the routing workaround is over for the markets that count; you can stop paying that tax.&quot;,
+  &quot;not_the_point&quot;: &quot;Avoid '298 markets,' avoid TVL bragging, avoid framing this as competing with CEXes, avoid urgency vocabulary, avoid em-dash press-release rhythm.&quot;,
+  &quot;channel_beat_plans&quot;: {
+    &quot;x&quot;: [
+      {
+        &quot;verb&quot;: &quot;to extend&quot;,
+        &quot;working_action&quot;: &quot;pressing&quot;,
+        &quot;physical_score&quot;: &quot;Steady declarative weight. The line plants the venue without effort spike.&quot;,
+        &quot;micro_objective&quot;: &quot;to lay the book down&quot;,
+        &quot;obstacle_local&quot;: &quot;Reader scrolling past another 'live now' tweet.&quot;,
+        &quot;shadow_move&quot;: &quot;none — keep it clean&quot;
+      },
+      {
+        &quot;verb&quot;: &quot;to name&quot;,
+        &quot;working_action&quot;: &quot;gliding&quot;,
+        &quot;physical_score&quot;: &quot;Even-tempo enumeration of tickers. Listed, not pitched.&quot;,
+        &quot;micro_objective&quot;: &quot;to show depth without selling each line&quot;,
+        &quot;obstacle_local&quot;: &quot;Listing risks reading as feature-spam.&quot;
+      }
+    ],
+    &quot;web&quot;: [
+      {
+        &quot;verb&quot;: &quot;to extend&quot;,
+        &quot;working_action&quot;: &quot;pressing&quot;,
+        &quot;physical_score&quot;: &quot;Single declarative surface. Weight without acceleration.&quot;,
+        &quot;micro_objective&quot;: &quot;to state the venue once&quot;,
+        &quot;obstacle_local&quot;: &quot;Reader expects either a hero pitch or technical jargon; deliver neither.&quot;
+      }
+    ],
+    &quot;in-product&quot;: [
+      {
+        &quot;verb&quot;: &quot;to open&quot;,
+        &quot;working_action&quot;: &quot;gliding&quot;,
+        &quot;physical_score&quot;: &quot;A compact UI label. Direct, light, finished.&quot;,
+        &quot;micro_objective&quot;: &quot;to make the action obvious&quot;,
+        &quot;obstacle_local&quot;: &quot;Sub-account model is new — clarity must beat cleverness.&quot;
+      }
+    ]
+  }
+}</pre></details>
+    <section class="channel">
+        <h3>x <span class="badge ">Actor selected 1</span></h3>
+        <p class="muted">Plants the venue, lists the markets as evidence, and closes on the through-line. Dash removed; same two-beat construction with a clean period replacing the staged pause.</p>
+        <div class="options">
+          <article class="option selected">
+            <h4>Option 1 - Actor selected <span class="badge pass">script pass</span> <span class="badge pass">Director: commanding</span></h4>
+            <blockquote>Spot CLOB on Hyperliquid is live on Infinex.
+
+HYPE, UBTC, UETH, USOL, UZEC, PURR and more. Same orderbook as your perps, now for spot.</blockquote>
+            <h5>Rationale</h5>
+            <p>Same construction as before, dash removed. Period after the list gives the same breath without the press-release tell.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>Spot CLOB on Hyperliquid is live on Infinex.</q><br><span class="muted">Declarative weight; the venue is stated as fact.</span></li><li><b>gliding</b> / to name: <q>HYPE, UBTC, UETH, USOL, UZEC, PURR and more.</q><br><span class="muted">Even-tempo enumeration; tickers listed without per-item emphasis.</span></li><li><b>pressing</b> / to extend: <q>Same orderbook as your perps, now for spot.</q><br><span class="muted">Returns weight to the through-line.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;Hyperliquid spot market: HYPE/USDC — $97.57M 24h volume (highest; native HL token, no U-prefix)&quot;,
+    &quot;Hyperliquid spot market: UBTC/USDC (Unit Bitcoin, wrapped BTC) — $26.91M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UETH/USDC (Unit Ethereum, wrapped ETH) — $4.21M 24h volume&quot;,
+    &quot;Hyperliquid spot market: USOL/USDC (Unit Solana, wrapped SOL) — $2.73M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UZEC/USDC (Unit Zcash, wrapped ZEC) — $8.39M 24h volume&quot;,
+    &quot;Hyperliquid spot market: PURR/USDC — $2.34M 24h volume&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;21 Hyperliquid spot markets have &gt;$100K 24h volume; 298 exist on-chain but most had zero or negligible volume — do not use 298 as a market count in copy&quot;,
+      &quot;reason&quot;: &quot;Market-count framing is not the point.&quot;
+    },
+    {
+      &quot;fact&quot;: &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;,
+      &quot;reason&quot;: &quot;Belongs in-product.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Spot CLOB on Hyperliquid is live on Infinex.\n\nHYPE, UBTC, UETH, USOL, UZEC, PURR and more. Same orderbook as your perps, now for spot.&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 1 (Actor recommended).\n\nSame construction as before, dash removed. Period after the list gives the same breath without the press-release tell.\n\nMovement receipt:\n- pressing / to extend: \&quot;Spot CLOB on Hyperliquid is live on Infinex.\&quot; — Declarative weight; the venue is stated as fact.\n- gliding / to name: \&quot;HYPE, UBTC, UETH, USOL, UZEC, PURR and more.\&quot; — Even-tempo enumeration; tickers listed without per-item emphasis.\n- pressing / to extend: \&quot;Same orderbook as your perps, now for spot.\&quot; — Returns weight to the through-line.\n\nActor recommendation: Plants the venue, lists the markets as evidence, and closes on the through-line. Dash removed; same two-beat construction with a clean period replacing the staged pause.\n\nFinal pick rationale: score 400; image cluster market-object; script pass, factual pass, copy/voice pass, Infinex legal fit, Actor recommended, image cluster repetition penalty market-object, lower repetition preferred (-4), channel fit. Warnings: All 3 passing x candidates share image-system cluster \&quot;market-object\&quot;.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo commanding</span>
+                <span class="badge ">confidence 0.72</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Strong&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained — present in the declarative hold but treated as motor stress, not tempo-name factor&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;certain (Awake outer; Direct + Sustained)&quot;,
+      &quot;factor_shape&quot;: &quot;Space + Time&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The weight of the announcement — the institutional declaration that something is now live — is the load-bearing axis. The line does not read as dawning awareness arriving at certainty; it reads as a fait accompli delivered from a position already taken. Weight is present and primary; Awake outer would require Weight to be incidental.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;practical (Stable; Strong + Flexible)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Space&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The ticker list has some enumerative openness but the dominant structure is aimed: one venue, one product type, one declaration. There is no wringing/spell-binding indirection. The path is single-axis, not flexible.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;warm (Near; Strong + Sustained)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Time&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Near requires Weight + Time as the baseline pair. The copy is not temporally paced toward or away from the reader in the Near sense — there is no slow consent or dissent dynamic. The sentence lands all at once as a resolved statement.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Strong</h5><ul><li>observation: 'Spot CLOB on Hyperliquid is live on Infinex.' is a full declarative with no hedging, qualification, or softening. The verb 'is live' asserts completed fact at full press — no lift, no tentativeness.</li><li>observation: 'Same orderbook as your perps' grounds the claim in already-trusted infrastructure, adding institutional mass rather than removing it.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: The headline sentence is a single aimed declarative. Subject → verb → object. No subordinate clauses, no hedged pathing, no exploratory branching.</li><li>observation: 'Same orderbook as your perps, now for spot.' is a one-axis extension of the first sentence — it does not detour; it re-aims at the same destination with added specification.</li></ul></div><div><h5>time: Sustained</h5><ul><li>observation: There is no attack-and-release rhythm; both sentences hold their weight through to their full stop. No clipped beat, no sudden pivot.</li><li>observation: The ticker enumeration 'HYPE, UBTC, UETH, USOL, UZEC, PURR and more' unfolds at even pace without crescendo — sustained even tempo, not Quick.</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: No overflow. The copy stops at 'now for spot.' — no trailing clause, no emotional excess, no expansive gesture beyond the stated scope.</li><li>observation: 'and more' is a contained acknowledgment, not an irradiant release. It closes the list without opening into speculation.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>spell</p>
+              <h5>Placement read</h5><p>The copy rests at the primary drive (Spell) without projecting Vision. The declaration 'is live' is the banker-turned-trailblazer's fait accompli: the mapping is already done, the reader simply arrives. This is legal resting character energy for Infinex — the Spell drive surfaces as the institutional claim that a new infrastructure order is in place. No Passion/urgency foreground. No Vision arc visible, but this is a one-line-plus-ticker X post, not an arc vehicle.</p>
+              <h5>Fit reason</h5><p>Tempo reads as commanding (Stable; Strong + Direct). Commanding is a primary allowed tempo for Infinex. Drive reads as Spell at rest — legal for stable|penetrating|flow. No Passion/urgency/FOMO foregrounded. The 'same orderbook as your perps' move is a classic Penetrating-Stable gesture: it attends to the reader's existing knowledge (perps) and extends the Space axis toward them without emotional pressure. No off-spec markers detected.</p>
+              <h5>Notes for actor</h5><ul><li>The Pressing motor is correctly dominant and the copy holds its weight cleanly. The Gliding enumeration in the ticker list is well-placed — even tempo, no per-item drama. No movement correction needed on the existing structure.</li><li>The closing beat 'Same orderbook as your perps, now for spot.' re-aims at the reader's existing infrastructure knowledge (Penetrating/Attending move) and lands without surplus. This is the correct Stable + Penetrating gesture for Infinex: it attends to what the reader already knows and simply extends it. Do not add urgency or deadline language here — that would foreground Passion and break the Spell drive surface.</li><li>If a future revision needs to move toward the Vision extravert (the cumulative Spell → Vision axis), the motor cue is: follow the Pressing with a Gliding or a Floating — a light, wide-space image of what this infrastructure makes possible for the user. Do not execute this as a Quick beat (no 'act now', no countdown). The Vision projection arrives as a widening of space, not an acceleration of time.</li><li>Confidence on commanding is 0.72 because the copy is short (two sentences, ~20 words). A longer piece would allow more precise tempo triangulation. The commanding read is the strongest single candidate but cannot be held at full certainty from this surface alone.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Live-state confirmation required before publishing: the release card asserts ship_date 2026-05-20 and that Spot CLOB is live on Infinex. Copy states 'is live' as present fact. A human ship gate must verify that the feature is actually deployed and accessible at time of posting.</li><li>Ticker set (HYPE, UBTC, UETH, USOL, UZEC, PURR) reflects release-card deployed facts. Confirm all six are tradeable at ship moment; if any are not yet accessible via Infinex UI at publish time, copy must be adjusted.</li><li>'and more' claim: the release card documents 21 markets with &gt;$100K volume. 'and more' is defensible but should be confirmed as accurate at ship state — i.e., that additional markets beyond the six named are in fact accessible.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article><article class="option ">
+            <h4>Option 2 <span class="badge pass">script pass</span> <span class="badge pass">Director: commanding</span></h4>
+            <blockquote>The orderbook you use for perps now runs spot.
+
+HYPE, UBTC, UETH, USOL, UZEC, PURR and more. Live on Infinex via Hyperliquid.</blockquote>
+            <h5>Rationale</h5>
+            <p>Through-line leads. Period replaces dash; list reads as evidence, venue plants at the close.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>The orderbook you use for perps now runs spot.</q><br><span class="muted">Single steady declarative.</span></li><li><b>gliding</b> / to name: <q>HYPE, UBTC, UETH, USOL, UZEC, PURR and more.</q><br><span class="muted">Listed evenly, no per-item lift.</span></li><li><b>pressing</b> / to extend: <q>Live on Infinex via Hyperliquid.</q><br><span class="muted">Plants the venue at the close.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid spot market: HYPE/USDC — $97.57M 24h volume (highest; native HL token, no U-prefix)&quot;,
+    &quot;Hyperliquid spot market: UBTC/USDC (Unit Bitcoin, wrapped BTC) — $26.91M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UETH/USDC (Unit Ethereum, wrapped ETH) — $4.21M 24h volume&quot;,
+    &quot;Hyperliquid spot market: USOL/USDC (Unit Solana, wrapped SOL) — $2.73M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UZEC/USDC (Unit Zcash, wrapped ZEC) — $8.39M 24h volume&quot;,
+    &quot;Hyperliquid spot market: PURR/USDC — $2.34M 24h volume&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;21 Hyperliquid spot markets have &gt;$100K 24h volume; 298 exist on-chain but most had zero or negligible volume — do not use 298 as a market count in copy&quot;,
+      &quot;reason&quot;: &quot;Catalogue framing is off-objective.&quot;
+    },
+    {
+      &quot;fact&quot;: &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;,
+      &quot;reason&quot;: &quot;Product mechanics.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;The orderbook you use for perps now runs spot.\n\nHYPE, UBTC, UETH, USOL, UZEC, PURR and more. Live on Infinex via Hyperliquid.&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 2.\n\nThrough-line leads. Period replaces dash; list reads as evidence, venue plants at the close.\n\nMovement receipt:\n- pressing / to extend: \&quot;The orderbook you use for perps now runs spot.\&quot; — Single steady declarative.\n- gliding / to name: \&quot;HYPE, UBTC, UETH, USOL, UZEC, PURR and more.\&quot; — Listed evenly, no per-item lift.\n- pressing / to extend: \&quot;Live on Infinex via Hyperliquid.\&quot; — Plants the venue at the close.\n\nActor recommended option 1 instead: Plants the venue, lists the markets as evidence, and closes on the through-line. Dash removed; same two-beat construction with a clean period replacing the staged pause.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo commanding</span>
+                <span class="badge ">confidence 0.72</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Strong&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained (motor evidence, Pressing prep; not a tempo-name factor for Stable)&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;certain (Awake outer; Direct + Sustained)&quot;,
+      &quot;factor_shape&quot;: &quot;Space + Time&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Direct pathing and held duration are both present, which fits certain's factor shape (Direct + Sustained). However the copy carries load-bearing Weight: the declarative extension of the user's existing tool is a Strong-weighted claim, not a weightless dawning of awareness. Stable reads more structurally load-bearing than Awake here. Awake outer is Action-only; it cannot serve as baseline. Rejected.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;practical (Stable; Strong + Flexible)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Space&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The opening sentence is a single aimed declarative — one sentence, one direction, no circling or casting. No Flexible/Indirect pathing is present. The list in line 2 enumerates sequentially without weaving. Flexible requires indirect or encircling movement. Rejected.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;warm (Near; Strong + Sustained)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Time&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Weight and Sustained duration are both observable. However Near requires Time as a co-constituting factor (Weight + Time). The prose shows no temporally-weighted decision arc or relational time-pressure; it reads as spatialized declaration (Direct delivery), not a temporally anchored Near. Space/Direct is more load-bearing than Time here. Rejected.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Strong</h5><ul><li>observation: 'The orderbook you use for perps now runs spot.' — asserts an existing infrastructure claim with full institutional weight; no hedging, no conditional. The verb 'runs' is load-bearing rather than descriptive.</li><li>observation: The subject is 'the orderbook' — a fixed, structural noun. This is not a light or tentative framing; the sentence rests its full mass on an existing shared object.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: The opening sentence is a single aimed declarative with no subordinate clause, no circling, no hedge. Subject → verb → object. One path.</li><li>observation: 'Live on Infinex via Hyperliquid.' — terminal placement, single prepositional arc, no branching. The sentence closes rather than opens outward.</li></ul></div><div><h5>time: Sustained</h5><ul><li>observation: No urgency markers, no deadline pressure, no exclamation. The copy holds its weight evenly across two beats without acceleration.</li><li>observation: The list ('HYPE, UBTC, UETH, USOL, UZEC, PURR and more') is evenly spaced — no per-item emphasis spike, no sudden attack. Duration is distributed, not released.</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: Both sentences are closed and contained. No overflow, no trailing clause, no Free release into feeling or enthusiasm. The period after 'spot.' and after 'Hyperliquid.' closes each beat fully.</li><li>observation: The list is bounded by 'and more' — it acknowledges incompleteness but contains it rather than releasing outward.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>spell</p>
+              <h5>Placement read</h5><p>Stable/commanding with Pressing → Gliding motor arc. The copy rests at primary drive (Spell): it extends the existing orderbook infrastructure into a new domain without urgency or Vision projection. This is legal resting character energy for Infinex — not a full primary → extravert axis arc, but a contained single beat on a web/X channel. The Doing surface (practical extension) is audible underneath; Spell is the dominant read because the copy names a structural fact the user already inhabits and opens it further, which is the Spell formative motion. No Vision projection present; acceptable for one-line X copy.</p>
+              <h5>Fit reason</h5><p>commanding is a primary allowed tempo for Infinex. Drive reads Spell — legal visible surface for stable|penetrating|flow. No Passion/urgency/FOMO foregrounded. No off-spec markers. The copy does not project Vision, but single-beat X copy is not required to carry the full Spell → Vision axis. Resting Spell is legal here.</p>
+              <h5>Notes for actor</h5><ul><li>The Pressing motor is correctly held across both beats. Do not add urgency language ('now available', 'don't miss', 'finally') — that would spike Time into Quick and foreground Passion.</li><li>The Gliding list is clean. If the list grows in revision, maintain even weight per token — no bolding or isolating one ticker above others, which would break the Gliding and introduce materialistic (Near/Quick) register.</li><li>If the brief asks for Vision projection (the extravert of the Spell → Vision axis), the way to arrive there is not to assert the future — it is to complete the Pressing arc into Punching: a single, short, Sharp-weight statement about what this means for the user's full portfolio capability. That beat would follow the current copy, not replace it. The current copy is a legal prep (Pressing); Vision emerges after the Working Action completes.</li><li>The closing tag 'Live on Infinex via Hyperliquid.' is Bound and Direct — it closes correctly. If a follow-on sentence is added, it should stay Sustained to avoid breaking the Pressing arc into an unearned Quick release.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Live-state confirmation required: 'The orderbook you use for perps now runs spot.' and 'Live on Infinex via Hyperliquid.' both assert present-tense availability. The ship_date is 2026-05-20. Publication must not precede that date and must confirm the spot CLOB is live and accessible on Infinex at time of posting.</li><li>Token ticker confirmation: UZEC appears in copy and release card. Confirm UZEC/USDC is accessible via the Infinex spot UI at ship date (release card lists it at $8.39M 24h volume, which is on Hyperliquid; confirm Infinex surface exposes it).</li><li>The phrase 'and more' in the token list implies additional liquid markets are accessible via Infinex. Confirm the product UI surfaces additional Hyperliquid spot markets beyond the six named, or narrow 'and more' to a specific second-tier list if product scope is limited at launch.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article><article class="option ">
+            <h4>Option 3 <span class="badge pass">script pass</span> <span class="badge pass">Director: commanding</span></h4>
+            <blockquote>Spot, on a real orderbook.
+
+HYPE, UBTC, UETH, USOL, UZEC, PURR and more. Same Hyperliquid CLOB as your perps, now live on Infinex.</blockquote>
+            <h5>Rationale</h5>
+            <p>Carries the swidge-to-CLOB shift implicitly via 'real orderbook.' Period replaces dash; the close re-plants the through-line.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>Spot, on a real orderbook.</q><br><span class="muted">Plants the venue with weighted brevity.</span></li><li><b>gliding</b> / to name: <q>HYPE, UBTC, UETH, USOL, UZEC, PURR and more.</q><br><span class="muted">List as evidence.</span></li><li><b>pressing</b> / to extend: <q>Same Hyperliquid CLOB as your perps, now live on Infinex.</q><br><span class="muted">Returns to the through-line and closes.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid spot market: HYPE/USDC — $97.57M 24h volume (highest; native HL token, no U-prefix)&quot;,
+    &quot;Hyperliquid spot market: UBTC/USDC (Unit Bitcoin, wrapped BTC) — $26.91M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UETH/USDC (Unit Ethereum, wrapped ETH) — $4.21M 24h volume&quot;,
+    &quot;Hyperliquid spot market: USOL/USDC (Unit Solana, wrapped SOL) — $2.73M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UZEC/USDC (Unit Zcash, wrapped ZEC) — $8.39M 24h volume&quot;,
+    &quot;Hyperliquid spot market: PURR/USDC — $2.34M 24h volume&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;21 Hyperliquid spot markets have &gt;$100K 24h volume; 298 exist on-chain but most had zero or negligible volume — do not use 298 as a market count in copy&quot;,
+      &quot;reason&quot;: &quot;Not the through-line.&quot;
+    },
+    {
+      &quot;fact&quot;: &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;,
+      &quot;reason&quot;: &quot;In-product detail.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Spot, on a real orderbook.\n\nHYPE, UBTC, UETH, USOL, UZEC, PURR and more. Same Hyperliquid CLOB as your perps, now live on Infinex.&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 3.\n\nCarries the swidge-to-CLOB shift implicitly via 'real orderbook.' Period replaces dash; the close re-plants the through-line.\n\nMovement receipt:\n- pressing / to extend: \&quot;Spot, on a real orderbook.\&quot; — Plants the venue with weighted brevity.\n- gliding / to name: \&quot;HYPE, UBTC, UETH, USOL, UZEC, PURR and more.\&quot; — List as evidence.\n- pressing / to extend: \&quot;Same Hyperliquid CLOB as your perps, now live on Infinex.\&quot; — Returns to the through-line and closes.\n\nActor recommended option 1 instead: Plants the venue, lists the markets as evidence, and closes on the through-line. Dash removed; same two-beat construction with a clean period replacing the staged pause.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo commanding</span>
+                <span class="badge ">confidence 0.62</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Strong&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained (motor: Pressing prep)&quot;,
+    &quot;Bound (containment in the truncated declarative)&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;warm&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Time (Strong + Sustained)&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Sustained is present as motor evidence inside the first declarative, but Space/Direct pathing (single-aim, no curve) is the more load-bearing structural feature. Weight + Time Near read would require Time to be the primary shaping factor; it functions here as motor prep only.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;self-contained&quot;,
+      &quot;factor_shape&quot;: &quot;Stable Light + Direct&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The first sentence is blunt and grounded, not lifted or delicate. 'Real orderbook' is a force-claim, not a cautious deferring one. Weight reads Strong, not Light.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;egocentric&quot;,
+      &quot;factor_shape&quot;: &quot;Remote outer Direct + Bound&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Bound is present but functions as containment within a Stable baseline, not as a Remote outer withdrawal. No Space + Flow surface read.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Strong</h5><ul><li>observation: 'real orderbook' is a force-assertion — the word 'real' invests weight against an implied lesser alternative (swaps/swidge). This is not a tentative claim; it commits.</li><li>observation: the first sentence terminates with a hard period after five syllables. No hedging, no qualifier. Strong weight in the truncation.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: 'Spot, on a real orderbook.' is a single-aim declarative. No subordinate clause, no arc, no deflection. The path goes straight to the claim.</li><li>observation: the closing sentence 'Same Hyperliquid CLOB as your perps, now live on Infinex.' closes by returning to the same assertion with no lateral movement. The spatial trajectory is linear throughout.</li></ul></div><div><h5>time: Sustained</h5><ul><li>observation: the list sentence ('HYPE, UBTC, UETH, USOL, UZEC, PURR and more.') is deliberate accumulation — not a quick attack. The closing sentence holds the through-line without acceleration.</li><li>observation: no urgency language, no exclamation, no countdown. The copy takes its time arriving at 'now live on Infinex' as a held resolution, not a sudden declaration.</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: each of the three text spans ends in a hard period. No sentence spills into the next. The containment is syntactic and metrically deliberate.</li><li>observation: 'and more' is the only open gesture — a minimal release that does not undo the overall bound structure. Flow is controlled throughout.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: [
+    &quot;receipt assigns 'pressing' to both sentence 1 and sentence 3 with the same objective verb 'to extend' — this collapses the preparation arc. Sentence 3 is more accurately a Punching release (Pressing prep completed, Quick resolution: 'now live'). The receipt does not distinguish prep from execution, but the Working Action identification (Pressing) is present in the prose and the error is analytical rather than absent.&quot;,
+    &quot;receipt assigns 'gliding' to the list sentence — this is defensible and present in the prose as described above. No issue with the identification itself.&quot;
+  ]
+}</pre>
+              <h5>Drive read</h5><p>spell</p>
+              <h5>Placement read</h5><p>Stable baseline, Penetrating aspect (Space/Attending is the dominant Inner Participation — the copy maps territory, names markets, defines what kind of venue this is). Flow stressed. Table cell: stable|penetrating|flow → primary=spell, secondary=doing, introvert=passion, extravert=vision. Surface reads as resting Spell (the character knows the shape of the world and names it). Vision is the cumulative target; it does not need to project here. Lining (passion) is not surfaced — correctly hidden.</p>
+              <h5>Fit reason</h5><p>Commanding tempo is a primary allowed tempo for Infinex. Drive reads as resting Spell, which is legal for stable|penetrating|flow. No urgency vocabulary, no FOMO, no scarcity — Passion/time-pressure drift is absent. Lining (passion) is not surfaced. The Super-Objective (take responsibility for the tech so the user only has to want) is served: the copy names the venue, names the markets, states 'live' — the user is not asked to hurry or fear.</p>
+              <h5>Notes for actor</h5><ul><li>The receipt collapses Pressing and Punching into the same beat label ('pressing' for both sentence 1 and sentence 3). In movement terms, sentence 3 ('now live on Infinex') is the Punching execution — the Quick resolution of the Pressing preparation in sentence 1. The actor should feel the distinction: the first sentence holds weight and loads the action; the closing phrase releases it. If the copy were longer, this arc should be audible as a tempo shift.</li><li>The list sentence (tickers) currently reads as Gliding — smooth, direct, even-weighted. This is legal but it sits between two Pressing beats without its own motor intention. If the list is meant to accumulate force (Wringing) rather than merely name (Gliding), the syntax would need to change: e.g. front-loading volume context or adding a single qualifier that gives the list some weight. As written, the Gliding read is correct and is not a failure — note it as a held choice.</li><li>Flow is Bound throughout (three hard-stopped sentences). This is appropriate for Stable/commanding but leaves no release. The single open gesture ('and more') is the only free moment. If the channel context supports a fractionally lighter close, the actor could consider whether 'and more' earns more space — but this is a refinement, not a correction.</li><li>Confidence is 0.62, not 1.0, because this is compact microcopy (~20 words across three beats). The commanding read is defensible but a longer performance would sharpen the evidence. No corrections required at this length.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Live-state confirmation required before publishing: 'now live on Infinex' must be confirmed against actual ship state on 2026-05-20. If the feature is not live at post time, this line is false.</li><li>Ticker accuracy: HYPE, UBTC, UETH, USOL, UZEC, PURR are all confirmed in the release card deployed_facts. The 'and more' is supported by the card noting &gt;21 markets with volume. No issue — flagged only as a soft note that 'and more' should not be taken to imply a specific count that differs from the release card.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article>
+        </div>
+      </section><section class="channel">
+        <h3>web <span class="badge ">Actor selected 3</span></h3>
+        <p class="muted">Carries the continuation without naming 'orderbook' or 'CLOB' directly — resolves the image-cluster drift while preserving the through-line ('the way you trade perps'). One declarative surface, dash-free.</p>
+        <div class="options">
+          <article class="option ">
+            <h4>Option 1 <span class="badge pass">script pass</span> <span class="badge pass">Director: commanding</span></h4>
+            <blockquote>Spot trading is live on Hyperliquid, through Infinex.</blockquote>
+            <h5>Rationale</h5>
+            <p>Object rotated: names the venue and the action, not the book itself. One declarative surface, dash-free.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>Spot trading is live on Hyperliquid, through Infinex.</q><br><span class="muted">Stated as fact, single declarative weight.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+      &quot;reason&quot;: &quot;Carried implicitly; web is one surface.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Spot trading is live on Hyperliquid, through Infinex.&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 1.\n\nObject rotated: names the venue and the action, not the book itself. One declarative surface, dash-free.\n\nMovement receipt:\n- pressing / to extend: \&quot;Spot trading is live on Hyperliquid, through Infinex.\&quot; — Stated as fact, single declarative weight.\n\nActor recommended option 3 instead: Carries the continuation without naming 'orderbook' or 'CLOB' directly — resolves the image-cluster drift while preserving the through-line ('the way you trade perps'). One declarative surface, dash-free.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo commanding</span>
+                <span class="badge ">confidence 0.55</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Strong&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained (Pressing motor, not a tempo-naming factor for Stable)&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;self-contained&quot;,
+      &quot;factor_shape&quot;: &quot;Light + Direct&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The declarative has mass — it lands as a statement of fact with institutional authority, not cautious or deferential. Weight reads as Strong, not Light.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;certain&quot;,
+      &quot;factor_shape&quot;: &quot;Direct + Sustained&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Awake outer (Space + Time) would require Time as a load-bearing tempo factor. The line does not perform Time-awareness or dawning cognition; it performs settled, weight-bearing placement. Stable (Weight + Space) is more load-bearing.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;practical&quot;,
+      &quot;factor_shape&quot;: &quot;Strong + Flexible&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. No flexible/indirect pathing. Single aimed declarative, no winding or multi-route syntax. Space reads Direct.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Strong</h5><ul><li>observation: The sentence arrives as an unqualified institutional statement of fact — no hedging, no softening particle, no conditional. The claim bears its own mass and does not ask permission.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: Subject → verb → object → locator — a single undeflected vector. No subordinate clause loops or multi-path syntax. The sentence goes straight from claim to channel.</li></ul></div><div><h5>time: Sustained</h5><ul><li>observation: No attack-word, no urgency marker, no exclamation. The sentence holds its line without rushing. Sustained reads as motor context (Pressing) rather than a tempo-naming factor for Stable.</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: No overflow, no spill into implication or excitement. The sentence stops at exactly what is true. Containment is present but reads as motor context, not a tempo-naming pole for Stable.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>spell</p>
+              <h5>Placement read</h5><p>Resting Spell. The character holds a stable, weight-bearing fact. No visible Vision projection; no urgency or Passion leak. Spell as formative surface is legal for Infinex at this scale of copy.</p>
+              <h5>Fit reason</h5><p>commanding is a primary allowed tempo for Infinex. Drive reads as Spell, which is the secondary formative drive and a legal visible surface for stable|penetrating|flow. No Passion/urgency foreground detected. Resting Spell without visible Vision projection is acceptable for one-line web copy per Director method.</p>
+              <h5>Notes for actor</h5><ul><li>The Pressing motor is loaded but never released. The line is fully contained — which is legal for a web placement at resting Spell — but the preparation exists without a Punching follow. If this line needs to carry more theatrical weight as a standalone (e.g., as a homepage hero), consider whether a second beat can complete the arc: something that releases the held weight into a Direct Quick statement. That is a brief/channel decision, not a movement error in this line.</li><li>Confidence is 0.55 because the surface is 13 words. Factor reads are consistent but microcopy limits certainty. No corrections are required — the line is clean, on-character, and on-spec.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Copy does not distinguish CLOB spot from previously available swidge/swap spot. For a first-CLOB-on-Infinex launch-tier post, this distinction may matter at publication; the copy as written is not false but is under-specified relative to the tier_reason. Confirm whether surrounding context (headline, subhead) carries the CLOB distinction before publishing standalone.</li><li>Live-state confirmation needed: verify Hyperliquid spot CLOB is actually live through Infinex at ship time before publishing.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article><article class="option ">
+            <h4>Option 2 <span class="badge fail">script fail</span> </h4>
+            <blockquote>HYPE, UBTC, UETH, USOL and more. Spot, on Hyperliquid.</blockquote>
+            <h5>Rationale</h5>
+            <p>Object rotated: leads with the markets. The reader sees what's tradable before the venue. Dash-free.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>gliding</b> / to name: <q>HYPE, UBTC, UETH, USOL and more.</q><br><span class="muted">Even-tempo enumeration; markets listed without per-item emphasis.</span></li><li><b>pressing</b> / to extend: <q>Spot, on Hyperliquid.</q><br><span class="muted">Plants the venue at the close.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Hyperliquid spot market: HYPE/USDC — $97.57M 24h volume (highest; native HL token, no U-prefix)&quot;,
+    &quot;Hyperliquid spot market: UBTC/USDC (Unit Bitcoin, wrapped BTC) — $26.91M 24h volume&quot;,
+    &quot;Hyperliquid spot market: UETH/USDC (Unit Ethereum, wrapped ETH) — $4.21M 24h volume&quot;,
+    &quot;Hyperliquid spot market: USOL/USDC (Unit Solana, wrapped SOL) — $2.73M 24h volume&quot;,
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+      &quot;reason&quot;: &quot;Carried by the rest of the site; not needed in this surface.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;HYPE, UBTC, UETH, USOL and more. Spot, on Hyperliquid.&quot;,
+  &quot;validation_passed&quot;: false,
+  &quot;validation_failures&quot;: [
+    {
+      &quot;rule&quot;: &quot;movement-receipt&quot;,
+      &quot;reason&quot;: &quot;movement_receipt.0 uses gliding, which is absent from the channel movement score.&quot;
+    }
+  ],
+  &quot;rationale&quot;: &quot;Actor option 2.\n\nObject rotated: leads with the markets. The reader sees what's tradable before the venue. Dash-free.\n\nMovement receipt:\n- gliding / to name: \&quot;HYPE, UBTC, UETH, USOL and more.\&quot; — Even-tempo enumeration; markets listed without per-item emphasis.\n- pressing / to extend: \&quot;Spot, on Hyperliquid.\&quot; — Plants the venue at the close.\n\nActor recommended option 3 instead: Carries the continuation without naming 'orderbook' or 'CLOB' directly — resolves the image-cluster drift while preserving the through-line ('the way you trade perps'). One declarative surface, dash-free.&quot;
+}</pre></details>
+            
+          </article><article class="option selected">
+            <h4>Option 3 - Actor selected <span class="badge pass">script pass</span> <span class="badge pass">Director: commanding</span></h4>
+            <blockquote>Trade spot the way you trade perps. Live on Hyperliquid.</blockquote>
+            <h5>Rationale</h5>
+            <p>Object rotated: names the user's action and their existing habit. Carries the continuation without naming the book directly. Dash-free.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>pressing</b> / to extend: <q>Trade spot the way you trade perps.</q><br><span class="muted">Declarative weight on the continuation; action-led.</span></li><li><b>pressing</b> / to extend: <q>Live on Hyperliquid.</q><br><span class="muted">Plants the venue at the close.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+    &quot;perps trading venue provider: Hyperliquid&quot;,
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex&quot;,
+      &quot;reason&quot;: &quot;Implied by the continuation.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Trade spot the way you trade perps. Live on Hyperliquid.&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 3 (Actor recommended).\n\nObject rotated: names the user's action and their existing habit. Carries the continuation without naming the book directly. Dash-free.\n\nMovement receipt:\n- pressing / to extend: \&quot;Trade spot the way you trade perps.\&quot; — Declarative weight on the continuation; action-led.\n- pressing / to extend: \&quot;Live on Hyperliquid.\&quot; — Plants the venue at the close.\n\nActor recommendation: Carries the continuation without naming 'orderbook' or 'CLOB' directly — resolves the image-cluster drift while preserving the through-line ('the way you trade perps'). One declarative surface, dash-free.\n\nFinal pick rationale: score 410; image cluster market-object; script pass, factual pass, copy/voice pass, Infinex legal fit, publication gate clear, Actor recommended, image cluster repetition penalty market-object, lower repetition preferred (-4), channel fit. Warnings: All 2 passing web candidates share image-system cluster \&quot;market-object\&quot;.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo commanding</span>
+                <span class="badge ">confidence 0.62</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge pass">publish pass</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Strong&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained (motor context, not a tempo-naming factor for Stable)&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;warm (Near; Strong + Sustained)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Time&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The line has no Time-as-deciding weight — no held duration, no slow consent-building. The sentence is aimed and declarative, not a warm durational lean. Weight reads as directive force, not relational warmth.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;acute (Awake; Direct + Quick)&quot;,
+      &quot;factor_shape&quot;: &quot;Space + Time&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Quick attack is not the dominant feel — the construction is assured, not darting. 'The way you trade perps' is a mapping move, not a snap decision. Weight is present and load-bearing; Space + Time without Weight cannot hold.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;practical (Stable; Strong + Flexible)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Space&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Considered. 'The way you trade perps' has a slight tracing quality — an analogical move that could read Flexible. Rejected on balance: the sentence is a single aimed assertion, not a weaving or spell-casting path. Direct holds.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Strong</h5><ul><li>observation: 'Trade spot the way you trade perps.' — imperative verb opening, no hedge, no qualifier. The full weight of the claim lands on the equivalence assertion. No lightness or lift; no delicate touch.</li><li>observation: 'Live on Hyperliquid.' — short declarative close. Plants. Does not float.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: Both sentences are single-target aimed statements. 'Trade spot the way you trade perps' collapses the distance between two things with a direct equivalence; no circling, no multi-path scanning.</li><li>observation: 'Live on Hyperliquid.' — one-word venue drop. No qualification, no branching. Maximum directness.</li></ul></div><div><h5>time: Sustained</h5><ul><li>observation: No urgency spike, no sudden attack. The copy reads as an assured, already-decided statement. The motor is held, not stabbing.</li><li>observation: Nine words + three words. Rhythm is measured, not staccato. Sustained is the motor register, not a naming factor for the Stable tempo read.</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: No overflow, no spill. 'Live on Hyperliquid.' is contained — the period closes it. No trailing release. Control is maintained throughout.</li><li>observation: The equivalence move ('the way you trade perps') is tight — it does not cascade or radiate outward.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>doing</p>
+              <h5>Placement read</h5><p>The copy maps a known action onto a new surface ('the way you trade perps') and names the venue. This is a Spell-primary character resting visibly in Doing — competence assertion, structural mapping, no affect spill. The Drive the audience would identify is Doing: purposeful, weight-forward, instrumentally confident. Spell is present as the underlying character stance (the mapping move has a crystallising quality) but Doing is the visible projection at this beat. No Vision projection; not required for a one-line web launch line.</p>
+              <h5>Fit reason</h5><p>Stable + Pressing motor is on-palette for Infinex. Commanding tempo (Strong + Direct) is in the primary allowed set. Doing as visible drive surface is legal — the character can rest here without projecting Vision per-line. No Passion/urgency/FOMO foreground. Bound flow holds rather than releases, consistent with Stable baseline. No off-spec markers detected.</p>
+              <h5>Notes for actor</h5><ul><li>The Pressing motor is correctly held throughout — do not add urgency markers (Quick spike) to the close. 'Live on Hyperliquid.' works precisely because it does not punch. Resist any editorial instinct to add 'now' or 'today' — that shifts Time to Quick and tips toward materialistic (Near; Strong + Quick), which foregrounds Passion.</li><li>The analogical move ('the way you trade perps') reads as Direct because it collapses two things into one equivalence rather than tracing a path between them. If future revisions qualify or circulate this ('much like the perps experience you already know'), the Space factor shifts toward Flexible and the tempo slides toward practical. Both are on-palette; just name the move if you make it.</li><li>Confidence is moderated to 0.62 because at 12 words the surface is thin — Stable reads strongly but the single-sentence construction cannot carry full tempo certainty. The read is stable (no competing factor is more load-bearing), but do not over-weight this classification for longer arc decisions.</li><li>Drive reads as Doing (visible surface), Spell (character resting stance). This is a legal contained beat. If the broader launch arc needs a Vision projection, add a line that reveals what the mapping produces — not what it is, but what it means to look from there. That is the Spell → Vision axis move, and it belongs in a separate beat, not inside this line.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Confirm Hyperliquid spot CLOB is live and accessible from Infinex UI at ship date (2026-05-20) before publishing. The copy's 'Live on Hyperliquid.' makes a live-state claim; if spot CLOB is not yet accessible from Infinex at publish time, the line is false at surface.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article>
+        </div>
+      </section><section class="channel">
+        <h3>in-product <span class="badge ">Actor selected 1</span></h3>
+        <p class="muted">Tightest reusable UI label. Action-led, dash-free, and points at user action rather than the market-object.</p>
+        <div class="options">
+          <article class="option selected">
+            <h4>Option 1 - Actor selected <span class="badge pass">script pass</span> <span class="badge pass">Director: self-contained</span></h4>
+            <blockquote>Open Spot</blockquote>
+            <h5>Rationale</h5>
+            <p>Action-led label. Names what the user does, not the object. Dash-free.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>gliding</b> / to open: <q>Open Spot</q><br><span class="muted">Direct, light, finished UI action label.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+      &quot;reason&quot;: &quot;User is inside the product context.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Open Spot&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 1 (Actor recommended).\n\nAction-led label. Names what the user does, not the object. Dash-free.\n\nMovement receipt:\n- gliding / to open: \&quot;Open Spot\&quot; — Direct, light, finished UI action label.\n\nActor recommendation: Tightest reusable UI label. Action-led, dash-free, and points at user action rather than the market-object.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo self-contained</span>
+                <span class="badge ">confidence 0.45</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Light&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained (motor-level, Gliding; not a tempo-naming factor for Stable)&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;acute (Awake outer; Direct + Quick)&quot;,
+      &quot;factor_shape&quot;: &quot;Space + Time&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. No Time pole is load-bearing in a two-word imperative label; the copy carries no sudden-attack or decision-pressure evidence. 'Open' is a declarative action-label, not a quick burst.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;commanding (Stable; Strong + Direct)&quot;,
+      &quot;factor_shape&quot;: &quot;Weight + Space&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. No Strong-weight pressure or bold-resolve energy — the label is minimal, finished, unforced. Light reads more accurately than Strong here.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;sociable (Remote outer; Direct + Free)&quot;,
+      &quot;factor_shape&quot;: &quot;Space + Flow&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Flow evidence is absent; this is contained Stable register, not a Remote outer action-attitude.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Light</h5><ul><li>observation: Two-word imperative 'Open Spot' carries no weight-bearing pressure, no assertion of force. The label is functional and undemanding — it arrives without pressing the reader.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: Single-path directive. No circumnavigation, no clause, no qualification. The word 'Open' aims at exactly one action; 'Spot' names exactly one destination. Unambiguously Direct.</li></ul></div><div><h5>time: unclear</h5><ul><li>observation: Microcopy label carries no temporal arc. Neither sustained pressure nor sudden attack is discernible from two words. Time pole is underdetermined at this scale.</li></ul></div><div><h5>flow: unclear</h5><ul><li>observation: No overflow or containment signal in a bare UI label. Flow pole underdetermined.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>doing</p>
+              <h5>Placement read</h5><p>Functional UI action label — resting at Doing (visible task execution). No Drive axis arc is possible from two words. Spell as character baseline is consistent with this surface; the label neither projects Vision nor foregrounds Passion. Legal contained beat.</p>
+              <h5>Fit reason</h5><p>self-contained sits inside the beat-only/reserve palette for Infinex — legal placement for a UI action label. No urgency, no FOMO, no passion-forward register. Doing as visible drive surface is explicitly permitted. The copy does not contradict the Spell → Vision axis; it simply does not carry it, which is acceptable for single-word-level in-product copy.</p>
+              <h5>Notes for actor</h5><ul><li>The label is clean and legally placed. At two words, tempo confidence is inherently soft (0.45) — this is not a defect, it is the nature of microcopy. No movement correction needed.</li><li>If a longer surrounding context (button group, screen header, tooltip) exists, bring it to the next audit pass — the surrounding copy carries the weight of the Spell → Vision arc; this label only needs to point without pressure, which it does.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Confirm 'Open Spot' is the exact label wired to the Spot sub-account entry action in the live Hyperliquid integration UI — not Perps, not a transfer flow. Receipt cites the Spot/Perps sub-account separation fact; that wiring must be verified before ship.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article><article class="option ">
+            <h4>Option 2 <span class="badge pass">script pass</span> <span class="badge pass">Director: self-contained</span></h4>
+            <blockquote>Trade spot on Hyperliquid</blockquote>
+            <h5>Rationale</h5>
+            <p>Verb-first action label naming the destination. Object rotated away from 'orderbook/CLOB' toward action+venue.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>gliding</b> / to open: <q>Trade spot on Hyperliquid</q><br><span class="muted">Direct compact action label; verb and destination.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+    &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps&quot;,
+      &quot;reason&quot;: &quot;Mechanic detail; not needed at label scale.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Trade spot on Hyperliquid&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 2.\n\nVerb-first action label naming the destination. Object rotated away from 'orderbook/CLOB' toward action+venue.\n\nMovement receipt:\n- gliding / to open: \&quot;Trade spot on Hyperliquid\&quot; — Direct compact action label; verb and destination.\n\nActor recommended option 1 instead: Tightest reusable UI label. Action-led, dash-free, and points at user action rather than the market-object.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo self-contained</span>
+                <span class="badge ">confidence 0.45</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Light&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained — present as motor-texture in the gliding working-action claim, not a tempo-naming factor for this Stable read&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;commanding&quot;,
+      &quot;factor_shape&quot;: &quot;Strong + Direct&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Five-word imperative is aimed and direct, but there is no force/mass/weight pressure — no assertion of resolve against resistance. The line is spare, not heavy. Light is more load-bearing than Strong here.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;acute&quot;,
+      &quot;factor_shape&quot;: &quot;Direct + Quick (Awake outer)&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Direct is present and there is some attack quality in the tight verb phrase, but Weight is structurally present (an imperative has Weight-Intending), and the line does not foreground Awake Space+Time at the expense of Weight. Stable is a better baseline fit than an Action-Attitude-only outer read.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;self-contained&quot;,
+      &quot;factor_shape&quot;: &quot;Light + Direct (Stable)&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Kept as primary. The line is aimed (Direct), spare and low-mass (Light), and carries the quiet deference of a navigation label — it points without asserting. Mirodan canonical shorthand: 'Cautious expression or cautious acceptance of a gentle deference'. This fits an in-product label that orients without pressing.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Light</h5><ul><li>observation: The line carries no force-vocabulary, no weight-against-resistance signal. 'Trade spot on Hyperliquid' is a label, not a command asserting resolve. Mass is absent.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: Single declarative phrase with a clear destination ('on Hyperliquid'). No branching, no qualification, no indirect pathing. The line aims at one thing.</li></ul></div><div><h5>time: unclear</h5><ul><li>observation: Five words give no timing arc. The phrase has no sustained held pressure nor a quick attack-release pair. Time is present in any imperative but is not distinguishable at this scale.</li></ul></div><div><h5>flow: unclear</h5><ul><li>observation: No containment vocabulary and no release vocabulary. Flow cannot be read from a five-word navigation label.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>doing</p>
+              <h5>Placement read</h5><p>A five-word in-product navigation label. It orients without pressing — Light + Direct Stable. The verb 'Trade' is transitive and aimed; 'on Hyperliquid' closes the spatial destination. No drive arc is visible at this scale; the audience reads functional orientation, not character energy. Drive reads as Doing (practical working-action surface, no Spell elaboration present). Legal as resting Spell-character energy at label scale — Doing surface is acceptable for Infinex.</p>
+              <h5>Fit reason</h5><p>self-contained is in the Infinex beat-only/reserve palette. A navigation label at this scale can legally rest at contained Doing surface. No passion/urgency/FOMO vocabulary is present. No off-spec markers. The line does not foreground wrong drive or wrong through-action. Reserve-palette placement is legal for in-product labelling.</p>
+              <h5>Notes for actor</h5><ul><li>The label reads correctly at this scale — light, aimed, no noise. No movement correction needed for the five-word form.</li><li>If this label is expected to carry any arc (i.e., brief requires it to do more than orient), the Gliding motor needs a preparation beat upstream — a Pressing or Wringing context that gives the Gliding somewhere to land. A standalone navigation label does not require this, but a card or section header pairing might.</li><li>Confidence ceiling is 0.45 because microcopy of this length does not give enough surface to read Time or Flow, and the two-factor Stable read is an inference from what is absent (force, indirection) as much as what is present. The read is defensible, not certain.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Live-state confirmation required: confirm Hyperliquid spot trading is live in-product and the navigation path 'Trade spot on Hyperliquid' matches the actual in-product label and routing before publishing.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article><article class="option ">
+            <h4>Option 3 <span class="badge pass">script pass</span> <span class="badge pass">Director: self-contained</span></h4>
+            <blockquote>Fund your Spot account to start</blockquote>
+            <h5>Rationale</h5>
+            <p>Empty-state line. Names the sub-account and the next concrete action. Dash replaced by a full imperative sentence; object rotated to user action.</p>
+            <h5>Movement receipt</h5>
+            <ul><li><b>gliding</b> / to open: <q>Fund your Spot account to start</q><br><span class="muted">Compact direct line; imperative, action-led.</span></li></ul>
+            <details><summary>Facts used / not said</summary><pre>{
+  &quot;deployed_facts_used&quot;: [
+    &quot;Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions&quot;
+  ],
+  &quot;not_said&quot;: [
+    {
+      &quot;fact&quot;: &quot;spot CLOB trading venue provider: Hyperliquid&quot;,
+      &quot;reason&quot;: &quot;Venue is implied by surrounding product context.&quot;
+    }
+  ]
+}</pre></details>
+            <details open><summary>Persisted candidate option</summary><pre>{
+  &quot;text&quot;: &quot;Fund your Spot account to start&quot;,
+  &quot;validation_passed&quot;: true,
+  &quot;validation_failures&quot;: [],
+  &quot;rationale&quot;: &quot;Actor option 3.\n\nEmpty-state line. Names the sub-account and the next concrete action. Dash replaced by a full imperative sentence; object rotated to user action.\n\nMovement receipt:\n- gliding / to open: \&quot;Fund your Spot account to start\&quot; — Compact direct line; imperative, action-led.\n\nActor recommended option 1 instead: Tightest reusable UI label. Action-led, dash-free, and points at user action rather than the market-object.\n\nFinal pick rationale: score 408; image cluster account-surface; script pass, factual pass, copy/voice pass, Infinex legal fit, distinct image cluster account-surface, channel fit.&quot;
+}</pre></details>
+            <details open><summary>Director audit</summary>
+              <div class="director-head">
+                <span class="badge pass">tempo self-contained</span>
+                <span class="badge ">confidence 0.55</span>
+                <span class="badge pass">passed</span>
+                <span class="badge pass">legal</span>
+                <span class="badge pass">copy pass</span>
+                <span class="badge pass">facts pass</span>
+                <span class="badge fail">publish warn</span>
+              </div>
+              <h5>Tempo basis</h5>
+              <pre>{
+  &quot;attitude_or_state&quot;: &quot;Stable&quot;,
+  &quot;variation_factors&quot;: [
+    &quot;Weight&quot;,
+    &quot;Space&quot;
+  ],
+  &quot;variation_poles&quot;: [
+    &quot;Light&quot;,
+    &quot;Direct&quot;
+  ],
+  &quot;excluded_present_poles&quot;: [
+    &quot;Sustained (motor duration, not tempo-name factor)&quot;,
+    &quot;Bound (containment present in the instructional register, treated as flow-context not tempo axis)&quot;
+  ],
+  &quot;rival_two_factor_reads_considered&quot;: [
+    {
+      &quot;tempo&quot;: &quot;commanding&quot;,
+      &quot;factor_shape&quot;: &quot;Strong + Direct&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. The line carries no weight-pressure or forcefulness. 'Fund your Spot account' is a gentle procedural prompt, not a bold declaration. Weight reads Light, not Strong.&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;acute&quot;,
+      &quot;factor_shape&quot;: &quot;Direct + Quick&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Rejected. Awake outer requires Space + Time as the two factors. Time is not load-bearing here; there is no attack or change-point in the line. The brevity could suggest Quick, but the line is instructional/guiding rather than decision-triggering. Light + Direct (Stable self-contained) is more load-bearing than Direct + Quick (Awake acute).&quot;
+    },
+    {
+      &quot;tempo&quot;: &quot;self-contained&quot;,
+      &quot;factor_shape&quot;: &quot;Light + Direct&quot;,
+      &quot;reason_kept_or_rejected&quot;: &quot;Kept. Single aimed declarative (Direct). No force or urgency (Light). Gentle deference posture — the line guides without commanding. Fits Stable. Confidence soft at 0.55 given microcopy surface.&quot;
+    }
+  ]
+}</pre>
+              <h5>Motion evidence</h5>
+              <div class="motion-grid"><div><h5>weight: Light</h5><ul><li>observation: No pressure-language, no forceful imperative, no weight-bearing claim. 'Fund your Spot account to start' is a procedural pointer, not a demand. The verb 'fund' is transactional and low-stakes in register.</li></ul></div><div><h5>space: Direct</h5><ul><li>observation: Single-path instructional syntax. One action ('Fund'), one named object ('Spot account'), one purpose ('to start'). No branching, no qualification, no indirect pathing. The sentence cannot be read as Flexible/Indirect.</li></ul></div><div><h5>time: unclear</h5><ul><li>observation: The line is brief but not attack-driven. No urgency marker, no sudden shift. Duration is indeterminate at microcopy scale. Treating Time as unclear rather than Quick or Sustained.</li></ul></div><div><h5>flow: Bound</h5><ul><li>observation: The line is tightly contained — five words, no overflow, no released feeling. The instructional structure controls and channels. Reads as Bound in the sense of contained/held, but Flow is not a tempo-name factor for Stable.</li></ul></div></div>
+              <h5>Movement receipt fit</h5><pre>{
+  &quot;passed&quot;: true,
+  &quot;issues&quot;: []
+}</pre>
+              <h5>Drive read</h5><p>doing</p>
+              <h5>Placement read</h5><p>Resting instructional beat. The line is a procedural prompt that names the required user action to unlock the feature. It sits in the Doing surface — it directs a concrete transaction. No Spell-building, no Vision projection. Legal as a functional UI label or in-product CTA accompanying a larger launch frame; cannot carry the launch arc alone.</p>
+              <h5>Fit reason</h5><p>self-contained is listed in the Infinex beat-only/reserve palette. Doing as visible drive surface is legal for Infinex — the character can rest at Doing without projecting Vision on a single in-product instruction. The line is a functional UI CTA, not a standalone launch message, so resting Doing is appropriate. No urgency, FOMO, or Passion foreground. No off-spec vocabulary. Factually anchored to the deployed fact about Spot sub-account as a distinct entity requiring funding.</p>
+              <h5>Notes for actor</h5><ul><li>The line is clean and legally placed as a reserve/beat-only self-contained CTA. No movement corrections required for this register. If you want to lift it toward the primary palette (commanding or practical), add a single load-bearing phrase that introduces weight — but for a functional in-product label, self-contained is correct and should not be upgraded.</li><li>The objective verb 'to open' in the receipt does not match 'to start' in the prose. The prose purpose-clause is 'to start', which is broader and slightly less precise than 'to open'. This is not a failure — both read as Doing-surface — but note the mismatch for receipt hygiene.</li><li>Microcopy confidence is soft (0.55). At five words, factor reads have wide error bars. Do not treat the self-contained classification as definitive; it is the best available read from limited surface.</li></ul>
+              <h5>Publication gate issues</h5><ul><li>Confirm that the in-product 'Fund your Spot account' action/button is live and functional at ship date 2026-05-20. The line presupposes the Spot sub-account UI (Deposit/Transfer flow) is accessible to the user at the point this copy appears. If the UI flow is not yet live or gated, this CTA would be orphaned.</li></ul>
+              <h5>Voice issues</h5><p class="muted">none</p>
+              <h5>Factual issues</h5><p class="muted">none</p>
+            </details>
+          </article>
+        </div>
+      </section>
+  </section>
+  </main>
+</body>
+</html>

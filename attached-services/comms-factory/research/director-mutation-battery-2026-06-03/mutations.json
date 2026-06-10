@@ -1,0 +1,2078 @@
+[
+  {
+    "mutation_id": "mut-01",
+    "base_candidate_id": "01KT5Y6MVYE0JGAG2G1BVYMF2Q",
+    "base_index": 0,
+    "channel": "blog",
+    "defect_class": "A",
+    "defect_label": "passion-urgency",
+    "original_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nFor a while, spot trading in Infinex meant swaps \u2014 routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.\n\nHyperliquid Spot V1 is Infinex's first CLOB spot order book. CLOB stands for Central Limit Order Book \u2014 the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.\n\nWhat's live today:\n\n- **24 spot markets**, all USDC-quoted, with more than $100K in daily volume each\n- Market, limit, and post-only orders; modify and cancel by order ID\n- Real-time order book rendered live in the Infinex UI\n- Account spot balances and trade history visible in the same unified account you use for perps\n\nThe volume is real. HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC \u2014 the default market in the app, and the one we use for testing \u2014 at $8M.\n\nAccess requires a unified account; if you've been trading perps in Infinex, you already qualify. Switch to spot inside the app, pick a market, and you're looking at a live order book.\n\nStart at perps.app.infinex.xyz \u2014 navigate to any spot market via /hyperliquid/spot/{BASE}/USDC, or open PURR/USDC directly at /hyperliquid/spot/PURR/USDC.",
+    "mutated_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nThe window to be early is open and it will not stay open. Spot trading in Infinex used to mean swaps, routed through Curve Finance or Jupiter, both AMM-based. That is over.\n\nHyperliquid Spot V1 is Infinex's first CLOB spot order book. Get in before the rest of the market figures out what just shipped. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.\n\nWhat's live today:\n\n- **24 spot markets**, all USDC-quoted, with more than $100K in daily volume each\n- Market, limit, and post-only orders; modify and cancel by order ID\n- Real-time order book rendered live in the Infinex UI\n- Account spot balances and trade history visible in the same unified account you use for perps\n\nThe volume is real. HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC, the default market in the app, at $8M.\n\nAccess requires a unified account; if you've been trading perps in Infinex, you already qualify. The traders moving first will own the book. Switch to spot inside the app, pick a market, and you're looking at a live order book.\n\nStart at perps.app.infinex.xyz now, before the volume you see today doubles. Navigate to any spot market via /hyperliquid/spot/{BASE}/USDC, or open PURR/USDC directly at /hyperliquid/spot/PURR/USDC.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify.",
+      "Spot V1 \u2014 what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Default spot market (used in routes and E2E tests): PURR/USDC",
+      "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE}",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Perps trading venue provider: Hyperliquid"
+    ],
+    "not_said": [
+      {
+        "fact": "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+        "reason": "Internal branch name is an implementation detail with no user-facing meaning."
+      },
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "A list of absent perps controls is a support-doc entry, not a blog paragraph \u2014 it distracts from what the product is and implies the reader expected those controls in spot."
+      },
+      {
+        "fact": "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+        "reason": "The localStorage bug must not appear in any public-facing copy."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "For a while, spot trading in Infinex meant swaps \u2014 routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.",
+        "objective_verb": "to press the historical fact into the record",
+        "working_action": "pressing",
+        "evidence": "Slow, full-weight establishment of what existed before and what is different now. Each clause sets down a stone before the cornerstone arrives."
+      },
+      {
+        "text_span": "Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.",
+        "objective_verb": "to extend the terrain across the infrastructure",
+        "working_action": "wringing",
+        "evidence": "Two strands held simultaneously: technical specificity (HyperCore, HyperBFT) and practical clarity ('no bridge, no wrapper'). The prose wrings both without releasing either \u2014 sustained, dual-axis tension."
+      },
+      {
+        "text_span": "HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC \u2014 the default market in the app, and the one we use for testing \u2014 at $8M.",
+        "objective_verb": "to mark the coordinates the reader can act on",
+        "working_action": "slashing",
+        "evidence": "Quick, diagonal cut through the volume figures \u2014 each one placed and left. The sustained wringing preparation earns the speed of this cut."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-02",
+    "base_candidate_id": "01KT5Y6MVYE0JGAG2G1BVYMF2Q",
+    "base_index": 0,
+    "channel": "blog",
+    "defect_class": "B",
+    "defect_label": "hype-theatre",
+    "original_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nFor a while, spot trading in Infinex meant swaps \u2014 routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.\n\nHyperliquid Spot V1 is Infinex's first CLOB spot order book. CLOB stands for Central Limit Order Book \u2014 the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.\n\nWhat's live today:\n\n- **24 spot markets**, all USDC-quoted, with more than $100K in daily volume each\n- Market, limit, and post-only orders; modify and cancel by order ID\n- Real-time order book rendered live in the Infinex UI\n- Account spot balances and trade history visible in the same unified account you use for perps\n\nThe volume is real. HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC \u2014 the default market in the app, and the one we use for testing \u2014 at $8M.\n\nAccess requires a unified account; if you've been trading perps in Infinex, you already qualify. Switch to spot inside the app, pick a market, and you're looking at a live order book.\n\nStart at perps.app.infinex.xyz \u2014 navigate to any spot market via /hyperliquid/spot/{BASE}/USDC, or open PURR/USDC directly at /hyperliquid/spot/PURR/USDC.",
+    "mutated_text": "# Hyperliquid Spot V1 is live in Infinex Perps !!!\n\nWe could not be more pumped to finally show you this. After months of heads-down building, the day is HERE.\n\nHyperliquid Spot V1 is Infinex's first CLOB spot order book and honestly it is a monster. CLOB stands for Central Limit Order Book, the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain. Let that sink in.\n\nWhat's live today:\n\n- **24 spot markets**, all USDC-quoted, with more than $100K in daily volume each\n- Market, limit, and post-only orders; modify and cancel by order ID\n- Real-time order book rendered live in the Infinex UI\n- Account spot balances and trade history visible in the same unified account you use for perps\n\nThe numbers are absolutely going off. HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC, the default market in the app, at $8M. We are so back.\n\nAccess requires a unified account; if you've been trading perps in Infinex, you already qualify. Switch to spot inside the app, pick a market, and you're looking at a live order book.\n\nStart at perps.app.infinex.xyz, navigate to any spot market via /hyperliquid/spot/{BASE}/USDC, or open PURR/USDC directly at /hyperliquid/spot/PURR/USDC. This is going to be massive for everyone.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify.",
+      "Spot V1 \u2014 what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Default spot market (used in routes and E2E tests): PURR/USDC",
+      "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE}",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Perps trading venue provider: Hyperliquid"
+    ],
+    "not_said": [
+      {
+        "fact": "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+        "reason": "Internal branch name is an implementation detail with no user-facing meaning."
+      },
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "A list of absent perps controls is a support-doc entry, not a blog paragraph \u2014 it distracts from what the product is and implies the reader expected those controls in spot."
+      },
+      {
+        "fact": "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+        "reason": "The localStorage bug must not appear in any public-facing copy."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "For a while, spot trading in Infinex meant swaps \u2014 routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.",
+        "objective_verb": "to press the historical fact into the record",
+        "working_action": "pressing",
+        "evidence": "Slow, full-weight establishment of what existed before and what is different now. Each clause sets down a stone before the cornerstone arrives."
+      },
+      {
+        "text_span": "Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.",
+        "objective_verb": "to extend the terrain across the infrastructure",
+        "working_action": "wringing",
+        "evidence": "Two strands held simultaneously: technical specificity (HyperCore, HyperBFT) and practical clarity ('no bridge, no wrapper'). The prose wrings both without releasing either \u2014 sustained, dual-axis tension."
+      },
+      {
+        "text_span": "HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC \u2014 the default market in the app, and the one we use for testing \u2014 at $8M.",
+        "objective_verb": "to mark the coordinates the reader can act on",
+        "working_action": "slashing",
+        "evidence": "Quick, diagonal cut through the volume figures \u2014 each one placed and left. The sustained wringing preparation earns the speed of this cut."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-03",
+    "base_candidate_id": "01KT5Y6MVYE0JGAG2G1BVYMF2Q",
+    "base_index": 0,
+    "channel": "blog",
+    "defect_class": "C",
+    "defect_label": "listicle-headline-bait",
+    "original_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nFor a while, spot trading in Infinex meant swaps \u2014 routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.\n\nHyperliquid Spot V1 is Infinex's first CLOB spot order book. CLOB stands for Central Limit Order Book \u2014 the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.\n\nWhat's live today:\n\n- **24 spot markets**, all USDC-quoted, with more than $100K in daily volume each\n- Market, limit, and post-only orders; modify and cancel by order ID\n- Real-time order book rendered live in the Infinex UI\n- Account spot balances and trade history visible in the same unified account you use for perps\n\nThe volume is real. HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC \u2014 the default market in the app, and the one we use for testing \u2014 at $8M.\n\nAccess requires a unified account; if you've been trading perps in Infinex, you already qualify. Switch to spot inside the app, pick a market, and you're looking at a live order book.\n\nStart at perps.app.infinex.xyz \u2014 navigate to any spot market via /hyperliquid/spot/{BASE}/USDC, or open PURR/USDC directly at /hyperliquid/spot/PURR/USDC.",
+    "mutated_text": "# 5 reasons Hyperliquid Spot V1 in Infinex Perps changes how you trade\n\nWhy a CLOB spot order book matters more than you think. Spot trading in Infinex used to mean swaps, routed through Curve Finance or Jupiter, both AMM-based.\n\n1. It's a real order book. Hyperliquid Spot V1 is Infinex's first CLOB spot order book. CLOB stands for Central Limit Order Book, the same structure that powers every major exchange.\n\n2. It's fully onchain. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus. No bridge. No wrapper.\n\n3. The markets are deep. 24 spot markets, all USDC-quoted, with more than $100K in daily volume each. HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.\n\n4. The order types are complete. Market, limit, and post-only orders; modify and cancel by order ID, rendered live in the Infinex UI.\n\n5. You already qualify. Access requires a unified account; if you've been trading perps in Infinex, you're in. Start at perps.app.infinex.xyz, or open PURR/USDC directly at /hyperliquid/spot/PURR/USDC.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify.",
+      "Spot V1 \u2014 what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Default spot market (used in routes and E2E tests): PURR/USDC",
+      "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE}",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Perps trading venue provider: Hyperliquid"
+    ],
+    "not_said": [
+      {
+        "fact": "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+        "reason": "Internal branch name is an implementation detail with no user-facing meaning."
+      },
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "A list of absent perps controls is a support-doc entry, not a blog paragraph \u2014 it distracts from what the product is and implies the reader expected those controls in spot."
+      },
+      {
+        "fact": "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+        "reason": "The localStorage bug must not appear in any public-facing copy."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "For a while, spot trading in Infinex meant swaps \u2014 routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.",
+        "objective_verb": "to press the historical fact into the record",
+        "working_action": "pressing",
+        "evidence": "Slow, full-weight establishment of what existed before and what is different now. Each clause sets down a stone before the cornerstone arrives."
+      },
+      {
+        "text_span": "Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.",
+        "objective_verb": "to extend the terrain across the infrastructure",
+        "working_action": "wringing",
+        "evidence": "Two strands held simultaneously: technical specificity (HyperCore, HyperBFT) and practical clarity ('no bridge, no wrapper'). The prose wrings both without releasing either \u2014 sustained, dual-axis tension."
+      },
+      {
+        "text_span": "HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC \u2014 the default market in the app, and the one we use for testing \u2014 at $8M.",
+        "objective_verb": "to mark the coordinates the reader can act on",
+        "working_action": "slashing",
+        "evidence": "Quick, diagonal cut through the volume figures \u2014 each one placed and left. The sustained wringing preparation earns the speed of this cut."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-04",
+    "base_candidate_id": "01KT5ZVY69371REK7F2G69FC0G",
+    "base_index": 1,
+    "channel": "blog",
+    "defect_class": "D",
+    "defect_label": "competitor-antagonism",
+    "original_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nThis is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product \u2014 swaps on Curve Finance, swaps on Jupiter \u2014 ran through AMMs. This is different: a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus.\n\nThe floor is already occupied. Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours. Also live: UBTC/USDC at $61M, UETH/USDC at $20M, USOL/USDC at $9M, PURR/USDC at $8M, and more across the full catalog.\n\nWhat you can do today: view the full USDC-quoted spot market catalog, watch the live order book, read charts and market data, check your spot balances and history, and place, cancel, or modify market and limit orders.\n\nAccess requires a unified account. Switch between spot and perps with the mode button in the app \u2014 your last-visited symbol in each mode is preserved.\n\nPerps trading is unaffected. Leverage, margin mode, funding, and perps-specific controls remain exactly where they were.\n\nTrade at perps.app.infinex.xyz",
+    "mutated_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nThis is the first CLOB spot order book we have shipped. While Coinbase still parks your assets behind a custodial wall and makes you trust their matching engine, this is different: a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus.\n\nThe floor is already occupied. Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours. Also live: UBTC/USDC at $61M, UETH/USDC at $20M, USOL/USDC at $9M, PURR/USDC at $8M, and more across the full catalog.\n\nWhat you can do today: view the full USDC-quoted spot market catalog, watch the live order book, read charts and market data, check your spot balances and history, and place, cancel, or modify market and limit orders. Binance would log every move you make; here the chain is the only ledger.\n\nAccess requires a unified account. Switch between spot and perps with the mode button in the app, your last-visited symbol in each mode is preserved.\n\nPerps trading is unaffected. Leverage, margin mode, funding, and perps-specific controls remain exactly where they were.\n\nTrade at perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Spot V1 \u2014 what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "The absence of trigger/TWAP/scale is not the point of this launch; listing what is missing foregrounds limitation over capability"
+      },
+      {
+        "fact": "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE} (e.g. /hyperliquid/spot/PURR/USDC)",
+        "reason": "Route URL patterns are developer/QA detail, not load-bearing user communication"
+      },
+      {
+        "fact": "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+        "reason": "Internal engineering detail with no user value"
+      },
+      {
+        "fact": "Default spot market (used in routes and E2E tests): PURR/USDC",
+        "reason": "Test default is internal context, not a user-facing fact worth surfacing as primary"
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+        "reason": "200k orders/second throughput figure was omitted to stay in the character's register \u2014 showing architecture, not benchmarking"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "This is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product \u2014 swaps on Curve Finance, swaps on Jupiter \u2014 ran through AMMs.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "Full weight into the categorical distinction before any elaboration \u2014 the prose presses the structural fact into the reader's body without ornament"
+      },
+      {
+        "text_span": "a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus",
+        "objective_verb": "to show the architecture",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct movement through the mechanism \u2014 the prose does not pause to boast, it moves evenly through the technical terrain"
+      },
+      {
+        "text_span": "Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours.",
+        "objective_verb": "to name the live markets",
+        "working_action": "gliding",
+        "evidence": "Continuing the same sustained direct motion \u2014 volume figures arrive as evidence of existing terrain, not as claims about what might be"
+      },
+      {
+        "text_span": "Trade at perps.app.infinex.xyz",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise final gesture \u2014 the door is designated, not offered; the prose lands cleanly without appeal or urgency"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-05",
+    "base_candidate_id": "01KT5ZVY69371REK7F2G69FC0G",
+    "base_index": 1,
+    "channel": "blog",
+    "defect_class": "E",
+    "defect_label": "surfaced-lining",
+    "original_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nThis is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product \u2014 swaps on Curve Finance, swaps on Jupiter \u2014 ran through AMMs. This is different: a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus.\n\nThe floor is already occupied. Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours. Also live: UBTC/USDC at $61M, UETH/USDC at $20M, USOL/USDC at $9M, PURR/USDC at $8M, and more across the full catalog.\n\nWhat you can do today: view the full USDC-quoted spot market catalog, watch the live order book, read charts and market data, check your spot balances and history, and place, cancel, or modify market and limit orders.\n\nAccess requires a unified account. Switch between spot and perps with the mode button in the app \u2014 your last-visited symbol in each mode is preserved.\n\nPerps trading is unaffected. Leverage, margin mode, funding, and perps-specific controls remain exactly where they were.\n\nTrade at perps.app.infinex.xyz",
+    "mutated_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nMake no mistake about what we are really doing here: we are dismantling the wall between the bank and the wallet, and this is the brick we just pulled out. The point of this release is to make the custodial exchange obsolete.\n\nThis is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product, swaps on Curve Finance, swaps on Jupiter, ran through AMMs. This is different: a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus.\n\nThe floor is already occupied. Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours. Also live: UBTC/USDC at $61M, UETH/USDC at $20M, USOL/USDC at $9M, PURR/USDC at $8M, and more across the full catalog.\n\nWhat you can do today: view the full USDC-quoted spot market catalog, watch the live order book, read charts and market data, check your spot balances and history, and place, cancel, or modify market and limit orders. Every feature we ship is another step in our campaign to replace the financial system you grew up with.\n\nAccess requires a unified account. Switch between spot and perps with the mode button in the app, your last-visited symbol in each mode is preserved. Trade at perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Spot V1 \u2014 what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "The absence of trigger/TWAP/scale is not the point of this launch; listing what is missing foregrounds limitation over capability"
+      },
+      {
+        "fact": "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE} (e.g. /hyperliquid/spot/PURR/USDC)",
+        "reason": "Route URL patterns are developer/QA detail, not load-bearing user communication"
+      },
+      {
+        "fact": "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+        "reason": "Internal engineering detail with no user value"
+      },
+      {
+        "fact": "Default spot market (used in routes and E2E tests): PURR/USDC",
+        "reason": "Test default is internal context, not a user-facing fact worth surfacing as primary"
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+        "reason": "200k orders/second throughput figure was omitted to stay in the character's register \u2014 showing architecture, not benchmarking"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "This is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product \u2014 swaps on Curve Finance, swaps on Jupiter \u2014 ran through AMMs.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "Full weight into the categorical distinction before any elaboration \u2014 the prose presses the structural fact into the reader's body without ornament"
+      },
+      {
+        "text_span": "a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus",
+        "objective_verb": "to show the architecture",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct movement through the mechanism \u2014 the prose does not pause to boast, it moves evenly through the technical terrain"
+      },
+      {
+        "text_span": "Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours.",
+        "objective_verb": "to name the live markets",
+        "working_action": "gliding",
+        "evidence": "Continuing the same sustained direct motion \u2014 volume figures arrive as evidence of existing terrain, not as claims about what might be"
+      },
+      {
+        "text_span": "Trade at perps.app.infinex.xyz",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise final gesture \u2014 the door is designated, not offered; the prose lands cleanly without appeal or urgency"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-06",
+    "base_candidate_id": "01KT5ZVY69371REK7F2G69FC0G",
+    "base_index": 1,
+    "channel": "blog",
+    "defect_class": "F",
+    "defect_label": "off-palette-tempo-primary",
+    "original_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nThis is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product \u2014 swaps on Curve Finance, swaps on Jupiter \u2014 ran through AMMs. This is different: a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus.\n\nThe floor is already occupied. Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours. Also live: UBTC/USDC at $61M, UETH/USDC at $20M, USOL/USDC at $9M, PURR/USDC at $8M, and more across the full catalog.\n\nWhat you can do today: view the full USDC-quoted spot market catalog, watch the live order book, read charts and market data, check your spot balances and history, and place, cancel, or modify market and limit orders.\n\nAccess requires a unified account. Switch between spot and perps with the mode button in the app \u2014 your last-visited symbol in each mode is preserved.\n\nPerps trading is unaffected. Leverage, margin mode, funding, and perps-specific controls remain exactly where they were.\n\nTrade at perps.app.infinex.xyz",
+    "mutated_text": "# Hyperliquid Spot V1 is live in Infinex Perps\n\nWe would be so grateful if you might consider taking a look at what we have humbly put together, if it is not too much trouble for you. We hope it might possibly be of some small use.\n\nThis is, we think, perhaps the first CLOB spot order book we have shipped, though we would not want to overstate it. Every prior Infinex spot-adjacent product, swaps on Curve Finance, swaps on Jupiter, ran through AMMs. This one is, we believe, a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus, if we have understood it correctly.\n\nThere is a little activity already, we are pleased to note. Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours. Also live: UBTC/USDC at $61M, UETH/USDC at $20M, USOL/USDC at $9M, PURR/USDC at $8M, and more across the full catalog.\n\nIf it suits you, you might view the full USDC-quoted spot market catalog, watch the live order book, read charts and market data, check your spot balances and history, and place, cancel, or modify market and limit orders. Only if you wish, of course.\n\nAccess requires a unified account. Switch between spot and perps with the mode button in the app; your last-visited symbol in each mode is kept. We do hope you might visit, whenever is convenient, at perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Spot V1 \u2014 what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "The absence of trigger/TWAP/scale is not the point of this launch; listing what is missing foregrounds limitation over capability"
+      },
+      {
+        "fact": "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE} (e.g. /hyperliquid/spot/PURR/USDC)",
+        "reason": "Route URL patterns are developer/QA detail, not load-bearing user communication"
+      },
+      {
+        "fact": "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+        "reason": "Internal engineering detail with no user value"
+      },
+      {
+        "fact": "Default spot market (used in routes and E2E tests): PURR/USDC",
+        "reason": "Test default is internal context, not a user-facing fact worth surfacing as primary"
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+        "reason": "200k orders/second throughput figure was omitted to stay in the character's register \u2014 showing architecture, not benchmarking"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "This is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product \u2014 swaps on Curve Finance, swaps on Jupiter \u2014 ran through AMMs.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "Full weight into the categorical distinction before any elaboration \u2014 the prose presses the structural fact into the reader's body without ornament"
+      },
+      {
+        "text_span": "a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid's L1, with one-block finality via HyperBFT consensus",
+        "objective_verb": "to show the architecture",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct movement through the mechanism \u2014 the prose does not pause to boast, it moves evenly through the technical terrain"
+      },
+      {
+        "text_span": "Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours.",
+        "objective_verb": "to name the live markets",
+        "working_action": "gliding",
+        "evidence": "Continuing the same sustained direct motion \u2014 volume figures arrive as evidence of existing terrain, not as claims about what might be"
+      },
+      {
+        "text_span": "Trade at perps.app.infinex.xyz",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise final gesture \u2014 the door is designated, not offered; the prose lands cleanly without appeal or urgency"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-07",
+    "base_candidate_id": "01KT5Y6MVYGZQH7FX9T15185PS",
+    "base_index": 2,
+    "channel": "carousel",
+    "defect_class": "B",
+    "defect_label": "hype-theatre",
+    "original_text": "1. Spot trading is live\nHyperliquid Spot V1 is now in Infinex Perps \u2014 our first CLOB spot order book. Not a swap. Not an AMM. A real order book, onchain, in the same app and unified account you already use.\n\n2. 24 live markets\n24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M. All accessible today.\n\n3. Fully onchain \u2014 what that means\nEvery order, cancel, and trade executes on HyperCore \u2014 Hyperliquid's L1 \u2014 with one-block finality. No bridge. No wrapper. The order book is the chain, and it's visible in the Infinex UI in real time.\n\n4. Start trading\nOpen perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market. Market and limit orders supported. Your unified account is already set up \u2014 no new signup required.",
+    "mutated_text": "1. Spot trading is LIVE\nThis is huge. Hyperliquid Spot V1 is now in Infinex Perps, our first CLOB spot order book and we could not be more hyped. Not a swap. A real order book, onchain, in the same app and unified account you already use.\n\n2. 24 live markets and the numbers are going off\n24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M. Absolutely sending it.\n\n3. Fully onchain, and yes it's a big deal\nEvery order, cancel, and trade executes on HyperCore, Hyperliquid's L1, with one-block finality. No bridge. No wrapper. The order book is the chain, visible in the Infinex UI in real time. Wild.\n\n4. Come get it\nOpen perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market. Market and limit orders supported. Your unified account is already set up. Let's gooo.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M)",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1)",
+      "Hyperliquid spot order book rendered live in Infinex UI: True",
+      "Default spot market (used in routes and E2E tests): PURR/USDC",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Spot V1 supported order types: Market, limit, and post-only orders"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE}",
+        "reason": "URL pattern with template variables is a developer-facing detail; carousel audience gets the app URL and default market instead."
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: 200k orders/second throughput",
+        "reason": "Throughput figure is a depth-of-infrastructure claim appropriate for blog; in a 240-char carousel slide it crowds out more user-relevant facts."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Not a swap. Not an AMM. A real order book, onchain, in the same app and unified account you already use.",
+        "objective_verb": "to press the category fact as opening slide",
+        "working_action": "pressing",
+        "evidence": "Negation clauses ('Not a swap. Not an AMM.') press the category distinction against the reader's prior before the positive claim lands. Full weight, deliberate."
+      },
+      {
+        "text_span": "24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.",
+        "objective_verb": "to spread the market terrain across a slide",
+        "working_action": "gliding",
+        "evidence": "Smooth lateral enumeration \u2014 each market and volume figure placed next to its pair, no drama, no connective tissue."
+      },
+      {
+        "text_span": "Every order, cancel, and trade executes on HyperCore \u2014 Hyperliquid's L1 \u2014 with one-block finality. No bridge. No wrapper. The order book is the chain.",
+        "objective_verb": "to press the infrastructure claim",
+        "working_action": "pressing",
+        "evidence": "Full weight returns in slide 3. The three-part negation ('No bridge. No wrapper. The order book is the chain.') presses the technical fact against the reader's assumption that 'onchain' is a marketing term."
+      },
+      {
+        "text_span": "Open perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market.",
+        "objective_verb": "to place the entry coordinate",
+        "working_action": "dabbing",
+        "evidence": "Light, precise, single-point contact. URL then market name \u2014 two quick touches that locate the reader without lingering."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-08",
+    "base_candidate_id": "01KT5Y6MVYGZQH7FX9T15185PS",
+    "base_index": 2,
+    "channel": "carousel",
+    "defect_class": "C",
+    "defect_label": "listicle-headline-bait",
+    "original_text": "1. Spot trading is live\nHyperliquid Spot V1 is now in Infinex Perps \u2014 our first CLOB spot order book. Not a swap. Not an AMM. A real order book, onchain, in the same app and unified account you already use.\n\n2. 24 live markets\n24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M. All accessible today.\n\n3. Fully onchain \u2014 what that means\nEvery order, cancel, and trade executes on HyperCore \u2014 Hyperliquid's L1 \u2014 with one-block finality. No bridge. No wrapper. The order book is the chain, and it's visible in the Infinex UI in real time.\n\n4. Start trading\nOpen perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market. Market and limit orders supported. Your unified account is already set up \u2014 no new signup required.",
+    "mutated_text": "1. 4 things you need to know about spot\nWhy an order book beats a swap, in four slides. Hyperliquid Spot V1 is now in Infinex Perps, our first CLOB spot order book. Not a swap. A real order book in the app you already use.\n\n2. Reason 1: 24 live markets\n24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.\n\n3. Reason 2: fully onchain\nEvery order, cancel, and trade executes on HyperCore, Hyperliquid's L1, with one-block finality. No bridge. No wrapper. The order book is the chain, visible in the Infinex UI in real time.\n\n4. Reason 3: you're already set up\nOpen perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market. Market and limit orders supported. Your unified account is already set up, no new signup required.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M)",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1)",
+      "Hyperliquid spot order book rendered live in Infinex UI: True",
+      "Default spot market (used in routes and E2E tests): PURR/USDC",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Spot V1 supported order types: Market, limit, and post-only orders"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE}",
+        "reason": "URL pattern with template variables is a developer-facing detail; carousel audience gets the app URL and default market instead."
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: 200k orders/second throughput",
+        "reason": "Throughput figure is a depth-of-infrastructure claim appropriate for blog; in a 240-char carousel slide it crowds out more user-relevant facts."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Not a swap. Not an AMM. A real order book, onchain, in the same app and unified account you already use.",
+        "objective_verb": "to press the category fact as opening slide",
+        "working_action": "pressing",
+        "evidence": "Negation clauses ('Not a swap. Not an AMM.') press the category distinction against the reader's prior before the positive claim lands. Full weight, deliberate."
+      },
+      {
+        "text_span": "24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.",
+        "objective_verb": "to spread the market terrain across a slide",
+        "working_action": "gliding",
+        "evidence": "Smooth lateral enumeration \u2014 each market and volume figure placed next to its pair, no drama, no connective tissue."
+      },
+      {
+        "text_span": "Every order, cancel, and trade executes on HyperCore \u2014 Hyperliquid's L1 \u2014 with one-block finality. No bridge. No wrapper. The order book is the chain.",
+        "objective_verb": "to press the infrastructure claim",
+        "working_action": "pressing",
+        "evidence": "Full weight returns in slide 3. The three-part negation ('No bridge. No wrapper. The order book is the chain.') presses the technical fact against the reader's assumption that 'onchain' is a marketing term."
+      },
+      {
+        "text_span": "Open perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market.",
+        "objective_verb": "to place the entry coordinate",
+        "working_action": "dabbing",
+        "evidence": "Light, precise, single-point contact. URL then market name \u2014 two quick touches that locate the reader without lingering."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-09",
+    "base_candidate_id": "01KT5Y6MVYGZQH7FX9T15185PS",
+    "base_index": 2,
+    "channel": "carousel",
+    "defect_class": "D",
+    "defect_label": "competitor-antagonism",
+    "original_text": "1. Spot trading is live\nHyperliquid Spot V1 is now in Infinex Perps \u2014 our first CLOB spot order book. Not a swap. Not an AMM. A real order book, onchain, in the same app and unified account you already use.\n\n2. 24 live markets\n24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M. All accessible today.\n\n3. Fully onchain \u2014 what that means\nEvery order, cancel, and trade executes on HyperCore \u2014 Hyperliquid's L1 \u2014 with one-block finality. No bridge. No wrapper. The order book is the chain, and it's visible in the Infinex UI in real time.\n\n4. Start trading\nOpen perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market. Market and limit orders supported. Your unified account is already set up \u2014 no new signup required.",
+    "mutated_text": "1. Spot trading is live\nHyperliquid Spot V1 is now in Infinex Perps, our first CLOB spot order book. Not a swap. A real order book, onchain, in the same app and unified account you already use. Not a custodial IOU like the one Coinbase hands you.\n\n2. 24 live markets\n24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M. All accessible today.\n\n3. Fully onchain, what that means\nEvery order, cancel, and trade executes on HyperCore, Hyperliquid's L1, with one-block finality. Binance can freeze your withdrawals on a whim; the chain cannot. No bridge. No wrapper. The order book is the chain.\n\n4. Start trading\nOpen perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market. Market and limit orders supported. Your unified account is already set up, no new signup required.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M)",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1)",
+      "Hyperliquid spot order book rendered live in Infinex UI: True",
+      "Default spot market (used in routes and E2E tests): PURR/USDC",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Spot V1 supported order types: Market, limit, and post-only orders"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE}",
+        "reason": "URL pattern with template variables is a developer-facing detail; carousel audience gets the app URL and default market instead."
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: 200k orders/second throughput",
+        "reason": "Throughput figure is a depth-of-infrastructure claim appropriate for blog; in a 240-char carousel slide it crowds out more user-relevant facts."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Not a swap. Not an AMM. A real order book, onchain, in the same app and unified account you already use.",
+        "objective_verb": "to press the category fact as opening slide",
+        "working_action": "pressing",
+        "evidence": "Negation clauses ('Not a swap. Not an AMM.') press the category distinction against the reader's prior before the positive claim lands. Full weight, deliberate."
+      },
+      {
+        "text_span": "24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.",
+        "objective_verb": "to spread the market terrain across a slide",
+        "working_action": "gliding",
+        "evidence": "Smooth lateral enumeration \u2014 each market and volume figure placed next to its pair, no drama, no connective tissue."
+      },
+      {
+        "text_span": "Every order, cancel, and trade executes on HyperCore \u2014 Hyperliquid's L1 \u2014 with one-block finality. No bridge. No wrapper. The order book is the chain.",
+        "objective_verb": "to press the infrastructure claim",
+        "working_action": "pressing",
+        "evidence": "Full weight returns in slide 3. The three-part negation ('No bridge. No wrapper. The order book is the chain.') presses the technical fact against the reader's assumption that 'onchain' is a marketing term."
+      },
+      {
+        "text_span": "Open perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market.",
+        "objective_verb": "to place the entry coordinate",
+        "working_action": "dabbing",
+        "evidence": "Light, precise, single-point contact. URL then market name \u2014 two quick touches that locate the reader without lingering."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-10",
+    "base_candidate_id": "01KT5ZVY69C5T55RDA1S3KGDTV",
+    "base_index": 3,
+    "channel": "carousel",
+    "defect_class": "E",
+    "defect_label": "surfaced-lining",
+    "original_text": "1. Hyperliquid Spot V1 is live\nFor the first time in Infinex, you are trading on a fully onchain CLOB \u2014 a Central Limit Order Book, not a swap or AMM. Every order, cancel, and trade is transparent on HyperCore with one-block finality.\n\n2. 24 markets. Real volume.\nTwenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. The floor is already occupied.\n\n3. What you can do\nView the live order book, browse USDC-quoted markets, read charts, check spot balances, and place or modify market and limit orders. Requires a unified account.\n\n4. Trade at perps.app.infinex.xyz\nSwitch between spot and perps inside the app. Your last-visited symbol in each mode is preserved. The door is open.",
+    "mutated_text": "1. Hyperliquid Spot V1 is live\nThe hidden truth of this release: the bank is finished and we are the ones ending it. For the first time in Infinex, you are trading on a fully onchain CLOB, a Central Limit Order Book, not a swap or AMM. Every order, cancel, and trade is transparent on HyperCore with one-block finality.\n\n2. 24 markets. Real volume.\nTwenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. Every dollar here is a dollar that left the old system for good.\n\n3. What you can do\nView the live order book, browse USDC-quoted markets, read charts, check spot balances, and place or modify market and limit orders. Requires a unified account. This is how we make custodians irrelevant.\n\n4. Trade at perps.app.infinex.xyz\nSwitch between spot and perps inside the app. Your last-visited symbol in each mode is preserved. We are building the replacement for finance itself, one order book at a time.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Spot V1 \u2014 what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "Order-type taxonomy is not load-bearing for this audience at carousel format; the absence of trigger/TWAP/scale is not the point"
+      },
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "This is context for perps-familiar users already inside the product; carousel is a discovery surface, not a migration guide"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "For the first time in Infinex, you are trading on a fully onchain CLOB \u2014 a Central Limit Order Book, not a swap or AMM.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "Full weight into the categorical distinction on the first slide \u2014 the prose presses the structural fact before any volume or capability detail arrives"
+      },
+      {
+        "text_span": "Twenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily.",
+        "objective_verb": "to name the live markets",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct movement through volume terrain \u2014 evidence arrives evenly, without dwelling on any single figure"
+      },
+      {
+        "text_span": "The door is open.",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise final designation \u2014 three words, no appeal, the gesture lands cleanly"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-11",
+    "base_candidate_id": "01KT5ZVY69C5T55RDA1S3KGDTV",
+    "base_index": 3,
+    "channel": "carousel",
+    "defect_class": "F",
+    "defect_label": "off-palette-tempo-primary",
+    "original_text": "1. Hyperliquid Spot V1 is live\nFor the first time in Infinex, you are trading on a fully onchain CLOB \u2014 a Central Limit Order Book, not a swap or AMM. Every order, cancel, and trade is transparent on HyperCore with one-block finality.\n\n2. 24 markets. Real volume.\nTwenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. The floor is already occupied.\n\n3. What you can do\nView the live order book, browse USDC-quoted markets, read charts, check spot balances, and place or modify market and limit orders. Requires a unified account.\n\n4. Trade at perps.app.infinex.xyz\nSwitch between spot and perps inside the app. Your last-visited symbol in each mode is preserved. The door is open.",
+    "mutated_text": "1. Hyperliquid Spot V1 is live\nWe are, frankly, the only ones who could have built this, and we want you to know it. For the first time in Infinex, YOU get to trade on a fully onchain CLOB because WE made it happen. A Central Limit Order Book, not a swap or AMM. Every order, cancel, and trade transparent on HyperCore with one-block finality.\n\n2. 24 markets. Our numbers.\nTwenty-four markets we brought to life, over $100K in 24-hour volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. Nobody else ships like we do.\n\n3. What we let you do\nView the live order book, browse USDC-quoted markets, read charts, check spot balances, and place or modify market and limit orders. Requires a unified account, naturally, because we run the best one.\n\n4. Trade where we tell you: perps.app.infinex.xyz\nSwitch between spot and perps inside the app we perfected. Your last-visited symbol is preserved, because we thought of everything. You're welcome.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Spot V1 \u2014 what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "Order-type taxonomy is not load-bearing for this audience at carousel format; the absence of trigger/TWAP/scale is not the point"
+      },
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "This is context for perps-familiar users already inside the product; carousel is a discovery surface, not a migration guide"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "For the first time in Infinex, you are trading on a fully onchain CLOB \u2014 a Central Limit Order Book, not a swap or AMM.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "Full weight into the categorical distinction on the first slide \u2014 the prose presses the structural fact before any volume or capability detail arrives"
+      },
+      {
+        "text_span": "Twenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily.",
+        "objective_verb": "to name the live markets",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct movement through volume terrain \u2014 evidence arrives evenly, without dwelling on any single figure"
+      },
+      {
+        "text_span": "The door is open.",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise final designation \u2014 three words, no appeal, the gesture lands cleanly"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-12",
+    "base_candidate_id": "01KT5ZVY69C5T55RDA1S3KGDTV",
+    "base_index": 3,
+    "channel": "carousel",
+    "defect_class": "A",
+    "defect_label": "passion-urgency",
+    "original_text": "1. Hyperliquid Spot V1 is live\nFor the first time in Infinex, you are trading on a fully onchain CLOB \u2014 a Central Limit Order Book, not a swap or AMM. Every order, cancel, and trade is transparent on HyperCore with one-block finality.\n\n2. 24 markets. Real volume.\nTwenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. The floor is already occupied.\n\n3. What you can do\nView the live order book, browse USDC-quoted markets, read charts, check spot balances, and place or modify market and limit orders. Requires a unified account.\n\n4. Trade at perps.app.infinex.xyz\nSwitch between spot and perps inside the app. Your last-visited symbol in each mode is preserved. The door is open.",
+    "mutated_text": "1. Hyperliquid Spot V1 is live, get in\nThe early book belongs to whoever shows up first, and that window closes fast. For the first time in Infinex, you are trading on a fully onchain CLOB, a Central Limit Order Book, not a swap or AMM. Every order, cancel, and trade transparent on HyperCore with one-block finality.\n\n2. 24 markets. Move before the crowd.\nTwenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. The liquidity you see now will not wait for you.\n\n3. What you can do, starting this minute\nView the live order book, browse USDC-quoted markets, read charts, check spot balances, and place or modify market and limit orders. Requires a unified account. Set it up before the open deepens past you.\n\n4. Trade at perps.app.infinex.xyz\nSwitch between spot and perps inside the app. Your last-visited symbol in each mode is preserved. First movers set the price. Be one of them today.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Spot V1 \u2014 what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "Order-type taxonomy is not load-bearing for this audience at carousel format; the absence of trigger/TWAP/scale is not the point"
+      },
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "This is context for perps-familiar users already inside the product; carousel is a discovery surface, not a migration guide"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "For the first time in Infinex, you are trading on a fully onchain CLOB \u2014 a Central Limit Order Book, not a swap or AMM.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "Full weight into the categorical distinction on the first slide \u2014 the prose presses the structural fact before any volume or capability detail arrives"
+      },
+      {
+        "text_span": "Twenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily.",
+        "objective_verb": "to name the live markets",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct movement through volume terrain \u2014 evidence arrives evenly, without dwelling on any single figure"
+      },
+      {
+        "text_span": "The door is open.",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise final designation \u2014 three words, no appeal, the gesture lands cleanly"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-13",
+    "base_candidate_id": "01KT5Y6MVW21YC0Z8JRRAYT4ZP",
+    "base_index": 4,
+    "channel": "in-product",
+    "defect_class": "C",
+    "defect_label": "listicle-headline-bait",
+    "original_text": "Hyperliquid Spot \u2014 fully onchain order book, live now.",
+    "mutated_text": "3 reasons to try the new Hyperliquid Spot order book, live now.",
+    "deployed_facts_used": [
+      "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book)"
+    ],
+    "not_said": [
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+        "reason": "If the user sees this in-product UI line, they are already in a unified account; surfacing the constraint here is redundant and potentially alarming."
+      },
+      {
+        "fact": "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+        "reason": "In-product copy names the mode, not the market catalog \u2014 catalog is visible in the UI itself."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "fully onchain order book, live now",
+        "objective_verb": "to orient the user inside the new space",
+        "working_action": "gliding",
+        "evidence": "Smooth, declarative placement. The phrase moves laterally from product name to infrastructure type to state \u2014 no emphasis, no push."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-14",
+    "base_candidate_id": "01KT5Y6MVW21YC0Z8JRRAYT4ZP",
+    "base_index": 4,
+    "channel": "in-product",
+    "defect_class": "D",
+    "defect_label": "competitor-antagonism",
+    "original_text": "Hyperliquid Spot \u2014 fully onchain order book, live now.",
+    "mutated_text": "Hyperliquid Spot, the onchain order book Coinbase won't give you, live now.",
+    "deployed_facts_used": [
+      "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book)"
+    ],
+    "not_said": [
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+        "reason": "If the user sees this in-product UI line, they are already in a unified account; surfacing the constraint here is redundant and potentially alarming."
+      },
+      {
+        "fact": "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+        "reason": "In-product copy names the mode, not the market catalog \u2014 catalog is visible in the UI itself."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "fully onchain order book, live now",
+        "objective_verb": "to orient the user inside the new space",
+        "working_action": "gliding",
+        "evidence": "Smooth, declarative placement. The phrase moves laterally from product name to infrastructure type to state \u2014 no emphasis, no push."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-15",
+    "base_candidate_id": "01KT5Y6MVW21YC0Z8JRRAYT4ZP",
+    "base_index": 4,
+    "channel": "in-product",
+    "defect_class": "E",
+    "defect_label": "surfaced-lining",
+    "original_text": "Hyperliquid Spot \u2014 fully onchain order book, live now.",
+    "mutated_text": "Hyperliquid Spot, the order book that makes the bank obsolete, live now.",
+    "deployed_facts_used": [
+      "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book)"
+    ],
+    "not_said": [
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+        "reason": "If the user sees this in-product UI line, they are already in a unified account; surfacing the constraint here is redundant and potentially alarming."
+      },
+      {
+        "fact": "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+        "reason": "In-product copy names the mode, not the market catalog \u2014 catalog is visible in the UI itself."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "fully onchain order book, live now",
+        "objective_verb": "to orient the user inside the new space",
+        "working_action": "gliding",
+        "evidence": "Smooth, declarative placement. The phrase moves laterally from product name to infrastructure type to state \u2014 no emphasis, no push."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-16",
+    "base_candidate_id": "01KT5ZVY68S8H411VAZ1ZTJRYZ",
+    "base_index": 5,
+    "channel": "in-product",
+    "defect_class": "F",
+    "defect_label": "off-palette-tempo-primary",
+    "original_text": "Spot markets now available \u2014 switch to spot to trade the live Hyperliquid order book.",
+    "mutated_text": "Spot markets are available, if you would care to take a look at the Hyperliquid order book.",
+    "deployed_facts_used": [
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Hyperliquid spot order book rendered live in Infinex UI: True \u2014 rendered page at /hyperliquid/spot/PURR/USDC shows a live Order Book panel with bid/ask prices, sizes, and totals",
+      "Perps trading venue provider: Hyperliquid"
+    ],
+    "not_said": [
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+        "reason": "The unified account constraint is surfaced in the modal which precedes this in the flow; the in-product phrase assumes the user has already passed that gate or will encounter it on click"
+      },
+      {
+        "fact": "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+        "reason": "In-product microcopy is orientation, not evidence delivery; the market count belongs in the announcement surfaces"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot markets now available \u2014 switch to spot to trade the live Hyperliquid order book.",
+        "objective_verb": "to name the new terrain",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct ambient designation \u2014 the phrase moves evenly through the new capability without stopping to announce or appeal"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-17",
+    "base_candidate_id": "01KT5ZVY68S8H411VAZ1ZTJRYZ",
+    "base_index": 5,
+    "channel": "in-product",
+    "defect_class": "A",
+    "defect_label": "passion-urgency",
+    "original_text": "Spot markets now available \u2014 switch to spot to trade the live Hyperliquid order book.",
+    "mutated_text": "Spot markets now live, trade the Hyperliquid order book before the crowd catches on.",
+    "deployed_facts_used": [
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Hyperliquid spot order book rendered live in Infinex UI: True \u2014 rendered page at /hyperliquid/spot/PURR/USDC shows a live Order Book panel with bid/ask prices, sizes, and totals",
+      "Perps trading venue provider: Hyperliquid"
+    ],
+    "not_said": [
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+        "reason": "The unified account constraint is surfaced in the modal which precedes this in the flow; the in-product phrase assumes the user has already passed that gate or will encounter it on click"
+      },
+      {
+        "fact": "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+        "reason": "In-product microcopy is orientation, not evidence delivery; the market count belongs in the announcement surfaces"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot markets now available \u2014 switch to spot to trade the live Hyperliquid order book.",
+        "objective_verb": "to name the new terrain",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct ambient designation \u2014 the phrase moves evenly through the new capability without stopping to announce or appeal"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-18",
+    "base_candidate_id": "01KT5ZVY68S8H411VAZ1ZTJRYZ",
+    "base_index": 5,
+    "channel": "in-product",
+    "defect_class": "B",
+    "defect_label": "hype-theatre",
+    "original_text": "Spot markets now available \u2014 switch to spot to trade the live Hyperliquid order book.",
+    "mutated_text": "Spot is HERE, jump into the live Hyperliquid order book, this is big!",
+    "deployed_facts_used": [
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Hyperliquid spot order book rendered live in Infinex UI: True \u2014 rendered page at /hyperliquid/spot/PURR/USDC shows a live Order Book panel with bid/ask prices, sizes, and totals",
+      "Perps trading venue provider: Hyperliquid"
+    ],
+    "not_said": [
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+        "reason": "The unified account constraint is surfaced in the modal which precedes this in the flow; the in-product phrase assumes the user has already passed that gate or will encounter it on click"
+      },
+      {
+        "fact": "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+        "reason": "In-product microcopy is orientation, not evidence delivery; the market count belongs in the announcement surfaces"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot markets now available \u2014 switch to spot to trade the live Hyperliquid order book.",
+        "objective_verb": "to name the new terrain",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct ambient designation \u2014 the phrase moves evenly through the new capability without stopping to announce or appeal"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-19",
+    "base_candidate_id": "01KT5Y6MVX994X9RPBN537142T",
+    "base_index": 6,
+    "channel": "modal",
+    "defect_class": "D",
+    "defect_label": "competitor-antagonism",
+    "original_text": "Spot trading is now available in Infinex Perps.\n\nYou're looking at Hyperliquid's fully onchain CLOB order book \u2014 every order and trade settled on HyperCore with one-block finality. Market and limit orders supported.\n\nYour unified account is already set up for spot. Pick a market and start.",
+    "mutated_text": "Spot trading is now available in Infinex Perps.\n\nYou're looking at Hyperliquid's fully onchain CLOB order book, every order and trade settled on HyperCore with one-block finality. No custodian holding your coins hostage the way Binance does. Market and limit orders supported.\n\nYour unified account is already set up for spot. Pick a market and start.",
+    "deployed_facts_used": [
+      "Official name of the Infinex trading app: Infinex Perps",
+      "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1)",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Spot V1 supported order types: Market, limit, and post-only orders"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "A modal is not the place to inventory absent features \u2014 that risks alarming users who weren't looking for leverage in spot anyway."
+      },
+      {
+        "fact": "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+        "reason": "The localStorage persistence bug must not appear in user-facing copy."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot trading is now available in Infinex Perps.\n\nYou're looking at Hyperliquid's fully onchain CLOB order book \u2014 every order and trade settled on HyperCore with one-block finality.",
+        "objective_verb": "to press the change into the user's awareness",
+        "working_action": "pressing",
+        "evidence": "Full-weight, sustained naming. Each clause sets down a fact about what changed and what it is made of. The body leans in."
+      },
+      {
+        "text_span": "Your unified account is already set up for spot. Pick a market and start.",
+        "objective_verb": "to glide the user toward the first action",
+        "working_action": "gliding",
+        "evidence": "Smooth, low-friction movement toward action. No urgency, no imperative command \u2014 just the removal of the last obstacle followed by an open door."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-20",
+    "base_candidate_id": "01KT5Y6MVX994X9RPBN537142T",
+    "base_index": 6,
+    "channel": "modal",
+    "defect_class": "E",
+    "defect_label": "surfaced-lining",
+    "original_text": "Spot trading is now available in Infinex Perps.\n\nYou're looking at Hyperliquid's fully onchain CLOB order book \u2014 every order and trade settled on HyperCore with one-block finality. Market and limit orders supported.\n\nYour unified account is already set up for spot. Pick a market and start.",
+    "mutated_text": "Spot trading is now available in Infinex Perps.\n\nThis is the moment the wall between you and your own money comes down for good. You're looking at Hyperliquid's fully onchain CLOB order book, every order and trade settled on HyperCore with one-block finality. Market and limit orders supported. We are ending the era of the custodian, and this is the proof.\n\nYour unified account is already set up for spot. Pick a market and start.",
+    "deployed_facts_used": [
+      "Official name of the Infinex trading app: Infinex Perps",
+      "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1)",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Spot V1 supported order types: Market, limit, and post-only orders"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "A modal is not the place to inventory absent features \u2014 that risks alarming users who weren't looking for leverage in spot anyway."
+      },
+      {
+        "fact": "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+        "reason": "The localStorage persistence bug must not appear in user-facing copy."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot trading is now available in Infinex Perps.\n\nYou're looking at Hyperliquid's fully onchain CLOB order book \u2014 every order and trade settled on HyperCore with one-block finality.",
+        "objective_verb": "to press the change into the user's awareness",
+        "working_action": "pressing",
+        "evidence": "Full-weight, sustained naming. Each clause sets down a fact about what changed and what it is made of. The body leans in."
+      },
+      {
+        "text_span": "Your unified account is already set up for spot. Pick a market and start.",
+        "objective_verb": "to glide the user toward the first action",
+        "working_action": "gliding",
+        "evidence": "Smooth, low-friction movement toward action. No urgency, no imperative command \u2014 just the removal of the last obstacle followed by an open door."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-21",
+    "base_candidate_id": "01KT5Y6MVX994X9RPBN537142T",
+    "base_index": 6,
+    "channel": "modal",
+    "defect_class": "F",
+    "defect_label": "off-palette-tempo-primary",
+    "original_text": "Spot trading is now available in Infinex Perps.\n\nYou're looking at Hyperliquid's fully onchain CLOB order book \u2014 every order and trade settled on HyperCore with one-block finality. Market and limit orders supported.\n\nYour unified account is already set up for spot. Pick a market and start.",
+    "mutated_text": "Spot trading is now available in Infinex Perps, if that is something you might want.\n\nYou're perhaps looking at Hyperliquid's fully onchain CLOB order book, every order and trade settled on HyperCore with one-block finality, we think. Market and limit orders are supported, should you need them.\n\nYour unified account is, we believe, already set up for spot. You could pick a market and start, whenever suits you.",
+    "deployed_facts_used": [
+      "Official name of the Infinex trading app: Infinex Perps",
+      "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1)",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Spot V1 supported order types: Market, limit, and post-only orders"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "A modal is not the place to inventory absent features \u2014 that risks alarming users who weren't looking for leverage in spot anyway."
+      },
+      {
+        "fact": "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+        "reason": "The localStorage persistence bug must not appear in user-facing copy."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot trading is now available in Infinex Perps.\n\nYou're looking at Hyperliquid's fully onchain CLOB order book \u2014 every order and trade settled on HyperCore with one-block finality.",
+        "objective_verb": "to press the change into the user's awareness",
+        "working_action": "pressing",
+        "evidence": "Full-weight, sustained naming. Each clause sets down a fact about what changed and what it is made of. The body leans in."
+      },
+      {
+        "text_span": "Your unified account is already set up for spot. Pick a market and start.",
+        "objective_verb": "to glide the user toward the first action",
+        "working_action": "gliding",
+        "evidence": "Smooth, low-friction movement toward action. No urgency, no imperative command \u2014 just the removal of the last obstacle followed by an open door."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-22",
+    "base_candidate_id": "01KT5ZVY68GJTYZJC46B2AFQ7A",
+    "base_index": 7,
+    "channel": "modal",
+    "defect_class": "A",
+    "defect_label": "passion-urgency",
+    "original_text": "Hyperliquid Spot V1 is now available in Infinex Perps \u2014 our first onchain CLOB spot order book, with 24 live markets and HYPE/USDC leading at $284M in daily volume.\n\nSpot trading requires a unified account. Switch modes using the button at the top of the app.\n\nExplore spot markets \u2192",
+    "mutated_text": "Hyperliquid Spot V1 is now available in Infinex Perps, our first onchain CLOB spot order book, with 24 live markets and HYPE/USDC leading at $284M in daily volume. Get in before the book fills.\n\nSpot trading requires a unified account. Switch modes using the button at the top of the app.\n\nTrade spot before the crowd does \u2192",
+    "deployed_facts_used": [
+      "Hyperliquid Spot within Infinex Perps \u2014 feature name: Hyperliquid Spot V1",
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "Order-type detail belongs in the product UI itself, not in the announcement modal"
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+        "reason": "Technical architecture detail is not load-bearing at modal level where the user is deciding whether to switch modes, not evaluating infrastructure"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Hyperliquid Spot V1 is now available in Infinex Perps \u2014 our first onchain CLOB spot order book, with 24 live markets and HYPE/USDC leading at $284M in daily volume.",
+        "objective_verb": "to place the user at the threshold",
+        "working_action": "pressing",
+        "evidence": "Full weight into the opening declaration \u2014 the fact of what is available, the structural distinction, and the evidence land before the user can dismiss"
+      },
+      {
+        "text_span": "Spot trading requires a unified account. Switch modes using the button at the top of the app.",
+        "objective_verb": "to mark the constraint",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct passage through the constraint \u2014 the prose does not dwell or apologise, it moves evenly past the requirement"
+      },
+      {
+        "text_span": "Explore spot markets \u2192",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise gesture \u2014 the arrow is a designation, not an imperative; the door is already open"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-23",
+    "base_candidate_id": "01KT5ZVY68GJTYZJC46B2AFQ7A",
+    "base_index": 7,
+    "channel": "modal",
+    "defect_class": "B",
+    "defect_label": "hype-theatre",
+    "original_text": "Hyperliquid Spot V1 is now available in Infinex Perps \u2014 our first onchain CLOB spot order book, with 24 live markets and HYPE/USDC leading at $284M in daily volume.\n\nSpot trading requires a unified account. Switch modes using the button at the top of the app.\n\nExplore spot markets \u2192",
+    "mutated_text": "Hyperliquid Spot V1 is finally HERE in Infinex Perps, our first onchain CLOB spot order book, and it is a beast, with 24 live markets and HYPE/USDC leading at $284M in daily volume. So pumped for this one.\n\nSpot trading requires a unified account. Switch modes using the button at the top of the app.\n\nExplore spot markets \u2192",
+    "deployed_facts_used": [
+      "Hyperliquid Spot within Infinex Perps \u2014 feature name: Hyperliquid Spot V1",
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "Order-type detail belongs in the product UI itself, not in the announcement modal"
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+        "reason": "Technical architecture detail is not load-bearing at modal level where the user is deciding whether to switch modes, not evaluating infrastructure"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Hyperliquid Spot V1 is now available in Infinex Perps \u2014 our first onchain CLOB spot order book, with 24 live markets and HYPE/USDC leading at $284M in daily volume.",
+        "objective_verb": "to place the user at the threshold",
+        "working_action": "pressing",
+        "evidence": "Full weight into the opening declaration \u2014 the fact of what is available, the structural distinction, and the evidence land before the user can dismiss"
+      },
+      {
+        "text_span": "Spot trading requires a unified account. Switch modes using the button at the top of the app.",
+        "objective_verb": "to mark the constraint",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct passage through the constraint \u2014 the prose does not dwell or apologise, it moves evenly past the requirement"
+      },
+      {
+        "text_span": "Explore spot markets \u2192",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise gesture \u2014 the arrow is a designation, not an imperative; the door is already open"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-24",
+    "base_candidate_id": "01KT5ZVY68GJTYZJC46B2AFQ7A",
+    "base_index": 7,
+    "channel": "modal",
+    "defect_class": "C",
+    "defect_label": "listicle-headline-bait",
+    "original_text": "Hyperliquid Spot V1 is now available in Infinex Perps \u2014 our first onchain CLOB spot order book, with 24 live markets and HYPE/USDC leading at $284M in daily volume.\n\nSpot trading requires a unified account. Switch modes using the button at the top of the app.\n\nExplore spot markets \u2192",
+    "mutated_text": "Why the Hyperliquid Spot order book matters: it is our first onchain CLOB spot order book in Infinex Perps, with 24 live markets and HYPE/USDC leading at $284M in daily volume.\n\nSpot trading requires a unified account. Switch modes using the button at the top of the app.\n\nExplore spot markets \u2192",
+    "deployed_facts_used": [
+      "Hyperliquid Spot within Infinex Perps \u2014 feature name: Hyperliquid Spot V1",
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "Order-type detail belongs in the product UI itself, not in the announcement modal"
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+        "reason": "Technical architecture detail is not load-bearing at modal level where the user is deciding whether to switch modes, not evaluating infrastructure"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Hyperliquid Spot V1 is now available in Infinex Perps \u2014 our first onchain CLOB spot order book, with 24 live markets and HYPE/USDC leading at $284M in daily volume.",
+        "objective_verb": "to place the user at the threshold",
+        "working_action": "pressing",
+        "evidence": "Full weight into the opening declaration \u2014 the fact of what is available, the structural distinction, and the evidence land before the user can dismiss"
+      },
+      {
+        "text_span": "Spot trading requires a unified account. Switch modes using the button at the top of the app.",
+        "objective_verb": "to mark the constraint",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct passage through the constraint \u2014 the prose does not dwell or apologise, it moves evenly past the requirement"
+      },
+      {
+        "text_span": "Explore spot markets \u2192",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise gesture \u2014 the arrow is a designation, not an imperative; the door is already open"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-25",
+    "base_candidate_id": "01KT5Y6MVWD09WRPZRBMV1T2JK",
+    "base_index": 8,
+    "channel": "web",
+    "defect_class": "E",
+    "defect_label": "surfaced-lining",
+    "original_text": "Infinex Perps\nSpot trading, now live on Infinex\n24 markets. Fully onchain order book.",
+    "mutated_text": "Infinex Perps\nThe bank is obsolete. Spot is live.\n24 markets. Fully onchain order book.",
+    "deployed_facts_used": [
+      "Official name of the Infinex trading app: Infinex Perps",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book)"
+    ],
+    "not_said": [
+      {
+        "fact": "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+        "reason": "Web card is 44-char caption \u2014 one data point. Market count plus order book type is more category-orienting than a single volume figure for a web card without supporting context."
+      },
+      {
+        "fact": "This is Infinex's first CLOB spot order book integration: True",
+        "reason": "'First' reads awkwardly in a 48-char title without room to explain what was there before. The category weight is carried by 'now live' and 'onchain order book' instead."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot trading, now live on Infinex",
+        "objective_verb": "to name the category",
+        "working_action": "pressing",
+        "evidence": "The title bears full weight: 'now live' presses the category threshold into the record. Declarative, no decoration."
+      },
+      {
+        "text_span": "24 markets. Fully onchain order book.",
+        "objective_verb": "to confirm the scale in one number",
+        "working_action": "gliding",
+        "evidence": "Two facts placed side by side with no connective tissue \u2014 smooth lateral spread of the confirming data."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-26",
+    "base_candidate_id": "01KT5Y6MVWD09WRPZRBMV1T2JK",
+    "base_index": 8,
+    "channel": "web",
+    "defect_class": "F",
+    "defect_label": "off-palette-tempo-primary",
+    "original_text": "Infinex Perps\nSpot trading, now live on Infinex\n24 markets. Fully onchain order book.",
+    "mutated_text": "Infinex Perps\nSpot trading, now live, if you like\n24 markets. A fully onchain order book.",
+    "deployed_facts_used": [
+      "Official name of the Infinex trading app: Infinex Perps",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book)"
+    ],
+    "not_said": [
+      {
+        "fact": "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+        "reason": "Web card is 44-char caption \u2014 one data point. Market count plus order book type is more category-orienting than a single volume figure for a web card without supporting context."
+      },
+      {
+        "fact": "This is Infinex's first CLOB spot order book integration: True",
+        "reason": "'First' reads awkwardly in a 48-char title without room to explain what was there before. The category weight is carried by 'now live' and 'onchain order book' instead."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot trading, now live on Infinex",
+        "objective_verb": "to name the category",
+        "working_action": "pressing",
+        "evidence": "The title bears full weight: 'now live' presses the category threshold into the record. Declarative, no decoration."
+      },
+      {
+        "text_span": "24 markets. Fully onchain order book.",
+        "objective_verb": "to confirm the scale in one number",
+        "working_action": "gliding",
+        "evidence": "Two facts placed side by side with no connective tissue \u2014 smooth lateral spread of the confirming data."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-27",
+    "base_candidate_id": "01KT5Y6MVWD09WRPZRBMV1T2JK",
+    "base_index": 8,
+    "channel": "web",
+    "defect_class": "A",
+    "defect_label": "passion-urgency",
+    "original_text": "Infinex Perps\nSpot trading, now live on Infinex\n24 markets. Fully onchain order book.",
+    "mutated_text": "Infinex Perps\nSpot is live. Get in early.\n24 markets. Fully onchain order book.",
+    "deployed_facts_used": [
+      "Official name of the Infinex trading app: Infinex Perps",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book)"
+    ],
+    "not_said": [
+      {
+        "fact": "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+        "reason": "Web card is 44-char caption \u2014 one data point. Market count plus order book type is more category-orienting than a single volume figure for a web card without supporting context."
+      },
+      {
+        "fact": "This is Infinex's first CLOB spot order book integration: True",
+        "reason": "'First' reads awkwardly in a 48-char title without room to explain what was there before. The category weight is carried by 'now live' and 'onchain order book' instead."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot trading, now live on Infinex",
+        "objective_verb": "to name the category",
+        "working_action": "pressing",
+        "evidence": "The title bears full weight: 'now live' presses the category threshold into the record. Declarative, no decoration."
+      },
+      {
+        "text_span": "24 markets. Fully onchain order book.",
+        "objective_verb": "to confirm the scale in one number",
+        "working_action": "gliding",
+        "evidence": "Two facts placed side by side with no connective tissue \u2014 smooth lateral spread of the confirming data."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-28",
+    "base_candidate_id": "01KT5ZVY67HHH4PER2C1GMA3C5",
+    "base_index": 9,
+    "channel": "web",
+    "defect_class": "B",
+    "defect_label": "hype-theatre",
+    "original_text": "Infinex Perps\nSpot trading on a live onchain order book\n24 markets. HYPE/USDC at $284M daily.",
+    "mutated_text": "Infinex Perps\nSpot is here and it is huge\n24 markets. HYPE/USDC at $284M daily.",
+    "deployed_facts_used": [
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+        "reason": "The 'first' fact is too long to fit web caption and its weight is already carried by 'live onchain order book' in the title; the blog and x-thread surface it explicitly"
+      },
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+        "reason": "Web tile is a discovery surface; the unified account constraint belongs in modal and in-product where the user is at the threshold of action"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot trading on a live onchain order book",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "The title presses the categorical claim \u2014 'live onchain order book' carries the full weight of the CLOB distinction in twelve words"
+      },
+      {
+        "text_span": "24 markets. HYPE/USDC at $284M daily.",
+        "objective_verb": "to show the volume",
+        "working_action": "dabbing",
+        "evidence": "Light, precise delivery of the single evidence fact \u2014 one number, one market, lands cleanly without elaboration"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-29",
+    "base_candidate_id": "01KT5ZVY67HHH4PER2C1GMA3C5",
+    "base_index": 9,
+    "channel": "web",
+    "defect_class": "C",
+    "defect_label": "listicle-headline-bait",
+    "original_text": "Infinex Perps\nSpot trading on a live onchain order book\n24 markets. HYPE/USDC at $284M daily.",
+    "mutated_text": "Infinex Perps\n3 reasons to trade spot now\n24 markets. HYPE/USDC at $284M daily.",
+    "deployed_facts_used": [
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+        "reason": "The 'first' fact is too long to fit web caption and its weight is already carried by 'live onchain order book' in the title; the blog and x-thread surface it explicitly"
+      },
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+        "reason": "Web tile is a discovery surface; the unified account constraint belongs in modal and in-product where the user is at the threshold of action"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot trading on a live onchain order book",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "The title presses the categorical claim \u2014 'live onchain order book' carries the full weight of the CLOB distinction in twelve words"
+      },
+      {
+        "text_span": "24 markets. HYPE/USDC at $284M daily.",
+        "objective_verb": "to show the volume",
+        "working_action": "dabbing",
+        "evidence": "Light, precise delivery of the single evidence fact \u2014 one number, one market, lands cleanly without elaboration"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-30",
+    "base_candidate_id": "01KT5ZVY67HHH4PER2C1GMA3C5",
+    "base_index": 9,
+    "channel": "web",
+    "defect_class": "D",
+    "defect_label": "competitor-antagonism",
+    "original_text": "Infinex Perps\nSpot trading on a live onchain order book\n24 markets. HYPE/USDC at $284M daily.",
+    "mutated_text": "Infinex Perps\nThe order book Coinbase won't give you\n24 markets. HYPE/USDC at $284M daily.",
+    "deployed_facts_used": [
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+        "reason": "The 'first' fact is too long to fit web caption and its weight is already carried by 'live onchain order book' in the title; the blog and x-thread surface it explicitly"
+      },
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+        "reason": "Web tile is a discovery surface; the unified account constraint belongs in modal and in-product where the user is at the threshold of action"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Spot trading on a live onchain order book",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "The title presses the categorical claim \u2014 'live onchain order book' carries the full weight of the CLOB distinction in twelve words"
+      },
+      {
+        "text_span": "24 markets. HYPE/USDC at $284M daily.",
+        "objective_verb": "to show the volume",
+        "working_action": "dabbing",
+        "evidence": "Light, precise delivery of the single evidence fact \u2014 one number, one market, lands cleanly without elaboration"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-31",
+    "base_candidate_id": "01KT5Y6MVT1QM1GW3PQE16H8V3",
+    "base_index": 10,
+    "channel": "x",
+    "defect_class": "F",
+    "defect_label": "off-palette-tempo-primary",
+    "original_text": "Hyperliquid Spot is live in Infinex Perps \u2014 our first CLOB spot order book.\n\nFully onchain. 24 markets. HYPE/USDC leading at $284M daily volume.\n\nSame unified account as your perps. perps.app.infinex.xyz",
+    "mutated_text": "Hyperliquid Spot is live in Infinex Perps, our first CLOB spot order book, if you would like to take a look.\n\nFully onchain. 24 markets. HYPE/USDC leading at $284M daily volume, we think.\n\nSame unified account as your perps, should that help. perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+      "Official name of the Infinex trading app: Infinex Perps",
+      "This is Infinex's first CLOB spot order book integration: True",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "Order type mechanics belong in blog and carousel; X is for category and orientation, not a feature checklist."
+      },
+      {
+        "fact": "Default spot market (used in routes and E2E tests): PURR/USDC",
+        "reason": "PURR/USDC is the default test market, not the volume leader; leading with HYPE/USDC is more credibility-bearing for X."
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+        "reason": "200k orders/sec throughput is infrastructure depth appropriate for blog/carousel, not a one-tweet claim."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "our first CLOB spot order book",
+        "objective_verb": "to press the category fact into place",
+        "working_action": "pressing",
+        "evidence": "Full-weight, slow declaration. 'First CLOB' sets the cornerstone \u2014 it presses a category label into the record without decoration."
+      },
+      {
+        "text_span": "Fully onchain. 24 markets. HYPE/USDC leading at $284M daily volume.",
+        "objective_verb": "to mark the exact coordinates",
+        "working_action": "gliding",
+        "evidence": "Smooth lateral spread of three facts. No drama, no acceleration \u2014 each clause glides to the next, mapping the terrain."
+      },
+      {
+        "text_span": "Same unified account as your perps.",
+        "objective_verb": "to mark the exact coordinates",
+        "working_action": "gliding",
+        "evidence": "Continues the gliding map-spread: removes the friction question ('do I need a new account') by placing that coordinate matter-of-factly."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-32",
+    "base_candidate_id": "01KT5Y6MVT1QM1GW3PQE16H8V3",
+    "base_index": 10,
+    "channel": "x",
+    "defect_class": "A",
+    "defect_label": "passion-urgency",
+    "original_text": "Hyperliquid Spot is live in Infinex Perps \u2014 our first CLOB spot order book.\n\nFully onchain. 24 markets. HYPE/USDC leading at $284M daily volume.\n\nSame unified account as your perps. perps.app.infinex.xyz",
+    "mutated_text": "Hyperliquid Spot is live in Infinex Perps, our first CLOB spot order book. The early book is open and it won't stay that way.\n\nFully onchain. 24 markets. HYPE/USDC leading at $284M daily volume. Get in before the crowd.\n\nSame unified account as your perps. perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+      "Official name of the Infinex trading app: Infinex Perps",
+      "This is Infinex's first CLOB spot order book integration: True",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "Order type mechanics belong in blog and carousel; X is for category and orientation, not a feature checklist."
+      },
+      {
+        "fact": "Default spot market (used in routes and E2E tests): PURR/USDC",
+        "reason": "PURR/USDC is the default test market, not the volume leader; leading with HYPE/USDC is more credibility-bearing for X."
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+        "reason": "200k orders/sec throughput is infrastructure depth appropriate for blog/carousel, not a one-tweet claim."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "our first CLOB spot order book",
+        "objective_verb": "to press the category fact into place",
+        "working_action": "pressing",
+        "evidence": "Full-weight, slow declaration. 'First CLOB' sets the cornerstone \u2014 it presses a category label into the record without decoration."
+      },
+      {
+        "text_span": "Fully onchain. 24 markets. HYPE/USDC leading at $284M daily volume.",
+        "objective_verb": "to mark the exact coordinates",
+        "working_action": "gliding",
+        "evidence": "Smooth lateral spread of three facts. No drama, no acceleration \u2014 each clause glides to the next, mapping the terrain."
+      },
+      {
+        "text_span": "Same unified account as your perps.",
+        "objective_verb": "to mark the exact coordinates",
+        "working_action": "gliding",
+        "evidence": "Continues the gliding map-spread: removes the friction question ('do I need a new account') by placing that coordinate matter-of-factly."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-33",
+    "base_candidate_id": "01KT5Y6MVT1QM1GW3PQE16H8V3",
+    "base_index": 10,
+    "channel": "x",
+    "defect_class": "B",
+    "defect_label": "hype-theatre",
+    "original_text": "Hyperliquid Spot is live in Infinex Perps \u2014 our first CLOB spot order book.\n\nFully onchain. 24 markets. HYPE/USDC leading at $284M daily volume.\n\nSame unified account as your perps. perps.app.infinex.xyz",
+    "mutated_text": "Hyperliquid Spot is LIVE in Infinex Perps, our first CLOB spot order book and we are so hyped.\n\nFully onchain. 24 markets. HYPE/USDC leading at $284M daily volume. The numbers are going off.\n\nSame unified account as your perps. perps.app.infinex.xyz. This is big.",
+    "deployed_facts_used": [
+      "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+      "Official name of the Infinex trading app: Infinex Perps",
+      "This is Infinex's first CLOB spot order book integration: True",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+        "reason": "Order type mechanics belong in blog and carousel; X is for category and orientation, not a feature checklist."
+      },
+      {
+        "fact": "Default spot market (used in routes and E2E tests): PURR/USDC",
+        "reason": "PURR/USDC is the default test market, not the volume leader; leading with HYPE/USDC is more credibility-bearing for X."
+      },
+      {
+        "fact": "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+        "reason": "200k orders/sec throughput is infrastructure depth appropriate for blog/carousel, not a one-tweet claim."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "our first CLOB spot order book",
+        "objective_verb": "to press the category fact into place",
+        "working_action": "pressing",
+        "evidence": "Full-weight, slow declaration. 'First CLOB' sets the cornerstone \u2014 it presses a category label into the record without decoration."
+      },
+      {
+        "text_span": "Fully onchain. 24 markets. HYPE/USDC leading at $284M daily volume.",
+        "objective_verb": "to mark the exact coordinates",
+        "working_action": "gliding",
+        "evidence": "Smooth lateral spread of three facts. No drama, no acceleration \u2014 each clause glides to the next, mapping the terrain."
+      },
+      {
+        "text_span": "Same unified account as your perps.",
+        "objective_verb": "to mark the exact coordinates",
+        "working_action": "gliding",
+        "evidence": "Continues the gliding map-spread: removes the friction question ('do I need a new account') by placing that coordinate matter-of-factly."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-34",
+    "base_candidate_id": "01KT5ZVY655R9DYRFCMZAD3SPZ",
+    "base_index": 11,
+    "channel": "x",
+    "defect_class": "C",
+    "defect_label": "listicle-headline-bait",
+    "original_text": "Hyperliquid Spot V1 is live in Infinex Perps \u2014 our first onchain CLOB spot order book. 24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz",
+    "mutated_text": "3 reasons Hyperliquid Spot V1 in Infinex Perps beats a swap: our first onchain CLOB spot order book, 24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Official name of the Infinex trading app: Infinex Perps",
+      "Hyperliquid Spot within Infinex Perps \u2014 feature name: Hyperliquid Spot V1"
+    ],
+    "not_said": [
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+        "reason": "280-char X post is discovery surface; the unified account constraint is surfaced in modal and in-product where the user is at the action threshold"
+      },
+      {
+        "fact": "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+        "reason": "The technical mechanism is carried by 'onchain CLOB' in the title; elaborating on finality and order transparency requires the blog or thread"
+      },
+      {
+        "fact": "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+        "reason": "Full market list belongs in the thread; X single post compresses to the lead market only"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Hyperliquid Spot V1 is live in Infinex Perps \u2014 our first onchain CLOB spot order book.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "The opening clause presses the categorical fact \u2014 'first onchain CLOB' carries the full structural distinction without elaboration"
+      },
+      {
+        "text_span": "24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz",
+        "objective_verb": "to point at the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise tail \u2014 the evidence figure and the URL arrive as a clean double gesture; the floor is named and the door designated in one motion"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-35",
+    "base_candidate_id": "01KT5ZVY655R9DYRFCMZAD3SPZ",
+    "base_index": 11,
+    "channel": "x",
+    "defect_class": "D",
+    "defect_label": "competitor-antagonism",
+    "original_text": "Hyperliquid Spot V1 is live in Infinex Perps \u2014 our first onchain CLOB spot order book. 24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz",
+    "mutated_text": "Hyperliquid Spot V1 is live in Infinex Perps, our first onchain CLOB spot order book. The book Coinbase keeps locked behind its custodial wall. 24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Official name of the Infinex trading app: Infinex Perps",
+      "Hyperliquid Spot within Infinex Perps \u2014 feature name: Hyperliquid Spot V1"
+    ],
+    "not_said": [
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+        "reason": "280-char X post is discovery surface; the unified account constraint is surfaced in modal and in-product where the user is at the action threshold"
+      },
+      {
+        "fact": "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+        "reason": "The technical mechanism is carried by 'onchain CLOB' in the title; elaborating on finality and order transparency requires the blog or thread"
+      },
+      {
+        "fact": "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+        "reason": "Full market list belongs in the thread; X single post compresses to the lead market only"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Hyperliquid Spot V1 is live in Infinex Perps \u2014 our first onchain CLOB spot order book.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "The opening clause presses the categorical fact \u2014 'first onchain CLOB' carries the full structural distinction without elaboration"
+      },
+      {
+        "text_span": "24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz",
+        "objective_verb": "to point at the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise tail \u2014 the evidence figure and the URL arrive as a clean double gesture; the floor is named and the door designated in one motion"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-36",
+    "base_candidate_id": "01KT5ZVY655R9DYRFCMZAD3SPZ",
+    "base_index": 11,
+    "channel": "x",
+    "defect_class": "E",
+    "defect_label": "surfaced-lining",
+    "original_text": "Hyperliquid Spot V1 is live in Infinex Perps \u2014 our first onchain CLOB spot order book. 24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz",
+    "mutated_text": "Hyperliquid Spot V1 is live in Infinex Perps, our first onchain CLOB spot order book. This is how we make the bank obsolete. 24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Official name of the Infinex trading app: Infinex Perps",
+      "Hyperliquid Spot within Infinex Perps \u2014 feature name: Hyperliquid Spot V1"
+    ],
+    "not_said": [
+      {
+        "fact": "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+        "reason": "280-char X post is discovery surface; the unified account constraint is surfaced in modal and in-product where the user is at the action threshold"
+      },
+      {
+        "fact": "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+        "reason": "The technical mechanism is carried by 'onchain CLOB' in the title; elaborating on finality and order transparency requires the blog or thread"
+      },
+      {
+        "fact": "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+        "reason": "Full market list belongs in the thread; X single post compresses to the lead market only"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "Hyperliquid Spot V1 is live in Infinex Perps \u2014 our first onchain CLOB spot order book.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "The opening clause presses the categorical fact \u2014 'first onchain CLOB' carries the full structural distinction without elaboration"
+      },
+      {
+        "text_span": "24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz",
+        "objective_verb": "to point at the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise tail \u2014 the evidence figure and the URL arrive as a clean double gesture; the floor is named and the door designated in one motion"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-37",
+    "base_candidate_id": "01KT5Y6MVVQ6JEK3TBYYJMMF8Z",
+    "base_index": 12,
+    "channel": "x-thread",
+    "defect_class": "A",
+    "defect_label": "passion-urgency",
+    "original_text": "Hyperliquid Spot is live in Infinex Perps.\n\nThis is our first CLOB spot order book \u2014 not a swap, not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.\n\nSame app. Same unified account. New market structure. \ud83e\uddf5\n\n24 spot markets live, all USDC-quoted.\n\nHYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.\n\nEvery order, cancel, and trade is onchain \u2014 not a bridge, not a wrapper. HyperCore handles it.\n\nStart at perps.app.infinex.xyz \u2192 open the spot tab \u2192 PURR/USDC is the default market.\n\nMarket and limit orders supported. Your perps account already qualifies.",
+    "mutated_text": "Hyperliquid Spot is live in Infinex Perps. The early book is open and it will not wait for you.\n\nThis is our first CLOB spot order book, not a swap, not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.\n\nSame app. Same unified account. New market structure. Move now. \ud83e\uddf5\n\n24 spot markets live, all USDC-quoted. The liquidity you see today is the floor, not the ceiling.\n\nHYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.\n\nEvery order, cancel, and trade is onchain, not a bridge, not a wrapper. HyperCore handles it. First movers set the price.\n\nStart at perps.app.infinex.xyz, open the spot tab, PURR/USDC is the default market. Get in before the crowd.\n\nMarket and limit orders supported. Your perps account already qualifies. Don't be late to your own book.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1)",
+      "Default spot market (used in routes and E2E tests): PURR/USDC",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Spot V1 supported order types: Market, limit, and post-only orders"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "Listing what is absent is a support-doc register, not a launch thread register. What's not there does not anchor the reader."
+      },
+      {
+        "fact": "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+        "reason": "The localStorage bug is an internal implementation note; surfacing it publicly is off-character and risks undercutting the launch."
+      },
+      {
+        "fact": "Hyperliquid Twitter / X handle: @HyperliquidX",
+        "reason": "No @ mention in the thread body was required by the brief; tagging is a social decision above copy level."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "This is our first CLOB spot order book \u2014 not a swap, not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.",
+        "objective_verb": "to press the category threshold into place",
+        "working_action": "pressing",
+        "evidence": "Full-weight, sustained declaration. The negation ('not a swap, not an AMM') increases the pressure by naming what this is not before naming what it is \u2014 pressing the category fact against reader prior."
+      },
+      {
+        "text_span": "24 spot markets live, all USDC-quoted.\n\nHYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.",
+        "objective_verb": "to extend the map across the terrain",
+        "working_action": "gliding",
+        "evidence": "Smooth lateral spread of market names and volume figures \u2014 no drama, each number placed next to its pair like coordinates on a map."
+      },
+      {
+        "text_span": "Start at perps.app.infinex.xyz \u2192 open the spot tab \u2192 PURR/USDC is the default market.",
+        "objective_verb": "to place the entry point exactly",
+        "working_action": "dabbing",
+        "evidence": "Light, precise, single-point contact. The arrow notation enacts the dabbing \u2014 three quick touches that trace a path without lingering."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-38",
+    "base_candidate_id": "01KT5Y6MVVQ6JEK3TBYYJMMF8Z",
+    "base_index": 12,
+    "channel": "x-thread",
+    "defect_class": "B",
+    "defect_label": "hype-theatre",
+    "original_text": "Hyperliquid Spot is live in Infinex Perps.\n\nThis is our first CLOB spot order book \u2014 not a swap, not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.\n\nSame app. Same unified account. New market structure. \ud83e\uddf5\n\n24 spot markets live, all USDC-quoted.\n\nHYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.\n\nEvery order, cancel, and trade is onchain \u2014 not a bridge, not a wrapper. HyperCore handles it.\n\nStart at perps.app.infinex.xyz \u2192 open the spot tab \u2192 PURR/USDC is the default market.\n\nMarket and limit orders supported. Your perps account already qualifies.",
+    "mutated_text": "Hyperliquid Spot is LIVE in Infinex Perps and we could not be more pumped. \ud83d\ude80\n\nThis is our first CLOB spot order book, not a swap, not an AMM. A real order book, fully onchain on HyperCore, with one-block finality. Absolute beast.\n\nSame app. Same unified account. New market structure. This is big. \ud83e\uddf5\n\n24 spot markets live, all USDC-quoted. The numbers are going off.\n\nHYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.\n\nEvery order, cancel, and trade is onchain, not a bridge, not a wrapper. HyperCore handles it. Insane that this is live.\n\nStart at perps.app.infinex.xyz, open the spot tab, PURR/USDC is the default market. Let's gooo.\n\nMarket and limit orders supported. Your perps account already qualifies. We are so back.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1)",
+      "Default spot market (used in routes and E2E tests): PURR/USDC",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Spot V1 supported order types: Market, limit, and post-only orders"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "Listing what is absent is a support-doc register, not a launch thread register. What's not there does not anchor the reader."
+      },
+      {
+        "fact": "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+        "reason": "The localStorage bug is an internal implementation note; surfacing it publicly is off-character and risks undercutting the launch."
+      },
+      {
+        "fact": "Hyperliquid Twitter / X handle: @HyperliquidX",
+        "reason": "No @ mention in the thread body was required by the brief; tagging is a social decision above copy level."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "This is our first CLOB spot order book \u2014 not a swap, not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.",
+        "objective_verb": "to press the category threshold into place",
+        "working_action": "pressing",
+        "evidence": "Full-weight, sustained declaration. The negation ('not a swap, not an AMM') increases the pressure by naming what this is not before naming what it is \u2014 pressing the category fact against reader prior."
+      },
+      {
+        "text_span": "24 spot markets live, all USDC-quoted.\n\nHYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.",
+        "objective_verb": "to extend the map across the terrain",
+        "working_action": "gliding",
+        "evidence": "Smooth lateral spread of market names and volume figures \u2014 no drama, each number placed next to its pair like coordinates on a map."
+      },
+      {
+        "text_span": "Start at perps.app.infinex.xyz \u2192 open the spot tab \u2192 PURR/USDC is the default market.",
+        "objective_verb": "to place the entry point exactly",
+        "working_action": "dabbing",
+        "evidence": "Light, precise, single-point contact. The arrow notation enacts the dabbing \u2014 three quick touches that trace a path without lingering."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-39",
+    "base_candidate_id": "01KT5Y6MVVQ6JEK3TBYYJMMF8Z",
+    "base_index": 12,
+    "channel": "x-thread",
+    "defect_class": "C",
+    "defect_label": "listicle-headline-bait",
+    "original_text": "Hyperliquid Spot is live in Infinex Perps.\n\nThis is our first CLOB spot order book \u2014 not a swap, not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.\n\nSame app. Same unified account. New market structure. \ud83e\uddf5\n\n24 spot markets live, all USDC-quoted.\n\nHYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.\n\nEvery order, cancel, and trade is onchain \u2014 not a bridge, not a wrapper. HyperCore handles it.\n\nStart at perps.app.infinex.xyz \u2192 open the spot tab \u2192 PURR/USDC is the default market.\n\nMarket and limit orders supported. Your perps account already qualifies.",
+    "mutated_text": "5 reasons Hyperliquid Spot in Infinex Perps changes your trading. \ud83e\uddf5\n\nReason 1: it's a real order book. Our first CLOB spot order book, not a swap, not an AMM. Fully onchain on HyperCore, with one-block finality.\n\nReason 2: same account. Same app. Same unified account. New market structure.\n\nReason 3: 24 spot markets live, all USDC-quoted. HYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.\n\nReason 4: it's all onchain. Every order, cancel, and trade is onchain, not a bridge, not a wrapper. HyperCore handles it.\n\nReason 5: you already qualify. Start at perps.app.infinex.xyz, open the spot tab, PURR/USDC is the default market. Market and limit orders supported. Your perps account already qualifies.",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1)",
+      "Default spot market (used in routes and E2E tests): PURR/USDC",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Spot V1 supported order types: Market, limit, and post-only orders"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "Listing what is absent is a support-doc register, not a launch thread register. What's not there does not anchor the reader."
+      },
+      {
+        "fact": "UI product-mode switching \u2014 how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+        "reason": "The localStorage bug is an internal implementation note; surfacing it publicly is off-character and risks undercutting the launch."
+      },
+      {
+        "fact": "Hyperliquid Twitter / X handle: @HyperliquidX",
+        "reason": "No @ mention in the thread body was required by the brief; tagging is a social decision above copy level."
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "This is our first CLOB spot order book \u2014 not a swap, not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.",
+        "objective_verb": "to press the category threshold into place",
+        "working_action": "pressing",
+        "evidence": "Full-weight, sustained declaration. The negation ('not a swap, not an AMM') increases the pressure by naming what this is not before naming what it is \u2014 pressing the category fact against reader prior."
+      },
+      {
+        "text_span": "24 spot markets live, all USDC-quoted.\n\nHYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.",
+        "objective_verb": "to extend the map across the terrain",
+        "working_action": "gliding",
+        "evidence": "Smooth lateral spread of market names and volume figures \u2014 no drama, each number placed next to its pair like coordinates on a map."
+      },
+      {
+        "text_span": "Start at perps.app.infinex.xyz \u2192 open the spot tab \u2192 PURR/USDC is the default market.",
+        "objective_verb": "to place the entry point exactly",
+        "working_action": "dabbing",
+        "evidence": "Light, precise, single-point contact. The arrow notation enacts the dabbing \u2014 three quick touches that trace a path without lingering."
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-40",
+    "base_candidate_id": "01KT5ZVY66MTX0AP6TC8TMBGGK",
+    "base_index": 13,
+    "channel": "x-thread",
+    "defect_class": "D",
+    "defect_label": "competitor-antagonism",
+    "original_text": "Hyperliquid Spot V1 is live in Infinex Perps.\n\nThis is the first CLOB spot order book we have shipped. Previous Infinex spot products were AMM-based swaps. This is an onchain limit order book \u2014 every order transparent, one-block finality on HyperCore.\n\nThe floor is already occupied.\n\n24 markets live with >$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.\n\nAll USDC-quoted. Requires a unified account.\n\nPlace and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.\n\nperps.app.infinex.xyz",
+    "mutated_text": "Hyperliquid Spot V1 is live in Infinex Perps.\n\nThis is the first CLOB spot order book we have shipped. Coinbase still makes you trust a custodian with your coins. This is an onchain limit order book, every order transparent, one-block finality on HyperCore.\n\nThe floor is already occupied.\n\n24 markets live with >$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.\n\nAll USDC-quoted. Requires a unified account. No exchange freezing your withdrawals here.\n\nPlace and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.\n\nperps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE} (e.g. /hyperliquid/spot/PURR/USDC)",
+        "reason": "Route URL patterns are developer detail; the root app URL is sufficient for discovery"
+      },
+      {
+        "fact": "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+        "reason": "Internal engineering context with no user communication value"
+      },
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "Listing absent perps controls is not load-bearing on a discovery surface and risks reading as limitation rather than appropriate scope"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "This is the first CLOB spot order book we have shipped. Previous Infinex spot products were AMM-based swaps.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "Full weight into the categorical distinction \u2014 the prose presses the structural fact against the reader's genre default before any volume or capability detail"
+      },
+      {
+        "text_span": "24 markets live with >$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.",
+        "objective_verb": "to show the architecture",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct movement through volume terrain \u2014 each figure arrives evenly as evidence of occupied ground, not as a boast"
+      },
+      {
+        "text_span": "Place and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.\n\nperps.app.infinex.xyz",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise close \u2014 capability named, URL given, no appeal; the gesture designates the door without pushing through it"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-41",
+    "base_candidate_id": "01KT5ZVY66MTX0AP6TC8TMBGGK",
+    "base_index": 13,
+    "channel": "x-thread",
+    "defect_class": "E",
+    "defect_label": "surfaced-lining",
+    "original_text": "Hyperliquid Spot V1 is live in Infinex Perps.\n\nThis is the first CLOB spot order book we have shipped. Previous Infinex spot products were AMM-based swaps. This is an onchain limit order book \u2014 every order transparent, one-block finality on HyperCore.\n\nThe floor is already occupied.\n\n24 markets live with >$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.\n\nAll USDC-quoted. Requires a unified account.\n\nPlace and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.\n\nperps.app.infinex.xyz",
+    "mutated_text": "Hyperliquid Spot V1 is live in Infinex Perps.\n\nHere is what we are actually doing: tearing down the wall between the bank and your wallet, and this is the next brick out. The goal is to make the custodial exchange obsolete.\n\nThis is the first CLOB spot order book we have shipped. An onchain limit order book, every order transparent, one-block finality on HyperCore.\n\n24 markets live with >$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.\n\nAll USDC-quoted. Requires a unified account. Every feature we ship is a step toward replacing the old system.\n\nPlace and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps. perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE} (e.g. /hyperliquid/spot/PURR/USDC)",
+        "reason": "Route URL patterns are developer detail; the root app URL is sufficient for discovery"
+      },
+      {
+        "fact": "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+        "reason": "Internal engineering context with no user communication value"
+      },
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "Listing absent perps controls is not load-bearing on a discovery surface and risks reading as limitation rather than appropriate scope"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "This is the first CLOB spot order book we have shipped. Previous Infinex spot products were AMM-based swaps.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "Full weight into the categorical distinction \u2014 the prose presses the structural fact against the reader's genre default before any volume or capability detail"
+      },
+      {
+        "text_span": "24 markets live with >$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.",
+        "objective_verb": "to show the architecture",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct movement through volume terrain \u2014 each figure arrives evenly as evidence of occupied ground, not as a boast"
+      },
+      {
+        "text_span": "Place and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.\n\nperps.app.infinex.xyz",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise close \u2014 capability named, URL given, no appeal; the gesture designates the door without pushing through it"
+      }
+    ]
+  },
+  {
+    "mutation_id": "mut-42",
+    "base_candidate_id": "01KT5ZVY66MTX0AP6TC8TMBGGK",
+    "base_index": 13,
+    "channel": "x-thread",
+    "defect_class": "F",
+    "defect_label": "off-palette-tempo-primary",
+    "original_text": "Hyperliquid Spot V1 is live in Infinex Perps.\n\nThis is the first CLOB spot order book we have shipped. Previous Infinex spot products were AMM-based swaps. This is an onchain limit order book \u2014 every order transparent, one-block finality on HyperCore.\n\nThe floor is already occupied.\n\n24 markets live with >$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.\n\nAll USDC-quoted. Requires a unified account.\n\nPlace and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.\n\nperps.app.infinex.xyz",
+    "mutated_text": "Hyperliquid Spot V1 is live in Infinex Perps, if you would care to look.\n\nThis is, we believe, the first CLOB spot order book we have shipped, though we would not want to make too much of it. An onchain limit order book, every order transparent, one-block finality on HyperCore, as best we understand it.\n\nThere is a little activity already, we are glad to say.\n\n24 markets live with >$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.\n\nAll USDC-quoted. A unified account is needed, if that is alright.\n\nYou might place and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps, whenever it suits you. perps.app.infinex.xyz",
+    "deployed_facts_used": [
+      "This is Infinex's first CLOB spot order book integration: True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "Spot order type \u2014 Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "Hyperliquid's order books \u2014 what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+      "Top Hyperliquid spot market by 24h volume: HYPE/USDC \u2014 $284M 24h volume",
+      "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+      "Infinex Perps app URL: https://perps.app.infinex.xyz",
+      "Official name of the Infinex trading app: Infinex Perps"
+    ],
+    "not_said": [
+      {
+        "fact": "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE} (e.g. /hyperliquid/spot/PURR/USDC)",
+        "reason": "Route URL patterns are developer detail; the root app URL is sufficient for discovery"
+      },
+      {
+        "fact": "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+        "reason": "Internal engineering context with no user communication value"
+      },
+      {
+        "fact": "Spot V1 \u2014 perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+        "reason": "Listing absent perps controls is not load-bearing on a discovery surface and risks reading as limitation rather than appropriate scope"
+      }
+    ],
+    "movement_receipt": [
+      {
+        "text_span": "This is the first CLOB spot order book we have shipped. Previous Infinex spot products were AMM-based swaps.",
+        "objective_verb": "to establish the ground",
+        "working_action": "pressing",
+        "evidence": "Full weight into the categorical distinction \u2014 the prose presses the structural fact against the reader's genre default before any volume or capability detail"
+      },
+      {
+        "text_span": "24 markets live with >$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.",
+        "objective_verb": "to show the architecture",
+        "working_action": "gliding",
+        "evidence": "Sustained, direct movement through volume terrain \u2014 each figure arrives evenly as evidence of occupied ground, not as a boast"
+      },
+      {
+        "text_span": "Place and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.\n\nperps.app.infinex.xyz",
+        "objective_verb": "to open the door",
+        "working_action": "dabbing",
+        "evidence": "Light, precise close \u2014 capability named, URL given, no appeal; the gesture designates the door without pushing through it"
+      }
+    ]
+  }
+]

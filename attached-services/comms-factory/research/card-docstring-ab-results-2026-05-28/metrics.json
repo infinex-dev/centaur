@@ -1,0 +1,120 @@
+[
+  {
+    "variant_id": "CURRENT",
+    "label": "Current (bank wall example)",
+    "count": 10,
+    "mean_anchoring_score": 3.4,
+    "surface_anchor_hit_rate": 0.2,
+    "validity_rate": 0.7,
+    "distinct_frames": 6,
+    "frame_distribution": {
+      "disappearance": 3,
+      "arrival": 3,
+      "revelation": 1,
+      "exposition": 1,
+      "permission": 1,
+      "transformation": 1
+    },
+    "distinct_verbs": 7,
+    "verbs": [
+      "dissolve",
+      "add",
+      "reveal",
+      "surface",
+      "reveal",
+      "announce",
+      "announce",
+      "announce",
+      "split",
+      "replace"
+    ]
+  },
+  {
+    "variant_id": "VARIANT_A",
+    "label": "Variant A (token swap — generic example)",
+    "count": 10,
+    "mean_anchoring_score": 2.9,
+    "surface_anchor_hit_rate": 0,
+    "validity_rate": 0.8,
+    "distinct_frames": 6,
+    "frame_distribution": {
+      "disappearance": 3,
+      "transformation": 3,
+      "arrival": 1,
+      "constraint": 1,
+      "exposition": 1,
+      "permission": 1
+    },
+    "distinct_verbs": 7,
+    "verbs": [
+      "eliminate",
+      "eliminate",
+      "make",
+      "integrate",
+      "eliminate",
+      "announce",
+      "announce",
+      "demonstrate",
+      "give",
+      "remove"
+    ]
+  },
+  {
+    "variant_id": "VARIANT_B",
+    "label": "Variant B (structural placeholder)",
+    "count": 10,
+    "mean_anchoring_score": 1.9,
+    "surface_anchor_hit_rate": 0,
+    "validity_rate": 0.8,
+    "distinct_frames": 5,
+    "frame_distribution": {
+      "disappearance": 3,
+      "transformation": 2,
+      "exposition": 3,
+      "arrival": 1,
+      "permission": 1
+    },
+    "distinct_verbs": 8,
+    "verbs": [
+      "dissolve",
+      "dissolve",
+      "surface",
+      "unify",
+      "eliminate",
+      "normalize",
+      "graduate",
+      "demonstrate",
+      "surface",
+      "collapse"
+    ]
+  },
+  {
+    "variant_id": "VARIANT_C",
+    "label": "Variant C (no example, canon ref + forbidden-list)",
+    "count": 10,
+    "mean_anchoring_score": 1.6,
+    "surface_anchor_hit_rate": 0,
+    "validity_rate": 0.5,
+    "distinct_frames": 5,
+    "frame_distribution": {
+      "transformation": 5,
+      "exposition": 1,
+      "permission": 2,
+      "constraint": 1,
+      "arrival": 1
+    },
+    "distinct_verbs": 7,
+    "verbs": [
+      "dissolve",
+      "dissolve",
+      "grant",
+      "dissolve",
+      "liberate",
+      "preserve",
+      "graduate",
+      "cross",
+      "grant",
+      "collapse"
+    ]
+  }
+]

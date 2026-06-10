@@ -1,0 +1,72 @@
+[
+  {
+    "variant_id": "CURRENT",
+    "count": 10,
+    "director_pass_rate": 1,
+    "exhausted_rate": 0,
+    "mean_attempts": 1.2,
+    "wall_hit_rate": 0,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "mean_anchoring_score": 3.4,
+    "mean_ship_quality": 4.8,
+    "mean_voice_fit": 4.9,
+    "mean_caption_length": 140
+  },
+  {
+    "variant_id": "VARIANT_A",
+    "count": 10,
+    "director_pass_rate": 1,
+    "exhausted_rate": 0,
+    "mean_attempts": 1.1,
+    "wall_hit_rate": 0,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "mean_anchoring_score": 2.5,
+    "mean_ship_quality": 4.8,
+    "mean_voice_fit": 4.9,
+    "mean_caption_length": 134
+  },
+  {
+    "variant_id": "VARIANT_A_PRIME",
+    "count": 10,
+    "director_pass_rate": 1,
+    "exhausted_rate": 0,
+    "mean_attempts": 1.4,
+    "wall_hit_rate": 0.1,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "mean_anchoring_score": 3.2,
+    "mean_ship_quality": 4.9,
+    "mean_voice_fit": 4.9,
+    "mean_caption_length": 168
+  },
+  {
+    "variant_id": "VARIANT_B_PRIME",
+    "count": 10,
+    "director_pass_rate": 1,
+    "exhausted_rate": 0,
+    "mean_attempts": 1.3,
+    "wall_hit_rate": 0.1,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "mean_anchoring_score": 3,
+    "mean_ship_quality": 4.8,
+    "mean_voice_fit": 4.9,
+    "mean_caption_length": 174
+  },
+  {
+    "variant_id": "VARIANT_C",
+    "count": 10,
+    "director_pass_rate": 1,
+    "exhausted_rate": 0,
+    "mean_attempts": 1.5,
+    "wall_hit_rate": 0,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "mean_anchoring_score": 3.3,
+    "mean_ship_quality": 4.7,
+    "mean_voice_fit": 4.7,
+    "mean_caption_length": 172
+  }
+]

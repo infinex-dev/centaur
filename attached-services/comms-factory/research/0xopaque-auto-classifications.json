@@ -1,0 +1,617 @@
+{
+  "model": "claude-sonnet-4-5",
+  "classifications": [
+    {
+      "id": "2052542856108421166",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Pert one-liner announcement, brisk intimacy with audience."
+    },
+    {
+      "id": "2052035440702882079",
+      "tempo": "acknowledged",
+      "confidence": "medium",
+      "reasoning": "Easy disclosure of technical mishap with emotional honesty."
+    },
+    {
+      "id": "2044909755203018770",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Brief exclamation, brisk one-liner vibe."
+    },
+    {
+      "id": "2042206106739740974",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Direct demand for action, position-taking resolve."
+    },
+    {
+      "id": "2041882036995248332",
+      "tempo": "acknowledged",
+      "confidence": "medium",
+      "reasoning": "Open admission of technical debt with light tone."
+    },
+    {
+      "id": "2041503948763517124",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Direct call-out, bold position."
+    },
+    {
+      "id": "2040835124284342347",
+      "tempo": "cool",
+      "confidence": "medium",
+      "reasoning": "Dry observational quip, pert intimacy."
+    },
+    {
+      "id": "2037132842002694421",
+      "tempo": "_skip",
+      "confidence": "high",
+      "reasoning": "Gibberish text, unclassifiable."
+    },
+    {
+      "id": "2036452998688415896",
+      "tempo": "sombre",
+      "confidence": "medium",
+      "reasoning": "Heavy contained concern, gravity about market."
+    },
+    {
+      "id": "2036252969768046978",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Sardonic one-liner with image, brisk tone."
+    },
+    {
+      "id": "2036108701795500112",
+      "tempo": "materialistic",
+      "confidence": "high",
+      "reasoning": "Sharp declarative mockery, sudden aggressive intent."
+    },
+    {
+      "id": "2033799853512565059",
+      "tempo": "human",
+      "confidence": "high",
+      "reasoning": "Slow tender observation, patient present-tense warmth."
+    },
+    {
+      "id": "2031711887210250612",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Pert parallel joke, brisk one-liner."
+    },
+    {
+      "id": "2029816465046786075",
+      "tempo": "_skip",
+      "confidence": "high",
+      "reasoning": "URL only, no content."
+    },
+    {
+      "id": "2029522833450430660",
+      "tempo": "materialistic",
+      "confidence": "high",
+      "reasoning": "Sharp declarative with aggressive undertone."
+    },
+    {
+      "id": "2026807871862878547",
+      "tempo": "irradiant",
+      "confidence": "medium",
+      "reasoning": "Visible delight in accomplishment, sympathetic exultation."
+    },
+    {
+      "id": "2026673226097766555",
+      "tempo": "_skip",
+      "confidence": "high",
+      "reasoning": "Low-info timestamped image post."
+    },
+    {
+      "id": "2024804643763822877",
+      "tempo": "revealed",
+      "confidence": "high",
+      "reasoning": "Sudden disclosure of behavioral experiment, bright reveal."
+    },
+    {
+      "id": "2024422891031592963",
+      "tempo": "acknowledged",
+      "confidence": "medium",
+      "reasoning": "Open admission of future fantasy with ease."
+    },
+    {
+      "id": "2024322925982282124",
+      "tempo": "irradiant",
+      "confidence": "medium",
+      "reasoning": "Visible delight with celebratory emoji."
+    },
+    {
+      "id": "2024312688084734295",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical working-through of community behavior problem."
+    },
+    {
+      "id": "2024172864824627243",
+      "tempo": "sombre",
+      "confidence": "high",
+      "reasoning": "Heavy gravity about future social division."
+    },
+    {
+      "id": "2024120072118350173",
+      "tempo": "commanding",
+      "confidence": "medium",
+      "reasoning": "Direct request for assistance, position-taking."
+    },
+    {
+      "id": "2024119997845631364",
+      "tempo": "uncertain",
+      "confidence": "medium",
+      "reasoning": "Sudden what-if framing, new idea confusion."
+    },
+    {
+      "id": "2021961432074793189",
+      "tempo": "irradiant",
+      "confidence": "medium",
+      "reasoning": "Visible delight in understanding, sympathetic exultation."
+    },
+    {
+      "id": "2021955115121618989",
+      "tempo": "certain",
+      "confidence": "high",
+      "reasoning": "Settled judgement about future value, sustained awareness."
+    },
+    {
+      "id": "2019588670366560422",
+      "tempo": "certain",
+      "confidence": "high",
+      "reasoning": "Settled position on pattern continuity, direct sustained."
+    },
+    {
+      "id": "2017158668572369336",
+      "tempo": "overpowering",
+      "confidence": "medium",
+      "reasoning": "Full conviction with emotion, manifesto-like declaration."
+    },
+    {
+      "id": "2016918234667372970",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Pert one-liner quip, brisk intimacy."
+    },
+    {
+      "id": "2016817434993578178",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Sardonic three-word quip, brisk tone."
+    },
+    {
+      "id": "2016487037092962667",
+      "tempo": "uncertain",
+      "confidence": "medium",
+      "reasoning": "Sudden questioning of algorithm change, what-if."
+    },
+    {
+      "id": "2010943992008229369",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical working-through of content quality problem."
+    },
+    {
+      "id": "2009093291804094540",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Pert sardonic update, brisk one-liner."
+    },
+    {
+      "id": "2008137149410091357",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Two-word dry reveal, brisk."
+    },
+    {
+      "id": "2007394027608686606",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Sardonic parenthetical quip, pert intimacy."
+    },
+    {
+      "id": "2006974477050191993",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Bold position-taking on purchase decision."
+    },
+    {
+      "id": "2006127442147078498",
+      "tempo": "certain",
+      "confidence": "high",
+      "reasoning": "Settled judgement on platform comparison, direct sustained."
+    },
+    {
+      "id": "2006027563781509553",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical working-through of content consumption problem."
+    },
+    {
+      "id": "2005968287574941849",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Single-letter question mark, brisk."
+    },
+    {
+      "id": "2005891820795187645",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Two-word declaration, brisk."
+    },
+    {
+      "id": "2005536332228309080",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Two-word position declaration, direct."
+    },
+    {
+      "id": "2004456808354926895",
+      "tempo": "uncertain",
+      "confidence": "medium",
+      "reasoning": "What-if framing about market direction, sudden idea."
+    },
+    {
+      "id": "2004369000852344897",
+      "tempo": "commanding",
+      "confidence": "medium",
+      "reasoning": "Direct request for follows, position-taking."
+    },
+    {
+      "id": "2004196619814949286",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical working-through of behavioral prediction."
+    },
+    {
+      "id": "2004165661409571257",
+      "tempo": "human",
+      "confidence": "high",
+      "reasoning": "Slow tenderness in holiday greeting, patient observation."
+    },
+    {
+      "id": "2003442994310185179",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Direct demand with emotional weight, bold position."
+    },
+    {
+      "id": "2001652154206233053",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Sardonic one-liner comparison, brisk."
+    },
+    {
+      "id": "2000754191275376711",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Pert teasing question, brisk intimacy."
+    },
+    {
+      "id": "1999456376628883705",
+      "tempo": "irradiant",
+      "confidence": "medium",
+      "reasoning": "Visible delight with accomplishment, sympathetic."
+    },
+    {
+      "id": "1997999995572863244",
+      "tempo": "_skip",
+      "confidence": "high",
+      "reasoning": "Low-info announcement with URL."
+    },
+    {
+      "id": "1997973571579375718",
+      "tempo": "revealed",
+      "confidence": "high",
+      "reasoning": "Sudden disclosure of preparation strategy, bright."
+    },
+    {
+      "id": "1997701920316920063",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Dry sardonic observation, pert."
+    },
+    {
+      "id": "1997562099153920242",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Direct football opinion, position-taking."
+    },
+    {
+      "id": "1997148694182048174",
+      "tempo": "receptive",
+      "confidence": "medium",
+      "reasoning": "Open invitation for suggestions, welcoming tenderness."
+    },
+    {
+      "id": "1995487445341945994",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "One-word question, brisk."
+    },
+    {
+      "id": "1995062485230223754",
+      "tempo": "certain",
+      "confidence": "medium",
+      "reasoning": "Settled prediction of market movement, direct sustained."
+    },
+    {
+      "id": "1994935690157854984",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "One-word question, brisk."
+    },
+    {
+      "id": "1994225813676294482",
+      "tempo": "_skip",
+      "confidence": "high",
+      "reasoning": "URL only announcement."
+    },
+    {
+      "id": "1994225811269009449",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical working-through of incentive mechanics."
+    },
+    {
+      "id": "1994065278263808031",
+      "tempo": "uncertain",
+      "confidence": "medium",
+      "reasoning": "Questioning observation of market activity, what-if."
+    },
+    {
+      "id": "1993307187171791182",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Direct declaration of breakdown clarity, position."
+    },
+    {
+      "id": "1993307160626053174",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical working-through of information asymmetry."
+    },
+    {
+      "id": "1993306139232985361",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Extended analytical explanation of voucher mechanics."
+    },
+    {
+      "id": "1993306134456013108",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical setup for price modeling, working-through."
+    },
+    {
+      "id": "1993306130504876278",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Detailed analytical calculation walkthrough."
+    },
+    {
+      "id": "1993306127325671705",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical explanation of voucher mechanics."
+    },
+    {
+      "id": "1993306122825220603",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Extended analytical explanation of distribution strategy."
+    },
+    {
+      "id": "1993306118257340695",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical explanation of patron relationship dynamics."
+    },
+    {
+      "id": "1993306114063315106",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical working-through of alignment strategy."
+    },
+    {
+      "id": "1993306110485577951",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical explanation of zero-sum game dynamics."
+    },
+    {
+      "id": "1993306107910238702",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical explanation with external reference."
+    },
+    {
+      "id": "1993306104030539848",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Extended analytical working-through of voucher value."
+    },
+    {
+      "id": "1993117713707975068",
+      "tempo": "materialistic",
+      "confidence": "high",
+      "reasoning": "Sharp declarative with aggressive intent, spade's-a-spade."
+    },
+    {
+      "id": "1993101347877687591",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Two-word declaration, brisk."
+    },
+    {
+      "id": "1992737743156449506",
+      "tempo": "sombre",
+      "confidence": "high",
+      "reasoning": "Heavy contained emotion about ideals lost, gravity."
+    },
+    {
+      "id": "1992421355263029425",
+      "tempo": "receptive",
+      "confidence": "high",
+      "reasoning": "Open request for help with welcoming tone."
+    },
+    {
+      "id": "1992412267246395841",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical explanation of doubling strategy."
+    },
+    {
+      "id": "1992387850990743894",
+      "tempo": "irradiant",
+      "confidence": "medium",
+      "reasoning": "Visible enthusiasm with caps, sympathetic exultation."
+    },
+    {
+      "id": "1992248015411908811",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "One-word appreciation, brisk."
+    },
+    {
+      "id": "1992127113495990376",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Extended analytical reflection on allocation learnings."
+    },
+    {
+      "id": "1991852401196961942",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Sardonic bet observation, pert."
+    },
+    {
+      "id": "1991786023597305997",
+      "tempo": "materialistic",
+      "confidence": "high",
+      "reasoning": "Sharp declarative about market leader, aggressive."
+    },
+    {
+      "id": "1991619423694909685",
+      "tempo": "certain",
+      "confidence": "high",
+      "reasoning": "Settled wisdom about incentives, direct sustained."
+    },
+    {
+      "id": "1990756471647449529",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Sardonic meta-observation, pert one-liner."
+    },
+    {
+      "id": "1990719850818191547",
+      "tempo": "certain",
+      "confidence": "medium",
+      "reasoning": "Direct price conviction with caveat, sustained."
+    },
+    {
+      "id": "1989883814345367602",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Sardonic anti-rug observation, brisk intimacy."
+    },
+    {
+      "id": "1989117527444844551",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Direct self-answer format, bold position."
+    },
+    {
+      "id": "1988081539012526217",
+      "tempo": "uncertain",
+      "confidence": "medium",
+      "reasoning": "What-if framing about refund timing, sudden."
+    },
+    {
+      "id": "1988033355326386469",
+      "tempo": "practical",
+      "confidence": "high",
+      "reasoning": "Analytical working-through of fee proposal valuation."
+    },
+    {
+      "id": "1987858789207597343",
+      "tempo": "sombre",
+      "confidence": "high",
+      "reasoning": "Heavy gravity about country decline, contained emotion."
+    },
+    {
+      "id": "1987746512861122717",
+      "tempo": "certain",
+      "confidence": "high",
+      "reasoning": "Settled judgement contrasting business models, direct."
+    },
+    {
+      "id": "1987524527371546692",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Direct position declaration with price, bold."
+    },
+    {
+      "id": "1987357877695316305",
+      "tempo": "uncertain",
+      "confidence": "medium",
+      "reasoning": "What-if question framing, sudden idea."
+    },
+    {
+      "id": "1987356560608338387",
+      "tempo": "receptive",
+      "confidence": "high",
+      "reasoning": "Open request for help, welcoming invitation."
+    },
+    {
+      "id": "1984967075744579816",
+      "tempo": "receptive",
+      "confidence": "high",
+      "reasoning": "Open invitation to exploit lack of knowledge."
+    },
+    {
+      "id": "1984941315906506888",
+      "tempo": "certain",
+      "confidence": "medium",
+      "reasoning": "Hopeful conviction about solvency, sustained awareness."
+    },
+    {
+      "id": "1984556829184283028",
+      "tempo": "receptive",
+      "confidence": "high",
+      "reasoning": "Simple open request for help, welcoming."
+    },
+    {
+      "id": "1984171541052190829",
+      "tempo": "commanding",
+      "confidence": "high",
+      "reasoning": "Direct imperative to survive, bold position."
+    },
+    {
+      "id": "1983913940200669531",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Sardonic reframe of allocation disappointment, pert."
+    },
+    {
+      "id": "1983886531569054088",
+      "tempo": "cool",
+      "confidence": "high",
+      "reasoning": "Dry listing of airdrop comparisons, brisk."
+    }
+  ],
+  "usage": {
+    "input_tokens": 6615,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 0
+    },
+    "output_tokens": 5237,
+    "service_tier": "standard",
+    "inference_geo": "not_available"
+  }
+}

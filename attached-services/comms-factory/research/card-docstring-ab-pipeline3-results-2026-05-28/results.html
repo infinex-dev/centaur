@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pipeline 3 v2 results — A/B/C/D/E on the correct pipeline</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --good: #4ade80;
+    --warn: #f0c674;
+    --bad: #ff6b6b;
+    --p1: #ff6b6b;
+    --p3: #4ade80;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1480px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 18px 0 10px; }
+  .sub { color: var(--muted); margin-bottom: 28px; }
+
+  .headline {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--good);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-bottom: 28px;
+  }
+  .headline h2 { margin-top: 0; border: none; padding: 0; color: var(--good); }
+  .headline ul { margin: 10px 0 0 22px; padding: 0; }
+  .headline li { margin-bottom: 6px; }
+  .headline strong { color: var(--text); }
+
+  table.compare {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+  table.compare th {
+    background: rgba(255,255,255,0.04);
+    text-align: center;
+    padding: 10px 8px;
+    color: var(--muted);
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+  table.compare th.variant { text-align: left; padding-left: 14px; }
+  table.compare th.p1 { color: var(--p1); }
+  table.compare th.p3 { color: var(--p3); }
+  table.compare td { padding: 10px 8px; border-top: 1px solid var(--border); text-align: center; font-family: var(--code-mono); font-size: 13px; }
+  table.compare td.variant { text-align: left; font-family: -apple-system, system-ui, sans-serif; font-weight: 600; padding-left: 14px; }
+  table.compare td.win { color: var(--good); font-weight: 700; }
+  table.compare td.lose { color: var(--bad); }
+  table.compare td.neutral { color: var(--muted); }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0 24px;
+  }
+  .compare-side {
+    padding: 14px 16px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+  }
+  .compare-side.p1 { background: rgba(255, 107, 107, 0.05); border-left: 3px solid var(--p1); }
+  .compare-side.p3 { background: rgba(74, 222, 128, 0.05); border-left: 3px solid var(--p3); }
+  .compare-side .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .compare-side.p1 .label { color: var(--p1); }
+  .compare-side.p3 .label { color: var(--p3); }
+  .compare-side .body {
+    font-family: var(--code-mono); font-size: 12.5px; line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .release-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+  .release-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+  .release-id { font-family: var(--code-mono); color: var(--accent); font-size: 13px; }
+  .release-title { font-weight: 600; }
+  .variant-line {
+    margin-top: 10px;
+    padding: 6px 0 0;
+    border-top: 1px dashed var(--border);
+  }
+  .variant-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 4px; }
+  .variant-label.flagged { color: var(--bad); }
+  .ta-in {
+    font-family: var(--code-mono); font-size: 11px; color: var(--muted);
+    margin-bottom: 6px;
+  }
+  mark { background: var(--bad); color: white; padding: 0 3px; border-radius: 2px; font-weight: 700; }
+
+  .verdict {
+    background: rgba(88, 166, 255, 0.06);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-top: 32px;
+  }
+  .verdict h3 { margin-top: 0; color: var(--accent); }
+  .verdict ul { padding-left: 22px; }
+  .verdict li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Pipeline 3 v2 results — A/B/C/D/E on the correct pipeline</h1>
+  <div class="sub">2026-05-28 · same 10 releases × 5 docstring variants as v2, but routed through <code>orchestrateActorDirectorWithRetries</code> instead of <code>generate()</code>. The v2 grounded through_action + lining were held constant as inputs to Pipeline 3; the SOLE variable is the architecture.</div>
+
+  <!-- ============================================================ -->
+  <div class="headline">
+    <h2>The big result: Pipeline 3 washes out wall contamination architecturally</h2>
+    <ul>
+      <li><strong>CURRENT docstring (worst input — "bank wall just dissolved") produces ZERO wall in P3 captions.</strong> Pipeline 1 produced wall in 20% of CURRENT captions. The Actor transforms the wall metaphor into structural observations without echoing the token. This is canonical Werle/Duke behavior — the Outer is sanitized, the Lining (banking/wallet structural distinction) stays underneath.</li>
+      <li><strong>Captions are SHORTER</strong> — 134-174 chars vs Pipeline 1's 186-209. Closer to real Infinex tweet length. The 3-beat essayist arc is gone.</li>
+      <li><strong>Director pass rate: 100% across all variants.</strong> Mean attempts: 1.1-1.5. The architecture produces shippable copy on the first attempt almost always.</li>
+      <li><strong>Captions OPEN WITH THE FACT</strong> — "Hyperliquid spot trading. Now native to Infinex." "Your Infinex account has a bank account number now." "Spot Hyperliquid is native in Infinex." Matches real Infinex IT017/IT020/IT022/IT025 shape. The "essayist Sombre-prep opener" failure mode from Pipeline 1 doesn't appear.</li>
+      <li><strong>Two wall leaks remain (10% in A' and B').</strong> Both came from through_actions that conceptually invoked the wall frame ("to erase the boundary..." → "The wall between..."; "to unify fragmented access" → "The wall is gone."). The Actor honored the Lining frame and surfaced the metaphor as Outer. Per Mirodan §7.3 this is the Lining-surfaces-as-Outer failure mode — bug remains but at 1/10th the rate.</li>
+      <li><strong>The architecture matters more than the docstring choice.</strong> Across all 5 variants, ship_quality stays at 4.7-4.9 and voice_fit at 4.7-4.9. Pipeline 3 produces consistently good captions regardless of which docstring fed the grounding.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Pipeline 1 vs Pipeline 3 — head-to-head metrics</h2>
+
+  <table class="compare">
+    <thead>
+      <tr>
+        <th class="variant" rowspan="2">Variant</th>
+        <th colspan="2">Wall hit %</th>
+        <th colspan="2">Ship quality (1-5)</th>
+        <th colspan="2">Voice fit (1-5)</th>
+        <th colspan="2">Avg chars</th>
+      </tr>
+      <tr>
+        <th class="p1">P1 (legacy)</th>
+        <th class="p3">P3 (Actor/Director)</th>
+        <th class="p1">P1</th>
+        <th class="p3">P3</th>
+        <th class="p1">P1</th>
+        <th class="p3">P3</th>
+        <th class="p1">P1</th>
+        <th class="p3">P3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="variant">CURRENT (bank wall)</td>
+        <td class="lose">20%</td>
+        <td class="win">0%</td>
+        <td>4.6</td>
+        <td class="neutral">4.8</td>
+        <td>5.0</td>
+        <td class="neutral">4.9</td>
+        <td>209</td>
+        <td class="win">140</td>
+      </tr>
+      <tr>
+        <td class="variant">VARIANT A (token swap)</td>
+        <td class="win">0%</td>
+        <td class="win">0%</td>
+        <td>4.9</td>
+        <td>4.8</td>
+        <td>5.0</td>
+        <td>4.9</td>
+        <td>202</td>
+        <td class="win">134</td>
+      </tr>
+      <tr>
+        <td class="variant">VARIANT A' (multi-example)</td>
+        <td>10%</td>
+        <td>10%</td>
+        <td>4.8</td>
+        <td class="win">4.9</td>
+        <td>5.0</td>
+        <td>4.9</td>
+        <td>200</td>
+        <td class="win">168</td>
+      </tr>
+      <tr>
+        <td class="variant">VARIANT B' (refusing removed)</td>
+        <td>10%</td>
+        <td>10%</td>
+        <td class="win">5.0</td>
+        <td>4.8</td>
+        <td>5.0</td>
+        <td>4.9</td>
+        <td>203</td>
+        <td class="win">174</td>
+      </tr>
+      <tr>
+        <td class="variant">VARIANT C (no example)</td>
+        <td>10%</td>
+        <td class="win">0%</td>
+        <td>4.9</td>
+        <td>4.7</td>
+        <td>5.0</td>
+        <td>4.7</td>
+        <td>186</td>
+        <td class="win">172</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size: 13px; color: var(--muted); margin-top: -8px;"><strong>Reading the table:</strong> green = P3 wins or ties; red = P1 loses meaningfully. Pipeline 3 strictly improves on wall contamination + caption length while holding ship quality and voice fit roughly constant.</p>
+
+  <!-- ============================================================ -->
+  <h2>Same release, head-to-head: Pipeline 1 vs Pipeline 3</h2>
+
+  <!-- fiat-onramp CURRENT — the contamination poster child -->
+  <div class="release-section">
+    <div class="release-header">
+      <span class="release-id">fiat-onramp × CURRENT</span>
+      <span class="release-title">The contamination poster child — bank-wall input docstring</span>
+    </div>
+    <div class="ta-in"><strong>Through-action fed into both pipelines:</strong> "to reveal that the bank wall just dissolved inside one account"</div>
+    <div class="compare-grid">
+      <div class="compare-side p1">
+        <div class="label">Pipeline 1 — anchor 5 / WALL hit</div>
+        <div class="body">The <mark>wall</mark> between your bank and your wallet was always somebody's business model.
+
+Send a wire to your Infinex account. It lands as USDC on-chain.
+
+One account. Dollars in, euros in, pesos in. The <mark>wall</mark> isn't there anymore.</div>
+      </div>
+      <div class="compare-side p3">
+        <div class="label">Pipeline 3 — anchor 4 / clean</div>
+        <div class="body">Your Infinex account has a bank account number now.
+
+Send a wire to it. Send an ACH. Send a SEPA transfer. It arrives in your wallet as USDC.
+
+The bank and the wallet were never supposed to be separate.</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: var(--muted); margin: 0;">P1 echoes "wall" twice. P3 transforms the same input into a Werle-shaped statement: opens with the fact (account number), names mechanics (wire/ACH/SEPA), closes on structural observation that doesn't use "wall". Same input, completely different output.</p>
+  </div>
+
+  <!-- partnership-spot CURRENT -->
+  <div class="release-section">
+    <div class="release-header">
+      <span class="release-id">partnership-spot-hyperliquid × CURRENT</span>
+      <span class="release-title">Hyperliquid spot integration</span>
+    </div>
+    <div class="ta-in"><strong>Through-action:</strong> "to reveal that Hyperliquid's orderbook now lives inside Infinex accounts"</div>
+    <div class="compare-grid">
+      <div class="compare-side p1">
+        <div class="label">Pipeline 1 — anchor 1 / clean</div>
+        <div class="body">Two accounts. Two passkeys. Two portfolios to reconcile every morning.
+
+That's over. Hyperliquid spot trades natively from your Infinex account.
+
+One key. The book opens where you already are.</div>
+      </div>
+      <div class="compare-side p3">
+        <div class="label">Pipeline 3 — anchor 4 / clean</div>
+        <div class="body">Hyperliquid spot trading. Now native to Infinex.
+
+One passkey. Both books.</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: var(--muted); margin: 0;">P3 is two clauses. Fact + settled close. Matches the IT017 register exactly ("Stock perps are now live on Infinex"). P1's 3-beat opener is the essayist failure mode — sets up a "two accounts, two passkeys" problem before landing the fact.</p>
+  </div>
+
+  <!-- passkey-portable B' -->
+  <div class="release-section">
+    <div class="release-header">
+      <span class="release-id">passkey-portable × VARIANT_B_PRIME</span>
+      <span class="release-title">Seed-phrase retirement, structural docstring variant</span>
+    </div>
+    <div class="ta-in"><strong>Through-action:</strong> "to eliminate the recovery burden"</div>
+    <div class="compare-grid">
+      <div class="compare-side p1">
+        <div class="label">Pipeline 1 — anchor 1 / clean</div>
+        <div class="body">The seed phrase was always a liability dressed as security. One slip, one fire, one forgotten drawer — and the account was gone.
+
+Infinex accounts now authenticate by passkey.
+
+The account travels with you, device to device, nothing to write down, nothing to lose.</div>
+      </div>
+      <div class="compare-side p3">
+        <div class="label">Pipeline 3 — anchor 3 / clean</div>
+        <div class="body">A twelve-word phrase. A drawer. A small piece of paper you were never allowed to lose.
+
+That was the price of self-custody. It isn't anymore.
+
+Infinex accounts authenticate by passkey. Your account travels with you across devices. No phrase to write down. Nothing to lose.</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: var(--muted); margin: 0;">P3 names specifics — "twelve-word phrase", "drawer", "small piece of paper". This is the Werle "the pension is fixed; it falls due quarterly" move — naming mechanics drains affect. P1 stays more abstract ("liability dressed as security") and uses lyrical compound metaphors ("one slip, one fire, one forgotten drawer").</p>
+  </div>
+
+  <!-- partnership B' wall leak -->
+  <div class="release-section">
+    <div class="release-header">
+      <span class="release-id">partnership-spot-hyperliquid × VARIANT_B_PRIME</span>
+      <span class="release-title">P3's wall-leak failure mode (1 of 2 in this run)</span>
+    </div>
+    <div class="ta-in"><strong>Through-action:</strong> "to unify fragmented access"</div>
+    <div class="compare-grid">
+      <div class="compare-side p1">
+        <div class="label">Pipeline 1 — WALL hit</div>
+        <div class="body">Two accounts. Two logins. Two halves of the same portfolio.
+
+Hyperliquid spot now trades natively inside Infinex. One account, one passkey.
+
+The <mark>wall</mark> was never the point. The market was.</div>
+      </div>
+      <div class="compare-side p3">
+        <div class="label">Pipeline 3 — WALL hit (anchor 5)</div>
+        <div class="body">Hyperliquid spot is native in Infinex.
+
+One account. One passkey. Both surfaces.
+
+The <mark>wall</mark> is gone.</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: var(--muted); margin: 0;">Both pipelines produce "wall" here. P3's caption is much shorter and more declarative, but it still names the Lining ("the wall is gone") as a closing settle. Per Mirodan §7.3 that's Lining-surfaces-as-Outer — the leak from our pre-mortem. The Actor honored the through_action's frame ("to unify fragmented access" implies a wall-or-fragment metaphor) and surfaced it. <strong>This is the failure mode that the proposed actor-memory.ts:373 fix should reduce — once the channel grammar stops prescribing 3-4 paragraph arcs, beat 3 doesn't need to land on the Lining-thesis.</strong></p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>What the data says about the proposed 5 fixes</h2>
+
+  <table class="compare">
+    <thead>
+      <tr>
+        <th class="variant">Fix</th>
+        <th>Still needed?</th>
+        <th>Expected impact</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="variant" style="font-family: var(--code-mono); font-size: 12px;">1. Switch HARNESS_GENERATOR_ARCH default to 'actor'</td>
+        <td class="win">YES — top priority</td>
+        <td style="font-family: -apple-system, system-ui; text-align: left;">The ENTIRE quality improvement above is gated on this. Production today routes through Pipeline 1.</td>
+      </tr>
+      <tr>
+        <td class="variant" style="font-family: var(--code-mono); font-size: 12px;">2. Fix actor-memory.ts:373 channel grammar</td>
+        <td class="win">YES — reduces remaining wall leak</td>
+        <td style="font-family: -apple-system, system-ui; text-align: left;">The 2 wall leaks remaining are in 3-paragraph compositions where beat 3 lands on the Lining. Removing "Usually 3-4 short paragraphs/beats" lets the Actor compose 1-2 beat captions, which won't have a "closing Lining beat" to surface the wall.</td>
+      </tr>
+      <tr>
+        <td class="variant" style="font-family: var(--code-mono); font-size: 12px;">3. Un-hardcode "Infinex character" in actor-director.ts:429</td>
+        <td>YES — brand-leak cleanup</td>
+        <td style="font-family: -apple-system, system-ui; text-align: left;">Doesn't affect Infinex output quality but prevents the prompt from breaking when running other brands (Cream, Nigel, etc.).</td>
+      </tr>
+      <tr>
+        <td class="variant" style="font-family: var(--code-mono); font-size: 12px;">4. Card.ts docstring — apply Variant C</td>
+        <td class="neutral">LOWER PRIORITY than expected</td>
+        <td style="font-family: -apple-system, system-ui; text-align: left;">Pipeline 3 washes out CURRENT's wall contamination almost entirely. The docstring choice has less leverage in Pipeline 3 than it appeared in Pipeline 1. <strong>Still worth doing</strong> (defense in depth) but not a blocker.</td>
+      </tr>
+      <tr>
+        <td class="variant" style="font-family: var(--code-mono); font-size: 12px;">5. Strip wall anchor from voice/cream.ts</td>
+        <td>YES — cross-brand cleanup</td>
+        <td style="font-family: -apple-system, system-ui; text-align: left;">Affects Cream pipeline; not Infinex.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <div class="verdict">
+    <h3>Verdict</h3>
+    <ul>
+      <li><strong>Ship Pipeline 3 as the default.</strong> Fix 1 is the single highest-leverage change in this entire session's work. Without it, the harness keeps producing Pipeline 1 captions in production.</li>
+      <li><strong>Ship fix 2 (channel grammar) with it.</strong> The 2 remaining wall leaks at 10% are downstream of the "Usually 3-4 short paragraphs/beats" prescription. Removing it should drop wall_hit to 0% across all variants.</li>
+      <li><strong>Fixes 3-5 are housekeeping</strong> — brand-leak cleanup and cross-brand strip. Not blocking but easy.</li>
+      <li><strong>The docstring debate (CURRENT vs Variant C) is moot in Pipeline 3.</strong> CURRENT produces clean output at the caption layer; the docstring contamination dies at the Actor's table_work transformation step. Apply Variant C as defense-in-depth if you want, but the architecture solved it.</li>
+      <li><strong>The 21-site wall sweep is mostly dead code</strong> per the pipeline map. Half the sites were in Pipeline 1's prompts which become unused once Pipeline 3 is default. Confirm with the legacy deletion PR.</li>
+      <li><strong>Caption quality</strong> on Pipeline 3 is genuinely good. Captions open with facts (IT017-shape), name specifics (Werle-shape), end on declarative settlement (canon-shape), at IT020 / IT022 / IT025 lengths. The architecture is doing what the framework asks of it.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

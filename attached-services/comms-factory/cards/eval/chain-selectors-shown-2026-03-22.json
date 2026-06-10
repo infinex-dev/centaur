@@ -1,0 +1,19 @@
+{
+  "id": "chain-selectors-shown-2026-03-22",
+  "title": "Chain selector dropdowns shown to the user: zero",
+  "ship_date": "2026-03-22",
+  "audience": ["x"],
+  "deployed_facts": [
+    "Infinex does not present a chain selector dropdown when initiating a swap",
+    "Cross-chain routes are resolved by the account, not picked by the user",
+    "The user signs the destination of the swap, not the route",
+    "The count of chain selectors shown in the Infinex app is zero"
+  ],
+  "kind": "data-card-wry",
+  "metric": "chain selector dropdowns shown to the user",
+  "value": 0,
+  "unit": "dropdowns",
+  "joke_angle": "the chain selector is the universal crypto UI element. Applying data-card chrome to the count of times we show it is a quiet flex on the rest of the category.",
+  "reader_prior": "every crypto app shows a chain selector. that's just how it works.",
+  "not_the_point": "explaining intent routing again. this card assumes the reader already knows; the chrome is the punchline."
+}

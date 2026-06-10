@@ -1,0 +1,65 @@
+{
+  "card_id": "infinex-synthetix-perps-2026-05-29",
+  "attempts": 1,
+  "table_work": [
+    {
+      "thesis": "Perps in Infinex are no longer one venue. Synthetix joins Hyperliquid, and the choice of venue becomes part of the account, not a separate destination.",
+      "through_action": "to widen the room",
+      "obstacle": "Reader expects a launch announcement with breathless leverage numbers and 'now live' framing. Reader also assumes one perps venue per app.",
+      "reader_prior": "Infinex has perps via Hyperliquid. Synthetix is a known DeFi perps name they associate with its own app, not Infinex.",
+      "lining": "Surface: a structural fact about the platform. Underneath: the banker's quiet placement — the better way already exists here, take it or don't.",
+      "not_the_point": "Race language between Synthetix and Hyperliquid. Leverage-as-feature. 'Now live' urgency. CLOB-vs-AMM mechanics debate.",
+      "channel_beat_plans": {
+        "x": [
+          {
+            "verb": "to place",
+            "working_action": "pressing",
+            "physical_score": "Set the fact down with weight and a direct line. No flourish, no hedge. The sentence has somewhere to be.",
+            "micro_objective": "to seat Synthetix next to Hyperliquid",
+            "obstacle_local": "Reader expects a launch frame; I refuse the frame.",
+            "shadow_move": "A flicker of pride in the placement that I do not let surface."
+          },
+          {
+            "verb": "to widen",
+            "working_action": "gliding",
+            "physical_score": "Slide into the consequence: more markets, one account. Light and direct, no force.",
+            "micro_objective": "to let the reader feel the room get larger",
+            "obstacle_local": "Tempting to list features; I keep the gesture spatial."
+          }
+        ],
+        "web": [
+          {
+            "verb": "to place",
+            "working_action": "pressing",
+            "physical_score": "One declarative surface. Strong, direct, sustained. The fact is the gesture.",
+            "micro_objective": "to seat Synthetix in the platform as structure",
+            "obstacle_local": "Compression pulls toward slogan; I keep it stated, not sold."
+          }
+        ],
+        "in-product": [
+          {
+            "verb": "to offer",
+            "working_action": "gliding",
+            "physical_score": "Quiet, light, direct UI surface — the kind of label that doesn't lean.",
+            "micro_objective": "to mark the venue choice without ceremony",
+            "obstacle_local": "Microcopy wants to instruct; I let it sit."
+          }
+        ]
+      }
+    }
+  ],
+  "picks": [
+    {
+      "channel": "x",
+      "text": "Synthetix sits next to Hyperliquid in Infinex. Ten markets on Ethereum mainnet, USDT-settled, cross-margin on a CLOB. Two venues for perps, one account."
+    },
+    {
+      "channel": "web",
+      "text": "Synthetix perps in Infinex. Ten markets on Ethereum mainnet, USDT-settled, on a CLOB."
+    },
+    {
+      "channel": "in-product",
+      "text": "Synthetix · USDT on Ethereum · CLOB, cross-margin"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "kind": "split",
+  "id": "bridge-fiat-deposit-2026-06-05",
+  "title": "Bank deposits: dollars into Infinex as USDC on Base",
+  "ship_date": "2026-06-05",
+  "audience": ["x", "x-thread", "blog", "carousel"],
+  "outward_product_name": "bank deposits",
+  "from": "US dollars from your own bank account",
+  "to": "USDC in your Infinex account on Base",
+  "split_semantics": "on-off-chain: bank/fiat and wallet/crypto, now one account",
+  "deployed_facts": [
+    "Infinex now supports bank deposits: send US dollars from your own bank account (ACH or wire) and they arrive in your Infinex account as USDC on Base.",
+    "Bank deposits are powered by Bridge.xyz, the stablecoin-infrastructure company acquired by Stripe.",
+    "US dollars are supported at launch, by ACH or wire.",
+    {"claim": "EUR (SEPA) bank deposits are coming soon, not yet enabled.", "basis": "EUR config exists in code but renders to users as status:pending ('our partner is still preparing this option'); DR-003 locks USD-only MVP", "scope": "blog/long-form only; keep off the X post"},
+    "Funds settle as USDC on Base, into your main Infinex account (not vaults or imported wallets). You do not choose the destination; it is always your main Infinex wallet on Base.",
+    "US dollars arrive one-to-one.",
+    {"claim": "Infinex does not add a fee on bank deposits at launch.", "basis": "no developer fee wired in code; this may change later, never frame as a permanent promise", "scope": "blog/long-form only; keep off the X post"},
+    "Verification is one-time, handled by Bridge through Persona: enter name and email, accept the terms, verify your identity. Usually a few minutes, and up to one business day.",
+    "After approval you receive reusable bank details in your name (bank name, routing number, account number) and send money the way you already do. The bank name is assigned per account, not chosen.",
+    {"claim": "Deposits typically arrive within a day; a wire can take up to a couple of days.", "basis": "operator's lived wire deposit landed in ~12h; settlement is rail-dependent and not guaranteed by Infinex code", "scope": "state as expectation, not a guarantee"},
+    "This is deposit-only at launch. Sending dollars back out to a bank (off-ramp) is not part of this release.",
+    {"claim": "To find it: Deposit, then Bank transfer under 'Other ways to deposit', then verify once, then USD bank transfer, then your deposit details.", "scope": "blog how-to only"},
+    {"claim": "Once funds are USDC on Base they can be used across Infinex: trade Hyperliquid perps, Swidge to other chains and assets, earn yield, take a position on Polymarket.", "basis": "operator roadmap; not bridge-grounded", "scope": "blog 'what's next' only, keep off the X post"},
+    {"claim": "Hyperliquid spot is coming in the weeks ahead.", "basis": "operator roadmap, patrons informed; not bridge-grounded", "scope": "blog 'what's next' only"}
+  ],
+  "feature_states": [
+    {"feature": "bank deposits via Bridge.xyz", "state": "new", "note": "first time fiat lands directly on-chain inside Infinex; reader has no prior context for it"},
+    {"feature": "Hyperliquid spot", "state": "changing-at-ship", "note": "coming in weeks; forward-looking, blog only"}
+  ],
+  "through_action": "to fold the two places the reader keeps separate, where their money sits and where it works, into one",
+  "obstacle": "the reader assumes putting money on-chain means a centralized exchange, KYC dread, fees, and not knowing where the money actually went; they will skim if this reads as another fintech-rails partnership",
+  "reader_prior": "fiat lives at a bank, crypto lives in a wallet, and getting between them is a chore that is usually theirs to solve",
+  "lining": "on the surface, a calm practical guide to a new way to add money; underneath, the banker who spent a career inside the system that kept bank and wallet apart, now standing on the far side of that wall holding it open, certain the next doors are already coming",
+  "not_the_point": "do not name the super-objective or the reader's wanting; no rails, plumbing, or feature taxonomy; no urgency or hype; do not headline the zero fee; do not say the user specifies or chooses the destination wallet; the point is not 'a new integration', it is that the wall between bank and wallet is gone"
+}

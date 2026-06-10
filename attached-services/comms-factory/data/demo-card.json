@@ -1,0 +1,16 @@
+{
+  "id": "demo-spot-hyperliquid",
+  "kind": "launch-tier",
+  "title": "Spot Hyperliquid is live in Infinex",
+  "ship_date": "2026-05-12",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "Spot trading on Hyperliquid is now live in Infinex",
+    "Same Infinex account and passkey — no new wallet required",
+    "100+ markets supported",
+    "Two clicks from portfolio to fill"
+  ],
+  "headline": "Spot Hyperliquid, native in Infinex",
+  "tier_reason": "first cross-exchange spot integration; load-bearing for one-app thesis",
+  "product_page_url": "https://infinex.xyz/perps"
+}

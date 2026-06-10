@@ -1,0 +1,45 @@
+  → lookup_partner({"feature":"perps_trading"})
+  → grep_platform_code({"pattern":"synthetix","glob":"*.ts"})
+  → fetch_public_page({"url":"https://docs.synthetix.io/"})
+  → read_platform_file({"path":"packages/web-shared/src/lib/perps-providers/index.ts","startLine":90,"endLine":140})
+  → read_platform_file({"path":"packages/web-shared/src/lib/exchanges.ts","startLine":1,"endLine":60})
+  → fetch_public_page({"url":"https://docs.synthetix.io/for-traders/markets"})
+  → grep_platform_code({"pattern":"synthetix.*leverage|leverage.*synthetix|SYNTHETIX.*MAX|maxLeverage.*synthetix","glob":"*.ts"})
+  → grep_platform_code({"pattern":"synthetix.*enabled|enabled.*synthetix|feature.*synthetix|synthetix.*feature","glob":"*.ts"})
+  → fetch_public_page({"url":"https://docs.synthetix.io/llms.txt"})
+  → fetch_public_page({"url":"https://docs.synthetix.io/trading/markets"})
+  → fetch_public_page({"url":"https://docs.synthetix.io/trading/leverage-margin"})
+  → grep_platform_code({"pattern":"PERPS_PROVIDER_LIMITS","glob":"*.ts"})
+  → read_platform_file({"path":"packages/main-service-contract/src/v2/server/perps/limits.ts","startLine":1,"endLine":60})
+  → grep_platform_code({"pattern":"synthetix.*market|market.*synthetix|SynthetixMarket|synthetixMarkets","glob":"*.ts"})
+  → fetch_public_page({"url":"https://docs.synthetix.io/trading/overview"})
+  → grep_platform_code({"pattern":"synthetix.*flag|flag.*synthetix|synthetix.*launch|synthetix.*disabled|isEnabled.*synthetix","glob":"*.ts"})
+  → grep_platform_code({"pattern":"useSynthetix|SynthetixProvider|synthetixProvider","glob":"*.ts"})
+  → grep_platform_code({"pattern":"synthetix","glob":"*.ts","maxResults":50})
+  → read_platform_file({"path":"packages/web-shared/src/lib/perps-providers/index.ts","startLine":1,"endLine":90})
+  → grep_platform_code({"pattern":"directDepositOnly|synthetix.*USDT|USDT.*synthetix","glob":"*.ts"})
+  → grep_platform_code({"pattern":"directDepositOnly","glob":"*.ts"})
+  → fetch_rendered_page({"url":"https://perps.app.infinex.xyz","waitFor":"networkidle"})
+  → grep_platform_code({"pattern":"ETHEREUM_CHAIN_ID|ethereum.*synthetix|synthetix.*ethereum","glob":"*.ts"})
+  → fetch_public_page({"url":"https://docs.synthetix.io/getting-started"})
+  ✓ Synthetix is the perps trading protocol provider for Infinex (alongside Hyperliquid and Lighter) = Synthetix [0.98] platform-code
+  ✓ Synthetix perps integration is present in the Infinex platform codebase (provider config, balance hooks, deposit/withdrawal routing all implemented) = Synthetix perps code is fully landed in the Infinex platform codebase [0.98] platform-code
+  ✓ Synthetix perps in Infinex: collateral token = USDT (Tether, Ethereum mainnet, address 0xdAC17F958D2ee523a2206206994597C13D831ec7) [0.99] platform-code
+  ✓ Synthetix perps in Infinex: settlement chain = Ethereum mainnet (chainId 1) [0.99] platform-code
+  ✓ Synthetix perps in Infinex: minimum deposit (USD) = 50 [0.99] platform-code
+  ✓ Synthetix perps in Infinex: minimum withdrawal (USD) = 50 [0.99] platform-code
+  ✓ Synthetix perps in Infinex: deposit method = Direct USDT deposits only — no swidge (cross-asset swap/bridge). directDepositOnly: true in platform config. [0.99] platform-code
+  ✓ Synthetix perps: protocol description = Decentralized derivatives exchange offering perpetual futures contracts on Ethereum Mainnet. All markets are quoted and settled in USDT on-chain. Uses a central limit order book (CLOB). Cross-margin across all positions in a subaccount. [0.98] provider-docs
+  ✓ Synthetix perps: listed markets (as of Feb 2026) = 10 markets: BTC-USDT, ETH-USDT, SOL-USDT, XRP-USDT, DOGE-USDT, ZEC-USDT, FARTCOIN-USDT, 1000PEPE-USDT, XMR-USDT, PUMP-USDT [0.9] provider-docs
+  ✓ Synthetix perps: maximum leverage for BTC and ETH markets = 50x (for positions up to $20M notional) [0.97] provider-docs
+  ✓ Synthetix perps: maximum leverage across all markets (highest cap) = 50x (BTC-USDT, ETH-USDT, SOL-USDT, XRP-USDT, DOGE-USDT); 25x (ZEC-USDT, 1000PEPE-USDT); 10x (FARTCOIN-USDT, XMR-USDT, PUMP-USDT) [0.97] provider-docs
+  ✓ Synthetix perps: collateral / settlement token per official docs = USDT — all markets quoted and settled in USDT on Ethereum Mainnet [0.99] provider-docs
+  ✓ Synthetix perps: margin model = Cross-margin — all positions in a subaccount share a single collateral pool. At 50x leverage, IMR is 2% and MMR is 1%. [0.97] provider-docs
+  ✓ Synthetix perps: Infinex display name in platform code = 'Synthetix' with description 'Decentralized derivatives exchange' [0.99] platform-code
+  ✓ Infinex perps app: existing provider alongside Synthetix = Hyperliquid (already live in platform; Lighter is also a third provider in codebase) [0.99] platform-code
+  ✓ Synthetix perps: estimated deposit settlement time in Infinex = 5 minutes (ESTIMATED_STANDARD_SETTLEMENT_TIME_MIN — slower than Hyperliquid's 2-min fast settlement) [0.95] platform-code
+  ✗ Synthetix perps are 'live' / publicly launched inside Infinex (vs. code-landed but behind a feature flag or not yet announced) — Platform code is fully implemented (provider config, balance hooks, deposit/withdraw routing all present), but no feature-flag search found an explicit enabled/disabled gate, and the rendered Infinex perps page only showed Hyperliquid data. Cannot confirm from available sources whether Synthetix is user-facing live or still in pre-launch.
+
+wrote research/grounded-synthetix-2026-05-29.json
+
+facts: 16 | unverifiable: 1 | turns: 15 | model: claude-sonnet-4-6

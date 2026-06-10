@@ -1,0 +1,16 @@
+{
+  "id": "trezor-2026-05-19",
+  "title": "Trezor hardware wallet support is now live in Infinex",
+  "ship_date": "2026-05-19",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "Trezor hardware wallet support is live in Infinex",
+    "Trezor wallets appear alongside Ledger in your portfolio",
+    "Funds stay on the hardware device; Infinex displays them and routes transactions",
+    "The hardware wallet signs every transaction"
+  ],
+  "kind": "launch-tier",
+  "headline": "Trezor is live in Infinex.",
+  "subhead": "Ledger and Trezor side by side in one portfolio.",
+  "tier_reason": "Adding Trezor alongside Ledger completes hardware-wallet coverage for the dominant brands. Anyone using cold-key storage can now run Infinex as their primary surface — a structural milestone, not a feature flag."
+}

@@ -1,0 +1,20 @@
+{
+  "id": "passkey-recovery-audit-2025-12-05",
+  "title": "Passkey recovery audit: zero accounts compromised",
+  "ship_date": "2025-12-05",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "An independent security audit of the passkey recovery flow concluded with zero accounts compromised",
+    "The audit covered every passkey recovery event from account launch through November 2025",
+    "No user action is required as a result of the audit",
+    "Audit methodology and scope are published on the Infinex security page",
+    "Recovery continues to work the same way it did before the audit"
+  ],
+  "kind": "data-card-official",
+  "metric": "accounts compromised in recovery audit",
+  "value": 0,
+  "unit": "accounts",
+  "delta": "across full audit window",
+  "obstacle": "any post about security defaults to alarm cadence; reader expects to be told to rotate, re-verify, or act. The fact set offers no such action — the post must land calm.",
+  "not_the_point": "rallying users to do something. There is nothing to do."
+}

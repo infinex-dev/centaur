@@ -1,0 +1,4262 @@
+{
+  "user": {
+    "data": {
+      "id": "1527020295059648513",
+      "name": "Hyperliquid",
+      "username": "HyperliquidX"
+    }
+  },
+  "tweets": {
+    "data": [
+      {
+        "note_tweet": {
+          "text": "Congratulations to Phantom on reaching $20M in builder code revenue on Hyperliquid in under a year. Users can trade 200+ markets in the Phantom app, including crypto, indices, commodities, and more.\n\nTo date, 100+ teams have integrated via builder codes, earning a share of fees on every trade their users make."
+        },
+        "created_at": "2026-05-11T22:49:05.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 279,
+              "end": 302,
+              "url": "https://t.co/LHEntrfbDb",
+              "expanded_url": "https://x.com/HyperliquidX/status/2053970679846834202/photo/1",
+              "display_url": "pic.x.com/LHEntrfbDb",
+              "media_key": "3_2053969876335710209"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2053969876335710209"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2053970679846834202"
+        ],
+        "public_metrics": {
+          "retweet_count": 154,
+          "reply_count": 521,
+          "like_count": 1525,
+          "quote_count": 27,
+          "bookmark_count": 64,
+          "impression_count": 102678
+        },
+        "text": "Congratulations to Phantom on reaching $20M in builder code revenue on Hyperliquid in under a year. Users can trade 200+ markets in the Phantom app, including crypto, indices, commodities, and more.\n\nTo date, 100+ teams have integrated via builder codes, earning a share of fees https://t.co/LHEntrfbDb",
+        "id": "2053970679846834202"
+      },
+      {
+        "created_at": "2026-05-07T02:15:29.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 10,
+              "username": "Ledger",
+              "id": "2652239532"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052210682410766570"
+        ],
+        "public_metrics": {
+          "retweet_count": 137,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 12
+        },
+        "text": "RT @Ledger: Perps are finally coming natively to Ledger Wallet\u2122.\n\nBuy. Sell. Swap. Earn. Now trade perps. All in one place - without ever l\u2026",
+        "id": "2052210682410766570",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2052025614018675054"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-04-30T11:28:50.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/CnRnT54YqR",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/MEGA",
+              "display_url": "app.hyperliquid.xyz/trade/MEGA",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/MEGA"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049813221293604867"
+        ],
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 7,
+          "like_count": 62,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 21442
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/CnRnT54YqR",
+        "id": "2049813221293604867",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2049813219154518504"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-04-30T11:28:49.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 104,
+              "end": 127,
+              "url": "https://t.co/JhoMiF83rU",
+              "expanded_url": "https://x.com/HyperliquidX/status/2049813219154518504/photo/1",
+              "display_url": "pic.x.com/JhoMiF83rU",
+              "media_key": "3_2049803328155181056"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2049803328155181056"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049813219154518504"
+        ],
+        "public_metrics": {
+          "retweet_count": 50,
+          "reply_count": 64,
+          "like_count": 539,
+          "quote_count": 11,
+          "bookmark_count": 12,
+          "impression_count": 46161
+        },
+        "text": "The MEGA hyperp has converted to a regular perp. You can now long or short MEGA with up to 3x leverage. https://t.co/JhoMiF83rU",
+        "id": "2049813219154518504"
+      },
+      {
+        "created_at": "2026-04-29T13:47:08.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "TrustWallet",
+              "id": "911011433147654144"
+            },
+            {
+              "start": 102,
+              "end": 115,
+              "username": "HyperliquidX",
+              "id": "1527020295059648513"
+            },
+            {
+              "start": 120,
+              "end": 129,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049485638186193256"
+        ],
+        "public_metrics": {
+          "retweet_count": 349,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 9
+        },
+        "text": "RT @TrustWallet: Hyperliquid is now live in Trust Wallet with 0% markup on fees for 3 months. \ud83d\ude80\n\nWith @HyperliquidX and @tradexyz, expect b\u2026",
+        "id": "2049485638186193256",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049475221397160113"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-04-22T14:39:15.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 100,
+              "end": 123,
+              "url": "https://t.co/pQIPyAS2Im",
+              "expanded_url": "https://x.com/unitxyz/status/2046944641434501280/photo/1",
+              "display_url": "pic.x.com/pQIPyAS2Im",
+              "media_key": "3_2046942763716112385"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "unitxyz",
+              "id": "1863957527529955328"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "2046944641434501280"
+          ],
+          "media_keys": [
+            "3_2046942763716112385"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2046962037952266419"
+        ],
+        "public_metrics": {
+          "retweet_count": 67,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 16
+        },
+        "text": "RT @unitxyz: Spot Virtual deposits, withdrawals and trading are now officially live on Hyperliquid. https://t.co/pQIPyAS2Im",
+        "id": "2046962037952266419",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2046944641434501280"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-04-22T02:31:31.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/fzmjMaC6QS",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/CHIP",
+              "display_url": "app.hyperliquid.xyz/trade/CHIP",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/CHIP"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2046778899661824142"
+        ],
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 13,
+          "like_count": 65,
+          "quote_count": 0,
+          "bookmark_count": 4,
+          "impression_count": 22298
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/fzmjMaC6QS",
+        "id": "2046778899661824142",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2046778897413652600"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-04-22T02:31:31.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 84,
+              "end": 107,
+              "url": "https://t.co/zAy0KlhSTf",
+              "expanded_url": "https://x.com/HyperliquidX/status/2046778897413652600/photo/1",
+              "display_url": "pic.x.com/zAy0KlhSTf",
+              "media_key": "3_2046777622202601472"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 48,
+              "end": 53,
+              "tag": "CHIP"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2046777622202601472"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2046778897413652600"
+        ],
+        "public_metrics": {
+          "retweet_count": 56,
+          "reply_count": 86,
+          "like_count": 671,
+          "quote_count": 15,
+          "bookmark_count": 16,
+          "impression_count": 96213
+        },
+        "text": "By community request, you can now long or short $CHIP perps with up to 3x leverage. https://t.co/zAy0KlhSTf",
+        "id": "2046778897413652600"
+      },
+      {
+        "created_at": "2026-04-13T17:18:22.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "chameleon_jeff",
+              "id": "1622260212798291972"
+            },
+            {
+              "start": 27,
+              "end": 36,
+              "username": "domcooke",
+              "id": "312496204"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2043740589997601111"
+        ],
+        "public_metrics": {
+          "retweet_count": 570,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "text": "RT @chameleon_jeff: Thanks @domcooke for spending months on researching and writing this piece. Einstein once said, \"If you can't explain i\u2026",
+        "id": "2043740589997601111",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2043714821074624796"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-04-13T11:50:23.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "colossusmag",
+              "id": "1338296768845451266"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2043658053179040186"
+        ],
+        "public_metrics": {
+          "retweet_count": 1072,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "text": "RT @colossusmag: This is the story of Hyperliquid, the most profitable startup per employee on earth, told from a guarded office in Singapo\u2026",
+        "id": "2043658053179040186",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2043654616257077548"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-04-08T15:43:34.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 19,
+              "end": 42,
+              "url": "https://t.co/NurdzMc6cn",
+              "expanded_url": "http://x.com/i/article/2041895017774456832",
+              "display_url": "x.com/i/article/2041\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/2041895017774456832"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "nativemarkets",
+              "id": "1963713874965762048"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2041904795146187240"
+        ],
+        "public_metrics": {
+          "retweet_count": 232,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 8
+        },
+        "text": "RT @nativemarkets: https://t.co/NurdzMc6cn",
+        "id": "2041904795146187240",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2041901395566030923"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-04-06T10:06:12.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 106,
+              "end": 129,
+              "url": "https://t.co/R9uDCAx3fo",
+              "expanded_url": "https://x.com/HyperliquidX/status/2041095119231959265/photo/1",
+              "display_url": "pic.x.com/R9uDCAx3fo",
+              "media_key": "3_2041080625399316480"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2041080625399316480"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2041095119231959265"
+        ],
+        "public_metrics": {
+          "retweet_count": 332,
+          "reply_count": 333,
+          "like_count": 2185,
+          "quote_count": 92,
+          "bookmark_count": 120,
+          "impression_count": 186458
+        },
+        "text": "RWA trading on Hyperliquid continues to reach new ATHs week after week, surpassing $2.3B in open interest https://t.co/R9uDCAx3fo",
+        "id": "2041095119231959265"
+      },
+      {
+        "created_at": "2026-04-03T02:47:07.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 114,
+              "end": 137,
+              "url": "https://t.co/5TT5iLSNKb",
+              "expanded_url": "https://x.com/SushiSwap/status/2039789742233936354/video/1",
+              "display_url": "pic.x.com/5TT5iLSNKb",
+              "media_key": "13_2039787560399204352"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "SushiSwap",
+              "id": "1303577160234328066"
+            },
+            {
+              "start": 48,
+              "end": 61,
+              "username": "HyperliquidX",
+              "id": "1527020295059648513"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "2039789742233936354"
+          ],
+          "media_keys": [
+            "13_2039787560399204352"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2039897453454094525"
+        ],
+        "public_metrics": {
+          "retweet_count": 140,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 8
+        },
+        "text": "RT @SushiSwap: Sushi Perps are LIVE\n\nPowered by @HyperliquidX \n\nEarly traders get boosted Sushi point multipliers https://t.co/5TT5iLSNKb",
+        "id": "2039897453454094525",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2039789742233936354"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-03-18T14:33:00.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "chameleon_jeff",
+              "id": "1622260212798291972"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2034276892141027812"
+        ],
+        "public_metrics": {
+          "retweet_count": 841,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 26
+        },
+        "text": "RT @chameleon_jeff: Huge congratulations to TradeXYZ and S&amp;P for this historic partnership. I'm honored that these teams choose to build on\u2026",
+        "id": "2034276892141027812",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2034275201371066432"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-03-18T13:43:41.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "WSJmarkets",
+              "id": "28164923"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2034264479652085919"
+        ],
+        "public_metrics": {
+          "retweet_count": 366,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6
+        },
+        "text": "RT @WSJmarkets: The owner of the S&amp;P 500 index is licensing the world\u2019s most tracked stock index for the launch of a derivative contract th\u2026",
+        "id": "2034264479652085919",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2034261695015588145"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-03-18T13:32:14.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2034261596462367219"
+        ],
+        "public_metrics": {
+          "retweet_count": 1926,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7
+        },
+        "text": "RT @tradexyz: S&amp;P Dow Jones Indices and trade[XYZ] have joined forces to launch the first official S&amp;P 500 perpetual contract, available ex\u2026",
+        "id": "2034261596462367219",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2034260987197444255"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-03-13T16:42:51.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 71,
+              "end": 94,
+              "url": "https://t.co/LrtOSgsiQa",
+              "expanded_url": "http://velo.xyz",
+              "display_url": "velo.xyz",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2053071854462504963/SZpH27kZ?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2053071854462504963/SZpH27kZ?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Velo",
+              "description": "faster, easier crypto data",
+              "unwound_url": "https://velo.xyz/"
+            },
+            {
+              "start": 95,
+              "end": 118,
+              "url": "https://t.co/rFTZS8FGAn",
+              "expanded_url": "https://x.com/velo_xyz/status/2032443978260595199/video/1",
+              "display_url": "pic.x.com/rFTZS8FGAn",
+              "media_key": "13_2032443172089962497"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "velo_xyz",
+              "id": "1621601143401979905"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "2032443978260595199"
+          ],
+          "media_keys": [
+            "13_2032443172089962497"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2032497627737244075"
+        ],
+        "public_metrics": {
+          "retweet_count": 109,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 8
+        },
+        "text": "RT @velo_xyz: Trading on Velo is now live.\n\nData, news, and trading at https://t.co/LrtOSgsiQa https://t.co/rFTZS8FGAn",
+        "id": "2032497627737244075",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2032443978260595199"
+          }
+        ]
+      },
+      {
+        "note_tweet": {
+          "text": "Over the past 2 weeks, RWA trading on Hyperliquid has repeatedly broken records, surpassing $1.3B in open interest and $1.4B in weekend volume.\n\nWhen traditional markets are closed, Hyperliquid is the premier venue for 24/7 price discovery on oil, metals, indices, and other essential assets. This is an important step towards housing all of finance."
+        },
+        "created_at": "2026-03-12T07:23:23.000Z",
+        "edit_history_tweet_ids": [
+          "2031994448444531053"
+        ],
+        "public_metrics": {
+          "retweet_count": 739,
+          "reply_count": 620,
+          "like_count": 4802,
+          "quote_count": 152,
+          "bookmark_count": 242,
+          "impression_count": 502623
+        },
+        "text": "Over the past 2 weeks, RWA trading on Hyperliquid has repeatedly broken records, surpassing $1.3B in open interest and $1.4B in weekend volume.\n\nWhen traditional markets are closed, Hyperliquid is the premier venue for 24/7 price discovery on oil, metals, indices, and other",
+        "id": "2031994448444531053"
+      },
+      {
+        "created_at": "2026-03-10T00:06:06.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "unitxyz",
+              "id": "1863957527529955328"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2031159624741826891"
+        ],
+        "public_metrics": {
+          "retweet_count": 160,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 10
+        },
+        "text": "RT @unitxyz: Spot ZCASH deposits, withdrawals and trading are now officially live on Hyperliquid. Only unshielded ZEC deposits and withdraw\u2026",
+        "id": "2031159624741826891",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2031110163533541801"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-03-05T01:22:26.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "rediamondjr",
+              "id": "2683116827"
+            },
+            {
+              "start": 46,
+              "end": 56,
+              "username": "HypeStrat",
+              "id": "1944038918137294852"
+            },
+            {
+              "start": 75,
+              "end": 84,
+              "username": "dschamis",
+              "id": "36531651"
+            },
+            {
+              "start": 89,
+              "end": 99,
+              "username": "red_thr33",
+              "id": "65183450"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2029366895594688991"
+        ],
+        "public_metrics": {
+          "retweet_count": 187,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5
+        },
+        "text": "RT @rediamondjr: Ringing the opening bell for @HypeStrat this morning with @dschamis and @red_thr33. So proud of our team!\n\nHyperliquid is\u2026",
+        "id": "2029366895594688991",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2029224093371814346"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-03-01T03:32:16.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "business",
+              "id": "34713362"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2027950016506302891"
+        ],
+        "public_metrics": {
+          "retweet_count": 430,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6
+        },
+        "text": "RT @business: Crypto traders flocked to the Hyperliquid exchange to hedge commodities as the conflict between the US, Israel and Iran erupt\u2026",
+        "id": "2027950016506302891",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2027746850573365271"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-02-20T14:27:40.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 61,
+              "end": 84,
+              "url": "https://t.co/bH8QkIdvfb",
+              "expanded_url": "https://x.com/tradexyz/status/2024636062539346083/photo/1",
+              "display_url": "pic.x.com/bH8QkIdvfb",
+              "media_key": "3_2024608812322496512"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "2024636062539346083"
+          ],
+          "media_keys": [
+            "3_2024608812322496512"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2024853464082473391"
+        ],
+        "public_metrics": {
+          "retweet_count": 65,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 16
+        },
+        "text": "RT @tradexyz: SK Hynix is now live. 10x leverage, 24/7, 365. https://t.co/bH8QkIdvfb",
+        "id": "2024853464082473391",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2024636062539346083"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-02-20T03:05:54.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "chameleon_jeff",
+              "id": "1622260212798291972"
+            },
+            {
+              "start": 68,
+              "end": 80,
+              "username": "KevinWSHPod",
+              "id": "1328652802344833024"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2024681892113711540"
+        ],
+        "public_metrics": {
+          "retweet_count": 186,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 18
+        },
+        "text": "RT @chameleon_jeff: It was great to have a second conversation with @KevinWSHPod more than a year after the first. While the first conversa\u2026",
+        "id": "2024681892113711540",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2024680215960850578"
+          }
+        ]
+      },
+      {
+        "note_tweet": {
+          "text": "The Hyper Foundation will contribute 1M HYPE tokens to support the creation of the Hyperliquid Policy Center. \n\nThe tokens will be unstaked later today.  The Hyperliquid community will benefit from having representation in Washington, D.C., and we are confident that under @jchervinsky's leadership, the Hyperliquid Policy Center will have a meaningful impact in favor of clear regulations for decentralized finance.",
+          "entities": {
+            "mentions": [
+              {
+                "start": 273,
+                "end": 285,
+                "username": "jchervinsky",
+                "id": "47003920"
+              }
+            ]
+          }
+        },
+        "created_at": "2026-02-18T13:40:02.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 273,
+              "end": 296,
+              "url": "https://t.co/Vgo95Nrr17",
+              "expanded_url": "https://twitter.com/HyperliquidPC/status/2024115893786067190",
+              "display_url": "x.com/HyperliquidPC/\u2026"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2024116702154473737"
+        ],
+        "public_metrics": {
+          "retweet_count": 311,
+          "reply_count": 321,
+          "like_count": 2038,
+          "quote_count": 88,
+          "bookmark_count": 139,
+          "impression_count": 273991
+        },
+        "text": "The Hyper Foundation will contribute 1M HYPE tokens to support the creation of the Hyperliquid Policy Center. \n\nThe tokens will be unstaked later today.  The Hyperliquid community will benefit from having representation in Washington, D.C., and we are confident that under https://t.co/Vgo95Nrr17",
+        "id": "2024116702154473737",
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2024115893786067190"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-02-17T03:50:48.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "Sterling_hl",
+              "id": "190708062"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2023606029502869905"
+        ],
+        "public_metrics": {
+          "retweet_count": 131,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7
+        },
+        "text": "RT @Sterling_hl: Excited to finally announce that I\u2019ve joined Hyperliquid Labs to help with BD and partnerships. My initial focus will be e\u2026",
+        "id": "2023606029502869905",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2023593754893185298"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-02-12T08:24:25.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/rEmKTUXkaP",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/AZTEC",
+              "display_url": "app.hyperliquid.xyz/trade/AZTEC",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/AZTEC"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2021862947841306719"
+        ],
+        "public_metrics": {
+          "retweet_count": 35,
+          "reply_count": 31,
+          "like_count": 101,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 31676
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/rEmKTUXkaP",
+        "id": "2021862947841306719",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2021862945647735009"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-02-12T08:24:25.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 85,
+              "end": 108,
+              "url": "https://t.co/RoXAj9Nfhp",
+              "expanded_url": "https://x.com/HyperliquidX/status/2021862945647735009/photo/1",
+              "display_url": "pic.x.com/RoXAj9Nfhp",
+              "media_key": "3_2021862822347780096"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 48,
+              "end": 54,
+              "tag": "AZTEC"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2021862822347780096"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2021862945647735009"
+        ],
+        "public_metrics": {
+          "retweet_count": 111,
+          "reply_count": 129,
+          "like_count": 433,
+          "quote_count": 12,
+          "bookmark_count": 36,
+          "impression_count": 65327
+        },
+        "text": "By community request, you can now long or short $AZTEC perps with up to 3x leverage. https://t.co/RoXAj9Nfhp",
+        "id": "2021862945647735009"
+      },
+      {
+        "created_at": "2026-02-04T16:25:19.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 10,
+              "username": "zerion",
+              "id": "895030804383969283"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2019084866956959984"
+        ],
+        "public_metrics": {
+          "retweet_count": 99,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "text": "RT @zerion: Perps Trading is now live for Zerion Premium users\n\n&gt; Trade Gold, Silver, Stocks &amp; Crypto\n&gt; Explore 250+ assets via @Hyperliqui\u2026",
+        "id": "2019084866956959984",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2019080961758241053"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-02-04T15:58:50.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 44,
+              "end": 67,
+              "url": "https://t.co/RZWdbRfHoe",
+              "expanded_url": "https://on.ripple.com/4ke7TzL",
+              "display_url": "on.ripple.com/4ke7TzL",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051576730125467650/UZZQTlcf?format=png&name=orig",
+                  "width": 1921,
+                  "height": 1080
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051576730125467650/UZZQTlcf?format=png&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Ripple Announces Support for Hyperliquid, Expanding Institutional Access to Onchain Liquidity",
+              "description": "Ripple is the leading blockchain payments company.",
+              "unwound_url": "https://ripple.com/ripple-press/ripple-announces-support-for-hyperliquid-expanding-institutional-access-to-onchain-liquidity/"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 10,
+              "username": "Ripple",
+              "id": "1051053836"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2019078202027553236"
+        ],
+        "public_metrics": {
+          "retweet_count": 1615,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 4
+        },
+        "text": "RT @Ripple: Hyperliquid, meet Ripple Prime: https://t.co/RZWdbRfHoe\n\nWe\u2019re now enabling institutions to access onchain derivatives liquidit\u2026",
+        "id": "2019078202027553236",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2019048504576864658"
+          }
+        ]
+      },
+      {
+        "note_tweet": {
+          "text": "HyperCore will support outcome trading (HIP-4). Outcomes are fully collateralized contracts that settle within a fixed range. They are a general-purpose primitive that are useful for applications such as prediction markets and bounded options-like instruments. There has been extensive user demand in both of these areas, and builders will likely think of novel applications as well.  \n\nOutcomes bring non-linearity, dated contracts, and an alternative form of derivative trading that does not involve leverage or liquidations. The outcome primitive expands the expressivity of HyperCore, while composing with other primitives such as portfolio margin and the HyperEVM.  \n\nOutcomes are a work in progress and currently only being tested on testnet. Canonical markets based on objective settlement sources will be deployed once technical development is complete. Canonical markets will be denominated in USDH. Pending user feedback, the infrastructure will be extended to permissionless deployment."
+        },
+        "created_at": "2026-02-02T14:15:16.000Z",
+        "edit_history_tweet_ids": [
+          "2018327360723202167"
+        ],
+        "public_metrics": {
+          "retweet_count": 962,
+          "reply_count": 895,
+          "like_count": 5986,
+          "quote_count": 632,
+          "bookmark_count": 1108,
+          "impression_count": 1767740
+        },
+        "text": "HyperCore will support outcome trading (HIP-4). Outcomes are fully collateralized contracts that settle within a fixed range. They are a general-purpose primitive that are useful for applications such as prediction markets and bounded options-like instruments. There has been",
+        "id": "2018327360723202167"
+      },
+      {
+        "created_at": "2026-02-02T07:38:14.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 111,
+              "end": 134,
+              "url": "https://t.co/SdOcpcgDO2",
+              "expanded_url": "https://twitter.com/HyperliquidX/status/2015812710483845519",
+              "display_url": "x.com/HyperliquidX/s\u2026"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2018227446320173431"
+        ],
+        "public_metrics": {
+          "retweet_count": 300,
+          "reply_count": 212,
+          "like_count": 2001,
+          "quote_count": 33,
+          "bookmark_count": 173,
+          "impression_count": 206845
+        },
+        "text": "Since last week, HIP-3 markets reached new all-time highs of $1B in open interest and $4.8B in 24-hour volume. https://t.co/SdOcpcgDO2",
+        "id": "2018227446320173431",
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2015812710483845519"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-01-26T15:42:56.000Z",
+        "edit_history_tweet_ids": [
+          "2015812710483845519"
+        ],
+        "public_metrics": {
+          "retweet_count": 406,
+          "reply_count": 608443,
+          "like_count": 2917,
+          "quote_count": 134,
+          "bookmark_count": 258,
+          "impression_count": 1320477
+        },
+        "text": "HIP-3 open interest reached an all-time high of $790M, driven recently by a surge in commodities trading. \n\nHIP-3 OI has been hitting new ATHs each week. A month ago, HIP-3 OI was $260M.",
+        "id": "2015812710483845519"
+      },
+      {
+        "created_at": "2026-01-22T02:56:50.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/1zz0VkyUDP",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/SKR",
+              "display_url": "app.hyperliquid.xyz/trade/SKR",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/SKR"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2014170362691428858"
+        ],
+        "public_metrics": {
+          "retweet_count": 42,
+          "reply_count": 21,
+          "like_count": 155,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 43173
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/1zz0VkyUDP",
+        "id": "2014170362691428858",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2014170359872762186"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-01-22T02:56:49.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 83,
+              "end": 106,
+              "url": "https://t.co/XUq42O1DBz",
+              "expanded_url": "https://x.com/HyperliquidX/status/2014170359872762186/photo/1",
+              "display_url": "pic.x.com/XUq42O1DBz",
+              "media_key": "3_2014170159993548800"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 48,
+              "end": 52,
+              "tag": "SKR"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2014170159993548800"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2014170359872762186"
+        ],
+        "public_metrics": {
+          "retweet_count": 157,
+          "reply_count": 156,
+          "like_count": 709,
+          "quote_count": 22,
+          "bookmark_count": 49,
+          "impression_count": 115472
+        },
+        "text": "By community request, you can now long or short $SKR perps with up to 3x leverage. https://t.co/XUq42O1DBz",
+        "id": "2014170359872762186"
+      },
+      {
+        "created_at": "2026-01-18T08:58:15.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/xSKLdEBgwP",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/DASH",
+              "display_url": "app.hyperliquid.xyz/trade/DASH",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/DASH"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2012811765936279683"
+        ],
+        "public_metrics": {
+          "retweet_count": 35,
+          "reply_count": 12,
+          "like_count": 116,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 38115
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/xSKLdEBgwP",
+        "id": "2012811765936279683",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2012811763570352152"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-01-18T08:58:15.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 84,
+              "end": 107,
+              "url": "https://t.co/egOCy7ualG",
+              "expanded_url": "https://x.com/HyperliquidX/status/2012811763570352152/photo/1",
+              "display_url": "pic.x.com/egOCy7ualG",
+              "media_key": "3_2012811629818195968"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 48,
+              "end": 53,
+              "tag": "DASH"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2012811629818195968"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2012811763570352152"
+        ],
+        "public_metrics": {
+          "retweet_count": 148,
+          "reply_count": 102,
+          "like_count": 536,
+          "quote_count": 18,
+          "bookmark_count": 35,
+          "impression_count": 80232
+        },
+        "text": "By community request, you can now long or short $DASH perps with up to 5x leverage. https://t.co/egOCy7ualG",
+        "id": "2012811763570352152"
+      },
+      {
+        "created_at": "2026-01-18T04:09:39.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/gdlp7ibDL3",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/AXS",
+              "display_url": "app.hyperliquid.xyz/trade/AXS",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/AXS"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2012739137284227468"
+        ],
+        "public_metrics": {
+          "retweet_count": 44,
+          "reply_count": 10,
+          "like_count": 106,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 34332
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/gdlp7ibDL3",
+        "id": "2012739137284227468",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2012739135124230317"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-01-18T04:09:39.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 83,
+              "end": 106,
+              "url": "https://t.co/6uGbNIAPvh",
+              "expanded_url": "https://x.com/HyperliquidX/status/2012739135124230317/photo/1",
+              "display_url": "pic.x.com/6uGbNIAPvh",
+              "media_key": "3_2012738977216806912"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 48,
+              "end": 52,
+              "tag": "AXS"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2012738977216806912"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2012739135124230317"
+        ],
+        "public_metrics": {
+          "retweet_count": 96,
+          "reply_count": 74,
+          "like_count": 482,
+          "quote_count": 18,
+          "bookmark_count": 28,
+          "impression_count": 84308
+        },
+        "text": "By community request, you can now long or short $AXS perps with up to 5x leverage. https://t.co/6uGbNIAPvh",
+        "id": "2012739135124230317"
+      },
+      {
+        "created_at": "2026-01-15T14:41:24.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/oV3DjM7Abf",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/LIT",
+              "display_url": "app.hyperliquid.xyz/trade/LIT",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/LIT"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2011810955903332495"
+        ],
+        "public_metrics": {
+          "retweet_count": 25,
+          "reply_count": 5,
+          "like_count": 82,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 29378
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/oV3DjM7Abf",
+        "id": "2011810955903332495",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2011810953734860971"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-01-15T14:41:23.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 103,
+              "end": 126,
+              "url": "https://t.co/xRvIOMTl4z",
+              "expanded_url": "https://x.com/HyperliquidX/status/2011810953734860971/photo/1",
+              "display_url": "pic.x.com/xRvIOMTl4z",
+              "media_key": "3_2011808096952442880"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 74,
+              "end": 78,
+              "tag": "LIT"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2011808096952442880"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2011810953734860971"
+        ],
+        "public_metrics": {
+          "retweet_count": 81,
+          "reply_count": 599,
+          "like_count": 563,
+          "quote_count": 5,
+          "bookmark_count": 21,
+          "impression_count": 58090
+        },
+        "text": "The LIT hyperp has converted to a regular perp. You can now long or short $LIT with up to 3x leverage. https://t.co/xRvIOMTl4z",
+        "id": "2011810953734860971"
+      },
+      {
+        "created_at": "2026-01-15T14:09:37.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/HRPGc2PWUS",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/FOGO",
+              "display_url": "app.hyperliquid.xyz/trade/FOGO",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/FOGO"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2011802958628077983"
+        ],
+        "public_metrics": {
+          "retweet_count": 18,
+          "reply_count": 4,
+          "like_count": 51,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 33992
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/HRPGc2PWUS",
+        "id": "2011802958628077983",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2011802956451189095"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-01-15T14:09:36.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 105,
+              "end": 128,
+              "url": "https://t.co/QoL732HVkW",
+              "expanded_url": "https://x.com/HyperliquidX/status/2011802956451189095/photo/1",
+              "display_url": "pic.x.com/QoL732HVkW",
+              "media_key": "3_2011801514583674880"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 75,
+              "end": 80,
+              "tag": "FOGO"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2011801514583674880"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2011802956451189095"
+        ],
+        "public_metrics": {
+          "retweet_count": 35,
+          "reply_count": 36,
+          "like_count": 233,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 43873
+        },
+        "text": "The FOGO hyperp has converted to a regular perp. You can now long or short $FOGO with up to 3x leverage. https://t.co/QoL732HVkW",
+        "id": "2011802956451189095"
+      },
+      {
+        "created_at": "2026-01-15T09:15:44.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/TGiWUFh03r",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/XMR",
+              "display_url": "app.hyperliquid.xyz/trade/XMR",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/XMR"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2011728999568064620"
+        ],
+        "public_metrics": {
+          "retweet_count": 21,
+          "reply_count": 10,
+          "like_count": 76,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 26234
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/TGiWUFh03r",
+        "id": "2011728999568064620",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2011728997336695183"
+          }
+        ]
+      },
+      {
+        "created_at": "2026-01-15T09:15:43.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 83,
+              "end": 106,
+              "url": "https://t.co/B5B9Rk2jgu",
+              "expanded_url": "https://x.com/HyperliquidX/status/2011728997336695183/photo/1",
+              "display_url": "pic.x.com/B5B9Rk2jgu",
+              "media_key": "3_2011728941921501185"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 48,
+              "end": 52,
+              "tag": "XMR"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2011728941921501185"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2011728997336695183"
+        ],
+        "public_metrics": {
+          "retweet_count": 133,
+          "reply_count": 515,
+          "like_count": 1373,
+          "quote_count": 47,
+          "bookmark_count": 61,
+          "impression_count": 182752
+        },
+        "text": "By community request, you can now long or short $XMR perps with up to 5x leverage. https://t.co/B5B9Rk2jgu",
+        "id": "2011728997336695183"
+      },
+      {
+        "note_tweet": {
+          "text": "Hyperliquid today looks very different from Hyperliquid a year ago. This time last year, the HyperEVM hadn\u2019t even launched, and there were only a handful of early believers building exclusively on Hyperliquid. Now, there are hundreds of teams building, dozens of regional communities with local events, and trillions more in volume traded.  \n\nThis was achieved without any external funding and giving all protocol fees to the community. Hyperliquid was built with a strong belief in returning to the core ethos of crypto\u200a - \u200achanging entrenched and predatory practices to be fair and permissionless.  \n\nThis art piece is meant to celebrate Hyperliquid\u2019s growing ecosystem and commemorate how far we\u2019ve come as a community in building the house of all finance. You\u2019ll find many of your favorite apps and teams interwoven in the piece if you zoom in. A special thank you to @Degen_Alfie for bringing the community to life. Many great teams didn\u2019t make it due to limited space and time, but your contributions have not gone unnoticed!  \n\nNotable product and tech releases in 2025 included: \n+ HyperEVM launch with HyperCore composability via precompiles and CoreWriter \n+ Spot assets bridged by Unit \n+ Fully permissionless validator set \n+ Native utility to staking, with fee discounts for traders and permissionless HyperCore deployment capabilities for builders \n+ Permissionless spot quote assets \n+ Hypurr NFTs \n+ USDH governance vote and launch by Native Markets \n+ HIP-3 permissionless perp deployment \n+ Native USDC integration \n+ Portfolio margin pre-alpha launch \n+ Assistance Fund HYPE officially burned  \n\nCompared to 2024, ATHs in 2025 reached: \n+ $32B in 24h volume from $15B in 2024 \n+ $16B in open interest from $4B \n+ $6B in TVL from $2B \n+ $20M in 24h protocol revenue from $3.5M \n+ 1.4M users from 300k  \n\nExcited to see what the ecosystem looks like another year from now. Thank you to all the builders, users, and supporters who have come together to push forward Hyperliquid\u2019s vision.",
+          "entities": {
+            "mentions": [
+              {
+                "start": 872,
+                "end": 884,
+                "username": "Degen_Alfie",
+                "id": "1493028980760662018"
+              }
+            ]
+          }
+        },
+        "created_at": "2026-01-06T08:41:38.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 272,
+              "end": 295,
+              "url": "https://t.co/Yb9Gv6yGTk",
+              "expanded_url": "https://x.com/HyperliquidX/status/2008458928288657426/photo/1",
+              "display_url": "pic.x.com/Yb9Gv6yGTk",
+              "media_key": "3_2008458524599480323"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2008458524599480323"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2008458928288657426"
+        ],
+        "public_metrics": {
+          "retweet_count": 930,
+          "reply_count": 2415,
+          "like_count": 4867,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 910323
+        },
+        "text": "Hyperliquid today looks very different from Hyperliquid a year ago. This time last year, the HyperEVM hadn\u2019t even launched, and there were only a handful of early believers building exclusively on Hyperliquid. Now, there are hundreds of teams building, dozens of regional https://t.co/Yb9Gv6yGTk",
+        "id": "2008458928288657426"
+      },
+      {
+        "created_at": "2026-01-03T00:31:49.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "chameleon_jeff",
+              "id": "1622260212798291972"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2007248497112953221"
+        ],
+        "public_metrics": {
+          "retweet_count": 856,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @chameleon_jeff: Integrity has always been one of Hyperliquid's core values.\n\nThe house of all finance must be credibly neutral. This me\u2026",
+        "id": "2007248497112953221",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2006788242713227395"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-12-26T13:14:07.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 10,
+              "username": "asxn_r",
+              "id": "1651245573226332160"
+            },
+            {
+              "start": 33,
+              "end": 46,
+              "username": "HyperliquidX",
+              "id": "1527020295059648513"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2004541232941605057"
+        ],
+        "public_metrics": {
+          "retweet_count": 178,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @asxn_r: We just released our @HyperliquidX Wrapped, covering what happened across the HyperCore and HyperEVM over the past year!\n\nYou c\u2026",
+        "id": "2004541232941605057",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2004529933922758830"
+          }
+        ]
+      },
+      {
+        "note_tweet": {
+          "text": "As a thank you to top traders and builders over the past year - if you see a button with a gift box emoji on the Portfolio page and would like to receive a physical package, please sign the message and follow-up in a Discord ticket.\n\nSome users have multiple addresses that qualify; please only sign the message for one address. Shipping excludes restricted jurisdictions."
+        },
+        "created_at": "2025-12-24T08:33:56.000Z",
+        "edit_history_tweet_ids": [
+          "2003745949898932236"
+        ],
+        "public_metrics": {
+          "retweet_count": 65,
+          "reply_count": 59,
+          "like_count": 699,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 186466
+        },
+        "text": "As a thank you to top traders and builders over the past year - if you see a button with a gift box emoji on the Portfolio page and would like to receive a physical package, please sign the message and follow-up in a Discord ticket.\n\nSome users have multiple addresses that",
+        "id": "2003745949898932236",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2003745946484736497"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-12-24T08:33:56.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 130,
+              "end": 153,
+              "url": "https://t.co/DiqblP5hSi",
+              "expanded_url": "https://x.com/HyperliquidX/status/2003745946484736497/photo/1",
+              "display_url": "pic.x.com/DiqblP5hSi",
+              "media_key": "3_2003741726255747072"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2003741726255747072"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2003745946484736497"
+        ],
+        "public_metrics": {
+          "retweet_count": 390,
+          "reply_count": 1726,
+          "like_count": 3032,
+          "quote_count": 81,
+          "bookmark_count": 0,
+          "impression_count": 249114
+        },
+        "text": "Happy Holidays! \n\nThank you to the community for your continued support as Hyperliquid builds toward housing all finance onchain. https://t.co/DiqblP5hSi",
+        "id": "2003745946484736497"
+      },
+      {
+        "created_at": "2025-12-24T04:30:53.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "HyperFND",
+              "id": "1808762862682394626"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2003684783168352492"
+        ],
+        "public_metrics": {
+          "retweet_count": 275,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @HyperFND: HYPE in the Assistance Fund system address of 0xfefefefefefefefefefefefefefefefefefefefe has been formally recognized as burn\u2026",
+        "id": "2003684783168352492",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2003684257949188396"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-12-23T16:53:11.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 71,
+              "end": 94,
+              "url": "https://t.co/7nouN6ghXR",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/xyz:EUR",
+              "display_url": "app.hyperliquid.xyz/trade/xyz:EUR",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/xyz:EUR"
+            },
+            {
+              "start": 95,
+              "end": 118,
+              "url": "https://t.co/DBmv8BXnHI",
+              "expanded_url": "https://x.com/tradexyz/status/2003502028258164929/photo/1",
+              "display_url": "pic.x.com/DBmv8BXnHI",
+              "media_key": "3_2003501106970918916"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "2003502028258164929"
+          ],
+          "media_keys": [
+            "3_2003501106970918916"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2003509201847615711"
+        ],
+        "public_metrics": {
+          "retweet_count": 53,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @tradexyz: EUR is now live. 20x leverage, 24/7, 365. \n\nTrade [EUR]: https://t.co/7nouN6ghXR https://t.co/DBmv8BXnHI",
+        "id": "2003509201847615711",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2003502028258164929"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-12-23T15:55:29.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 74,
+              "end": 97,
+              "url": "https://t.co/564AP5zBVI",
+              "expanded_url": "https://app.trade.xyz/trade?market=JPY",
+              "display_url": "app.trade.xyz/trade?market=J\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2042375346251591680/0sabXq3R?format=jpg&name=orig",
+                  "width": 2400,
+                  "height": 1260
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2042375346251591680/0sabXq3R?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "trade.xyz",
+              "description": "Trade anything, anytime.",
+              "unwound_url": "https://app.trade.xyz/trade?market=JPY"
+            },
+            {
+              "start": 98,
+              "end": 121,
+              "url": "https://t.co/Q5I4wTfP5d",
+              "expanded_url": "https://x.com/tradexyz/status/2003481947843232043/photo/1",
+              "display_url": "pic.x.com/Q5I4wTfP5d",
+              "media_key": "3_2003481945129316352"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "2003481947843232043"
+          ],
+          "media_keys": [
+            "3_2003481945129316352"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2003494679879516395"
+        ],
+        "public_metrics": {
+          "retweet_count": 37,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @tradexyz: JPY is now live. 20x leverage, 24/7, 365.    \n\nTrade [JPY]: https://t.co/564AP5zBVI https://t.co/Q5I4wTfP5d",
+        "id": "2003494679879516395",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2003481947843232043"
+          }
+        ]
+      },
+      {
+        "note_tweet": {
+          "text": "As a reminder, hyperps do not rely on any external data for the oracle price. Hyperps trade like perpetual contracts that users are familiar with, but do not require an external spot or index oracle price. Instead, the funding rate is determined relative to a moving average of the hyperp mark price. This makes the hyperp price more stable and less susceptible to manipulation, unlike usual pre-launch futures.\n\nWhen trading hyperps, funding rates are important to consider. If there is heavy price momentum in one direction, funding will heavily incentivize positions in the opposite direction for the next eight hours. As always, be sure to understand the contract before trading.\n\nTrading is on low leverage and isolated margin only. Beware of low liquidity, high volatility, potentially extreme funding, and increased liquidation risk. Note: LIT-USDC will convert to a vanilla perp upon CEX listing. See Docs for more.\n\nLIT-USDC is a hyperp contract that poses higher than normal risk. Do not trade contracts you are unfamiliar with and do not understand the risks for. Read the Docs to learn more about the hyperp mechanism and how it differs from vanilla perps. NFA.\n\nhttps://t.co/dcsB9KNYF7",
+          "entities": {
+            "urls": [
+              {
+                "start": 1175,
+                "end": 1198,
+                "url": "https://t.co/dcsB9KNYF7",
+                "expanded_url": "https://app.hyperliquid.xyz/trade/LIT",
+                "display_url": "app.hyperliquid.xyz/trade/LIT"
+              }
+            ]
+          }
+        },
+        "created_at": "2025-12-22T15:51:25.000Z",
+        "edit_history_tweet_ids": [
+          "2003131269975281797"
+        ],
+        "public_metrics": {
+          "retweet_count": 12,
+          "reply_count": 8,
+          "like_count": 177,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 47555
+        },
+        "text": "As a reminder, hyperps do not rely on any external data for the oracle price. Hyperps trade like perpetual contracts that users are familiar with, but do not require an external spot or index oracle price. Instead, the funding rate is determined relative to a moving average of",
+        "id": "2003131269975281797",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2003131267228065960"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-12-22T15:51:25.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 142,
+              "end": 165,
+              "url": "https://t.co/f5ADrwFgrX",
+              "expanded_url": "https://x.com/HyperliquidX/status/2003131267228065960/photo/1",
+              "display_url": "pic.x.com/f5ADrwFgrX",
+              "media_key": "3_2003123055351238656"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2003123055351238656"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2003131267228065960"
+        ],
+        "public_metrics": {
+          "retweet_count": 119,
+          "reply_count": 134,
+          "like_count": 973,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 315975
+        },
+        "text": "By community request, Hyperliquid has listed LIT-USDC hyperps. You can now long or short the unlaunched Lighter token with up to 3x leverage. https://t.co/f5ADrwFgrX",
+        "id": "2003131267228065960"
+      },
+      {
+        "note_tweet": {
+          "text": "Hyperliquid is built on a foundation of onchain transparency. A recent article made several claims that are factually incorrect:\n+ Solvency: Every dollar is accounted for; the author failed to count native HyperEVM USDC.\n+ Integrity: Testnet functions are exactly that - testnet only for testing. They cannot be executed on mainnet.\n+ Transparency: Hyperliquid is more transparent and decentralized than all other major venues for perps trading. The entire state is independently maintained by a permissionless validator set and verified through BFT proof-of-stake consensus by each node. Every order, trade, and liquidation is available in real time during execution. Anyone can run a node and index the chain\u2019s state and transitions. No major perps platform comes close to this guarantee for users.\n\nSee our response to the writer\u2019s individual points below.\n \nClaim: The system is undercollateralized by $362M\n\nFalse: The Hyperliquid blockchain state is fully and verifiably solvent. The author excluded the HyperEVM USDC (a publicly announced and much anticipated integration), which exists in parallel to the Arbitrum bridge. Every USDC in circulation on HyperCore is accounted for transparently, by summing up the balances of https://t.co/Fk2lhZvpXD and https://t.co/pGBPcsJUTl. At the time of writing, this amounts to 3.989B + 362M = 4.351B USDC on HyperCore. USDC on the HyperEVM can be computed by subtracting 362M from the 421M on the HyperEVM USDC contract (https://t.co/ohiJm3WzN8), totaling another 59M USDC on HyperEVM.\n\nThe sum of the Arbitrum bridge and native USDC balances can be compared against the sum of user balances on HyperCore. As highlighted in the introduction, this exercise of verifying complete system solvency against user balances is uniquely possible on Hyperliquid compared to competitors.\n\nThe current Arbitrum bridge was an important stepping stone in bootstrapping the Hyperliquid network and will be deprecated as the migration to native USDC is complete, bringing Hyperliquid to parity with other major L1s.\n\nClaim: There is retroactive volume manipulation via TestnetSetYesterdayUserVlm\n\nFalse: This is a testnet-only function to allow for comprehensive testing. The author states that \u201cthe function\u2019s presence is the problem\u2026capability alone violates the trust model.\u201d Testnet-only features that enable more rigorous testing of edge cases do not undermine the chain\u2019s integrity. The fee schedule on Hyperliquid interacts in a complex way with inputs: user volume, aligned quote token status, maker vs taker, HIP-3, etc. It\u2019s important to test these interactions on testnet, and therefore the testnet chain has a set of admin testing functions that do not exist on mainnet. The related TestnetAddMainnetUser action is to mark a testnet user as having corresponding mainnet state, to avoid DDOS and other attacks that are \u201cfree\u201d on testnet. None of these functions are callable on the mainnet state.\n\nWhile the execution source is not available, anyone can verify every trade onchain by running a node, and sum up the values to confirm that volume numbers are reflected accurately in onchain state. Similar to onchain solvency verification against the sum of all user account values, this is possible on Hyperliquid but not on most competitive platforms.\n\nGiven that this code path is entirely unreachable on mainnet, future development work will entirely compile out this testnet-only logic on mainnet nodes to avoid any possible misunderstanding or misinterpretation.\n\nClaim: Some users have special privileges such as fee exemptions or retroactive volume manipulation used to influence the airdrop\n\nFalse: Like system solvency, user balances, and individual trades, the fees paid by any address is available onchain. Each trade along with its fees paid or rebates received are transparently indexed by nodes, API servers, and third party analytics providers. There are no such mechanisms to distort fees, and no such mechanisms could have influenced the HYPE airdrop. Furthermore, the genesis distribution of HYPE is fully available onchain, and users can verify the historical behavior of every such address.\n\nClaim: \u201cCoreWriter\u201d godmode can mint tokens, move user funds without signatures, crash random validators and basically do whatever it wants\n\nFalse: The CoreWriter spec is fully documented here https://t.co/TTMWI5pDBB and replicable in the open source HyperEVM execution. CoreWriter is a way for smart contracts on HyperEVM to send HyperCore actions as part of HyperEVM block execution. It supports various actions that are normally sent by EOAs such as staking and placing orders, but has no such features to \u201cmint tokens, move user funds without signatures, crash random validators and basically do whatever it wants.\u201d This is a fundamental misunderstanding of how HyperCore interacts with the HyperEVM.\n\nClaim: Chain can freeze via governance, and no undo function exists\n\nMisinterpreted: The chain freezes during network upgrades. There is no undo function because the validators adopt a new binary at that height. This is analogous to how other networks perform hard forks at future heights determined by social consensus.\n\nSuspicious activity on POPCAT in Nov 2025 did not cause the L1 to freeze, nor were any user funds frozen. The L1 was entirely operational, and any observer can see the blocks that were produced during this time. The Arbitrum bridge was automatically locked after the incident due to abnormal variation in account balances. As explained above, the Arbitrum bridge is not as secure as natively minted USDC, and therefore requires several conservative automated locking mechanisms as safeguards. The Arbitrum bridge\u2019s locking mechanism is audited and open sourced, and the bridge is being deprecated with the transition to native USDC.\n\nClaim: A single private key can set any oracle price instantly: no timelock, no limits\n\nMisinterpreted: The author is likely mistaking the HIP-3 oracle updater logic with the validator-operated perps. HIP-3 oracle updates are indeed set by a single address, but this is up to the deployer to configure. The updater address need not be an EOA. For example, current HIP-3 deployers use a combination of MPC and CoreWriter architecture.\n\nFor validator-operated perps, multiple validators can submit oracle price updates. The final prices are a robust weighted median across major centralized exchanges. There is no timelock and no limits explicitly because these limits make the system less, not more, safe. The events of 10/10 show the danger to solvency if ADL is not accurately triggered in a timely manner during high volatility. Hyperliquid was one of the only venues without performance degradation or a network outage during this time. If Mango Markets or a similar protocol with oracle rate limits were active during 10/10, they would have likely accrued bad debt. Further decentralization will involve other validators actively running independent and open-sourced oracle update binaries.\n\nClaim: 8 undisclosed addresses control all transaction submission\n\nFalse: Some transactions are already sent directly from the validators. Some such as orders are not, in order to minimize MEV, but a future upgrade will incorporate this logic for all transactions in a mechanism that is both MEV- and censorship-resistant. The careful consideration of MEV is in response to trader and researcher feedback based on predatory behavior observed on other chains. There is almost unanimous agreement that toxic transaction ordering degrades the end user experience. Ultimately, the validator set is permissionless, and there is no guarantee that validators in the mainnet set are always fully aligned with the ecosystem. A major milestone in decentralization will be solving this problem, including a multiple-proposer block building setup.\n\nClaim: There is a liquidation cartel with unfair advantages\n\nMisinterpreted: Only HLP may backstop liquidate users, and HLP subvaults are the only addresses in this set. However, depositing into HLP is permissionless, so HLP is a community-owned liquidity vault supporting the protocol. The fact that HLP has privileges is no different from other protocol liquidity vaults.\n\nRelatedly, all liquidations are first attempted against the order book, which handles the vast majority of liquidated positions without backstop liquidation. This allows users to keep any remaining collateral, and allows all other users to compete in providing the best price to the liquidation flow, benefitting the liquidated user.\n\nClaim: There is a hidden lending protocol with $1M+ supplied and no documentation\n\nFalse: Portfolio margin, borrow lend, and the HLP supplied value were all publicly announced and are currently in pre-alpha rollout. The current documentation can be found at https://t.co/vvE8EhpIhX and has been progressively fleshed out over the past several weeks.\n\nClaim: ModifyNonCirculatingSupply allows changes to token supply\n\nFalse: The full supply of HIP-1 tokens on HyperCore is fixed at deployment. The non-circulating supply is a purely informational number that can optionally mark addresses as \u201cnon-circulating\u201d for display purposes. Whether an address is marked as \u201cnon-circulating\u201d does not affect execution. This is an example of onchain information that might make more sense offchain, but is not a vulnerability.\n\nThank you to the author for spending the time to verify the execution of Hyperliquid. The fact that this investigation could be done at all proves the transparency and decentralization that Hyperliquid has already achieved. Concretely, Hyperliquid is the only major perps venue where the entire state and every input diff is transparently available to anyone running a node.\n\nA similar analysis on any of the other top perp DEXs is impossible. For example, Lighter uses a single centralized sequencer whose execution logic and ZK circuits are unavailable. Aster uses centralized matching and even offers dark pool trading, which is only possible with a single centralized sequencer without verifiable execution. Other protocols with some open source contracts do not have a verifiable sequencer.\n\nOn Binance, Lighter, Aster, or similar exchanges, it is impossible for anyone other than the sequencer to see a full snapshot of onchain state including order books, positions, and other user information. The centralized sequencer can also upgrade its software without any constraints. On Hyperliquid, the entire state is onchain, which means there are 24 validators executing the same state machine under BFT consensus rules. There is plenty left to do on the journey towards greater decentralization, but it\u2019s important to highlight just how far Hyperliquid and its ecosystem have come compared to competitors.\n\nDecentralization is progressive, and Hyperliquid will ultimately be fully open sourced. Hyperliquid is the most transparent of all major venues, even though this leaks advantages to competitors (all of whom are closed source), who can copy Hyperliquid\u2019s innovations more easily. We think this is the correct tradeoff to balance value accrual to the community, speed of innovation, and upholding the values of defi.\n\nThe HyperEVM execution is open source, and Sprites, an independent community member, maintains a full archival node that powers many important integrations. HyperCore will follow the same path as soon as it reaches feature completion.",
+          "entities": {
+            "urls": [
+              {
+                "start": 1231,
+                "end": 1254,
+                "url": "https://t.co/Fk2lhZvpXD",
+                "expanded_url": "https://arbiscan.io/address/0x2df1c51e09aecf9cacb7bc98cb1742757f163df7",
+                "display_url": "arbiscan.io/address/0x2df1\u2026"
+              },
+              {
+                "start": 1259,
+                "end": 1282,
+                "url": "https://t.co/pGBPcsJUTl",
+                "expanded_url": "https://hyperevmscan.io/address/0x6b9e773128f453f5c2c60935ee2de2cbc5390a24",
+                "display_url": "hyperevmscan.io/address/0x6b9e\u2026"
+              },
+              {
+                "start": 1468,
+                "end": 1491,
+                "url": "https://t.co/ohiJm3WzN8",
+                "expanded_url": "https://hyperevmscan.io/token/0xb88339cb7199b77e23db6e890353e22632ba630f",
+                "display_url": "hyperevmscan.io/token/0xb88339\u2026"
+              },
+              {
+                "start": 4346,
+                "end": 4369,
+                "url": "https://t.co/TTMWI5pDBB",
+                "expanded_url": "https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/hyperevm/interacting-with-hypercore",
+                "display_url": "hyperliquid.gitbook.io/hyperliquid-do\u2026"
+              },
+              {
+                "start": 8816,
+                "end": 8839,
+                "url": "https://t.co/vvE8EhpIhX",
+                "expanded_url": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/portfolio-margin",
+                "display_url": "hyperliquid.gitbook.io/hyperliquid-do\u2026"
+              }
+            ]
+          }
+        },
+        "created_at": "2025-12-22T10:11:00.000Z",
+        "edit_history_tweet_ids": [
+          "2003045600657334570"
+        ],
+        "public_metrics": {
+          "retweet_count": 456,
+          "reply_count": 438,
+          "like_count": 2438,
+          "quote_count": 181,
+          "bookmark_count": 334,
+          "impression_count": 774533
+        },
+        "text": "Hyperliquid is built on a foundation of onchain transparency. A recent article made several claims that are factually incorrect:\n+ Solvency: Every dollar is accounted for; the author failed to count native HyperEVM USDC.\n+ Integrity: Testnet functions are exactly that - testnet",
+        "id": "2003045600657334570"
+      },
+      {
+        "created_at": "2025-12-17T03:52:45.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "HyperFND",
+              "id": "1808762862682394626"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2001138469880652049"
+        ],
+        "public_metrics": {
+          "retweet_count": 399,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @HyperFND: The Hyper Foundation is proposing a validator vote to formally recognize the Assistance Fund HYPE as burned, removing the tok\u2026",
+        "id": "2001138469880652049",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2001127850754367525"
+          }
+        ]
+      },
+      {
+        "note_tweet": {
+          "text": "As a reminder, hyperps do not rely on any external data for the oracle price. Hyperps trade like perpetual contracts that users are familiar with, but do not require an external spot or index oracle price. Instead, the funding rate is determined relative to a moving average of the hyperp mark price. This makes the hyperp price more stable and less susceptible to manipulation, unlike usual pre-launch futures.     \n\nWhen trading hyperps, funding rates are important to consider. If there is heavy price momentum in one direction, funding will heavily incentivize positions in the opposite direction for the next eight hours. As always, be sure to understand the contract before trading.     \n\nTrading is on low leverage and isolated margin only. Beware of low liquidity, high volatility, potentially extreme funding, and increased liquidation risk. Note: FOGO-USD will convert to a vanilla perp upon CEX spot listing. See Docs for more.     \n\nFOGO-USD is a hyperp contract that poses higher than normal risk. Do not trade contracts you are unfamiliar with and do not understand the risks for. Read the Docs to learn more about the hyperp mechanism and how it differs from vanilla perps. NFA.   \n\nhttps://t.co/5CHaAwC50O",
+          "entities": {
+            "urls": [
+              {
+                "start": 1198,
+                "end": 1221,
+                "url": "https://t.co/5CHaAwC50O",
+                "expanded_url": "https://app.hyperliquid.xyz/trade/FOGO",
+                "display_url": "app.hyperliquid.xyz/trade/FOGO"
+              }
+            ]
+          }
+        },
+        "created_at": "2025-12-11T02:52:09.000Z",
+        "edit_history_tweet_ids": [
+          "1998948891824370155"
+        ],
+        "public_metrics": {
+          "retweet_count": 21,
+          "reply_count": 6,
+          "like_count": 88,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 31901
+        },
+        "text": "As a reminder, hyperps do not rely on any external data for the oracle price. Hyperps trade like perpetual contracts that users are familiar with, but do not require an external spot or index oracle price. Instead, the funding rate is determined relative to a moving average of",
+        "id": "1998948891824370155",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1998948888632512600"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-12-11T02:52:08.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 139,
+              "end": 162,
+              "url": "https://t.co/oEWqhUlS83",
+              "expanded_url": "https://x.com/HyperliquidX/status/1998948888632512600/photo/1",
+              "display_url": "pic.x.com/oEWqhUlS83",
+              "media_key": "3_1998948707744755714"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_1998948707744755714"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1998948888632512600"
+        ],
+        "public_metrics": {
+          "retweet_count": 76,
+          "reply_count": 69,
+          "like_count": 393,
+          "quote_count": 29,
+          "bookmark_count": 17,
+          "impression_count": 83546
+        },
+        "text": "By community request, Hyperliquid has listed FOGO-USD hyperps. You can now long or short the unlaunched Fogo token with up to 3x leverage. https://t.co/oEWqhUlS83",
+        "id": "1998948888632512600"
+      },
+      {
+        "created_at": "2025-12-10T02:00:44.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "hyenatrade",
+              "id": "1933517491323727872"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1998573564493230235"
+        ],
+        "public_metrics": {
+          "retweet_count": 179,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @hyenatrade: Introducing HyENA - the Internet Trading Engine with Native Rewards.\n\n\u2192 USDe-margined perpetuals DEX built on Hyperliquid\u2019s\u2026",
+        "id": "1998573564493230235",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1998377321452167509"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-12-08T13:20:04.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/toRqT04OrG",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/STABLE",
+              "display_url": "app.hyperliquid.xyz/trade/STABLE",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/STABLE"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1998019750379864333"
+        ],
+        "public_metrics": {
+          "retweet_count": 13,
+          "reply_count": 7,
+          "like_count": 54,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 23419
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/toRqT04OrG",
+        "id": "1998019750379864333",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1998019747951395041"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-12-08T13:20:03.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 80,
+              "end": 103,
+              "url": "https://t.co/KwLiZnMESh",
+              "expanded_url": "https://x.com/HyperliquidX/status/1998019747951395041/photo/1",
+              "display_url": "pic.x.com/KwLiZnMESh",
+              "media_key": "3_1998019643735408640"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 48,
+              "end": 55,
+              "tag": "STABLE"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_1998019643735408640"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1998019747951395041"
+        ],
+        "public_metrics": {
+          "retweet_count": 46,
+          "reply_count": 54,
+          "like_count": 303,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 54189
+        },
+        "text": "By community request, you can now long or short $STABLE with up to 3x leverage. https://t.co/KwLiZnMESh",
+        "id": "1998019747951395041"
+      },
+      {
+        "note_tweet": {
+          "text": "During this transition phase, USDC transfers from HyperCore to HyperEVM (including HyperEVM and CCTP USDC \u201cwithdrawal\u201d options) may fail if there is insufficient balance on HyperEVM. If a transfer/withdrawal to HyperEVM fails, the funds are still safe and remain in HyperCore. Users can still withdraw from the Arbitrum bridge instead. If users want USDC on HyperEVM, they can send to HyperEVM from Arbitrum via CCTP, the same as before the linking. This is an intentional design during the transition period, as the Arbitrum bridge and HyperEVM are separate even though the USDC is fungible on HyperCore.\n\nBuilders can begin switching their integrations to use HyperEVM USDC deposit flow. The USDC contracts support CCTP transfers from other chains to and from HyperCore with a single source chain transaction, which is a meaningful improvement in user experience. For more, see https://t.co/JuB7XYqmv6.",
+          "entities": {
+            "urls": [
+              {
+                "start": 880,
+                "end": 903,
+                "url": "https://t.co/JuB7XYqmv6",
+                "expanded_url": "https://github.com/circlefin/hyperevm-circle-contracts",
+                "display_url": "github.com/circlefin/hype\u2026"
+              }
+            ]
+          }
+        },
+        "created_at": "2025-12-08T02:16:56.000Z",
+        "edit_history_tweet_ids": [
+          "1997852866950861185"
+        ],
+        "public_metrics": {
+          "retweet_count": 13,
+          "reply_count": 4,
+          "like_count": 108,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 25225
+        },
+        "text": "During this transition phase, USDC transfers from HyperCore to HyperEVM (including HyperEVM and CCTP USDC \u201cwithdrawal\u201d options) may fail if there is insufficient balance on HyperEVM. If a transfer/withdrawal to HyperEVM fails, the funds are still safe and remain in HyperCore.",
+        "id": "1997852866950861185",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1997852864308486319"
+          }
+        ]
+      },
+      {
+        "note_tweet": {
+          "text": "USDC is now linked between HyperCore and HyperEVM. This is a major milestone in allowing secure, natively minted cross chain USDC deposits directly to HyperCore. In the final state, the Arbitrum bridge will be deprecated and all USDC will be natively minted. There are many details still to build out, and the priority is to roll out features in a safe way while giving users and builders ample time to migrate. Thank you to the Circle team\u2019s hard work on building this integration.\n\nFor users and builders, there is no immediate breaking change. Users can deposit and withdraw from both the Arbitrum bridge and HyperEVM. HyperCore now supports one-click deposits from CCTP-enabled chains, abstracting away the minting on HyperEVM. The CCTP route from Arbitrum has been deployed by Circle, with others to follow."
+        },
+        "created_at": "2025-12-08T02:16:55.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 274,
+              "end": 297,
+              "url": "https://t.co/0g8fTCgkVl",
+              "expanded_url": "https://x.com/HyperliquidX/status/1997852864308486319/photo/1",
+              "display_url": "pic.x.com/0g8fTCgkVl",
+              "media_key": "3_1997628007683596288"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_1997628007683596288"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1997852864308486319"
+        ],
+        "public_metrics": {
+          "retweet_count": 267,
+          "reply_count": 223,
+          "like_count": 1423,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 183315
+        },
+        "text": "USDC is now linked between HyperCore and HyperEVM. This is a major milestone in allowing secure, natively minted cross chain USDC deposits directly to HyperCore. In the final state, the Arbitrum bridge will be deprecated and all USDC will be natively minted. There are many https://t.co/0g8fTCgkVl",
+        "id": "1997852864308486319"
+      },
+      {
+        "created_at": "2025-11-27T12:08:57.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 85,
+              "end": 108,
+              "url": "https://t.co/jXuMOJMye6",
+              "expanded_url": "https://x.com/kinetiq_xyz/status/1994013492370706866/video/1",
+              "display_url": "pic.x.com/jXuMOJMye6",
+              "media_key": "13_1994010489546801152"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 17,
+              "end": 22,
+              "tag": "KNTQ"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "Kinetiq_xyz",
+              "id": "1839015175782813697"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "1994013492370706866"
+          ],
+          "media_keys": [
+            "13_1994010489546801152"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1994015588528844939"
+        ],
+        "public_metrics": {
+          "retweet_count": 297,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "text": "RT @kinetiq_xyz: $KNTQ, the governance token of Kinetiq, is now live on Hyperliquid. https://t.co/jXuMOJMye6",
+        "id": "1994015588528844939",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1994013492370706866"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-25T15:28:12.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "chameleon_jeff",
+              "id": "1622260212798291972"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1993340954770841611"
+        ],
+        "public_metrics": {
+          "retweet_count": 575,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @chameleon_jeff: Hyperliquid supports permissionless perps on anything. As all of finance moves onchain, there is a billion dollar oppor\u2026",
+        "id": "1993340954770841611",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1993339777811169357"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-25T15:08:07.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 116,
+              "end": 139,
+              "url": "https://t.co/BwS2MwK4sH",
+              "expanded_url": "http://app.hyperunit.xyz",
+              "display_url": "app.hyperunit.xyz",
+              "status": 200,
+              "title": "Unit",
+              "unwound_url": "http://app.hyperunit.xyz"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "unitxyz",
+              "id": "1863957527529955328"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1993335901225992595"
+        ],
+        "public_metrics": {
+          "retweet_count": 47,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "text": "RT @unitxyz: Spot Ethena deposits, withdrawals, and trading are now officially live on Hyperliquid.\n\nDeposit ENA on https://t.co/BwS2MwK4sH\u2026",
+        "id": "1993335901225992595",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1993330286713880968"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-24T16:01:21.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 204,
+              "end": 227,
+              "url": "https://t.co/tvfY2aJA66",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/MON",
+              "display_url": "app.hyperliquid.xyz/trade/MON",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/MON"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1992986908977488362"
+        ],
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 8,
+          "like_count": 46,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 23444
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA. \n\nhttps://t.co/tvfY2aJA66",
+        "id": "1992986908977488362",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1992986906825830507"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-24T16:01:21.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 103,
+              "end": 126,
+              "url": "https://t.co/J8AcfeAJd7",
+              "expanded_url": "https://x.com/HyperliquidX/status/1992986906825830507/photo/1",
+              "display_url": "pic.x.com/J8AcfeAJd7",
+              "media_key": "3_1992971047453560832"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 74,
+              "end": 78,
+              "tag": "MON"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_1992971047453560832"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1992986906825830507"
+        ],
+        "public_metrics": {
+          "retweet_count": 61,
+          "reply_count": 60,
+          "like_count": 566,
+          "quote_count": 11,
+          "bookmark_count": 13,
+          "impression_count": 64849
+        },
+        "text": "The MON hyperp has converted to a regular perp. You can now long or short $MON with up to 3x leverage. https://t.co/J8AcfeAJd7",
+        "id": "1992986906825830507"
+      },
+      {
+        "created_at": "2025-11-24T15:49:50.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "felixprotocol",
+              "id": "1843322702943473664"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1992984010994434241"
+        ],
+        "public_metrics": {
+          "retweet_count": 44,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @felixprotocol: CRCL-USDH perp is now live to trade on Hyperliquid\n\nThe perp market is deployed and managed by the Felix team (via HIP-3\u2026",
+        "id": "1992984010994434241",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1992975324519317697"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-24T13:58:57.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 115,
+              "end": 138,
+              "url": "https://t.co/4GwzUn0gSs",
+              "expanded_url": "http://app.hyperliquid.xyz",
+              "display_url": "app.hyperliquid.xyz",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "unitxyz",
+              "id": "1863957527529955328"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1992956104033370283"
+        ],
+        "public_metrics": {
+          "retweet_count": 48,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @unitxyz: Spot Monad deposits, withdrawals, and trading are now officially live on Hyperliquid.\n\nDeposit MON on https://t.co/4GwzUn0gSs\u2026",
+        "id": "1992956104033370283",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1992955507460710490"
+          }
+        ]
+      },
+      {
+        "note_tweet": {
+          "text": "Growth mode for HIP-3\n\nTo bootstrap novel markets, HIP-3 deployers can activate growth mode to reduce fees by 90%. Growth mode applies on top of other multipliers, such as aligned stablecoin collateral fee benefits and staking discounts.\n\n@tradexyz enabled growth mode today for their perp assets, lowering baseline taker fees to 0.009%.",
+          "entities": {
+            "mentions": [
+              {
+                "start": 239,
+                "end": 248,
+                "username": "tradexyz",
+                "id": "1764725210761031681"
+              }
+            ]
+          }
+        },
+        "created_at": "2025-11-24T05:51:48.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 239,
+              "end": 248,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1992833511565516838"
+        ],
+        "public_metrics": {
+          "retweet_count": 168,
+          "reply_count": 173,
+          "like_count": 1390,
+          "quote_count": 47,
+          "bookmark_count": 73,
+          "impression_count": 213848
+        },
+        "text": "Growth mode for HIP-3\n\nTo bootstrap novel markets, HIP-3 deployers can activate growth mode to reduce fees by 90%. Growth mode applies on top of other multipliers, such as aligned stablecoin collateral fee benefits and staking discounts.\n\n@tradexyz enabled growth mode today for",
+        "id": "1992833511565516838"
+      },
+      {
+        "created_at": "2025-11-23T05:28:45.000Z",
+        "entities": {
+          "cashtags": [
+            {
+              "start": 59,
+              "end": 65,
+              "tag": "xHYPE"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "liminalmoney",
+              "id": "1867550969115865088"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1992465320695701899"
+        ],
+        "public_metrics": {
+          "retweet_count": 93,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @liminalmoney: Epoch 2 is live.\n\nxTokens start now with $xHYPE.\nLiminal now becomes fully composable.\n\nTokenized delta-neutral strategie\u2026",
+        "id": "1992465320695701899",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1992270909047009487"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-22T16:28:11.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "nativemarkets",
+              "id": "1963713874965762048"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1992268883953406032"
+        ],
+        "public_metrics": {
+          "retweet_count": 64,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6
+        },
+        "text": "RT @nativemarkets: As of 13:10 UTC, Native Markets has upgraded USDH to qualify as an Aligned Quote Asset.\n\nNow, when trading on markets qu\u2026",
+        "id": "1992268883953406032",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1992228360618205471"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-21T16:58:50.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "Anchorage",
+              "id": "987190230204600320"
+            },
+            {
+              "start": 89,
+              "end": 100,
+              "username": "Figment_io",
+              "id": "1004162476273893377"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1991914208758518124"
+        ],
+        "public_metrics": {
+          "retweet_count": 32,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3
+        },
+        "text": "RT @Anchorage: Now live: HYPE staking on HyperCORE through Anchorage Digital, powered by @Figment_io\n\nAnchorage Digital clients can now ful\u2026",
+        "id": "1991914208758518124",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1991903174589030516"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-21T01:59:47.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 88,
+              "end": 111,
+              "url": "https://t.co/NOcJzO4H9d",
+              "expanded_url": "https://x.com/ventuals/status/1991629027912949813/photo/1",
+              "display_url": "pic.x.com/NOcJzO4H9d",
+              "media_key": "3_1991614002183475200"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "ventuals",
+              "id": "1930017553436315648"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "1991629027912949813"
+          ],
+          "media_keys": [
+            "3_1991614002183475200"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1991687956839690322"
+        ],
+        "public_metrics": {
+          "retweet_count": 65,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 4
+        },
+        "text": "RT @ventuals: OpenAI is now live for trading\n\n- 3x max leverage\n- $1M open interest cap https://t.co/NOcJzO4H9d",
+        "id": "1991687956839690322",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1991629027912949813"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-20T15:14:23.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 74,
+              "end": 97,
+              "url": "https://t.co/8E6XdMal0H",
+              "expanded_url": "https://app.trade.xyz/trade?market=META",
+              "display_url": "app.trade.xyz/trade?market=M\u2026",
+              "status": 200,
+              "title": "Trade XYZ",
+              "unwound_url": "https://app.trade.xyz/trade?market=META"
+            },
+            {
+              "start": 98,
+              "end": 121,
+              "url": "https://t.co/IJTrynWrO6",
+              "expanded_url": "https://x.com/tradexyz/status/1991515454574342207/photo/1",
+              "display_url": "pic.x.com/IJTrynWrO6",
+              "media_key": "3_1991433560826208256"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "1991515454574342207"
+          ],
+          "media_keys": [
+            "3_1991433560826208256"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1991525537362371067"
+        ],
+        "public_metrics": {
+          "retweet_count": 53,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @tradexyz: META is now live. 10x leverage, 24/7, 365. \n \nTrade [META]: https://t.co/8E6XdMal0H https://t.co/IJTrynWrO6",
+        "id": "1991525537362371067",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1991515454574342207"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-20T01:52:58.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 60,
+              "end": 83,
+              "url": "https://t.co/eWGqvAVoqd",
+              "expanded_url": "https://x.com/phantom/status/1991206504956039522/photo/1",
+              "display_url": "pic.x.com/eWGqvAVoqd",
+              "media_key": "3_1991205657966702592"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "phantom",
+              "id": "1379053041995890695"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "1991206504956039522"
+          ],
+          "media_keys": [
+            "3_1991205657966702592"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1991323853277319200"
+        ],
+        "public_metrics": {
+          "retweet_count": 225,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @phantom: You can now trade HyperEVM tokens in Phantom \ud83d\udc7b https://t.co/eWGqvAVoqd",
+        "id": "1991323853277319200",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1991206504956039522"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-20T01:46:08.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "safepal",
+              "id": "1068417957686992896"
+            },
+            {
+              "start": 47,
+              "end": 60,
+              "username": "HyperliquidX",
+              "id": "1527020295059648513"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1991322132438286539"
+        ],
+        "public_metrics": {
+          "retweet_count": 37,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @safepal: \ud83d\udd25 SafePal has natively integrated @HyperliquidX\n\u26a1 Open long or short positions with up to 40x leverage in just a few clicks\n\ud83d\udc4c\u2026",
+        "id": "1991322132438286539",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1991052824931897476"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-19T16:31:26.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "ether_fi",
+              "id": "1617988046565134341"
+            },
+            {
+              "start": 52,
+              "end": 65,
+              "username": "HyperliquidX",
+              "id": "1527020295059648513"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1991182539231543572"
+        ],
+        "public_metrics": {
+          "retweet_count": 105,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @ether_fi: The Blockchain to House all Finance\u2122\ufe0f @HyperliquidX \n\nMeet real world payments \ud83d\udcb3\n\nHYPE and beHYPE are now live on Cash!\n\n\u2022 De\u2026",
+        "id": "1991182539231543572",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1991150096168165490"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-19T15:47:01.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 72,
+              "end": 95,
+              "url": "https://t.co/4yAWBxYu5Q",
+              "expanded_url": "https://app.trade.xyz/trade?market=MSFT",
+              "display_url": "app.trade.xyz/trade?market=M\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2036273479670964224/cdLdwkMK?format=jpg&name=orig",
+                  "width": 2400,
+                  "height": 1260
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2036273479670964224/cdLdwkMK?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "trade.xyz",
+              "description": "Trade anything, anytime.",
+              "unwound_url": "https://app.trade.xyz/trade?market=MSFT"
+            },
+            {
+              "start": 96,
+              "end": 119,
+              "url": "https://t.co/f4lC2wwQfz",
+              "expanded_url": "https://x.com/tradexyz/status/1991152396156760325/photo/1",
+              "display_url": "pic.x.com/f4lC2wwQfz",
+              "media_key": "3_1991150909108203520"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "1991152396156760325"
+          ],
+          "media_keys": [
+            "3_1991150909108203520"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1991171360119525490"
+        ],
+        "public_metrics": {
+          "retweet_count": 46,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @tradexyz: MSFT is now live. 10x leverage, 24/7, 365.\n\nTrade [MSFT]: https://t.co/4yAWBxYu5Q https://t.co/f4lC2wwQfz",
+        "id": "1991171360119525490",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1991152396156760325"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-18T17:46:22.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 72,
+              "end": 95,
+              "url": "https://t.co/AoHMnMJHsm",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/xyz:AMZN",
+              "display_url": "app.hyperliquid.xyz/trade/xyz:AMZN",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/xyz:AMZN"
+            },
+            {
+              "start": 96,
+              "end": 119,
+              "url": "https://t.co/rVMQ6zd5k0",
+              "expanded_url": "https://x.com/tradexyz/status/1990835550283035082/photo/1",
+              "display_url": "pic.x.com/rVMQ6zd5k0",
+              "media_key": "3_1990807563135262720"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "1990835550283035082"
+          ],
+          "media_keys": [
+            "3_1990807563135262720"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1990839008054947879"
+        ],
+        "public_metrics": {
+          "retweet_count": 55,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @tradexyz: AMZN is now live. 10x leverage, 24/7, 365.\n\nTrade [AMZN]: https://t.co/AoHMnMJHsm https://t.co/rVMQ6zd5k0",
+        "id": "1990839008054947879",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1990835550283035082"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-18T16:57:48.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 76,
+              "end": 99,
+              "url": "https://t.co/w2jgmA2Sur",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/xyz:GOOGL",
+              "display_url": "app.hyperliquid.xyz/trade/xyz:GOOGL",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/xyz:GOOGL"
+            },
+            {
+              "start": 100,
+              "end": 123,
+              "url": "https://t.co/0d7lBbAdIm",
+              "expanded_url": "https://x.com/tradexyz/status/1990815916045582632/photo/1",
+              "display_url": "pic.x.com/0d7lBbAdIm",
+              "media_key": "3_1990797402819747840"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "1990815916045582632"
+          ],
+          "media_keys": [
+            "3_1990797402819747840"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1990826788650725463"
+        ],
+        "public_metrics": {
+          "retweet_count": 69,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @tradexyz: GOOGL is now live. 10x leverage, 24/7, 365.  \n\nTrade [GOOGL]: https://t.co/w2jgmA2Sur https://t.co/0d7lBbAdIm",
+        "id": "1990826788650725463",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1990815916045582632"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-14T17:43:02.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "chameleon_jeff",
+              "id": "1622260212798291972"
+            },
+            {
+              "start": 39,
+              "end": 48,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            },
+            {
+              "start": 50,
+              "end": 59,
+              "username": "ventuals",
+              "id": "1930017553436315648"
+            },
+            {
+              "start": 65,
+              "end": 79,
+              "username": "felixprotocol",
+              "id": "1843322702943473664"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1989388618855846161"
+        ],
+        "public_metrics": {
+          "retweet_count": 446,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @chameleon_jeff: Congratulations to @tradexyz, @ventuals, and @felixprotocol on their HIP-3 launches!\n\nIt's exciting to see things come\u2026",
+        "id": "1989388618855846161",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1989388141044830540"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-14T15:37:15.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 72,
+              "end": 95,
+              "url": "https://t.co/Sx4OaQZR0I",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/xyz:PLTR",
+              "display_url": "app.hyperliquid.xyz/trade/xyz:PLTR",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/xyz:PLTR"
+            },
+            {
+              "start": 96,
+              "end": 119,
+              "url": "https://t.co/IstK4FcTwD",
+              "expanded_url": "https://x.com/tradexyz/status/1989355044093989285/photo/1",
+              "display_url": "pic.x.com/IstK4FcTwD",
+              "media_key": "3_1989354955602264064"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "1989355044093989285"
+          ],
+          "media_keys": [
+            "3_1989354955602264064"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1989356964858769419"
+        ],
+        "public_metrics": {
+          "retweet_count": 50,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "text": "RT @tradexyz: PLTR is now live. 10x leverage, 24/7, 365.\n\nTrade [PLTR]: https://t.co/Sx4OaQZR0I https://t.co/IstK4FcTwD",
+        "id": "1989356964858769419",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1989355044093989285"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-14T03:47:31.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "ventuals",
+              "id": "1930017553436315648"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1989178352469758360"
+        ],
+        "public_metrics": {
+          "retweet_count": 82,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @ventuals: Trading pre-IPO companies is now a reality.\n\nVentuals mainnet alpha is live.\n\nYou can now trade SpaceX, our first pre-IPO mar\u2026",
+        "id": "1989178352469758360",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1989022307004666263"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-14T03:47:09.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "felixprotocol",
+              "id": "1843322702943473664"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1989178260983541791"
+        ],
+        "public_metrics": {
+          "retweet_count": 87,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "text": "RT @felixprotocol: TSLA-USDH perp is now live to trade on Hyperliquid\n\nThe perp market is deployed and managed by the Felix team (via HIP-3\u2026",
+        "id": "1989178260983541791",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1988978099640304095"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-13T00:19:43.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 10,
+              "username": "asxn_r",
+              "id": "1651245573226332160"
+            },
+            {
+              "start": 57,
+              "end": 70,
+              "username": "HyperliquidX",
+              "id": "1527020295059648513"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1988763670911066563"
+        ],
+        "public_metrics": {
+          "retweet_count": 124,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "text": "RT @asxn_r: 1/ Excited to announce the launch of our new @HyperliquidX dashboard!\n\nYou can track HyperCore and HyperEVM revenues, activity,\u2026",
+        "id": "1988763670911066563",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1988703570997440978"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-13T00:18:52.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 72,
+              "end": 95,
+              "url": "https://t.co/9ffuOkbbP2",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/xyz:NVDA",
+              "display_url": "app.hyperliquid.xyz/trade/xyz:NVDA",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/xyz:NVDA"
+            },
+            {
+              "start": 96,
+              "end": 119,
+              "url": "https://t.co/YBrs4FplOr",
+              "expanded_url": "https://x.com/tradexyz/status/1988699816248111520/photo/1",
+              "display_url": "pic.x.com/YBrs4FplOr",
+              "media_key": "3_1988697749118726144"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tradexyz",
+              "id": "1764725210761031681"
+            }
+          ]
+        },
+        "attachments": {
+          "media_source_tweet_id": [
+            "1988699816248111520"
+          ],
+          "media_keys": [
+            "3_1988697749118726144"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1988763457274180052"
+        ],
+        "public_metrics": {
+          "retweet_count": 199,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "text": "RT @tradexyz: NVDA is now live. 10x leverage, 24/7, 365.\n\nTrade [NVDA]: https://t.co/9ffuOkbbP2 https://t.co/YBrs4FplOr",
+        "id": "1988763457274180052",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1988699816248111520"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-11T06:49:56.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/erPdPso0dI",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/AERO",
+              "display_url": "app.hyperliquid.xyz/trade/AERO",
+              "status": 200,
+              "title": "Hyperliquid",
+              "description": "Trade 100+ perps and spot assets on Hyperliquid, a decentralized Layer 1 blockchain with fully onchain order books.",
+              "unwound_url": "https://app.hyperliquid.xyz/trade/AERO"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1988137098327855305"
+        ],
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 9,
+          "like_count": 53,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 25332
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/erPdPso0dI",
+        "id": "1988137098327855305",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1988137095924445548"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-11T06:49:56.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 78,
+              "end": 101,
+              "url": "https://t.co/QqgYbTgUC0",
+              "expanded_url": "https://x.com/HyperliquidX/status/1988137095924445548/photo/1",
+              "display_url": "pic.x.com/QqgYbTgUC0",
+              "media_key": "3_1988136998050402304"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 48,
+              "end": 53,
+              "tag": "AERO"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_1988136998050402304"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1988137095924445548"
+        ],
+        "public_metrics": {
+          "retweet_count": 100,
+          "reply_count": 96,
+          "like_count": 633,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 108687
+        },
+        "text": "By community request, you can now long or short $AERO with up to 3x leverage. https://t.co/QqgYbTgUC0",
+        "id": "1988137095924445548"
+      },
+      {
+        "created_at": "2025-11-11T01:29:21.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 10,
+              "username": "Ledger",
+              "id": "2652239532"
+            },
+            {
+              "start": 42,
+              "end": 55,
+              "username": "HyperliquidX",
+              "id": "1527020295059648513"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1988056420064129126"
+        ],
+        "public_metrics": {
+          "retweet_count": 176,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "text": "RT @Ledger: You can now secure your HYPE (@HyperliquidX\u2019s native token) and other HyperEVM ecosystem tokens directly in Ledger Wallet!\n\nWit\u2026",
+        "id": "1988056420064129126",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1987913372185080166"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-10T07:22:27.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/eQU20T08eO",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/CC",
+              "display_url": "app.hyperliquid.xyz/trade/CC",
+              "status": 200,
+              "unwound_url": "https://app.hyperliquid.xyz/trade/CC"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1987782894132351443"
+        ],
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 4,
+          "like_count": 37,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 20309
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/eQU20T08eO",
+        "id": "1987782894132351443",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1987782892152594682"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-10T07:22:27.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 101,
+              "end": 124,
+              "url": "https://t.co/MBYiFs4m5r",
+              "expanded_url": "https://x.com/HyperliquidX/status/1987782892152594682/photo/1",
+              "display_url": "pic.x.com/MBYiFs4m5r",
+              "media_key": "3_1987779480686084096"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 73,
+              "end": 76,
+              "tag": "CC"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_1987779480686084096"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1987782892152594682"
+        ],
+        "public_metrics": {
+          "retweet_count": 34,
+          "reply_count": 51,
+          "like_count": 290,
+          "quote_count": 5,
+          "bookmark_count": 3,
+          "impression_count": 38613
+        },
+        "text": "The CC hyperp has converted to a regular perp. You can now long or short $CC with up to 3x leverage. https://t.co/MBYiFs4m5r",
+        "id": "1987782892152594682"
+      },
+      {
+        "created_at": "2025-11-08T03:43:15.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/CuSYHzL7lG",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/ICP",
+              "display_url": "app.hyperliquid.xyz/trade/ICP",
+              "status": 200,
+              "unwound_url": "https://app.hyperliquid.xyz/trade/ICP"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1987002955422441937"
+        ],
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 5,
+          "like_count": 73,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 27741
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/CuSYHzL7lG",
+        "id": "1987002955422441937",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1987002953354620972"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-11-08T03:43:15.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 77,
+              "end": 100,
+              "url": "https://t.co/JqrsQF9EFZ",
+              "expanded_url": "https://x.com/HyperliquidX/status/1987002953354620972/photo/1",
+              "display_url": "pic.x.com/JqrsQF9EFZ",
+              "media_key": "3_1987002838653018112"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 48,
+              "end": 52,
+              "tag": "ICP"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_1987002838653018112"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1987002953354620972"
+        ],
+        "public_metrics": {
+          "retweet_count": 230,
+          "reply_count": 161,
+          "like_count": 1318,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 306974
+        },
+        "text": "By community request, you can now long or short $ICP with up to 5x leverage. https://t.co/JqrsQF9EFZ",
+        "id": "1987002953354620972"
+      },
+      {
+        "note_tweet": {
+          "text": "As a reminder, hyperps do not rely on any external data for the oracle price. Hyperps trade like perpetual contracts that users are familiar with, but do not require an external spot or index oracle price. Instead, the funding rate is determined relative to a moving average of the hyperp mark price. This makes the hyperp price more stable and less susceptible to manipulation, unlike usual pre-launch futures.   \n\nWhen trading hyperps, funding rates are important to consider. If there is heavy price momentum in one direction, funding will heavily incentivize positions in the opposite direction for the next eight hours. As always, be sure to understand the contract before trading.   \n\nTrading is on low leverage and isolated margin only. Beware of low liquidity, high volatility, potentially extreme funding, and increased liquidation risk. Note: CC-USD will convert to a vanilla perp upon CEX spot listing. See Docs for more.   \n\nCC-USD is a hyperp contract that poses higher than normal risk. Do not trade contracts you are unfamiliar with and do not understand the risks for. Read the Docs to learn more about the hyperp mechanism and how it differs from vanilla perps. NFA. \n\nhttps://t.co/PwFmsRtFQo",
+          "entities": {
+            "urls": [
+              {
+                "start": 1186,
+                "end": 1209,
+                "url": "https://t.co/PwFmsRtFQo",
+                "expanded_url": "https://app.hyperliquid.xyz/trade/CC",
+                "display_url": "app.hyperliquid.xyz/trade/CC"
+              }
+            ]
+          }
+        },
+        "created_at": "2025-10-31T12:14:57.000Z",
+        "edit_history_tweet_ids": [
+          "1984232623573553585"
+        ],
+        "public_metrics": {
+          "retweet_count": 15,
+          "reply_count": 19,
+          "like_count": 111,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 39469
+        },
+        "text": "As a reminder, hyperps do not rely on any external data for the oracle price. Hyperps trade like perpetual contracts that users are familiar with, but do not require an external spot or index oracle price. Instead, the funding rate is determined relative to a moving average of",
+        "id": "1984232623573553585",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1984232620763516968"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-10-31T12:14:56.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 147,
+              "end": 170,
+              "url": "https://t.co/JJPg2SmZQb",
+              "expanded_url": "https://x.com/HyperliquidX/status/1984232620763516968/photo/1",
+              "display_url": "pic.x.com/JJPg2SmZQb",
+              "media_key": "3_1984227994542694400"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_1984227994542694400"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1984232620763516968"
+        ],
+        "public_metrics": {
+          "retweet_count": 108,
+          "reply_count": 148,
+          "like_count": 706,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 137260
+        },
+        "text": "By community request, Hyperliquid has listed CC-USD hyperps. You can now long or short the unlaunched Canton Network token with up to 3x leverage. https://t.co/JJPg2SmZQb",
+        "id": "1984232620763516968"
+      },
+      {
+        "created_at": "2025-10-23T14:20:41.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/wQcupqoDvN",
+              "expanded_url": "https://app.hyperliquid.xyz/trade/MET",
+              "display_url": "app.hyperliquid.xyz/trade/MET",
+              "status": 200,
+              "unwound_url": "https://app.hyperliquid.xyz/trade/MET"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1981365161685635187"
+        ],
+        "public_metrics": {
+          "retweet_count": 27,
+          "reply_count": 12,
+          "like_count": 106,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 48470
+        },
+        "text": "Listing is not an endorsement of the project. Past performance does not guarantee future results. Do not trade assets you are unfamiliar with and do not understand the risks for. Exercise control. NFA.\n\nhttps://t.co/wQcupqoDvN",
+        "id": "1981365161685635187",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1981365158825050131"
+          }
+        ]
+      },
+      {
+        "created_at": "2025-10-23T14:20:40.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 103,
+              "end": 126,
+              "url": "https://t.co/zKveBh6J4E",
+              "expanded_url": "https://x.com/HyperliquidX/status/1981365158825050131/photo/1",
+              "display_url": "pic.x.com/zKveBh6J4E",
+              "media_key": "3_1981352465397157888"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 74,
+              "end": 78,
+              "tag": "MET"
+            }
+          ]
+        },
+        "attachments": {
+          "media_keys": [
+            "3_1981352465397157888"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1981365158825050131"
+        ],
+        "public_metrics": {
+          "retweet_count": 72,
+          "reply_count": 108,
+          "like_count": 662,
+          "quote_count": 6,
+          "bookmark_count": 8,
+          "impression_count": 83555
+        },
+        "text": "The MET hyperp has converted to a regular perp. You can now long or short $MET with up to 3x leverage. https://t.co/zKveBh6J4E",
+        "id": "1981365158825050131"
+      }
+    ],
+    "includes": {
+      "media": [
+        {
+          "type": "photo",
+          "media_key": "3_2053969876335710209",
+          "url": "https://pbs.twimg.com/media/HIEquFpX0AEp694.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2049803328155181056",
+          "url": "https://pbs.twimg.com/media/HHJdREIaYAAXfhF.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2046942763716112385",
+          "url": "https://pbs.twimg.com/media/HGgzmTLa8AEiZH2.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2046777622202601472",
+          "url": "https://pbs.twimg.com/media/HGedZzGa0AANvl4.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2041080625399316480",
+          "url": "https://pbs.twimg.com/media/HFNgA8LbwAAHDo6.jpg"
+        },
+        {
+          "variants": [
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2039787560399204352/vid/avc1/640x360/vcjc_rKCa2TWdq4l.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2039787560399204352/pl/Y217bhvUmC8mwVbb.m3u8?v=cfc"
+            },
+            {
+              "bit_rate": 10368000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2039787560399204352/vid/avc1/1920x1080/MP1lPd9rUk-vTdVg.mp4"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2039787560399204352/vid/avc1/1280x720/sw3AKIjPONK9Gnjv.mp4"
+            },
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2039787560399204352/vid/avc1/480x270/88cu-jG1LKL29ivY.mp4"
+            }
+          ],
+          "type": "video",
+          "media_key": "13_2039787560399204352",
+          "duration_ms": 27200,
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2039787560399204352/img/jqWbl4dnJkKXNBdm.jpg"
+        },
+        {
+          "variants": [
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2032443172089962497/vid/avc1/480x270/pKhaoRRXAUnElQW1.mp4"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2032443172089962497/vid/avc1/640x360/n9SDrHg6DaGEaTjV.mp4"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2032443172089962497/vid/avc1/1280x720/m-GD3sTPnGQrSLie.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2032443172089962497/pl/nu9K4whOabNUUN2D.m3u8?v=cfc"
+            }
+          ],
+          "type": "video",
+          "media_key": "13_2032443172089962497",
+          "duration_ms": 29760,
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2032443172089962497/img/IoKsGb7CBUV_1Kt_.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2024608812322496512",
+          "url": "https://pbs.twimg.com/media/HBja_OuboAAUsRV.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2021862822347780096",
+          "url": "https://pbs.twimg.com/media/HA8Zhk6bsAA4aIE.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2014170159993548800",
+          "url": "https://pbs.twimg.com/media/G_PFFsebcAAxSob.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2012811629818195968",
+          "url": "https://pbs.twimg.com/media/G-7xg1MWsAABnPo.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2012738977216806912",
+          "url": "https://pbs.twimg.com/media/G-6vb5KXQAAFdy2.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2011808096952442880",
+          "url": "https://pbs.twimg.com/media/G-tgzh8a4AAekv0.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2011801514583674880",
+          "url": "https://pbs.twimg.com/media/G-ta0YtaUAAWQI5.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2011728941921501185",
+          "url": "https://pbs.twimg.com/media/G-sY0GeagAEYjEh.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2008458524599480323",
+          "url": "https://pbs.twimg.com/media/G996YwjbcAMMCXG.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2003741726255747072",
+          "url": "https://pbs.twimg.com/media/G864e9caEAAgAVe.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2003501106970918916",
+          "url": "https://pbs.twimg.com/media/G83dpEwagAQYf_Y.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2003481945129316352",
+          "url": "https://pbs.twimg.com/media/G83MNtVXcAANO0Q.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2003123055351238656",
+          "url": "https://pbs.twimg.com/media/G8yFzkubEAAK8p6.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1998948707744755714",
+          "url": "https://pbs.twimg.com/media/G72xQkFaMAIo92o.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1998019643735408640",
+          "url": "https://pbs.twimg.com/media/G7pkR68aAAAV2cJ.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1997628007683596288",
+          "url": "https://pbs.twimg.com/media/G7kAFs9aIAANFBQ.jpg"
+        },
+        {
+          "variants": [
+            {
+              "bit_rate": 10368000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1994010489546801152/vid/avc1/1920x1080/GvTC1aluzlCVQZ1k.mp4"
+            },
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1994010489546801152/vid/avc1/480x270/IEtSthsk7wa0JE21.mp4"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1994010489546801152/vid/avc1/640x360/EF7BSsMZ74RsvK2P.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/1994010489546801152/pl/yQ2UIhDeZPtzD4Vn.m3u8?v=404"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1994010489546801152/vid/avc1/1280x720/9_g50gD8EqtnlkAq.mp4"
+            }
+          ],
+          "type": "video",
+          "media_key": "13_1994010489546801152",
+          "duration_ms": 46233,
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/1994010489546801152/img/UTCph9Eo-EsxpByU.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1992971047453560832",
+          "url": "https://pbs.twimg.com/media/G6h0m8MbkAAPvN9.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1991614002183475200",
+          "url": "https://pbs.twimg.com/media/G6OiYgnXEAAiQip.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1991433560826208256",
+          "url": "https://pbs.twimg.com/media/G6L-RcLWYAA97m-.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1991205657966702592",
+          "url": "https://pbs.twimg.com/media/G6Iu_v3acAAW1vL.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1991150909108203520",
+          "url": "https://pbs.twimg.com/media/G6H9M8eXMAAg76w.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1990807563135262720",
+          "url": "https://pbs.twimg.com/media/G6DE7lDWoAAnkEB.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1990797402819747840",
+          "url": "https://pbs.twimg.com/media/G6C7sK7XYAAtfTV.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1989354955602264064",
+          "url": "https://pbs.twimg.com/media/G5ubysTWAAArc_a.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1988697749118726144",
+          "url": "https://pbs.twimg.com/media/G5lGEPXXMAAWhLc.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1988136998050402304",
+          "url": "https://pbs.twimg.com/media/G5dIEO2bEAAr9hm.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1987779480686084096",
+          "url": "https://pbs.twimg.com/media/G5YC5-4awAADFaB.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1987002838653018112",
+          "url": "https://pbs.twimg.com/media/G5NAjd2bIAAJ2AF.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1984227994542694400",
+          "url": "https://pbs.twimg.com/media/G4lk2SAaYAAN4nU.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1981352465397157888",
+          "url": "https://pbs.twimg.com/media/G38tkdLXkAAIEGw.jpg"
+        }
+      ]
+    },
+    "meta": {
+      "result_count": 99,
+      "newest_id": "2053970679846834202",
+      "oldest_id": "1981365158825050131",
+      "next_token": "7140dibdnow9c7btw4e30elzv5x9yy4zsug3wp8e04w1d"
+    }
+  }
+}

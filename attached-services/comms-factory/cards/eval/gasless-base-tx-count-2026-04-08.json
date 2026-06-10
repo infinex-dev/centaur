@@ -1,0 +1,17 @@
+{
+  "id": "gasless-base-tx-count-2026-04-08",
+  "title": "Gasless transactions on Base crossed one million",
+  "ship_date": "2026-04-08",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "Infinex users sent over one million transactions on Base without paying gas directly",
+    "Gas is sponsored by the account abstraction layer and settled in stablecoins from the user balance",
+    "The user never holds ETH on Base to transact",
+    "The figure covers transactions originated from the Infinex account on Base only"
+  ],
+  "kind": "data-card-official",
+  "metric": "gasless transactions on Base",
+  "value": "1,000,000+",
+  "unit": "transactions",
+  "delta": "first million reached"
+}

@@ -1,0 +1,206 @@
+{
+  "facts": [
+    {
+      "category": "partner",
+      "claim": "Infinex fiat deposit provider (bridge-integration branch)",
+      "value": "Bridge.xyz",
+      "source": "platform-docs",
+      "source_ref": "leakage/05-where-users-hold-yield.md:34",
+      "confidence": 0.75,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "product",
+      "claim": "Bridge.xyz company description",
+      "value": "Stablecoin infrastructure and fiat on/off-ramp company, acquired by Stripe for approximately $1.1 billion",
+      "source": "web-search",
+      "source_ref": "https://x.com/Padierfind/status/2038761078901907861",
+      "confidence": 0.9,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "partner",
+      "claim": "Bridge.xyz parent company (acquirer)",
+      "value": "Stripe",
+      "source": "web-search",
+      "source_ref": "https://x.com/Padierfind/status/2038761078901907861",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "product",
+      "claim": "Bridge.xyz virtual account mechanic — what enters, converts, exits",
+      "value": "Bridge virtual accounts are permanent, reusable fiat deposit addresses. Incoming fiat is converted into crypto (stablecoin) and delivered to a specified destination wallet address (e.g. the user's Infinex account). They provide local deposit details such as account numbers and routing codes.",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz supported deposit rail — USD",
+      "value": "USD Virtual Accounts: U.S. bank account and routing numbers (issued in customer's name) for ACH or wire transfers",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz supported deposit rail — EUR",
+      "value": "EUR Virtual Accounts: Euro-denominated IBANs for SEPA payments",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz supported deposit rail — MXN",
+      "value": "MXN Virtual Accounts: CLABE account numbers for SPEI (Mexico) payments",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz supported deposit rail — BRL",
+      "value": "BRL Virtual Accounts: BR codes for PIX payments (Brazil)",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz supported deposit rail — GBP",
+      "value": "GBP Virtual Accounts: Unique account number for FPS (UK Faster Payments)",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz supported deposit rail — COP",
+      "value": "COP Virtual Accounts: Unique account number for Bre-B (Colombia) payments",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "KYC/onboarding requirement for Bridge.xyz virtual accounts",
+      "value": "Customers must be onboarded and KYC/KYB-approved before Bridge virtual accounts can be created for them",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz virtual account event lifecycle — key event types",
+      "value": "funds_received → payment_submitted → payment_processed (final, on-chain confirmed). Also: funds_scheduled (ACH in-transit), in_review (manual), refunded, refund_in_flight, refund_failed, account_update, deactivation, activation, microdeposit",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account-events",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz virtual account deposit — finalized transaction hash timing",
+      "value": "The transaction hash at payment_submitted stage is preliminary and not guaranteed final. The finalized tx hash is returned only at payment_processed state.",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account-events",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz virtual account — reusability",
+      "value": "Virtual accounts are permanent and reusable — a customer receives one set of deposit details that can be used for multiple deposits over time",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz deposit refund constraint",
+      "value": "Bridge can only refund fiat deposits to the original sending account. If the sending bank account is closed, deactivated, or suspended, refund_failed may occur.",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account-events",
+      "confidence": 0.95,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz KYC customer API — endorsements required for rail access",
+      "value": "Bridge monitors kyc_status and endorsement status per rail (e.g. 'base endorsement' for US rails). Customers pass KYC info via Customers API; Bridge validates and grants endorsements enabling platform access.",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/customers/customers",
+      "confidence": 0.9,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz virtual account — delivery destination",
+      "value": "Fiat is converted to crypto and delivered to a developer-specified destination (e.g. a wallet address — in Infinex's case, the user's Infinex account). The destination payment_rail and stablecoin currency (e.g. USDC) are set at account creation.",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.9,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "capability",
+      "claim": "Bridge.xyz virtual account — amount fields for fees transparency",
+      "value": "amount = full amount received in source currency (pre-fee). subtotal_amount = amount minus developer fee and exchange fee (always in source currency). exchange_fee_amount = fee for FX conversion.",
+      "source": "provider-docs",
+      "source_ref": "https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account",
+      "confidence": 0.9,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "product",
+      "claim": "Bridge.xyz integration code status on current Infinex platform branch",
+      "value": "No Bridge.xyz-specific integration code found on this branch (no api.bridge.xyz calls, no BridgeService/BridgeClient/BridgeProvider, no virtual_account code). The branch contains only a passing reference to 'bridge.xyz off-ramp' in a leakage analysis doc. Virtual accounts are listed as 'planned' on the Infinex public roadmap.",
+      "source": "platform-code",
+      "source_ref": "apps/public-website/src/app/(site)/roadmap/data.ts:212 + grep results showing no api.bridge.xyz",
+      "confidence": 0.85,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "product",
+      "claim": "Infinex roadmap status for virtual accounts / fiat bank deposits",
+      "value": "Listed as 'planned' on the Infinex public roadmap. Blog post confirms 'Onramp via credit card and bank account is in development' alongside virtual accounts.",
+      "source": "platform-code",
+      "source_ref": "apps/public-website/src/app/(site)/roadmap/data.ts:212 + apps/content-app/content/blog/the-roadmap-what-s-next-for-infinex.md:49",
+      "confidence": 0.85,
+      "verified_at": "2026-06-05"
+    },
+    {
+      "category": "product",
+      "claim": "Existing Infinex crypto onramp stack (not the Bridge.xyz fiat flow)",
+      "value": "Current 'Buy crypto' page uses: Swapper (onramp aggregator), Shift4 (payment processor), ZeroHash (KYC provider). Distinct from the planned Bridge.xyz bank-deposit flow.",
+      "source": "platform-code",
+      "source_ref": "apps/web-app/src/pages/app/onramp/index.tsx:27-30, :220-240",
+      "confidence": 0.9,
+      "verified_at": "2026-06-05"
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim": "Which specific Bridge.xyz payment rails (USD ACH/wire, EUR SEPA, others) are wired/enabled in the Infinex bridge-integration branch",
+      "reason": "No Bridge.xyz integration code found on this branch — no API calls, service files, or config specifying which rails are enabled. The full rails list is known from Bridge docs (USD/EUR/MXN/BRL/GBP/COP), but which subset Infinex will enable at launch cannot be determined without live integration code."
+    },
+    {
+      "claim": "Which specific stablecoin(s) (e.g. USDC, USDB) Bridge.xyz will settle into within the Infinex integration",
+      "reason": "Bridge supports multiple destination currencies and chains. The Infinex integration code specifying the destination stablecoin and chain is not present on this branch. The existing onramp page uses USDC on Base, but that is the Swapper flow, not the Bridge.xyz bank-deposit flow."
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "ground_turns": 15,
+  "approval_requests": []
+}

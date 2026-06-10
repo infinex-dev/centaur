@@ -1,0 +1,44 @@
+{
+  "id": "infinex-hyperliquid-spot-v1-2026-06-03",
+  "title": "Hyperliquid Spot V1 is live in Infinex Perps",
+  "ship_date": "2026-06-03",
+  "audience": [
+    "x",
+    "x-thread",
+    "web",
+    "in-product",
+    "modal",
+    "blog",
+    "carousel"
+  ],
+  "deployed_facts": [
+    "Perps trading venue provider: Hyperliquid",
+    "Spot trading venue provider for Infinex Perps app: Hyperliquid",
+    "Official name of the Infinex trading app: Infinex Perps",
+    "Infinex Perps app URL: https://perps.app.infinex.xyz",
+    "Hyperliquid Spot within Infinex Perps — feature name: Hyperliquid Spot V1",
+    "Spot order type — Hyperliquid order book type: Fully onchain CLOB (Central Limit Order Book) — every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+    "Quote currency for Spot V1 in Infinex Perps: USDC (USDC-only; non-USDC pairs excluded from execution)",
+    "Account type required to access Hyperliquid Spot V1: Unified account (unifiedAccount) only — non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+    "Spot V1 supported order types: Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+    "Spot V1 — perps-only controls not available in spot UI: Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+    "Spot V1 — what user can see and do: Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+    "Default spot market (used in routes and E2E tests): PURR/USDC",
+    "Spot market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE} (e.g. /hyperliquid/spot/PURR/USDC)",
+    "Perps market route URL pattern within Infinex Perps app: https://perps.app.infinex.xyz/hyperliquid/perps/{SYMBOL} (e.g. /hyperliquid/perps/BTC)",
+    "Feature branch name for Hyperliquid Spot V1 integration: spot-integration",
+    "This is Infinex's first CLOB spot order book integration: True — the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+    "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count): 24",
+    "Top Hyperliquid spot market by 24h volume: HYPE/USDC — $284M 24h volume",
+    "Notable spot markets available with >$1M 24h volume: HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+    "Hyperliquid Twitter / X handle: @HyperliquidX",
+    "UI product-mode switching — how users move between perps and spot: Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+    "Hyperliquid spot order book rendered live in Infinex UI: True — rendered page at /hyperliquid/spot/PURR/USDC shows a live Order Book panel with bid/ask prices, sizes, and totals",
+    "Hyperliquid's order books — what they are technically: Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput"
+  ],
+  "not_the_point": "Infinex Pro details, features, or timing are not announced and must not be mentioned.",
+  "kind": "launch-tier",
+  "headline": "Hyperliquid Spot is live in Infinex Perps — our first CLOB spot order book.",
+  "tier_reason": "First CLOB spot order book in Infinex; 24 live markets led by HYPE/USDC at $284M daily volume; fully onchain on HyperCore with one-block finality."
+}
+

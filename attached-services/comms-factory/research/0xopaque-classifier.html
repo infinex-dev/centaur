@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>0xopaque · tempo classifier</title>
+<style>
+  :root {
+    --bg: #0d0e10;
+    --card: #1a1c20;
+    --border: #2a2d33;
+    --text: #e7e8ea;
+    --muted: #8e9197;
+    --accent: #FE6F39;
+    --near: #4ade80;
+    --stable: #60a5fa;
+    --adream: #c084fc;
+    --mobile: #fb923c;
+    --remote: #94a3b8;
+    --awake: #fde047;
+  }
+  * { box-sizing: border-box; }
+  body { font: 14px/1.5 -apple-system, "SF Pro Text", system-ui, sans-serif;
+         background: var(--bg); color: var(--text); margin: 0; padding: 0; }
+  header { position: sticky; top: 0; z-index: 10; background: rgba(13,14,16,0.95);
+           backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); padding: 12px 20px; }
+  header h1 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+  header .meta { color: var(--muted); font-size: 12px; }
+  .controls { padding: 8px 20px; border-bottom: 1px solid var(--border);
+              display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .controls button { background: var(--card); border: 1px solid var(--border); color: var(--text);
+                     padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+  .controls button:hover { background: #25272d; }
+  .controls .danger { color: #ef4444; }
+  .progress-bar { background: var(--border); height: 4px; margin-top: 8px; border-radius: 2px; overflow: hidden; }
+  .progress-fill { background: var(--accent); height: 100%; transition: width 0.2s; }
+  .distribution { padding: 12px 20px; border-bottom: 1px solid var(--border);
+                  display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; font-size: 12px; }
+  .dist-col h3 { margin: 0 0 6px; font-size: 11px; text-transform: uppercase;
+                 letter-spacing: 0.08em; color: var(--muted); }
+  .dist-col .tempo-row { display: flex; justify-content: space-between; padding: 2px 0;
+                         color: var(--muted); }
+  .dist-col .tempo-row.has-count { color: var(--text); }
+  .dist-col .tempo-row span:last-child { font-variant-numeric: tabular-nums; }
+  .placement-guess { padding: 12px 20px; border-bottom: 1px solid var(--border);
+                     background: #14161a; color: var(--muted); font-size: 12px;
+                     font-family: ui-monospace, "SF Mono", monospace; white-space: pre-wrap; }
+  .placement-guess strong { color: var(--accent); }
+  main { padding: 16px 20px 80px; max-width: 1200px; margin: 0 auto; }
+  .post { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+          padding: 14px; margin-bottom: 12px; }
+  .post.classified { border-color: var(--accent); }
+  .post-meta { color: var(--muted); font-size: 11px; margin-bottom: 6px; font-family: ui-monospace, "SF Mono", monospace; }
+  .post-text { font-size: 14px; line-height: 1.5; margin-bottom: 10px; white-space: pre-wrap;
+               word-break: break-word; }
+  .tempo-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+  .tempo-col { display: flex; flex-direction: column; gap: 3px; }
+  .tempo-col-header { font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em;
+                      color: var(--muted); padding: 2px 4px; }
+  .tempo-btn { background: var(--card); border: 1px solid var(--border); color: var(--text);
+               padding: 5px 6px; border-radius: 4px; cursor: pointer; font-size: 11px;
+               text-align: left; transition: all 0.1s; }
+  .tempo-btn:hover { background: #25272d; }
+  .tempo-btn.selected { color: #000; font-weight: 600; }
+  .tempo-btn.selected[data-bucket="near"] { background: var(--near); border-color: var(--near); }
+  .tempo-btn.selected[data-bucket="stable"] { background: var(--stable); border-color: var(--stable); }
+  .tempo-btn.selected[data-bucket="adream"] { background: var(--adream); border-color: var(--adream); }
+  .tempo-btn.selected[data-bucket="mobile"] { background: var(--mobile); border-color: var(--mobile); }
+  .tempo-btn.selected[data-bucket="remote"] { background: var(--remote); border-color: var(--remote); }
+  .tempo-btn.selected[data-bucket="awake"] { background: var(--awake); border-color: var(--awake); }
+  .tempo-btn .label { display: block; font-weight: 500; }
+  .tempo-btn .motor { display: block; color: var(--muted); font-size: 9px; margin-top: 1px; }
+  .tempo-btn.selected .motor { color: rgba(0,0,0,0.7); }
+  .skip-row { margin-top: 6px; }
+  .skip-btn { background: transparent; border: 1px dashed var(--border); color: var(--muted);
+              padding: 4px 10px; font-size: 11px; border-radius: 4px; cursor: pointer; }
+  .skip-btn.selected { color: var(--text); border-style: solid; background: #25272d; }
+  .post a { color: var(--accent); text-decoration: none; }
+  .post a:hover { text-decoration: underline; }
+  .legend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+                margin-right: 4px; vertical-align: middle; }
+</style>
+</head>
+<body>
+<header>
+  <h1>0xopaque — last 100 originals · tempo classifier</h1>
+  <div class="meta">Click the tempo that best fits each post. Progress is saved locally. Range: 2025-10-30 → 2026-05-08.</div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</header>
+<div class="controls">
+  <span style="color:var(--muted)" id="progressText">0 / 100 classified</span>
+  <button onclick="recompute()">Refresh distribution</button>
+  <button onclick="exportJSON()">Export JSON</button>
+  <button onclick="copyMarkdown()">Copy markdown</button>
+  <button class="danger" onclick="resetAll()">Reset all</button>
+  <span style="margin-left:auto;color:var(--muted);font-size:11px">
+    <span class="legend-dot" style="background:var(--near)"></span>Near
+    <span class="legend-dot" style="background:var(--stable);margin-left:10px"></span>Stable
+    <span class="legend-dot" style="background:var(--adream);margin-left:10px"></span>Adream
+    <span class="legend-dot" style="background:var(--mobile);margin-left:10px"></span>Mobile
+    <span class="legend-dot" style="background:var(--remote);margin-left:10px"></span>Remote
+    <span class="legend-dot" style="background:var(--awake);margin-left:10px"></span>Awake
+  </span>
+</div>
+<div class="distribution" id="distribution"></div>
+<div class="placement-guess" id="placementGuess">Backward-derived placement appears here once you've classified 20+ posts.</div>
+<main id="postList"></main>
+<script>
+const POSTS = [{"id": "2052542856108421166", "text": "one week out copy trade degens https://t.co/1Pifgv4YmN", "date": "2026-05-08", "likes": 11, "rts": 0, "replies": 4, "imps": 100}, {"id": "2052035440702882079", "text": "found out my paperclip heartbeat has been summoning a bloated 800k cache claude code session every 3 hours\n\nand me and my bank account are devasted", "date": "2026-05-06", "likes": 25, "rts": 1, "replies": 1, "imps": 179}, {"id": "2044909755203018770", "text": "finally https://t.co/t0iZBotWDP https://t.co/ksa0SOMSZt", "date": "2026-04-16", "likes": 93, "rts": 1, "replies": 0, "imps": 386}, {"id": "2042206106739740974", "text": "@bcherny @trq212 @bcherny still would like a refund of my Max Plan, Fin is refusing and can\u2019t forward to a human. \n\nPlease help.", "date": "2026-04-09", "likes": 2, "rts": 0, "replies": 1, "imps": 220}, {"id": "2041882036995248332", "text": "i need a new model soon so i can fix all the issues i made with the old ones", "date": "2026-04-08", "likes": 8, "rts": 0, "replies": 0, "imps": 605}, {"id": "2041503948763517124", "text": "when refund email @bcherny - still waiting", "date": "2026-04-07", "likes": 11, "rts": 0, "replies": 1, "imps": 248}, {"id": "2040835124284342347", "text": "luckily my claude max sub is on cooldown until tuesday\n\nso i can miss the Claude Code v Openclaw first vibe code war", "date": "2026-04-05", "likes": 54, "rts": 0, "replies": 1, "imps": 376}, {"id": "2037132842002694421", "text": "It c cut guy ig by ur d dry o", "date": "2026-03-26", "likes": 43, "rts": 1, "replies": 0, "imps": 337}, {"id": "2036452998688415896", "text": "crypto stocks selling off\n\nthat can't be good", "date": "2026-03-24", "likes": 22, "rts": 0, "replies": 1, "imps": 250}, {"id": "2036252969768046978", "text": "hey guys did Anthropic launch anything new? https://t.co/ufvT5OaLNP", "date": "2026-03-24", "likes": 10, "rts": 1, "replies": 1, "imps": 449}, {"id": "2036108701795500112", "text": "sir a second EA slop delve founder interview has hit the TL https://t.co/PxdweySA2b https://t.co/WK75RCrqkx", "date": "2026-03-23", "likes": 5, "rts": 0, "replies": 1, "imps": 416}, {"id": "2033799853512565059", "text": "calling your mom makes you live longer https://t.co/yHBdPaNhjf", "date": "2026-03-17", "likes": 13, "rts": 0, "replies": 2, "imps": 304}, {"id": "2031711887210250612", "text": "Gotta Catch 'Em All!\n\nbut it's 151 API credentials", "date": "2026-03-11", "likes": 8, "rts": 0, "replies": 2, "imps": 265}, {"id": "2029816465046786075", "text": "https://t.co/FJAz4njyrR", "date": "2026-03-06", "likes": 113, "rts": 2, "replies": 8, "imps": 1821}, {"id": "2029522833450430660", "text": "Oh yeah they\u2019re reading all your messages https://t.co/zsG2kyiWRf", "date": "2026-03-05", "likes": 9, "rts": 0, "replies": 3, "imps": 390}, {"id": "2026807871862878547", "text": "I have officially oneshot my partner with a fleet of Openclaw support characters.", "date": "2026-02-25", "likes": 6, "rts": 0, "replies": 0, "imps": 184}, {"id": "2026673226097766555", "text": "snapshot 26.02.26 https://t.co/RRRC59n27B", "date": "2026-02-25", "likes": 7, "rts": 0, "replies": 3, "imps": 174}, {"id": "2024804643763822877", "text": "today i have started swearing more when talking to agents\n\nlet\u2019s see how it fucking works out for me", "date": "2026-02-20", "likes": 0, "rts": 0, "replies": 0, "imps": 169}, {"id": "2024422891031592963", "text": "When I get forcibly retired by the machines, I\u2019ll have a room that\u2019s just 24/7 playing LOTR\n\nRalph Wiggum infinite loop Middle Earth https://t.co/RECH5En17P", "date": "2026-02-19", "likes": 0, "rts": 0, "replies": 0, "imps": 257}, {"id": "2024322925982282124", "text": "underclass avoided \ud83d\ude4c https://t.co/xDvsk60QC6", "date": "2026-02-19", "likes": 0, "rts": 0, "replies": 0, "imps": 104}, {"id": "2024312688084734295", "text": "So many people are just copying OpenClaw articles and then getting their agent to implement them\n\nI get it, that\u2019s the meta\n\nBut then what\u2019s your role? \n\nIf someone else does the thinking for you  AND the implementation, what value do you add? \n\nC+P?", "date": "2026-02-19", "likes": 0, "rts": 0, "replies": 0, "imps": 108}, {"id": "2024172864824627243", "text": "those banned by Anthropic will be part of the permanent underclass", "date": "2026-02-18", "likes": 0, "rts": 0, "replies": 0, "imps": 155}, {"id": "2024120072118350173", "text": "@pandasxyz help me out (again)", "date": "2026-02-18", "likes": 0, "rts": 0, "replies": 0, "imps": 70}, {"id": "2024119997845631364", "text": "how has Openclaw been around for nearly 3 months and no one has built something to mass block all the bots, sloppers and race warmongers on the TL", "date": "2026-02-18", "likes": 0, "rts": 0, "replies": 0, "imps": 86}, {"id": "2021961432074793189", "text": "I think I finally understand the Charizard thesis @izebel_eth https://t.co/qEllfH7XNO", "date": "2026-02-12", "likes": 0, "rts": 0, "replies": 0, "imps": 130}, {"id": "2021955115121618989", "text": "In a post AI world, meaning is what is valuable. https://t.co/7NcIf4Ep26", "date": "2026-02-12", "likes": 0, "rts": 0, "replies": 0, "imps": 488}, {"id": "2019588670366560422", "text": "This is how I made my first internet money. \n\nSelling simple bots on eBay to pick up feathers overnight in RuneScape.\n\nThe world has changed, the game has not. https://t.co/JX5Vw6EOSc", "date": "2026-02-06", "likes": 0, "rts": 0, "replies": 0, "imps": 674}, {"id": "2017158668572369336", "text": "For the first time in over a year, you can\u2019t buy exposure to Infinex. \n\nYou\u2019ll have to wait 10 hours. \n\nImagine the pent up demand.", "date": "2026-01-30", "likes": 0, "rts": 0, "replies": 0, "imps": 580}, {"id": "2016918234667372970", "text": "forget copper, gold, silver\n\ni\u2019m hoarding adamantite https://t.co/sBbioV84AZ", "date": "2026-01-29", "likes": 5, "rts": 1, "replies": 3, "imps": 210}, {"id": "2016817434993578178", "text": "Well well we\u2019ll. https://t.co/aNKoUusJUD", "date": "2026-01-29", "likes": 5, "rts": 0, "replies": 4, "imps": 176}, {"id": "2016487037092962667", "text": "What happened to the FYP, everything has about 10% of the views as usual", "date": "2026-01-28", "likes": 0, "rts": 0, "replies": 0, "imps": 167}, {"id": "2010943992008229369", "text": "people are writing long articles (that are often soulless and sloppy), and because no one can actually sit down and read long form content anymore it's all heralded as wonderful, deep writing\n\nits slop, and that's ok", "date": "2026-01-13", "likes": 0, "rts": 0, "replies": 0, "imps": 634}, {"id": "2009093291804094540", "text": "the long GOOG / short TSLA trade is going very well\n\nthanks for asking https://t.co/cBcAtnPoYl", "date": "2026-01-08", "likes": 0, "rts": 0, "replies": 0, "imps": 1111}, {"id": "2008137149410091357", "text": "it was memes https://t.co/CEaIEGAt93", "date": "2026-01-05", "likes": 0, "rts": 0, "replies": 0, "imps": 349}, {"id": "2007394027608686606", "text": "it's a good day to decentralise INX\n\n(to me) https://t.co/55MPet8pdt", "date": "2026-01-03", "likes": 0, "rts": 0, "replies": 0, "imps": 406}, {"id": "2006974477050191993", "text": "This is cheaper than I bought for in 2024. I'm in (again). https://t.co/IXJ84c6Sx2", "date": "2026-01-02", "likes": 18, "rts": 0, "replies": 0, "imps": 520}, {"id": "2006127442147078498", "text": "i like Lighter &amp; Hyperliquid \n\ni think that people that pit them directly against each other are missing the point https://t.co/1Wzlf13cf6", "date": "2025-12-30", "likes": 0, "rts": 0, "replies": 0, "imps": 378}, {"id": "2006027563781509553", "text": "With all the will in the world, I am not reading your Substack.\n\nI would read newsletters if they were packaged into a nice magazine and delivered to my door.\n\nWho is building this?", "date": "2025-12-30", "likes": 0, "rts": 0, "replies": 0, "imps": 261}, {"id": "2005968287574941849", "text": "O? https://t.co/njdAdtpWkI", "date": "2025-12-30", "likes": 0, "rts": 0, "replies": 0, "imps": 225}, {"id": "2005891820795187645", "text": "vibe shift", "date": "2025-12-30", "likes": 0, "rts": 0, "replies": 0, "imps": 494}, {"id": "2005536332228309080", "text": "long degeneracy https://t.co/FRTwJEwzrJ", "date": "2025-12-29", "likes": 0, "rts": 0, "replies": 0, "imps": 372}, {"id": "2004456808354926895", "text": "if this is the beginning, it\u2019ll be the highest beta shitcoins that\u2019ll pump first\n\nwhat have been the worst coins of the last year? https://t.co/9u1PZpoERT", "date": "2025-12-26", "likes": 25, "rts": 0, "replies": 15, "imps": 2753}, {"id": "2004369000852344897", "text": "Going to create an alt for stocks &amp; AI. Who should I be following apart from @Citrini7 &amp; @tengyanAI?", "date": "2025-12-26", "likes": 0, "rts": 0, "replies": 0, "imps": 383}, {"id": "2004196619814949286", "text": "katexbt logged into Infinex to claim her 1 (one) crate.\n\nlet\u2019s see if despite the gas on the timeline, she goes for the INX sale in a few weeks time\n\nmy bet is she she likes money more than whatever she\u2019s bit she\u2019s doing here https://t.co/7TXvXxw15N", "date": "2025-12-25", "likes": 0, "rts": 0, "replies": 0, "imps": 560}, {"id": "2004165661409571257", "text": "Merry Christmas to everyone who should be offline today.\n\nMay the grind be worth it next year", "date": "2025-12-25", "likes": 0, "rts": 0, "replies": 0, "imps": 225}, {"id": "2003442994310185179", "text": "Whoever keeps adding an AI filter to old footage, please stop.\n\nWe want the grain, the haze, the imperfections.\n\nWhen the world is all slop, it\u2019s all we\u2019ll have left.", "date": "2025-12-23", "likes": 0, "rts": 0, "replies": 0, "imps": 562}, {"id": "2001652154206233053", "text": "Hype is now DiCaprio undateable. https://t.co/brJip1dSMW", "date": "2025-12-18", "likes": 0, "rts": 0, "replies": 0, "imps": 351}, {"id": "2000754191275376711", "text": "will underwear be worn for the final?\n\ntune in on Thursday to find out \u23f1\ufe0f https://t.co/X2Of1QkqmK", "date": "2025-12-16", "likes": 0, "rts": 0, "replies": 0, "imps": 631}, {"id": "1999456376628883705", "text": "This was a hard one \ud83d\ude2e\u200d\ud83d\udca8\n\nGlad to be a @hyperlendx user https://t.co/IPF7fRIO5V", "date": "2025-12-12", "likes": 0, "rts": 0, "replies": 0, "imps": 1078}, {"id": "1997999995572863244", "text": "Live now \ud83d\udc47 https://t.co/4hdkPVeGcG", "date": "2025-12-08", "likes": 0, "rts": 0, "replies": 0, "imps": 873}, {"id": "1997973571579375718", "text": "i've been learning lines hard\n\nif i win, i'll share my method\n\nif i lose, i will never speak of this again\n\nlfg @PapaDari_ \ud83d\udd25 https://t.co/dQ9yRSqBNf", "date": "2025-12-08", "likes": 0, "rts": 0, "replies": 0, "imps": 1162}, {"id": "1997701920316920063", "text": "i have not been liquidated\n\nso i suppose we go lower", "date": "2025-12-07", "likes": 0, "rts": 0, "replies": 0, "imps": 639}, {"id": "1997562099153920242", "text": "rare football post\n\nif Slot is being replaced, the club have to get Lijnders\n\nits the only way", "date": "2025-12-07", "likes": 0, "rts": 0, "replies": 0, "imps": 453}, {"id": "1997148694182048174", "text": "I like Rektguys, and I am Rekt\n\nBut miss the 2021 of expressing yourself with new PFPs\n\nShill me some collections", "date": "2025-12-06", "likes": 0, "rts": 0, "replies": 0, "imps": 741}, {"id": "1995487445341945994", "text": "Oh? https://t.co/wDuX5hsasF", "date": "2025-12-01", "likes": 0, "rts": 0, "replies": 0, "imps": 537}, {"id": "1995062485230223754", "text": "liquidate the late longers, then up https://t.co/B6Y35j9OU9", "date": "2025-11-30", "likes": 0, "rts": 0, "replies": 0, "imps": 872}, {"id": "1994935690157854984", "text": "Oh? https://t.co/oKmhoRpAiW", "date": "2025-11-30", "likes": 0, "rts": 0, "replies": 0, "imps": 558}, {"id": "1994225813676294482", "text": "Flywheel starts Monday \ud83d\udc47\n\nhttps://t.co/ngddWCi7hO", "date": "2025-11-28", "likes": 0, "rts": 0, "replies": 0, "imps": 258}, {"id": "1994225811269009449", "text": ".@kaiynne is the master of incentives.\n\ncheck out this flywheel for Craterun:\n\nMore volume on Infinex \u2192 more revenue \u2192 more INX/Patron buybacks \u2192 higher FDV \u2192 more value in crates \u2192 more traders \u2192 more volume on Infinex", "date": "2025-11-28", "likes": 0, "rts": 0, "replies": 0, "imps": 486}, {"id": "1994065278263808031", "text": "patrons are being swept.\n\nany news? https://t.co/sB9xGCViip", "date": "2025-11-27", "likes": 0, "rts": 0, "replies": 0, "imps": 452}, {"id": "1993307187171791182", "text": "So I\u2019ve broken it down here as clearly as I can: INX vouchers are the alpha.\n\nhttps://t.co/3WFndEzQc9", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 505}, {"id": "1993307160626053174", "text": "The large perps traders\u00a0are\u00a0keeping\u00a0the\u00a0alpha\u00a0to\u00a0themselves, which\u00a0is why you\u00a0haven't seen this\u00a0on\u00a0the TL.  \n\nBut we don\u2019t want that. We want to get our next wave of Patrons, 10x more in number but just as aligned.", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 399}, {"id": "1993306139232985361", "text": "You can choose when and at what market price you redeem the vouchers at (you\u00a0have\u00a0a\u00a0year\u00a0from the\u00a0TGE to redeem), so\u00a0if FDV is below\u00a0voucher price, you don't need to redeem it\u00a0until price is\u00a0above it.\n\nAnd obviously, some very large\u00a0perps traders\u00a0have\u00a0figured out that\u00a0crates, and INX vouchers are\u00a0EV+, because\u00a0our\u00a0builder code fees have been up only since announcing Craterun details.", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 364}, {"id": "1993306134456013108", "text": "Which\u00a0means if\u00a0you\u00a0are\u00a0trading on\u00a0Infinex perps the first days and weeks of Craterun,\u00a0you\u00a0are\u00a0very likely to get vouchers at\u00a0a price\u00a0you like (up to 444x), as\u00a0we\u00a0are\u00a0giving\u00a0out up to\u00a010% of the INX supply as vouchers in crates.\n\nSo\u00a0let's model\u00a0some\u00a0prices out (with numbers for illustration\u00a0only).", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 417}, {"id": "1993306130504876278", "text": "Firstly, there are 100,000 Patrons & there will be 10,000,000,000 INX. That\u2019s the total supply of both Patrons & INX.\n\nSo the FDV = 100k Patrons * Price.\n\nBased on current\u00a0Patron price, FDV =\u00a0$444m (though price\u00a0of\u00a0illiquid\u00a0jpeg collection, usually trades at a discount to the token\u00a0representing\u00a0the\u00a0project, but\u00a0that's\u00a0a deep\u00a0dive for\u00a0another day).", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 360}, {"id": "1993306127325671705", "text": "so wtf are they?\n\nVouchers give\u00a0you the\u00a0ability after\u00a0TGE, to\u00a0buy\u00a0INX at an\u00a0FDV between $1m-$500m (there will be a significant amount of $1m vouchers).\n\nWe've\u00a0been\u00a0clear\u00a0that\u00a0most\u00a0of\u00a0the lower\u00a0FDV vouchers are\u00a0in the earlier weeks\u00a0/ crates, but\u00a0I\u2019m\u00a0still\u00a0getting\u00a0asked questions\u00a0like\u00a0this\u00a0from\u00a0our\u00a0top yapper, so\u00a0let's\u00a0dig\u00a0into why\u00a0you\u00a0want\u00a0these\u00a0+ why you want them\u00a0early.", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 353}, {"id": "1993306122825220603", "text": "But now's our opportunity to widen our distribution, so more people can be financially aligned to Infinex, without having to buy an illiquid fungible jpeg.\n\n'how?!' i hear you cry\n\nCraterun\n\nThere are multiple ways of earning crates, but most of the crates will be earned through trading on Infinex perps. It\u2019s also the only repeatable way of earning crates.\n\nAfter\u00a0you\u00a0earn\u00a0a crate and open\u00a0it, you've\u00a0got\u00a0a pretty strong\u00a0likelihood to\u00a0get INX vouchers.", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 380}, {"id": "1993306118257340695", "text": "Patrons have been our super power over the last year, and its a two way relationship:\n\nPatrons get access first to the cool new things we're building (currently wallet extension + wallet import), and we get critical, aligned feedback so we can hotfix and dial in the products before they go live to a broader audience.\n\nIt's really not as\u00a0simple as gating features behind a 1.5 eth fungible jpeg.", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 371}, {"id": "1993306114063315106", "text": "Ensuring the Infinex community are aligned investors has worked well for us in the past, last year we gave retail - its me, i'm retail - the opportunity to buy Patrons at three prices, from liquid to most locked: $5k, $3k, $1.25k.\n\nOverwhelmingly community members chose the most locked version. What this has done, is created a core group of users and investors aligned with the project; Patrons.", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 452}, {"id": "1993306110485577951", "text": "The second reason hasn\u2019t been spoken about as much, which is, it's a 0 sum game.\n\nThose that have figured out that INX vouchers are the alpha are disincentivised to share that information, especially on X.\n\nLess players = more vouchers for them.", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 435}, {"id": "1993306107910238702", "text": "There are two things at play here; this is a novel distribution mechanism - our version of an airdrop, Kain went into detail on The Rollup about why\u00a0we want aligned investors rather than airdrop farmers for INX.\n\nhttps://t.co/PVM7IRYlHS", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 504}, {"id": "1993306104030539848", "text": "Why should you trade on Infinex Perps during Craterun?\n\nThe market has digested the Craterun campaign, and the headline prize draws. Prizes are easy to understand: $1m major prize, $100k a week, then NFTs & Patrons\n\nBut I think what's missing is that INX vouchers are the alpha", "date": "2025-11-25", "likes": 115, "rts": 15, "replies": 52, "imps": 14434}, {"id": "1993117713707975068", "text": "You do understand what I do for a living? I literally make decentralized central banks and rebuilt Wallstreet on a blockchain https://t.co/vnbCfIegnG", "date": "2025-11-25", "likes": 0, "rts": 0, "replies": 0, "imps": 522}, {"id": "1993101347877687591", "text": "vibe shift", "date": "2025-11-24", "likes": 0, "rts": 0, "replies": 0, "imps": 367}, {"id": "1992737743156449506", "text": "i've been getting depressed about how much crypto has moved on so much from the ideals i joined the space for in 2017\n\nso i'm going to read more cypherpunk/og texts + books + post them here to remind myself what we're doing here", "date": "2025-11-23", "likes": 0, "rts": 0, "replies": 0, "imps": 878}, {"id": "1992421355263029425", "text": "can some yankee doodle help me out with my @sportfun team\n\ni bought a bunch of packs so i got 72 players, but can only play 35\n\nbut i don't know who any of these people are\n\nwho should i bench?\n\nwill pay 10% of this week's rewards to whoever gives the alpha https://t.co/DoOlotnGfz", "date": "2025-11-23", "likes": 0, "rts": 0, "replies": 0, "imps": 441}, {"id": "1992412267246395841", "text": "i've doubled my monad airdrop with the Coinbase ICO\n\ni usually like to double airdrops: it supports projects that have supported me, and it remains a free trade until the price goes -50%\n\nworked very well with Hyperliquid\n\ngmonad https://t.co/MVdjWWttRC https://t.co/nk0CiXqM6J", "date": "2025-11-23", "likes": 0, "rts": 0, "replies": 0, "imps": 1468}, {"id": "1992387850990743894", "text": "LET ME IN! @synthetix Season 2 Trading Competition https://t.co/5UXO7Adg5l https://t.co/WVdDdNHRxt", "date": "2025-11-23", "likes": 0, "rts": 0, "replies": 0, "imps": 812}, {"id": "1992248015411908811", "text": "banger", "date": "2025-11-22", "likes": 0, "rts": 0, "replies": 0, "imps": 148}, {"id": "1992127113495990376", "text": "pretty gutted my @megaeth allocation didn\u2019t increase with all the cancelled bids, and a review\n\nbut looking at the dune dashboard made by @Fookin_No_Wan, i didn\u2019t realise how quite so many people at any allocation above $2650 locked!\n\nmy learning, because ill never be a top yapper for a project, is to be aligned by being price insensitive & setting up where i can take bigger, longer term bets\n\nthank you megaETH for the learnings here & i look forward to crossing the bridge nov 25th", "date": "2025-11-22", "likes": 0, "rts": 0, "replies": 0, "imps": 1414}, {"id": "1991852401196961942", "text": "my polymarket bet likes this https://t.co/Wvs0IGeLpL https://t.co/nSOSRrndsb", "date": "2025-11-21", "likes": 0, "rts": 0, "replies": 0, "imps": 557}, {"id": "1991786023597305997", "text": "it is never good when fartcoin leads a bounce https://t.co/UwmrblD4FD", "date": "2025-11-21", "likes": 0, "rts": 0, "replies": 0, "imps": 833}, {"id": "1991619423694909685", "text": "if you build it (the right incentive structure), they will come (trade perps)", "date": "2025-11-20", "likes": 0, "rts": 0, "replies": 0, "imps": 399}, {"id": "1990756471647449529", "text": "what ring of hell is the news that X is down being the only thing posted on X when its down", "date": "2025-11-18", "likes": 0, "rts": 0, "replies": 0, "imps": 615}, {"id": "1990719850818191547", "text": "$100 HYPE makes sense to me\n\ndunno, might be psyops", "date": "2025-11-18", "likes": 0, "rts": 0, "replies": 0, "imps": 450}, {"id": "1989883814345367602", "text": "You know the best thing about the $1m prize? \n\nIt\u2019s paid in USDC, and 70% of it isn\u2019t locked for 6 months\n\nWhat a rug that would be https://t.co/T7iJC4esX9", "date": "2025-11-16", "likes": 0, "rts": 0, "replies": 0, "imps": 5593}, {"id": "1989117527444844551", "text": "who are the best clippers on CT?\n\nInfinex", "date": "2025-11-13", "likes": 0, "rts": 0, "replies": 0, "imps": 1515}, {"id": "1988081539012526217", "text": "the real question is, will megaeth bidders get their unused money back before sale close? https://t.co/jtVCvncJee", "date": "2025-11-11", "likes": 0, "rts": 0, "replies": 0, "imps": 744}, {"id": "1988033355326386469", "text": "so digesting this Uni fee switch news\n\nproposal:\n- take 1/5th of fees and use it to burn the UNI token\n- burn 100M UNI tokens from the treasury, to back date the burn\n\nthey\u2019re internally valuing the yearly burn at $250m, which puts them at a p/r of 8x\n\nlower than Hyperliquid \ud83d\udc40", "date": "2025-11-10", "likes": 0, "rts": 0, "replies": 0, "imps": 776}, {"id": "1987858789207597343", "text": "every day i\u2019m grateful that i left the UK\n\ncountry is legit cooking itself\n\nsad for those who haven\u2019t left\n\ni hope one day it can purge\n\nand for the record the problem isn\u2019t immigration\n\nit\u2019s self immolation", "date": "2025-11-10", "likes": 0, "rts": 0, "replies": 0, "imps": 469}, {"id": "1987746512861122717", "text": "listening to SBF talking about the black box again today\n\nHyperliquid is the complete opposite of this - valued not  as a ponzi but a business that generates revenue and uses it to buy their token\n\nHyperliquid", "date": "2025-11-10", "likes": 0, "rts": 0, "replies": 0, "imps": 156}, {"id": "1987524527371546692", "text": "just gone long SNX in the SNX trading competition again\n\n$6", "date": "2025-11-09", "likes": 0, "rts": 0, "replies": 0, "imps": 376}, {"id": "1987357877695316305", "text": "Is the answer just Pendle?\n\nkHYPE YT &amp; PT run out in a couple days \ud83d\udc40", "date": "2025-11-09", "likes": 0, "rts": 0, "replies": 0, "imps": 172}, {"id": "1987356560608338387", "text": "I simply need more HYPE.\n\nI\u2019m making a few % on HyperEVM, but I know there\u2019s something I\u2019m missing.\n\nHelp me out here chat.", "date": "2025-11-09", "likes": 0, "rts": 0, "replies": 0, "imps": 402}, {"id": "1984967075744579816", "text": "look i have absolutely no idea how american football works\n\nso come exploit my lack of skill\n\nhttps://t.co/YelcCXa9WT https://t.co/sq9Chitf9Z", "date": "2025-11-02", "likes": 0, "rts": 0, "replies": 0, "imps": 560}, {"id": "1984941315906506888", "text": "i (hope) i can stay solvent longer than the decentralised market can stay offline https://t.co/U4K4Euhe6X", "date": "2025-11-02", "likes": 0, "rts": 0, "replies": 0, "imps": 353}, {"id": "1984556829184283028", "text": "Help a degen out \n\nthx https://t.co/vSXt8Nu4zL", "date": "2025-11-01", "likes": 0, "rts": 0, "replies": 0, "imps": 674}, {"id": "1984171541052190829", "text": "max pain is being liquidated before up\n\nsurvive", "date": "2025-10-31", "likes": 0, "rts": 0, "replies": 0, "imps": 329}, {"id": "1983913940200669531", "text": "if you\u2019re upset about your MON allocation\n\njust think, you can use it as margin &amp; turn it into $0\n\nthat\u2019s the power of leverage", "date": "2025-10-30", "likes": 0, "rts": 0, "replies": 0, "imps": 308}, {"id": "1983886531569054088", "text": "my meteora drop was ~$5k\n\nlooks like my monad drop will be similar\n\nnext up, do i get megaeth allo? https://t.co/1kyUnOOwCy", "date": "2025-10-30", "likes": 0, "rts": 0, "replies": 0, "imps": 1846}];
+
+const TEMPI = [
+  {bucket: "near", name: "materialistic", motor: "Punching→Slashing", desc: "Strong/Quick — sudden aggressive intent"},
+  {bucket: "near", name: "human", motor: "Floating→Gliding", desc: "Light/Sustained — slow tenderness"},
+  {bucket: "near", name: "warm", motor: "Pressing→Wringing", desc: "Strong/Sustained — warm consent"},
+  {bucket: "near", name: "cool", motor: "Dabbing→Flicking", desc: "Light/Quick — pert intimacy"},
+  {bucket: "stable", name: "commanding", motor: "Pressing→Punching", desc: "Strong/Direct — bold resolve"},
+  {bucket: "stable", name: "receptive", motor: "Floating→Flicking", desc: "Light/Flexible — welcoming tenderness"},
+  {bucket: "stable", name: "practical", motor: "Wringing→Slashing", desc: "Strong/Flexible — spell-binding power"},
+  {bucket: "stable", name: "self-contained", motor: "Gliding→Dabbing", desc: "Light/Direct — gentle deference"},
+  {bucket: "adream", name: "sombre", motor: "Pressing→Punching", desc: "Strong/Bound — sombre awareness"},
+  {bucket: "adream", name: "irradiant", motor: "Floating→Flicking", desc: "Light/Free — sympathetic exultation"},
+  {bucket: "adream", name: "overpowering", motor: "Wringing→Slashing", desc: "Strong/Free — irradiant casting"},
+  {bucket: "adream", name: "diffused", motor: "Gliding→Dabbing", desc: "Light/Bound — diffused welcome"},
+  {bucket: "mobile", name: "unacknowledged", motor: "Punching/Slashing", desc: "Quick/Bound — self-concealed aggression"},
+  {bucket: "mobile", name: "acknowledged", motor: "Floating/Gliding", desc: "Sustained/Free — easy disclosure"},
+  {bucket: "mobile", name: "revealed", motor: "Dabbing/Flicking", desc: "Quick/Free — sudden disclosure"},
+  {bucket: "mobile", name: "concealed", motor: "Pressing/Wringing", desc: "Sustained/Bound — withheld weight"},
+  {bucket: "remote", name: "egocentric", motor: "Pressing→Punching", desc: "Direct/Bound — unsociable solitude"},
+  {bucket: "remote", name: "altruistic", motor: "Floating→Flicking", desc: "Flexible/Free — sociable cordiality"},
+  {bucket: "remote", name: "sociable", motor: "Gliding→Dabbing", desc: "Direct/Free — sociable companionship"},
+  {bucket: "remote", name: "unsociable", motor: "Wringing→Slashing", desc: "Flexible/Bound — welcome solitude"},
+  {bucket: "awake", name: "acute", motor: "Punching→Dabbing", desc: "Direct/Quick — acute idea-decision"},
+  {bucket: "awake", name: "doubting", motor: "Floating→Wringing", desc: "Flexible/Sustained — slowly dawning doubt"},
+  {bucket: "awake", name: "certain", motor: "Pressing→Gliding", desc: "Direct/Sustained — certain awareness"},
+  {bucket: "awake", name: "uncertain", motor: "Flicking→Slashing", desc: "Flexible/Quick — sudden new idea"},
+];
+
+const BUCKETS = ["near","stable","adream","mobile","remote","awake"];
+const BUCKET_LABEL = {near:"Near",stable:"Stable",adream:"Adream",mobile:"Mobile",remote:"Remote",awake:"Awake"};
+
+const STORE_KEY = "opaque-classifier-v1";
+let picks = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
+
+function save() { localStorage.setItem(STORE_KEY, JSON.stringify(picks)); recompute(); }
+
+function pick(postId, tempoName) {
+  if (picks[postId] === tempoName) delete picks[postId]; else picks[postId] = tempoName;
+  save();
+  renderPostButtons(postId);
+}
+
+function skip(postId) { pick(postId, "_skip"); }
+
+function renderPostButtons(postId) {
+  const wrap = document.querySelector(`[data-postid="${postId}"]`);
+  if (!wrap) return;
+  wrap.querySelectorAll(".tempo-btn, .skip-btn").forEach(b => {
+    const t = b.dataset.tempo;
+    if (t === picks[postId]) b.classList.add("selected"); else b.classList.remove("selected");
+  });
+  const post = wrap.closest(".post");
+  if (picks[postId] && picks[postId] !== "_skip") post.classList.add("classified");
+  else post.classList.remove("classified");
+}
+
+function recompute() {
+  const total = POSTS.length;
+  const classified = Object.values(picks).filter(v => v && v !== "_skip").length;
+  const skipped = Object.values(picks).filter(v => v === "_skip").length;
+  document.getElementById("progressFill").style.width = ((classified + skipped) / total * 100) + "%";
+  document.getElementById("progressText").textContent =
+    `${classified} classified · ${skipped} skipped · ${total - classified - skipped} remaining`;
+
+  // Tempo counts
+  const counts = {};
+  TEMPI.forEach(t => counts[t.name] = 0);
+  for (const k in picks) if (picks[k] && picks[k] !== "_skip") counts[picks[k]] = (counts[picks[k]]||0) + 1;
+
+  // Distribution grid
+  const dist = document.getElementById("distribution");
+  dist.innerHTML = BUCKETS.map(b => {
+    const tempi = TEMPI.filter(t => t.bucket === b);
+    const bucketTotal = tempi.reduce((s,t) => s + (counts[t.name]||0), 0);
+    return `<div class="dist-col">
+      <h3 style="color:var(--${b})">${BUCKET_LABEL[b]} · ${bucketTotal}</h3>
+      ${tempi.map(t => `<div class="tempo-row ${counts[t.name]?'has-count':''}">
+        <span>${t.name}</span><span>${counts[t.name]||0}</span></div>`).join("")}
+    </div>`;
+  }).join("");
+
+  // Placement guess
+  const guess = document.getElementById("placementGuess");
+  if (classified < 20) {
+    guess.innerHTML = `Backward-derived placement appears here once you've classified 20+ posts. (${classified}/20)`;
+  } else {
+    const bucketTotals = {};
+    BUCKETS.forEach(b => bucketTotals[b] = TEMPI.filter(t => t.bucket === b).reduce((s,t) => s + (counts[t.name]||0), 0));
+    const baselineTotals = {near: bucketTotals.near, stable: bucketTotals.stable, adream: bucketTotals.adream};
+    const baseline = Object.entries(baselineTotals).sort((a,b) => b[1]-a[1])[0][0];
+    const outerTotals = {mobile: bucketTotals.mobile, remote: bucketTotals.remote, awake: bucketTotals.awake};
+
+    // Stress derivation per baseline + outer
+    const STRESS_MAP = {
+      "near-stable": "space", "near-awake": "space",
+      "near-adream": "flow", "near-mobile": "flow",
+      "stable-near": "time", "stable-awake": "time",
+      "stable-adream": "flow", "stable-remote": "flow",
+      "adream-near": "time", "adream-mobile": "time",
+      "adream-stable": "space", "adream-remote": "space",
+    };
+    const outerFires = Object.entries(outerTotals).filter(([k,v]) => v > 0).map(([k,v]) => k);
+    const baselineFires = Object.entries(baselineTotals).filter(([k,v]) => v > 0 && k !== baseline).map(([k,v]) => k);
+    const candidates = [...outerFires, ...baselineFires];
+    const stressVotes = {};
+    candidates.forEach(c => {
+      const s = STRESS_MAP[`${baseline}-${c}`];
+      if (s) stressVotes[s] = (stressVotes[s] || 0) + 1;
+    });
+    const stress = Object.entries(stressVotes).sort((a,b) => b[1]-a[1])[0]?.[0] || "?";
+
+    const dominantTempo = Object.entries(counts).sort((a,b) => b[1]-a[1])[0];
+    const top5 = Object.entries(counts).filter(([k,v]) => v>0).sort((a,b) => b[1]-a[1]).slice(0,5);
+
+    guess.innerHTML = `<strong>Backward-derived placement (${classified} posts classified):</strong>
+
+Baseline:        <strong>${baseline.toUpperCase()}</strong> (${bucketTotals[baseline]} posts in home tempi)
+Stress:          <strong>${stress.toUpperCase()}-stressed</strong> (inferred from outer projections firing)
+Outers firing:   ${outerFires.length ? outerFires.join(" + ") : "(none yet)"}
+Other baselines: ${baselineFires.length ? baselineFires.join(" + ") + " (these should NOT fire — if they do, the placement may be drifting)" : "(none — clean)"}
+
+Bucket distribution:
+  Near: ${bucketTotals.near}  ·  Stable: ${bucketTotals.stable}  ·  Adream: ${bucketTotals.adream}
+  Mobile: ${bucketTotals.mobile}  ·  Remote: ${bucketTotals.remote}  ·  Awake: ${bucketTotals.awake}
+
+Top tempi:
+${top5.map(([k,v]) => `  ${k}: ${v}`).join("\n")}
+${dominantTempo[1] > 0 ? `\nDominant: ${dominantTempo[0]} (${dominantTempo[1]} posts, ${(dominantTempo[1]/classified*100).toFixed(0)}%)` : ""}`;
+  }
+}
+
+function exportJSON() {
+  const out = {handle: "0xopaque", fetched: "2026-05-13", picks, distribution: Object.fromEntries(TEMPI.map(t => [t.name, Object.values(picks).filter(v=>v===t.name).length]))};
+  const blob = new Blob([JSON.stringify(out, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "0xopaque-tempo-picks.json";
+  a.click();
+}
+
+function copyMarkdown() {
+  let md = "# 0xopaque — tempo classification picks\n\n";
+  POSTS.forEach((p, i) => {
+    const t = picks[p.id] || "—";
+    md += `${i+1}. **[${p.date}]** \`${t}\` — ${p.text.replace(/\n/g,' ').slice(0,200)}\n`;
+  });
+  navigator.clipboard.writeText(md).then(() => alert("Markdown copied to clipboard"));
+}
+
+function resetAll() {
+  if (confirm("Reset all classifications? This cannot be undone.")) {
+    picks = {};
+    save();
+    POSTS.forEach(p => renderPostButtons(p.id));
+  }
+}
+
+function renderAll() {
+  const main = document.getElementById("postList");
+  main.innerHTML = POSTS.map((p, i) => {
+    const grid = BUCKETS.map(b => {
+      const tempi = TEMPI.filter(t => t.bucket === b);
+      return `<div class="tempo-col">
+        <div class="tempo-col-header" style="color:var(--${b})">${BUCKET_LABEL[b]}</div>
+        ${tempi.map(t => `<button class="tempo-btn" data-tempo="${t.name}" data-bucket="${b}"
+          onclick="pick('${p.id}','${t.name}')" title="${t.motor} · ${t.desc}">
+          <span class="label">${t.name}</span>
+          <span class="motor">${t.motor}</span>
+        </button>`).join("")}
+      </div>`;
+    }).join("");
+    return `<div class="post" id="post-${p.id}">
+      <div class="post-meta">${i+1}/${POSTS.length} · ${p.date} · ❤${p.likes} 🔁${p.rts} 💬${p.replies} 👁${p.imps} · <a href="https://x.com/0xopaque/status/${p.id}" target="_blank">x.com/0xopaque/status/${p.id}</a></div>
+      <div class="post-text">${p.text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</div>
+      <div data-postid="${p.id}">
+        <div class="tempo-grid">${grid}</div>
+        <div class="skip-row"><button class="skip-btn" data-tempo="_skip" onclick="skip('${p.id}')">— skip (unclear / RT / auto-text)</button></div>
+      </div>
+    </div>`;
+  }).join("");
+  POSTS.forEach(p => renderPostButtons(p.id));
+}
+
+renderAll();
+recompute();
+</script>
+</body>
+</html>

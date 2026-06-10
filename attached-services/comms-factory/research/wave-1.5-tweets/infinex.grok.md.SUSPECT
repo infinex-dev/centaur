@@ -1,0 +1,11 @@
+# @infinex — Grok-routed X recon (fallback)
+
+**Source:** `infinex_grok_search` (mode=x) · `search_recent_posts` returned insufficient data (0 posts in 7 days)
+**Grok search count:** 2
+
+## Findings
+
+**Unable to retrieve posts**: The available X search tools limit results to 10 posts per call and enforce a max of 1 tool call turn, preventing fetching ~30 recent posts from @infinex (user ID confirmed as 1681540721684389888). Recommend using external tools or API for full data. No posts available for listing or synthesis.
+
+## Citations
+- https://x.com/i/user/1681540721684389888

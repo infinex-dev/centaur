@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Blog/docs pattern — 2026-05-28</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-muted: #555;
+    --bg: #fbfaf7;
+    --rule: #d8d4c8;
+    --accent: #7a3b00;
+    --accent-2: #2a4d7a;
+    --code-bg: #f1eee6;
+    --steal-bg: #eef4ee;
+    --steal-border: #5a8d5a;
+    --avoid-bg: #fbeded;
+    --avoid-border: #b04a4a;
+    --pending-bg: #f7f1e1;
+    --pending-border: #c89732;
+    --phase-bg: #eef0f4;
+    --phase-border: #6677a3;
+  }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    padding: 48px 24px 96px;
+  }
+  main { max-width: 980px; margin: 0 auto; }
+  h1, h2, h3, h4 {
+    font-family: -apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-top: 2.2em;
+    margin-bottom: 0.6em;
+  }
+  h1 { font-size: 1.9em; margin-top: 0.2em; border-bottom: 2px solid var(--ink); padding-bottom: 0.3em; }
+  h2 { font-size: 1.45em; border-bottom: 1px solid var(--rule); padding-bottom: 0.25em; }
+  h3 { font-size: 1.18em; color: var(--accent); }
+  h4 { font-size: 1.02em; margin-top: 1.6em; font-weight: 700; }
+  p { margin: 0.7em 0; }
+  hr { border: none; border-top: 1px solid var(--rule); margin: 2.4em 0; }
+  strong { color: #000; }
+  em { color: var(--ink); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  code {
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font: 0.9em/1.4 "SF Mono","Menlo","Consolas",monospace;
+    color: #5a3000;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 14px 18px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font: 0.86em/1.5 "SF Mono","Menlo","Consolas",monospace;
+    border-left: 3px solid var(--accent);
+  }
+  pre code { background: transparent; padding: 0; color: var(--ink); font-size: 1em; }
+  blockquote {
+    border-left: 3px solid var(--rule);
+    margin: 1em 0;
+    padding: 0.2em 1em;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.93em;
+  }
+  th, td {
+    border: 1px solid var(--rule);
+    padding: 7px 11px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--code-bg); font-family: -apple-system,sans-serif; font-weight: 600; font-size: 0.92em; }
+  tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  details {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 10px 16px;
+    margin: 1.2em 0;
+    background: rgba(255,255,255,0.5);
+  }
+  details[open] { background: rgba(255,255,255,0.9); }
+  details > summary {
+    cursor: pointer;
+    font-family: -apple-system,sans-serif;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1.05em;
+    padding: 4px 0;
+  }
+  details > summary:hover { color: #000; }
+  .meta {
+    font-family: -apple-system,sans-serif;
+    color: var(--ink-muted);
+    font-size: 0.86em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.8em;
+  }
+  .meta a { margin-right: 0.8em; display: inline-block; margin-bottom: 0.2em; }
+  .steal { border-left: 3px solid var(--steal-border); background: var(--steal-bg); border-radius: 0 4px 4px 0; padding: 12px 16px; margin: 0.8em 0; }
+  .avoid { border-left: 3px solid var(--avoid-border); background: var(--avoid-bg); border-radius: 0 4px 4px 0; padding: 12px 16px; margin: 0.8em 0; }
+  .pill {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-family: -apple-system,sans-serif;
+    font-size: 0.8em;
+    background: var(--code-bg);
+    color: var(--ink-muted);
+    margin-right: 6px;
+    border: 1px solid var(--rule);
+  }
+  .pill.infinex { background: #f0e8d8; color: #6b4a00; border-color: #d8c898; }
+  .pill.anchorage { background: #efeaf7; color: #4b2d8a; border-color: #c5b6e0; }
+  .pill.phantom { background: #ecf3ec; color: #2e5e2e; border-color: #b6d6b6; }
+  .pill.coinbase { background: #e7eff8; color: #1f4a7e; border-color: #b6c8df; }
+  .pill.hyperliquid { background: #f8e7e7; color: #7e1f1f; border-color: #dfb6b6; }
+  @media (max-width: 640px) {
+    body { padding: 24px 14px 64px; font-size: 15px; }
+    h1 { font-size: 1.55em; }
+    table { font-size: 0.85em; }
+    .meta a { margin-right: 0.5em; }
+  }
+</style>
+</head>
+<body>
+<main>
+<div class="meta">
+  <a href="#tldr-the-absolute-bare-minimum-pattern">TL;DR</a>
+  <a href="#the-minimum-viable-infinex-template">Template</a>
+  <a href="#three-modes-one-template">Modes</a>
+  <a href="#worked-example-hyperliquid-spark-launch">Worked example</a>
+  <a href="#the-five-pronged-clanker-stack">Clanker stack</a>
+  <a href="#strip-from-infinex-s-current-blog">Strip</a>
+  <a href="#source-brand-contributions">Brand contributions</a>
+  <a href="#top-level-architecture">Architecture</a>
+  <a href="#deep-dives">Deep dives</a>
+</div>
+<article id="content">Loading&hellip;</article>
+</main>
+
+<script id="md-source" type="text/markdown">
+# Blog/docs pattern — 2026-05-28
+
+Synthesis of five parallel structural audits — Infinex (baseline), Anchorage Digital, Phantom, Coinbase Blog + Coinbase Learn, Hyperliquid docs. Inputs for one minimum-viable Infinex blog/docs template covering Hyperliquid Spark, Synthetics Perps, Bridge on/off-ramps, and beyond.
+
+Each audit is a collapsible deep-dive at the bottom of the doc. The top is the synthesized template recommendation.
+
+---
+
+## TL;DR — the absolute bare minimum pattern
+
+1. **Three modes, one URL surface.** Frontmatter `type:` parameter (`launch | explainer | weekly-update`) resolves the mode — NOT a URL path or site section. Coinbase splits Blog and Learn into two URL trees; Infinex can collapse public launch posts, explainers, and lightweight docs into `/news/` with `type` in the frontmatter. User-support docs stay separate only when they are true helpdesk flows.
+2. **The H1 + Date + Dek trinity stays.** Infinex already does this on every post — the dek/standfirst paragraph under the headline does TL;DR work without being labeled. Keep it. It's the most clanker-friendly opening shape already present in the corpus.
+3. **H2-as-claim, not H2-as-label.** Launch and essay section headings should be assertions ("Markets price the world now"), not labels ("Markets section"). Explainers can use question-shaped H2s. Either way, the TOC should carry the post's argument or user path. Steal from Anchorage and Coinbase Learn.
+4. **One-sentence opener IS the TL;DR.** Hyperliquid's discipline. No marketing throat-clearing, no scene-setting, no question-led openings on launch posts. The first sentence states the load-bearing fact. Explainer mode uses Coinbase Learn's `"What is X?"` h1 with a same-sentence definition opener — also rigidly disciplined.
+5. **Five-pronged clanker stack baked in from day 1.** `.md` URL suffix on every page, `?ask=<q>` GET param, `/sitemap.md`, `/llms-full.txt`, per-page "For AI agents" footer. Direct port from Hyperliquid docs. Infinex can leapfrog the audited blog surfaces on this dimension, but it is low engineering cost, not zero cost.
+6. **Blog defaults static; motion lives upstream.** Phantom's discipline. Avoid GIFs/video on the blog unless motion explains product state better than a screenshot. The Kalshi-style tease arc for Spark plays out on Twitter; the blog is the static anchor that survives screenshot, share, paste-into-clanker.
+7. **Length budget by `type`.** Launch posts 600–900w (Phantom feature-launch norm). Explainer posts 500–1,200w (Coinbase Learn norm). Weekly-update posts 150–400w (Infinex's `№ N` norm — already disciplined, keep).
+
+---
+
+## Pipeline now
+
+The pipeline should collapse around one canonical public source object, then adapt outward:
+
+```
+release event
+  -> ReleaseCard / deployed_facts
+  -> canonical blog/docs source page
+  -> validator + human edit gate
+  -> touchpoint adapters
+       - X
+       - Telegram
+       - website blog page
+       - website modal
+       - email, after domain warmup
+       - press, only if relevant
+  -> human ship gate per channel
+```
+
+The blog/docs source page is the artifact of record. The channel outputs are excerpts, angles, or shortened cuts from the same source, not independent rewrites.
+
+Production stance:
+
+- Ready now as a human-editable template and review workflow.
+- Close for short-copy generation/validation: release cards, generator, validator, orchestrator, and CLI already exist for X/web/in-product-style candidates.
+- Not production-ready for autonomous blog/docs generation: no longform page generator, no canonical page renderer, no `.md` route, no `?ask=` handler, no `/sitemap.md`, no `/llms-full.txt`, no email/press adapters, and ship remains human/manual.
+- Safe MVP: fill the canonical source template by hand, run short adaptations through the existing validator, then manually ship approved outputs.
+
+Template for the human-editable source object: [`research/blog-docs-human-edit-template-2026-05-28.md`](blog-docs-human-edit-template-2026-05-28.md).
+
+---
+
+## The minimum-viable Infinex template
+
+This is the skeleton. Every post starts from this shape; `type` resolves the variant.
+
+This is also the canonical comms source object. X, Telegram, website modal, email, and press copy should adapt from this page/card rather than each touchpoint inventing its own version.
+
+```markdown
+---
+type: launch                          # launch | explainer | weekly-update
+release_id: spark-2026               # references ReleaseCard if applicable
+deployed_facts:                      # what the post is allowed to assert
+  - "Spark live on Infinex 2026-XX-XX"
+  - "Supports N HL markets at launch"
+date: 2026-05-28
+tags: [hyperliquid, integration]
+slug: hyperliquid-spark-live
+---
+
+# H1: mode-honest subject + status/question
+
+Dek / standfirst paragraph: 1–2 short factual sentences under the H1.
+Functions as TL;DR.
+This is what the agent extracts when asked "what's this post about."
+
+## H2: claim or question that names the section's load-bearing point
+
+Body — 2–4 short paragraphs of Practical-tempo prose. Explain the
+structure; let the structure justify itself.
+
+## H2: next load-bearing point
+
+Body. Bullets only for enumeration. Code blocks for SDK/CLI snippets.
+
+## What happens next
+
+Single forward-looking sentence or short paragraph, drawn from committed facts. Phantom signature.
+```
+
+Three things in the rendered DOM:
+
+- Visible TOC anchor list below the H1 on launch/explainer posts over ~600 words (Phantom + Anchorage convention)
+- Metadata strip below TOC: date, tags, related posts (Phantom strip)
+- **"For AI agents"** footer with absolute URLs to: the post's `.md` source, the `deployed_facts` manifest, related posts, and three example `?ask=` queries pre-filled
+
+---
+
+## Three modes, one template
+
+| `type` | Used for | H1 shape | Opening | Length | Notable convention |
+|---|---|---|---|---|---|
+| `launch` | Hyperliquid Spark, Synthetics Perps, Bridge, future product launches | `Subject + verb + "is live on Infinex"` | Dek = headline fact in one sentence | 600–900w | 3 H2 sections, claim-shaped by default; "What happens next" close |
+| `explainer` | "What is Hyperliquid Spark?", "How synthetic perps work" | `"What is X?"` (Coinbase Learn pattern) | Same-sentence definition: `X is Y that does Z.` | 500–1,200w | h2 chain mirrors Google "People also ask": What is / How does it work / Why use / Risks / Example |
+| `weekly-update` | Infinex's existing `№ N` pattern | `№ N` (preserved) | Dek = "this week..." | 150–400w | H3-per-feature, screenshots inline, "Coming up" close |
+
+The `type` resolves at render time: same template logic, different defaults for h1 shape, length budget, and section conventions. Coinbase ships two separate URL trees to achieve this differentiation; Infinex can ship one tree with a frontmatter switch.
+
+**Why this fits Infinex better than Coinbase's split:** a user coming from a launch tweet may need the explainer next; a user reading the explainer may need the launch announcement next. Same URL tree means related-posts navigation works across modes. Tag-based filtering (`/news/?tag=hyperliquid`) shows all Hyperliquid posts regardless of mode. The lost URL-mode signal must be replaced with a visible `type` chip and date/edited metadata.
+
+---
+
+## Worked example: Hyperliquid Spark launch
+
+What the Spark launch post looks like in this template. Concrete to make the abstract pattern usable.
+
+```markdown
+---
+type: launch
+release_id: spark-2026
+deployed_facts:
+  - "Hyperliquid Spark is live on Infinex from 2026-XX-XX"
+  - "Spark routes perp trades from Infinex directly to Hyperliquid L1"
+  - "Supports N HL markets at launch"
+  - "Infinex holds no custody of positions — positions live on Hyperliquid"
+date: 2026-XX-XX
+tags: [hyperliquid, integration, perps]
+slug: hyperliquid-spark-live
+---
+
+# Hyperliquid Spark is live on Infinex
+
+Spark routes perp trades from Infinex directly to Hyperliquid's L1.
+N markets supported at launch.
+
+## Trade Hyperliquid markets without leaving Infinex
+
+Body: explain the supported market universe, the perp-vs-spot scope,
+and the leverage caps if those are in `deployed_facts`. Plain prose,
+Practical-tempo, no marketing.
+2–3 short paragraphs. Bullets only if enumerating markets or features.
+
+## Your positions live on Hyperliquid
+
+Body: clarify that positions live on Hyperliquid L1, Infinex holds none.
+Address the natural user question without burying it. This is the
+Practical-tempo move: explain the structure, let the structure
+justify itself.
+
+## What happens next
+
+If committed facts allow it: Spark's next features ship over the coming weeks: [list].
+```
+
+Visible elements rendered around this:
+- TOC anchors for the three H2s
+- Metadata strip showing date + tags + related posts (e.g. the matching explainer "What is Hyperliquid Spark?")
+- For AI agents footer with `infinex.xyz/news/hyperliquid-spark-live.md` + the `deployed_facts` URL + three example queries
+
+**Synthetics Perps and Bridge follow the same launch skeleton** with different `deployed_facts` and different H2 claims. Synthetics likely needs a paired explainer-mode companion (`type: explainer`, "What are synthetic perps?") because liquidations, margin, and risk need definition. Bridge can start launch-only if the routing, timing, fees, regions, and failure modes are obvious in the launch post; add an explainer or FAQ if they are not.
+
+---
+
+## The five-pronged clanker stack
+
+Prioritize from day 1. The full stack does not exist on Infinex's current `/news` surface; all five are present on Hyperliquid's docs. This is mostly framework work rather than visual design, but it still needs routing, rendering, caching, and tests.
+
+1. **`.md` URL suffix on every page.** `infinex.xyz/news/hyperliquid-spark-live.md` returns the markdown source verbatim. An LLM agent requesting the page gets the source without HTML parsing. One render path internally, two response shapes.
+
+2. **`?ask=<question>` GET parameter** baked into every page's "For AI agents" footer. The page is shaped to be a useful prompt. `infinex.xyz/news/hyperliquid-spark-live?ask=what+markets` should become a valid URL that an agent can construct once the backend handles the parameter.
+
+3. **`/sitemap.md`** at the root. Plain markdown list of all posts with absolute URLs, tags, dates, types. Supplements `sitemap.xml` for agent consumption — XML remains useful for search engines; markdown is easier for current LLM agents.
+
+4. **`/llms-full.txt`** at the root. Single-file concatenation of all posts. The audit workflow already treats this as a first check when crawling a new docs site; adopting it puts Infinex in the small set of crypto brands that take agent-readers seriously. Hyperliquid ships this; the audited Phantom and Coinbase surfaces did not expose an equivalent.
+
+5. **Per-page "For AI agents" footer.** Absolute URLs to: this page's `.md`, the `deployed_facts` manifest, related posts, the post `type`, and three example `?ask=` queries pre-filled. Even the 404 page follows this pattern — name three recovery paths for lost agents.
+
+---
+
+## Strip from Infinex's current blog
+
+From the Infinex baseline audit. The blog is currently three disciplined templates (numbered weekly updates, Uneasy Money podcast recaps, essay-announcements) which is good — preserve the three-template family. Strip the surface clutter:
+
+<div class="avoid">
+
+- **2023 manifesto em-dash cadence** (16+ per post). Already trending to 0–1 in 2026 weeklies — finish the job. The current validator catches em-dash density; a true zero-tolerance rule would need its own tests.
+- **Reuters press-release dateline + media-contact block.** One-off, doesn't recur.
+- **"Quick take" headers.** The dek paragraph does this job.
+- **Block-quote-heavy recap posts.** When the structure is "quote, quote, quote," the post isn't doing original work.
+- **Victory-lap phrasing.** "One of the largest NFT sales in crypto history" — superlatives age badly. Validator can catch with a new tested rule alongside `rejectAIslop`.
+
+</div>
+
+<div class="steal">
+
+Keep — these are load-bearing already:
+
+- **H1 + Date + Dek trinity.** Don't touch. Already the strongest clanker affordance in the corpus.
+- **Noun-phrase section headings** (upgrade to H2-as-claim per Anchorage — assertion-shape, not label-shape).
+- **Forward-looking single-sentence close.** Phantom's "Looking ahead" signature, already present in Infinex's recent posts.
+- **No-byline corporate voice** for launch and weekly-update modes. Explainer mode might carry an author for credibility (TBD).
+- **Bullets-for-enumeration-only.** Never for emphasis. Infinex already does this; Anchorage and Phantom do it too. Coinbase Blog drifts into emphasis-bullets; don't imitate.
+- **Three-template family discipline.** Already strong; formalize as the `type` frontmatter parameter.
+
+</div>
+
+---
+
+## Source brand contributions
+
+Each brand contributes a specific pattern to the synthesis:
+
+| Brand | What Infinex steals | Why it fits |
+|---|---|---|
+| <span class="pill infinex">infinex own</span> | H1 + Date + Dek trinity; noun-phrase section headings; three-template family; forward-looking close | Baseline; already disciplined |
+| <span class="pill anchorage">anchorage</span> | **H2-as-claim** discipline; single tag-faceted funnel instead of multi-surface sprawl | Single largest individual contribution |
+| <span class="pill phantom">phantom</span> | Compressed chassis (minimal H3 nesting, FAQ only when user questions/risk justify it, no default video embeds); "Looking ahead" close; blog-as-static-anchor + motion on Twitter; length norms by post kind | Closest template-level analog by audience |
+| <span class="pill coinbase">coinbase learn</span> | "What is X?" h1 for explainer-type; "People also ask" h2 chain; agent-readable affordance inherited from SEO structure | Explainer-mode authority |
+| <span class="pill coinbase">coinbase blog</span> | Headline-fact-in-sentence-1 opening | Reinforces Infinex's existing dek pattern |
+| <span class="pill hyperliquid">hyperliquid</span> | **Five-pronged clanker stack**; three-page-kind discipline; one-sentence opener as TL;DR; single-mode-per-block (table OR code OR prose, not all three layered) | Highest clanker-readable bar in this audit |
+
+---
+
+## Top-level architecture
+
+One URL surface for public launch, explainer, weekly-update, and lightweight product-doc content: `/news/`. No separate `/blog`, `/learn`, or `/changelog` subtrees for this scope. The `type` frontmatter parameter resolves mode at the post level, not the URL level.
+
+**Why not split for Infinex now:** Coinbase's separation into Blog and Learn has a real mode-signaling benefit, but it also makes readers cross URL trees, fragments related-post navigation, and multiplies the surface area. Infinex can consume both modes from one tree if the template makes `type`, date, and related posts obvious.
+
+**Navigation:**
+- Index page at `/news/` lists all posts, newest first, mode shown as a chip.
+- Tags as the only secondary navigation (Anchorage convention). Examples: `hyperliquid`, `perps`, `bridge`, `weekly`, `explainer`. `/news/?tag=hyperliquid` shows all Hyperliquid-related posts regardless of mode.
+- Related-posts surface at the bottom of every post pulls from same-tag + same-`type` pools.
+- No separate "Changelog" surface for this launch/news scope unless the operator revisits the decision. Operator stated 2026-05-28: blog covers it.
+
+**What the operator's existing taxonomy looks like once formalized:**
+
+```
+/news/                              # index, newest-first
+/news/<slug>                        # HTML render
+/news/<slug>.md                     # markdown source
+/news/?tag=hyperliquid              # tag filter
+/news/?type=explainer               # type filter (rarely useful, mostly for clankers)
+/sitemap.md                         # full corpus index for agents
+/llms-full.txt                      # single-file concatenation for agents
+```
+
+Help docs at `support.infinex.xyz` (Intercom KB) stay separate — that's user-support flow, different surface. Not in scope for this template.
+
+---
+
+## Deep dives
+
+Source audits in full. Each is a `<details>` block — expand to read.
+
+<details>
+<summary>Infinex baseline — current blog state</summary>
+
+**Source:** [`research/infinex-blog-pattern-audit-2026-05-28.md`](infinex-blog-pattern-audit-2026-05-28.md) (565 lines)
+
+**Where the blog lives:** `infinex.xyz/news` (`/blog` 301-redirects there). No Mirror, no Substack, no Medium mirror. Help docs at `support.infinex.xyz` are a separate Intercom KB.
+
+**Three templates currently in use:**
+
+| Template | Length | Shape |
+|---|---|---|
+| Numbered weekly updates (`№ N`) | 150–400w | H3-per-feature + screenshots + "Coming up" close |
+| Uneasy Money podcast recaps | 180–350w | H1-only, identical closing line every time |
+| Essay-announcements | 350–1,500w | H1+H2+H3, prose-heavy |
+
+**The frontmatter-in-disguise is already there.** Every post has H1 + Date + factual dek paragraph. The dek does TL;DR work without being labeled. Section headings are noun-phrases that name their actual content ("The numbers," "Coming up," "What happens now") — already clanker-quotable.
+
+**Em-dash density** has decayed organically: 16+ in 2023 manifestos → 0–1 in 2026 weeklies. The current validator's density rule formalizes that drift; zero tolerance would be a stricter future rule.
+
+**Clanker gaps:** zero code blocks across 16/16 posts (gap for SDK-facing content like Connect); no machine-readable frontmatter; no anchor-link nav; no glossary. Highest-leverage upgrade: render a hidden `{type, release_id, deployed_facts[]}` header — exactly what `ReleaseCard` already produces in this repo.
+
+**STRIP candidates:** 2023 manifesto em-dash cadence; Reuters press-release dateline + media-contact block; "Quick take" header (dek does the job); block-quote-heavy recap posts; victory-lap phrasing.
+
+**KEEP candidates:** H1+Date+Dek trinity; noun-phrase section headings (upgrade to assertion-shape); forward-looking single closing sentence; no-byline corporate voice; bullets-for-enumeration-only; the three-template family.
+
+</details>
+
+<details>
+<summary>Anchorage Digital — H2-as-claim and single tag-faceted funnel</summary>
+
+**Source:** [`research/anchorage-blog-pattern-audit-2026-05-28.md`](anchorage-blog-pattern-audit-2026-05-28.md) (275 lines)
+
+**Disambiguation:** Anchorage was the right interpretation of "unchange." Unchained.com (the alternative) is BTC-maximalist consumer custody — wrong register for Infinex's banker-trailblazer placement.
+
+**12 posts sampled** (Jan–May 2026) across one Insights surface — tag-faceted, NOT surface-faceted. Single funnel beats blog/research/newsroom sprawl.
+
+**Two coexisting registers:**
+- Banker-statesman (CEO-bylined, argumentative, ~20% of volume)
+- Institutional press release (Anchorage-bylined, quote-driven, ~80% of volume)
+
+Both share lead-with-credential opening + H2-as-claim discipline.
+
+**Highest-leverage steal: H2-as-claim.** The strongest sampled sections use headings as assertions, not "Section N." TOC reads as thesis. High-leverage win for both human readers and clanker extraction.
+
+**Clanker-readable:** above-average accidental (URL hygiene, named-entity density, consistent boilerplate) but no JSON-LD, no glossary, no data tables. Infinex can leapfrog cheaply by shipping these from day one.
+
+**Partial reference:** shared Stable+Penetrating placement with Infinex but Anchorage's Sustained-stress + 1,800-word default diverges from Infinex's Flow-stressed + Practical-dominant blog mandate. Steal template; reject length-and-quote-density defaults.
+
+</details>
+
+<details>
+<summary>Phantom — compressed chassis and "Looking ahead" close</summary>
+
+**Source:** [`research/phantom-blog-pattern-audit-2026-05-28.md`](phantom-blog-pattern-audit-2026-05-28.md) (356 lines)
+
+**15 posts sampled** (May 2024 → Apr 2026).
+
+**Compressed chassis:** H1 + subheadline + byline-with-role + tags + hero (static) + TOC + 4–6 H2s + forward-looking close + newsletter + related-articles. Older posts (2023, early 2024) had H3 nesting, FAQ sections, video embeds — all trimmed by 2025.
+
+**"Looking ahead" close is the single most reliable signature** (15/15 posts).
+
+**4 H2 shape patterns:** verb-noun feature, question explainer, how-to, forward-looking. No 5th shape.
+
+**Blog is the static anchor; motion lives on Twitter.** Zero GIFs/video in modern posts. 1–3 static images each. Even the technical/security post has zero code blocks — Phantom is aggressively prose-grade.
+
+**Clanker-readable affordances are PARTIAL** — clean H1/H2 hierarchy, semantic slug URLs, controlled tag vocab, TOC anchors. But no TL;DR (operator should add — Coinbase Learn does, Phantom doesn't), no FAQ (deprecated 2024), no code blocks, no fact boxes, no schema.org markup. These are the gaps Infinex fills.
+
+**Length norms by post kind:**
+- Acquisition: ~400w prose-only
+- Funding: ~700w
+- Feature launch: 600–900w  → **Synthetics Perps**
+- Major launch: 800–1,200w
+- Chain integration: ~800w  → **Hyperliquid Spark**
+- Cross-chain swapper: ~800w with FAQ re-added  → **Bridge**
+
+**Author choice tracks weight:** PM for products, CEO for strategy, GC for regulatory, engineer for security.
+
+</details>
+
+<details>
+<summary>Coinbase Blog + Coinbase Learn — two surfaces, one collapsed template</summary>
+
+**Source:** [`research/coinbase-blog-learn-pattern-audit-2026-05-28.md`](coinbase-blog-learn-pattern-audit-2026-05-28.md) (261 lines)
+
+**Caveat:** all Coinbase URLs returned 403 on direct fetch (Cloudflare-blocked). Structural patterns reconstructed from Google snippets + crypto-press recaps. Macro patterns high-confidence; exact h2 trees and word counts estimated.
+
+**Coinbase Blog (5 posts):**
+- Launch/deal posts lead with the headline fact in sentence 1; thesis and year-in-review posts lead with a framing claim. No scene-setting, no questions, no quote-led openings in the sampled summaries.
+- Voice baseline: corporate / financial-PR. Ventures is the only register-shift (thesis-VC).
+- Length type-driven: M&A short (~500w), product launch medium (~800w), thesis/year-in-review long (1,500–3,000w).
+- Closings split: forward-looking strategy OR regulatory disclaimer footer. No reader-CTA buttons; the post is the artifact.
+
+**Coinbase Learn (5 articles):**
+- 100% use "What is X?" H1 with same-sentence definition opener: `X is Y that does Z.`
+- H2 chain mirrors Google's "People also ask": **What is / How does it work / Why use / Risks / Example.** Dominant Learn shape.
+- Footer triad constant: Disclaimer + Related Articles + product CTA.
+- Length tight (500–1,200w).
+- The same structure that wins featured snippets also makes Learn clanker-readable — no AI-specific surface needed.
+
+**Collapsed-surface recommendation:** ship one base template; mode (announcement / explainer / hybrid) is a frontmatter parameter, NOT a URL path or site section. Use question-shaped H2s where they fit to inherit Learn's clanker affordance without a separate AI-specific surface. This is the most-load-bearing output of this audit — Infinex's stated intent to collapse launch and education content points in this direction.
+
+</details>
+
+<details>
+<summary>Hyperliquid docs — five-pronged clanker stack and three-page-kind discipline</summary>
+
+**Source:** [`research/hyperliquid-docs-pattern-audit-2026-05-28.md`](hyperliquid-docs-pattern-audit-2026-05-28.md) (321 lines)
+
+**One GitBook surface; no separate docs/blog/changelog split.** Announcements live inside the trading app and are uncrawlable. **Anti-pattern Infinex must NOT inherit** — Infinex announcements need to be crawlable markdown pages, not JS-rendered.
+
+**Three page shapes only:**
+- **Concept** — one-sentence definition + 3–5 H3 prose blocks
+- **Reference** — rule opener + per-endpoint template (heading + headers-table + request + response + params-table)
+- **Tutorial-FAQ** — question opener + numbered steps + external links
+
+**H3 is the workhorse heading, not H2.** Counter-intuitive for blog-like content but disciplined.
+
+**One-sentence opener IS the TL;DR.** No marketing throat-clearing, no hero, no reading time, no bylines, no carousels, no prev/next on most pages.
+
+**Single mode per block:** tables for tabular, JSON for API, prose for everything else. No layered code-and-table-and-prose blocks.
+
+**Code lives in linked SDKs, not embedded** — even the signing page has zero code blocks. Prose handles the explanation; code lives one click away.
+
+**Five-pronged clanker stack baked in:**
+1. `.md` URL suffix on every page
+2. `?ask=<question>` GET param
+3. `/sitemap.md`
+4. `/llms-full.txt`
+5. Per-page "Agent Instructions" footer — even the 404 page names all three recovery paths
+
+**Top-level IA:** 13 sections organized by subject domain (not by audience). Max 3 levels deep. Audience emerges from section names ("For Developers," "Validators," "Builder Tools") rather than a top-level audience partition.
+
+**Hyperliquid is the existence proof for clanker-readable docs at the engineering layer**, not just the prose layer. The five-pronged stack is the bar Infinex should ship to.
+
+</details>
+
+---
+
+## Sources
+
+- **Infinex baseline:** [`research/infinex-blog-pattern-audit-2026-05-28.md`](infinex-blog-pattern-audit-2026-05-28.md)
+- **Anchorage:** [`research/anchorage-blog-pattern-audit-2026-05-28.md`](anchorage-blog-pattern-audit-2026-05-28.md)
+- **Phantom:** [`research/phantom-blog-pattern-audit-2026-05-28.md`](phantom-blog-pattern-audit-2026-05-28.md)
+- **Coinbase Blog + Coinbase Learn:** [`research/coinbase-blog-learn-pattern-audit-2026-05-28.md`](coinbase-blog-learn-pattern-audit-2026-05-28.md)
+- **Hyperliquid docs:** [`research/hyperliquid-docs-pattern-audit-2026-05-28.md`](hyperliquid-docs-pattern-audit-2026-05-28.md)
+- **Companion docs:** [`launch-readiness-2026-05-28.html`](launch-readiness-2026-05-28.html) (per-launch synthesis) + [`path-c-email-engineering-plan-2026-05-28.html`](path-c-email-engineering-plan-2026-05-28.html) (email infra plan)
+
+</script>
+
+<script>
+(function(){
+  var src = document.getElementById('md-source').textContent;
+  function render(){
+    if (typeof marked.parse !== 'function') return;
+    var out = document.getElementById('content');
+    out.innerHTML = marked.parse(src, { mangle: false, headerIds: true });
+    out.querySelectorAll('h2,h3').forEach(function(h){
+      if (h.id) return;
+      h.id = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    });
+  }
+  if (window.marked) render();
+  else {
+    var poll = setInterval(function(){
+      if (window.marked) { clearInterval(poll); render(); }
+    }, 30);
+    setTimeout(function(){
+      clearInterval(poll);
+      if (!document.getElementById('content').innerHTML || document.getElementById('content').innerHTML === 'Loading…') {
+        document.getElementById('content').innerHTML = '<p>marked.js failed to load (offline?). Open the .md sources directly.</p>';
+      }
+    }, 5000);
+  }
+})();
+</script>
+</body>
+</html>

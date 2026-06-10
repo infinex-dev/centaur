@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Generated captions vs Infinex/Phantom/Hyperliquid/Polymarket corpus</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --good: #4ade80;
+    --warn: #f0c674;
+    --bad: #ff6b6b;
+    --infinex: #ffd86c;
+    --phantom: #ab9ff2;
+    --hl: #97fce4;
+    --poly: #4d8bff;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1480px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h2 { font-size: 22px; margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 18px 0 8px; }
+  .sub { color: var(--muted); margin-bottom: 28px; }
+
+  /* Brand fingerprint cards */
+  .fingerprints { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .fp { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 16px; }
+  .fp.infinex { border-top: 3px solid var(--infinex); }
+  .fp.phantom { border-top: 3px solid var(--phantom); }
+  .fp.hl      { border-top: 3px solid var(--hl); }
+  .fp.poly    { border-top: 3px solid var(--poly); }
+  .fp h3 { margin-top: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; }
+  .fp.infinex h3 { color: var(--infinex); }
+  .fp.phantom h3 { color: var(--phantom); }
+  .fp.hl      h3 { color: var(--hl); }
+  .fp.poly    h3 { color: var(--poly); }
+  .fp ul { padding-left: 18px; margin: 8px 0; font-size: 13px; }
+  .fp li { margin-bottom: 4px; }
+  .fp .example {
+    font-family: var(--code-mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-top: 8px;
+    white-space: pre-wrap;
+  }
+
+  /* Matched-release comparison */
+  .match {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin-bottom: 24px;
+  }
+  .match-header { margin-bottom: 12px; }
+  .match-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+  .match-meta { color: var(--muted); font-size: 13px; }
+
+  .real-section {
+    background: rgba(255, 216, 108, 0.05);
+    border-left: 3px solid var(--infinex);
+    padding: 14px 16px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
+  .real-section .label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--infinex); font-weight: 700; margin-bottom: 8px;
+  }
+  .real-section .meta { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+  .real-text {
+    font-family: var(--code-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text);
+    white-space: pre-wrap;
+  }
+  .real-text mark { background: var(--infinex); color: #0e1116; padding: 0 4px; border-radius: 2px; font-weight: 700; }
+
+  .variants-section { margin-top: 14px; }
+  .variants-section .section-label {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); font-weight: 700; margin-bottom: 10px;
+  }
+  .vcap {
+    margin-top: 8px;
+    padding: 12px 14px;
+    border-radius: 5px;
+    border-left: 3px solid var(--border);
+    background: rgba(255,255,255,0.03);
+  }
+  .vcap.current   { border-left-color: var(--bad);    background: rgba(255, 107, 107, 0.05); }
+  .vcap.variant-a { border-left-color: var(--warn);   background: rgba(240, 198, 116, 0.04); }
+  .vcap.variant-ap{ border-left-color: #d8b4fe;       background: rgba(216, 180, 254, 0.04); }
+  .vcap.variant-bp{ border-left-color: var(--accent); background: rgba(88, 166, 255, 0.04); }
+  .vcap.variant-c { border-left-color: var(--good);   background: rgba(74, 222, 128, 0.04); }
+  .vcap-header {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+  .vcap-label { font-weight: 700; }
+  .vcap-text {
+    font-family: var(--code-mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .verdict-chip {
+    font-size: 10px; padding: 2px 7px; border-radius: 10px;
+    background: rgba(255,255,255,0.06); color: var(--muted);
+  }
+  .verdict-chip.match  { background: rgba(74, 222, 128, 0.18); color: var(--good); }
+  .verdict-chip.miss   { background: rgba(255, 107, 107, 0.18); color: var(--bad); }
+  .verdict-chip.partial{ background: rgba(240, 198, 116, 0.18); color: var(--warn); }
+
+  .pattern-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    font-size: 12.5px;
+  }
+  .pattern-table th, .pattern-table td { padding: 8px 10px; border-top: 1px solid var(--border); text-align: left; vertical-align: middle; }
+  .pattern-table th { background: rgba(255,255,255,0.04); color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; border-top: none; }
+  .pattern-table td.variant { font-weight: 600; }
+  .pattern-table td.check { font-family: var(--code-mono); text-align: center; }
+  .pattern-table td.check.yes { color: var(--good); font-weight: 700; }
+  .pattern-table td.check.no  { color: var(--bad); }
+  .pattern-table td.check.partial { color: var(--warn); }
+
+  .verdict {
+    margin-top: 32px;
+    background: rgba(88, 166, 255, 0.06);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 22px 26px;
+  }
+  .verdict h3 { margin-top: 0; color: var(--accent); }
+  .verdict ul { padding-left: 22px; }
+  .verdict li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Generated captions vs the corpus</h1>
+  <div class="sub">2026-05-28 · matching v2 test captions against real Infinex tweets (and Phantom / Hyperliquid / Polymarket as negative space). Source corpora: <code>research/infinex-corpus-tweets.md</code>, <code>research/phantom-corpus-tweets.md</code>, <code>research/competitor-comms-audit-2026-05-28.md</code>.</div>
+
+  <!-- ============================================================ -->
+  <h2>Brand voice fingerprints (from real corpora)</h2>
+
+  <div class="fingerprints">
+    <div class="fp infinex">
+      <h3>Infinex</h3>
+      <ul>
+        <li>Declarative leads: <em>"X is live"</em></li>
+        <li>Single-noun openers used: <em>"Tick, tock."</em>, <em>"INX is here."</em></li>
+        <li>Arrows <code>→</code> and <code>↓</code> as connective tissue</li>
+        <li>Sentence-case headers</li>
+        <li>Line breaks for visual rhythm (almost every announcement)</li>
+        <li><strong>No ghost emoji</strong>, no hashtags, no "FYI"</li>
+        <li>Sign-off: <code>→</code> link, <code>↓</code>, or nothing</li>
+        <li>Confident-flat, not consumer-fintech upbeat</li>
+      </ul>
+      <div class="example">Stock perps are now live on Infinex.
+
+Trade XYZ100 → top 100 US company index. 20x leverage. 24/7.
+
+Plus TSLA. NVDA. AAPL. GOOGL. HOOD. 19 markets total.
+
+Powered by @HyperliquidX and provided by @tradexyz.</div>
+    </div>
+
+    <div class="fp phantom">
+      <h3>Phantom</h3>
+      <ul>
+        <li>"FYI, X is now live..." opener</li>
+        <li>Title-Case-y, emoji-suffixed</li>
+        <li>Ghost emoji 👻 + product name as sign-off</li>
+        <li>Upbeat consumer-fintech voice</li>
+        <li>Three-bullet user-verb body</li>
+        <li>Replies in lowercase, shitposter-on-main</li>
+        <li>Compliance disclaimer as separate post</li>
+      </ul>
+      <div class="example">FYI, GameStop is now live for trading in Phantom 🎮</div>
+    </div>
+
+    <div class="fp hl">
+      <h3>Hyperliquid</h3>
+      <ul>
+        <li>"The fact, alone" voice</li>
+        <li>Maximally terse, no adjectives</li>
+        <li>No emoji, no hashtags, no exclamation marks</li>
+        <li>Single-clause declaratives</li>
+        <li>Commanding-led, Practical-bodied</li>
+        <li>Sign-off: link, or none</li>
+      </ul>
+      <div class="example">$HYPE, the native token of the Hyperliquid L1, is live.
+
+Permissionless spot deploys are now live on mainnet.</div>
+    </div>
+
+    <div class="fp poly">
+      <h3>Polymarket</h3>
+      <ul>
+        <li>News-anchor-neutral register</li>
+        <li>The market card IS the comms (visual carries weight)</li>
+        <li>Practical-led on product</li>
+        <li>Lets the numbers carry, doesn't punch</li>
+        <li>Third-party-as-author (journalists embed odds)</li>
+      </ul>
+      <div class="example">Polymarket is back in the US with sports and elections markets.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Direct matches — same release type, real Infinex tweet vs our generated captions</h2>
+
+  <!-- chain-add-megaeth -->
+  <div class="match">
+    <div class="match-header">
+      <div class="match-title">chain-add-megaeth (Swidge adds MegaETH)</div>
+      <div class="match-meta">Real-world counterpart: <strong>IT025</strong> · Infinex tweet from 2026-02-09</div>
+    </div>
+
+    <div class="real-section">
+      <div class="label">★ Real Infinex tweet — what shipped</div>
+      <div class="meta">2026-02-09 · IT025 · "announcement" stratum</div>
+      <div class="real-text">Infinex 🤝 MegaETH ⚡️
+
+@MegaETH is now live on Infinex. Day 1.
+
+You can now bridge to MegaETH through Swidge, and use onchain apps with the Infinex Extension.</div>
+    </div>
+
+    <div class="variants-section">
+      <div class="section-label">Our generated captions for the same release</div>
+
+      <div class="vcap current">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--bad)">CURRENT</span><span class="verdict-chip partial">close to declarative voice; over-conceptual</span></div>
+        <div class="vcap-text">Every chain stood between a user and MegaETH. Bridge, gas, swap, three transactions, three places to lose the thread.
+
+Swidge takes MegaETH from any supported chain in one transaction. Bridge, gas, destination DEX, handled.
+
+The chain stops being the thing you cross. It's just where you land.</div>
+      </div>
+
+      <div class="vcap variant-a">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--warn)">VARIANT A</span><span class="verdict-chip partial">declarative; longer than real</span></div>
+        <div class="vcap-text">MegaETH is the fastest chain. Speed there has been gated by the work of getting capital in.
+
+Swidge bridges in from any supported source. One transaction covers the bridge, the gas, the destination swap.
+
+The route is open.</div>
+      </div>
+
+      <div class="vcap variant-ap">
+        <div class="vcap-header"><span class="vcap-label" style="color:#d8b4fe">VARIANT A'</span><span class="verdict-chip partial">verbose vs real's terse "Day 1"</span></div>
+        <div class="vcap-text">Every bridge has been a route to plan. A chain to add. A gas token to find. A DEX to open after.
+
+Swidge now reaches MegaETH from any supported chain. Bridge, gas, destination swap — one transaction.
+
+You don't route in. You arrive.</div>
+      </div>
+
+      <div class="vcap variant-bp">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--accent)">VARIANT B'</span><span class="verdict-chip partial">good prose; lacks the @-mention + emoji compress of real</span></div>
+        <div class="vcap-text">The chain you wanted to reach was always somewhere else.
+
+MegaETH is now a Swidge destination. One transaction from any supported source — bridge, gas, and the destination DEX, handled.
+
+You arrive already moving.</div>
+      </div>
+
+      <div class="vcap variant-c">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--good)">VARIANT C</span><span class="verdict-chip partial">terser; closer to Infinex's actual rhythm</span></div>
+        <div class="vcap-text">MegaETH was a destination you had to plan for.
+
+Swidge bridges in from any supported source. One transaction carries the gas and the DEX hop with it.
+
+You decide. You're already there.</div>
+      </div>
+
+      <div style="margin-top: 12px; padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 4px; font-size: 12.5px; color: var(--muted);">
+        <strong style="color: var(--text);">Diff vs real:</strong> the real IT025 is <strong>3 short paragraphs ending with what the user can do</strong>. Uses 🤝 + ⚡️ as a visual handshake. Ends with capability statement. Our captions are all 3-paragraph but <strong>more abstract / "philosophical"</strong> — they open with "Every chain stood between..." or "The chain you wanted to reach was always somewhere else." Real Infinex skips the setup and opens with the partner handshake. Our captions arc through Sombre→Commanding→Irradiant; real Infinex skipped the Sombre prep and opened Commanding.
+      </div>
+    </div>
+  </div>
+
+  <!-- partnership-spot-hyperliquid -->
+  <div class="match">
+    <div class="match-header">
+      <div class="match-title">partnership-spot-hyperliquid (Spot Hyperliquid native)</div>
+      <div class="match-meta">Real-world counterpart: <strong>IT017</strong> · Infinex tweet from 2025-12-22 (HIP-3 partnership)</div>
+    </div>
+
+    <div class="real-section">
+      <div class="label">★ Real Infinex tweet — what shipped</div>
+      <div class="meta">2025-12-22 · IT017 · "announcement" stratum</div>
+      <div class="real-text">Stock perps are now live on Infinex.
+
+Trade XYZ100 → top 100 US company index. 20x leverage. 24/7.
+
+Plus TSLA. NVDA. AAPL. GOOGL. HOOD. 19 markets total.
+
+You can find them in your Infinex Perps dashboard under HIP-3.
+
+Powered by @HyperliquidX and provided by @tradexyz.</div>
+    </div>
+
+    <div class="variants-section">
+      <div class="section-label">Our generated captions (note: 3 of 5 used "wall" — generator.ts contamination)</div>
+
+      <div class="vcap current">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--bad)">CURRENT</span><span class="verdict-chip partial">closer to real Infinex tempo</span></div>
+        <div class="vcap-text">Two accounts. Two passkeys. Two portfolios to reconcile every morning.
+
+That's over. Hyperliquid spot trades natively from your Infinex account.
+
+One key. The book opens where you already are.</div>
+      </div>
+
+      <div class="vcap variant-a">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--warn)">VARIANT A</span><span class="verdict-chip match">clean; matches Infinex's terse declarative shape</span></div>
+        <div class="vcap-text">The orderbook used to live somewhere else. Your account followed it there, or it didn't move.
+
+Hyperliquid spot now trades inside Infinex. One account, one passkey, both sides.
+
+The liquidity came to where you already are.</div>
+      </div>
+
+      <div class="vcap variant-ap">
+        <div class="vcap-header"><span class="vcap-label" style="color:#d8b4fe">VARIANT A'</span><span class="verdict-chip miss">"wall was never load-bearing" — generator-injected metaphor, off-character</span></div>
+        <div class="vcap-text">The choice between venues was always a tax on the user.
+
+Spot Hyperliquid trades natively inside Infinex. One account, one passkey, both sides.
+
+The wall was never load-bearing.</div>
+      </div>
+
+      <div class="vcap variant-bp">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--accent)">VARIANT B'</span><span class="verdict-chip miss">"wall was never the point" — same generator contamination</span></div>
+        <div class="vcap-text">Two accounts. Two logins. Two halves of the same portfolio.
+
+Hyperliquid spot now trades natively inside Infinex. One account, one passkey.
+
+The wall was never the point. The market was.</div>
+      </div>
+
+      <div class="vcap variant-c">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--good)">VARIANT C</span><span class="verdict-chip miss">"wall between two accounts was always arbitrary" — same</span></div>
+        <div class="vcap-text">The wall between two accounts was always arbitrary.
+
+Spot Hyperliquid trades inside Infinex now. One account, one passkey, both sides.
+
+The seam is gone. What's left is the trade.</div>
+      </div>
+
+      <div style="margin-top: 12px; padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 4px; font-size: 12.5px; color: var(--muted);">
+        <strong style="color: var(--text);">Diff vs real:</strong> the real IT017 opens with the FACT ("Stock perps are now live on Infinex.") and then loads the body with <strong>specifics</strong> — leverage, hours, ticker list, dashboard location, partner attribution. Our captions stay at the <strong>conceptual level</strong> — "the orderbook used to live somewhere else", "the wall was never the point" — and miss the concrete deployed_facts almost entirely. Real Infinex announcement voice is FACT-FORWARD. Our generated captions are THESIS-FORWARD. This is a structural mismatch with the actual Infinex announcement register.
+      </div>
+    </div>
+  </div>
+
+  <!-- private-send-ga -->
+  <div class="match">
+    <div class="match-header">
+      <div class="match-title">private-send-ga (Private Send GA)</div>
+      <div class="match-meta">Real-world counterpart: <strong>IT030</strong> · Infinex tweet from 2026-03-06 (Private Send beta launch — closest we have)</div>
+    </div>
+
+    <div class="real-section">
+      <div class="label">★ Real Infinex tweet — what shipped</div>
+      <div class="meta">2026-03-06 · IT030 · "announcement" stratum</div>
+      <div class="real-text">Private Send beta is live for all users.
+
+Send crypto. Without exposing your financial history.
+
+Incognito Mode, powered by @HoudiniSwap 🔮
+
+How it works ↓</div>
+    </div>
+
+    <div class="variants-section">
+      <div class="section-label">Our generated captions for the GA version</div>
+
+      <div class="vcap current">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--bad)">CURRENT</span><span class="verdict-chip match">closest match — declarative, terse, factual</span></div>
+        <div class="vcap-text">Private Send is no longer in beta.
+
+It's available to every user, starting today.
+
+Send a payment. Your wallet history stays your own.</div>
+      </div>
+
+      <div class="vcap variant-a">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--warn)">VARIANT A</span><span class="verdict-chip partial">good prose; lyrical close not in Infinex style</span></div>
+        <div class="vcap-text">Private Send spent its time in beta quietly. Sending money never required a public ledger of your history.
+
+Today it leaves beta. Every user has it.
+
+Pay someone. The transfer carries no past with it.</div>
+      </div>
+
+      <div class="vcap variant-ap">
+        <div class="vcap-header"><span class="vcap-label" style="color:#d8b4fe">VARIANT A'</span><span class="verdict-chip partial">over-philosophical; "past stops introducing you"</span></div>
+        <div class="vcap-text">A wallet has always carried its history in the open. Every payment, a paper trail anyone could read.
+
+Private Send is now generally available. Send without your chain history walking in the door first.
+
+The past stops introducing you.</div>
+      </div>
+
+      <div class="vcap variant-bp">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--accent)">VARIANT B'</span><span class="verdict-chip partial">good middle, "default quietly moves" reads operator-vibey</span></div>
+        <div class="vcap-text">A payment used to drag your whole history behind it. Every counterparty inherited your ledger.
+
+Private Send is GA. Send without handing over the trail.
+
+The default quietly moves.</div>
+      </div>
+
+      <div class="vcap variant-c">
+        <div class="vcap-header"><span class="vcap-label" style="color:var(--good)">VARIANT C</span><span class="verdict-chip partial">"Privacy was never meant to live in beta" — slightly editorial opener</span></div>
+        <div class="vcap-text">Privacy was never meant to live in beta.
+
+Private Send is GA. Every user, every payment.
+
+Send without dragging your history behind you.</div>
+      </div>
+
+      <div style="margin-top: 12px; padding: 10px 12px; background: rgba(255,255,255,0.03); border-radius: 4px; font-size: 12.5px; color: var(--muted);">
+        <strong style="color: var(--text);">Diff vs real:</strong> real IT030 is 4 short blocks: <strong>fact / capability / partner credit + emoji / arrow CTA</strong>. It names the partner (HoudiniSwap), uses 🔮 as a visual anchor, ends with <code>↓</code> arrow pointing to a thread. Our captions all skip partner credit (we didn't give them a partner field), skip the emoji + arrow rhythm. <strong>CURRENT is the closest match in shape</strong> — terse, declarative, no philosophical opener. A/A'/B'/C all add a meta-observation line that real Infinex announcements don't have.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Pattern fingerprint check</h2>
+
+  <table class="pattern-table">
+    <thead>
+      <tr>
+        <th>Variant</th>
+        <th>Declarative<br>lead</th>
+        <th>Sentence<br>case</th>
+        <th>No ghost<br>emoji</th>
+        <th>No hype<br>theatre</th>
+        <th>No "FYI"<br>opener</th>
+        <th>Arrow <code>→</code><br>or <code>↓</code></th>
+        <th>Partner<br>@-credit</th>
+        <th>Fact-forward<br>open</th>
+        <th>"We shipped"<br>not "we believe"</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="variant" style="color: var(--infinex);">REAL INFINEX</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓ (when applicable)</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+      </tr>
+      <tr>
+        <td class="variant" style="color: var(--bad);">CURRENT</td>
+        <td class="check partial">~</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check no">✗</td>
+        <td class="check no">✗</td>
+        <td class="check partial">~ (often opens with thesis)</td>
+        <td class="check yes">✓</td>
+      </tr>
+      <tr>
+        <td class="variant" style="color: var(--warn);">VARIANT A</td>
+        <td class="check partial">~</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check no">✗</td>
+        <td class="check no">✗</td>
+        <td class="check no">✗ (philosophical opener)</td>
+        <td class="check yes">✓</td>
+      </tr>
+      <tr>
+        <td class="variant" style="color: #d8b4fe;">VARIANT A'</td>
+        <td class="check partial">~</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check no">✗</td>
+        <td class="check no">✗</td>
+        <td class="check no">✗ (philosophical opener)</td>
+        <td class="check yes">✓</td>
+      </tr>
+      <tr>
+        <td class="variant" style="color: var(--accent);">VARIANT B'</td>
+        <td class="check partial">~</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check no">✗</td>
+        <td class="check no">✗</td>
+        <td class="check no">✗ (philosophical opener)</td>
+        <td class="check yes">✓</td>
+      </tr>
+      <tr>
+        <td class="variant" style="color: var(--good);">VARIANT C</td>
+        <td class="check partial">~</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check yes">✓</td>
+        <td class="check no">✗</td>
+        <td class="check no">✗</td>
+        <td class="check partial">~ (mixed, sometimes opens fact-forward)</td>
+        <td class="check yes">✓</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="font-size: 13px; color: var(--muted); margin-top: -8px;">All 5 variants hit the easy patterns (no ghost emoji, no hype theatre, no FYI) but ALL miss the harder ones: <strong>arrow connective tissue, partner @-credit, fact-forward openers</strong>. These are structural Infinex tweet patterns the generator doesn't produce.</div>
+
+  <!-- ============================================================ -->
+  <div class="verdict">
+    <h3>Findings from corpus comparison</h3>
+    <ul>
+      <li><strong>Real Infinex opens with the FACT. Our generator opens with the THESIS.</strong> Every real Infinex announcement in the corpus starts with "X is now live" / "Y is here" / "Z is open." Our captions almost always start with a Sombre setup line ("The orderbook used to live somewhere else", "Every chain stood between a user and MegaETH"). This is the bigger voice gap than any docstring contamination — it's a structural mismatch with the actual Infinex announcement register.</li>
+      <li><strong>Real Infinex announcements use specifics. Our captions stay abstract.</strong> IT017 lists 19 markets, leverage %, hours, dashboard location, two partner @-mentions. Our captions name maybe 1-2 deployed_facts at most. The generator is leaving deployed_facts on the table.</li>
+      <li><strong>Real Infinex uses arrows as connective tissue and sign-off.</strong> <code>→</code> appears in IT008, IT020, IT024, IT029. <code>↓</code> in IT021, IT030. Our captions use line breaks but never arrows. Easy fix; not a voice problem, a format problem.</li>
+      <li><strong>Real Infinex credits partners with @-mentions.</strong> IT017 ends "Powered by @HyperliquidX and provided by @tradexyz." IT030 says "powered by @HoudiniSwap 🔮". IT025 leads "Infinex 🤝 MegaETH". Our captions skip this entirely — partly because we didn't pass a partner field in the test card, but also because the generator doesn't reach for partner mentions.</li>
+      <li><strong>None of our captions sound like Phantom, Hyperliquid, or Polymarket.</strong> Phantom would have "FYI" opener and ghost emoji. Hyperliquid would be one sentence with no embellishment. Polymarket would be news-anchor neutral. We don't drift toward any of those — we drift toward <em>essayist</em>, which is its own voice but not Infinex's announcement voice.</li>
+      <li><strong>The Sombre-setup → Commanding-fact → Irradiant-lift beat pattern is consistent across all variants</strong>, but the real Infinex corpus shows that for announcements <em>the Sombre prep is often skipped</em>. IT017, IT020, IT025, IT030, IT031 all open directly with the Commanding fact. The 3-beat default we passed to the generator may be over-prescribed for announcement-class releases.</li>
+    </ul>
+    <p><strong>Implication:</strong> the docstring variant debate is largely cosmetic relative to two structural issues:</p>
+    <ol>
+      <li><strong>The generator's default 3-beat shape</strong> — Sombre → Commanding → Irradiant — forces a philosophical opener that real Infinex announcements skip. Many real announcements are 1- or 2-beat (Commanding-only, or Commanding → Irradiant). The <code>defaultBeatsForKind</code> function probably needs per-kind defaults that match the actual register: data-card-official → Commanding-led + brief lift; launch-tier → 3-beat arc; maintenance → Self-Contained / Diffused only.</li>
+      <li><strong>The generator isn't using deployed_facts the way the real corpus uses them.</strong> Real Infinex announcements load the body with specifics; our captions stay abstract. This is downstream of the prompt — Stage B's drafting prompt likely needs a stronger "load the body with the deployed_facts that earn ship space" rule.</li>
+    </ol>
+    <p style="margin-bottom: 0;">Both of these are bigger levers than the card.ts docstring choice. Worth flagging for the broader generator cleanup pass.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{
+  "card_id": "hyperliquid-spot-unified-2026-05-29",
+  "attempts": 1,
+  "table_work": [
+    {
+      "thesis": "The split between spot and perps was a mechanical artifact of how Hyperliquid was wired. Infinex is closing that seam: one account, one balance truth, no transfer step. Spot trading arrives natively as part of that closing.",
+      "through_action": "to retire the seam between spot and perps",
+      "obstacle": "Reader assumes this is another 'integration' headline — venue added, feature list, mild novelty. They expect to scan and move on.",
+      "reader_prior": "Spot and perps are separate accounts on Hyperliquid; moving between them is a known chore; Infinex previously routed spot through swaps rather than offering native order entry.",
+      "lining": "Surface: native Hyperliquid spot is shipping inside Infinex on one unified account. Underneath: we took responsibility for the plumbing so you stop thinking about which account holds what.",
+      "not_the_point": "Order-type enumeration, sub-account mechanics, readiness-gate internals, swidge routing details, HIP-4 prediction markets.",
+      "channel_beat_plans": {
+        "x": [
+          {
+            "verb": "to state",
+            "working_action": "pressing",
+            "physical_score": "Steady weight forward. A flat declarative that names the change without selling it. The sentence leans in but doesn't strike.",
+            "micro_objective": "to make the reader register the position before they scan past",
+            "obstacle_local": "the temptation to lead with novelty or order types",
+            "shadow_move": "a small directness leak — the writer wants to be believed without raising volume"
+          },
+          {
+            "verb": "to retire",
+            "working_action": "punching",
+            "physical_score": "Short, single-stroke release. Names the chore that's gone — 'no transfer step', 'one account' — in a clipped phrase after the sustained set-up.",
+            "preparation_from": "pressing",
+            "micro_objective": "to land the closure of the old seam as already-done",
+            "obstacle_local": "must not read as triumph; the decision is taken, not celebrated"
+          }
+        ],
+        "web": [
+          {
+            "verb": "to state",
+            "working_action": "pressing",
+            "physical_score": "One declarative line. Weighted, direct, no qualifier. The seam is gone; the line says so.",
+            "micro_objective": "to set the position in one breath",
+            "obstacle_local": "headline register that promises a tour"
+          }
+        ],
+        "in-product": [
+          {
+            "verb": "to indicate",
+            "working_action": "gliding",
+            "physical_score": "Light, direct, low-pressure. A UI surface that names the new state without ornament.",
+            "micro_objective": "to make the new affordance feel like it was always there",
+            "obstacle_local": "the urge to label or celebrate the change inside the product"
+          }
+        ]
+      }
+    }
+  ],
+  "picks": [
+    {
+      "channel": "x",
+      "text": "Hyperliquid spot is coming to Infinex on one unified account. Spot and perps read from the same balance. The transfer step between them is gone. One click to switch."
+    },
+    {
+      "channel": "web",
+      "text": "Hyperliquid spot, native on Infinex. Unified account: one balance for spot and perps, no class transfer."
+    },
+    {
+      "channel": "in-product",
+      "text": "Switch to Spot"
+    }
+  ]
+}

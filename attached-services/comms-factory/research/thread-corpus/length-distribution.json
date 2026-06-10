@@ -1,0 +1,62 @@
+{
+  "source": "wave-1.5 on-disk harvest (2026-05-12), self-reply reconstruction",
+  "note": "Use EDITORIAL distribution for x-thread length variety. Raw is polluted by announcement+link/disclaimer 2-tweet pairs (not real threads).",
+  "raw": {
+    "total_threads": 130,
+    "by_length": {
+      "2": {
+        "count": 109,
+        "weight": 0.8385
+      },
+      "3": {
+        "count": 10,
+        "weight": 0.0769
+      },
+      "4": {
+        "count": 4,
+        "weight": 0.0308
+      },
+      "5": {
+        "count": 2,
+        "weight": 0.0154
+      },
+      "6": {
+        "count": 3,
+        "weight": 0.0231
+      },
+      "7": {
+        "count": 2,
+        "weight": 0.0154
+      }
+    }
+  },
+  "editorial": {
+    "total_threads": 75,
+    "by_length": {
+      "2": {
+        "count": 54,
+        "weight": 0.72
+      },
+      "3": {
+        "count": 10,
+        "weight": 0.1333
+      },
+      "4": {
+        "count": 4,
+        "weight": 0.0533
+      },
+      "5": {
+        "count": 2,
+        "weight": 0.0267
+      },
+      "6": {
+        "count": 3,
+        "weight": 0.04
+      },
+      "7": {
+        "count": 2,
+        "weight": 0.0267
+      }
+    }
+  }
+}

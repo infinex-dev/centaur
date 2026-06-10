@@ -1,0 +1,5761 @@
+{
+  "user": {
+    "data": {
+      "id": "1261335549215989760",
+      "name": "Polymarket",
+      "username": "Polymarket"
+    }
+  },
+  "tweets": [
+    {
+      "edit_history_tweet_ids": [
+        "2054089439597482029"
+      ],
+      "public_metrics": {
+        "retweet_count": 6,
+        "reply_count": 55,
+        "like_count": 83,
+        "quote_count": 2,
+        "bookmark_count": 2,
+        "impression_count": 8508
+      },
+      "text": "\ud83d\udea8 NEW POLYMARKET: Will Trump and Xi hug at their summit? https://t.co/tU4Plliqzz",
+      "id": "2054089439597482029",
+      "entities": {
+        "urls": [
+          {
+            "start": 57,
+            "end": 80,
+            "url": "https://t.co/tU4Plliqzz",
+            "expanded_url": "https://polymarket.com/event/will-trump-and-xi-hug-at-their-summit?via=x-afr2",
+            "display_url": "polymarket.com/event/will-tru\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2054089485013368832/l4AZbD81?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2054089485013368832/l4AZbD81?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Will Trump and Xi hug at their summit?",
+            "description": "$1,389 has traded on \"Will Trump and Xi hug at their summit?\" as of May 12, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/will-trump-and-xi-hug-at-their-summit?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-12T06:41:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2054073333411438831"
+      ],
+      "public_metrics": {
+        "retweet_count": 47,
+        "reply_count": 63,
+        "like_count": 459,
+        "quote_count": 4,
+        "bookmark_count": 13,
+        "impression_count": 28887
+      },
+      "text": "NEW: Philippine Vice President Sara Duterte impeached for a second time.",
+      "id": "2054073333411438831",
+      "created_at": "2026-05-12T05:37:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2054062260407107689"
+      ],
+      "public_metrics": {
+        "retweet_count": 36,
+        "reply_count": 54,
+        "like_count": 358,
+        "quote_count": 2,
+        "bookmark_count": 17,
+        "impression_count": 33266
+      },
+      "text": "JUST IN: Japanese snack giant Calbee switches to black-and-white packaging due to disrupted ink supplies caused by the Iran conflict.",
+      "id": "2054062260407107689",
+      "created_at": "2026-05-12T04:53:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2054054962414673924"
+      ],
+      "public_metrics": {
+        "retweet_count": 75,
+        "reply_count": 77,
+        "like_count": 620,
+        "quote_count": 33,
+        "bookmark_count": 64,
+        "impression_count": 51883
+      },
+      "text": "JUST IN: Top South Korean policymaker proposes a \u201ccitizen dividend\u201d funded by AI-tax revenue.",
+      "id": "2054054962414673924",
+      "created_at": "2026-05-12T04:24:00.000Z",
+      "lang": "en"
+    },
+    {
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "edit_history_tweet_ids": [
+        "2054049204444475851"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053927294612226440"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 155,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 0
+      },
+      "text": "RT @Polymarket: NEW: Apple officially rolls out ads in Apple Maps.",
+      "id": "2054049204444475851",
+      "created_at": "2026-05-12T04:01:07.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2054041886709391577"
+      ],
+      "public_metrics": {
+        "retweet_count": 83,
+        "reply_count": 53,
+        "like_count": 998,
+        "quote_count": 14,
+        "bookmark_count": 49,
+        "impression_count": 63008
+      },
+      "text": "JUST IN: House Republicans launch probe into Sam Altman\u2019s business dealings ahead of OpenAI\u2019s IPO.",
+      "id": "2054041886709391577",
+      "created_at": "2026-05-12T03:32:02.000Z",
+      "lang": "en"
+    },
+    {
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "edit_history_tweet_ids": [
+        "2054033748862054415"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053873949642023111"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 215,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 3
+      },
+      "text": "RT @Polymarket: JUST IN: Spencer Pratt is soaring in the race for LA mayor.\n\n28% chance the reality TV star leads Los Angeles. https://t.co\u2026",
+      "id": "2054033748862054415",
+      "created_at": "2026-05-12T02:59:42.000Z",
+      "lang": "en"
+    },
+    {
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ],
+        "urls": [
+          {
+            "start": 112,
+            "end": 135,
+            "url": "https://t.co/aIB0b90ehq",
+            "expanded_url": "https://x.com/Polymarket/status/2053883123100713147/photo/1",
+            "display_url": "pic.x.com/aIB0b90ehq",
+            "media_key": "3_2053882809765265408"
+          },
+          {
+            "start": 112,
+            "end": 135,
+            "url": "https://t.co/aIB0b90ehq",
+            "expanded_url": "https://x.com/Polymarket/status/2053883123100713147/photo/1",
+            "display_url": "pic.x.com/aIB0b90ehq",
+            "media_key": "3_2053882818682302465"
+          }
+        ]
+      },
+      "edit_history_tweet_ids": [
+        "2054033730298102170"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053883123100713147"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 2136,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 4
+      },
+      "text": "RT @Polymarket: JUST IN: Republicans surge past Democrats in Senate midterm odds, projected to remain in power. https://t.co/aIB0b90ehq",
+      "id": "2054033730298102170",
+      "created_at": "2026-05-12T02:59:38.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2053882809765265408",
+          "3_2053882818682302465"
+        ],
+        "media_source_tweet_id": [
+          "2053883123100713147",
+          "2053883123100713147"
+        ]
+      }
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2054023462256050272"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2054004229929341284"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 2,
+        "reply_count": 6,
+        "like_count": 35,
+        "quote_count": 2,
+        "bookmark_count": 2,
+        "impression_count": 23520
+      },
+      "text": "28% chance the AI bubble bursts this year. https://t.co/qTwZyuFzmH",
+      "id": "2054023462256050272",
+      "entities": {
+        "urls": [
+          {
+            "start": 43,
+            "end": 66,
+            "url": "https://t.co/qTwZyuFzmH",
+            "expanded_url": "https://polymarket.com/event/ai-bubble-burst-by?via=x-afr2",
+            "display_url": "polymarket.com/event/ai-bubbl\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051561629184319488/XyHIw8kh?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051561629184319488/XyHIw8kh?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "AI bubble burst by...?",
+            "description": "$2,791,459 has traded on \"AI bubble burst by...?\" as of May 5, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/ai-bubble-burst-by?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-12T02:18:49.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2054023256902971437"
+      ],
+      "public_metrics": {
+        "retweet_count": 44,
+        "reply_count": 65,
+        "like_count": 522,
+        "quote_count": 5,
+        "bookmark_count": 35,
+        "impression_count": 57104
+      },
+      "text": "JUST IN: FBI charges three men in violent \"crypto robbery spree\" across California that allegedly stole $6.5 million.",
+      "id": "2054023256902971437",
+      "created_at": "2026-05-12T02:18:01.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2054010829771604188"
+      ],
+      "public_metrics": {
+        "retweet_count": 30,
+        "reply_count": 78,
+        "like_count": 500,
+        "quote_count": 8,
+        "bookmark_count": 15,
+        "impression_count": 42636
+      },
+      "text": "JUST IN: Trump to undergo his annual physical on May 26.",
+      "id": "2054010829771604188",
+      "created_at": "2026-05-12T01:28:38.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2054004229929341284"
+      ],
+      "public_metrics": {
+        "retweet_count": 70,
+        "reply_count": 92,
+        "like_count": 1422,
+        "quote_count": 34,
+        "bookmark_count": 77,
+        "impression_count": 121121
+      },
+      "text": "JUST IN: UCF graduates loudly boo commencement speaker after she praises AI as \u201cthe next industrial revolution.\u201d",
+      "id": "2054004229929341284",
+      "created_at": "2026-05-12T01:02:24.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053995319524815329"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053995149437374832"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 4,
+        "reply_count": 10,
+        "like_count": 62,
+        "quote_count": 2,
+        "bookmark_count": 6,
+        "impression_count": 24976
+      },
+      "text": "34% chance a Greenland deal is signed this year. https://t.co/Y4GyNE9m5Y",
+      "id": "2053995319524815329",
+      "entities": {
+        "urls": [
+          {
+            "start": 49,
+            "end": 72,
+            "url": "https://t.co/Y4GyNE9m5Y",
+            "expanded_url": "https://polymarket.com/event/trump-x-greenland-deal-signed-by-december-31?via=x-afr2",
+            "display_url": "polymarket.com/event/trump-x-\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053995332103479298/NSSkfAIG?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053995332103479298/NSSkfAIG?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Trump x Greenland deal signed by December 31?",
+            "description": "$63,252 has traded on \"Trump x Greenland deal signed by December 31?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/trump-x-greenland-deal-signed-by-december-31?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-12T00:27:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053995149437374832"
+      ],
+      "public_metrics": {
+        "retweet_count": 391,
+        "reply_count": 107,
+        "like_count": 4972,
+        "quote_count": 31,
+        "bookmark_count": 159,
+        "impression_count": 140638
+      },
+      "text": "JUST IN: The U.S. is reportedly in \"closely-guarded talks\" to open three new military bases in Greenland.",
+      "id": "2053995149437374832",
+      "created_at": "2026-05-12T00:26:19.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053989940690571625"
+      ],
+      "public_metrics": {
+        "retweet_count": 47,
+        "reply_count": 124,
+        "like_count": 443,
+        "quote_count": 7,
+        "bookmark_count": 21,
+        "impression_count": 48830
+      },
+      "text": "JUST IN: Iran\u2019s parliamentary speaker says the U.S. must accept its newest proposal or else American taxpayers \u201cwill pay for it.\u201d",
+      "id": "2053989940690571625",
+      "created_at": "2026-05-12T00:05:37.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053986452128587883"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053986117255332233"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 5,
+        "reply_count": 3,
+        "like_count": 44,
+        "quote_count": 0,
+        "bookmark_count": 2,
+        "impression_count": 21887
+      },
+      "text": "68% chance the Housing for the 21st Century Act is signed into law. https://t.co/AlwYzWKBP6",
+      "id": "2053986452128587883",
+      "entities": {
+        "urls": [
+          {
+            "start": 68,
+            "end": 91,
+            "url": "https://t.co/AlwYzWKBP6",
+            "expanded_url": "https://polymarket.com/event/which-bills-will-become-law-in-2026?via=x-afr2",
+            "display_url": "polymarket.com/event/which-bi\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053986453550477312/osB-jRa4?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053986453550477312/osB-jRa4?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Which bills will become law in 2026?",
+            "description": "$99,382 has traded on \"Which bills will become law in 2026?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/which-bills-will-become-law-in-2026?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T23:51:46.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053986117255332233"
+      ],
+      "public_metrics": {
+        "retweet_count": 118,
+        "reply_count": 81,
+        "like_count": 2027,
+        "quote_count": 17,
+        "bookmark_count": 51,
+        "impression_count": 66119
+      },
+      "text": "JUST IN: Trump urges Congress to pass housing bill to ensure \u201chomes are for people, not corporations.\u201d",
+      "id": "2053986117255332233",
+      "created_at": "2026-05-11T23:50:26.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053980017974005886"
+      ],
+      "public_metrics": {
+        "retweet_count": 274,
+        "reply_count": 165,
+        "like_count": 4092,
+        "quote_count": 73,
+        "bookmark_count": 284,
+        "impression_count": 196319
+      },
+      "text": "JUST IN: French woman aboard the MV Hondius was reportedly told her hantavirus symptoms were just \u201canxiety\u201d \u2014 she later tested positive.",
+      "id": "2053980017974005886",
+      "created_at": "2026-05-11T23:26:12.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053977456915169740"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053976284829536324"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 9,
+        "reply_count": 13,
+        "like_count": 193,
+        "quote_count": 0,
+        "bookmark_count": 6,
+        "impression_count": 29231
+      },
+      "text": "43% chance Trump suspends US entry for more countries by the end of next month.https://t.co/D2MDIg2Ab0",
+      "id": "2053977456915169740",
+      "entities": {
+        "urls": [
+          {
+            "start": 79,
+            "end": 102,
+            "url": "https://t.co/D2MDIg2Ab0",
+            "expanded_url": "https://polymarket.com/event/trump-fully-suspends-entry-to-the-us-for-more-countries-by?via=x-afr2",
+            "display_url": "polymarket.com/event/trump-fu\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053977307430187008/kNfgcV0U?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053977307430187008/kNfgcV0U?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Trump suspends U.S. entry for more countries by...?",
+            "description": "$7,282 has traded on \"Trump suspends U.S. entry for more countrie...\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/trump-fully-suspends-entry-to-the-us-for-more-countries-by?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T23:16:01.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053976284829536324"
+      ],
+      "public_metrics": {
+        "retweet_count": 403,
+        "reply_count": 290,
+        "like_count": 7258,
+        "quote_count": 92,
+        "bookmark_count": 164,
+        "impression_count": 314374
+      },
+      "text": "JUST IN: U.S. colleges report a 20% drop in new foreign undergraduates amid Trump\u2019s visa crackdown.",
+      "id": "2053976284829536324",
+      "created_at": "2026-05-11T23:11:21.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053974566075035897"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053974272905707568"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 2,
+        "reply_count": 8,
+        "like_count": 37,
+        "quote_count": 1,
+        "bookmark_count": 4,
+        "impression_count": 30518
+      },
+      "text": "20% chance Drake calls out Kendrick on Iceman. https://t.co/W9KEXo0sba",
+      "id": "2053974566075035897",
+      "entities": {
+        "urls": [
+          {
+            "start": 47,
+            "end": 70,
+            "url": "https://t.co/W9KEXo0sba",
+            "expanded_url": "https://polymarket.com/event/what-will-be-said-on-iceman?via=x-afr2",
+            "display_url": "polymarket.com/event/what-wil\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053974567803060225/o1xQDc0h?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053974567803060225/o1xQDc0h?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "What will be said on ICEMAN?",
+            "description": "$59,661 has traded on \"What will be said on ICEMAN?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/what-will-be-said-on-iceman?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T23:04:32.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053974272905707568"
+      ],
+      "public_metrics": {
+        "retweet_count": 48,
+        "reply_count": 81,
+        "like_count": 1509,
+        "quote_count": 15,
+        "bookmark_count": 73,
+        "impression_count": 170951
+      },
+      "text": "JUST IN: Kendrick Lamar deletes and reuploads \u201cNot Like Us\u201d days before Drake\u2019s new album release.",
+      "id": "2053974272905707568",
+      "created_at": "2026-05-11T23:03:22.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053969912134041737"
+      ],
+      "public_metrics": {
+        "retweet_count": 26,
+        "reply_count": 55,
+        "like_count": 137,
+        "quote_count": 8,
+        "bookmark_count": 11,
+        "impression_count": 37856
+      },
+      "text": "\ud83d\udea8 NEW POLYMARKET: Kamikaze dolphins confirmed?\nhttps://t.co/LmRd7VAWTA",
+      "id": "2053969912134041737",
+      "entities": {
+        "urls": [
+          {
+            "start": 47,
+            "end": 70,
+            "url": "https://t.co/LmRd7VAWTA",
+            "expanded_url": "https://poly.market/mu7s50l",
+            "display_url": "poly.market/mu7s50l",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053969956115496960/ge6tGZrw?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053969956115496960/ge6tGZrw?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "US Kamikaze Dolphins confirmed by May 31?",
+            "description": "View real-time odds for \"US Kamikaze Dolphins confirmed by May 31?\" as of May 11, 2026 and trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/us-kamikaze-dolphins-confirmed-by-may-31?dub_id=6LdcoMpEJ99RCj9B"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T22:46:02.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053968983544471696"
+      ],
+      "public_metrics": {
+        "retweet_count": 145,
+        "reply_count": 116,
+        "like_count": 1420,
+        "quote_count": 35,
+        "bookmark_count": 120,
+        "impression_count": 134991
+      },
+      "text": "JUST IN: SpaceX IPO now projected to close above $2,200,000,000,000.00, which would make it the highest-valued IPO close in history.\nhttps://t.co/ZxNNbTCOXd",
+      "id": "2053968983544471696",
+      "entities": {
+        "urls": [
+          {
+            "start": 133,
+            "end": 156,
+            "url": "https://t.co/ZxNNbTCOXd",
+            "expanded_url": "https://polymarket.com/event/spacex-ipo-closing-market-cap-above?via=x-afr2",
+            "display_url": "polymarket.com/event/spacex-i\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053969027844706304/jJGV7k_W?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053969027844706304/jJGV7k_W?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "SpaceX IPO closing market cap above ___ ?",
+            "description": "$1,564,317 has traded on \"SpaceX IPO closing market cap above ___ ?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/spacex-ipo-closing-market-cap-above?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T22:42:21.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053967295223902381"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053966988465057866"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 2,
+        "reply_count": 10,
+        "like_count": 23,
+        "quote_count": 0,
+        "bookmark_count": 4,
+        "impression_count": 24167
+      },
+      "text": "29% chance OpenAI IPOs this year. https://t.co/xMfRmmeuCh",
+      "id": "2053967295223902381",
+      "entities": {
+        "urls": [
+          {
+            "start": 34,
+            "end": 57,
+            "url": "https://t.co/xMfRmmeuCh",
+            "expanded_url": "https://polymarket.com/event/openai-ipo-by?via=x-afr2",
+            "display_url": "polymarket.com/event/openai-i\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053967339675082752/BATjP6ie?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053967339675082752/BATjP6ie?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "OpenAI IPO by...?",
+            "description": "$1,201,114 has traded on \"OpenAI IPO by...?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/openai-ipo-by?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T22:35:38.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053966988465057866"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "quoted",
+          "id": "2053899689372852717"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 9,
+        "reply_count": 28,
+        "like_count": 116,
+        "quote_count": 1,
+        "bookmark_count": 13,
+        "impression_count": 52438
+      },
+      "text": "NEW: OpenAI issues similar warning, says it will \u201cvigorously enforce\u201d restrictions on direct &amp; indirect sales of its equity. https://t.co/gSm7omX0bG",
+      "id": "2053966988465057866",
+      "entities": {
+        "urls": [
+          {
+            "start": 129,
+            "end": 152,
+            "url": "https://t.co/gSm7omX0bG",
+            "expanded_url": "https://twitter.com/Polymarket/status/2053899689372852717",
+            "display_url": "x.com/Polymarket/sta\u2026"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T22:34:25.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053964907402407999"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053963683512946832"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 2,
+        "reply_count": 10,
+        "like_count": 33,
+        "quote_count": 0,
+        "bookmark_count": 2,
+        "impression_count": 25758
+      },
+      "text": "54% chance Bass is reelected. https://t.co/CA9SyfPrki",
+      "id": "2053964907402407999",
+      "entities": {
+        "urls": [
+          {
+            "start": 30,
+            "end": 53,
+            "url": "https://t.co/CA9SyfPrki",
+            "expanded_url": "https://polymarket.com/event/los-angeles-mayoral-election-117?via=x-afr2",
+            "display_url": "polymarket.com/event/los-ange\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052252997028376577/q5k2iADL?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052252997028376577/q5k2iADL?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Los Angeles Mayoral Election",
+            "description": "$1,190,739 has traded on \"Los Angeles Mayoral Election\" as of May 7, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/los-angeles-mayoral-election-117?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T22:26:09.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053963683512946832"
+      ],
+      "public_metrics": {
+        "retweet_count": 22,
+        "reply_count": 366,
+        "like_count": 237,
+        "quote_count": 45,
+        "bookmark_count": 12,
+        "impression_count": 359457
+      },
+      "text": "NEW: Magic Johnson officially endorses L.A. Mayor Karen Bass for reelection, praising her \u201ctremendous job\u201d",
+      "id": "2053963683512946832",
+      "created_at": "2026-05-11T22:21:17.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053958421326491806"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053958271447249181"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 3,
+        "reply_count": 11,
+        "like_count": 50,
+        "quote_count": 3,
+        "bookmark_count": 2,
+        "impression_count": 23755
+      },
+      "text": "26% chance the AI bubble bursts by the end of the year. https://t.co/qTwZyuFzmH",
+      "id": "2053958421326491806",
+      "entities": {
+        "urls": [
+          {
+            "start": 56,
+            "end": 79,
+            "url": "https://t.co/qTwZyuFzmH",
+            "expanded_url": "https://polymarket.com/event/ai-bubble-burst-by?via=x-afr2",
+            "display_url": "polymarket.com/event/ai-bubbl\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051561629184319488/XyHIw8kh?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051561629184319488/XyHIw8kh?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "AI bubble burst by...?",
+            "description": "$2,791,459 has traded on \"AI bubble burst by...?\" as of May 5, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/ai-bubble-burst-by?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T22:00:23.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053958271447249181"
+      ],
+      "public_metrics": {
+        "retweet_count": 58,
+        "reply_count": 100,
+        "like_count": 701,
+        "quote_count": 14,
+        "bookmark_count": 55,
+        "impression_count": 74072
+      },
+      "text": "JUST IN: Michael Burry warns the AI rally looks like \u201cthe last months of the 1999-2000 bubble.\u201d",
+      "id": "2053958271447249181",
+      "created_at": "2026-05-11T21:59:47.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053955984540741709"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053955889019662540"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 1,
+        "reply_count": 8,
+        "like_count": 57,
+        "quote_count": 0,
+        "bookmark_count": 4,
+        "impression_count": 30746
+      },
+      "text": "80% chance tech layoffs are up in 2026. https://t.co/kAjMbg5Ot4",
+      "id": "2053955984540741709",
+      "entities": {
+        "urls": [
+          {
+            "start": 40,
+            "end": 63,
+            "url": "https://t.co/kAjMbg5Ot4",
+            "expanded_url": "https://polymarket.com/event/tech-layoffs-up-or-down-in-2026?via=x-afr2",
+            "display_url": "polymarket.com/event/tech-lay\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053956028958449665/gnqxp1NP?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053956028958449665/gnqxp1NP?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Tech Layoffs Up or Down in 20\u200b26?",
+            "description": "$25,123 has traded on \"Tech Layoffs Up or Down in 20\u200b26?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/tech-layoffs-up-or-down-in-2026?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T21:50:42.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053955889019662540"
+      ],
+      "public_metrics": {
+        "retweet_count": 72,
+        "reply_count": 96,
+        "like_count": 1020,
+        "quote_count": 56,
+        "bookmark_count": 107,
+        "impression_count": 453853
+      },
+      "text": "JUST IN: GitLab announces job cuts to reinvest in growth for the \u201cagentic era.\u201d",
+      "id": "2053955889019662540",
+      "created_at": "2026-05-11T21:50:19.000Z",
+      "lang": "en"
+    },
+    {
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 19,
+            "username": "PolymarketMoney",
+            "id": "1938262633871822848"
+          }
+        ],
+        "urls": [
+          {
+            "start": 100,
+            "end": 123,
+            "url": "https://t.co/Iwh8uAkt7m",
+            "expanded_url": "https://x.com/PolymarketMoney/status/2053919297987313972/photo/1",
+            "display_url": "pic.x.com/Iwh8uAkt7m",
+            "media_key": "3_2053918818523594752"
+          },
+          {
+            "start": 100,
+            "end": 123,
+            "url": "https://t.co/Iwh8uAkt7m",
+            "expanded_url": "https://x.com/PolymarketMoney/status/2053919297987313972/photo/1",
+            "display_url": "pic.x.com/Iwh8uAkt7m",
+            "media_key": "3_2053918837402116096"
+          }
+        ]
+      },
+      "edit_history_tweet_ids": [
+        "2053947901554962638"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053919297987313972"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 63,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 47
+      },
+      "text": "RT @PolymarketMoney: JUST IN: Odds a major crypto hedge fund blows up this year surge to 86% today. https://t.co/Iwh8uAkt7m",
+      "id": "2053947901554962638",
+      "created_at": "2026-05-11T21:18:34.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2053918818523594752",
+          "3_2053918837402116096"
+        ],
+        "media_source_tweet_id": [
+          "2053919297987313972",
+          "2053919297987313972"
+        ]
+      }
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053947584494944400"
+      ],
+      "public_metrics": {
+        "retweet_count": 478,
+        "reply_count": 172,
+        "like_count": 6691,
+        "quote_count": 84,
+        "bookmark_count": 444,
+        "impression_count": 368218
+      },
+      "text": "NEW: Arcadia, California, mayor Eileen Wang charged with acting as an illegal agent of China.",
+      "id": "2053947584494944400",
+      "created_at": "2026-05-11T21:17:19.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053946651820064890"
+      ],
+      "public_metrics": {
+        "retweet_count": 12,
+        "reply_count": 52,
+        "like_count": 213,
+        "quote_count": 9,
+        "bookmark_count": 10,
+        "impression_count": 64283
+      },
+      "text": "JUST IN: Hims stock plunges -8% after-hours.",
+      "id": "2053946651820064890",
+      "created_at": "2026-05-11T21:13:36.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053946449189077164"
+      ],
+      "public_metrics": {
+        "retweet_count": 787,
+        "reply_count": 677,
+        "like_count": 7098,
+        "quote_count": 369,
+        "bookmark_count": 724,
+        "impression_count": 619515
+      },
+      "text": "JUST IN: A dozen employees at a Dutch hospital may have been exposed to hantavirus, after not following PPE regulations.",
+      "id": "2053946449189077164",
+      "created_at": "2026-05-11T21:12:48.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053942999642509671"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053940826317767147"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 9,
+        "reply_count": 11,
+        "like_count": 132,
+        "quote_count": 2,
+        "bookmark_count": 8,
+        "impression_count": 28096
+      },
+      "text": "22% chance GameStop acquires eBay. https://t.co/hlydU4wsHE",
+      "id": "2053942999642509671",
+      "entities": {
+        "urls": [
+          {
+            "start": 35,
+            "end": 58,
+            "url": "https://t.co/hlydU4wsHE",
+            "expanded_url": "https://polymarket.com/event/will-gamestop-acquire-ebay?via=x-afr2",
+            "display_url": "polymarket.com/event/will-gam\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053943044106248192/XSUt3MBQ?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053943044106248192/XSUt3MBQ?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Will GameStop acquire eBay?",
+            "description": "$358,518 has traded on \"Will GameStop acquire eBay?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/will-gamestop-acquire-ebay?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T20:59:06.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053942782734053662"
+      ],
+      "public_metrics": {
+        "retweet_count": 45,
+        "reply_count": 57,
+        "like_count": 934,
+        "quote_count": 12,
+        "bookmark_count": 12,
+        "impression_count": 41743
+      },
+      "text": "JUST IN: Trump nominates Kari Lake to serve as U.S. Ambassador to Jamaica.",
+      "id": "2053942782734053662",
+      "created_at": "2026-05-11T20:58:14.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053942553456570741"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053937669307076768"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 8,
+        "reply_count": 5,
+        "like_count": 57,
+        "quote_count": 1,
+        "bookmark_count": 4,
+        "impression_count": 28176
+      },
+      "text": "85% chance Delcy Rodriguez is the de facto leader of Venezuela at the end of the year. https://t.co/31dAmKC2yl",
+      "id": "2053942553456570741",
+      "entities": {
+        "urls": [
+          {
+            "start": 87,
+            "end": 110,
+            "url": "https://t.co/31dAmKC2yl",
+            "expanded_url": "https://polymarket.com/event/venezuela-de-facto-leader-end-of-2026?via=x-afr2",
+            "display_url": "polymarket.com/event/venezuel\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051669861269426179/hpeU7CTz?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051669861269426179/hpeU7CTz?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Venezuela de facto leader end of 2026?",
+            "description": "$7,849 has traded on \"Venezuela de facto leader end of 2026?\" as of May 5, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/venezuela-de-facto-leader-end-of-2026?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T20:57:19.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053940826317767147"
+      ],
+      "public_metrics": {
+        "retweet_count": 17,
+        "reply_count": 62,
+        "like_count": 318,
+        "quote_count": 2,
+        "bookmark_count": 17,
+        "impression_count": 51737
+      },
+      "text": "JUST IN: eBay auction to have lunch with Warren Buffett, Stephen Curry, &amp; Ayesha Curry tops $70,000.",
+      "id": "2053940826317767147",
+      "created_at": "2026-05-11T20:50:28.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053937669307076768"
+      ],
+      "public_metrics": {
+        "retweet_count": 468,
+        "reply_count": 118,
+        "like_count": 7611,
+        "quote_count": 30,
+        "bookmark_count": 190,
+        "impression_count": 216008
+      },
+      "text": "NEW: U.S. removes the last of Venezuela\u2019s \"highly enriched\" uranium.",
+      "id": "2053937669307076768",
+      "created_at": "2026-05-11T20:37:55.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053934605552492672"
+      ],
+      "public_metrics": {
+        "retweet_count": 137,
+        "reply_count": 166,
+        "like_count": 1803,
+        "quote_count": 84,
+        "bookmark_count": 108,
+        "impression_count": 128531
+      },
+      "text": "JUST IN: Samsung upgrades its smart refrigerators with Google Gemini to recognize more than 2,000 foods.",
+      "id": "2053934605552492672",
+      "created_at": "2026-05-11T20:25:44.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053929954853736875"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053929704810332645"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 17,
+        "reply_count": 9,
+        "like_count": 98,
+        "quote_count": 2,
+        "bookmark_count": 4,
+        "impression_count": 27383
+      },
+      "text": "6% chance. https://t.co/XUEBVxf3vI",
+      "id": "2053929954853736875",
+      "entities": {
+        "urls": [
+          {
+            "start": 11,
+            "end": 34,
+            "url": "https://t.co/XUEBVxf3vI",
+            "expanded_url": "https://polymarket.com/event/will-venezuela-become-51st-state?via=x-afr2",
+            "display_url": "polymarket.com/event/will-ven\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053929999183282177/blh0maSA?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053929999183282177/blh0maSA?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Will Venezuela become 51st state?",
+            "description": "$152,799 has traded on \"Will Venezuela become 51st state?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/will-venezuela-become-51st-state?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T20:07:16.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053929704810332645"
+      ],
+      "public_metrics": {
+        "retweet_count": 219,
+        "reply_count": 195,
+        "like_count": 2502,
+        "quote_count": 47,
+        "bookmark_count": 89,
+        "impression_count": 132849
+      },
+      "text": "JUST IN: Trump announces he's \"seriously considering\" making Venezuela the 51st state.",
+      "id": "2053929704810332645",
+      "created_at": "2026-05-11T20:06:16.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053927294612226440"
+      ],
+      "public_metrics": {
+        "retweet_count": 155,
+        "reply_count": 433,
+        "like_count": 2898,
+        "quote_count": 196,
+        "bookmark_count": 204,
+        "impression_count": 496835
+      },
+      "text": "NEW: Apple officially rolls out ads in Apple Maps.",
+      "id": "2053927294612226440",
+      "created_at": "2026-05-11T19:56:41.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053923295972700313"
+      ],
+      "public_metrics": {
+        "retweet_count": 105,
+        "reply_count": 167,
+        "like_count": 1374,
+        "quote_count": 32,
+        "bookmark_count": 51,
+        "impression_count": 92084
+      },
+      "text": "JUST IN: Hantavirus cruise ship now en route to the Netherlands, where the ship will be disinfected.",
+      "id": "2053923295972700313",
+      "created_at": "2026-05-11T19:40:48.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053918664731316455"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053918561438200044"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 4,
+        "reply_count": 7,
+        "like_count": 37,
+        "quote_count": 0,
+        "bookmark_count": 3,
+        "impression_count": 32297
+      },
+      "text": "18% chance Raman wins the election. https://t.co/CA9SyfPZ9Q",
+      "id": "2053918664731316455",
+      "entities": {
+        "urls": [
+          {
+            "start": 36,
+            "end": 59,
+            "url": "https://t.co/CA9SyfPZ9Q",
+            "expanded_url": "https://polymarket.com/event/los-angeles-mayoral-election-117?via=x-afr2",
+            "display_url": "polymarket.com/event/los-ange\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052252997028376577/q5k2iADL?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052252997028376577/q5k2iADL?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Los Angeles Mayoral Election",
+            "description": "$1,190,739 has traded on \"Los Angeles Mayoral Election\" as of May 7, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/los-angeles-mayoral-election-117?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T19:22:24.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053918561438200044"
+      ],
+      "public_metrics": {
+        "retweet_count": 78,
+        "reply_count": 318,
+        "like_count": 1366,
+        "quote_count": 51,
+        "bookmark_count": 45,
+        "impression_count": 184791
+      },
+      "text": "JUST IN: Los Angeles mayoral candidate Nithya Raman confirms she no longer believes in defunding the police.",
+      "id": "2053918561438200044",
+      "created_at": "2026-05-11T19:21:59.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053914160488960124",
+        "2053914241833341041"
+      ],
+      "public_metrics": {
+        "retweet_count": 65,
+        "reply_count": 66,
+        "like_count": 670,
+        "quote_count": 11,
+        "bookmark_count": 27,
+        "impression_count": 46152
+      },
+      "text": "JUST IN: Keir Starmer projected to be ousted as British PM by the end of next month, as more than 50 Labour MP's call for his resignation. \n\n56% chance. https://t.co/zNovPtu4NA",
+      "id": "2053914241833341041",
+      "entities": {
+        "urls": [
+          {
+            "start": 153,
+            "end": 176,
+            "url": "https://t.co/zNovPtu4NA",
+            "expanded_url": "https://polymarket.com/event/starmer-out-in-2025?via=x-afr2",
+            "display_url": "polymarket.com/event/starmer-\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2048762404733911040/x_DFZJbU?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2048762404733911040/x_DFZJbU?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Starmer out by...?",
+            "description": "$16,139,373 has traded on \"Starmer out by...?\" as of April 27, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/starmer-out-in-2025?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T19:04:49.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053911094402359668"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053903313347674228"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 3,
+        "like_count": 25,
+        "quote_count": 0,
+        "bookmark_count": 1,
+        "impression_count": 20593
+      },
+      "text": "30% chance a diplomatic meeting is held by the end of the month. https://t.co/m2NaGRFoi1",
+      "id": "2053911094402359668",
+      "entities": {
+        "urls": [
+          {
+            "start": 65,
+            "end": 88,
+            "url": "https://t.co/m2NaGRFoi1",
+            "expanded_url": "https://polymarket.com/event/us-x-iran-diplomatic-meeting-by-329?via=x-afr2",
+            "display_url": "polymarket.com/event/us-x-ira\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053906779612811264/lhva7K4w?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053906779612811264/lhva7K4w?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "US x Iran diplomatic meeting by...?",
+            "description": "$35,068,497 has traded on \"US x Iran diplomatic meeting by...?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/us-x-iran-diplomatic-meeting-by-329?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T18:52:19.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053909728258838541"
+      ],
+      "public_metrics": {
+        "retweet_count": 52,
+        "reply_count": 50,
+        "like_count": 501,
+        "quote_count": 2,
+        "bookmark_count": 11,
+        "impression_count": 36013
+      },
+      "text": "JUST IN: U.S. alerts financial institutions on IRGC use of front companies &amp; crypto to evade sanctions.",
+      "id": "2053909728258838541",
+      "created_at": "2026-05-11T18:46:53.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053905496273305686"
+      ],
+      "public_metrics": {
+        "retweet_count": 34,
+        "reply_count": 76,
+        "like_count": 641,
+        "quote_count": 7,
+        "bookmark_count": 22,
+        "impression_count": 52672
+      },
+      "text": "NEW: Alcohol deaths in the UK fall for the first time since Covid.",
+      "id": "2053905496273305686",
+      "created_at": "2026-05-11T18:30:04.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053903313347674228"
+      ],
+      "public_metrics": {
+        "retweet_count": 26,
+        "reply_count": 67,
+        "like_count": 552,
+        "quote_count": 4,
+        "bookmark_count": 11,
+        "impression_count": 47951
+      },
+      "text": "NEW: Trump says the ceasefire with Iran is \u201con life support\u201d after rejecting Iran\u2019s recent proposal.",
+      "id": "2053903313347674228",
+      "created_at": "2026-05-11T18:21:24.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053902585573089290"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053899689372852717"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 2,
+        "reply_count": 7,
+        "like_count": 35,
+        "quote_count": 0,
+        "bookmark_count": 10,
+        "impression_count": 26281
+      },
+      "text": "62% chance Anthropic IPOs this year. https://t.co/xaqcDV0SIf",
+      "id": "2053902585573089290",
+      "entities": {
+        "urls": [
+          {
+            "start": 37,
+            "end": 60,
+            "url": "https://t.co/xaqcDV0SIf",
+            "expanded_url": "https://polymarket.com/event/ipos-before-2027?via=x-afr2",
+            "display_url": "polymarket.com/event/ipos-bef\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053902629965565952/6myvrWq6?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053902629965565952/6myvrWq6?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "IPOs before 2027?",
+            "description": "$6,174,320 has traded on \"IPOs before 2027?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/ipos-before-2027?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T18:18:30.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053899689372852717"
+      ],
+      "public_metrics": {
+        "retweet_count": 39,
+        "reply_count": 85,
+        "like_count": 1001,
+        "quote_count": 18,
+        "bookmark_count": 91,
+        "impression_count": 234640
+      },
+      "text": "NEW: Anthropic cracks down on secondary market activity, saying unauthorized stock interests are \u201cvoid\u201d",
+      "id": "2053899689372852717",
+      "created_at": "2026-05-11T18:07:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053895662731969020"
+      ],
+      "public_metrics": {
+        "retweet_count": 1460,
+        "reply_count": 248,
+        "like_count": 16419,
+        "quote_count": 128,
+        "bookmark_count": 789,
+        "impression_count": 497206
+      },
+      "text": "JUST IN: U.S. rejects UN migration forum declaration, accusing it of promoting \u201creplacement immigration.\u201d",
+      "id": "2053895662731969020",
+      "created_at": "2026-05-11T17:51:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053893123932029193"
+      ],
+      "public_metrics": {
+        "retweet_count": 69,
+        "reply_count": 96,
+        "like_count": 1128,
+        "quote_count": 15,
+        "bookmark_count": 18,
+        "impression_count": 41713
+      },
+      "text": "JUST IN: Trump reportedly plans to suspend tariffs on beef to curb record-high prices.",
+      "id": "2053893123932029193",
+      "created_at": "2026-05-11T17:40:54.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053888809373151577"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053885633504936223"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 3,
+        "reply_count": 7,
+        "like_count": 52,
+        "quote_count": 1,
+        "bookmark_count": 1,
+        "impression_count": 20112
+      },
+      "text": "27% chance NFLX crashes below $80 by the end of the month. https://t.co/JkJ1n9N8TQ",
+      "id": "2053888809373151577",
+      "entities": {
+        "urls": [
+          {
+            "start": 59,
+            "end": 82,
+            "url": "https://t.co/JkJ1n9N8TQ",
+            "expanded_url": "https://polymarket.com/event/what-price-will-nflx-hit-in-may-2026?via=x-afr2",
+            "display_url": "polymarket.com/event/what-pri\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053888810245599232/H5KqZ_ha?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053888810245599232/H5KqZ_ha?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "What will Netflix, Inc. (NFLX) hit in May 2026?",
+            "description": "$30,449 has traded on \"What will Netflix, Inc. (NFLX) hit in May ...\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/what-price-will-nflx-hit-in-may-2026?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T17:23:46.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053885633504936223"
+      ],
+      "public_metrics": {
+        "retweet_count": 76,
+        "reply_count": 81,
+        "like_count": 762,
+        "quote_count": 13,
+        "bookmark_count": 42,
+        "impression_count": 49061
+      },
+      "text": "JUST IN: Netflix sued by Texas for allegedly \u201cspying on children\u201d by collecting their data &amp; designing the platform to be maximally addictive.",
+      "id": "2053885633504936223",
+      "created_at": "2026-05-11T17:11:09.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053883125990658266"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053883123100713147"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 18,
+        "reply_count": 12,
+        "like_count": 116,
+        "quote_count": 2,
+        "bookmark_count": 6,
+        "impression_count": 93967
+      },
+      "text": "Live odds:\nhttps://t.co/IvY3rd5AU4",
+      "id": "2053883125990658266",
+      "entities": {
+        "urls": [
+          {
+            "start": 11,
+            "end": 34,
+            "url": "https://t.co/IvY3rd5AU4",
+            "expanded_url": "https://poly.market/B2ue5SC",
+            "display_url": "poly.market/B2ue5SC",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053883129601925121/66CPquol?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053883129601925121/66CPquol?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Which party will win the Senate in 2026?",
+            "description": "$2,346,885 has traded on \"Which party will win the Senate in 2026?\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/which-party-will-win-the-senate-in-2026?dub_id=i5OchPfvSldHrULf"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T17:01:11.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053883123100713147"
+      ],
+      "public_metrics": {
+        "retweet_count": 2136,
+        "reply_count": 794,
+        "like_count": 18254,
+        "quote_count": 409,
+        "bookmark_count": 734,
+        "impression_count": 2414904
+      },
+      "text": "JUST IN: Republicans surge past Democrats in Senate midterm odds, projected to remain in power. https://t.co/aIB0b90ehq",
+      "id": "2053883123100713147",
+      "entities": {
+        "urls": [
+          {
+            "start": 96,
+            "end": 119,
+            "url": "https://t.co/aIB0b90ehq",
+            "expanded_url": "https://x.com/Polymarket/status/2053883123100713147/photo/1",
+            "display_url": "pic.x.com/aIB0b90ehq",
+            "media_key": "3_2053882809765265408"
+          },
+          {
+            "start": 96,
+            "end": 119,
+            "url": "https://t.co/aIB0b90ehq",
+            "expanded_url": "https://x.com/Polymarket/status/2053883123100713147/photo/1",
+            "display_url": "pic.x.com/aIB0b90ehq",
+            "media_key": "3_2053882818682302465"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T17:01:10.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2053882809765265408",
+          "3_2053882818682302465"
+        ]
+      }
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053882800189645186"
+      ],
+      "public_metrics": {
+        "retweet_count": 54,
+        "reply_count": 45,
+        "like_count": 734,
+        "quote_count": 1,
+        "bookmark_count": 16,
+        "impression_count": 33561
+      },
+      "text": "JUST IN: Trump to discuss U.S. arms sales to Taiwan with Xi Jinping this week.",
+      "id": "2053882800189645186",
+      "created_at": "2026-05-11T16:59:53.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053880427564147013"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053880180536459458"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 2,
+        "reply_count": 2,
+        "like_count": 34,
+        "quote_count": 1,
+        "bookmark_count": 1,
+        "impression_count": 19022
+      },
+      "text": "29% chance gas hits $5 in May. https://t.co/UWOzyH3stB",
+      "id": "2053880427564147013",
+      "entities": {
+        "urls": [
+          {
+            "start": 31,
+            "end": 54,
+            "url": "https://t.co/UWOzyH3stB",
+            "expanded_url": "https://polymarket.com/event/will-gas-hit-by-end-of-may?via=x-afr2",
+            "display_url": "polymarket.com/event/will-gas\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052138915490910214/nhkLDJwg?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052138915490910214/nhkLDJwg?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Will gas hit __ by end of May?",
+            "description": "$121,344 has traded on \"Will gas hit __ by end of May?\" as of May 6, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/will-gas-hit-by-end-of-may?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T16:50:27.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053880180536459458"
+      ],
+      "public_metrics": {
+        "retweet_count": 42,
+        "reply_count": 77,
+        "like_count": 673,
+        "quote_count": 10,
+        "bookmark_count": 13,
+        "impression_count": 36722
+      },
+      "text": "JUST IN: Trump announces plans to suspend the federal gas tax \"for a period of time.\"",
+      "id": "2053880180536459458",
+      "created_at": "2026-05-11T16:49:28.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053878297314865248"
+      ],
+      "public_metrics": {
+        "retweet_count": 233,
+        "reply_count": 213,
+        "like_count": 2474,
+        "quote_count": 114,
+        "bookmark_count": 136,
+        "impression_count": 346811
+      },
+      "text": "NEW: Papa Johns completes its first-ever drone delivery.",
+      "id": "2053878297314865248",
+      "created_at": "2026-05-11T16:41:59.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053877058040705039"
+      ],
+      "public_metrics": {
+        "retweet_count": 69,
+        "reply_count": 183,
+        "like_count": 1739,
+        "quote_count": 18,
+        "bookmark_count": 16,
+        "impression_count": 50714
+      },
+      "text": "NEW: Trump says he has a plan on Iran.",
+      "id": "2053877058040705039",
+      "created_at": "2026-05-11T16:37:04.000Z",
+      "lang": "en"
+    },
+    {
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "edit_history_tweet_ids": [
+        "2053876955187978345"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053668415345135889"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 313,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 14
+      },
+      "text": "RT @Polymarket: JUST IN: U.S. citizen tests \u201cmildly positive\u201d for hantavirus after departing from the MV Hondius cruise ship.",
+      "id": "2053876955187978345",
+      "created_at": "2026-05-11T16:36:39.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053875526247280805"
+      ],
+      "public_metrics": {
+        "retweet_count": 17,
+        "reply_count": 50,
+        "like_count": 347,
+        "quote_count": 3,
+        "bookmark_count": 20,
+        "impression_count": 55186
+      },
+      "text": "NEW: Medicare chief Dr. Oz reveals one in three Americans are \u201cunder-babied\u201d",
+      "id": "2053875526247280805",
+      "created_at": "2026-05-11T16:30:59.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053874794731389054"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053873949642023111"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 2,
+        "reply_count": 1,
+        "like_count": 18,
+        "quote_count": 0,
+        "bookmark_count": 2,
+        "impression_count": 20114
+      },
+      "text": "Live odds &amp; full list of candidates: https://t.co/CA9SyfPrki",
+      "id": "2053874794731389054",
+      "entities": {
+        "urls": [
+          {
+            "start": 41,
+            "end": 64,
+            "url": "https://t.co/CA9SyfPrki",
+            "expanded_url": "https://polymarket.com/event/los-angeles-mayoral-election-117?via=x-afr2",
+            "display_url": "polymarket.com/event/los-ange\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052252997028376577/q5k2iADL?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052252997028376577/q5k2iADL?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Los Angeles Mayoral Election",
+            "description": "$1,190,739 has traded on \"Los Angeles Mayoral Election\" as of May 7, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/los-angeles-mayoral-election-117?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T16:28:04.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053873949642023111"
+      ],
+      "public_metrics": {
+        "retweet_count": 215,
+        "reply_count": 115,
+        "like_count": 3652,
+        "quote_count": 25,
+        "bookmark_count": 43,
+        "impression_count": 154467
+      },
+      "text": "JUST IN: Spencer Pratt is soaring in the race for LA mayor.\n\n28% chance the reality TV star leads Los Angeles. https://t.co/BwO3lwBeYP",
+      "id": "2053873949642023111",
+      "entities": {
+        "urls": [
+          {
+            "start": 111,
+            "end": 134,
+            "url": "https://t.co/BwO3lwBeYP",
+            "expanded_url": "https://x.com/Polymarket/status/2053873949642023111/photo/1",
+            "display_url": "pic.x.com/BwO3lwBeYP",
+            "media_key": "3_2053873945842008064"
+          },
+          {
+            "start": 111,
+            "end": 134,
+            "url": "https://t.co/BwO3lwBeYP",
+            "expanded_url": "https://x.com/Polymarket/status/2053873949642023111/photo/1",
+            "display_url": "pic.x.com/BwO3lwBeYP",
+            "media_key": "3_2053873945447714816"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T16:24:43.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2053873945842008064",
+          "3_2053873945447714816"
+        ]
+      }
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053869154910851293"
+      ],
+      "public_metrics": {
+        "retweet_count": 96,
+        "reply_count": 76,
+        "like_count": 1627,
+        "quote_count": 9,
+        "bookmark_count": 37,
+        "impression_count": 48856
+      },
+      "text": "JUST IN: Trump is reportedly inviting Elon Musk &amp; Tim Cook on his trip to China this week.",
+      "id": "2053869154910851293",
+      "created_at": "2026-05-11T16:05:40.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053865986504130743"
+      ],
+      "public_metrics": {
+        "retweet_count": 31,
+        "reply_count": 58,
+        "like_count": 380,
+        "quote_count": 4,
+        "bookmark_count": 17,
+        "impression_count": 42441
+      },
+      "text": "JUST IN: Trump declares Republicans will \u201cwalk away\u201d with the midterms.\n\n23% chance Republicans sweep the midterms. https://t.co/tii9YrjOiq",
+      "id": "2053865986504130743",
+      "entities": {
+        "urls": [
+          {
+            "start": 116,
+            "end": 139,
+            "url": "https://t.co/tii9YrjOiq",
+            "expanded_url": "https://polymarket.com/event/balance-of-power-2026-midterms?via=x-afr2",
+            "display_url": "polymarket.com/event/balance-\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053866031261638657/M_zeSRbT?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053866031261638657/M_zeSRbT?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Balance of Power: 2026 Midterms",
+            "description": "$6,562,734 has traded on \"Balance of Power: 2026 Midterms\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/balance-of-power-2026-midterms?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T15:53:04.000Z",
+      "lang": "en"
+    },
+    {
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "edit_history_tweet_ids": [
+        "2053865743062634544"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053537066588258671"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 241,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 14
+      },
+      "text": "RT @Polymarket: JUST IN: The Pentagon says they can\u2019t confirm or deny whether they have \u201ckamikaze dolphins\u201d",
+      "id": "2053865743062634544",
+      "created_at": "2026-05-11T15:52:06.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053863721751961920"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053863471180070980"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 0,
+        "reply_count": 3,
+        "like_count": 27,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 17431
+      },
+      "text": "19% chance a peace deal is achieved this month. https://t.co/UqL2cQIROS",
+      "id": "2053863721751961920",
+      "entities": {
+        "urls": [
+          {
+            "start": 48,
+            "end": 71,
+            "url": "https://t.co/UqL2cQIROS",
+            "expanded_url": "https://polymarket.com/event/us-x-iran-permanent-peace-deal-by?via=x-afr2",
+            "display_url": "polymarket.com/event/us-x-ira\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051804216063049732/srxiy165?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051804216063049732/srxiy165?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "US x Iran permanent peace deal by...?",
+            "description": "$73,033,195 has traded on \"US x Iran permanent peace deal by...?\" as of May 5, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/us-x-iran-permanent-peace-deal-by?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T15:44:04.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053863471180070980"
+      ],
+      "public_metrics": {
+        "retweet_count": 31,
+        "reply_count": 52,
+        "like_count": 475,
+        "quote_count": 4,
+        "bookmark_count": 7,
+        "impression_count": 30385
+      },
+      "text": "NEW: Trump says Iran\u2019s latest proposal is a \u201cstupid proposal.\u201d",
+      "id": "2053863471180070980",
+      "created_at": "2026-05-11T15:43:05.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053862192366157888"
+      ],
+      "public_metrics": {
+        "retweet_count": 40,
+        "reply_count": 57,
+        "like_count": 578,
+        "quote_count": 2,
+        "bookmark_count": 14,
+        "impression_count": 26496
+      },
+      "text": "NEW: Trump announces he\u2019s considering renewing \u201cProject Freedom\u201d in the Strait of Hormuz.",
+      "id": "2053862192366157888",
+      "created_at": "2026-05-11T15:38:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053854894251991284"
+      ],
+      "public_metrics": {
+        "retweet_count": 30,
+        "reply_count": 82,
+        "like_count": 417,
+        "quote_count": 7,
+        "bookmark_count": 19,
+        "impression_count": 76513
+      },
+      "text": "NEW: HHS official assures hantavirus risk remains \u201cvery, very low\u201d",
+      "id": "2053854894251991284",
+      "created_at": "2026-05-11T15:09:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053850928097247538"
+      ],
+      "public_metrics": {
+        "retweet_count": 21,
+        "reply_count": 59,
+        "like_count": 408,
+        "quote_count": 6,
+        "bookmark_count": 13,
+        "impression_count": 58212
+      },
+      "text": "JUST IN: Cole Allen pleads not guilty to attempted assassination of the president.",
+      "id": "2053850928097247538",
+      "created_at": "2026-05-11T14:53:14.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053849723497251084"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053849105995284886"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 2,
+        "reply_count": 8,
+        "like_count": 32,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 22145
+      },
+      "text": "8% chance the U.S. withdraws from NATO. https://t.co/kwizLv1Vd9",
+      "id": "2053849723497251084",
+      "entities": {
+        "urls": [
+          {
+            "start": 40,
+            "end": 63,
+            "url": "https://t.co/kwizLv1Vd9",
+            "expanded_url": "https://polymarket.com/event/will-us-withdraw-from-nato-before-2027?via=x-afr2",
+            "display_url": "polymarket.com/event/will-us-\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052894023753318402/K6FaFsD5?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052894023753318402/K6FaFsD5?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Will US withdraw from NATO by...?",
+            "description": "$5,329,706 has traded on \"Will US withdraw from NATO by...?\" as of May 8, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/will-us-withdraw-from-nato-before-2027?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T14:48:27.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053849259741417593"
+      ],
+      "public_metrics": {
+        "retweet_count": 88,
+        "reply_count": 109,
+        "like_count": 1461,
+        "quote_count": 16,
+        "bookmark_count": 59,
+        "impression_count": 107329
+      },
+      "text": "JUST IN: Nvidia CEO Jensen Huang was reportedly not invited to Trump\u2019s China summit.",
+      "id": "2053849259741417593",
+      "created_at": "2026-05-11T14:46:36.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053849105995284886"
+      ],
+      "public_metrics": {
+        "retweet_count": 127,
+        "reply_count": 60,
+        "like_count": 2370,
+        "quote_count": 5,
+        "bookmark_count": 51,
+        "impression_count": 58582
+      },
+      "text": "JUST IN: Lithuanian foreign minister says U.S. troops are welcome \u201cwherever they are\u201d in Europe.",
+      "id": "2053849105995284886",
+      "created_at": "2026-05-11T14:46:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053845889324613766"
+      ],
+      "public_metrics": {
+        "retweet_count": 25,
+        "reply_count": 58,
+        "like_count": 418,
+        "quote_count": 3,
+        "bookmark_count": 8,
+        "impression_count": 41849
+      },
+      "text": "JUST IN: Effort to revive Spirit Airlines has now drawn over $335 million in pledges.",
+      "id": "2053845889324613766",
+      "created_at": "2026-05-11T14:33:13.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053844051145699515"
+      ],
+      "public_metrics": {
+        "retweet_count": 157,
+        "reply_count": 308,
+        "like_count": 1024,
+        "quote_count": 64,
+        "bookmark_count": 89,
+        "impression_count": 153415
+      },
+      "text": "JUST IN: Hantavirus projected to be confirmed in the U.S. this week.\n\n77% chance. \nhttps://t.co/OiOC2zBvnL",
+      "id": "2053844051145699515",
+      "entities": {
+        "urls": [
+          {
+            "start": 83,
+            "end": 106,
+            "url": "https://t.co/OiOC2zBvnL",
+            "expanded_url": "https://poly.market/l0QyRWj",
+            "display_url": "poly.market/l0QyRWj",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053844094711959552/iLRYsQSt?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053844094711959552/iLRYsQSt?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Confirmed case of Hantavirus in US by May 15?",
+            "description": "$305,319 has traded on \"Confirmed case of Hantavirus in US by May...\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/confirmed-case-of-hantavirus-in-us-by-may-15?dub_id=jTo4Bp4AO9dU1qeY"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T14:25:55.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053841945307251096"
+      ],
+      "public_metrics": {
+        "retweet_count": 144,
+        "reply_count": 176,
+        "like_count": 2481,
+        "quote_count": 19,
+        "bookmark_count": 44,
+        "impression_count": 346612
+      },
+      "text": "JUST IN: Israeli official announces the Iron Dome has been ~99% effective against missiles from Hamas, Hezbollah &amp; Iran.",
+      "id": "2053841945307251096",
+      "created_at": "2026-05-11T14:17:32.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053834509951349152"
+      ],
+      "public_metrics": {
+        "retweet_count": 6,
+        "reply_count": 41,
+        "like_count": 67,
+        "quote_count": 2,
+        "bookmark_count": 2,
+        "impression_count": 24935
+      },
+      "text": "\ud83d\udea8 NEW POLYMARKET: What will Trump say this week? https://t.co/pfG6iTy5Jz",
+      "id": "2053834509951349152",
+      "entities": {
+        "urls": [
+          {
+            "start": 49,
+            "end": 72,
+            "url": "https://t.co/pfG6iTy5Jz",
+            "expanded_url": "https://polymarket.com/event/what-will-trump-say-this-week-may-17?via=x-afr2",
+            "display_url": "polymarket.com/event/what-wil\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053417309780291590/Gs9Bctn8?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053417309780291590/Gs9Bctn8?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "What will Trump say this week? (May 17)",
+            "description": "View real-time odds for \"What will Trump say this week? (May 17)\" as of May 10, 2026 and trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/what-will-trump-say-this-week-may-17?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T13:48:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053831741757063339"
+      ],
+      "public_metrics": {
+        "retweet_count": 176,
+        "reply_count": 86,
+        "like_count": 2529,
+        "quote_count": 18,
+        "bookmark_count": 56,
+        "impression_count": 98563
+      },
+      "text": "NEW: Zelensky says \u201cnearly 20\u201d countries are interested in drone deals with Ukraine, with 4 already signed.",
+      "id": "2053831741757063339",
+      "created_at": "2026-05-11T13:37:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053826960133116099"
+      ],
+      "public_metrics": {
+        "retweet_count": 237,
+        "reply_count": 132,
+        "like_count": 3222,
+        "quote_count": 23,
+        "bookmark_count": 49,
+        "impression_count": 113542
+      },
+      "text": "JUST IN: White House confirms Trump will travel to China Wednesday.",
+      "id": "2053826960133116099",
+      "created_at": "2026-05-11T13:18:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053819158756810767"
+      ],
+      "public_metrics": {
+        "retweet_count": 11,
+        "reply_count": 47,
+        "like_count": 146,
+        "quote_count": 2,
+        "bookmark_count": 6,
+        "impression_count": 30623
+      },
+      "text": "\ud83d\udea8 NEW POLYMARKET: Will MicroStrategy announce a Bitcoin purchase May 12-18? https://t.co/r7zIAygTd4",
+      "id": "2053819158756810767",
+      "entities": {
+        "urls": [
+          {
+            "start": 76,
+            "end": 99,
+            "url": "https://t.co/r7zIAygTd4",
+            "expanded_url": "https://polymarket.com/event/will-microstrategy-announce-a-bitcoin-purchase-may-12-18/will-microstrategy-announce-a-bitcoin-purchase-may-12-18?via=x-afr2",
+            "display_url": "polymarket.com/event/will-mic\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053819203560275969/o3jQpkST?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053819203560275969/o3jQpkST?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Will Microstrategy announce a Bitcoin purchase May 12-18?",
+            "description": "$1,238 has traded on \"Will Microstrategy announce a Bitcoin purch...\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/will-microstrategy-announce-a-bitcoin-purchase-may-12-18/will-microstrategy-announce-a-bitcoin-purchase-may-12-18?via=x-afr2"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T12:47:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053810853942534490"
+      ],
+      "public_metrics": {
+        "retweet_count": 84,
+        "reply_count": 90,
+        "like_count": 1135,
+        "quote_count": 6,
+        "bookmark_count": 23,
+        "impression_count": 54943
+      },
+      "text": "NEW: Keir Starmer makes last-ditch speech to save his premiership, refuses to resign &amp; risk \u201cplunging the country into chaos.\u201d",
+      "id": "2053810853942534490",
+      "created_at": "2026-05-11T12:14:00.000Z",
+      "lang": "en"
+    },
+    {
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "edit_history_tweet_ids": [
+        "2053810567341539715"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053561666525163658"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 343,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 9
+      },
+      "text": "RT @Polymarket: JUST IN: South Korea investigating cargo ship struck by \u201cunidentified flying objects\u201d in the Strait of Hormuz.",
+      "id": "2053810567341539715",
+      "created_at": "2026-05-11T12:12:51.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053799026072444966"
+      ],
+      "public_metrics": {
+        "retweet_count": 87,
+        "reply_count": 121,
+        "like_count": 1155,
+        "quote_count": 10,
+        "bookmark_count": 19,
+        "impression_count": 61436
+      },
+      "text": "JUST IN: Iran accuses the U.S. of making \u201cunreasonable\u201d demands in ceasefire negotiations.",
+      "id": "2053799026072444966",
+      "created_at": "2026-05-11T11:27:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053792728413057464"
+      ],
+      "public_metrics": {
+        "retweet_count": 418,
+        "reply_count": 324,
+        "like_count": 6464,
+        "quote_count": 245,
+        "bookmark_count": 412,
+        "impression_count": 1832554
+      },
+      "text": "JUST IN: All 17 U.S. passengers of the hantavirus cruise ship are now being flown to Nebraska for evaluation after one tested positive.",
+      "id": "2053792728413057464",
+      "created_at": "2026-05-11T11:01:58.000Z",
+      "lang": "en"
+    },
+    {
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ],
+        "urls": [
+          {
+            "start": 65,
+            "end": 88,
+            "url": "https://t.co/pfG6iTy5Jz",
+            "expanded_url": "https://polymarket.com/event/what-will-trump-say-this-week-may-17?via=x-afr2",
+            "display_url": "polymarket.com/event/what-wil\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053417309780291590/Gs9Bctn8?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053417309780291590/Gs9Bctn8?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "What will Trump say this week? (May 17)",
+            "description": "View real-time odds for \"What will Trump say this week? (May 17)\" as of May 10, 2026 and trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/what-will-trump-say-this-week-may-17?via=x-afr2"
+          }
+        ]
+      },
+      "edit_history_tweet_ids": [
+        "2053785014983065965"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053417260543361239"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 27,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 8
+      },
+      "text": "RT @Polymarket: \ud83d\udea8 NEW POLYMARKET: What will Trump say this week? https://t.co/pfG6iTy5Jz",
+      "id": "2053785014983065965",
+      "created_at": "2026-05-11T10:31:19.000Z",
+      "lang": "en"
+    },
+    {
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ],
+        "urls": [
+          {
+            "start": 108,
+            "end": 131,
+            "url": "https://t.co/SCN9k3q5oe",
+            "expanded_url": "https://polymarket.com/event/what-price-will-wti-hit-in-may-2026?via=x-afr2",
+            "display_url": "polymarket.com/event/what-pri\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053602020087468032/ihSVPR4r?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053602020087468032/ihSVPR4r?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "What will WTI Crude Oil (WTI) hit in May 2026?",
+            "description": "$12,796,231 has traded on \"What will WTI Crude Oil (WTI) hit in M...\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/what-price-will-wti-hit-in-may-2026?via=x-afr2"
+          }
+        ]
+      },
+      "edit_history_tweet_ids": [
+        "2053784963686732144"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053601975963423220"
+        }
+      ],
+      "public_metrics": {
+        "retweet_count": 29,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 15
+      },
+      "text": "RT @Polymarket: JUST IN: Crude oil now projected to surge above $110 by the end of the month. \n\n52% chance. https://t.co/SCN9k3q5oe",
+      "id": "2053784963686732144",
+      "created_at": "2026-05-11T10:31:07.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053779828579422420"
+      ],
+      "public_metrics": {
+        "retweet_count": 51,
+        "reply_count": 103,
+        "like_count": 661,
+        "quote_count": 15,
+        "bookmark_count": 17,
+        "impression_count": 63140
+      },
+      "text": "JUST IN: French national who was aboard the MV Hondius cruise ship tests positive for hantavirus.",
+      "id": "2053779828579422420",
+      "created_at": "2026-05-11T10:10:43.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053772350181482762"
+      ],
+      "public_metrics": {
+        "retweet_count": 34,
+        "reply_count": 70,
+        "like_count": 544,
+        "quote_count": 4,
+        "bookmark_count": 19,
+        "impression_count": 71016
+      },
+      "text": "JUST IN: Argentine tourist hub Ushuaia denies being the source of the deadly MV Hondius hantavirus outbreak.",
+      "id": "2053772350181482762",
+      "created_at": "2026-05-11T09:41:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053743409572331939"
+      ],
+      "public_metrics": {
+        "retweet_count": 82,
+        "reply_count": 83,
+        "like_count": 1196,
+        "quote_count": 8,
+        "bookmark_count": 49,
+        "impression_count": 66363
+      },
+      "text": "NEW: The U.S. is reportedly \u201cdisappointed\u201d in Taiwan\u2019s recently approved smaller defense budget.",
+      "id": "2053743409572331939",
+      "created_at": "2026-05-11T07:46:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053713965457518680"
+      ],
+      "public_metrics": {
+        "retweet_count": 27,
+        "reply_count": 50,
+        "like_count": 311,
+        "quote_count": 3,
+        "bookmark_count": 12,
+        "impression_count": 39612
+      },
+      "text": "JUST IN: Thailand\u2019s former Prime Minister, Thaksin Shinawatra, released from prison with ankle monitor.",
+      "id": "2053713965457518680",
+      "created_at": "2026-05-11T05:49:00.000Z",
+      "lang": "en"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053695594464428397"
+      ],
+      "public_metrics": {
+        "retweet_count": 77,
+        "reply_count": 107,
+        "like_count": 803,
+        "quote_count": 16,
+        "bookmark_count": 46,
+        "impression_count": 70502
+      },
+      "text": "NEW: Australia to quarantine &amp; repatriate passengers from the Hantavirus-hit cruise ship.",
+      "id": "2053695594464428397",
+      "created_at": "2026-05-11T04:36:00.000Z",
+      "lang": "en"
+    },
+    {
+      "id": "2053680495070753221",
+      "text": "JUST IN: U.S. nuclear submarine reportedly spotted near Gibraltar.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 395,
+        "reply_count": 201,
+        "like_count": 5557,
+        "quote_count": 57,
+        "bookmark_count": 286,
+        "impression_count": 394857
+      },
+      "edit_history_tweet_ids": [
+        "2053680495070753221"
+      ],
+      "created_at": "2026-05-11T03:36:00.000Z"
+    },
+    {
+      "id": "2053668415345135889",
+      "text": "JUST IN: U.S. citizen tests \u201cmildly positive\u201d for hantavirus after departing from the MV Hondius cruise ship.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 313,
+        "reply_count": 517,
+        "like_count": 3815,
+        "quote_count": 361,
+        "bookmark_count": 419,
+        "impression_count": 4399180
+      },
+      "edit_history_tweet_ids": [
+        "2053668415345135889"
+      ],
+      "created_at": "2026-05-11T02:48:00.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 82,
+            "end": 105,
+            "url": "https://t.co/uD1eCpnlR7",
+            "expanded_url": "https://polymarket.com/event/which-film-will-get-the-most-oscar-nominations-at-the-99th-academy-awards?via=x-afr2",
+            "display_url": "polymarket.com/event/which-fi\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053657129425281024/ZrWvLueR?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053657129425281024/ZrWvLueR?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Which film will get the most Oscar nominations at the 99th Academy Awards?",
+            "description": "$17,123 has traded on \"Which film will get the most Oscar nominat...\" as of May 11, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/which-film-will-get-the-most-oscar-nominations-at-the-99th-academy-awards?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053657083975700782",
+      "text": "49% chance The Odyssey has the most Oscar nominations at the 99th Academy Awards. https://t.co/uD1eCpnlR7",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 8,
+        "reply_count": 17,
+        "like_count": 94,
+        "quote_count": 0,
+        "bookmark_count": 7,
+        "impression_count": 107929
+      },
+      "edit_history_tweet_ids": [
+        "2053657083975700782"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053652016048591183"
+        }
+      ],
+      "created_at": "2026-05-11T02:02:58.000Z"
+    },
+    {
+      "id": "2053652016048591183",
+      "text": "NEW: Elliot Page, formerly Ellen Page, rumored to play legendary Greek warrior Achilles in Christopher Nolan\u2019s The Odyssey.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 64,
+        "reply_count": 629,
+        "like_count": 1649,
+        "quote_count": 184,
+        "bookmark_count": 168,
+        "impression_count": 2620776
+      },
+      "edit_history_tweet_ids": [
+        "2053652016048591183"
+      ],
+      "created_at": "2026-05-11T01:42:50.000Z"
+    },
+    {
+      "id": "2053649367857340771",
+      "text": "JUST IN: Dua Lipa sues Samsung for $15 million for using her photo on TV boxes without permission.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 43,
+        "reply_count": 63,
+        "like_count": 956,
+        "quote_count": 6,
+        "bookmark_count": 27,
+        "impression_count": 88185
+      },
+      "edit_history_tweet_ids": [
+        "2053649367857340771"
+      ],
+      "created_at": "2026-05-11T01:32:18.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 65,
+            "end": 88,
+            "url": "https://t.co/rCNtUSF5lg",
+            "expanded_url": "https://polymarket.com/event/new-virginia-congressional-map-used-in-the-midterms/new-virginia-congressional-map-used-in-the-midterms?via=x-afr2",
+            "display_url": "polymarket.com/event/new-virg\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052759238049398784/pgD6T72P?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052759238049398784/pgD6T72P?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "New Virginia congressional map used in the midterms?",
+            "description": "$10,753 has traded on \"New Virginia congressional map used in the ...\" as of May 8, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/new-virginia-congressional-map-used-in-the-midterms/new-virginia-congressional-map-used-in-the-midterms?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053643943074496774",
+      "text": "11% chance a new Virginia congressional map is used at midterms. https://t.co/rCNtUSF5lg",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 10,
+        "reply_count": 10,
+        "like_count": 150,
+        "quote_count": 2,
+        "bookmark_count": 6,
+        "impression_count": 139246
+      },
+      "edit_history_tweet_ids": [
+        "2053643943074496774"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053631292021858814"
+        }
+      ],
+      "created_at": "2026-05-11T01:10:45.000Z"
+    },
+    {
+      "id": "2053642982184620484",
+      "text": "JUST IN: Nintendo stock crashes -12%.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 387,
+        "reply_count": 340,
+        "like_count": 5900,
+        "quote_count": 230,
+        "bookmark_count": 416,
+        "impression_count": 1923996
+      },
+      "edit_history_tweet_ids": [
+        "2053642982184620484"
+      ],
+      "created_at": "2026-05-11T01:06:56.000Z"
+    },
+    {
+      "id": "2053631292021858814",
+      "text": "JUST IN: Virginia Democrats propose lowering the mandatory retirement age for state Supreme Court justices from 75 to 54.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 1468,
+        "reply_count": 961,
+        "like_count": 19280,
+        "quote_count": 577,
+        "bookmark_count": 814,
+        "impression_count": 3827093
+      },
+      "edit_history_tweet_ids": [
+        "2053631292021858814"
+      ],
+      "created_at": "2026-05-11T00:20:29.000Z"
+    },
+    {
+      "id": "2053621010084061431",
+      "text": "JUST IN: Trump reportedly plans to \u201cpress\u201d Xi Jinping on China\u2019s approach to Iran at their meeting this week.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 93,
+        "reply_count": 100,
+        "like_count": 1514,
+        "quote_count": 7,
+        "bookmark_count": 25,
+        "impression_count": 82376
+      },
+      "edit_history_tweet_ids": [
+        "2053621010084061431"
+      ],
+      "created_at": "2026-05-10T23:39:37.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 56,
+            "end": 79,
+            "url": "https://t.co/cIb7I4ar4e",
+            "expanded_url": "https://polymarket.com/event/who-will-trump-publicly-praise-by-may-31?via=x-afr2",
+            "display_url": "polymarket.com/event/who-will\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053613386194165761/am9uSCKA?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053613386194165761/am9uSCKA?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Who will Trump publicly praise by May 31?",
+            "description": "$5,603 has traded on \"Who will Trump publicly praise by May 31?\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/who-will-trump-publicly-praise-by-may-31?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053613384386445529",
+      "text": "73% chance Trump publicly praises Netanyahu this month. https://t.co/cIb7I4ar4e",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 6,
+        "reply_count": 4,
+        "like_count": 63,
+        "quote_count": 0,
+        "bookmark_count": 4,
+        "impression_count": 32139
+      },
+      "edit_history_tweet_ids": [
+        "2053613384386445529"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053612977895407932"
+        }
+      ],
+      "created_at": "2026-05-10T23:09:19.000Z"
+    },
+    {
+      "id": "2053612977895407932",
+      "text": "JUST IN: Netanyahu calls for Israel to \u201cwean\u201d itself off remaining U.S. military support.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 103,
+        "reply_count": 138,
+        "like_count": 1489,
+        "quote_count": 27,
+        "bookmark_count": 50,
+        "impression_count": 106628
+      },
+      "edit_history_tweet_ids": [
+        "2053612977895407932"
+      ],
+      "created_at": "2026-05-10T23:07:42.000Z"
+    },
+    {
+      "id": "2053608411061739579",
+      "text": "RT @Polymarket: NEW: Analysis reveals female-dominated corporate roles are more vulnerable to AI automation than male roles.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 516,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 11
+      },
+      "edit_history_tweet_ids": [
+        "2053608411061739579"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053468347451523427"
+        }
+      ],
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "created_at": "2026-05-10T22:49:34.000Z"
+    },
+    {
+      "id": "2053603565596217705",
+      "text": "JUST IN: Russian officials reportedly must now surrender their watches before one-on-one meetings with Putin.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 229,
+        "reply_count": 120,
+        "like_count": 5080,
+        "quote_count": 26,
+        "bookmark_count": 250,
+        "impression_count": 288875
+      },
+      "edit_history_tweet_ids": [
+        "2053603565596217705"
+      ],
+      "created_at": "2026-05-10T22:30:18.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 92,
+            "end": 115,
+            "url": "https://t.co/SCN9k3q5oe",
+            "expanded_url": "https://polymarket.com/event/what-price-will-wti-hit-in-may-2026?via=x-afr2",
+            "display_url": "polymarket.com/event/what-pri\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053602020087468032/ihSVPR4r?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053602020087468032/ihSVPR4r?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "What will WTI Crude Oil (WTI) hit in May 2026?",
+            "description": "$12,796,231 has traded on \"What will WTI Crude Oil (WTI) hit in M...\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/what-price-will-wti-hit-in-may-2026?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053601975963423220",
+      "text": "JUST IN: Crude oil now projected to surge above $110 by the end of the month. \n\n52% chance. https://t.co/SCN9k3q5oe",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 29,
+        "reply_count": 67,
+        "like_count": 203,
+        "quote_count": 4,
+        "bookmark_count": 13,
+        "impression_count": 67590
+      },
+      "edit_history_tweet_ids": [
+        "2053601975963423220"
+      ],
+      "created_at": "2026-05-10T22:23:59.000Z"
+    },
+    {
+      "id": "2053592657662804392",
+      "text": "JUST IN: Trump &amp; Chinese leaders to discuss AI security concerns during his China visit this week.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 53,
+        "reply_count": 70,
+        "like_count": 584,
+        "quote_count": 4,
+        "bookmark_count": 13,
+        "impression_count": 51004
+      },
+      "edit_history_tweet_ids": [
+        "2053592657662804392"
+      ],
+      "created_at": "2026-05-10T21:46:58.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 48,
+            "end": 71,
+            "url": "https://t.co/UqL2cQIROS",
+            "expanded_url": "https://polymarket.com/event/us-x-iran-permanent-peace-deal-by?via=x-afr2",
+            "display_url": "polymarket.com/event/us-x-ira\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051804216063049732/srxiy165?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051804216063049732/srxiy165?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "US x Iran permanent peace deal by...?",
+            "description": "$73,033,195 has traded on \"US x Iran permanent peace deal by...?\" as of May 5, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/us-x-iran-permanent-peace-deal-by?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053586002774516058",
+      "text": "23% chance a peace deal is achieved this month. https://t.co/UqL2cQIROS",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 5,
+        "reply_count": 2,
+        "like_count": 46,
+        "quote_count": 1,
+        "bookmark_count": 2,
+        "impression_count": 28683
+      },
+      "edit_history_tweet_ids": [
+        "2053586002774516058"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053581562063544549"
+        }
+      ],
+      "created_at": "2026-05-10T21:20:31.000Z"
+    },
+    {
+      "id": "2053585574049521739",
+      "text": "JUST IN: France to quarantine five nationals after one showed hantavirus symptoms following departure from the MV Hondius cruise ship.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 166,
+        "reply_count": 104,
+        "like_count": 1231,
+        "quote_count": 32,
+        "bookmark_count": 78,
+        "impression_count": 137583
+      },
+      "edit_history_tweet_ids": [
+        "2053585574049521739"
+      ],
+      "created_at": "2026-05-10T21:18:49.000Z"
+    },
+    {
+      "id": "2053581562063544549",
+      "text": "NEW: Trump says Iran\u2019s response to the latest U.S. peace proposal is \u201ctotally unacceptable.\u201d",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 50,
+        "reply_count": 84,
+        "like_count": 751,
+        "quote_count": 6,
+        "bookmark_count": 11,
+        "impression_count": 53884
+      },
+      "edit_history_tweet_ids": [
+        "2053581039520346487",
+        "2053581562063544549"
+      ],
+      "created_at": "2026-05-10T21:02:52.000Z"
+    },
+    {
+      "id": "2053575369232437688",
+      "text": "JUST IN: Oakland home values hit their lowest level in roughly a decade after falling 11.4% in a year.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 91,
+        "reply_count": 98,
+        "like_count": 1255,
+        "quote_count": 28,
+        "bookmark_count": 90,
+        "impression_count": 135137
+      },
+      "edit_history_tweet_ids": [
+        "2053575369232437688"
+      ],
+      "created_at": "2026-05-10T20:38:16.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 55,
+            "end": 78,
+            "url": "https://t.co/KCnIlKW484",
+            "expanded_url": "https://polymarket.com/event/trump-announces-us-blockade-of-hormuz-lifted-by?via=x-afr2",
+            "display_url": "polymarket.com/event/trump-an\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051494947875172352/KmXxRsp7?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051494947875172352/KmXxRsp7?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Trump announces US blockade of Hormuz lifted by...?",
+            "description": "$11,992,434 has traded on \"Trump announces US blockade of Hormuz l...\" as of May 5, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/trump-announces-us-blockade-of-hormuz-lifted-by?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053572079333650585",
+      "text": "67% chance the U.S. blockade persists into next month. https://t.co/KCnIlKW484",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 8,
+        "reply_count": 12,
+        "like_count": 56,
+        "quote_count": 0,
+        "bookmark_count": 3,
+        "impression_count": 30154
+      },
+      "edit_history_tweet_ids": [
+        "2053572079333650585"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053568951515312428"
+        }
+      ],
+      "created_at": "2026-05-10T20:25:11.000Z"
+    },
+    {
+      "id": "2053568951515312428",
+      "text": "JUST IN: Iran declares foreign powers \u201cunwelcome\u201d in the Persian Gulf.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 87,
+        "reply_count": 87,
+        "like_count": 1172,
+        "quote_count": 8,
+        "bookmark_count": 20,
+        "impression_count": 60276
+      },
+      "edit_history_tweet_ids": [
+        "2053568951515312428"
+      ],
+      "created_at": "2026-05-10T20:12:46.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 53,
+            "end": 76,
+            "url": "https://t.co/hvT7GCJP8Z",
+            "expanded_url": "https://polymarket.com/event/which-countries-will-send-warships-through-the-strait-of-hormuz-by-may-31?via=x-afr2",
+            "display_url": "polymarket.com/event/which-co\u2026",
+            "status": 200,
+            "title": "Which countries will send warships through the Strait of Hormuz by May 31?",
+            "description": "$16,618 has traded on \"Which countries will send warships through ...\" as of May 6, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/which-countries-will-send-warships-through-the-strait-of-hormuz-by-may-31?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053565426043425118",
+      "text": "9% chance South Korea sends warships through Hormuz. https://t.co/hvT7GCJP8Z",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 9,
+        "reply_count": 4,
+        "like_count": 58,
+        "quote_count": 2,
+        "bookmark_count": 3,
+        "impression_count": 37404
+      },
+      "edit_history_tweet_ids": [
+        "2053565426043425118"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053561666525163658"
+        }
+      ],
+      "created_at": "2026-05-10T19:58:45.000Z"
+    },
+    {
+      "id": "2053563889686585744",
+      "text": "JUST IN: Trump says Iran\u2019s enriched uranium is being \u201csurveilled\u201d by the U.S.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 107,
+        "reply_count": 94,
+        "like_count": 2478,
+        "quote_count": 7,
+        "bookmark_count": 18,
+        "impression_count": 58481
+      },
+      "edit_history_tweet_ids": [
+        "2053563889686585744"
+      ],
+      "created_at": "2026-05-10T19:52:39.000Z"
+    },
+    {
+      "id": "2053561666525163658",
+      "text": "JUST IN: South Korea investigating cargo ship struck by \u201cunidentified flying objects\u201d in the Strait of Hormuz.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 343,
+        "reply_count": 164,
+        "like_count": 3536,
+        "quote_count": 60,
+        "bookmark_count": 309,
+        "impression_count": 252534
+      },
+      "edit_history_tweet_ids": [
+        "2053560733728731355",
+        "2053561666525163658"
+      ],
+      "created_at": "2026-05-10T19:43:49.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 82,
+            "end": 105,
+            "url": "https://t.co/Wc0c1XxROj",
+            "expanded_url": "https://polymarket.com/event/iran-agrees-to-surrender-enriched-uranium-stockpile-by?via=x-afr2",
+            "display_url": "polymarket.com/event/iran-agr\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053555566576893953/FrN1C4F-?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053555566576893953/FrN1C4F-?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Iran agrees to surrender enriched uranium stockpile by...?",
+            "description": "$6,619,987 has traded on \"Iran agrees to surrender enriched urani...\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/iran-agrees-to-surrender-enriched-uranium-stockpile-by?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053555522599575601",
+      "text": "12% chance Iran agrees to surrender its enriched uranium by the end of the month. https://t.co/Wc0c1XxROj",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 5,
+        "reply_count": 4,
+        "like_count": 44,
+        "quote_count": 0,
+        "bookmark_count": 1,
+        "impression_count": 28770
+      },
+      "edit_history_tweet_ids": [
+        "2053555522599575601"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053555129505239324"
+        }
+      ],
+      "created_at": "2026-05-10T19:19:24.000Z"
+    },
+    {
+      "id": "2053555129505239324",
+      "text": "JUST IN: Iran reportedly proposes to transfer \u201csome\u201d of its enriched uranium to a third country.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 53,
+        "reply_count": 104,
+        "like_count": 743,
+        "quote_count": 15,
+        "bookmark_count": 20,
+        "impression_count": 112378
+      },
+      "edit_history_tweet_ids": [
+        "2053555129505239324"
+      ],
+      "created_at": "2026-05-10T19:17:50.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 41,
+            "end": 64,
+            "url": "https://t.co/JtbZgQUg1S",
+            "expanded_url": "https://polymarket.com/event/will-xi-jinping-visit-us-before-2027/will-xi-jinping-visit-us-before-2027?via=x-afr2",
+            "display_url": "polymarket.com/event/will-xi-\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053547528893636608/ziB7-AX3?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053547528893636608/ziB7-AX3?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Will Xi Jinping visit US before 2027?",
+            "description": "$94,247 has traded on \"Will Xi Jinping visit US before 2027?\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/will-xi-jinping-visit-us-before-2027/will-xi-jinping-visit-us-before-2027?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053547526263824700",
+      "text": "73% chance Xi visits the U.S. this year. https://t.co/JtbZgQUg1S",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 7,
+        "reply_count": 9,
+        "like_count": 62,
+        "quote_count": 2,
+        "bookmark_count": 5,
+        "impression_count": 28848
+      },
+      "edit_history_tweet_ids": [
+        "2053547526263824700"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053547328435376580"
+        }
+      ],
+      "created_at": "2026-05-10T18:47:37.000Z"
+    },
+    {
+      "id": "2053547328435376580",
+      "text": "JUST IN: Trump reportedly plans to host Xi Jinping for a U.S. visit later in 2026.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 140,
+        "reply_count": 81,
+        "like_count": 2352,
+        "quote_count": 5,
+        "bookmark_count": 47,
+        "impression_count": 74849
+      },
+      "edit_history_tweet_ids": [
+        "2053547328435376580"
+      ],
+      "created_at": "2026-05-10T18:46:50.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 57,
+            "end": 80,
+            "url": "https://t.co/AeupZtqnJG",
+            "expanded_url": "https://polymarket.com/event/us-federally-charges-cuba-leader-miguel-diaz-canel/us-federally-charges-cuba-leader-miguel-diaz-canel?via=x-afr2",
+            "display_url": "polymarket.com/event/us-feder\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053539862473547778/Sdlaaof3?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053539862473547778/Sdlaaof3?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "US federally charges Cuba leader Miguel Diaz-Canel?",
+            "description": "$14,968 has traded on \"US federally charges Cuba leader Miguel Di...\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/us-federally-charges-cuba-leader-miguel-diaz-canel/us-federally-charges-cuba-leader-miguel-diaz-canel?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053539817753854008",
+      "text": "21% chance the U.S. criminally charges Cuba\u2019s president. https://t.co/AeupZtqnJG",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 11,
+        "reply_count": 4,
+        "like_count": 63,
+        "quote_count": 4,
+        "bookmark_count": 4,
+        "impression_count": 40235
+      },
+      "edit_history_tweet_ids": [
+        "2053539817753854008"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053539374449496558"
+        }
+      ],
+      "created_at": "2026-05-10T18:17:00.000Z"
+    },
+    {
+      "id": "2053539374449496558",
+      "text": "NEW: U.S. Navy &amp; Air Force have reportedly conducted at least 25 intelligence flights near Cuba since February 4.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 97,
+        "reply_count": 43,
+        "like_count": 1447,
+        "quote_count": 4,
+        "bookmark_count": 26,
+        "impression_count": 47469
+      },
+      "edit_history_tweet_ids": [
+        "2053539374449496558"
+      ],
+      "created_at": "2026-05-10T18:15:14.000Z"
+    },
+    {
+      "id": "2053537066588258671",
+      "text": "JUST IN: The Pentagon says they can\u2019t confirm or deny whether they have \u201ckamikaze dolphins\u201d",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 241,
+        "reply_count": 170,
+        "like_count": 3465,
+        "quote_count": 105,
+        "bookmark_count": 307,
+        "impression_count": 341907
+      },
+      "edit_history_tweet_ids": [
+        "2053537066588258671"
+      ],
+      "created_at": "2026-05-10T18:06:04.000Z"
+    },
+    {
+      "id": "2053536106361016415",
+      "text": "JUST IN: Scientology\u2019s recruiting center in Hollywood has been closed for 16 days because of \u201cspeed runners\u201d",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 137,
+        "reply_count": 77,
+        "like_count": 2705,
+        "quote_count": 27,
+        "bookmark_count": 66,
+        "impression_count": 97136
+      },
+      "edit_history_tweet_ids": [
+        "2053536106361016415"
+      ],
+      "created_at": "2026-05-10T18:02:15.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 45,
+            "end": 68,
+            "url": "https://t.co/2xHxgBfcgy",
+            "expanded_url": "https://polymarket.com/event/pluto-reclassified-as-a-planet-by-june-30?via=x-afr2",
+            "display_url": "polymarket.com/event/pluto-re\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053535643884474372/YbZSHSIM?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053535643884474372/YbZSHSIM?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Pluto reclassified as a planet by June 30?",
+            "description": "$20,653 has traded on \"Pluto reclassified as a planet by June 30?\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/pluto-reclassified-as-a-planet-by-june-30?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053535600003670366",
+      "text": "5% chance Pluto is reclassified as a planet. https://t.co/2xHxgBfcgy",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 4,
+        "reply_count": 7,
+        "like_count": 47,
+        "quote_count": 2,
+        "bookmark_count": 5,
+        "impression_count": 31929
+      },
+      "edit_history_tweet_ids": [
+        "2053535600003670366"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053535132884054437"
+        }
+      ],
+      "created_at": "2026-05-10T18:00:14.000Z"
+    },
+    {
+      "id": "2053535132884054437",
+      "text": "JUST IN: Astronomers find unexpected atmosphere around celestial body beyond Neptune, suggesting it may hold \u201cbuilding blocks for life.\u201d",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 276,
+        "reply_count": 154,
+        "like_count": 3974,
+        "quote_count": 35,
+        "bookmark_count": 362,
+        "impression_count": 244344
+      },
+      "edit_history_tweet_ids": [
+        "2053535132884054437"
+      ],
+      "created_at": "2026-05-10T17:58:23.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 61,
+            "end": 84,
+            "url": "https://t.co/o1gNPHhc1H",
+            "expanded_url": "https://polymarket.com/event/trumps-face-on-us-gold-coin-by-july-4/trumps-face-on-us-gold-coin-by-july-4?via=x-afr2",
+            "display_url": "polymarket.com/event/trumps-f\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052126061874360323/oTzjA7Pa?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052126061874360323/oTzjA7Pa?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Trump's face on US gold coin by July 4?",
+            "description": "$15,925 has traded on \"Trump's face on US gold coin by July 4?\" as of May 6, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/trumps-face-on-us-gold-coin-by-july-4/trumps-face-on-us-gold-coin-by-july-4?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053527965854577045",
+      "text": "70% chance Trump\u2019s face appears on a US gold coin by July 4. https://t.co/o1gNPHhc1H",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 6,
+        "reply_count": 9,
+        "like_count": 95,
+        "quote_count": 1,
+        "bookmark_count": 6,
+        "impression_count": 31168
+      },
+      "edit_history_tweet_ids": [
+        "2053527965854577045"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053525293042733359"
+        }
+      ],
+      "created_at": "2026-05-10T17:29:54.000Z"
+    },
+    {
+      "id": "2053525293042733359",
+      "text": "NEW: Trump says he still wants to visit Fort Knox to see \u201cwhether or not we have any gold in there.\u201d",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 480,
+        "reply_count": 290,
+        "like_count": 7072,
+        "quote_count": 99,
+        "bookmark_count": 216,
+        "impression_count": 274064
+      },
+      "edit_history_tweet_ids": [
+        "2053525293042733359"
+      ],
+      "created_at": "2026-05-10T17:19:17.000Z"
+    },
+    {
+      "id": "2053518247744397608",
+      "text": "JUST IN: Transgender Green Party candidate Q Manivannan, who does not have a British visa, elected to Scottish Parliament.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 147,
+        "reply_count": 126,
+        "like_count": 2610,
+        "quote_count": 38,
+        "bookmark_count": 192,
+        "impression_count": 169725
+      },
+      "edit_history_tweet_ids": [
+        "2053518247744397608"
+      ],
+      "created_at": "2026-05-10T16:51:17.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 64,
+            "end": 87,
+            "url": "https://t.co/hvT7GCJP8Z",
+            "expanded_url": "https://polymarket.com/event/which-countries-will-send-warships-through-the-strait-of-hormuz-by-may-31?via=x-afr2",
+            "display_url": "polymarket.com/event/which-co\u2026",
+            "status": 200,
+            "title": "Which countries will send warships through the Strait of Hormuz by May 31?",
+            "description": "$16,618 has traded on \"Which countries will send warships through ...\" as of May 6, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/which-countries-will-send-warships-through-the-strait-of-hormuz-by-may-31?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053510417247355391",
+      "text": "22% chance the UK sends a warship through the Strait of Hormuz. https://t.co/hvT7GCJP8Z",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 6,
+        "reply_count": 9,
+        "like_count": 43,
+        "quote_count": 1,
+        "bookmark_count": 3,
+        "impression_count": 28796
+      },
+      "edit_history_tweet_ids": [
+        "2053510417247355391"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053510124602307044"
+        }
+      ],
+      "created_at": "2026-05-10T16:20:10.000Z"
+    },
+    {
+      "id": "2053510124602307044",
+      "text": "JUST IN: Iran threatens \u201cimmediate decisive response\u201d if French &amp; British warships accompany U.S. missions in the Strait of Hormuz.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 132,
+        "reply_count": 126,
+        "like_count": 1282,
+        "quote_count": 5,
+        "bookmark_count": 28,
+        "impression_count": 83049
+      },
+      "edit_history_tweet_ids": [
+        "2053510124602307044"
+      ],
+      "created_at": "2026-05-10T16:19:00.000Z"
+    },
+    {
+      "id": "2053506065224863828",
+      "text": "JUST IN: Microsoft\u2019s planned $1 billion Kenya data center delayed amid dispute over guaranteed government payments.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 510,
+        "reply_count": 123,
+        "like_count": 1639,
+        "quote_count": 73,
+        "bookmark_count": 140,
+        "impression_count": 111866
+      },
+      "edit_history_tweet_ids": [
+        "2053506065224863828"
+      ],
+      "created_at": "2026-05-10T16:02:52.000Z"
+    },
+    {
+      "id": "2053497142761636214",
+      "text": "JUST IN: Israeli PM Netanyahu declares the military operation against Iran is \u201cnot over.\"",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 81,
+        "reply_count": 117,
+        "like_count": 1200,
+        "quote_count": 6,
+        "bookmark_count": 27,
+        "impression_count": 75844
+      },
+      "edit_history_tweet_ids": [
+        "2053497142761636214"
+      ],
+      "created_at": "2026-05-10T15:27:25.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 54,
+            "end": 77,
+            "url": "https://t.co/rfjRBMB2NM",
+            "expanded_url": "https://polymarket.com/event/which-countries-will-donald-trump-visit-in-2026?via=x-afr2",
+            "display_url": "polymarket.com/event/which-co\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051357064593625088/AHT1oNjv?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051357064593625088/AHT1oNjv?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Which countries will Donald Trump visit in 2026?",
+            "description": "$339,912 has traded on \"Which countries will Donald Trump visit in...\" as of May 4, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/which-countries-will-donald-trump-visit-in-2026?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053489923320111401",
+      "text": "10% chance Trump visits Syria by the end of the year. https://t.co/rfjRBMB2NM",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 5,
+        "reply_count": 9,
+        "like_count": 40,
+        "quote_count": 1,
+        "bookmark_count": 2,
+        "impression_count": 28739
+      },
+      "edit_history_tweet_ids": [
+        "2053489923320111401"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053489638975639572"
+        }
+      ],
+      "created_at": "2026-05-10T14:58:44.000Z"
+    },
+    {
+      "id": "2053489638975639572",
+      "text": "NEW: Syria carries out its first Visa and Mastercard transaction in over 15 years.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 195,
+        "reply_count": 114,
+        "like_count": 3596,
+        "quote_count": 25,
+        "bookmark_count": 114,
+        "impression_count": 182116
+      },
+      "edit_history_tweet_ids": [
+        "2053489638975639572"
+      ],
+      "created_at": "2026-05-10T14:57:36.000Z"
+    },
+    {
+      "id": "2053483538729611444",
+      "text": "JUST IN: British paratroopers airdrop medical aid to remote Tristan da Cunha islands for suspected hantavirus case.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 51,
+        "reply_count": 97,
+        "like_count": 612,
+        "quote_count": 9,
+        "bookmark_count": 21,
+        "impression_count": 63876
+      },
+      "edit_history_tweet_ids": [
+        "2053482640070660383",
+        "2053483538729611444"
+      ],
+      "created_at": "2026-05-10T14:33:22.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 68,
+            "end": 91,
+            "url": "https://t.co/9NKcdndFx7",
+            "expanded_url": "https://polymarket.com/event/anthony-albanese-out-as-prime-minister-of-australia-by?via=x-afr2",
+            "display_url": "polymarket.com/event/anthony-\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053472418488832003/IC_AOOrK?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053472418488832003/IC_AOOrK?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Anthony Albanese out as Prime Minister of Australia by...?",
+            "description": "$12,392 has traded on \"Anthony Albanese out as Prime Minister of ...\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/anthony-albanese-out-as-prime-minister-of-australia-by?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053472417478033772",
+      "text": "6% chance Albanese is out as prime minister by the end of the year. https://t.co/9NKcdndFx7",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 9,
+        "reply_count": 10,
+        "like_count": 60,
+        "quote_count": 2,
+        "bookmark_count": 1,
+        "impression_count": 32651
+      },
+      "edit_history_tweet_ids": [
+        "2053472417478033772"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053470096664728043"
+        }
+      ],
+      "created_at": "2026-05-10T13:49:10.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 80,
+            "end": 103,
+            "url": "https://t.co/VbAPsXBLwT",
+            "expanded_url": "https://polymarket.com/event/confirmed-case-of-hantavirus-in-us-by-may-15/confirmed-case-of-hantavirus-in-us-by-may-15?via=x-afr2",
+            "display_url": "polymarket.com/event/confirme\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053373734329954304/9snsdUSl?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053373734329954304/9snsdUSl?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Confirmed case of Hantavirus in US by May 15?",
+            "description": "$103,640 has traded on \"Confirmed case of Hantavirus in US by May...\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/confirmed-case-of-hantavirus-in-us-by-may-15/confirmed-case-of-hantavirus-in-us-by-may-15?via=x-afr2"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "id": "2053470202260496743",
+      "text": "RT @Polymarket: \ud83d\udea8 NEW POLYMARKET: Confirmed case of hantavirus in US by May 15? https://t.co/VbAPsXBLwT",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 53,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 10
+      },
+      "edit_history_tweet_ids": [
+        "2053470202260496743"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053373723697348623"
+        }
+      ],
+      "created_at": "2026-05-10T13:40:22.000Z"
+    },
+    {
+      "id": "2053470096664728043",
+      "text": "JUST IN: Australia\u2019s Trump-aligned One Nation party wins first lower house seat.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 264,
+        "reply_count": 123,
+        "like_count": 5723,
+        "quote_count": 17,
+        "bookmark_count": 116,
+        "impression_count": 143796
+      },
+      "edit_history_tweet_ids": [
+        "2053470096664728043"
+      ],
+      "created_at": "2026-05-10T13:39:57.000Z"
+    },
+    {
+      "id": "2053468347451523427",
+      "text": "NEW: Analysis reveals female-dominated corporate roles are more vulnerable to AI automation than male roles.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 516,
+        "reply_count": 504,
+        "like_count": 9773,
+        "quote_count": 347,
+        "bookmark_count": 895,
+        "impression_count": 2103879
+      },
+      "edit_history_tweet_ids": [
+        "2053468347451523427"
+      ],
+      "created_at": "2026-05-10T13:33:00.000Z"
+    },
+    {
+      "id": "2053450982735122705",
+      "text": "NEW: British activists hold \u201cNo Kings\u201d protest outside Buckingham Palace in London.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 67,
+        "reply_count": 148,
+        "like_count": 1120,
+        "quote_count": 31,
+        "bookmark_count": 44,
+        "impression_count": 90095
+      },
+      "edit_history_tweet_ids": [
+        "2053450982735122705"
+      ],
+      "created_at": "2026-05-10T12:24:00.000Z"
+    },
+    {
+      "id": "2053441419910762874",
+      "text": "JUST IN: Israel deports two activists detained aboard Gaza-bound flotilla.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 19,
+        "reply_count": 58,
+        "like_count": 376,
+        "quote_count": 0,
+        "bookmark_count": 2,
+        "impression_count": 44409
+      },
+      "edit_history_tweet_ids": [
+        "2053441419910762874"
+      ],
+      "created_at": "2026-05-10T11:46:00.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 49,
+            "end": 72,
+            "url": "https://t.co/pfG6iTy5Jz",
+            "expanded_url": "https://polymarket.com/event/what-will-trump-say-this-week-may-17?via=x-afr2",
+            "display_url": "polymarket.com/event/what-wil\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053417309780291590/Gs9Bctn8?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053417309780291590/Gs9Bctn8?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "What will Trump say this week? (May 17)",
+            "description": "View real-time odds for \"What will Trump say this week? (May 17)\" as of May 10, 2026 and trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/what-will-trump-say-this-week-may-17?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053417260543361239",
+      "text": "\ud83d\udea8 NEW POLYMARKET: What will Trump say this week? https://t.co/pfG6iTy5Jz",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 27,
+        "reply_count": 103,
+        "like_count": 228,
+        "quote_count": 5,
+        "bookmark_count": 11,
+        "impression_count": 68708
+      },
+      "edit_history_tweet_ids": [
+        "2053417260543361239"
+      ],
+      "created_at": "2026-05-10T10:10:00.000Z"
+    },
+    {
+      "id": "2053403167715406256",
+      "text": "JUST IN: Alibaba to integrate Qwen AI with Taobao, enabling \u201cagentic shopping\u201d through chat.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 45,
+        "reply_count": 97,
+        "like_count": 652,
+        "quote_count": 11,
+        "bookmark_count": 44,
+        "impression_count": 65438
+      },
+      "edit_history_tweet_ids": [
+        "2053403167715406256"
+      ],
+      "created_at": "2026-05-10T09:14:00.000Z"
+    },
+    {
+      "id": "2053394359693848940",
+      "text": "JUST IN: Panama Canal revenue has reportedly surged +15% since the Iran conflict began.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 84,
+        "reply_count": 57,
+        "like_count": 1497,
+        "quote_count": 1,
+        "bookmark_count": 20,
+        "impression_count": 57490
+      },
+      "edit_history_tweet_ids": [
+        "2053394359693848940"
+      ],
+      "created_at": "2026-05-10T08:39:00.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 64,
+            "end": 87,
+            "url": "https://t.co/VbAPsXBLwT",
+            "expanded_url": "https://polymarket.com/event/confirmed-case-of-hantavirus-in-us-by-may-15/confirmed-case-of-hantavirus-in-us-by-may-15?via=x-afr2",
+            "display_url": "polymarket.com/event/confirme\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053373734329954304/9snsdUSl?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053373734329954304/9snsdUSl?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Confirmed case of Hantavirus in US by May 15?",
+            "description": "$103,640 has traded on \"Confirmed case of Hantavirus in US by May...\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/confirmed-case-of-hantavirus-in-us-by-may-15/confirmed-case-of-hantavirus-in-us-by-may-15?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053373723697348623",
+      "text": "\ud83d\udea8 NEW POLYMARKET: Confirmed case of hantavirus in US by May 15? https://t.co/VbAPsXBLwT",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 53,
+        "reply_count": 163,
+        "like_count": 479,
+        "quote_count": 21,
+        "bookmark_count": 47,
+        "impression_count": 141465
+      },
+      "edit_history_tweet_ids": [
+        "2053373723697348623"
+      ],
+      "created_at": "2026-05-10T07:17:00.000Z"
+    },
+    {
+      "id": "2053356610936815813",
+      "text": "JUST IN: Qatar reportedly sends its first LNG shipment through Hormuz since the Iran conflict began.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 88,
+        "reply_count": 75,
+        "like_count": 1185,
+        "quote_count": 7,
+        "bookmark_count": 14,
+        "impression_count": 90248
+      },
+      "edit_history_tweet_ids": [
+        "2053356610936815813"
+      ],
+      "created_at": "2026-05-10T06:09:00.000Z"
+    },
+    {
+      "id": "2053353842675507274",
+      "text": "NEW: Chinese bubble tea chain Mixue \u2014 with more stores than McDonald\u2019s \u2014 plans global expansion.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 67,
+        "reply_count": 81,
+        "like_count": 991,
+        "quote_count": 11,
+        "bookmark_count": 53,
+        "impression_count": 80716
+      },
+      "edit_history_tweet_ids": [
+        "2053353842675507274"
+      ],
+      "created_at": "2026-05-10T05:58:00.000Z"
+    },
+    {
+      "id": "2053353271343874289",
+      "text": "RT @Polymarket: JUST IN: Audemars Piguet to launch an \u201caffordable new take\u201d on the Royal Oak with Swatch, reportedly expected to cost aroun\u2026",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 620,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 14
+      },
+      "edit_history_tweet_ids": [
+        "2053353271343874289"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053172181132030112"
+        }
+      ],
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "created_at": "2026-05-10T05:55:44.000Z"
+    },
+    {
+      "id": "2053353176342876318",
+      "text": "RT @Polymarket: JUST IN: \ud835\udd4f is testing duplicate video detection to crack down on content clippers.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 450,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 5
+      },
+      "edit_history_tweet_ids": [
+        "2053353176342876318"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053196543209984119"
+        }
+      ],
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "created_at": "2026-05-10T05:55:21.000Z"
+    },
+    {
+      "id": "2053352959581335845",
+      "text": "RT @Polymarket: NEW: Aliens\u200b.gov is now expected to be revealed as an immigration website rather than extraterrestrial-related.\n\n55% chance\u2026",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 60,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 8
+      },
+      "edit_history_tweet_ids": [
+        "2053352959581335845"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053227751595733217"
+        }
+      ],
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "created_at": "2026-05-10T05:54:29.000Z"
+    },
+    {
+      "id": "2053352942439198788",
+      "text": "RT @Polymarket: JUST IN: Putin says the special military operation in Ukraine is \u201ccoming to an end.\u201d",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 1718,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 7
+      },
+      "edit_history_tweet_ids": [
+        "2053352942439198788"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053202667338404227"
+        }
+      ],
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "created_at": "2026-05-10T05:54:25.000Z"
+    },
+    {
+      "id": "2053344943666585843",
+      "text": "JUST IN: The cruise ship hit by a deadly hantavirus outbreak has officially arrived in Spain\u2019s Canary Islands.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 81,
+        "reply_count": 96,
+        "like_count": 946,
+        "quote_count": 11,
+        "bookmark_count": 46,
+        "impression_count": 99195
+      },
+      "edit_history_tweet_ids": [
+        "2053344943666585843"
+      ],
+      "created_at": "2026-05-10T05:22:38.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 42,
+            "end": 65,
+            "url": "https://t.co/MY24pT1S0V",
+            "expanded_url": "https://polymarket.com/event/will-ground-beef-hit-in-2026?via=x-afr2",
+            "display_url": "polymarket.com/event/will-gro\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053338826471309316/n2AwF355?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053338826471309316/n2AwF355?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Will ground beef hit __ in 2026?",
+            "description": "$18,428 has traded on \"Will ground beef hit __ in 2026?\" as of May 10, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/will-ground-beef-hit-in-2026?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053338781864874344",
+      "text": "54% chance ground beef hits $8 this year. https://t.co/MY24pT1S0V",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 9,
+        "reply_count": 12,
+        "like_count": 52,
+        "quote_count": 6,
+        "bookmark_count": 3,
+        "impression_count": 62782
+      },
+      "edit_history_tweet_ids": [
+        "2053338781864874344"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053333149141082116"
+        }
+      ],
+      "created_at": "2026-05-10T04:58:09.000Z"
+    },
+    {
+      "id": "2053333149141082116",
+      "text": "JUST IN: Live cattle futures are trading just below record highs.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 24,
+        "reply_count": 62,
+        "like_count": 341,
+        "quote_count": 10,
+        "bookmark_count": 10,
+        "impression_count": 53092
+      },
+      "edit_history_tweet_ids": [
+        "2053333149141082116"
+      ],
+      "created_at": "2026-05-10T04:35:46.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 79,
+            "end": 102,
+            "url": "https://t.co/Aw51QggRap",
+            "expanded_url": "https://polymarket.com/event/ufc-sea2-kha7-2026-05-09?via=x-afr2",
+            "display_url": "polymarket.com/event/ufc-sea2\u2026",
+            "status": 200,
+            "title": "UFC 328: Sean Strickland vs. Khamzat Chimaev (Middleweight, Main Card) Odds & Predictions (May 9, 2026) | Polymarket",
+            "description": "UFC 328: Sean Strickland vs. Khamzat Chimaev (Middleweight, Main Card) (Resolved): View final results and past odds on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/sports/ufc/ufc-sea2-kha7-2026-05-09"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "id": "2053320720088801621",
+      "text": "RT @Polymarket: \ud83d\udea8 NEW POLYMARKET: UFC 328: Khamzat Chimaev vs. Sean Strickland https://t.co/Aw51QggRap",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 13,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 4
+      },
+      "edit_history_tweet_ids": [
+        "2053320720088801621"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053201800543477842"
+        }
+      ],
+      "created_at": "2026-05-10T03:46:23.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 125,
+            "end": 139,
+            "url": "https://t.co/E",
+            "display_url": "t.co/E"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 19,
+            "username": "PolymarketSport",
+            "id": "1800266527247106048"
+          }
+        ]
+      },
+      "id": "2053317192985264580",
+      "text": "RT @PolymarketSport: \ud83d\udea81,700,000 trade on Khamzat Chimaev placed on Polymarket...\n\nThis massive trade pays out $2,200,000.00. https://t.co/E\u2026",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 10,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 5
+      },
+      "edit_history_tweet_ids": [
+        "2053317192985264580"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053303498486194637"
+        }
+      ],
+      "created_at": "2026-05-10T03:32:22.000Z"
+    },
+    {
+      "id": "2053312399776666076",
+      "text": "JUST IN: Canada sees its biggest military recruitment surge in 30 years.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 167,
+        "reply_count": 411,
+        "like_count": 2398,
+        "quote_count": 60,
+        "bookmark_count": 136,
+        "impression_count": 234840
+      },
+      "edit_history_tweet_ids": [
+        "2053312399776666076"
+      ],
+      "created_at": "2026-05-10T03:13:19.000Z"
+    },
+    {
+      "id": "2053297239250878565",
+      "text": "NEW: Iran is reportedly considering taking control of 7 undersea internet cables in the Strait of Hormuz.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 214,
+        "reply_count": 218,
+        "like_count": 2285,
+        "quote_count": 40,
+        "bookmark_count": 90,
+        "impression_count": 163888
+      },
+      "edit_history_tweet_ids": [
+        "2053297239250878565"
+      ],
+      "created_at": "2026-05-10T02:13:04.000Z"
+    },
+    {
+      "id": "2053284496745677309",
+      "text": "JUST IN: WHO chief assures hantavirus outbreak \u201cis not COVID\u201d",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 82,
+        "reply_count": 182,
+        "like_count": 1282,
+        "quote_count": 31,
+        "bookmark_count": 59,
+        "impression_count": 137824
+      },
+      "edit_history_tweet_ids": [
+        "2053284496745677309"
+      ],
+      "created_at": "2026-05-10T01:22:26.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 79,
+            "end": 102,
+            "url": "https://t.co/39LTtNy7In",
+            "expanded_url": "https://polymarket.com/event/ufc-khamzat-chimaev-to-land-1st-minute-takedown/ufc-khamzat-chimaev-to-land-1st-minute-takedown?via=x-afr2",
+            "display_url": "polymarket.com/event/ufc-kham\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053147612845350912/sFxtMtVf?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053147612845350912/sFxtMtVf?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "UFC: Khamzat Chimaev to Land 1st Minute Takedown?",
+            "description": "$9,862 has traded on \"UFC: Khamzat Chimaev to Land 1st Minute Take...\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/ufc-khamzat-chimaev-to-land-1st-minute-takedown/ufc-khamzat-chimaev-to-land-1st-minute-takedown?via=x-afr2"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "id": "2053276327503937733",
+      "text": "RT @Polymarket: \ud83d\udea8 NEW POLYMARKET: Khamzat Chimaev to land 1st minute takedown? https://t.co/39LTtNy7In",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 12,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 10
+      },
+      "edit_history_tweet_ids": [
+        "2053276327503937733"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053148143022231642"
+        }
+      ],
+      "created_at": "2026-05-10T00:49:59.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 56,
+            "end": 79,
+            "url": "https://t.co/jJEk2jju8J",
+            "expanded_url": "https://polymarket.com/event/openai-announces-it-has-achieved-agi-before-2027/openai-announces-it-has-achieved-agi-before-2027?via=x-afr2",
+            "display_url": "polymarket.com/event/openai-a\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052315053303685120/wxJKcoEa?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052315053303685120/wxJKcoEa?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "OpenAI announces it has achieved AGI before 2027?",
+            "description": "$67,867 has traded on \"OpenAI announces it has achieved AGI before...\" as of May 7, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/openai-announces-it-has-achieved-agi-before-2027/openai-announces-it-has-achieved-agi-before-2027?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053275176754663882",
+      "text": "13% chance OpenAI announces AGI by the end of the year. https://t.co/jJEk2jju8J",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 8,
+        "reply_count": 12,
+        "like_count": 61,
+        "quote_count": 3,
+        "bookmark_count": 7,
+        "impression_count": 33164
+      },
+      "edit_history_tweet_ids": [
+        "2053275176754663882"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053274980893208659"
+        }
+      ],
+      "created_at": "2026-05-10T00:45:24.000Z"
+    },
+    {
+      "id": "2053274980893208659",
+      "text": "NEW: OpenAI CEO Sam Altman declares GPT-5.5 is an \u201cautistic genius.\u201d",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 56,
+        "reply_count": 117,
+        "like_count": 1283,
+        "quote_count": 37,
+        "bookmark_count": 70,
+        "impression_count": 124847
+      },
+      "edit_history_tweet_ids": [
+        "2053274980893208659"
+      ],
+      "created_at": "2026-05-10T00:44:38.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 54,
+            "end": 77,
+            "url": "https://t.co/OEzYBkL70s",
+            "expanded_url": "https://polymarket.com/event/where-will-zelenskyy-and-putin-meet-next?via=x-afr2",
+            "display_url": "polymarket.com/event/where-wi\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053267512129658882/BVHqWtLX?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053267512129658882/BVHqWtLX?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Where will Zelenskyy and Putin meet next before 2027?",
+            "description": "$2,413,950 has traded on \"Where will Zelenskyy and Putin meet next...\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/where-will-zelenskyy-and-putin-meet-next?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053267509793476619",
+      "text": "4% chance Putin &amp; Zelenskyy meet next in the U.S. https://t.co/OEzYBkL70s",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 6,
+        "reply_count": 5,
+        "like_count": 41,
+        "quote_count": 0,
+        "bookmark_count": 2,
+        "impression_count": 33581
+      },
+      "edit_history_tweet_ids": [
+        "2053267509793476619"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053267244918972909"
+        }
+      ],
+      "created_at": "2026-05-10T00:14:56.000Z"
+    },
+    {
+      "id": "2053267244918972909",
+      "text": "JUST IN: Putin says for the first time he is open to meeting Zelenskyy outside Russia once a lasting deal is in place.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 297,
+        "reply_count": 99,
+        "like_count": 4381,
+        "quote_count": 20,
+        "bookmark_count": 119,
+        "impression_count": 152137
+      },
+      "edit_history_tweet_ids": [
+        "2053267244918972909"
+      ],
+      "created_at": "2026-05-10T00:13:53.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 60,
+            "end": 83,
+            "url": "https://t.co/Ca11qObKM0",
+            "expanded_url": "https://polymarket.com/event/who-will-announce-presidential-run-before-2027?via=x-afr2",
+            "display_url": "polymarket.com/event/who-will\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052934757940441093/VHlaWrhQ?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052934757940441093/VHlaWrhQ?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Who will announce Presidential run before 2027?",
+            "description": "$634,769 has traded on \"Who will announce Presidential run before ...\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/who-will-announce-presidential-run-before-2027?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053261222728868190",
+      "text": "21% chance DeSantis announces a presidential run this year. https://t.co/Ca11qObKM0",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 5,
+        "reply_count": 3,
+        "like_count": 49,
+        "quote_count": 0,
+        "bookmark_count": 2,
+        "impression_count": 33151
+      },
+      "edit_history_tweet_ids": [
+        "2053261222728868190"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053242062590349435"
+        }
+      ],
+      "created_at": "2026-05-09T23:49:57.000Z"
+    },
+    {
+      "id": "2053253355934228620",
+      "text": "JUST IN: Israel reportedly built a \u201csecret military base\u201d in Iraq to support its operation against Iran.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 110,
+        "reply_count": 97,
+        "like_count": 1873,
+        "quote_count": 14,
+        "bookmark_count": 47,
+        "impression_count": 89952
+      },
+      "edit_history_tweet_ids": [
+        "2053253355934228620"
+      ],
+      "created_at": "2026-05-09T23:18:42.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 61,
+            "end": 84,
+            "url": "https://t.co/sul9WUDbMA",
+            "expanded_url": "https://polymarket.com/event/ukraine-signs-peace-deal-with-russia-before-2027/ukraine-signs-peace-deal-with-russia-before-2027?via=x-afr2",
+            "display_url": "polymarket.com/event/ukraine-\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053247929427677187/hTSeQXmJ?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053247929427677187/hTSeQXmJ?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Ukraine signs peace deal with Russia before 2027?",
+            "description": "$331,703 has traded on \"Ukraine signs peace deal with Russia befor...\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/ukraine-signs-peace-deal-with-russia-before-2027/ukraine-signs-peace-deal-with-russia-before-2027?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053247928366416014",
+      "text": "38% chance Ukraine signs a peace deal with Russia this year. https://t.co/sul9WUDbMA",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 22,
+        "reply_count": 6,
+        "like_count": 201,
+        "quote_count": 1,
+        "bookmark_count": 10,
+        "impression_count": 86286
+      },
+      "edit_history_tweet_ids": [
+        "2053247928366416014"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053202667338404227"
+        }
+      ],
+      "created_at": "2026-05-09T22:57:08.000Z"
+    },
+    {
+      "id": "2053242062590349435",
+      "text": "NEW: Florida Gov. Ron DeSantis has reportedly been taking \u201csocial coaching\u201d in preparation for a potential 2028 presidential run.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 160,
+        "reply_count": 278,
+        "like_count": 3379,
+        "quote_count": 115,
+        "bookmark_count": 202,
+        "impression_count": 265296
+      },
+      "edit_history_tweet_ids": [
+        "2053241687539888372",
+        "2053242062590349435"
+      ],
+      "created_at": "2026-05-09T22:33:49.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 125,
+            "end": 148,
+            "url": "https://t.co/mlGM7tnKLb",
+            "expanded_url": "https://polymarket.com/event/aliensgov-confirmed-as-immigration-website/aliensgov-confirmed-as-immigration-website?via=x-afr",
+            "display_url": "polymarket.com/event/aliensgo\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053227796139253767/mmxf_gDe?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053227796139253767/mmxf_gDe?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Aliens.gov confirmed immigration website?",
+            "description": "$139,858 has traded on \"Aliens.gov confirmed immigration website?\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/aliensgov-confirmed-as-immigration-website/aliensgov-confirmed-as-immigration-website?via=x-afr"
+          }
+        ]
+      },
+      "id": "2053227751595733217",
+      "text": "NEW: Aliens\u200b.gov is now expected to be revealed as an immigration website rather than extraterrestrial-related.\n\n55% chance. https://t.co/mlGM7tnKLb",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 60,
+        "reply_count": 94,
+        "like_count": 516,
+        "quote_count": 18,
+        "bookmark_count": 32,
+        "impression_count": 89821
+      },
+      "edit_history_tweet_ids": [
+        "2053227751595733217"
+      ],
+      "created_at": "2026-05-09T21:36:57.000Z"
+    },
+    {
+      "id": "2053223666981224753",
+      "text": "JUST IN: Trump says he expects a response from Iran \u201cvery soon\u201d regarding the latest U.S. peace proposal.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 129,
+        "reply_count": 198,
+        "like_count": 2177,
+        "quote_count": 20,
+        "bookmark_count": 0,
+        "impression_count": 102001
+      },
+      "edit_history_tweet_ids": [
+        "2053223666981224753"
+      ],
+      "created_at": "2026-05-09T21:20:43.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 71,
+            "end": 94,
+            "url": "https://t.co/UqL2cQIROS",
+            "expanded_url": "https://polymarket.com/event/us-x-iran-permanent-peace-deal-by?via=x-afr2",
+            "display_url": "polymarket.com/event/us-x-ira\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051804216063049732/srxiy165?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051804216063049732/srxiy165?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "US x Iran permanent peace deal by...?",
+            "description": "$73,033,195 has traded on \"US x Iran permanent peace deal by...?\" as of May 5, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/us-x-iran-permanent-peace-deal-by?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053220170915623281",
+      "text": "27% chance a permanent peace deal is achieved by the end of the month. https://t.co/UqL2cQIROS",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 6,
+        "reply_count": 6,
+        "like_count": 39,
+        "quote_count": 2,
+        "bookmark_count": 1,
+        "impression_count": 29915
+      },
+      "edit_history_tweet_ids": [
+        "2053220170915623281"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053219851657760859"
+        }
+      ],
+      "created_at": "2026-05-09T21:06:50.000Z"
+    },
+    {
+      "id": "2053219851657760859",
+      "text": "NEW: Marco Rubio &amp; Steve Witkoff reportedly met with Qatar\u2019s prime minister in Miami to advance talks on an Iran peace deal.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 76,
+        "reply_count": 62,
+        "like_count": 1208,
+        "quote_count": 1,
+        "bookmark_count": 16,
+        "impression_count": 52747
+      },
+      "edit_history_tweet_ids": [
+        "2053219851657760859"
+      ],
+      "created_at": "2026-05-09T21:05:34.000Z"
+    },
+    {
+      "id": "2053210251290173891",
+      "text": "JUST IN: China's central bank has now purchased gold for 18 consecutive months.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 163,
+        "reply_count": 111,
+        "like_count": 1877,
+        "quote_count": 18,
+        "bookmark_count": 58,
+        "impression_count": 89054
+      },
+      "edit_history_tweet_ids": [
+        "2053210251290173891"
+      ],
+      "created_at": "2026-05-09T20:27:25.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 109,
+            "end": 132,
+            "url": "https://t.co/vJKgV0QxNE",
+            "expanded_url": "https://polymarket.com/event/what-price-will-solana-hit-in-may-2026?via=x-afr2",
+            "display_url": "polymarket.com/event/what-pri\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053117022897082370/weCc6KBQ?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053117022897082370/weCc6KBQ?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "What price will Solana hit in May?",
+            "description": "$557,957 has traded on \"What price will Solana hit in May?\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/what-price-will-solana-hit-in-may-2026?via=x-afr2"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "id": "2053209380355543251",
+      "text": "RT @Polymarket: JUST IN: Solana now projected to surge back above $100 by the end of the month.\n\n55% chance. https://t.co/vJKgV0QxNE",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 63,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 6
+      },
+      "edit_history_tweet_ids": [
+        "2053209380355543251"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053117021919809762"
+        }
+      ],
+      "created_at": "2026-05-09T20:23:57.000Z"
+    },
+    {
+      "id": "2053202667338404227",
+      "text": "JUST IN: Putin says the special military operation in Ukraine is \u201ccoming to an end.\u201d",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 1718,
+        "reply_count": 494,
+        "like_count": 22982,
+        "quote_count": 368,
+        "bookmark_count": 1252,
+        "impression_count": 2181426
+      },
+      "edit_history_tweet_ids": [
+        "2053202667338404227"
+      ],
+      "created_at": "2026-05-09T19:57:17.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 63,
+            "end": 86,
+            "url": "https://t.co/Aw51QggRap",
+            "expanded_url": "https://polymarket.com/event/ufc-sea2-kha7-2026-05-09?via=x-afr2",
+            "display_url": "polymarket.com/event/ufc-sea2\u2026",
+            "status": 200,
+            "title": "UFC 328: Sean Strickland vs. Khamzat Chimaev (Middleweight, Main Card) Odds & Predictions (May 9, 2026) | Polymarket",
+            "description": "UFC 328: Sean Strickland vs. Khamzat Chimaev (Middleweight, Main Card) (Resolved): View final results and past odds on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/sports/ufc/ufc-sea2-kha7-2026-05-09"
+          }
+        ]
+      },
+      "id": "2053201800543477842",
+      "text": "\ud83d\udea8 NEW POLYMARKET: UFC 328: Khamzat Chimaev vs. Sean Strickland https://t.co/Aw51QggRap",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 13,
+        "reply_count": 51,
+        "like_count": 117,
+        "quote_count": 1,
+        "bookmark_count": 5,
+        "impression_count": 91177
+      },
+      "edit_history_tweet_ids": [
+        "2053201800543477842"
+      ],
+      "created_at": "2026-05-09T19:53:50.000Z"
+    },
+    {
+      "id": "2053196543209984119",
+      "text": "JUST IN: \ud835\udd4f is testing duplicate video detection to crack down on content clippers.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 450,
+        "reply_count": 337,
+        "like_count": 6957,
+        "quote_count": 193,
+        "bookmark_count": 284,
+        "impression_count": 418683
+      },
+      "edit_history_tweet_ids": [
+        "2053196543209984119"
+      ],
+      "created_at": "2026-05-09T19:32:57.000Z"
+    },
+    {
+      "id": "2053185164524532151",
+      "text": "NEW: CDC official says no mandatory quarantine is planned for Americans returning from hantavirus cruise ship.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 280,
+        "reply_count": 282,
+        "like_count": 2505,
+        "quote_count": 295,
+        "bookmark_count": 321,
+        "impression_count": 1003134
+      },
+      "edit_history_tweet_ids": [
+        "2053185164524532151"
+      ],
+      "created_at": "2026-05-09T18:47:44.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 78,
+            "end": 101,
+            "url": "https://t.co/JssuDqwKHq",
+            "expanded_url": "https://polymarket.com/event/ufc-strickland-and-chimaev-to-touch-gloves/ufc-strickland-and-chimaev-to-touch-gloves?via=x-afr2",
+            "display_url": "polymarket.com/event/ufc-stri\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053011882731347968/2A_GwNo1?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053011882731347968/2A_GwNo1?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "UFC: Strickland and Chimaev to Touch Gloves?",
+            "description": "$27,548 has traded on \"UFC: Strickland and Chimaev to Touch Gloves?\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/ufc-strickland-and-chimaev-to-touch-gloves/ufc-strickland-and-chimaev-to-touch-gloves?via=x-afr2"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "Polymarket",
+            "id": "1261335549215989760"
+          }
+        ]
+      },
+      "id": "2053182615969026511",
+      "text": "RT @Polymarket: \ud83d\udea8 NEW POLYMARKET: Will Strickland &amp; Chimaev touch gloves? https://t.co/JssuDqwKHq",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 17,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 5
+      },
+      "edit_history_tweet_ids": [
+        "2053182615969026511"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2053011839018213623"
+        }
+      ],
+      "created_at": "2026-05-09T18:37:36.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 47,
+            "end": 70,
+            "url": "https://t.co/8cKbZnt7Jj",
+            "expanded_url": "https://polymarket.com/event/who-will-trump-speak-to-in-may?via=x-afr2",
+            "display_url": "polymarket.com/event/who-will\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051053859699601408/Cf-lVi34?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051053859699601408/Cf-lVi34?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Who will Trump speak to in May?",
+            "description": "$128,170 has traded on \"Who will Trump speak to in May?\" as of May 3, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/who-will-trump-speak-to-in-may?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053173694667661611",
+      "text": "72% chance Trump speaks with Putin this month. https://t.co/8cKbZnt7Jj",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 5,
+        "reply_count": 10,
+        "like_count": 80,
+        "quote_count": 0,
+        "bookmark_count": 2,
+        "impression_count": 27753
+      },
+      "edit_history_tweet_ids": [
+        "2053173694667661611"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053168577939714388"
+        }
+      ],
+      "created_at": "2026-05-09T18:02:09.000Z"
+    },
+    {
+      "id": "2053172181132030112",
+      "text": "JUST IN: Audemars Piguet to launch an \u201caffordable new take\u201d on the Royal Oak with Swatch, reportedly expected to cost around $300-$450.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 620,
+        "reply_count": 246,
+        "like_count": 9285,
+        "quote_count": 626,
+        "bookmark_count": 1396,
+        "impression_count": 2642469
+      },
+      "edit_history_tweet_ids": [
+        "2053172181132030112"
+      ],
+      "created_at": "2026-05-09T17:56:08.000Z"
+    },
+    {
+      "id": "2053168577939714388",
+      "text": "JUST IN: Russia is reportedly sending drone parts to Iran via the Caspian Sea, bypassing the Hormuz blockade.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 194,
+        "reply_count": 121,
+        "like_count": 2070,
+        "quote_count": 8,
+        "bookmark_count": 45,
+        "impression_count": 94016
+      },
+      "edit_history_tweet_ids": [
+        "2053168577939714388"
+      ],
+      "created_at": "2026-05-09T17:41:49.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 81,
+            "end": 104,
+            "url": "https://t.co/x6IQ5j4faM",
+            "expanded_url": "https://polymarket.com/event/tamas-sulyok-out-as-president-of-hungary-by-june-30/tamas-sulyok-out-as-president-of-hungary-by-june-30?via=x-afr2",
+            "display_url": "polymarket.com/event/tamas-su\u2026",
+            "status": 200,
+            "title": "Tamas Sulyok out as President of Hungary by June 30?",
+            "description": "$61,720 has traded on \"Tamas Sulyok out as President of Hungary by...\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/tamas-sulyok-out-as-president-of-hungary-by-june-30/tamas-sulyok-out-as-president-of-hungary-by-june-30?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053154596336398347",
+      "text": "72% chance Tamas Sulyok is out as President of Hungary by the end of next month. https://t.co/x6IQ5j4faM",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 4,
+        "reply_count": 2,
+        "like_count": 42,
+        "quote_count": 0,
+        "bookmark_count": 1,
+        "impression_count": 25843
+      },
+      "edit_history_tweet_ids": [
+        "2053154596336398347"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053153423831286195"
+        }
+      ],
+      "created_at": "2026-05-09T16:46:16.000Z"
+    },
+    {
+      "id": "2053153423831286195",
+      "text": "NEW: P\u00e9ter Magyar officially sworn in as Hungary\u2019s prime minister, ending Orb\u00e1n\u2019s 16-year rule.",
+      "lang": "ro",
+      "public_metrics": {
+        "retweet_count": 40,
+        "reply_count": 52,
+        "like_count": 757,
+        "quote_count": 2,
+        "bookmark_count": 13,
+        "impression_count": 49382
+      },
+      "edit_history_tweet_ids": [
+        "2053153423831286195"
+      ],
+      "created_at": "2026-05-09T16:41:36.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 63,
+            "end": 86,
+            "url": "https://t.co/39LTtNy7In",
+            "expanded_url": "https://polymarket.com/event/ufc-khamzat-chimaev-to-land-1st-minute-takedown/ufc-khamzat-chimaev-to-land-1st-minute-takedown?via=x-afr2",
+            "display_url": "polymarket.com/event/ufc-kham\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053147612845350912/sFxtMtVf?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053147612845350912/sFxtMtVf?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "UFC: Khamzat Chimaev to Land 1st Minute Takedown?",
+            "description": "$9,862 has traded on \"UFC: Khamzat Chimaev to Land 1st Minute Take...\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/ufc-khamzat-chimaev-to-land-1st-minute-takedown/ufc-khamzat-chimaev-to-land-1st-minute-takedown?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053148143022231642",
+      "text": "\ud83d\udea8 NEW POLYMARKET: Khamzat Chimaev to land 1st minute takedown? https://t.co/39LTtNy7In",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 12,
+        "reply_count": 49,
+        "like_count": 198,
+        "quote_count": 3,
+        "bookmark_count": 0,
+        "impression_count": 72434
+      },
+      "edit_history_tweet_ids": [
+        "2053148143022231642"
+      ],
+      "created_at": "2026-05-09T16:20:37.000Z"
+    },
+    {
+      "entities": {
+        "urls": [
+          {
+            "start": 50,
+            "end": 73,
+            "url": "https://t.co/VDQz3DOrBs",
+            "expanded_url": "https://polymarket.com/event/will-the-gop-use-nuclear-option-to-break-filibuster?via=x-afr2",
+            "display_url": "polymarket.com/event/will-the\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053138545888382980/QbgUX1kd?format=png&name=orig",
+                "width": 800,
+                "height": 418
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053138545888382980/QbgUX1kd?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Will the GOP use 'Nuclear Option' to break filibuster by...?",
+            "description": "$559,598 has traded on \"Will the GOP use 'Nuclear Option' to break...\" as of May 9, 2026. View real-time odds or trade on The World's Largest Prediction Market\u2122",
+            "unwound_url": "https://polymarket.com/event/will-the-gop-use-nuclear-option-to-break-filibuster?via=x-afr2"
+          }
+        ]
+      },
+      "id": "2053138543082385749",
+      "text": "20% chance the GOP ends the filibuster this year. https://t.co/VDQz3DOrBs",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 8,
+        "reply_count": 3,
+        "like_count": 46,
+        "quote_count": 1,
+        "bookmark_count": 2,
+        "impression_count": 44724
+      },
+      "edit_history_tweet_ids": [
+        "2053138543082385749"
+      ],
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053138249292411107"
+        }
+      ],
+      "created_at": "2026-05-09T15:42:28.000Z"
+    },
+    {
+      "id": "2053138249292411107",
+      "text": "JUST IN: AOC officially calls for ending the Senate filibuster.",
+      "lang": "en",
+      "public_metrics": {
+        "retweet_count": 115,
+        "reply_count": 107,
+        "like_count": 1855,
+        "quote_count": 33,
+        "bookmark_count": 53,
+        "impression_count": 289318
+      },
+      "edit_history_tweet_ids": [
+        "2053138249292411107"
+      ],
+      "created_at": "2026-05-09T15:41:18.000Z"
+    }
+  ],
+  "media": [
+    {
+      "url": "https://pbs.twimg.com/media/HIDbiJZXAAAE8bS.jpg",
+      "type": "photo",
+      "media_key": "3_2053882809765265408"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HIDbiqnWMAEJoF5.jpg",
+      "type": "photo",
+      "media_key": "3_2053882818682302465"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HID8SIeWwAA5D8q.png",
+      "type": "photo",
+      "media_key": "3_2053918818523594752"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HID8TOzWIAAT-e6.jpg",
+      "type": "photo",
+      "media_key": "3_2053918837402116096"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HIDTeMtXwAAZqra.jpg",
+      "type": "photo",
+      "media_key": "3_2053873945842008064"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HIDTeLPXUAA4VJm.jpg",
+      "type": "photo",
+      "media_key": "3_2053873945447714816"
+    }
+  ]
+}

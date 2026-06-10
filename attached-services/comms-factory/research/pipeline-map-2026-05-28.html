@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pipeline map — what exists, what we've been using, what's correct</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --good: #4ade80;
+    --warn: #f0c674;
+    --bad: #ff6b6b;
+    --legacy: #ff6b6b;
+    --legacy-llm: #f0c674;
+    --actor: #4ade80;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1400px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 18px 0 10px; }
+  .sub { color: var(--muted); margin-bottom: 28px; }
+
+  .pipeline {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin-bottom: 22px;
+  }
+  .pipeline.legacy     { border-left: 4px solid var(--legacy); }
+  .pipeline.legacy-llm { border-left: 4px solid var(--legacy-llm); }
+  .pipeline.actor      { border-left: 4px solid var(--actor); }
+
+  .p-header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  .p-name { font-size: 18px; font-weight: 700; }
+  .p-name.legacy { color: var(--legacy); }
+  .p-name.legacy-llm { color: var(--legacy-llm); }
+  .p-name.actor { color: var(--actor); }
+  .p-tag {
+    font-size: 10px; padding: 3px 9px; border-radius: 10px;
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+  }
+  .p-tag.default { background: var(--bad); color: white; }
+  .p-tag.gated   { background: var(--accent); color: #0e1116; }
+  .p-tag.correct { background: var(--good); color: #0e1116; }
+  .p-summary { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+
+  .diagram {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+    margin: 14px 0;
+    overflow-x: auto;
+    flex-wrap: wrap;
+  }
+  .stage {
+    flex: 1 1 0;
+    min-width: 180px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stage .stage-num {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); font-weight: 700;
+  }
+  .stage .stage-name { font-size: 13px; font-weight: 600; }
+  .stage .stage-call {
+    font-family: var(--code-mono);
+    font-size: 11px;
+    color: var(--accent);
+    word-break: break-word;
+  }
+  .stage .stage-note { font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+  .stage.bad  { border-color: rgba(255,107,107,0.4); background: rgba(255,107,107,0.04); }
+  .stage.good { border-color: rgba(74,222,128,0.4); background: rgba(74,222,128,0.04); }
+  .arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 18px; padding: 0 2px; }
+
+  .props { display: grid; grid-template-columns: 180px 1fr; gap: 4px 16px; margin: 12px 0; font-size: 13px; }
+  .props .k { color: var(--muted); }
+  .props .v { font-family: var(--code-mono); font-size: 12.5px; }
+  .props .v.bad  { color: var(--bad); }
+  .props .v.good { color: var(--good); }
+
+  .verdict {
+    background: rgba(88, 166, 255, 0.06);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 16px 22px;
+    margin-top: 18px;
+  }
+  .verdict h3 { margin-top: 0; color: var(--accent); }
+
+  .relevance-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  .relevance-table th {
+    background: rgba(255,255,255,0.04);
+    text-align: left;
+    padding: 10px 12px;
+    color: var(--muted);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .relevance-table td { padding: 10px 12px; border-top: 1px solid var(--border); vertical-align: top; }
+  .relevance-table td.center { text-align: center; }
+  .yes { color: var(--good); font-weight: 700; }
+  .no  { color: var(--bad); font-weight: 700; }
+  .partial { color: var(--warn); font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Pipeline map — what exists, what we've been using, what's correct</h1>
+  <div class="sub">2026-05-28 · honest end-to-end map of the three pipelines, which is default, which is closest to right, and how the prior work maps onto each.</div>
+
+  <!-- ============================================================ -->
+  <h2>Three pipelines exist in the repo</h2>
+
+  <!-- PIPELINE 1: Legacy generator -->
+  <div class="pipeline legacy">
+    <div class="p-header">
+      <span class="p-name legacy">Pipeline 1 — Legacy generator + regex validator</span>
+      <span class="p-tag default">Used by CLI</span>
+    </div>
+    <div class="p-summary">The original two-call generator. Declares tempo per beat via <code>TempoBeat[]</code>. Regex-based validator. Orchestrator picks per channel + retries up to 3.</div>
+
+    <div class="diagram">
+      <div class="stage bad">
+        <div class="stage-num">Stage 1</div>
+        <div class="stage-name">Card schema</div>
+        <div class="stage-call">src/card.ts</div>
+        <div class="stage-note">ReleaseCard JSON. Docstring example carries "bank wall dissolved".</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage bad">
+        <div class="stage-num">Stage 2</div>
+        <div class="stage-name">Generator (LLM)</div>
+        <div class="stage-call">generate(card, beats)</div>
+        <div class="stage-note"><code>BeatSequence</code> with <code>TempoBeat[]</code>. Stage A inner-work → Stage B drafting. Has "set up the wall coming down" canonical line at gen.ts:1172.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage">
+        <div class="stage-num">Stage 3</div>
+        <div class="stage-name">Regex validator</div>
+        <div class="stage-call">validate(text, beats, voice)</div>
+        <div class="stage-note">Deterministic rules: cliches, listicle, AI-slop, em-dash, off-spec regexes, blind tempo classifier.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage">
+        <div class="stage-num">Stage 4</div>
+        <div class="stage-name">Orchestrator</div>
+        <div class="stage-call">orchestrateWithRetries</div>
+        <div class="stage-note">Pick per channel, retry up to 3 with operator feedback string.</div>
+      </div>
+    </div>
+
+    <div class="props">
+      <div class="k">Tempo handling</div>            <div class="v bad">Declared per beat in TempoBeat. Forces tempo arcs (sombre → commanding → irradiant).</div>
+      <div class="k">Beat count</div>                <div class="v bad">defaultBeatsForKind returns 3-4 beat arcs by kind.</div>
+      <div class="k">Director equivalent</div>      <div class="v">Regex validator only; no LLM blind audit.</div>
+      <div class="k">Verb vs tempo</div>             <div class="v bad">Tempo is the load-bearing field per beat. No Working Action selection.</div>
+      <div class="k">Used by</div>                   <div class="v">src/cli.ts (CLI default path). harness/app/actions/generate.ts when active validator is OFF.</div>
+    </div>
+  </div>
+
+  <!-- PIPELINE 2: Legacy + LLM validator -->
+  <div class="pipeline legacy-llm">
+    <div class="p-header">
+      <span class="p-name legacy-llm">Pipeline 2 — Legacy generator + LLM validator (active validator)</span>
+      <span class="p-tag default">Default in harness</span>
+    </div>
+    <div class="p-summary">Same generator as #1. Different validator: LLM call instead of regex. This is the path the harness actually runs by default (HARNESS_ACTIVE_VALIDATOR is default-on per harness/app/actions/generate.ts:374).</div>
+
+    <div class="diagram">
+      <div class="stage bad">
+        <div class="stage-num">Stage 1</div>
+        <div class="stage-name">Card schema</div>
+        <div class="stage-call">src/card.ts</div>
+        <div class="stage-note">Same as Pipeline 1.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage bad">
+        <div class="stage-num">Stage 2</div>
+        <div class="stage-name">Generator (LLM)</div>
+        <div class="stage-call">generate(card, beats)</div>
+        <div class="stage-note">Same as Pipeline 1. Same TempoBeat[] arc problem.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage bad">
+        <div class="stage-num">Stage 3</div>
+        <div class="stage-name">LLM validator</div>
+        <div class="stage-call">auditTextLLM (validator-llm.ts)</div>
+        <div class="stage-note">Sonnet call. Has the operator-paraphrase drive descriptors (urgency=Passion etc.) at validator-llm.ts:169.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage">
+        <div class="stage-num">Stage 4</div>
+        <div class="stage-name">Active orchestrator</div>
+        <div class="stage-call">orchestrateActiveWithRetries</div>
+        <div class="stage-note">Same retry logic as #1 but uses LLM verdict to gate.</div>
+      </div>
+    </div>
+
+    <div class="props">
+      <div class="k">Tempo handling</div>            <div class="v bad">Same as Pipeline 1 — TempoBeat[].</div>
+      <div class="k">Beat count</div>                <div class="v bad">Same as Pipeline 1.</div>
+      <div class="k">Director equivalent</div>      <div class="v partial">LLM validator audits text. Calls itself "active validator", not Director. Different system prompt than the Mirodan-canonical Director.</div>
+      <div class="k">Verb vs tempo</div>             <div class="v bad">Same as Pipeline 1.</div>
+      <div class="k">Used by</div>                   <div class="v">harness/app/actions/generate.ts default path. <strong>This is what we've been running in the harness.</strong></div>
+    </div>
+  </div>
+
+  <!-- PIPELINE 3: Actor/Director -->
+  <div class="pipeline actor">
+    <div class="p-header">
+      <span class="p-name actor">Pipeline 3 — Actor / Director</span>
+      <span class="p-tag gated">Gated by HARNESS_GENERATOR_ARCH=actor</span>
+      <span class="p-tag correct">Closest to canon</span>
+    </div>
+    <div class="p-summary">Single Actor call covers all channels via JSON schema. Verb + Working Action per beat (no tempo declaration). Director audits each candidate blind. Retry loop with director_notes preserves transcript.</div>
+
+    <div class="diagram">
+      <div class="stage">
+        <div class="stage-num">Stage 1</div>
+        <div class="stage-name">Card schema</div>
+        <div class="stage-call">src/card.ts</div>
+        <div class="stage-note">Same ReleaseCard. Docstring example issue persists (read by the Actor too).</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage good">
+        <div class="stage-num">Stage 2</div>
+        <div class="stage-name">Actor (Opus)</div>
+        <div class="stage-call">generateActorAttempt(card)</div>
+        <div class="stage-note">One call returns: warmup (scene_rehearsal) + table_work (thesis, through_action, obstacle, reader_prior, lining, not_the_point, channel_beat_plans) + performances per channel + selected_performance per channel.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage good">
+        <div class="stage-num">Stage 3</div>
+        <div class="stage-name">Director (Sonnet)</div>
+        <div class="stage-call">auditCandidateWithDirector(candidate)</div>
+        <div class="stage-note">Per-candidate blind audit. Returns primary_tempo + 4-factor motion evidence + working_actions list + drive_read + infinex_fit + notes_for_actor. Two-factor Attitude gate enforced.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="stage">
+        <div class="stage-num">Stage 4</div>
+        <div class="stage-name">Actor/Director orchestrator</div>
+        <div class="stage-call">orchestrateActorDirectorWithRetries</div>
+        <div class="stage-note">3 attempts max. director_notes fed back to Actor's transcript on retry. Same warmup mode preserved.</div>
+      </div>
+    </div>
+
+    <div class="props">
+      <div class="k">Tempo handling</div>            <div class="v good">Tempo is NEVER declared. Actor selects verb + Working Action. Director reads tempo blind. Mirodan-canonical.</div>
+      <div class="k">Beat count</div>                <div class="v partial">Actor selects own beat count per channel. Channel grammar at actor-memory.ts:373 prescribes "Usually 3-4 short paragraphs/beats" for X — this is the one gap.</div>
+      <div class="k">Director equivalent</div>      <div class="v good">Source-indexed Mirodan canon. Two-factor Attitude gate. Rival two-factor reads required. Drive read inferred, not demanded.</div>
+      <div class="k">Verb vs tempo</div>             <div class="v good">Verb + Working Action are the playable units. Pressing → Punching can both be inside one Commanding tempo.</div>
+      <div class="k">Used by</div>                   <div class="v">harness/app/actions/generate.ts ONLY when HARNESS_GENERATOR_ARCH=actor is set. <strong>NOT the default.</strong></div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Which pipeline we've actually been testing</h2>
+
+  <div class="verdict" style="border-left-color: var(--bad);">
+    <h3 style="color: var(--bad);">All A/B/C/D/E testing ran through Pipeline 1 (legacy generator)</h3>
+    <p>The test harness at <code>eval/card-docstring-ab-v2/ab-test-v2.ts</code> calls <code>generate(card, {beats, voice, channel, n, mode: "live"})</code> with explicit <code>beats</code>, which routes through <code>generate.ts:277-279</code> into <code>legacySingleCall: true</code>. That's Pipeline 1 — the legacy single-call generator. Not the two-call Stage A/B. Not the active validator. Not the actor/director.</p>
+    <p style="margin-bottom: 0;"><strong>The 50 captions in the v2 results came from the wrong pipeline.</strong> The "essayist 3-beat arc" failure mode, the wall-language at caption layer, the philosophical-opener pattern — all observed under Pipeline 1, where <code>defaultBeatsForKind</code> forces tempo arcs and <code>generator.ts:1172</code> hardcodes the "wall coming down" canonical line.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>How prior work maps onto the three pipelines</h2>
+
+  <h3>Wall sweep — 21 sites, mapped by pipeline</h3>
+  <table class="relevance-table">
+    <thead>
+      <tr>
+        <th>Site</th>
+        <th>Path</th>
+        <th class="center">P1 Legacy</th>
+        <th class="center">P2 Legacy+LLM</th>
+        <th class="center">P3 Actor/Director</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Card schema docstrings</td>             <td>src/card.ts:48, :61-62</td>                 <td class="center yes">YES</td><td class="center yes">YES</td><td class="center yes">YES</td></tr>
+      <tr><td>defaultBeatsForKind wall hint</td>       <td>src/voice/infinex.ts:303</td>               <td class="center yes">YES</td><td class="center yes">YES</td><td class="center no">NO (Actor selects own beats)</td></tr>
+      <tr><td>"wall coming down canonical shape"</td>  <td>src/generator.ts:1172</td>                  <td class="center yes">YES</td><td class="center yes">YES</td><td class="center no">NO</td></tr>
+      <tr><td>"dissolved-wall thesis"</td>             <td>src/generator.ts:1403</td>                  <td class="center yes">YES</td><td class="center yes">YES</td><td class="center no">NO</td></tr>
+      <tr><td>Stage A / Stage B labels</td>            <td>src/generator.ts:1184, :1218, :1379</td>    <td class="center yes">YES</td><td class="center yes">YES</td><td class="center no">NO</td></tr>
+      <tr><td>Drive performance demand</td>            <td>src/generator.ts:592</td>                   <td class="center yes">YES</td><td class="center yes">YES</td><td class="center no">NO</td></tr>
+      <tr><td>"Performing the wrong character"</td>    <td>src/generator.ts:617</td>                   <td class="center yes">YES</td><td class="center yes">YES</td><td class="center no">NO</td></tr>
+      <tr><td>Validator-LLM drive descriptors</td>     <td>src/validator-llm.ts:169</td>               <td class="center no">NO</td><td class="center yes">YES</td><td class="center no">NO (Actor/Director has its own Director, not validator-llm)</td></tr>
+      <tr><td>Copy-rewrite hardcoded Infinex</td>      <td>src/copy-rewrite-llm.ts:129</td>            <td class="center partial">N/A</td><td class="center partial">N/A</td><td class="center partial">N/A (separate tool)</td></tr>
+      <tr><td>Cream voice spec wall anchor</td>        <td>src/voice/cream.ts:22, :361</td>            <td class="center yes">YES</td><td class="center yes">YES</td><td class="center yes">YES (any pipeline running Cream)</td></tr>
+      <tr><td>Hardcoded "Infinex character"</td>       <td>src/actor-director.ts:429</td>              <td class="center no">NO</td><td class="center no">NO</td><td class="center yes">YES</td></tr>
+      <tr><td>Channel grammar "3-4 beats"</td>         <td>src/actor-memory.ts:373</td>                <td class="center no">NO</td><td class="center no">NO</td><td class="center yes">YES (the one gap inside the correct pipeline)</td></tr>
+      <tr><td>Eval permutation prompts</td>            <td>eval/permutation-prompts/*.md</td>          <td class="center partial">classifier-only</td><td class="center partial">classifier-only</td><td class="center partial">classifier-only</td></tr>
+      <tr><td>Mirodan competence eval</td>             <td>eval/mirodan-competence/questions.ts:493</td><td class="center partial">eval-only</td><td class="center partial">eval-only</td><td class="center partial">eval-only</td></tr>
+      <tr><td>Harness mock data</td>                   <td>harness/lib/mock-data.ts:158</td>           <td class="center partial">UI display</td><td class="center partial">UI display</td><td class="center partial">UI display</td></tr>
+      <tr><td>Test fixtures</td>                       <td>src/__tests__/...</td>                      <td class="center partial">tests</td><td class="center partial">tests</td><td class="center partial">tests</td></tr>
+      <tr><td>Skill files Adream-outer + Stanley</td>  <td>skills/laban-voice-for-ai-agents/...</td>   <td class="center partial">doc-only</td><td class="center partial">doc-only</td><td class="center partial">doc-only</td></tr>
+      <tr><td>Character sheet wall exemplar</td>       <td>research/infinex-character-sheet.md</td>    <td class="center partial">operator-facing</td><td class="center partial">operator-facing</td><td class="center partial">operator-facing</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size: 13px; color: var(--muted);"><strong>Tally for Pipeline 3 (the closest to correct):</strong> only 2 wall sweep sites apply directly to the actor/director pipeline — <code>actor-director.ts:429</code> (hardcoded "Infinex character") and <code>actor-memory.ts:373</code> (channel grammar "Usually 3-4 short paragraphs/beats"). Plus card schema + Cream + cross-cutting docs. The other 11 contamination sites are <em>legacy-pipeline-only</em>; they become dead-code-cleanup if we switch the default to actor/director.</p>
+
+  <!-- ============================================================ -->
+  <h2>How prior tests map</h2>
+
+  <table class="relevance-table">
+    <thead>
+      <tr>
+        <th>Prior work</th>
+        <th>Pipeline tested</th>
+        <th>Findings generalize to actor/director?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>v1 A/B/C grounder test (docstring → through_action + lining)</td>
+        <td>Tested the grounder LLM independently of any generator pipeline</td>
+        <td class="partial">Partial — measures docstring contamination at the grounding step. The actor/director Actor ALSO reads the card docstring, so this is still relevant. The intermediate field contamination (proposed through_action) flows into both pipelines.</td>
+      </tr>
+      <tr>
+        <td>v2 A/B/C/D/E full-pipeline test (50 final captions)</td>
+        <td>Pipeline 1 (legacy single-call generator)</td>
+        <td class="no">NO — measured contamination through the legacy generator's prompts. The "wall at 10% across non-CURRENT variants" was from generator.ts:1172 injecting wall vocab, which isn't in actor/director. The "essayist 3-beat arc" was from defaultBeatsForKind, which actor/director doesn't use. <strong>Need to re-run v2 against Pipeline 3.</strong></td>
+      </tr>
+      <tr>
+        <td>Corpus comparison (vs real Infinex tweets)</td>
+        <td>Pipeline 1 outputs vs real corpus</td>
+        <td class="partial">Partial — the "real Infinex opens with the fact, our captions open with the thesis" finding is Pipeline 1's failure mode. Actor/director MAY not have this failure because beat selection is Actor-driven, but the channel grammar at line 373 still pushes toward arcs. Re-test required.</td>
+      </tr>
+      <tr>
+        <td>Literary anchor comparison (Werle/Duke/Logan)</td>
+        <td>Pipeline 1 outputs vs canonical literature</td>
+        <td class="partial">Partial — same as corpus comparison. The architectural delta (Pipeline 1 forces arcs, canon composes settlements) is real, but actor/director's verb-based composition may close the gap. Re-test required.</td>
+      </tr>
+      <tr>
+        <td>Wall contamination sweep (21 sites)</td>
+        <td>Static code analysis across all pipelines</td>
+        <td class="yes">YES — but most sites are Pipeline-1-specific. See the table above. If we switch default to Pipeline 3, half the sites become dead code.</td>
+      </tr>
+      <tr>
+        <td>End-to-end change plan (21 sites)</td>
+        <td>Proposed across all pipelines</td>
+        <td class="partial">Partial — the plan is correct for what it covers but wastes effort on legacy-only sites if we're switching to actor/director. The plan needs to be narrowed.</td>
+      </tr>
+      <tr>
+        <td>Caption rater HTML (50 captions × ratings)</td>
+        <td>Rates Pipeline 1 outputs</td>
+        <td class="no">NO — the captions in the rater came from Pipeline 1. If we switch to Pipeline 3 the ratings are invalidated.</td>
+      </tr>
+      <tr>
+        <td>Voice spec Laban-pure refactor (this session)</td>
+        <td>Voice spec layer; read by BOTH Pipeline 1 and Pipeline 3</td>
+        <td class="yes">YES — both pipelines read voice/infinex.ts. The Laban-pure refactor stands.</td>
+      </tr>
+      <tr>
+        <td>operator_hint archive + canonical_shorthand</td>
+        <td>Voice spec layer</td>
+        <td class="yes">YES — both pipelines benefit.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <h2>The closest-to-correct pipeline (Pipeline 3) — gaps to close</h2>
+
+  <div class="verdict">
+    <h3>Inside Pipeline 3, here's what remains</h3>
+    <ol>
+      <li><strong>Switch the default.</strong> harness/app/actions/generate.ts:65 currently runs Pipeline 1 unless HARNESS_GENERATOR_ARCH=actor. Either flip the default to actor, or remove the env gate and delete the legacy paths. <strong>Until this flips, every harness run goes through the wrong pipeline.</strong></li>
+      <li><strong>Fix actor-memory.ts:373 channel grammar.</strong> The line "X: Usually 3-4 short paragraphs/beats" prescribes beat count, which contradicts the actor/director's own verb-emergent principle. Drop the count, replace with verb-emergent grounding citing Mirodan §1.7.</li>
+      <li><strong>Fix actor-director.ts:429 hardcoded "Infinex character".</strong> Replace with "the character" — character identity flows from voice spec parameter.</li>
+      <li><strong>Fix card.ts:48, :61-62 docstring examples.</strong> Variant C (no example, canon ref + forbidden-list) — applies to both pipelines. The Actor reads the card schema docstring too.</li>
+      <li><strong>Strip wall anchor from voice/cream.ts:22, :361.</strong> Cross-brand leak. Applies to any pipeline running Cream.</li>
+    </ol>
+    <p style="margin: 16px 0 0;"><strong>That's 5 changes to ship Pipeline 3 cleanly</strong> — not 21. The other 16 wall sweep sites are Pipeline-1-only contamination that becomes dead code if the legacy pipeline is removed.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>What needs re-testing under Pipeline 3</h2>
+
+  <div class="verdict" style="border-left-color: var(--good);">
+    <h3 style="color: var(--good);">Re-run v2 A/B/C/D/E against the actor/director pipeline</h3>
+    <p>Same 10-release corpus. Same 5 docstring variants. But route through <code>orchestrateActorDirectorWithRetries()</code> instead of <code>generate()</code>. Capture: Actor's table_work + selected_performance per channel + Director's audit + final candidate. Score the same metrics: wall_present, refusing_present, anchoring, ship_quality, voice_fit.</p>
+    <p>If the actor/director pipeline produces fundamentally different captions (verb-selected beats, no forced tempo arc, Director's blind read instead of regex blind classifier), the v2 findings won't apply — we'd be measuring a different system. The docstring variant decision may also change: maybe CURRENT is fine under actor/director because the Actor's source-indexed Mirodan canon overpowers a single docstring example.</p>
+    <p style="margin-bottom: 0;">This is the empirical answer to "do we need to fix the docstring at all if we switch pipelines." I'd run it before committing to ANY card.ts change.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Recommended sequencing</h2>
+
+  <ol style="font-size: 14px;">
+    <li><strong>Switch HARNESS_GENERATOR_ARCH default to 'actor'</strong> (or remove the gate). Confirm harness runs route through Pipeline 3.</li>
+    <li><strong>Fix actor-memory.ts:373</strong> — drop "Usually 3-4 short paragraphs/beats", replace with verb-emergent grounding.</li>
+    <li><strong>Fix actor-director.ts:429</strong> — un-hardcode "Infinex character".</li>
+    <li><strong>Re-run v2 A/B/C/D/E test against Pipeline 3.</strong> Capture new caption set + new ratings. Compare to Pipeline 1 results.</li>
+    <li><strong>Make docstring decision based on Pipeline 3 results,</strong> not Pipeline 1 results.</li>
+    <li><strong>Strip wall anchor from voice/cream.ts.</strong> Cross-brand cleanup.</li>
+    <li><strong>(Optional) Delete the legacy generator path.</strong> Removes 11 wall contamination sites as dead code. Big simplification.</li>
+  </ol>
+
+  <p style="font-size: 13px; color: var(--muted); margin-top: 20px;">The big takeaway from this map: we've spent the session debugging Pipeline 1's failure modes (essayist arcs, wall language, philosophical openers) when Pipeline 3 was sitting in the repo, gated behind an env var, with the architectural problems already solved. Five focused changes get us to a clean Pipeline 3 ship; the broader change plan was optimizing the wrong artifact.</p>
+
+</div>
+</body>
+</html>

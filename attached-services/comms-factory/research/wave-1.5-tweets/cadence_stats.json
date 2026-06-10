@@ -1,0 +1,93 @@
+{
+  "phantom": {
+    "posts": 300,
+    "span_days": 8.2,
+    "posts_per_day": 36.5,
+    "originals": 14,
+    "replies": 273,
+    "retweets": 2,
+    "quotes": 11,
+    "media_attached_pct": 13.0,
+    "avg_likes_originals": 536.0,
+    "avg_impressions_originals": 39523.0,
+    "top_post_impressions": 256853
+  },
+  "HyperliquidX": {
+    "posts": 199,
+    "span_days": 319.7,
+    "posts_per_day": 0.62,
+    "originals": 66,
+    "replies": 47,
+    "retweets": 81,
+    "quotes": 5,
+    "media_attached_pct": 37.7,
+    "avg_likes_originals": 1951.0,
+    "avg_impressions_originals": 327645.0,
+    "top_post_impressions": 1767746
+  },
+  "infinex": {
+    "posts": 300,
+    "span_days": 119.6,
+    "posts_per_day": 2.51,
+    "originals": 64,
+    "replies": 153,
+    "retweets": 70,
+    "quotes": 13,
+    "media_attached_pct": 29.3,
+    "avg_likes_originals": 134.0,
+    "avg_impressions_originals": 37574.0,
+    "top_post_impressions": 410003
+  },
+  "Polymarket": {
+    "posts": 195,
+    "span_days": 2.6,
+    "posts_per_day": 74.29,
+    "originals": 130,
+    "replies": 44,
+    "retweets": 20,
+    "quotes": 1,
+    "media_attached_pct": 2.1,
+    "avg_likes_originals": 2465.0,
+    "avg_impressions_originals": 307471.0,
+    "top_post_impressions": 4399180
+  },
+  "pendle_fi": {
+    "posts": 300,
+    "span_days": 40.8,
+    "posts_per_day": 7.35,
+    "originals": 41,
+    "replies": 127,
+    "retweets": 105,
+    "quotes": 27,
+    "media_attached_pct": 45.0,
+    "avg_likes_originals": 118.0,
+    "avg_impressions_originals": 17206.0,
+    "top_post_impressions": 127519
+  },
+  "berachain": {
+    "posts": 399,
+    "span_days": 350.9,
+    "posts_per_day": 1.14,
+    "originals": 133,
+    "replies": 147,
+    "retweets": 98,
+    "quotes": 21,
+    "media_attached_pct": 44.9,
+    "avg_likes_originals": 200.0,
+    "avg_impressions_originals": 50440.0,
+    "top_post_impressions": 674407
+  },
+  "monad": {
+    "posts": 399,
+    "span_days": 158.9,
+    "posts_per_day": 2.51,
+    "originals": 153,
+    "replies": 83,
+    "retweets": 85,
+    "quotes": 78,
+    "media_attached_pct": 32.6,
+    "avg_likes_originals": 752.0,
+    "avg_impressions_originals": 58963.0,
+    "top_post_impressions": 547630
+  }
+}

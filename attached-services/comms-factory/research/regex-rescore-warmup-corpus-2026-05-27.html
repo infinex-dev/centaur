@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Regex Rescore Warmup Corpus</title>
+  <style>
+    body { font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 32px; color: #181818; background: #fafafa; }
+    h1, h2 { margin: 0 0 12px; }
+    .meta { color: #666; margin-bottom: 24px; }
+    table { border-collapse: collapse; width: 100%; margin: 18px 0 32px; background: #fff; }
+    th, td { border: 1px solid #ddd; padding: 8px; vertical-align: top; text-align: left; }
+    th { background: #f0f0f0; }
+    .pass { color: #087a32; font-weight: 700; }
+    .fail { color: #a31515; font-weight: 700; }
+    .copy { white-space: pre-wrap; max-width: 54rem; }
+    .small { font-size: 12px; color: #666; }
+    code { background: #eee; padding: 1px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>Regex Rescore Warmup Corpus</h1>
+  <div class="meta">Bridge.xyz fiat deposits into Infinex · infinex-bridge-fiat-deposit-2026-05-22 · 14/18 pass after regex-as-hygiene</div>
+
+  <h2>Summary</h2>
+  <table>
+    <thead><tr><th>Mode</th><th>Old pass</th><th>New regex pass</th><th>New hard pass incl length</th><th>Avg rail tokens</th><th>Old failures</th><th>New failures</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>none</td>
+        <td>0/6</td>
+        <td>5/6</td>
+        <td>5/6</td>
+        <td>3.2</td>
+        <td><code>{&quot;fact-contract&quot;:16,&quot;unsupported-claim&quot;:3,&quot;ai-slop&quot;:1}</code></td>
+        <td><code>{&quot;ai-slop&quot;:1}</code></td>
+      </tr>
+<tr>
+        <td>daily_pages</td>
+        <td>0/6</td>
+        <td>5/6</td>
+        <td>5/6</td>
+        <td>2.5</td>
+        <td><code>{&quot;fact-contract&quot;:96,&quot;unsupported-claim&quot;:6,&quot;ai-slop&quot;:1}</code></td>
+        <td><code>{&quot;ai-slop&quot;:1}</code></td>
+      </tr>
+<tr>
+        <td>scene_rehearsal</td>
+        <td>0/6</td>
+        <td>5/6</td>
+        <td>4/6</td>
+        <td>6.7</td>
+        <td><code>{&quot;fact-contract&quot;:66,&quot;unsupported-claim&quot;:7,&quot;ai-slop&quot;:1,&quot;length&quot;:1}</code></td>
+        <td><code>{&quot;ai-slop&quot;:1,&quot;length&quot;:1}</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Candidates</h2>
+  <table>
+    <thead><tr><th>Attempt</th><th>Mode</th><th>Channel</th><th>Old</th><th>New</th><th>Rails</th><th>Copy</th><th>New Failures</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>4</td>
+        <td>none</td>
+        <td>web</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>0</td>
+        <td class="copy">Send fiat to Infinex the way you'd send it to a bank. It lands as USDC on-chain.<div class="small">80 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>4</td>
+        <td>none</td>
+        <td>x</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>6</td>
+        <td class="copy">Your bank account and your wallet have always been two separate things.
+
+Inside Infinex, they aren't anymore.
+
+Send USD, EUR, MXN, BRL, GBP, or COP the way you'd send it to a bank. It arrives on-chain.<div class="small">201 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>5</td>
+        <td>none</td>
+        <td>web</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>0</td>
+        <td class="copy">Send fiat to Infinex the way you'd send it to a bank. It converts and lands on-chain as USDC.<div class="small">93 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>5</td>
+        <td>none</td>
+        <td>x</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>6</td>
+        <td class="copy">Your bank account and your wallet have always been two separate things.
+
+Inside Infinex, they aren't anymore.
+
+Send USD, EUR, MXN, BRL, GBP, or COP the way you'd send it to a bank. It arrives on-chain as USDC.<div class="small">209 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>6</td>
+        <td>none</td>
+        <td>web</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>0</td>
+        <td class="copy">Send fiat to Infinex. It's converted to USDC and delivered on-chain.<div class="small">68 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>6</td>
+        <td>none</td>
+        <td>x</td>
+        <td class="fail">fail</td>
+        <td class="fail">fail</td>
+        <td>7</td>
+        <td class="copy">Fiat comes from banks. Crypto lives in wallets. That's the rule everyone learned.
+
+Infinex accounts now receive fiat directly. ACH, wire, SEPA, SPEI, PIX, FPS, Bre-B — converted to USDC, delivered on-chain.
+
+The wall is gone for the person holding the account.<div class="small">260 chars</div></td>
+        <td><code>[{&quot;rule&quot;:&quot;ai-slop&quot;,&quot;reason&quot;:&quot;em-dash density 1 in 260 chars (&gt; 0/280)&quot;}]</code></td>
+      </tr>
+<tr>
+        <td>7</td>
+        <td>daily_pages</td>
+        <td>web</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>0</td>
+        <td class="copy">Fund your Infinex account the way you fund a bank account. It lands as USDC, on-chain.<div class="small">86 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>7</td>
+        <td>daily_pages</td>
+        <td>x</td>
+        <td class="fail">fail</td>
+        <td class="fail">fail</td>
+        <td>5</td>
+        <td class="copy">Your Infinex account now has a deposit account.
+
+Wire, ACH, SEPA, PIX, SPEI — money arrives the way it arrives into a bank.
+
+It lands as USDC, on-chain, in your wallet.
+
+The seam between the two stopped existing.<div class="small">212 chars</div></td>
+        <td><code>[{&quot;rule&quot;:&quot;ai-slop&quot;,&quot;reason&quot;:&quot;em-dash density 1 in 212 chars (&gt; 0/280)&quot;}]</code></td>
+      </tr>
+<tr>
+        <td>8</td>
+        <td>daily_pages</td>
+        <td>web</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>0</td>
+        <td class="copy">Fund your Infinex account the way you fund a bank account. It lands as USDC, on-chain.<div class="small">86 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>8</td>
+        <td>daily_pages</td>
+        <td>x</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>5</td>
+        <td class="copy">Your Infinex account now has a deposit account.
+
+Wire, ACH, SEPA, PIX, SPEI. Money arrives the way it arrives into a bank.
+
+It lands as USDC, on-chain, in your wallet.
+
+The seam between the two stopped existing.<div class="small">211 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>9</td>
+        <td>daily_pages</td>
+        <td>web</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>0</td>
+        <td class="copy">Fund your Infinex account the way you fund a bank account. It lands as USDC, on-chain.<div class="small">86 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>9</td>
+        <td>daily_pages</td>
+        <td>x</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>5</td>
+        <td class="copy">Your Infinex account now has a deposit account.
+
+Wire, ACH, SEPA, PIX, SPEI. Money arrives the way it arrives into a bank.
+
+It lands as USDC, on-chain, in your wallet.
+
+The seam between the two stopped existing.<div class="small">211 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>10</td>
+        <td>scene_rehearsal</td>
+        <td>web</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>3</td>
+        <td class="copy">Your Infinex account has a routing number. Wire it the way you'd wire a bank. It lands as USDC, on-chain.<div class="small">105 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>10</td>
+        <td>scene_rehearsal</td>
+        <td>x</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>7</td>
+        <td class="copy">Your Infinex account has a routing number now.
+
+An IBAN. A CLABE. A PIX code. A FPS sort code.
+
+Wire it the way you'd wire a bank. It lands as USDC, on-chain, in your account.
+
+The wall between the bank and the wallet is the part that's missing.<div class="small">245 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>11</td>
+        <td>scene_rehearsal</td>
+        <td>web</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>0</td>
+        <td class="copy">An Infinex account can now receive fiat the way a bank account does. It lands as USDC, on-chain.<div class="small">96 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+<tr>
+        <td>11</td>
+        <td>scene_rehearsal</td>
+        <td>x</td>
+        <td class="fail">fail</td>
+        <td class="fail">fail</td>
+        <td>12</td>
+        <td class="copy">Whatever rail your salary uses — ACH, SEPA, SPEI, PIX, FPS, Bre-B — it now lands directly in your Infinex account.
+
+USD, EUR, MXN, BRL, GBP, COP. Sent the way you'd send to a bank. Arrives on-chain as USDC.
+
+The wall between the bank and the wallet is the part that's missing.<div class="small">276 chars</div></td>
+        <td><code>[{&quot;rule&quot;:&quot;ai-slop&quot;,&quot;reason&quot;:&quot;em-dash density 2 in 276 chars (&gt; 0/280)&quot;}]</code></td>
+      </tr>
+<tr>
+        <td>12</td>
+        <td>scene_rehearsal</td>
+        <td>web</td>
+        <td class="fail">fail</td>
+        <td class="fail">fail</td>
+        <td>6</td>
+        <td class="copy">Your Infinex account now has its own deposit address for fiat. Money sent over ACH, SEPA, SPEI, PIX, FPS, or Bre-B arrives as USDC, on-chain.<div class="small">141 chars</div></td>
+        <td><code>[{&quot;rule&quot;:&quot;length&quot;,&quot;reason&quot;:&quot;length: 141 &gt; 140 for channel web&quot;}]</code></td>
+      </tr>
+<tr>
+        <td>12</td>
+        <td>scene_rehearsal</td>
+        <td>x</td>
+        <td class="fail">fail</td>
+        <td class="pass">pass</td>
+        <td>12</td>
+        <td class="copy">Whatever rail your salary uses. ACH, SEPA, SPEI, PIX, FPS, Bre-B. It now lands directly in your Infinex account.
+
+USD, EUR, MXN, BRL, GBP, COP. Sent the way you'd send to a bank. Arrives on-chain as USDC.
+
+The wall between the bank and the wallet is the part that's missing.<div class="small">274 chars</div></td>
+        <td><code>[]</code></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

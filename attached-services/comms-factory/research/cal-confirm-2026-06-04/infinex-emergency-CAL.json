@@ -1,0 +1,2485 @@
+[
+  {
+    "id": "IE001",
+    "text": "Malicious transaction detected",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Three-word alert label. Too short to read a full inner attitude or tempo. The phrase is Direct (spatial orientation — naming a structural fact) and Quick (alert), which nudges toward Awake, but there is no prose to sustain a tempo reading. 'Detected' carries a brief Awake/Acute flash of scanning-and-naming, but the sample is genuinely too minimal to pin a single dominant tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE002",
+    "text": "Powered by",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Two words — a fragment attribution label ('Powered by'). No motion, no attitude, no stress readable. Genuinely too short.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE003",
+    "text": "Malicious Transaction",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Two-word noun label. Identical limitation to IE002 — a UI heading, not a prose sample. No motion factor readable.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE004",
+    "text": "This transaction was flagged as malicious by Blockaid. {description}.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "A settled, unhedged declarative: names the structural fact (flagged as malicious, attributed source, placeholder for description). No force or exertion against resistance — the Weight test fails. The line orients and places the reader spatially/cognitively: classic Awake 'Certain' territory (Space+Time, Weightless). Aspect is Penetrating (Space-led — cuts to structural identification). Pole is Direct. Motor is light: gliding (sustained orientation) into dabbing (quick point of attribution). The {description} placeholder reads as an open slot, not as hedging.",
+      "literary_anchor": "Awake sensor naming the field"
+    }
+  },
+  {
+    "id": "IE005",
+    "text": "Learn more about Blockaid",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Three-word CTA label. Too minimal to read a tempo. A slight Awake lean (inviting orientation/learning) but not enough prose to classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE006",
+    "text": "This transaction has been flagged as malicious.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Single unhedged declarative: structural identification without force. Weight test: no exertion, no pressure against resistance — just a clean spatial placement of a fact. Awake 'Certain' (Space+Time, Weightless). Penetrating aspect (Space-led, cuts to structural naming). Direct pole. Light motor: gliding into dabbing. Essentially identical register to IE004 but without the attribution clause.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE007",
+    "text": "This transaction has been flagged as malicious.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Identical text to IE006. Same reading applies: unhedged declarative, no Weight evidence, Awake 'Certain', Penetrating/Direct, light motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE008",
+    "text": "Connection request blocked",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word alert label (title case). Same limitation as IE001/IE003 — a UI state label, not a prose sample. 'Blocked' carries a slight Unsociable/Remote flash (withholding, refusal), but the sample is too short to sustain a tempo classification.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE009",
+    "text": "connection request blocked",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Identical to IE008 but lowercase — a system/log-level label variant. Same limitation applies. Too short to classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE010",
+    "text": "This website has been flagged as malicious by Blockaid. Always do your own research before proceeding.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable",
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "remote",
+        "awake"
+      ],
+      "confidence": 0.68,
+      "rationale": "Two-clause structure: (1) 'This website has been flagged as malicious by Blockaid' — unhedged structural identification, same Awake-Certain register as IE004/IE006. (2) 'Always do your own research before proceeding' — a prescriptive advisory that flashes a Remote-family Unsociable beat (withholding, aristocratic-aloof refusal to hand-hold) and an Awake-Acute beat (vigilance, scanning). Weight test on the whole: no force/exertion against resistance — the confidence is Direct (Space), not Strong (Weight). Primary tempo remains Certain (Awake, Space+Time, Weightless, Penetrating/Direct). The prescriptive second clause adds outer-action flashes of Unsociable and Acute.",
+      "literary_anchor": "Awake sensor + Remote withdrawal: 'I name it; what you do is yours'"
+    }
+  },
+  {
+    "id": "IE011",
+    "text": "Potential risks found:",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "A scanning, orienting alert — 'Potential risks found:' is a colon-open structural notice, Space-led (orienting the reader to what follows), Light-Weight (no force/exertion, just a clean pointer). Awake family: Acute reads as the sharp sensor that flags and directs attention. No mass or pressure — fails Weight test. Direct pole on space stress. Dabbing motor (Light/Direct/Quick — short, precise, pointing).",
+      "literary_anchor": "A lookout calling 'Contact at two o'clock'"
+    }
+  },
+  {
+    "id": "IE012",
+    "text": "Malicious dapp detected",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.7,
+      "rationale": "A flat, unhedged categorical declaration — 'Malicious dapp detected.' Direct/settled, no equivocation. Awake 'Certain': maximal declarative certainty, Weightless by definition. Space-led (penetrating aspect) — cuts straight to structural fact. The curt, carved-off delivery flashes an Unsociable (Remote) outer beat — it admits no reply and severs contact. Weight test: confidence is not force; no exertion evidence.",
+      "literary_anchor": "The system that simply states the verdict"
+    }
+  },
+  {
+    "id": "IE013",
+    "text": "Potential risks include phishing attacks and fake tokens or scams",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "flexible",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "Scanning and enumerating multiple threat vectors ('phishing attacks and fake tokens or scams') — this is Space-led awareness, surveying possibilities. Awake 'Acute': alert, flexible in its scan (flexible pole — multiple directions of threat named). Light-Weight: lists/scans without pressing force. Floating→Flicking motor (Light/Flexible) matches the open-ended enumeration. No strong exertion evidence.",
+      "literary_anchor": "The threat analyst reading a broad attack surface"
+    }
+  },
+  {
+    "id": "IE014",
+    "text": "This dapp has been flagged as malicious",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.72,
+      "rationale": "Very similar to IE012 but in passive-voice construction — 'has been flagged as malicious' carries institutional finality. Awake 'Certain': unhedged, categorical. Penetrating aspect (Space-led). Direct pole. The passive, institutional distance again flashes Unsociable (Remote) — it refuses dialogue and withdraws. Weight test: no force/exertion independent of the finality.",
+      "literary_anchor": "The court clerk reading a verdict"
+    }
+  },
+  {
+    "id": "IE015",
+    "text": "Close",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Single-word UI label. Genuinely too short to read inner attitude, aspect, or stress with any confidence. Could carry a dismissive or resolved beat but one word is insufficient for placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE016",
+    "text": "Signature Farming - Stealing transaction signatures",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "'Signature Farming – Stealing transaction signatures': structured label + definition. Space-led scanning and orientation; the em-dash creates a direct definitional cut. Awake 'Acute': sharp alert, isolating a specific threat type. Light-Weight: categorical naming without muscular force. Direct pole. Dabbing motor (Light/Direct/Quick).",
+      "literary_anchor": "The forensic analyst naming a specimen"
+    }
+  },
+  {
+    "id": "IE017",
+    "text": "Approval Farming - Stealing token approvals",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Structurally identical to IE016: 'Approval Farming – Stealing token approvals.' Same label+definition pattern, same Space-led direct cut. Awake 'Acute', penetrating, direct, Light-Weight, Dabbing motor. No new weight-bearing evidence.",
+      "literary_anchor": "The forensic analyst naming a specimen"
+    }
+  },
+  {
+    "id": "IE018",
+    "text": "NFT Theft - Stealing all your NFTs",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.63,
+      "rationale": "'NFT Theft – Stealing ALL your NFTs': the capitalised ALL adds a flash of blunt severity that carries a brief Unsociable (Remote) outer beat — it cuts off, admits no mitigation. Otherwise same pattern: Space-led, Awake Acute, penetrating, direct, Light-Weight. Weight test: emphasis is intensity of attention, not muscular force.",
+      "literary_anchor": "The forensic report with one bolded line"
+    }
+  },
+  {
+    "id": "IE019",
+    "text": "Transfer Farming - Draining your tokens",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "'Transfer Farming – Draining your tokens': same label+definition structure. 'Draining' carries a mild flow-metaphor but not enough to shift the inner attitude — the overall register stays Space-led, alert, enumerating. Awake Acute, penetrating, direct, Light-Weight, Dabbing motor.",
+      "literary_anchor": "The forensic analyst naming a specimen"
+    }
+  },
+  {
+    "id": "IE020",
+    "text": "Transfer From Farming - Unauthorized transfers",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "'Transfer From Farming – Unauthorized transfers': same pattern as IE016–IE019. Space-led definitional cut, Awake Acute, direct, Light-Weight. 'Unauthorized' adds institutional authority but no independent Weight evidence — it is declarative (Space/Direct), not forceful (Strong/Weight). Dabbing motor.",
+      "literary_anchor": "The forensic analyst naming a specimen"
+    }
+  },
+  {
+    "id": "IE021",
+    "text": "ETH Theft - Stealing your native currency",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Ultra-short label + subtitle. 'ETH Theft – Stealing your native currency' is a categorisation tag, not prose. No flow, no build, no relational texture to read inner attitude from. Direct and factual (Space) but too sparse to pin a tempo. Could flash Unsociable (Remote) from its curt taxonomy, but even that is a stretch for a 5-word label.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE022",
+    "text": "OpenSea Exploit - Stealing via Seaport",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Same register as IE021: a taxonomy label ('OpenSea Exploit – Stealing via Seaport'). Too short and classificatory to yield a dominant tempo. No prose movement to read.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE023",
+    "text": "Blur Exploit - Stealing via Blur marketplace",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Taxonomy label: 'Blur Exploit – Stealing via Blur marketplace'. Same structure as IE021-IE022. No prose drive to classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE024",
+    "text": "Permit Exploit - Stealing via permit signatures",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Taxonomy label: 'Permit Exploit – Stealing via permit signatures'. Structurally identical to the preceding labels. Too sparse for placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE025",
+    "text": "Seed Phrase Theft - Attempting to steal your recovery phrase",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.22,
+      "rationale": "'Seed Phrase Theft – Attempting to steal your recovery phrase.' Marginally longer than prior labels and the word 'attempting' introduces a slight temporal-process quality (ongoing threat), but the sample remains a UI warning tag rather than prose. Still too sparse to read a dominant inner attitude.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE026",
+    "text": "Malicious Network - Connected to known attack servers",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.22,
+      "rationale": "'Malicious Network – Connected to known attack servers.' A factual, oriented warning tag. Direct (Space) in its structure but no Weight or Flow evidence. Insufficient length and prose texture for tempo placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE027",
+    "text": "Malicious Code - Contains known malicious scripts",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.22,
+      "rationale": "'Malicious Code – Contains known malicious scripts.' Same register: short classificatory warning. No inner movement to read.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE028",
+    "text": "Investment Scam - Fake investment scheme",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "'Investment Scam – Fake investment scheme.' Purely taxonomic. Two-word label plus subtitle. No prose drive discernible.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE029",
+    "text": "Other Malicious Activity",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "'Other Malicious Activity.' Three words; a catch-all residual category. Absolutely insufficient for placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE030",
+    "text": "Detected as malicious site",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "'Detected as malicious site.' Four words; passive-voice detection statement. Factual and direct but no prose motion, no relational texture, no Weight or Flow evidence. Too sparse for any tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE031",
+    "text": "Your account has been disabled. You have limited access to your account and it has been placed in send-only mode.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "unknown",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.72,
+      "rationale": "A declarative administrative sentence — states a structural fact and orients the user to their new constrained status. Weight test: no force/exertion against resistance; the finality is Direct (Space), not Strong. Self-Contained (Stable Light+Direct) fits: settled, measured, withholding warmth. The curtailment ('disabled', 'send-only mode') flashes a Remote-family Unsociable beat — carved-off, exclusionary. Aspect is penetrating (Space-led, cuts to the structural situation). Motor is light: gliding (informational delivery) → dabbing (short, final, direct).",
+      "literary_anchor": "A functionary delivering a ruling — no force, just structural fact."
+    }
+  },
+  {
+    "id": "IE032",
+    "text": "It looks like you're using an old version of the app, refresh to update.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "A light, quick, helpful nudge — 'it looks like' softens, 'refresh' is an immediate call to action. Time-stressed and Quick-poled: there's a small urgency to act now. Weight test: no muscular force, no pressure against resistance — this is Light. Mobile family (Time+Flow) fits the fragmented, reactive, momentary register. Acknowledged (Mobile) reads as the noticed-and-passed-on quality: the system has clocked the situation and bounces it to the user. Circumscribing aspect (Time-led). Motor: dabbing (light, direct, quick notice) → flicking (light, flexible, quick dispatch).",
+      "literary_anchor": "A helpful stage-manager catching a small problem mid-show."
+    }
+  },
+  {
+    "id": "IE033",
+    "text": "\"{{message}}\" (operator-driven via feature flag — no shipped default)",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "This is a template/operator placeholder with no shipped prose content — it is a code stub, not a sample of brand voice. There is nothing to read.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE034",
+    "text": "We'll be back soon",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "floating",
+        "gliding"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "Four words, very short — but the register is reassuring, body-forward, relational: 'We'll be back soon' presupposes a shared space, a mutual relationship. Near (Weight+Time) family; stress falls on flow (continuity of relationship, no rupture). Warm (Near, flow-leaning, open) is the best fit — a gentle human promise. Weight test marginal: 'we'll be back' carries a mild relational weight of presence/absence but no muscular force — Light reads more cleanly; however the relational warmth tilts Near. Motor: floating (light, flexible, sustained continuity) → gliding (light, direct, sustained).",
+      "literary_anchor": "A shopkeeper's handwritten note on the door."
+    }
+  },
+  {
+    "id": "IE035",
+    "text": "We're making some updates and will be back online soon. Your funds remain safe.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.74,
+      "rationale": "Two moves: (1) relational reassurance about being back — Near/Warm, body-forward continuity; (2) 'Your funds remain safe' — a direct, unhedged, categorical assurance that flashes Awake 'Certain'. Primary register is Near+flow: inclusive 'we', ongoing process framing ('making updates'), human continuity. Warm (Near family) fits. Weight test: no muscular force — Light motor. The 'funds remain safe' beat lands as a penetrating Certain outer-action moment. Stress: flow (continuity, reassurance), pole: free.",
+      "literary_anchor": "The Nurse reassuring her charge that all will be well."
+    }
+  },
+  {
+    "id": "IE036",
+    "text": "One of our upstream providers is offline for maintenance but they'll be back online soon. Your funds remain safe.",
+    "classification": {
+      "tempo_primary": "Cool",
+      "inner_attitude": "near",
+      "aspect": "unknown",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.7,
+      "rationale": "Slightly more structural and distancing than IE035 — identifies an external third-party cause ('upstream providers'), names a mechanism, then reassures. The structural-diagnostic framing gives it a Space-led, slightly detached quality within the Near family: Cool (Near, more detached, analytical sub-tone). Weight test: no force, informational delivery — Light motor. 'Your funds remain safe' again flashes Awake Certain. Stress is space (orientation, naming the structural situation), pole direct. Aspect penetrating (Space-led cut to causal structure).",
+      "literary_anchor": "A calm operational briefing from a competent but slightly distant technician."
+    }
+  },
+  {
+    "id": "IE037",
+    "text": "Temporarily unavailable",
+    "classification": {
+      "tempo_primary": "Unsociable",
+      "inner_attitude": "remote",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "gliding"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Two words — the shortest possible functional label. No warmth, no explanation, no 'we', no relational framing. Remote (Space+Flow) family: Unsociable (the carved-off, withholding Remote tempo) is the cleanest read — the copy simply closes the door. Weight test: no force — Light. Motor: dabbing (Light, Direct, Quick — a short label placed and withdrawn). Aspect penetrating (Space-led; the line orients by negation). Stress space, pole direct.",
+      "literary_anchor": "A closed sign with no apology."
+    }
+  },
+  {
+    "id": "IE038",
+    "text": "We're experiencing technical issues and have temporarily disabled the app while we investigate. Your funds remain safe.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "pressing"
+      ],
+      "outer_action_tempi": [
+        "Certain",
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "awake",
+        "remote"
+      ],
+      "confidence": 0.66,
+      "rationale": "Three-beat structure: (1) 'experiencing technical issues' — acknowledges the situation with Near relational honesty; (2) 'temporarily disabled the app while we investigate' — active, responsible, slightly bound/held (not free-flowing); (3) 'Your funds remain safe' — Certain flash. The primary register is Near/Warm (inclusive 'we', body-forward accountability), but the stress is bound flow — a contained, effortful holding rather than free reassurance. The disabling action itself carries a hint of controlled force (pressing motor as inner preparation), though Weight test still leans Light overall — the primary motor is gliding. The 'disabled' beat flashes Unsociable (carved-off closure). Pole: bound (held, restrained continuity).",
+      "literary_anchor": "A responsible steward acknowledging a problem while holding the perimeter."
+    }
+  },
+  {
+    "id": "IE039",
+    "text": "Make sure you deposit to the correct network or it could result in loss of funds",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "A sharp, urgent warning — 'make sure', 'could result in loss of funds' is an alert to immediate consequence. Awake (Space+Time) family: Acute (the high-alert, sharp-attention Awake tempo) fits cleanly — sensor-mode, strategic warning, quick Time-stressed. Weight test: no muscular force — Light. Motor: dabbing (Light, Direct, Quick — a sharp precise touch) → flicking (Light, Flexible, Quick — the flick of a warning). Aspect circumscribing (Time-led — the urgency wraps around the action). Stress time, pole quick.",
+      "literary_anchor": "A lookout calling a sharp warning."
+    }
+  },
+  {
+    "id": "IE040",
+    "text": "Please read our support article for more information.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.67,
+      "rationale": "A direct, unhedged, orienting instruction: 'Please read our support article for more information.' No emotional register, no warmth, no force — simply points the user to a structural resource. Awake 'Certain' (Space+Time, Light) fits: settled, direct, final, no hedging, orients the reader. Weight test: pure informational pointer, no force. Motor: gliding (Light, Direct, Sustained — a smooth handoff) → dabbing (Light, Direct, Quick — precise placement of the instruction). Aspect penetrating (Space-led orientation). Stress space, pole direct.",
+      "literary_anchor": "A reference librarian pointing to the shelf."
+    }
+  },
+  {
+    "id": "IE041",
+    "text": "Your assets are at risk",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "A short, sharp warning that orients the reader to a structural risk. The line is Space-led (direct identification of a structural problem) with a Time-Quick urgency beat. No weight-bearing force/exertion — brevity reads as Dab (Light/Direct/Quick), not Punch. Awake 'Acute' fits: alert, noticing, scanning for danger. Penetrating aspect (Space-led orientation).",
+      "literary_anchor": "a terse lookout's call"
+    }
+  },
+  {
+    "id": "IE042",
+    "text": "Please set up funds recovery to ensure your assets can be recovered in case you lose access to your account. Without a recovery address, your assets are unrecoverable.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.65,
+      "rationale": "Structural, instructional, unhedged — orients the reader through a logical if/then architecture (lose access → unrecoverable). Space-led: it maps consequences with Direct orientation. Awake 'Certain' fits: settled, clear, no emotional charge. Weight test: no independent force/exertion, just clear structural guidance. Gliding (sustained light direct) into Dabbing (quick light direct) motor. An 'Acute' outer beat flashes in the 'unrecoverable' landing — a sharp alert moment.",
+      "literary_anchor": "a calm advisor laying out a clear condition"
+    }
+  },
+  {
+    "id": "IE043",
+    "text": "Recovery setup required",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Two-word label — too short to read inner attitude, aspect, or stress with confidence. Reads as a UI header, not prose. Cannot reliably classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE044",
+    "text": "Please set up funds recovery to ensure your assets can be recovered in the case that you lose access to your account. Without a recovery address, your assets are unrecoverable.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.65,
+      "rationale": "Near-identical to IE042 — same structural, instructional, unhedged copy mapping a logical if/then risk architecture. Awake 'Certain': settled orientation, no emotional charge, no weight-bearing pressure. Space-led direct orientation. 'Unrecoverable' landing flashes an Acute outer beat.",
+      "literary_anchor": "a calm advisor laying out a clear condition"
+    }
+  },
+  {
+    "id": "IE045",
+    "text": "Funds recovery",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Two-word label — too short to read any placement reliably. UI header/label only.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE046",
+    "text": "Ensure that you control the above funds recovery address on the Berachain network before deploying your vault. If you do not control this address, your funds in this vault will not be recoverable.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.68,
+      "rationale": "Structural conditional logic: 'Ensure… before deploying… if you do not control… not recoverable.' Awake 'Certain' — unhedged, Space-Direct orientation, mapping structural consequence. No independent force evidence (Weight test fails); confidence is Direct not Strong. Penetrating aspect (Space-led — structural scanning). 'Not recoverable' final beat flashes Acute (alert warning moment).",
+      "literary_anchor": "a precise systems architect issuing a pre-flight checklist"
+    }
+  },
+  {
+    "id": "IE047",
+    "text": "To avoid loss of funds, see which assets we support",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "'To avoid loss… see which assets we support' — short, alert, redirecting. Time-Quick urgency with Space-Direct orientation. Awake 'Acute' fits: noticing a danger and pointing to a resolution. No weight-bearing pressure — Dab motor (Light/Direct/Quick). Penetrating aspect: Space-led orientation toward a structural resource.",
+      "literary_anchor": "a watchful guide flagging a hazard and pointing to the map"
+    }
+  },
+  {
+    "id": "IE048",
+    "text": "You can't send to your own Infinex account address. Use Move instead.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.72,
+      "rationale": "Canonical worked example from the framework. Direct factual refusal + redirect. Awake 'Certain': settled, unhedged, no weight-bearing force. Penetrating (Space-led). The curt refusal flashes an Unsociable (Remote) outer beat. Gliding into Dabbing motor — light, direct.",
+      "literary_anchor": "a gate-keeper stating a rule without apology"
+    }
+  },
+  {
+    "id": "IE049",
+    "text": "This address may change. Always copy the address from here before each deposit.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "'This address may change. Always copy… before each deposit.' — Time-led: 'always… before each' encodes a repeated-action ritual with a temporal rhythm. Awake 'Acute' fits: sharp alert, noticing instability ('may change'), prescribing a recurrent vigilant action. Circumscribing aspect (Time-led — the instruction wraps around a repeating temporal action). No weight-bearing force; Dab motor.",
+      "literary_anchor": "a vigilant navigator reminding the crew to re-check bearings before every manoeuvre"
+    }
+  },
+  {
+    "id": "IE050",
+    "text": "Verify your passkey",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Three-word imperative label — too short to read inner attitude, aspect, or stress reliably. UI action prompt only.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE051",
+    "text": "Verify your passkey works correctly before depositing. This ensures you can access your funds.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.78,
+      "rationale": "A procedural directive — verify, then deposit — structured as a logical sequence with clear spatial orientation (do X before Y, ensure access). The prose is unhedged and instructional, Direct in Space. No weight-bearing force: it orients the reader rather than pushing against resistance. Awake 'Certain' fits: alert-settled notice delivered without hedging. Light motor (gliding→dabbing): a clean directional placement, no muscular build-up. Aspect is penetrating (Space-led — scanning for the right sequence).",
+      "literary_anchor": "A careful steward checking locks before leaving"
+    }
+  },
+  {
+    "id": "IE052",
+    "text": "Read before proceeding",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Three words — a bare imperative label. Too short to read inner attitude, stress, or aspect with any confidence. It reads as direct and quick (a dab-like placement) but there is insufficient material to assign a named tempo reliably.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE053",
+    "text": "We have detected the use of a smart contract account which means it may not be deployed across all networks.",
+    "classification": {
+      "tempo_primary": "Doubting",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "flexible",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "The prose detects and notifies — it is scanning, alert, orienting. The hedge 'may not be deployed' introduces genuine uncertainty without urgency or weight-bearing force. Awake 'Doubting' (Space+Time, uncertain orientation) fits: an alert noticing that cannot fully resolve. Aspect is penetrating (Space-led — structural scanning of network deployment). Pole is flexible (the qualifier 'may not' opens rather than forecloses). Light motor: floating→flicking (no force, the notice is buoyant/tentative).",
+      "literary_anchor": "A careful engineer flagging an edge case"
+    }
+  },
+  {
+    "id": "IE054",
+    "text": "Please confirm you have access to this address on the {network} network before proceeding.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "A confirmation gate — 'please confirm you have access… before proceeding.' Structurally direct and spatially oriented (confirm access on this specific network). No weight-bearing pressure; the politeness softens it but the underlying instruction is clear and unhedged as to what must happen. Awake 'Certain' reads: settled alert, direct placement. Penetrating aspect (Space-led — network/address specificity). Light motor gliding→dabbing.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE055",
+    "text": "Please note that recovering funds will deactivate the associated Infinex Account. However, the account won't be deleted and funds recovery will still be available. If you have any questions, please open a ticket at our Help & Support Centre.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.71,
+      "rationale": "This is the most relational sample in this set. 'Please note… However… won't be deleted… If you have any questions… Help & Support Centre.' The tone is body-forward and caring — it anticipates user worry and cushions it (Near family, relational). 'Warm' (Near, Light+Flexible+Sustained) fits: a reassuring, human hand on the shoulder. Aspect is circumscribing (Time-led — sequencing consequences and availability: 'will deactivate… won't be deleted… still available… please open a ticket'). Stress is flow (free), carried by the reassuring, open-ended close. An Awake 'Certain' flash surfaces at 'the account won't be deleted and funds recovery will still be available' — a factual, unhedged reassurance that momentarily registers as settled certainty. Light motor: gliding→floating.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) — reassuring, practical, body-forward care"
+    }
+  },
+  {
+    "id": "IE056",
+    "text": "Once recovery has been started you'll no longer be able to access your Infinex account.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "gliding"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.8,
+      "rationale": "A single blunt consequence statement — 'once X, you'll no longer be able to access.' Direct, final, unhedged. Awake 'Certain' is the dominant read: settled, alert, no hedging. Aspect is penetrating (Space-led — orienting the user to a structural point of no return). An 'Unsociable' flash (Remote family, carved-off) surfaces in the curtness: it does not soften or elaborate, it simply states and withdraws — the same curt-refusal beat noted in Example 5. Light motor: dabbing→gliding (no force; the line is quick and direct, a dab, not a punch).",
+      "literary_anchor": "A gate closing — factual finality without warmth"
+    }
+  },
+  {
+    "id": "IE057",
+    "text": "Double-check your deposit address as they are not all the same across EVM networks.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "gliding"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.76,
+      "rationale": "'Double-check your deposit address as they are not all the same across EVM networks.' Alert, sharp, structural — a sensor catching a risk point. Awake 'Acute' (Space+Time, sharp noticing) fits: the directive is a quick, precise alert to a structural mismatch (not all addresses are the same). Aspect penetrating (Space-led — network topology awareness). No weight-bearing force; brevity reads as Quick+Direct, a dab. Light motor: dabbing→gliding.",
+      "literary_anchor": "A sharp-eyed navigator catching a chart discrepancy"
+    }
+  },
+  {
+    "id": "IE058",
+    "text": "Action required: Move your assets",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "gliding"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "'Action required: Move your assets' — a terse alert label. Awake 'Acute' reads: sharp, time-pressured noticing with direct orientation. The colon structure and imperative 'Move' land as a quick, direct puncture. Aspect is circumscribing (Time-led — an urgent call to act now). Stress is space (direct scan — where your assets are and where they must go). No force-against-resistance; brevity is Quick+Direct (dab), not Strong. Light motor: dabbing→gliding.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE059",
+    "text": "{chains} is/are being deprecated. Move your assets to a supported chain using Swidge before {deadline}. Your wallet keys remain yours — you can always access funds directly.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "gliding"
+      ],
+      "outer_action_tempi": [
+        "Certain",
+        "Warm"
+      ],
+      "outer_action_inners": [
+        "awake",
+        "near"
+      ],
+      "confidence": 0.65,
+      "rationale": "This is the most complex sample in the set. It carries: a deprecation fact, a procedural instruction (use Swidge before {deadline}), and a reassurance ('your wallet keys remain yours — you can always access funds directly'). Stable 'Practical' (Weight+Space, decision-taken, procedural) reads as the dominant register: there is genuine structural weight here — a chain is being killed, assets must move, a deadline is set. The 'load' of deprecation and the responsibility to act gives Weight evidence beyond mere confidence. Aspect is penetrating (Space-led — mapping chain topology, network specificity). Stress is time (sustained — the deadline horizon gives a slow, sustained urgency rather than a sudden jab). An Awake 'Certain' flash surfaces at 'your wallet keys remain yours — you can always access funds directly' (unhedged, settled reassurance). A 'Warm' (Near) flash surfaces in the reassurance register of that same closing clause — a brief relational care beat. Motor: pressing (Practical's Stable+Sustained preparation) → gliding (the Light+Sustained reassurance close).",
+      "literary_anchor": "Aragorn giving orders before battle — practical, weight-bearing, closes with reassurance"
+    }
+  },
+  {
+    "id": "IE060",
+    "text": "Chain being deprecated",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three words — a bare status label. Insufficient material to assign inner attitude, stress, aspect, or tempo. Reads as Direct+Quick (a dab-like placement) with a structural/spatial orientation, but no named tempo can be reliably pinned.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE061",
+    "text": "This asset is on {chains}, which is being deprecated. Move your assets to a supported chain using Swidge. Your wallet keys remain yours — you can always access funds directly.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.72,
+      "rationale": "The notice orients the user structurally: chain deprecated → move assets → keys remain yours. Each clause is a direct spatial pointer — no hedging, no force-against-resistance, no emotional yield. The Weight test fails: the confidence is declarative (Direct/Space), not muscular. The line 'Your wallet keys remain yours — you can always access funds directly' carries a subtle reassuring Self-Contained undertone, but the dominant register is Awake Certain (Space+Time, unhedged, clean placement). The deprecation warning flashes a brief Unsociable beat (Remote-family: carved-off, structural chill).",
+      "literary_anchor": "Aragorn at the map — orienting, not commanding"
+    }
+  },
+  {
+    "id": "IE062",
+    "text": "This token is not verified. Only interact with tokens you trust.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.78,
+      "rationale": "Two short, unhedged, structurally binary sentences. No warmth, no build, no force. Direct spatial placement: 'not verified' / 'only interact with tokens you trust'. Classic Awake Certain — high clarity, zero Weight. The curt withholding flashes an Unsociable outer beat. Motor is Dabbing (Light/Direct/Quick) — brevity with precision, not muscular pressure.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE063",
+    "text": "Swidge is under maintenance",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.4,
+      "rationale": "Four-word status label. Genuinely too short to read inner attitude, aspect, or stress with any confidence. Cannot distinguish Certain, Self-Contained, or Unsociable as dominant from label alone.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE064",
+    "text": "Swidge is temporarily unavailable while we perform maintenance. Your funds remain safe. Please check back soon.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "gliding",
+        "gliding"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "Three beats: (1) state the situation, (2) reassure on safety, (3) invite return. The copy holds its ground calmly — 'Your funds remain safe' is load-bearing in the emotional sense of containment, not muscular force. Weight test: no exertion against resistance — the reassurance is Light, settled. The Stable Light+Direct character of Self-Contained fits: decisions taken, nothing to prove, warmth withheld. Stress is bound-flow: continuity of safety, held stillness. Gliding motor (Light/Direct/Sustained) — smooth, frictionless reassurance.",
+      "literary_anchor": "The Duke — settled authority without performance"
+    }
+  },
+  {
+    "id": "IE065",
+    "text": "We're making some upgrades to our Airdrop system and have briefly paused claims. Check back soon!",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "'briefly paused' and 'Check back soon!' signal Time-led quick movement — the copy acknowledges the user's presence and the interruption with light, bouncy energy. The exclamation mark and 'briefly' keep it Mobile-family: Acknowledged (Mobile, Time+Flow) — the brand registers that the user is there and signals it's paying attention. No weight-bearing force. Aspect circumscribing (Time-led). Motor: Dabbing (Light/Direct/Quick) sustained into Flicking (Light/Flexible/Quick) as the tone tilts cheerful at the close.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE066",
+    "text": "Voucher redemption is paused",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Three-word status label. Too short to resolve inner attitude or stress. Could be Certain, Unsociable, or Self-Contained — impossible to distinguish.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE067",
+    "text": "Voucher redemption in review",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Four-word status label. Same limitation as IE066 — insufficient text to read tempo, aspect, or stress.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE068",
+    "text": "One of your previous voucher redemptions has had an error and is currently under review. Please wait for us to resolve it before starting another redemption, or Contact Support",
+    "classification": {
+      "tempo_primary": "Cool",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.66,
+      "rationale": "The copy is relational but controlled — 'one of your previous voucher redemptions has had an error' is body-forward, matter-of-fact, addressing the user directly without alarm. Near family (Weight+Time) but the emotional temperature is Cool (Near-Cool is the detached-but-caring end). The instruction 'Please wait for us to resolve it before starting another redemption' holds bound-flow — continuity of process, restrained. Weight test: no independent force/exertion. The 'Contact Support' pivot flashes a brief Unsociable outer beat (structural carved-off option). Motor: Gliding (sustained, smooth instruction delivery) → Dabbing (the direct 'or Contact Support' closing tap).",
+      "literary_anchor": "The Nurse (R&J) in practical mode — caring but not warm"
+    }
+  },
+  {
+    "id": "IE069",
+    "text": "You're being rate limited by Hyperliquid and we cannot load your data. Please close unused perps windows, wait a few mins and refresh.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.67,
+      "rationale": "'You're being rate limited… we cannot load your data' — the brand acknowledges the user's blocked state and pivots immediately to remediation steps. Time-led (quick, sequenced: close / wait / refresh). Mobile-family Acknowledged: registers the user, names the problem, dispatches action. The 'Please close… wait a few mins and refresh' sequence is light-touch instructional. Weight test: no force. 'You're being rate limited by Hyperliquid' flashes a brief Unsociable outer beat (external authority, carved-off chill). Motor: Dabbing (Light/Direct/Quick) into Flicking (Light/Flexible/Quick) as the instruction list bounces along.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE070",
+    "text": "You're being rate limited by Hyperliquid and we cannot load your data. Close unused perps windows, wait a few minutes, then try again.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.7,
+      "rationale": "IE070 is the same content as IE069 but with the 'Please' softener removed and 'try again' substituted for 'refresh'. The register hardens from Acknowledged (Mobile) to Certain (Awake): three clean directives with no hedging, no relational warmth, no exclamation — just structural orientation. Space-led (each clause is a direct pointer). Weight test fails: still no force. The stripped 'Close… wait… try again' reads as a tighter Awake Certain. Unsociable outer beat persists on 'rate limited by Hyperliquid'. Motor: Dabbing both ends (Light/Direct/Quick) — precise, frictionless, no linger.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE071",
+    "text": "High Liquidation Risk",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Three-word label — too short to read a full inner attitude. The word 'High' and 'Risk' carry urgency and orientation but the sample is a UI header, not prose. Cannot pin a tempo with confidence.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE072",
+    "text": "This order would put you at risk of immediate liquidation. Reduce size or leverage.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.72,
+      "rationale": "The sentence is a direct, unhedged warning: 'this order WOULD PUT YOU at risk of IMMEDIATE liquidation'. The stress is Time (immediate, urgency of clock), Space-led penetrating aspect (it orients the user precisely to the structural risk). Weight test: no independent force/exertion — the line states a structural fact with precision, not muscular push. Awake family; Acute (the alarmed-sensor tempo) fits the scanning-for-danger register. Pole is Quick (the urgency of 'immediate'). The imperative commands 'Reduce size or leverage' flash a curt Unsociable beat (Remote-family curtness). Motor is light-touch direct — Dabbing (Light/Direct/Quick), no weight-bearing build.",
+      "literary_anchor": "An alert systems voice — no literary figure; closest to a watchful navigator calling danger"
+    }
+  },
+  {
+    "id": "IE073",
+    "text": "Insufficient Margin",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Two-word label, pure UI header. No prose to read for inner attitude or tempo. Cannot classify reliably.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE074",
+    "text": "Insufficient margin for this order. Reduce size or add funds.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.7,
+      "rationale": "A factual diagnosis followed by two clean structural remedies: 'Reduce size or add funds.' Unhedged, categorical, orientating — that is Direct Space, not Strong Weight. Weight test: no force/exertion evidence; the prose explains a structural state and routes the user. Awake 'Certain' (Space+Time, Weightless per Ch2 p.474) is the dominant read: settled, clear, final. Aspect is Penetrating (Space-led — cuts to structural insight). Pole Direct. Motor: Gliding (Light/Direct/Sustained) for the diagnosis, Dabbing (Light/Direct/Quick) for the imperative. The curt double-imperative ending flashes an Unsociable beat.",
+      "literary_anchor": "Awake diagnostician — closest to a calm systems-voice that sees and names the problem without emotion"
+    }
+  },
+  {
+    "id": "IE075",
+    "text": "Leverage Too High",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word label — pure UI header, too short to read a full tempo with confidence.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE076",
+    "text": "Maximum leverage for this market is {n}x.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "A single declarative fact: 'Maximum leverage for this market is {n}x.' No hedging, no emotion, no urgency — just a boundary-statement. Unhedged finality = Direct (Space), not Strong (Weight). Weight test: no force/exertion evidence — the line simply names a structural ceiling. Awake 'Certain' fits perfectly: the settled, Weightless, Space+Time sensor that names what is so. Aspect Penetrating (Space-led structural orientation). Pole Direct. Motor Gliding→Dabbing (Light/Direct). Single-register — no outer-action flash.",
+      "literary_anchor": "The rule-book voice — Certain, no negotiation, no drama"
+    }
+  },
+  {
+    "id": "IE077",
+    "text": "Trading Not Activated",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word label — UI header only. Too short to read a tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE078",
+    "text": "Please activate trading to place orders. Click \\\"Activate Trading\\\" to continue.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.62,
+      "rationale": "The copy guides the user through a gating ritual: 'Please activate… Click… to continue.' The 'Please' softens; the step-by-step guidance is relational and procedural. Mobile family: the sample fragments across two steps (state → action), acknowledging the user's position and routing them forward — Mobile 'Acknowledged' (the tempo that recognises a situation and hands the reader a next move). Aspect Circumscribing (Time-led — the sequential framing moves around the user's current stuck-state). Stress is Flow (the guidance yields, it doesn't cut). Pole Bound (the flow is held, conditional on completing the action). The final imperative 'Click… to continue' flashes a Certain beat (Awake family — single factual instruction). Motor Light/Direct: Gliding for the setup, Dabbing for the imperative.",
+      "literary_anchor": "A helpful usher who acknowledges the block and hands you the door handle"
+    }
+  },
+  {
+    "id": "IE079",
+    "text": "Signature Rejected",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Two-word label — UI header only. Too short to classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE080",
+    "text": "Please approve the transaction in your wallet to continue.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.68,
+      "rationale": "Parallel structure to IE078: 'Please approve the transaction in your wallet to continue.' A gentle, procedural routing — acknowledges a blocked state (wallet approval pending), hands the user the next step without force or urgency. Mobile 'Acknowledged' again: the voice sees the situation and wraps the user toward resolution. Aspect Circumscribing (Time-led sequential guidance). Stress Flow (yielding, relational, not cutting or urgent). Pole Bound (held until the wallet act is completed). Weight test: no force/exertion — Light throughout. The terminal 'to continue' again flashes a brief Certain (Awake) beat. Motor Gliding→Dabbing.",
+      "literary_anchor": "An attentive guide holding the door open, waiting without pressure"
+    }
+  },
+  {
+    "id": "IE081",
+    "text": "Trading Session Expired",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Two-word status label — 'Trading Session Expired'. Too short to read inner attitude or stress. Reads as a clean, direct state-report — possibly Certain (Awake) or Self-Contained (Stable), but the sample is too compressed to commit. No Weight evidence, no flow, no time pressure discernible beyond a flat factual notice.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE082",
+    "text": "Your trading session has expired. Please re-activate trading.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "Two clean declarative sentences: state the fact, give the remedy. No hedging, no urgency, no force against resistance — Weight test fails. Reads as Awake (Space+Time): alert, orienting, structural. Aspect is penetrating (Space-led — cuts to the point, orients the user). Pole direct. Motor light: gliding (sustained orientation) → dabbing (quick directive). Tempo: Certain.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE083",
+    "text": "Something's not right",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word hedged admission — 'Something's not right'. Too short and too vague to pin a tempo. The contraction and mild uncertainty gesture toward Near or Awake territory, but there is insufficient substance to commit. Could flash Doubting (Awake) or Warm (Near) but neither is readable with confidence.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE084",
+    "text": "You acknowledge that you have read and understood the above disclaimer and accept the risks of interacting with permissionless markets deployed by this deployer.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Self-Contained"
+      ],
+      "outer_action_inners": [
+        "stable"
+      ],
+      "confidence": 0.65,
+      "rationale": "Legal/disclaimer register: unhedged, categorical, structural enumeration of acknowledgements. No force against resistance — Weight test fails. Direct Space carries the sentence: it orients, enumerates, and forecloses ambiguity. Reads primarily Awake (Space+Time), Certain tempo — maximal declarative directness, weightless. Aspect penetrating (Space-led orientation). Motor gliding → dabbing (light, direct, sustained/quick). The formal distancing of 'you acknowledge… the above disclaimer' carries a brief Self-Contained (Stable Light+Direct) outer flash — the copy momentarily adopts an institutional still-point.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE085",
+    "text": "Please top up your gas account to continue.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.58,
+      "rationale": "'Please top up your gas account to continue.' — a calm, polite directive with a mild sense of blocked forward motion ('to continue'). Reads Awake (Space+Time): alert, orienting. The 'to continue' carries a faint Time-stress (something is paused, continuation is gated) but it is not urgent — sustained rather than quick. Aspect circumscribing (Time-led — the action is framed around continuity). Pole sustained. Motor light: gliding (orient) → dabbing (quick instruction). Tempo Certain — unhedged, clear, weightless.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE086",
+    "text": "Not enough {token} for gas.",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Four-word template fragment with an unfilled variable '{token}' — this is a placeholder string, not finished copy. Too short and structurally incomplete to read any tempo reliably. The factual constraint pattern (not enough X for Y) gestures toward Certain/Awake but the sample is too thin and unresolved to commit.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE087",
+    "text": "Not enough {{symbol}} for gas. Swidge to top up.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.55,
+      "rationale": "'Not enough {{symbol}} for gas. Swidge to top up.' — the invented brand-verb 'Swidge' is the key read: it is body-forward, casual, relational, community-coded. This is Near (Weight+Time) territory — down-to-earth, practical-friendly, a nudge between familiar parties. Weight test: 'Swidge' carries a light bodily nudge, not heavy exertion — Light-Weight. Near with Light-Weight reads toward Warm (Near family, Human/Warm are the lighter Near tempi). Aspect circumscribing (Time-led — the directive is wrapped in informal invitation). Stress flow (the casual relational texture), pole free. Motor gliding → floating (light, friendly, sustained). The notification format briefly flashes Acknowledged (Mobile) — the system surfaces itself into the user's attention momentarily.",
+      "literary_anchor": "Anthony Bourdain casual-instructive mode"
+    }
+  },
+  {
+    "id": "IE088",
+    "text": "Transaction failed",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Two-word status label — 'Transaction failed'. Too short to read inner attitude. Could gesture toward Certain (Awake, clean factual report) or a flash of Unacknowledged (Mobile, system failing to complete) but neither is readable at this length. Insufficient material to commit.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE089",
+    "text": "User rejected the request",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Four-word system message — 'User rejected the request'. Clinically third-person, flat, structural. Gestures toward Certain (Awake) or Self-Contained (Stable) but the sample is too compressed and ambiguous to pin a tempo. The third-person framing is notable (distancing) but not enough to read Remote with confidence.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE090",
+    "text": "Websocket confirmation timeout",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Three-word technical label — 'Websocket confirmation timeout'. Pure engineering vocabulary, no expressive register discernible. Too short and too technical to read any placement. Could faintly gesture toward Unacknowledged (Mobile — system failing to connect/complete) but that would be over-reading a raw log string.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE091",
+    "text": "Approval failed. Please try again.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "Two short, unhedged declarative beats: a named failure state then a clean imperative. No force/exertion against resistance — apply Weight test: fails. The read is Awake 'Certain' (Space+Time, Weightless): crisp, orienting, settled. Direct placement of fact + direct instruction = penetrating aspect. Quick/Direct = Dab motor. Both beats are identical register so single-register.",
+      "literary_anchor": "Stage manager announcing a technical stop — calm, no drama."
+    }
+  },
+  {
+    "id": "IE092",
+    "text": "Something went wrong, please try again",
+    "classification": {
+      "tempo_primary": "Uncertain",
+      "inner_attitude": "awake",
+      "aspect": "unknown",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "'Something went wrong' is vague and unresolved — that vagueness is the tell. Unlike IE091's named failure, this hedges the error identity completely. Awake 'Uncertain' (Space+Time, alert but unresolved) fits: the system notices something but cannot orient the user precisely. Quick/stressed time because the imperative 'please try again' pushes urgency. Light-Weight (no force evidence). Motor: Dab (direct+quick) shading toward Flick (flexible+quick) on the vague 'something'.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE093",
+    "text": "{chain} is not supported",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.75,
+      "rationale": "A single-line categorical refusal: '{chain} is not supported.' Fully unhedged, direct, no warmth. Weight test: no force/exertion — this is a structural orientation statement, not a muscular push. Awake 'Certain' with a penetrating (Space-led) aspect. The curt, carved-off refusal flashes an 'Unsociable' (Remote) outer moment — same pattern as Example 5.",
+      "literary_anchor": "A bouncer at the door: 'Not on the list.'"
+    }
+  },
+  {
+    "id": "IE094",
+    "text": "Something went wrong",
+    "classification": {
+      "tempo_primary": "Uncertain",
+      "inner_attitude": "awake",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "Three words — genuinely too short to read inner attitude with confidence. 'Something went wrong' is vague (hedged identity) and unresolved. Closest read is Awake 'Uncertain': the system is alert but cannot specify. Too brief for a reliable motor or aspect read.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE095",
+    "text": "An unexpected error occurred. Please try reloading the page.",
+    "classification": {
+      "tempo_primary": "Uncertain",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "'An unexpected error occurred' signals the unresolved, non-oriented state of Awake Uncertain. The 'unexpected' qualifier is key — it admits the system was not prepared, which is the opposite of Certain. 'Please try reloading' adds a Time-stress quick imperative. Circumscribing aspect: the reload instruction wraps the moment in an action-frame. Light-Weight throughout — no force/exertion evidence. Motor: Dab (direct instruction) + Flick (unexpected/flexible error).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE096",
+    "text": "Session Expired",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.7,
+      "rationale": "Two-word declarative label: named, unambiguous, final. Weight test: fails — no force/exertion, just a clean structural statement. Awake 'Certain' (Weightless, Space+Time). Penetrating aspect (Space-led, cuts directly to state). The clipped, affectless delivery flashes 'Unsociable' (Remote outer moment) — the curt named-state with no softening.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IE097",
+    "text": "Please sign in again to continue",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "'Please sign in again to continue' — this is the first sample with a relational softness. 'Please' and 'to continue' both orient toward the user's experience and ongoing journey rather than just orienting the space. Near 'Warm' (Weight+Time, body-forward, relational) is the closest read: the line is gentle and inviting, not merely declarative. Flow-stress (free): the continuity framing ('to continue') is flow-led. Circumscribing aspect (Time-led wrap around the action). Motor: Glide (sustained+direct+light) into Dab (quick+direct+light). Light-Weight — no force evidence.",
+      "literary_anchor": "A host gently redirecting a guest."
+    }
+  },
+  {
+    "id": "IE098",
+    "text": "To ensure you can recovery your full portfolio from your Infinex wallet, enable recovery with a verified email address.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "gliding"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "'To ensure you can recover your full portfolio… enable recovery with a verified email address.' This is the most weight-bearing sample in the set: 'full portfolio' and the consequence structure ('to ensure') carry genuine stake/pressure — not pure certainty-confidence, but actual load (your full portfolio is at risk if you don't act). Stable 'Practical' (Weight+Space, intelligent ruler executing a decision, Ch2 p. 497) fits: the line is structured, consequential, and directive without being aggressive. Penetrating aspect (Space-led structural orientation). Stress=time, pole=sustained: the sustained consequence arc ('to ensure… enable') is time-extended. Motor: Pressing (sustained+direct+strong) into Gliding (sustained+direct+light) — the line builds pressure then releases into the instruction.",
+      "literary_anchor": "Werle giving careful estate instructions."
+    }
+  },
+  {
+    "id": "IE099",
+    "text": "Henlo, and furthermore deploy your Beravault",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "radiating",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Warm"
+      ],
+      "outer_action_inners": [
+        "near"
+      ],
+      "confidence": 0.65,
+      "rationale": "'Henlo, and furthermore deploy your Beravault.' This is playfully internet-native — 'Henlo' (misspelled greeting) + 'and furthermore' (mock-formal escalation) + invented proper noun 'Beravault'. The mock-formal register ('and furthermore') is a Mobile 'Acknowledged' moment: the copy is self-aware, performing its own weirdness for an audience that gets the joke. Radiating aspect (Flow-led): the playful expansiveness radiates outward. Free flow: uncontrolled, spilling. Motor: Float (light+flexible+sustained) into Flick (light+flexible+quick) — weightless and scattered. The greeting 'Henlo' flashes a Near 'Warm' outer beat before the mock-formal pivot.",
+      "literary_anchor": "Community-native Discord energy — knowing absurdism for the in-group."
+    }
+  }
+]

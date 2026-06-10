@@ -1,0 +1,18 @@
+{
+  "id": "perps-live-2025-03-04",
+  "title": "Perps are live in Infinex",
+  "ship_date": "2025-03-04",
+  "audience": ["x", "web", "in-product"],
+  "deployed_facts": [
+    "Perpetual futures trading is live in Infinex",
+    "Perps trade from the same account as spot",
+    "There is no separate sub-account, deposit, or transfer required to open a position",
+    "Margin and spot balances live in the same portfolio view",
+    "The perps venue is integrated at the orderbook level, not as a wrapper"
+  ],
+  "kind": "launch-tier",
+  "headline": "Perps are live.",
+  "subhead": "Same account as your spot. Same passkey. No sub-account, no transfer.",
+  "tier_reason": "Perps were the largest structural addition since the account launch. Spot-and-perps in one account collapses the dominant CEX workflow into a single self-custodial surface — a category-shaping moment, not a venue addition.",
+  "through_action": "to make 'I have to bridge to perps' a sentence that no longer makes sense"
+}

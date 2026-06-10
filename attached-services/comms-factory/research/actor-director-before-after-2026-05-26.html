@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Actor/Director Architecture - Before and After</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7f4ed;
+      --ink: #171717;
+      --muted: #66615a;
+      --rule: #d8d0c4;
+      --before: #7a2f2f;
+      --after: #245b44;
+      --warn: #8a5a00;
+      --code: #24201c;
+      --code-bg: #eee7dc;
+      --band: #fffaf1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 14px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(1280px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.1; }
+    h1 { font-size: clamp(30px, 5vw, 56px); letter-spacing: 0; max-width: 1050px; }
+    h2 { font-size: 24px; margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--rule); }
+    h3 { font-size: 15px; margin-bottom: 8px; }
+    p { margin: 8px 0; }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      background: var(--code-bg);
+      color: var(--code);
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      padding: 12px;
+      margin: 10px 0 0;
+      font-size: 12px;
+    }
+    .meta {
+      margin-top: 14px;
+      color: var(--muted);
+      max-width: 900px;
+    }
+    .verdict {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .pill {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: rgba(255,255,255,.45);
+      padding: 14px;
+      min-height: 106px;
+    }
+    .pill strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+    }
+    .pill.good { border-color: rgba(36,91,68,.35); }
+    .pill.bad { border-color: rgba(122,47,47,.35); }
+    .pill.warn { border-color: rgba(138,90,0,.35); }
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 14px;
+    }
+    .col {
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      background: rgba(255,255,255,.45);
+      padding: 16px;
+    }
+    .col.before { border-top: 5px solid var(--before); }
+    .col.after { border-top: 5px solid var(--after); }
+    .label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    ul { margin: 10px 0 0 20px; padding: 0; }
+    li { margin: 6px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      background: rgba(255,255,255,.35);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--rule);
+      padding: 10px;
+    }
+    th {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      background: var(--band);
+    }
+    tr:last-child td { border-bottom: 0; }
+    .callout {
+      border: 1px solid rgba(138,90,0,.35);
+      border-left: 5px solid var(--warn);
+      border-radius: 8px;
+      background: #fff7df;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+    .ok { color: var(--after); font-weight: 650; }
+    .no { color: var(--before); font-weight: 650; }
+    .warn-text { color: var(--warn); font-weight: 650; }
+    .small { color: var(--muted); font-size: 12px; }
+    @media (max-width: 860px) {
+      main { width: min(100vw - 24px, 760px); padding-top: 22px; }
+      .grid, .verdict { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Actor/Director Architecture: What Changed, What Still Fails</h1>
+  <p class="meta">
+    Generated 2026-05-26. This report compares the old comms-factory generator path with the new actor/director path,
+    using the current worktree plus one live Anthropic run against a disposable harness database. Secrets are not rendered.
+  </p>
+
+  <section class="verdict">
+    <div class="pill good">
+      <strong>Architecture</strong>
+      The system now has a real actor/director path with rollback, source-indexed memory, blind Director audits,
+      persisted transcripts, and harness UI visibility.
+    </div>
+    <div class="pill bad">
+      <strong>Quality</strong>
+      I am not happy calling the generator good yet. The first live web run exhausted 3 actor attempts and the
+      Director rejected the passing candidates as <code>acute</code>.
+    </div>
+    <div class="pill warn">
+      <strong>Next Layer</strong>
+      The live failure supports adding Daily Pages / Actor Notes: a persisted warm-up phase before table work and
+      performance, invisible to the blind Director.
+    </div>
+  </section>
+
+  <h2>1. The Main Architectural Difference</h2>
+  <div class="grid">
+    <section class="col before">
+      <div class="label">Before</div>
+      <h3>Per-channel generator flows</h3>
+      <ul>
+        <li><code>runGenerator</code> looped through channels and called <code>generateForChannel</code> separately.</li>
+        <li>Each channel had its own attempt row in <code>generator_attempts</code>.</li>
+        <li>The prompt capture still spoke in Stage A / Stage B terms: <code>inner_work_prompt_json</code> and <code>drafting_prompt_json</code>.</li>
+        <li>Context was mostly prompt text plus voice spec. No persisted character session across channels.</li>
+        <li>The validator could run regex, active LLM audit, and history guard, but the generation actor and validator did not share a visible rehearsal trail.</li>
+      </ul>
+      <pre>release card
+  -> generateForChannel(x)
+       -> generator attempt(s)
+       -> validator
+  -> generateForChannel(web)
+       -> generator attempt(s)
+       -> validator</pre>
+    </section>
+
+    <section class="col after">
+      <div class="label">After</div>
+      <h3>One Actor, blind Director</h3>
+      <ul>
+        <li><code>HARNESS_GENERATOR_ARCH=actor</code> switches to <code>runActorGenerator</code>.</li>
+        <li>One Actor call handles all requested channels for an attempt.</li>
+        <li>The Actor receives source-indexed memory and returns <code>table_work</code> plus <code>performances</code>.</li>
+        <li>The Director reads candidate prose blind. It does not see actor table work.</li>
+        <li>Director notes are appended to the same actor transcript for retry attempts.</li>
+      </ul>
+      <pre>system: Actor Memory
+user: assignment
+assistant: table_work + performances
+user: Director notes
+assistant: revised table_work + performances</pre>
+    </section>
+  </div>
+
+  <h2>2. Persistence Difference</h2>
+  <div class="grid">
+    <section class="col before">
+      <div class="label">Before</div>
+      <h3>Legacy attempt rows only</h3>
+      <ul>
+        <li><code>generator_attempts</code>: one row per <code>(card, channel, attempt)</code>.</li>
+        <li><code>candidate_audits</code>: optional active validator and history guard trace.</li>
+        <li><code>candidates</code>: text, declared beat JSON, validator result, source.</li>
+      </ul>
+    </section>
+
+    <section class="col after">
+      <div class="label">After</div>
+      <h3>Additive actor/director tables</h3>
+      <ul>
+        <li><code>actor_attempts</code>: one row per card-level Actor attempt, spanning all channels requested in that attempt.</li>
+        <li><code>director_audits</code>: one row per blind Director read.</li>
+        <li><code>candidates</code> stay compatible; Director fields are joined from <code>director_audits</code>.</li>
+        <li>No destructive migration. Legacy rows still render.</li>
+      </ul>
+      <pre>actor_attempts:
+  source_index_json
+  prompt_version
+  prompt_hash
+  channels_json
+  actor_prompt_json
+  actor_transcript_json
+  actor_response_json
+  table_work_json
+  director_notes_in_json
+
+director_audits:
+  candidate_id
+  director_prompt_json
+  director_audit_json
+  passed</pre>
+    </section>
+  </div>
+
+  <h2>3. Prompt And Source Difference</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Thing</th>
+        <th>Before</th>
+        <th>Now</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Movement knowledge</td>
+        <td>Mostly generated prompt sections from <code>src/voice/infinex.ts</code> and derived operational references.</td>
+        <td>Actor and Director memory explicitly source-index the canonical Mirodan chapters, combined reference, PDF, and source-location memory.</td>
+      </tr>
+      <tr>
+        <td>All 24 tempi</td>
+        <td>The old generator worked mainly from the Infinex palette and locked examples.</td>
+        <td><code>ALL_TEMPO_NAMES</code> and <code>MIRODAN_24_TEMPI</code> give the Actor and Director the surrounding world, not only Infinex.</td>
+      </tr>
+      <tr>
+        <td>Tempo selection</td>
+        <td>Legacy paths could still carry declared tempo fields for beat diagnostics.</td>
+        <td>The Actor output contract forbids tempo fields in beat plans. The Director classifies tempo after the fact.</td>
+      </tr>
+      <tr>
+        <td>Evidence</td>
+        <td>Validator reasoning could include classification, but movement evidence was not source-ref structured.</td>
+        <td>Director output requires motion evidence and working action evidence with <code>source_refs</code>. Local phrases like "single aimed sentence" are observations, not canonical claims.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. Environment Key Finding</h2>
+  <div class="callout">
+    <p><strong>The Anthropic key exists on disk.</strong> It is present in both <code>.env</code> and <code>harness/.env.local</code>. I did not render the secret value here.</p>
+    <p>The earlier command reported <code>ANTHROPIC_API_KEY=missing</code> because one-off root shell commands do not automatically source <code>.env</code>.</p>
+    <pre># Root CLI / eval commands need this:
+set -a
+source .env
+set +a
+
+# Harness commands run from harness/ can use:
+set -a
+source ../.env
+set +a</pre>
+  </div>
+
+  <h2>5. Live Actor/Director Check</h2>
+  <p>
+    I ran a live actor/director generation with the key loaded from <code>../.env</code>, against
+    <code>/tmp/comms-factory-live-actor-check.sqlite</code>, one web channel, one candidate per attempt.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Actor attempts</td><td>3</td></tr>
+      <tr><td>Candidates persisted</td><td>3</td></tr>
+      <tr><td>Director audits persisted</td><td>2</td></tr>
+      <tr><td>Source index entries</td><td>7</td></tr>
+      <tr><td>Actor prompt hash</td><td><code>4b85012e1e2569ac4c37417cb5de640d72c83626afbb327a9c0c2607e7c18920</code></td></tr>
+      <tr><td>Outcome</td><td><span class="no">No passing candidate</span></td></tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Attempt</th>
+        <th>Candidate</th>
+        <th>Script Supervisor</th>
+        <th>Director</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>Spot on Hyperliquid is live in Infinex. Same account as your perps.</code></td>
+        <td><span class="no">Fail</span>: unsupported claim, because "same account as your perps" was not in deployed facts.</td>
+        <td>Did not run.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><code>Spot on Hyperliquid is live in Infinex.</code></td>
+        <td><span class="ok">Pass</span></td>
+        <td><span class="no">Fail</span>: primary tempo <code>acute</code>, confidence 1.00.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><code>We brought the venue inside the account: Spot on Hyperliquid is live in Infinex, ready to trade.</code></td>
+        <td><span class="warn-text">Originally passed, now fixed</span>: the phrase <code>ready to trade</code> exposed a fact-contract hole.</td>
+        <td><span class="no">Fail</span>: primary tempo <code>acute</code>, confidence 1.00.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <p><strong>Interpretation:</strong> the architecture is no longer fake, but the Actor is still too cold-started. It knows the rules, but it is not yet warmed into the character. It defaults to product bulletin structure under pressure.</p>
+  </div>
+
+  <h2>6. Bug Fixed After Live Run</h2>
+  <div class="grid">
+    <section class="col before">
+      <div class="label">Before</div>
+      <h3>Fact contract missed readiness claims</h3>
+      <p>
+        A sentence could contain a valid launch fact and add an unsupported readiness claim, and the old sentence-level support check would treat the whole sentence as supported.
+      </p>
+      <pre>Fact A is live, ready to trade.
+
+Supported? incorrectly yes, because
+"Fact A is live" overlapped the deployed fact.</pre>
+    </section>
+    <section class="col after">
+      <div class="label">After</div>
+      <h3>Readiness claim extractor</h3>
+      <p>
+        <code>ready to trade</code>, <code>ready to use</code>, <code>ready to swap</code>, and similar claims are now audited independently against deployed facts.
+      </p>
+      <pre>readiness claim is not in deployed_facts:
+"ready to trade"</pre>
+    </section>
+  </div>
+
+  <h2>7. Daily Pages / Actor Notes Recommendation</h2>
+  <p>
+    Your proposed warm-up layer is the right next move. It should not replace table work. It should happen before table work and should be persisted as rehearsal material.
+  </p>
+  <div class="grid">
+    <section class="col before">
+      <div class="label">Current actor flow</div>
+      <h3>Still too abrupt</h3>
+      <pre>Actor Memory
+  -> Assignment
+  -> Table Work
+  -> Performance
+  -> Director Notes
+  -> Revised Table Work + Performance</pre>
+      <p>
+        This is structurally correct, but the live run shows the Actor can still perform from rules instead of lived circumstances.
+      </p>
+    </section>
+    <section class="col after">
+      <div class="label">Next actor flow</div>
+      <h3>Warm-up before performance</h3>
+      <pre>Actor Memory
+  -> Assignment
+  -> Daily Pages / Actor Notes
+       - given circumstances
+       - product world
+       - reader prior
+       - left/right choices
+       - what feels false
+       - what the character refuses
+  -> Table Work
+  -> Performance
+  -> Blind Director
+  -> Director Notes
+  -> More Actor Notes
+  -> Revised Table Work + Performance</pre>
+    </section>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Design Decision</th>
+        <th>Recommendation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Where to store it</td>
+        <td>Add an additive <code>actor_warmups</code> table or columns on <code>actor_attempts</code>: <code>warmup_prompt_json</code>, <code>warmup_response_json</code>, <code>given_circumstances_json</code>, <code>false_starts_json</code>.</td>
+      </tr>
+      <tr>
+        <td>Who sees it</td>
+        <td>The Actor sees it. The Director does not. The Director must stay blind to prevent self-rationalized validation.</td>
+      </tr>
+      <tr>
+        <td>What it should produce</td>
+        <td>Not polished copy. It should produce journal pages, given-circumstances notes, rejected impulses, vocabulary that felt false, and a short distilled actor state for table work.</td>
+      </tr>
+      <tr>
+        <td>Why it matters</td>
+        <td>It turns the Actor from "LLM applying rules" into "LLM rehearsing the character before writing." That is closer to the acting model you described.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>8. Verification State</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Check</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>pnpm test</code></td><td><span class="ok">Pass</span>: 34 files, 543 tests.</td></tr>
+      <tr><td><code>pnpm typecheck</code></td><td><span class="ok">Pass</span>.</td></tr>
+      <tr><td><code>cd harness && pnpm typecheck</code></td><td><span class="ok">Pass</span>.</td></tr>
+      <tr><td>Live API path</td><td><span class="ok">Wired</span>: key loaded, live Actor/Director calls completed, rows persisted.</td></tr>
+      <tr><td>Live output quality</td><td><span class="no">Not good enough</span>: no passing candidate in the first live web check.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>9. Files Changed In This Architecture Pass</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>src/actor-memory.ts</code></td><td>Actor and Director memory packs, canonical source index, full tempo taxonomy.</td></tr>
+      <tr><td><code>src/actor-director.ts</code></td><td>Actor call, Director call, JSON parsing, blind Director prompt, stub path.</td></tr>
+      <tr><td><code>src/actor-orchestrator.ts</code></td><td>Retry loop, one actor call for all channels, Director notes appended to transcript.</td></tr>
+      <tr><td><code>src/voice/types.ts</code></td><td><code>ALL_TEMPO_NAMES</code> for the 24-tempo world.</td></tr>
+      <tr><td><code>src/validator.ts</code></td><td>Readiness claim detection for unsupported claims like <code>ready to trade</code>.</td></tr>
+      <tr><td><code>src/__tests__/actor-director.test.ts</code></td><td>Actor memory, 24-tempo Director prompt, blind Director, call-count, retry, max-attempt tests.</td></tr>
+      <tr><td><code>src/__tests__/validator.test.ts</code></td><td>Readiness-claim regression test.</td></tr>
+      <tr><td><code>harness/app/actions/generate.ts</code></td><td>Feature flag and persistence path for actor/director generation.</td></tr>
+      <tr><td><code>harness/lib/schema.sql</code></td><td>Additive <code>actor_attempts</code> and <code>director_audits</code> tables.</td></tr>
+      <tr><td><code>harness/lib/queries.ts</code></td><td>Query joins for Director audit state and actor attempts.</td></tr>
+      <tr><td><code>harness/components/AttemptPanel.tsx</code></td><td>Shows actor prompt, source index, transcript, table work, Director notes in.</td></tr>
+      <tr><td><code>harness/components/CandidateCard.tsx</code></td><td>Shows Director read, motion evidence, source refs, raw Director JSON.</td></tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

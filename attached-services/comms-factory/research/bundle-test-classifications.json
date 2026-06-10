@@ -1,0 +1,351 @@
+[
+  {
+    "id": "T1B1",
+    "text": "The keys used to live on one device and the app used to live on another. You'd bridge the gap with screenshots, seed phrases, and a small prayer.",
+    "classification": {
+      "tempo_primary": "Human",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "The past-tense narrative is body-forward and relational — 'screenshots, seed phrases, and a small prayer' places the reader in a lived, tactile moment of friction. Near inner attitude (Weight+Time): down-to-earth, communal, experiential. The 'small prayer' phrase tips the register into vulnerability/warmth = Human tempo. Aspect is enclosing (Weight-led, wrapping the reader in shared memory). Stress is flow (the emotional continuity of that awkward gap), pole free (easy, conversational disclosure).",
+      "literary_anchor": "The Nurse recounting a remembered inconvenience with warmth"
+    }
+  },
+  {
+    "id": "T1B2",
+    "text": "Trezor support is live in Infinex. Plug it in alongside your Ledger; both wallets show up in the same portfolio, the hardware device signs every transaction.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.78,
+      "rationale": "Crisp declarative structure: 'Plug it in … both wallets show up … the hardware device signs every transaction.' Each clause lands with executive precision. Stable inner attitude (Weight+Space, decisions taken). Penetrating aspect (Space-led: structural mapping of a new configuration). Time stress, quick pole — this is an announcement, a done-thing, no lingering. Commanding tempo: the ruler reporting a completed campaign.",
+      "literary_anchor": "Tywin Lannister briefing the council on a newly taken position"
+    }
+  },
+  {
+    "id": "T1B3",
+    "text": "Hardware-wallet UX is the part most apps skip. The signing surface has to be honest about what's being signed, and the portfolio has to behave the same whether the keys are hot or cold. We held it back until both were true.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "spell→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "'The part most apps skip' … 'The signing surface has to be honest' … 'We held it back until both were true.' This is principled, inward-held conviction — not commanding others but testifying to a standard quietly insisted upon. Stable inner (Weight+Space). Penetrating aspect (Space-led structural critique of the category). Stress is flow (the held-back conviction, the wait), pole bound (restrained, no release until ready). Self-Contained: the ruler whose authority comes from inner standard rather than proclamation.",
+      "literary_anchor": "Werle (The Wild Duck) explaining a decision made on principle, not politics"
+    }
+  },
+  {
+    "id": "T1B4",
+    "text": "A few months from now, the question of which device holds your keys stops being a workflow. Your portfolio is your portfolio, and the signer is whichever piece of metal you trust.",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "'A few months from now … stops being a workflow … whichever piece of metal you trust.' The future dissolves a problem into irrelevance — this is adream territory: yielding into a promised state, body-and-feel, dreamy forward projection. Irradiant tempo: gentle luminous promise, not overpowering. Radiating aspect (Flow-led, expansive). Stress is time (future moment implied), pole sustained (unhurried, the horizon approaches softly).",
+      "literary_anchor": "Blanche DuBois gesturing at a future where the difficulties simply fall away"
+    }
+  },
+  {
+    "id": "T2B1",
+    "text": "Self-custody used to mean choosing between the wallet that held your keys and the app that could actually do something with them.",
+    "classification": {
+      "tempo_primary": "Cool",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "doing",
+      "drive_secondary": "passion",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "'Self-custody used to mean choosing between…' — observational, slightly detached, mapping a structural opposition. Near inner attitude (Weight+Time), but the diagnostic mapping of the tension ('the wallet that held your keys' vs 'the app that could actually do something') gives it a cooler, more analytical register. Cool tempo within Near. Enclosing aspect (Weight-led, wrapping the category history). Stress is space (direct: the binary is named precisely), pole direct.",
+      "literary_anchor": "Anthony Bourdain calmly naming the contradiction in a kitchen culture"
+    }
+  },
+  {
+    "id": "T2B2",
+    "text": "Trezor is now supported in Infinex, alongside Ledger. Funds stay on the device. Infinex is the surface; the hardware wallet is the signer.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.82,
+      "rationale": "Staccato declaratives: 'Trezor is now supported … Funds stay on the device. Infinex is the surface; the hardware wallet is the signer.' Maximum structural economy. Stable inner (Weight+Space). Penetrating (Space-led: structural role-assignment). Time stress, quick pole — each clause a punch. Commanding: the executive assigning roles with no surplus words.",
+      "literary_anchor": "Logan Roy issuing a restructuring memo"
+    }
+  },
+  {
+    "id": "T2B3",
+    "text": "Your own keys, your own device, your own portfolio in one view. One step closer to the version where you stop thinking about where the signing happens.",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.67,
+      "rationale": "'One step closer to the version where you stop thinking about where the signing happens.' This is adream: yielding into a near-future state, dissolving cognitive friction. Irradiant: soft luminous incremental progress. Radiating aspect (Flow-led, expanding toward ease). Time stress, sustained pole (the destination is near but unhurried). The first sentence 'Your own keys…one view' flashes a brief Certain (Awake) beat — crisp enumeration before the drift begins.",
+      "literary_anchor": "Ophelia describing a world that simply becomes simpler"
+    }
+  },
+  {
+    "id": "T3B1",
+    "text": "The hard part of hardware-wallet support isn't the integration. It's making the rest of the app behave as if cold keys were always the default — same portfolio, same routing, same transaction flow, just a different signer at the end.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "spell→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.8,
+      "rationale": "'The hard part … isn't the integration. It's making the rest of the app behave as if cold keys were always the default.' This is structural diagnosis delivered from inward conviction — no announcement, no fanfare, just a principle stated clearly. Stable inner (Weight+Space). Penetrating (Space-led: drilling into the real technical crux). Flow stress, bound pole — held-back standard, the craft-knowledge that was waited on. Self-Contained: authority emanating from an internalized standard.",
+      "literary_anchor": "Werle (The Wild Duck) quietly explaining the actual mechanism behind a facade"
+    }
+  },
+  {
+    "id": "T3B2",
+    "text": "Trezor is live in Infinex. Ledger and Trezor side by side in one portfolio. Funds on the device. Signing on the device.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.76,
+      "rationale": "'Trezor is live … Ledger and Trezor side by side … Funds on the device. Signing on the device.' Ultra-compressed enumeration — each phrase a nail driven. Stable inner (Weight+Space). Penetrating (Space-led: naming exactly where things live). Time stress, quick pole. Practical rather than Commanding: this is operational confirmation, not a proclamation of authority — getting the facts down efficiently.",
+      "literary_anchor": "Aragorn issuing a field report with minimal words"
+    }
+  },
+  {
+    "id": "T3B3",
+    "text": "In a year you won't remember which hardware wallet you started with. You'll remember that your assets were always yours, and that the app never tried to be the custodian.",
+    "classification": {
+      "tempo_primary": "Sombre",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "'In a year you won't remember which hardware wallet you started with. You'll remember that your assets were always yours.' The future-looking dissolution of technical memory into a deeper ownership truth — this is adream with a gravitas. Sombre: the weight of a principle that outlasts its circumstances. Radiating aspect (Flow-led, expanding outward toward a lasting truth). Time stress, sustained pole (a year from now, unhurried, inevitable).",
+      "literary_anchor": "Hamlet reflecting on what will remain when the noise is gone"
+    }
+  },
+  {
+    "id": "T1FULL",
+    "text": "The keys used to live on one device and the app used to live on another. You'd bridge the gap with screenshots, seed phrases, and a small prayer. Trezor support is live in Infinex. Plug it in alongside your Ledger; both wallets show up in the same portfolio, the hardware device signs every transaction. Hardware-wallet UX is the part most apps skip. The signing surface has to be honest about what's being signed, and the portfolio has to behave the same whether the keys are hot or cold. We held it back until both were true. A few months from now, the question of which device holds your keys stops being a workflow. Your portfolio is your portfolio, and the signer is whichever piece of metal you trust.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "spell→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Human",
+        "Commanding",
+        "Irradiant"
+      ],
+      "outer_action_inners": [
+        "near",
+        "stable",
+        "adream"
+      ],
+      "confidence": 0.74,
+      "rationale": "The full arc moves: warm communal memory (Near/Human beat) → executive announcement (Stable/Commanding beat) → principled withholding (Stable/Self-Contained, the dominant centre) → dreamy future dissolution (Adream/Irradiant beat). The dominant register is the third paragraph's inward standard — 'We held it back until both were true' — which is the structural spine. Self-Contained: authority from a held principle, not proclamation. Penetrating (Space-led critique of the category). Flow stress, bound pole (the restraint that was exercised). Transient outer beats: Human (opening nostalgia), Commanding (announcement paragraph), Irradiant (closing future-promise).",
+      "literary_anchor": "Werle — a memory offered warmly, a decision announced cleanly, then the private standard revealed"
+    }
+  },
+  {
+    "id": "T2FULL",
+    "text": "Self-custody used to mean choosing between the wallet that held your keys and the app that could actually do something with them. Trezor is now supported in Infinex, alongside Ledger. Funds stay on the device. Infinex is the surface; the hardware wallet is the signer. Your own keys, your own device, your own portfolio in one view. One step closer to the version where you stop thinking about where the signing happens.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Cool",
+        "Irradiant"
+      ],
+      "outer_action_inners": [
+        "near",
+        "adream"
+      ],
+      "confidence": 0.76,
+      "rationale": "The dominant register is the central announcement block — 'Trezor is now supported … Funds stay on the device. Infinex is the surface; the hardware wallet is the signer.' — which is pure Commanding. Stable inner (Weight+Space), penetrating (Space-led structural role-assignment), time stress, quick pole. The opening paragraph flashes Cool (Near: a diagnostic, detached observation of the old problem). The closing paragraph flashes Irradiant (Adream: yielding toward a future where the friction is gone).",
+      "literary_anchor": "Logan Roy issuing a restructuring brief, bookended by a calm diagnosis and a soft promise"
+    }
+  },
+  {
+    "id": "T3FULL",
+    "text": "The hard part of hardware-wallet support isn't the integration. It's making the rest of the app behave as if cold keys were always the default — same portfolio, same routing, same transaction flow, just a different signer at the end. Trezor is live in Infinex. Ledger and Trezor side by side in one portfolio. Funds on the device. Signing on the device. In a year you won't remember which hardware wallet you started with. You'll remember that your assets were always yours, and that the app never tried to be the custodian.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "spell→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Practical",
+        "Sombre"
+      ],
+      "outer_action_inners": [
+        "stable",
+        "adream"
+      ],
+      "confidence": 0.78,
+      "rationale": "The dominant register is the opening structural diagnosis — 'The hard part … isn't the integration. It's making the rest of the app behave as if cold keys were always the default' — Self-Contained conviction, inward standard, Stable inner. Penetrating (Space-led: drilling to the real crux). Flow stress, bound pole (held principle). The middle paragraph flashes Practical (Stable: operational facts delivered crisply). The closing paragraph flashes Sombre (Adream: the gravity of 'your assets were always yours' dissolving technical noise into a deeper truth).",
+      "literary_anchor": "Werle stating the principle, then Aragorn confirming the facts, then Hamlet offering the enduring memory"
+    }
+  }
+]

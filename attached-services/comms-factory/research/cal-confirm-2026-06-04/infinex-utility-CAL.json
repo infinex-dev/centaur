@@ -1,0 +1,2408 @@
+[
+  {
+    "id": "IU001",
+    "text": "Login",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Single imperative label. Too short to read inner attitude, stress, or motor. No force/exertion evidence, no flow, no spatial scan — just a bare functional directive. Cannot pin a tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU002",
+    "text": "Enter username",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Two-word imperative field label. No prose register to read inner attitude from. Direct orientation implied but insufficient for full placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU003",
+    "text": "Choose a username",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word imperative prompt. Slightly softer than 'Enter' (invitational 'Choose') but still too short to establish inner attitude, stress, or motor. No weight, flow, or temporal evidence.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU004",
+    "text": "Your username",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Possessive field label only. No verb, no register, no movement evidence. Cannot derive placement from a two-word nominal.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU005",
+    "text": "Create an account",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Three-word CTA. 'Create' implies initiation and mild forward-pull (vision-adjacent), but no stress, flow, weight, or spatial evidence is present to anchor a tempo. Too short for reliable classification.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU006",
+    "text": "Creating…",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Single progressive-tense loading word with ellipsis. Implies process-in-motion (Time stress possible), but one word is insufficient to establish inner attitude or motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU007",
+    "text": "By continuing, you agree with Infinex",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "unknown",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.52,
+      "rationale": "A legal-boilerplate consent clause. It is unhedged and categorical ('by continuing, you agree') — Direct/Space. No force or exertion against resistance: Weight test fails, so no Strong tempo. Light+Direct+Sustained reads as Self-Contained (Stable family, Light). The prose orients the user spatially toward a structural fact (terms binding). Aspect is penetrating (Space-led, cuts to the structural implication). Motor: gliding (Light/Direct/Sustained) with a dabbing quality (brief, precise). Pole: direct.",
+      "literary_anchor": "A measured legal notice — the Duke's quiet boundary-setting"
+    }
+  },
+  {
+    "id": "IU008",
+    "text": "Terms of Use",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Two-word hyperlink label. No prose register; purely nominal. Cannot derive placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU009",
+    "text": "Privacy Policy.",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Two-word hyperlink label with period. Structurally closes the IU007 sentence but as an isolated token carries no classifiable movement quality.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU010",
+    "text": "Use another account",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.5,
+      "rationale": "A spare, unhedged alternative-path offer. 'Use another account' is direct orientation — it points spatially to an alternative structural path with no hedging. Weight test: no force/exertion against resistance — just a clean redirect. Reads as Awake 'Certain' (Space+Time, Weightless, unhedged, alert). Aspect penetrating (Space-led — structural scan to an alternative). Pole direct. Motor gliding→dabbing (Light/Direct). A faint Unsociable flash: the brevity and refusal-of-explanation has the carved-off Remote quality noted in Example 5.",
+      "literary_anchor": "A quiet exit sign — no warmth, no pressure, just orientation"
+    }
+  },
+  {
+    "id": "IU011",
+    "text": "Log in with username",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.45,
+      "rationale": "Three-word imperative UI label. Direct orientation in space — tells the user exactly where to go, no hedging, no weight-bearing pressure. Too short for a full inner-attitude read; the label carries a clean Awake/Direct quality but insufficient material to pin a single tempo. Motor reads as Dabbing (Light/Direct/Quick) — a precise, economical touch.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU012",
+    "text": "Some early Infinex users may have signed up with a passkey that requires their username to log in. If you're having trouble logging in, enter your Infinex username and try again.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "A diagnostic helper text: it identifies a specific sub-population ('some early users'), names the cause, and gives a clear remediation path ('enter your username and try again'). The register is Awake — spatial orientation, alert noticing of a structural snag, unhedged but not forceful. No weight-bearing pressure; the copy simply places the reader correctly. Certain (Awake, Light/Direct/Sustained) fits: settled, factual, orienting. Motor: Gliding → Dabbing (light, direct, minimal effort).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU013",
+    "text": "Log in",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.4,
+      "rationale": "Two-word CTA label. Purely functional, direct, economical. No inner attitude discernible at this length. Space-led (Direct), Light. Motor: Dabbing — precise, quick, light touch. Too short to pin any tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU014",
+    "text": "OR",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "A single conjunction used as a UI separator. No movement quality readable; entirely structural/syntactic. Cannot assign any placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU015",
+    "text": "Welcome back",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.38,
+      "rationale": "A short greeting phrase. The warmth implied is relational/Near-adjacent, Flow-tinged (free, welcoming continuity), but at two words there is insufficient material to pin a tempo. The enclosing aspect (Weight-led warmth, gathering in the returning user) is faintly readable. Motor: Floating → Flicking (light, flexible — a soft welcoming gesture). Too short to commit to a single tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU016",
+    "text": "Use another account",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.4,
+      "rationale": "Three-word navigational option. Direct, functional, space-oriented. No inner attitude depth at this length. Light motor (Dabbing) — precise, minimal. Too short for a tempo read.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU017",
+    "text": "Forget all users",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.42,
+      "rationale": "A terse destructive-action label. The bluntness ('Forget all') carries a faint Unsociable flash (Remote family — carved-off, curt, withdrawn) similar to Example 5, but the primary read is still functionally Direct/Light. Too short to pin a full tempo as primary. The Unsociable outer-action moment is noted for the curt finality of the phrasing.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU018",
+    "text": "Import Wallet",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.38,
+      "rationale": "Two-word functional CTA. Direct and light — a clean spatial placement. No sufficient material for a tempo read.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU019",
+    "text": "Portfolio",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Single-word navigation label. No movement quality readable at this length. Cannot assign placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU020",
+    "text": "Perps",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Single-word navigation label. No movement quality readable at this length. Cannot assign placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU021",
+    "text": "Swidge",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Single invented portmanteau label ('Swidge' — blend of swap/bridge). Too short and lexically opaque to read inner attitude, aspect, stress, or motor. No prose motion detectable.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU022",
+    "text": "Labs",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "Single generic noun label. No motion factors readable from a one-word navigation tab.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU023",
+    "text": "Home",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "Single generic noun label. One-word UI anchor; no motion factors readable.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU024",
+    "text": "Search Dapps",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.42,
+      "rationale": "A two-word imperative that orients the user spatially and directly — 'Search' is a Space-led scanning action, 'Dapps' a direct object. Reads Awake (Space+Time), penetrating aspect (Space-led), Direct pole. No weight-bearing force; the touch is light and orienting — Gliding→Dabbing motor. Tempo reads as Certain (unhedged, direct, weightless). Sample is minimal so confidence is low.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU025",
+    "text": "Activity",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "Single noun label. Too short to read motion factors.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU026",
+    "text": "Earn",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "Single verb-as-label. Too short to read motion factors reliably.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU027",
+    "text": "Airdrops",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "Single noun label. Too short to read motion factors.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU028",
+    "text": "Hang tight while we check.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "'Hang tight while we check.' is body-forward, relational and reassuring — classic Near territory (Weight+Time). The 'while we check' clause signals a shared waiting, yielding to continuity (flow stress, free pole). No force/exertion against resistance — Weight test: the warmth is relational proximity, not muscular pressure, so Near rather than Stable. Circumscribing aspect (Time-led: 'hang tight' uses the inherited casual holding form). Motor reads Light (no muscular load) — Gliding→Floating. Tempo: Warm (Near, relationally supportive).",
+      "literary_anchor": "Anthony Bourdain holding-space mode / the Nurse (R&J)"
+    }
+  },
+  {
+    "id": "IU029",
+    "text": "Nice one!",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "radiating",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.5,
+      "rationale": "'Nice one!' is a brief affirmative exclamation — light, buoyant, socially outward. It carries no weight-bearing force (Weight test: no exertion, no resistance). The exclamative burst is Flow-free, radiating outward to the user. Mobile family fits: it's a momentary acknowledgment flash, fragmenting briefly into social reward. 'Acknowledged' (Mobile — seen/noticed) is the closest tempo: the system briefly marks the user's action as seen. Motor: light — Floating→Flicking (buoyant, quick outward flick).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU030",
+    "text": "Name your seed phrase.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.52,
+      "rationale": "'Name your seed phrase.' is a clean, unhedged directive — Direct, orienting, no urgency pressure, no emotional warmth, no force against resistance. Reads Awake (Space+Time): the user is pointed to a specific structural task. Penetrating aspect (Space-led: it targets an exact object — the seed phrase). Pole: Direct. Weight test: no muscular force, no accumulation against resistance — this is a light orienting touch, Gliding→Dabbing motor. Tempo: Certain (Awake, weightless declarative directive).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU031",
+    "text": "Give your seed phrase a name…",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "A single incomplete UI prompt fragment — 'Give your seed phrase a name…' The ellipsis trails off, implying invitation/continuity, but there is no prose mass to read a full inner attitude from. Too short to pin a tempo with confidence. Light touch, direct addressing, quick action implied — leans Dabbing (Light/Direct/Quick) if forced, but the sample is genuinely too short.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU032",
+    "text": "Name your imported wallet.",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "A bare three-word imperative UI label. No prose texture, no emotional or kinetic charge beyond the functional directive. Too short to read inner attitude or tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU033",
+    "text": "Give your imported wallet a name to use it.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.52,
+      "rationale": "Slightly more textured than IU032: 'Give your imported wallet a name to use it.' The conditional clause ('to use it') orients the user spatially — it maps cause-to-effect with a clean, unhedged directness. No weight-bearing force or emotional charge. Reads Awake/Certain: alert, settled, direct orientation. Space-led penetrating aspect. Weight test: no force/exertion — this is Light. Motor: gliding (sustained orientation) → dabbing (quick, precise action prompt). Pole: direct.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU034",
+    "text": "Non-custodial, cross-chain, easy recovery",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "unknown",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "'Non-custodial, cross-chain, easy recovery' — three parallel declarative attributes, no verbs, no hedging, no urgency. Reads as a settled self-definition, mapping structural coordinates. Space-led: it orients the reader by naming what the thing IS across multiple dimensions. Stable family, Light-end: Self-Contained (Stable Light+Direct, p. 497) rather than Commanding because there is no weight-bearing force — it simply names facts. Penetrating aspect (Space-led). Motor: gliding → dabbing (light, direct, matter-of-fact). Weight test: no exertion/pressure — purely categorical naming.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU035",
+    "text": "Connection request",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "A two-word UI header label. No prose content beyond naming an event type. Genuinely too short to read any inner attitude or tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU036",
+    "text": "Signing Request",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "A two-word UI header label naming an event type. Too short for any movement-quality or tempo reading.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU037",
+    "text": "Transaction Request",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "A two-word UI header label. Same as IU035/IU036 — purely functional naming, too short to classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU038",
+    "text": "Unknown Dapp",
+    "classification": {
+      "tempo_primary": "Unsociable",
+      "inner_attitude": "remote",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.5,
+      "rationale": "'Unknown Dapp' — a terse, carved-off warning label. It withholds endorsement and names an absence of verified identity. This reads closest to Remote-family Unsociable: Space+Flow, the 'carved-off' tempo (p. 447) — aloof, withholding, marked by what is NOT known/verified. Penetrating aspect (Space-led — it orients by naming a structural gap). Weight test: no force. Motor: gliding → dabbing (light, direct, cautionary placement). Pole: direct.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU039",
+    "text": "{{hostname}} is a verified site",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "'{{hostname}} is a verified site' — a clean, unhedged, factual verification statement. Awake/Certain: alert orientation with settled declarative finality. Space-led penetrating aspect — it maps trustworthiness onto a specific structural coordinate (the hostname). Weight test: no exertion/pressure, purely informational. Motor: gliding (sustained, light, direct) → dabbing (light, quick, precise). Pole: direct. The contrast with IU038 ('Unknown Dapp') is exactly the Certain vs. Unsociable polarity.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU040",
+    "text": "Infinex wallet",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "A two-word proper-noun label ('Infinex wallet'). Pure naming — no qualitative prose to read movement quality or tempo from. Too short.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU041",
+    "text": "Network Cost",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Two-word UI label. Functional nomenclature — orients the reader to a structural datum (cost of the network). Too short to read a full inner attitude. The spatial-orienting function nudges toward Awake/Direct, but no stress, motor, or tempo can be reliably extracted from a bare label.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU042",
+    "text": "Unknown asset",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Two-word UI label flagging an unrecognised asset. Purely functional; carries an implicit alerting function but the sample is far too sparse to extract a placement. No force, no flow, no orientation pattern — genuinely illegible at this length.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU043",
+    "text": "Estimated wallet changes",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word UI label. 'Estimated' introduces hedging (tentative/qualified), which could nudge toward Doubting (Awake) or Uncertain (Awake), but the sample is too short to commit. Structurally orienting but no inner attitude is securely readable at this length.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU044",
+    "text": "Programs & Accounts",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Section-header label. Classifying/enumerating two structural categories — spatially organisational, cataloguing. Nudges toward Direct/Structural (Awake or Stable) but too sparse for a tempo read.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU045",
+    "text": "Gas account",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Two-word UI label naming a functional sub-entity. Purely nominal; no drive, no motor, no aspect is extractable. Too short.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU046",
+    "text": "Sponsored",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Single-word tag/badge. 'Sponsored' conveys that a cost is covered externally — functional informational marker. No attitude, no motor readable from one word.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU047",
+    "text": "Approve",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.45,
+      "rationale": "Single imperative CTA. 'Approve' is a clean, unhedged, categorical directive — Direct (Space), decisive, no weight-bearing force evident. Weight test: no independent force/exertion; the word simply names an action to confirm. Reads as Awake 'Certain' (Direct+Light) — a Dab quality (Light/Direct/Quick). Aspect penetrating (Space-led decisive cut). Motor: gliding (sustained prep) → dabbing (light/direct/quick execution).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU048",
+    "text": "Approving…",
+    "classification": {
+      "tempo_primary": "Uncertain",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.42,
+      "rationale": "In-progress state label with ellipsis. The '…' signals ongoing, unresolved duration — Time-stressed, Sustained (process not yet complete, reader held in suspension). No weight-bearing force; light, continuous. Reads as Awake 'Uncertain' (the waiting, unresolved pole of Awake — Space+Time, Sustained/unresolved). Circumscribing aspect (Time-led, process-wrapping). Motor: gliding (sustained/light/direct) → floating (light/flexible/sustained — open, unresolved drift while the operation completes).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU049",
+    "text": "Reject",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.48,
+      "rationale": "Single imperative CTA — categorical refusal/termination. 'Reject' is Direct, unhedged, final. Weight test: no force/exertion against resistance — it is a clean stopping-action, not a push. Primary read: Awake 'Certain' (Direct/Light), penetrating aspect. However the word carries a curt, carved-off quality — an Unsociable flash (Remote family, Space+Flow, the 'withdrawn refusal' tempo) surfaces as a transient outer-action moment, analogous to Example 5's 'Unsociable beat'. Motor: gliding → dabbing (light/direct).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU050",
+    "text": "Proceed",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.45,
+      "rationale": "Single imperative CTA. 'Proceed' is directional and forward-oriented — Space-led, unhedged, no weight-bearing pressure. Weight test fails (no force/exertion). Reads as Awake 'Certain': a clean go-ahead, declarative and direct. Slightly more forward-moving than 'Approve' but same inner structure. Penetrating aspect (Space-led, oriented continuation). Motor: gliding → dabbing (light/direct/sustained prep into quick execution).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU051",
+    "text": "Sign",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Single imperative verb. Too short to read any inner attitude, stress, or motor. Could hint at Direct/Quick (Dab) but one word is genuinely unreadable.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU052",
+    "text": "Top up",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Two-word imperative label. Too short to read a tempo. A functional CTA with no weight, flow, or space information beyond its directness.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU053",
+    "text": "Swidge",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Single portmanteau verb (swap+bridge). Too short to read. Carries a light/flexible flavour (Flicking/Dabbing direction) by its coinedness but genuinely unreadable at one word.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU054",
+    "text": "Loading signing request details…",
+    "classification": {
+      "tempo_primary": "Uncertain",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.52,
+      "rationale": "A loading-state label: process is underway, outcome not yet resolved. The ellipsis ('…') marks sustained open-endedness rather than urgency — time-stress, but the pole is sustained (waiting, not hurrying). Awake family: the UI is actively scanning/orienting ('Loading…details') without Weight evidence. 'Uncertain' fits: attention is oriented but resolution is pending. Circumscribing aspect because the label encircles an ongoing time-bound action. Light motor (gliding→floating) — no force, just smooth process-tracking.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU055",
+    "text": "Message signed.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Short declarative past-tense confirmation. Unhedged, categorical, final — the canonical Direct/Weightless read (Awake 'Certain'). No force or exertion evidence; just a clean settled notice of completion. Penetrating aspect (Space-led: pins exactly what happened). Light motor (gliding→dabbing): precise, clean, no muscular load.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU056",
+    "text": "Sending transaction...",
+    "classification": {
+      "tempo_primary": "Uncertain",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.58,
+      "rationale": "Progressive-tense status label ('Sending…') with ellipsis: process ongoing, outcome pending. Time-stress (the clock is running) with a sustained pole (still in motion, not resolved). Awake family — orienting the user to a live event. 'Uncertain' because completion is not yet confirmed. No Weight evidence. Circumscribing aspect (Time-led framing of an action in progress). Light motor (gliding→floating).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU057",
+    "text": "Transaction broadcasted.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Past-tense completion confirmation, unhedged and categorical. Parallel to 'Message signed.' — the same Awake 'Certain' read: declarative, settled, Direct, Weightless. Penetrating aspect (Space-led: precisely orients the user to what has been done). Light motor (gliding→dabbing). No force or exertion against resistance.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU058",
+    "text": "Switched to {chainName}",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "System confirmation of a completed switch: 'Switched to {chainName}'. Unhedged, past-tense, direct statement of the new state. Awake 'Certain' — orients the user spatially/structurally to the new context. No Weight evidence; brevity is Quick/Direct (Dab), not Strong. Penetrating aspect (Space-led orientation). Light motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU059",
+    "text": "Manage asset visibility",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "unknown",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.5,
+      "rationale": "Functional section-header label ('Manage asset visibility'). Administrative, self-contained governance of one's own domain — no urgency, no emotion, no weight-bearing pressure. Stable 'Self-Contained' (Light+Direct) fits: calm structural ownership. Penetrating aspect (Space-led: directly names the management function). Light motor. Could also read as Awake 'Certain' but the 'manage' framing adds a slight Stable colour.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU060",
+    "text": "Search asset name or ticker",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "flexible",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "Search-field placeholder: 'Search asset name or ticker'. Invites flexible scanning across multiple possible inputs ('name or ticker' — two pathways). Awake 'Acute' fits: alert, sensor-oriented, ready to attend to whatever signal arrives. Penetrating aspect (Space-led — the function is pure spatial orientation). Pole is flexible (the 'or' opens multiple scan paths rather than pinning a single direct target). Light motor (gliding→floating — open, scanning, no weight).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU061",
+    "text": "No assets found. Try a new search.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.72,
+      "rationale": "Short, unhedged factual statement orienting the user — Space-led (Direct) with no weight-bearing pressure. 'No assets found' is a clean declarative placement (Awake/Certain), light-touch. 'Try a new search' redirects attention spatially. Weight test fails: no force or exertion. The curtness flashes a brief Unsociable (Remote) outer beat — carved-off, closed door.",
+      "literary_anchor": "A calm information desk; no warmth, no force"
+    }
+  },
+  {
+    "id": "IU062",
+    "text": "You don't have any assets yet",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "A light, settled statement of absence. No urgency, no force, no redirection. It rests in a quiet, enclosed fact about the user's current state. Light+Direct (Stable) with a bound-flow undertone — slightly held, gently informative. Closest to Self-Contained (Stable Light+Direct). Weight test: no exertion. Motor: gliding (Light/Direct/Sustained) is apt for a smooth, low-key informational delivery.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU063",
+    "text": "Share feedback",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.4,
+      "rationale": "Two-word label. Too short to read inner attitude, stress, or aspect. Insufficient prose to classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU064",
+    "text": "Tell us what you think…",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "An inviting, open prompt — relational, body-forward, reaching toward the user with gentle curiosity. The ellipsis softens finality and signals open flow. Near (Weight+Time) with a flow stress (free) — Warm reads here as the approachable, inclusive Near tempo. Weight test: 'Tell us what you think' carries mild relational weight (reaching, body-forward) but not force against resistance — it's light enough to sit at Warm rather than any Strong tempo. Motor: gliding (Light/Direct/Sustained) and floating (Light/Flexible/Sustained) suit the soft invitation.",
+      "literary_anchor": "Anthony Bourdain casual-welcoming register"
+    }
+  },
+  {
+    "id": "IU065",
+    "text": "Images and videos, max 25MB each",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "A compact technical specification — no warmth, no force, pure spatial orientation. 'Images and videos, max 25MB each' orients the user with Direct spatial precision. Awake/Certain: alert, settled, factual constraint. Weight test: no exertion. Light touch, direct placing.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU066",
+    "text": "Submitting…",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "A single in-progress state label — Time-dominated, Quick, Mobile. The ellipsis signals active, ongoing, time-bound process. Mobile (Time+Flow) with circumscribing aspect (Time-led). 'Acknowledged' fits: the system is mid-act, visible in its doing, fragmenting forward. Weight test: no force. Light motor (dabbing/flicking) suits the fleeting in-progress nature.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU067",
+    "text": "Thanks for your feedback!",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "A short, warm, exclamatory acknowledgment — relational, body-forward gratitude. 'Thanks for your feedback!' carries genuine warmth and human connection without force. Near (Weight+Time) with free-flow stress. Warm is the apt Near tempo: open, inclusive, appreciative. Weight test: mild relational warmth is not muscular force — Light motor applies. The exclamation mark adds free-flow energy rather than Strong-Weight push.",
+      "literary_anchor": "Friendly service voice, Bourdain-warmth register"
+    }
+  },
+  {
+    "id": "IU068",
+    "text": "We appreciate you taking the time to help us improve.",
+    "classification": {
+      "tempo_primary": "Human",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "A fuller relational sentence — 'We appreciate you taking the time to help us improve.' This is body-forward, down-to-earth, genuinely relational Near prose. Human (Near — the most plainly relational Near tempo) with enclosing aspect (Weight-led enfolding) and free flow. Weight test: the enfolding warmth has mild weight in the sense of genuine bodily presence ('taking the time'), but no force against resistance — Light motor. The sentence reaches around the user with care rather than pushing.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) — warm, grounding, unglamorous appreciation"
+    }
+  },
+  {
+    "id": "IU069",
+    "text": "Uploading files ({{current}}/{{total}})…",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "A progress-state label with live counters — Time-dominated, in-flight, Mobile. The template variables ({{current}}/{{total}}) foreground counting/progress as the dominant register. Ellipsis signals ongoing, fragmented action. Mobile (Time+Flow), circumscribing (Time-led), Acknowledged (mid-process, visible in its doing). Weight test: no force. Light quick motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU070",
+    "text": "Share feedback",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.4,
+      "rationale": "Identical to IU063 — two-word label, too short to classify inner attitude, stress, or aspect.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU071",
+    "text": "No recents yet",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Three-word empty-state label. Too short to read an inner attitude or motor. Reads as a neutral placeholder — direct, settled, no weight or flow evidence. Possibly Self-Contained (Stable Light+Direct) but sample is too minimal to commit.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU072",
+    "text": "Recent addresses you send to will appear here.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "A calm, orienting factual statement — tells the user exactly where and when something will appear. No hedging, no urgency, no weight-bearing pressure. Space-led (direct structural orientation), Light-Weight (no force against resistance). Awake 'Certain' is the canonical Weightless, unhedged, direct tempo. Motor: gliding (Light+Direct+Sustained) into dabbing (Light+Direct+Quick) — a clean placing, no exertion.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU073",
+    "text": "No contacts found",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word empty-state label. Identical register problem to IU071 — too short to read inner attitude. Direct and settled, but no basis for tempo assignment beyond that.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU074",
+    "text": "Try searching by full name or enter a valid wallet address",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Instructional micro-copy offering two direct structural alternatives: search by name OR enter a wallet address. Space-led orientation — it scans two paths and presents them. No weight-bearing pressure, no urgency clock, no flow-yielding. Awake 'Certain' fits: Light+Direct, unhedged, factual guidance. Motor: gliding (sustained path-laying) → dabbing (quick, precise touch for either option).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU075",
+    "text": "You don't have any entities yet.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "doing→passion",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.48,
+      "rationale": "A quiet, settled empty-state notice: 'You don't have any entities yet.' The 'yet' introduces a mild temporal held-ness — sustained, not urgent. Stable Light+Direct: no weight-bearing force, no hedging, just a contained factual acknowledgment. Self-Contained (Stable family) fits the calm, inward, non-pressuring tone. Aspect enclosing as the Weight is nominally present in Stable but subordinated. Motor light: gliding into dabbing.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU076",
+    "text": "No wallets found.",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word empty-state label with a period — same minimal register as IU071 and IU073. Too short for a reliable inner-attitude or tempo read.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU077",
+    "text": "Only native BTC is supported. Other Bitcoin assets won't be withdrawable until support is added.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.66,
+      "rationale": "Two-part structure: first sentence states a constraint categorically ('Only native BTC is supported'); second sentence softens it with a temporal hedge ('until support is added'). The dominant read is Space-led orientation — direct structural scoping of what is and isn't possible. No independent force/exertion evidence; the categorical tone is Direct (Space), not Strong (Weight). Awake 'Certain' carries the primary register. Transient 'Unsociable' moment: the blunt boundary-setting ('Other Bitcoin assets won't be withdrawable') flashes a Remote-family carved-off beat, as in Example 5. Motor: gliding (sustained, orienting) → dabbing (precise, Light+Direct+Quick).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU078",
+    "text": "Deposit to get started",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.52,
+      "rationale": "Four-word imperative CTA: 'Deposit to get started.' Light, brisk, invitational — no weight-bearing pressure, just a quick directional nudge. Time-led (there is a 'to get started' forward pull), Quick pole. Mobile 'Acknowledged' fits: a small, flickering beckoning gesture that names the next step without heaviness. Motor: dabbing (Light+Direct+Quick) → flicking (Light+Flexible+Quick), both light-weight. No force against resistance — Weight test fails for any Strong tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU079",
+    "text": "Use this address to deposit supported tokens and collectibles on {chainName}",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.63,
+      "rationale": "Instructional orientating copy: 'Use this address to deposit supported tokens and collectibles on {chainName}.' Direct spatial mapping — here is the address, here is its purpose, here is the chain context. No hedging, no urgency, no weight-bearing force. Awake 'Certain' (Weightless, Space+Time, unhedged orientation). Space-led aspect (penetrating). Motor: gliding (Light+Direct+Sustained) → dabbing (Light+Direct+Quick).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU080",
+    "text": "Allow a few minutes for processing",
+    "classification": {
+      "tempo_primary": "Receptive",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "doing→passion",
+      "motor_pair": [
+        "pressing",
+        "gliding"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.5,
+      "rationale": "'Allow a few minutes for processing' — a gentle, patient holding instruction. Time-stress is present (minutes, processing duration) but the pole is sustained rather than quick: the user is asked to wait, to yield to clock-time rather than hurry it. There is a mild Weight quality in the 'allow' — a soft, absorbing, patient bearing — suggesting Stable register. Receptive (Stable family, Stable+Time+Sustained) fits: the tone is accepting, inward, holding without force. Motor: pressing (Strong+Direct+Sustained for the weight of patient waiting) paired with gliding (Light+Direct+Sustained as the yielding, flowing side). Confidence is moderate given sample brevity.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU081",
+    "text": "Double-check your deposit address as they are not all the same across EVM networks.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "A navigational warning that orients the reader to structural difference across EVM networks. Space-led (Direct) — it scans and differentiates topology. The 'double-check' imperative carries a quick, alert quality (Awake family). No weight-bearing force: there's no exertion against resistance, just a precise directional notice. Awake 'Acute' fits: the sharp noticing of a distinction that matters. Light motor (gliding→dabbing): careful placing, no muscular press.",
+      "literary_anchor": "A careful stage manager giving a pre-show orientation note."
+    }
+  },
+  {
+    "id": "IU082",
+    "text": "Currently, only the below networks are supported for imported wallets.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "A categorical, unhedged structural limitation statement. Direct and settled — it carves out the precise scope with no urgency or weight-bearing pressure. Awake 'Certain': maximal declarative certainty, Weightless by definition. Space-led (penetrating aspect): it orients the reader to the structural boundary of 'below networks.' Light motor (gliding→dabbing).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU083",
+    "text": "Not supported yet.",
+    "classification": {
+      "tempo_primary": "Unsociable",
+      "inner_attitude": "remote",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Extremely brief, curt, carved-off. Two words close a door with minimal ceremony. This is not Strong-Weight (no exertion against resistance, just brevity); it is Quick/Direct — a Dab. The aristocratic withdrawal and refusal-without-explanation is Remote 'Unsociable' territory: Space+Flow, carved-off, aloof. Light motor. Confidence is moderate due to the sample's minimal length.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU084",
+    "text": "Use your Infinex Wallet instead.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.7,
+      "rationale": "A clean, unhedged redirect: 'Use X instead.' Declarative certainty is Direct/Space, not Weight. Awake 'Certain' fits: settled, factual, no force. A faint Unsociable flash: the brevity of the redirect carries a slight Remote-aloof quality — it closes a door without elaboration. Light motor (gliding→dabbing).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU085",
+    "text": "To add two-factor authentication, add an email first.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.73,
+      "rationale": "A prerequisite-gate instruction: you must do A before B. Structurally oriented, direct, unhedged. Space-led (penetrating): it maps the dependency relationship between two features. Awake 'Certain': categorical directional placement with no weight-bearing force, no urgency. Light motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU086",
+    "text": "To add recovery addresses, add an authentication method first.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.73,
+      "rationale": "Structurally identical register to IU085: a prerequisite-gate that maps a dependency. Direct, unhedged, no time pressure, no emotional weight. Awake 'Certain': clean declarative placing. Space-led aspect. Light motor (gliding→dabbing).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU087",
+    "text": "Once added this address cannot be changed.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.74,
+      "rationale": "A finality statement: 'cannot be changed.' Unhedged and categorical — that is Direct, not Strong. The Weight test fails: there is no force/exertion against resistance, only a structural fact being placed. Awake 'Certain' is the canonical tempo for maximal declarative certainty without Weight. An Unsociable flash in the outer: the irreversibility framing closes a door with aristocratic curtness. Light motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU088",
+    "text": "Multi-sig wallets require multiple approvals to sign transactions. Some features aren't available yet — more support is coming.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.62,
+      "rationale": "Two beats: (1) a factual structural note about multi-sig wallets; (2) a softening acknowledgment of limitation with a forward-looking 'more support is coming.' The second beat's accepting, temporally open quality ('coming') and the multi-directional scatter (features here, features not here, future) point to Mobile family. 'Acknowledged' fits: Mobile tempo where the fragmentation is recognised and named rather than hidden. Flow-led (circumscribing aspect): the continuity of 'coming' keeps the flow open. A Certain flash in the outer covers the factual first clause. Light motor (gliding→floating): no muscular weight-bearing.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU089",
+    "text": "Your hardware wallet stays in control of signing. Some features, including Swidge, aren't available yet — more support is coming.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "floating"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.63,
+      "rationale": "Structurally parallel to IU088. Two beats: (1) a reassurance about hardware wallet control (Direct, factual); (2) a limitation acknowledgment with a forward-looking 'more support is coming.' The same Mobile 'Acknowledged' register: fragmentation is named and held without urgency. Flow-led (circumscribing): open continuity toward future support. A Certain flash covers the reassurance clause. Light motor (gliding→floating).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU090",
+    "text": "You don't currently hold any locked Patron NFTs. These settings will become available when you acquire this asset.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Concealed"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.65,
+      "rationale": "Two beats: (1) a direct diagnostic — 'you don't hold X'; (2) a conditional gateway — 'when you acquire this asset.' The dominant register is Awake 'Certain': structural, unhedged, orientating. No Weight evidence — the certainty is Direct, not Strong. A faint Mobile 'Concealed' outer flash: the second clause withholds settings that exist but are hidden behind a condition, giving a brief concealment quality. Light motor (gliding→dabbing).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU091",
+    "text": "Please enter a Funds Recovery Address for {type} in Recovery addresses below.",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.45,
+      "rationale": "A short procedural instruction directing the user to a specific UI location. Unhedged and spatially orienting ('below', 'in Recovery addresses') — Direct/Space-led. No weight-bearing pressure; no time urgency; no flow. Too minimal for a full tempo read, but the spatial-orientating character is clear. Light-Direct motor (Gliding→Dabbing).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU092",
+    "text": "This is the address where your funds will be returned if you initiate the funds recovery process.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "A factual, definitional clarification — it states what the address IS and what it does. Unhedged, spatially structuring (orienting the user to a concept). No force or exertion; no emotional current; no urgency. Awake 'Certain' fits: settled, alert, declarative, Direct-pole. Light motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU093",
+    "text": "When connected, this account or wallet will be able to initiate the funds recovery process.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "Conditional-declarative ('When connected…will be able to…') — spatially mapping capability and permission. Oriented, structural, no emotional charge, no weight-bearing pressure. Awake 'Certain': clear spatial definition of function. Light-Direct motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU094",
+    "text": "Your redeemed INX will be redeemed to the wallet the payment is made from.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.58,
+      "rationale": "Declarative statement of process outcome — maps where funds go, structurally orienting. No urgency, no force, no emotional colour. Unhedged Direct read; Awake 'Certain'. Light-Direct (Gliding→Dabbing).",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU095",
+    "text": "Please wait for it to complete before redeeming more.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.52,
+      "rationale": "'Please wait for it to complete before redeeming more' — a holding instruction with a temporal gate. Time-stress is primary (sequencing, waiting, before/after). The mood is patient, watchful, not forceful. Awake 'Acute' (alert-sensing, time-orientated) fits better than Certain here — there is a slight watchfulness/monitoring quality. Stress=time, pole=sustained (wait, patience). Light motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU096",
+    "text": "Once recovery has been started you'll no longer be able to access your Infinex account.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.65,
+      "rationale": "'Once recovery has been started you'll no longer be able to access your Infinex account.' — a hard, final, unhedged structural consequence. Primary read is Awake 'Certain': declarative, spatially mapping an irreversible state. The finality and curtness also flash a Remote 'Unsociable' beat — the carved-off quality of no-going-back. Weight test: no force/exertion evidence; this is Direct not Strong. Light motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU097",
+    "text": "Your account is on an old version. Your funds will be recovered on Base.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.6,
+      "rationale": "Two short declarative statements: status-fact + consequence-fact. Both unhedged, spatially orienting (old version → Base). Awake 'Certain'. The abrupt delivery ('Your account is on an old version.') and the matter-of-fact dismissal of agency flash an Unsociable (Remote) outer beat — aloof, withdrawn, no warmth. No weight-bearing pressure; light motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU098",
+    "text": "Infinex Wallet Recovery",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Three-word header label only — 'Infinex Wallet Recovery'. Entirely too short to read any tempo, aspect, or motor. Naming label, not prose.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IU099",
+    "text": "Liquid staking",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Two-word label — 'Liquid staking'. No prose, no movement quality readable. Too short for any classification.",
+      "literary_anchor": null
+    }
+  }
+]

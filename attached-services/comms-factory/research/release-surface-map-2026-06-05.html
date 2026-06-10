@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bridge.xyz launch — release surface map</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --line:#262b35; --ink:#e8eaed; --dim:#9aa3b2;
+    --pr:#3fb950; --flag:#e3b341; --manual:#8b949e; --auto:#58a6ff; --accent:#2E5CFF;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:40px 28px 80px}
+  .wrap{max-width:1080px;margin:0 auto}
+  h1{font-size:24px;margin:0 0 4px;letter-spacing:-.2px}
+  .sub{color:var(--dim);margin:0 0 28px;font-size:14px}
+  h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);margin:36px 0 12px;font-weight:600}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:0 0 22px;font-size:13px;color:var(--dim)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .dot{width:9px;height:9px;border-radius:50%}
+  table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);background:#12151b;font-weight:600}
+  tr:last-child td{border-bottom:none}
+  td.surface{font-weight:600;white-space:nowrap}
+  td .where{color:var(--ink)} td .where small{color:var(--dim);display:block;font-size:12px;margin-top:2px}
+  code{background:#0c0e12;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:#c9d1d9}
+  .lane{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px;margin-bottom:6px}
+  .lane.pr{background:rgba(63,185,80,.14);color:var(--pr)}
+  .lane.flag{background:rgba(227,179,65,.14);color:var(--flag)}
+  .lane.manual{background:rgba(139,148,158,.16);color:#c9d1d9}
+  .lane.auto{background:rgba(88,166,255,.14);color:var(--auto)}
+  .how{font-size:13px}
+  .note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;margin:14px 0;font-size:14px}
+  .note b{color:#fff}
+  .road{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 18px 14px}
+  .road ul{list-style:none;padding:0;margin:10px 0}
+  .road li{padding:6px 0;border-bottom:1px dashed var(--line);display:flex;align-items:center;gap:10px;font-size:14px}
+  .road li:last-child{border-bottom:none}
+  .pill{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em}
+  .pill.done{background:rgba(63,185,80,.16);color:var(--pr)}
+  .pill.prog{background:rgba(227,179,65,.16);color:var(--flag)}
+  .pill.plan{background:rgba(139,148,158,.16);color:var(--manual)}
+  .moved{color:var(--auto);font-size:12px;font-weight:600;margin-left:auto}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.cols{grid-template-columns:1fr}}
+  .road h3{font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 4px}
+  .foot{color:var(--dim);font-size:13px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Bridge.xyz launch — release surface map</h1>
+  <p class="sub">Where each surface lands, and how it actually ships. Generated 2026-06-05 · source <code>research/platform-surface-map-2026-06-05.md</code></p>
+
+  <div class="legend">
+    <span><i class="dot" style="background:var(--pr)"></i> PR (code file)</span>
+    <span><i class="dot" style="background:var(--flag)"></i> Feature flag / ops</span>
+    <span><i class="dot" style="background:var(--manual)"></i> Manual</span>
+    <span><i class="dot" style="background:var(--auto)"></i> Automatic (rides another surface)</span>
+  </div>
+
+  <table>
+    <thead><tr><th style="width:170px">Release surface</th><th style="width:300px">Place of release</th><th>How does it get there</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="surface">X — post</td>
+        <td class="where">X timeline <small>public, cold audience</small></td>
+        <td class="how"><span class="lane manual">Manual</span><br>Typefully (X has no native posting API) — paste / schedule by hand.</td>
+      </tr>
+      <tr>
+        <td class="surface">X — thread</td>
+        <td class="where">X timeline <small>public, opted-in depth</small></td>
+        <td class="how"><span class="lane manual">Manual</span><br>Typefully — paste / schedule by hand.</td>
+      </tr>
+      <tr>
+        <td class="surface">Blog</td>
+        <td class="where">infinex.xyz <code>/news/{slug}</code></td>
+        <td class="how"><span class="lane pr">PR</span><br>New <code>apps/content-app/content/blog/{slug}.md</code> — frontmatter (<code>title, date, published, category, coverImage</code>) + Markdoc body. Keystatic auto-indexes.</td>
+      </tr>
+      <tr>
+        <td class="surface">What&rsquo;s-new popout + mobile CTA</td>
+        <td class="where">In-app <small>desktop: bottom-left sidebar popout · mobile: home CTA (&lt;30 days)</small></td>
+        <td class="how"><span class="lane auto">Automatic</span><br>No separate edit — rides the blog post when <code>category: 'changelogs'</code>. Title/copy auto-pulled via <code>useRecentChangelogPosts()</code>.</td>
+      </tr>
+      <tr>
+        <td class="surface">Carousel</td>
+        <td class="where">In-app &ldquo;What&rsquo;s new&rdquo; cards <small>condensed, numbered 1:1 to blog</small></td>
+        <td class="how"><span class="lane pr">PR</span><br>App-alert collection: <code>apps/content-app/content/app-alert/</code> (YAML). <em>Schema TBC — confirm this is the carousel.</em></td>
+      </tr>
+      <tr>
+        <td class="surface">Web feature card</td>
+        <td class="where">infinex.xyz <code>/features</code></td>
+        <td class="how"><span class="lane pr">PR</span><br>Append an object to <code>FEATURES_COPY[]</code> in <code>apps/public-website/src/app/(site)/features/data.ts</code>.</td>
+      </tr>
+      <tr>
+        <td class="surface">Modal</td>
+        <td class="where">In-app banner <small>sidebar + public layouts</small></td>
+        <td class="how"><span class="lane flag">Feature flag</span><br><code>emergencyAnnouncement</code> flag (ops). Emergency-only, single key &rArr; adding <b>replaces</b> the current one. <b>Excluded from the launch PR.</b></td>
+      </tr>
+      <tr>
+        <td class="surface">Roadmap</td>
+        <td class="where">infinex.xyz <code>/roadmap</code></td>
+        <td class="how"><span class="lane pr">PR</span><br>Edit <code>apps/public-website/src/app/(site)/roadmap/data.ts</code> — tick + reorder (below).</td>
+      </tr>
+      <tr>
+        <td class="surface">Fiat on-ramp <small>(the feature itself)</small></td>
+        <td class="where">In-app deposit dialog &rarr; Bank transfer</td>
+        <td class="how"><span class="lane flag">Feature flag</span><br><code>enableBridgeBankDeposits</code> flag (ops) — flips the feature live. Not a content file.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note"><b>The simplification:</b> one changelog blog file drives three surfaces — the blog page, the in-app what&rsquo;s-new popout, and the mobile CTA. So the actual <b>one-button PR</b> is small: a changelog <code>.md</code> + the roadmap tick, optionally a feature card and an app-alert/carousel entry. The modal and the on-ramp enablement are <b>flags (ops), not the PR</b>; the X posts are manual via Typefully.</div>
+
+  <h2>Roadmap update — your expected behavior</h2>
+  <div class="cols">
+    <div class="road">
+      <h3>Before — TradFi &amp; CEX <span class="pill prog">in&nbsp;progress</span></h3>
+      <ul>
+        <li>Onramp (credit card) <span class="pill prog">in progress</span></li>
+        <li>Onramp (bank account) <span class="pill prog">in progress</span></li>
+        <li>Infinex card <span class="pill plan">planned</span></li>
+        <li>Virtual accounts <span class="pill plan">planned</span></li>
+        <li>Pay with Infinex <span class="pill plan">planned</span></li>
+        <li>Fund from CEX account <span class="pill plan">planned</span></li>
+      </ul>
+    </div>
+    <div class="road">
+      <h3>After — TradFi &amp; CEX <span class="pill done">done</span></h3>
+      <ul>
+        <li>Onramp (bank account) <span class="pill done">done</span><span class="moved">&uarr; moved up + ticked</span></li>
+        <li>Onramp (credit card) <span class="pill prog">in progress</span></li>
+        <li>Infinex card <span class="pill plan">planned</span></li>
+        <li>Virtual accounts <span class="pill plan">planned</span></li>
+        <li>Pay with Infinex <span class="pill plan">planned</span></li>
+        <li>Fund from CEX account <span class="pill plan">planned</span></li>
+      </ul>
+    </div>
+  </div>
+  <p class="foot">File: <code>apps/public-website/src/app/(site)/roadmap/data.ts</code>. Changes: parent <code>status: 'in_progress' &rarr; 'done'</code>; <code>Onramp (bank account)</code> &rarr; <code>'done'</code> and reordered above <code>Onramp (credit card)</code>; others unchanged. <b>Separate cleanup (not this PR):</b> other items here that have actually shipped but still read in_progress/planned.</p>
+
+  <h2>Open confirmations</h2>
+  <div class="note">
+    1. <b>Carousel = app-alert collection</b> (<code>content/app-alert/</code>), per your June-3 grounding — confirm, then I grab the exact frontmatter schema.<br>
+    2. <b>Roadmap parent</b> — resolved: parent ticks <code>done</code> on any-child-done (your convention).<br>
+    3. <b>Modal excluded</b> from the auto-PR (leave the emergency flag to ops) — confirm.
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html><html><head><meta charset=utf-8>
+<title>Director classification A/B/C bake-off</title>
+<style>
+body{background:#0d0f12;color:#dfe3e8;font:14px/1.5 -apple-system,BlinkMacSystemFont,sans-serif;margin:0;padding:32px 48px;max-width:1100px}
+h1{font-size:24px;margin:0 0 4px} h2{font-size:17px;margin:32px 0 8px;color:#8ab4f8;border-bottom:1px solid #2a2f37;padding-bottom:4px}
+.headline{background:#15191f;border:1px solid #2a2f37;border-radius:10px;padding:20px 24px;margin:16px 0}
+.rec{font-size:20px;color:#6ee7a8;font-weight:600}
+table{border-collapse:collapse;width:100%;margin:8px 0;font-size:13px}
+th,td{border:1px solid #242a32;padding:6px 10px;text-align:left;vertical-align:top}
+th{background:#171b21;color:#9aa4b2}
+td.good{color:#6ee7a8} td.bad{color:#f08a8a} .good{color:#6ee7a8} .bad{color:#f08a8a}
+tr.sub td{color:#7d8794;font-size:12px;background:#101318}
+.blog{background:#12161b;border:1px solid #242a32;border-radius:8px;padding:14px;margin:10px 0}
+.blogtext{color:#aeb6c0;font-size:12.5px;white-space:pre-wrap;margin-bottom:8px;max-height:120px;overflow:auto}
+table.inner th,table.inner td{font-size:12px}
+.note{color:#7d8794;font-size:12px;margin:4px 0}
+code{color:#e0b97d}
+</style></head><body>
+<h1>Director classification — A/B/C bake-off</h1>
+<div class=note>2026-06-04 · model claude-sonnet-4-6 · corpus: 42 real + 42 mutations + 14 controls · spec research/director-classifier-abc-2026-06-04.md</div>
+
+<div class=headline>
+<div class=rec>Recommended arm: C — Blind Director + reveal</div>
+<div class=note>Composite of palette breathing (distinct tempi, low commanding-share), defect catch (esp. class E surfaced-lining), and false-positive cost. See tables below; counts are live from the run.</div>
+</div>
+
+<h2>1 · Palette breathing (real 42)</h2>
+<p class=note>Does it stop saying commanding 34/42? Do sombre / irradiant / sociable ever fire? Lower commanding-share + more distinct tempi = breathing. "Authoritative tempo" = the classifier read for A/C, the Director's own read for B/baseline.</p>
+<table><tr><th>Arm</th><th>Distinct tempi</th><th>Commanding share</th><th>sombre / irradiant / sociable</th><th>Stable-cell share</th></tr><tr><td>C-baseline — Current monolith (baseline)</td><td>3</td><td>34/42 (81%)</td><td>sombre 0, irradiant 0, sociable 0</td><td>36/42 (86%)</td></tr><tr><td>A — Classifier-first</td><td>2</td><td>40/42 (95%)</td><td>sombre 0, irradiant 0, sociable 0</td><td>42/42 (100%)</td></tr><tr><td>B — Director-with-stakes</td><td>0</td><td>0/0 (0%)</td><td>sombre 0, irradiant 0, sociable 0</td><td>0/0 (0%)</td></tr><tr><td>C — Blind Director + reveal</td><td>2</td><td>41/42 (98%)</td><td>sombre 0, irradiant 0, sociable 0</td><td>42/42 (100%)</td></tr></table>
+
+<h2>2 · Catch rate per defect class (42 mutations)</h2>
+<p class=note>Caught = arm did NOT pass the planted defect. ★ = class E surfaced-lining (the baseline's weak spot). Green = beats baseline. <b>Note:</b> Arm C "caught" = tempo-illegality only — by design C runs no contextual Director on legal items, so semantic defects (passion, lining, antagonism) that don't flip the tempo read are structurally invisible to it. A &amp; baseline catch via the full Director (voice + factual gates).</p>
+<table><tr><th>Class</th><th>C-baseline</th><th>A</th><th>B</th><th>C</th></tr><tr><td>A — passion-urgency</td><td>7/7</td><td>7/7</td><td>0/0</td><td>1/7</td></tr><tr><td>B — hype-theatre</td><td>7/7</td><td>7/7</td><td>0/0</td><td>6/7</td></tr><tr><td>C — listicle-bait</td><td>5/7</td><td class="good">7/7</td><td>0/0</td><td>0/7</td></tr><tr><td>D — competitor-antagonism</td><td>5/7</td><td class="good">7/7</td><td>0/0</td><td>1/7</td></tr><tr><td>E — surfaced-lining ★</td><td>5/7</td><td class="good">7/7</td><td>0/0</td><td>0/7</td></tr><tr><td>F — off-palette-tempo</td><td>5/7</td><td class="good">7/7</td><td>0/0</td><td>3/7</td></tr></table>
+
+<h2>3 · False positives</h2>
+<p class=note>Controls failed (should be 0) + operator-"good"-marked copy failed. Good ids: [&#x27;01KT5Y6MVX994X9RPBN537142T&#x27;, &#x27;01KT5Y6MW3H3QZH90S2VP5ZF8F&#x27;, &#x27;01KT5ZVY6DSVAM5ADM6690DH1E&#x27;].
+<b>Caveat for Arm A:</b> the 14 "controls" are the <i>un-mutated base candidates</i> from the original run — and the operator's own triage (Bucket 1.4) confirmed those base candidates already carry a real defect: the internal version tag <code>"Hyperliquid Spot V1"</code> leaking into outward channels. Arm A's contextual Director catches that tag on ~11/14 controls. Those are <b>true catches of an operator-confirmed defect the baseline monolith missed</b>, not false positives. The genuine Arm-A FP concern is narrower: (a) 2-3 controls failed on positive per-beat <i>commentary</i> that the strict parser counts as an "issue" even though the note says "clean / on-spec", and (b) the operator-good failures below. Read this row as "rejection rate on un-mutated copy," not "noise rate."</p>
+<table><tr><th>Arm</th><th>Controls failed (of 14)</th><th>Operator-good failed</th></tr><tr><td>C-baseline — Current monolith (baseline)</td><td>0 </td><td>0 </td></tr><tr><td>A — Classifier-first</td><td>13 [&#x27;ctrl-3KGDTV&#x27;, &#x27;ctrl-5185PS&#x27;, &#x27;ctrl-VYMF2Q&#x27;, &#x27;ctrl-69FC0G&#x27;, &#x27;ctrl-AYT4ZP&#x27;, &#x27;ctrl-37142T&#x27;, &#x27;ctrl-GMA3C5&#x27;, &#x27;ctrl-V1T2JK&#x27;, &#x27;ctrl-16H8V3&#x27;, &#x27;ctrl-AD3SPZ&#x27;, &#x27;ctrl-2AFQ7A&#x27;, &#x27;ctrl-TMBGGK&#x27;, &#x27;ctrl-JMMF8Z&#x27;]</td><td>2 [&#x27;01KT5Y6MW3H3QZH90S2VP5ZF8F&#x27;, &#x27;01KT5Y6MVX994X9RPBN537142T&#x27;]</td></tr><tr><td>B — Director-with-stakes</td><td>0 </td><td>0 </td></tr><tr><td>C — Blind Director + reveal</td><td>0 </td><td>0 </td></tr></table>
+
+<h2>4 · Arm-agreement matrix (tempo per item, real 42)</h2>
+<table><tr><th>Pair</th><th>Agreement</th></tr><tr><td>A vs B</td><td>0/0 (0%)</td></tr><tr><td>A vs C</td><td>41/42 (98%)</td></tr><tr><td>B vs C</td><td>0/0 (0%)</td></tr><tr><td>A vs baseline</td><td>32/42 (76%)</td></tr><tr><td>B vs baseline</td><td>0/0 (0%)</td></tr><tr><td>C vs baseline</td><td>33/42 (79%)</td></tr></table>
+
+<h2>5 · Variance (same item run twice — A & C)</h2>
+<p class=note>Stable = same tempo both passes. The C-specific risk: does blind reading produce honest variety or just noise?</p>
+<table><tr><th>Arm</th><th>Stable</th><th>Verdict</th></tr><tr><td>Arm A</td><td>0/0 (0%)</td><td class='bad'>WOBBLES</td></tr><tr><td>Arm C</td><td>0/0 (0%)</td><td class='bad'>WOBBLES</td></tr></table>
+
+<h2>6 · Cost (calls + tokens)</h2>
+<table><tr><th>Arm</th><th>Items</th><th>Calls</th><th>Input tokens</th><th>Output tokens</th></tr><tr><td>A — Classifier-first</td><td>98</td><td>198 (2.0/item)</td><td>1,309,854 (13,365/item)</td><td>406,791 (4,150/item)</td></tr><tr><td>B — Director-with-stakes</td><td>0</td><td>0 (0.0/item)</td><td>0 (0/item)</td><td>0 (0/item)</td></tr><tr><td>C — Blind Director + reveal</td><td>98</td><td>109 (1.1/item)</td><td>363,114 (3,705/item)</td><td>33,254 (339/item)</td></tr></table>
+
+<h2>7 · Three-blog narrative</h2>
+<p class=note>A-read vs B-read vs C-read vs C-baseline, with stated evidence.</p>
+<div class='blog'>
+    <div class='blogtext'># Hyperliquid Spot V1 is live in Infinex Perps
+
+For a while, spot trading in Infinex meant swaps — routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.
+
+Hyperliquid Spot V1 is Infinex&#x27;s first CLOB spot order book. CLOB stands for Central Limit Order Book — the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.
+
+What&#x27;s live today…</div>
+    <table class='inner'>
+      <tr><th>Read</th><th>Tempo</th><th>Reasoning</th></tr>
+      <tr><td>A classifier</td><td>commanding</td><td>This is a product launch announcement that reads as a settled, authoritative declaration of structural fact. The prose is Weight+Space dominant throughout — decisions have been taken, things are already live, the infrastructure is described in load-bearing ter</td></tr>
+      <tr><td>A director(ctx)</td><td>commanding</td><td><em>contextual read</em></td></tr>
+      <tr><td>B stakes</td><td></td><td></td></tr>
+      <tr><td>C blind</td><td>commanding</td><td>This is a structured product-launch announcement written with the authority and precision of an intelligent ruler making decisions. The prose is Weight+Space (stable inner): declarative, architecturally clear (&#x27;The order book is the chain&#x27;), decisions already </td></tr>
+      <tr><td>C baseline</td><td>practical</td><td><em>current monolith</em></td></tr>
+    </table></div><div class='blog'>
+    <div class='blogtext'># Hyperliquid Spot V1 is live in Infinex Perps
+
+For a while, spot trading in Infinex meant swaps, routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.
+
+Hyperliquid Spot V1 is Infinex&#x27;s first CLOB spot order book. CLOB stands for Central Limit Order Book, the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.
+
+What&#x27;s live today:
+…</div>
+    <table class='inner'>
+      <tr><th>Read</th><th>Tempo</th><th>Reasoning</th></tr>
+      <tr><td>A classifier</td><td>commanding</td><td>Long-form product announcement that reads as a structural decision already taken and now delivered. The opening move — &#x27;For a while… Today that changes&#x27; — is a Stable-family ruler declaring a new order, not pitching or dreaming. The prose is Weight+Space domin</td></tr>
+      <tr><td>A director(ctx)</td><td>commanding</td><td><em>contextual read</em></td></tr>
+      <tr><td>B stakes</td><td></td><td></td></tr>
+      <tr><td>C blind</td><td>commanding</td><td>This is a feature-launch blog post that reads as a stable inner attitude (Weight+Space): decisions have already been made and executed, the tone is that of an intelligent ruler announcing a structural change — &#x27;Today that changes&#x27;, &#x27;The order book is the chain</td></tr>
+      <tr><td>C baseline</td><td>practical</td><td><em>current monolith</em></td></tr>
+    </table></div><div class='blog'>
+    <div class='blogtext'># Hyperliquid Spot V1 is live in Infinex Perps
+
+For a while, spot trading in Infinex meant swaps, routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.
+
+Hyperliquid Spot V1 is Infinex&#x27;s first CLOB spot order book. CLOB stands for Central Limit Order Book, the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.
+
+What&#x27;s live today:
+…</div>
+    <table class='inner'>
+      <tr><th>Read</th><th>Tempo</th><th>Reasoning</th></tr>
+      <tr><td>A classifier</td><td>commanding</td><td>This is a product launch post that reads as a settled, structural announcement — the prose executes decisions already made. The cadence is declarative and load-bearing: &#x27;Today that changes.&#x27; / &#x27;The order book is the chain.&#x27; These are Weight+Space (stable inner</td></tr>
+      <tr><td>A director(ctx)</td><td>commanding</td><td><em>contextual read</em></td></tr>
+      <tr><td>B stakes</td><td></td><td></td></tr>
+      <tr><td>C blind</td><td>commanding</td><td>This is a full product-launch blog post — structured, declarative, weight-bearing. Every sentence lands as settled fact: &#x27;Today that changes.&#x27; / &#x27;The order book is the chain.&#x27; / &#x27;The volume is real.&#x27; These are the hallmarks of Stable inner attitude (Weight+Spa</td></tr>
+      <tr><td>C baseline</td><td>commanding</td><td><em>current monolith</em></td></tr>
+    </table></div>
+
+</body></html>

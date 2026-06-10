@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# Next.js
+.next/
+out/
+build/
+*.tsbuildinfo
+
+# local DB (don't commit operator decisions)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.db.bak*
+*.bak
+
+# env
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store

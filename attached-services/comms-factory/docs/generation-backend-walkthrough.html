@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>comms-factory — Generation Backend Walkthrough</title>
+<style>
+  :root{
+    --bg:#0d0f12; --panel:#14171c; --panel2:#1a1e25; --ink:#e8eaed; --dim:#9aa3ad;
+    --line:#262b33; --accent:#5c8dff; --actor:#8a7bff; --director:#3fd0c8;
+    --gate:#f5b84e; --reject:#ff6b6b; --ok:#52d273; --code:#cdd6e0; --mono:'SF Mono',ui-monospace,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{display:grid;grid-template-columns:255px 1fr;max-width:1320px;margin:0 auto;}
+  nav{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:26px 18px;border-right:1px solid var(--line);font-size:13px;}
+  nav h4{margin:18px 0 7px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;font-size:10.5px;}
+  nav a{display:block;color:var(--dim);padding:3px 0;}
+  nav a:hover{color:var(--ink);text-decoration:none}
+  main{padding:40px 52px 120px;min-width:0;}
+  h1{font-size:30px;margin:0 0 4px;letter-spacing:-.02em}
+  h2{font-size:21px;margin:54px 0 14px;padding-top:14px;border-top:1px solid var(--line);letter-spacing:-.01em}
+  h3{font-size:16px;margin:26px 0 8px;color:#fff}
+  .sub{color:var(--dim);font-size:14px;margin-bottom:8px}
+  p{margin:10px 0}
+  code{font-family:var(--mono);font-size:12.5px;background:var(--panel2);padding:1.5px 5px;border-radius:4px;color:var(--code)}
+  .fl{font-family:var(--mono);font-size:11.5px;color:var(--director);white-space:nowrap}
+  pre{background:#0a0c0f;border:1px solid var(--line);border-radius:8px;padding:15px 17px;overflow-x:auto;font-family:var(--mono);font-size:12.5px;line-height:1.55;color:var(--code)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:14px 0}
+  .tag{display:inline-block;font-family:var(--mono);font-size:10.5px;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;vertical-align:middle}
+  .t-actor{background:rgba(138,123,255,.16);color:var(--actor);border:1px solid rgba(138,123,255,.4)}
+  .t-director{background:rgba(63,208,200,.14);color:var(--director);border:1px solid rgba(63,208,200,.4)}
+  .t-gate{background:rgba(245,184,78,.14);color:var(--gate);border:1px solid rgba(245,184,78,.4)}
+  .t-legacy{background:rgba(154,163,173,.12);color:var(--dim);border:1px solid rgba(154,163,173,.35)}
+  .t-default{background:rgba(82,210,115,.14);color:var(--ok);border:1px solid rgba(82,210,115,.4)}
+  table{border-collapse:collapse;width:100%;margin:14px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+  th{background:var(--panel2);color:var(--dim);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  td code{font-size:11.5px}
+  .lede{font-size:16px;color:var(--ink);background:linear-gradient(90deg,rgba(92,141,255,.08),transparent);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 8px 8px 0;margin:18px 0}
+  .flow{display:flex;flex-direction:column;gap:0}
+  .step{display:grid;grid-template-columns:34px 1fr;gap:14px;position:relative}
+  .step .n{width:34px;height:34px;border-radius:50%;background:var(--panel2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;color:var(--accent);z-index:2}
+  .step .body{padding-bottom:22px}
+  .step:not(:last-child)::before{content:"";position:absolute;left:16.5px;top:34px;bottom:0;width:1px;background:var(--line)}
+  .step .body h3{margin-top:4px}
+  .pill{font-family:var(--mono);font-size:11px;color:var(--dim)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .reject{color:var(--reject)} .ok{color:var(--ok)} .dim{color:var(--dim)}
+  .note{font-size:13px;color:var(--dim);border-left:2px solid var(--line);padding-left:12px;margin:10px 0}
+  .kbd{font-family:var(--mono);font-size:11px;background:var(--panel2);border:1px solid var(--line);border-bottom-width:2px;padding:1px 6px;border-radius:4px}
+  @media(max-width:900px){.wrap{grid-template-columns:1fr}nav{display:none}main{padding:24px}.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <h4>Orientation</h4>
+  <a href="#tldr">TL;DR — two paths</a>
+  <a href="#contract">The stage contract</a>
+  <a href="#click">What "run generator" does</a>
+  <h4>The default path</h4>
+  <a href="#actor">The Actor</a>
+  <a href="#factcontract">Fact contract / "do not say"</a>
+  <a href="#director">The Director</a>
+  <a href="#prompt">What the LM loads</a>
+  <a href="#select">Selection &amp; ranking</a>
+  <a href="#retry">The retry loop</a>
+  <h4>The gates</h4>
+  <a href="#gates">Gate sequence</a>
+  <a href="#regex">Regex validator</a>
+  <a href="#active">Active LLM validator</a>
+  <a href="#history">History guards</a>
+  <h4>Fit</h4>
+  <a href="#fit">Slack bot / new harness</a>
+  <a href="#env">Config / env vars</a>
+  <a href="#files">File index</a>
+</nav>
+<main>
+
+<h1>comms-factory — Generation Backend</h1>
+<div class="sub">What actually happens when you click <span class="kbd">run generator</span> on <code>/cards/[id]</code>. Every claim is anchored to <span class="fl">file:line</span>. Generated 2026-06-01 from a code trace of <code>main</code> (working tree).</div>
+
+<div class="lede">
+There are <b>two</b> generation paths and the harness defaults to the newer one. The <span class="t-default">ACTOR/DIRECTOR</span> path is live by default; the <span class="t-legacy">LEGACY two-call</span> path is opt-in via <code>HARNESS_GENERATOR_ARCH=legacy</code>. They share the same regex validator core but have <b>different gating stacks</b>. Read the Actor/Director path first — that's what you're watching in the UI.
+</div>
+
+<!-- ============================================================= -->
+<h2 id="tldr">TL;DR — the two paths</h2>
+
+<div class="grid2">
+  <div class="card">
+    <div class="tag t-default">default — actor</div>
+    <h3 style="margin-top:10px">Actor / Director</h3>
+    <p class="dim" style="font-size:13px">One LLM (the <b>Actor</b>) does dramaturgical table-work then performs <i>all</i> channels in a single call, emitting ~5 candidates/channel. A second, <b>blind</b> LLM (the <b>Director</b>) forensically classifies each survivor. Retries carry a persistent transcript.</p>
+    <pre>orchestrateActorDirectorWithRetries()
+  └ loop attempt 1..3
+     ├ Actor    → table_work + performances
+     ├ regex validate() per candidate
+     ├ Director → blind audit per survivor
+     ├ pickRankedPassingByChannel()
+     └ summarizeDirectorNotes() → retry</pre>
+    <div class="fl">src/actor-orchestrator.ts:111</div>
+  </div>
+  <div class="card">
+    <div class="tag t-legacy">opt-in — legacy</div>
+    <h3 style="margin-top:10px">Two-call generator</h3>
+    <p class="dim" style="font-size:13px">Stage A generates <b>inner work</b> (thesis + beat verbs, no tempo). Stage B drafts from it, per channel. Gated by the regex validator + an <b>active LLM validator</b> (with research tools) + length + <b>history guards</b> (freshness vs shipped copy).</p>
+    <pre>generateForChannel()
+  └ orchestrateActiveWithRetries()
+     ├ Stage A: generateInnerWork()
+     ├ Stage B: draftFromInnerWork()
+     ├ regex validate()
+     ├ active validator (LLM + tools)
+     ├ length gate
+     └ history guards</pre>
+    <div class="fl">harness/app/actions/generate.ts:348</div>
+  </div>
+</div>
+
+<p class="note">The switch lives at <span class="fl">harness/app/actions/generate.ts:66-67</span>: anything other than <code>'legacy'</code> is forced to <code>'actor'</code>. So actor/director is the live default and the rest of this doc leads with it.</p>
+
+<!-- ============================================================= -->
+<h2 id="contract">The stage contract — why the split exists</h2>
+<p>The whole system is built on one rule from <code>CLAUDE.md</code>: <b>a model that both writes and audits its own output rationalizes slop.</b> So generation and judgment are physically separate processes with separate prompts and separate models.</p>
+
+<table>
+<tr><th>Stage</th><th>Job — one job only</th><th>Lives in</th></tr>
+<tr><td><span class="tag t-actor">actor</span></td><td>Produce. Table-work, then perform. <b>Never</b> self-audits, never names its own tempo.</td><td><span class="fl">src/actor-director.ts</span></td></tr>
+<tr><td><span class="tag t-gate">validator</span></td><td>Regex-grade external gates. No taste, no LLM. First failure blocks.</td><td><span class="fl">src/validator.ts</span></td></tr>
+<tr><td><span class="tag t-director">director</span></td><td>Forensic classification, blind to the Actor's intent. Reads what the prose <i>did</i>, not what the Actor <i>claimed</i>.</td><td><span class="fl">src/actor-director.ts:285</span></td></tr>
+<tr><td><span class="tag t-legacy">orchestrator</span></td><td>Filter → rank → shape to channel. Picks winners; never generates.</td><td><span class="fl">src/actor-orchestrator.ts:409</span></td></tr>
+</table>
+
+<p class="note">Mirodan grammar underneath: the Actor plays <b>transitive verbs</b> through <b>Working Actions</b> (pressing, punching, flicking…). It is structurally forbidden from declaring a tempo. The Director <i>infers</i> tempo from the finished prose. Tempo is emergent, never assigned — that's the "actor table-work before drafting" discipline encoded as two processes.</p>
+
+<!-- ============================================================= -->
+<h2 id="click">What "run generator" actually does</h2>
+<p class="sub">The full call chain, UI → persisted candidates, on the default path.</p>
+
+<div class="flow">
+  <div class="step"><div class="n">1</div><div class="body">
+    <h3>UI button → server action</h3>
+    <p>The <span class="kbd">run generator</span> button calls the <code>runGenerator(cardId)</code> server action with channels derived from the card's audience.</p>
+    <div class="fl">harness/components/GenerateControls.tsx:7-26 → harness/app/actions/generate.ts:54</div>
+  </div></div>
+
+  <div class="step"><div class="n">2</div><div class="body">
+    <h3>Arch branch</h3>
+    <p><code>HARNESS_GENERATOR_ARCH !== 'legacy'</code> → forced to <code>'actor'</code> → calls <code>runActorGenerator()</code>. (The <code>'legacy'</code> branch calls <code>generateForChannel()</code> instead.)</p>
+    <div class="fl">harness/app/actions/generate.ts:66-69 → runActorGenerator @ 539</div>
+  </div></div>
+
+  <div class="step"><div class="n">3</div><div class="body">
+    <h3>Preconditions + load</h3>
+    <p>Requires <code>ANTHROPIC_API_KEY</code> — <b>no stub mode</b> for actor/director (fail loud). Loads the card row, reads the release-card JSON, parses it into a <code>ReleaseCard</code>.</p>
+    <div class="fl">harness/app/actions/generate.ts:544-548</div>
+  </div></div>
+
+  <div class="step"><div class="n">4</div><div class="body">
+    <h3>Orchestrate <span class="tag t-default">the core call</span></h3>
+    <p><code>orchestrateActorDirectorWithRetries(releaseCard, channels, opts)</code> with <code>{ n, warmup_mode, voice, mode:'live', maxAttempts:3 }</code> and an <code>onEvent</code> callback that streams live checkpoints to the UI as the run proceeds.</p>
+    <div class="fl">generate.ts:563-570 → src/actor-orchestrator.ts:111</div>
+  </div></div>
+
+  <div class="step"><div class="n">5</div><div class="body">
+    <h3>The attempt loop (1..3)</h3>
+    <p>Each attempt runs Actor → regex validate → Director → select → summarize. Detailed in the sections below. Loop exits early once every channel has a passing pick.</p>
+    <div class="fl">src/actor-orchestrator.ts:111-275</div>
+  </div></div>
+
+  <div class="step"><div class="n">6</div><div class="body">
+    <h3>Persist everything</h3>
+    <p>Writes <code>actor_attempts</code>, <code>candidates</code>, <code>director_audits</code>, <code>actor_warmups</code>, a Pipeline-3 proof record, and a <code>pipeline_runs</code> row. Nothing is thrown away — every option the Actor produced is stored with its audit, so the operator can inspect rejects too.</p>
+    <div class="fl">generate.ts:572-586 (persistActorDirectorResult / buildPipeline3Proof / persistPipelineRun)</div>
+  </div></div>
+
+  <div class="step"><div class="n">7</div><div class="body">
+    <h3>Render to the panel</h3>
+    <p>The page groups rows into attempts and renders one <code>AttemptPanel</code> per attempt, each <code>CandidateCard</code> showing text + regex failures + director audit + tempo classification + operator decision buttons.</p>
+    <div class="fl">harness/app/cards/[id]/page.tsx:174-207 · AttemptPanel.tsx:23 · CandidateCard.tsx:108</div>
+  </div></div>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="actor">The Actor <span class="tag t-actor">produce</span></h2>
+<p class="sub"><span class="fl">generateActorAttempt() — src/actor-director.ts:248-282</span></p>
+
+<p>The Actor is a single Opus 4.7 call (<code>max_tokens=32000</code>) that receives the card and, in <b>one response</b>, does its table-work and performs every channel. Three inputs assemble the call:</p>
+
+<table>
+<tr><th>Piece</th><th>What it is</th><th>Built by</th></tr>
+<tr><td><b>System prompt</b><br>(the "memory pack")</td><td>Static per-voice. The Actor's standing instructions + the full Mirodan corpus + the Infinex placement. See <a href="#prompt">What the LM loads</a>.</td><td><span class="fl">buildActorMemoryPack() — src/actor-memory.ts:146</span></td></tr>
+<tr><td><b>Transcript</b></td><td>First attempt: one user message = the assignment. Retries: prior messages + a Director-notes message (persistent conversation).</td><td><span class="fl">buildActorTranscript() / buildActorAssignmentMessage() :320</span></td></tr>
+<tr><td><b>Parse</b></td><td>JSON → <code>{ warmup, table_work, performances, selected_performances }</code> → <b>all</b> candidates (not just the Actor's favorites).</td><td><span class="fl">parseActorOutput() → actorOutputToCandidates()</span></td></tr>
+</table>
+
+<h3>What the Actor returns</h3>
+<pre>{
+  "warmup":   { ... },              // rehearsal / daily-pages — visible, not final copy
+  "table_work": {
+     "thesis":        "...",        // one-sentence interpretation of the release
+     "through_action":"to ...",     // the transitive intent driving the post
+     "obstacle":      "...",
+     "lining":        "...",        // the unsaid subtext
+     "not_the_point": "...",
+     "channel_beat_plans": {        // per channel, a sequence of beats — VERBS only
+        "x":   [{ verb, working_action, physical_score, prep_from, micro_objective, ... }],
+        "web": [ ... ]
+     }
+  },
+  "performances": {                 // ~5 final-copy options per channel
+     "x":   [{ text, rationale, movement_receipt[], deployed_facts_used, not_said }],
+     "web": [ ... ]
+  },
+  "selected_performances": {        // the Actor's own favorite per channel (advisory only)
+     "x": { selected_option: 1, selection_rationale: "..." }
+  }
+}</pre>
+
+<p class="note"><b>The load-bearing constraint:</b> the Actor is told to do table-work <i>first</i>, then perform, and to <b>never name, choose, or target a tempo</b> — only to deliberately score Mirodan Working Actions and honor the preparation hierarchy (a Quick action must be prepared by a Sustained one). The <code>movement_receipt</code> maps spans of the final text to the Working Action that produced them — that's the artifact the Director and the validator check against. <span class="fl">src/actor-director.ts:340-414</span></p>
+
+<!-- ============================================================= -->
+<h2 id="factcontract">The fact contract — <code>deployed_facts_used</code> &amp; <code>not_said</code></h2>
+<p class="sub">The per-tweet "do not say" list — what the Actor deliberately withheld, with reasons.</p>
+
+<p>For <b>every single candidate</b> it writes, the Actor attaches two receipts. This is the fact-check anchor: the caption may only assert what's in the card's <code>deployed_facts</code>, and the Actor must account for every fact — either it used it or it consciously declined it.</p>
+
+<table>
+<tr><th>Receipt</th><th>Shape</th><th>Meaning</th></tr>
+<tr><td><code>deployed_facts_used</code></td><td><code>string[]</code></td><td>Which card facts this caption actually asserts.</td></tr>
+<tr><td><code>not_said</code></td><td><code>{ fact, reason }[]</code></td><td>Card facts the Actor <b>chose not to use in this tweet</b> — each with a one-line reason. This is the per-tweet "do not say."</td></tr>
+<tr><td><code>not_the_point</code></td><td><code>string</code></td><td>Different thing — a <b>table-work-level</b> theme ("what this post is not about"), one per attempt, not per tweet.</td></tr>
+</table>
+
+<p>The validator's claim contract (<span class="fl">src/validator.ts:191-276</span>) enforces it mechanically: every claim must be in <code>deployed_facts_used</code>; every withheld fact in <code>not_said</code>; a fact can't be in both; a card fact must be in one or the other. It's fed in at <span class="fl">harness/app/actions/generate.ts:466-469</span>.</p>
+
+<p>Real example from the Hyperliquid-spot card (X, option 1) — the Actor's <code>not_said</code>:</p>
+<pre>{ "fact": "Hyperliquid spot markets with &gt;$100K 24h volume: 20",
+  "reason": "market-count enumeration would project Passion via scarcity; not the through-action" }
+{ "fact": "Top markets by 24h volume: HYPE/USDC $130.44M, UBTC/USDC $17.72M, ...",
+  "reason": "venue-shilling; reads as hype, not hand-over" }</pre>
+
+<div class="card" style="border-color:rgba(245,184,78,.4)">
+  <h3 style="margin-top:0" class="dim" style="color:var(--gate)">⚠ Where you can view it today</h3>
+  <p style="margin-top:6px"><b>Per-tweet <code>not_said</code> is generated and gated, but not rendered in the harness UI.</b> The <code>candidates</code> table has no column for it (<span class="fl">harness/lib/schema.sql:230</span>) and <code>CandidateCard.tsx</code> shows nothing for it. The only persisted copy lives inside the raw <code>actor_attempts.actor_response_json</code> blob — visible only by querying SQLite directly:</p>
+  <pre>sqlite3 harness/harness.db \
+  "SELECT actor_response_json FROM actor_attempts WHERE card_id='&lt;id&gt;';"
+# → parse JSON → .performances.&lt;channel&gt;[i].not_said</pre>
+  <p>A rendered view for the current card is at <code>docs/actor-do-not-say-hyperliquid-spot.html</code>.</p>
+  <p class="dim" style="font-size:13px">The table-work-level <code>not_the_point</code> <i>is</i> visible — it's inside the "table work" JSON block on each attempt (<span class="fl">harness/components/AttemptPanel.tsx:105</span>). It's the per-candidate <code>not_said</code> that has no panel. Surfacing it = add a column to the <code>candidates</code> insert (both paths write at <span class="fl">generate.ts:474 and :707</span>) + a block in <code>CandidateCard.tsx</code>.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="director">The Director <span class="tag t-director">judge, blind</span></h2>
+<p class="sub"><span class="fl">auditCandidateWithDirector() — src/actor-director.ts:285-301</span></p>
+
+<p>For each candidate that survives the regex validator, the Director runs as a <b>separate, blind</b> Sonnet 4.6 call (<code>max_tokens=4096</code>). "Blind" = it sees the finished prose and the card, but <b>not</b> the Actor's table-work. Its job is forensic, not aesthetic: classify what the text actually did, then decide if that's legal for the voice.</p>
+
+<h3>The four gates it returns</h3>
+<table>
+<tr><th>Gate</th><th>Asks</th></tr>
+<tr><td><code>copy_voice_passed</code></td><td>Does the prose fit the voice, and does it cohere under paraphrase?</td></tr>
+<tr><td><code>factual_passed</code></td><td>Is every claim supported by the card's <code>deployed_facts</code>?</td></tr>
+<tr><td><code>publication_gate_passed</code></td><td>Is this live-product ready (no unshipped state, no placeholder)? Tracked separately from draft quality.</td></tr>
+<tr><td><code>infinex_fit.legal</code></td><td>Is the inferred placement + tempo inside the allowed set for this voice?</td></tr>
+</table>
+<p class="dim" style="font-size:13px">Draft passes when <code>copy_voice_passed && factual_passed && infinex_fit.legal</code>. <span class="fl">DirectorAuditResult — src/actor-director.ts:189-233</span></p>
+
+<h3>What else it reports (diagnostic, not pass/fail)</h3>
+<p><code>primary_tempo</code> + confidence, <code>motion_evidence</code> (Weight / Space / Time / Flow poles it read), detected <code>working_actions</code>, <code>movement_receipt_fit</code> (do the Actor's span-claims match what the Director observed?), <code>drive_read</code> (spell / passion / vision …), and <code>notes_for_actor[]</code> — movement-corrective feedback that feeds the retry.</p>
+
+<p class="note"><b>Director discipline</b> (encoded in <code>directorMethodBlock</code>, <span class="fl">src/actor-memory.ts:302-368</span>): read the two-factor Variation first; Working Actions <i>support</i> but don't <i>define</i> tempo; <code>drive_read</code> is inferential, not a checklist; don't fail a legal primary-allowed tempo purely on factor shape; a resting Spell without visible Vision is legal; never prescribe "add a second sentence" as a movement rule. These guardrails stop the Director from over-failing single-line UI copy.</p>
+
+<!-- ============================================================= -->
+<h2 id="prompt">What the LM actually loads (the memory pack)</h2>
+<p class="sub"><span class="fl">buildActorMemoryPack() :146 · buildDirectorMemoryPack() :176 — src/actor-memory.ts</span></p>
+
+<p>Both Actor and Director system prompts are assembled from the same blocks, with role-specific method blocks swapped in. This is where "the rules" physically live in the prompt:</p>
+
+<table>
+<tr><th>Block</th><th>Source</th><th>What it injects</th></tr>
+<tr><td>Canonical source index</td><td><span class="fl">buildMirodanSourceIndex</span></td><td>Presence + hash + size of 7 canonical Mirodan files (ch1-4, the reference, the Vol.2 PDF, the memory pointer). A provenance check — proves the framework is grounded in the real source.</td></tr>
+<tr><td>Source evidence anchors</td><td><span class="fl">buildSourceEvidenceBlock</span></td><td>Short canonical quotes from Mirodan.</td></tr>
+<tr><td>Movement corpus</td><td><span class="fl">buildMovementCorpusBlock</span></td><td>Motion Factors, Inner Attitudes, Aspects, Stress, Drives, Working Actions — the taxonomy.</td></tr>
+<tr><td>Mirodan kernel</td><td><span class="fl">voice.mirodan_kernel → infinex.ts:264</span></td><td>The 12 derivation rules for this voice.</td></tr>
+<tr><td>Drive table</td><td><span class="fl">voice.drive_table → infinex.ts:265</span></td><td>The 12-cell table for mechanically deriving drive from placement.</td></tr>
+<tr><td>Method block</td><td><span class="fl">actorMethodBlock :286 / directorMethodBlock :302</span></td><td><b>Role-specific.</b> Actor: "table-work → score Working Actions → play transitive verbs." Director: "forensic classification, not taste; read what happened."</td></tr>
+<tr><td>Full 24-tempo taxonomy</td><td><span class="fl">fullTempoTaxonomyBlock :331</span></td><td>All tempi, so the Director can classify into reserve tempi too.</td></tr>
+<tr><td>Infinex placement</td><td><span class="fl">infinexPlacementBlock :345</span></td><td>Character image (banker-turned-crypto trailblazer), Stable + Penetrating + Flow, Spell→Vision axis, the 5 allowed tempi + 7 beat-only reserves.</td></tr>
+<tr><td>Channel grammar</td><td><span class="fl">channelGrammarBlock :375</span></td><td>Per-channel shape rules (X vs web vs in-product).</td></tr>
+</table>
+
+<h3>The voice spec it reads from</h3>
+<p><code>src/voice/infinex.ts</code> is the locked placement (2026-05-12). It declares the inner attitude (Stable), stress (Flow-bound), aspect (Penetrating), drive axis (Spell→Vision), the <b>5 main tempi</b> (Commanding · Practical · Sombre · Irradiant · Sociable) with their Sustained→Quick motor pairs, the <b>7 beat-only reserves</b>, plus <code>mirodan_kernel</code> and <code>drive_table</code>. <code>src/voice/types.ts</code> defines the <code>CharacterSpec</code> / <code>Tempo</code> / <code>WorkingAction</code> shapes; <code>laban.ts</code> holds the prep-hierarchy machinery; <code>cream.ts</code> / <code>nigel.ts</code> are sibling voices (same shape, different placement).</p>
+
+<p class="note">The same voice spec also feeds the legacy two-call generator's system prompt via <code>buildSystemPrompt()</code> → <code>buildV2SystemPrompt()</code> <span class="fl">src/generator.ts:340-625</span>. One voice spec, two prompt assemblers — that's the portability the project cares about.</p>
+
+<!-- ============================================================= -->
+<h2 id="select">Selection &amp; ranking</h2>
+<p class="sub"><span class="fl">pickRankedPassingByChannel() :409 · scoreCandidateForSelection() :458 — src/actor-orchestrator.ts</span></p>
+<p>Per channel: keep only candidates that passed regex <b>and</b> the Director draft gate, then score and rank.</p>
+<pre>base   = script(100) + factual(100) + copy_voice(100) + legal(100)        // max 400
+bonus  = publication_gate(+8) + actor_recommended(+6)
+       + distinct_image(+4) + channel_fit(+4)
+penalty= image_cluster_repetition(-10) + repetition(-N) + rail_tokens(-N)
+       + voice_issues*12 + factual_issues*20 + operator_preferences</pre>
+<p>"Image clusters" (<span class="fl">:583-593</span>) — wall-boundary, rail-plumbing, account-surface, market-object, spark-object, fact-literal — get penalized for repeating across candidates, so a batch doesn't converge on the same metaphor. Highest score wins the channel.</p>
+<p class="note dim"><b>Known TODO:</b> the legacy <code>orchestrate()</code> path still uses naive "first-pass-wins" ranking <span class="fl">src/orchestrator.ts:290</span>. The actor path's scoring above is the real ranker.</p>
+
+<!-- ============================================================= -->
+<h2 id="retry">The retry loop</h2>
+<p>If a channel has no passing pick, the orchestrator synthesizes Director notes and runs the Actor again — up to 3 attempts — as a <b>persistent conversation</b> (the Actor sees its prior output).</p>
+<pre>summarizeDirectorNotes(attempt, channels, records, picks)   // src/actor-orchestrator.ts
+  └ buildDirectorNotesMessage()                              // actor-director.ts:478
+       ## Preserve unless explicitly contradicted
+       - through_action / beat_plan / working_actions / objective_verbs
+       ## Change lanes
+       - copy / facts / voice / movement</pre>
+<p>The principle (<span class="fl">:479-484</span>): <b>preserve the table-work and motor unless the Director explicitly failed it</b>; only revise the copy, facts, and local line issues. Stops the Actor from re-deriving the whole interpretation each round. After 3 exhausted attempts it returns <code>{ exhausted:true, picks: bestSoFar }</code>.</p>
+
+<!-- ============================================================= -->
+<h2 id="gates">The gate sequence — what blocks, in what order</h2>
+<p>Two stacks, depending on path. Both start with the same regex core.</p>
+
+<div class="grid2">
+  <div class="card">
+    <div class="tag t-default">actor / director stack</div>
+    <ol style="margin:12px 0 0;padding-left:20px;line-height:1.9">
+      <li>Card approved? API key present?</li>
+      <li><span class="t-gate" style="padding:1px 6px;border-radius:4px">Regex validator</span> — <code>validate()</code></li>
+      <li>Actor movement checks (tempo not declared, receipt present, prep hierarchy)</li>
+      <li><span class="t-director" style="padding:1px 6px;border-radius:4px">Director audit</span> — blind LLM, 4 gates</li>
+      <li>Score + rank → pick</li>
+    </ol>
+  </div>
+  <div class="card">
+    <div class="tag t-legacy">legacy stack</div>
+    <ol style="margin:12px 0 0;padding-left:20px;line-height:1.9">
+      <li>Card approved? API key present?</li>
+      <li><span class="t-gate" style="padding:1px 6px;border-radius:4px">Regex validator</span> — <code>validate()</code></li>
+      <li><span class="t-gate" style="padding:1px 6px;border-radius:4px">Active LLM validator</span> — with research tools</li>
+      <li>Length gate (X 280 / web 140 / in-product 80)</li>
+      <li><span class="t-gate" style="padding:1px 6px;border-radius:4px">History guards</span> — freshness vs shipped copy</li>
+      <li>First survivor per channel → pick</li>
+    </ol>
+  </div>
+</div>
+<p class="note">Both paths feed audits into <code>candidate_audits</code> / <code>director_audits</code> for operator inspection. The regex layer is <b>blocking and first</b> in both — first failure stops evaluation, so the expensive LLM never runs on obviously-bad copy.</p>
+
+<!-- ============================================================= -->
+<h2 id="regex">Regex validator — brand-agnostic slop <span class="tag t-gate">deterministic</span></h2>
+<p class="sub"><span class="fl">src/validator.ts</span> — every rule is an exported function with positive+negative tests. No LLM, no taste.</p>
+
+<table>
+<tr><th>Rule</th><th>Line</th><th>Catches</th></tr>
+<tr><td><code>rejectCliches</code></td><td class="fl">:80</td><td>game-changer, unlock, paradigm, seamless, empower, leverage (verb)</td></tr>
+<tr><td><code>rejectListicleVoice</code></td><td class="fl">:94</td><td>"N reasons", "why X matters", "top N", "N things you"</td></tr>
+<tr><td><code>rejectAntagonism</code></td><td class="fl">:109</td><td>competitor name within 40 chars of a pejorative; "unlike X"</td></tr>
+<tr><td><code>rejectAIslop</code></td><td class="fl">:124</td><td>innovative, cutting-edge, "thrilled to", "stay tuned" + <b>em-dash density (zero-tolerance, <code>MAX=0</code> :122)</b></td></tr>
+<tr><td><code>rejectKainBaggage</code></td><td class="fl">:145</td><td>Kain-era tics: "degen army", "synthetic everything", "spartan council"</td></tr>
+<tr><td><code>rejectClaimedPalettes</code></td><td class="fl">:155</td><td>competitor hex codes (Polymarket #2E5CFF, Pendle, Phantom, …)</td></tr>
+<tr><td><code>rejectVisualSlop</code></td><td class="fl">:173</td><td>glassmorphism, holographic gradient, purple gradient, vaporwave</td></tr>
+<tr><td><code>rejectOffSpecDrive</code></td><td class="fl">:183</td><td>per-voice off-spec drive surfaces (Infinex rejects foregrounded time-pressure)</td></tr>
+</table>
+
+<h3>Claim contract — the fact-check anchor <span class="fl">:191-348</span></h3>
+<p>The caption cannot assert anything outside the card's <code>deployed_facts</code>. The validator enforces receipts: every claim must appear in <code>deployed_facts_used</code>; everything deliberately withheld in <code>not_said</code>; a fact can't be in both; a card fact must be in one or the other; and <code>auditUnsupportedClaims()</code> (<span class="fl">:305</span>) extracts URLs/numbers/claims and fuzzy-matches them back to the card.</p>
+
+<h3>Beat-sequence audit <span class="fl">:441-651</span></h3>
+<p>Splits copy into beats, runs a <b>deterministic heuristic</b> tempo classifier (<code>classifyTempoBlind</code> :513 — scores each paragraph against the voice's vocab anchors + motor vocabulary; short copy caps confidence at 0.6), and checks the Laban prep→release motor hierarchy (<code>auditPrepHierarchy</code> :460). A beat passes if it classifies as 'unknown' or into an allowed tempo. <span class="dim">Note: this heuristic classifier is separate from the Director's LLM classification — it's the cheap regex-grade pre-read.</span></p>
+
+<!-- ============================================================= -->
+<h2 id="active">Active LLM validator <span class="tag t-legacy">legacy stack</span></h2>
+<p class="sub"><span class="fl">src/validator-active.ts:85-208</span> · default model <code>claude-sonnet-4-6</code></p>
+<p>On the legacy path, after regex passes, an agentic validator runs (up to 6 tool turns). It can call <b>research/fact-check tools</b> to verify claims against platform code / registries before voting, then emits a verdict via an <code>audit_pass</code> / <code>audit_fail</code> tool call:</p>
+<pre>{ passed, deterministic, llm:{ feedback, voice_issues[], factual_issues[],
+   independent_classification:{ tempo, motifs[], detected_drive, confidence } },
+   research_trace[], active_turns, truncated, reason }</pre>
+<p>Behavior locked by recent commits: <b>LLM validator is the default</b> gating voice, <b>zero-tolerance em-dash</b>, and it <b>fails loud</b> when the LLM is unavailable rather than silently falling back to regex. Disable only with <code>HARNESS_ACTIVE_VALIDATOR=0</code> (not recommended). If it hits max turns without a verdict → fail with <code>active-validator-max-tool-turns</code>. <span class="fl">:195-207</span></p>
+<p class="note dim">The actor/director path doesn't run this validator — the <b>Director</b> is its judgment layer. The active validator is the legacy path's equivalent. Conceptually parallel; different implementations.</p>
+
+<!-- ============================================================= -->
+<h2 id="history">History guards — freshness vs shipped copy <span class="tag t-legacy">legacy stack</span></h2>
+<p class="sub"><span class="fl">src/history-guards.ts:64-194</span> · runs after the active validator, before final pick</p>
+<p>Loads recent shipped copy (last 12 on X, last 20 on web/in-product) from <code>final_picks</code> and rejects anything stale:</p>
+<table>
+<tr><th>Guard</th><th>Line</th><th>Budget</th></tr>
+<tr><td>Repeated opener (first 4 words)</td><td class="fl">:104</td><td>1× per window</td></tr>
+<tr><td>Phrase budget ("now live", "no new wallet")</td><td class="fl">:119</td><td>2× X / 3× web</td></tr>
+<tr><td>Tempo cadence (same primary tempo in a row)</td><td class="fl">:141</td><td>2× X / 3× web</td></tr>
+<tr><td>Rare tempo overuse (reserve tempi)</td><td class="fl">:158</td><td>0× — fail on first</td></tr>
+<tr><td>Announcement frame ("now live"/"ships"/"launch")</td><td class="fl">:178</td><td>2+ in recent 6 → fail</td></tr>
+<tr><td>Protagonist repetition</td><td class="fl">:194</td><td>0× — fail on first</td></tr>
+</table>
+
+<!-- ============================================================= -->
+<h2 id="fit">How this fits a Slack bot or a new harness</h2>
+<p>The harness is explicitly a <b>temporary review tool</b>, not the product — production surfaces are the Slack bot + an MCP server. The good news from this trace: <b>the entire pipeline is harness-independent.</b> Everything load-bearing lives in <code>src/</code>; the harness is a thin Next.js shell over it.</p>
+
+<div class="grid2">
+  <div class="card">
+    <h3 style="margin-top:0" class="ok">Reusable core — call from anywhere</h3>
+    <ul style="margin:6px 0;padding-left:18px;line-height:1.8">
+      <li><code>orchestrateActorDirectorWithRetries()</code> — the whole default pipeline, one call. Takes a <code>ReleaseCard</code> + channels, returns picks + full audit trail.</li>
+      <li><code>validate()</code> — the regex gate, pure + synchronous. Cheapest reuse; ideal for an MCP <code>/validate</code> tool or a Slack ad-hoc check.</li>
+      <li><code>generate()</code> — the legacy two-call generator if you want the cheaper non-director path.</li>
+      <li>The CLI (<code>src/cli.ts</code>) already wires <code>generate</code> / <code>validate</code> subcommands — it's the reference for how a non-harness caller drives the stages.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0" class="reject">Harness-specific — don't port</h3>
+    <ul style="margin:6px 0;padding-left:18px;line-height:1.8">
+      <li>SQLite persistence (<code>actor_attempts</code>, <code>candidates</code>, <code>director_audits</code>, <code>pipeline_runs</code>) — a Slack bot wants its own store or none.</li>
+      <li>The <code>onEvent</code> checkpoint streaming → React panels. A Slack bot would map these to thread messages instead.</li>
+      <li>Operator decision buttons (approve/edit/retry/reject) — the harness's whole reason to exist (agreement metrics). The Slack/MCP fast lane skips this; the <b>ship gate stays human</b> regardless.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <h3 style="margin-top:0">Concrete shapes</h3>
+  <p><b>Slack bot (fast lane):</b> slash command → build a <code>ReleaseCard</code> from the event → <code>orchestrateActorDirectorWithRetries(card, channels, {maxAttempts: 1-2})</code> → post the top pick per channel into a thread with the Director verdict as context → 👍 reaction is the ship gate. The retry loop and Director notes become thread replies if the operator asks for another pass.</p>
+  <p><b>MCP server:</b> three tools mapping straight onto existing functions — <code>/generate</code> → <code>orchestrateActorDirectorWithRetries</code>, <code>/validate</code> → <code>validate</code> (+ optionally the active validator), <code>/audit</code> → <code>auditCandidateWithDirector</code> on arbitrary text. The Director-on-arbitrary-text call is the highest-value standalone tool: it audits hand-written copy, not just generated.</p>
+  <p class="note">Decision you'll face: <b>which gating stack does the fast lane use?</b> The actor/director stack is richer (blind Director, scoring) but is 1 Actor call + N Director calls per attempt. The legacy stack's active-validator+history-guards is lighter and already has freshness baked in. For a high-frequency Slack lane you may want regex + active-validator + history-guards (cheap, freshness-aware) and reserve the full Actor/Director run for the deep-review harness lane. That's a real fork, not a config flag — worth deciding before wiring either surface.</p>
+</div>
+
+<!-- ============================================================= -->
+<h2 id="env">Config / environment</h2>
+<table>
+<tr><th>Var</th><th>Default</th><th>Effect</th></tr>
+<tr><td><code>ANTHROPIC_API_KEY</code></td><td><span class="reject">required</span></td><td>No stub mode for actor/director — fail loud if absent.</td></tr>
+<tr><td><code>HARNESS_GENERATOR_ARCH</code></td><td><code>actor</code></td><td><code>actor</code> (default) or <code>legacy</code>. Anything ≠ <code>legacy</code> → <code>actor</code>.</td></tr>
+<tr><td><code>HARNESS_ACTIVE_VALIDATOR</code></td><td><code>1</code> (on)</td><td><code>0</code> = regex-only on the legacy path (not recommended).</td></tr>
+<tr><td><code>HARNESS_ACTOR_WARMUP</code></td><td><code>none</code></td><td><code>none</code> / <code>daily_pages</code> / <code>scene_rehearsal</code>.</td></tr>
+<tr><td><code>COMMS_ACTOR_MODEL</code></td><td><code>claude-opus-4-7</code></td><td>Actor model.</td></tr>
+<tr><td><code>COMMS_DIRECTOR_MODEL</code></td><td><code>claude-sonnet-4-6</code></td><td>Director model.</td></tr>
+<tr><td><code>COMMS_ACTIVE_VALIDATOR_MODEL</code></td><td><code>claude-sonnet-4-6</code></td><td>Legacy active-validator model.</td></tr>
+</table>
+
+<!-- ============================================================= -->
+<h2 id="files">File index</h2>
+<table>
+<tr><th>File</th><th>Role</th></tr>
+<tr><td><span class="fl">harness/app/actions/generate.ts</span></td><td>Server action. Arch branch :66, <code>runActorGenerator</code> :539, legacy <code>generateForChannel</code> :348, persistence.</td></tr>
+<tr><td><span class="fl">src/actor-orchestrator.ts</span></td><td>The default pipeline. Retry loop :111, movement checks :308, selection :409, scoring :458.</td></tr>
+<tr><td><span class="fl">src/actor-director.ts</span></td><td>Actor :248 + Director :285 calls, assignment message :320, audit result shape :189, retry notes :478.</td></tr>
+<tr><td><span class="fl">src/actor-memory.ts</span></td><td>System-prompt assembly. Actor pack :146, Director pack :176, method/placement blocks :286-372.</td></tr>
+<tr><td><span class="fl">src/generator.ts</span></td><td>Legacy two-call generator. <code>generate()</code> :228, inner-work :1023, v2 prompt :510.</td></tr>
+<tr><td><span class="fl">src/validator.ts</span></td><td>Regex gates :76-189, claim contract :191-348, beat audit :441-651.</td></tr>
+<tr><td><span class="fl">src/validator-active.ts</span></td><td>Agentic LLM validator (legacy stack) :85.</td></tr>
+<tr><td><span class="fl">src/history-guards.ts</span></td><td>Freshness guards :64-194.</td></tr>
+<tr><td><span class="fl">src/orchestrator.ts</span></td><td>Legacy filter/rank/length :180-346 (naive ranking TODO :290).</td></tr>
+<tr><td><span class="fl">src/voice/infinex.ts</span></td><td>Locked voice spec: placement, 5 tempi, reserves, kernel :264, drive table :265.</td></tr>
+<tr><td><span class="fl">src/voice/types.ts</span></td><td><code>CharacterSpec</code> / <code>Tempo</code> / <code>WorkingAction</code> shapes.</td></tr>
+<tr><td><span class="fl">src/cli.ts</span></td><td>Reference non-harness caller: <code>generate</code> / <code>validate</code> subcommands.</td></tr>
+<tr><td><span class="fl">harness/app/cards/[id]/page.tsx · AttemptPanel.tsx · CandidateCard.tsx</span></td><td>What you're looking at in the UI.</td></tr>
+</table>
+
+<p class="dim" style="margin-top:40px;font-size:12px">Traced from <code>main</code> working tree, 2026-06-01. Line numbers are anchors, not exact across edits — grep the symbol if one drifts. The Actor/Director path is recent and still iterating (see HANDOVER-CODEX-actor-director-*); the legacy two-call path is stable.</p>
+
+</main>
+</div>
+</body>
+</html>

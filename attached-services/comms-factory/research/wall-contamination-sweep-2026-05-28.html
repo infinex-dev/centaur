@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wall-metaphor contamination sweep — 2026-05-28</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --p0: #ff6b6b;
+    --p1: #f0c674;
+    --p2: #58a6ff;
+    --p3: #8b949e;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1480px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 36px 0 14px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 15px; margin: 18px 0 8px; }
+  .sub { color: var(--muted); margin-bottom: 24px; }
+
+  .tldr {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--p0);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .tldr strong { color: var(--text); }
+  .tldr ul { margin: 8px 0; }
+
+  .severity-key {
+    display: flex; gap: 18px; margin: 16px 0 24px; font-size: 12px; color: var(--muted); flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px; border-radius: 10px;
+    font-size: 11px; font-weight: 600;
+    margin-right: 8px; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .badge.p0 { background: rgba(255, 107, 107, 0.20); color: var(--p0); }
+  .badge.p1 { background: rgba(240, 198, 116, 0.18); color: var(--p1); }
+  .badge.p2 { background: rgba(88, 166, 255, 0.18); color: var(--p2); }
+  .badge.p3 { background: rgba(139, 148, 158, 0.20); color: var(--p3); }
+  .badge.archived { background: rgba(74, 222, 128, 0.15); color: #4ade80; }
+
+  table.sites {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 28px;
+    font-size: 13px;
+    overflow: hidden;
+  }
+  table.sites th {
+    background: rgba(255,255,255,0.04);
+    text-align: left;
+    padding: 10px 12px;
+    color: var(--muted);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  table.sites td { padding: 12px; border-top: 1px solid var(--border); vertical-align: top; }
+  table.sites td.sev { width: 90px; }
+  table.sites td.file { font-family: var(--code-mono); font-size: 12.5px; color: var(--accent); white-space: nowrap; }
+  table.sites td.what { color: var(--muted); }
+  table.sites td.flag { width: 80px; font-size: 11px; }
+  .flag-yes { color: #4ade80; font-weight: 600; }
+  .flag-no  { color: var(--p0); font-weight: 600; }
+
+  .site-detail {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+  }
+  .site-detail .header {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
+  }
+  .site-detail .filename { font-family: var(--code-mono); font-size: 14px; color: var(--accent); }
+  .site-detail .desc { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+  pre.code {
+    background: rgba(255, 107, 107, 0.05);
+    border: 1px solid rgba(255, 107, 107, 0.3);
+    border-left: 3px solid var(--p0);
+    border-radius: 4px;
+    padding: 10px 14px;
+    font-family: var(--code-mono);
+    font-size: 12.5px;
+    line-height: 1.55;
+    margin: 8px 0 10px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+  }
+  pre.code.context {
+    background: rgba(255,255,255,0.03);
+    border-color: var(--border);
+    border-left-color: var(--border);
+  }
+  mark { background: var(--p0); color: #fff; padding: 0 3px; border-radius: 2px; font-weight: 700; }
+  .impact {
+    font-size: 12.5px;
+    background: rgba(88, 166, 255, 0.06);
+    border-left: 3px solid var(--accent);
+    padding: 8px 12px;
+    margin-top: 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .impact strong { color: var(--text); }
+  .fix {
+    font-size: 12.5px;
+    background: rgba(74, 222, 128, 0.06);
+    border-left: 3px solid #4ade80;
+    padding: 8px 12px;
+    margin-top: 8px;
+    border-radius: 0 4px 4px 0;
+  }
+  .fix strong { color: var(--text); }
+
+  .mea-culpa {
+    background: rgba(240, 198, 116, 0.08);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--p1);
+    border-radius: 6px;
+    padding: 16px 22px;
+    margin-top: 24px;
+  }
+  .mea-culpa strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Wall-metaphor contamination sweep</h1>
+  <div class="sub">2026-05-28 · operator asked: "could the contamination come from somewhere else?" Answer: yes, ~12 sites. The card.ts docstring is one of them.</div>
+
+  <div class="tldr">
+    <strong>TL;DR.</strong> The "bank vs wallet wall" / "load-bearing" / "section by section" / "stopped existing" metaphor is treated as the canonical Infinex sombre voice across <strong>multiple subsystems</strong>, not just <code>card.ts</code>. Fixing the card schema docstring is necessary but <strong>insufficient</strong> — any of the other vectors will keep injecting it.
+    <ul>
+      <li><strong>4 P0 sites</strong> — LLM-facing prompts that actively shape generation today</li>
+      <li><strong>3 P1 sites</strong> — eval / classifier prompts that shape downstream model training/judgment</li>
+      <li><strong>4 P2 sites</strong> — test fixtures + harness mock data that establish "this is what passing looks like"</li>
+      <li><strong>1 P3 site</strong> — the operator-facing character sheet (research/) that may be loaded into Claude context</li>
+    </ul>
+    Plus there's a <strong>cross-brand leak</strong>: <code>voice/cream.ts</code> (a different brand spec) carries the same "section by section" anchor vocabulary, meaning Cream's voice would also produce wall-flavored copy.
+  </div>
+
+  <div class="severity-key">
+    <span><span class="badge p0">P0</span>LLM-facing now</span>
+    <span><span class="badge p1">P1</span>eval/classifier prompts</span>
+    <span><span class="badge p2">P2</span>tests + mock data</span>
+    <span><span class="badge p3">P3</span>research / context-loaded docs</span>
+    <span><span class="badge archived">ARCHIVED</span>explicitly marked not-load-bearing</span>
+  </div>
+
+  <h2>All sites — sorted</h2>
+
+  <table class="sites">
+    <thead>
+      <tr>
+        <th>Sev</th>
+        <th>File:line</th>
+        <th>What it contains / does</th>
+        <th>Flagged in pre-mortem?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="sev"><span class="badge p0">P0</span></td><td class="file">src/card.ts:48 + :61-62</td><td class="what">Schema docstring examples (the original Bridge.xyz contamination source)</td><td class="flag"><span class="flag-yes">YES (P0.1)</span></td></tr>
+      <tr><td class="sev"><span class="badge p0">P0</span></td><td class="file">src/generator.ts:1172</td><td class="what">System prompt LITERALLY says "A 'set up the wall coming down, then land the fact' shape is canonical."</td><td class="flag"><span class="flag-no">NO — missed</span></td></tr>
+      <tr><td class="sev"><span class="badge p0">P0</span></td><td class="file">src/generator.ts:1403</td><td class="what">Stage B prompt: "naming the dissolved-wall thesis WITHOUT touching not_the_point framings"</td><td class="flag"><span class="flag-yes">YES (P0.8)</span></td></tr>
+      <tr><td class="sev"><span class="badge p0">P0</span></td><td class="file">src/voice/infinex.ts:303</td><td class="what">defaultBeatsForKind launch-tier sombre hint: "set up the wall we are taking down"</td><td class="flag"><span class="flag-yes">YES (P0.2)</span></td></tr>
+      <tr><td class="sev"><span class="badge p0">P0</span></td><td class="file">src/voice/cream.ts:22, :361</td><td class="what">CREAM brand spec contains "section by section" + the wall-anchor vocabulary inherited from Infinex (cross-brand leak)</td><td class="flag"><span class="flag-no">NO — missed</span></td></tr>
+
+      <tr><td class="sev"><span class="badge p1">P1</span></td><td class="file">eval/permutation-prompts/kernel.md, current.md, full.md, examples.md</td><td class="what">Classifier permutation prompts include the wall language as canonical sombre exemplars</td><td class="flag"><span class="flag-no">NO — missed</span></td></tr>
+      <tr><td class="sev"><span class="badge p1">P1</span></td><td class="file">eval/mirodan-competence/questions.ts:493</td><td class="what">Mirodan competence eval canonical example: "The wall between wallet and exchange has been load-bearing for years..."</td><td class="flag"><span class="flag-no">NO — missed</span></td></tr>
+
+      <tr><td class="sev"><span class="badge p2">P2</span></td><td class="file">harness/lib/mock-data.ts:158</td><td class="what">Mock card text shown in the operator's harness UI literally contains the wall metaphor</td><td class="flag"><span class="flag-no">NO — missed</span></td></tr>
+      <tr><td class="sev"><span class="badge p2">P2</span></td><td class="file">src/__tests__/actor-director.test.ts</td><td class="what">Test fixtures at lines 28, 30, 76, 146, 159, 180, 226, 268, 278, 293 — "The wall moved." / "bank wall moved off the user"</td><td class="flag"><span class="flag-yes">PARTIAL (P1.5)</span></td></tr>
+      <tr><td class="sev"><span class="badge p2">P2</span></td><td class="file">src/__tests__/generator.test.ts:260-261, :299</td><td class="what">Test cases: "Bridge dissolves the wall." / "to dissolve the wall"</td><td class="flag"><span class="flag-yes">YES (P1.5)</span></td></tr>
+
+      <tr><td class="sev"><span class="badge p3">P3</span></td><td class="file">research/infinex-character-sheet.md (lines 70, 72, 76, 104, 119)</td><td class="what">Operator-facing character document treats wall language as the canonical sombre example; loaded if referenced in Claude Code context</td><td class="flag"><span class="flag-no">NO — missed</span></td></tr>
+
+      <tr><td class="sev"><span class="badge archived">ARC</span></td><td class="file">research/infinex-brand-vocab-archive-2026-05-28.md</td><td class="what">Today's archive of stripped Infinex brand-vocab — explicitly marked NOT load-bearing</td><td class="flag">—</td></tr>
+      <tr><td class="sev"><span class="badge archived">ARC</span></td><td class="file">research/operator-hints-archived-2026-05-28.md</td><td class="what">Today's archive of dropped operator_hints — explicitly marked NOT load-bearing</td><td class="flag">—</td></tr>
+      <tr><td class="sev"><span class="badge archived">ARC</span></td><td class="file">eval/card-docstring-ab/ab-test.ts:170-179</td><td class="what">Test harness deliberately includes the wall example as the CURRENT variant baseline</td><td class="flag">—</td></tr>
+      <tr><td class="sev"><span class="badge archived">ARC</span></td><td class="file">eval/runs/midsmoke-1779767037/results.json</td><td class="what">Past run's generated outputs containing wall metaphor — historical data, not pipeline input</td><td class="flag">—</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <h2>P0 sites — the ones actively shaping LLM output today</h2>
+
+  <!-- Site 1 — generator.ts:1172 (NEW finding) -->
+  <div class="site-detail">
+    <div class="header"><span class="filename">src/generator.ts:1172</span><span class="badge p0">P0</span><span class="badge" style="background: rgba(255,107,107,0.3); color: white;">NEW FINDING</span></div>
+    <div class="desc">The X-channel beat-sequencing instruction baked into the generator system prompt. Every X-channel caption generation reads this as canonical voice shape.</div>
+    <pre class="code">parts.push("  - This is an **x** post (280 chars). 3-4 beats. Multi-paragraph. Sequence the beats so that sustained-feeling verbs (set up, reveal, mark, hold) precede quick-feeling release verbs (land, snap, sting, lift). A '<mark>set up the wall coming down, then land the fact</mark>' shape is canonical.");</pre>
+    <div class="impact"><strong>Impact:</strong> the generator's LLM is told that "set up the wall coming down" IS the canonical X-post shape. This isn't an example tucked in a docstring — it's an explicit instruction in the system prompt. Every X-channel run reads this. Likely the biggest single contamination vector after card.ts.</div>
+    <div class="fix"><strong>Fix:</strong> rewrite to brand-agnostic dramaturgy. e.g. <code>"A 'set up the prior state, then land the present-state fact' shape is canonical."</code> or remove the example shape entirely and let the verbs (set up / reveal / mark / hold → land / snap / sting / lift) carry the structural pattern.</div>
+  </div>
+
+  <!-- Site 2 — generator.ts:1403 -->
+  <div class="site-detail">
+    <div class="header"><span class="filename">src/generator.ts:1403</span><span class="badge p0">P0</span><span class="badge" style="background: rgba(74,222,128,0.15); color: #4ade80;">flagged earlier</span></div>
+    <div class="desc">Stage B drafting prompt, instructional language for the Actor.</div>
+    <pre class="code">parts.push(`- **HARD: respect not_the_point as a hard refusal, not a soft preference.** The draft must NOT contain framings or content patterns named in not_the_point. If not_the_point says "do not list currencies," then the draft contains zero currency codes (no USD, no EUR, no inline list, no examples). Refusal is the point — <mark>naming the dissolved-wall thesis</mark> WITHOUT touching the not_the_point framings is the discipline.`);</pre>
+    <div class="impact"><strong>Impact:</strong> the Actor reads "the dissolved-wall thesis" as the example thesis to imitate.</div>
+    <div class="fix"><strong>Fix:</strong> <code>"naming the core transformation WITHOUT touching the not_the_point framings is the discipline."</code></div>
+  </div>
+
+  <!-- Site 3 — infinex.ts:303 -->
+  <div class="site-detail">
+    <div class="header"><span class="filename">src/voice/infinex.ts:303</span><span class="badge p0">P0</span><span class="badge" style="background: rgba(74,222,128,0.15); color: #4ade80;">flagged earlier</span></div>
+    <div class="desc">defaultBeatsForKind launch-tier sombre hint flows into the generator's beat-sequence prompt.</div>
+    <pre class="code">{ tempo: "sombre", hint: "<mark>set up the wall we are taking down</mark> — Pressing prep" },</pre>
+    <div class="impact"><strong>Impact:</strong> every launch-tier card without explicit beats gets this hint injected.</div>
+    <div class="fix"><strong>Fix:</strong> <code>"open with the structural opposition — Pressing prep"</code></div>
+  </div>
+
+  <!-- Site 4 — card.ts -->
+  <div class="site-detail">
+    <div class="header"><span class="filename">src/card.ts:48 + :61-62</span><span class="badge p0">P0</span><span class="badge" style="background: rgba(74,222,128,0.15); color: #4ade80;">flagged earlier (A/B/C test ran on this)</span></div>
+    <div class="desc">Schema docstring examples. The A/B/C test confirmed this directly contaminates the grounder.</div>
+    <pre class="code">// Example: "to reveal that <mark>the bank wall just dissolved inside one account</mark>".
+through_action: z.string().min(1).optional(),
+
+// Example: "on the surface: a new fiat deposit rail. underneath: the
+// <mark>bank-vs-wallet wall just stopped existing for Infinex users</mark>."
+lining: z.string().min(1).optional(),</pre>
+    <div class="impact"><strong>Impact:</strong> the A/B/C test showed grounder anchoring score of 3.4/5 with this docstring; 2 of 10 outputs regurgitated the example verbatim.</div>
+    <div class="fix"><strong>Fix:</strong> Variant B (with the "refusing" trigger rewritten) per the A/B/C test results.</div>
+  </div>
+
+  <!-- Site 5 — cream.ts (cross-brand leak — NEW FINDING) -->
+  <div class="site-detail">
+    <div class="header"><span class="filename">src/voice/cream.ts:22 + :361</span><span class="badge p0">P0</span><span class="badge" style="background: rgba(255,107,107,0.3); color: white;">NEW FINDING — cross-brand leak</span></div>
+    <div class="desc">The Cream voice spec (a DIFFERENT brand) carries the same "section by section" / wall-anchor vocabulary as Infinex's pre-Laban sombre. This means Cream's grounder + generator produce wall-flavored output too.</div>
+    <pre class="code context"># cream.ts:22 (header comment)
+ * "<mark>section by section</mark>", "patient craft", "the future is patient". Cream of
+
+# cream.ts:361 (comment near sombre tempo)
+// language ("<mark>section by section</mark>", "we've been building this for years",</pre>
+    <div class="impact"><strong>Impact:</strong> Cream is a separate brand. If Cream's voice spec was copy-pasted from Infinex's pre-Laban Sombre as a starting point, it inherited the contamination. Any Cream comms generation would echo Infinex's wall vocabulary.</div>
+    <div class="fix"><strong>Fix:</strong> Cream needs its own audit pass. For now: strip "section by section" from Cream's spec. This sits alongside the deferred work on other brand specs (nigel / nick-b / nick-d / projectjin).</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>P1 sites — eval / classifier prompts</h2>
+
+  <div class="site-detail">
+    <div class="header"><span class="filename">eval/permutation-prompts/{kernel,current,full,examples}.md</span><span class="badge p1">P1</span><span class="badge" style="background: rgba(255,107,107,0.3); color: white;">NEW FINDING</span></div>
+    <div class="desc">Classifier permutation evaluation prompts that include wall language as exemplars for the Sombre tempo classification.</div>
+    <pre class="code context"># kernel.md:76 + current.md:59 (Lining example for sombre)
+"The trailblazer's awareness that this was once unthinkable. The Outer
+names <mark>a wall coming down</mark>; the Lining is 'the old wall used to keep me
+out too — I remember when this couldn't have been said.'"
+
+# kernel.md:78 + current.md:61 (vocab_anchor for sombre)
+Vocab anchor: used to, becomes, stops being, the gap between,
+<mark>section by section, load-bearing</mark>
+
+# kernel.md:80 + current.md:63 + examples.md:14 + full.md:53
+"<mark>The wallet and the venue used to be separate things. We've been taking
+that wall down section by section.</mark>"</pre>
+    <div class="impact"><strong>Impact:</strong> when the v2 classifier scores generated copy, it sees this canonical example as part of its few-shot context. It's calibrated to expect wall-language for Sombre, so it scores wall-language MORE highly. Self-reinforcing loop.</div>
+    <div class="fix"><strong>Fix:</strong> these files are eval prompts — should be updated to use Mirodan-canon literary examples (Werle / the Duke lines) instead of Infinex product narratives, OR explicitly marked as "deprecated / contains pre-Laban brand vocab; classifier should ignore." Bigger surgical task.</div>
+  </div>
+
+  <div class="site-detail">
+    <div class="header"><span class="filename">eval/mirodan-competence/questions.ts:493</span><span class="badge p1">P1</span><span class="badge" style="background: rgba(255,107,107,0.3); color: white;">NEW FINDING</span></div>
+    <div class="desc">Mirodan competence eval — a question fed to the classifier as a canonical Sombre example.</div>
+    <pre class="code context">"<mark>The wall between wallet and exchange has been load-bearing for years.
+We've been taking it down section by section.</mark>"
+
+# Followed by:
+"Per infinex-character-bundle.md §3 Weight-of-conviction example. Sombre
+tempo, Pressing → Punching (bound). Some classifiers might read it as
+Pressing → Slashing or Wringing → Slashing given the carving 'load-bearing'
+/ 'section by section' language; both are accepted as on-spec for
+Stable+Penetrating+Flow. On-spec."</pre>
+    <div class="impact"><strong>Impact:</strong> the eval question explicitly trains the classifier that the wall metaphor is canonical Infinex sombre. If we replace card.ts but leave this, the classifier will keep grading wall-language as "on-spec."</div>
+    <div class="fix"><strong>Fix:</strong> replace with a Werle / the Duke canonical literary exemplar of Sombre (Strong + Bound, pressing → punching) that doesn't inject brand vocab.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>P2 sites — tests + harness mock data</h2>
+
+  <div class="site-detail">
+    <div class="header"><span class="filename">harness/lib/mock-data.ts:158</span><span class="badge p2">P2</span><span class="badge" style="background: rgba(255,107,107,0.3); color: white;">NEW FINDING</span></div>
+    <div class="desc">Mock card text shown in the operator's harness UI as the "what good comms output looks like" reference.</div>
+    <pre class="code">"<mark>Spot used to live in a different app from your perps. We've been taking that wall down section by section.</mark>\n\nSpot on Hyperliquid is live in Infinex.\nSame passkey, same orderbook style, alongside perps.\n\nThe routing layer was the hard part — we held it back until spot felt as native as perps.\n\nA few months from now you won't think about which venue your order lives on."</pre>
+    <div class="impact"><strong>Impact:</strong> operator reviewing in the harness sees this and internalizes it as "what passing output looks like." Trains operator expectations, which then feeds back as feedback to the LLM.</div>
+    <div class="fix"><strong>Fix:</strong> rewrite the mock to use a different shape. Lower urgency than the LLM-facing sites but matters for operator-mental-model hygiene.</div>
+  </div>
+
+  <div class="site-detail">
+    <div class="header"><span class="filename">src/__tests__/actor-director.test.ts (many lines)</span><span class="badge p2">P2</span></div>
+    <div class="desc">Test fixtures embed the wall metaphor throughout actor-director tests.</div>
+    <pre class="code">// line 28: through_action: "to reveal that the bank wall moved off the user"
+// line 30: reader_prior: "bank and wallet are separate systems"
+// lines 76, 146, 159, 180, 226, 268, 278, 293: actorOutput("The wall moved.", "The wall moved.")</pre>
+    <div class="impact"><strong>Impact:</strong> developers reading the tests copy these fixtures as templates. Also: the assertion patterns are calibrated to wall-flavored output.</div>
+    <div class="fix"><strong>Fix:</strong> rewrite fixtures with generic abstract values. Touch alongside other test updates.</div>
+  </div>
+
+  <div class="site-detail">
+    <div class="header"><span class="filename">src/__tests__/generator.test.ts:260-261, :299</span><span class="badge p2">P2</span></div>
+    <div class="desc">Test case verifies the Stage B prompt contains "Bridge dissolves the wall" — the assertion itself is contamination.</div>
+    <pre class="code">thesis: "<mark>Bridge dissolves the wall.</mark>",
+through_action: "<mark>to dissolve the wall</mark>",
+obstacle: "users read 'bridge' as plumbing",
+...
+expect(captureObj.drafting?.user).toContain("<mark>Bridge dissolves the wall.</mark>");</pre>
+    <div class="impact"><strong>Impact:</strong> this test ENFORCES that the wall metaphor is in the drafting prompt — if we remove it elsewhere, this test would have to be updated.</div>
+    <div class="fix"><strong>Fix:</strong> rewrite the test thesis + assertion to a generic example. Catch when fixing card.ts.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>P3 sites — research / context-loaded docs</h2>
+
+  <div class="site-detail">
+    <div class="header"><span class="filename">research/infinex-character-sheet.md (lines 70, 72, 76, 104, 119)</span><span class="badge p3">P3</span><span class="badge" style="background: rgba(255,107,107,0.3); color: white;">NEW FINDING</span></div>
+    <div class="desc">Operator-facing character document treats wall language as the canonical Sombre exemplar. Loaded into Claude Code context whenever the operator works on voice questions.</div>
+    <pre class="code context">Line 70: "Used at the start of a longer arc, before the institutional drop. Sets up <mark>the wall that's being taken down</mark>. Carries gravity without grovelling."
+
+Line 72 (worked example):
+"<mark>The wallet and the venue used to be separate things. We've been taking that wall down section by section.</mark>"
+
+Line 76 (vocab anchors): "used to · becomes · stops being · the gap between · section by section · load-bearing · another section."
+
+Line 104 (Launch-tier sequence):
+"<mark>Set up the wall we're taking down</mark> · land the fact · justify the build decision · future-tense lift"
+
+Line 119: "<mark>We've been taking that wall down section by section.</mark>"</pre>
+    <div class="impact"><strong>Impact:</strong> this is the OPERATOR's source of truth for the Infinex voice. If the character sheet says wall-language is canonical Sombre, and the operator references it (or it gets loaded into Claude context), the contamination keeps regenerating.</div>
+    <div class="fix"><strong>Fix:</strong> this is the bigger lift — the character sheet is the operator-facing document. Either (a) rewrite using brand-agnostic Mirodan exemplars + non-Infinex literary anchors (Werle / the Duke), (b) note at the top of the character sheet that the worked examples are stripped to a brand-samples directory, (c) keep but mark as "for operator illustration only — DO NOT feed to LLM context." Deserves its own session.</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="mea-culpa">
+    <strong>Acknowledgment:</strong> the pre-mortem I wrote earlier today (<code>research/pre-mortem-non-canon-contamination-2026-05-28.md</code>) missed 5 of these 11 contamination sites: <code>generator.ts:1172</code>, <code>voice/cream.ts</code>, <code>eval/permutation-prompts/*</code>, <code>eval/mirodan-competence/questions.ts</code>, <code>harness/lib/mock-data.ts</code>, and <code>research/infinex-character-sheet.md</code>. The pre-mortem audited the Actor/Director architecture for non-canon contamination but didn't sweep specifically for the wall-metaphor token cluster across the whole tree. The operator's question — "could the contamination come from somewhere else?" — exposed the gap. Good catch.
+  </div>
+
+  <h2>Recommendation</h2>
+  <div class="tldr" style="border-left-color: #4ade80;">
+    <strong>Sweep all P0 sites in one commit, then ship.</strong> Fixing card.ts alone leaves ~4 other active LLM-facing contamination vectors. The clean cohort is:
+    <ol>
+      <li><strong>card.ts:48 + :61-62</strong> — apply Variant B' (refined, no "refusing" trigger)</li>
+      <li><strong>generator.ts:1172</strong> — replace "set up the wall coming down, then land the fact" with brand-agnostic dramaturgy</li>
+      <li><strong>generator.ts:1403</strong> — replace "dissolved-wall thesis" with "core transformation"</li>
+      <li><strong>voice/infinex.ts:303</strong> — sombre hint becomes "open with the structural opposition"</li>
+      <li><strong>voice/cream.ts:22, :361</strong> — strip wall-anchor vocab from Cream's comments + samples (separate cross-brand leak)</li>
+    </ol>
+    P1 (eval prompts), P2 (tests + mock), P3 (character sheet) can be deferred to follow-up sessions — they won't actively re-contaminate the next live run, but they're each a future re-contamination risk.
+    <br><br>
+    <strong>Plus the other queued changes</strong> from <code>research/changes-preview-2026-05-28.html</code> (<code>actor-director.ts:429</code> un-hardcoding "Infinex character" + Stage A/B rename in generator.ts) — bundle them into the same commit since they all touch only LLM-facing strings.
+  </div>
+
+</div>
+</body>
+</html>

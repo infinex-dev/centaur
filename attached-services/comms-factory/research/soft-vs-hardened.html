@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Infinex voice — soft vs hardened</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    color: #1a1a1a;
+    background: #fafaf9;
+    margin: 0;
+    padding: 32px 24px 80px;
+    line-height: 1.45;
+  }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  .lead { color: #555; margin: 0 0 32px; font-size: 14px; }
+  h2 { font-size: 16px; margin: 32px 0 4px; }
+  .explain { color: #555; font-size: 13px; margin: 0 0 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; border: 1px solid #ddd; table-layout: fixed; }
+  th, td { padding: 10px 12px; vertical-align: top; text-align: left; border-bottom: 1px solid #eee; }
+  th { background: #f3f3f1; font-weight: 600; color: #333; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; position: sticky; top: 0; z-index: 1; }
+  td.id { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-weight: 600; color: #444; width: 44px; }
+  td.job { color: #555; width: 130px; font-size: 11px; }
+  td.text { width: 220px; }
+  td.text.og { font-style: italic; color: #1a1a1a; background: #fdfaf3; border-left: 3px solid #f0c870; padding-left: 10px; }
+  td.side { width: auto; }
+  td.drive { width: 96px; text-align: center; }
+  td.diff { width: 90px; text-align: center; }
+  .tempo-row { font-size: 11px; color: #333; margin-bottom: 4px; line-height: 1.6; }
+  .tempo-row code { background: #eef0f3; padding: 1px 5px; border-radius: 3px; font-size: 11px; color: #1a3a6b; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .tempo-row .arrow { color: #999; }
+  .label { color: #777; font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .conf { color: #888; font-size: 10px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .verdict-row { margin-bottom: 6px; }
+  .rationale { color: #333; font-size: 11px; line-height: 1.5; background: #fafafa; padding: 6px 8px; border-left: 2px solid #ddd; border-radius: 2px; }
+  .intent { color: #555; font-size: 11px; margin-bottom: 6px; line-height: 1.5; background: #fafafa; padding: 6px 8px; border-left: 2px solid #c0d0e0; }
+  .replacement { color: #0a0a0a; font-size: 13px; line-height: 1.45; background: #f3fbf3; padding: 8px 10px; border-left: 3px solid #4caf7a; margin-top: 6px; }
+  .meta { color: #888; font-size: 10px; font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  section { margin-bottom: 28px; }
+  footer { color: #999; font-size: 11px; margin-top: 40px; }
+</style>
+</head>
+<body>
+<h1>Infinex voice validator — soft vs hardened</h1>
+<p class="lead">2026-05-15 · Soft = validator allows all 12 Mirodan tempi as primary classifications. Hardened = restricted to the 5 main locked tempi (Commanding · Practical · Sombre · Irradiant · Sociable). Reserve / beat-only tempi (Self-contained, Receptive, Overpowering, Diffused, Egocentric, Altruistic, Unsociable) only pass under Soft.</p>
+<section>
+    <h2>1. Homepage tempo-fit audit (Sonnet validator only)</h2>
+    <p class="explain">For each shipped homepage string, the validator blind-classifies it. <b>Soft</b> = validator allows all 12 tempi (main + reserve). <b>Hardened</b> = validator only accepts the 5 main tempi (Commanding · Practical · Sombre · Irradiant · Sociable); strings reading as Self-contained etc. are flagged as off-rotation. <b>Drive</b> is parsed from the hardened validator's rationale prose — green = on-spec for Infinex (spell / vision / spell-vision), red = off-spec (passion / doing-passion).</p>
+    <table>
+      <thead><tr><th>ID</th><th>Job</th><th>OG (shipped)</th><th>Drive</th><th>Soft validator</th><th>Hardened validator</th><th>Diff</th></tr></thead>
+      <tbody><tr>
+      <td class="id">H01</td>
+      <td class="job">hero</td>
+      <td class="text og">Change the way you crypto.</td>
+      <td class="drive"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:0.02em;">passion</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.72)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">The imperative is punching in shape but has no pressing prep — it opens mid-air. More critically, the aspiration framing ('change the way'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.75)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">The imperative 'Change the way you…' is a rallying-cry shape — it carries Passion (urgency, behavioural transformation appeal</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">H02</td>
+      <td class="job">value_prop</td>
+      <td class="text og">Unified portfolio.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.85)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">A two-word declarative label with no hedging or warmth. Pressing prep is implicit in the surface context; Punching release in the hard stop. Matches Commanding's 'locked, decisive, no ornament' feel.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.72)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Two-word label with no ornament, no emotional hook. Operates as a decisive institutional descriptor — the Pressing setup (what it is</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">H03</td>
+      <td class="job">value_prop</td>
+      <td class="text og">Multi-provider trading.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.85)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Two-word declarative, no ornament. Hard stop. Institutional label drop. Commanding.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.70)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Noun-phrase label. Concise, institutional. Pressing → Punching motor — states the fact and stops. No emotional or aspiration framing.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">H04</td>
+      <td class="job">value_prop</td>
+      <td class="text og">Serious Opsec.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.82)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Two-word label. 'Serious' carries low-key pressing weight; 'Opsec.' is the punching release. Dry, locked, no ornament.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.70)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Same sparse noun-phrase pattern. 'Serious' adds mild Pressing weight before 'Opsec' lands as the Punching close. No off-spec drive.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">H05</td>
+      <td class="job">cta</td>
+      <td class="text og">Get Infinex</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.80)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Imperative label with no urgency dressing. Pure Punching release. Commanding.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.72)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Short imperative CTA. Pressing into Punching — a command without urgency theatre. Consistent with Commanding's 'ruler issuing a position' feel.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">H06</td>
+      <td class="job">section_head</td>
+      <td class="text og">See everything we've shipped, and everything that's coming up</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>irradiant</code> <span class="arrow">→</span> <span class="label">read as</span> <code>self-contained</code> <span class="conf">(conf 0.65)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MISMATCH</span> <span style="color:#444;font-size:11px;">irradiant</span></div>
+        <div class="rationale">FAIL: Tempo mismatch: declared Irradiant but motor is Gliding → Dabbing (Self-contained</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>irradiant</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.68)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">FAIL: Reserve tempo: reads as Self-contained (out-of-rotation</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">H07</td>
+      <td class="job">section_head</td>
+      <td class="text og">Explore key features</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.70)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Imperative label. Pressing approach (directional</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.75)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">Wayfinding imperative with no factual anchor. The motor is a light Gliding → Dabbing — smooth approach with soft touch. That is Self-contained, not Commanding. Self-contained is out of rotation.</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H08</td>
+      <td class="job">feature_description</td>
+      <td class="text og">Passkey-first, gas-abstracted wallet with support for 20+ chains.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>practical</code> <span class="arrow">→</span> <span class="label">read as</span> <code>practical</code> <span class="conf">(conf 0.75)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Technical specification enumeration with a precise quantifier ('20+ chains'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>practical</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.72)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">Attribute list with no reasoning arc. The motor is Gliding → Dabbing — smooth delivery of information without the Wringing tension of Practical. Self-contained reserve tempo. No main-rotation tempo fits.</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H09</td>
+      <td class="job">feature_description</td>
+      <td class="text og">Swap. Perps. Earn. Predict. Multi-provider. Multi-chain.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.90)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Staccato enumeration. Each noun is a Punching release; the sequence itself is the Pressing buildup. Locked, decisive, no ornament. Commanding.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.82)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Staccato list — each period is a Punching closure. The accumulation presses, the final pair ('Multi-provider. Multi-chain.'</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">H10</td>
+      <td class="job">feature_description</td>
+      <td class="text og">More than view-only. Import or connect existing wallets and take control.</td>
+      <td class="drive"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:0.02em;">passion</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>practical</code> <span class="arrow">→</span> <span class="label">read as</span> <code>practical</code> <span class="conf">(conf 0.78)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Opens by reframing a known limitation ('view-only'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>practical</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.65)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">FAIL: Reserve tempo (Self-contained</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H11</td>
+      <td class="job">feature_description</td>
+      <td class="text og">Connect securely to any dapp and take your account with you.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>practical</code> <span class="arrow">→</span> <span class="label">read as</span> <code>practical</code> <span class="conf">(conf 0.72)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Two conditions compressed into a single capability line. Working through complexity (secure + portable + dapp-compatible</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>practical</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.67)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">Smooth benefit statement. Gliding → Dabbing motor — no sustained pressure, no carved answer. Self-contained out-of-rotation reserve. The freedom framing ('take your account with you'</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H12</td>
+      <td class="job">feature_description</td>
+      <td class="text og">Passkey to Ledger to Safe. Choose the Opsec to suit your spec.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>off-spec</code> <span class="arrow">→</span> <span class="label">read as</span> <code>practical</code> <span class="conf">(conf 0.74)</span></div>
+        <div class="verdict-row"><span style="background:#7a5b1f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">OFF-SPEC</span> <span style="color:#444;font-size:11px;">practical</span></div>
+        <div class="rationale">Options enumerated, then a decisive framing of user agency. Wringing through complexity, Slashing to the choice. Practical.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>off-spec</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.76)</span></div>
+        <div class="verdict-row"><span style="background:#7a5b1f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">OFF-SPEC</span> <span style="color:#444;font-size:11px;">commanding</span></div>
+        <div class="rationale">First clause presses across a spectrum; second clause punches with a decisive imperative. Locked, no emotional pull, factual. Classic Commanding Pressing → Punching shape.</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">H13</td>
+      <td class="job">feature_description</td>
+      <td class="text og">Switch to Infinex and earn crates and cashback on every trade.</td>
+      <td class="drive"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:0.02em;">passion</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>off-spec</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.68)</span></div>
+        <div class="verdict-row"><span style="background:#7a5b1f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">OFF-SPEC</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">FAIL: Off-spec drive: Passion. Reward/incentive-switching framing ('earn crates and cashback on every trade'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>off-spec</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.72)</span></div>
+        <div class="verdict-row"><span style="background:#7a5b1f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">OFF-SPEC</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">FAIL: Off-spec drive: Passion activated by incentive/reward urgency framing ('Switch… earn… every trade'</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">H14</td>
+      <td class="job">positioning</td>
+      <td class="text og">One super app.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>off-spec</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.82)</span></div>
+        <div class="verdict-row"><span style="background:#7a5b1f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">OFF-SPEC</span> <span style="color:#444;font-size:11px;">commanding</span></div>
+        <div class="rationale">'One' performs compression (pressing</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>off-spec</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.60)</span></div>
+        <div class="verdict-row"><span style="background:#7a5b1f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">OFF-SPEC</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">'Super app' is a marketing category claim — confident-light, no factual anchor, no motor arc. Closest reserve tempo is Self-contained. Does not carry the factual press of Commanding or the reasoning of Practical.</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">H15</td>
+      <td class="job">feature_description</td>
+      <td class="text og">Trade perps in-app with up to 40x leverage</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.80)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Factual capability drop with a precise quantifier. Pressing into the spec ('Trade perps in-app'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.70)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">Attribute-spec sentence. Gliding → Dabbing motor — smooth delivery of a single feature fact with no buildup or decisive punch. Self-contained reserve tempo. Not Commanding.</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H16</td>
+      <td class="job">partner_credit</td>
+      <td class="text og">Powered by Hyperliquid</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">read as</span> <code>sociable</code> <span class="conf">(conf 0.85)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Smooth, light attribution. Gliding approach; Dabbing acknowledgement. No urgency, no warmth excess. Sociable register.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.65)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">Passive attribution phrase — 'Powered by X' is a badge/label with no relational warmth or motor arc. Self-contained reserve tempo. Sociable requires active relational framing ('Working with', 'Built with', 'Thanks to'</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H17</td>
+      <td class="job">partner_credit</td>
+      <td class="text og">Powered by Polymarket</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">read as</span> <code>sociable</code> <span class="conf">(conf 0.85)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Identical motor to H16. Light attribution glide with a dabbing touch. Sociable.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.65)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">Same pattern as H16. Passive attribution with no relational motor. Self-contained out-of-rotation reserve.</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H18</td>
+      <td class="job">trust_line</td>
+      <td class="text og">Your keys, secured by Turnkey</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">read as</span> <code>sociable</code> <span class="conf">(conf 0.80)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Opens on user-ownership ('your keys'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.62)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">Trust-badge with passive attribution. 'Your keys' ownership framing edges toward Passion (autonomy/empowerment appeal</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H19</td>
+      <td class="job">value_prop</td>
+      <td class="text og">Phishing resistant security</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.83)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Specific security descriptor delivered as a label. Pressing into the threat category, Punching with the capability claim. Commanding.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">read as</span> <code>commanding</code> <span class="conf">(conf 0.71)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Noun-phrase label — no ornament, no motor excess. Pressing (category: security</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">H20</td>
+      <td class="job">value_prop</td>
+      <td class="text og">See what privileges you're granting</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>practical</code> <span class="arrow">→</span> <span class="label">read as</span> <code>practical</code> <span class="conf">(conf 0.70)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">MATCH</span> <span style="color:#444;font-size:11px;"></span></div>
+        <div class="rationale">Frames an implicit problem (blind permission grants</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">declared</span> <code>practical</code> <span class="arrow">→</span> <span class="label">read as</span> <code>unknown</code> <span class="conf">(conf 0.68)</span></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">UNKNOWN</span> <span style="color:#444;font-size:11px;">unknown</span></div>
+        <div class="rationale">Short instructional imperative — smooth delivery of a UI action prompt. No Wringing tension, no carved answer, no tradeoff reasoning. Self-contained out-of-rotation reserve tempo.</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr></tbody>
+    </table>
+  </section>
+<section>
+    <h2>2. Existing platform / dogfood copy audit (Sonnet validator only)</h2>
+    <p class="explain">Same validator pass, but on platform / website strings dogfooded from the 45-minute ElevenLabs transcript audit. Rows S14–S18 are the audit's proposed replacements — they should pass cleanly as Commanding. <b>Drive</b> column same convention as section 1.</p>
+    <table>
+      <thead><tr><th>ID</th><th>Surface</th><th>OG (shipped)</th><th>Drive</th><th>Soft validator</th><th>Hardened validator</th><th>Diff</th></tr></thead>
+      <tbody><tr>
+      <td class="id">S01</td>
+      <td class="job">Website homepage hero</td>
+      <td class="text og">Change the way you crypto.</td>
+      <td class="drive"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:0.02em;">passion</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.72)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive: Passion. Urgency/transformation-as-excitement framing inconsistent with Spell-Vision character.: Replace with a Commanding or Irradiant line that states a fact or names a future state — e.g. 'One account. Every chain.' or 'A few months from now, you won't think about which chain your coins are on.'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.82)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive activated — Passion. Motivational/hype imperative inconsistent with Spell-Vision character placement.: Replace with a Commanding fact-drop or Irradiant future-state line. e.g. 'One account. Every chain.' or 'A few months from now, you'll run DeFi from one place.'</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S02</td>
+      <td class="job">Import wallet pitch</td>
+      <td class="text og">Give your wallet Infinex superpowers.</td>
+      <td class="drive"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:0.02em;">passion</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.78)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive: Passion. 'Superpowers' is hype-theatre inconsistent with the character's Spell-Vision drive.: Name what actually happens: e.g. 'Import an external wallet. Spot, perps, and yield in one place.'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.78)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive activated — Passion. 'Superpowers' is hype-theatre vocabulary inconsistent with Spell-Vision/penetrating character.: Rewrite as Commanding or Irradiant. e.g. 'Your wallet, now inside Infinex.' or 'Import your wallet. Your positions, your history — visible from one place.'</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S03</td>
+      <td class="job">Import wallet pitch</td>
+      <td class="text og">Import to unlock seamless trading, management and multi-chain access.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.60)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive: Passion. Benefit-stacking with 'seamless' reads as hype-theatre uplift rather than Spell-Vision.: Ground in a real claim: e.g. 'Import your wallet. Your positions and balances appear here alongside everything else in your Infinex account.'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.72)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Reads as Self-contained reserve tempo (Gliding→Dabbing, confident-light informational). Off-rotation for this character. Also, 'seamless' is generic-marketing filler inconsistent with penetrating aspect.: Make it Commanding or Irradiant with concrete specificity. e.g. 'Import your wallet. Spot, perps, yield — one view…</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S04</td>
+      <td class="job">Import wallet — scanning</td>
+      <td class="text og">Hang tight while we check.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.65)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive: Passion (via performative casual warmth). No motor arc; social filler inconsistent with penetrating, flow-bound character.: Replace with a flat state-descriptor: e.g. 'Scanning wallet activity.' or 'Checking wallet.'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.75)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Reads as Self-contained reserve tempo — colloquial filler, no motor pair from any main tempo. Off-rotation.: Commanding microcopy: 'Scanning wallet.' or 'Checking now.' — Pressing→Punching, minimal, functional, in-character.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S05</td>
+      <td class="job">Import wallet — success</td>
+      <td class="text og">Nice one!</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.70)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive: Passion. Enthusiasm-theatre inconsistent with Spell-Vision character.: Replace with a state-completing declarative: e.g. 'Wallet imported.' or 'Done.'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.85)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec register — social cheer. Reads as Receptive reserve tempo or Passion-warmth activation. Neither is in rotation.: Commanding micro-fact: 'Wallet imported.' — delivers the landing without the cheer. Or Irradiant: 'Wallet imported. Your positions are now visible here.'</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S06</td>
+      <td class="job">External wallets card</td>
+      <td class="text og">Bring your wallets into Infinex. Enjoy the seamless experience you love.</td>
+      <td class="drive"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:0.02em;">passion</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.62)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive: Passion. 'The seamless experience you love' is emotional-payoff uplift theatre inconsistent with Spell-Vision.: Drop the second sentence or replace with a factual completion: e.g. 'Bring your wallets into Infinex. Your positions appear alongside your Infinex account.'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.70)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive — Passion. Aspirational flattery ('experience you love') inconsistent with Spell-Vision character. 'Seamless' is a generic filler recurring across the set.: Remove the second sentence entirely, or replace with a concrete benefit: 'Your full balance, visible in one place.'</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S07</td>
+      <td class="job">Product subtitle</td>
+      <td class="text og">Infinex, a crypto super app.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.68)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive: Passion. 'Super app' is a hype-category descriptor inconsistent with Spell-Vision.: Replace with a factual or vision-grounded descriptor: e.g. 'Infinex. One account across every chain.' or 'Infinex. Spot, perps, and yield from one passkey.'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.80)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Self-contained reserve tempo — confident-light taxonomy label, no vision or conviction. Off-rotation.: Sombre or Commanding: e.g. 'One account. Every chain. One key.' — or a short Sombre thesis: 'The wallet and the venue, together.'</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S08</td>
+      <td class="job">Perps blurb</td>
+      <td class="text og">Track your positions and PnL at a glance.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>self-contained</code> <span class="conf">(conf 0.80)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Short declarative feature description. Smooth approach (gliding) landing on a precise function (dabbing — 'at a glance'). No vision pull, no emotional weight, no pressing or wringing. Reads as confident-light informational — Self-contained.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.77)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Self-contained reserve tempo — informational feature bullet, no main-tempo motor pair. Off-rotation.: Irradiant or Commanding: 'Your positions and PnL — one view, all venues.' or 'Perps. Spot. Yield. One screen.'</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">S09</td>
+      <td class="job">Perps marketing</td>
+      <td class="text og">Seamless on desktop and mobile.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.65)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Off-spec drive: Passion (via empty uplift adjective 'seamless'). Inconsistent with Spell-Vision character.: State the fact directly: e.g. 'Available on desktop and mobile.' or simply 'Desktop and mobile.'</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>unknown</code> <span class="conf">(conf 0.82)</span></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span></div>
+        <div class="rationale">Self-contained reserve register. 'Seamless' is generic Passion-reassurance filler. Off-rotation.: Drop or replace with a Commanding fact: 'Desktop and mobile. Same account, same passkey.' — carries the Pressing→Punching motor without filler.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S10</td>
+      <td class="job">Send error</td>
+      <td class="text og">You can't send to your own Infinex account address. Use Move instead.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.82)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Two declaratives: constraint (sustained press), instruction (punching release). 'Use Move instead' is the decisive landing. Locked, no ornament. Reads as Commanding error-state copy.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.85)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Fact-drop plus decisive redirect. Pressing (constraint stated flatly) → Punching (single clear action). No ornament, no apology. Fits Commanding motor cleanly.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S11</td>
+      <td class="job">Deposit BTC note</td>
+      <td class="text og">Only native BTC is supported. Other Bitcoin assets won't be withdrawable until support is added.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.78)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Constraint-first structure, decisive consequence statement. No ornament, no warmth, no vision pull. Commanding beat for a deposit note.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.83)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Constraint declared flatly, consequence stated without softening. Pressing→Punching. Commanding micro-structure: fact, then implication. No ornament.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S12</td>
+      <td class="job">Deposit address warning</td>
+      <td class="text og">This address may change. Always copy the address from here before each deposit.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.83)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Fact statement (pressing) → imperative directive (punching). 'Always copy the address from here before each deposit' is a locked, decisive instruction. Classic Commanding pattern.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.88)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Risk fact + imperative instruction, both delivered without ornament. Double Pressing→Punching structure. Commanding and fully in-character.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S13</td>
+      <td class="job">Earn label</td>
+      <td class="text og">Liquid staking</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>self-contained</code> <span class="conf">(conf 0.75)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Pure label — light, direct, no motor build needed. Dabbing: a precise, placed touch with no approach ornament. Self-contained.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.70)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Two-word label — Pressing without an explicit Punching release, as expected for a UI category tag. Dry, zero ornament. Consistent with Commanding minimal form. Confidence is moderate because the sample is very short, but there is no evidence of off-spec drive or reserve-tempo drift.</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">S14</td>
+      <td class="job">Audit-proposed rewrite</td>
+      <td class="text og">Import an external wallet.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.85)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Short imperative declarative. 'Import' is the punching release; 'an external wallet' is the precise object. No ornament. Fits Commanding exactly.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.80)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Imperative + object — Pressing (external wallet, outside the system) → Punching (import, decisive single action). Commanding minimal form. In-character.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S15</td>
+      <td class="job">Audit-proposed rewrite</td>
+      <td class="text og">Connect via seed phrase or private key.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>self-contained</code> <span class="conf">(conf 0.80)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Smooth approach ('connect via') landing on a precise method ('seed phrase or private key'). Confident-light informational. Self-contained.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.82)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Flat instruction naming the exact mechanism. Pressing (the 'via' clause — how) → Punching (connect — the action). Commanding register. In-character.</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">S16</td>
+      <td class="job">Audit-proposed rewrite</td>
+      <td class="text og">Scanning wallet activity.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.83)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Gerund + precise noun. States the current action without ornament. Commanding micro-beat — the press is the sustained scan, the word 'activity' lands the object cleanly.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.78)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Present-participle state label — Pressing sustained action, no release yet (intentional for an in-progress state). No ornament, no filler. Commanding minimal form. In-character.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S17</td>
+      <td class="job">Audit-proposed rewrite</td>
+      <td class="text og">Wallet imported.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.90)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Past-passive declarative. 'Wallet imported.' is a clean punching release with no prep needed — the action was the prep; this is the landing. Locked, decisive, no ornament. Commanding.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.88)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Past-tense fact-drop — the canonical Commanding success micro-form. Subject + past-participle. Pressing→Punching. In-character.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">S18</td>
+      <td class="job">Audit-proposed rewrite</td>
+      <td class="text og">Copy a fresh address for every deposit.</td>
+      <td class="drive"><span style="color:#bbb;font-size:11px;">—</span></td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.85)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Imperative ('copy') + precise object ('a fresh address') + precise condition ('for every deposit'). Sustained precision in the qualifier → punching release in the directive. Commanding.</div>
+      </td>
+      <td class="side">
+        <div class="tempo-row"><span class="label">classified</span> <code>commanding</code> <span class="conf">(conf 0.86)</span></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span></div>
+        <div class="rationale">Imperative instruction with embedded risk-qualifier ('fresh'). Pressing (risk tension in 'fresh') → Punching ('Copy… every deposit' — absolute habitual action). Commanding. In-character.</div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr></tbody>
+    </table>
+  </section>
+<section>
+    <h2>3. Intent-strip rewrite loop (3 LLM agents: Sonnet extractor → Opus generator → Sonnet validator)</h2>
+    <p class="explain">Each shipped string is reverse-engineered into job/intent (no phrasing leak), then Opus writes a replacement from intent + character spec only (never sees the shipped text), then Sonnet blind-classifies the replacement. <b>Soft</b> = validator allows all 12 tempi. <b>Hardened</b> = validator restricted to 5 main tempi. Both runs constrain the generator to 5 main tempi.</p>
+    <table>
+      <thead><tr><th>ID</th><th>Current</th><th>Soft regen</th><th>Hardened regen</th><th>Diff</th></tr></thead>
+      <tbody><tr>
+      <td class="id">H01</td>
+      <td class="text og">Change the way you crypto.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a first-time visitor what Infinex's singular product position is, in one decisive line that defines the category shift the product represents for anyone who holds or moves digital assets.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.00</span></div>
+        <div class="replacement">One account for everything onchain.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a first-time visitor what Infinex's fundamental product position is in a single decisive line that names what the platform does differently, without describing how the user should feel about it.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>irradiant</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>irradiant</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.00</span></div>
+        <div class="replacement">One account. Stop thinking about which chain, which venue, which asset.</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">H02</td>
+      <td class="text og">Unified portfolio.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a homepage visitor what core problem Infinex solves for their assets — that previously scattered holdings are now accessible and managed in one place.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.00</span></div>
+        <div class="replacement">One account.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a homepage visitor what core problem Infinex solves for their assets — that all holdings across contexts are accessible and managed in one place.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.33</span></div>
+        <div class="replacement">Unified custody.</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H03</td>
+      <td class="text og">Multi-provider trading.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a first-time visitor what core product mechanic Infinex offers by naming the structural feature that distinguishes how orders are executed across the platform.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.20</span></div>
+        <div class="replacement">Multi-venue execution</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a first-time visitor what core platform mechanic enables broader market access by naming the architectural feature (aggregation across multiple liquidity sources), not the outcome feeling.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.00</span></div>
+        <div class="replacement">One account. Every venue's liquidity.</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H04</td>
+      <td class="text og">Serious Opsec.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a homepage visitor that the platform treats user security and operational protection as a core, non-negotiable product attribute — not an afterthought.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.00</span></div>
+        <div class="replacement">Security by default</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a homepage visitor that Infinex treats the security of their assets and operations as a non-negotiable, first-class product commitment — named as a concrete capability, not a feeling.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.00</span></div>
+        <div class="replacement">Passkey-secured custody</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H05</td>
+      <td class="text og">Get Infinex</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> </div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code></code> <span class="arrow">→</span> <span class="label">verifier read</span> <code></code></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;"></span> <span class="meta">retries  · sim </span></div>
+        <div class="replacement"></div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Direct a homepage visitor to begin acquiring or activating access to the product.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.00</span></div>
+        <div class="replacement">Open account</div>
+      </td>
+      <td class="diff"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">LOOSENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H06</td>
+      <td class="text og">See everything we've shipped, and everything that's coming up</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Orient the visitor to a section that surfaces the full product timeline — both what has already been delivered and what is planned next — so they can assess progress and momentum at a glance.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.14</span></div>
+        <div class="replacement">Shipped. And what's next.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Orient the visitor to a section that surfaces both completed releases and the forward-looking roadmap in a single combined view.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 2 · sim 0.10</span></div>
+        <div class="replacement">Shipped this season. More already in the pipe.</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H07</td>
+      <td class="text og">Explore key features</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Orient the visitor to the start of a section that lists the product's primary capabilities, so they know what kind of information follows.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.00</span></div>
+        <div class="replacement">The full stack.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Orient the visitor to the start of a section that lists the product's defining capabilities, so they understand what the section contains before reading individual items.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.00</span></div>
+        <div class="replacement">One account. Every market.</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H08</td>
+      <td class="text og">Passkey-first, gas-abstracted wallet with support for 20+ chains.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Communicate to a prospective user what the wallet's three core technical properties are: its authentication method, its fee model, and its multi-network reach — so they can assess compatibility with their needs without clicking further.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>unknown</code></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span> <span class="meta">retries 2 · sim 0.18</span></div>
+        <div class="replacement">One passkey. No gas. Nine networks, one account.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a prospective user what technical properties define the wallet, specifically its authentication method, fee model, and multi-network reach, so they can assess compatibility with their needs.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>practical</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>practical</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.21</span></div>
+        <div class="replacement">Here's what one wallet actually means: a passkey signs every transaction, gas is abstracted away, and 20+ networks behave as one account.</div>
+      </td>
+      <td class="diff"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">LOOSENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H09</td>
+      <td class="text og">Swap. Perps. Earn. Predict. Multi-provider. Multi-chain.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a first-time visitor which core product capabilities and infrastructure dimensions are available on the platform, so they can immediately assess whether it covers their trading and yield needs.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.15</span></div>
+        <div class="replacement">Perps. Spot. Yield. Prediction markets. Every chain. Every venue.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a first-time visitor what categories of financial actions and infrastructure capabilities the platform covers, so they can self-assess whether it meets their needs before reading further.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>unknown</code></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span> <span class="meta">retries 2 · sim 0.13</span></div>
+        <div class="replacement">One account. Spot, perps, yield, stablecoins, smart routing, every chain — all of it.</div>
+      </td>
+      <td class="diff"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TIGHTENED</span></td>
+    </tr>
+<tr>
+      <td class="id">H10</td>
+      <td class="text og">More than view-only. Import or connect existing wallets and take control.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a visitor what the wallet import feature enables them to do with their existing wallets — specifically that it goes beyond passive read access and grants active, full capability over those wallets within the product.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.10</span></div>
+        <div class="replacement">Your existing wallets are live in Infinex. Bring them in and sign, send, and trade from the same account.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a visitor what the wallet import feature enables them to do with their existing wallets — specifically that the capability goes beyond passive access into active ownership and action.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>irradiant</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>irradiant</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.06</span></div>
+        <div class="replacement">What this lets you do: bring every address you already own into one place. Import or connect a wallet and each one becomes somewhere you can sign, send, and act from — not just watch.</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">H11</td>
+      <td class="text og">Connect securely to any dapp and take your account with you.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Explain to a prospective user that their Infinex account is portable and works with the broader decentralized application ecosystem, without requiring repeated setup or losing access to their assets.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.09</span></div>
+        <div class="replacement">One passkey. Every dapp. No new accounts.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a visitor what the wallet connectivity feature does for them — specifically that their account works across the decentralized application ecosystem and travels with them wherever they go within it.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>irradiant</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>irradiant</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.12</span></div>
+        <div class="replacement">Soon you won't think about connecting wallets — your account moves with you across every dapp, already signed in.</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">H12</td>
+      <td class="text og">Passkey to Ledger to Safe. Choose the Opsec to suit your spec.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Inform a visitor that the platform supports a spectrum of security configurations, from lightweight to institutional-grade, and that the user controls which level they adopt.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.00</span></div>
+        <div class="replacement">Passkeys, MPC, hardware wallets, multi-sig. You pick the tier.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Communicate to a prospective user that the platform supports a range of security custody models — from lightweight to hardware to multisig — and that the user selects the tier that matches their own security requirements.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>practical</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>practical</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.04</span></div>
+        <div class="replacement">Passkey, hardware wallet, or multisig — each is a real custody path inside the same account. Pick the tier that matches your own threat model, not someone else's default.</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">H13</td>
+      <td class="text og">Switch to Infinex and earn crates and cashback on every trade.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a visitor what tangible incentives they receive for trading on the platform, naming both the reward types and the trigger action.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>irradiant</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>unknown</code></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span> <span class="meta">retries 2 · sim 0.00</span></div>
+        <div class="replacement">What this lets you do: keep trading, and your account is already collecting Patron Passes and stacking fee rebates in the background — one activity, two returns showing up on their own.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Inform a prospective user that migrating to the platform unlocks a dual-reward system tied to trading activity, so they understand the concrete benefit of switching before they sign up.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>unknown</code></div>
+        <div class="verdict-row"><span style="background:#a83232;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">FAIL</span> <span class="meta">retries 2 · sim 0.14</span></div>
+        <div class="replacement">Every qualifying trade earns a Patron Pass and a fee rebate. No exceptions.</div>
+      </td>
+      <td class="diff"><span style="background:#a06a00;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">TEMPO SHIFT</span></td>
+    </tr>
+<tr>
+      <td class="id">H14</td>
+      <td class="text og">One super app.</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a first-time visitor what Infinex is by naming its product category in a single definitive fragment that establishes its scope and singular nature.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.00</span></div>
+        <div class="replacement">The everything account.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a first-time visitor what Infinex is by naming its product category as a single unified platform, in a way that communicates scope and consolidation rather than a feeling.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 2 · sim 0.17</span></div>
+        <div class="replacement">One account. Every venue.</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H15</td>
+      <td class="text og">Trade perps in-app with up to 40x leverage</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Communicate to a prospective user that the platform supports leveraged perpetual futures trading natively, and specify the maximum leverage multiplier available.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 2 · sim 0.18</span></div>
+        <div class="replacement">Perps are live in Infinex. Up to 25x leverage, same account, same passkey.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Inform a prospective user that the platform supports leveraged perpetual futures trading natively within the application, and specify the maximum leverage multiplier available.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.22</span></div>
+        <div class="replacement">Perps are live in Infinex. Up to 50x, native to the app.</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H16</td>
+      <td class="text og">Powered by Hyperliquid</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> </div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code></code> <span class="arrow">→</span> <span class="label">verifier read</span> <code></code></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;"></span> <span class="meta">retries  · sim </span></div>
+        <div class="replacement"></div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> </div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code></code> <span class="arrow">→</span> <span class="label">verifier read</span> <code></code></div>
+        <div class="verdict-row"><span style="background:#6b6b6b;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;"></span> <span class="meta">retries  · sim </span></div>
+        <div class="replacement"></div>
+      </td>
+      <td class="diff"><span style="color:#999;font-size:11px">unchanged</span></td>
+    </tr>
+<tr>
+      <td class="id">H17</td>
+      <td class="text og">Powered by Polymarket</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell the visitor which third-party platform supplies the underlying data or functionality for a specific feature on this surface, so they can attribute the source correctly.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>sociable</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.33</span></div>
+        <div class="replacement">Powered by Hyperliquid</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell the visitor which third-party platform supplies the underlying data or infrastructure for a specific feature, so they can attribute capability to its source.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>sociable</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.33</span></div>
+        <div class="replacement">Powered by @HyperliquidX</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H18</td>
+      <td class="text og">Your keys, secured by Turnkey</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Reassure the visitor that their self-sovereign credential is protected by a named third-party security infrastructure provider, establishing accountability for custody at the bottom of the page.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>sociable</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.17</span></div>
+        <div class="replacement">Passkey infrastructure built with @Turnkey.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Inform the visitor which third-party infrastructure is responsible for protecting their private key custody, so they can assess the security trust chain before committing funds.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>sociable</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>sociable</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.33</span></div>
+        <div class="replacement">Working with @Turnkey — your keys, yours alone.</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H19</td>
+      <td class="text og">Phishing resistant security</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Tell a visitor what specific threat vector the platform's security model is built to neutralize, so they understand the protection mechanism being offered, not just that the product is &quot;secure&quot;.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.00</span></div>
+        <div class="replacement">Drainer-proof by design.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Communicate to a prospective user that the platform's account protection is architected to eliminate a specific class of credential-theft attack, naming the security property rather than a feeling of safety.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 0 · sim 0.33</span></div>
+        <div class="replacement">Passkey-secured. Phishing-resistant by design.</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr>
+<tr>
+      <td class="id">H20</td>
+      <td class="text og">See what privileges you're granting</td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Prompt the user to inspect which permissions or access rights they are currently authorizing before proceeding.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.00</span></div>
+        <div class="replacement">Every approval, decoded before you sign.</div>
+      </td>
+      <td class="side">
+        <div class="intent"><span class="label">intent</span> Inform the user that they can inspect which permissions or access rights they are currently authorizing before proceeding.</div>
+        <div class="tempo-row"><span class="label">generator picked</span> <code>commanding</code> <span class="arrow">→</span> <span class="label">verifier read</span> <code>commanding</code></div>
+        <div class="verdict-row"><span style="background:#1f7a3f;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">PASS</span> <span class="meta">retries 1 · sim 0.00</span></div>
+        <div class="replacement">Every permission, visible and yours.</div>
+      </td>
+      <td class="diff"><span style="background:#3a5cb0;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;">REPHRASED</span></td>
+    </tr></tbody>
+    </table>
+  </section>
+<footer>Generated by scripts/build-soft-vs-hardened-html.ts · sources: research/infinex-homepage-tempo-fit.llm.{cleaned,hardened}.md · infinex-dogfood-pipeline.llm.{cleaned,hardened}.md · infinex-homepage-rewrite{,.hardened}.md</footer>
+</body>
+</html>

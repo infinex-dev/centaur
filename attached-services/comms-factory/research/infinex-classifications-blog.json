@@ -1,0 +1,1543 @@
+[
+  {
+    "id": "IB001",
+    "text": "№ 60 - INX is here",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Pure label/headline — '№ 60 - INX is here.' Three words of content. Too short to read an inner attitude, stress, or motor. The announcement register is present but the sample is genuinely too compressed to classify beyond that.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB002",
+    "text": "The INX token is now live. We've put together an INX page on the website with info about the token, how to buy, and more.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "Stable inner attitude: Weight+Space, decision taken. 'The INX token is now live' — structural fact, structurally settled. 'We've put together an INX page... with info about the token, how to buy, and more' is utility-forward, getting-things-done. No dreamy yield, no relational warmth — this is an organised information-delivery statement. Stress is time (the 'now live' beat is present-tense immediacy). Aspect penetrating: Space-led, cuts straight to what exists and where to find it. Tempo Practical (Stable family: competent steward of structure). Motor pressing→punching: force-landing the live announcement.",
+      "literary_anchor": "Tywin Lannister issuing a campaign dispatch — structure settled, information delivered."
+    }
+  },
+  {
+    "id": "IB003",
+    "text": "You can buy INX in-app using Swidge on Ethereum, Solana and BNB. If you're a Patron holder, you can now claim your INX in-app. If you have INX vouchers, you can redeem them from the Crates page.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.68,
+      "rationale": "Three conditional clauses ('If you're a Patron holder… If you have INX vouchers…') carve out distinct user paths with spatial precision — classic Stable penetrating. 'Now claim', 'can redeem' — time-stressed quick delivery. The parenthetical nods ('thanks swidge'-style brevity is absent here, but the structured if/then logic) faintly flash a Mobile-family Acknowledged moment — the copy acknowledges specific sub-communities (Patron holders, voucher holders) as transient address beats. Stress time, pole quick; dominant register remains Practical Stable.",
+      "literary_anchor": "Aragorn at the gate — each group named, each path assigned."
+    }
+  },
+  {
+    "id": "IB004",
+    "text": "See everything we've shipped so far, and what's coming up, on the brand new Roadmap page.",
+    "classification": {
+      "tempo_primary": "Receptive",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "Stable inner (Weight+Space) but this sample invites rather than commands — 'See everything we've shipped so far, and what's coming up.' The dual temporal sweep (past + future) and the inviting 'see' gesture make this Receptive rather than Practical or Commanding. Aspect enclosing: Weight-led, gathers both past and future into one held view. Stress flow, pole free — the continuity of 'so far… coming up' flows without urgency. Motor gliding→dabbing: warm-touch delivery, an open hand rather than a landing fist.",
+      "literary_anchor": "A steward showing the estate map — 'here is what we hold, here is where we are going.'"
+    }
+  },
+  {
+    "id": "IB005",
+    "text": "№ 51 - Introducing Infinex Perps",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Pure headline label — '№ 51 - Introducing Infinex Perps.' Too short to classify. The word 'Introducing' has a mild Acknowledged/Mobile flash, but there is insufficient prose to sustain a reading.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB006",
+    "text": "Infinex Perps, powered by Hyperliquid, is now live for all Infinex users.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.8,
+      "rationale": "Canonical Stable-Time-Penetrating beat: 'is now live for all Infinex users.' Structurally settled, instantly decisive, no hedging. 'Powered by Hyperliquid' — authority delegated but structural confidence intact. Commanding is the Stable tempo that most naturally carries the announcement-of-power register. Stress time (immediacy of 'now'), pole quick (no lingering). Motor pressing→punching: force-lands the live fact.",
+      "literary_anchor": "Tywin Lannister announcing the completion of an alliance — fait accompli."
+    }
+  },
+  {
+    "id": "IB007",
+    "text": "Fund your account with any asset, and start trading in one step without worrying about bridging or gas (thanks swidge).",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.65,
+      "rationale": "Near inner (Weight+Time) — body-forward, relational, practical ease. 'Fund your account with any asset, and start trading in one step without worrying about bridging or gas' — this is comfort-giving, friction-removal language. The casual parenthetical '(thanks swidge)' is warmly relational, community-body voice. Aspect circumscribing (Time-led, wraps the user's experience in a single fluid step). Stress flow, pole free — yielding continuity, no urgency. The '(thanks swidge)' credit flashes a transient Acknowledged (Mobile) beat — a brief communal nod before returning to the Near register. Motor gliding→dabbing: warm-touch.",
+      "literary_anchor": "Anthony Bourdain: 'just eat it, don't overthink it.'"
+    }
+  },
+  {
+    "id": "IB008",
+    "text": "Trade over 100 markets, with up to 40x leverage. And because Perps is fully integrated with your Infinex Account, you can trade on any device, and move seamlessly between desktop and mobile (thanks passkeys).",
+    "classification": {
+      "tempo_primary": "Human",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.67,
+      "rationale": "Near inner (Weight+Time) — body-forward, user-life-centered. '100 markets, 40x leverage' are weight/body facts. 'trade on any device, move seamlessly between desktop and mobile' — life-continuity, relational to the user's lived experience. Human (Near family) for its user-inclusive address: 'you can… you can…'. Circumscribing aspect: Time-led, wraps the full user journey in one enclosing gesture. Stress flow, pole free — seamless continuity. '(thanks passkeys)' is another Acknowledged flash — same communal-credit register as IB007. Motor gliding→dabbing.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) counting up all the good things, body present, warmly accumulating."
+    }
+  },
+  {
+    "id": "IB009",
+    "text": "The Infinex Sale (updated)",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Pure title label — 'The Infinex Sale (updated).' The parenthetical '(updated)' is too slight to carry a classification. Too short.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB010",
+    "text": "The Infinex TGE is planned for January 2026. The Infinex sale is the final opportunity for the community to align themselves with Infinex ahead of TGE.",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.63,
+      "rationale": "Adream inner (Weight+Flow) — the future-pull of 'planned for January 2026' and the horizon-oriented 'final opportunity to align ahead of TGE' carry a dreamy, vision-forward quality. 'The final opportunity' has an expansive, almost Blanche DuBois weight — yielding toward a promised moment. Aspect radiating: Flow-led, projects outward toward the community as a beam of invitation. Stress time (the January 2026 date anchors a specific future moment), pole sustained (the pull is held, not rushed). Irradiant (Adream family) for its uplift and outward-radiating invite. The 'final opportunity' phrasing flashes a transient Certain (Awake) beat — a brief moment of sharp strategic alertness before returning to the adream register. Motor pressing→punching: the weight of 'final opportunity' still lands with force.",
+      "literary_anchor": "Lovborg before the manuscript is lost — 'this is the moment, align now.'"
+    }
+  },
+  {
+    "id": "IB011",
+    "text": "We will be selling 5% of the INX token supply at $99.99M FDV, with a 1-year lock. Token holders will be able to unlock their tokens early via an early unlock option.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "Stable inner (Weight+Space): structural, rule-setting, institutional voice. The copy lays out precise terms — 5%, $99.99M FDV, 1-year lock — with calm, load-bearing authority. No urgency spike, but the early-unlock clause introduces a temporal hinge, making time the stressed factor (sustained pole: the unlock is deferred, deliberate). Aspect is penetrating: Space-led structural disclosure cuts straight to mechanism. Tempo lands as Practical — the Stable tempo of ordered procedure rather than command or receptivity.",
+      "literary_anchor": "Tywin Lannister reading treaty terms aloud"
+    }
+  },
+  {
+    "id": "IB012",
+    "text": "The Infinex Sale runs from 3-6 Jan, 2026. Once the sale begins, each Infinex account may place one order only for INX allocation. The minimum amount is $200.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.78,
+      "rationale": "Stable inner: Weight+Space, ruler-voice issuing structured instructions. Three hard rules delivered in sequence (date window, one order only, minimum amount) — this is a Commanding tempo, decisions already taken and now announced. Stress is time: the date range (3–6 Jan) and the 'once the sale begins' trigger make the clock explicit. Pole: quick — each rule lands as a punctual cut. Aspect: penetrating (Space-led — the copy orients the reader spatially through procedural checkpoints). The 'one order only' restriction flashes a brief Acute (Awake-family) alert moment — sensor-sharp, noticing.",
+      "literary_anchor": "Logan Roy announcing the terms of a deal in a board meeting"
+    }
+  },
+  {
+    "id": "IB013",
+    "text": "The Infinex Sale: Wrapped",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Four-word title only — 'The Infinex Sale: Wrapped'. Too short to read inner attitude, stress, or tempo. The word 'Wrapped' implies retrospection (possibly Practical or Acknowledged) but the sample is genuinely too short to classify with confidence.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB014",
+    "text": "The Infinex Sale closed on 10 January, with total contributions of $7.2 million USDC, exceeding the $5 million cap by roughly $2.2 million (44% oversubscribed).",
+    "classification": {
+      "tempo_primary": "Overpowering",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.68,
+      "rationale": "Adream inner (Weight+Flow): the copy carries a swelling, triumphant emotional register — '44% oversubscribed' lands as a felt crescendo, not a dry data point. The numbers are presented as lived experience exceeding expectation. Aspect: radiating (Flow-led — the excess expands outward, lifts). Stress: time (the closed date '10 January' and the excess figures create a culmination-moment). Pole: quick (the oversubscription lands as a sudden, surprising arrival). Tempo: Overpowering — the Adream tempo of large-scale emotional overwhelm. The '$7.2 million USDC' figure briefly flashes Acknowledged (Mobile-family: community recognition of a public result).",
+      "literary_anchor": "Blanche DuBois recounting a triumph she did not quite believe would come"
+    }
+  },
+  {
+    "id": "IB015",
+    "text": "We used max-min fair allocation (also known as water-filling), where everyone's allocation rises equally until their order is filled or supply runs out.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "spell→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "Stable inner (Weight+Space): the voice is assured, explanatory, intellectually self-possessed — defining an algorithm ('max-min fair allocation / water-filling') without appeal to emotion or urgency. Aspect: penetrating (Space-led — the parenthetical clarification 'also known as water-filling' cuts to structural precision). Stress: flow (the mechanism is described as a continuous, equitable rising — 'rises equally until… supply runs out' — implying held conviction and continuity, not a deadline). Pole: bound (the fairness constraint is held tight). Self-Contained tempo: Stable register of systematic self-explanation.",
+      "literary_anchor": "Werle patiently explaining the mechanics of his enterprise"
+    }
+  },
+  {
+    "id": "IB016",
+    "text": "At TGE, the early unlock price starts at $300M FDV (3c per token) and declines linearly over 1 year to the sale price of $99.99M FDV (0.99c per token).",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.74,
+      "rationale": "Stable inner (Weight+Space): structured, procedural, institutional. The copy maps a precise linear price-decline schedule over one year — it is mechanical and structural. Aspect: penetrating (Space-led orientation through price coordinates and temporal waypoints). Stress: time (the full-year linear arc is the operative logic — 'starts at TGE… declines linearly over 1 year'). Pole: sustained (the decline is slow, deliberate, not a sudden cut). Tempo: Practical — the Stable tempo of ordered mechanism, not command. No outer-action flashes; the sample is monochromatic in register.",
+      "literary_anchor": "A Duke's chancellor reading the terms of a financial instrument"
+    }
+  },
+  {
+    "id": "IB017",
+    "text": "Road to TGE: The Complete Guide",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Five-word title — 'Road to TGE: The Complete Guide'. Too short to classify. The journey metaphor ('Road to') hints at Irradiant or Practical, and 'Complete Guide' implies Stable-Practical, but the sample is genuinely unclassifiable at this length.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB018",
+    "text": "This document is your comprehensive guide to understanding what happens to your Infinex holdings at TGE.",
+    "classification": {
+      "tempo_primary": "Receptive",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Stable inner (Weight+Space): authoritative and helpful simultaneously — 'your comprehensive guide' is Weight-assured but also welcoming. Aspect: enclosing (Weight-led — the copy wraps the reader: 'your… holdings… at TGE', pulling them into a defined container of understanding). Stress: flow (the aim is continuous comprehension, not urgency — 'understanding what happens' is a slow, sustained conveying). Pole: bound (the comprehensiveness is held together, nothing spills out). Tempo: Receptive — the Stable tempo of attentive, inclusive guidance, slightly softer than Commanding.",
+      "literary_anchor": "Aragorn before the battle, calmly briefing his companions"
+    }
+  },
+  {
+    "id": "IB019",
+    "text": "The Patron snapshot will take place at 07:00 UTC on Friday, 30 January. For every Patron NFT you hold at the time of the snapshot, you will be able to claim 100,000 INX in the Infinex app from TGE (19:00 UTC on Friday, 30 January). If your Patrons are held outside your Infinex account, you'll be able to claim your INX at app.magna.so.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acute",
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake",
+        "awake"
+      ],
+      "confidence": 0.76,
+      "rationale": "Stable inner (Weight+Space): the copy is dense with procedural precision — UTC timestamps, specific dates, conditional logic ('if your Patrons are held outside…'). This is a Practical Stable: step-by-step, rule-governed, structural. Aspect: penetrating (Space-led: multiple checkpoints orient the reader through a sequence of exact spatial and temporal coordinates). Stress: time (snapshot time, claim time, TGE time — the clock dominates). Pole: quick (each timestamp is a punctual cut). The conditional 'if… outside your Infinex account' fires a brief Acute (Awake-family alert) moment, and the definitive 'you will be able to claim' flashes Certain (Awake).",
+      "literary_anchor": "Tywin Lannister's chancellor issuing precise operational orders with contingency clauses"
+    }
+  },
+  {
+    "id": "IB020",
+    "text": "If you purchased INX in the Sonar Sale (3-10 January, 2026), your tokens are locked for one year from TGE, and will unlock on 30 January, 2027.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "Stable inner (Weight+Space): clear, procedural, institutional disclosure. The copy states a lock condition and its exact unlock date — Weight-grounded (it simply IS), Space-structured (checkpoints: sale period, lock duration, unlock date). Aspect: penetrating (Space-led structural orientation through the timeline). Stress: time (the entire sentence pivots on temporal logic: purchase window → lock duration → unlock date). Pole: sustained (the one-year lock is a long, held arc — not a quick cut). Tempo: Practical — ordered mechanism, no emotionality or command energy. Monochromatic, no outer-action flashes.",
+      "literary_anchor": "A treasurer reading the vesting schedule from the ledger"
+    }
+  },
+  {
+    "id": "IB021",
+    "text": "From mindshare to slop: Why we're pausing Yaprun",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "A short editorial headline — 'From mindshare to slop: Why we're pausing Yaprun.' The colon structure and the word 'pausing' imply a structural decision taken (Stable flavour), and 'slop' is a sharp, dismissive weight-drop. But at 9 words the sample is too compressed to pin a single dominant tempo with confidence. The contrast ('mindshare → slop') gestures at Penetrating Stable (a cutting spatial assessment), but the headline alone cannot carry a full inner+aspect+stress reading. Honest call: n/a.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB022",
+    "text": "Crypto is a game of attention. Teams can build the greatest product in the world, but if they're not capturing attention, it doesn't matter. So when Kaito emerged as a platform that quantified attention and mindshare, we saw an opportunity to shift how we think about user acquisition and community growth.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.74,
+      "rationale": "The prose is structurally diagnostic: 'Crypto is a game of attention… if they're not capturing attention, it doesn't matter.' This is Weight+Space reasoning — a ruler surveying the field, drawing a load-bearing structural conclusion. The pivot 'So when Kaito emerged… we saw an opportunity' introduces urgency and decisive action-taking (Time stress). Tempo reads as Practical (Stable family: purposive, surveying, solution-oriented). The scanning-for-opportunity beat briefly flashes Acute (Awake — alert sensor noticing the signal in the noise), registered as an outer action moment. Motor: pressing (sustained structural weight) → punching (decisive opportunity grab). Literary anchor: Tywin Lannister reading a battlefield map.",
+      "literary_anchor": "Tywin Lannister reading a battlefield map"
+    }
+  },
+  {
+    "id": "IB023",
+    "text": "With approximately $6 million USD planned for distribution across four seasons, this retroactive rewards system was designed to prevent gaming while demonstrating that authentic, well-researched and high-quality content about Infinex is valued.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "A dense, institutionally-worded policy statement: '$6 million USD… four seasons… retroactive rewards system… designed to prevent gaming… authentic, well-researched and high-quality content.' This is deeply Stable — Weight+Space, decisions already taken and architecturally described. The tone is Self-Contained (withdrawn, self-referential, criterion-setting rather than appealing outward). Stress is flow (bound): the system is held together by continuous conviction, not urgency. Aspect is enclosing — Weight-led, the prose wraps and contains the criteria. No outer flash; it reads as monochromatic institutional register. Literary anchor: Werle's legal instrument.",
+      "literary_anchor": "Werle drafting a legal instrument"
+    }
+  },
+  {
+    "id": "IB024",
+    "text": "When Kaito's smart followers metric ballooned to over 100,000 accounts - many of questionable authenticity - we realized the system had broken down. We are far more interested in 3-5,000 verified, real people whose contributions make a difference to the Infinex narrative.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.78,
+      "rationale": "'The system had broken down' — a sharp, definitive structural verdict. 'We are far more interested in 3-5,000 verified, real people' — a rapid reorientation, a decision snapped into place. This is Commanding (Stable family: decisional, ruling, cutting through ambiguity). Aspect penetrating: Space-led, carving a structural distinction (100,000 questionable vs 3-5,000 real). Stress time, pole quick: the past-tense audit ('we realized') lands fast, not prolonged. Motor pressing → punching. The dismissal of the bloated metric flashes a brief Unsociable beat (Remote family: carved-off, aloof refusal of the inauthentic crowd). Literary anchor: Logan Roy saying 'that's not how it works.'",
+      "literary_anchor": "Logan Roy: 'That's not how it works.'"
+    }
+  },
+  {
+    "id": "IB025",
+    "text": "The Superapp Thesis",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Three-word title — 'The Superapp Thesis.' No prose body to read for inner attitude, stress, or tempo. The word 'Thesis' carries a stable intellectual aura, but a title alone cannot support a full Mirodan placement. Honest call: n/a across all fields.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB026",
+    "text": "In Kain's recent blog The Superapp Thesis, he outlines how Infinex replicates the Centralized Exchange experience on-chain, and how sustainable protocols require sustainable revenue models, just as we've seen in traditional finance.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.67,
+      "rationale": "'Outlines how Infinex replicates the CEX experience on-chain… sustainable protocols require sustainable revenue models… just as we've seen in traditional finance.' This is Weight+Space Stable, summarising a structural thesis with settled conviction. Practical tempo (purposive, methodical, applying a known framework). Aspect enclosing — Weight-led, the prose holds/wraps a thesis rather than cutting or radiating. Stress flow, pole bound: the conviction is continuous, architectural, no urgency spike. The analogy to traditional finance grounds it in weight rather than time. Motor pressing → punching. No outer flash — monochromatic explanatory register. Literary anchor: a CFO presenting a strategic roadmap.",
+      "literary_anchor": "A CFO presenting a strategic roadmap"
+    }
+  },
+  {
+    "id": "IB027",
+    "text": "\\\"Centralized exchanges are the original superapps,\\\" Kain observes. \\\"They have custody, spot, perps, staking, launchpads, and many more services all in a single platform.\\\" Infinex aims to replicate this model through on-chain infrastructure.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "'Centralized exchanges are the original superapps' — declarative, weight-bearing, structurally definitive. The enumeration ('custody, spot, perps, staking, launchpads…') is a Space-led spatial inventory — a penetrating scan of the CEX architecture. Tempo Commanding: the ruler's voice making a historical structural assertion that grounds the strategic direction. Stress time, pole quick: 'the original' snaps a verdict into place rather than dwelling. Aspect penetrating: Space-led, carving a structural map. Motor pressing → punching. Literary anchor: Tywin Lannister naming an historical precedent to justify a campaign.",
+      "literary_anchor": "Tywin Lannister citing historical precedent"
+    }
+  },
+  {
+    "id": "IB028",
+    "text": "The strategic approach emphasizes timing: \\\"We need a real token. But only once we have earned it.\\\" The platform will launch its token after demonstrating sustained, diversified revenue across multiple features, validating the superapp model before the token generation event.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.68,
+      "rationale": "'We need a real token. But only once we have earned it.' — this is a deeply Self-Contained Stable utterance: withholding, criterion-setting, refusing external pressure. The prose is Weight+Space but the stress is flow (bound): the restraint is a held, continuous conviction not an urgent time-snap. Aspect enclosing: the token is enclosed inside a set of preconditions; the prose wraps the future event in criteria. The brief flash of 'Certain' (Awake family) appears in 'validating the superapp model before the TGE' — a crisp, strategic moment of certainty about sequencing. Motor pressing → punching. Literary anchor: Werle holding his cards.",
+      "literary_anchor": "Werle holding his cards, refusing to show them early"
+    }
+  },
+  {
+    "id": "IB029",
+    "text": "Infinex governance retake",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Three-word title — 'Infinex governance retake.' No prose body. 'Retake' implies a reassertion of control (Stable flavour) but a title cannot carry a full Mirodan placement. Honest call: n/a.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB030",
+    "text": "Kain recently published a reassessment of Infinex's governance structure in his blog post, Infinex Governance Retake. His analysis covers the failures of early DeFi governance, the importance of simplicity, and a new approach to token holder rights.",
+    "classification": {
+      "tempo_primary": "Receptive",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Doubting"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.65,
+      "rationale": "'His analysis covers the failures of early DeFi governance, the importance of simplicity, and a new approach to token holder rights.' This is Stable — Weight+Space, a structural reassessment taken from a position of authority. Receptive tempo (Stable family): attending to a diagnosis, receiving information before deciding; the prose introduces the analysis rather than issuing directives. Aspect enclosing: the sentence wraps and holds the three analytical themes. Stress flow, pole bound: the continuous held conviction of the ongoing retrospective. The 'failures of early DeFi governance' beat flashes Doubting (Awake — alert to what went wrong, questioning the prior structure). Motor pressing → punching. Literary anchor: A judge reviewing a flawed prior ruling.",
+      "literary_anchor": "A judge reviewing a flawed prior ruling before issuing a new opinion"
+    }
+  },
+  {
+    "id": "IB031",
+    "text": "Kain doesn't mince words about the current state of crypto governance: 'We have clear evidence that DAO governance and other forms of governance by committee, in general, are absolutely diabolical.'",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "spell→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.82,
+      "rationale": "Kain's direct verdict — 'absolutely diabolical' — carries the settled, structural authority of Stable. The pronouncement is not urgent (no clock) but bound-conviction: Weight+Space inner pair with a Space-led penetrating cut into the structural problem (governance-by-committee). Stress is flow (bound), held certainty with no escape valve. The bluntness of the quoted condemnation flashes a transient Unsociable (Remote) beat — the aristocratic severance from the collective form being condemned.",
+      "literary_anchor": "Logan Roy dismissing a board proposal; Tywin Lannister on council governance"
+    }
+  },
+  {
+    "id": "IB032",
+    "text": "Kain's proposed governance structure: A 50% net majority requirement of Patrons voting to enact the new governance system; Delegate project decision-making to a project lead; All revenue after any direct costs, such as incentives or rebates, must be used for token buybacks; The platform must remain non-custodial.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.85,
+      "rationale": "A structured list of governance rules — majority requirement, delegation, revenue use, non-custodial constraint. This is Stable in its most functional register: decisions taken, form imposed, clauses enumerated. Practical is the right tempo (Stable family, process-forward). Aspect is penetrating (Space-led: each clause locates and delimits). Stress is time, pole quick — each rule lands as a discrete, settled act. No outer-action transients; the sample is monochromatic procedural.",
+      "literary_anchor": "Aragorn establishing the laws of Gondor; the Duke issuing statutes"
+    }
+  },
+  {
+    "id": "IB033",
+    "text": "Sunsetting XGP",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Two-word header. Genuinely too short to read inner attitude, aspect, stress, or motor. Cannot classify beyond noting a terminal, finality-flavoured weight.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB034",
+    "text": "Infinex is discontinuing the XGP token ahead of a new crate campaign, and upcoming TGE.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "doing→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "A decisive institutional announcement: 'is discontinuing… ahead of… upcoming TGE.' The time markers ('ahead of', 'upcoming') set a quick temporal pole on a Stable-family Weight+Space base. Aspect is enclosing (Weight-led — the announcement closes down the XGP token definitively, wrapping it off). Commanding is the right tempo: authority declaring a structural change. Single-register.",
+      "literary_anchor": "Logan Roy killing a division in a memo"
+    }
+  },
+  {
+    "id": "IB035",
+    "text": "XGP was originally created to reward early community members who participated in Infinex governance and ecosystem activities. The token was distributed across various user groups, including early governance participants, Discord and Twitter users, and holders of certain NFT collections such as Pudgy Penguins, Milady, Bit Bears, and Mad Lads.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.74,
+      "rationale": "A retrospective account of community-building: rewarding early members, listing groups (governance participants, Discord, Twitter, NFT holders). The body-forward, relational, listing quality places this in Near (Weight+Time). The tone is warm and inclusive — Warm tempo. Aspect is enclosing (Weight-led: gathering and honouring the community). Stress is flow, pole free — the enumeration flows without urgency, a generous release of recognition.",
+      "literary_anchor": "The Nurse recounting the past with fond detail; Bourdain on the people who built a kitchen culture"
+    }
+  },
+  {
+    "id": "IB036",
+    "text": "All XGP held in Infinex Accounts before 9 Nov 2025, 00:00 UTC will be automatically converted according to the following structure: Every 200,000 XGP will be converted into one Patron. Any remaining XGP (ie, less than 200,000) will be converted into Crates at a rate to be confirmed.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.83,
+      "rationale": "Precise conversion rules with a hard UTC deadline: '9 Nov 2025, 00:00 UTC', 'Every 200,000 XGP → one Patron', 'remaining XGP → Crates'. The clock is explicit and the structural partitioning is direct — Stable family, Practical tempo (process-forward, no ambiguity). Penetrating aspect (Space-led: each clause cuts to the structural conversion rule). Stress time, pole quick (deadline governs). Single-register.",
+      "literary_anchor": "Tywin Lannister issuing precise terms of a settlement"
+    }
+  },
+  {
+    "id": "IB037",
+    "text": "The Patron Sale (Now Live)",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Four-word header with a parenthetical. Too short to read inner attitude, aspect, stress, or motor reliably. The '(Now Live)' tag hints at quick-time but a header alone cannot ground a tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB038",
+    "text": "From now until September 24, eligible Infinex users can buy a Patron NFT to show their support for Infinex's core mission.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Warm"
+      ],
+      "outer_action_inners": [
+        "near"
+      ],
+      "confidence": 0.7,
+      "rationale": "'From now until September 24, eligible Infinex users can buy… to show their support.' The sentence orbits a community moment — it's time-bounded but the emotional register is about belonging and showing support (free-flow, relational lift). The time window circumscribes (Time-led aspect) but the underlying pulse is Mobile-family: gathering the community around an event. Acknowledged fits: the community is seen and invited. A transient Warm (Near-family) flash: 'show their support for Infinex's core mission' is body-relational.",
+      "literary_anchor": "A community herald announcing the window for allegiance-pledging"
+    }
+  },
+  {
+    "id": "IB039",
+    "text": "The sale is proceeding in four waves from September 10 - 24, starting with strategic partners and key members of the crypto community, followed by all eligible Infinex users.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.72,
+      "rationale": "'Proceeding in four waves from September 10–24' — a structured, sequenced rollout. Awake-family (Space+Time): alert, strategic, scanning sequence. Certain tempo: the wave structure is laid out with no hedging. Circumscribing aspect (Time-led: the waves are timed containers). Stress time, pole quick (each wave date lands with precision). Outer-action flash of Acknowledged (Mobile): 'followed by all eligible Infinex users' widens the circle in a Mobile-community beat.",
+      "literary_anchor": "A general announcing phased deployment of forces — Tywin or Aragorn in strategic mode"
+    }
+  },
+  {
+    "id": "IB040",
+    "text": "The Patron NFT is a way for community members to show their support for Infinex's mission by acquiring a limited-edition digital collectible. Patron NFTs are available in three different tiers: Liquid Patrons ($5,000), Linear Patrons ($3,000), and Locked Patrons ($1,250).",
+    "classification": {
+      "tempo_primary": "Materialistic",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "doing",
+      "drive_secondary": "passion",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.71,
+      "rationale": "A product description enumerating tiers ($5,000 / $3,000 / $1,250) and framing the NFT as a way to 'show support' through a tangible collectible. Near-family (Weight+Time): body-forward, concrete, product-in-hand. Materialistic tempo: the price-tiering and 'limited-edition digital collectible' language foregrounds the tangible object-value. Enclosing aspect (Weight-led: the tiers wrap the community member in a defined offering). Stress space, pole direct (the tiers are clearly delineated — spatial partitioning of value levels). Note: near allows space stress. Single-register.",
+      "literary_anchor": "Big Daddy pricing things out; a merchant laying wares on a table in clear categories"
+    }
+  },
+  {
+    "id": "IB041",
+    "text": "Memewars",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Single word — 'Memewars'. Too short to read any inner attitude, aspect, stress or tempo. The combative suffix 'wars' gestures toward force but there is no prose structure to read a placement from.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB042",
+    "text": "Starting on the 6th of July, Infinex is rolling out support for fourteen new memecoins over seven days and kicking off Meme Wars!",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Revealed"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.62,
+      "rationale": "The sentence announces an event with a precise date ('Starting on the 6th of July'), a rapid rollout cadence ('fourteen new memecoins over seven days'), and an exclamatory launch ('kicking off Meme Wars!'). The energy is Mobile-family — fragmented, multi-directional, announcement-scatter. 'Acknowledged' fits the Mobile tempo of being noticed/seen entering the scene. Time-stress is dominant (date-anchored urgency); pole quick (the 7-day sprint). Circumscribing aspect: Time-led framing that wraps CT culture norms (meme seasons, launch events). A 'Revealed' flash at the end ('kicking off!') marks a secondary Mobile beat. Motor: floating→flicking (Light-Flexible lifting radiance suits memecoin CT energy).",
+      "literary_anchor": "A carnival barker announcing the start of the show — time-led, scattered excitement."
+    }
+  },
+  {
+    "id": "IB043",
+    "text": "While BTC has ripped to new ATHs and we have finally seen the introduction of spot ETFs. The wild rise of memecoins over the last year has captivated the attention of CT.",
+    "classification": {
+      "tempo_primary": "Diffused",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.58,
+      "rationale": "The prose surveys macro landscape — BTC ATHs, spot ETFs, the 'wild rise' of memecoins, 'captivated the attention of CT'. This is Adream: Weight+Flow, yielding to the drift of market feeling, dreamy observation of collective enchantment. 'Diffused' suits the scattered, ambient captivation — energy spreads outward like a spell over CT. Aspect radiating: Flow-led expansiveness ('captivated the attention'). Stress time: the year-long arc ('over the last year') anchors a sustained temporal sweep, pole sustained. Motor pressing→punching: Strong-Direct force-landing of the macro facts.",
+      "literary_anchor": "Lovborg surveying a world he has been swept up in — dreamy retrospective, diffused attention."
+    }
+  },
+  {
+    "id": "IB044",
+    "text": "Each Meme Wars battle lasts 24 hours and the memecoin with the most Total Value Locked (TVL) at the end of 24h 'wins' the war.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "This sentence lays out the rules of engagement with structural precision: '24 hours', 'most TVL', 'wins'. It is Stable — Weight+Space, decisions taken, rule-governed. 'Practical' is the Stable tempo of procedural clarity. Aspect penetrating: Space-led — it cuts to the structural mechanism of the contest. Stress time: the 24-hour clock is the operative constraint, pole quick (tight deadline). Motor pressing→punching: Strong-Direct force-landing of the rule.",
+      "literary_anchor": "Tywin Lannister setting the terms of a tournament — structural, clock-bound, no flourish."
+    }
+  },
+  {
+    "id": "IB045",
+    "text": "Infinex announces acquisition of Keypom",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Five-word headline — 'Infinex announces acquisition of Keypom'. Too short to derive a reliable inner attitude, aspect, or stress. Structurally implies Stable/Commanding but the sample itself provides no prose texture to anchor a reading.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB046",
+    "text": "Infinex (infinex.xyz), a rapidly growing consumer crypto platform focused on delivering the best onchain user experience, today announced that it has reached a definitive agreement to acquire Keypom (keypom.xyz), a leading provider within the NEAR ecosystem of crypto onboarding, key management and user experience solutions.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.78,
+      "rationale": "This is press-release prose in the fullest sense: formal subject-verb declarations, institutional vocabulary ('definitive agreement', 'leading provider', 'consumer crypto platform'), and a decisive announcement of accomplished fact ('today announced'). Stable inner — Weight+Space, the intelligent ruler announcing a decision taken. 'Commanding' is the Stable tempo that issues structural proclamations. Aspect penetrating: Space-led — cuts directly to structural facts (who, what, ecosystem). Stress time: 'today announced' lands the event in the present moment with quick decisiveness, pole quick. Motor pressing→punching. A flash of Awake-family 'Certain' appears in the precision of credentials ('rapidly growing', 'leading provider') — a secondary strategist-sensor moment.",
+      "literary_anchor": "Aragorn announcing a formal alliance — institutional authority, Space-led clarity."
+    }
+  },
+  {
+    "id": "IB047",
+    "text": "Under the terms of the agreement, Keypom will be acquired using a combination of cash and tokens. Both teams share a common vision of simplifying the complexity inherent in decentralized applications (dApps) and Web3 services. By leveraging Keypom's expertise in account abstraction capabilities directly into Infinex's platform, the combined entity aims to lower the barriers to entry for crypto users.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "This paragraph narrates the terms and shared rationale of the acquisition: 'cash and tokens', 'common vision', 'leveraging expertise', 'lower the barriers'. The prose is Stable — Weight+Space, decisions taken — but the stress here is flow: the shared conviction and ongoing mission ('aims to lower the barriers') is held in bound continuity, not urgency. 'Self-Contained' fits: the Stable tempo of integration and settled purpose, containing the combined entity within a coherent vision. Aspect enclosing: Weight-led — the deal wraps both teams inside a shared structure. Pole bound: held, purposeful flow. Motor pressing→punching: force-landed into 'lower the barriers to entry'.",
+      "literary_anchor": "The Duke drawing the terms of a compact — Weight-forward, held conviction, no urgency."
+    }
+  },
+  {
+    "id": "IB048",
+    "text": "Keypom's team will join Infinex's core working group, adding their expertise in the NEAR ecosystem and user experience to the Infinex engineering team. As a result, users can expect a rapid rollout of NEAR tech, including chain signatures, chain abstraction and cross-chain intents.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.73,
+      "rationale": "The prose moves into operational mode: 'will join', 'rapid rollout', 'chain signatures, chain abstraction, cross-chain intents'. Stable inner — Weight+Space, rule-governed action — but the dominant energy is 'Practical': things will get done, teams merged, tech shipped. Aspect penetrating: Space-led — enumerates specific technical deliverables with structural clarity. Stress time: 'rapid rollout' makes time the operative pole, quick. Motor pressing→punching: Strong-Direct landing of each deliverable. A transient 'Acknowledged' (Mobile) flash appears in 'users can expect' — briefly turning toward the audience to be seen/acknowledged.",
+      "literary_anchor": "Tywin Lannister briefing his generals on the order of march — procedural, time-pressed, penetrating."
+    }
+  },
+  {
+    "id": "IB049",
+    "text": "Pyth Airdrop to Infinex Users",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Four-word headline — 'Pyth Airdrop to Infinex Users'. Too short to derive inner attitude, aspect, stress, or tempo reliably. Gestures toward gifting/community (Near?) but the sample itself provides no prose texture.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB050",
+    "text": "The Infinex Treasury has approved an airdrop of 1,000,000 $PYTH to users who opened crates within the first 24 hours of crate opening for Craterun.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.67,
+      "rationale": "A treasury approval gifting tokens to early users ('who opened crates within the first 24 hours'). The prose is Near — Weight+Time, body-forward, relational, community-facing. 'Warm' is the Near tempo of generous giving, face-to-face recognition. Aspect circumscribing: Time-led — the 24-hour eligibility window wraps the community in a time-bounded embrace. Stress flow: the gift flows freely outward to the recipients, pole free. Motor gliding→dabbing: Light-Direct warm-touch suits the gifting gesture. A transient 'Acknowledged' (Mobile) beat appears in the explicit naming of who qualifies — CT community being seen and recognised.",
+      "literary_anchor": "Anthony Bourdain buying the first round — Near body, Warm tempo, free-flowing generosity."
+    }
+  },
+  {
+    "id": "IB051",
+    "text": "Pyth Network has been a key integration for Infinex, specifically Pyth Entropy, which was used to ensure the randomness of prizes. Additionally, Pythians are some of Infinex's most engaged community members, having recently received a Governance Point airdrop, as proposed in XIP-44. The further alignment of Infinex Users with Pyth Holders through this airdrop is intended to build a stronger bridge between the respective protocols.",
+    "classification": {
+      "tempo_primary": "Altruistic",
+      "inner_attitude": "remote",
+      "aspect": "unknown",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Warm"
+      ],
+      "outer_action_inners": [
+        "near"
+      ],
+      "confidence": 0.65,
+      "rationale": "The prose is bridge-building, community-aligning, protocol-connecting — a Remote-Altruistic shape (Space+Flow, outward-giving orientation). It traces integrations and airdrops across two communities, emphasising relational alignment ('stronger bridge', 'alignment of users with holders'). The Time-led circumscribing aspect captures the narrative arc through XIP references and sequential events. Stress is flow (continuity, relational yielding), pole free (open giving). A transient Near/Warm flash appears in 'most engaged community members' — body-forward, relational warmth briefly surfaces.",
+      "literary_anchor": "A diplomat announcing a treaty between two houses — Altruistic Remote, giving outward."
+    }
+  },
+  {
+    "id": "IB052",
+    "text": "The 1,000,000 $PYTH is to be distributed equally among 2,023 eligible users. This equates to 494.32 $PYTH for each user – users will not need to claim anything. The Infinex Account now supports $PYTH (as approved in XIP-57). $PYTH will show as an asset under the Wallet tab in your Infinex Account and be liquid, represented onchain.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.78,
+      "rationale": "Precise numbers (1,000,000 $PYTH, 2,023 users, 494.32 $PYTH each), no-action-needed delivery, structural clarity — this is Stable-Practical: Weight+Space, decisions made, ruler-distributing. Aspect is penetrating (Space-led: structural breakdown of allocations). Stress is time, pole quick — each sentence lands a settled fact briskly. Motor pressing → punching: force-landing each specification. Single-register, no outer-action flash.",
+      "literary_anchor": "A Chancellor reading out the precise terms of a disbursement."
+    }
+  },
+  {
+    "id": "IB053",
+    "text": "Trust and transparency in DeFi's UX layer",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "A five-word title/label. Too short to read inner attitude, aspect, stress or motor with confidence. Surface reading suggests Stable-intellectual territory ('trust and transparency', 'UX layer') but that is lexical inference, not placement inference.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB054",
+    "text": "Innovations in crypto user experience have lagged behind innovations in crypto infrastructure, and this makes sense.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "A single declarative assertion: 'innovations in UX have lagged behind infrastructure — and this makes sense.' The finality ('and this makes sense') is an Awake-Certain shape: Space+Time, alert sensor landing a calibrated structural verdict. Aspect penetrating (Space-led structural scan). Stress time, pole quick — the conclusion lands fast and settled. Motor pressing → punching.",
+      "literary_anchor": "A strategist crisply naming a gap on a whiteboard."
+    }
+  },
+  {
+    "id": "IB055",
+    "text": "Derivatives volume in CeFi is still towering over volume in DeFi, despite the two sides being in an arm wrestle on key features like liquidity, leverage, new pairs, etcetera. But you could say that self-custody and transparency are _infinitely_ better features of decentralised trading, since there's no comparison on the other side.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.7,
+      "rationale": "Opens with a macro structural claim ('derivatives volume in CeFi towering over DeFi'), then pivots to a decisive rhetorical move ('infinitely better features'). The weight-and-space ruler is Stable-Commanding, aspect penetrating (space-led structural scan of the competitive landscape). Stress time, pole quick — the italicised 'infinitely' drives a sharp conclusion. The scanning-comparing middle passage ('arm wrestle on key features… liquidity, leverage, new pairs') flashes an Awake-Acute moment — rapid enumeration, alert surveying.",
+      "literary_anchor": "Logan Roy surveying a competitor's weakness before delivering the coup de grâce."
+    }
+  },
+  {
+    "id": "IB056",
+    "text": "When we use the term _trustless_, we don't really mean that trust doesn't exist at all, but rather that the level of trust required is so minimal that we consider it to be zero. When we hold money on-chain, we trust that the Ethereum network will work as it should.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.66,
+      "rationale": "Definitional, explanatory, held — 'when we use the term trustless, we don't really mean…'. This is Stable's Self-Contained tempo: turning inward to govern the definition, closing the frame. Aspect enclosing (Weight-led: the prose wraps and contains the concept). Stress flow, pole bound — holding the redefinition tightly, yielding inward conviction rather than urgency. Motor pressing → punching (Strong-Direct, though the pace is measured). Single-register.",
+      "literary_anchor": "A philosopher-ruler defining terms for his court — Werle clarifying the rules of the house."
+    }
+  },
+  {
+    "id": "IB057",
+    "text": "Infinex Litepaper",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Two words — a document title. No placement readable.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "IB058",
+    "text": "The Infinex platform provides access to onchain protocols, services and applications. It is non-custodial, using a novel security architecture centred around onchain smart accounts and passkeys. Infinex currently supports seven EVM and non-EVM chains, including Solana, Base and Arbitrum. Infinex is designed to replace centralized platforms as the primary point of interaction for crypto users.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "Four declarative sentences, each landing a structural fact: platform scope, security architecture, chains supported, strategic design purpose. This is Stable-Practical — Weight+Space, the ruler describing his domain. Aspect penetrating (Space-led: each sentence is a structural coordinate). Stress time, pole quick — rapid factual succession. Motor pressing → punching. Clean single-register.",
+      "literary_anchor": "The Duke reading out the terms of his domain — Aragorn accounting for his kingdom's reach."
+    }
+  },
+  {
+    "id": "IB059",
+    "text": "Infinex is built to optimize the User Experience. To supplant centralized services, Infinex must replicate the full user experience of centralized platforms. This contrasts with most decentralized services that start with infrastructure and protocol design and build out to the UX layer.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.72,
+      "rationale": "Opens with a declarative mandate ('built to optimise UX'), escalates to a strategic imperative ('must replicate the full user experience'), then contrasts against the field ('contrasts with most decentralised services'). This is Stable-Commanding: ruler issuing direction and structural distinction. Aspect penetrating (Space-led: the contrast with infrastructure-first competitors is a structural cut). Stress time, pole quick — 'must replicate' lands urgently. A transient Awake-Certain flash in the final contrastive sentence — alert scanning of the landscape.",
+      "literary_anchor": "Tywin Lannister announcing strategic intent and distinguishing himself from lesser houses."
+    }
+  },
+  {
+    "id": "IB060",
+    "text": "Passkeys are the core mechanism used to secure Infinex Accounts and authorise onchain transactions. When a user creates an Infinex Account, a corresponding passkey (a public-private key pair) is created by their operating system or password manager and stored securely on their device.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.67,
+      "rationale": "Explains the mechanism of passkeys step-by-step: what they are, how they're created, where they're stored. Stable-Practical in enclosing mode — the prose wraps and contains the security architecture, governing comprehension. Stress flow, pole bound — held, unhurried explanation maintaining tightly controlled register. No urgency, no scanning; just Weight-led containing of the technical definition. Motor pressing → punching (Strong-Direct, landing each step).",
+      "literary_anchor": "A master craftsman walking an apprentice through the lock mechanism — stable, enclosing, bound."
+    }
+  }
+]

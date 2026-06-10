@@ -1,0 +1,1171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Visual Vocabulary — comms-factory · live digest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0B0B0D;
+    --bg-2:      #131316;
+    --rule:      #26252A;
+    --text:      #F0EDE6;
+    --dim:       #7E7B73;
+    --dim-2:     #4E4C48;
+    --accent:    #E8E0CC;  /* working accent — not Infinex's, not any of the 6 claimed */
+    --ours:      #FE6F39;  /* Infinex canteloupe — locked, ours */
+    --warn:      #C25347;
+
+    --ff-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+    --ff-body:    "Inter", -apple-system, system-ui, sans-serif;
+    --ff-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --measure: 70ch;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--text); }
+  body {
+    font-family: var(--ff-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    margin: 0;
+    padding: 4rem 1.5rem 8rem;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+
+  .meta {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+    text-transform: uppercase;
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1rem;
+  }
+  .meta span::before { content: "·"; margin-right: 0.5rem; color: var(--dim-2); }
+  .meta span:first-child::before { content: ""; margin: 0; }
+  .meta .live { color: var(--ours); }
+
+  h1, h2, h3 {
+    font-family: var(--ff-display);
+    font-weight: 400;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+    color: var(--text);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.4rem);
+    margin-bottom: 0.75rem;
+    font-variation-settings: "opsz" 144, "SOFT" 50, "wght" 350;
+  }
+  .lede {
+    font-family: var(--ff-display);
+    font-style: italic;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    line-height: 1.4;
+    color: var(--dim);
+    font-weight: 300;
+    margin: 0 0 5rem;
+    max-width: var(--measure);
+  }
+  h2 {
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    margin: 6rem 0 2rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--rule);
+  }
+  h2 .num {
+    font-family: var(--ff-mono);
+    font-size: 0.6em;
+    font-weight: 500;
+    color: var(--dim);
+    margin-right: 0.9em;
+    letter-spacing: 0.05em;
+    vertical-align: 0.3em;
+  }
+  h3 {
+    font-size: 1.3rem;
+    font-style: italic;
+    font-variation-settings: "opsz" 24, "SOFT" 60, "wght" 400;
+    margin: 0 0 0.6rem;
+    color: var(--accent);
+  }
+
+  p, li { max-width: var(--measure); }
+  p { margin: 0 0 1.2rem; color: var(--text); }
+  p.dim { color: var(--dim); }
+  code, .mono { font-family: var(--ff-mono); font-size: 0.85em; color: var(--accent); }
+  strong { font-weight: 600; color: var(--text); }
+  em { font-style: italic; color: var(--text); }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--dim-2); }
+  a:hover { border-bottom-color: var(--accent); }
+
+  .row { display: grid; gap: 1.5rem; }
+  .row.two { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .row.three { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+  .card {
+    border: 1px solid var(--rule);
+    padding: 1.5rem 1.6rem;
+    background: var(--bg-2);
+  }
+  .card .label {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+
+  /* ── numbered baseline list ───────────────── */
+  .baseline { counter-reset: baseline; list-style: none; padding: 0; margin: 0; }
+  .baseline > li {
+    counter-increment: baseline;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .baseline > li:last-child { border-bottom: none; }
+  .baseline > li::before {
+    content: counter(baseline, decimal-leading-zero);
+    font-family: var(--ff-mono);
+    font-size: 0.75rem;
+    color: var(--dim);
+    letter-spacing: 0.05em;
+    padding-top: 0.3rem;
+  }
+  .baseline h3 { color: var(--text); font-style: normal; font-size: 1.15rem; margin-bottom: 0.3rem; }
+  .baseline p { margin: 0; color: var(--dim); font-size: 0.95rem; }
+
+  /* ── 2×2 matrix ───────────────────────────── */
+  .matrix {
+    display: grid;
+    grid-template-columns: 130px 1fr 1fr;
+    grid-template-rows: 50px 1fr 1fr;
+    border: 1px solid var(--rule);
+    margin: 2rem 0;
+  }
+  .matrix .ax-label {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+  .matrix .corner { background: transparent; }
+  .matrix .y-label { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; }
+  .matrix .cell {
+    padding: 1.5rem;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .matrix .cell .brands { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .matrix .cell .brand {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--rule);
+    color: var(--text);
+  }
+  .matrix .cell .note {
+    font-family: var(--ff-display);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--dim);
+    line-height: 1.35;
+  }
+  .matrix .cell.empty {
+    background: linear-gradient(135deg, rgba(254,111,57,0.10), transparent 60%);
+    position: relative;
+  }
+  .matrix .cell.empty::before {
+    content: "INFINEX";
+    position: absolute;
+    top: 1.4rem;
+    right: 1.5rem;
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ours);
+  }
+  .matrix .cell.empty .note { color: var(--ours); font-style: italic; }
+
+  /* ── template family cards ────────────────── */
+  .templates { margin: 2rem 0; }
+  .templates .t {
+    border-top: 1px solid var(--rule);
+    padding: 2rem 0;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 2rem;
+  }
+  .templates .t:last-child { border-bottom: 1px solid var(--rule); }
+  .templates .t .order {
+    font-family: var(--ff-display);
+    font-size: 3.2rem;
+    font-style: italic;
+    color: var(--accent);
+    line-height: 1;
+    font-variation-settings: "opsz" 144, "SOFT" 80, "wght" 300;
+  }
+  .templates .t h3 { color: var(--text); font-style: normal; font-size: 1.4rem; }
+  .templates .t .reg {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .templates .t p { margin: 0 0 0.6rem; }
+
+  /* ── steal cards ──────────────────────────── */
+  .steal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin: 2rem 0;
+  }
+  .steal .s { background: var(--bg); padding: 1.7rem 1.6rem; }
+  .steal .s .brand {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .steal .s .move {
+    font-family: var(--ff-display);
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 0.7rem;
+  }
+  .steal .s p { font-size: 0.9rem; color: var(--dim); margin: 0; }
+
+  /* ── avoid list ───────────────────────────── */
+  .avoid { list-style: none; padding: 0; margin: 2rem 0; counter-reset: avoid; }
+  .avoid li {
+    counter-increment: avoid;
+    display: grid;
+    grid-template-columns: 50px 1fr 140px;
+    gap: 1.5rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+    max-width: none;
+  }
+  .avoid li::before {
+    content: "× " counter(avoid, decimal-leading-zero);
+    font-family: var(--ff-mono);
+    font-size: 0.75rem;
+    color: var(--warn);
+    letter-spacing: 0.05em;
+  }
+  .avoid li .body { font-size: 0.98rem; color: var(--text); }
+  .avoid li .body strong { color: var(--text); }
+  .avoid li .why {
+    font-family: var(--ff-mono);
+    font-size: 0.7rem;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: right;
+    line-height: 1.4;
+  }
+
+  /* ── palette swatches ─────────────────────── */
+  .palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+  }
+  .swatch { padding: 1.1rem; border: 1px solid var(--rule); position: relative; }
+  .swatch .chip { width: 100%; height: 80px; margin-bottom: 0.9rem; position: relative; }
+  .swatch .chip::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent calc(50% - 0.5px), var(--bg-2) calc(50% - 0.5px), var(--bg-2) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+    opacity: 0.7;
+  }
+  .swatch .hex { font-family: var(--ff-mono); font-size: 11px; color: var(--accent); letter-spacing: 0.04em; }
+  .swatch .brand {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    color: var(--dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+  .swatch .tag {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    font-family: var(--ff-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--warn);
+    border: 1px solid var(--warn);
+    padding: 0.2rem 0.5rem;
+    text-transform: uppercase;
+    background: var(--bg);
+  }
+  .swatch-ours { border-color: var(--ours); padding: 1.4rem; }
+  .swatch-ours .chip { height: 110px; }
+  .swatch-ours .chip::after { display: none; }
+  .swatch-ours .hex { color: var(--ours); font-size: 13px; font-weight: 500; }
+  .swatch-ours .brand { color: var(--text); }
+  .swatch-ours .tag { color: var(--ours); border-color: var(--ours); }
+
+  /* ── verify list ──────────────────────────── */
+  .verify { list-style: none; padding: 0; margin: 1.5rem 0; }
+  .verify li {
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    max-width: none;
+  }
+  .verify li:last-child { border-bottom: none; }
+  .verify li .name {
+    font-family: var(--ff-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .verify li .urls { font-size: 0.9rem; color: var(--dim); }
+  .verify li .urls a { color: var(--text); }
+
+  /* ── callout ──────────────────────────────── */
+  .callout {
+    border-left: 2px solid var(--accent);
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    margin: 2.5rem 0;
+    max-width: var(--measure);
+  }
+  .callout.ours { border-left-color: var(--ours); }
+  .callout.ours h3 { color: var(--ours); }
+  .callout h3 { color: var(--accent); font-size: 1.5rem; margin-bottom: 0.8rem; }
+  .callout p { color: var(--text); }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ── caveat ───────────────────────────────── */
+  .caveat {
+    background: var(--bg-2);
+    border: 1px solid var(--rule);
+    padding: 1.5rem 1.7rem;
+    margin: 2rem 0;
+  }
+  .caveat .label {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ours);
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+  .caveat p { margin: 0 0 0.8rem; color: var(--text); max-width: none; }
+  .caveat p:last-child { margin-bottom: 0; }
+
+  /* ── locked status grid (Infinex) ─────────── */
+  .locked { border: 1px solid var(--rule); margin: 2rem 0; }
+  .locked-row {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1.5rem;
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .locked-row:last-child { border-bottom: none; }
+  .locked-key {
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+  .locked-val { font-size: 0.95rem; color: var(--text); max-width: none; }
+  .locked-val code { color: var(--ours); font-weight: 500; font-size: 0.9rem; }
+  .locked-tag {
+    display: inline-block;
+    font-family: var(--ff-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    padding: 0.2rem 0.5rem;
+    margin-left: 0.6rem;
+    border: 1px solid var(--rule);
+    text-transform: uppercase;
+    vertical-align: 0.1em;
+  }
+  .locked-tag-ours { color: var(--ours); border-color: var(--ours); }
+  .locked-tag-tbd { color: var(--dim); }
+
+  /* ── Laban axes ─────────────────────────────── */
+  .laban {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5rem 0;
+    font-family: var(--ff-display);
+    font-style: italic;
+    font-size: 1.15rem;
+    border: 1px solid var(--rule);
+  }
+  .laban-axis {
+    display: grid;
+    grid-template-columns: 1fr 90px 1fr;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .laban-axis:last-child { border-bottom: none; }
+  .laban-pick { color: var(--ours); text-align: right; }
+  .laban-over {
+    font-family: var(--ff-mono);
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--dim);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .laban-pass {
+    color: var(--dim);
+    text-decoration: line-through;
+    text-decoration-color: var(--dim-2);
+  }
+
+  /* ── status table ───────────────────────────── */
+  .status { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+  .status td {
+    padding: 0.85rem 1rem 0.85rem 0;
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+    font-size: 0.95rem;
+  }
+  .status tr:first-child td { border-top: none; }
+  .status-tag {
+    width: 140px;
+    font-family: var(--ff-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-left: 0 !important;
+  }
+  .status-active { color: var(--ours); }
+  .status-pending { color: var(--accent); }
+  .status-open { color: var(--dim); }
+  .status-done { color: var(--accent); opacity: 0.7; }
+
+  /* ── wave 1.5 feed cards ──────────────────── */
+  .feeds { display: flex; flex-direction: column; gap: 1.2rem; margin: 1.5rem 0; }
+  .feed { border: 1px solid var(--rule); padding: 1.5rem 1.6rem; background: var(--bg-2); }
+  .feed-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 1rem; gap: 1rem; flex-wrap: wrap;
+    padding-bottom: 0.7rem; border-bottom: 1px solid var(--rule);
+  }
+  .feed-handle {
+    font-family: var(--ff-mono); font-size: 14px; letter-spacing: 0.05em;
+    color: var(--accent); font-weight: 500;
+  }
+  .feed-stat {
+    font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.1em;
+    color: var(--dim); text-transform: uppercase;
+  }
+  .feed-stat.warn { color: var(--warn); }
+  .feed dl { margin: 0; }
+  .feed dt {
+    font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.12em;
+    color: var(--accent); text-transform: uppercase; margin-top: 0.7rem;
+  }
+  .feed dt:first-child { margin-top: 0; }
+  .feed dd { margin: 0.2rem 0 0; font-size: 0.92rem; max-width: none; }
+
+  /* ── sources footer ───────────────────────── */
+  .sources { margin-top: 6rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+  .sources ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.5rem;
+  }
+  .sources li { max-width: none; }
+  .sources a {
+    font-family: var(--ff-mono);
+    font-size: 12px;
+    border: none;
+    color: var(--dim);
+    text-transform: lowercase;
+    letter-spacing: 0.04em;
+  }
+  .sources a:hover { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    body { padding: 2.5rem 1.2rem 6rem; }
+    .matrix { grid-template-columns: 90px 1fr 1fr; }
+    .matrix .cell { padding: 1rem; min-height: 140px; }
+    .templates .t { grid-template-columns: 1fr; gap: 0.8rem; }
+    .avoid li { grid-template-columns: 40px 1fr; }
+    .avoid li .why { grid-column: 2; text-align: left; }
+    .verify li { grid-template-columns: 1fr; gap: 0.4rem; }
+    .locked-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    .laban-axis { grid-template-columns: 1fr; text-align: center; }
+    .laban-pick, .laban-pass { text-align: center; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="meta">
+    <span>comms-factory</span>
+    <span>wave 1 · infinex diff</span>
+    <span>2026-05-12</span>
+    <span class="live">all 7 timelines pulled · 2 decisions left</span>
+    <span>infinex feed: 100 posts · 27 media</span>
+    <span>brand-factory: infinex draft ready</span>
+    <span>comms-factory: scaffold complete</span>
+  </div>
+
+  <h1>Visual vocabulary.</h1>
+  <p class="lede">A living digest. What every serious crypto brand we studied already does, where they diverge, and the empty quadrant where Infinex fits — plus what's locked, what's open, and what's in flight.</p>
+
+  <div class="callout ours" style="border-left-width: 3px; padding: 1.5rem 0 1.5rem 1.7rem;">
+    <h3 style="color: var(--ours);">2 decisions left — Twitter is unblocked</h3>
+    <p style="color: var(--dim); font-size: 0.9rem; margin-bottom: 1rem;"><strong>✓ Twitter resolved.</strong> Fresh X API bearer in 1Password (item: "X API", Employee vault). All 7 timelines pulled — including @infinex (100 posts, 27 media) and @berachain (100, 31). See §A and §B updates below.</p>
+    <p><strong>B · Infinex's Laban placement.</strong> Nigel is <em>Flow-stressed Stable</em>. Per Mirodan status grammar (time-stress = adolescent/lower; space-stress = mature/higher; flow-stress = emotional/sociable), Infinex's "grown-up sophisticated" brief reads as <strong>Space-stressed Stable</strong>. Your call. The pick locks the six-piece unit and feeds every voice-spec downstream.</p>
+    <p><strong>C · brand-factory pipeline for Infinex.</strong> Draft <code>BRAND.md</code> + <code>BRIEF.md</code> + 5× <code>01-inputs/*</code> are ready at <code>brand-factory/brands/infinex/</code>. To unblock comms-factory's voice spec, gates <code>briefed → researched → positioned → identified → voiced</code> need to flip. Run it now in another session, or batch the reviews this week.</p>
+    <p class="dim" style="margin-top: 1rem; font-size: 0.85rem;">Everything below is informational. The two decisions above are the only blockers.</p>
+  </div>
+
+  <!-- ── TL;DR ──────────────────────────────────────────────── -->
+  <div class="callout">
+    <h3>The position</h3>
+    <p>Every serious crypto brand we studied runs one accent on near-black, bespoke or editorial-grade type, and restrained motion. That's now the baseline — match it or look amateur.</p>
+    <p>Where the brands diverge is on two axes: <strong>data-hero vs. lore-hero</strong> and <strong>single-register vs. two-register</strong>. Polymarket, Pendle, Hyperliquid are data-hero single-register. Monad, Berachain are lore-hero two-register. Phantom is lore-hero single-register.</p>
+    <p><strong>Nobody is data-hero × two-register.</strong> That's Infinex's empty quadrant — natural fit for a wallet/exchange with rich on-chain telemetry and a brief that calls for grown-up sophistication with an in-on-the-joke lane.</p>
+  </div>
+
+  <!-- ── INFINEX TODAY ──────────────────────────────────────── -->
+  <h2><span class="num">00</span>Where Infinex sits today</h2>
+  <p class="dim">Current state of the brand we're designing comms for. What's locked, what's open, where we already align with the empty quadrant.</p>
+
+  <div class="locked">
+    <div class="locked-row">
+      <span class="locked-key">Color anchor</span>
+      <span class="locked-val">
+        Canteloupe orange · <code>#FE6F39</code> + full Radix 12-step scale (<code>#440906</code> → <code>#FFF4ED</code>)
+        <span class="locked-tag locked-tag-ours">locked · ours</span>
+      </span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Secondary palette</span>
+      <span class="locked-val">Shark (gray), Violet, Blue, Green, Amber, Red — each as Radix 12-step scale. Plus decorative singles: Red <code>#e5484d</code>, Yellow <code>#ffc53d</code>, Green <code>#3dd68c</code>, Cyan <code>#23afd0</code>, Indigo <code>#5472e4</code>, Purple <code>#9a5cd0</code>, Pink <code>#d6409f</code>. <span class="locked-tag" style="color: var(--warn); border-color: var(--warn);">⚠ check usage</span> 8-color decorative set risks the "five-color gradient soup" anti-pattern; verify how restrained actual usage is.</span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Typography</span>
+      <span class="locked-val">Inter Variable v4.1, self-hosted, single face. <span class="locked-tag" style="color: var(--warn); border-color: var(--warn);">⚠ gap</span> Per Wave 1: plain Inter alone is now the FLOOR, not the ceiling. No bespoke or editorial second face. Strategic choice: Polymarket-play (stay Inter, double down on restraint) or Hyperliquid-play (add one unexpected display face).</span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Motion</span>
+      <span class="locked-val">Minimal — <code>tw-animate-css</code> + 1 custom keyframe (<code>caret-blink</code>). No Framer Motion, no Lottie. <span class="locked-tag" style="color: var(--warn); border-color: var(--warn);">⚠ gap for video</span> comms-factory will need a motion vocabulary that doesn't currently exist in the platform.</span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Wordmark</span>
+      <span class="locked-val">Geometric logotype + combination mark with solid logomark. Assets: <code>apps/public-website/public/brand-guidelines/Infinex_Logo_Cantaloupe.svg</code></span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Tagline (live)</span>
+      <span class="locked-val">"Change the way you crypto." (homepage) · "Meet a new kind of wallet" (product)</span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Core props</span>
+      <span class="locked-val">Unified portfolio. Multi-provider trading. Serious Opsec.</span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Products</span>
+      <span class="locked-val">Perps · Extension · Swidge · Portfolio · Passkeys · Craterun · INX · Earn &amp; Yield · NFTs · Prediction Markets · Wallet Extension</span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Custody</span>
+      <span class="locked-val">Secured by Turnkey</span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Design tokens</span>
+      <span class="locked-val">TypeScript + CSS in <code>packages/mobile-ui/src/theme/dark.ts</code> + <code>packages/ui/styles/theme.css</code>. Auto-generated semantic tokens (e.g., <code>--background-color-surfaceBrand</code>). Importable into comms-factory as a workspace package.</span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">brand-factory state</span>
+      <span class="locked-val">Pre-positioned. Infinex has not been through the gated pipeline (<code>briefed → researched → positioned → identified → voiced</code>). Only Slop Factory is shipped to date.</span>
+    </div>
+    <div class="locked-row">
+      <span class="locked-key">Twitter handle</span>
+      <span class="locked-val"><a href="https://x.com/infinex">@infinex</a> · authored posts not surfacing via X search API (filter quirk — see §A)</span>
+    </div>
+  </div>
+
+  <div class="callout ours">
+    <h3>The color you can't change is the one no competitor has claimed</h3>
+    <p>Canteloupe orange <code>#FE6F39</code> is not in any of the six brand palettes we studied. Phantom purple. Hyperliquid mint. Pendle PT-green / YT-blue. Polymarket blue. Berachain honey-gold. Monad violet. None are orange.</p>
+    <p>The constraint you specified — orange is locked, we don't change it — happens to coincide with the open slot on the color axis. <strong>The empty quadrant and the unclaimed color rhyme.</strong></p>
+  </div>
+
+  <h3 style="margin-top: 3rem; font-style: normal; color: var(--text);">The Laban grain</h3>
+  <p class="dim">The emotional/temporal layer that sits above the structural empty-quadrant slot. Working hypothesis. Not locked.</p>
+
+  <div class="laban">
+    <div class="laban-axis">
+      <span class="laban-pick">Time-stressed</span>
+      <span class="laban-over">over</span>
+      <span class="laban-pass">space-stressed</span>
+    </div>
+    <div class="laban-axis">
+      <span class="laban-pick">Remote &amp; stable</span>
+      <span class="laban-over">over</span>
+      <span class="laban-pass">near &amp; mobile</span>
+    </div>
+    <div class="laban-axis">
+      <span class="laban-pick">Feeling / sensing</span>
+      <span class="laban-over">over</span>
+      <span class="laban-pass">thinking / analyzing</span>
+    </div>
+  </div>
+
+  <p style="margin-top: 1rem;"><em>Infinex should feel like a dream you're inside of, not a thing you're standing next to.</em> Cadence over location. Patient gravity over kinetic proximity. Intuitive over analytical. (Source: Rudolf von Laban's Movement Analysis — Effort dimensions applied to brand feel.)</p>
+
+  <div class="callout">
+    <h3>Workflow note: build infra in parallel, content from brand-factory</h3>
+    <p>brand-factory's anti-pattern #1: <em>no visuals before the </em><code>positioned</code><em> gate flips.</em> Infinex hasn't been through the pipeline yet, so committing Remotion template specs or comms-factory voice samples would violate this rule.</p>
+    <p>Pragmatic path: comms-factory builds <strong>infrastructure</strong> in parallel (Remotion scaffolds, release-card schema, generator/validator, orchestrator) — all brand-agnostic. The <strong>content</strong> (palette refinements, type, voice samples, allergen catalog) fills in once brand-factory's Infinex run produces the locked spec. Two tracks, one timeline.</p>
+  </div>
+
+  <h3 style="margin-top: 3rem; font-style: normal; color: var(--text);">In flight</h3>
+  <table class="status">
+    <tr><td class="status-tag status-done">resolved</td><td>Twitter access — fresh X API bearer pulled from 1Password "X API" item (Employee vault, 116-char AAAA... shape, lives in "password" field). All 7 timelines pulled via /2/users/:id/tweets endpoint with media expansion.</td></tr>
+    <tr><td class="status-tag status-active">decision B</td><td>Infinex Laban placement — pick before brand-factory voice spec can be written. Nigel = Flow-stressed Stable; Infinex tentative read = Space-stressed Stable.</td></tr>
+    <tr><td class="status-tag status-active">decision C</td><td>brand-factory pipeline for Infinex — when do gates flip? <code>BRAND.md</code> + <code>BRIEF.md</code> + 5× <code>01-inputs/*</code> drafts ready.</td></tr>
+    <tr><td class="status-tag status-open">open</td><td>Rambo brief — visual-vocabulary handoff for Remotion template scoping. Can fire anytime — page is ready.</td></tr>
+    <tr><td class="status-tag status-open">open</td><td>Remotion test against current Perps screens (later, per your note)</td></tr>
+    <tr><td class="status-tag status-done">done</td><td>Wave 2 dispatch — 5 agents, all returned. See §B below.</td></tr>
+    <tr><td class="status-tag status-done">done</td><td>comms-factory scaffold — 12 files, 6 working validator rules, vitest passes</td></tr>
+    <tr><td class="status-tag status-done">done</td><td>brand-factory/brands/infinex/ — 7 draft files (BRAND, BRIEF, 5 inputs)</td></tr>
+    <tr><td class="status-tag status-done">done</td><td>5 sample release cards (Perps, Swidge, Extension, Portfolio, Passkeys)</td></tr>
+    <tr><td class="status-tag status-done">done</td><td>Palette audit: discipline, not slop ✓ (single accent, semantic state colors)</td></tr>
+    <tr><td class="status-tag status-done">done</td><td>Allergen catalog — 8 patterns, 3 verified + 5 reasoned, ready-to-paste regex</td></tr>
+    <tr><td class="status-tag status-done">done</td><td>Mirodan + Nigel scaffold mapped, saved to project memory</td></tr>
+    <tr><td class="status-tag status-done">done</td><td>Infinex platform recon — 13 apps + 110 packages mapped; tokens at <code>~/sites/infinex-xyz/platform</code></td></tr>
+    <tr><td class="status-tag status-done">done</td><td>Wave 1 visual recon · Wave 1.5 voice recon (5/7 handles) · Infinex handle confirmed · Remotion skill pack installed · Laban frame captured</td></tr>
+  </table>
+
+  <!-- ── INFINEX X FEED — REAL DATA ──────────────────────────── -->
+  <h2><span class="num">— C —</span>Infinex's actual X voice (now we have data)</h2>
+  <p class="dim">100 posts via X API v2 user-timeline · 27 media items · window: Feb 2026 – Apr 2026 · raw at <code>wave-1.5-tweets/infinex.api.md</code></p>
+
+  <div class="callout ours">
+    <h3>Wave 1's matrix placement needs re-grading</h3>
+    <p>The hypothesis was: Infinex sits in the empty quadrant (data-hero × two-register), with the structural opening being unclaimed. The real feed says: <strong>Infinex is already operating two-register naturally</strong>, but the model is closer to <strong>Monad</strong> than to the pure empty-quadrant we drew. The unifier is <strong>Kain-as-character</strong> — founder-led voice, agent-narrative-dominant, with cultural-warmth replies sitting next to serious launch announcements.</p>
+    <p>The empty quadrant we mapped was the absence of <em>data-hero × two-register</em>. Infinex's actual voice is closer to <em>founder-hero × two-register</em> — sharing Monad's structural model. That's not a problem; it's a useful diff: comms-factory should plan templates that AMPLIFY the founder-led move (Kain quote cards, interview clip pulls) alongside data-card templates, not REPLACE it.</p>
+  </div>
+
+  <div class="feeds">
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">@infinex · what they actually post</span>
+        <span class="feed-stat">100 posts · 27 media · Feb-Apr 2026</span>
+      </div>
+      <dl>
+        <dt>Dominant theme (last 60 days)</dt>
+        <dd><strong>Agents, agents, agents.</strong> Kain interview clips with @theblondebroker, @VirtualBacon, @RobertSagurton. Long threads pulling quotes ("Build for the agent six months from now. Not the agent today.") · "Your agent will be managing your crypto for you." · "MCP server gives any agent the full crypto stack." Voice register: confident, thesis-led, willing to take positions ("There will not be a broad market-agnostic rally in alts ever again").</dd>
+        <dt>Recent product launches captured</dt>
+        <dd><strong>Private Send / Incognito Mode</strong> (Houdini Swap integration) — Mar 2026 — 164k impressions on launch post, 311k on "Times change. Privacy doesn't." follow-up. <strong>Lighter Perps integration</strong> — Mar 2026 — Commodities Challenge, "Gold. Oil. Palladium." <strong>Chinese New Year Red Packets</strong> w/ Coinbase + Base — $888 USDC blessings, on-chain tradition import.</dd>
+        <dt>Voice posture</dt>
+        <dd>Serious-but-warm. Long-form thread breakdowns (8–20 tweet threads). Short warm replies ("I'm glad you like it. More to come 🙏" · "Yes, very possible."). <strong>"More to come"</strong> recurs as a signoff. Heavy RTs of @laurashin, @RobertSagurton, @0xEquinox_ — borrowed credibility from media + employees.</dd>
+        <dt>Visual artifacts</dt>
+        <dd>Product reveals are 30–46s mp4 at 1280×720 with branded thumbnails. The Private Send reveal video, Lighter Perps reveal, Kain interview clips — all available as media URLs in the raw data. Rambo: <code>wave-1.5-tweets/infinex.api.json</code> contains direct video URLs for sampling.</dd>
+        <dt>Empty quadrant status — corrected</dt>
+        <dd>Infinex is NOT empty-quadrant; closer to <strong>founder-hero × two-register</strong> (Monad's shape). The growth move isn't "discover the empty quadrant" — it's "amplify the existing founder-led shape with better infrastructure (consistent templates, faster reveals, validator-checked voice)." That's what comms-factory builds.</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">@berachain · real feed (was filtered before)</span>
+        <span class="feed-stat">100 posts · 31 media · Feb-Apr 2026</span>
+      </div>
+      <dl>
+        <dt>Voice posture (now visible)</dt>
+        <dd>Mixed serious + culturally-warm. Security alerts ("Wasabi Protocol admin key compromise" — same-day response, blacklisted vaults). Light cultural posts ("What da bears and @DefiLlama doin?"). Heavy ecosystem amplification via @SmokeyTheBera (founder-as-character, like Kain for Infinex) and @berachaindevs. The Wave 1 inference about serialized lore is confirmed but more <em>announcement-driven</em> than I expected — they ship features and acknowledge ecosystem partners constantly.</dd>
+        <dt>Pattern Infinex can learn from</dt>
+        <dd>The instant-response on a security incident (Wasabi exploit, $50K at risk) — they posted withdrawal instructions within hours, then a paused-vaults follow-up. Operational-comms muscle. comms-factory should have a "security-alert" template family (fast, sober, no joke — different register from the launches and the data cards).</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">@HyperliquidX · was filtered too (wasn't silent)</span>
+        <span class="feed-stat">99 posts · 38 media · Feb-Apr 2026</span>
+      </div>
+      <dl>
+        <dt>The Wave 1.5 "near-silent" finding was wrong</dt>
+        <dd>The X search-recent endpoint was filtering Hyperliquid too — they returned 2 posts via search but 99 via user-timeline. Wave 1's "quiet luxury" inference was right about restraint but wrong about absence. They're active; the search index just didn't show it.</dd>
+        <dt>What to do</dt>
+        <dd>Re-read the Hyperliquid samples in <code>wave-1.5-tweets/HyperliquidX.api.md</code> with 38 media items before locking any template-design conclusions about "Hyperliquid's silent strategy." That hypothesis is now stale.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- ── WAVE 2 DELIVERABLES ─────────────────────────────────── -->
+  <h2><span class="num">— B —</span>Wave 2 deliverables</h2>
+  <p class="dim">Five agents fired in parallel. All returned. Folded into the codebase + research dir.</p>
+
+  <div class="feeds">
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">brand-factory/brands/infinex/</span>
+        <span class="feed-stat">7 files · drafts, gates unlocked</span>
+      </div>
+      <dl>
+        <dt>What's there</dt>
+        <dd><code>BRAND.md</code> (status machine — all gates pre-positioned, you flip), <code>BRIEF.md</code> (4 pillars: Consolidate · Show the work · In on the joke not the bully · Trust as architecture — plus 6 confirmation questions for <code>briefed</code> flip), <code>01-inputs/{users,competitors,premise,table-stakes,devils-advocate}.md</code>.</dd>
+        <dt>Devil's-advocate findings</dt>
+        <dd>5 serious attacks identified (empty-because-unlivable, trust deficit from past era, Phantom already won, "rich data surface" aspirational, parent-rebrand undermines kit). Concedes thesis is defensible but flags <em>execution risk</em>. 5 user resolutions required before <code>researched</code> can flip.</dd>
+        <dt>What you do</dt>
+        <dd>Open the 7 files. Answer the confirmation questions. Push back on any pillar that's wrong. Then flip gates one at a time. comms-factory's voice spec is gated on <code>positioned</code>; visual spec on <code>identified</code>.</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">comms-factory/ (scaffold)</span>
+        <span class="feed-stat">12 files · validator passes</span>
+      </div>
+      <dl>
+        <dt>Pipeline shape</dt>
+        <dd><code>card → generator → validator → orchestrator → renderer → ship gate</code> — mirrors Nigel exactly. Zod-typed release card with discriminated union over <code>kind: data-card-official | data-card-wry | launch-tier | split</code>. <code>deployed_facts</code> field anchors fact-checking.</dd>
+        <dt>Working validator rules (regex)</dt>
+        <dd><code>rejectCliches</code> · <code>rejectListicleVoice</code> · <code>rejectAntagonism</code> · <code>rejectAIslop</code> (em-dash density + vague-noun list) · <code>rejectKainBaggage</code> (8 patterns from allergen catalog ready to paste) · <code>rejectClaimedPalettes</code> (Polymarket/Pendle/Phantom/Monad/Hyperliquid/Berachain hexes). 47 vitest assertions pass. Edge case verified: "leverage" flags, "leverage ratio"/"leveraged long" do not.</dd>
+        <dt>Pending</dt>
+        <dd><code>pnpm install</code> (deps not installed). Voice prompt template + few-shots load from <code>brand-factory/brands/infinex/04-voice/tone.md</code> once <code>voiced</code> gate flips. Remotion compositions gated on <code>identified</code>.</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">5× sample release cards</span>
+        <span class="feed-stat">research/sample-releases/</span>
+      </div>
+      <dl>
+        <dt>What's there</dt>
+        <dd>Perps, Swidge, Extension, Portfolio, Passkeys. Each with: release metadata · 3 candidate data points to hero · data-card caption (sober) · data-wry caption (cultural) · launch-tier (where warranted) · split (where applicable) · voice notes.</dd>
+        <dt>Best samples</dt>
+        <dd><em>Data-card (sober):</em> "60% of every fee, back to you. 100+ markets, up to 40x, two clicks from passkey to position." (Perps) · <em>Data-wry (cultural):</em> "we asked 25 bridges for a quote so you don't have to open 25 tabs." (Swidge)</dd>
+        <dt>Schema implication</dt>
+        <dd>Three of five product URLs 404 — they live as anchors on <code>infinex.xyz/features#&lt;product&gt;</code>. Release-card schema needs <code>(url, anchor)</code> not just URL. Only Passkeys warranted a launch-tier copy; Extension had no split. Many fields are nullable, not required — schema reflects this.</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">Palette audit</span>
+        <span class="feed-stat">verdict: DISCIPLINE ✓</span>
+      </div>
+      <dl>
+        <dt>Finding</dt>
+        <dd>Infinex's CSS bundle uses canteloupe <code>#FE6F39</code> as the <em>single</em> brand/selected/focus accent. Red/yellow/green/blue each have exactly one semantic role (critical/caution/positive/info). Six small product-chip accents on homepage (Perps mint, Wallet cyan, Prediction blue, Earn lime, NFT magenta, Swap vermillion) — confined to chip-sized labels, not hero decoration. No rainbow gradients on any audited page.</dd>
+        <dt>What it means</dt>
+        <dd>Wave 1 anti-pattern #4 ("five-color gradient brand soup") NOT tripped. The 8-color decorative palette is Radix-discipline, not slop. comms-factory should import the existing tokens, not re-invent them.</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">Allergen catalog</span>
+        <span class="feed-stat">8 patterns · 3 verified + 5 reasoned</span>
+      </div>
+      <dl>
+        <dt>Verified (with citations)</dt>
+        <dd>Coinbase-as-regulatory-punching-bag (Kain 2018 tweet captured) · Spartan rallying language (Synthetix blog "Spartans have never shied away from asymmetrical bets") · "fundamentally flawed" dismissals (Messari governance report).</dd>
+        <dt>Reasoned (heuristic only)</dt>
+        <dd>Anti-CEX dismissiveness · anti-MetaMask dismissiveness · VC-as-villain framing · 2020-era degen slang (ser/anon/frens) · founder-essay self-congratulation.</dd>
+        <dt>Ready to ship</dt>
+        <dd>All 8 patterns are ready-to-paste TS regex entries for <code>validator.ts:rejectKainBaggage</code>. Note: <code>ser</code>/<code>anon</code>/<code>frens</code> is aggressive — should verify Infinex's current voice doesn't deploy them ironically before merging.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h3>Mirodan / Laban grounding — now load-bearing</h3>
+    <p>Nigel runs on Veronica Mirodan's 1997 PhD framework (synthesis of Laban Movement Analysis). The vocabulary: character as a six-piece unit (Inner Attitude + Aspect + Dominant Stress + Outer Action(s) + Lining + Working Actions). Three-baseline rule: only <em>Stable / Near / Adream</em> can baseline; Mobile / Awake / Remote are outer-only. Status grammar: time-stress reads adolescent / lower, space-stress reads mature / higher, flow-stress reads emotional / sociable.</p>
+    <p>Nigel: <strong>Flow-stressed Stable, Bound flow pole, Light + Direct</strong>. Three registers (Self-Contained baseline · Diffused Adream outer · Egocentric Remote outer).</p>
+    <p>Infinex tentative: <strong>Space-stressed Stable</strong> (mature/higher, gravitational) — to confirm. comms-factory's voice spec (when brand-factory <code>voiced</code> gate flips) should be written in this vocabulary, not vague descriptors. Validator should mirror Nigel's intent-consistency guard.</p>
+  </div>
+
+  <!-- ── WAVE 1.5: VOICE & CADENCE ───────────────────────────── -->
+  <h2><span class="num">— A —</span>Wave 1.5 · what their feeds actually show</h2>
+  <p class="dim">Last 7 days of X activity, pulled directly via ProjectJin's <code>infinex_search_recent_posts</code>. <strong>Voice and cadence</strong>, NOT visual — the response carries no media URLs; visual still needs browser-level recon.</p>
+
+  <div class="caveat">
+    <div class="label">⚠ Caveat — Grok hallucinates when asked for posts it can't access</div>
+    <p>When <code>infinex_search_recent_posts</code> returned zero results for some handles, we fell back to <code>infinex_grok_search</code> (mode=x). For three of those, Grok <strong>fabricated post content</strong>: invented URLs (<code>t.co/abc123</code>, <code>t.co/def456</code>), wrong colors (<code>#8B5CF6</code> for Hyperliquid; their actual mint is <code>~#97FCE4</code>), engagement numbers that don't match reality. The fake files are quarantined as <code>*.SUSPECT</code>. Only verified <code>search_recent_posts</code> output is treated as ground truth below.</p>
+  </div>
+
+  <div class="caveat">
+    <div class="label">⚠ Anomaly — @infinex and @berachain are author-side filtered from X search</div>
+    <p>Both accounts ARE searchable: replies to them surface (6–10 results), mentions surface (10+ results). But <code>from:@infinex</code> and <code>from:@berachain</code> return <strong>zero authored posts</strong> on both test and prod profiles. The accounts exist in the index; their authored content is filtered out. Phantom, Polymarket, Pendle, Monad all return author posts fine on the same query shape.</p>
+    <p><strong>For Infinex specifically:</strong> if confirmed, this is a real discoverability problem worth raising internally — X searches that should surface Infinex's own announcements may not be returning them. Possible causes: a search-exclusion setting toggled on, "team accounts" with mismatched author_id under the hood, or recent throttle. Needs investigation.</p>
+  </div>
+
+  <h3 style="margin-top: 2.5rem; font-style: normal; color: var(--text); font-size: 1rem;">Real findings — handles that returned data</h3>
+
+  <div class="feeds">
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">@phantom</span>
+        <span class="feed-stat">100 posts · 168h · ~14/day</span>
+      </div>
+      <dl>
+        <dt>Voice on X</dt>
+        <dd>Reply-driven CT-native presence. Top posts are 1–3 word emoji replies in other people's threads: <code>👻</code>, <code>💜</code>, <code>🥳</code>, <code>🫡</code>, <code>"Hyperliquid 👻"</code>. Announcements are rare; <em>being present</em> is the strategy.</dd>
+        <dt>How it updates Wave 1</dt>
+        <dd>Wave 1 called Phantom "sophisticated consumer fintech." True for the WEBSITE. On X they're casual-emoji-driven, almost the opposite register. Two voice layers operating in parallel surfaces.</dd>
+        <dt>Recurring artifact</dt>
+        <dd>The <code>👻</code> ghost emoji as branded signoff — used in casual replies and product reveals alike ("Sidelined? Trade CRCL on Phantom 👻"). The emoji is a brand element.</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">@Polymarket</span>
+        <span class="feed-stat">98 posts · 168h · ~14/day</span>
+      </div>
+      <dl>
+        <dt>Voice on X</dt>
+        <dd>Pure news desk. Every post prefixed <code>JUST IN:</code> or <code>NEW:</code>. Format: headline → link to market with chart. Occasional flip: <code>🚨 NEW POLYMARKET:</code> for stranger markets ("Kamikaze dolphins confirmed?"). Variant: <code>X% chance Y</code> as a separate template.</dd>
+        <dt>How it updates Wave 1</dt>
+        <dd>Confirms. They really are a CNBC ticker with markets attached. Massive engagement on news posts (300+ likes, 17k–26k impressions on the strongest).</dd>
+        <dt>Recurring artifact</dt>
+        <dd><code>JUST IN:</code> as a verb-tier signal. The chart screenshot is the brand surface, restated daily.</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">@pendle_fi</span>
+        <span class="feed-stat">54 posts · 168h · ~8/day</span>
+      </div>
+      <dl>
+        <dt>Voice on X</dt>
+        <dd>Sophisticated DeFi explainer mixed with <strong>heavy RT amplification of a deputized community army</strong>: <code>@PendleIntern</code>, <code>@18decimals</code>, <code>@thelearningpill</code>, <code>@pendle_grandma</code>, <code>@apyx_fi</code>. Pendle RTs validation rather than always posting themselves. Original posts are finance-precise — exact numbers ($318M, 1,033,235, 18.94% APY).</dd>
+        <dt>How it updates Wave 1</dt>
+        <dd>Wave 1 said "two-color semantic system" — true visually. But the X voice has a SECOND register Wave 1 missed entirely: the borrowed-credibility ecosystem RT army. The brand is a node in a network, not a broadcast tower.</dd>
+        <dt>Recurring artifact</dt>
+        <dd><code>Pendle Print #N</code> — a numbered recurring series. Branded-template with incrementing counter that compounds across weeks. The exact lesson Berachain teaches structurally, applied to data-hero content.</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">@monad</span>
+        <span class="feed-stat">11 posts · 168h · handle migrated from @monad_xyz</span>
+      </div>
+      <dl>
+        <dt>Voice on X</dt>
+        <dd>Founder-led, meme-aware, mixed-register. <code>"gmonad"</code> (1.4k likes, 88k impressions). <code>"The name is Hon, Keone Hon"</code> (Bond riff, 927 likes). <code>"Everybody wants to be a founder, but nobody wants to lift no heavy *** weights"</code> (gym joke, 939 likes). Sitting next to <code>"Payments, Trading, DeFi, RWAs, Stablecoins, Tokenization, FX, Agents · All in one"</code> (formal positioning, 1.2k likes). And the airdrop tease: <code>"Active traders on Monad might want to check their wallets for a little surprise"</code> (1.5k likes, 282k impressions — top of week).</dd>
+        <dt>How it updates Wave 1</dt>
+        <dd>Confirms two-register thesis but reveals the registers are <em>both</em> driven by the founder (Keone Hon, @keoneHD). Personality is the unifier, not the visual system. The Monanimals are the visual culture layer; Keone is the voice layer.</dd>
+        <dt>Recurring artifact</dt>
+        <dd>Founder-as-character. Cross-platform plug post listing YouTube/Insta/Reddit/LinkedIn/TikTok — they treat X as one channel of many, not the spine.</dd>
+      </dl>
+    </div>
+
+    <div class="feed">
+      <div class="feed-head">
+        <span class="feed-handle">@HyperliquidX</span>
+        <span class="feed-stat warn">2 posts · 168h · ⚠ essentially silent</span>
+      </div>
+      <dl>
+        <dt>Voice on X</dt>
+        <dd>Restraint to the point of <em>abstention</em>. 1 original post (congratulating Phantom on $20M builder code revenue) + 1 RT (Ledger Wallet) in 7 days. They speak only to acknowledge ecosystem partners.</dd>
+        <dt>How it updates Wave 1</dt>
+        <dd>Wave 1 inferred "quiet luxury / editorial restraint" from the website. On X this becomes <strong>near-silence as a strategy</strong>. The original Wave 1 motion-vocabulary claims about their X presence couldn't be verified because there's almost nothing TO verify. The "restraint" hypothesis is now stronger — they're not just understated, they're absent on purpose.</dd>
+        <dt>Recurring artifact</dt>
+        <dd>The rare post that does land gets massive lift (91k impressions, 1.4k likes on the Phantom congrats). Scarcity as broadcast amplifier.</dd>
+      </dl>
+    </div>
+
+  </div>
+
+  <h3 style="margin-top: 2.5rem; font-style: normal; color: var(--text); font-size: 1rem;">What this changes</h3>
+
+  <div class="callout">
+    <h3>X-voice is a parallel surface</h3>
+    <p>Wave 1's matrix placement (data-hero vs lore-hero, single vs two-register) holds for the <strong>website</strong>, but X is a different game. Phantom is single-register on web but reply-driven and emoji-tier on X. Hyperliquid is restrained on web but actively absent on X. Polymarket and Pendle hold the same register across both. Monad runs the same two registers on X that they run on web, unified by their founder's personality.</p>
+    <p><strong>For Infinex's empty quadrant:</strong> the data-hero × two-register thesis still works as a STRUCTURAL placement, but now we should think about it as TWO surfaces: <em>data-hero on web + landing pages + product</em>, and <em>reply-and-presence on X</em>. Don't try to do both registers within a single video. Use the data-hero template for owned channels; develop a separate X-voice playbook for reply/quote-RT presence.</p>
+  </div>
+
+  <!-- ── BASELINE ────────────────────────────────────────────── -->
+  <h2><span class="num">01</span>The new baseline</h2>
+  <p class="dim">Four moves every brand in the set already makes. Not differentiators. The cost of admission.</p>
+
+  <ol class="baseline">
+    <li><div>
+      <h3>One accent on near-black</h3>
+      <p>Phantom <code>#AB9FF2</code>. Hyperliquid mint-teal ~<code>#97FCE4</code>. Polymarket <code>#2E5CFF</code>. Berachain honey-gold ~<code>#F5B82E</code>. Monad <code>#6E54FF</code>. Pendle is the exception — they run two <em>semantic</em> colors (<code>#1BE3C2</code> PT-green = principal, <code>#7AB7FF</code> YT-blue = yield) — same discipline applied to a glossary instead of a single accent. Every saturated pixel earns its meaning.</p>
+    </div></li>
+    <li><div>
+      <h3>Bespoke or editorial-grade type</h3>
+      <p>Phantom commissioned F37 to cut a custom face. Hyperliquid runs a serif as display (rare in crypto). Pendle paid for Kyrial Sans Pro. Monad runs Britti Sans + Roboto Mono used <em>decoratively</em>. Polymarket is Inter-only — that's now the floor, not the ceiling. Plain Inter alone reads as default.</p>
+    </div></li>
+    <li><div>
+      <h3>Restrained motion</h3>
+      <p>No glitch, no CRT scanline, no Matrix rain, no rainbow conic gradient, no neon glow, no Tron grid, no five-color brand soup. Motion serves the message — type reveals, draw-in charts, mascot beats — never decoration.</p>
+    </div></li>
+    <li><div>
+      <h3>Product- and chain-agnostic discipline</h3>
+      <p>Phantom is the loudest on this: every announcement is purple, regardless of which chain is launching. Hyperliquid never breaks into "the perp color" or "the spot color." Infinex is multi-chain and multi-venue — refusing to color-code chains is the move; chain references live as <em>text/logo labels inside Infinex's palette</em>, not as accent swings.</p>
+    </div></li>
+  </ol>
+
+  <!-- ── 2×2 MATRIX ──────────────────────────────────────────── -->
+  <h2><span class="num">02</span>The two axes that split the set</h2>
+  <p class="dim">Where each brand actually sits, and what the empty cell tells us. Infinex's color also lands in this quadrant on the color axis — see §00 above.</p>
+
+  <div class="matrix">
+    <div class="corner"></div>
+    <div class="ax-label">Data-hero</div>
+    <div class="ax-label">Lore-hero</div>
+
+    <div class="ax-label y-label">Single-register</div>
+    <div class="cell">
+      <div class="brands">
+        <span class="brand">Polymarket</span>
+        <span class="brand">Pendle</span>
+        <span class="brand">Hyperliquid</span>
+      </div>
+      <div class="note">Product UI exported as imagery. Restraint as personality.</div>
+    </div>
+    <div class="cell">
+      <div class="brands"><span class="brand">Phantom</span></div>
+      <div class="note">Mascot-and-identity-driven, no broader lore arc.</div>
+    </div>
+
+    <div class="ax-label y-label">Two-register</div>
+    <div class="cell empty">
+      <div class="brands"><span class="brand" style="border-color: var(--ours); color: var(--ours);">Infinex</span></div>
+      <div class="note">Data-as-poster × official + cultural. One color anchor (#FE6F39 — also unclaimed in this set), two voices. The chart stays sober; the joke lives in the caption.</div>
+    </div>
+    <div class="cell">
+      <div class="brands">
+        <span class="brand">Monad</span>
+        <span class="brand">Berachain</span>
+      </div>
+      <div class="note">Official + cultural register, both authorized. Mascot- or vibe-as-comms vehicle.</div>
+    </div>
+  </div>
+
+  <!-- ── TEMPLATE FAMILIES ──────────────────────────────────── -->
+  <h2><span class="num">03</span>Template families to sketch first</h2>
+  <p class="dim">What goes into Remotion before anything else. Build in this order. Note: per §00 workflow rule, these are <em>infrastructure scaffolds</em>; final content fills in once brand-factory locks Infinex's spec.</p>
+
+  <div class="templates">
+    <div class="t">
+      <div class="order">i.</div>
+      <div>
+        <div class="reg">Official register · highest leverage</div>
+        <h3>The data card</h3>
+        <p>Polymarket's gift to the category. Take a live Infinex data point — swap rate, bridge progress, portfolio delta, yield % — and treat it as the protagonist. Big-numeric in the display face, single accent color, one-line caption, small icon. Every video is a screenshot waiting to be re-shared. <strong>The product already produces the content; the template just frames it.</strong></p>
+      </div>
+    </div>
+    <div class="t">
+      <div class="order">ii.</div>
+      <div>
+        <div class="reg">Cultural register · paired with i.</div>
+        <h3>The data wry</h3>
+        <p>Same data card, but the caption does the in-on-the-joke work. Same accent, same type, same chrome — different copy register. <strong>The chart stays sober; the joke lives in the caption.</strong> This is how Polymarket-style data-hero meets Monad-style two-register without bolting on a mascot.</p>
+      </div>
+    </div>
+    <div class="t">
+      <div class="order">iii.</div>
+      <div>
+        <div class="reg">Reserved · used ~4× per year</div>
+        <h3>The launch tier</h3>
+        <p>Berachain's lesson. A separate template that ONLY gets used for major events, with a reserved sub-palette and a reserved typographic move that signals "this one matters." Different accent within Infinex's system, different aspect ratio, different motion primitive. <strong>The scarcity is the signal.</strong></p>
+      </div>
+    </div>
+    <div class="t">
+      <div class="order">iv.</div>
+      <div>
+        <div class="reg">Semantic · when there's a real split</div>
+        <h3>The split</h3>
+        <p>Pendle's lesson. If Infinex has any product motion that's semantically a split — in/out, bridge-from/bridge-to, principal/yield, spot/perp, on-chain/off-chain — build one template that visualizes the split with a reserved color pair. <strong>The split becomes Infinex's most legible visual primitive after the wordmark.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <p class="dim"><strong>Defer (don't build yet):</strong> 3D mascot, character animation, illustrated explainer, scroll-cinema, anything that requires a serialized lore substrate Infinex doesn't have yet.</p>
+
+  <!-- ── STEAL ──────────────────────────────────────────────── -->
+  <h2><span class="num">04</span>One technique per brand worth porting</h2>
+  <p class="dim">What to take from each. The principle, not the execution.</p>
+
+  <div class="steal">
+    <div class="s"><div class="brand">Phantom</div><div class="move">Chain-agnostic discipline.</div><p>Chain references as labels inside Infinex's accent system, not as accent swings per post.</p></div>
+    <div class="s"><div class="brand">Hyperliquid</div><div class="move">One unexpected display face.</div><p>Theirs is serif (now claimed). Infinex's could be didone, stencil, humanist condensed, slab. One move buys more sophistication than VFX.</p></div>
+    <div class="s"><div class="brand">Pendle</div><div class="move">Semantic color.</div><p>Pick two saturated colors that always mean the same two things across every template. Lock them. Take the discipline, not the specific hexes.</p></div>
+    <div class="s"><div class="brand">Polymarket</div><div class="move">Data-as-poster.</div><p>Every video is a screenshot of a live Infinex moment. Embed-distributable is a principle, not a feature.</p></div>
+    <div class="s"><div class="brand">Berachain</div><div class="move">Serialization mechanic.</div><p>One "launch-tier" template gets used 4× per year. Recurring visual primitives that compound across weeks.</p></div>
+    <div class="s"><div class="brand">Monad</div><div class="move">Two-register discipline.</div><p>One color anchor, two voices. Commission the cultural register from brand-factory; don't fake bottom-up.</p></div>
+  </div>
+
+  <!-- ── AVOID ──────────────────────────────────────────────── -->
+  <h2><span class="num">05</span>Nine specific traps</h2>
+  <p class="dim">Patterns the recon flagged as universally dated, derivative, or category-collapsing.</p>
+
+  <ol class="avoid">
+    <li><div class="body"><strong>Variable-weight type animation.</strong> Now reads as "I hired a fintech rebrand studio circa 2023."</div><div class="why">Phantom signature</div></li>
+    <li><div class="body"><strong>Smooth-scroll cinematic in Remotion.</strong> Wrong medium; collapses video into website-feel.</div><div class="why">Category error</div></li>
+    <li><div class="body"><strong>Crypto-neon glow / cyberpunk caustics / Tron grids.</strong> Universally dated.</div><div class="why">Hyperliquid avoids</div></li>
+    <li><div class="body"><strong>Five-color gradient brand soup.</strong> The inherited 2021-era L1 default.</div><div class="why">Hyperliquid avoids</div></li>
+    <li><div class="body"><strong>Mascot-as-required-presence.</strong> Duolingo-owl energy if forced.</div><div class="why">Monad avoids</div></li>
+    <li><div class="body"><strong>Maximalist motion on perf/data claims.</strong> Over-animating the counter undercuts credibility.</div><div class="why">Monad avoids</div></li>
+    <li><div class="body"><strong>Meme-format posts (Wojaks, Chad/virgin).</strong> Reads as condescension to a sophisticated audience.</div><div class="why">Pendle avoids</div></li>
+    <li><div class="body"><strong>Lore vocabulary without illustration system.</strong> Text-only shitposts without recurring visual anchors read as cringe.</div><div class="why">Berachain warns</div></li>
+    <li><div class="body"><strong>Any claimed palette below.</strong> Each hex is now coded to a competitor; using it reads as imitation regardless of context.</div><div class="why">Universal</div></li>
+  </ol>
+
+  <!-- ── PALETTES ───────────────────────────────────────────── -->
+  <h2><span class="num">06</span>Palettes</h2>
+  <p class="dim">Ours — locked. Theirs — off-limits.</p>
+
+  <h3 style="font-style: normal; color: var(--text); margin: 1.5rem 0 0.5rem; font-size: 1rem;">Our anchor</h3>
+  <div class="palette">
+    <div class="swatch swatch-ours">
+      <div class="chip" style="background:#FE6F39;"></div>
+      <div class="hex">#FE6F39</div>
+      <div class="brand">Infinex Canteloupe</div>
+      <div class="tag">ours · locked</div>
+    </div>
+  </div>
+
+  <h3 style="font-style: normal; color: var(--text); margin: 2rem 0 0.5rem; font-size: 1rem;">Canteloupe Radix scale (full system on disk)</h3>
+  <div class="palette">
+    <div class="swatch"><div class="chip" style="background:#440906;"></div><div class="hex">#440906</div><div class="brand">canteloupe 01</div></div>
+    <div class="swatch"><div class="chip" style="background:#6B0F09;"></div><div class="hex">~#6B0F09</div><div class="brand">02</div></div>
+    <div class="swatch"><div class="chip" style="background:#8E1A0F;"></div><div class="hex">~#8E1A0F</div><div class="brand">03</div></div>
+    <div class="swatch"><div class="chip" style="background:#B83218;"></div><div class="hex">~#B83218</div><div class="brand">04</div></div>
+    <div class="swatch"><div class="chip" style="background:#D44A20;"></div><div class="hex">~#D44A20</div><div class="brand">05</div></div>
+    <div class="swatch swatch-ours" style="padding: 1.1rem;"><div class="chip" style="height:80px;background:#FE6F39;"></div><div class="hex">#FE6F39</div><div class="brand">06 · anchor</div></div>
+    <div class="swatch"><div class="chip" style="background:#FF8A5E;"></div><div class="hex">~#FF8A5E</div><div class="brand">07</div></div>
+    <div class="swatch"><div class="chip" style="background:#FFA585;"></div><div class="hex">~#FFA585</div><div class="brand">08</div></div>
+    <div class="swatch"><div class="chip" style="background:#FFC0AA;"></div><div class="hex">~#FFC0AA</div><div class="brand">09</div></div>
+    <div class="swatch"><div class="chip" style="background:#FFD7C5;"></div><div class="hex">~#FFD7C5</div><div class="brand">10</div></div>
+    <div class="swatch"><div class="chip" style="background:#FFEADD;"></div><div class="hex">~#FFEADD</div><div class="brand">11</div></div>
+    <div class="swatch"><div class="chip" style="background:#FFF4ED;"></div><div class="hex">#FFF4ED</div><div class="brand">12 · lightest</div></div>
+  </div>
+  <p class="dim" style="font-size: 0.85rem; margin-top: 0.3rem;">Intermediate hexes interpolated visually — read <code>packages/mobile-ui/src/theme/dark.ts</code> for exact values. The system is in place; comms-factory should import it, not re-invent.</p>
+
+  <h3 style="font-style: normal; color: var(--text); margin: 2rem 0 0.5rem; font-size: 1rem;">Decorative palette (used sparingly per Radix conventions)</h3>
+  <div class="palette">
+    <div class="swatch"><div class="chip" style="background:#e5484d;"></div><div class="hex">#e5484d</div><div class="brand">red</div></div>
+    <div class="swatch"><div class="chip" style="background:#ffc53d;"></div><div class="hex">#ffc53d</div><div class="brand">yellow</div></div>
+    <div class="swatch"><div class="chip" style="background:#3dd68c;"></div><div class="hex">#3dd68c</div><div class="brand">green</div></div>
+    <div class="swatch"><div class="chip" style="background:#23afd0;"></div><div class="hex">#23afd0</div><div class="brand">cyan</div></div>
+    <div class="swatch"><div class="chip" style="background:#5472e4;"></div><div class="hex">#5472e4</div><div class="brand">indigo</div></div>
+    <div class="swatch"><div class="chip" style="background:#9a5cd0;"></div><div class="hex">#9a5cd0</div><div class="brand">purple</div></div>
+    <div class="swatch"><div class="chip" style="background:#d6409f;"></div><div class="hex">#d6409f</div><div class="brand">pink</div></div>
+  </div>
+  <p class="dim" style="font-size: 0.85rem; margin-top: 0.3rem;">⚠ <strong>Discipline question for Rambo:</strong> Wave 1's anti-pattern #4 is "five-color gradient brand soup." Infinex's system has 8 decorative colors. We need to verify whether these are used sparingly (Radix discipline — color as semantic state) or generously (slop risk). Worth a quick browse of <code>app.infinex.xyz</code> to check actual usage in product.</p>
+
+  <h3 style="font-style: normal; color: var(--text); margin: 2.5rem 0 0.5rem; font-size: 1rem;">Already claimed by competitors</h3>
+  <div class="palette">
+    <div class="swatch"><div class="chip" style="background:#AB9FF2;"></div><div class="hex">#AB9FF2</div><div class="brand">Phantom</div><div class="tag">claimed</div></div>
+    <div class="swatch"><div class="chip" style="background:#97FCE4;"></div><div class="hex">~#97FCE4</div><div class="brand">Hyperliquid</div><div class="tag">claimed</div></div>
+    <div class="swatch"><div class="chip" style="background:#1BE3C2;"></div><div class="hex">#1BE3C2</div><div class="brand">Pendle (PT)</div><div class="tag">claimed</div></div>
+    <div class="swatch"><div class="chip" style="background:#7AB7FF;"></div><div class="hex">#7AB7FF</div><div class="brand">Pendle (YT)</div><div class="tag">claimed</div></div>
+    <div class="swatch"><div class="chip" style="background:#2E5CFF;"></div><div class="hex">#2E5CFF</div><div class="brand">Polymarket</div><div class="tag">claimed</div></div>
+    <div class="swatch"><div class="chip" style="background:#F5B82E;"></div><div class="hex">~#F5B82E</div><div class="brand">Berachain</div><div class="tag">claimed</div></div>
+    <div class="swatch"><div class="chip" style="background:#6E54FF;"></div><div class="hex">#6E54FF</div><div class="brand">Monad</div><div class="tag">claimed</div></div>
+  </div>
+
+  <!-- ── GAPS ───────────────────────────────────────────────── -->
+  <h2><span class="num">07</span>Recon gaps — now being closed</h2>
+
+  <div class="caveat">
+    <div class="label">Twitter/X recon was inferred — now being upgraded</div>
+    <p>Wave 1 motion-vocabulary claims are <strong>inferred</strong> from blogs, landing pages, agency case studies, and secondhand coverage. The actual Twitter videos returned 402 to anonymous WebFetch; Wayback was also blocked.</p>
+    <p><strong>Now dispatching real recon via ProjectJin:</strong> 7 parallel <code>subagent_twitter_researcher</code> calls (Grok-backed) — one per brand including Infinex itself — pulling recent posts + sentiment + asset descriptions. Results fold into this doc as they arrive.</p>
+  </div>
+
+  <h3 style="font-style: normal; color: var(--text); margin-top: 2.5rem;">Where to verify in browser before locking specs</h3>
+  <ul class="verify">
+    <li><span class="name">Phantom</span><span class="urls"><a href="https://phantom.com/learn">phantom.com/learn</a> — Cash, Sui, Multichain, Perps, Kalshi launches.</span></li>
+    <li><span class="name">Hyperliquid</span><span class="urls"><a href="https://hyperliquid.gitbook.io/hyperliquid-docs/brand-kit">brand-kit on gitbook</a> — download the PDF + font files.</span></li>
+    <li><span class="name">Pendle</span><span class="urls"><a href="https://www.pendle.finance/brand-guide/">pendle.finance/brand-guide</a> — swatches + ten logo lockups.</span></li>
+    <li><span class="name">Polymarket</span><span class="urls"><a href="https://polymarket.com/brand">polymarket.com/brand</a> — ground truth: Inter + #2E5CFF + black/white.</span></li>
+    <li><span class="name">Berachain</span><span class="urls"><a href="https://www.berachain.com/">berachain.com</a> — the reverse-scroll gag works only in person.</span></li>
+    <li><span class="name">Monad</span><span class="urls"><a href="https://www.monad.xyz/brand-and-media-kit">monad.xyz/brand-and-media-kit</a>. H3AT testnet trailer on YouTube — cinematic launch high-water mark.</span></li>
+    <li><span class="name">Infinex</span><span class="urls"><a href="https://infinex.xyz">infinex.xyz</a> · <a href="https://app.infinex.xyz">app.infinex.xyz</a> — current visible brand; orange logo mark, geometric wordmark.</span></li>
+  </ul>
+
+  <!-- ── SOURCES ────────────────────────────────────────────── -->
+  <div class="sources">
+    <div class="meta" style="border: none; padding: 0; margin: 0 0 0.5rem;"><span>source files · wave 1 + synthesis</span></div>
+    <ul>
+      <li><a href="wave-1/phantom.md">wave-1/phantom.md</a></li>
+      <li><a href="wave-1/hyperliquid.md">wave-1/hyperliquid.md</a></li>
+      <li><a href="wave-1/pendle.md">wave-1/pendle.md</a></li>
+      <li><a href="wave-1/polymarket.md">wave-1/polymarket.md</a></li>
+      <li><a href="wave-1/berachain.md">wave-1/berachain.md</a></li>
+      <li><a href="wave-1/monad.md">wave-1/monad.md</a></li>
+      <li><a href="visual-vocabulary.md">visual-vocabulary.md</a></li>
+    </ul>
+    <div class="meta" style="border: none; padding: 0; margin: 1.5rem 0 0.5rem;"><span>source files · wave 1.5 (voice + cadence on X)</span></div>
+    <ul>
+      <li><a href="wave-1.5-tweets/phantom.md">phantom.md · 100 posts</a></li>
+      <li><a href="wave-1.5-tweets/Polymarket.md">Polymarket.md · 98 posts</a></li>
+      <li><a href="wave-1.5-tweets/pendle_fi.md">pendle_fi.md · 54 posts</a></li>
+      <li><a href="wave-1.5-tweets/monad.md">monad.md · 11 posts</a></li>
+      <li><a href="wave-1.5-tweets/HyperliquidX.md">HyperliquidX.md · 2 posts</a></li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

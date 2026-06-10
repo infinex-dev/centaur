@@ -1,0 +1,38 @@
+[
+  {
+    "feature": "perps_trading",
+    "provider": "Hyperliquid",
+    "provider_handle": "@HyperliquidX",
+    "evidence": {
+      "source_ref": "apps/perps-app/src/app/api/og/lib/hyperliquid.ts",
+      "verified_at": "2026-05-15"
+    }
+  },
+  {
+    "feature": "prediction_markets",
+    "provider": "Polymarket",
+    "provider_handle": "@Polymarket",
+    "evidence": {
+      "source_ref": "apps/predict-app",
+      "verified_at": "2026-05-15"
+    }
+  },
+  {
+    "feature": "passkey_custody",
+    "provider": "Turnkey",
+    "provider_handle": "@turnkeyhq",
+    "evidence": {
+      "source_ref": "packages/wallet-security",
+      "verified_at": "2026-05-15"
+    }
+  },
+  {
+    "feature": "swap_routing",
+    "provider": "Swidge",
+    "provider_handle": null,
+    "evidence": {
+      "source_ref": "packages/chain-config/src/swidge.ts",
+      "verified_at": "2026-05-15"
+    }
+  }
+]
