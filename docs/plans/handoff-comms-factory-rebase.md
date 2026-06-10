@@ -1,5 +1,10 @@
 # Handoff prompt — rebase comms-factory PR #2 onto director-service-surface
 
+> **⚠️ MOOT (superseded).** comms-factory has been vendored into the centaur repo at
+> `attached-services/comms-factory/` from PR#3 head `8c8ec37` (which already contains the
+> rebase this doc describes). The deploy no longer clones the external repo. See
+> `docs/plans/comms-factory-monorepo-migration.md`. Kept for historical context only.
+
 > Paste everything below the line into a fresh agent session. Best started **in a clean checkout of `infinex-dev/comms-factory`** (NOT the deploy cache at `~/.cache/centaur/comms-factory`, which centaur's `deploy-local.sh` overwrites on every deploy).
 
 ---

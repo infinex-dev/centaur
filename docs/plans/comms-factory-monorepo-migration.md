@@ -1,5 +1,12 @@
 # Plan — fold comms-factory into the centaur repo (monorepo migration)
 
+> **Status (executed on `feat/comms-factory-monorepo`):**
+> - ✅ Phase 1 — vendored at `attached-services/comms-factory/` (714 files, PR#3 head `8c8ec37`, clean copy). `21e51dfa`
+> - ✅ Phase 2 — root `ruff.toml` excludes `attached-services/`; pnpm isolates it (non-workspace member, root frozen lockfile still valid); CI scoped & green. `5cd89ab4`
+> - ✅ Phase 3 — both deploy scripts build comms-factory from in-repo source (no clone/pin); prod overlay values re-derived; websearch un-disabled. `1ca70ec5`
+> - ✅ Phase 4 — comms-factory image builds from the in-repo path (cache-identical to the old cloned `8c8ec37` build); `helm template` schema-valid; scripts shellcheck-clean. (Full local k3s E2E not run — runtime wiring unchanged from the validated local path.)
+> - ◑ Phase 5 — CLAUDE.md/AGENTS.md updated. **Remaining (manual / follow-up):** (a) archive `infinex-dev/comms-factory` — outward-facing, left to the user; (b) optional comms-factory CI job (typecheck/test) — defer until a host `pnpm typecheck` pass confirms it's green on the CI runner.
+
 **Goal:** stop the two-repo dance. Vendor the **entire** comms-factory project into the
 centaur repo as a clean copy, build + deploy it from in-repo source (no external clone, no
 pinned ref, no rebase handoffs), and archive `infinex-dev/comms-factory`.
