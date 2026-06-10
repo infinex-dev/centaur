@@ -248,8 +248,11 @@ describe("comms-factory service API", () => {
       });
       expect(body.facts[0].evidence_ids).toEqual(["ev_ground_1"]);
       expect(body.progress.fact_receipts).toEqual([{ claim: "Fact A", value: "live", evidence_ids: ["ev_ground_1"] }]);
-      expect(centaurRequests[0]).toMatchObject({
-        url: "/tools/repo_context/search",
+      // grep first discovers repos via list_repos; this mock returns no `repositories`,
+      // so the grounder falls back to the single platform repo (one search).
+      expect(centaurRequests[0]?.url).toBe("/tools/repo_context/list_repos");
+      const groundSearch = centaurRequests.find((r) => r.url === "/tools/repo_context/search");
+      expect(groundSearch).toMatchObject({
         authorization: "Bearer test-cap-token",
         jobId: "job-ground-test",
         threadKey: "thread-ground-test",

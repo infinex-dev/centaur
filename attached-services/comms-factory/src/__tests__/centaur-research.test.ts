@@ -30,12 +30,31 @@ describe("CentaurResearchExecutor", () => {
       const body = await readBody(req);
       requests.push({ url: req.url, ...(req.headers.authorization ? { authorization: req.headers.authorization } : {}), headers: req.headers, body });
       const path = req.url ?? "";
-      if (path === "/tools/repo_context/search") {
+      if (path === "/tools/repo_context/list_repos") {
         writeJson(res, 200, {
           schema_version: "centaur.tool_result.v1",
           ok: true,
-          content: "src/file.ts:1: const maxLeverage = 50",
-          evidence: [{ schema_version: "centaur.evidence_item.v1", id: "ev_repo_1", source: "repo.search_match", source_ref: "src/file.ts:1", quote: "maxLeverage = 50" }],
+          output: {
+            ok: true,
+            repositories: [
+              { repo: "infinex-xyz/platform", available: true },
+              { repo: "infinex-xyz/agent-platform", available: true },
+              { repo: "infinex-xyz/context", available: true },
+            ],
+            aliases: {},
+          },
+          evidence: [],
+        });
+        return;
+      }
+      if (path === "/tools/repo_context/search") {
+        const repo = typeof (body as { repo?: unknown })?.repo === "string" ? (body as { repo: string }).repo : "unknown";
+        const short = repo.split("/").pop() ?? repo;
+        writeJson(res, 200, {
+          schema_version: "centaur.tool_result.v1",
+          ok: true,
+          content: `${short}:src/file.ts:1: const maxLeverage = 50`,
+          evidence: [{ schema_version: "centaur.evidence_item.v1", id: `ev_${short}`, source: "repo.search_match", source_ref: "src/file.ts:1", quote: "maxLeverage = 50" }],
         });
         return;
       }
@@ -91,6 +110,12 @@ describe("CentaurResearchExecutor", () => {
     expect(mapLogicalToolToTool("read_platform_file", { path: "src/file.ts" })?.method).toBe("read_file");
   });
 
+  it("routes the repo arg to repo_context, defaulting to the platform repo", () => {
+    expect(mapLogicalToolToTool("grep_platform_code", { pattern: "x" }, undefined, "infinex-xyz/context")?.input.repo).toBe("infinex-xyz/context");
+    expect(mapLogicalToolToTool("grep_platform_code", { pattern: "x" })?.input.repo).toBe("infinex-platform");
+    expect(mapLogicalToolToTool("read_platform_file", { path: "a.ts" }, undefined, "agent-platform")?.input.repo).toBe("agent-platform");
+  });
+
   it("maps non-repo research tools to native tool methods", () => {
     // Web/page fetching has no dedicated tool — it runs through the Exa-backed websearch.search.
     expect(mapLogicalToolToTool("fetch_public_page", { url: "https://example.com" })).toEqual({
@@ -138,19 +163,29 @@ describe("CentaurResearchExecutor", () => {
 
     const result = await executor.execute("grep_platform_code", { pattern: "maxLeverage" }, "toolu_1", { ref: "origin/feature" });
 
-    expect(result.content).toContain("maxLeverage");
-    expect(result.content).toContain("Evidence IDs: ev_repo_1");
-    expect(result.evidence?.[0]?.id).toBe("ev_repo_1");
-    expect(executor.evidence.map((item) => item.id)).toEqual(["ev_repo_1"]);
+    // grep fans out across every configured repo and merges the labelled blocks.
+    expect(result.content).toContain("=== repo: infinex-xyz/platform ===");
+    expect(result.content).toContain("=== repo: infinex-xyz/agent-platform ===");
+    expect(result.content).toContain("=== repo: infinex-xyz/context ===");
+    expect(result.content).toContain("Evidence IDs: ev_platform, ev_agent-platform, ev_context");
+    expect(executor.evidence.map((item) => item.id)).toEqual(["ev_platform", "ev_agent-platform", "ev_context"]);
 
-    expect(requests[0]?.url).toBe("/tools/repo_context/search");
-    expect(requests[0]?.authorization).toBe("Bearer secret-token");
+    // Repo list is discovered once via list_repos, then one search per repo.
+    expect(requests[0]?.url).toBe("/tools/repo_context/list_repos");
+    const searches = requests.filter((r) => r.url === "/tools/repo_context/search");
+    expect(searches).toHaveLength(3);
+    expect(searches.map((r) => (r.body as { repo: string }).repo)).toEqual([
+      "infinex-xyz/platform",
+      "infinex-xyz/agent-platform",
+      "infinex-xyz/context",
+    ]);
     // Body is the raw method input, NOT a tool envelope; no tool-rejected kwargs leak in.
-    expect(requests[0]?.body).toEqual({ repo: "infinex-platform", query: "maxLeverage", ref: "origin/feature" });
-    expect(requests[0]?.headers["idempotency-key"]).toBe("job-1:ground:grep_platform_code:toolu_1");
-    expect(requests[0]?.headers["x-centaur-job-id"]).toBe("job-1");
-    expect(requests[0]?.headers["x-centaur-stage"]).toBe("ground");
-    expect(requests[0]?.headers["x-centaur-thread-key"]).toBe("thread-1");
+    expect(searches[0]?.body).toEqual({ repo: "infinex-xyz/platform", query: "maxLeverage", ref: "origin/feature" });
+    // Per-repo idempotency key; deterministicRequestId keeps ':' and rewrites '/' to '_'.
+    expect(searches[0]?.headers["idempotency-key"]).toBe("job-1:ground:grep_platform_code:infinex-xyz_platform:toolu_1");
+    expect(searches[0]?.headers["x-centaur-job-id"]).toBe("job-1");
+    expect(searches[0]?.headers["x-centaur-stage"]).toBe("ground");
+    expect(searches[0]?.headers["x-centaur-thread-key"]).toBe("thread-1");
   });
 
   it("rejects non-HTTPS page URLs before calling Centaur", async () => {
