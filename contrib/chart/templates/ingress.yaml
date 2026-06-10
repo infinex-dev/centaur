@@ -1,21 +1,25 @@
-{{- if and .Values.ingress.enabled .Values.slackbot.enabled }}
+{{- $slackbotIngress := .Values.ingress.slackbot | default dict -}}
+{{- $apiIngress := .Values.ingress.api | default dict -}}
+{{- $slackbotIngressEnabled := dig "enabled" true $slackbotIngress -}}
+{{- $apiIngressEnabled := dig "enabled" false $apiIngress -}}
+{{- if and .Values.ingress.enabled .Values.slackbot.enabled $slackbotIngressEnabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ include "centaur.componentName" (dict "root" . "component" "slackbot") }}
   labels:
 {{ include "centaur.componentLabels" (dict "root" . "component" "slackbot") | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
+  {{- with (default .Values.ingress.annotations $slackbotIngress.annotations) }}
   annotations:
 {{ toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- with .Values.ingress.className }}
+  {{- with (default .Values.ingress.className $slackbotIngress.className) }}
   ingressClassName: {{ . }}
   {{- end }}
   rules:
-    - {{- if .Values.ingress.host }}
-      host: {{ .Values.ingress.host | quote }}
+    - {{- if (default .Values.ingress.host $slackbotIngress.host) }}
+      host: {{ (default .Values.ingress.host $slackbotIngress.host) | quote }}
       {{- end }}
       http:
         paths:
@@ -26,7 +30,41 @@ spec:
                 name: {{ include "centaur.componentName" (dict "root" . "component" "slackbot") }}
                 port:
                   number: 3001
-  {{- with .Values.ingress.tls }}
+  {{- with (default .Values.ingress.tls $slackbotIngress.tls) }}
+  tls:
+{{ toYaml . | nindent 4 }}
+  {{- end }}
+---
+{{- end }}
+{{- if and .Values.ingress.enabled $apiIngressEnabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "centaur.componentName" (dict "root" . "component" "api") }}
+  labels:
+{{ include "centaur.componentLabels" (dict "root" . "component" "api") | nindent 4 }}
+  {{- with (default .Values.ingress.annotations $apiIngress.annotations) }}
+  annotations:
+{{ toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with (default .Values.ingress.className $apiIngress.className) }}
+  ingressClassName: {{ . }}
+  {{- end }}
+  rules:
+    - {{- if (default .Values.ingress.host $apiIngress.host) }}
+      host: {{ (default .Values.ingress.host $apiIngress.host) | quote }}
+      {{- end }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ include "centaur.componentName" (dict "root" . "component" "api") }}
+                port:
+                  number: 8000
+  {{- with (default .Values.ingress.tls $apiIngress.tls) }}
   tls:
 {{ toYaml . | nindent 4 }}
   {{- end }}

@@ -421,7 +421,17 @@ try:
 except ImportError:
     pass
 
-tool_manager = ToolManager(_tools_dirs)
+
+def _csv_env_set(name: str) -> set[str]:
+    raw = os.environ.get(name, "")
+    return {part.strip() for part in raw.split(",") if part.strip()}
+
+
+tool_manager = ToolManager(
+    _tools_dirs,
+    enabled_tools=_csv_env_set("CENTAUR_ENABLED_TOOLS"),
+    disabled_tools=_csv_env_set("CENTAUR_DISABLED_TOOLS"),
+)
 tool_manager.discover()
 app.state.tool_manager = tool_manager
 app.include_router(tool_manager.create_rest_router())

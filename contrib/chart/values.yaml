@@ -66,6 +66,8 @@ api:
   slackSyncThreadLookbackDays: 3
   companyContextDocumentsIntervalSeconds: 14400
   slackEtlExcludedChannelPatterns: ""
+  enabledTools: []
+  disabledTools: []
   victoriaMetricsPushEnabled: false
   startupProbe:
     failureThreshold: 30
@@ -84,6 +86,14 @@ api:
     namespace: centaur-egress
     clusterDomain: cluster.local
     tailnetFqdnAnnotation: tailscale.com/tailnet-fqdn
+  kubernetesApiNoProxyHosts:
+    - kubernetes
+    - kubernetes.default
+    - kubernetes.default.svc
+    - kubernetes.default.svc.cluster.local
+    - .svc
+    - .svc.cluster.local
+  kubernetesApiEgress: []
   terminationGracePeriodSeconds: 35
   extraEnv: {}
   resources: {}
@@ -187,6 +197,18 @@ ingress:
   annotations: {}
   host: centaur.local
   tls: []
+  slackbot:
+    enabled: true
+    className: ""
+    annotations: {}
+    host: ""
+    tls: []
+  api:
+    enabled: false
+    className: ""
+    annotations: {}
+    host: ""
+    tls: []
 
 httpRoutes: []
 

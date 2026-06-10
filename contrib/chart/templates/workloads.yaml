@@ -182,13 +182,17 @@ spec:
             - name: SSL_CERT_FILE
               value: /firewall-certs/ca-cert.pem
             - name: NO_PROXY
-              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.componentName" (dict "root" . "component" "slackbot")) (include "centaur.firewallNoProxyHosts" .) | quote }}
+              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.kubernetesApiNoProxyHosts" .) (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.componentName" (dict "root" . "component" "slackbot")) (include "centaur.firewallNoProxyHosts" .) | quote }}
             - name: no_proxy
-              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.componentName" (dict "root" . "component" "slackbot")) (include "centaur.firewallNoProxyHosts" .) | quote }}
+              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.kubernetesApiNoProxyHosts" .) (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.componentName" (dict "root" . "component" "slackbot")) (include "centaur.firewallNoProxyHosts" .) | quote }}
             - name: CENTAUR_LOG_LEVEL
               value: info
             - name: CENTAUR_DEFAULT_HARNESS
               value: {{ .Values.api.defaultHarness | quote }}
+            - name: CENTAUR_ENABLED_TOOLS
+              value: {{ join "," .Values.api.enabledTools | quote }}
+            - name: CENTAUR_DISABLED_TOOLS
+              value: {{ join "," .Values.api.disabledTools | quote }}
             - name: TOOL_DIRS
 {{- if .Values.overlay.image.repository }}
               value: {{ printf "/app/tools:%s/tools" .Values.overlay.mountPath | quote }}
@@ -487,9 +491,9 @@ spec:
             - name: NODE_EXTRA_CA_CERTS
               value: /firewall-certs/ca-cert.pem
             - name: NO_PROXY
-              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.firewallNoProxyHosts" .) | quote }}
+              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.kubernetesApiNoProxyHosts" .) (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.firewallNoProxyHosts" .) | quote }}
             - name: no_proxy
-              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.firewallNoProxyHosts" .) | quote }}
+              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.kubernetesApiNoProxyHosts" .) (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.firewallNoProxyHosts" .) | quote }}
 {{- if .Values.slackbot.runtimeErrorAlertChannel }}
             - name: RUNTIME_ERROR_ALERT_CHANNEL
               value: {{ .Values.slackbot.runtimeErrorAlertChannel | quote }}
