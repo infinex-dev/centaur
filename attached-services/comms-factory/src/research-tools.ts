@@ -92,7 +92,7 @@ export function buildResearchTools(): AnthropicTool[] {
     {
       name: "grep_platform_code",
       description:
-        "Search the Infinex platform monorepo using ripgrep (case-insensitive). Use for finding constants, config values, feature flags, leverage caps, supported chain counts, or any hardcoded product fact. Returns file paths, line numbers, and matched content. By default it already searches BOTH code (*.ts/*.tsx/*.json) and docs (*.md) — so for 'what does the product offer / what categories are supported / how is it positioned / what volume figures' claims, just search normally and you WILL hit the docs (docs/brainstorms/, docs/plans/, docs/collectibles/), then read_platform_file the matching .md. Leave glob UNSET to search everything. Only set glob to NARROW to a single file type, and pass exactly ONE pattern (e.g. glob:'*.md' for docs-only) — never a comma-separated list.",
+        "Search ALL configured Infinex grounding repos (platform, agent-platform, context) using ripgrep (case-insensitive). Use for finding constants, config values, feature flags, leverage caps, supported chain counts, or any hardcoded product fact. Returns file paths, line numbers, and matched content, grouped under a '=== repo: <name> ===' header per repo — note which repo a hit came from and pass it to read_platform_file. By default it already searches BOTH code (*.ts/*.tsx/*.json) and docs (*.md) — so for 'what does the product offer / what categories are supported / how is it positioned / what volume figures' claims, just search normally and you WILL hit the docs (docs/brainstorms/, docs/plans/, docs/collectibles/), then read_platform_file the matching .md. Leave glob UNSET to search everything. Only set glob to NARROW to a single file type, and pass exactly ONE pattern (e.g. glob:'*.md' for docs-only) — never a comma-separated list.",
       input_schema: {
         type: "object",
         properties: {
@@ -107,11 +107,12 @@ export function buildResearchTools(): AnthropicTool[] {
     {
       name: "read_platform_file",
       description:
-        "Read a specific file from the platform monorepo. Use after grep_platform_code to read the full context around a match. Path is relative to the platform root.",
+        "Read a specific file from a configured Infinex repo. Use after grep_platform_code to read the full context around a match. Pass `repo` matching the '=== repo: <name> ===' header the grep hit came from; it defaults to the platform repo if omitted. Path is relative to that repo's root.",
       input_schema: {
         type: "object",
         properties: {
-          path: { type: "string", description: "Relative path within the platform root, e.g. 'apps/perps-app/src/app/[[...params]]/page.tsx'" },
+          repo: { type: "string", description: "Which repo to read from, e.g. 'infinex-xyz/platform', 'agent-platform', or 'context' — use the repo from the grep hit's header. Defaults to the platform repo." },
+          path: { type: "string", description: "Relative path within the repo root, e.g. 'apps/perps-app/src/app/[[...params]]/page.tsx'" },
           startLine: { type: "number", description: "First line to read (1-indexed)" },
           endLine: { type: "number", description: "Last line to read (1-indexed)" },
         },

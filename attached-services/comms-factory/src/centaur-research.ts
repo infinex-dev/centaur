@@ -2,6 +2,9 @@ import { allFeatures, lookupFeature, searchFeatures, type PartnerRegistryEntry }
 import { READ_FILE_CAP, TOOL_RESULT_CAP, type ResearchToolName, type ResearchToolResult } from "./research-tools.js";
 import { CentaurToolsClient, type EvidenceItem, type ToolResult } from "./centaur-tools.js";
 
+/** Fallback when repo_context.list_repos is unavailable — preserves the historical single-repo behavior. */
+const DEFAULT_GROUNDING_REPOS = ["infinex-platform"];
+
 export interface CentaurResearchConfig {
   base_url: string;
   bearer_token?: string;
@@ -23,6 +26,8 @@ export class CentaurResearchExecutor {
   readonly evidence: EvidenceItem[] = [];
   private readonly config: CentaurResearchConfig;
   private readonly client: CentaurToolsClient;
+  /** Lazily-resolved (once per executor) list of grounding repos from repo_context.list_repos. */
+  private repoListPromise?: Promise<string[]>;
 
   constructor(config: CentaurResearchConfig) {
     const token = config.bearer_token ?? (config.bearer_token_env ? process.env[config.bearer_token_env] : undefined);
@@ -45,7 +50,14 @@ export class CentaurResearchExecutor {
     if (toolName === "lookup_partner") {
       return executeLocalPartnerLookup(toolInput, toolUseId);
     }
-    const mapped = mapLogicalToolToTool(toolName, toolInput, opts.ref);
+    // grep fans out across every configured grounding repo; everything else is a single call.
+    if (toolName === "grep_platform_code") {
+      return this.executeGrepAllRepos(toolInput, toolUseId, opts);
+    }
+
+    // read targets ONE repo — the one the grounder learned from a labelled grep hit.
+    const repo = toolName === "read_platform_file" ? repoInput(toolInput.repo) : undefined;
+    const mapped = mapLogicalToolToTool(toolName, toolInput, opts.ref, repo);
     if (!mapped) {
       return { tool_use_id: toolUseId, content: `UNAVAILABLE: no Centaur tool mapping for ${toolName}` };
     }
@@ -54,41 +66,109 @@ export class CentaurResearchExecutor {
       return { tool_use_id: toolUseId, content: rejected };
     }
 
-    const stage = this.config.stage ?? "ground";
+    const cap = toolName === "read_platform_file" ? READ_FILE_CAP : TOOL_RESULT_CAP;
+    const idempotencyKey = deterministicRequestId(this.config.job_id, this.stage(), toolName, toolUseId);
+    const outcome = await this.callMappedTool(mapped, idempotencyKey, cap);
+    if (!outcome.ok) {
+      return { tool_use_id: toolUseId, content: outcome.content };
+    }
+    this.evidence.push(...outcome.evidence);
+    return {
+      tool_use_id: toolUseId,
+      content: withEvidenceIds(outcome.content, outcome.evidence),
+      evidence: outcome.evidence,
+      tool: `${mapped.tool}.${mapped.method}`,
+    };
+  }
+
+  /** Run grep against every configured repo concurrently and merge the labelled blocks. */
+  private async executeGrepAllRepos(
+    toolInput: Record<string, unknown>,
+    toolUseId: string,
+    opts: CentaurResearchExecutorOptions,
+  ): Promise<ResearchToolResult> {
+    const repos = await this.resolveRepos();
+    // Share the result budget across repos so a 3-repo fan-out matches a single grep's token cost.
+    const perRepoCap = Math.max(1, Math.floor(TOOL_RESULT_CAP / repos.length));
+    const blocks = await Promise.all(
+      repos.map(async (repo) => {
+        const mapped = mapLogicalToolToTool("grep_platform_code", toolInput, opts.ref, repo);
+        if (!mapped) return { repo, content: `UNAVAILABLE: no Centaur tool mapping for grep_platform_code`, evidence: [] as EvidenceItem[] };
+        const key = deterministicRequestId(this.config.job_id, this.stage(), `grep_platform_code:${repo}`, toolUseId);
+        const outcome = await this.callMappedTool(mapped, key, perRepoCap);
+        return { repo, content: outcome.content, evidence: outcome.ok ? outcome.evidence : [] };
+      }),
+    );
+
+    const allEvidence = blocks.flatMap((block) => block.evidence);
+    this.evidence.push(...allEvidence);
+    const merged = blocks.map((block) => `=== repo: ${block.repo} ===\n${block.content}`).join("\n\n");
+    return {
+      tool_use_id: toolUseId,
+      content: withEvidenceIds(merged, allEvidence),
+      evidence: allEvidence,
+      tool: "repo_context.search",
+    };
+  }
+
+  /** One repo_context (or other native) tool call, normalized to content + evidence or an error string. */
+  private async callMappedTool(
+    mapped: { tool: string; method: string; input: Record<string, unknown> },
+    idempotencyKey: string,
+    cap: number,
+  ): Promise<{ ok: true; content: string; evidence: EvidenceItem[] } | { ok: false; content: string }> {
     let result: ToolResult;
     try {
       result = await this.client.callTool(mapped.tool, mapped.method, mapped.input, {
-        idempotencyKey: deterministicRequestId(this.config.job_id, stage, toolName, toolUseId),
-        trace: {
-          jobId: this.config.job_id,
-          stage,
-          ...(this.config.thread_key ? { threadKey: this.config.thread_key } : {}),
-          ...(this.config.workflow_run_id ? { trace: this.config.workflow_run_id } : {}),
-        },
+        idempotencyKey,
+        trace: this.traceContext(),
       });
     } catch (error) {
-      return { tool_use_id: toolUseId, content: `ERROR: ${String(error)}` };
+      return { ok: false, content: `ERROR: ${String(error)}` };
     }
-
     if (!result.ok) {
       const prefix = result.retryable || result.error.retryable ? "UNAVAILABLE" : "ERROR";
-      return {
-        tool_use_id: toolUseId,
-        content: `${prefix}: ${result.error.code}: ${result.error.message}`,
-      };
+      return { ok: false, content: `${prefix}: ${result.error.code}: ${result.error.message}` };
     }
-
     const evidence = Array.isArray(result.evidence) ? result.evidence : [];
-    this.evidence.push(...evidence);
-    const cap = toolName === "read_platform_file" ? READ_FILE_CAP : TOOL_RESULT_CAP;
-    const content = capModelText(modelTextFromToolResult(result), cap);
+    return { ok: true, content: capModelText(modelTextFromToolResult(result), cap), evidence };
+  }
+
+  /**
+   * The grounding repo list, discovered once from repo_context.list_repos (the same
+   * allowlist the deploy derives from repo-context.repositories.txt) so nothing here
+   * hardcodes which repos exist. Falls back to the platform repo if discovery fails.
+   */
+  private resolveRepos(): Promise<string[]> {
+    if (!this.repoListPromise) {
+      this.repoListPromise = this.discoverRepos();
+    }
+    return this.repoListPromise;
+  }
+
+  private async discoverRepos(): Promise<string[]> {
+    try {
+      const result = await this.client.callTool("repo_context", "list_repos", {}, { trace: this.traceContext() });
+      if (result.ok) {
+        const repos = repoNamesFromListResult(result);
+        if (repos.length > 0) return repos;
+      }
+    } catch {
+      // fall through to the default below
+    }
+    return [...DEFAULT_GROUNDING_REPOS];
+  }
+
+  private stage(): string {
+    return this.config.stage ?? "ground";
+  }
+
+  private traceContext(): { jobId: string; stage: string; threadKey?: string; trace?: string } {
     return {
-      tool_use_id: toolUseId,
-      content: evidence.length > 0
-        ? `${content}\n\nEvidence IDs: ${evidence.map((item) => item.id).join(", ")}`
-        : content,
-      evidence,
-      tool: `${mapped.tool}.${mapped.method}`,
+      jobId: this.config.job_id,
+      stage: this.stage(),
+      ...(this.config.thread_key ? { threadKey: this.config.thread_key } : {}),
+      ...(this.config.workflow_run_id ? { trace: this.config.workflow_run_id } : {}),
     };
   }
 }
@@ -113,6 +193,7 @@ export function mapLogicalToolToTool(
   toolName: string,
   input: Record<string, unknown>,
   ref?: string,
+  repo?: string,
 ): { tool: string; method: string; input: Record<string, unknown> } | undefined {
   switch (toolName as ResearchToolName) {
     case "grep_platform_code":
@@ -122,7 +203,7 @@ export function mapLogicalToolToTool(
         tool: "repo_context",
         method: "search",
         input: clean({
-          repo: "infinex-platform",
+          repo: repo ?? "infinex-platform",
           query: stringValue(input.pattern),
           path_glob: optionalString(input.glob) ?? optionalString(input.path),
           limit: optionalNumber(input.maxResults),
@@ -135,7 +216,7 @@ export function mapLogicalToolToTool(
         tool: "repo_context",
         method: hasRange ? "read_range" : "read_file",
         input: clean({
-          repo: "infinex-platform",
+          repo: repo ?? "infinex-platform",
           path: stringValue(input.path),
           start_line: optionalNumber(input.startLine),
           end_line: optionalNumber(input.endLine),
@@ -186,6 +267,31 @@ function executeLocalPartnerLookup(input: Record<string, unknown>, toolUseId: st
   }
   const all = allFeatures().map((entry: PartnerRegistryEntry) => entry.feature).join(", ");
   return { tool_use_id: toolUseId, content: `No entry found. Available features: ${all}` };
+}
+
+function repoInput(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function withEvidenceIds(content: string, evidence: EvidenceItem[]): string {
+  return evidence.length > 0 ? `${content}\n\nEvidence IDs: ${evidence.map((item) => item.id).join(", ")}` : content;
+}
+
+/** Pull repo names from a repo_context.list_repos result (the raw dict rides in `output`). */
+function repoNamesFromListResult(result: Extract<ToolResult, { ok: true }>): string[] {
+  const output = result.output;
+  if (!output || typeof output !== "object") return [];
+  const repositories = (output as { repositories?: unknown }).repositories;
+  if (!Array.isArray(repositories)) return [];
+  const names: string[] = [];
+  for (const entry of repositories) {
+    if (typeof entry === "string" && entry.trim()) {
+      names.push(entry.trim());
+    } else if (entry && typeof entry === "object" && typeof (entry as { repo?: unknown }).repo === "string") {
+      names.push((entry as { repo: string }).repo);
+    }
+  }
+  return names;
 }
 
 function modelTextFromToolResult(result: Extract<ToolResult, { ok: true }>): string {

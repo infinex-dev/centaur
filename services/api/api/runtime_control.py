@@ -8,6 +8,7 @@ import contextlib
 import datetime as dt
 import hashlib
 import json
+import math
 import os
 import pathlib
 import uuid
@@ -126,8 +127,31 @@ class ControlPlaneError(RuntimeError):
         self.status_code = status_code
 
 
+def _jsonb_safe(value: Any) -> Any:
+    """Coerce a value into something Postgres JSONB can actually store.
+
+    Two value classes survive ``json.dumps`` but are rejected by a ``::jsonb``
+    cast: NUL (``U+0000``) — the one codepoint Postgres ``text``/JSONB cannot
+    hold — and the non-finite floats ``json.dumps`` emits as bare ``NaN`` /
+    ``Infinity``. Tool results built from scraped web content (e.g. comms
+    grounding) routinely carry stray NULs. Strip NUL from every string and dict
+    key, null out non-finite floats, and preserve everything else exactly.
+    """
+    if isinstance(value, str):
+        return value.replace("\x00", "") if "\x00" in value else value
+    if isinstance(value, dict):
+        return {_jsonb_safe(key): _jsonb_safe(val) for key, val in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [_jsonb_safe(item) for item in value]
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    return value
+
+
 def canonical_json(value: Any) -> str:
-    return json.dumps(value, separators=(",", ":"), sort_keys=True, ensure_ascii=False)
+    return json.dumps(
+        _jsonb_safe(value), separators=(",", ":"), sort_keys=True, ensure_ascii=False
+    )
 
 
 def request_hash(value: Any) -> str:
