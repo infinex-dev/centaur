@@ -61,6 +61,10 @@ attachedServices:
 # and the GITHUB_TOKEN already in the infra secret.
 repoCache:
   enabled: true
+  # Refresh hourly instead of the chart default (86400s / daily) so comms
+  # grounding sees recently-merged platform changes within the hour, not up to a
+  # day late. These two repos are small, so an hourly git fetch is cheap.
+  syncIntervalSeconds: 3600
   repositories:
     - infinex-xyz/platform
     - infinex-xyz/agent-platform
