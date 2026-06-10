@@ -260,6 +260,24 @@ ensure_secret_key() {
 ensure_secret_key COMMS_FACTORY_SERVICE_TOKEN "comms-"
 ensure_secret_key COMMS_FACTORY_CAPABILITY_API_KEY "aiv2_comms_cap_"
 
+# Refuse to deploy if ANTHROPIC_API_KEY is missing/empty on the infra secret.
+# comms-factory calls Anthropic directly (new Anthropic(), no baseURL) and the
+# general bot now runs the claude-code harness; both silently degrade without a
+# key — comms-factory falls back to deterministic STUB copy, claude-code 401s —
+# so a "green" deploy could ship garbage. Fail loudly instead. (jsonpath returns
+# base64; an absent OR empty value both render empty here.)
+require_secret_key() {
+  local key="$1" existing
+  existing="$(kubectl -n "$NAMESPACE" get secret "$SECRET_NAME" -o "jsonpath={.data.${key}}" 2>/dev/null || true)"
+  if [[ -z "$existing" ]]; then
+    echo "FATAL: $key is missing or empty on secret $SECRET_NAME (namespace $NAMESPACE)." >&2
+    echo "       comms-factory generation and the claude-code bot harness both require it." >&2
+    echo "       Patch it before deploying (see contrib/docs/deploy-env-runsheet.md)." >&2
+    exit 1
+  fi
+}
+require_secret_key ANTHROPIC_API_KEY
+
 helm dependency update "$CHART_DIR" >/dev/null
 
 helm_args=(

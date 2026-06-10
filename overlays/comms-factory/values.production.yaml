@@ -73,9 +73,18 @@ api:
   # disabledTools) so the live bot keeps every tool it has today and ALSO gains
   # comms_factory / repo_context / company_context once the overlay is mounted.
   # websearch is removed from disabledTools in values.production-env.example.yaml
-  # because comms grounding needs it. defaultHarness is intentionally NOT set here:
-  # the comms workflows use no harness (pure tool/gate), so prod keeps codex.
+  # because comms grounding needs it.
+  #
+  # The general @mention bot runs on the claude-code harness (Anthropic), not
+  # codex. iron-proxy swaps the real key in from the built-in ANTHROPIC_API_KEY
+  # infra-secret binding, so the sandbox only ever sees a placeholder. The comms
+  # workflows themselves use no harness (pure tool/gate); this only sets the live
+  # bot's default. WARM_POOL_HARNESS MUST match defaultHarness — warm_pool rejects
+  # any claim whose harness differs (warm_pool.py), so a mismatch cold-starts
+  # every request while warm pods of the wrong harness sit idle and bill.
+  defaultHarness: claude-code
   extraEnv:
+    WARM_POOL_HARNESS: claude-code
     COMMS_FACTORY_BASE_URL: http://centaur-centaur-attached-comms-factory:8080
     CENTAUR_BASE_URL: http://centaur-centaur-api:8000
     REPO_CONTEXT_REPOSITORY_ALIASES: "infinex-platform=infinex-xyz/platform,platform=infinex-xyz/platform,agent-platform=infinex-xyz/agent-platform"
