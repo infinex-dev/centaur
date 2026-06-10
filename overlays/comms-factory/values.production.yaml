@@ -1,0 +1,86 @@
+# Production overlay values for the comms-factory deployment.
+#
+# Layered on TOP of contrib/chart/values.production-env.example.yaml by
+# contrib/scripts/deploy-k8s-env.sh, which ALWAYS includes comms-factory for this
+# deployment (no opt-in flag). The script overrides the image repositories + tags
+# below via --set at deploy time (registry prefix + centaur's git $TAG; both the
+# service and overlay images are built from in-repo source), so the `replace-me` /
+# registry.local placeholders here are never used directly.
+#
+# In-cluster service hostnames assume the default Helm release name `centaur`
+# (-> `centaur-centaur-*`), matching contrib/docs/deploy-env-runsheet.md. If you
+# deploy with a different --release, override the *_BASE_URL env values to match.
+
+overlay:
+  image:
+    repository: registry.local/centaur/comms-factory-centaur-overlay  # --set by deploy-k8s-env.sh
+    tag: replace-me                                                    # --set by deploy-k8s-env.sh
+    pullPolicy: IfNotPresent
+    sourcePath: /overlay
+
+attachedServices:
+  comms-factory:
+    enabled: true
+    image:
+      repository: registry.local/centaur/comms-factory-api  # --set by deploy-k8s-env.sh
+      tag: replace-me                                        # --set by deploy-k8s-env.sh
+      pullPolicy: IfNotPresent
+    service:
+      port: 8080
+    # The comms-factory service talks to the Centaur API and Anthropic directly,
+    # not through iron-proxy (matches the validated local wiring).
+    proxy:
+      enabled: false
+    # Bootstraps the least-privilege `service:comms-factory` API key (research
+    # bundle only) from the COMMS_FACTORY_CAPABILITY_API_KEY secret-env token via
+    # the generic attached-service key mechanism — no hardcoded base api_keys entry.
+    serviceKey:
+      name: "service:comms-factory"
+      scopes: ["bundle:research"]
+      envVar: COMMS_FACTORY_CAPABILITY_API_KEY
+    env:
+      CENTAUR_BASE_URL: http://centaur-centaur-api:8000
+      # Native Centaur tool callbacks can include slow-but-successful external
+      # research calls; keep this above the comms-factory client's 20s default so
+      # callbacks are governed by the outer workflow/tool budget, not an early fail.
+      CENTAUR_TIMEOUT_MS: "90000"
+    secretEnv:
+      COMMS_FACTORY_SERVICE_TOKEN:
+        secretName: centaur-infra-env
+        key: COMMS_FACTORY_SERVICE_TOKEN
+      ANTHROPIC_API_KEY:
+        secretName: centaur-infra-env
+        key: ANTHROPIC_API_KEY
+        optional: true
+      CENTAUR_TOKEN:
+        secretName: centaur-infra-env
+        key: COMMS_FACTORY_CAPABILITY_API_KEY
+
+# Read-only repo cache the comms grounder reads real product facts from. Uses the
+# agent image (repoCache.image defaults to sandbox.image, which the script --sets)
+# and the GITHUB_TOKEN already in the infra secret.
+repoCache:
+  enabled: true
+  repositories:
+    - infinex-xyz/platform
+    - infinex-xyz/agent-platform
+  githubToken:
+    existingSecretName: centaur-infra-env
+    secretKey: GITHUB_TOKEN
+
+api:
+  # @firenze stays general-purpose: keep enabledTools empty (= all tools except
+  # disabledTools) so the live bot keeps every tool it has today and ALSO gains
+  # comms_factory / repo_context / company_context once the overlay is mounted.
+  # websearch is removed from disabledTools in values.production-env.example.yaml
+  # because comms grounding needs it. defaultHarness is intentionally NOT set here:
+  # the comms workflows use no harness (pure tool/gate), so prod keeps codex.
+  extraEnv:
+    COMMS_FACTORY_BASE_URL: http://centaur-centaur-attached-comms-factory:8080
+    CENTAUR_BASE_URL: http://centaur-centaur-api:8000
+    REPO_CONTEXT_REPOSITORY_ALIASES: "infinex-platform=infinex-xyz/platform,platform=infinex-xyz/platform,agent-platform=infinex-xyz/agent-platform"
+
+slackbot:
+  extraEnv:
+    # Slack triggers: `comms audit …` -> comms_audit, `comms generate|release …` -> comms_release.
+    SLACK_WORKFLOW_COMMANDS: '[{"match":"^comms\\s+audit\\b[:\\s-]*(.*)$","workflow":"comms_audit","input":{"text":"$1"},"triggerSuffix":":comms_audit"},{"match":"^comms\\s+(?:generate|release)\\b[:\\s-]*(.*)$","workflow":"comms_release","input":{"brief":"$1"},"triggerSuffix":":comms_release"}]'

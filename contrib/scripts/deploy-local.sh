@@ -22,18 +22,13 @@ ONLY_SVC=""   # empty = all four; or one of: api slackbot agent iron-proxy
 SERVICES_CSV=""
 WITH_COMMS_FACTORY=0
 SKIP_COMMS_FACTORY_BUILD=0
-COMMS_FACTORY_GIT_URL="${COMMS_FACTORY_GIT_URL:-https://github.com/infinex-dev/comms-factory.git}"
-# Open PR head for https://github.com/infinex-dev/comms-factory/pull/3 —
-# the Centaur integration stack rebased onto director-service-surface
-# (base director tip 0bafa817a9ee682c7a465d151c18d4ac39abb01b).
-# Deploy the PR head/merge commit, not the base commit or moving main.
-COMMS_FACTORY_REF="${COMMS_FACTORY_REF:-8c8ec37d5e4357719cd2aa105a96ef2f89e20534}"
+# comms-factory is vendored in-repo at attached-services/comms-factory — built from
+# source here, no external clone or pinned ref.
+COMMS_FACTORY_SRC="${COMMS_FACTORY_SRC:-$ROOT_DIR/attached-services/comms-factory}"
 COMMS_FACTORY_IMAGE="${COMMS_FACTORY_IMAGE:-comms-factory-api}"
-COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-}"
+COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-local}"
 COMMS_FACTORY_OVERLAY_IMAGE="${COMMS_FACTORY_OVERLAY_IMAGE:-comms-factory-centaur-overlay}"
 COMMS_FACTORY_OVERLAY_TAG="${COMMS_FACTORY_OVERLAY_TAG:-local}"
-COMMS_FACTORY_REPO="${COMMS_FACTORY_REPO:-}"
-COMMS_FACTORY_CACHE_DIR="${COMMS_FACTORY_CACHE_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/centaur/comms-factory}"
 COMMS_FACTORY_DEFAULT_HARNESS="${COMMS_FACTORY_DEFAULT_HARNESS:-claude-code}"
 
 while [[ $# -gt 0 ]]; do
@@ -44,29 +39,23 @@ while [[ $# -gt 0 ]]; do
     --only)          ONLY_SVC="${2:?}";      shift 2 ;;
     --services)      SERVICES_CSV="${2:?}";  shift 2 ;;
     --with-comms-factory) WITH_COMMS_FACTORY=1; shift ;;
-    --comms-factory-repo) COMMS_FACTORY_REPO="${2:?}"; shift 2 ;;
-    --comms-factory-ref)  COMMS_FACTORY_REF="${2:?}"; shift 2 ;;
     --skip-comms-factory-build) SKIP_COMMS_FACTORY_BUILD=1; shift ;;
     --help|-h)
       echo "Usage: contrib/scripts/deploy-local.sh [--namespace NS] [--release NAME] [--skip-build] [--only api|slackbot|agent|iron-proxy]"
-      echo "       contrib/scripts/deploy-local.sh [--services api,slackbot] [--with-comms-factory] [--comms-factory-repo PATH] [--comms-factory-ref REF]"
+      echo "       contrib/scripts/deploy-local.sh [--services api,slackbot] [--with-comms-factory] [--skip-comms-factory-build]"
       echo "Deploys onto k3s inside the podman machine VM (no docker). See contrib/docs/deploy-local-runsheet.md."
       echo "Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY"
       echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY DEEP_RESEARCH_MODEL COMMS_FACTORY_SERVICE_TOKEN LOCAL_DEV_API_KEY"
       echo "--only rebuilds + reimports a single Centaur image (the rest stay as-is) for fast iteration."
       echo "--services rebuilds + reimports a comma-separated subset of Centaur images."
-      echo "--with-comms-factory builds/imports the pinned comms-factory image, builds/mounts the comms overlay, patches local secrets, and enables attachedServices.comms-factory."
+      echo "--with-comms-factory builds/imports the in-repo comms-factory image (attached-services/comms-factory), builds/mounts the comms overlay, patches local secrets, and enables attachedServices.comms-factory."
       exit 0 ;;
     *) echo "unknown argument: $1" >&2; exit 2 ;;
   esac
 done
-COMMS_FACTORY_TAG="${COMMS_FACTORY_TAG:-$COMMS_FACTORY_REF}"
 
 require_cmd() { command -v "$1" >/dev/null 2>&1 || { echo "FATAL: missing command: $1" >&2; exit 1; }; }
 require_cmd podman; require_cmd kubectl; require_cmd helm; require_cmd openssl; require_cmd python3
-if [[ "$WITH_COMMS_FACTORY" == "1" && "$SKIP_COMMS_FACTORY_BUILD" != "1" && -z "$COMMS_FACTORY_REPO" ]]; then
-  require_cmd git
-fi
 
 # 1. Ensure the k3s cluster is up and the API is reachable from the Mac.
 "$ROOT_DIR/contrib/scripts/k3s-local.sh"
@@ -96,28 +85,6 @@ image_for()      { case "$1" in api) echo centaur-api ;; slackbot) echo centaur-
 dockerfile_for() { case "$1" in api) echo "$ROOT_DIR/services/api/Dockerfile" ;; slackbot) echo "$ROOT_DIR/services/slackbot/Dockerfile" ;; agent) echo "$ROOT_DIR/services/sandbox/Dockerfile" ;; iron-proxy) echo "$ROOT_DIR/services/iron-proxy/Dockerfile" ;; esac; }
 target_for()     { case "$1" in agent) echo sandbox ;; *) echo "" ;; esac; }
 
-# Resolve the comms-factory source without accidentally building moving upstream
-# main. If COMMS_FACTORY_REPO/--comms-factory-repo is supplied, use that checkout
-# as-is. Otherwise clone/fetch the reviewed source ref into a local cache.
-resolve_comms_factory_repo() {
-  if [[ -n "$COMMS_FACTORY_REPO" ]]; then
-    [[ -f "$COMMS_FACTORY_REPO/services/api/Dockerfile" ]] \
-      || { echo "FATAL: comms-factory repo missing services/api/Dockerfile: $COMMS_FACTORY_REPO" >&2; exit 2; }
-    echo "$COMMS_FACTORY_REPO"
-    return
-  fi
-
-  if [[ ! -d "$COMMS_FACTORY_CACHE_DIR/.git" ]]; then
-    echo ">> cloning comms-factory into $COMMS_FACTORY_CACHE_DIR" >&2
-    rm -rf "$COMMS_FACTORY_CACHE_DIR"
-    git clone "$COMMS_FACTORY_GIT_URL" "$COMMS_FACTORY_CACHE_DIR" >/dev/null
-  fi
-  echo ">> checking out comms-factory ref $COMMS_FACTORY_REF" >&2
-  git -C "$COMMS_FACTORY_CACHE_DIR" fetch --no-tags origin "$COMMS_FACTORY_REF" >/dev/null 2>&1 || true
-  git -C "$COMMS_FACTORY_CACHE_DIR" checkout --quiet "$COMMS_FACTORY_REF"
-  echo "$COMMS_FACTORY_CACHE_DIR"
-}
-
 # 2. Build with podman, then import into k3s's containerd. The chart references
 #    bare names (centaur-api:latest, IfNotPresent), which containerd resolves to
 #    docker.io/library/centaur-api:latest -- so the image MUST be imported under
@@ -142,8 +109,9 @@ if [[ "$SKIP_BUILD" != "1" ]]; then
 fi
 
 if [[ "$WITH_COMMS_FACTORY" == "1" && "$SKIP_COMMS_FACTORY_BUILD" != "1" ]]; then
-  comms_repo="$(resolve_comms_factory_repo)"
-  build_and_import "$COMMS_FACTORY_IMAGE" "$comms_repo/services/api/Dockerfile" "" "$comms_repo" "$COMMS_FACTORY_TAG"
+  [[ -f "$COMMS_FACTORY_SRC/services/api/Dockerfile" ]] \
+    || { echo "FATAL: comms-factory source missing at $COMMS_FACTORY_SRC (expected vendored at attached-services/comms-factory)" >&2; exit 2; }
+  build_and_import "$COMMS_FACTORY_IMAGE" "$COMMS_FACTORY_SRC/services/api/Dockerfile" "" "$COMMS_FACTORY_SRC" "$COMMS_FACTORY_TAG"
 fi
 if [[ "$WITH_COMMS_FACTORY" == "1" && "$SKIP_BUILD" != "1" ]]; then
   build_and_import \

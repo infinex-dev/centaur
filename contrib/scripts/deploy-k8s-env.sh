@@ -20,12 +20,24 @@ SKIP_BUILD=0
 SKIP_PUSH=0
 SKIP_DEPLOY=0
 
+# comms-factory is vendored in-repo (attached-services/comms-factory) and is intrinsic
+# to this deployment: the script always builds + pushes the comms-factory service and
+# overlay images from in-repo source (no external clone / pinned ref) and layers the
+# overlay values on top of the base values file.
+COMMS_FACTORY_SRC="${COMMS_FACTORY_SRC:-$ROOT_DIR/attached-services/comms-factory}"
+COMMS_OVERLAY_VALUES="${COMMS_OVERLAY_VALUES:-$ROOT_DIR/overlays/comms-factory/values.production.yaml}"
+
 usage() {
   cat <<'EOF'
 Usage: contrib/scripts/deploy-k8s-env.sh --registry REGISTRY [options]
 
 Ongoing deployment script for env-secret based Centaur installs.
 Uses podman by default to build and push images, then runs helm upgrade --install.
+
+Always builds + pushes the in-repo comms-factory service (attached-services/comms-factory)
+and overlay images and layers overlays/comms-factory/values.production.yaml on top of the
+base values — comms-factory is intrinsic to this deployment, built from in-repo source at
+the same $TAG as the base images (no external clone, no pinned ref).
 
 Options:
   --registry REGISTRY       Registry/repository prefix, e.g. registry.local/centaur
@@ -164,6 +176,10 @@ API_IMAGE="${API_IMAGE:-$REGISTRY/centaur-api}"
 SLACKBOT_IMAGE="${SLACKBOT_IMAGE:-$REGISTRY/centaur-slackbot}"
 AGENT_IMAGE="${AGENT_IMAGE:-$REGISTRY/centaur-agent}"
 IRON_PROXY_IMAGE="${IRON_PROXY_IMAGE:-$REGISTRY/centaur-iron-proxy}"
+# comms-factory service + overlay, built in-repo and tagged with the same $TAG as
+# the base images (single repo, single version — no separate pin).
+COMMS_API_IMAGE="${COMMS_API_IMAGE:-$REGISTRY/comms-factory-api}"
+COMMS_OVERLAY_IMAGE="${COMMS_OVERLAY_IMAGE:-$REGISTRY/comms-factory-centaur-overlay}"
 
 build_image() {
   local image="$1"
@@ -175,6 +191,13 @@ build_image() {
   fi
   args+=("$ROOT_DIR")
   "$CONTAINER_CLI" "${args[@]}"
+}
+
+# Build with an explicit context (for in-repo sub-projects whose Dockerfile expects
+# its own directory as the build context, e.g. attached-services/comms-factory).
+build_image_at() {
+  local image="$1" dockerfile="$2" context="$3"
+  "$CONTAINER_CLI" build -t "$image:$TAG" -f "$dockerfile" "$context"
 }
 
 push_image() {
@@ -192,6 +215,12 @@ if [[ "$SKIP_BUILD" != "1" ]]; then
   build_image "$SLACKBOT_IMAGE" "$ROOT_DIR/services/slackbot/Dockerfile"
   build_image "$AGENT_IMAGE" "$ROOT_DIR/services/sandbox/Dockerfile" sandbox
   build_image "$IRON_PROXY_IMAGE" "$ROOT_DIR/services/iron-proxy/Dockerfile"
+
+  # comms-factory service (in-repo) + the comms overlay image.
+  [[ -f "$COMMS_FACTORY_SRC/services/api/Dockerfile" ]] \
+    || { echo "FATAL: comms-factory source missing at $COMMS_FACTORY_SRC" >&2; exit 1; }
+  build_image_at "$COMMS_API_IMAGE" "$COMMS_FACTORY_SRC/services/api/Dockerfile" "$COMMS_FACTORY_SRC"
+  build_image_at "$COMMS_OVERLAY_IMAGE" "$ROOT_DIR/overlays/comms-factory/Dockerfile" "$ROOT_DIR/overlays/comms-factory"
 fi
 
 if [[ "$SKIP_PUSH" != "1" ]]; then
@@ -199,6 +228,8 @@ if [[ "$SKIP_PUSH" != "1" ]]; then
   push_image "$SLACKBOT_IMAGE"
   push_image "$AGENT_IMAGE"
   push_image "$IRON_PROXY_IMAGE"
+  push_image "$COMMS_API_IMAGE"
+  push_image "$COMMS_OVERLAY_IMAGE"
 fi
 
 if [[ "$SKIP_DEPLOY" == "1" ]]; then
@@ -209,6 +240,26 @@ fi
 require_cmd kubectl
 kubectl create namespace "$NAMESPACE" --dry-run=client -o yaml | kubectl apply -f - >/dev/null
 
+# Ensure the comms-factory service tokens exist on the pre-created infra secret
+# (generate once, preserve on later deploys; never overwrite an existing value).
+# The infra secret itself is created one-time per contrib/docs/deploy-env-runsheet.md.
+if ! kubectl -n "$NAMESPACE" get secret "$SECRET_NAME" >/dev/null 2>&1; then
+  echo "FATAL: secret $SECRET_NAME not found in namespace $NAMESPACE." >&2
+  echo "       Create it first (see contrib/docs/deploy-env-runsheet.md)." >&2
+  exit 1
+fi
+require_cmd openssl
+ensure_secret_key() {
+  local key="$1" prefix="$2" existing
+  existing="$(kubectl -n "$NAMESPACE" get secret "$SECRET_NAME" -o "jsonpath={.data.${key}}" 2>/dev/null || true)"
+  [[ -n "$existing" ]] && return
+  echo ">> generating $key on secret $SECRET_NAME"
+  kubectl -n "$NAMESPACE" patch secret "$SECRET_NAME" \
+    -p "{\"stringData\":{\"${key}\":\"${prefix}$(openssl rand -hex 24)\"}}" >/dev/null
+}
+ensure_secret_key COMMS_FACTORY_SERVICE_TOKEN "comms-"
+ensure_secret_key COMMS_FACTORY_CAPABILITY_API_KEY "aiv2_comms_cap_"
+
 helm dependency update "$CHART_DIR" >/dev/null
 
 helm_args=(
@@ -216,6 +267,7 @@ helm_args=(
   --namespace "$NAMESPACE"
   --create-namespace
   -f "$VALUES_FILE"
+  -f "$COMMS_OVERLAY_VALUES"
   --set "secretManager.existingSecretName=$SECRET_NAME"
   --set "ironProxy.secretSource=env"
   --set "api.image.repository=$API_IMAGE"
@@ -226,6 +278,10 @@ helm_args=(
   --set-string "sandbox.image.tag=$TAG"
   --set "ironProxy.image.repository=$IRON_PROXY_IMAGE"
   --set-string "ironProxy.image.tag=$TAG"
+  --set "overlay.image.repository=$COMMS_OVERLAY_IMAGE"
+  --set-string "overlay.image.tag=$TAG"
+  --set "attachedServices.comms-factory.image.repository=$COMMS_API_IMAGE"
+  --set-string "attachedServices.comms-factory.image.tag=$TAG"
 )
 
 if [[ -n "$IMAGE_PULL_SECRET" ]]; then
