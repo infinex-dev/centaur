@@ -2,3 +2,4 @@
 # Keep this list intentionally small so local repo-cache only clones repos covered by the PAT.
 infinex-xyz/platform
 infinex-xyz/agent-platform
+infinex-xyz/context

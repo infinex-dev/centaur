@@ -63,11 +63,16 @@ repoCache:
   enabled: true
   # Refresh hourly instead of the chart default (86400s / daily) so comms
   # grounding sees recently-merged platform changes within the hour, not up to a
-  # day late. These two repos are small, so an hourly git fetch is cheap.
+  # day late. These repos are small, so an hourly git fetch is cheap.
   syncIntervalSeconds: 3600
+  # This list IS the repo_context allowlist too — the chart derives
+  # REPO_CONTEXT_REPOSITORIES from it (workloads.yaml). The GITHUB_TOKEN in the
+  # infra secret must have read access to every repo here, or the cache pod
+  # fails to clone it and stays unready.
   repositories:
     - infinex-xyz/platform
     - infinex-xyz/agent-platform
+    - infinex-xyz/context
   githubToken:
     existingSecretName: centaur-infra-env
     secretKey: GITHUB_TOKEN
@@ -91,7 +96,7 @@ api:
     WARM_POOL_HARNESS: claude-code
     COMMS_FACTORY_BASE_URL: http://centaur-centaur-attached-comms-factory:8080
     CENTAUR_BASE_URL: http://centaur-centaur-api:8000
-    REPO_CONTEXT_REPOSITORY_ALIASES: "infinex-platform=infinex-xyz/platform,platform=infinex-xyz/platform,agent-platform=infinex-xyz/agent-platform"
+    REPO_CONTEXT_REPOSITORY_ALIASES: "infinex-platform=infinex-xyz/platform,platform=infinex-xyz/platform,agent-platform=infinex-xyz/agent-platform,context=infinex-xyz/context"
 
 slackbot:
   extraEnv:
