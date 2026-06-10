@@ -43,6 +43,13 @@ build-one service:
       *) echo "unknown service: {{service}}" >&2; exit 2 ;;
     esac
 
+prune:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    podman image prune -f
+    podman builder prune -f
+    podman system df
+
 _build-api:
     docker build -t centaur-api:latest -f services/api/Dockerfile .
 

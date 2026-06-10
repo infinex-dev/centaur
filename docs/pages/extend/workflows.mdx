@@ -16,7 +16,9 @@ configuration.
 
 Workflows are loaded from `WORKFLOW_DIRS`. In an overlay deployment, workflow
 files must exist under `/app/overlay/org/workflows` in the API container. Files
-in those directories are loaded the same way as built-in workflows.
+in those directories are loaded the same way as built-in workflows. Overlay
+workflow directories are added to Python's import path, so workflow files can
+share sibling helper modules such as `shared.py` without modifying base Centaur.
 
 ## Define a workflow
 
@@ -182,6 +184,28 @@ trigger key is configured, Centaur uses the raw body SHA-256 hash.
 
 The webhook endpoint returns `202` when it creates a new run and `200` when the
 same trigger key maps to an existing run.
+
+## Launch from Slack mentions
+
+By default, Slack mentions start the generic `slack_thread_turn` workflow.
+Deployments can opt specific mention text into explicit workflows with the
+Slackbot `SLACK_WORKFLOW_COMMANDS` env var. It is a JSON array of regex mappings;
+matched capture groups can be inserted into workflow input with `$1`, `$2`, and
+so on:
+
+```json
+[
+  {
+    "match": "^deploy\\s+review\\b[:\\s-]*(.*)$",
+    "workflow": "deploy_review",
+    "input": {"text": "$1"},
+    "triggerSuffix": ":deploy_review"
+  }
+]
+```
+
+Keep these mappings deployment-specific. Base Centaur should not hard-code
+organization workflow names or command phrases.
 
 ## Verify
 

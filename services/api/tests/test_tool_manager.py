@@ -8,10 +8,12 @@ from typing import Optional, Union
 
 import httpx
 import pytest
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
+from api.api_keys import APIKeyInfo  # noqa: E402
+from api.deps import verify_api_key  # noqa: E402
 from api.tool_manager import (  # noqa: E402
     _LIFECYCLE_METHODS,
     _describe_method_docstring,
@@ -22,6 +24,29 @@ from api.tool_manager import (  # noqa: E402
     ToolManager,
     ToolMethod,
 )
+
+
+def _grant_tools_scope(scopes: list[str]):
+    """Build a ``verify_api_key`` override that authenticates with *scopes*.
+
+    The native ``/tools`` router depends on ``verify_api_key`` and gates each
+    call through ``check_scope(info, "tools", tool_name)``. Tests drive the
+    router over ASGI without a DB, so they override the dependency to attach an
+    ``APIKeyInfo`` carrying the desired scopes onto ``request.state``.
+    """
+
+    async def _override(request: Request) -> str:
+        request.state.api_key_info = APIKeyInfo(
+            id="test-key",
+            name="test",
+            key_prefix="test",
+            scopes=scopes,
+            created_by="test",
+            source="db",
+        )
+        return "key:test"
+
+    return _override
 
 
 class TestDescribeMethodDocstring:
@@ -536,6 +561,20 @@ def test_discover_respects_enabled_tools_allowlist(tmp_path: Path):
     assert set(manager.tools) == {"beta"}
 
 
+def test_discover_disabled_tools_take_precedence_over_allowlist(tmp_path: Path):
+    tools_dir = tmp_path / "tools"
+    _write_tool(tools_dir, "alpha", FAKE_TOOL_CLIENT)
+    _write_tool(tools_dir, "beta", FAKE_TOOL_CLIENT)
+
+    manager = ToolManager(
+        tools_dir, enabled_tools={"alpha", "beta"}, disabled_tools={"beta"}
+    )
+    loaded = manager.discover()
+
+    assert [tool.name for tool in loaded] == ["alpha"]
+    assert set(manager.tools) == {"alpha"}
+
+
 @pytest.mark.asyncio
 async def test_call_tool_invokes_sync_and_async_methods_with_secret_placeholders(
     tmp_path: Path,
@@ -639,6 +678,7 @@ async def test_tool_rest_router_lists_describes_and_invokes_tools(
     manager.discover()
     app = FastAPI()
     app.include_router(manager.create_rest_router())
+    app.dependency_overrides[verify_api_key] = _grant_tools_scope(["tools:*"])
 
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:
@@ -662,28 +702,65 @@ async def test_tool_rest_router_lists_describes_and_invokes_tools(
             "sync_echo",
         ]
 
+        # JSON consumers receive the tool_result.v1 envelope: the raw tool
+        # return rides in ``output`` with no evidence for non-research tools.
         call_response = await client.post(
             "/tools/alpha/sync_echo",
             json={"text": "from rest"},
         )
         assert call_response.status_code == 200
         assert call_response.json() == {
-            "tool": "alpha",
-            "method": "sync_echo",
-            "result": {"mode": "sync", "text": "from rest", "source": "base"},
+            "schema_version": "centaur.tool_result.v1",
+            "ok": True,
+            "content": None,
+            "text": None,
+            "output": {"mode": "sync", "text": "from rest", "source": "base"},
+            "evidence": [],
+            "error": None,
+            "retryable": False,
         }
 
         secret_response = await client.post("/tools/alpha/secret_values", json={})
         assert secret_response.status_code == 200
         assert secret_response.json() == {
-            "tool": "alpha",
-            "method": "secret_values",
-            "result": {"required": "REQ_TOKEN", "optional": "OPT_TOKEN"},
+            "schema_version": "centaur.tool_result.v1",
+            "ok": True,
+            "content": None,
+            "text": None,
+            "output": {"required": "REQ_TOKEN", "optional": "OPT_TOKEN"},
+            "evidence": [],
+            "error": None,
+            "retryable": False,
         }
 
+        # A missing method resolves through ``call_tool_raw``, which returns a
+        # plain ``{"error": ..., "available_methods": [...]}`` dict. That shape
+        # is not flagged as a tool error (no ``ok:false``/``status:error``), so
+        # the envelope wraps it as a successful result with the dict in
+        # ``output`` — the consumer inspects ``output`` for the not-found error.
         missing_response = await client.post("/tools/alpha/missing", json={})
         assert missing_response.status_code == 200
-        assert missing_response.json()["result"] == (
-            '{"error": "Method \'missing\' not found in tool \'alpha\'", '
-            '"available_methods": ["async_echo", "secret_values", "sync_echo"]}'
-        )
+        missing_body = missing_response.json()
+        assert missing_body["schema_version"] == "centaur.tool_result.v1"
+        assert missing_body["ok"] is True
+        assert missing_body["output"] == {
+            "error": "Method 'missing' not found in tool 'alpha'",
+            "available_methods": ["async_echo", "secret_values", "sync_echo"],
+        }
+        assert missing_body["evidence"] == []
+
+
+@pytest.mark.asyncio
+async def test_tool_rest_router_requires_authentication(tmp_path: Path):
+    """Without a valid key, the native tool plane rejects every request 401."""
+    tools_dir = tmp_path / "tools"
+    _write_tool(tools_dir, "alpha", FAKE_TOOL_CLIENT, description="REST alpha")
+    manager = ToolManager(tools_dir)
+    manager.discover()
+    app = FastAPI()
+    app.include_router(manager.create_rest_router())
+
+    transport = httpx.ASGITransport(app=app)
+    async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:
+        assert (await client.get("/tools")).status_code == 401
+        assert (await client.post("/tools/alpha/sync_echo", json={})).status_code == 401

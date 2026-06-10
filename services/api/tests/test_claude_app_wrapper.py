@@ -3,6 +3,8 @@ from __future__ import annotations
 import importlib.util
 import os
 from pathlib import Path
+
+import pytest
 from types import ModuleType
 from typing import Any
 
@@ -164,6 +166,33 @@ def test_handle_input_goal_rewrites_to_single_instruction(monkeypatch) -> None:
     assert sent[0]["type"] == "user"
     assert "ship feature X" in sent[0]["message"]["content"][0]["text"]
     assert emitted == []
+
+
+def test_send_to_claude_reports_dead_child_without_broken_pipe(monkeypatch) -> None:
+    wrapper = _load_wrapper()
+
+    class DeadStdin:
+        def write(self, _payload: str) -> None:
+            raise AssertionError("should not write to a dead child")
+
+        def flush(self) -> None:
+            raise AssertionError("should not flush a dead child")
+
+    class DeadApp:
+        stdin = DeadStdin()
+
+        def poll(self) -> int:
+            return 1
+
+    monkeypatch.setattr(wrapper, "APP", DeadApp())
+
+    with pytest.raises(RuntimeError) as exc_info:
+        wrapper.send_to_claude({"type": "user", "message": {}})
+
+    message = str(exc_info.value)
+    assert "claude process exited before stdin write" in message
+    assert "Broken pipe" not in message
+    assert "Errno 32" not in message
 
 
 def test_handle_input_interrupt_calls_interrupt(monkeypatch) -> None:

@@ -49,6 +49,23 @@ def _set_env(env: list[str], name: str, value: str) -> None:
     env.append(entry)
 
 
+def _env_truthy(name: str) -> bool:
+    return (os.getenv(name) or "").strip().lower() in {"1", "true", "yes", "on"}
+
+
+def claude_code_session_persistence_enabled() -> bool:
+    """Return True when fresh Claude Code pods can safely resume old sessions.
+
+    Claude Code session ids are only portable across sandbox pods when the
+    deployment provides persistent Claude home/session storage. The default
+    Kubernetes sandbox is ephemeral, so passing a prior session id to a fresh
+    pod makes Claude exit with "No conversation found with session ID".
+    """
+    return _env_truthy("CLAUDE_CODE_SESSION_PERSISTENCE_ENABLED") or _env_truthy(
+        "CLAUDE_CODE_SESSION_PERSISTENCE"
+    )
+
+
 def _sandbox_extra_env() -> list[tuple[str, str]]:
     raw = (os.getenv("KUBERNETES_SANDBOX_EXTRA_ENV") or "").strip()
     if not raw:

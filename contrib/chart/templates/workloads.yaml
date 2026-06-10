@@ -182,9 +182,9 @@ spec:
             - name: SSL_CERT_FILE
               value: /firewall-certs/ca-cert.pem
             - name: NO_PROXY
-              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.kubernetesApiNoProxyHosts" .) (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.componentName" (dict "root" . "component" "slackbot")) (include "centaur.firewallNoProxyHosts" .) | quote }}
+              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,%s%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.kubernetesApiNoProxyHosts" .) (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.componentName" (dict "root" . "component" "slackbot")) (include "centaur.firewallNoProxyHosts" .) (include "centaur.attachedServiceNoProxyHosts" .) | quote }}
             - name: no_proxy
-              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.kubernetesApiNoProxyHosts" .) (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.componentName" (dict "root" . "component" "slackbot")) (include "centaur.firewallNoProxyHosts" .) | quote }}
+              value: {{ printf "localhost,127.0.0.1,%s,%s,%s,%s,%s%s,centaur-egress.svc.cluster.local,.centaur-egress.svc.cluster.local" (include "centaur.kubernetesApiNoProxyHosts" .) (include "centaur.componentName" (dict "root" . "component" "postgres")) (include "centaur.componentName" (dict "root" . "component" "api")) (include "centaur.componentName" (dict "root" . "component" "slackbot")) (include "centaur.firewallNoProxyHosts" .) (include "centaur.attachedServiceNoProxyHosts" .) | quote }}
             - name: CENTAUR_LOG_LEVEL
               value: info
             - name: CENTAUR_DEFAULT_HARNESS
@@ -347,6 +347,12 @@ spec:
             - name: REPOS_PATH
               value: {{ $reposPath | quote }}
 {{- end }}
+{{- if .Values.repoCache.enabled }}
+            - name: REPO_CONTEXT_ROOT
+              value: /repo-cache
+            - name: REPO_CONTEXT_REPOSITORIES
+              value: {{ join "," .Values.repoCache.repositories | quote }}
+{{- end }}
 {{- with .Values.sandbox.extraEnv }}
 {{- $envList := list }}
 {{- range $k, $v := . }}
@@ -369,6 +375,7 @@ spec:
             - name: {{ $name }}
               value: {{ $value | quote }}
 {{- end }}
+{{- include "centaur.attachedServiceKeyEnv" . | nindent 12 }}
           envFrom:
             - secretRef:
                 name: {{ include "centaur.secretEnvName" . }}
@@ -404,6 +411,11 @@ spec:
             - name: firewall-ca
               mountPath: /firewall-certs
               readOnly: true
+{{- if .Values.repoCache.enabled }}
+            - name: repo-cache
+              mountPath: /repo-cache
+              readOnly: true
+{{- end }}
 {{- if .Values.overlay.image.repository }}
             - name: overlay-root
               mountPath: {{ dir .Values.overlay.mountPath | quote }}
@@ -421,6 +433,12 @@ spec:
         - name: firewall-ca
           secret:
             secretName: {{ include "centaur.trustedCaSecretName" . }}
+{{- if .Values.repoCache.enabled }}
+        - name: repo-cache
+          hostPath:
+            path: {{ .Values.repoCache.hostPath | quote }}
+            type: DirectoryOrCreate
+{{- end }}
 {{- if .Values.overlay.image.repository }}
         - name: overlay-root
           emptyDir: {}

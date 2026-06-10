@@ -13,6 +13,15 @@ export class CentaurHandoff {
   }
 
   async emit(event: NormalizedSlackEvent): Promise<CentaurHandoffResult> {
+    return this.emitWorkflow('slack_thread_turn', event)
+  }
+
+  async emitWorkflow(
+    workflowName: string,
+    event: NormalizedSlackEvent,
+    extraInput: Record<string, unknown> = {},
+    triggerSuffix = ''
+  ): Promise<CentaurHandoffResult> {
     const url = new URL('/workflows/runs', this.config.CENTAUR_API_URL)
     const apiKey = centaurApiKey(this.config)
     const response = await fetch(url, {
@@ -22,8 +31,8 @@ export class CentaurHandoff {
         ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {})
       },
       body: JSON.stringify({
-        workflow_name: 'slack_thread_turn',
-        trigger_key: event.message_id,
+        workflow_name: workflowName,
+        trigger_key: `${event.message_id}${triggerSuffix}`,
         eager_start: true,
         input: {
           thread_key: event.thread_key,
@@ -50,7 +59,8 @@ export class CentaurHandoff {
             thread_ts: event.thread_ts,
             recipient_user_id: event.user_id,
             recipient_team_id: event.recipient_team_id ?? event.team_id
-          }
+          },
+          ...extraInput
         }
       })
     })

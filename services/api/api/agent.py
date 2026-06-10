@@ -27,6 +27,7 @@ from typing import Any
 import structlog
 
 from api.sandbox.base import RuntimeState, SandboxSession
+from api.sandbox.config import claude_code_session_persistence_enabled
 from api.sandbox.harness_protocol import (
     build_user_input,
     extract_result,
@@ -905,6 +906,17 @@ async def get_or_spawn(
         effective_harness, persona=persona, engine_override=engine
     )
 
+    if (
+        resolved_engine == "claude-code"
+        and old_agent_thread_id
+        and not claude_code_session_persistence_enabled()
+    ):
+        log.info(
+            "claude_resume_thread_id_cleared_no_persistence",
+            thread_key=thread_key,
+        )
+        old_agent_thread_id = ""
+
     # Try warm pool first
     should_try_warm = (
         not engine
@@ -1085,6 +1097,56 @@ def _build_session_context(
     return "\n".join(lines)
 
 
+_INVALID_CLAUDE_RESUME_TEXT = "no conversation found with session id"
+
+
+def _event_error_text(event: dict) -> str:
+    err = event.get("error")
+    if isinstance(err, str):
+        return err
+    if isinstance(err, dict):
+        message = err.get("message")
+        if isinstance(message, str):
+            return message
+    message = event.get("message")
+    return message if isinstance(message, str) else ""
+
+
+def _is_invalid_claude_resume_event(event: dict) -> bool:
+    if (
+        event.get("type") == "system"
+        and event.get("subtype") == "invalid_resume_session"
+    ):
+        return True
+    return _INVALID_CLAUDE_RESUME_TEXT in _event_error_text(event).lower()
+
+
+async def _clear_agent_thread_id(session: SandboxSession, *, reason: str) -> None:
+    if not session.agent_thread_id:
+        return
+    session.agent_thread_id = ""
+    try:
+        pool = _get_pool()
+        await pool.execute(
+            "UPDATE sandbox_sessions SET agent_thread_id = NULL, updated_at = NOW() "
+            "WHERE thread_key = $1",
+            session.thread_key,
+        )
+        log.info(
+            "agent_thread_id_cleared",
+            thread_key=session.thread_key,
+            sandbox=session.sandbox_id[:12],
+            reason=reason,
+        )
+    except Exception:
+        log.warning(
+            "agent_thread_id_clear_failed",
+            thread_key=session.thread_key,
+            sandbox=session.sandbox_id[:12],
+            reason=reason,
+        )
+
+
 def _terminal_error_from_harness_event(event: dict) -> str | None:
     """Return terminal error text when an end-of-turn event represents failure."""
     event_type = event.get("type")
@@ -1119,6 +1181,19 @@ def _terminal_error_from_harness_event(event: dict) -> str | None:
         result = event.get("result")
         if isinstance(result, str) and result.strip():
             return result.strip()
+        return "Harness reported an error"
+
+    if event_type == "turn.failed":
+        err = event.get("error")
+        if isinstance(err, str) and err.strip():
+            return err.strip()
+        if isinstance(err, dict):
+            message = err.get("message")
+            if isinstance(message, str) and message.strip():
+                return message.strip()
+        message = event.get("message")
+        if isinstance(message, str) and message.strip():
+            return message.strip()
         return "Harness reported an error"
 
     return None
@@ -1161,6 +1236,8 @@ async def _stream_stdout(
                 continue
 
             evt_type = evt.get("type", "") if isinstance(evt, dict) else ""
+            if session.engine == "claude-code" and _is_invalid_claude_resume_event(evt):
+                await _clear_agent_thread_id(session, reason="invalid_claude_resume")
             if evt_type and evt_type not in _VALID_STDOUT_EVENT_TYPES:
                 log.warning(
                     "stdout_unknown_event_type",

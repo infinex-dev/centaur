@@ -47,6 +47,8 @@ onepasswordConnect:
 secrets:
   bootstrapSecretName: ""
 
+attachedServices: {}
+
 api:
   replicaCount: 1
   image:
@@ -130,7 +132,7 @@ repoCache:
   enabled: false
   hostPath: /var/lib/centaur/repos
   repositories: []
-  syncIntervalSeconds: 300
+  syncIntervalSeconds: 86400
   image:
     repository: ""
     tag: ""

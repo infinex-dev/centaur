@@ -281,14 +281,32 @@ class WebSearchClient:
             score -= 2
         return score
 
+    def _report_body_without_sources(self, text: str) -> str:
+        parts = re.split(r"^##\s*Sources\s*$", text, maxsplit=1, flags=re.IGNORECASE | re.MULTILINE)
+        return parts[0].rstrip()
+
     def _extract_sources_section_ids(self, text: str) -> set[int]:
         match = re.search(r"##\s*Sources\s*(.*)$", text, flags=re.IGNORECASE | re.DOTALL)
         if not match:
             return set()
         ids: set[int] = set()
-        for source_id in re.findall(r"^\s*\[\s*(\d+)\s*\]\s+", match.group(1), flags=re.MULTILINE):
+        pattern = r"^\s*(?:[-*]\s*)?\[\s*(\d+)\s*\](?:\s+|:|\s*[—-])"
+        for source_id in re.findall(pattern, match.group(1), flags=re.MULTILINE):
             ids.add(int(source_id))
         return ids
+
+    def _sync_sources_section(self, report: str, sources: list[SourceDocument]) -> str:
+        body = self._report_body_without_sources(report)
+        cited_ids = sorted(self._extract_citation_ids(body))
+        source_by_id = {source.source_id: source for source in sources}
+
+        rows = ["## Sources"]
+        for source_id in cited_ids:
+            source = source_by_id[source_id]
+            title = re.sub(r"\s+", " ", source.title).strip() or source.url
+            rows.append(f"[{source.source_id}] {title} — {source.url}")
+
+        return f"{body}\n\n" + "\n".join(rows)
 
     def _normalize_claims(
         self,
@@ -351,9 +369,7 @@ class WebSearchClient:
                 for raw_id in source_ids_raw:
                     if isinstance(raw_id, int) and raw_id in valid_source_ids:
                         source_ids.append(raw_id)
-            normalized_items.append(
-                {"summary": summary, "source_ids": sorted(set(source_ids))}
-            )
+            normalized_items.append({"summary": summary, "source_ids": sorted(set(source_ids))})
             seen_summaries.add(summary_key)
         return normalized_items
 
@@ -501,7 +517,9 @@ class WebSearchClient:
                     highlights_chars=4000,
                     additional_queries=None,
                 )
-                return await self._exa_search_async(payload=payload, timeout_seconds=timeout_seconds)
+                return await self._exa_search_async(
+                    payload=payload, timeout_seconds=timeout_seconds
+                )
 
         batch_results = await asyncio.gather(
             *(run_query(query) for query in deduped_queries), return_exceptions=True
@@ -744,13 +762,13 @@ class WebSearchClient:
         max_report_chars: int,
     ) -> str:
         max_repair_attempts = 2
-        invalid_ids = sorted(self._invalid_citation_ids(report, sources))
-        cited_ids = self._extract_citation_ids(report)
-        source_section_ids = self._extract_sources_section_ids(report)
-        missing_sources_ids = sorted(cited_ids - source_section_ids)
+        body = self._report_body_without_sources(report)
+        invalid_ids = sorted(self._invalid_citation_ids(body, sources))
+        cited_ids = self._extract_citation_ids(body)
         attempt = 0
-        while (invalid_ids or missing_sources_ids) and attempt < max_repair_attempts:
+        while invalid_ids and attempt < max_repair_attempts:
             attempt += 1
+            missing_sources_ids = sorted(cited_ids - self._extract_sources_section_ids(report))
             report = await self._repair_report_citations(
                 report=report,
                 invalid_ids=invalid_ids,
@@ -758,19 +776,26 @@ class WebSearchClient:
                 sources=sources,
                 max_report_chars=max_report_chars,
             )
-            invalid_ids = sorted(self._invalid_citation_ids(report, sources))
-            cited_ids = self._extract_citation_ids(report)
-            source_section_ids = self._extract_sources_section_ids(report)
-            missing_sources_ids = sorted(cited_ids - source_section_ids)
+            body = self._report_body_without_sources(report)
+            invalid_ids = sorted(self._invalid_citation_ids(body, sources))
+            cited_ids = self._extract_citation_ids(body)
         if invalid_ids:
-            raise RuntimeError(f"Citation validation failed. Invalid source IDs in report: {invalid_ids}")
+            raise RuntimeError(
+                f"Citation validation failed. Invalid source IDs in report: {invalid_ids}"
+            )
+        if not cited_ids:
+            raise RuntimeError(
+                "Citation validation failed. Report did not include source citations."
+            )
+
+        report = self._sync_sources_section(report, sources)
+        source_section_ids = self._extract_sources_section_ids(report)
+        missing_sources_ids = sorted(cited_ids - source_section_ids)
         if missing_sources_ids:
             raise RuntimeError(
                 "Citation validation failed. Sources section missing cited IDs: "
                 f"{missing_sources_ids}"
             )
-        if not self._extract_citation_ids(report):
-            raise RuntimeError("Citation validation failed. Report did not include source citations.")
         return report
 
     async def search(
@@ -843,7 +868,9 @@ class WebSearchClient:
                     max_report_chars=max_report_chars,
                 )
             except Exception as exc:
-                partial_failures.append({"query": normalized_query, "error": f"synthesis failed: {exc}"})
+                partial_failures.append(
+                    {"query": normalized_query, "error": f"synthesis failed: {exc}"}
+                )
 
         meta = ResponseMeta(
             duration_ms=int((time.perf_counter() - started) * 1000),
@@ -928,13 +955,17 @@ class WebSearchClient:
                 batch_results = [exc]
 
             added_in_iteration = 0
-            for query, result in zip(["; ".join(deduped_current_queries)], batch_results, strict=True):
+            for query, result in zip(
+                ["; ".join(deduped_current_queries)], batch_results, strict=True
+            ):
                 if isinstance(result, Exception):
                     partial_failures.append({"query": query, "error": str(result)})
                     continue
                 request_id_list = result.get("requestIds")
                 if isinstance(request_id_list, list):
-                    request_ids.extend(str(request_id) for request_id in request_id_list if request_id)
+                    request_ids.extend(
+                        str(request_id) for request_id in request_id_list if request_id
+                    )
                 elif result.get("requestId"):
                     request_ids.append(str(result.get("requestId")))
                 result_partial_failures = result.get("partialFailures", [])

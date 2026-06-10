@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import secrets
 import time
@@ -38,6 +39,25 @@ class ServiceAPIKeySpec:
     scopes: tuple[str, ...]
 
 
+# ---------------------------------------------------------------------------
+# Named scope bundles — expand a ``bundle:<name>`` token into concrete
+# ``tools:`` scopes so consumers get curated least-privilege access without
+# a separate profile/capability registry.
+# ---------------------------------------------------------------------------
+
+SCOPE_BUNDLES: dict[str, tuple[str, ...]] = {
+    # Real, read-only research tools only. There is no ``web_fetch`` or
+    # ``browser`` tool — page fetches route through the Exa-backed
+    # ``websearch`` tool's ``search`` method.
+    "research": (
+        "tools:repo_context",
+        "tools:websearch",
+        "tools:twitter",
+        "tools:company_context",
+    ),
+}
+
+
 _SERVICE_API_KEYS: tuple[ServiceAPIKeySpec, ...] = (
     ServiceAPIKeySpec(
         env_var="SLACKBOT_API_KEY",
@@ -50,6 +70,62 @@ _SERVICE_API_KEYS: tuple[ServiceAPIKeySpec, ...] = (
         scopes=("admin", "agent", "threads", "tools:*"),
     ),
 )
+
+
+def _load_attached_service_key_specs() -> tuple[ServiceAPIKeySpec, ...]:
+    """Load attached-service callback key specs declared by the Helm chart.
+
+    The chart renders ``ATTACHED_SERVICE_KEYS`` as a JSON list of
+    ``{env_var, name, scopes}`` (one per ``attachedServices.<name>.serviceKey``).
+    This keeps base free of any specific attached service: a deployment declares
+    its service key as config, and the key is bootstrapped exactly like the
+    built-in service keys above (env-var-gated, least-privilege scopes).
+    """
+    raw = os.environ.get("ATTACHED_SERVICE_KEYS", "").strip()
+    if not raw:
+        return ()
+    try:
+        entries = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"ATTACHED_SERVICE_KEYS is not valid JSON: {exc}") from exc
+    if not isinstance(entries, list):
+        raise ValueError("ATTACHED_SERVICE_KEYS must be a JSON list")
+    # Built-in names are reserved: the api_keys table is unique on key_hash, not
+    # name, so a colliding attached entry would seed a phantom second key with the
+    # same identity and different scopes. Reject collisions and duplicates loudly.
+    reserved = {spec.name for spec in _SERVICE_API_KEYS}
+    seen: set[str] = set()
+    specs: list[ServiceAPIKeySpec] = []
+    for index, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            raise ValueError(f"ATTACHED_SERVICE_KEYS entry {index} must be an object")
+        env_var = entry.get("env_var")
+        name = entry.get("name")
+        scopes = entry.get("scopes")
+        if not env_var or not name or not isinstance(scopes, list) or not scopes:
+            raise ValueError(
+                f"ATTACHED_SERVICE_KEYS entry {index} (name={name!r}) needs "
+                "env_var, name, and non-empty scopes"
+            )
+        if not all(isinstance(scope, str) and scope for scope in scopes):
+            raise ValueError(
+                f"ATTACHED_SERVICE_KEYS entry {index} (name={name!r}) scopes "
+                "must be non-empty strings"
+            )
+        if name in reserved:
+            raise ValueError(
+                f"ATTACHED_SERVICE_KEYS entry {index} name {name!r} collides with "
+                "a built-in service key"
+            )
+        if name in seen:
+            raise ValueError(
+                f"ATTACHED_SERVICE_KEYS has a duplicate service key name {name!r}"
+            )
+        seen.add(name)
+        specs.append(
+            ServiceAPIKeySpec(env_var=str(env_var), name=str(name), scopes=tuple(scopes))
+        )
+    return tuple(specs)
 
 
 def generate_key() -> tuple[str, str, str]:
@@ -67,12 +143,29 @@ def hash_key(key: str) -> str:
 
 
 def _normalize_scopes(scopes: list[str] | tuple[str, ...]) -> list[str]:
-    """Deduplicate scopes while preserving declaration order."""
+    """Deduplicate and expand scopes while preserving declaration order.
+
+    ``bundle:<name>`` tokens are expanded into their constituent ``tools:``
+    scopes before deduplication.
+    """
     seen: set[str] = set()
     normalized: list[str] = []
     for scope in scopes:
         cleaned = scope.strip()
-        if not cleaned or cleaned in seen:
+        if not cleaned:
+            continue
+        # Expand bundle tokens
+        if cleaned.startswith("bundle:"):
+            bundle_name = cleaned[len("bundle:"):]
+            bundle_scopes = SCOPE_BUNDLES.get(bundle_name)
+            if bundle_scopes is None:
+                raise ValueError(f"Unknown scope bundle: {bundle_name!r}")
+            for s in bundle_scopes:
+                if s not in seen:
+                    seen.add(s)
+                    normalized.append(s)
+            continue
+        if cleaned in seen:
             continue
         seen.add(cleaned)
         normalized.append(cleaned)
@@ -227,7 +320,7 @@ async def ensure_static_key(
 async def bootstrap_service_api_keys(pool: asyncpg.Pool) -> list[APIKeyInfo]:
     """Seed long-lived service keys from env vars into Postgres."""
     bootstrapped: list[APIKeyInfo] = []
-    for spec in _SERVICE_API_KEYS:
+    for spec in (*_SERVICE_API_KEYS, *_load_attached_service_key_specs()):
         token = os.environ.get(spec.env_var, "").strip()
         if not token:
             continue
@@ -296,6 +389,10 @@ def check_scope(key_info: APIKeyInfo, required: str, resource: str = "") -> bool
     "tools:*", "tools:<name>", "workflows", "workflows:*",
     "workflows:<name>", "threads", "threads:read".
 
+    ``bundle:<name>`` tokens are expanded into concrete ``tools:`` scopes at
+    key load time (see ``_normalize_scopes``), so ``check_scope`` only ever
+    sees the expanded ``tools:<name>`` entries.
+
     A bare category scope (e.g. "agent") grants all sub-actions. Resource-
     qualified categories (``tools``, ``workflows``) accept either a wildcard
     (``tools:*`` / ``workflows:*``) or an exact resource match
@@ -324,7 +421,10 @@ def check_scope(key_info: APIKeyInfo, required: str, resource: str = "") -> bool
         for scope in scopes:
             if scope in ("workflows", "workflows:*"):
                 return True
-            if scope.startswith("workflows:") and resource == scope[len("workflows:") :]:
+            if (
+                scope.startswith("workflows:")
+                and resource == scope[len("workflows:") :]
+            ):
                 return True
         return False
 

@@ -45,6 +45,7 @@ async def create_api_key(request: Request, body: CreateKeyRequest) -> dict:
         "tools:",
         "workflows",
         "workflows:",
+        "bundle:",
     )
     for scope in body.scopes:
         if not any(scope == p or scope.startswith(p) for p in valid_scope_prefixes):
@@ -52,7 +53,7 @@ async def create_api_key(request: Request, body: CreateKeyRequest) -> dict:
                 status_code=400,
                 detail=(
                     f"Invalid scope: {scope}. Must be one of: *, admin, agent, "
-                    "threads, tools:<name>, workflows, workflows:<name>"
+                    "threads, tools:<name>, workflows, workflows:<name>, bundle:<name>"
                 ),
             )
 

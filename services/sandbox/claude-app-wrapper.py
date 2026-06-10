@@ -45,13 +45,25 @@ def emit(payload: dict[str, Any]) -> None:
     sys.stdout.flush()
 
 
+def _claude_exit_error(proc: subprocess.Popen[str] | None) -> RuntimeError:
+    exit_code = proc.poll() if proc is not None else None
+    if exit_code is None:
+        return RuntimeError("claude stdin is unavailable")
+    return RuntimeError(f"claude process exited before stdin write (exit={exit_code})")
+
+
 def send_to_claude(payload: dict[str, Any]) -> None:
     assert APP is not None and APP.stdin is not None
     with WRITE_LOCK:
-        APP.stdin.write(
-            json.dumps(payload, separators=(",", ":"), ensure_ascii=False) + "\n"
-        )
-        APP.stdin.flush()
+        if APP.poll() is not None:
+            raise _claude_exit_error(APP)
+        try:
+            APP.stdin.write(
+                json.dumps(payload, separators=(",", ":"), ensure_ascii=False) + "\n"
+            )
+            APP.stdin.flush()
+        except (BrokenPipeError, OSError) as exc:
+            raise _claude_exit_error(APP) from exc
 
 
 def api_stdin_reader() -> None:

@@ -17,6 +17,11 @@ Centaur deploy it next to the agent control plane. The app can contribute tools,
 skills, workflows, personas, and a web surface without forking the base Centaur
 repo.
 
+Do not confuse this WIP Apps design with `attachedServices`. Attached services
+exist today as a low-level Helm primitive for running an internal Deployment and
+ClusterIP Service beside the API; they do not provide app manifests, app routes,
+registration APIs, lifecycle records, or web-surface proxying.
+
 The point is to let teams deploy privileged internal applications without
 threading Cloudflare, Vercel, or another external hosting path into systems that
 should stay behind the company boundary. Apps also give employees a way to

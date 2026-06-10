@@ -1,5 +1,6 @@
 import { createHmac } from 'node:crypto'
 import { afterEach, describe, expect, it, mock } from 'bun:test'
+import type { AppConfig } from './config'
 import type { StartSocketModeOptions } from './slack/socket-mode'
 
 const originalEnv = { ...process.env }
@@ -248,6 +249,65 @@ describe('Slack event HTTP dedupe', () => {
       console.log = originalLog
       console.warn = originalWarn
     }
+  })
+
+  it('parses configured workflow launch commands', async () => {
+    const { parseConfiguredWorkflowCommand } = await import('./index')
+    const event = {
+      thread_key: 'slack:C123:1.2',
+      message_id: '1.2',
+      team_id: 'T123',
+      user_id: 'U123',
+      channel_id: 'C123',
+      thread_ts: '1.2',
+      is_mention: true,
+      parts: [{ type: 'text' as const, text: '<@UBOT> report audit tweet: Fact A' }],
+      slack: { message_ts: '1.2' }
+    }
+
+    const commands: AppConfig['SLACK_WORKFLOW_COMMANDS'] = [
+      {
+        match: '^report\\s+audit\\b[:\\s-]*(.*)$',
+        workflow: 'report_audit',
+        input: { text: '$1' },
+        triggerSuffix: ':report_audit'
+      },
+      {
+        match: '^report\\s+(?:generate|release)\\b[:\\s-]*(.*)$',
+        workflow: 'report_release',
+        input: { brief: '$1' },
+        triggerSuffix: ':report_release'
+      }
+    ]
+
+    expect(parseConfiguredWorkflowCommand(event)).toBeNull()
+    expect(parseConfiguredWorkflowCommand(event, commands)).toEqual({
+      workflowName: 'report_audit',
+      input: { text: 'tweet: Fact A' },
+      triggerSuffix: ':report_audit'
+    })
+    expect(
+      parseConfiguredWorkflowCommand(
+        {
+          ...event,
+          parts: [{ type: 'text' as const, text: '<@UBOT> report generate for x: Fact A' }]
+        },
+        commands
+      )
+    ).toEqual({
+      workflowName: 'report_release',
+      input: { brief: 'for x: Fact A' },
+      triggerSuffix: ':report_release'
+    })
+    expect(
+      parseConfiguredWorkflowCommand(
+        {
+          ...event,
+          parts: [{ type: 'text' as const, text: '<@UBOT> hello' }]
+        },
+        commands
+      )
+    ).toBeNull()
   })
 
   it('starts Socket Mode only when enabled with an app token', async () => {
