@@ -179,7 +179,13 @@
     "slackbot": {
       "type": "object",
       "properties": {
-        "enabled": { "type": "boolean" }
+        "enabled": { "type": "boolean" },
+        "socketMode": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" }
+          }
+        }
       }
     },
     "postgres": {

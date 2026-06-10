@@ -1,0 +1,50 @@
+{
+  "display_information": {
+    "name": "FirenzeStaging",
+    "description": "Staging instance of the Centaur agent orchestrator, run locally for development. Mention @FirenzeStaging in a thread and the locally-running stack works the task in an isolated sandbox, posting progress and the final answer back.",
+    "background_color": "#0b0b0f"
+  },
+  "features": {
+    "app_home": {
+      "home_tab_enabled": false,
+      "messages_tab_enabled": true,
+      "messages_tab_read_only_enabled": false
+    },
+    "assistant_view": {
+      "assistant_description": "Centaur agent orchestrator (staging). Mention me or DM me and I work the task in an isolated sandbox, posting progress and the final answer back."
+    },
+    "bot_user": {
+      "display_name": "FirenzeStaging",
+      "always_online": true
+    }
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "app_mentions:read",
+        "assistant:write",
+        "channels:history",
+        "channels:read",
+        "chat:write",
+        "files:write",
+        "im:history",
+        "im:read",
+        "im:write",
+        "reactions:write",
+        "users.profile:read",
+        "users:read"
+      ]
+    }
+  },
+  "settings": {
+    "event_subscriptions": {
+      "bot_events": ["app_mention", "message.channels", "message.im"]
+    },
+    "interactivity": {
+      "is_enabled": false
+    },
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": true,
+    "token_rotation_enabled": false
+  }
+}
