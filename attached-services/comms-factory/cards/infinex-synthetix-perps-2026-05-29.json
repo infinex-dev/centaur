@@ -1,0 +1,21 @@
+{
+  "id": "infinex-synthetix-perps-2026-05-29",
+  "title": "Synthetix perps in Infinex",
+  "ship_date": "2026-05-29",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "Synthetix is integrated in Infinex as a perps provider alongside Hyperliquid (third provider Lighter also present in the platform codebase)",
+    "Synthetix is a decentralized derivatives exchange offering perpetual futures on Ethereum mainnet, quoted and settled in USDT",
+    "Synthetix perps use a central limit order book (CLOB), with cross-margin across all positions in a subaccount",
+    "Synthetix perps markets: BTC, ETH, SOL, XRP, DOGE, ZEC, FARTCOIN, 1000PEPE, XMR, PUMP (all quoted in USDT)",
+    "Synthetix perps max leverage: 50x on BTC, ETH, SOL, XRP, DOGE; 25x on ZEC and 1000PEPE; 10x on FARTCOIN, XMR, PUMP",
+    "Synthetix perps collateral: USDT on Ethereum mainnet; direct USDT deposits only (no swidge); minimum deposit and withdrawal are $50",
+    "Synthetix perps deposits settle in approximately 5 minutes",
+    "Infinex existing perps provider before Synthetix: Hyperliquid",
+    "Synthetix perps integration is fully implemented in the Infinex platform codebase; public-facing availability is to be confirmed at ship time (do not assert 'live' until confirmed)"
+  ],
+  "kind": "data-card-official",
+  "metric": "Synthetix perp markets in Infinex",
+  "value": 10,
+  "unit": "markets"
+}

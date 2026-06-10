@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Literary anchor comparison — Werle / the Duke / Logan Roy vs our captions</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --good: #4ade80;
+    --warn: #f0c674;
+    --bad: #ff6b6b;
+    --werle: #f5d76e;
+    --duke: #d8b4fe;
+    --logan: #97fce4;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h2 { font-size: 22px; margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; margin: 22px 0 10px; }
+  .sub { color: var(--muted); margin-bottom: 28px; }
+
+  .preamble {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 28px;
+  }
+  .preamble strong { color: var(--text); }
+  .preamble code { background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px; font-size: 12.5px; }
+
+  .character {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin-bottom: 24px;
+  }
+  .character.werle { border-top: 3px solid var(--werle); }
+  .character.duke  { border-top: 3px solid var(--duke); }
+  .character.logan { border-top: 3px solid var(--logan); }
+
+  .char-header { margin-bottom: 12px; }
+  .char-name { font-size: 22px; font-weight: 700; }
+  .char-name.werle { color: var(--werle); }
+  .char-name.duke  { color: var(--duke); }
+  .char-name.logan { color: var(--logan); }
+  .char-source { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .char-placement {
+    font-family: var(--code-mono);
+    font-size: 12px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    padding: 6px 10px;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+
+  .line {
+    background: rgba(0,0,0,0.18);
+    border-left: 3px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 10px 14px;
+    margin: 10px 0;
+  }
+  .line .ref { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .line .text {
+    font-family: var(--code-mono);
+    font-size: 13.5px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: var(--text);
+  }
+  .line.werle { border-left-color: var(--werle); }
+  .line.duke  { border-left-color: var(--duke); }
+  .line.logan { border-left-color: var(--logan); }
+  .line .note {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .pattern-block {
+    background: rgba(88, 166, 255, 0.05);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  .pattern-block h4 { margin: 0 0 8px; color: var(--accent); font-size: 13px; }
+  .pattern-block ul { margin: 6px 0 0 18px; padding: 0; font-size: 13px; }
+  .pattern-block li { margin-bottom: 4px; }
+
+  .delta-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--bad);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 32px 0;
+  }
+  .delta-section h2 { border: none; margin-top: 0; padding-bottom: 0; }
+  .delta-section h3 { color: var(--bad); margin-top: 16px; }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 14px 0;
+  }
+  .compare-side { padding: 12px 14px; border-radius: 4px; }
+  .compare-side.canon {
+    background: rgba(245, 215, 110, 0.06);
+    border-left: 3px solid var(--werle);
+  }
+  .compare-side.ours {
+    background: rgba(255, 107, 107, 0.05);
+    border-left: 3px solid var(--bad);
+  }
+  .compare-side .label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .compare-side.canon .label { color: var(--werle); }
+  .compare-side.ours .label { color: var(--bad); }
+  .compare-side .body {
+    font-family: var(--code-mono);
+    font-size: 12.5px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+  }
+
+  .verdict {
+    background: rgba(74, 222, 128, 0.06);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--good);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-top: 32px;
+  }
+  .verdict h3 { margin-top: 0; color: var(--good); }
+  .verdict ul { margin: 8px 0 0 18px; }
+  .verdict li { margin-bottom: 6px; }
+
+  .caveat {
+    background: rgba(240, 198, 116, 0.06);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--warn);
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-size: 12.5px;
+    color: var(--muted);
+    margin: 10px 0;
+  }
+  .caveat strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Literary anchor comparison</h1>
+  <div class="sub">2026-05-28 · what real Stable + Flow-stressed characters actually say vs what our generator produces.</div>
+
+  <div class="preamble">
+    <p>The Infinex voice spec (<code>src/voice/infinex.ts</code>) cites <strong>Werle</strong> (Ibsen's <em>Wild Duck</em>) and <strong>the Duke</strong> (Shakespeare's <em>Measure for Measure</em>) as literary anchors. Both are canonical Stable + Penetrating + Flow-stressed (Diagram D) per Mirodan ch4 pp. 561–566.</p>
+    <p>Mirodan classifies these characters but does <strong>not</strong> quote their dialogue. The actual lines below are pulled from the plays directly. The point: read what they say, see the structural patterns, then compare against our generated captions.</p>
+  </div>
+
+  <div class="caveat">
+    <strong>Source caveat:</strong> these are dialogue excerpts recalled from the public-domain texts of Ibsen's <em>The Wild Duck</em> (1884) and Shakespeare's <em>Measure for Measure</em> (c.1604), plus Logan Roy from <em>Succession</em> (HBO, 2018–23). Famous Shakespeare lines should be verbatim; Werle's dialogue is recalled in spirit and shape — exact word-for-word verification would require pulling the Ibsen translation you favor (William Archer 1890 is the most-cited English Werle). Treat the SHAPES as load-bearing; treat individual wordings as approximate.
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- WERLE -->
+  <!-- ============================================================ -->
+  <div class="character werle">
+    <div class="char-header">
+      <div class="char-name werle">Werle</div>
+      <div class="char-source">Hjalmar Werle Sr., the old merchant — Henrik Ibsen, <em>The Wild Duck</em> (1884)</div>
+      <div class="char-placement">Mirodan placement: Stable + Penetrating + Flow-stressed + Bound · Diagram D · Spell → Vision axis · Adream outer projection · Pressing → Punching motor (bound flow)</div>
+    </div>
+
+    <h3>Voice in scene</h3>
+
+    <div class="line werle">
+      <div class="ref">Act I — dinner party, Werle to his son Gregers</div>
+      <div class="text">"It is your nature that I cannot understand, Gregers. You have always taken everything from the wrong side."</div>
+      <div class="note">Declarative dismissal. No defense, no plea. Names the problem (his son's posture) without engaging it. Stable + Bound — the Outer is calm assertion; the Lining is "I will not enter this argument."</div>
+    </div>
+
+    <div class="line werle">
+      <div class="ref">Act I — to Gregers, on the past</div>
+      <div class="text">"It is now fifteen, sixteen years since these things happened. I think we may consider that chapter closed."</div>
+      <div class="note">Refusal disguised as accounting. Specifies the number — fifteen, sixteen years — then closes the discussion as a matter of bookkeeping. Penetrating: the speech CUTS to structural fact and then settles.</div>
+    </div>
+
+    <div class="line werle">
+      <div class="ref">Act III — Werle on his motivations</div>
+      <div class="text">"I have done what I felt to be right. — Beyond that, there is nothing to say."</div>
+      <div class="note">Two short clauses, the second a settling close. No elaboration, no apology, no reframing. The full Pressing → Punching motor: weight built up across the dinner, the line lands as final word.</div>
+    </div>
+
+    <div class="line werle">
+      <div class="ref">Act V — Werle offering money to Hjalmar Ekdal</div>
+      <div class="text">"This is no charity. It is what you have earned, and what your father earned before you. The pension is fixed; it falls due quarterly."</div>
+      <div class="note">Practical register — the act of giving is dressed as accounting, not generosity. Names the mechanics (quarterly, fixed) to drain the moral weight from the transaction. The Lining ("I owe a debt I will not name") never surfaces; the Outer is bookkeeping.</div>
+    </div>
+
+    <div class="line werle">
+      <div class="ref">Act I — Werle to Hjalmar, on old Ekdal</div>
+      <div class="text">"Your father is a good copyist. He is well-suited to the work he does for the firm."</div>
+      <div class="note">The Lining is what's NOT said: that he ruined old Ekdal's life and saved his own. The Outer is a small, polite compliment about clerical work. Mirodan §7.3 in action — write the Outer, leak the Lining.</div>
+    </div>
+
+    <div class="pattern-block">
+      <h4>Werle's structural signature</h4>
+      <ul>
+        <li><strong>Short declaratives.</strong> Average sentence: 8–14 words. Rarely a comma-separated arc.</li>
+        <li><strong>Fact first, then closure.</strong> "It is X. That is all." or "X is the case. Beyond that, nothing."</li>
+        <li><strong>Numbers and specifics in service of distance.</strong> "Fifteen, sixteen years" / "the pension is fixed; it falls due quarterly" — naming the mechanics drains moral weight.</li>
+        <li><strong>Refusal is the move.</strong> Most Werle scenes are about NOT engaging — closing chapters, declining to revisit, settling matters. The verbs are "closed", "settled", "done", "fixed".</li>
+        <li><strong>The Lining is what he won't say.</strong> Reader/audience knows what he owes; Werle never names it. The dramatic gap IS the engine.</li>
+        <li><strong>No metaphor at the surface.</strong> Werle speaks in nouns: pension, work, father, copyist, chapter, years. The metaphor (debt, ruin, recompense) lives entirely in the Lining.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- THE DUKE -->
+  <!-- ============================================================ -->
+  <div class="character duke">
+    <div class="char-header">
+      <div class="char-name duke">The Duke (Vincentio)</div>
+      <div class="char-source">William Shakespeare, <em>Measure for Measure</em> (c.1604)</div>
+      <div class="char-placement">Mirodan placement: Stable + Penetrating + Flow-stressed · Diagram D (Mirodan ch4 p.566) · Spell → Vision axis with Remote Outer Action + Near Inner · "His objective has lots of Vision (to relieve the anxiety of death) while the Inner is full of Passion"</div>
+    </div>
+
+    <h3>Voice in scene</h3>
+
+    <div class="line duke">
+      <div class="ref">Act 1, sc. 3 — Duke to Friar Thomas, explaining his plan</div>
+      <div class="text">"Hence shall we see,
+If power change purpose, what our seemers be."</div>
+      <div class="note">Gnomic couplet. Names the test (power changing purpose) and waits to watch. The Duke's standing posture: he watches before he judges. Penetrating — cuts to a structural observation about people in power.</div>
+    </div>
+
+    <div class="line duke">
+      <div class="ref">Act 3, sc. 1 — Duke (disguised as friar) to the condemned Claudio</div>
+      <div class="text">"Be absolute for death; either death or life
+Shall thereby be the sweeter. Reason thus with life:
+If I do lose thee, I do lose a thing
+That none but fools would keep."</div>
+      <div class="note">Three sentences, escalating. The first is the instruction. The second names the method. The third earns the position by working through it. Wringing → Slashing motor: the reasoning sustains, then carves. No urgency, no plea — just the case being made.</div>
+    </div>
+
+    <div class="line duke">
+      <div class="ref">Act 1, sc. 1 — Duke commissioning Angelo</div>
+      <div class="text">"There is a kind of character in thy life
+That to the observer doth thy history fully unfold."</div>
+      <div class="note">Two-clause structure: observation (there is a character in your life) → implication (the observer can read it). Sentence-case, sentence-final period. No exclamation. Settles.</div>
+    </div>
+
+    <div class="line duke">
+      <div class="ref">Act 1, sc. 1 — Duke on virtue and use</div>
+      <div class="text">"Heaven doth with us as we with torches do,
+Not light them for themselves; for if our virtues
+Did not go forth of us, 'twere all alike
+As if we had them not."</div>
+      <div class="note">Long-form thesis-mode — the Practical tempo. Lays out the analogy across four lines, then settles into the conclusion. Same shape as Karpathy-essay register: comfortable with complexity, willing to take you through.</div>
+    </div>
+
+    <div class="line duke">
+      <div class="ref">Act 5, sc. 1 — Duke pronouncing judgment</div>
+      <div class="text">"An Angelo for Claudio; death for death.
+Haste still pays haste, and leisure answers leisure;
+Like doth quit like, and measure still for measure."</div>
+      <div class="note">Commanding tempo. Three short clauses, each a settled measure. Pressing → Punching. No ornament. The reader can quote the close. Notice: no philosophical setup before the judgment — the Duke spent four acts watching; now the LANDING is unadorned fact.</div>
+    </div>
+
+    <div class="line duke">
+      <div class="ref">Act 5, sc. 1 — Duke's final move</div>
+      <div class="text">"What's mine is yours, and what is yours is mine."</div>
+      <div class="note">Single line. Symmetric clauses, period. Proposes marriage to Isabella in 10 words. This is a CHARACTER-MARRIAGE moment in Shakespeare given ~3 lines of stage time. The Duke does not perform the proposal — he states it, then exits.</div>
+    </div>
+
+    <div class="pattern-block">
+      <h4>The Duke's structural signature</h4>
+      <ul>
+        <li><strong>Settles into close, doesn't open with thesis.</strong> The Duke's longest speeches END on the load-bearing observation. The opener is usually setup.</li>
+        <li><strong>Symmetric clause structure.</strong> "A for B" / "X is mine, Y is yours" / "Like doth quit like" / "measure still for measure." Parallelism IS the music.</li>
+        <li><strong>Sentence-final period rules.</strong> No exclamation marks anywhere in the Duke's voice. Even his judgments land on periods.</li>
+        <li><strong>Watches before he speaks.</strong> Most of the play is the Duke OBSERVING (in disguise). His speech, when it comes, is selected — not reactive. Spell drive.</li>
+        <li><strong>Verbs of measurement and trial.</strong> "Hence shall we see" / "what our seemers be" / "Reason thus" / "measure for measure" — the Duke's vocabulary is investigative. Penetrating aspect literalized.</li>
+        <li><strong>Two registers — disguised and undisguised.</strong> As friar: meditative, gnomic, consoling. As Duke: decisive, judgment-issuing, commanding. Both are Stable; the shift is from Practical-bodied to Commanding-led.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- LOGAN ROY -->
+  <!-- ============================================================ -->
+  <div class="character logan">
+    <div class="char-header">
+      <div class="char-name logan">Logan Roy</div>
+      <div class="char-source">Brian Cox, <em>Succession</em> (HBO, 2018–23) — modern Stable + Bound parallel</div>
+      <div class="char-placement">Not Mirodan-cited but explicitly used in <code>eval/runs/midsmoke-1779767037/results.json</code> as Werle's modern parallel. Stable + Penetrating + Flow-stressed + Bound. Pressing → Punching motor.</div>
+    </div>
+
+    <h3>Voice in scene</h3>
+
+    <div class="line logan">
+      <div class="ref">S1E1 — Logan to his children, on the company</div>
+      <div class="text">"You are not serious people."</div>
+      <div class="note">Five words. Verdict. No setup, no qualification. The whole season builds toward this line being earned; the line itself is unornamented.</div>
+    </div>
+
+    <div class="line logan">
+      <div class="ref">S2 — Logan on a rival</div>
+      <div class="text">"I love him. I love him. But this is not the move."</div>
+      <div class="note">Repetition for weight, then the carved decision. "But this is not the move" — a four-word judgment that closes deliberation. No "because" — the deliberation happened before the line.</div>
+    </div>
+
+    <div class="line logan">
+      <div class="ref">S3 — Logan on the deal</div>
+      <div class="text">"The world is a feast. People are hungry. Some people get fed."</div>
+      <div class="note">Three declarative clauses. Each one a sentence. Reads as observation — no judgment surface — but the LINING is "and I decide who gets fed." Mirodan §7.3.</div>
+    </div>
+
+    <div class="line logan">
+      <div class="ref">Various — Logan on succession</div>
+      <div class="text">"Money wins."</div>
+      <div class="note">Two words. Period. Sentence. The most-quoted Logan line in the corpus. Compresses a worldview into a sentence that fits on a chip.</div>
+    </div>
+
+    <div class="line logan">
+      <div class="ref">S4 — Logan refusing a child's plea</div>
+      <div class="text">"No. — No, no, no. We're not doing this now."</div>
+      <div class="note">No engagement. The Lining ("I will not be moved by this") never surfaces. The Outer is the refusal. Bound flow at maximum compression.</div>
+    </div>
+
+    <div class="pattern-block">
+      <h4>Logan's structural signature</h4>
+      <ul>
+        <li><strong>Sentences that fit on a chip.</strong> "Money wins." / "You are not serious people." / "This is not the move." 2–6 words.</li>
+        <li><strong>The judgment comes without setup.</strong> No "because", no "given that", no "consider this." The deliberation happens off-screen.</li>
+        <li><strong>Lining is the engine; Outer is the period.</strong> What he means is huge; what he says is small. The dramatic gap is the show.</li>
+        <li><strong>Modern speech, not theatrical.</strong> Same Stable + Bound shape as Werle but in late-capitalist American executive idiom. Same MUSIC, different vocabulary.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Pattern synthesis — what all three share</h2>
+
+  <div class="pattern-block" style="border-left-color: var(--accent);">
+    <h4>The Stable + Flow-stressed signature, distilled</h4>
+    <ul>
+      <li><strong>OPENS WITH THE FACT, NOT THE THESIS.</strong> "It is now fifteen, sixteen years..." / "An Angelo for Claudio, death for death." / "You are not serious people." Never philosophical setup. The setup happened offstage.</li>
+      <li><strong>SHORT SENTENCES THAT SETTLE.</strong> 5–14 words. Period, not comma. Each sentence is a unit that COULD stand alone — and several of them do.</li>
+      <li><strong>NAMES THE MECHANICS.</strong> Quarterly. Fifteen years. Measure for measure. Money. The specifics drain emotional voltage from what the speaker won't engage.</li>
+      <li><strong>NO METAPHOR AT THE SURFACE.</strong> The metaphor lives in the Lining. The Outer is nouns and verbs of fact. "Wall" / "dissolved" / "boundary" would be off-character for Werle or the Duke — they'd name the THING, not the dissolution.</li>
+      <li><strong>REFUSAL IS A LEGAL MOVE.</strong> The most Stable + Bound thing is to CLOSE a topic, not open one. "Beyond that, there is nothing to say." / "We're not doing this now." Decline is not weakness; it's the character's resting Spell.</li>
+      <li><strong>PARALLELISM AND SYMMETRY.</strong> "Like doth quit like, and measure still for measure." / "What's mine is yours, and what is yours is mine." / "Some people get fed." The MUSIC of Stable is balanced clauses, not arc.</li>
+      <li><strong>NO EXCLAMATION POINTS. NO HEDGES. NO "WE BELIEVE...".</strong> Statement, period, period, period.</li>
+    </ul>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>How our captions compare</h2>
+
+  <div class="delta-section">
+    <h2 style="color: var(--bad);">Where we diverge from the canon</h2>
+
+    <h3>1. We open with the THESIS where they open with the FACT.</h3>
+    <div class="compare-grid">
+      <div class="compare-side canon">
+        <div class="label">★ Werle / Duke / Logan</div>
+        <div class="body">"Stock perps are now live on Infinex." (real IT017)
+"An Angelo for Claudio. Death for death." (Duke)
+"You are not serious people." (Logan)
+"It is now fifteen, sixteen years since these things happened." (Werle)</div>
+      </div>
+      <div class="compare-side ours">
+        <div class="label">Our generated captions (partnership-spot-hyperliquid)</div>
+        <div class="body">"The orderbook used to live somewhere else. Your account followed it there, or it didn't move." (VARIANT_A)
+"The choice between venues was always a tax on the user." (A')
+"Two accounts. Two logins. Two halves of the same portfolio." (B')
+"The wall between two accounts was always arbitrary." (C)</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 6px;">Every one of our captions opens with a Sombre setup that names the prior state. None of them open the way Werle/Duke/Logan open — with the SHIPPED FACT, unadorned. This is the biggest single voice gap.</p>
+
+    <h3>2. We deliver lining-as-thesis where they leave the lining UNSAID.</h3>
+    <div class="compare-grid">
+      <div class="compare-side canon">
+        <div class="label">★ Werle (Act I)</div>
+        <div class="body">"Your father is a good copyist. He is well-suited to the work he does for the firm."
+
+(The Lining — that Werle ruined old Ekdal's life — never surfaces. It's the audience's job to feel.)</div>
+      </div>
+      <div class="compare-side ours">
+        <div class="label">Our generated captions (passkey-portable, VARIANT_C)</div>
+        <div class="body">"The seed phrase was always the price of entry.
+
+Now the account is a passkey. Sign in, and it follows you across devices.
+
+Nothing to write down. Nothing to lose. Just the door, opening when you do."
+
+(The Lining — about access, about who's let in — is named in the Outer with "the door, opening when you do.")</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 6px;">Real Stable + Bound voices REFUSE to name the meaning. Our generator NAMES the meaning as the closing flourish. Every closing beat is a small thesis — "the wall isn't there anymore", "you arrive already moving", "the past stops introducing you." Beautiful prose, but it's leaking the Lining the canon would let stay underneath.</p>
+
+    <h3>3. We avoid specifics; they pile on specifics.</h3>
+    <div class="compare-grid">
+      <div class="compare-side canon">
+        <div class="label">★ Real Infinex IT017 + Werle</div>
+        <div class="body">"Stock perps are now live on Infinex.
+Trade XYZ100 → top 100 US company index. 20x leverage. 24/7.
+Plus TSLA. NVDA. AAPL. GOOGL. HOOD. 19 markets total."
+
+"The pension is fixed; it falls due quarterly." (Werle, Act V)</div>
+      </div>
+      <div class="compare-side ours">
+        <div class="label">Our captions (partnership-spot-hyperliquid, VARIANT_B')</div>
+        <div class="body">"Two accounts. Two logins. Two halves of the same portfolio.
+
+Hyperliquid spot now trades natively inside Infinex. One account, one passkey.
+
+The wall was never the point. The market was."
+
+(No tickers. No leverage. No "powered by". No mechanics.)</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 6px;">Real Stable speech earns moral weight by NAMING the mechanics — Werle says "quarterly" because the specificity drains the moral charge. Real Infinex announcements name leverage and tickers and partner @-handles for the same reason. Our captions skip specifics in favor of meta-observation. Less Stable, more essay.</p>
+
+    <h3>4. We compose 3-beat arcs; they compose ONE settled statement.</h3>
+    <div class="compare-grid">
+      <div class="compare-side canon">
+        <div class="label">★ Duke / Logan / real Infinex one-liners</div>
+        <div class="body">"Money wins."
+"What's mine is yours, and what is yours is mine."
+"Tick, tock." (real Infinex IT050)
+"Oversubscribed." (real Infinex IT015)
+"Times change. Privacy doesn't." (real Infinex IT052)</div>
+      </div>
+      <div class="compare-side ours">
+        <div class="label">Our captions (all variants)</div>
+        <div class="body">Every single one of our 50 captions is a 3-beat arc: Sombre prep → Commanding fact → Irradiant lift.
+
+Sometimes ~200-280 chars, sometimes shorter — but always three paragraph blocks.</div>
+      </div>
+    </div>
+    <p style="font-size: 13px; color: var(--muted); margin-top: 6px;">Real Stable voices live and die on the ONE-LINE LANDING. "Tick, tock." was real Infinex. Logan's "Money wins." carries an entire worldview in two words. Our generator NEVER produces a one-line caption because the default beat sequence is 3-beat. The whole "Practical / Sombre / Irradiant" cadence forces narrative arc where the canon often uses single-clause statement.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="verdict">
+    <h3>What this means for the generator</h3>
+    <p>The corpus comparison (vs real Infinex tweets) and the literary anchor comparison (vs Werle / Duke / Logan) point at the <strong>same structural failure</strong>: our generator produces essayist prose where Stable + Flow-stressed voice produces <strong>SETTLEMENT</strong>.</p>
+
+    <h4 style="color: var(--good); margin-top: 16px; margin-bottom: 6px; font-size: 14px;">Three structural fixes implied by the canon:</h4>
+    <ul>
+      <li><strong>Per-kind beat defaults need to allow 1-beat and 2-beat shapes</strong>, not just 3-beat arcs. <code>data-card-official</code> and <code>data-card-wry</code> should often be Commanding-only. <code>launch-tier</code> is the only kind that natively wants the full 3-beat arc. The current default in <code>infinex.ts:defaultBeatsForKind</code> over-prescribes arc structure.</li>
+      <li><strong>The generator should be instructed that Lining stays HIDDEN, not delivered as a closing flourish.</strong> Currently our captions deliver the Lining at the close (the "wall isn't there anymore" / "you arrive already moving" pattern). Real Stable voice leaves the Lining underneath. The generator system prompt should explicitly say: "Do not name the Lining in the closing beat. If the closing beat resolves the meaning, the Lining has surfaced. Let the Outer end on a fact, not a thesis."</li>
+      <li><strong>The generator should reach for the deployed_facts more aggressively.</strong> Werle says "fifteen, sixteen years" and "the pension falls due quarterly." Real Infinex IT017 names 19 markets, 20x leverage, and two partner @-handles. Our generator stays abstract. The Stage B prompt should mandate: "At least one deployed_fact must appear in the surface text with the specifics intact (numbers, names, mechanics) — not as paraphrase but as the actual ship language."</li>
+    </ul>
+
+    <p style="margin-top: 16px;">These three fixes would shift the generator from <em>essayist</em> to <em>banker-trailblazer</em>. The docstring-variant decision is downstream of this. <strong>Even with variant B', the generator's beat-sequencing instructions and Stage B prompts produce essayist prose.</strong> The voice gap isn't in the docstring — it's in the generator's compositional defaults.</p>
+
+    <p style="margin-bottom: 0;"><strong>Next move:</strong> rather than agonizing over which docstring variant to ship, this data argues for fixing <code>defaultBeatsForKind</code> + <code>generator.ts</code> Stage B drafting prompt + the per-kind beat counts. The docstring change becomes a small piece of a bigger sweep that aligns the generator output to the actual character voice the spec is claiming.</p>
+  </div>
+
+</div>
+</body>
+</html>

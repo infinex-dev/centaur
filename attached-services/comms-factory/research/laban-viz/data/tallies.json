@@ -1,0 +1,1200 @@
+[
+  {
+    "label": "Phantom website",
+    "total": 89,
+    "innerCounts": {
+      "Adream": 15,
+      "Near": 16,
+      "Stable": 30,
+      "Awake": 14,
+      "Mobile": 7,
+      "Remote": 2
+    },
+    "tempoCounts": {
+      "Overpowering": 5,
+      "Warm": 13,
+      "Practical": 14,
+      "Acute": 10,
+      "Certain": 2,
+      "Irradiant": 8,
+      "Acknowledged": 6,
+      "Diffused": 1,
+      "Revealed": 1,
+      "Commanding": 9,
+      "Self-Contained": 7,
+      "Human": 2,
+      "Cool": 1,
+      "Unsociable": 2,
+      "Sombre": 1,
+      "Doubting": 2
+    },
+    "aspectCounts": {
+      "radiating": 10,
+      "enclosing": 17,
+      "circumscribing": 14,
+      "penetrating": 18
+    },
+    "exemplars": {
+      "Overpowering": [
+        "The money app that'll take you places",
+        "Crypto and volatility go hand in hand, right? Every time you invest in a digital asset, you're taking a gamble on the unpredictable price fluctuation…",
+        "Phantom has become the most dominant crypto wallet in the world, thanks in large part to Solana. With fast, low-cost transactions, and a smooth user…"
+      ],
+      "Warm": [
+        "Our global Support team is here for you 24/7.",
+        "Solana's native token is SOL. It's used to transfer value and pay for transaction fees throughout the Solana ecosystem, so you'll always want to keep…",
+        "Thank you for joining us on this journey—from building the leading wallet on Solana to becoming the go-to app for crypto. Your support has made it al…"
+      ],
+      "Practical": [
+        "Crypto wallets are software tools that enable users to securely access, manage, and interact with their cryptocurrencies by storing their cryptograph…",
+        "From managing multi-chain assets to gathering trading insights, Phantom makes it simple.",
+        "Founded in 2017 by Anatoly Yakavenko, Solana is a decentralized, fast-growing layer-1 blockchain known for speed."
+      ],
+      "Acute": [
+        "Scam detection flags malicious transactions instantly.",
+        "This scam promises you free tokens or NFTs to bait you into clicking a malicious link. Once you click the link, which is usually found in a spam NFT…",
+        "Send money in seconds. Even pay friends."
+      ],
+      "Certain": [
+        "Find trending tokens, top traders, and apps."
+      ],
+      "Irradiant": [
+        "Decentralized Finance (DeFi) is an exciting innovation that brings traditional financial services to the blockchain without the need for a bank or 3r…",
+        "We're launching support for perpetual futures (perps) to help democratize access to some of crypto's most liquid and popular markets.",
+        "Since we launched in 2021, our mission was to make crypto safe and easy to use. Thanks to your incredible support, we've emerged as the world's leadi…"
+      ],
+      "Diffused": [
+        "Go long, go short, go anywhere with Perps."
+      ],
+      "Commanding": [
+        "Your wallet is secured by a 12-word Secret Recovery Phrase. Write it down and store it somewhere safe and offline. It's the only way to restore your…",
+        "Self-custodial means you control your funds. We never have access.",
+        "Self-custodial wallets are the solution to this problem. In self-custodial wallets, you have true ownership of your funds. No third party can access…"
+      ],
+      "Self-Contained": [
+        "Phantom is a self-custodial wallet, meaning only you have access to your funds. Phantom never stores your credentials or has access to your account.",
+        "Controlled by you, secured by us",
+        "Perps are a powerful trading tool. But they are not without risks. Leverage lets you control a larger position with a smaller amount of capital. Whil…"
+      ],
+      "Human": [
+        "Trusted by a community of 20+ million users. It's more than a wallet.",
+        "Join the millions of people using Phantom to buy, sell, and trade everyday."
+      ],
+      "Cool": [
+        "See real-time activity and gain insights from friends, traders, and..."
+      ],
+      "Sombre": [
+        "TradFi apps like Robinhood, Square, and Chime are more digital than ever. But they're still locked into old, legacy finance rails."
+      ],
+      "Doubting": [
+        "With the increasing number of tokens, apps, and airdrops, there's also a rise in scams aiming to steal them. It appears that almost every other day,…",
+        "Most crypto beginners start by opening an account on a crypto exchange like Coinbase. Although exchanges have become the go-to entry point for newcom…"
+      ]
+    },
+    "driveAxisCounts": {
+      "passion→vision": 15,
+      "spell→passion": 7,
+      "doing→vision": 14,
+      "passion→spell": 7,
+      "doing→spell": 1,
+      "doing→passion": 3,
+      "passion→doing": 1,
+      "spell→vision": 1
+    },
+    "driveByInner": {
+      "Stable": {
+        "spell": 8,
+        "doing": 17
+      },
+      "Near": {
+        "passion": 12,
+        "doing": 1
+      },
+      "Adream": {
+        "passion": 11
+      }
+    },
+    "driveByTempo": {
+      "Overpowering": {
+        "passion→vision": 2,
+        "passion→doing": 1
+      },
+      "Warm": {
+        "passion→vision": 4,
+        "passion→spell": 6
+      },
+      "Practical": {
+        "spell→passion": 3,
+        "doing→vision": 7,
+        "doing→passion": 2,
+        "spell→vision": 1
+      },
+      "Irradiant": {
+        "passion→vision": 7
+      },
+      "Diffused": {
+        "passion→vision": 1
+      },
+      "Commanding": {
+        "doing→vision": 7,
+        "doing→passion": 1
+      },
+      "Self-Contained": {
+        "spell→passion": 4
+      },
+      "Human": {
+        "passion→vision": 1,
+        "passion→spell": 1
+      },
+      "Cool": {
+        "doing→spell": 1
+      }
+    }
+  },
+  {
+    "label": "Phantom tweets",
+    "total": 55,
+    "innerCounts": {
+      "Near": 15,
+      "Adream": 5,
+      "Stable": 8,
+      "Awake": 12,
+      "Mobile": 14,
+      "Remote": 8
+    },
+    "tempoCounts": {
+      "Warm": 9,
+      "Irradiant": 3,
+      "Commanding": 4,
+      "Acute": 7,
+      "Acknowledged": 14,
+      "Practical": 2,
+      "Certain": 3,
+      "Doubting": 2,
+      "Sociable": 4,
+      "Unsociable": 4,
+      "Self-Contained": 2,
+      "Overpowering": 2,
+      "Cool": 3,
+      "Human": 3
+    },
+    "aspectCounts": {
+      "circumscribing": 17,
+      "penetrating": 12,
+      "enclosing": 7,
+      "radiating": 4
+    },
+    "exemplars": {
+      "Warm": [
+        "Phantom turns 5 today 🎂 From 3AM trades to paying for coffee with Cash, we've been with you every step of the way. Here's to the next chapter 👻💜",
+        "call your mom today (NFA, DYOR)",
+        "@web3pingu thanks gang and thanks for showing up in the comments every day 💜"
+      ],
+      "Commanding": [
+        "FYI, Zoom (ZM) is now live for trading on Phantom 👨‍💻 Go long or short with up to 10x leverage.",
+        "Phantom Perps are not available in all jurisdictions. Referenced leverage reflects the highest maximum among newly listed markets. Any tickers refere…",
+        "FYI, GameStop is now live for trading in Phantom 🎮"
+      ],
+      "Acute": [
+        "COIN, CRWV, and DKNG all report Q1 earnings today after market close. Trade them on Phantom before the call 💫",
+        "Zcash (ZEC) is up almost 70% this week 🤯 What's fueling the latest rally?",
+        "Sidelined? Trade CRCL on Phantom 👻"
+      ],
+      "Practical": [
+        "If it's in the news, you can probably trade it on Phantom. EBAY is now available to trade. Go long or short with up to 10x leverage.",
+        "Long or short COIN, CRWV and DKNG up to 10x leverage on Phantom 👻"
+      ],
+      "Certain": [
+        "PLTR just announced Q1 earnings. EPS: $0.33 ( ✅ Beat) Revenue: $1.63B (✅ Beat) PLTR is currently trading at $148 on Phantom",
+        "Two companies report Q1 2026 earnings today 👻 EPS Estimates: MSTR $-4.49 AMD $1.30 Results will be reported today after market close. Trade them on P…",
+        "@elonmusk @grok in simple terms, explain what the GB300 is and what it can do"
+      ],
+      "Acknowledged": [
+        "FULL CRCL moment: CRCL is up over 11% despite mixed Q1 earnings results. Their on-chain volume hit $11.9 trillion this year, a 247% surge.",
+        "Another week, another round of earnings 👻 Palantir, Strategy, Advanced Micro Devices, Coinbase, CoreWeave, and DraftKings are all reporting.",
+        "Note: This represents a new perps markets that went live in Phantom this week."
+      ],
+      "Doubting": [
+        "Despite missing Q1 earnings, MSTR is still up nearly 12% this week 🤔 Did you catch the trade?",
+        "@Kalshi why does it take 6 years to unplug the machine?"
+      ],
+      "Irradiant": [
+        "The S&P500 is up almost 12% since it went live for trading in Phantom 😳"
+      ],
+      "Self-Contained": [
+        "Phantom is not a bank. The Prepaid Debit Visa Card is issued by Lead Bank and managed by Bridge Ventures, LLC. Fees may apply. See Phantom's website…",
+        "Phantom Perps involve risks and are not available to users in the US or other restricted jurisdictions. See full disclaimer here:"
+      ],
+      "Overpowering": [
+        "@lostsol heart maxxing 💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜",
+        "ATH supercycle (real)"
+      ],
+      "Cool": [
+        "if your network isn't discussing peptide stacks, drop shipping, and stablecoin payment infrastructure… it's time to find a new network",
+        "@useCASH seems to be working 😏 solana:CASHx9KJUStyftLFWGvEVf59SGeG9sh5FfcnZMVPCASH",
+        "@greg16676935420 22 bucks for nothing is pretty steep"
+      ],
+      "Human": [
+        "@MINHxDYNASTY Thanks Minh! Hope you're having a great weekend",
+        "@0xSweep true. i'm basically an unc",
+        "@moonpay thanks moongang! you guys have a big birthday coming up soon right? 🥳"
+      ]
+    },
+    "driveAxisCounts": {
+      "passion→spell": 10,
+      "doing→vision": 4,
+      "doing→passion": 1,
+      "passion→vision": 8,
+      "spell→vision": 1,
+      "spell→passion": 1
+    },
+    "driveByInner": {
+      "Stable": {
+        "doing": 5,
+        "spell": 2
+      },
+      "Near": {
+        "passion": 15
+      },
+      "Adream": {
+        "passion": 3
+      }
+    },
+    "driveByTempo": {
+      "Warm": {
+        "passion→spell": 7,
+        "passion→vision": 2
+      },
+      "Commanding": {
+        "doing→vision": 3
+      },
+      "Practical": {
+        "doing→passion": 1,
+        "doing→vision": 1
+      },
+      "Irradiant": {
+        "passion→vision": 1
+      },
+      "Self-Contained": {
+        "spell→vision": 1,
+        "spell→passion": 1
+      },
+      "Overpowering": {
+        "passion→vision": 2
+      },
+      "Cool": {
+        "passion→spell": 2,
+        "passion→vision": 1
+      },
+      "Human": {
+        "passion→vision": 2,
+        "passion→spell": 1
+      }
+    }
+  },
+  {
+    "label": "Phantom app-adjacent",
+    "total": 92,
+    "innerCounts": {
+      "Near": 16,
+      "Stable": 44,
+      "Awake": 7,
+      "Mobile": 3,
+      "Adream": 3,
+      "Remote": 11
+    },
+    "tempoCounts": {
+      "Warm": 10,
+      "Commanding": 14,
+      "Acute": 5,
+      "Self-Contained": 9,
+      "Certain": 2,
+      "Human": 5,
+      "Acknowledged": 3,
+      "Practical": 18,
+      "Irradiant": 3,
+      "Receptive": 3,
+      "Unsociable": 10,
+      "Sociable": 1,
+      "Cool": 1
+    },
+    "aspectCounts": {
+      "circumscribing": 11,
+      "penetrating": 26,
+      "enclosing": 25,
+      "radiating": 3
+    },
+    "exemplars": {
+      "Warm": [
+        "The friendly crypto wallet for tokens and NFTs",
+        "New to Phantom? Start by downloading the app, creating or restoring your wallet, and adding funds when you're ready.",
+        "When you stake your SOL with Phantom liquid staking, you receive Phantom Staked SOL (PSOL), a token that earns staking rewards, MEV rewards, and prio…"
+      ],
+      "Commanding": [
+        "Phantom Support will NEVER DM you or ask for your Secret Recovery Phrase. Anyone with your recovery phrase can fully control your wallet.",
+        "The recovery phrase cannot be changed.",
+        "If you lose your recovery phrase, access to your wallet and funds cannot be restored. Phantom does not store your recovery phrase. If you lose it, th…"
+      ],
+      "Acute": [
+        "Phishing is the most common scam in crypto, with attackers using social engineering, fake assets, or malicious sites to trick you into exposing your…",
+        "Instant transactions with super low fees"
+      ],
+      "Self-Contained": [
+        "Phantom is a self-custodial crypto wallet, which means you control your wallet. Phantom does not hold your credentials or have access to your funds.",
+        "A recovery phrase wallet is secured by a Secret Recovery Phrase, which is a unique sequence of 12 words linked to your wallet on the blockchain.",
+        "Protect your wallet from scams, phishing, and hacks—plus tips on staying safe"
+      ],
+      "Certain": [
+        "Scammers often impersonate support staff or community moderators in Discord, Twitter, or Telegram.",
+        "Independently audited by top security firms"
+      ],
+      "Human": [
+        "You can reach out to Phantom Support safely through the Chat option in their Help Center.",
+        "When you open a position, you're entering a contract with another trader who takes the opposite side—one long, one short.",
+        "Use Phantom Cash like everyday money — add from bank or card, spend globally, pay friends, and earn rewards"
+      ],
+      "Acknowledged": [
+        "Just deposit some Crypto into Phantom and get started with Web3 today!"
+      ],
+      "Practical": [
+        "Perpetual futures, also called perps, let you trade the price of a token or equity with leverage, without owning the token or the underlying company…",
+        "Cash is a set of financial tools built into your Phantom wallet. It lets you hold, send, receive, and spend money in one place—your Cash account—powe…",
+        "Instant transactions with super low fees"
+      ],
+      "Irradiant": [
+        "Later this year you can put your money to work by passively earning rewards on unspent CASH without lockups or extra steps.",
+        "makes it easy, safe, and fun for everyone to explore all that Web3 has to offer",
+        "A beautiful home for your NFTs and tokens"
+      ],
+      "Receptive": [
+        "Phantom offers an alternative to managing a recovery phrase: create a wallet using your Google or Apple login with a 4-digit PIN, where your private…",
+        "Your recovery method gives you access to your wallet's private keys. In Phantom, that recovery method is either a Secret Recovery Phrase or a Google…",
+        "Independently audited by top security firms"
+      ],
+      "Cool": [
+        "PSOL can also be used in DeFi."
+      ]
+    },
+    "driveAxisCounts": {
+      "passion→spell": 10,
+      "doing→vision": 20,
+      "spell→passion": 16,
+      "passion→vision": 5,
+      "passion→doing": 1,
+      "doing→passion": 4,
+      "spell→vision": 3
+    },
+    "driveByInner": {
+      "Stable": {
+        "doing": 23,
+        "spell": 19
+      },
+      "Near": {
+        "passion": 13,
+        "doing": 1
+      },
+      "Adream": {
+        "passion": 3
+      }
+    },
+    "driveByTempo": {
+      "Warm": {
+        "passion→spell": 6,
+        "passion→vision": 2
+      },
+      "Commanding": {
+        "doing→vision": 11,
+        "spell→passion": 2,
+        "doing→passion": 1
+      },
+      "Self-Contained": {
+        "spell→passion": 9
+      },
+      "Human": {
+        "passion→spell": 3,
+        "doing→vision": 1,
+        "passion→vision": 1
+      },
+      "Practical": {
+        "spell→passion": 3,
+        "doing→vision": 8,
+        "doing→passion": 3,
+        "spell→vision": 2
+      },
+      "Irradiant": {
+        "passion→vision": 2,
+        "passion→doing": 1
+      },
+      "Receptive": {
+        "spell→vision": 1,
+        "spell→passion": 2
+      },
+      "Cool": {
+        "passion→spell": 1
+      }
+    }
+  },
+  {
+    "label": "Phantom app",
+    "total": 244,
+    "innerCounts": {
+      "Stable": 20,
+      "Near": 5,
+      "Mobile": 1,
+      "Adream": 1,
+      "Awake": 2,
+      "Remote": 3
+    },
+    "tempoCounts": {
+      "Practical": 13,
+      "Warm": 5,
+      "Unacknowledged": 1,
+      "Self-Contained": 2,
+      "Overpowering": 1,
+      "Commanding": 5,
+      "Acute": 1,
+      "Unsociable": 3,
+      "Uncertain": 1
+    },
+    "aspectCounts": {
+      "penetrating": 17,
+      "circumscribing": 4,
+      "enclosing": 4,
+      "radiating": 1
+    },
+    "exemplars": {
+      "Practical": [
+        "When using Apple Pay or Google Pay, payments made with debit cards are more likely to succeed.",
+        "Confirming will allow this site to view balances and activity for the selected account.",
+        "External providers are used to process fiat-to-crypto purchases. Rates vary between providers."
+      ],
+      "Warm": [
+        "For your safety, Phantom has blocked this request.",
+        "gm!",
+        "Buy or transfer a collectible to start building your collection"
+      ],
+      "Unacknowledged": [
+        "No wallet detected"
+      ],
+      "Self-Contained": [
+        "Phantom does not use your personal information for analytics purposes",
+        "Security & Privacy"
+      ],
+      "Overpowering": [
+        "More Power with Perps"
+      ],
+      "Commanding": [
+        "Domain found on blocklists maintained by: Blowfish. This website is very likely to be a scam. If you believe this is a mistake, please contact them.",
+        "Only connect to websites you trust",
+        "Trade with up to 40x leverage"
+      ],
+      "Acute": [
+        "Less than 10 minutes"
+      ],
+      "Uncertain": [
+        "This is not an address you've interacted with recently. Please proceed with caution."
+      ]
+    },
+    "driveAxisCounts": {
+      "doing→vision": 14,
+      "passion→spell": 3,
+      "doing→passion": 2,
+      "spell→vision": 1,
+      "passion→vision": 3
+    },
+    "driveByInner": {
+      "Stable": {
+        "doing": 16,
+        "spell": 1
+      },
+      "Near": {
+        "passion": 5
+      },
+      "Adream": {
+        "passion": 1
+      }
+    },
+    "driveByTempo": {
+      "Practical": {
+        "doing→vision": 11,
+        "doing→passion": 1
+      },
+      "Warm": {
+        "passion→spell": 3,
+        "passion→vision": 2
+      },
+      "Self-Contained": {
+        "spell→vision": 1
+      },
+      "Overpowering": {
+        "passion→vision": 1
+      },
+      "Commanding": {
+        "doing→vision": 3,
+        "doing→passion": 1
+      }
+    }
+  },
+  {
+    "label": "Infinex marketing",
+    "total": 70,
+    "innerCounts": {
+      "Adream": 3,
+      "Stable": 25,
+      "Remote": 3,
+      "Mobile": 3,
+      "Awake": 7,
+      "Near": 4
+    },
+    "tempoCounts": {
+      "Overpowering": 1,
+      "Practical": 9,
+      "Self-Contained": 8,
+      "Unsociable": 2,
+      "Revealed": 1,
+      "Commanding": 7,
+      "Acute": 5,
+      "Receptive": 1,
+      "Certain": 2,
+      "Acknowledged": 2,
+      "Warm": 4,
+      "Irradiant": 2,
+      "Altruistic": 1
+    },
+    "aspectCounts": {
+      "radiating": 4,
+      "penetrating": 18,
+      "enclosing": 10,
+      "circumscribing": 6
+    },
+    "exemplars": {
+      "Overpowering": [
+        "Change the way you crypto."
+      ],
+      "Practical": [
+        "Passkey-first, gas-abstracted wallet with support for 20+ chains.",
+        "Your Infinex Account is secured with a passkey – a safer replacement for passwords.",
+        "Earn yield on ETH, SOL, and stablecoins"
+      ],
+      "Self-Contained": [
+        "Connect securely to any dapp and take your account with you.",
+        "The Infinex App is currently available to Patrons only. Try logging in with a Patron account.",
+        "Onchain vaults for maximum control"
+      ],
+      "Revealed": [
+        "See everything we've shipped, and everything that's coming up"
+      ],
+      "Commanding": [
+        "Swap. Perps. Earn. Predict. Multi-provider. Multi-chain.",
+        "Funds recovery doesn't require the Infinex platform.",
+        "Trade perps in-app with up to 40x leverage"
+      ],
+      "Receptive": [
+        "Passkey to Ledger to Safe. Choose the Opsec to suit your spec."
+      ],
+      "Acknowledged": [
+        "Switch to Infinex and earn crates and cashback on every trade."
+      ],
+      "Irradiant": [
+        "Earn passive yield on your assets",
+        "Give your wallet Infinex superpowers."
+      ],
+      "Warm": [
+        "Bring your wallets into Infinex. Enjoy the seamless experience you love.",
+        "Simple recovery when needed",
+        "Connect to all your favorite dapps"
+      ],
+      "Certain": [
+        "Trade on OpenSea, Magic Eden, and Blur"
+      ],
+      "Acute": [
+        "Track your positions and PnL at a glance.",
+        "See what privileges you're granting",
+        "Pick winners on prediction markets"
+      ],
+      "Altruistic": [
+        "Powered by Polymarket"
+      ]
+    },
+    "driveAxisCounts": {
+      "passion→vision": 3,
+      "doing→vision": 12,
+      "spell→passion": 6,
+      "doing→passion": 4,
+      "spell→vision": 3,
+      "passion→spell": 3
+    },
+    "driveByInner": {
+      "Stable": {
+        "doing": 16,
+        "spell": 9
+      },
+      "Near": {
+        "passion": 3
+      },
+      "Adream": {
+        "passion": 3
+      }
+    },
+    "driveByTempo": {
+      "Overpowering": {
+        "passion→vision": 1
+      },
+      "Practical": {
+        "doing→vision": 6,
+        "doing→passion": 3
+      },
+      "Self-Contained": {
+        "spell→passion": 6,
+        "spell→vision": 2
+      },
+      "Commanding": {
+        "doing→vision": 6,
+        "doing→passion": 1
+      },
+      "Receptive": {
+        "spell→vision": 1
+      },
+      "Irradiant": {
+        "passion→vision": 2
+      },
+      "Warm": {
+        "passion→spell": 3
+      }
+    }
+  },
+  {
+    "label": "Infinex utility",
+    "total": 99,
+    "innerCounts": {
+      "Stable": 36,
+      "Remote": 9,
+      "Near": 13,
+      "Awake": 3,
+      "Mobile": 5
+    },
+    "tempoCounts": {
+      "Practical": 17,
+      "Self-Contained": 3,
+      "Unsociable": 9,
+      "Warm": 9,
+      "Human": 4,
+      "Commanding": 16,
+      "Certain": 2,
+      "Uncertain": 1,
+      "Acknowledged": 4,
+      "Revealed": 1
+    },
+    "aspectCounts": {
+      "penetrating": 26,
+      "circumscribing": 8,
+      "enclosing": 17
+    },
+    "exemplars": {
+      "Practical": [
+        "Currently, only the below networks are supported for imported wallets.",
+        "To add two-factor authentication, add an email first.",
+        "To add recovery addresses, add an authentication method first."
+      ],
+      "Self-Contained": [
+        "You don't currently hold any locked Patron NFTs. These settings will become available when you acquire this asset.",
+        "Manage asset visibility",
+        "Use another account"
+      ],
+      "Warm": [
+        "Some early Infinex users may have signed up with a passkey that requires their username to log in. If you're having trouble logging in, enter your In…",
+        "Thanks for your feedback!",
+        "Deposit to get started"
+      ],
+      "Unsociable": [
+        "Forget all users",
+        "Unknown Dapp"
+      ],
+      "Human": [
+        "We appreciate you taking the time to help us improve.",
+        "Allow a few minutes for processing",
+        "You don't have any assets yet"
+      ],
+      "Commanding": [
+        "Use your Infinex Wallet instead.",
+        "Once added this address cannot be changed.",
+        "Only native BTC is supported. Other Bitcoin assets won't be withdrawable until support is added."
+      ],
+      "Certain": [
+        "{{hostname}} is a verified site",
+        "Search asset name or ticker"
+      ],
+      "Uncertain": [
+        "Approving…"
+      ],
+      "Acknowledged": [
+        "Switched to {chainName}",
+        "Submitting…"
+      ],
+      "Revealed": [
+        "Uploading files ({{current}}/{{total}})…"
+      ]
+    },
+    "driveAxisCounts": {
+      "doing→vision": 21,
+      "spell→passion": 8,
+      "passion→spell": 3,
+      "passion→vision": 6,
+      "doing→passion": 3,
+      "spell→vision": 1,
+      "doing→spell": 1
+    },
+    "driveByInner": {
+      "Stable": {
+        "doing": 24,
+        "spell": 9
+      },
+      "Near": {
+        "passion": 9,
+        "doing": 1
+      }
+    },
+    "driveByTempo": {
+      "Practical": {
+        "doing→vision": 6,
+        "spell→passion": 6,
+        "doing→passion": 3
+      },
+      "Self-Contained": {
+        "doing→vision": 1,
+        "spell→vision": 1,
+        "spell→passion": 1
+      },
+      "Warm": {
+        "passion→spell": 3,
+        "passion→vision": 3
+      },
+      "Human": {
+        "passion→vision": 3,
+        "doing→spell": 1
+      },
+      "Commanding": {
+        "doing→vision": 14,
+        "spell→passion": 1
+      }
+    }
+  },
+  {
+    "label": "Infinex emergency",
+    "total": 99,
+    "innerCounts": {
+      "Stable": 41,
+      "Remote": 8,
+      "Near": 16,
+      "Awake": 25,
+      "Adream": 3,
+      "Mobile": 3
+    },
+    "tempoCounts": {
+      "Commanding": 32,
+      "Unsociable": 8,
+      "Warm": 11,
+      "Acute": 20,
+      "Practical": 8,
+      "Overpowering": 2,
+      "Human": 2,
+      "Certain": 5,
+      "Sombre": 1,
+      "Acknowledged": 3,
+      "Cool": 3,
+      "Self-Contained": 1
+    },
+    "aspectCounts": {
+      "penetrating": 40,
+      "enclosing": 8,
+      "circumscribing": 11,
+      "radiating": 1
+    },
+    "exemplars": {
+      "Commanding": [
+        "You can't send to your own Infinex account address. Use Move instead.",
+        "Ensure that you control the above funds recovery address on the Berachain network before deploying your vault. If you do not control this address, yo…",
+        "Make sure you deposit to the correct network or it could result in loss of funds"
+      ],
+      "Acute": [
+        "Double-check your deposit address as they are not all the same across EVM networks.",
+        "It looks like you're using an old version of the app, refresh to update.",
+        "Signature Farming - Stealing transaction signatures"
+      ],
+      "Practical": [
+        "Please set up funds recovery to ensure your assets can be recovered in case you lose access to your account. Without a recovery address, your assets…",
+        "Please set up funds recovery to ensure your assets can be recovered in the case that you lose access to your account. Without a recovery address, you…",
+        "This address may change. Always copy the address from here before each deposit."
+      ],
+      "Warm": [
+        "We're making some updates and will be back online soon. Your funds remain safe.",
+        "Swidge is temporarily unavailable while we perform maintenance. Your funds remain safe. Please check back soon.",
+        "Please note that recovering funds will deactivate the associated Infinex Account. However, the account won't be deleted and funds recovery will still…"
+      ],
+      "Human": [
+        "We're experiencing technical issues and have temporarily disabled the app while we investigate. Your funds remain safe.",
+        "One of our upstream providers is offline for maintenance but they'll be back online soon. Your funds remain safe."
+      ],
+      "Certain": [
+        "We have detected the use of a smart contract account which means it may not be deployed across all networks."
+      ],
+      "Sombre": [
+        "Once recovery has been started you'll no longer be able to access your Infinex account."
+      ],
+      "Acknowledged": [
+        "We're making some upgrades to our Airdrop system and have briefly paused claims. Check back soon!",
+        "Henlo, and furthermore deploy your Beravault"
+      ],
+      "Cool": [
+        "You're being rate limited by Hyperliquid and we cannot load your data. Close unused perps windows, wait a few minutes, then try again.",
+        "One of your previous voucher redemptions has had an error and is currently under review. Please wait for us to resolve it before starting another red…",
+        "Not enough {{symbol}} for gas. Swidge to top up."
+      ],
+      "Self-Contained": [
+        "You acknowledge that you have read and understood the above disclaimer and accept the risks of interacting with permissionless markets deployed by th…"
+      ]
+    },
+    "driveAxisCounts": {
+      "doing→vision": 32,
+      "doing→passion": 2,
+      "passion→vision": 4,
+      "passion→spell": 5,
+      "passion→doing": 1,
+      "doing→spell": 4,
+      "spell→passion": 1
+    },
+    "driveByInner": {
+      "Stable": {
+        "doing": 34,
+        "spell": 1
+      },
+      "Near": {
+        "passion": 9,
+        "doing": 4
+      },
+      "Adream": {
+        "passion": 1
+      }
+    },
+    "driveByTempo": {
+      "Commanding": {
+        "doing→vision": 27,
+        "doing→passion": 1
+      },
+      "Practical": {
+        "doing→passion": 1,
+        "doing→vision": 5
+      },
+      "Warm": {
+        "passion→vision": 2,
+        "passion→spell": 5,
+        "doing→spell": 1
+      },
+      "Human": {
+        "passion→vision": 2
+      },
+      "Sombre": {
+        "passion→doing": 1
+      },
+      "Cool": {
+        "doing→spell": 3
+      },
+      "Self-Contained": {
+        "spell→passion": 1
+      }
+    }
+  },
+  {
+    "label": "Infinex tweets",
+    "total": 52,
+    "innerCounts": {
+      "Near": 9,
+      "Mobile": 13,
+      "Remote": 6,
+      "Awake": 15,
+      "Stable": 27,
+      "Adream": 11
+    },
+    "tempoCounts": {
+      "Human": 1,
+      "Acknowledged": 10,
+      "Unsociable": 5,
+      "Warm": 8,
+      "Acute": 10,
+      "Commanding": 12,
+      "Practical": 9,
+      "Certain": 5,
+      "Receptive": 1,
+      "Self-Contained": 5,
+      "Sociable": 1,
+      "Irradiant": 4,
+      "Revealed": 2,
+      "Concealed": 1,
+      "Diffused": 1,
+      "Sombre": 3,
+      "Overpowering": 3
+    },
+    "aspectCounts": {
+      "circumscribing": 12,
+      "enclosing": 5,
+      "penetrating": 21,
+      "radiating": 6
+    },
+    "exemplars": {
+      "Human": [
+        "We got the sale wrong.<br><br>We tried to balance existing Patron holders, new participants, and fair distribution all at once and the result was a s…"
+      ],
+      "Acknowledged": [
+        "MegaETH support, bulk move, hardware wallet support and more 🤫<br><br>Here's what's shipped over the past few weeks👇",
+        "Our founder has frontrun us again.<br><br>We call this a skill-horizon.",
+        "Kain is live on FOMO Hour to go over the Infinex sale changes."
+      ],
+      "Warm": [
+        "馬年吉祥 🧧<br><br>This Lunar New Year we're celebrating onchain.<br><br>We're teaming up with @coinbase_au to bring Red Packets to the Infinex community…",
+        "A thread and an olive branch to the Yappers from Kain."
+      ],
+      "Acute": [
+        "⏰ 23 HOURS LEFT<br><br>Tomorrow is the last opportunity to join the Infinex sale. A new kind of crypto app that feels like a CEX but is self-custodia…",
+        "@pendle_fi ⏰ 1 HOUR LEFT<br><br>Last orders.",
+        "@pendle_fi ⏰ 2 HOURS LEFT<br><br>Oversubscribed."
+      ],
+      "Commanding": [
+        "Hardware wallet support is live.<br><br>You can now connect your @Trezor or @Ledger to Infinex. View those assets in your portfolio. Send and move th…",
+        "Stock perps are now live on Infinex.<br><br>Trade XYZ100 → top 100 US company index. 20x leverage. 24/7.<br><br>Plus TSLA. NVDA. AAPL. GOOGL. HOOD. 1…",
+        "The Infinex extension is live.<br><br>You can use your whole portfolio in one tab. Connect anywhere across any chain.<br><br>↓"
+      ],
+      "Practical": [
+        "Infinex Sale timeline:<br><br>📍 Now → Registration open<br>📍 Jan 3-6 →Infinex Sale<br>📍 Jan 7-13 → Final allocation<br>📍 Late Jan → TGE",
+        "What this looks like in practice:<br><br>- Smart DCA that only buys the dip<br>- Sentiment-driven trading via Grok<br>- Auto-rebalancing lending posi…",
+        "The Infinex Sale is open for registration.<br><br>5% of INX supply at $99.99M FDV. 1-year lock, with early unlock option.<br><br>Orders between $200…"
+      ],
+      "Receptive": [
+        "The Infinex Sale is the lowest price INX has ever been sold.<br><br>To take part:<br><br>1. Verify through Sonar (https://t.co/v4VV2VgrGK)<br>2. Conn…"
+      ],
+      "Self-Contained": [
+        "Times change. Privacy doesn't.",
+        "Infinex is a non-custodial superapp.<br><br>One account. Every chain. Trading, DeFi, wallet, privacy.<br><br>You keep your keys. We handle the comple…",
+        "Everyone is building for AI.<br><br>Not everyone is built for AI.<br><br>🦞"
+      ],
+      "Certain": [
+        "Haven't become an Infinex Patron because you don't like NFTs?<br><br>The Infinex sale is your chance to get INX, fungibly."
+      ],
+      "Revealed": [
+        "We've already shipped enough to fill two whitepapers.<br><br>CoinGecko did a deep dive on what's live today.<br><br>→"
+      ],
+      "Concealed": [
+        "Private Send beta is live for all users.<br><br>Send crypto. Without exposing your financial history.<br><br>Incognito Mode, powered by @HoudiniSwap…"
+      ],
+      "Irradiant": [
+        "A few months from now, you (or more likely your agent) will mostly use one app.<br><br>You won't think about which chain your coins are on. You won't…",
+        "@solana I've been waiting for years for this."
+      ],
+      "Sombre": [
+        "The altcoin market is structurally broken<br><br>Perps are the baseline now. Not spot. The UNI fee switch ran from $5 to $10 on pure perp activity, t…",
+        "Kain's hot take: eight more months of sideways, capitulation by year-end, four-year cycle validated again.<br><br>2018 built DeFi. 2022 built the inf…"
+      ],
+      "Overpowering": [
+        "Every form factor of interaction with technology just got nuked by agents.<br><br>Kain: \"No one is going to do all of their own crypto stuff anymore.…",
+        "The only tokens that will outperform next cycle are the ones that figure out how to make people want to hold spot again.<br><br>Staking, tokenomics r…",
+        "Tick, tock."
+      ]
+    },
+    "driveAxisCounts": {
+      "passion→spell": 2,
+      "passion→vision": 6,
+      "doing→vision": 16,
+      "spell→passion": 4,
+      "spell→vision": 3
+    },
+    "driveByInner": {
+      "Stable": {
+        "doing": 16,
+        "spell": 7
+      },
+      "Near": {
+        "passion": 3
+      },
+      "Adream": {
+        "passion": 5
+      }
+    },
+    "driveByTempo": {
+      "Human": {
+        "passion→spell": 1
+      },
+      "Warm": {
+        "passion→vision": 1,
+        "passion→spell": 1
+      },
+      "Commanding": {
+        "doing→vision": 9
+      },
+      "Practical": {
+        "doing→vision": 6,
+        "spell→vision": 2
+      },
+      "Receptive": {
+        "spell→passion": 1
+      },
+      "Self-Contained": {
+        "spell→passion": 3,
+        "spell→vision": 1,
+        "doing→vision": 1
+      },
+      "Irradiant": {
+        "passion→vision": 2
+      },
+      "Overpowering": {
+        "passion→vision": 3
+      }
+    }
+  },
+  {
+    "label": "Infinex blog",
+    "total": 60,
+    "innerCounts": {
+      "Stable": 32,
+      "Mobile": 10,
+      "Near": 7,
+      "Adream": 3,
+      "Awake": 12,
+      "Remote": 3
+    },
+    "tempoCounts": {
+      "Practical": 15,
+      "Acknowledged": 9,
+      "Receptive": 3,
+      "Commanding": 9,
+      "Warm": 5,
+      "Human": 1,
+      "Irradiant": 1,
+      "Certain": 7,
+      "Acute": 4,
+      "Overpowering": 1,
+      "Self-Contained": 5,
+      "Unsociable": 2,
+      "Doubting": 1,
+      "Materialistic": 1,
+      "Revealed": 1,
+      "Diffused": 1,
+      "Altruistic": 1
+    },
+    "aspectCounts": {
+      "penetrating": 23,
+      "enclosing": 12,
+      "circumscribing": 6,
+      "radiating": 3
+    },
+    "exemplars": {
+      "Practical": [
+        "Kain's proposed governance structure: A 50% net majority requirement of Patrons voting to enact the new governance system; Delegate project decision-…",
+        "All XGP held in Infinex Accounts before 9 Nov 2025, 00:00 UTC will be automatically converted according to the following structure: Every 200,000 XGP…",
+        "The 1,000,000 $PYTH is to be distributed equally among 2,023 eligible users. This equates to 494.32 $PYTH for each user – users will not need to clai…"
+      ],
+      "Receptive": [
+        "This document is your comprehensive guide to understanding what happens to your Infinex holdings at TGE.",
+        "Kain recently published a reassessment of Infinex's governance structure in his blog post, Infinex Governance Retake. His analysis covers the failure…",
+        "See everything we've shipped so far, and what's coming up, on the brand new Roadmap page."
+      ],
+      "Commanding": [
+        "Kain doesn't mince words about the current state of crypto governance: 'We have clear evidence that DAO governance and other forms of governance by c…",
+        "Infinex Perps, powered by Hyperliquid, is now live for all Infinex users.",
+        "The Infinex Sale runs from 3-6 Jan, 2026. Once the sale begins, each Infinex account may place one order only for INX allocation. The minimum amount…"
+      ],
+      "Warm": [
+        "XGP was originally created to reward early community members who participated in Infinex governance and ecosystem activities. The token was distribut…",
+        "The Infinex Treasury has approved an airdrop of 1,000,000 $PYTH to users who opened crates within the first 24 hours of crate opening for Craterun.",
+        "Fund your account with any asset, and start trading in one step without worrying about bridging or gas (thanks swidge)."
+      ],
+      "Human": [
+        "Trade over 100 markets, with up to 40x leverage. And because Perps is fully integrated with your Infinex Account, you can trade on any device, and mo…"
+      ],
+      "Irradiant": [
+        "The Infinex TGE is planned for January 2026. The Infinex sale is the final opportunity for the community to align themselves with Infinex ahead of TG…"
+      ],
+      "Overpowering": [
+        "The Infinex Sale closed on 10 January, with total contributions of $7.2 million USDC, exceeding the $5 million cap by roughly $2.2 million (44% overs…"
+      ],
+      "Self-Contained": [
+        "We used max-min fair allocation (also known as water-filling), where everyone's allocation rises equally until their order is filled or supply runs o…",
+        "With approximately $6 million USD planned for distribution across four seasons, this retroactive rewards system was designed to prevent gaming while…",
+        "The strategic approach emphasizes timing: \\\"We need a real token. But only once we have earned it.\\\" The platform will launch its token after demonst…"
+      ],
+      "Acknowledged": [
+        "From now until September 24, eligible Infinex users can buy a Patron NFT to show their support for Infinex's core mission.",
+        "Starting on the 6th of July, Infinex is rolling out support for fourteen new memecoins over seven days and kicking off Meme Wars!"
+      ],
+      "Certain": [
+        "The sale is proceeding in four waves from September 10 - 24, starting with strategic partners and key members of the crypto community, followed by al…",
+        "Innovations in crypto user experience have lagged behind innovations in crypto infrastructure, and this makes sense."
+      ],
+      "Materialistic": [
+        "The Patron NFT is a way for community members to show their support for Infinex's mission by acquiring a limited-edition digital collectible. Patron…"
+      ],
+      "Diffused": [
+        "While BTC has ripped to new ATHs and we have finally seen the introduction of spot ETFs. The wild rise of memecoins over the last year has captivated…"
+      ],
+      "Altruistic": [
+        "Pyth Network has been a key integration for Infinex, specifically Pyth Entropy, which was used to ensure the randomness of prizes. Additionally, Pyth…"
+      ]
+    },
+    "driveAxisCounts": {
+      "doing→vision": 21,
+      "spell→passion": 9,
+      "passion→spell": 3,
+      "passion→vision": 4,
+      "spell→vision": 2,
+      "doing→passion": 1
+    },
+    "driveByInner": {
+      "Stable": {
+        "doing": 21,
+        "spell": 11
+      },
+      "Near": {
+        "passion": 4,
+        "doing": 1
+      },
+      "Adream": {
+        "passion": 3
+      }
+    },
+    "driveByTempo": {
+      "Practical": {
+        "doing→vision": 13,
+        "spell→passion": 2
+      },
+      "Receptive": {
+        "spell→passion": 3
+      },
+      "Commanding": {
+        "doing→vision": 7,
+        "spell→vision": 1,
+        "doing→passion": 1
+      },
+      "Warm": {
+        "passion→spell": 2,
+        "passion→vision": 1
+      },
+      "Human": {
+        "passion→spell": 1
+      },
+      "Irradiant": {
+        "passion→vision": 1
+      },
+      "Overpowering": {
+        "passion→vision": 1
+      },
+      "Self-Contained": {
+        "spell→vision": 1,
+        "spell→passion": 4
+      },
+      "Materialistic": {
+        "doing→vision": 1
+      },
+      "Diffused": {
+        "passion→vision": 1
+      }
+    }
+  }
+]

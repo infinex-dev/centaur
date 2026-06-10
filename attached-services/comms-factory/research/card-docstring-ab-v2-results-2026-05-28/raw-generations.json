@@ -1,0 +1,252 @@
+[
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "CURRENT",
+    "caption": "The wall between your bank and your wallet was always somebody's business model.\n\nSend a wire to your Infinex account. It lands as USDC on-chain.\n\nOne account. Dollars in, euros in, pesos in. The wall isn't there anymore."
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_A",
+    "caption": "The wire used to leave the chain. Days of routing, intermediaries, an off-ramp pretending to be a bridge.\n\nYour Infinex account now takes ACH, SEPA, and wire directly. Fiat lands as USDC in your wallet.\n\nThe bank rail ends where the wallet begins. Same motion, one surface."
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "The wire still clears in two days. The account number still belongs to a bank you've never walked into.\n\nNow that account number is yours inside Infinex. ACH, SEPA, wire — the deposit lands as USDC in your wallet.\n\nSix currencies in. One balance out. The rail you came from no longer decides what you hold."
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "The wire, the routing number, the three-day wait. That was the interface.\n\nInfinex account numbers now accept ACH, SEPA, and wire. Deposits land on-chain as USDC.\n\nUSD, EUR, GBP, MXN, BRL, COP — six currencies, one wallet, no seam."
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_C",
+    "caption": "The wire, the ACH transfer, the SEPA rail. Old machinery, still humming.\n\nSend from your bank to your Infinex account number. It lands as USDC in your wallet.\n\nOne deposit. No crossing required."
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "CURRENT",
+    "caption": "Every chain stood between a user and MegaETH. Bridge, gas, swap, three transactions, three places to lose the thread.\n\nSwidge takes MegaETH from any supported chain in one transaction. Bridge, gas, destination DEX, handled.\n\nThe chain stops being the thing you cross. It's just where you land."
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_A",
+    "caption": "MegaETH is the fastest chain. Speed there has been gated by the work of getting capital in.\n\nSwidge bridges in from any supported source. One transaction covers the bridge, the gas, the destination swap.\n\nThe route is open."
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "Every bridge has been a route to plan. A chain to add. A gas token to find. A DEX to open after.\n\nSwidge now reaches MegaETH from any supported chain. Bridge, gas, destination swap — one transaction.\n\nYou don't route in. You arrive."
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "The chain you wanted to reach was always somewhere else.\n\nMegaETH is now a Swidge destination. One transaction from any supported source — bridge, gas, and the destination DEX, handled.\n\nYou arrive already moving."
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_C",
+    "caption": "MegaETH was a destination you had to plan for.\n\nSwidge bridges in from any supported source. One transaction carries the gas and the DEX hop with it.\n\nYou decide. You're already there."
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "CURRENT",
+    "caption": "Choosing between Aave, Morpho, Pendle, Maple was never the interesting part of the work.\n\nThe vaults are live. An agent routes the capital and rotates when the math changes.\n\nEvery rebalance opens its reasoning to you. Read it, or don't."
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_A",
+    "caption": "Autonomous yield has always asked for trust without offering proof.\n\nThe vaults are live. An agent routes across Aave, Morpho, Pendle, Maple.\n\nEvery rebalance shows its reasoning. The machine acts, then explains."
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "Capital used to sit where you put it.\n\nYield vaults are live. An agent routes across Aave, Morpho, Pendle, Maple.\n\nEvery rebalance carries its reasoning. Read it, weigh it, decide what you make of it."
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "Allocation across Aave, Morpho, Pendle, Maple has always been a judgment call.\n\nThe vault now makes that call, and shows its work on every rebalance.\n\nReasoning, visible. Yield, live."
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_C",
+    "caption": "Delegation has always asked you to trust something you couldn't see.\n\nThe vaults are live. An agent rotates across Aave, Morpho, Pendle, Maple.\n\nEvery rebalance opens its reasoning to you."
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "CURRENT",
+    "caption": "Two accounts. Two passkeys. Two portfolios to reconcile every morning.\n\nThat's over. Hyperliquid spot trades natively from your Infinex account.\n\nOne key. The book opens where you already are."
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_A",
+    "caption": "The orderbook used to live somewhere else. Your account followed it there, or it didn't move.\n\nHyperliquid spot now trades inside Infinex. One account, one passkey, both sides.\n\nThe liquidity came to where you already are."
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "The choice between venues was always a tax on the user.\n\nSpot Hyperliquid trades natively inside Infinex. One account, one passkey, both sides.\n\nThe wall was never load-bearing."
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "Two accounts. Two logins. Two halves of the same portfolio.\n\nHyperliquid spot now trades natively inside Infinex. One account, one passkey.\n\nThe wall was never the point. The market was."
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_C",
+    "caption": "The wall between two accounts was always arbitrary.\n\nSpot Hyperliquid trades inside Infinex now. One account, one passkey, both sides.\n\nThe seam is gone. What's left is the trade."
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "CURRENT",
+    "caption": "The seed phrase was always the toll booth. Twelve words between a person and their money, and one bad afternoon away from losing it all.\n\nInfinex accounts sign in by passkey. Same account, any device, no phrase to write down or lose.\n\nThe door was heavier than the room behind it. We took the door off."
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_A",
+    "caption": "The seed phrase was the toll booth crypto never removed.\n\nInfinex accounts authenticate by passkey. The account travels with you, device to device.\n\nNo paper, no metal plate, no envelope in a drawer. Just the account, where you are."
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "The seed phrase was always a burden disguised as security.\n\nInfinex accounts authenticate with a passkey.\n\nYour account, reachable from any device you sign in on."
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "The seed phrase was always a liability dressed as security. One slip, one fire, one forgotten drawer — and the account was gone.\n\nInfinex accounts now authenticate by passkey.\n\nThe account travels with you, device to device, nothing to write down, nothing to lose."
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_C",
+    "caption": "The seed phrase was always the price of entry.\n\nNow the account is a passkey. Sign in, and it follows you across devices.\n\nNothing to write down. Nothing to lose. Just the door, opening when you do."
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "CURRENT",
+    "caption": "Sunday, 02:00 UTC. The perps engine goes quiet for about ten minutes.\n\nOpen positions hold where they are. New orders queue and release when the engine returns.\n\nA short stillness, then the rails carry through."
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_A",
+    "caption": "Sunday, 02:00 UTC. The perps engine goes down for roughly ten minutes.\n\nOpen positions stay as they are. New orders queue and clear when the window closes.\n\nQuiet work, done in the quiet hour."
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "Sunday 02:00 UTC, the perps engine goes down for about ten minutes.\n\nOpen positions hold. New orders queue through the window.\n\nA short pause, then back to the book."
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "Sunday, 02:00 UTC. The perps engine goes down for service.\n\nTen minutes, give or take. Open positions sit where you left them; new orders queue and clear when the lights come back.\n\nA quiet window, scheduled, and then the book breathes again."
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_C",
+    "caption": "Sunday, 02:00 UTC. The perps engine goes quiet for about ten minutes.\n\nOpen positions hold where they are. New orders queue and clear when the engine wakes.\n\nA short window, then back to flow."
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "CURRENT",
+    "caption": "Private Send is no longer in beta.\n\nIt's available to every user, starting today.\n\nSend a payment. Your wallet history stays your own."
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_A",
+    "caption": "Private Send spent its time in beta quietly. Sending money never required a public ledger of your history.\n\nToday it leaves beta. Every user has it.\n\nPay someone. The transfer carries no past with it."
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "A wallet has always carried its history in the open. Every payment, a paper trail anyone could read.\n\nPrivate Send is now generally available. Send without your chain history walking in the door first.\n\nThe past stops introducing you."
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "A payment used to drag your whole history behind it. Every counterparty inherited your ledger.\n\nPrivate Send is GA. Send without handing over the trail.\n\nThe default quietly moves."
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_C",
+    "caption": "Privacy was never meant to live in beta.\n\nPrivate Send is GA. Every user, every payment.\n\nSend without dragging your history behind you."
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "CURRENT",
+    "caption": "Ten million accounts.\n\nNo seed phrases. Yield that runs itself.\n\nThe wall was never the chain. It was everything we asked people to carry across it."
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_A",
+    "caption": "Ten million accounts.\n\nThe barrier was never the user. It was the door.\n\nPasskeys opened it. The vaults did the rest."
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "Ten million accounts.\n\nThe friction was the product. Remove it and this is what's underneath.\n\nPasskeys, vaults, the rest of what's coming."
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "Ten million accounts.\n\nA passkey, a vault, no seed phrase between them.\n\nThis is what the door looks like once you stop guarding it."
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_C",
+    "caption": "Ten million accounts.\n\nThe gate was never the chain. It was the seed phrase, the signature popup, the bridge tab open in the background.\n\nA passkey opens the door. The vault keeps working while you sleep."
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "CURRENT",
+    "caption": "The vault doesn't decide what risk you carry.\n\nYou set the ceiling, the allowed protocols, the rebalance cadence. The agent works inside those walls.\n\nEvery rebalance comes back as a report against the constraints you locked."
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_A",
+    "caption": "Delegation without governance is just hope wearing a uniform.\n\nSet the vault's limits yourself: max risk, allowed protocols, rebalance cadence.\n\nEach rebalance returns to you, measured against the lines you drew."
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "The agent acted. You watched.\n\nNow you set the bounds. Max risk, which protocols, how often it rebalances.\n\nIt reports back against the lines you drew."
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "Delegation without boundaries isn't delegation. It's abdication.\n\nSo the vault answers to you: max risk, allowed protocols, rebalance cadence. You set them. They hold.\n\nEvery rebalance comes back against the line you drew."
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_C",
+    "caption": "Delegation without limits isn't delegation. It's abdication.\n\nSet the agent's ceiling: max risk, the protocols it may touch, how often it rebalances.\n\nEach rebalance comes back as a report against the bounds you drew."
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "CURRENT",
+    "caption": "The old yield UI is gone.\n\nOne vault now. One position. The agent runs it.\n\nYou stopped hunting yield. You didn't notice when."
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_A",
+    "caption": "The old yield aggregator is gone.\n\nOne vault now. One funded position. The agent reads the field.\n\nYou hold the want. The work routes itself."
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_A_PRIME",
+    "caption": "The old yield screen is gone. It asked you to compare, weigh, decide, repeat.\n\nIn its place: a single vault. One funded position, one agent doing the reading.\n\nYou stopped being the analyst. You became the one the work is done for."
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_B_PRIME",
+    "caption": "The old yield aggregator is gone.\n\nOne vault now holds the position. One interface, one place to look.\n\nThe comparing, the rebalancing, the tab-switching — lifted off the desk."
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_C",
+    "caption": "The old yield aggregator is gone.\n\nOne vault now holds the position. One interface, one funded line.\n\nThe weight settles where it belongs, and the surface goes quiet."
+  }
+]

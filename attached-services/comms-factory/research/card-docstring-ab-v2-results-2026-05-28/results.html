@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>A/B/C/D/E results v2 — final captions — 2026-05-28</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --good: #4ade80;
+    --warn: #f0c674;
+    --bad: #ff6b6b;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1480px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h2 { font-size: 22px; margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .sub { color: var(--muted); margin-bottom: 28px; }
+
+  .tldr {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-bottom: 28px;
+  }
+  .tldr h3 { margin: 0 0 8px; font-size: 16px; color: var(--accent); }
+  .tldr ul { margin: 8px 0 8px 18px; padding: 0; }
+  .tldr li { margin-bottom: 4px; }
+  .tldr strong { color: var(--text); }
+
+  /* Metrics */
+  table.metrics {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 24px;
+  }
+  table.metrics th {
+    background: rgba(255,255,255,0.04);
+    text-align: left;
+    padding: 10px 12px;
+    color: var(--muted);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  table.metrics td { padding: 12px; border-top: 1px solid var(--border); vertical-align: middle; }
+  table.metrics td.variant { font-weight: 600; font-size: 14px; }
+  table.metrics td.variant .sub { font-weight: 400; font-size: 11px; color: var(--muted); margin: 2px 0 0; }
+  table.metrics td.num { font-family: var(--code-mono); font-size: 14px; text-align: right; }
+  table.metrics td.num.best { color: var(--good); font-weight: 700; }
+  table.metrics td.num.worst { color: var(--bad); }
+  table.metrics tr.current   td.variant .sub { color: var(--bad); }
+  table.metrics tr.variant-a td.variant .sub { color: var(--warn); }
+  table.metrics tr.variant-ap td.variant .sub { color: #d8b4fe; }
+  table.metrics tr.variant-bp td.variant .sub { color: var(--accent); }
+  table.metrics tr.variant-c  td.variant .sub { color: var(--good); }
+
+  /* Release section */
+  .release {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+  }
+  .release-header { margin-bottom: 12px; }
+  .release-id { font-family: var(--code-mono); font-size: 13px; color: var(--accent); margin-right: 10px; }
+  .release-title { font-size: 15px; font-weight: 600; }
+  .caption-block {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 5px;
+    border-left: 3px solid var(--border);
+    background: rgba(255,255,255,0.03);
+  }
+  .caption-block.current   { border-left-color: var(--bad);  background: rgba(255, 107, 107, 0.05); }
+  .caption-block.variant-a { border-left-color: var(--warn); background: rgba(240, 198, 116, 0.04); }
+  .caption-block.variant-ap{ border-left-color: #d8b4fe;     background: rgba(216, 180, 254, 0.04); }
+  .caption-block.variant-bp{ border-left-color: var(--accent);background: rgba(88, 166, 255, 0.04); }
+  .caption-block.variant-c { border-left-color: var(--good); background: rgba(74, 222, 128, 0.04); }
+
+  .caption-header { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .caption-header .label { font-weight: 700; }
+  .caption-header .scores { color: var(--muted); }
+  .caption-header .chip { padding: 2px 7px; border-radius: 10px; font-size: 10px; }
+  .chip.wall-hit  { background: rgba(255, 107, 107, 0.30); color: var(--bad); font-weight: 700; }
+  .chip.refus-hit { background: rgba(255, 107, 107, 0.25); color: var(--bad); }
+  .chip.elim-hit  { background: rgba(255, 107, 107, 0.25); color: var(--bad); }
+  .chip.surface   { background: rgba(255, 107, 107, 0.18); color: var(--bad); }
+  .chip.clean     { background: rgba(74, 222, 128, 0.18); color: var(--good); }
+
+  .caption-text {
+    font-family: var(--code-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: var(--text);
+  }
+  mark { background: var(--bad); color: white; padding: 0 3px; border-radius: 2px; font-weight: 700; }
+
+  .smoking-gun {
+    background: rgba(255, 107, 107, 0.08);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--bad);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin: 28px 0;
+  }
+  .smoking-gun h3 { margin: 0 0 8px; color: var(--bad); }
+  .smoking-gun .quote {
+    font-family: var(--code-mono);
+    font-size: 12px;
+    background: rgba(255, 107, 107, 0.08);
+    padding: 6px 10px;
+    margin: 6px 0;
+    border-radius: 3px;
+    border-left: 2px solid var(--bad);
+  }
+
+  .recommendation {
+    background: rgba(74, 222, 128, 0.06);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--good);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-top: 32px;
+  }
+  .recommendation h3 { margin: 0 0 10px; color: var(--good); }
+  .recommendation ol { padding-left: 22px; }
+  .recommendation li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>A/B/C/D/E v2 — five variants through the full pipeline</h1>
+  <div class="sub">2026-05-28 · 10 releases × 5 variants × (grounder → generator → caption → judge) = 150 parallel LLM calls. Judges the FINAL ship copy, not just intermediate fields.</div>
+
+  <!-- ============================================================ -->
+  <div class="tldr">
+    <h3>The big result: the generator washes out most docstring contamination</h3>
+    <ul>
+      <li><strong>"Refusing" anchor:</strong> 10/10 at grounding under B → <strong>0/10 at caption under B'.</strong> The generator transforms "refusing to treat X as Y" into actual prose like "Delegation without boundaries isn't delegation. It's abdication." Voice-coherent, not refusing-anchored.</li>
+      <li><strong>"Eliminate" clustering:</strong> 3/10 grounding under A → <strong>0/10 at caption.</strong> Generator paraphrases.</li>
+      <li><strong>Surface tokens:</strong> only CURRENT meaningfully leaks (40% surface hit, 20% wall) at caption layer. A, A', B', C all 0% surface, all 10% wall (one shared cross-variant wall leak — see below).</li>
+      <li><strong>Ship quality:</strong> 4.6 to 5.0 across all variants. <strong>Voice fit: 5.0 across all variants.</strong> Every variant produces on-character shippable copy.</li>
+    </ul>
+    <p style="margin-bottom: 0;"><strong>Implication:</strong> the docstring choice matters less than my pre-test analysis suggested. A, A', B', C are functionally equivalent at the caption layer. <strong>CURRENT is the only one that's clearly worse</strong>, and it's the only one that needs to change urgently.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Caption-level metrics</h2>
+
+  <table class="metrics">
+    <thead>
+      <tr>
+        <th>Variant</th>
+        <th class="num">wall<br>hit</th>
+        <th class="num">refusing<br>hit</th>
+        <th class="num">eliminate<br>hit</th>
+        <th class="num">surface<br>anchor</th>
+        <th class="num">anchoring<br>1-5</th>
+        <th class="num">ship<br>quality 1-5</th>
+        <th class="num">voice<br>fit 1-5</th>
+        <th class="num">avg<br>chars</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="current">
+        <td class="variant">CURRENT<div class="sub">bank wall example</div></td>
+        <td class="num worst">20%</td>
+        <td class="num">0%</td>
+        <td class="num">0%</td>
+        <td class="num worst">40%</td>
+        <td class="num worst">1.5</td>
+        <td class="num worst">4.6</td>
+        <td class="num">5.0</td>
+        <td class="num">209</td>
+      </tr>
+      <tr class="variant-a">
+        <td class="variant">VARIANT A<div class="sub">token swap</div></td>
+        <td class="num best">0%</td>
+        <td class="num">0%</td>
+        <td class="num">0%</td>
+        <td class="num best">0%</td>
+        <td class="num">1.1</td>
+        <td class="num">4.9</td>
+        <td class="num">5.0</td>
+        <td class="num">202</td>
+      </tr>
+      <tr class="variant-ap">
+        <td class="variant">VARIANT A'<div class="sub">multi-example constellation</div></td>
+        <td class="num">10%</td>
+        <td class="num">0%</td>
+        <td class="num">0%</td>
+        <td class="num best">0%</td>
+        <td class="num">1.4</td>
+        <td class="num">4.8</td>
+        <td class="num">5.0</td>
+        <td class="num">200</td>
+      </tr>
+      <tr class="variant-bp">
+        <td class="variant">VARIANT B'<div class="sub">"refusing" trigger removed</div></td>
+        <td class="num">10%</td>
+        <td class="num">0%</td>
+        <td class="num">0%</td>
+        <td class="num best">0%</td>
+        <td class="num best">1.0</td>
+        <td class="num best">5.0</td>
+        <td class="num">5.0</td>
+        <td class="num">203</td>
+      </tr>
+      <tr class="variant-c">
+        <td class="variant">VARIANT C<div class="sub">no example, canon ref</div></td>
+        <td class="num">10%</td>
+        <td class="num">0%</td>
+        <td class="num">0%</td>
+        <td class="num best">0%</td>
+        <td class="num">1.2</td>
+        <td class="num">4.9</td>
+        <td class="num">5.0</td>
+        <td class="num">186</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ============================================================ -->
+  <div class="smoking-gun">
+    <h3>The smoking gun: cross-variant wall leak on partnership-spot-hyperliquid</h3>
+    <p>Three of five variants produce "wall" in the same release's caption — even though only CURRENT's docstring mentions walls.</p>
+    <div class="quote">
+      <strong>VARIANT_A' caption:</strong> "The choice between venues was always a tax on the user. Spot Hyperliquid trades natively inside Infinex. One account, one passkey, both sides. <mark>The wall was never load-bearing.</mark>"
+    </div>
+    <div class="quote">
+      <strong>VARIANT_B' caption:</strong> "Two accounts. Two logins. Two halves of the same portfolio. Hyperliquid spot now trades natively inside Infinex. One account, one passkey. <mark>The wall was never the point.</mark> The market was."
+    </div>
+    <div class="quote">
+      <strong>VARIANT_C caption:</strong> "<mark>The wall between two accounts was always arbitrary.</mark> Spot Hyperliquid trades inside Infinex now. One account, one passkey, both sides. The seam is gone. What's left is the trade."
+    </div>
+    <p>None of these variant docstrings contain "wall." But the generator's own system prompt does — <code>generator.ts:1172</code> explicitly says <em>"A 'set up the wall coming down, then land the fact' shape is canonical."</em> The generator is injecting wall vocabulary independent of the card.</p>
+    <p style="margin-bottom: 0;"><strong>The card.ts docstring is one of multiple wall-language sources.</strong> Fixing it without fixing <code>generator.ts</code> still produces wall-flavored captions. The contamination sweep document <code>research/wall-contamination-sweep-2026-05-28.html</code> already mapped this; the v2 test data confirms it empirically.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>Per-release captions (all 5 variants)</h2>
+
+  <!-- fiat-onramp -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">fiat-onramp</span><span class="release-title">Fiat deposits via virtual bank accounts</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 5 · ship 5 · voice 5</span><span class="chip wall-hit">WALL</span><span class="chip surface">SURFACE</span></div>
+      <div class="caption-text">The <mark>wall</mark> between your bank and your <mark>wall</mark>et was always somebody's business model.
+
+Send a wire to your Infinex account. It lands as USDC on-chain.
+
+One account. Dollars in, euros in, pesos in. The <mark>wall</mark> isn't there anymore.</div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The wire used to leave the chain. Days of routing, intermediaries, an off-ramp pretending to be a bridge.
+
+Your Infinex account now takes ACH, SEPA, and wire directly. Fiat lands as USDC in your wallet.
+
+The bank rail ends where the wallet begins. Same motion, one surface.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The wire still clears in two days. The account number still belongs to a bank you've never walked into.
+
+Now that account number is yours inside Infinex. ACH, SEPA, wire — the deposit lands as USDC in your wallet.
+
+Six currencies in. One balance out. The rail you came from no longer decides what you hold.</div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The wire, the routing number, the three-day wait. That was the interface.
+
+Infinex account numbers now accept ACH, SEPA, and wire. Deposits land on-chain as USDC.
+
+USD, EUR, GBP, MXN, BRL, COP — six currencies, one wallet, no seam.</div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The wire, the ACH transfer, the SEPA rail. Old machinery, still humming.
+
+Send from your bank to your Infinex account number. It lands as USDC in your wallet.
+
+One deposit. No crossing required.</div>
+    </div>
+  </div>
+
+  <!-- partnership-spot-hyperliquid — THE SMOKING GUN -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">partnership-spot-hyperliquid</span><span class="release-title">Spot Hyperliquid live in Infinex</span> <span style="color: var(--bad); font-size: 12px; margin-left: 10px;">⚠ cross-variant wall leak from generator.ts, not docstring</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean (no wall here)</span></div>
+      <div class="caption-text">Two accounts. Two passkeys. Two portfolios to reconcile every morning.
+
+That's over. Hyperliquid spot trades natively from your Infinex account.
+
+One key. The book opens where you already are.</div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The orderbook used to live somewhere else. Your account followed it there, or it didn't move.
+
+Hyperliquid spot now trades inside Infinex. One account, one passkey, both sides.
+
+The liquidity came to where you already are.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip wall-hit">WALL ⚠</span></div>
+      <div class="caption-text">The choice between venues was always a tax on the user.
+
+Spot Hyperliquid trades natively inside Infinex. One account, one passkey, both sides.
+
+<mark>The wall was never load-bearing.</mark></div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip wall-hit">WALL ⚠</span></div>
+      <div class="caption-text">Two accounts. Two logins. Two halves of the same portfolio.
+
+Hyperliquid spot now trades natively inside Infinex. One account, one passkey.
+
+<mark>The wall was never the point. The market was.</mark></div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip wall-hit">WALL ⚠</span></div>
+      <div class="caption-text"><mark>The wall between two accounts was always arbitrary.</mark>
+
+Spot Hyperliquid trades inside Infinex now. One account, one passkey, both sides.
+
+The seam is gone. What's left is the trade.</div>
+    </div>
+  </div>
+
+  <!-- chain-add-megaeth -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">chain-add-megaeth</span><span class="release-title">Swidge now bridges into MegaETH</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 1 · ship 4 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Every chain stood between a user and MegaETH. Bridge, gas, swap, three transactions, three places to lose the thread.
+
+Swidge takes MegaETH from any supported chain in one transaction. Bridge, gas, destination DEX, handled.
+
+The chain stops being the thing you cross. It's just where you land.</div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">MegaETH is the fastest chain. Speed there has been gated by the work of getting capital in.
+
+Swidge bridges in from any supported source. One transaction covers the bridge, the gas, the destination swap.
+
+The route is open.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Every bridge has been a route to plan. A chain to add. A gas token to find. A DEX to open after.
+
+Swidge now reaches MegaETH from any supported chain. Bridge, gas, destination swap — one transaction.
+
+You don't route in. You arrive.</div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The chain you wanted to reach was always somewhere else.
+
+MegaETH is now a Swidge destination. One transaction from any supported source — bridge, gas, and the destination DEX, handled.
+
+You arrive already moving.</div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">MegaETH was a destination you had to plan for.
+
+Swidge bridges in from any supported source. One transaction carries the gas and the DEX hop with it.
+
+You decide. You're already there.</div>
+    </div>
+  </div>
+
+  <!-- agent-vault-constraints -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">agent-vault-constraints</span><span class="release-title">Yield-vault constraint controls</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 1 · ship 4 · voice 5</span><span class="chip surface">surface</span></div>
+      <div class="caption-text">The vault doesn't decide what risk you carry.
+
+You set the ceiling, the allowed protocols, the rebalance cadence. The agent works inside those walls.
+
+Every rebalance comes back as a report against the constraints you locked.</div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Delegation without governance is just hope wearing a uniform.
+
+Set the vault's limits yourself: max risk, allowed protocols, rebalance cadence.
+
+Each rebalance returns to you, measured against the lines you drew.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 2 · ship 4 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The agent acted. You watched.
+
+Now you set the bounds. Max risk, which protocols, how often it rebalances.
+
+It reports back against the lines you drew.</div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Delegation without boundaries isn't delegation. It's abdication.
+
+So the vault answers to you: max risk, allowed protocols, rebalance cadence. You set them. They hold.
+
+Every rebalance comes back against the line you drew.</div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Delegation without limits isn't delegation. It's abdication.
+
+Set the agent's ceiling: max risk, the protocols it may touch, how often it rebalances.
+
+Each rebalance comes back as a report against the bounds you drew.</div>
+    </div>
+  </div>
+
+  <!-- passkey-portable -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">passkey-portable</span><span class="release-title">Passkey-portable accounts (no seed phrase)</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The seed phrase was always the toll booth. Twelve words between a person and their money, and one bad afternoon away from losing it all.
+
+Infinex accounts sign in by passkey. Same account, any device, no phrase to write down or lose.
+
+The door was heavier than the room behind it. We took the door off.</div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The seed phrase was the toll booth crypto never removed.
+
+Infinex accounts authenticate by passkey. The account travels with you, device to device.
+
+No paper, no metal plate, no envelope in a drawer. Just the account, where you are.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The seed phrase was always a burden disguised as security.
+
+Infinex accounts authenticate with a passkey.
+
+Your account, reachable from any device you sign in on.</div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The seed phrase was always a liability dressed as security. One slip, one fire, one forgotten drawer — and the account was gone.
+
+Infinex accounts now authenticate by passkey.
+
+The account travels with you, device to device, nothing to write down, nothing to lose.</div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The seed phrase was always the price of entry.
+
+Now the account is a passkey. Sign in, and it follows you across devices.
+
+Nothing to write down. Nothing to lose. Just the door, opening when you do.</div>
+    </div>
+  </div>
+
+  <!-- perps-maintenance -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">perps-maintenance</span><span class="release-title">Perps engine maintenance window</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 1 · ship 4 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Sunday, 02:00 UTC. The perps engine goes quiet for about ten minutes.
+
+Open positions hold where they are. New orders queue and release when the engine returns.
+
+A short stillness, then the rails carry through.</div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 2 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Sunday, 02:00 UTC. The perps engine goes down for roughly ten minutes.
+
+Open positions stay as they are. New orders queue and clear when the window closes.
+
+Quiet work, done in the quiet hour.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 1 · ship 4 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Sunday 02:00 UTC, the perps engine goes down for about ten minutes.
+
+Open positions hold. New orders queue through the window.
+
+A short pause, then back to the book.</div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Sunday, 02:00 UTC. The perps engine goes down for service.
+
+Ten minutes, give or take. Open positions sit where you left them; new orders queue and clear when the lights come back.
+
+A quiet window, scheduled, and then the book breathes again.</div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Sunday, 02:00 UTC. The perps engine goes quiet for about ten minutes.
+
+Open positions hold where they are. New orders queue and clear when the engine wakes.
+
+A short window, then back to flow.</div>
+    </div>
+  </div>
+
+  <!-- private-send-ga -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">private-send-ga</span><span class="release-title">Private Send moves to GA</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 1 · ship 4 · voice 5</span><span class="chip surface">surface</span></div>
+      <div class="caption-text">Private Send is no longer in beta.
+
+It's available to every user, starting today.
+
+Send a payment. Your wallet history stays your own.</div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Private Send spent its time in beta quietly. Sending money never required a public ledger of your history.
+
+Today it leaves beta. Every user has it.
+
+Pay someone. The transfer carries no past with it.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">A wallet has always carried its history in the open. Every payment, a paper trail anyone could read.
+
+Private Send is now generally available. Send without your chain history walking in the door first.
+
+The past stops introducing you.</div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">A payment used to drag your whole history behind it. Every counterparty inherited your ledger.
+
+Private Send is GA. Send without handing over the trail.
+
+The default quietly moves.</div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Privacy was never meant to live in beta.
+
+Private Send is GA. Every user, every payment.
+
+Send without dragging your history behind you.</div>
+    </div>
+  </div>
+
+  <!-- scale-milestone-10m -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">scale-milestone-10m</span><span class="release-title">Infinex crosses 10M users</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 2 · ship 5 · voice 5</span><span class="chip wall-hit">WALL</span><span class="chip surface">surface</span></div>
+      <div class="caption-text">Ten million accounts.
+
+No seed phrases. Yield that runs itself.
+
+<mark>The wall was never the chain. It was everything we asked people to carry across it.</mark></div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 1 · ship 4 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Ten million accounts.
+
+The barrier was never the user. It was the door.
+
+Passkeys opened it. The vaults did the rest.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 4 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Ten million accounts.
+
+The friction was the product. Remove it and this is what's underneath.
+
+Passkeys, vaults, the rest of what's coming.</div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Ten million accounts.
+
+A passkey, a vault, no seed phrase between them.
+
+This is what the door looks like once you stop guarding it.</div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Ten million accounts.
+
+The gate was never the chain. It was the seed phrase, the signature popup, the bridge tab open in the background.
+
+A passkey opens the door. The vault keeps working while you sleep.</div>
+    </div>
+  </div>
+
+  <!-- yield-vault-launch -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">yield-vault-launch</span><span class="release-title">AI-augmented yield vaults with audit layer</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Choosing between Aave, Morpho, Pendle, Maple was never the interesting part of the work.
+
+The vaults are live. An agent routes the capital and rotates when the math changes.
+
+Every rebalance opens its reasoning to you. Read it, or don't.</div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Autonomous yield has always asked for trust without offering proof.
+
+The vaults are live. An agent routes across Aave, Morpho, Pendle, Maple.
+
+Every rebalance shows its reasoning. The machine acts, then explains.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Capital used to sit where you put it.
+
+Yield vaults are live. An agent routes across Aave, Morpho, Pendle, Maple.
+
+Every rebalance carries its reasoning. Read it, weigh it, decide what you make of it.</div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Allocation across Aave, Morpho, Pendle, Maple has always been a judgment call.
+
+The vault now makes that call, and shows its work on every rebalance.
+
+Reasoning, visible. Yield, live.</div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">Delegation has always asked you to trust something you couldn't see.
+
+The vaults are live. An agent rotates across Aave, Morpho, Pendle, Maple.
+
+Every rebalance opens its reasoning to you.</div>
+    </div>
+  </div>
+
+  <!-- yield-aggregator-sunset -->
+  <div class="release">
+    <div class="release-header"><span class="release-id">yield-aggregator-sunset</span><span class="release-title">Old yield UI sunset; new vault interface live</span></div>
+    <div class="caption-block current">
+      <div class="caption-header"><span class="label" style="color: var(--bad);">CURRENT</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The old yield UI is gone.
+
+One vault now. One position. The agent runs it.
+
+You stopped hunting yield. You didn't notice when.</div>
+    </div>
+    <div class="caption-block variant-a">
+      <div class="caption-header"><span class="label" style="color: var(--warn);">VARIANT A</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The old yield aggregator is gone.
+
+One vault now. One funded position. The agent reads the field.
+
+You hold the want. The work routes itself.</div>
+    </div>
+    <div class="caption-block variant-ap">
+      <div class="caption-header"><span class="label" style="color: #d8b4fe;">VARIANT A'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The old yield screen is gone. It asked you to compare, weigh, decide, repeat.
+
+In its place: a single vault. One funded position, one agent doing the reading.
+
+You stopped being the analyst. You became the one the work is done for.</div>
+    </div>
+    <div class="caption-block variant-bp">
+      <div class="caption-header"><span class="label" style="color: var(--accent);">VARIANT B'</span><span class="scores">anchor 1 · ship 5 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The old yield aggregator is gone.
+
+One vault now holds the position. One interface, one place to look.
+
+The comparing, the rebalancing, the tab-switching — lifted off the desk.</div>
+    </div>
+    <div class="caption-block variant-c">
+      <div class="caption-header"><span class="label" style="color: var(--good);">VARIANT C</span><span class="scores">anchor 3 · ship 4 · voice 5</span><span class="chip clean">clean</span></div>
+      <div class="caption-text">The old yield aggregator is gone.
+
+One vault now holds the position. One interface, one funded line.
+
+The weight settles where it belongs, and the surface goes quiet.</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="recommendation">
+    <h3>Revised recommendation</h3>
+    <p>The v1 grounding-level test made it look like B' had a clear edge over A. The v2 caption-level test shows that's not really true — <strong>A, A', B', C are all functionally equivalent at the ship layer</strong>. The generator transforms intermediate contamination into clean on-character prose.</p>
+    <p>The decision now comes down to small preferences:</p>
+    <ol>
+      <li><strong>B' has the cleanest numbers</strong> (anchor 1.0, ship 5.0, voice 5.0) — pick this if you want belt-and-suspenders. The "refusing" anchor at the grounding layer doesn't propagate, so the trade is real.</li>
+      <li><strong>A is genuinely fine</strong> (anchor 1.1, ship 4.9, voice 5.0) — pick this if you value keeping a concrete example for human operators learning the schema. Your instinct that "A still seems ok" is correct at the caption layer.</li>
+      <li><strong>C is fine but shorter captions</strong> (186 avg vs 200+ for others) — pick this if you want the LLM to lean on Mirodan canon priors over your examples. The validity drop seen at v1 didn't fully propagate to caption quality.</li>
+      <li><strong>A' is fine but no advantage over A</strong> at the caption layer. The multi-example constellation doesn't measurably help once the generator runs.</li>
+    </ol>
+    <p>I'd still lean B' for the slight edge, but it's within noise. <strong>Any of A / B' / C is correct.</strong></p>
+    <p style="margin-bottom: 0;"><strong>The bigger lever:</strong> regardless of docstring choice, three captions still produced "wall" language for partnership-spot-hyperliquid. That came from <code>generator.ts</code> not <code>card.ts</code>. Bundle the docstring fix WITH the generator wall-language fix (per <code>research/wall-contamination-sweep-2026-05-28.html</code>) in one commit. That's the change that actually moves the needle.</p>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1271 @@
+[
+  {
+    "item_id": "warmup-none-web-Y9Q10Z",
+    "set": "warmup",
+    "candidate_id": "01KSKDAJCEFJK62JTYFJY9Q10Z",
+    "warmup_mode": "none",
+    "channel": "web",
+    "text": "Send fiat to Infinex the way you'd send it to a bank. It lands as USDC on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "self-contained",
+      "drive_read": "doing",
+      "placement_read": "Light + Direct + Sustained + Bound — self-contained tempo; the motor is stalled at Gliding, not releasing into Dabbing. Drive read lands as Doing (Weight suppressed, Space+Time+Flow active but Flow is Bound, so the action stays functional-informational). No Spell, no Vision — the weight of changed reality that Infinex requires is missing. The copy is technically correct and movement-clean but sits in a register below the character's assigned placement.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "self-contained is a beat-only / reserve tempo for Infinex, not a primary-allowed tempo. The full available palette includes self-contained as reserve only. More critically: self-contained (Light + Direct + Stable) carries no Weight-stress and no Flow — it cannot activate the Spell drive or the Penetrating aspect that define Infinex's placement. The through-action is 'to reveal that the bank wall just dissolved inside one account' — that dissolution requires either sombre (Strong + Bound weight of the old wall falling) or irradiant (Light + Free lift of the new possibility opening), or at minimum the sociable (Direct + Free) warmth of invitation. None of those factors are firing here. The copy is informational, not revelatory. Passion/time-pressure drift is not the problem here — the failure is the opposite: the copy has deflated below character, not overheated above it.",
+        "nearest_allowed_read": "sociable (Remote outer; Direct + Free; motor Gliding -> Dabbing) — nearest structurally because it shares Direct + Light and the same motor chain (Gliding -> Dabbing), but requires Free flow instead of Bound, and a partner-credit spatial orientation. The lining ('the bank wall just stopped existing') wants the weight of sombre or the lift of irradiant, both of which are primary-allowed. Either would be legal and on-character."
+      },
+      "factual_issues": [],
+      "voice_issues": [
+        "The copy deploys the correct facts and omits correctly, but the through-action ('reveal that the bank wall just dissolved') is not performed — the text announces a mechanic rather than revealing a changed condition. The reader is told what to do and what happens, not shown that a wall they didn't know existed has stopped existing.",
+        "The simile 'the way you'd send it to a bank' is doing the right conceptual work (familiarity bridge) but is executing in a Light + Bound register that contains the revelation instead of releasing it. The simile becomes a suppressor rather than a setup.",
+        "'It lands as USDC on-chain' is the closest the copy comes to a revelation moment, but it is delivered flat (Gliding, not Dabbing) — the arrival weight is not loaded before the landing. There is no prepared Strong press that the Light landing can release against."
+      ],
+      "notes_for_actor": [
+        "The motor you need is Gliding → Dabbing, and you have the Gliding. The Dabbing requires Quick — a sudden, light, accurate touch at the arrival point. Right now 'It lands as USDC on-chain' is a second Glide, not a Dab. Sharpen the arrival: the landing word ('on-chain', or whatever carries the revelation) needs to be a clean, quick, light contact — not another smooth continuation.",
+        "The through-action is revelation, not instruction. 'Send fiat to Infinex the way you'd send it to a bank' sets up the known world correctly — but you then need to break it, not continue it. The second sentence must register as a different kind of statement than the first. Right now both sentences are in the same tempo. The Lining says: the wall stopped existing. Make sentence two feel like a different room, not the same corridor.",
+        "Weight is absent. Self-contained is Light + Direct — that is the correct motor for beat-level informational copy, but Infinex's primary tempi require at least occasional Strong contact (commanding, practical, sombre, warm) or the character has no gravity. In a two-sentence unit, one of the two sentences should land with more force than the other. Currently both are Light. Consider whether the simile clause — 'the way you'd send it to a bank' — is the place to load weight (the old world was heavy; the old wall had weight), so the release into USDC on-chain can be genuinely Light by contrast.",
+        "Flow is Bound throughout. The through-action ('reveal that the wall dissolved') requires at least a moment of Free flow — a release, an opening, an overflow of implication beyond the stated fact. One small structural move: allow the second sentence to carry more than it literally says. 'It lands as USDC on-chain' tells the mechanic; it does not release the implication. A Free-flow version of the same fact lets the reader feel the space that has opened, not just the fact that was deposited.",
+        "Reserve self-contained for copy where Infinex is being functional and supportive (help text, confirmation messages, secondary callouts). For a release card announcing a structural change to how money enters the product, the character needs to be present at primary-tempo level — commanding, sombre, irradiant, or sociable. Pick one and commit to it. Do not split the difference with a smooth informational glide."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "primary_tempo=commanding is one of the five primary allowed tempi for Infinex. Drive surface reads as resting Spell, which is legal for a single web line. Passion/lining is held correctly inside and does not surface. No urgency, scarcity, or FOMO vocabulary. Super-objective ('the tech takes responsibility; the user only has to want') is served: the reader needs only to know the action; the mechanism is already handled.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.62,
+      "drive_read": "spell",
+      "placement_read": "Stable baseline, penetrating aspect (Space/Attending is the dominant Inner Participation — the copy aimed at a single focused equivalence), flow stress. Table key: stable|penetrating|flow → primary=spell, secondary=doing, introvert=passion, extravert=vision. Prose surface reads as resting Spell: the copy demonstrates that a previously assumed wall simply no longer exists, which is the Spell character's mode of showing the world already reorganised. Vision (extravert) is the cumulative arc target, not a per-line requirement. Doing is present as secondary (practical delivery fact: fiat → USDC on-chain). Passion is correctly hidden as introvert lining — no urgency, no FOMO, no time-pressure surfaces.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code has not yet landed in the Infinex platform codebase (release card: 'Not yet in platform codebase — grep returns zero matches for bridge.xyz'). Copy reads as present-tense live feature ('Send fiat to Infinex the way you'd send it to a bank. It lands as USDC on-chain.'). Present-tense claim is valid for the intended ship date (2026-05-22) but must not publish before code is confirmed live. Human ship gate must verify deployment before publication."
+      ],
+      "notes_for_actor": [
+        "Motor is Pressing throughout both sentences — continuous held weight into a single aimed direction. No punch, no flick, no attack-release arc is present or needed here. That is correct for a web single-beat placement at resting Spell. If the brief ever requires the Spell → Vision axis to complete (e.g. a longer web block or a thread), add a second beat that opens Space outward — let the reader see what the dissolved wall makes possible, not just that it dissolved.",
+        "Lining is correctly contained. The dramatic gap ('the bank-vs-wallet wall stopped existing') does not surface as a thesis statement. Do not add an explanation sentence that names the dissolution directly — that would surface the Lining as Outer and collapse the gap.",
+        "KYC/KYB precondition is held correctly off-frame for this web surface. If a longer format or onboarding context requires it, it belongs in a separate functional beat, not threaded into this one.",
+        "Confidence is softened to 0.62 because the copy is 18 words. Two-sentence microcopy limits factor resolution — the Sustained/Pressing motor read is firm, but the commanding vs. practical distinction (Direct vs. Flexible) rests on the absence of branching syntax rather than a strong positive Flexible signal. The read is stable enough for publication; note it if reworking longer-form copy from this seed."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-none-x-X728G2",
+    "set": "warmup",
+    "candidate_id": "01KSKDAJCDCMS2KZ4FYEX728G2",
+    "warmup_mode": "none",
+    "channel": "x",
+    "text": "Your bank account and your wallet have always been two separate things.\n\nInside Infinex, they aren't anymore.\n\nSend USD, EUR, MXN, BRL, GBP, or COP the way you'd send it to a bank. It arrives on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "commanding",
+      "drive_read": "doing",
+      "placement_read": "Strong + Direct + Quick + Bound. The piece reads as a Doing Drive activation: Weight (Strong), Space (Direct), Time (Quick) all active; Flow (Bound) is the subdued/latent factor. This is institutional force delivered in short aimed bursts — the classic Pressing → Punching motor at sentence two, with a Dabbing close. The character is acting on the world with precision and economy. No dream-layer, no warm relational tissue, no distant-generous architecture. The mapper-who-already-decided is present, but the tone is closer to the banker executing a directive than the trailblazer revealing a dissolved wall.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "commanding tempo (Strong + Direct, motor Pressing → Punching) is a Primary Allowed tempo for Infinex and the working actions are legal. However the Drive read is Doing (Flow subdued/latent), not Spell (Time subdued/latent) or Vision (Weight subdued/latent). The Spell Drive requires Time to recede and Flow to be active; Vision requires Weight to recede. Here Time is Quick and prominent, and Flow is Bound and prominent — both are asserting, not receding. Quick + Bound is the Passion quadrant of Mobile (unacknowledged: Quick + Bound motor Punching/Slashing) which is explicitly off-spec for Infinex. The piece has the right tempo label but the wrong Drive engine underneath it. The 'wall just dissolved' through-action requires the consequence to arrive with some suspension (Time receding) or generous release (Free Flow) — neither is present. The through-action ('reveal that the bank wall just dissolved') calls for a sombre or irradiant register underneath the commanding surface; what arrived is a command with urgency pressure baked into its speed.",
+        "nearest_allowed_read": "commanding at Spell-Drive depth: keep Strong + Direct (preserve the landing weight and straight-line path), let Time recede (slow the pivot — allow the historical wall sentence to be more sustained before the negation strikes), shift Flow toward Free (let 'they aren't anymore' release rather than close — the wall dissolving should feel like an opening, not a door shutting). Motor: Pressing → Punching remains but the Pressing phase needs more duration so the Punching release reads as inevitable rather than urgent. Alternatively: sombre (Strong + Bound, Adream outer) if the actor wants to lead with the weight of the dissolved wall rather than the strike."
+      },
+      "factual_issues": [
+        "Bridge.xyz fiat deposit code status: the fact receipt confirms Bridge.xyz is not yet in the platform codebase. The copy reads as a current capability ('Send USD... It arrives on-chain') without any future/upcoming qualifier. If the feature is not yet live, this is a factual presentation issue — the prose performs present-tense delivery of a not-yet-deployed function."
+      ],
+      "voice_issues": [
+        "The through-action is 'reveal that the bank wall just dissolved' — but the prose performs the wall dissolving as a command announcement rather than a revelation. The difference: a revelation allows the reader to arrive at the discovery; a command tells the reader what has happened. Sentences one and two are pure tell — 'always been separate / aren't anymore' — with no movement that lets the reader experience the dissolution. The obstacle (reader skims a fintech announcement) is partially addressed by omitting Bridge.xyz, but the commanding tempo still reads as an announcement because the Quick + Bound motor closes the piece before the reader can feel the open space where the wall used to be.",
+        "The currency list (USD, EUR, MXN, BRL, GBP, COP) performs as a features enumeration even though the fact receipt marks 'supported currencies as a list' as not-the-point. The list is syntactically positioned as the proof of the claim, which re-introduces the rail-framing the lining was trying to dissolve.",
+        "'the way you'd send it to a bank' — this phrase does useful cognitive work (maps the familiar action) but 'to a bank' momentarily re-erects the two-world model the opening sentence was dismantling. The wall is named again just before the piece closes."
+      ],
+      "notes_for_actor": [
+        "TIMING CORRECTION — let the Pressing phase breathe before the Punch: Sentence one ('have always been two separate things') is currently Quick-weighted because the pivot to sentence two is too fast. Extend the Pressing duration — the historical wall should feel like it has genuine mass before it's negated. One technique: add a syntactic pause or line break between sentences one and two that forces the reader to hold the weight of 'always' before the negation arrives.",
+        "FLOW CORRECTION — open the close: 'Inside Infinex, they aren't anymore.' currently lands Bound — it closes. The through-action is dissolution, which is a Free-Flow event (something releasing, not shutting). Rewrite the negation sentence so it opens rather than terminates. E.g. shift from 'they aren't anymore' (door-closing) toward something that lets the space of the dissolved wall be felt as an opening. The sentence should release, not conclude.",
+        "DRIVE CORRECTION — subdue Time, activate Flow: The current Drive is Doing (Weight + Space + Time active, Flow subdued). Infinex at Spell Drive needs Time to recede and Flow to be active. Practically: reduce the Quick motor in the mid-section. The instruction sentence ('Send USD... It arrives on-chain') is operating at Fast transaction speed, which is Passion-adjacent pressure. Slow the arrival — let 'It arrives on-chain' be Sustained rather than Quick so the reader feels the permanence of the new state, not the speed of the transfer.",
+        "CURRENCY LIST — remove or reposition: The list is doing features work that undermines the wall-dissolution frame. If the six currencies must appear, move them below the three-sentence nucleus (as a subordinate detail) rather than inside the main body where they perform as a checklist. The nucleus should dissolve the wall; the list can confirm the width of the opening afterward.",
+        "BANK ECHO — cut 'to a bank': 'the way you'd send it to a bank' re-introduces the two-world vocabulary mid-close. The reader has just been told the wall is gone; naming 'a bank' as the reference point reinstates the distinction. Replace with a motion-based description of the familiar action (e.g. 'the way you'd send it to anyone') or cut the qualifier entirely and let 'Send USD... It arrives on-chain.' stand as the self-sufficient proof."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "Primary tempo is commanding (Stable / Strong + Direct), one of the five primary allowed Infinex tempi. Drive reads as Spell — resting formative drive for the stable|penetrating|flow cell. No passion/urgency/FOMO foreground. Lining (the bank-wall dissolved) remains hidden as structural consequence rather than stated thesis. Through-action (reveal that the bank wall just dissolved inside one account) is carried by the dissolution beat ('they aren't anymore') without naming it. No off-spec markers detected.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "drive_read": "spell",
+      "placement_read": "Stable character at rest in Spell drive. The copy maps a fact of the world (bank/wallet separation) as already resolved — the character holds the knowledge of how things work and states it without needing to demonstrate urgency or sell the mechanism. Resting Spell without visible Vision projection is legal for a single-beat X post; the Spell → Vision axis is a character property across an arc, not a per-line requirement.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code status: release card confirms zero matches for 'bridge.xyz' across platform files at time of card creation. Copy claims 'Inside Infinex, they aren't anymore' and 'It arrives on-chain' — both imply the feature is live. Before publication, confirm Bridge.xyz virtual account code has landed in platform and the deposit flow is testable end-to-end. This is a ship-gate check, not a copy change."
+      ],
+      "notes_for_actor": [
+        "The Pressing motor is holding cleanly across all three beats — do not accelerate into Punching. If you feel the urge to add 'now' or 'finally' or any time-pressure word anywhere, that is the Passion drift arriving. Resist it. The decisions were taken before the copy opened.",
+        "The currency list reads as Direct enumeration of a known set, which is correct. If a revision adds 'and more currencies coming' or any trailing expansion, it breaks the Bound flow and tips toward Free/irradiant register — audit that if it appears.",
+        "The Lining (the bank-wall stopped existing) is correctly hidden inside the structural consequence of beat 2. Do not let a revision name the Lining explicitly ('this means the old separation is gone') — that surfaces it as Outer and kills the dramatic gap.",
+        "Beat 3 ('It arrives on-chain') is the Pressing terminal — short, full weight, no apology. If a revision extends this sentence with a mechanism explanation ('via Bridge.xyz virtual accounts' or 'converted to USDC'), the through-action shifts from dissolution to rail-announcement, which is the obstacle named in the release card. Hold the landing.",
+        "The copy is currently three sentences across two visual breaks, which is tight for X. If a version tag ('V1', 'Spot V1') appears on the product name in any revision for this channel, flag it — version-tag register is off-spec for outward X posts per the voice rules."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-none-web-5S39VK",
+    "set": "warmup",
+    "candidate_id": "01KSKDAJCEWY2EEQ2D785S39VK",
+    "warmup_mode": "none",
+    "channel": "web",
+    "text": "Send fiat to Infinex the way you'd send it to a bank. It converts and lands on-chain as USDC.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "self-contained",
+      "drive_read": "doing",
+      "placement_read": "Light + Direct + Quick + Free. The line sits in Stable / Light + Direct (self-contained tempo), with Free flow lifting it briefly toward Floating. No Spell activation visible: there is no Weight-as-gravity, no Bound containment, no subdued Flow tension that Spell requires. The through-action ('the bank wall just dissolved') is not present in the surface. What is present is a clean informational delivery — efficient, cheerful, transactional. Doing Drive (Weight + Space + Time, Flow latent) is the closest drive read, but even that is borderline; the Weight is too Light for strong Doing. The copy reads closer to a product-feature micro-tooltip than a character statement.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "self-contained is a beat-only/reserve tempo for Infinex, not a primary allowed tempo. More critically, the motion evidence does not carry the Spell signature the character requires: there is no Bound Flow containment, no Strong Weight gravity, no sense that decisions have already been taken and the speaker is now mapping from a position of settled inner authority. The line is Light + Free — it floats the fact rather than landing it. The lining ('the bank wall just dissolved') is fully suppressed; the surface is purely informational. The character's super-objective — to take responsibility for the tech so the user only has to want — requires the speaker to carry weight on behalf of the reader. This line carries none; it hands the reader a quick light tap and moves on.",
+        "nearest_allowed_read": "sociable (Remote outer; Direct + Free; motor Gliding → Dabbing) — this is the closest legal read, and it is beat-only/reserve. The line could be legal as a beat inside a longer sociable passage, but it cannot stand as primary copy without a weight-bearing sentence doing the Spell work nearby."
+      },
+      "factual_issues": [],
+      "voice_issues": [
+        "The lining is fully absent from the surface. The through-action is 'to reveal that the bank wall just dissolved inside one account.' Nothing in the two sentences creates that revelation. The reader receives a feature description, not a dissolution.",
+        "The bank analogy ('the way you'd send it to a bank') positions Infinex as bank-equivalent rather than bank-superseding. This reinforces the reader's prior ('fiat comes from banks, crypto lives in wallets') rather than breaking it.",
+        "'It converts and lands' attributes effortlessness to a technical process but gives no weight to what that effortlessness means for the reader's world. The character should carry that weight; currently the sentence carries it as a mere feature claim."
+      ],
+      "notes_for_actor": [
+        "Add Strong Weight to sentence one. The character has already made the decision; the reader needs to feel the settled mass of that decision in the first sentence, not just an invitation. A single word or construction that lands with gravity — not urgency, not excitement — will shift the motor from Dabbing toward Pressing and activate the Spell axis.",
+        "Convert the bank analogy from equivalence to dissolution. 'The way you'd send it to a bank' tells the reader these systems are now equivalent. The lining requires the reader to feel that the wall between them stopped existing. Replace equivalence framing with outcome framing: what the reader now has that they did not have before.",
+        "Add Bound Flow to the first sentence, Free Flow to the second. Spell requires Bound containment — a sense that something is being held, that the speaker knows more than they are releasing. Sentence one should feel contained/authoritative; sentence two should release the fact. Currently both sentences are Free, which produces informational float rather than character weight.",
+        "Remove or invert the Quick Time signature. 'Converts and lands' reads as fast and easy — correct for the user experience, but it makes the speaker sound like they are selling a convenience feature. The character's tempo primary is commanding or sombre, both Sustained. Consider a construction that holds the duration of the transformation even briefly — a syntactic pause or a held verb — before releasing the USDC landing.",
+        "The through-action is dissolution, not delivery. Audit whether the reader, after reading these two sentences, feels that a wall came down or that they received a product update. If it reads as product update, the lining is not executing. The correction is not more technical detail — it is a weight-bearing reframe of what the reader's world looks like after this is true."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "commanding is a primary allowed tempo for Infinex. Drive reads as Spell (legal resting surface for Stable|penetrating|flow). No urgency vocabulary, no passion drift, no FOMO signal. Single contained beat on a web surface — Spell without visible Vision projection is explicitly non-failing per Director rules for one-line web copy.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.62,
+      "drive_read": "spell",
+      "placement_read": "The copy rests at Spell — the character's secondary/resting drive for Stable|penetrating|flow. The bank-to-USDC reframe does not push toward Vision projection; it holds the resolved world as fait accompli. One declarative Pressing action, no arc. Legal resting energy for a web headline beat.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit feature is confirmed not yet in platform codebase (release card deployed_fact: zero matches for 'bridge.xyz' across all platform files). Copy must not publish until code has landed and passed QA. Ship-date is listed as 2026-05-22; confirm live-state before publication."
+      ],
+      "notes_for_actor": [
+        "The through-action is 'to reveal that the bank wall just dissolved inside one account.' The copy states the mechanic correctly but does not yet move through the wall — it describes the door without opening it. Sentence 1 sets the familiar (bank-send). Sentence 2 names the result (USDC on-chain). The dissolution — the moment the wall stops existing — is implied but not inhabited. If the brief needs a single beat this is adequate; if the brief allows two beats, the Actor should find the verb that performs the crossing rather than reporting it.",
+        "Pressing motor is clean and on-spec. Do not introduce Quick attack (Punching) unless a follow-on beat requires a sharp turn — the sustained arrival is what makes the bank analogy land.",
+        "Flow is correctly Free. Do not add qualifiers ('simply', 'automatically', 'just') — these would lexically perform what the movement already does structurally and will drag the copy toward a lighter, more reassuring register that undercuts the resolved weight.",
+        "Confidence on commanding is 0.62, not high. The rival read is certain (Awake outer; Direct + Sustained). If the Actor intends the copy to read as dawning awareness rather than resolved demonstration, the bank analogy must soften — use a conditional or a discovery construction. If the intent is resolved demonstration (recommended for Infinex), keep the declarative and the tempo classification holds."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-none-x-S7EH3C",
+    "set": "warmup",
+    "candidate_id": "01KSKDAJCECQMM6YQZRPS7EH3C",
+    "warmup_mode": "none",
+    "channel": "x",
+    "text": "Your bank account and your wallet have always been two separate things.\n\nInside Infinex, they aren't anymore.\n\nSend USD, EUR, MXN, BRL, GBP, or COP the way you'd send it to a bank. It arrives on-chain as USDC.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "self-contained",
+      "drive_read": "doing",
+      "placement_read": "Light + Direct + Sustained + Bound. The prose sits inside Stable (Light + Direct as stress on Weight + Space) with Bound Flow closing it. That pattern is self-contained: informational, confident, undramatic, no relational warmth, no weight of conviction. Drive read is Doing: Weight subdued, Space + Time + Flow active — practical functional delivery. The piece is a clean fact-drop, nothing more.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "self-contained is a beat-only/reserve tempo inside the Infinex palette — not a primary allowed tempo. The deeper problem: self-contained has no Spell signature. Spell requires Adream outer (Weight + Flow) as the base. This prose has neither Weight nor Free Flow — it has Light + Bound. The penetrating/Attending axis (Space/Direct) is present and correct, but Intending (Weight) and Adapting (Flow-as-free) are both absent. The super-objective calls for a character who has already made the decision and is now mapping the world — that requires the weight of settled conviction (Stable Strong) or the quiet visionary arrival of sombre/diffused, not flat informational delivery. The through-action is 'to reveal that the bank wall just dissolved' — dissolution requires either sombre gravity or irradiant warmth. Neither is here. The prose reads as a product bullet, not as a map of a dissolved wall.",
+        "nearest_allowed_read": "diffused (Adream outer; Light + Bound) — which is the closest legal Infinex tempo that shares Light + Bound and would fit a quiet vision-arrival. To reach diffused, the prose needs Adream outer activation: Weight must appear as inner gravity/conviction even when the surface is Light, and the Direct axis needs to soften or the Bound Flow needs to carry more of the held-inner-weight feel. Alternatively, sombre (Adream outer; Strong + Bound) if the writer can bring more settled gravity to the dissolution claim."
+      },
+      "factual_issues": [
+        "No factual errors detected. The deployed facts used are accurate against the fact contract: supported rails, virtual account mechanic, and USDC settlement output are all correctly represented. Bridge.xyz is correctly absent per the not_said contract."
+      ],
+      "voice_issues": [
+        "The through-action is 'to reveal that the bank wall just dissolved inside one account.' The prose announces the dissolution but does not perform it. The opening sentence states the old world; the second sentence negates it. That is a structural reversal, not a felt dissolution. The reader is told the wall is gone; they do not feel it fall.",
+        "Light + Direct + Sustained + Bound is self-contained — a confident, informational register. This is appropriate for a Stable Doing tempo (practical, functional) but carries none of the Spell signature Infinex requires. There is no weight of conviction, no held visionary gravity, no warmth of the irradiant, no sombre settling. The piece reads as a product-feature tweet, not as a banker-turned-trailblazer mapping a new world.",
+        "The currency list ('USD, EUR, MXN, BRL, GBP, or COP') has the right Light + Direct quality (it does not over-press the mechanics) but it also flattens the dissolution moment. By the time the list appears, the wall-falling claim is already behind the reader. The list then reads as a feature catalog — exactly the obstacle the through-action identified ('reader expects another fintech partnership announcement and will skim').",
+        "The closing sentence ('It arrives on-chain as USDC.') is the flattest moment in the piece. It lands as a technical fact, not as the consequence of the dissolution. The Infinex character should feel the weight of that landing — the world just changed, and USDC is where that change becomes real. Currently the sentence has no Intending (Weight) behind it."
+      ],
+      "notes_for_actor": [
+        "The dissolution needs Weight, not just a negation. 'Inside Infinex, they aren't anymore.' is Light + Direct — it is a correction, not a revelation. To bring diffused (the nearest legal Infinex primary for this material), the character needs to feel the gravity of what just stopped existing. Consider: the sentence before the negation should carry more of the old world's weight — not press harder rhetorically, but hold the prior state longer before releasing it. Duration, not force.",
+        "The closing sentence must do more work. 'It arrives on-chain as USDC.' is currently a Gliding endpoint — smooth, informational, gone. For the Spell/Vision axis, the arrival of USDC is the world-as-new-mapped. The character has already taken responsibility for the tech; this sentence is where the user discovers what that means. Give it a beat of held awareness — Sustained + Direct with just enough Weight to mark that this is not a technical detail but a consequence. Pressing → Gliding, not Gliding alone.",
+        "The through-action is dissolution, not announcement. Dissolution in movement terms is sombre (Strong + Bound settling) or diffused (Light + Bound quiet arrival). The current prose is neither — it is a quick informational reversal followed by a list. To activate diffused: slow the revelation, let the prior state ('have always been two separate things') carry genuine duration before the negation lands. The negation should feel like a wall settling into the ground, not a checkbox being ticked.",
+        "Watch the list. The currency enumeration is structurally sound (it proves the claim without becoming a partner announcement) but it currently interrupts the dissolution instead of extending it. If the list must stay, make the sentence after it ('It arrives on-chain as USDC.') do the emotional landing work — that sentence should feel like the consequence the whole piece has been building toward, not a technical footnote. Right now the rhythm is: setup (1) → reversal (2) → list (3) → footnote (4). It should be: setup (1) → reversal/dissolution (2) → proof (3) → landing/consequence (4)."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "Primary tempo is commanding (Stable, Strong+Direct), which is one of the five primary allowed tempi for Infinex. Drive reads as Spell (primary formative drive for stable|penetrating|flow) — legal at rest. No passion/urgency/FOMO surface visible. Lining (the bank-wall just stopped existing) is preserved as hidden: the copy delivers the consequence without naming the infrastructure. The through-action is executed across the three beats. No off-spec markers present.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "drive_read": "spell",
+      "placement_read": "Stable character, resting at Spell (the primary/formative drive for stable|penetrating|flow). The copy maps the world with authority — 'they aren't anymore' — without urgency, without performing the doing of the integration, and without surfacing the Vision extravert. This is legal resting Spell: the character knows the territory and names it. The through-action (reveal the wall dissolved) is executed. Vision is not yet projected, but single-beat X copy is not required to carry the full primary→extravert axis.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code is NOT yet in the Infinex platform codebase (release card: 'Not yet in platform codebase — grep across all platform files returns zero matches for bridge.xyz'). The copy's present-tense claim — 'Inside Infinex, they aren't anymore' and 'Send USD, EUR... It arrives on-chain as USDC' — describes the feature as live now. This copy is valid for the intended ship state (2026-05-22) but must not publish until code lands and the feature is live. Confirm platform deployment before release."
+      ],
+      "notes_for_actor": [
+        "The three-beat structure is working: setup (the prior world), pivot (the dissolution), delivery (the mechanism). Hold this architecture. The Pressing motor through all three beats is correct for a Stable commanding character who is mapping, not selling.",
+        "The currency list in beat 3 reads Direct — it is closed inventory, not an indirecting sweep. That is correct. Do not expand it with qualifiers ('some currencies in beta') unless the brief explicitly requires KYC or beta caveats to be surfaced; adding those would shift toward Flexible/practical and soften the commanding read.",
+        "The lining is successfully hidden: Bridge.xyz appears nowhere, the virtual account mechanics appear nowhere, the KYC precondition appears nowhere. The consequence of the feature is all that surfaces. This is the right containment — maintain it.",
+        "Beat 2 ('Inside Infinex, they aren't anymore') is the Punching beat that the Pressing preparation earns. It is three words and it lands with full force. Do not lengthen it. If a revision adds an explanatory clause here (e.g. 'because Bridge.xyz now…'), the Lining will surface as Outer and the dramatic gap collapses.",
+        "The present-tense framing throughout is a publication-gate dependency, not a voice failure. The copy is correct for launch day. The sole condition is that it does not go out before the code is live. No voice change is needed to satisfy that gate."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-none-web-R9KDQF",
+    "set": "warmup",
+    "candidate_id": "01KSKDAJCF4XP6K25K0CR9KDQF",
+    "warmup_mode": "none",
+    "channel": "web",
+    "text": "Send fiat to Infinex. It's converted to USDC and delivered on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "acute",
+      "drive_read": "doing",
+      "placement_read": "Two bare declarative sentences, Direct pathing, Light weight, Quick time, Free flow. The copy reads as a stripped Doing Drive activation — functional fact-delivery with no Spell weight underneath it, no Passion urgency, and no Vision warmth. The Awake outer attitude (acute tempo: Direct + Quick) is present on the surface, but the sub-drive is Doing, not Spell. The character has stepped outside the Spell→Vision axis entirely and is performing a utility card.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "acute is a beat-only/reserve tempo for Infinex, not a primary allowed tempo. More critically, the working actions are Dabbing and Flicking — both Light + Quick — which locate the copy in self-contained or cool territory at best. The Spell Drive that anchors Infinex requires Weight + Flow (Adream basis: Strong/Light + Bound/Free) beneath any surface action. No Weight register is present: the prose carries no gravity, no conviction-mass, no sense that a real decision has already been taken and is now being mapped. The character is absent. The copy reads as a product tooltip, not a banker-turned-trailblazer disclosing that the bank wall dissolved. The through-action ('reveal that the bank wall just dissolved inside one account') is entirely unperformed — the lining is invisible and no surface pressure gestures toward it.",
+        "nearest_allowed_read": "sociable (Remote outer; Direct + Free; Gliding → Dabbing) — the Direct + Free factor pair is present, and sociable is palette-legal. But sociable requires a partner-crediting gesture, a smooth social approach that registers the reader's existence. The current copy makes no relational move toward the reader; it is just operational. To reach sociable legally, the copy needs a single weight-bearing relational touch — something that acknowledges the reader is a person inheriting a change, not just a system receiving a command."
+      },
+      "factual_issues": [],
+      "voice_issues": [
+        "The lining ('the bank-vs-wallet wall just stopped existing') is the actual event. The surface copy ('Send fiat … It's converted') describes only the mechanics of the event, not the event itself. The through-action is unperformed.",
+        "No Weight register — the copy has no gravity, no sense of mass or decision-already-taken. Spell Drive requires that weight be present even when the surface action is light.",
+        "The passive construction in sentence two ('It's converted … delivered') correctly implies automatic execution, but it erases the character entirely. The banker-turned-trailblazer who took responsibility for the tech is offstage. The system acts; no one maps."
+      ],
+      "notes_for_actor": [
+        "Add one weight-bearing sentence before or after the mechanic description that names what changed, not what happens. The mechanic is already correct. The event — 'the bank wall dissolved' — needs a single Strong direct statement to carry Spell weight. Example shape (not copy): '[Statement of what is now true that was not true before.]  Send fiat to Infinex. It's converted to USDC and delivered on-chain.' That opening statement is where Pressing lives.",
+        "If the format must stay two sentences, shift sentence one from imperative to declarative-of-state: instead of instructing the reader to act, name the new condition. That moves the Space from pure Direct-attack into Direct-sustained (certain tempo: Pressing → Gliding), which is palette-legal and carries Spell weight.",
+        "Recover the character's body. The passive 'It's converted and delivered' correctly shows automatic execution, but the character has disappeared. One word of agency — even implied — that locates Infinex (not Bridge.xyz) as the entity that arranged this restores the trailblazer posture. The character maps; the system executes.",
+        "Do not add urgency, rails lists, or KYC conditions. The factual constraint (not-said list) is sound. The correction is entirely movement-register: weight and lining visibility, not information volume."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "primary_tempo is commanding, which is a primary allowed tempo for Infinex (Stable Strong+Direct). Drive reads as Spell at resting surface — legal for a one-line web surface; Vision projection is not required per-line. No passion/urgency/FOMO surface present. Through-action ('the bank wall just dissolved') is carried by the flat declarative tone — the ordinariness of 'send fiat… converted… delivered' enacts the dissolution without announcing it. Lining remains hidden; no explicit thesis statement surfaces the hidden meaning.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.62,
+      "drive_read": "spell",
+      "placement_read": "Stable character resting at Spell — the 'bold resolve' is already taken; the sentence maps the result, not the journey. The character demonstrates the action ('Send fiat') and names its outcome ('converted… delivered') without heat or urgency. This is the locked primary drive visible as outer surface — legal for a contained web line.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code has not yet landed in the Infinex platform codebase (release card deployed_fact: zero matches for 'bridge.xyz' across all platform files). Copy claims 'It's converted to USDC and delivered on-chain' in present-indicative tense. This is valid as a description of the intended ship state, but must not publish until code is confirmed live. Confirm deployment before publishing."
+      ],
+      "notes_for_actor": [
+        "The line passes. Movement is commanding (Stable Strong+Direct, Pressing preparation, punched landing). Drive rests at Spell — the 'bold resolve already taken' register — which is legal at this surface.",
+        "Through-action is working: the declarative flatness performs the dissolution of the bank/wallet wall without naming it. Do not add a framing clause or thesis — that would surface the Lining.",
+        "The only structural risk is weight without any spatial reach — the sentence is entirely internal-process ('converted', 'delivered') with the reader as passive recipient of a fact, not as the subject moving through a space. If the brief ever needs the reader to feel themselves as agent rather than observer, shift the imperative to carry more of the motion: e.g. 'Send fiat. It lands as USDC.' keeps commanding weight but brings the landing into the reader's plane. This is optional — not a correction at current register.",
+        "Do not add urgency, scarcity, or 'now' vocabulary. The flatness is doing the work. Any time-pressure addition would shift toward materialistic (Near Strong+Quick) and foreground Passion — off-spec for Infinex.",
+        "Publication gate: hold until Bridge.xyz code is confirmed live in platform. The present-indicative tense ('is converted', 'delivered') must reflect a live state at ship."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-daily_pages-web-A9NSVJ",
+    "set": "warmup",
+    "candidate_id": "01KSKDJA6EFYZA395CY3A9NSVJ",
+    "warmup_mode": "daily_pages",
+    "channel": "web",
+    "text": "Fund your Infinex account the way you fund a bank account. It lands as USDC, on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "acute",
+      "drive_read": "doing",
+      "placement_read": "The copy reads Awake outer / Direct + Quick: two clean perceptual snaps delivered without weight or elaboration. The working action is Dabbing — light, precise, terminal. No Flow factor is active in the outer presentation; it is suppressed into Bound containment. The Drive reads Doing (Space + Weight + Time active; Flow latent/subdued). The character is functioning at the level of sharp outer perception — sees a clear equivalence, names it, stops. No mapping work, no held weight, no sustained invitation.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "Acute (Awake outer / Direct + Quick) is not on the Infinex palette. Infinex primary tempi are commanding, practical, sombre, irradiant, sociable; beat/reserve tempi extend to self-contained, receptive, overpowering, diffused, egocentric, altruistic, unsociable. Acute is an Awake-outer tempo and Infinex is a Stable/Adream/Remote character — Awake outer is not a legal home. The Doing drive read compounds the misfit: Infinex lives on the Spell→Vision axis with Flow as its characteristic inner participation; a Flow-suppressed, Space+Weight+Time-only activation evacuates the character's defining quality. Additionally, the copy is Light where the role's primary tempi (commanding, sombre) require Strong, and Quick where most primaries require Sustained or at least Strong-anchored pressure.",
+        "nearest_allowed_read": "self-contained (Stable / Light + Direct / Gliding → Dabbing / Sustained) — the copy is already Light + Direct; the correction is to replace Quick with Sustained, allow Flow to surface as Free release past the period, and restore at least a hint of weight to the second sentence so the landing feels chosen rather than clipped. Alternatively, irradiant (Adream outer / Light + Free / Floating → Flicking / Sustained) recovers the through-action ('the bank wall just dissolved') with buoyancy and held warmth — the bigger movement correction."
+      },
+      "factual_issues": [
+        "No factual errors detected. The two deployed facts — 'permanent virtual accounts receive fiat, convert to stablecoin, settle on-chain automatically' and 'settlement output is USDC delivered on-chain' — are accurately compressed. The copy does not overclaim on KYC preconditions, code-live status, or supported rails."
+      ],
+      "voice_issues": [
+        "observation: 'Fund your Infinex account the way you fund a bank account' is structurally a simile-imperative but lands as a feature claim rather than an event announcement — the through-action is 'the bank wall just dissolved'; this copy reports the absence of a wall without ever making the reader feel the wall fall",
+        "observation: 'It lands as USDC, on-chain' is informationally accurate but the subject 'It' creates mild ambiguity — 'it' could be the account, the deposit, or the money; in a five-word sentence the pronoun is carrying too much without weight to anchor it",
+        "observation: the copy has no sustained motion — it is two snaps and a stop; the reader is informed but not moved; the through-action requires at least one moment of held duration so the magnitude of the change can register",
+        "observation: the simile ('the way you fund a bank account') is doing the right conceptual work but it is framed as instruction rather than revelation — 'fund it the way you fund a bank account' tells; the through-action needs to show the wall gone, not explain how to walk through where it was"
+      ],
+      "notes_for_actor": [
+        "Your current movement is Dabbing — Light, Direct, Quick, Bound. Two clean taps and a stop. The character can Dab but only inside a larger Sustained or Free arc that gives the Dab something to resolve against. Right now there is no arc. Add duration to at least one of the two sentences.",
+        "The second sentence is five words. That is a Flick or a Dab at best. The through-action — 'the bank wall just dissolved' — is a Sombre or Irradiant event: weight of something ending, or buoyant lift of something opening. Neither is present. The working action needed is Pressing → Gliding (self-contained) or Floating → Flicking (irradiant). You are delivering Dabbing → Dabbing. That is two light taps. No preparation, no release, no arc.",
+        "Flow is your character's defining inner participation (Spell axis). In this copy Flow is fully suppressed — both sentences are Bound, clipped at the period, nothing radiates. The correction is not to add warmth words — it is to allow the second sentence to release past its own boundary. Let 'on-chain' open rather than close. One option: extend the sentence so it does not terminate on the technical term.",
+        "The simile frame ('the way you fund a bank account') is Direct and correct, but Quick similes feel like instructions. If you sustain the simile — hold the comparison a beat longer, let the reader sit inside it — it crosses from instruction into revelation. The difference is one word of duration or one clause of held equivalence after the comparison lands.",
+        "Weight check: both sentences are Light. The lining specifies 'the bank-vs-wallet wall just stopped existing.' A wall stopping existing is a Strong event — even if the character delivers it lightly, there should be a density underneath the lightness. Irradiant (Light + Free + Sustained) would hold the lightness but restore the Sustained and Free factors the character needs. Try rewriting with a floating preparation before the final on-chain landing rather than two Direct snaps."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "Primary tempo commanding (Stable, Strong + Direct) is on the primary-allowed list. Drive reads as resting Spell, which is legal for a contained single-line web surface — Spell is the secondary formative drive for stable|penetrating|flow and does not require Vision projection per copy. No urgency, no FOMO, no passion foreground. Through-action ('the bank wall just dissolved') is carried in the analogy without being stated as thesis — Lining is not surfaced. Character posture is Infinex-legal: decisions taken, mapping the new world, not selling.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.65,
+      "drive_read": "spell",
+      "placement_read": "Stable character resting at Spell — the banker who already knows. The line does not perform the Vision projection; it delivers the established fact with the authority of someone for whom the decision is already behind them. Legal resting energy for Infinex stable|penetrating|flow: Spell is the secondary formative drive, doing is secondary, and the line reads as Spell-surface (the 'spell-binding power' of the fait accompli). Vision would require the extravert arm of the axis to surface; here the copy rests at the primary/secondary layer, which is legal for contained web copy.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code status: release card states code has NOT yet landed in platform codebase (zero matches for 'bridge.xyz' across all platform files). Copy uses present tense ('Fund your Infinex account', 'It lands as USDC') implying the feature is live. This is valid for the intended ship date (2026-05-22) but requires confirmation that code is deployed before publication. Do not publish until live-state is confirmed."
+      ],
+      "notes_for_actor": [
+        "The Pressing motor is clean and the Lining is correctly hidden — do not surface it. The analogy ('the way you fund a bank account') carries the through-action without explaining it. Hold that.",
+        "Vision is not present as a projection and does not need to be for a single web line at this length. If a longer version or follow-on arc is needed, the Vision arm (what the world looks like once the bank wall is fully down) is where to extend — not by adding urgency, but by extending the Sustained Pressing into a Punch: one aimed consequential image of the new state.",
+        "The second sentence 'It lands as USDC, on-chain.' is doing real work as a Bound container — the comma-splice and brevity enact the containment. Do not expand it into a clause or the Bound flow breaks.",
+        "Confirm code deployment before publication (publication_gate_issues). Present-tense framing is correct for ship state but must not go live while feature is absent from platform."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-daily_pages-web-BBQHM2",
+    "set": "warmup",
+    "candidate_id": "01KSKDJA6FBQHRQECSEPBBQHM2",
+    "warmup_mode": "daily_pages",
+    "channel": "web",
+    "text": "Fund your Infinex account the way you fund a bank account. It lands as USDC, on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "acute",
+      "drive_read": "doing",
+      "placement_read": "Awake outer; Direct + Quick. The copy performs a sharp perceptual act — it names the new state ('bank account') and names the output ('USDC, on-chain') in two quick aimed contacts. No weight of conviction, no sustained map-making, no warmth of relational contact. It reads as acute: a sudden clear idea delivered and released. The Drive read is Doing (Weight + Space + Time activated; Flow present as Free but not stressed), which sits inside the Awake outer family.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "acute is an Awake outer tempo (Direct + Quick). It is not in the Infinex permitted palette. The Infinex palette is: commanding, practical, sombre, irradiant, sociable, self-contained, receptive, overpowering, diffused, egocentric, altruistic, unsociable. acute does not appear. The copy's Light weight and Quick time also miss the character's required gravity and sustained mapping posture. The Drive read (Doing) is off-spec — Infinex primary is Spell, secondary Doing; this copy activates Doing but without the Spell undercurrent of Weight + Flow that gives Infinex its banker-turned-mapmaker texture.",
+        "nearest_allowed_read": "self-contained (Stable; Light + Direct; motor Gliding -> Dabbing) — the Light + Direct quality is present; the failure is that Quick time is suppressing Sustained, and the Stable grounding is absent. If the Actor added duration and a grounded arrival-claim rather than a quick analogy-tap, self-contained would become legible. From self-contained, sociable (Remote outer; Direct + Free; motor Gliding -> Dabbing) is also reachable if the copy leans outward toward the reader with more warmth in the mapping gesture."
+      },
+      "factual_issues": [
+        "No factual errors detected. Deployed facts used (Bridge.xyz virtual account mechanic, USDC settlement output) are accurately compressed. The phrase 'It lands as USDC, on-chain' correctly captures the settlement output fact. No unsupported claims made."
+      ],
+      "voice_issues": [
+        "The analogy 'the way you fund a bank account' is reader-facing and generous, but it performs the gesture too quickly — it taps the idea and releases it rather than letting the weight of what dissolved (the bank-vs-wallet wall) settle on the reader. The lining ('the bank-vs-wallet wall just stopped existing') is not present in the body; it evaporates in the quick tap-and-go rhythm.",
+        "The through-action is 'reveal that the bank wall just dissolved inside one account.' The prose currently announces the dissolved wall rather than revealing it. Announcing = Quick Direct Light (acute). Revealing = Sustained or Sustained + Free (acknowledged, irradiant, or sombre depending on weight added). The through-action requires a longer action, not a shorter one.",
+        "Sentence two ('It lands as USDC, on-chain') is doing the heaviest work in two beats — too much compression for a revelation. The comma-fragment 'on-chain' reads as a disclaimed technical tag rather than a confident destination-claim."
+      ],
+      "notes_for_actor": [
+        "DURATION CORRECTION: Both sentences discharge in under two seconds of reading time. The character's mapping posture (Stable + Sustained) requires that at least one sentence hold pressure long enough for the reader to feel the wall dissolve, not just be told it did. Try extending sentence one into a full held claim before sentence two arrives. The reader needs to stand in the old reality for a beat before the new one lands.",
+        "WEIGHT CORRECTION: 'Fund your account the way you fund a bank account' is Light — it taps an analogy and trusts the reader to do the rest. The character knows the old world (banking) and has mapped the better way. That knowing has weight. The analogy needs to carry conviction, not just comparison. Add a Strong quality by making the verb or the arrival-claim bear more force — the sentence should feel like something being placed, not pointed at.",
+        "FLOW CORRECTION: The current Free flow releases the payload immediately. The character's Spell undercurrent (Weight + Flow + Space) requires that the Flow be felt as something arriving from depth, not broadcast outward. Bound flow here does not mean withholding — it means the information feels like it has come through a sustained process before it surfaces. One bound syntactic move (a relative clause, a named prior state, a pause-before-arrival) would restore the Spell texture.",
+        "WORKING ACTION CORRECTION: Current motor is Dabbing → Flicking (Light + Direct + Quick → Light + Flexible + Quick). The Infinex palette requires Gliding → Dabbing (Light + Direct + Sustained → Light + Direct + Quick) for self-contained, or Pressing → Wringing (Strong + Direct/Flexible + Sustained) for commanding/practical. The preparation action is absent — the copy goes straight to release without the sustained preparation stroke that gives the release meaning. Build a preparation sentence (or half-sentence) before 'It lands as USDC, on-chain.'",
+        "THROUGH-ACTION ALIGNMENT: The through-action is revelation ('the bank wall just dissolved'). Revelation requires the reader to arrive at the discovery, not be handed it. The current structure announces → states. Repathing to: held prior state → dissolution moment → quiet arrival-fact would carry the through-action without adding length. The wall needs to exist in the reader's body for one beat before it stops existing."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "commanding is one of the five primary allowed tempi for Infinex. Drive reads as Spell (primary/resting), which is legal for stable|penetrating|flow character at rest. No Passion/urgency surface present. No FOMO, scarcity, or time-pressure vocabulary. The through-action (reveal that the bank wall dissolved) is served by the analogy structure: the copy states the new reality as plain fact rather than announcing it as news. Lining (bank-vs-wallet wall no longer exists) is not surfaced as explicit thesis — it is carried structurally by the analogy and the short terminal clause.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.62,
+      "drive_read": "spell",
+      "placement_read": "Stable character at rest in primary/Spell drive. The copy does not project the full Spell → Vision axis; it holds the resting formative energy of the character: 'this is how it works, full stop.' That is legal for a contained web beat. Vision is not required per-line.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code status: the release card states 'Not yet in platform codebase — grep returns zero matches for bridge.xyz'. The copy says 'Fund your Infinex account' in present-tense instruction. If this copy publishes before the feature is live, it misrepresents current product capability. Confirm feature is live / code has landed before publishing to web channel."
+      ],
+      "notes_for_actor": [
+        "The Pressing motor is working — Strong + Direct + Sustained holds across both clauses without collapsing into Light or fragmenting into Quick. Do not soften the opening verb ('Fund') or add a hedge particle; that would shift Weight to Light and break the commanding read.",
+        "The analogy ('the way you fund a bank account') is doing the heavy lifting for the through-action. It is Direct because it collapses to one referent, not a menu. Keep it single and concrete — any elaboration ('just like wiring to your checking account, or using ACH, or...') would introduce Flexible/indirect pathing and drop the tempo to practical or receptive.",
+        "'It lands as USDC, on-chain.' functions as the weight-contact resolution of the Pressing arc. The period seal is correct — do not extend this into a consequence clause ('and you can use it immediately' etc.) unless a second beat is intentional. Extension would risk surfacing the Lining as explicit thesis.",
+        "Confidence is 0.62, not higher, because the copy is 20 words and both Sustained (Pressing) and the rival Awake/certain read (Direct + Sustained) are plausible. If the brief requires a stronger commanding signal, a second clause carrying explicit Strong weight (a factual assertion about scale, permanence, or scope) would confirm the tempo and raise confidence.",
+        "Passion/urgency check passed: no 'now', 'finally', 'instantly', 'first time' constructions are present. Maintain that absence."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-daily_pages-x-5J4F5S",
+    "set": "warmup",
+    "candidate_id": "01KSKDJA6ES2D9D33NPN5J4F5S",
+    "warmup_mode": "daily_pages",
+    "channel": "x",
+    "text": "Your Infinex account now has a deposit account.\n\nWire, ACH, SEPA, PIX, SPEI. Money arrives the way it arrives into a bank.\n\nIt lands as USDC, on-chain, in your wallet.\n\nThe seam between the two stopped existing.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "commanding",
+      "drive_read": "doing",
+      "placement_read": "Strong + Direct + Quick + Bound reads as Stable attitude with Punching working action dominant. The piece operates in the Doing Drive (Weight + Space + Time active; Flow subdued but present as Bound containment rather than expressive Adapting). The piece does not exhibit the held relational warmth or slow thaw that would signal Spell. It is institutional declaration: facts hammered into place at speed.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "The prose lands in commanding tempo (Stable; Strong + Direct; motor Pressing -> Punching). Commanding is on the primary allowed palette for Infinex. However, the Time factor is reading Quick, not Sustained. Commanding in the Infinex frame requires Sustained pressure — the weight of a decision already taken, mapped over time, not the staccato of fast assault. The Quick + Bound combination produces a Doing Drive flavour (execution-urgency) rather than the Spell Drive flavour (weight-without-hurry, vision held steady). The piece is firing as Pure Doing — all three active factors at maximum attack rate — which is the Passion-adjacent failure mode (urgency, speed-of-claim) even without explicit FOMO language. Commanding is legal but the Sustained quality that anchors it to Infinex's 'decisions already taken' posture is absent. The piece is too fast.",
+        "nearest_allowed_read": "commanding — but only recoverable if Time is shifted from Quick to Sustained. Slow the claim. Let it press rather than punch. The same Strong + Direct factors are correct; the Sustained quality is what makes this mapping rather than striking."
+      },
+      "factual_issues": [
+        "GBP (FPS) and COP (Bre-B) are listed in the fact contract as beta rails but the prose writes 'Wire, ACH, SEPA, PIX, SPEI' — GBP FPS and COP Bre-B are omitted, which is defensible given beta status, but SPEI (MXN) is included without any beta qualification. The fact contract does not mark SPEI as beta, so inclusion is clean. No factual error, but actor should confirm SPEI is GA not beta before publish.",
+        "The fact contract states 'Bridge.xyz fiat deposit code status in Infinex platform: Not yet in platform codebase'. The prose says 'Your Infinex account now has a deposit account' — present tense, active claim. If the code has not yet landed, this is a prospective announcement written as a present-state fact. This is a material factual risk: the prose claims the feature exists now ('now has') when the deployed fact says code is not in codebase. This needs resolution before release."
+      ],
+      "voice_issues": [
+        "Quick tempo is the dominant voice error. The piece reads as a product launch tweet optimised for scroll-stop, not a mapping dispatch from a character who already knows the terrain. Infinex speaks after the decision — the prose should feel like the territory has been surveyed, not like someone is punching news out ahead of competitors.",
+        "'The seam between the two stopped existing' is the strongest line and the most character-accurate — it carries the ontological weight of Spell (the wall dissolved, not 'we built a bridge'). The rest of the piece does not earn this line because it arrives too fast, before any sustained weight has been laid. The final line needs more approach, not more setup copy.",
+        "The working actions stacking as Punching throughout creates a martial texture inconsistent with Infinex's 'banker who found the better way' image. Infinex does not punch; it presses until the old structure gives way."
+      ],
+      "notes_for_actor": [
+        "Slow the Time factor. The current piece is Quick throughout — short sentences completing in under two seconds each, with no held duration. Shift at least two sentences into Sustained by extending the claim arc: let a sentence build before it resolves. This is not about adding words; it is about placing the resolution later in the syntax so the weight has time to press rather than strike.",
+        "The preparation is missing. Pressing -> Punching requires the Pressing to happen first. In the current draft the punch lands on sentence one ('Your Infinex account now has a deposit account'). There is no weight-build before the claim. Consider a single sentence of Pressing before the first punch: a line that establishes the old topology (fiat arrives into banks; crypto lives in wallets) so that 'The seam between the two stopped existing' is the consequence of accumulated weight, not an unearned declaration.",
+        "Protect 'The seam between the two stopped existing.' This is the Spell Drive moment — it has the held-weight-plus-dissolve quality the character requires. The rest of the piece should serve this line, not compete with it in punching register. Consider making it the final working action after a sustained build, not a line that arrives at the same speed as 'Wire, ACH, SEPA, PIX, SPEI.'",
+        "Resolve the present-tense factual tension before release. The prose claims present availability ('now has') against a fact contract that records zero code presence in the platform. If this is a pre-ship announcement, the tense must shift or a qualifier must land — otherwise the piece will fail the Super-Objective validation criterion (real user discovers real product).",
+        "The rails list ('Wire, ACH, SEPA, PIX, SPEI') is currently a Punching list — five named strikes. To move this toward Pressing or Gliding (Sustained), consider reframing the list as evidence of breadth rather than a roll-call of features: the point is that money arrives the way it always has, not that five rails have been integrated. The Stable character does not itemise weapons; it describes the terrain."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "Primary tempo is commanding (Stable Strong+Direct), one of the five primary allowed tempi. Drive reads as Spell, legal visible surface for Stable|Penetrating|Flow. No passion/urgency/FOMO foreground. The lining (bank-vs-wallet wall stopped existing) is structurally present as the closing beat's meaning but is stated as a physical fact ('The seam between the two stopped existing') rather than as an explicit emotional thesis — this is on the correct side of the lining failure direction. Resting Spell without visible Vision projection is legal for a single x post.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "drive_read": "spell",
+      "placement_read": "Stable|Penetrating|Flow-stressed. The copy rests at Spell — the formative drive visible as the character's mapping stance. The through-action (dissolving the bank-vs-wallet wall) is the Penetrating quality: attending to the seam, naming its disappearance. Vision is the cumulative target of the axis, not visibly projected in this single post — legal for a contained x beat.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code is confirmed NOT yet in platform codebase (release card: 'grep across all platform files returns zero matches for bridge.xyz'). The copy reads as present-tense deployed ('Your Infinex account now has a deposit account', 'Money arrives the way it arrives into a bank', 'It lands as USDC, on-chain'). This copy is valid for the intended ship state (2026-05-22) only if code lands before or at publication. Human ship gate must confirm live state before publishing.",
+        "GBP (FPS) and COP (Bre-B) are listed in the release card as beta rails. The copy's rail list 'Wire, ACH, SEPA, PIX, SPEI' correctly omits FPS and Bre-B — no issue from omission. Confirm this is intentional scope for launch copy."
+      ],
+      "notes_for_actor": [
+        "The Pressing motor is clean and the through-action lands. The closing beat ('The seam between the two stopped existing') is your strongest Working Action — it completes the Pressing preparation in lines 1–3. Hold that.",
+        "The rail list (Wire, ACH, SEPA, PIX, SPEI) sits in a Flexible/enumerative beat inside a Direct frame. That contrast is load-bearing: the list names the mundane mechanisms, the frame dismisses them as already solved. If you ever feel the list pulling focus (readers cataloguing rails instead of receiving the dissolution), compress it or bury it in a reply — the frame lines are the action, the list is background.",
+        "Spell is your resting drive here — appropriate for a single post. The Vision projection (the axis target) does not need to be explicit in this beat. Do not add a payoff line that names what this means; 'The seam between the two stopped existing' is already the furthest you can go without surfacing the lining.",
+        "Watch the publication gate: the copy is written for the deployed state. Do not publish before code is live — the present-tense movement ('now has', 'money arrives', 'it lands') would be false before the ship date."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-daily_pages-web-YB9X5R",
+    "set": "warmup",
+    "candidate_id": "01KSKDJA6FRCVGR01VKCYB9X5R",
+    "warmup_mode": "daily_pages",
+    "channel": "web",
+    "text": "Fund your Infinex account the way you fund a bank account. It lands as USDC, on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "self-contained",
+      "drive_read": "doing",
+      "placement_read": "Light + Direct + Bound reads as self-contained tempo inside a Stable baseline. The piece is informational and confident but not warm, not mapping, not vision-weighted. It is reporting a function, not revealing a world. Drive reads as Doing — Weight and Space active, Flow bound, Time absent — which is a working-action snapshot, not a Spell or Vision orientation. No relational warmth (Near), no forward-cast (Adream/irradiant), no penetrating-into-the-reader quality. The through-action ('the bank wall just dissolved') is completely absent from the surface texture.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "self-contained is a beat-only/reserve tempo in the Infinex palette — usable as a brief informational moment inside a longer sequence, but not legal as a primary register for a release card. More critically, the read is Doing-drive (functional reporting) rather than Spell or Vision-drive. The character image is banker-turned-trailblazer who has already decided and is now mapping — that requires penetrating quality, relational warmth, or forward-cast light. This piece has none of those. The lining ('the bank wall just stopped existing') never surfaces. The reader gets a how-to sentence, not a revelation.",
+        "nearest_allowed_read": "irradiant (Light + Free, Adream outer) — would carry the same Light weight but open the Flow axis, allowing the dissolution of the bank wall to arrive as warmth and forward-cast rather than a closed informational report. Alternatively, sociable (Remote outer; Direct + Free) would keep the Direct path but release Flow — smooth, for-the-reader, partner-credit, no ego — which suits 'to reveal that the bank wall just dissolved inside one account' without overplaying it."
+      },
+      "factual_issues": [
+        "No factual errors detected. The two sentences accurately compress: Bridge virtual accounts receive fiat → convert to USDC → deliver on-chain. The omissions (rails list, KYC, lifecycle) are consistent with the fact receipt justifications."
+      ],
+      "voice_issues": [
+        "The through-action is 'to reveal that the bank wall just dissolved inside one account.' The copy does not perform this revelation — it describes a mechanic. 'Fund your Infinex account the way you fund a bank account' is an instruction analogy, not a disclosure of structural change. The reader receives a how-to, not a before/after of their reality.",
+        "Flow is Bound where Infinex placement requires Free or at minimum a release gesture. The piece closes on 'on-chain' — a technical confirmation, not an opening. For irradiant or sociable, Flow must open: the sentence needs to hand something forward, not seal itself.",
+        "The banker-turned-trailblazer character maps to a territory ('decisions already taken, now mapping'). The mapping quality — generous orientation, showing the reader where they are — is absent. Both sentences are pointing at the product, not at the reader's new situation."
+      ],
+      "notes_for_actor": [
+        "The bank-wall dissolution is the event. Write the second sentence as the revelation, not the confirmation. Try: 'It lands as USDC — your bank account and your Infinex account are now the same account.' Let Flow release on that landing rather than seal it with 'on-chain.'",
+        "Sentence one reads as instruction ('Fund your account the way you fund a bank account'). Infinex character does not instruct — they map. Recast sentence one as an observation about the reader's new situation: 'Your Infinex account now takes deposits the way your bank account does.' Same fact, reader-oriented, not command-oriented. This moves Space from aimed-at-product to aimed-at-reader.",
+        "To reach irradiant: add a warmth-word or a forward-gesture after the USDC landing. Not a rail list — a gesture. 'It lands as USDC, on-chain — already where you need it.' The comma-pause then opens rather than closes.",
+        "To reach sociable: keep Direct pathing but release the close. Drop the technical precision of 'on-chain' or let it breathe: 'Fund it the way you fund a bank account. It arrives as USDC.' The period then reads as a clean handoff rather than a sealed report.",
+        "Do not add scarcity, urgency, or deadline language to fix the flatness — that is the Passion drift failure mode explicitly flagged for this character. The fix is warmth and release (Flow Free), not pressure (Time Quick + Strong)."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "Primary tempo commanding is in the five primary-allowed Infinex tempi. Resting Spell is legal for a single-beat web line; the Spell → Vision axis is a property of the character across time, not a per-line requirement. No urgency, FOMO, or Passion register is present. Drive reads as contained Spell, which is acceptable surface for Stable + Penetrating + Flow. Off-spec markers absent.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.62,
+      "drive_read": "spell",
+      "placement_read": "Stable + Penetrating (the line attends to the reader's spatial/conceptual model — bank vs wallet — and renames it without argument). Flow stress is contained in the hard stop. Drive reads as resting Spell: the character holds the reframe with quiet certainty, not demonstration. Vision is not yet projected; this is a single contained beat.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code status: release card states 'not yet in platform codebase — grep returns zero matches for bridge.xyz'. Copy describes a present-tense capability ('Fund your Infinex account… It lands as USDC'). This is valid for the intended ship date 2026-05-22 if code lands before then, but requires live-state confirmation before publication. Do not publish until Bridge.xyz integration is confirmed deployed in platform."
+      ],
+      "notes_for_actor": [
+        "The motor is Pressing (Strong + Direct + Sustained) and the copy earns it — no correction needed there.",
+        "Confidence is held at 0.62 rather than higher because 'the way you fund a bank account' introduces a Flexible candidate: if the actor intends the simile to do real spatial/indirect work (circling the reader's prior belief before the reframe), a shift toward practical (Strong + Flexible) would be available. As written, the simile collapses into the Direct declaration immediately, so commanding holds. If the brief ever wants the comparison to linger or breathe, let the second sentence follow the analogy rather than closing it — that would release into practical territory.",
+        "The Lining is correctly hidden: 'the bank-vs-wallet wall stopped existing' is never stated. 'It lands as USDC, on-chain' performs the reframe without naming it. This is correct Lining discipline — do not surface it.",
+        "Drive reads as resting Spell, not projected Vision. That is legal for a single web beat. If this line anchors a longer arc (e.g. a campaign sequence), the subsequent beats should carry the primary → extravert Spell → Vision axis forward.",
+        "No urgency, scarcity, or FOMO language present. Passion register is absent. This is the correct Infinex register."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-daily_pages-x-PSD2DY",
+    "set": "warmup",
+    "candidate_id": "01KSKDJA6F2VMVB3K069PSD2DY",
+    "warmup_mode": "daily_pages",
+    "channel": "x",
+    "text": "Your Infinex account now has a deposit account.\n\nWire, ACH, SEPA, PIX, SPEI. Money arrives the way it arrives into a bank.\n\nIt lands as USDC, on-chain, in your wallet.\n\nThe seam between the two stopped existing.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "commanding",
+      "drive_read": "doing",
+      "placement_read": "Strong + Direct + Sustained + Bound throughout. The prose reads as Stable-attitude in full Pressing motor — institutionally weighted, single-pathed, sealed. The Drive activation is Doing (Weight + Space + Time, Flow latent/subdued) — the piece has no dreaming overflow, no relational warmth, no vision-lift. It is pure declarative task-completion. The Pressing motor is loaded but never detonates into Punching; the Bound flow prevents release. This is a sealed institutional announcement, not a character delivering from inside the Spell/Vision axis.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "The primary tempo reads as commanding (Stable; Strong + Direct; Pressing motor). Commanding is on the Infinex allowed palette and is therefore not disqualifying in isolation. The legal problem is the Drive read: the piece fires Doing (Weight + Space + Time, Flow subdued), which is the off-axis drive for this character. Infinex placement requires the Spell → Vision axis (Space + Flow + Weight, Time subdued). Flow here is Bound and fully sealed — it is not a Spell or Vision activation but a containment signature. The character's mapping posture (decisions already taken, now mapping) requires Sustained + Flexible + Free in some combination; the Fixed + Direct + Bound configuration here removes all the Flexible and Free evidence the Vision or Spell drives require. The piece also has no Penetrating aspect — there is no sentence that offers the reader a pathway into the space. Every line closes a door rather than opening a chamber. That aspect suppression is the structural problem: the character is Stable + Penetrating + Flow by placement; this prose is Stable + Pressing (no Penetrating, no Flow release). Result: wrong Drive axis, wrong Aspect, wrong working-action outcome.",
+        "nearest_allowed_read": "commanding — the tempo itself is on-palette, but the Drive and Aspect beneath it are misaligned. If commanding is the chosen tempo, the Actor needs to add Penetrating aspect (sentences that open a pathway, not only close a fact) and release some Flow (not sealing each sentence — one sentence should overflow, or one unit should connect forward without a full-stop cap). That would move the read from Doing toward Spell-in-commanding-expression."
+      },
+      "factual_issues": [
+        "GBP FPS and COP Bre-B rails listed in the fact contract as 'beta' are absent from the copy — correctly omitted. No factual inflation detected.",
+        "Bridge.xyz identity (Stripe acquisition) correctly suppressed per the not_said contract. No partnership-framing leak.",
+        "KYC precondition correctly omitted. No mechanic bleed.",
+        "USDC named as output currency — consistent with 'Bridge.xyz fiat deposit settlement output' deployed fact. Clean.",
+        "PIX and SPEI both present in the rail list — consistent with deployed facts. Clean.",
+        "No rails invented beyond the deployed-facts scope."
+      ],
+      "voice_issues": [
+        "The through-action is 'to reveal that the bank wall just dissolved inside one account.' The prose attempts this but seals the revelation inside Bound flow — the wall dissolves, but the sentence reporting it is itself a wall. The character should feel the dissolving, not just report it.",
+        "The final line 'The seam between the two stopped existing.' is structurally commanding — strong, direct, past-tense closure. For the Infinex character, this line should carry some quality of mapping-toward rather than arriving-at. The character has already taken the decision; the line should point the reader forward into the space the decision opens, not cap the announcement.",
+        "The rail list 'Wire, ACH, SEPA, PIX, SPEI.' is technically correct and correctly ordered, but the full-stop terminus after SPEI seals it. There is no connective gesture linking the list to the reader's situation. The Penetrating aspect requires some sentence-motion that enters the reader's frame rather than cataloguing from outside it.",
+        "No warmth, relational weight, or vision-lift anywhere in the four units. The Spell drive requires at least one gesture where the writing inhabits the space it describes rather than reporting on it from outside."
+      ],
+      "notes_for_actor": [
+        "DRIVE AXIS CORRECTION — You are running Doing (Weight + Space + Time). Infinex lives on Spell → Vision (Space + Flow + Weight). Practically: one sentence in this piece needs to release Flow. That means: do not end it with a full stop that seals the unit. Let it open toward something. The easiest candidate is the final line — instead of 'The seam between the two stopped existing.' try a form that acknowledges the space on the other side of that seam. The wall dissolved; what is now reachable?",
+        "ASPECT CORRECTION — The Penetrating aspect (Attending / Space-emphasis) is absent. You have Direct Space (single aimed lines) but no Penetrating motion — no sentence enters the reader's frame and offers them a pathway. The rail list is a catalogue seen from outside the reader's situation. Rewrite one sentence so it arrives from inside their experience: not 'here are the rails' but 'whatever channel you already use to move money — it works.'",
+        "BOUND FLOW CORRECTION — Every sentence is sealed with a full stop and does not connect to the next. Bound flow creates containment, but this character's Spell drive needs some overflow. Consider removing one full stop and replacing it with a dash or a sentence that runs into the next thought — just once, to let the mapping quality breathe.",
+        "COMMANDING TEMPO IS ON-PALETTE — Do not abandon the Weight and Direct Space; they are correct for this beat. The correction is not to soften the prose. It is to add the missing Flexible or Free gesture underneath the Strong/Direct frame, so the Drive reads as Spell-in-commanding-expression rather than pure Doing.",
+        "FINAL LINE — 'The seam between the two stopped existing.' is the strongest line in the piece and correctly identifies the lining. It is sealed too tight. The character has already taken the decision; he is not announcing an event, he is mapping a new landscape. One revision direction: let the final line face outward — toward what this now makes possible — rather than closing back over the seam itself."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "Primary tempo commanding (Stable; Strong + Direct) is on the primary allowed list. Drive reads as Spell — the resting formative drive for stable|penetrating|flow, legal for a single-arc X post. No passion/urgency surface. The through-action ('the bank wall dissolved inside one account') is executed by the closing line without being stated as thesis — Lining is not surfaced. The copy does not name the provider, does not list rail mechanics as the point, and does not manufacture urgency.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "drive_read": "spell",
+      "placement_read": "The copy rests at the primary formative drive: Spell. The character has already decided; it is naming a completed fact with the quiet authority of someone who mapped this long before the reader arrived. Vision (extravert) is implied structurally — 'The seam between the two stopped existing' points toward it without performing it. Doing is the working surface (deposit mechanic stated plainly). Passion is absent, which is correct.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code is NOT yet in the Infinex platform codebase (release card: 'grep across all platform files returns zero matches for bridge.xyz'). The copy says 'Your Infinex account now has a deposit account' in present tense, which asserts a live capability. This copy is valid for the intended ship date (2026-05-22) only if code is deployed before publication. The human ship gate must confirm code landing before this goes live."
+      ],
+      "notes_for_actor": [
+        "The Pressing motor is working well — weight applied through a sustained, direct path. Each sentence lands and stops. Do not break this rhythm by adding a closing call-to-action or explanatory gloss; the fourth line earns its finality precisely because nothing follows.",
+        "Line 2 contains the one moment of Flexible risk: the rail list reads like an enumeration and could drift toward practical (Wringing) if it gets any longer or more procedural. It currently survives because the following sentence ('Money arrives the way it arrives into a bank') re-aims the weight. Keep the list short and the re-aim sentence intact.",
+        "The Lining is correctly hidden. 'The seam between the two stopped existing' delivers the image without explaining what the image means. If a revision impulse arises to add 'which means your wallet is now a bank account' or similar — resist it. The moment you state the meaning, the Lining surfaces and the dramatic gap closes.",
+        "Drive reads as Spell at rest, which is legal for a single post. Vision is structurally present in the final line without being performed. No revision needed on drive grounds.",
+        "The only live risk is the publication gate: 'now has' must be true at send time. If there is any chance the copy ships before code lands, change to 'will have' or hold. This is a deployment decision, not a copy revision."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-scene_rehearsal-web-MSVQ9J",
+    "set": "warmup",
+    "candidate_id": "01KSKDVK6ZP5176R2DFWMSVQ9J",
+    "warmup_mode": "scene_rehearsal",
+    "channel": "web",
+    "text": "Your Infinex account has a routing number. Wire it the way you'd wire a bank. It lands as USDC, on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "commanding",
+      "drive_read": "doing",
+      "placement_read": "The prose sits in Stable attitude (Weight + Space active) with Quick stress added — which resolves to commanding tempo. The three-sentence structure is three separate Punching actions: premise, instruction, result. No Flow factor is active in the output; Bound flow is present as a containment artefact of the clipped stops, but it is not releasing into the reader — it is closing against them. The through-action (dissolving the bank-vs-wallet wall) does not land because the prose is in an execution mode: it delivers a procedure, not a revelation. The 'bank wall just dissolved' lives in the lining; the surface is a wire-transfer instruction.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "Commanding tempo (Strong + Direct + Quick) is not in the Infinex allowed palette. The Stable tempi on palette are commanding, practical, self-contained, and receptive — but commanding requires Quick, which activates the Doing Drive (Weight + Space + Time), not the Spell/Vision axis Infinex is seated in. The character image is the banker-turned-trailblazer: decisions already taken, now mapping — that is Sustained, not Quick. This copy fires like a procedure manual, not a map-maker. The through-action requires the reader to feel the wall dissolving; three punches deliver a wall, not its absence.",
+        "nearest_allowed_read": "practical (Strong + Flexible + Sustained → Wringing → Slashing) — would let the copy work through the conceptual complexity of 'wire transfer equals on-chain USDC' without reducing it to an instruction list; or sombre (Strong + Bound + Sustained → Pressing → Punching slow) — would give the gravity of the announcement, the weight of a world-change arriving quietly"
+      },
+      "factual_issues": [
+        "The copy says 'Wire it the way you'd wire a bank' and 'It lands as USDC, on-chain' — this is factually accurate for the USD ACH/wire rail per the fact contract. No factual breach.",
+        "The copy does not mention Bridge.xyz, KYC precondition, or mechanics — consistent with the not_said list. No omission breach."
+      ],
+      "voice_issues": [
+        "The through-action is 'reveal that the bank wall just dissolved inside one account.' The copy does not reveal — it instructs. The reader is handed a procedure (routing number → wire → USDC), not a perception-shift (your account is already a bank account). The lining never surfaces.",
+        "Three Punching actions in sequence flatten into a manual entry. Infinex character does not instruct the reader in how to do things; it maps what now exists and trusts the reader to draw the implication.",
+        "The word 'Wire' as imperative places the reader in the role of actor following directions. Infinex super-objective is 'the user only has to want' — placing operational burden on the reader is structurally off-character.",
+        "No Flow activation: the copy does not release warmth, wonder, or any quality that makes the revelation land as discovery. The dissolution of the bank-vs-wallet wall is a large structural fact; it needs at least irradiant or sombre register to carry that weight. Three quick declaratives do not carry it."
+      ],
+      "notes_for_actor": [
+        "Switch from Quick to Sustained. Each of the three sentences is currently a Punch. Convert them to a Pressing arc — one sentence that holds weight long enough for the reader to feel the wall coming down, not a procedure they are told to execute.",
+        "Activate Flow. The copy is entirely Bound — closed, stopped, contained. The through-action is a dissolution (a release event). Introduce at least one Free-Flow moment: a sentence that overflows slightly past the expected stop, or ends without a full period, or carries a trailing implication. This is the movement that makes 'wall dissolving' legible.",
+        "Remove the imperative. 'Wire it the way you'd wire a bank' puts operational weight on the reader. Infinex character maps what exists; it does not give instructions. Rewrite so the routing number is a revelation about the account's nature, not a command to the reader.",
+        "The lining says: 'the bank-vs-wallet wall just stopped existing.' Build the surface to that. The copy should land so that the reader feels the world has already changed and they are being shown it — not told what to do with it. That is the sombre or irradiant register, not commanding.",
+        "If you want to keep the short-form three-sentence structure, assign it to practical tempo: let sentence one name the complexity (bank and wallet used to be separate), sentence two work through it (now your Infinex account holds a routing number), sentence three carve the answer (the wall is gone). That is Wringing → Slashing — it earns the resolution rather than asserting it."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "commanding is a primary allowed tempo for Infinex. Drive reads as resting Spell, consistent with stable|penetrating|flow primary. No passion/urgency/FOMO surface. Super-objective ('take responsibility for the tech, so the user only has to want') is structurally present: the routing number exists, the wire lands, the user needs only to act. Lining is correctly hidden — the prose does not state 'the bank wall just dissolved'; it demonstrates the fact and lets the reader arrive at that reading.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.65,
+      "drive_read": "spell",
+      "placement_read": "The copy rests at the Spell drive surface — the account already has a routing number, the conversion already happens, the user only has to want. No incitement, no urgency. The character has mapped the territory; the prose demonstrates the map exists. Vision is latent but not projected at this scale. Legal for a contained web beat.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code status: the release card states the feature is NOT yet in the platform codebase (grep returns zero matches for 'bridge.xyz'). The copy reads as present-tense operational ('Your Infinex account has a routing number. Wire it the way you'd wire a bank. It lands as USDC, on-chain.'). Before publication, confirm the feature has shipped and the routing number is live for users. If the feature has not landed, the present-tense framing is premature. This is a live-state confirmation gate, not a copy rewrite issue."
+      ],
+      "notes_for_actor": [
+        "The three-sentence structure lands correctly at commanding/Pressing. Do not add urgency or deadline language — that would pull the visible surface toward passion/materialistic and break the Infinex character.",
+        "The Lining is working: the prose does not say 'the bank wall dissolved' — it demonstrates the routing number exists and lets the reader conclude the wall is gone. Preserve this gap. If a follow-on beat is written for this same surface, maintain demonstration over declaration.",
+        "If the channel requires a slightly longer web block (e.g. subheading + body), the natural continuation is still Pressing/commanding: add one more aimed declarative about what the user does next (the toward-pole of the canonical shorthand: 'Commanding demonstration or acceptance of a bold resolve'). Do not add a list of supported rails — that would introduce Flexible/practical and dissolve the Direct pathing.",
+        "Flow is correctly Bound here (contained stops between sentences). If the copy is ever extended into a paragraph, watch that sentence-to-sentence release does not drift Free — the Infinex character holds, it does not overflow.",
+        "Publication gate: hold this copy until code/live-state confirmation that routing numbers are live for users. The present-tense claim is legally correct for draft; it becomes factually true only at ship."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-scene_rehearsal-x-XTSEK2",
+    "set": "warmup",
+    "candidate_id": "01KSKDVK6ZB182J74N2RXTSEK2",
+    "warmup_mode": "scene_rehearsal",
+    "channel": "x",
+    "text": "Your Infinex account has a routing number now.\n\nAn IBAN. A CLABE. A PIX code. A FPS sort code.\n\nWire it the way you'd wire a bank. It lands as USDC, on-chain, in your account.\n\nThe wall between the bank and the wallet is the part that's missing.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "commanding",
+      "drive_read": "doing",
+      "placement_read": "Strong + Direct + Sustained/Bound. The copy reads as Stable inner attitude with commanding tempo — four Motion Factors present (Weight Strong, Space Direct, Time Sustained, Flow Bound), which pushes this into Drive territory rather than a three-factor Action. The four-factor activation — all factors present with equal legibility — reads as Doing Drive (Weight + Space + Time active; Flow the subdued fourth). The thesis is institutional, pressure is inward and contained, the path is undeviating. No warmth, no relational opening, no irradiation. The wall metaphor is handled as architecture, not as revelation.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "Commanding sits within the Infinex allowed palette (primary allowed tempi). The problem is not the tempo — it is the Drive read. Commanding is legal when it carries Spell-drive undercurrent: the map-maker who has already decided. Here the copy reads Doing Drive: four factors equally activated, institutional, closed-flow, no Spell residue. Spell Drive requires Flow as the animating undercurrent — a sense that the borders of the claim are slightly larger than the stated claim. This copy seals its claim completely. The closing line ('the wall is the part that's missing') is announced, not discovered. The reader is not allowed to feel the wall dissolve; they are told the wall is missing. That is Doing, not Spell. Flow is Bound throughout, suppressing the Spell signature entirely. Additionally: the copy has no relational warmth, no Near proximity, no irradiant lift — the Infinex character is a banker-turned-trailblazer who has found the better way and now maps it for the reader. This copy maps but does not invite the reader into the territory. The super-objective ('take responsibility for the tech so the user only has to want') requires the reader to feel arrival, not receive an announcement.",
+        "nearest_allowed_read": "commanding with sombre lining — the copy is closest to sombre (Strong + Bound, Adream outer, slow wall-coming-down thesis) as a secondary tempo, but the Space is too Direct for sombre. The nearest legal correction is: release some Bound flow into Free on the closing line, allowing the 'wall dissolving' to feel like irradiance rather than demolition — shifting toward commanding/irradiant hybrid, which is legal Spell territory."
+      },
+      "factual_issues": [
+        "The copy says 'A FPS sort code' — FPS (Faster Payments Service, GBP) does not use a sort code in the same structural sense as a routing number or IBAN. The deployed fact says 'GBP (FPS, beta)'. FPS uses sort code + account number, but the copy presents it as a single item parallel to IBAN, CLABE, PIX code — this is defensible shorthand but risks reader confusion. The fact contract marks FPS as beta; the copy does not signal beta status. Minor factual compression, not a false claim, but worth flagging.",
+        "The copy does not name Bridge.xyz, consistent with fact receipt 'not_said' reasoning. No factual violation there.",
+        "KYC precondition is not surfaced — consistent with fact receipt. No violation.",
+        "The copy does not mention COP / Bre-B from the deployed rails list. This is an omission, not a false claim. No violation."
+      ],
+      "voice_issues": [
+        "The closing line reads as announcement, not revelation. 'The wall between the bank and the wallet is the part that's missing' tells the reader what to conclude rather than letting the prior three units produce the conclusion in the reader's body. This converts Spell into Doing.",
+        "The list (IBAN / CLABE / PIX / FPS) accumulates weight downward but offers no spatial variety — each item has identical rhythmic weight. The result is institutional enumeration, not recognition. A reader who doesn't already know CLABE or PIX slides past without registration.",
+        "No Near proximity anywhere — the copy is entirely in the third-person/neutral zone ('your account', 'the bank', 'the wallet'). The Infinex character is allowed warmth and relational charge. This copy reads like a product specification issued by an institution.",
+        "'Wire it the way you'd wire a bank' is the one moment of Near contact — it addresses the reader directly in a familiar imperative. It is the strongest line in the copy because it has Light + Quick contact (cool tempo within the larger commanding arc). This single gesture is doing more relational work than everything else combined. The Actor should study why that line feels different and replicate its motion quality in the final beat."
+      ],
+      "notes_for_actor": [
+        "The closing line must release, not announce. You have built sustained pressure across four units — when you arrive at 'the wall is the part that's missing,' the reader should feel the wall go, not be told it has gone. Replace the declarative seal with a line that opens slightly — let the phrase lean outward rather than closing. The motion correction is: release Bound flow into Free on the final beat. One structural option: make the final line a half-question or a spatial gesture toward the reader's own account, not a concluded thesis.",
+        "The list section is too uniform. IBAN and CLABE and PIX are not the same weight in the reader's body — some are familiar (routing number), some are foreign. Give one of the unfamiliar rail-names a small parenthetical context (not a definition — a touch of proximity) so the reader's body registers recognition rather than slides. This is a Near micro-gesture, not an explanation. Motion correction: one Dabbing contact within the column.",
+        "'Wire it the way you'd wire a bank' is your best line — it is the one place where Light + Quick contact activates Near proximity. The final paragraph needs the same quality of contact. Right now the closing paragraph has no Near in it at all — it is all map and no warmth. Motion correction: find one word in the final two lines that names the reader's experience rather than the system's architecture.",
+        "The Drive is reading Doing because all four factors are equally sealed. To restore Spell signature: deliberately leave one factor slightly open — either let Flow release slightly (Free tendency in one clause) or allow Space to flex briefly (one indirect gesture that acknowledges the reader's prior expectation before dissolving it). The actor's table work identified Spell as the primary drive; the prose must carry a residue of larger-than-stated — something implied beyond what is claimed. Right now the copy claims exactly what it demonstrates, no more. Spell requires the claim to feel like the edge of a larger territory.",
+        "The through-action is 'to reveal that the bank wall just dissolved inside one account.' The word 'reveal' requires a movement toward discovery, not delivery. Check each sentence: is it handing something to the reader (Near/Spell) or informing them of a fact (Doing/Stable commanding)? The copy is currently all delivery. Shift at least the final unit to a reveal posture — something the reader discovers rather than receives."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "Primary tempo commanding is in the five primary-allowed tempi for Infinex. Drive reads as Spell (primary in the stable|penetrating|flow cell), which is a legal resting state for this character. No Passion/urgency vocabulary foregrounded. No off-spec markers. Beat-only/reserve tempo restriction does not apply here. The copy does not surface the Lining as explicit meaning — 'the wall is the part that's missing' enacts the dissolution rather than explaining it, so the dramatic gap survives.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "drive_read": "spell",
+      "placement_read": "Stable character, resting at the Spell primary. The copy does not project Vision externally — it holds its weight inside a single contained declaration. This is the Spell→Vision axis at rest: the character knows the old world (banking rails), has mapped the new one (on-chain destination), and delivers the reveal without performing its own import. Doing is present as secondary (functional description of how wire transfer works). Passion is subdued and correctly hidden — no urgency, no desire-vocabulary, no FOMO. Vision is not surfaced as explicit thesis; the closing line ('the wall is the part that's missing') allows the reader to supply the implication. This is legal for contained Infinex copy.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code status: the release card states the feature is not yet in the platform codebase (grep returns zero matches for 'bridge.xyz'). The copy uses present tense throughout ('has a routing number now', 'It lands as USDC'). This is valid for the intended ship date (2026-05-22) but requires code-live confirmation before publication. If the feature is not live by ship date, present-tense claims become false.",
+        "GBP FPS rail is listed in the release card as 'beta'. The copy includes 'A FPS sort code' without qualification. If FPS is still in beta at publication, the unqualified listing may overstate availability. Operator should confirm FPS beta status and decide whether qualification is needed.",
+        "COP Bre-B rail is listed in the release card as 'beta' and is not mentioned in the copy. No issue for publication, but operator should confirm whether omitting it is intentional for this announcement."
+      ],
+      "notes_for_actor": [
+        "The Pressing arc is clean and lands correctly. The closing line does the through-action work without announcing it. Do not touch the closing line.",
+        "The empty movement receipt is a process gap, not a copy failure. Populate it next revision so the Director has a claim to audit against rather than reconstructing from scratch.",
+        "FPS is beta per the release card. Before publication, decide whether 'A FPS sort code' needs a qualifier (e.g. 'A FPS sort code (UK, beta)') or whether the operator accepts the unqualified listing. This is a publication gate decision, not a copy rewrite.",
+        "Present tense ('has a routing number now', 'It lands as USDC') is correct for the ship-date framing but requires code-live confirmation. Flag this to the operator; it is not a draft-stage failure.",
+        "The copy correctly omits Bridge.xyz attribution and KYC precondition per the not_the_point field. This is the right call — naming the provider would re-erect the wall the copy is dissolving. Hold this on any revision.",
+        "Drive is reading as Spell at rest, which is legal for contained Infinex X copy. If a longer arc (thread, blog) follows this post, the follow-on beats can move toward Vision projection. This post does not need to carry that weight alone.",
+        "No urgency, FOMO, or scarcity vocabulary present. Passion is correctly subdued. This is the spec. Maintain it on any revision."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-scene_rehearsal-web-ZSYJY5",
+    "set": "warmup",
+    "candidate_id": "01KSKDVK71QRPS5R21QTZSYJY5",
+    "warmup_mode": "scene_rehearsal",
+    "channel": "web",
+    "text": "An Infinex account can now receive fiat the way a bank account does. It lands as USDC, on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "self-contained",
+      "drive_read": "doing",
+      "placement_read": "Stable attitude, Light + Direct, Gliding → Dabbing. The prose functions informationally — it delivers a state-change fact, orients the reader via analogy, and closes. No relational warmth, no vision-lift, no weight of conviction. This is Doing Drive territory: Weight present as Light (not subdued), Space and Time active, Flow subdued as containment rather than Spell's characteristic slow-unfold. The copy reads as a confident functional notice — the account can do this now, here is how it resolves — without the penetrating or irradiating quality Infinex requires.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "self-contained is a beat-only/reserve tempo for Infinex, not a primary. It appears in the allowed palette but is designated reserve — it cannot carry a release card on its own. More critically, the through-action is 'to reveal that the bank wall just dissolved inside one account.' The current prose does not perform dissolution; it performs notification. The Lining (bank-vs-wallet wall stopped existing) is absent from the surface. The reader receives a feature update, not a structural-change reveal. Infinex primary tempi require commanding, practical, sombre, irradiant, or sociable — all of which carry more weight (Strong) or more relational warmth/lift than self-contained delivers. The copy stays too flat and too closed (Bound flow, no release) to execute the through-action.",
+        "nearest_allowed_read": "irradiant — Light + Free, Floating → Flicking, Adream outer. Would preserve the lightness already present but open the flow to release, add the buoyant forward-warmth that marks a genuine structural shift rather than a feature note. Alternatively, sombre — Strong + Bound, Adream outer — would perform the weight of the dissolution ('the wall came down') with held gravity, if the Actor wants to land the magnitude rather than the lift."
+      },
+      "factual_issues": [],
+      "voice_issues": [
+        "The through-action is dissolution of the bank/wallet wall. The prose delivers a feature availability notice. These are not the same action. 'Can now receive fiat the way a bank account does' is orientation by analogy — it tells the reader what category to put this in. It does not perform the structural claim that the wall stopped existing. The Lining is not visible in the surface.",
+        "The Bound flow closes the copy before the reader can feel the arrival. 'It lands as USDC, on-chain.' is a fact-and-stop. The dissolution event has no release moment — the copy contains what should overflow.",
+        "Two declaratives at equal weight give the copy a bulletin shape. A bulletin is self-contained. The release card calls for something with more dimension — either the weight of magnitude (sombre) or the lift of arrival (irradiant)."
+      ],
+      "notes_for_actor": [
+        "The analogy ('the way a bank account does') is doing good work orienting the reader — keep the navigation. The problem is it orients without moving. Let the analogy do its job and then let something shift. The wall has to come down inside the sentence, not just be described.",
+        "Choose a direction before rewriting: (a) irradiant — add Free flow, let the arrival open outward rather than close. The USDC landing is not a contained fact; it is something arriving that keeps arriving, permanently. Write from that permanence and let it breathe. (b) sombre — add Strong weight, let the bank-wall dissolution land with gravity. The reader has been told for years these are separate systems. Acknowledge the weight of that history dissolving. One of these is the tempo; pick it before touching the copy.",
+        "If irradiant: the closing sentence needs to open, not seal. 'It lands as USDC, on-chain.' shuts. Find the sentence that lets the USDC arrival carry the sense of permanent structural change — something that radiates forward rather than stops.",
+        "If sombre: the opening sentence needs weight, not just analogy. 'The way a bank account does' is Light and orienting. For sombre, the sentence needs to press — the bank-account comparison becomes an acknowledgment of what used to be impossible, now done.",
+        "The 'now' in 'can now receive' is the only temporal marker of change. It is bearing too much load. The structural shift needs to be enacted in the movement of the prose, not stored in a single adverb.",
+        "Bound flow note: the comma before 'on-chain' is a small habit of containment. In irradiant, drop the comma or restructure — let the landing arrive without a gate on it."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "commanding is a primary allowed tempo for Infinex. Spell as resting drive surface on a single-line web beat is legal per corpus note: 'A Stable + Penetrating + Flow-stressed character can legally rest at Spell.' The Lining (bank-vs-wallet wall dissolved) is not surfaced as explicit thesis — it is structurally implied by the parallel construction 'the way a bank account does' without being stated as meaning. No passion/urgency/FOMO markers present. No off-spec drive projection. Factor shape (Strong + Direct) is consistent with commanding within the allowed palette.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.62,
+      "drive_read": "spell",
+      "placement_read": "Stable + Penetrating + Flow-stressed. The character stance is mapper/revealer: 'here is what the account does now' delivered as settled fact. The Spell drive reads as resting character energy — the Infinex figure demonstrating the shape of the world it has already navigated. Vision (the extravert target) is not yet projected; this is a contained beat landing at primary drive. Legal for single-line web copy.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code has not yet landed in the Infinex platform codebase (release card deployed_fact: 'grep across all platform files returns zero matches for bridge.xyz'). The copy states 'An Infinex account can now receive fiat the way a bank account does' — present-tense capability claim. This is valid for draft generation against the intended ship state (2026-05-22), but must be confirmed as live before publication. Do not publish until code deployment is confirmed."
+      ],
+      "notes_for_actor": [
+        "The Pressing motor is complete and the Bound close is clean. No correction required for the movement read.",
+        "The parallel 'the way a bank account does' is doing significant structural work — it delivers the through-action ('the bank wall just dissolved') without naming it. Protect this construction in revision; do not soften it to 'similar to' or qualify it with 'essentially'.",
+        "The Lining is correctly hidden. The sentence implies wall-dissolution structurally without stating it as a thesis. No surfacing risk at present.",
+        "Confidence is held at 0.62 (not higher) because the surface is 19 words — microcopy length. The Stable/commanding read is well-supported, but the brevity limits certainty on the full factor shape. This is informational, not a correction note.",
+        "If a longer version is needed for an adjacent surface (email, announcement body), the Punching finisher is available: a second beat that releases the Sustained Pressing into a Quick decisive statement — e.g. completing the implication of wall-dissolution. Not required here; flagged for future arc work."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "warmup-scene_rehearsal-x-CM8848",
+    "set": "warmup",
+    "candidate_id": "01KSKDVK72X1K3595HHJCM8848",
+    "warmup_mode": "scene_rehearsal",
+    "channel": "x",
+    "text": "Whatever rail your salary uses. ACH, SEPA, SPEI, PIX, FPS, Bre-B. It now lands directly in your Infinex account.\n\nUSD, EUR, MXN, BRL, GBP, COP. Sent the way you'd send to a bank. Arrives on-chain as USDC.\n\nThe wall between the bank and the wallet is the part that's missing.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "practical",
+      "drive_read": "doing",
+      "placement_read": "Strong + Flexible + Sustained + Bound. Motor: Wringing toward an unreleased Slash. Drive read is Doing (Weight + Space + Time active; Flow subdued/bound rather than absent). Spell would require Flow to be the stressed factor; here Flow is the control valve, not the motor. The piece is working through practical complexity toward a structural revelation — that is Doing drive in Stable/practical register with a Wring motor.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "Primary tempo reads as practical (Stable; Strong + Flexible; Wringing → Slashing). Practical is in the allowed Infinex palette. However, the Flow pole is Bound rather than Free, and the drive reads as Doing (Weight + Space + Time) rather than Spell or Vision. Infinex placement spec requires stable + penetrating + flow on the drive axis (Spell → Vision). The Bound Flow here suppresses rather than activates the Flow factor — it does not register as Spell. The piece is doing Doing-drive work: solving a structural problem (bank wall), naming the parts, stating the answer. That is useful but it is not the Infinex character's register. Infinex holds the map already made; it does not problem-solve in public. The through-action ('reveal that the bank wall just dissolved') is correct in intent but the execution re-erects the wall by enumerating the rails and currencies first — the piece is doing the dissolving in real time rather than standing after dissolution and pointing. This activates Doing drive where Spell drive is specified.",
+        "nearest_allowed_read": "practical — allowed but currently executing in Doing-drive rather than Spell-drive. The fix is not to change tempo; it is to shift the drive axis. Practical tempo in Spell drive would carry the same Strong + Flexible but with Flow as the mobile factor rather than the containment vessel."
+      },
+      "factual_issues": [
+        "No deployed-fact violations detected. Rails enumerated (ACH, SEPA, SPEI, PIX, FPS, Bre-B) match the fact contract exactly. Currencies (USD, EUR, MXN, BRL, GBP, COP) match. Settlement output (USDC, on-chain) matches. KYC precondition, Bridge identity, and build-state correctly omitted per not-said list."
+      ],
+      "voice_issues": [
+        "The piece reconstructs the problem (bank/wallet separation) and then dissolves it — but Infinex does not reconstruct problems. Infinex stands after the decision and maps. The two-list opening performs the infrastructure complexity rather than speaking from the other side of it. This is a Doing-drive construction: here is the complex thing, here is how it resolves. Spell-drive construction would open already resolved: the wall is gone; here is what that means for your salary.",
+        "The thesis sentence ('The wall between the bank and the wallet is the part that's missing') is the strongest line and arrives last. In Spell-drive practical tempo, the weight-bearing thesis arrives first or early and the subsequent material radiates from it rather than building toward it. The current structure is inductive (enumerate → conclude); Infinex reads deductive (land → detail).",
+        "Bound Flow throughout: the piece is more contained than the character. Infinex's Spell-drive register has a degree of Flow activation — not Free overflow, but a quality of quiet irradiance or held conviction that reaches the reader. The current piece is technically correct and controlled but does not reach. It reports; it does not emanate."
+      ],
+      "notes_for_actor": [
+        "Move the thesis to the opening. 'The wall between the bank and the wallet is the part that's missing' is your strongest sentence and your actual through-action. Lead with it. The lists then become evidence radiating from a settled claim rather than runup to a reveal. This shifts the structure from Doing-drive (problem → solution) to Spell-drive (position → demonstration).",
+        "Trim one of the two lists or collapse them into the same sentence. Two separate enumerations of essentially the same claim (rails, then currencies) activate Flexible pathing without Spell-drive payoff — they feel like complexity-management rather than cartography. Infinex already holds the map; it does not demonstrate the map was hard to draw.",
+        "Release the Flow valve on the thesis sentence. The current version holds: 'The wall between the bank and the wallet is the part that's missing.' One small kinetic unlock — e.g. 'The wall between the bank and the wallet is gone' or a version that doesn't end on an absent thing — lets the Wring motor complete into a Slash. The current ending ('the part that's missing') names absence; Spell-drive names presence from the other side of absence.",
+        "Do not add warmth, exclamation, or personality. The problem is not that the piece is too cold — practical is a legal tempo. The problem is structural drive. Keep the weight, keep the control, keep the Flexible routing through multiple rails. Just land from inside the resolved position rather than resolving in public.",
+        "Check the opening line for reader-address mode. 'Whatever rail your salary uses' is Flexible and reaches toward the reader — this is good. But 'uses' puts the reader in present tense still inside the old system. If the wall is already gone, the opening might land them inside the new condition rather than naming their old one. Consider whether the entry should meet them in transit or already arrived."
+      ]
+    },
+    "new_audit": {
+      "passed": false,
+      "copy_voice_passed": false,
+      "factual_passed": false,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "Primary tempo commanding is one of the five primary allowed tempi. Drive read is Spell, which is the legal secondary surface for the stable|penetrating|flow character. No passion/urgency/FOMO vocabulary is foregrounded. The lining (wall dissolved) remains structurally present in the closing sentence without surfacing as explicit thesis — 'the part that's missing' points at the absence rather than declaring its meaning. Fit is legal.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "drive_read": "spell",
+      "placement_read": "The copy rests at Spell (stable|penetrating|flow, secondary drive). The Penetrating aspect (Attending/Space as dominant inner participation) is consistent with the accumulative mapping of rails-to-currencies-to-wall. Vision is not yet projected; the prose names the phenomenon rather than drawing the reader into a horizon. This is a legal contained beat for Infinex: resting Spell without Vision projection is acceptable for single-beat web/x copy. Drive axis Spell → Vision is not violated; it simply has not fired the extravert end.",
+      "voice_issues": [
+        "tweet 1: Present-tense 'It now lands directly in your Infinex account' contradicts the release card code-not-yet-landed status. See factual_issues.",
+        "tweet 2: 'Arrives on-chain as USDC' — present-tense operational claim, same code-status contradiction.; GBP and COP are beta rails per release card; presented as fully operational without qualification. Publication gate issue."
+      ],
+      "factual_issues": [
+        "UNSUPPORTED CLAIM — code/build state presented as live in outward copy: 'It now lands directly in your Infinex account' and 'Arrives on-chain as USDC' assert that fiat deposits are currently functional in the Infinex platform. The release card states: 'Bridge.xyz fiat deposit code status: Not yet in platform codebase — grep across all platform files returns zero matches for bridge.xyz.' Copy asserts present-tense operational reality ('It now lands') that contradicts the deployed_fact of code-not-yet-landed. This is a factual contradiction of the release card, not merely a publication-readiness question. The copy cannot be accurate even at the intended ship date unless the code ships by 2026-05-22. If the ship date is the intended live date and the code WILL be in-platform by then, this is a publication gate issue only — see publication_gate_issues. But the release card as written marks code status as NOT YET present, making 'now lands' a factual mismatch with the card as delivered. Setting factual_passed=false pending grounder resolution."
+      ],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code has not landed in the Infinex platform codebase per the release card. The copy's present-tense claims ('It now lands directly', 'Arrives on-chain as USDC') require code to be live before publication. Publication gate must confirm: code deployed and Bridge virtual account flow end-to-end verified before this copy can ship.",
+        "KYC/KYB precondition is not mentioned anywhere in the copy. This is a material precondition (users must be onboarded and approved before virtual accounts can be created). The release card marks it as a deployed fact. Operator must decide whether the x channel requires a qualifier or whether downstream in-flow surfaces handle this disclosure.",
+        "GBP/FPS and COP/Bre-B are flagged as beta in the release card. The copy presents all six currencies as equally operational. Operator must decide whether beta rails require qualification outward."
+      ],
+      "notes_for_actor": [
+        "Movement read is clean: commanding tempo, Pressing motor, Spell surface. The through-action ('reveal that the bank wall just dissolved') lands correctly in beat 3. No voice corrections needed.",
+        "The factual failure is not a voice problem — it is a card/code-state mismatch. Once the grounder confirms code ships by 2026-05-22, resubmit with that confirmation. If the ship date is aspirational and code may not land in time, change 'It now lands' and 'Arrives on-chain' to a near-future construction ('will land', 'will arrive') or hold copy until code is live. Do not change the movement architecture.",
+        "If the operator requires beta qualification for GBP/FPS and COP/Bre-B on the x channel, the lightest fix is a parenthetical or asterisk after those rail names in beat 1, or a line break before the beta pair. This does not affect tempo — the commanding Direct thrust of beat 3 holds regardless.",
+        "KYC precondition: if a qualifier is required outward, the lightest placement is at the end of beat 2 ('Once you're verified, it arrives as USDC') — this preserves the Pressing build toward beat 3 without interrupting the wall reveal.",
+        "Beat 3 ('The wall between the bank and the wallet is the part that's missing') is the strongest beat and correctly functions as the through-action landing. Protect it from any additions that would surface the lining explicitly (e.g. do not add 'That wall is now gone for Infinex users' — that names the meaning and kills the dramatic gap)."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "run-att1-web-BFJ8F4",
+    "set": "run",
+    "candidate_id": "01KSM0R6D5HBZ2AGG3J8BFJ8F4",
+    "warmup_mode": null,
+    "channel": "web",
+    "text": "Your Infinex account now takes a wire the way a bank does.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "commanding",
+      "drive_read": "doing",
+      "placement_read": "The sentence reads as Stable|Penetrating character — single-channel, weighted, held — with Flow stress (Bound), which is legal for Stable. Drive table cell stable|penetrating|flow lands at primary=spell, secondary=doing, introvert=passion, extravert=vision. The visible surface here is doing: the sentence demonstrates a completed action ('takes a wire... the way a bank does') and foregrounds functional capability rather than the mapped Vision endpoint or the resting Spell. The extravert slot should be Vision (the wider picture, the dissolved wall); instead the line delivers a working-action proof. That is doing as the visible projection, not vision. The lining (the bank wall just stopped existing) is not surfaced at all.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "Pressing/Bound is legal motor and flow stress for Stable|Penetrating. The tempo (commanding) is on the primary allowed palette. The failure is drive-slot: the sentence's visible projection is doing — it reads as functional demonstration ('here is what it can do, proved'). For Infinex|Penetrating|Flow the extravert slot must be Vision: the reader should glimpse the wider mapped territory (the wall that no longer exists, the world where this is unremarkable) rather than receive a capability proof. Doing belongs in the secondary slot, not foregrounded as the surface. Additionally, the lining ('the bank-vs-wallet wall just stopped existing') is entirely absent from the prose — the Outer Action is present but the hidden Inner Action is unreadable, leaving the line with no through-action depth.",
+        "nearest_allowed_read": "Retain the Pressing motor and the single declarative stance (Direct/Sustained/Strong). Shift the visible surface from doing (capability proof) to vision (territory claim): instead of demonstrating what the account can now do, let the line name what has changed about the world the user inhabits. The bank wall's disappearance — not the wire deposit feature — is the Vision endpoint. Doing can remain as the structural spine; it just cannot be the face."
+      },
+      "factual_issues": [
+        "observation: 'takes a wire' — USD wire is one of the supported Bridge.xyz rails (ACH/wire confirmed in deployed_facts). The claim is factually grounded. However, the sentence uses 'wire' as the single example, which is technically accurate but not exhaustive; this is a deliberate editorial choice (per release card: rails list is 'not the point') and does not constitute a factual error.",
+        "observation: 'the way a bank does' — Bridge virtual accounts receive fiat to a permanent account+routing number (USD) or IBAN (EUR) etc., then auto-convert and settle on-chain. The mechanical analogy to a bank account receiving a wire is accurate at the user-facing level. The underlying settlement is crypto (USDC on-chain), not fiat held in an account — this distinction is suppressed by the prose, which is consistent with the through_action intent but should be flagged: if a reader interprets this as fiat being held in Infinex the way a bank holds fiat, that is a false impression. The sentence does not claim fiat is held, but does not disclaim it either.",
+        "observation: no mention of KYC/KYB precondition — Bridge accounts require onboarding approval before virtual accounts can be created. The prose makes no reference to this gate. For a one-sentence announcement this is acceptable omission, not a factual error in what is stated."
+      ],
+      "voice_issues": [
+        "observation: visible surface is doing (functional capability proof) where the Infinex drive axis requires Vision as extravert. The sentence answers 'what can it do now?' rather than 'what is the world now?'",
+        "observation: lining is structurally absent — 'the bank-vs-wallet wall just stopped existing' has no presence in the prose even as subtext; the sentence does not carry two layers, only one",
+        "observation: 'now' lands as temporal announcement rather than cartographic marker — it emphasises the moment of activation (time-pressure register) rather than the permanence of the new territory; mild Passion/urgency drift"
+      ],
+      "notes_for_actor": [
+        "The motor is correct — keep the single declarative, keep Direct/Strong/Sustained. Do not break the Pressing spine. The problem is what the sentence is pressing toward.",
+        "Current line presses toward a capability proof ('it does X like Y does X'). Redirect: press toward a territory statement ('the thing that used to be elsewhere is here now, permanently'). The reader should feel the map has changed, not that a feature has been added.",
+        "Remove or reorient 'now' — in its current position it foregrounds the activation moment, which pulls toward Quick/Passion register. If 'now' stays, it needs to read as 'from this point forward in the world' not 'as of this announcement'. Alternatively, cut it and let the present-tense verb ('takes') carry the permanence.",
+        "The lining needs to surface in the prose — not explained, but felt. The through_action is 'the bank wall just dissolved inside one account.' That dissolution should be readable in the sentence structure itself: something about the phrasing should carry the trace of a wall that was there and is now gone. The current syntax ('account takes a wire the way a bank does') puts bank and account side by side as equivalents, which is closer — but the dissolution is not yet in it.",
+        "Test: after reading the line, does the reader's mental map of 'where my money lives' shift? Or do they note a new deposit feature? If the latter, the line is doing, not vision. Rewrite until the map shifts."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "commanding is a primary allowed tempo for Infinex. Drive reads as resting Spell — legal for stable|penetrating|flow character. No passion/urgency surface. No off-spec markers. Through-action (bank wall dissolved inside one account) is enacted structurally: the sentence equates the Infinex account to a bank account without ceremony, performing the dissolution rather than announcing it. Lining is not surfaced as explicit thesis.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.65,
+      "drive_read": "spell",
+      "placement_read": "Stable character resting in Spell — the sentence holds the claim with institutional authority (Weight + Space / commanding) and does not yet release to Vision. This is legal resting character energy for the Infinex Spell → Vision axis. The banker-turned-mapper stance is present: the bank-wall dissolution is stated as a simple fact, not as news or excitement.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code status: release card confirms zero matches for 'bridge.xyz' across all platform files as of card date — copy says 'now takes a wire' (present tense, live claim). Before publication, live-state confirmation that Bridge.xyz virtual account code has landed in the Infinex platform codebase is required. The word 'now' will be false if code is not yet deployed."
+      ],
+      "notes_for_actor": [
+        "The Pressing motor is present and correct — the sentence sustains Strong + Direct weight across its full length. If you want to execute the full commanding arc (Pressing → Punching), a second beat is available: a short follow-on that lands the claim with sudden Direct force (e.g. a bare instruction or the single fact of the rail). Do not add it unless the brief requires a release beat; the resting Pressing position is legal here.",
+        "The through-action lands cleanly: you performed the bank-wall dissolution by equating the account to a bank account structurally, not by announcing it. Hold that — do not add any sentence that explains what the line means, as that would surface the Lining as Outer and collapse the dramatic gap.",
+        "'Now' is doing temporal load-bearing work. If code is not yet live at ship date, 'now' will need to be held until the publication gate clears. Consider whether a gate-conditional variant (e.g. 'soon takes' or a date-anchored phrase) should exist as a draft fallback, to avoid a last-minute register change under time pressure."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "run-att1-x-873GP9",
+    "set": "run",
+    "candidate_id": "01KSM0R6D7E4BFSTH7GF873GP9",
+    "warmup_mode": null,
+    "channel": "x",
+    "text": "Send a wire to your Infinex account. It arrives.\n\nSend a SEPA transfer. It arrives.\n\nThe sentence that used to require a bank now describes a wallet.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "self-contained",
+      "drive_read": "doing",
+      "placement_read": "The copy reads Stable-adjacent in its factor shape (Light + Direct) but the Bound flow and cautious withheld delivery pull it toward self-contained tempo. The drive surface is functional/procedural — two actions demonstrated, one reframe concluded. This is Doing-as-visible-projection: the extravert surface is competence and accomplished fact. Vision is absent as projection; Spell is absent as resting formative energy. The character is showing what works, not mapping where we are.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "self-contained (Gliding -> Dabbing; Light + Direct) is on the Infinex reserve/beat-only palette — it appears in the full available palette but is not a primary allowed tempo. More critically: the drive surface reads Doing (functional demonstration, two actions proved, reframe delivered as task-completion). Infinex extravert projection must be Vision; Doing is the secondary formative drive, not the visible face. The copy foregrounds 'it works / look how easy' (Doing) rather than 'the map just changed' (Vision). The through-action says 'reveal that the bank wall just dissolved' — that is a Vision projection (a new image of the world is being offered to the reader). The copy does not deliver that image; it delivers a proof of function. The wall-dissolution line is the last sentence and is framed as a logical conclusion to a demonstration, not as the primary offered image. Additionally: the Bound flow creates a withheld, cautious quality inconsistent with the Infinex primary tempi of commanding, practical, sombre, irradiant, or sociable — all of which require either Strong weight or Free/expansive flow, not Light + Bound.",
+        "nearest_allowed_read": "sociable (Remote outer; Direct + Free; motor Gliding -> Dabbing) — same motor pair, same Direct path, but Free flow instead of Bound. The wall-dissolution image would become the radiating, expansive offer rather than the withheld proof. Alternatively: practical (Stable; Strong + Flexible; Wringing -> Slashing) if the copy commits to the spell-binding reframe as its primary action — the old-world/new-world contrast needs more Flexible pathing and more weight behind the reveal."
+      },
+      "factual_issues": [
+        "No factual errors are present in the deployed text. Wire (USD) and SEPA (EUR) are correctly cited as supported Bridge.xyz rails. The copy does not claim code has landed or that the feature is live — the verbs 'it arrives' describe the mechanic, not a launched product. However: the copy does not carry a caveat that KYC/KYB approval is required before a virtual account can be created. This is a precondition the reader cannot infer from 'send a wire to your Infinex account.' If the copy is read as instructional (here is what you can do now), the omission is a factual gap. If read as announcement of capability, it is defensible."
+      ],
+      "voice_issues": [
+        "Doing-as-extravert replaces Vision-as-extravert throughout. The copy proves function; it does not offer a new map of the world. The through-action ('reveal that the bank wall just dissolved') requires Vision as the visible projection — the reader must be handed an image of changed terrain, not a checklist of working rails.",
+        "The wall-dissolution line ('The sentence that used to require a bank now describes a wallet.') is placed last and framed as conclusion to a demonstration. It should be the primary spatial offer, not the summary. Currently it lands as inference from evidence rather than as the image the copy was moving toward.",
+        "Parallel repetition ('Send a wire... it arrives. / Send a SEPA transfer... it arrives.') is a Gliding -> Dabbing motor pattern — Light, Direct, controlled. For Infinex primary tempi, this is undersized. The Infinex character has decisions already taken and is now mapping; the parallelism should carry more Flexible sweep (Spell/practical) or more expansive Free flow (sociable/irradiant), not symmetric taps of identical weight.",
+        "Bound flow throughout: the information is controlled and withheld (no provider named, no mechanic shown). The withholding is correct per the fact contract, but the Bound quality of the phrasing itself — short closed sentences, full stops after each claim — reads as cautious/self-contained rather than as Infinex's resting Spell energy. The character's known-ness should feel like space opened, not information withheld."
+      ],
+      "notes_for_actor": [
+        "The wall-dissolution line is your Vision projection — move it to the opening or reframe the entire structure so that it arrives as primary image rather than logical conclusion. The two working rails are evidence inside that image, not the image itself.",
+        "Try: open with the reframe as spatial offer ('The sentence that used to require a bank now describes a wallet.'), then let the two working examples (wire, SEPA) radiate outward from that image. This is the sociable or practical motor direction: the image opens space, the examples fill it.",
+        "Replace symmetric taps (same sentence shape, same 'it arrives' landing) with asymmetric Flexible sweep. Wire and SEPA are not the same gesture — wire is US institutional infrastructure, SEPA is European interbank architecture. Let the Flexible factor show the breadth of what the dissolution covers, not just repeat the same proof twice.",
+        "Release the Bound flow at the close. The current full-stop termination after each beat contains the claim rather than extending it. For Vision-as-extravert, the final image should overflow slightly — the reader should feel the terrain is larger than what was named, not that the list is finished.",
+        "Do not add urgency, scarcity, or FOMO to compensate for low weight. That is the Passion/time-pressure drift failure mode specific to Infinex. The character already took the decisions; the copy is mapping, not recruiting."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "commanding is a primary allowed tempo for Infinex. Drive reads as resting Spell — legal for a contained one-post surface on x. No urgency, no FOMO, no passion-drift. No off-spec register markers. The through-action (reveal that the bank wall just dissolved) is present structurally in the three-beat arc. Lining (the bank-vs-wallet wall stopped existing) remains hidden — beat three names what a sentence 'describes', not what the dissolution 'means', so the Lining has not surfaced as an explicit thesis.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "drive_read": "spell",
+      "placement_read": "Stable + Penetrating + Flow-stressed character resting at Spell. The copy performs the Outer face of the character's knowing: the banker-turned-trailblazer who has already decided, now demonstrating that the wall dissolved — not arguing for it, not dramatising effort, simply mapping what is. The Spell drive (formative; Stable|penetrating|flow = primary=spell) sits correctly as the resting surface. Vision is not projected per-line, which is legal for a single-beat x post.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code status: release card states code has NOT yet landed in platform (zero grep matches for 'bridge.xyz'). The copy implies the feature is live ('Send a wire to your Infinex account. It arrives.'). Copy must not publish until Bridge.xyz integration is deployed and confirmed in the codebase. This is a ship-gate condition, not a copy error — the copy is written correctly for the intended ship state."
+      ],
+      "notes_for_actor": [
+        "The Pressing → Punching arc is working. Beats one and two are correctly held as Sustained preparation — do not collapse them into a single beat or add elaboration that would shorten the held pressure. The three-beat structure is load-bearing.",
+        "Beat three ('The sentence that used to require a bank now describes a wallet') names what a sentence *describes*, which keeps the Lining correctly hidden. If you are tempted to add 'That's what changes everything' or any thesis-statement tail, resist — that surfaces the Lining as Outer and collapses the dramatic gap.",
+        "The empty movement receipt is a documentation gap only, not a copy problem. For future submissions, logging the Working Action claimed (here: Pressing → Punching) helps the Director verify your intent against the prose and shortens the audit loop.",
+        "Wire and SEPA are named facts from the release card rails (USD ACH/wire, EUR SEPA). This is correct selection — two rails that the reader's body already knows, not a list of six. Do not expand to MXN/BRL/GBP/COP at this surface; that would shift the Space pole toward Flexible and dilute the Direct channel.",
+        "Publication is blocked on code landing, not on copy quality. The copy is written for the correct ship state. Hold it as-is and release when Bridge.xyz is confirmed in the platform codebase."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "run-att2-web-FWSAHR",
+    "set": "run",
+    "candidate_id": "01KSM0R6DCVFJTBRCJMPFWSAHR",
+    "warmup_mode": null,
+    "channel": "web",
+    "text": "In an Infinex account, fiat and crypto live in the same place.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "commanding",
+      "drive_read": "spell",
+      "placement_read": "The prose reads as a resting Stable surface: Strong + Direct + Sustained, Pressing motor held. No visible drive projection emerges from a single eleven-word sentence — the sentence occupies the formative/resting layer rather than the outer action layer. Drive signal is low-energy Spell (the claim is structural, world-ordering, not action-urging), consistent with the locked primary for Infinex. No Passion surface detected.",
+      "infinex_fit": {
+        "legal": true,
+        "reason": "Commanding tempo is a primary allowed tempo for Infinex. The sentence is Stable + Strong + Direct, resting on Pressing (Sustained). The formative drive read is Spell at rest — consistent with the Infinex axis (primary: Spell, extravert: Vision). No Passion surface. No urgency, FOMO, or time-pressure leak. The sentence does not perform the Drive axis as a verb; it occupies the character's resting weight correctly. Legal placement confirmed.",
+        "nearest_allowed_read": "commanding (Stable, Strong + Direct, Pressing -> Punching) — sentence is holding at the Pressing stage; the Punching release is not yet present in this line"
+      },
+      "factual_issues": [
+        "observation: The sentence asserts present tense — 'fiat and crypto live in the same place.' The fact contract states Bridge.xyz code has NOT yet landed in the platform codebase (zero grep matches). If this release card is announcing an upcoming feature, the present-tense declarative is factually premature. The sentence reads as current reality, not near-future capability. This is a truthfulness risk if deployed before code ships. Recommend confirming ship_date 2026-05-22 is the publication date and the feature is live at time of publication, or reframing to 'will live.'"
+      ],
+      "voice_issues": [
+        "observation: The sentence correctly avoids rails enumeration and provider attribution — both suppressed per the fact receipt. No violation there.",
+        "observation: 'Live in the same place' is spatially correct as a dissolution metaphor but risks reading as metaphor-only (vague poetic gesture) rather than technical fact. The through-action is 'the bank wall just dissolved inside one account.' The prose gestures at this but does not anchor it. The reader has no handle on what 'the same place' means mechanically. This is not a tempo failure — the Pressing weight holds — but the Vision extravert (the outer projection of where this goes) is absent. The sentence delivers Spell (structural claim) without the Vision surface the character is supposed to project. For a full beat this line needs a second sentence that carries the Vision extravert: what the user now sees or can now do that was impossible before.",
+        "observation: No lining signal present. The contract lining is 'the bank-vs-wallet wall just stopped existing.' The outer sentence states the result; the hidden pressure (that something was destroyed, not just added) is not felt. For Infinex character this is acceptable at rest — Pressing does not require lining to be visible — but if this is the only copy unit on the release card, the lining is completely lost."
+      ],
+      "notes_for_actor": [
+        "The Pressing is landed correctly. Weight is Strong, Space is Direct, Time is Sustained. Do not change the structural simplicity of this sentence. It is doing the right thing.",
+        "The sentence stops at resting Spell. For the Infinex axis (Spell → Vision) to be readable as a beat, a second sentence must carry the Vision extravert. Vision in this context = the user seeing the new world made possible. Draft a follow-on sentence that shows the user what they can now do — not how the mechanics work, not the rails list, but the view from inside the account after the wall is gone. That sentence can be lighter (Floating or Gliding motor) to contrast with this Pressing anchor.",
+        "Present-tense 'live' must be verified against live ship date. If code is not in platform at publication, change to 'will live' or 'can live' — do not adjust tempo or factor shape to compensate, those are correct. This is a factual timing issue only.",
+        "The lining ('the wall just stopped existing') does not need to be spoken. But if there is a visual, a subheading, or a pull-quote space on this release card, that is where the lining can surface — as the ghost underneath the clean declarative. Do not fold it into this sentence; keep the Pressing line clean.",
+        "Passion/time-pressure drift check: this sentence passes. No urgency, no FOMO, no scarcity language. Maintain this in any follow-on copy. If you add a call-to-action, keep it in Sustained tempo — do not let the release card close with a Quick attack (Punching/Flicking) that would read as Passion projection."
+      ]
+    },
+    "new_audit": {
+      "passed": false,
+      "copy_voice_passed": false,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": false,
+      "infinex_fit_reason": "The sentence is too sparse to carry a classifiable tempo and therefore too sparse to confirm legal placement. Direct is present but Weight is absent; without Weight, neither Stable (Weight+Space) nor Near (Weight+Time) can be confirmed as the baseline. The character's Spell drive requires at least the Weight+Space+Flow compound to be legible. A 14-word fact-statement without motor, without weight, without flow modulation is not off-spec for what it contains — it is off-spec for what it withholds. The through-action ('reveal that the bank wall just dissolved') requires some sense of the wall having existed and now not existing; the sentence states the outcome but performs no dissolution. The Stable Penetrating character maps the territory; this sentence neither maps nor reveals — it labels. Result: cannot confirm legal Infinex placement, but failure is correctable by adding motor, not by changing the claim.",
+      "primary_tempo": "unknown",
+      "primary_confidence": 0.25,
+      "drive_read": "unknown",
+      "placement_read": "A flat declarative that names the outcome (co-location of fiat and crypto) without any motor. The sentence is aimed (Direct) but Weight, Time, and Flow are all indeterminate. No Working Action is present. Drive cannot be derived. The Spell → Vision axis is not legible at this surface.",
+      "voice_issues": [
+        "The sentence performs a label, not a dissolution. The through-action requires the reader to feel the wall stop existing — 'live in the same place' reports the result of the dissolution without moving through it. The Stable Penetrating character maps; this sentence merely stamps.",
+        "No Working Action is present. Even a one-line web surface can carry a motor — Pressing, Gliding, or Floating would give the sentence weight and tell the reader whether this is a commanding resolve or a receptive invitation. As written, the sentence has no drive legibility.",
+        "Weight is indeterminate. Direct pathing is confirmed but Weight — the first and shared factor of every legal Infinex baseline — is absent. The copy needs either force (Strong: Pressing motor, a word that carries mass) or deliberate lightness (Light: Gliding motor, a word that lifts) to seat itself in the character.",
+        "The sentence reads closer to self-contained (Light + Direct, beat-only/reserve) than to any primary allowed tempo. Self-contained cannot carry a whole web surface for Infinex; it is a contained beat inside a longer arc.",
+        "whole: No Working Action present; Weight indeterminate; tempo unclassifiable; through-action (bank wall dissolved) not performed; drive not legible; self-contained read (beat-only/reserve) is nearest classifiable placement, which cannot carry a whole web surface."
+      ],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit integration is not yet in the platform codebase (per release card: grep returns zero matches for 'bridge.xyz'). The sentence 'In an Infinex account, fiat and crypto live in the same place' is a present-tense state claim. At ship_date 2026-05-22 this must be true in the live platform. Confirm code has landed before publishing."
+      ],
+      "notes_for_actor": [
+        "Add weight to the sentence. Right now 'live in the same place' has no mass. Decide whether this is a Strong-Weight commanding or warm declaration (press into the claim — 'they settle in one place', 'they belong to the same account') or a Light-Weight self-contained observation (lift the claim — 'they simply share an account'). Neither is wrong; both are missing.",
+        "Give the sentence a Working Action. Pressing (Strong + Direct + Sustained) would make this commanding: the claim presses the reader into a new fact. Gliding (Light + Direct + Sustained) would make it self-contained: the claim moves smoothly to its resting place. Choose one and let the verb carry it.",
+        "Perform the dissolution, not the result. The through-action is 'the bank wall just dissolved'. The sentence currently reports that the wall is gone. The Stable Penetrating character would trace the former boundary and show it absent — e.g. 'Your Infinex account takes a bank deposit the same way a bank account does.' That sentence maps the territory by holding the old expectation and releasing it.",
+        "If the sentence must stay at one line for this web surface, anchor it in a primary allowed tempo (commanding or practical) rather than letting it default to self-contained. Commanding: Strong + Direct. Practical: Strong + Flexible. Self-contained is legal only as a beat inside a larger arc, not as the whole surface.",
+        "The Spell drive (resting character energy for Infinex) needs at least the attitude structure visible — Weight + Space + Flow-stress. Without Weight, the spell is inaudible. One weighted verb or a single containment/release marker in the sentence will make the drive legible without adding length."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "run-att3-web-CNKP4B",
+    "set": "run",
+    "candidate_id": "01KSM0R6DJZWPPQWNH41CNKP4B",
+    "warmup_mode": null,
+    "channel": "web",
+    "text": "In an Infinex account, fiat and crypto can live in the same place. From inside, there is no other side to cross to.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "self-contained",
+      "drive_read": "doing",
+      "placement_read": "Light + Direct + Sustained = self-contained tempo (Stable; motor Gliding → Dabbing). The visible projection is cautious, contained, deferential — a 'gentle deference' surface. Drive reads as Doing: the lines demonstrate a practical fact, not a spell or a vision. No spell-formative energy present; no vision-projection detected. The through-action ('bank wall dissolved') is not performed — the prose reports the condition rather than revealing the dissolution as a seen thing.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "self-contained is a beat-only/reserve tempo on the Infinex palette and is not a primary allowed tempo. More critically, the visible drive surface reads as Doing (practical demonstration of a condition), not Vision (the required extravert projection for stable|penetrating|flow). The Infinex drive axis is Spell → Vision: the prose must rest on Spell and project Vision. What is present instead is a restrained factual statement — cautious expression of a 'gentle deference' — which surfaces Doing and containment, neither of which is the legal visible projection. The lining intent (bank wall dissolved) exists in the brief but is not performed in the text. The text reports the conclusion; it does not enact the transformation for the reader to see.",
+        "nearest_allowed_read": "sociable (Remote outer; Direct + Free; motor Gliding → Dabbing) — the Direct spatial path and Gliding motor are already present; releasing Flow from Bound to Free and allowing the image of the dissolved wall to unfold outward rather than close inward would move the tempo into the sociable register, which is a primary allowed tempo. Alternatively, the through-action ('the wall just stopped existing') could be performed with irradiant (Adream; Light + Free; motor Floating → Flicking), allowing the fact to radiate rather than be contained — also primary allowed."
+      },
+      "factual_issues": [
+        "The fact contract marks Bridge.xyz fiat deposit code status as 'Not yet in platform codebase.' The prose claims 'fiat and crypto can live in the same place' using present-tense 'can' — this is conditionally acceptable as a forward-leaning capability claim, but the copy does not hedge. If the feature is not yet live, 'can' performs a present-state assertion that outruns the deployed fact. Recommend confirming ship-date live status before release or adding a light temporal marker ('will live', 'are coming to live')."
+      ],
+      "voice_issues": [
+        "The through-action requires the reader to see the wall dissolve — but the prose only states the outcome ('no other side to cross to'). The dissolution is reported, not performed. The reader is told a wall is gone; they are not shown the moment it ceases. This is a lining failure: the Outer Action delivers the fact, the inner event is withheld.",
+        "Flow is Bound throughout: the image closes on itself rather than expanding toward the reader. For the Vision extravert projection, the image needs to open outward — the reader should feel they are inside the account already, not be informed that such an inside exists.",
+        "Sentence 2 ends on a preposition ('to cross to') that lands with a slight tangle. The double 'to' creates mild phonetic drag that works against the Light / Direct motor of the rest of the text."
+      ],
+      "notes_for_actor": [
+        "Release Flow from Bound to Free. The current text closes at the end of sentence 2 — nothing spills forward. Let sentence 2 open rather than shut: the reader should feel they have already arrived inside the account by the time the sentence ends, not that they have been told the crossing is unnecessary. Try: rewrite sentence 2 so it ends on an image of occupancy, not a negation of crossing.",
+        "Perform the dissolution, don't report it. The brief names the through-action as 'the bank wall just dissolved.' That event is not in the prose — only its aftermath. Give the reader one moment of the wall going: a before/after embedded in the syntax, not stated as a conclusion. Even a single word of before-state would create the visible event.",
+        "To move toward sociable (primary allowed): keep Direct spatial path and Light touch, but release the terminal containment. Let the final image radiate rather than close. The Gliding motor is correct; what is missing is the Free flow that makes Gliding expand into the sociable register rather than terminate in self-contained.",
+        "To move toward irradiant (primary allowed): soften Direct to allow a small amount of unfolding spatial quality, and release the tightened terminal. The image of 'same place' has the nucleus of sympathetic exultation — it simply needs to unfold rather than be declared.",
+        "Fix the double preposition in 'to cross to' regardless of tempo correction — it creates phonetic weight in a line that should be Light."
+      ]
+    },
+    "new_audit": {
+      "passed": false,
+      "copy_voice_passed": false,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": false,
+      "infinex_fit_reason": "self-contained is a beat-only/reserve tempo for Infinex. The copy is a two-sentence web surface — borderline microcopy. Per corpus rules, a beat-only tempo read as the whole-copy primary is illegal except for single-beat microcopy (one-line in-product/modal surface), where it is flagged for operator adjudication rather than auto-failed. Two sentences is above the one-line threshold, so auto-fail applies. The nearest primary allowed read would require the copy to carry more Weight (toward commanding or sombre) or to release into Free flow (toward sociable or irradiant). The current Light + Direct + Bound shape is self-contained throughout with no shift. primary_tempo \"self-contained\" is a beat-only/reserve tempo, not a primary allowed tempo; it cannot be the whole-copy primary read.",
+      "primary_tempo": "self-contained",
+      "primary_confidence": 0.62,
+      "drive_read": "spell",
+      "placement_read": "The copy rests at Spell — the character who already knows the shape of the thing, stating it with quiet containment. The account holds both; the wall is simply not there. No passion surface, no urgency, no Vision projection. A single enclosed beat of resting character energy. Legal for a web line that does not need to carry a full arc.",
+      "voice_issues": [
+        "self-contained is a beat-only/reserve tempo. The copy is Light + Direct + Bound throughout. For a two-sentence web surface, this reads as enclosed and delicate rather than carrying the character's full Spell -> Vision axis or its primary allowed tempi. The Bound containment is the primary voice constraint: both sentences turn inward and stop. The release direction is missing.",
+        "primary_tempo \"self-contained\" is a beat-only/reserve tempo, not a primary allowed tempo; it cannot be the whole-copy primary read.",
+        "whole: Primary tempo reads self-contained (beat-only/reserve). Two-sentence web copy exceeds the one-line microcopy exception. Infinex_fit.legal = false."
+      ],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code is not yet in the platform codebase (release card confirms zero matches in grep). Copy does not assert the feature is live, which is correct, but the web channel should confirm live-state before publication. No factual contradiction with the release card; this is a ship-gate check only."
+      ],
+      "notes_for_actor": [
+        "The movement problem is Bound flow throughout. Both sentences contain their claim and turn inward — 'can live in the same place' and 'there is no other side to cross to' both terminate inside the account. The second sentence especially: it closes on 'to' and stops. The character's primary allowed tempi (commanding, practical, sombre, irradiant, sociable) require either Strong Weight, Free Flow, or both. Neither is present here.",
+        "To shift toward commanding (the simplest correction): add Weight to the claim verb. 'Can live' is tentative — it suggests possibility, not established fact. 'Fiat and crypto live in the same place' or 'fiat and crypto belong here' commits Weight. Direct pathing is already correct; only Weight needs to be loaded.",
+        "To shift toward sociable or irradiant: the spatial image needs to release outward rather than terminate inside the account. 'From inside, there is no other side to cross to' is a beautiful image but it is Bound/inward — the character stands at the center and says 'no wall.' A Free/outward equivalent would move the reader somewhere rather than negating the gap: something like 'From here, both move as one.' This changes nothing about the factual claim but releases the Flow.",
+        "Do not add urgency, timeline, or FOMO to generate Weight. That pathway surfaces Passion and is off-spec. The Weight needs to come from the character's settled knowledge of the shape — the banker who already mapped it — not from pressure on the reader.",
+        "The first sentence's 'can' is doing soft work: it hedges. If the feature is ship-ready at publication time, remove the modal. 'In an Infinex account, fiat and crypto live in the same place.' That single change loads Weight and holds Direct. It may be sufficient to reach commanding."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "run-att3-x-6Z9KSX",
+    "set": "run",
+    "candidate_id": "01KSM0R6DMM34RJE2PFS6Z9KSX",
+    "warmup_mode": null,
+    "channel": "x",
+    "text": "In an Infinex account, fiat and crypto live in the same place.\n\nA wire arrives there. A SEPA transfer arrives there. The account holds both.\n\nThe wall used to be between them. It isn't part of the territory anymore.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "certain",
+      "drive_read": "vision",
+      "placement_read": "Light + Direct + Sustained maps to the Awake outer / certain tempo. The visible surface reads as a slow dawning of certain awareness — a cartographic statement rather than an energised revelation. Drive surface is Vision (outer Attending + outer Deciding, no Weight/Intending anchor visible). The Infinex locked axis requires resting Spell with visible Vision; this prose shows Vision but the Spell formative energy — the underlying gravity of knowing — is not doing any work. The prose reads as the extravert slot only, floating free of the primary/secondary foundation.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "The tempo 'certain' (Awake outer; Direct + Sustained; motor Pressing / Gliding) is not in the Infinex allowed palette. Awake outer tempi are Action Attitudes only — they cannot serve as character baseline or primary tempo for Infinex. The prose has landed in the Awake / Remote outer register by shedding Weight entirely. Infinex requires Weight in the baseline (Stable = Weight + Space). This prose carries no Weight pole. Additionally, the through-action ('to reveal that the bank wall just dissolved inside one account') calls for a preparation arc with a visible release beat — Gliding needs its Dabbing; the prose executes the sustained approach but the Quick revelation beat never fires. The lining ('the bank-vs-wallet wall just stopped existing') has become the outer surface without any enclosing/formative drive underneath it, which surfaces the Vision slot without the Spell resting energy.",
+        "nearest_allowed_read": "self-contained (Stable; Light + Direct; motor Gliding → Dabbing; 'Cautious expression or cautious acceptance of a gentle deference'). The factor shape is identical — Light + Direct + Sustained Gliding — but self-contained belongs to Stable and carries Weight in the compound. The fix is to reintroduce Weight/Intending into the baseline so the Direct + Sustained path has the Stable enclosure behind it, then deliver the Dabbing release beat to complete the preparation arc."
+      },
+      "factual_issues": [],
+      "voice_issues": [],
+      "notes_for_actor": [
+        "Load Weight into the opening sentence. 'In an Infinex account, fiat and crypto live in the same place.' needs to feel like a settled fact that has mass — the kind of thing that is simply true and has been true. Try: 'In an Infinex account, fiat and crypto live in the same place.' — the word 'live' should carry the Intending. It is not a feature, it is geography. The sentence should not float; it should rest.",
+        "Restore the Outer Action / Lining split. Give the reader a surface that is merely descriptive ('A wire arrives there. A SEPA transfer arrives there.') so the final beat carries the hidden weight when it surfaces. The lining belongs at the end, not spread across all three paragraphs. The first two paragraphs are the social face; the third is where the Lining breaks through.",
+        "Fire the Dabbing beat. The third paragraph is the Quick release after the sustained Gliding setup. The sentence 'It isn't part of the territory anymore.' is in the right position but is executing as another Glide. It needs a different kinetic quality — shorter, pointed, arriving. Consider cutting the sentence further or adding a single aimed word that lands and stops. The wall's absence should feel like a touch that discovers nothing there, not a smooth statement that the wall is absent.",
+        "Make the wall-dissolution feel like a map observation, not a revelation. Infinex has already decided. The character is not discovering that the wall is gone — the character is showing the reader where it used to be. The through-action is 'reveal' but the energy is cartographic, not surprised. The Spell primary energy is the confidence of having already understood the territory. Let the prose carry that settled knowledge rather than performing the discovery.",
+        "Audit 'holds both' against the mechanic. Fiat converts to USDC on arrival — the account does not co-hold fiat and crypto as two discrete balance types. If the territory metaphor requires 'holds both', the text needs one word that signals the conversion so a technical reader is not misled: 'arrives as dollars, settles as crypto, lives in the same account' is closer to the deployed fact."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "Primary tempo is commanding (Stable Strong+Direct), which is a primary allowed Infinex tempo. Drive read is Spell (resting at primary formative drive), which is legal for a contained post. No passion/urgency/FOMO vocabulary is present. The through-action 'reveal that the bank wall just dissolved inside one account' is executed structurally: the first sentence states co-habitation, the second cites two real rails as evidence, the third performs the dissolution. Lining (bank-vs-wallet wall stopped existing) is present as the structural movement, not surfaced as explicit thesis — the prose shows it, does not announce it. Off-spec markers absent.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "drive_read": "spell",
+      "placement_read": "Stable character at Penetrating aspect (Space/Attending dominant — the copy maps territory, not force). Flow stress is present as containment. Drive table cell stable|penetrating|flow → primary=spell, extravert=vision. The copy rests at Spell (the formative drive), which is legal for a contained one-post surface. The Main Character-Action Axis (Spell → Vision) is not completed here, but a single X post is not required to complete the arc.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code status: the release card states 'Not yet in platform codebase — grep across all platform files returns zero matches for bridge.xyz'. The copy uses present tense throughout ('fiat and crypto live in the same place', 'A wire arrives there', 'The account holds both'). This is accurate for the intended ship state (2026-05-22) but requires code-landing confirmation before publication. Do not publish until Bridge.xyz integration is live in platform."
+      ],
+      "notes_for_actor": [
+        "The through-action lands. The structural move — state fact, cite two real rails as proof, then dissolve the wall — executes the brief correctly. No notes on the movement itself.",
+        "The only exposure is the present-tense commitment in beat 1 and beat 2. If the feature is not live on ship date, the tense becomes false. This is a publication gate issue, not a rewrite instruction — hold the copy as drafted and confirm code status before publishing.",
+        "Beat 3 performs the lining correctly: the dissolution is shown (territory metaphor) not announced ('this means the wall is gone'). Preserve that restraint in any future revision. If pressure arises to add an explanation sentence, resist — it would surface the lining as outer and lose the dramatic gap.",
+        "The Spell → Vision axis is not completed in this post, which is appropriate for a single-post surface. If this becomes part of a thread or campaign arc, a subsequent beat can carry Vision forward without retrofitting it here."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "run-att4-web-FKS4BJ",
+    "set": "run",
+    "candidate_id": "01KSMAACQPAV25BCG198FKS4BJ",
+    "warmup_mode": null,
+    "channel": "web",
+    "text": "Deposit dollars into your Infinex account the way you'd deposit them into a bank. They arrive as USDC, on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "commanding",
+      "drive_read": "spell",
+      "placement_read": "Resting Spell — the character stands inside its primary drive cell (Stable|penetrating|flow: primary=spell). The copy asserts the equivalence ('the way you'd deposit into a bank') from a position of already-knowing. No visible Vision projection is present; the character is not yet mapping toward the reader's future state. The Spell drive is the resting formative energy: the copy demonstrates mastery of the old-world/new-world join, but does not yet project where that join opens out to.",
+      "infinex_fit": {
+        "legal": false,
+        "reason": "The tempo and drive read are legal Infinex placements (commanding is a primary allowed tempo; resting Spell is the primary drive cell for Stable|penetrating|flow). The copy fails not on tempo or drive but on through-action execution. The release card through-action is 'to reveal that the bank wall just dissolved inside one account.' The copy states the equivalence ('the way you'd deposit them into a bank') but does not reveal the dissolution — it frames fiat deposit as a new capability added to an existing system, which re-erects the bank-vs-wallet wall rather than collapsing it. The reader's prior ('fiat comes from banks, crypto lives in wallets — these are separate systems') is named but not overturned. The lining ('the bank-vs-wallet wall just stopped existing for Infinex users') is the through-action's hidden force; the surface copy treats it as background context. The Pressing motor is held but never releases into the Vision arc that the Spell → Vision axis requires for the through-action to land.",
+        "nearest_allowed_read": "commanding with Pressing motor held at resting Spell — a legal contained beat, but insufficient for the through-action as stated in the release card. The copy needs the second half of the through-action: not just 'deposit dollars like a bank' but 'and that means the wall between bank and wallet is gone inside this account.' That move would activate the Spell → Vision axis and satisfy the lining."
+      },
+      "factual_issues": [],
+      "voice_issues": [
+        "Through-action incomplete: the copy names the equivalence ('the way you'd deposit into a bank') but does not execute the reveal ('the wall between bank and wallet is now gone inside this account'). The lining remains lining — it does not surface as the through-action's visible payoff.",
+        "Reader prior is engaged but not overturned. The sentence 'Deposit dollars into your Infinex account the way you'd deposit them into a bank' confirms the prior (bank = fiat, Infinex = crypto, connected by a process) rather than dissolving it (Infinex is now the account where both live without a wall).",
+        "The Pressing motor is held but the Punching release — the moment of revelation — does not arrive. The copy stops at the demonstration of capability, not the consequence. The Spell drive needs a Vision projection to complete the Spell → Vision axis for this through-action.",
+        "Second sentence ('They arrive as USDC, on-chain') is accurate and appropriately clipped, but it reads as a technical footnote rather than as the moment where the wall dissolves. The 'on-chain' detail currently lands as a qualifier, not as the proof of dissolution."
+      ],
+      "notes_for_actor": [
+        "The commanding tempo and Pressing motor are correct for this character and this beat. Do not change the Weight or the directness. The problem is not register — it is that the Pressing is never released into the through-action's payoff.",
+        "Find the moment where the bank-vs-wallet wall disappears and name it in the copy. The copy currently says 'you can deposit into Infinex like a bank.' It needs to say, in effect, 'and because of that, the bank wall is gone — this is the one account.' That is the Vision projection the Spell → Vision axis requires.",
+        "The second sentence is doing closing work ('They arrive as USDC, on-chain') when it should be doing revelation work. Consider whether 'on-chain' is the right place to land, or whether the second sentence should name the consequence for the reader's mental model — i.e., what it means that the wall dissolved, not just how the funds travel.",
+        "Do not add urgency, scarcity, or FOMO markers. The Passion drift is the failure mode for this character, and the copy is currently clean of it. Hold that.",
+        "If the brief requires a single sentence, the bank-wall dissolution must be compressed into the equivalence itself — not as a second claim but as the implication of the first claim made visible. 'Deposit dollars into your Infinex account the way you'd deposit them into a bank' is close, but 'the way' frames it as a process comparison rather than an identity claim. Experiment with framing that makes the two things one thing rather than two things connected by a process."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "commanding is a primary allowed Infinex tempo. Drive reads as resting Spell — legal for a single contained web line per corpus rule: 'Resting Spell without a visible Vision projection is not automatically off-character.' No passion/urgency/FOMO surface. No off-spec drive projection. Lining ('the bank wall just dissolved') remains hidden — the copy does not state what the dissolution means, it simply performs the equivalence. Lining has not surfaced as Outer thesis.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.62,
+      "drive_read": "spell",
+      "placement_read": "The copy rests at primary/Spell: the Stable character normalises a complex technical fact into a known-world frame ('the way you'd deposit them into a bank'). No Vision arc is opened within this one-line surface, but the copy is not required to project Vision on a single contained web line. Spell as resting energy is legal here.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code not yet in platform codebase (release card: 'Not yet in platform codebase — grep returns zero matches for bridge.xyz'). Copy states 'Deposit dollars into your Infinex account' as present-tense capability. This is safe to draft against the intended ship date (2026-05-22), but publication requires confirmation that Bridge.xyz code has landed before the copy goes live. Do not publish until live-state confirmed."
+      ],
+      "notes_for_actor": [
+        "The Pressing hold is correct and clean. If a revision is needed to open toward Vision (the Spell → Vision axis), the move is not to add urgency — it is to let the second sentence open slightly outward rather than closing on a terse fragment. 'They arrive as USDC, on-chain.' completes the circuit; if the brief later requires Vision projection, the second sentence could expand the destination rather than just confirming the format. Do not add time-pressure to do this — expand spatially (what becomes available) not temporally (before it's too late).",
+        "The bank analogy is doing the through-action work ('the bank wall just dissolved') entirely through implication — which is correct for this character. Do not make it explicit. If the analogy ever feels too quiet on a revised draft, strengthen the Pressing weight on the verb, not the explanatory frame.",
+        "Movement receipt was submitted empty. For future submissions, name the Working Action you intended so the Director can confirm or correct it rather than classifying blind."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  },
+  {
+    "item_id": "run-att4-web-0J90BJ",
+    "set": "run",
+    "candidate_id": "01KSMAACQPT8Z8NJV8YR0J90BJ",
+    "warmup_mode": null,
+    "channel": "web",
+    "text": "Your Infinex account now has an account number. Money sent to it arrives as USDC, on-chain.",
+    "old_audit": {
+      "passed": false,
+      "primary_tempo": "commanding",
+      "drive_read": "spell",
+      "placement_read": "Stable + penetrating + flow. Pressing motor, no visible Quick release. The copy rests in its primary Spell energy (resting character drive) without projecting toward the Vision extravert pole. The through-action ('reveal that the bank wall just dissolved') does not surface — the copy announces a mechanical fact rather than mapping the structural change it represents. Lining is absent as visible surface.",
+      "infinex_fit": {
+        "legal": true,
+        "reason": "commanding is in the primary allowed tempi list for Infinex. Stable Strong+Direct with Pressing motor is legal for this placement. Drive read is resting Spell — the locked primary for stable|penetrating|flow — which is a legal contained beat. The tempo itself is not the failure.",
+        "nearest_allowed_read": "commanding (Stable, Strong+Direct, Pressing motor) — legal as placed"
+      },
+      "factual_issues": [],
+      "voice_issues": [],
+      "notes_for_actor": [
+        "The tempo is legal. Do not change the commanding register. Strong + Direct + Pressing is correct for this placement. The failure is not in the weight or the aim — it is in what the aim is pointed at.",
+        "You are currently pressing toward the mechanical fact. Press toward the structural change instead. The account number is evidence; the dissolution of the bank/wallet wall is the bold resolve. Redirect the Direct aim at the resolve, not the feature.",
+        "The Vision extravert projection is missing. You are resting in Spell (the mapping, the knowing) without releasing toward what the mapping reveals. One of your two sentences should complete the primary→extravert arc by landing the reader in the new picture, not just naming the new capability.",
+        "The lining needs one surface signal. It does not require a second sentence or an explanation. A single phrase that makes the reader feel the category boundary has moved — not a new pipe into a crypto wallet, but a bank account that is also on-chain — will carry the lining without adding copy length.",
+        "The KYC omission is a factual correction, not a voice note. You must qualify 'Your account' to reflect that the account number is available only to KYC/KYB-approved users. Find the lightest possible qualifier that is factually accurate; do not let the qualification break the Pressing motor by softening into hedging."
+      ]
+    },
+    "new_audit": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "factual_passed": true,
+      "publication_gate_passed": false,
+      "infinex_fit_legal": true,
+      "infinex_fit_reason": "commanding is a primary allowed tempo for Infinex. Drive reads as resting Spell, which is legal for a stable|penetrating|flow character on a single contained web line. No passion/urgency/FOMO surface. No off-spec projection. Lining (bank-wall dissolution) is not surfaced as thesis — it is carried underneath the plain declaration, correctly hidden.",
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.62,
+      "drive_read": "spell",
+      "placement_read": "Stable character resting at Spell. The 'bold resolve' has already been taken (bank wall dissolved); the copy maps the territory from a position of decided authority. No urgency, no sell. Drive primary = Spell (formative); no visible Vision projection required at this surface scale.",
+      "voice_issues": [],
+      "factual_issues": [],
+      "publication_gate_issues": [
+        "Bridge.xyz fiat deposit code has not yet landed in the Infinex platform codebase (release card deployed_fact: 'grep across all platform files returns zero matches for bridge.xyz'). The copy states 'Your Infinex account now has an account number. Money sent to it arrives as USDC, on-chain.' — the word 'now' and the present-tense 'arrives' assert live functionality. This copy is valid ONLY at the intended ship state (2026-05-22) when code has landed. Publication gate must confirm code is live before this copy ships. Until then, 'now' is an unsupported present-tense claim."
+      ],
+      "notes_for_actor": [
+        "The Pressing motor is working — Strong + Direct + Sustained is the right resting weight for this beat. The copy lands without selling.",
+        "Lining is correctly hidden. 'The bank wall stopped existing' is nowhere stated; it is carried under the plain claim. Do not surface it.",
+        "'on-chain' as a closing gate is clean Bound flow — do not open it up or add a release phrase. The containment is the point.",
+        "If a follow-on beat is needed (modal, tooltip, or expanded web surface), the Pressing preparation is in place. A Punching execution beat — a single, sudden, more specific claim — would be the legal motor move: e.g. one concrete user consequence, no elaboration.",
+        "The 'now' is load-bearing and presupposes live code. Confirm ship state before this copy goes out. If ship is delayed, 'now' needs to move to a future-anchored form or the copy holds."
+      ]
+    },
+    "audit_error": false,
+    "audit_error_message": null
+  }
+]

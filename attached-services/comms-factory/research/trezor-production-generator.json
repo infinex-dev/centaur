@@ -1,0 +1,332 @@
+{
+  "voice": "infinex",
+  "beats": [
+    "sombre",
+    "commanding",
+    "practical",
+    "irradiant"
+  ],
+  "candidates": [
+    {
+      "id": "anthropic-0",
+      "text": "Cold-key storage used to mean choosing a side.\n\nTrezor hardware wallet support is live in Infinex.\n\nLedger and Trezor sit in the same portfolio. The device still signs every transaction — Infinex just routes.\n\nOne surface for your cold keys, no matter which brand they live on.",
+      "channel": "x",
+      "declared_beats": [
+        {
+          "tempo": "sombre",
+          "hint": "set up the wall we are taking down — Pressing prep"
+        },
+        {
+          "tempo": "commanding",
+          "hint": "land the fact — Punching release, fed by Sombre prep"
+        },
+        {
+          "tempo": "practical",
+          "hint": "justify the build decision — Wringing/Slashing"
+        },
+        {
+          "tempo": "irradiant",
+          "hint": "future-tense lift — Floating/Flicking"
+        }
+      ],
+      "deployed_facts_used": [
+        "Trezor hardware wallet support is live in Infinex",
+        "The hardware wallet signs every transaction",
+        "Funds stay on the hardware device; Infinex displays them and routes transactions"
+      ],
+      "not_said": [
+        {
+          "fact": "Trezor wallets appear alongside Ledger in your portfolio",
+          "reason": "Covered implicitly by 'Ledger and Trezor sit in the same portfolio' — the explicit phrasing would have been redundant."
+        }
+      ],
+      "rationale": "Sombre opens with the brand-split wall. Commanding lands the headline fact. Practical carves the build decision (display + route, device signs). Irradiant lifts to the unified-surface future.",
+      "source": "anthropic",
+      "validation": {
+        "passed": false,
+        "failures": [
+          {
+            "rule": "fact-contract",
+            "reason": "declared deployed fact does not appear plausibly in text: \"Funds stay on the hardware device; Infinex displays them and routes transactions\""
+          },
+          {
+            "rule": "beat-tempo-fit",
+            "reason": "beat 2 (declared practical): blind classifier saw unknown (confidence 0, margin 0)"
+          },
+          {
+            "rule": "beat-tempo-fit",
+            "reason": "beat 3 (declared irradiant): blind classifier saw commanding (confidence 0.355, margin 0.875)"
+          }
+        ],
+        "beat_audit": [
+          {
+            "beat_index": 0,
+            "declared_tempo": "sombre",
+            "classified_tempo": "sombre",
+            "classified_confidence": 0.571,
+            "passed": true
+          },
+          {
+            "beat_index": 1,
+            "declared_tempo": "commanding",
+            "classified_tempo": "commanding",
+            "classified_confidence": 0.469,
+            "passed": true
+          },
+          {
+            "beat_index": 2,
+            "declared_tempo": "practical",
+            "classified_tempo": "unknown",
+            "classified_confidence": 0,
+            "passed": false,
+            "reason": "blind classifier saw unknown (confidence 0, margin 0)"
+          },
+          {
+            "beat_index": 3,
+            "declared_tempo": "irradiant",
+            "classified_tempo": "commanding",
+            "classified_confidence": 0.355,
+            "passed": false,
+            "reason": "blind classifier saw commanding (confidence 0.355, margin 0.875)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "anthropic-1",
+      "text": "Your hardware wallet brand used to decide which app you lived in.\n\nTrezor hardware wallet support is live in Infinex.\n\nTrezor wallets appear alongside Ledger in your portfolio. Keys never move — the device signs, Infinex routes.\n\nOne place for cold storage. Stop thinking about which brand you picked.",
+      "channel": "x",
+      "declared_beats": [
+        {
+          "tempo": "sombre",
+          "hint": "set up the wall we are taking down — Pressing prep"
+        },
+        {
+          "tempo": "commanding",
+          "hint": "land the fact — Punching release, fed by Sombre prep"
+        },
+        {
+          "tempo": "practical",
+          "hint": "justify the build decision — Wringing/Slashing"
+        },
+        {
+          "tempo": "irradiant",
+          "hint": "future-tense lift — Floating/Flicking"
+        }
+      ],
+      "deployed_facts_used": [
+        "Trezor hardware wallet support is live in Infinex",
+        "Trezor wallets appear alongside Ledger in your portfolio",
+        "The hardware wallet signs every transaction",
+        "Funds stay on the hardware device; Infinex displays them and routes transactions"
+      ],
+      "not_said": [],
+      "rationale": "Sombre frames the brand-lock-in wall. Commanding drops the fact. Practical explains side-by-side display with the signing/routing split. Irradiant releases into the agent-era 'stop thinking about which' shape.",
+      "source": "anthropic",
+      "validation": {
+        "passed": false,
+        "failures": [
+          {
+            "rule": "fact-contract",
+            "reason": "declared deployed fact does not appear plausibly in text: \"Funds stay on the hardware device; Infinex displays them and routes transactions\""
+          },
+          {
+            "rule": "beat-tempo-fit",
+            "reason": "beat 2 (declared practical): blind classifier saw sociable (confidence 0.35, margin 1.417)"
+          }
+        ],
+        "beat_audit": [
+          {
+            "beat_index": 0,
+            "declared_tempo": "sombre",
+            "classified_tempo": "sombre",
+            "classified_confidence": 0.433,
+            "passed": true
+          },
+          {
+            "beat_index": 1,
+            "declared_tempo": "commanding",
+            "classified_tempo": "commanding",
+            "classified_confidence": 0.469,
+            "passed": true
+          },
+          {
+            "beat_index": 2,
+            "declared_tempo": "practical",
+            "classified_tempo": "sociable",
+            "classified_confidence": 0.35,
+            "passed": false,
+            "reason": "blind classifier saw sociable (confidence 0.35, margin 1.417)"
+          },
+          {
+            "beat_index": 3,
+            "declared_tempo": "irradiant",
+            "classified_tempo": "irradiant",
+            "classified_confidence": 0.631,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "anthropic-2",
+      "text": "Hardware wallets used to fragment your view by brand.\n\nTrezor hardware wallet support is live in Infinex.\n\nThe hard part was making both devices feel native, not bolted on. Funds stay on the device; Infinex displays them and routes transactions.\n\nCold storage, one portfolio, regardless of which key sits in your drawer.",
+      "channel": "x",
+      "declared_beats": [
+        {
+          "tempo": "sombre",
+          "hint": "set up the wall we are taking down — Pressing prep"
+        },
+        {
+          "tempo": "commanding",
+          "hint": "land the fact — Punching release, fed by Sombre prep"
+        },
+        {
+          "tempo": "practical",
+          "hint": "justify the build decision — Wringing/Slashing"
+        },
+        {
+          "tempo": "irradiant",
+          "hint": "future-tense lift — Floating/Flicking"
+        }
+      ],
+      "deployed_facts_used": [
+        "Trezor hardware wallet support is live in Infinex",
+        "Funds stay on the hardware device; Infinex displays them and routes transactions"
+      ],
+      "not_said": [
+        {
+          "fact": "Trezor wallets appear alongside Ledger in your portfolio",
+          "reason": "Implied by 'one portfolio' and the framing, but not stated verbatim to keep the post under the channel max."
+        },
+        {
+          "fact": "The hardware wallet signs every transaction",
+          "reason": "Compressed into 'Funds stay on the device' for length — the custody guarantee carries the point."
+        }
+      ],
+      "rationale": "Sombre sets up the fragmentation wall. Commanding lands the launch. Practical leans into the build tradeoff (native, not bolted on) plus the custody split. Irradiant lifts to the unified cold-storage future.",
+      "source": "anthropic",
+      "validation": {
+        "passed": false,
+        "failures": [
+          {
+            "rule": "unsupported-claim",
+            "reason": "assertive claim is not supported by deployed_facts: \"The hard part was making both devices feel native, not bolted on.\""
+          }
+        ],
+        "beat_audit": [
+          {
+            "beat_index": 0,
+            "declared_tempo": "sombre",
+            "classified_tempo": "sombre",
+            "classified_confidence": 0.548,
+            "passed": true
+          },
+          {
+            "beat_index": 1,
+            "declared_tempo": "commanding",
+            "classified_tempo": "commanding",
+            "classified_confidence": 0.469,
+            "passed": true
+          },
+          {
+            "beat_index": 2,
+            "declared_tempo": "practical",
+            "classified_tempo": "practical",
+            "classified_confidence": 0.603,
+            "passed": true
+          },
+          {
+            "beat_index": 3,
+            "declared_tempo": "irradiant",
+            "classified_tempo": "irradiant",
+            "classified_confidence": 0.352,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "anthropic-3",
+      "text": "Cold-key users used to pick a wallet brand and pick an app to match.\n\nTrezor hardware wallet support is live in Infinex.\n\nTrezor sits alongside Ledger in your portfolio. The device signs every transaction — Infinex never touches the keys.\n\nA few months from now, the brand on the device won't shape where you actually work.",
+      "channel": "x",
+      "declared_beats": [
+        {
+          "tempo": "sombre",
+          "hint": "set up the wall we are taking down — Pressing prep"
+        },
+        {
+          "tempo": "commanding",
+          "hint": "land the fact — Punching release, fed by Sombre prep"
+        },
+        {
+          "tempo": "practical",
+          "hint": "justify the build decision — Wringing/Slashing"
+        },
+        {
+          "tempo": "irradiant",
+          "hint": "future-tense lift — Floating/Flicking"
+        }
+      ],
+      "deployed_facts_used": [
+        "Trezor hardware wallet support is live in Infinex",
+        "Trezor wallets appear alongside Ledger in your portfolio",
+        "The hardware wallet signs every transaction"
+      ],
+      "not_said": [
+        {
+          "fact": "Funds stay on the hardware device; Infinex displays them and routes transactions",
+          "reason": "Compressed into 'Infinex never touches the keys' — the custody point is carried, the routing detail dropped for length."
+        }
+      ],
+      "rationale": "Sombre carves the brand→app coupling. Commanding lands the headline. Practical clarifies the custody model (device signs, Infinex never touches keys). Irradiant uses the 'a few months from now' shape for future-state lift.",
+      "source": "anthropic",
+      "validation": {
+        "passed": false,
+        "failures": [
+          {
+            "rule": "beat-tempo-fit",
+            "reason": "beat 2 (declared practical): blind classifier saw sociable (confidence 0.371, margin 1.917)"
+          },
+          {
+            "rule": "beat-tempo-fit",
+            "reason": "beat 3 (declared irradiant): blind classifier saw unknown (confidence 0.319, margin 1.25)"
+          }
+        ],
+        "beat_audit": [
+          {
+            "beat_index": 0,
+            "declared_tempo": "sombre",
+            "classified_tempo": "sombre",
+            "classified_confidence": 0.586,
+            "passed": true
+          },
+          {
+            "beat_index": 1,
+            "declared_tempo": "commanding",
+            "classified_tempo": "commanding",
+            "classified_confidence": 0.469,
+            "passed": true
+          },
+          {
+            "beat_index": 2,
+            "declared_tempo": "practical",
+            "classified_tempo": "sociable",
+            "classified_confidence": 0.371,
+            "passed": false,
+            "reason": "blind classifier saw sociable (confidence 0.371, margin 1.917)"
+          },
+          {
+            "beat_index": 3,
+            "declared_tempo": "irradiant",
+            "classified_tempo": "unknown",
+            "classified_confidence": 0.319,
+            "passed": false,
+            "reason": "blind classifier saw unknown (confidence 0.319, margin 1.25)"
+          }
+        ]
+      }
+    }
+  ],
+  "picks": []
+}

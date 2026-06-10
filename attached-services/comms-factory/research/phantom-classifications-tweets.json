@@ -1,0 +1,1420 @@
+[
+  {
+    "id": "T001",
+    "text": "Phantom turns 5 today 🎂  From 3AM trades to paying for coffee with Cash, we've been with you every step of the way.  Here's to the next chapter 👻💜",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Irradiant"
+      ],
+      "outer_action_inners": [
+        "adream"
+      ],
+      "confidence": 0.78,
+      "rationale": "Anniversary copy is body-forward, relational, and temporally rooted ('every step of the way', '3AM trades to coffee') — classic Near territory. The nostalgic arc and emotional warmth land in Warm tempo. Circumscribing aspect: Time-led form (milestone birthday, sequential journey framing). Stress=flow, pole=free: the emotion flows openly, no bound holding. The 'Here's to the next chapter' gesture briefly flashes an Adream/Irradiant lift — a radiating secondary moment — recorded in outer_action_tempi.",
+      "literary_anchor": "Anthony Bourdain raising a glass to his crew"
+    }
+  },
+  {
+    "id": "T002",
+    "text": "FYI, GameStop is now live for trading in Phantom 🎮",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "Very short FYI announcement — structural, factual, decisive. 'Now live' is a time-quick stamp. Stable register: a ruler noting the state of affairs. Penetrating aspect: Space-led, cutting to the point. Stress=time, pole=quick. Motor pressing→punching. Too brief for secondary flashes.",
+      "literary_anchor": "Tywin Lannister issuing a brief dispatch"
+    }
+  },
+  {
+    "id": "T003",
+    "text": "Zcash (ZEC) is up almost 70% this week 🤯  What's fueling the latest rally?",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.74,
+      "rationale": "Alert sensor copy: scanning a market signal ('up almost 70%'), then pivoting to inquiry ('What's fueling…'). Awake register (Space+Time): noticing + questioning. Acute tempo: sharp, alert, investigative question. Penetrating aspect: Space-led structural scanning. Stress=time, pole=quick (the 🤯 implies urgency of the moment). The trailing open question flashes an Acknowledged moment (Mobile: the market event now made visible/socially noted).",
+      "literary_anchor": "A trader on the floor pivoting to read the board"
+    }
+  },
+  {
+    "id": "T004",
+    "text": "If it's in the news, you can probably trade it on Phantom.  EBAY is now available to trade.  Go long or short with up to 10x leverage.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "doing→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Commanding"
+      ],
+      "outer_action_inners": [
+        "stable"
+      ],
+      "confidence": 0.76,
+      "rationale": "'If it's in the news, you can probably trade it' is a confident, generalized rule — Stable register, Weight+Space. Practical tempo: applied intelligence, getting things sorted. Enclosing aspect: Weight-led — the rule wraps the user inside a world where everything is accessible. Stress=time (now available, 'Go long or short' immediacy), pole=quick. 'EBAY is now available' briefly flashes Commanding (a decree announcement) as a secondary beat.",
+      "literary_anchor": "A competent captain explaining the ship's capabilities"
+    }
+  },
+  {
+    "id": "T005",
+    "text": "FYI, Zoom (ZM) is now live for trading on Phantom 👨‍💻  Go long or short with up to 10x leverage.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "Short FYI + leverage offer. Stable register, decisive. 'Now live' and '10x leverage' are authority-stamped declarations. Commanding tempo: the ruler announcing capability. Penetrating aspect: Space-led directness, cuts straight to the offer. Stress=time, pole=quick. Single-register, no secondary flashes.",
+      "literary_anchor": "Tywin Lannister at a briefing table"
+    }
+  },
+  {
+    "id": "T006",
+    "text": "PLTR just announced Q1 earnings.  EPS: $0.33 ( ✅ Beat) Revenue: $1.63B (✅ Beat)  PLTR is currently trading at $148 on Phantom",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.8,
+      "rationale": "Earnings beat bulletin: structured, factual, checkmarked. Awake register (Space+Time): strategic sensor reporting data with precision. Certain tempo: the data is in, confidence is locked. Penetrating aspect: Space-led, scanning and presenting structural facts. Stress=time, pole=quick ('currently trading at $148' — live now). The social broadcast framing ('PLTR is currently trading on Phantom') flashes an Acknowledged beat — making the market moment visible to the community.",
+      "literary_anchor": "A strategist presenting confirmed intel"
+    }
+  },
+  {
+    "id": "T007",
+    "text": "FULL CRCL moment: CRCL is up over 11% despite mixed Q1 earnings results.  Their on-chain volume hit $11.9 trillion this year, a 247% surge.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Irradiant"
+      ],
+      "outer_action_inners": [
+        "adream"
+      ],
+      "confidence": 0.7,
+      "rationale": "'FULL CRCL moment' is community-inflected, celebratory, and socially broadcast — Mobile register (Time+Flow), fragmenting attention across multiple data points. Acknowledged tempo: the event is now made socially visible, named, celebrated. Circumscribing aspect: Time-led — the 'moment' frame wraps the event in temporal spectacle. Stress=flow, pole=free (the excitement flows outward freely). The '247% surge' data point briefly flashes an Irradiant (Adream) lift — a dreamy upward radiance.",
+      "literary_anchor": "A sports commentator naming the highlight-reel moment"
+    }
+  },
+  {
+    "id": "T008",
+    "text": "Despite missing Q1 earnings, MSTR is still up nearly 12% this week 🤔  Did you catch the trade?",
+    "classification": {
+      "tempo_primary": "Doubting",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.73,
+      "rationale": "The 🤔 and the contradictory market logic ('despite missing earnings, still up 12%') marks an Awake register — noticing an anomaly, questioning. Doubting tempo: the strategist who has spotted an inconsistency and holds it up for examination. Penetrating aspect: Space-led scanning of the contradiction. Stress=time, pole=quick ('this week', urgency of opportunity). 'Did you catch the trade?' flashes Acknowledged — making the trade moment socially visible and inviting community recognition.",
+      "literary_anchor": "A canny analyst raising an eyebrow at the tape"
+    }
+  },
+  {
+    "id": "T009",
+    "text": "COIN, CRWV, and DKNG all report Q1 earnings today after market close.  Trade them on Phantom before the call 💫",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.77,
+      "rationale": "Three tickers, same day, 'before the call' — time-pressured, multi-target scanning. Awake register: alert sensor sweeping across multiple events with urgency. Acute tempo: sharp, quick-sighted, decisive alerting. Circumscribing aspect: Time-led — the 'today after market close' deadline wraps all three tickers in a temporal frame. Stress=time, pole=quick ('before the call' — the clock is running). The 💫 and the social naming of all three tickers flashes Acknowledged — publicly marking these as the trades-to-watch.",
+      "literary_anchor": "A floor trader calling out multiple positions before the bell"
+    }
+  },
+  {
+    "id": "T010",
+    "text": "Two companies report Q1 2026 earnings today 👻  EPS Estimates:  MSTR $-4.49 AMD $1.30  Results will be reported today after market close. Trade them on Phantom",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.76,
+      "rationale": "EPS estimate reporting — structured, factual, two-ticker scan. Awake register: the strategist presenting confirmed intelligence. Certain tempo: the data is on the table, the frame is settled. Penetrating aspect: Space-led structural precision (named tickers, named estimates). Stress=time, pole=quick ('today after market close' deadline). The two-ticker enumeration with the 👻 brand stamp briefly flashes Acute — a sharp alerting beat before the results land.",
+      "literary_anchor": "An analyst presenting pre-call briefing notes"
+    }
+  },
+  {
+    "id": "T011",
+    "text": "Another week, another round of earnings 👻  Palantir, Strategy, Advanced Micro Devices, Coinbase, CoreWeave, and DraftKings are all reporting.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Sociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.68,
+      "rationale": "'Another week, another round of earnings' is rhythmic, casual-communal, list-building — a Near-family circumscribing move that names the crowd ('frens') of companies. The ghost emoji and breezy enumeration give free-flow, body-forward ease. The list structure is a Mobile-family (Time+Flow) form, broadcasting names outward — hence Acknowledged (Mobile: seen, named, surfaced). A Sociable flash (Remote family) flickers in the collegial 'another week, another round' ritual framing.",
+      "literary_anchor": "A broadcaster calling the card — Tony Kornheiser announcing the week's matchups."
+    }
+  },
+  {
+    "id": "T012",
+    "text": "The S&P500 is up almost 12% since it went live for trading in Phantom 😳",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.72,
+      "rationale": "'Up almost 12% since it went live' is a radiant number-flash — adream (Weight+Flow) inflected by a time-stress quick punch. The 😳 emoji amplifies the lifted-radiance surprise. The stat radiates outward as a glowing fact, Irradiant in feel (adream family: yielding body, lifted feeling). An Acknowledged beat (Mobile) flickers — the number is being 'surfaced' to the audience as newly visible.",
+      "literary_anchor": "Blanche DuBois announcing something that shimmers more than it proves."
+    }
+  },
+  {
+    "id": "T013",
+    "text": "Circle just reported their Q1 Earnings, with HIMS and Alibaba scheduled this week. Go long or short on Phantom 💫",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.65,
+      "rationale": "'Go long or short on Phantom 💫' is an inclusive, body-forward invitation — Near family, relational warmth. The preceding earnings roll-call (Circle, HIMS, Alibaba) is circumscribing: time-led enumeration inherited from community broadcast form. Stress is flow (free: the invite opens outward without urgency-clench). Warm tempo (Near) carries the inclusive 'here's your shot' feel. Acknowledged (Mobile) flashes as the names are surfaced into view.",
+      "literary_anchor": "Anthony Bourdain saying 'here's the table — sit down, eat.'"
+    }
+  },
+  {
+    "id": "T014",
+    "text": "Phantom Perps are not available in all jurisdictions. Referenced leverage reflects the highest maximum among newly listed markets. Any tickers referenced do not represent ownership of actual equities or securities, but rather perpetual contracts issued by Phantom's partner platforms. Review individual market details before trading. Perpetuals involve significant risk and may not be suitable for all users. This content is for informational purposes only and does not constitute investment advice. Past performance does not guarantee future results.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.75,
+      "rationale": "Legal boilerplate is structurally Stable — authoritative, decisions-taken, weight+space settled. 'Review individual market details before trading' and 'does not constitute investment advice' are penetrating (Space-led structural cuts). Time-stress sustained: the pace is deliberate, clause-by-clause, never rushed. Commanding tempo: the voice holds power over the reader's understanding of risk. An Unsociable flash (Remote) comes through in the carved-off, distancing tone — 'may not be suitable for all users' withdraws warmth entirely.",
+      "literary_anchor": "Logan Roy's lawyers issuing a statement — no warmth, structural authority only."
+    }
+  },
+  {
+    "id": "T015",
+    "text": "Sidelined?  Trade CRCL on Phantom 👻",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "'Sidelined?' is a quick, alert challenge — Awake family (Space+Time), sensor-mode, noticing the reader's position and cutting to a solution. 'Trade CRCL on Phantom' is a fast directive. Acute tempo: sharp identification of a gap, quick close. Circumscribing: the question-mark form wraps around the reader's presumed state. The ghost emoji lightens but doesn't dissolve the directness. Single-register — no transient outer flashes.",
+      "literary_anchor": "Iago spotting an opening and speaking before the thought has fully formed."
+    }
+  },
+  {
+    "id": "T016",
+    "text": "Long or short COIN, CRWV and DKNG up to 10x leverage on Phantom 👻",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.73,
+      "rationale": "'Long or short COIN, CRWV and DKNG up to 10x leverage on Phantom' is a clean, functional Stable offer — Practical tempo (Stable family: Weight+Space, decisions-taken). The enumeration is Space-led (penetrating: three tickers named precisely). Time-stress quick: 'up to 10x' implies a live window. No warmth, no dreaming — pure capability statement. Motor: pressing into punching (Strong-Direct). Single-register.",
+      "literary_anchor": "Tywin Lannister enumerating terms of a trade deal — no surplus words."
+    }
+  },
+  {
+    "id": "T017",
+    "text": "Phantom Perps involve risks and are not available to users in the US or other restricted jurisdictions. See full disclaimer here:",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "spell→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.67,
+      "rationale": "A compact legal disclaimer. Stable family (Weight+Space, structural authority). Self-Contained: the voice closes off, withholds, draws a boundary around what is and isn't offered. Penetrating aspect (Space-led precision: named jurisdictions, 'US or other restricted'). Stress flow, pole bound: the withholding is emotionally firm — not urgency, but a held gate. Unsociable (Remote) flashes in the geographic exclusion — 'not available to users in the US' is a carved-off aristocratic withdrawal.",
+      "literary_anchor": "The Duke of Ferrara noting 'I gave commands' — polite, final, withdrawing."
+    }
+  },
+  {
+    "id": "T018",
+    "text": "Note: This represents a new perps markets that went live in Phantom this week.",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "'Note: This represents a new perps markets that went live in Phantom this week.' is a flat informational flag — a parenthetical surfacing of a fact. Mobile family (Time+Flow), Acknowledged tempo: the beat is 'here, I name this for you.' Circumscribing: time-led form (this week = temporal boundary). Flow-stress free: the release is light, almost casual. Motor floating → flicking (Light-Flexible) — a gentle flag, not a force-landing. Single-register.",
+      "literary_anchor": "A stage direction in a playscript — informational, unmarked, briefly surfaced."
+    }
+  },
+  {
+    "id": "T019",
+    "text": "call your mom today (NFA, DYOR)",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Sociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.76,
+      "rationale": "'Call your mom today' is maximally Near — body-forward, relational, human-weight directive. Warm tempo (Near family: Weight+Time, down-to-earth). Enclosing aspect (Weight-led: wraps the reader in a bodily, familial closeness). Stress flow, pole free: the feel is open-handed, no grip. The parenthetical '(NFA, DYOR)' is a Sociable (Remote) flash — it signals community fluency, a nod to the in-group, brief and knowing. Literary: the Nurse telling Juliet to go to bed — warm, body-led, no theory.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) — warmth-first, body-forward, no abstraction."
+    }
+  },
+  {
+    "id": "T020",
+    "text": "ATH supercycle (real)",
+    "classification": {
+      "tempo_primary": "Overpowering",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "'ATH supercycle (real)' is adream — dreamy, yielding, body-and-feel without body. Overpowering tempo (adream family: Weight+Flow, yielding): the proclamation is massive, sweeping, a force-field statement. Radiating aspect (Flow-led: the idea expands outward, 'supercycle' implies a vast arc). Time-stress quick: '(real)' punches the belief home as immediate, now. The parenthetical '(real)' is the quick pole landing — pressing into punching. The utterance floats, then lands with a jab. Literary: Lovborg announcing the manuscript is the future — total belief, expansive, no irony.",
+      "literary_anchor": "Eilert Lovborg: 'It is the future — the whole future of civilization.'"
+    }
+  },
+  {
+    "id": "T021",
+    "text": "tired of winning?",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three words. The rhetorical edge ('tired of winning?') implies a sardonic, body-forward relational jab — potentially Near/Cool — but the sample is too short and too ambiguous to pin a single tempo. Could read as Remote/Unsociable or Near/Cool irony. Cannot commit to inner attitude or stress.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T022",
+    "text": "waiting…",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "Single word with ellipsis. Genuinely too short to read any placement. The suspension implies either Adream (yielding, time-held) or Awake (alert, expectant), but both readings are equally plausible. No commitment possible.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T023",
+    "text": "if you don't love me at my -70% you don't deserve me at my +180% ❤️‍🩹",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.62,
+      "rationale": "The meme-format ('if you don't love me at my X you don't deserve me at my Y') is culturally circumscribing — Time-led, adopting a recognizable communal form. The heart-bandage emoji and emotional volatility (-70%/+180%) reads body-forward and relational: Near family. Stress is flow (the emotional continuity is visible, yielding), pole free (flowing out, not held). Warm tempo: intimate, self-exposing, relational. The meme form itself flashes an Acknowledged (Mobile) outer-action beat — a moment of performing-for-recognition.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) making herself vulnerable through communal form"
+    }
+  },
+  {
+    "id": "T024",
+    "text": "if your network isn't discussing peptide stacks, drop shipping, and stablecoin payment infrastructure… it's time to find a new network",
+    "classification": {
+      "tempo_primary": "Cool",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.65,
+      "rationale": "Near family: body-forward, relational, but with a cool gatekeeping edge ('drop your network'). The list (peptide stacks, dropshipping, stablecoin) is circumscribing — Time-led, inherited community-signalling form. Stress is flow (bound): the emotional conviction is held tight, exclusionary. Cool tempo: Near but with emotional distance/edge. The dismissal ('find a new network') flashes a Remote/Unsociable beat — carved-off, aristocratic-aloof.",
+      "literary_anchor": "Iago curating his inner circle"
+    }
+  },
+  {
+    "id": "T025",
+    "text": "Hyperliquid 👻",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "A brand name plus ghost emoji. Too short to read any inner attitude, stress, or aspect. The ghost may signal Near playfulness or Remote irony, but nothing is determinable at this length.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T026",
+    "text": "best met gala fit so far?",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Five words, question format. Sociable/Awake flavour is faintly present (scanning, inviting opinion), but genuinely too short to commit to a tempo, stress, or aspect. Could be Acute (Awake) or Sociable (Remote). No commitment.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T027",
+    "text": "@claudeai @SpaceX @grok are you worried that ai is taking your job?",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "Awake family: alert, scanning, strategist energy. The question is directed at real entities (@claudeai, @SpaceX, @grok) and probes a live cultural tension (AI and jobs). Penetrating aspect: Space-led, cutting to the structural issue. Stress is time, pole quick — the question lands with immediacy, a pointed jab. Acute tempo (Awake): sharp, single-targeted notice. Sample is borderline short but the tagging pattern and framing carry enough signal.",
+      "literary_anchor": "A journalist cornering subjects with a structural question"
+    }
+  },
+  {
+    "id": "T028",
+    "text": "@Kalshi @grok what is the deal?",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Too short and too vague to classify. 'What is the deal?' could be Awake/Acute (probing, alert) or Near/Cool (exasperated, relational) but the sample provides no enough context for the inner or stress to be determined.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T029",
+    "text": "@Kalshi so once all elon's companies merge will it be TeslaXBoringSpaceXAiLink",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Sociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.52,
+      "rationale": "Mobile family: fragmenting, multi-directional, playful scatter. The portmanteau 'TeslaXBoringSpaceXAiLink' is a quick, flicking riff — radiating aspect (Flow-led, expansive burst of wit). Stress is time, pole quick (the joke is thrown, not held). Acknowledged tempo (Mobile): performing for recognition, inviting the crowd in. The @Kalshi tag and the public-facing wit flash a Sociable (Remote) outer beat — a brief moment of aristocratic-cool delivery before the laugh breaks through.",
+      "literary_anchor": "A court jester riffing in public — Falstaff mid-improvisation"
+    }
+  },
+  {
+    "id": "T030",
+    "text": "@Kalshi why does it take 6 years to unplug the machine?",
+    "classification": {
+      "tempo_primary": "Doubting",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "space",
+      "pole": "flexible",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "wringing",
+        "slashing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.5,
+      "rationale": "Awake family: alert, questioning, structural cognition. The question ('why does it take 6 years to unplug the machine?') is a scanning, orientation-driven probe — Awake/penetrating energy. However the framing is exasperated and orbiting rather than cutting cleanly, making circumscribing aspect (Time-led) more fitting: the question circles the structural absurdity. Stress is space, pole flexible (scanning multiple explanatory angles rather than landing a direct verdict). Doubting tempo (Awake): alert but unresolved, holding the question open. Sample is borderline but carries enough structural frustration to read.",
+      "literary_anchor": "Hedda Gabler probing the bureaucratic machine with ironic despair"
+    }
+  },
+  {
+    "id": "T031",
+    "text": "@Kalshi wake up babe new finance hack just dropped",
+    "classification": {
+      "tempo_primary": "Acknowledged",
+      "inner_attitude": "mobile",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.62,
+      "rationale": "\"Wake up babe new finance hack just dropped\" is CT-native hype vernacular — it performs adjacency and cultural fluency (Mobile family: Acknowledged, the tempo of being seen/recognized within a community). The \"wake up babe\" framing is circumscribing (Time-led, inherited CT form), stress is flow (free — spilling, no holding back), pole free. A flash of Acute (Awake family) arrives with \"just dropped\" — a sudden-alert sensory ping. Gliding→dabbing suits the light, breezy touch.",
+      "literary_anchor": "A casual hype-man invoking the crowd — Anthony Bourdain's casual mode gone meme-register."
+    }
+  },
+  {
+    "id": "T032",
+    "text": "@elonmusk @grok in simple terms, explain what the GB300 is and what it can do",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "A direct request for structural clarity: \"in simple terms, explain what X is and what it can do.\" Awake family (Space+Time), Certain tempo — the speaker knows what they want and aims straight at it. Aspect is penetrating (Space-led — oriented, scanning for a defined target). Stress is space, pole direct. Pressing→punching: a clean, force-landing demand. No secondary register flashes.",
+      "literary_anchor": "A field correspondent asking a sharp briefing question — no-nonsense, orientation-driven."
+    }
+  },
+  {
+    "id": "T033",
+    "text": "the whole gang pulled up  @moonpay + @solana + @useCASH 👻",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Sociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.65,
+      "rationale": "\"The whole gang pulled up\" is body-forward, relational, communal — Near family (Weight+Time). Warm tempo: the affiliative, embracing register. Aspect is circumscribing (Time-led — the gathering itself is the event, performed in CT-native shorthand). Stress flow, pole free (spilling warmth, no containment). Gliding→dabbing: light, touching. The emoji ghost 👻 and the brand list flash a Sociable (Remote) outer-action moment — a brief cool-elegant name-drop.",
+      "literary_anchor": "Tony Soprano welcoming the crew at the Bada Bing — warmth as social currency."
+    }
+  },
+  {
+    "id": "T034",
+    "text": "@useCASH seems to be working 😏 solana:CASHx9KJUStyftLFWGvEVf59SGeG9sh5FfcnZMVPCASH",
+    "classification": {
+      "tempo_primary": "Cool",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.6,
+      "rationale": "\"Seems to be working 😏\" is knowing, slightly withheld — Near family but at its restrained, Cool pole. The winking emoji signals performed casualness with held-back pleasure (bound flow). Circumscribing aspect: Time-led, using the live-update format as CT-native form. The contract address appended is a factual, community-oriented drop that flashes Acknowledged (Mobile — being seen by insiders).",
+      "literary_anchor": "Iago aside to the audience — knowing, barely suppressed."
+    }
+  },
+  {
+    "id": "T035",
+    "text": "@opensea remember when we [REDACTED]",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "The sample is fatally truncated by [REDACTED]. The fragment \"remember when we\" gestures at Near/nostalgic register but there is no legible content to classify. Cannot assign tempo, aspect, stress, or motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T036",
+    "text": "@0xSweep true. i'm basically an unc",
+    "classification": {
+      "tempo_primary": "Human",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.63,
+      "rationale": "\"I'm basically an unc\" is self-deprecating, body-grounded, relational self-disclosure — Near family (Weight+Time), Human tempo (the most plainly relational Near tempo). Aspect enclosing: Weight-led, turning inward on the self as subject. Stress flow, pole free — easy, unguarded admission. Gliding→dabbing: light touch, no drama.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) confessing her age cheerfully — self-aware, earthy."
+    }
+  },
+  {
+    "id": "T037",
+    "text": "@catznfa gud one. stealing this",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "\"Gud one. stealing this\" is brief, affectionate, community-bonding — Near family, Warm tempo (affiliative approval). Circumscribing aspect: Time-led, using the CT reply-compliment form as inherited ritual. Stress flow, pole free (uncontained warmth). Gliding→dabbing: light, casual touch. Too short for outer-action flashes.",
+      "literary_anchor": "Casual Bourdain — quick, genuine appreciation between peers."
+    }
+  },
+  {
+    "id": "T038",
+    "text": "@lostsol heart maxxing 💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜💜",
+    "classification": {
+      "tempo_primary": "Overpowering",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "44 purple heart emojis with \"heart maxxing\" is pure adream register — Weight+Flow, dreamy, feeling-forward, no rational anchor. Overpowering tempo: the adream tempo of overwhelming emotional projection. Aspect radiating: Flow-led, spilling outward in all directions. Stress time (the \"maxxing\" suffix implies an ongoing, sustained temporal push — maximizing without end), pole sustained. Pressing→punching: the sheer weight of accumulation forces a landing. No secondary register.",
+      "literary_anchor": "Ophelia strewing flowers — pure feeling, no restraint, pouring outward."
+    }
+  },
+  {
+    "id": "T039",
+    "text": "@web3pingu thanks gang and thanks for showing up in the comments every day 💜",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "\"Thanks gang and thanks for showing up in the comments every day 💜\" is relational, body-forward gratitude — Near family (Weight+Time), Warm tempo. Aspect enclosing: Weight-led, gathering the community inward around the speaker. Stress flow, pole free (openly expressed warmth, no holding back). Gliding→dabbing: gentle, touching contact. Single register — no outer-action flashes.",
+      "literary_anchor": "Tony Soprano thanking the crew — genuine, relational, body-warmth."
+    }
+  },
+  {
+    "id": "T040",
+    "text": "@MINHxDYNASTY Thanks Minh! Hope you're having a great weekend",
+    "classification": {
+      "tempo_primary": "Human",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "\"Thanks Minh! Hope you're having a great weekend\" is plain, sincere, person-to-person warmth — Near family, Human tempo (the most direct relational Near beat, name-to-name). Aspect enclosing: Weight-led, turning toward the individual. Stress flow, pole free (open, unguarded). Gliding→dabbing: light, warm touch. No secondary register.",
+      "literary_anchor": "The Nurse speaking directly to a named person — plain, genuine care."
+    }
+  },
+  {
+    "id": "T041",
+    "text": "@itsthatgigi wasn't familiar with this piece of lore 🤯",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Too short to read a stable inner attitude. The 🤯 emoji signals surprise/discovery — a flash of Awake (Acute) energy — but the fragment is a bare social reply, not enough prose to anchor a baseline tempo.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T042",
+    "text": "@WatcherGuru dubai?",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Single word + question mark. No prose to read. Genuinely too short to classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T043",
+    "text": "@remarks this is the only reason i fly",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "A one-liner of strong personal preference ('the only reason I fly') that hints at Near body-forward loyalty, but it's too sparse to reliably lock a tempo or inner attitude.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T044",
+    "text": "@paulg all of my best (worst) ideas started in the garage",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.42,
+      "rationale": "Body-forward, relational, self-deprecating warmth ('best (worst) ideas') — classic Near energy. The garage mythology is a shared cultural form (circumscribing, Time-led inherited frame), but the emotional openness and free-flowing aside push stress toward flow/free. Warm is the closest Near tempo: genial, inclusive, slightly ironic. Still a short sample — confidence moderate.",
+      "literary_anchor": "Anthony Bourdain riffing on origins"
+    }
+  },
+  {
+    "id": "T045",
+    "text": "@PopBase what happened to Trudeau",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Bare three-word question. Cannot anchor inner attitude or tempo from this fragment.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T046",
+    "text": "@greg16676935420 22 bucks for nothing is pretty steep",
+    "classification": {
+      "tempo_primary": "Cool",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.45,
+      "rationale": "Near inner attitude — body-forward, grounded complaint about value-for-money. 'Pretty steep' is measured, weight-felt dissatisfaction. Cool tempo (Near family): restrained, evaluative, withholding warmth. Enclosing aspect (Weight-led): the judgement lands inward, no scan outward. Stress flow/bound: held feeling, not urgent or spatial.",
+      "literary_anchor": "Tony Soprano quietly noting disrespect"
+    }
+  },
+  {
+    "id": "T047",
+    "text": "@Kalshi 🍎 > 🥈",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Pure emoji shorthand with no prose. The 🍎 > 🥈 comparison implies a hierarchy judgement (possibly Stable/Commanding energy) but is too minimal to reliably classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T048",
+    "text": "@Jeremybtc 👽📈",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Two emojis only. No prose to read. Cannot classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T049",
+    "text": "@web3Esf gm 👻",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.15,
+      "rationale": "'gm' with a ghost emoji is a crypto-community greeting — Near-adjacent in register (relational, body-forward) — but as per the worked examples, 'gm' alone with a single emoji is too short to pin a reliable tempo. Genuinely too minimal.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T050",
+    "text": "@Web3Maxx gSol",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Single portmanteau token ('gSol'). No prose. Cannot classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T051",
+    "text": "@notthreadguy pretty soon i heard",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Fragment reply '@notthreadguy pretty soon i heard' — five words, no discernible inner attitude. Possibly Near-family hearsay casualness but far too short to anchor a tempo, aspect, or stress. Genuinely unreadable.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "T052",
+    "text": "@Dexerto this is the kind of stuff that happens if we move to a 4 day work week.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.52,
+      "rationale": "A one-liner causal argument — 'this is the kind of stuff that happens if…' — reads as a snap structural observation delivered with confident assertion. The conditional framing ('if we move to…') is Space-scanning and the delivery is quick and pointed, landing as Awake-family Acute: a sharp noticing-sensor making a fast, slightly sardonic structural claim. Stress is time (quick snap verdict), pole quick. Motor pressing→punching: a punchy, direct landing.",
+      "literary_anchor": "A pundit clocking irony in real time — Sherlock noting the obvious"
+    }
+  },
+  {
+    "id": "T053",
+    "text": "@unusual_whales thanks for the info. stocking up on toilet paper and diet coke this time 🫡",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.58,
+      "rationale": "Body-forward, relational, casual prep-humor ('stocking up on toilet paper and diet coke') with a saluting emoji. Near-family: Weight+Time, grounded and social. Aspect circumscribing: Time-led, using communal in-joke format. Stress flow, pole free — the comment yields freely into humour without urgency. Warm is the best Near tempo: self-deprecating friendliness. The 🫡 salute flashes a brief Mobile-Acknowledged beat (self-aware performative acknowledgement of the info).",
+      "literary_anchor": "Anthony Bourdain deadpanning crisis-prep grocery lists"
+    }
+  },
+  {
+    "id": "T054",
+    "text": "@moonpay thanks moongang! you guys have a big birthday coming up soon right? 🥳",
+    "classification": {
+      "tempo_primary": "Human",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "Warm, relational address to a brand ('moongang!') with community-nickname use and birthday excitement emoji. Near-family: Weight+Time, body-forward, social. Human tempo: genuine interpersonal warmth without irony or distance. Aspect circumscribing: Time-led, riding the inherited community moment (birthday). Stress flow, pole free — easy, yielding friendliness. Motor gliding→dabbing: light-touch contact, warm.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) cheerfully remembering a birthday"
+    }
+  },
+  {
+    "id": "T055",
+    "text": "Phantom is not a bank. The Prepaid Debit Visa Card is issued by Lead Bank and managed by Bridge Ventures, LLC. Fees may apply. See Phantom's website for more details.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.72,
+      "rationale": "Legal-disclaimer boilerplate: 'Phantom is not a bank… Fees may apply. See website for more details.' Stable-family: Weight+Space, settled, structural, decisions-already-taken. Self-Contained tempo: internally complete, no appeal to the reader's emotion, self-referential closure. Aspect enclosing: Weight-led, wrapping the product in a bounded legal frame. Stress flow, pole bound — the text holds itself tightly, no release, bound conviction. Motor pressing→punching: firm, direct delivery. The curt institutional refusal ('is not a bank') flashes a Remote-Unsociable outer beat — carved-off, aristocratically aloof.",
+      "literary_anchor": "A solicitor reading the small print — Werle's notary closing the deed"
+    }
+  }
+]

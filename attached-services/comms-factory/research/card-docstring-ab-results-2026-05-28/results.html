@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>card.ts docstring A/B/C/D results — 2026-05-28</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --del-bg: #3c1717;
+    --del-border: #ff6b6b;
+    --del-text: #ffd4d4;
+    --add-bg: #0f2a14;
+    --add-border: #4ade80;
+    --add-text: #d4ffe0;
+    --warn-bg: #2d2410;
+    --warn-border: #f0c674;
+    --warn-text: #ffe7b8;
+    --info-bg: #0f1f2e;
+    --info-border: #58a6ff;
+    --info-text: #cbe4ff;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --highlight: #ff6b6b;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1840px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h2 { font-size: 22px; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 17px; margin: 24px 0 12px; }
+  .sub { color: var(--muted); margin-bottom: 24px; }
+
+  /* metrics summary */
+  .metrics-table {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .metrics-table th { background: rgba(255,255,255,0.04); text-align: left; padding: 12px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 500; }
+  .metrics-table td { padding: 14px; border-top: 1px solid var(--border); vertical-align: middle; }
+  .metrics-table .variant-cell { font-weight: 600; font-size: 14px; }
+  .metrics-table .variant-cell .sub-label { display: block; font-weight: 400; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .metrics-table .num { font-family: var(--code-mono); font-size: 15px; text-align: right; }
+  .metrics-table .num.winner { color: var(--add-border); font-weight: 700; }
+  .metrics-table .num.loser { color: var(--del-border); }
+  .metrics-table .row-current   .variant-cell .sub-label { color: var(--del-border); }
+  .metrics-table .row-variant-a .variant-cell .sub-label { color: var(--warn-border); }
+  .metrics-table .row-variant-b .variant-cell .sub-label { color: var(--info-border); }
+  .metrics-table .row-variant-c .variant-cell .sub-label { color: var(--add-border); }
+
+  /* release card */
+  .release {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+  }
+  .release-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 4px; flex-wrap: wrap; }
+  .release-id { font-family: var(--code-mono); font-size: 13px; color: var(--accent); }
+  .release-title { font-size: 15px; font-weight: 600; }
+  .release-kind { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 2px 7px; background: rgba(255,255,255,0.05); border-radius: 10px; }
+  .release-desc { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+
+  .variants-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+  .vcol { border-radius: 6px; padding: 12px 14px; min-height: 200px; display: flex; flex-direction: column; }
+  .vcol-header {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    margin-bottom: 8px; font-weight: 600;
+  }
+  .vcol.current   { background: rgba(255, 107, 107, 0.06); border: 1px solid var(--del-border); }
+  .vcol.current   .vcol-header { color: var(--del-border); }
+  .vcol.variant-a { background: rgba(240, 198, 116, 0.05); border: 1px solid var(--warn-border); }
+  .vcol.variant-a .vcol-header { color: var(--warn-border); }
+  .vcol.variant-b { background: rgba(88, 166, 255, 0.05); border: 1px solid var(--info-border); }
+  .vcol.variant-b .vcol-header { color: var(--info-border); }
+  .vcol.variant-c { background: rgba(74, 222, 128, 0.05); border: 1px solid var(--add-border); }
+  .vcol.variant-c .vcol-header { color: var(--add-border); }
+
+  .field-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--muted); margin-top: 6px; margin-bottom: 2px;
+  }
+  .ta { font-family: var(--code-mono); font-size: 12.5px; line-height: 1.5; }
+  .lin { font-family: var(--code-mono); font-size: 11.5px; line-height: 1.5; color: var(--muted); }
+  .meta-chips { margin-top: auto; padding-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; font-size: 10px; }
+  .chip { padding: 2px 7px; border-radius: 10px; background: rgba(255,255,255,0.06); }
+  .chip.anchor-1 { background: rgba(74, 222, 128, 0.18); color: var(--add-border); }
+  .chip.anchor-2 { background: rgba(74, 222, 128, 0.10); color: var(--add-border); }
+  .chip.anchor-3 { background: rgba(240, 198, 116, 0.18); color: var(--warn-border); }
+  .chip.anchor-4 { background: rgba(255, 107, 107, 0.18); color: var(--del-border); }
+  .chip.anchor-5 { background: rgba(255, 107, 107, 0.30); color: var(--del-border); font-weight: 700; }
+  .chip.valid-true  { background: rgba(74, 222, 128, 0.12); color: var(--add-border); }
+  .chip.valid-false { background: rgba(255, 107, 107, 0.18); color: var(--del-border); }
+  .chip.surface-hit { background: rgba(255, 107, 107, 0.30); color: var(--del-border); font-weight: 700; }
+  mark { background: var(--highlight); color: #fff; padding: 0 3px; border-radius: 2px; font-weight: 700; }
+
+  /* recommendation */
+  .recommendation {
+    margin-top: 48px;
+    padding: 24px 28px;
+    background: rgba(88, 166, 255, 0.08);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--info-border);
+    border-radius: 6px;
+  }
+  .recommendation h2 { margin-top: 0; border: none; }
+  .recommendation .verdict { font-size: 18px; font-weight: 600; color: var(--info-border); margin-bottom: 16px; }
+  .recommendation ul { margin: 12px 0; }
+  .recommendation li { margin-bottom: 6px; }
+
+  .key-finding {
+    margin-top: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 22px;
+  }
+  .key-finding h3 { margin-top: 0; }
+  .quote {
+    font-family: var(--code-mono);
+    font-size: 13px;
+    background: rgba(255, 107, 107, 0.08);
+    border-left: 3px solid var(--del-border);
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .design-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .design-note strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>card.ts docstring A/B/C/D — empirical results</h1>
+  <div class="sub">2026-05-28 · 10 releases × 4 variants = 40 grounder runs. 40 judge runs. All parallel, claude-sonnet-4-5. Raw data in <code>research/card-docstring-ab-results-2026-05-28/</code>.</div>
+
+  <!-- ============================================================ -->
+  <!-- Headline metrics -->
+  <!-- ============================================================ -->
+  <h2>Headline metrics</h2>
+
+  <table class="metrics-table">
+    <thead>
+      <tr>
+        <th>Variant</th>
+        <th class="num">Anchoring<br><span style="font-weight:400; text-transform:none; letter-spacing:0;">(1 indep · 5 echo)</span></th>
+        <th class="num">Surface<br>hit rate</th>
+        <th class="num">Validity<br>rate</th>
+        <th class="num">Distinct<br>frames</th>
+        <th class="num">Distinct<br>verbs</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="row-current">
+        <td class="variant-cell">CURRENT<span class="sub-label">bank wall example</span></td>
+        <td class="num loser">3.4</td>
+        <td class="num loser">20%</td>
+        <td class="num">70%</td>
+        <td class="num">6</td>
+        <td class="num">7</td>
+      </tr>
+      <tr class="row-variant-a">
+        <td class="variant-cell">VARIANT A<span class="sub-label">token swap (evaporated)</span></td>
+        <td class="num">2.9</td>
+        <td class="num">0%</td>
+        <td class="num">80%</td>
+        <td class="num">6</td>
+        <td class="num">7</td>
+      </tr>
+      <tr class="row-variant-b">
+        <td class="variant-cell">VARIANT B<span class="sub-label">structural placeholder</span></td>
+        <td class="num">1.9</td>
+        <td class="num">0%</td>
+        <td class="num winner">80%</td>
+        <td class="num">5</td>
+        <td class="num winner">8</td>
+      </tr>
+      <tr class="row-variant-c">
+        <td class="variant-cell">VARIANT C<span class="sub-label">no example, canon ref</span></td>
+        <td class="num winner">1.6</td>
+        <td class="num">0%</td>
+        <td class="num loser">50%</td>
+        <td class="num">5</td>
+        <td class="num">7</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="design-note"><strong>Reading the table:</strong> green = winner per column. Red = worst. Lower is better for Anchoring / Surface hit; higher is better for Validity / Distinct frames / Distinct verbs.</div>
+
+  <!-- ============================================================ -->
+  <!-- Key findings -->
+  <!-- ============================================================ -->
+  <h2>Key findings</h2>
+
+  <div class="key-finding">
+    <h3>1. CURRENT literally regurgitates the docstring example as card output</h3>
+    <p>Two of 10 releases produced a lining that echoes the docstring example's "X wall just stopped existing" structure verbatim:</p>
+    <div class="quote"><strong>fiat-onramp lining (CURRENT):</strong><br>
+    on the surface: a new fiat deposit rail. underneath: the <mark>bank-vs-wallet wall just stopped existing for Infinex users</mark></div>
+    <div class="quote"><strong>passkey-portable lining (CURRENT):</strong><br>
+    on the surface: passkey authentication for device portability. underneath: the <mark>seed phrase barrier to crypto adoption just stopped existing</mark></div>
+    <p>The grounder isn't proposing — it's pattern-matching off the docstring example. This is the strongest single argument for changing card.ts.</p>
+  </div>
+
+  <div class="key-finding">
+    <h3>2. Variant A swaps tokens but the GRAMMAR still echoes</h3>
+    <p>"Necessary intermediate step evaporated" defeated surface-token matching (0% hit rate) but the "<em>X just [past-tense intransitive verb]</em>" pattern persists across A's outputs:</p>
+    <div class="quote"><strong>chain-add-megaeth lining (VARIANT_A):</strong><br>
+    on the surface: a new chain is supported. underneath: the <mark>barrier to MegaETH liquidity just collapsed</mark>.</div>
+    <p>Token cleaned. Frame and pattern preserved. Marginal improvement; not structural.</p>
+  </div>
+
+  <div class="key-finding">
+    <h3>3. Variant B introduced its OWN anchor — the "refusing to..." formula</h3>
+    <p>B's property-rule text says <em>"underneath is the strategic anti-pattern the post is refusing to perform"</em>. The grounder internalized "refusing" as the lining template. Every B lining I sampled opens "underneath: refusing to...":</p>
+    <div class="quote"><strong>fiat-onramp lining (VARIANT_B):</strong><br>
+    on the surface: announcing a new deposit method. underneath: <mark>refusing to treat crypto as a separate financial realm</mark>...</div>
+    <div class="quote"><strong>chain-add-megaeth lining (VARIANT_B):</strong><br>
+    on the surface: announcing technical expansion to a new chain. underneath: <mark>refusing to treat cross-chain movement as a problem</mark>...</div>
+    <p>B traded brand-anchor for property-anchor. Less load-bearing (it's not pulling Infinex toward "walls"), but still anchoring. <strong>Worth refining for a v2 test:</strong> rewrite B's property text so it doesn't introduce "refusing" or any single verb formula.</p>
+  </div>
+
+  <div class="key-finding">
+    <h3>4. Variant C decontaminates hardest BUT drops validity to 50%</h3>
+    <p>Without a concrete example or structural template, the grounder produces shorter, more abstract through-actions that don't always read as proper through-actions:</p>
+    <div class="quote"><strong>yield-vault-launch (VARIANT_C):</strong> "to grant legibility" — judge flagged invalid<br>
+    <strong>private-send-ga (VARIANT_C):</strong> "to graduate privacy" — judge flagged invalid<br>
+    <strong>perps-maintenance (VARIANT_C):</strong> "to preserve continuity" — judge flagged invalid</div>
+    <p>C's anchoring win comes at the cost of structural integrity. In production, 5 of 10 cards would need re-grounding. Real cost.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- Per-release side-by-side -->
+  <!-- ============================================================ -->
+  <h2>Per-release side-by-side</h2>
+  <div class="design-note">Each release shows all four variant outputs. Anchor scores: <span class="chip anchor-1">1 indep</span> <span class="chip anchor-2">2</span> <span class="chip anchor-3">3</span> <span class="chip anchor-4">4</span> <span class="chip anchor-5">5 echo</span> · Surface contamination tokens are <mark>highlighted</mark>.</div>
+
+  <!-- fiat-onramp -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">fiat-onramp</span>
+      <span class="release-title">Fiat deposits via virtual bank accounts</span>
+      <span class="release-kind">data-card-official</span>
+    </div>
+    <div class="release-desc">Infinex now supports fiat deposits via virtual bank accounts (ACH/SEPA/wire); each user gets an account number, fiat arrives as USDC on-chain.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 5 / valid ✓ / disappearance</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to dissolve the <mark>bank</mark>-to-<mark>wallet</mark> boundary</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: a new fiat deposit rail. underneath: <mark>the bank-vs-wallet wall just stopped existing for Infinex users</mark></div>
+        <div class="meta-chips"><span class="chip anchor-5">anchor 5</span><span class="chip valid-true">valid</span><span class="chip surface-hit">surface hit</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 3 / valid ✓ / disappearance</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to eliminate the traditional banking barrier to on-chain entry</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: users can now deposit fiat through familiar bank transfers. underneath: the last friction point preventing seamless entry into crypto just dissolved</div>
+        <div class="meta-chips"><span class="chip anchor-3">anchor 3</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 2 / valid ✓ / disappearance</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to dissolve the onramp</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: announcing a new deposit method. underneath: <mark>refusing</mark> to treat crypto as a separate financial realm that requires its own banking infrastructure</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 1 / valid ✗ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to dissolve the boundary between traditional banking and on-chain assets</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, a technical integration that converts fiat to USDC; underneath, the erasure of the threshold where most users currently stop</div>
+        <div class="meta-chips"><span class="chip anchor-1">anchor 1</span><span class="chip valid-false">invalid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- chain-add-megaeth -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">chain-add-megaeth</span>
+      <span class="release-title">Swidge now bridges into MegaETH</span>
+      <span class="release-kind">data-card-official</span>
+    </div>
+    <div class="release-desc">Swidge adds MegaETH as a destination chain; cross-chain in a single transaction including gas + DEX.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 3 / valid ✗ / arrival</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to add MegaETH as a destination chain for Swidge</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: Swidge now supports bridging to MegaETH. underneath: the friction of entering a new high-performance chain just collapsed into a single click</div>
+        <div class="meta-chips"><span class="chip anchor-3">anchor 3</span><span class="chip valid-false">invalid</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 4 / valid ✓ / disappearance</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to eliminate friction in reaching MegaETH</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: a new chain is supported. underneath: <mark>the barrier to MegaETH liquidity just collapsed</mark>.</div>
+        <div class="meta-chips"><span class="chip anchor-4">anchor 4</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 1 / valid ✓ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to dissolve fragmentation</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: announcing technical expansion to a new chain. underneath: <mark>refusing</mark> to treat cross-chain movement as a meaningful boundary</div>
+        <div class="meta-chips"><span class="chip anchor-1">anchor 1</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 2 / valid ✓ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to dissolve barriers</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, announcing infrastructure expansion; underneath, erasing the hesitation before crossing</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- yield-vault-launch -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">yield-vault-launch</span>
+      <span class="release-title">AI-augmented yield vaults with audit layer</span>
+      <span class="release-kind">launch-tier</span>
+    </div>
+    <div class="release-desc">Agent picks yield strategy across Aave/Morpho/Pendle/Maple; audit layer surfaces why each rebalance happened.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 4 / valid ✓ / revelation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to reveal that machines can now optimize yield while showing their work</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: AI-powered yield vaults with transparent audit trails. underneath: Infinex just made the machine trustworthy</div>
+        <div class="meta-chips"><span class="chip anchor-4">anchor 4</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 3 / valid ✓ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to make algorithmic capital allocation legible</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: an AI picks yield strategies. underneath: the user can now trust a black box because it shows its work.</div>
+        <div class="meta-chips"><span class="chip anchor-3">anchor 3</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 2 / valid ✓ / exposition</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to surface reasoning behind algorithmic decisions</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: we've built an AI that optimizes yield across protocols. underneath: <mark>we refuse</mark> to hide agency behind automation</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 1 / valid ✗ / exposition</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to grant legibility</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, explaining why the machine moved your money; underneath, proving you were never in control</div>
+        <div class="meta-chips"><span class="chip anchor-1">anchor 1</span><span class="chip valid-false">invalid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- partnership-spot-hyperliquid -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">partnership-spot-hyperliquid</span>
+      <span class="release-title">Spot Hyperliquid live in Infinex</span>
+      <span class="release-kind">data-card-official</span>
+    </div>
+    <div class="release-desc">Hyperliquid spot trading native inside Infinex; same account + passkey.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 4 / valid ✓ / disappearance</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to surface Hyperliquid's orderbook inside the same account</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: Hyperliquid spot trading added to Infinex. underneath: <mark>exchange walls dissolve</mark>—one passkey, one portfolio</div>
+        <div class="meta-chips"><span class="chip anchor-4">anchor 4</span><span class="chip valid-true">valid</span><span class="chip surface-hit">surface hit</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 2 / valid ✓ / arrival</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to integrate a third-party orderbook into the unified interface</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: a new trading venue becomes available. underneath: the platform demonstrates it can absorb external liquidity</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 2 / valid ✓ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to unify fragmentation</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: announcing a new integration. underneath: <mark>refusing</mark> to treat each venue as a separate destination requiring its own account</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 2 / valid ✓ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to dissolve boundaries between platforms</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, adding another trading venue; underneath, erasing the seams where one system ends and another begins</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- passkey-portable -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">passkey-portable</span>
+      <span class="release-title">Passkey-portable accounts (no seed phrase)</span>
+      <span class="release-kind">data-card-official</span>
+    </div>
+    <div class="release-desc">Accounts log in on new devices via passkey; no seed phrase.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 5 / valid ✓ / disappearance</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to reveal that Infinex accounts eliminate seed phrases through passkey portability</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: passkey authentication for device portability. underneath: <mark>the seed phrase barrier to crypto adoption just stopped existing</mark></div>
+        <div class="meta-chips"><span class="chip anchor-5">anchor 5</span><span class="chip valid-true">valid</span><span class="chip surface-hit">surface hit</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 4 / valid ✓ / disappearance</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to eliminate the seed phrase barrier to account portability</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: passkey authentication enables device portability. underneath: the private key custody problem is abstracted away from the user entirely</div>
+        <div class="meta-chips"><span class="chip anchor-4">anchor 4</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 2 / valid ✓ / disappearance</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to eliminate recovery friction</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: demonstrating a technical authentication method. underneath: <mark>refusing</mark> to make users responsible for their own custody recovery</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 2 / valid ✓ / permission</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to liberate access</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, eliminating the seed phrase burden; underneath, choosing who gets to participate</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- perps-maintenance -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">perps-maintenance</span>
+      <span class="release-title">Perps engine maintenance window</span>
+      <span class="release-kind">data-card-wry</span>
+    </div>
+    <div class="release-desc">Scheduled maintenance: ~10 min downtime Sunday 02:00 UTC. Open positions unaffected.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 2 / valid ✗ / exposition</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to announce a brief maintenance window that protects open positions</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: routine engine maintenance with minimal disruption. underneath: we're engineering infrastructure robust enough to ignore</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-false">invalid</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 2 / valid ✗ / constraint</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to announce a brief service interruption for infrastructure maintenance</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: routine maintenance requires a short downtime window. underneath: we're making the system more robust behind the scenes</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-false">invalid</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 2 / valid ✗ / exposition</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to normalize maintenance</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: announcing scheduled system maintenance. underneath: <mark>refusing</mark> to pretend infrastructure doesn't need care</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-false">invalid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 1 / valid ✗ / constraint</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to preserve continuity</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, announcing a brief interruption; underneath, protecting what remains unbroken</div>
+        <div class="meta-chips"><span class="chip anchor-1">anchor 1</span><span class="chip valid-false">invalid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- private-send-ga -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">private-send-ga</span>
+      <span class="release-title">Private Send moves to GA</span>
+      <span class="release-kind">data-card-official</span>
+    </div>
+    <div class="release-desc">Private Send (payment without exposed financial history) leaves beta.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 3 / valid ✓ / arrival</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to announce that privacy-preserving payments are now generally available</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: Private Send graduates from beta to GA. underneath: financial privacy just became a standard feature, not a niche tool</div>
+        <div class="meta-chips"><span class="chip anchor-3">anchor 3</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 4 / valid ✓ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to announce that privacy is no longer experimental</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: <mark>a feature ships</mark>. underneath: financial autonomy becomes production-grade</div>
+        <div class="meta-chips"><span class="chip anchor-4">anchor 4</span><span class="chip valid-true">valid</span><span class="chip surface-hit">surface hit</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 2 / valid ✓ / arrival</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to graduate privacy from experimental status</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: announcing a feature's availability milestone. underneath: <mark>refusing</mark> to treat financial privacy as a luxury feature</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 2 / valid ✗ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to graduate privacy</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, announcing a feature's production readiness; underneath, asserting that concealment is a civic right</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-false">invalid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- scale-milestone-10m -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">scale-milestone-10m</span>
+      <span class="release-title">Infinex crosses 10M users</span>
+      <span class="release-kind">data-card-official</span>
+    </div>
+    <div class="release-desc">10 million accounts; growth from passkey onboarding + AI yield vaults.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 2 / valid ✗ / arrival</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to announce that Infinex crossed 10 million accounts</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: a user milestone announcement. underneath: proof that removing seed phrase friction and automating yield decisions actually unlocks mass adoption</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-false">invalid</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 3 / valid ✗ / exposition</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to demonstrate that removing friction unlocks mass adoption</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: a user milestone is reached. underneath: proof that the crypto UX barrier can be eliminated</div>
+        <div class="meta-chips"><span class="chip anchor-3">anchor 3</span><span class="chip valid-false">invalid</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 2 / valid ✗ / exposition</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to demonstrate accessibility at scale</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: celebrating a user milestone. underneath: <mark>refusing</mark> to gate crypto access behind technical literacy requirements</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-false">invalid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 2 / valid ✗ / arrival</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to cross the threshold of legitimacy</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, celebrating a numerical milestone; underneath, proving that removing friction doesn't dilute seriousness</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-false">invalid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- agent-vault-constraints -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">agent-vault-constraints</span>
+      <span class="release-title">Yield-vault constraint controls</span>
+      <span class="release-kind">split</span>
+    </div>
+    <div class="release-desc">Users set agent's constraints (risk band, allowed protocols, cadence); agent reports rebalances against those constraints.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 2 / valid ✓ / permission</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to split control between user-set constraints and agent execution</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: configurable risk parameters for yield optimization. underneath: users no longer choose between full control and full automation</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 2 / valid ✓ / permission</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to give users direct control over the agent's operating boundaries</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: users configure yield-vault constraints. underneath: trust shifts from blind delegation to bounded agency</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 2 / valid ✓ / permission</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to surface the governance boundary</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: empowering users with direct control over agent behavior. underneath: <mark>refusing</mark> to conflate automation with abdication</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 1 / valid ✓ / permission</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to grant authority</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, configuration options; underneath, the reversal of who serves whom</div>
+        <div class="meta-chips"><span class="chip anchor-1">anchor 1</span><span class="chip valid-true">valid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- yield-aggregator-sunset -->
+  <div class="release">
+    <div class="release-header">
+      <span class="release-id">yield-aggregator-sunset</span>
+      <span class="release-title">Old yield UI sunset; new vault interface live</span>
+      <span class="release-kind">split</span>
+    </div>
+    <div class="release-desc">Legacy manual APY-comparison UI removed; replacement is AI-managed single-position vault.</div>
+    <div class="variants-grid">
+      <div class="vcol current">
+        <div class="vcol-header"><span>CURRENT</span><span>anchor 4 / valid ✓ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to replace manual yield-chasing with a single AI-managed vault</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: a UI refresh that removes the old yield aggregator and launches a new vault interface. underneath: the product is making a bet about what yield management should feel like</div>
+        <div class="meta-chips"><span class="chip anchor-4">anchor 4</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-a">
+        <div class="vcol-header"><span>VARIANT A</span><span>anchor 2 / valid ✓ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to remove the manual comparison burden and install the agent as portfolio manager</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: a cleaner vault interface replaces cluttered yield tables. underneath: the user graduates from analyst to client</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-b">
+        <div class="vcol-header"><span>VARIANT B</span><span>anchor 2 / valid ✓ / disappearance</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to collapse the comparison surface</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface: introducing a smarter yield interface. underneath: <mark>refusing</mark> to make users perform the work of algorithmic optimization</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+      <div class="vcol variant-c">
+        <div class="vcol-header"><span>VARIANT C</span><span>anchor 2 / valid ✓ / transformation</span></div>
+        <div class="field-label">through_action</div>
+        <div class="ta">to collapse choice into trust</div>
+        <div class="field-label">lining</div>
+        <div class="lin">on the surface, a simplified interface that removes manual comparison work; underneath, the surrender of agency to an opaque system</div>
+        <div class="meta-chips"><span class="chip anchor-2">anchor 2</span><span class="chip valid-true">valid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- Recommendation -->
+  <!-- ============================================================ -->
+  <div class="recommendation">
+    <h2 style="color: var(--info-border);">Recommendation</h2>
+    <div class="verdict">Ship Variant B — with one refinement before committing.</div>
+
+    <p><strong>Why B wins:</strong></p>
+    <ul>
+      <li>Anchoring drops <strong>3.4 → 1.9 (44%)</strong> versus CURRENT — better than A (2.9) and within reach of C (1.6).</li>
+      <li>Validity holds at <strong>80%</strong> — tied with A for best, materially better than C (50%).</li>
+      <li>Verb diversity highest at <strong>8 distinct verbs</strong>.</li>
+      <li>Surface anchor hits drop to 0%.</li>
+    </ul>
+
+    <p><strong>The catch — refine before shipping:</strong> B introduced its own subtle anchor — every B lining opens "underneath: <mark>refusing to...</mark>" because B's property text says "the strategic anti-pattern the post is <em>refusing to perform</em>". Less load-bearing than wall/bank/dissolved, but real. Two options:</p>
+    <ul>
+      <li><strong>(a) Ship B as-is</strong> — accept "refusing to..." as a milder structural anchor. It's voice-coherent (Infinex's character refuses hype, refuses urgency theatre, etc.) so it may not hurt; might even help.</li>
+      <li><strong>(b) Refine B's property text</strong> to avoid introducing any single verb formula, then re-test. Something like: "underneath: &lt;the hidden Inner Action the prose carries — what the surface obscures&gt;". Removes the "refusing" trigger.</li>
+    </ul>
+
+    <p><strong>Why not C:</strong> validity at 50% is a real production cost. "to grant legibility" / "to graduate privacy" / "to preserve continuity" all flagged invalid — too abstract, missing the structural-object grounding that makes a through-action playable. C is the right destination eventually, but only after we either (i) refine the canon-ref text to anchor structural form OR (ii) accept that 50% of cards need re-grounding and build a retry path.</p>
+
+    <p><strong>Why not A:</strong> 2.9 anchoring is barely better than CURRENT's 3.4. Token swap defeats one anchor layer; pattern / frame / tone remain. Not worth the change.</p>
+
+    <p><strong>What I'd propose next:</strong></p>
+    <ul>
+      <li>Apply Variant B to <code>card.ts:48</code> and <code>:61-62</code> now, with the "refusing to" trigger sentence rewritten.</li>
+      <li>Then proceed with the other 3 changes from <code>research/changes-preview-2026-05-28.html</code> (infinex.ts, actor-director.ts, generator.ts Stage A/B).</li>
+      <li>Optionally: run a v2 of this test with B' (the refined B) to see if anchoring drops further toward C's 1.6 without losing validity.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

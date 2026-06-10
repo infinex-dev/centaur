@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>comms-factory — product map · 2026-05-25 (audit-corrected)</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #161c24;
+    --panel-2: #1d242e;
+    --text: #e8eef5;
+    --muted: #8a98a8;
+    --border: #2a333f;
+    --accent: #5b9dff;
+    --you: #ffd86b;
+    --built: #5fc78a;
+    --building: #f0b440;
+    --lateral: #c98bff;
+    --trap: #ff7a7a;
+    --planned: #6f7a88;
+    --correction: #ff9d5b;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 15px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; }
+  main { max-width: 1020px; margin: 0 auto; padding: 48px 32px 96px; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 18px; margin-bottom: 28px; }
+  h1 { font-size: 28px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .dateline { color: var(--muted); font-size: 13px; margin: 0; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 40px 0 14px; font-weight: 600; }
+  h3 { font-size: 17px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.005em; }
+  p { margin: 0 0 8px; }
+  code { background: var(--panel); padding: 1px 6px; border-radius: 3px; font-size: 12.5px; color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  .audit-callout {
+    background: var(--panel); border: 1px solid var(--correction); border-left: 4px solid var(--correction);
+    padding: 18px 22px; border-radius: 8px; margin-bottom: 22px;
+  }
+  .audit-callout h2 { margin-top: 0; color: var(--correction); }
+  .audit-callout ul { margin: 8px 0 0; padding-left: 20px; }
+  .audit-callout li { margin-bottom: 5px; font-size: 13.5px; }
+  .audit-callout li strong { color: var(--correction); }
+
+  .tldr { background: var(--panel); border: 1px solid var(--border); border-left: 3px solid var(--you); padding: 20px 22px; border-radius: 8px; margin-bottom: 18px; }
+  .tldr h2 { margin-top: 0; color: var(--you); }
+  .tldr ol { margin: 0; padding-left: 22px; }
+  .tldr li { margin-bottom: 6px; }
+  .tldr li strong { color: var(--text); }
+
+  .risk { background: var(--panel); border: 1px solid var(--trap); border-left: 4px solid var(--trap); padding: 16px 20px; border-radius: 8px; margin-bottom: 22px; }
+  .risk h3 { color: var(--trap); margin-top: 0; }
+  .risk p { font-size: 14px; }
+  .risk code { color: var(--trap); }
+
+  /* Hierarchy tree */
+  .tree { position: relative; }
+  .level { position: relative; padding-left: 28px; margin-bottom: 14px; }
+  .level::before {
+    content: ''; position: absolute; left: 9px; top: 28px; bottom: -14px; width: 2px; background: var(--border);
+  }
+  .level:last-child::before { display: none; }
+  .level-label {
+    display: inline-block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--muted); font-weight: 700; margin-bottom: 10px; margin-left: -28px;
+    position: relative; padding-left: 28px;
+  }
+  .level-label::before {
+    content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 18px; height: 18px; border-radius: 50%; background: var(--panel-2); border: 2px solid var(--border);
+  }
+  .level-label.lvl-0::before { background: var(--you); border-color: var(--you); }
+  .level-label.lvl-1::before { background: var(--built); border-color: var(--built); }
+  .level-label.lvl-2::before { background: var(--accent); border-color: var(--accent); }
+  .level-label.lvl-25::before { background: var(--building); border-color: var(--building); }
+  .level-label.lvl-3::before { background: var(--lateral); border-color: var(--lateral); }
+  .level-label.lvl-4::before { background: var(--trap); border-color: var(--trap); }
+
+  .boxes { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 760px) { .boxes.two { grid-template-columns: 1fr 1fr; } .boxes.three { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .box { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px 18px; position: relative; }
+  .box.you { border-left: 4px solid var(--you); background: linear-gradient(90deg, rgba(255,216,107,0.08) 0%, var(--panel) 60%); }
+  .box.built { border-left: 4px solid var(--built); }
+  .box.building { border-left: 4px solid var(--building); }
+  .box.partial { border-left: 4px solid var(--building); opacity: 0.95; }
+  .box.planned { border-left: 4px solid var(--planned); opacity: 0.85; }
+  .box.lateral { border-left: 4px solid var(--lateral); background: linear-gradient(90deg, rgba(201,139,255,0.07) 0%, var(--panel) 60%); }
+  .box.trap { border-left: 4px solid var(--trap); background: linear-gradient(90deg, rgba(255,122,122,0.07) 0%, var(--panel) 60%); }
+  .box.uncommitted { border-left: 4px solid var(--correction); background: linear-gradient(90deg, rgba(255,157,91,0.08) 0%, var(--panel) 60%); }
+  .box p { color: var(--text); margin-bottom: 6px; font-size: 13.5px; }
+  .box .meta, .box .status {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted);
+    margin-top: 8px; display: block; font-weight: 600;
+  }
+  .box.you .status { color: var(--you); }
+  .box.built .status { color: var(--built); }
+  .box.building .status, .box.partial .status { color: var(--building); }
+  .box.planned .status { color: var(--planned); }
+  .box.lateral .status, .box.lateral .meta { color: var(--lateral); }
+  .box.trap .status { color: var(--trap); }
+  .box.uncommitted .status { color: var(--correction); }
+
+  .qa { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 22px 24px; margin-top: 18px; }
+  .qa h3 { color: var(--accent); margin-top: 0; }
+  .qa p { font-size: 14px; line-height: 1.65; color: var(--text); }
+  .qa p strong { color: var(--text); }
+
+  .next { background: var(--panel); border: 1px solid var(--correction); border-left: 4px solid var(--correction); border-radius: 8px; padding: 22px 24px; margin-top: 18px; }
+  .next h3 { margin-top: 0; color: var(--correction); }
+  .next ol { margin: 8px 0 0; padding-left: 22px; }
+  .next li { margin-bottom: 10px; font-size: 14px; }
+  .next li strong { color: var(--text); }
+
+  footer { color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--border); }
+  footer code { background: var(--panel); padding: 2px 6px; border-radius: 3px; font-size: 11px; }
+
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin: 8px 0 24px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+  .legend .l-you { background: var(--you); }
+  .legend .l-built { background: var(--built); }
+  .legend .l-building { background: var(--building); }
+  .legend .l-lateral { background: var(--lateral); }
+  .legend .l-trap { background: var(--trap); }
+  .legend .l-planned { background: var(--planned); }
+  .legend .l-uncommitted { background: var(--correction); }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>comms-factory — product map</h1>
+  <p class="dateline">2026-05-25 · <strong style="color:var(--correction)">AUDIT-CORRECTED</strong> · audit reports A/B/C/D · synthesized from real code state, not handover docs</p>
+</header>
+
+<div class="audit-callout">
+  <h2>What the audit changed (read this first)</h2>
+  <ul>
+    <li><strong>Harness Phase 2-3 is DONE.</strong> Codex landed 4,289 LOC in commit <code>22367ae</code> on 2026-05-22. Dev server runs on <code>:3210</code>. Dashboard live. Live DB has 2 cards, 49 facts, 24 candidates, 12 candidate_audits. <em>No card walked end-to-end by a human yet</em> — decision tables empty.</li>
+    <li><strong>Audit MACHINERY shipped.</strong> Commit <code>5cf1a92</code> added <code>validator-active.ts</code> + <code>history-guards.ts</code> + research-tool wiring. The agentic auditor exists inside the orchestrator. <em>What's still missing: the CLI surface for arbitrary artifacts.</em></li>
+    <li><strong>Card inner-work fields already first-class Zod schema.</strong> <code>card.ts:36–73</code>. "Phase 4 — extend schema" was wrong framing; only the grounder-proposal step is pending.</li>
+    <li><strong>Renderer wired for <code>data-card-official</code> end-to-end.</strong> 3 of 4 Remotion compositions still missing (wry, launch-tier, split).</li>
+    <li><strong>6 voices live in <code>src/voice/</code></strong> — Infinex + ProjectJin LOCKED; Nigel + Cream + Nick-B + Nick-D drafted. Not in brand-factory.</li>
+    <li><strong>873 corpus samples v2-classified</strong> across Infinex (380) + Phantom (480) + bundle-test (13).</li>
+    <li><strong>Tests green: 170/170 pass. tsc clean.</strong></li>
+  </ul>
+</div>
+
+<div class="risk">
+  <h3>⚠ Immediate operational risk</h3>
+  <p><strong>Uncommitted work in your tree:</strong> <code>src/generator.ts</code> has <strong>+874 LOC unstaged</strong> (the Phase 2 holistic two-call generator). Same goes for <code>card.ts</code>, <code>voice/infinex.ts</code>, <code>voice/types.ts</code>. 45 untracked items + 7 modified files. A <code>git stash</code> or branch-switch mistake costs you this. Defend in git before forward motion. ~10 minutes.</p>
+</div>
+
+<div class="tldr">
+  <h2>Hold these three sentences in your head</h2>
+  <ol>
+    <li><strong>The pipeline is mostly built.</strong> Comms-factory core, harness, audit machinery, two voice locks — all in code. Your judgment is now embedded in real software, not waiting to be.</li>
+    <li><strong>The next move isn't "build more" — it's "use what's built."</strong> Walk one card through the harness end-to-end to populate the empty decision-data tables and get your first agreement metrics. That's the validation the harness was built for.</li>
+    <li><strong>The lateral pivot question survives but defers.</strong> Audit-as-product (the CLI surface for arbitrary artifacts) is genuinely still un-built; after step 1 you'll know whether to build it next or stay internal.</li>
+  </ol>
+</div>
+
+<div class="legend">
+  <span><i class="l-you"></i> You</span>
+  <span><i class="l-built"></i> Built · in git</span>
+  <span><i class="l-uncommitted"></i> Built · not in git</span>
+  <span><i class="l-building"></i> Pending / partial</span>
+  <span><i class="l-planned"></i> Planned</span>
+  <span><i class="l-lateral"></i> Product-shape</span>
+  <span><i class="l-trap"></i> Trap</span>
+</div>
+
+<h2>The hierarchy</h2>
+
+<div class="tree">
+
+  <!-- LEVEL 0 -->
+  <div class="level">
+    <div class="level-label lvl-0">Level 0 — the moat (you)</div>
+    <div class="boxes">
+      <div class="box you">
+        <h3>Operator's actor-perspective judgment</h3>
+        <p>Room-direct Mirodan character placement. Lock the Want, the placement, the tempi. Audit candidates against the lock. Recognize off-spec by feel.</p>
+        <p>What Writer, Jasper, Lex don't have. Most of it is now externalized into Level 1.</p>
+        <span class="status">Source · partially externalized · still required to lock new brands</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVEL 1 -->
+  <div class="level">
+    <div class="level-label lvl-1">Level 1 — the instrument (extracted judgment, in code)</div>
+    <div class="boxes two">
+      <div class="box built">
+        <h3>scripts/classify-corpus.ts v2</h3>
+        <p>712 LOC. Hybrid LLM (claude-sonnet-4-6 tool-use) + deterministic drive-derivation. 24 tempi × 6 attitudes × 4 aspects × 3 stresses. Factor coherence enforced in code.</p>
+        <span class="status">Built · 873 samples already classified</span>
+      </div>
+      <div class="box built">
+        <h3>src/validator.ts</h3>
+        <p>Regex rules: cliches, listicle voice, antagonism, AI-slop, em-dash density, competitor palettes. Each rule has positive + negative tests.</p>
+        <span class="status">Built · rule-complete for brand-agnostic slop</span>
+      </div>
+      <div class="box built">
+        <h3>src/validator-active.ts + src/history-guards.ts</h3>
+        <p>The audit MACHINERY. 326 + 230 LOC. Agentic research-tool-calling auditor wired into <code>orchestrateActive</code> / <code>orchestrateActiveWithRetries</code>. Landed commit <code>5cf1a92</code> 2026-05-22.</p>
+        <span class="status">Built · in-orchestrator audit (NOT exposed as standalone CLI yet)</span>
+      </div>
+      <div class="box built">
+        <h3>src/grounder.ts + research-tools</h3>
+        <p>Fact-grounder with platform-code / partner-registry / infinex-page / projectjin tool sources. Intent-stripped rewrite loop. Mechanics-discovery layer.</p>
+        <span class="status">Built · all 6 tool sources wired</span>
+      </div>
+      <div class="box built">
+        <h3>src/voice/infinex.ts (LOCKED) + src/voice/projectjin.ts (LOCKED)</h3>
+        <p>Infinex Diagram D (Stable + Flow + Penetrating + Spell-Vision). ProjectJin Diagram A. Each with locked Want, 5 tempi, character image, validation criterion.</p>
+        <span class="status">Locked · 2026-05-12 / 2026-05-15</span>
+      </div>
+      <div class="box uncommitted">
+        <h3>src/voice/{nigel, cream, nick-b, nick-d}.ts</h3>
+        <p>4 voice drafts in <code>src/voice/</code>. Not in brand-factory. Status: drafted but not locked. Live in your tree.</p>
+        <span class="status">Drafted · status pending</span>
+      </div>
+      <div class="box uncommitted">
+        <h3>src/generator.ts — two-call holistic generator</h3>
+        <p>Stage A InnerWork (thesis + beat plan + verbs) → Stage B drafting. Default path. Tests pass. <strong>+874 LOC UNCOMMITTED in your tree.</strong></p>
+        <span class="status">Built + working + UNCOMMITTED · defend in git first</span>
+      </div>
+      <div class="box built">
+        <h3>src/card.ts — release card schema</h3>
+        <p>Discriminated union over 4 kinds. <strong>Inner-work fields already first-class:</strong> <code>through_action</code>, <code>obstacle</code>, <code>lining</code>, <code>reader_prior</code>, <code>not_the_point</code> (lines 36–73).</p>
+        <span class="status">Built · schema complete (but uncommitted updates pending)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVEL 2 -->
+  <div class="level">
+    <div class="level-label lvl-2">Level 2 — applications (built on the instrument)</div>
+    <div class="boxes two">
+      <div class="box built">
+        <h3>comms-factory pipeline</h3>
+        <p>card → generator → validator → orchestrator → renderer → ship gate. Tests 170/170 pass. tsc clean. Renderer wired end-to-end for <code>data-card-official</code>.</p>
+        <span class="status">Built · running · in-tree work uncommitted</span>
+      </div>
+      <div class="box built">
+        <h3>harness/ — Next.js review tool</h3>
+        <p>Codex landed 4,289 LOC in <code>22367ae</code>. Dev server boots on <code>:3210</code>. Agreement dashboard live. 4 stage panels per card. 12/12 spec deliverables (minus vim-keys, migrations).</p>
+        <span class="status">Built · running · awaiting first human card-walk</span>
+      </div>
+      <div class="box built">
+        <h3>research/laban-viz/</h3>
+        <p>React 18.3 single-page Laban visualization. 1,022 LOC, no build step. Tallies for 9 surfaces (Infinex + Phantom × multiple lanes). Live.</p>
+        <span class="status">Built</span>
+      </div>
+      <div class="box built">
+        <h3>cards/ — release card store</h3>
+        <p>Directory exists and is being populated. Untracked in git.</p>
+        <span class="status">Built · in-tree</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVEL 2.5 — gaps -->
+  <div class="level">
+    <div class="level-label lvl-25">Level 2.5 — genuine gaps (what's actually pending)</div>
+    <div class="boxes two">
+      <div class="box building">
+        <h3>Audit CLI (<code>cli.ts audit &lt;path&gt;</code>)</h3>
+        <p>The machinery exists in <code>validator-active.ts</code>. What's missing: a CLI surface that scores arbitrary HTML/markdown/copy (not just generated candidates). This is the audit-as-product surface.</p>
+        <span class="status">Pending · half day · LATERAL PIVOT GATE</span>
+      </div>
+      <div class="box building">
+        <h3>Grounder proposes inner-work</h3>
+        <p>Schema is built. What's pending: wire grounder to PROPOSE <code>through_action / obstacle / lining / reader_prior / not_the_point</code> from <code>deployed_facts</code> for operator to approve/edit.</p>
+        <span class="status">Pending · half day · reduces operator burden</span>
+      </div>
+      <div class="box building">
+        <h3>3 of 4 Remotion compositions</h3>
+        <p><code>data-card-official</code> wired. Missing: <code>data-card-wry</code>, <code>launch-tier</code>, <code>split</code>. Blocked on brand-factory <code>voiced</code> status (per CLAUDE.md hard constraint).</p>
+        <span class="status">Pending · blocked on brand-factory</span>
+      </div>
+      <div class="box building">
+        <h3>Empty harness decision tables</h3>
+        <p><code>candidate_decisions</code> / <code>fact_edits</code> / <code>release_card_edits</code> / <code>agreement_snapshots</code> all empty. No human has walked a card end-to-end yet. This is the next move.</p>
+        <span class="status">Empty · awaiting first card-walk</span>
+      </div>
+      <div class="box planned">
+        <h3>Slack bot</h3>
+        <p>Fast-lane production surface. Generate + validate inline.</p>
+        <span class="status">Planned · post-agreement-metrics</span>
+      </div>
+      <div class="box planned">
+        <h3>MCP server</h3>
+        <p>Exposes <code>/generate</code>, <code>/validate</code>, <code>/audit</code> as tools. Apparatus → infrastructure transition.</p>
+        <span class="status">Planned</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVEL 3 -->
+  <div class="level">
+    <div class="level-label lvl-3">Level 3 — product shapes (gated by the audit CLI + harness validation)</div>
+    <div class="boxes">
+      <div class="box lateral">
+        <h3>Coherence — audit-as-SaaS <em>(agent C's pick)</em></h3>
+        <p>Crawl a buyer's product surface. Grade every artifact against locked placement. <strong>Note:</strong> the machinery to do this is in <code>validator-active.ts</code>; what's missing is the CLI surface + MCP wrapper, not the engine.</p>
+        <span class="meta">Buyer: Series-B-to-D founder-led crypto/fintech/AI · WTP $24-60k/yr + $50-75k install · Moat: Mirodan apparatus + corpus + locked placements</span>
+      </div>
+      <div class="box lateral">
+        <h3>Voice-SDK — character-as-deployable <em>(agent A's read)</em></h3>
+        <p>Locked character → bundle + MCP server. Drop into product content stack. <strong>2 locked characters ready right now (Infinex, ProjectJin); 4 drafts cookin'.</strong></p>
+        <span class="meta">Buyer: agencies, founder-led product orgs, AI companies wanting voice consistency · WTP per-character + per-call</span>
+      </div>
+      <div class="box lateral">
+        <h3>Harness-as-product <em>(agent D's bet)</em></h3>
+        <p>Train agents on subjective tasks via human-in-loop review + diff capture + agreement metrics. <strong>The harness is built and running.</strong> Comms = first vertical. Brand audit, legal review, design QA = next.</p>
+        <span class="meta">Buyer: AI tooling teams · WTP enterprise · validate via the first human card-walk first</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEVEL 4 -->
+  <div class="level">
+    <div class="level-label lvl-4">Level 4 — the trap</div>
+    <div class="boxes">
+      <div class="box trap">
+        <h3>Operator-judgment doesn't scale</h3>
+        <p>If locking a placement, auditing a candidate, or recognizing off-spec all require you, this stays consulting-with-software. <strong>Counter-evidence from the audit:</strong> the apparatus already encodes a LOT of your judgment (classifier taxonomy, validator rules, locked voices, active-validator machinery). You're further on extraction than you thought.</p>
+        <p><strong>Active question:</strong> what does a junior operator still need YOU to do? Find out by having one walk through the harness next week.</p>
+        <span class="status">Less acute than I claimed · still the long-term shape question</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<h2>"Why isn't this already productized?"</h2>
+<div class="qa">
+  <h3>It is — partially. Competitors are at the wrong abstraction layer.</h3>
+  <p><strong>Writer, Jasper, Lex, Yardstick, Copy.ai</strong> all attempted brand-voice productization. They treat voice as <em>style</em>: tone adjectives, ban-words, few-shot examples. Thin layer.</p>
+  <p>This treats voice as <strong>character</strong>: Mirodan/Laban placement on a 24-cell grid, preparation-hierarchy verbs, motor-pair construction, drive-stress placement, a Want phrased to honor a north-star metric, validation criterion tied to a real user discovering the product.</p>
+  <p>Structurally different. Requires theatre training + corpus work upstream. You have both. The combination is rare, not worthless.</p>
+</div>
+
+<h2>What to actually do this week</h2>
+<div class="next">
+  <h3>Audit-corrected next steps (in order)</h3>
+  <ol>
+    <li><strong>Commit the uncommitted work.</strong> Stage <code>src/generator.ts</code> + <code>card.ts</code> + <code>voice/infinex.ts</code> + <code>voice/types.ts</code>. Possibly also the 4 draft voices (<code>nigel.ts</code>, <code>cream.ts</code>, <code>nick-b.ts</code>, <code>nick-d.ts</code>). Defend the Phase 2 holistic generator in git. ~10 minutes. <em>Non-negotiable; do this before anything else.</em></li>
+    <li><strong>Walk ONE card through the harness end-to-end.</strong> Pick a recent release event (Swidge / spot HL / passkey). Use the harness at <code>:3210</code>. Let the active validator + auditor + research-tools run. Approve/edit at each stage. This populates the empty decision tables and produces your <strong>first agreement metrics</strong>. ~1-2 hours. <em>This was the original "what's next" all along.</em></li>
+    <li><strong>Look at what the first card-walk reveals.</strong> Where did the auditor fire correctly? Where did you have to override? Where was friction highest? This data is the truth-source for what to build next — not lateral speculation.</li>
+    <li><strong>THEN decide:</strong> build the audit CLI (the lateral-pivot gate), wire grounder to propose inner-work, or fix whatever the card-walk surfaced as broken. Don't decide before step 2.</li>
+  </ol>
+</div>
+
+<footer>
+  Audit reports: <code>research/audit-2026-05-25-{A-src,B-harness,C-tools,D-narrative}.md</code> · this map at <code>research/product-map-2026-05-25.html</code> · previous (wrong) version overwritten · next refresh: after first card-walk
+</footer>
+
+</main>
+</body>
+</html>

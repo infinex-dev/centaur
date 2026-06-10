@@ -1,0 +1,220 @@
+{
+  "facts": [
+    {
+      "category": "partner",
+      "claim": "Perps trading venue provider",
+      "value": "Hyperliquid",
+      "source": "partner-registry",
+      "source_ref": "apps/perps-app/src/app/api/og/lib/hyperliquid.ts (partner registry, verified 2026-05-15)",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "partner",
+      "claim": "Spot trading venue provider for Infinex Perps app",
+      "value": "Hyperliquid",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Official name of the Infinex trading app",
+      "value": "Infinex Perps",
+      "source": "infinex-page",
+      "source_ref": "https://perps.app.infinex.xyz (rendered page title)",
+      "confidence": 0.98,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "url",
+      "claim": "Infinex Perps app URL",
+      "value": "https://perps.app.infinex.xyz",
+      "source": "infinex-page",
+      "source_ref": "https://perps.app.infinex.xyz",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Hyperliquid Spot within Infinex Perps — feature name",
+      "value": "Hyperliquid Spot V1",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.98,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Spot order type — Hyperliquid order book type",
+      "value": "Fully onchain CLOB (Central Limit Order Book) — every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "source": "provider-docs",
+      "source_ref": "https://hyperliquid.gitbook.io/hyperliquid-docs/",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Quote currency for Spot V1 in Infinex Perps",
+      "value": "USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Account type required to access Hyperliquid Spot V1",
+      "value": "Unified account (unifiedAccount) only — non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.98,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Spot V1 supported order types",
+      "value": "Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md (Feature Parity Matrix)",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Spot V1 — perps-only controls not available in spot UI",
+      "value": "Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Spot V1 — what user can see and do",
+      "value": "Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md + apps/perps-app/docs/e2e-runsheet.md",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Default spot market (used in routes and E2E tests)",
+      "value": "PURR/USDC",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-runsheet.md (flows 4, 6, 9, 17, 24, 33, 41)",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "url",
+      "claim": "Spot market route URL pattern within Infinex Perps app",
+      "value": "https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE} (e.g. /hyperliquid/spot/PURR/USDC)",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-runsheet.md",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "url",
+      "claim": "Perps market route URL pattern within Infinex Perps app",
+      "value": "https://perps.app.infinex.xyz/hyperliquid/perps/{SYMBOL} (e.g. /hyperliquid/perps/BTC)",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-runsheet.md",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Feature branch name for Hyperliquid Spot V1 integration",
+      "value": "spot-integration",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-findings-2026-05-19.md",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "This is Infinex's first CLOB spot order book integration",
+      "value": "True — the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "source": "platform-docs",
+      "source_ref": "apps/content-app/content/blog/the-roadmap-what-s-next-for-infinex.md + apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.92,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "number",
+      "claim": "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count)",
+      "value": "24",
+      "source": "provider-docs",
+      "source_ref": "https://api.hyperliquid.xyz/info (POST spotMetaAndAssetCtxs, live query)",
+      "confidence": 0.9,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Top Hyperliquid spot market by 24h volume",
+      "value": "HYPE/USDC — $284M 24h volume",
+      "source": "provider-docs",
+      "source_ref": "https://api.hyperliquid.xyz/info (POST spotMetaAndAssetCtxs, live query)",
+      "confidence": 0.9,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Notable spot markets available with >$1M 24h volume",
+      "value": "HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "source": "provider-docs",
+      "source_ref": "https://api.hyperliquid.xyz/info (POST spotMetaAndAssetCtxs, live query)",
+      "confidence": 0.88,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "ticker",
+      "claim": "Hyperliquid Twitter / X handle",
+      "value": "@HyperliquidX",
+      "source": "partner-registry",
+      "source_ref": "partner registry (verified 2026-05-15)",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "UI product-mode switching — how users move between perps and spot",
+      "value": "Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-runsheet.md (flows 11–15)",
+      "confidence": 0.96,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Hyperliquid spot order book rendered live in Infinex UI",
+      "value": "True — rendered page at /hyperliquid/spot/PURR/USDC shows a live Order Book panel with bid/ask prices, sizes, and totals",
+      "source": "infinex-page",
+      "source_ref": "https://perps.app.infinex.xyz/hyperliquid/spot/PURR/USDC (rendered)",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Hyperliquid's order books — what they are technically",
+      "value": "Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "source": "provider-docs",
+      "source_ref": "https://hyperliquid.gitbook.io/hyperliquid-docs/",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim": "Infinex Pro — any product details, features, or timing",
+      "reason": "Explicitly noted in source copy as NOT YET ANNOUNCED. No public information available and grounding should not surface it."
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "ground_turns": 15,
+  "approval_requests": []
+}

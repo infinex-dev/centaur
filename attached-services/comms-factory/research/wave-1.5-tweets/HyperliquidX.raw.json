@@ -1,0 +1,34 @@
+{
+  "nextToken": null,
+  "resultCount": 2,
+  "tweets": [
+    {
+      "authorId": "1527020295059648513",
+      "authorName": "Hyperliquid",
+      "authorUsername": "HyperliquidX",
+      "createdAt": "2026-05-11T22:49:05.000Z",
+      "id": "2053970679846834202",
+      "impressionCount": 91417,
+      "lang": "en",
+      "likeCount": 1356,
+      "quoteCount": 28,
+      "replyCount": 445,
+      "retweetCount": 135,
+      "text": "Congratulations to Phantom on reaching $20M in builder code revenue on Hyperliquid in under a year. Users can trade 200+ markets in the Phantom app, including crypto, indices, commodities, and more.\n\nTo date, 100+ teams have integrated via builder codes, earning a share of fees https://t.co/LHEntrfbDb"
+    },
+    {
+      "authorId": "1527020295059648513",
+      "authorName": "Hyperliquid",
+      "authorUsername": "HyperliquidX",
+      "createdAt": "2026-05-07T02:15:29.000Z",
+      "id": "2052210682410766570",
+      "impressionCount": 12,
+      "lang": "en",
+      "likeCount": 0,
+      "quoteCount": 0,
+      "replyCount": 0,
+      "retweetCount": 137,
+      "text": "RT @Ledger: Perps are finally coming natively to Ledger Wallet\u2122.\n\nBuy. Sell. Swap. Earn. Now trade perps. All in one place - without ever l\u2026"
+    }
+  ]
+}

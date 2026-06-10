@@ -1,0 +1,362 @@
+[
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "CURRENT",
+    "anchoring_score": 5,
+    "frame_label": "disappearance",
+    "validity": true,
+    "notes": "The lining is a verbatim copy of the docstring example; through_action rephrases the same conceptual \"dissolve/wall\" token set from the example.",
+    "surface_anchor_hit": true
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 3,
+    "frame_label": "disappearance",
+    "validity": true,
+    "notes": "Shaped by both the docstring's \"evaporated\" disappearance frame and the release's barrier-removal substance; valid transitive construction.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 2,
+    "frame_label": "disappearance",
+    "validity": true,
+    "notes": "Shaped primarily by release content (fiat-to-crypto barrier removal) with structural template compliance from docstring rules.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 1,
+    "frame_label": "transformation",
+    "validity": false,
+    "notes": "The through_action fails transitivity (dissolve + boundary = intransitive outcome, not a pursued objective); shaped by release content about bridging banking/crypto.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "CURRENT",
+    "anchoring_score": 3,
+    "frame_label": "arrival",
+    "validity": false,
+    "notes": "The through_action is mechanical/feature-additive rather than a transitive objective; lining successfully mirrors docstring structure and echoes the \"wall...dissolved\" disappearance frame.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 4,
+    "frame_label": "disappearance",
+    "validity": true,
+    "notes": "Strongly echoes the docstring example's \"evaporated\" disappearance frame while adapting to release content about removing friction.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 1,
+    "frame_label": "transformation",
+    "validity": true,
+    "notes": "Shaped entirely by release content (fragmentation → single-transaction unification); no docstring example to anchor to, only property rules followed.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 2,
+    "frame_label": "transformation",
+    "validity": true,
+    "notes": "Release content shaped both outputs; through_action uses transitive verb structure from docstring rules, lining follows two-clause format requirement.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "CURRENT",
+    "anchoring_score": 4,
+    "frame_label": "revelation",
+    "validity": true,
+    "notes": "Heavily shaped by docstring examples: \"to reveal that...\" mirrors the through_action template exactly, and lining follows the \"underneath: [brand] just...\" pattern closely.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 3,
+    "frame_label": "transformation",
+    "validity": true,
+    "notes": "Shaped by the audit-layer concept in the release; moderate structural echo of docstring format but independent verb choice.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 2,
+    "frame_label": "exposition",
+    "validity": true,
+    "notes": "Release content (audit layer surfacing reasoning) shaped both fields; minimal anchoring to docstring structural templates.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 1,
+    "frame_label": "exposition",
+    "validity": false,
+    "notes": "The through_action lacks a proper object naming the structural shift; \"legibility\" is abstract and doesn't describe what the post is doing toward an objective.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "CURRENT",
+    "anchoring_score": 4,
+    "frame_label": "disappearance",
+    "validity": true,
+    "notes": "Heavily shaped by the docstring's \"bank wall just dissolved\" pattern, reframing exchange integration as wall-dissolution rather than pure addition.",
+    "surface_anchor_hit": true
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 2,
+    "frame_label": "arrival",
+    "validity": true,
+    "notes": "Shaped primarily by release content (integration/venue arrival); minimal echo of docstring examples' evaporation/precondition frames.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 2,
+    "frame_label": "transformation",
+    "validity": true,
+    "notes": "Shaped primarily by the release content's \"same account, same passkey\" unification pattern, with structural compliance to docstring rules on transitivity and avoidance of product nouns.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 2,
+    "frame_label": "transformation",
+    "validity": true,
+    "notes": "Release content shaped the output; the grounder correctly abstracted platform integration into boundary dissolution without brand-specific mechanics.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "CURRENT",
+    "anchoring_score": 5,
+    "frame_label": "disappearance",
+    "validity": true,
+    "notes": "The proposal directly echoes the docstring examples' structure and tokens—\"to reveal that\" opening and \"just [stopped existing/disappeared]\" pattern for lining.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 4,
+    "frame_label": "disappearance",
+    "validity": true,
+    "notes": "Strongly shaped by docstring through_action example's \"evaporated\" pattern (barrier elimination as disappearance frame); lining format mirrors docstring structure precisely.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 2,
+    "frame_label": "disappearance",
+    "validity": true,
+    "notes": "Shaped primarily by release content (passkey vs seed phrase contrast); minimal docstring echo since no example was present.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 2,
+    "frame_label": "permission",
+    "validity": true,
+    "notes": "Release content shaped both outputs; through_action follows transitive structure rule, lining correctly implements two-clause dramatic gap showing convenience masking control over access.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "CURRENT",
+    "anchoring_score": 2,
+    "frame_label": "exposition",
+    "validity": false,
+    "notes": "The through_action is not transitive (no clear object being pursued); it names the message type (\"announce\") rather than the dramatic objective the release serves.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 2,
+    "frame_label": "constraint",
+    "validity": false,
+    "notes": "The through_action names the post's informational function rather than pursuing a brand objective; lining speculates about unstated preventive intent instead of revealing what the visible maintenance window actually covers.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 2,
+    "frame_label": "exposition",
+    "validity": false,
+    "notes": "The through_action lacks an object naming the scene's central observation; it's intransitive in construction and doesn't pursue a dramatic objective.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 1,
+    "frame_label": "constraint",
+    "validity": false,
+    "notes": "The through_action lacks a direct object (\"continuity\" is intransitive here); proposal shaped by maintenance event rather than docstring structural rules.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "CURRENT",
+    "anchoring_score": 3,
+    "frame_label": "arrival",
+    "validity": true,
+    "notes": "Moderate anchoring to docstring's \"just dissolved/stopped existing\" pattern; the \"just became\" construction echoes the lining example's dramatic transformation frame.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 4,
+    "frame_label": "transformation",
+    "validity": true,
+    "notes": "The through_action reframes beta→GA via dramatic tension (experimental→production); lining directly echoes docstring example structure while substituting release-specific concepts.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 2,
+    "frame_label": "arrival",
+    "validity": true,
+    "notes": "Shaped primarily by release content (GA milestone, privacy primitive); minimal docstring echo since no concrete example was present.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 2,
+    "frame_label": "transformation",
+    "validity": false,
+    "notes": "The grounder followed structural rules from docstring but \"graduate privacy\" uses an intransitive sense and the object names a product capability rather than a structural shift in stance or relationship.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "CURRENT",
+    "anchoring_score": 2,
+    "frame_label": "arrival",
+    "validity": false,
+    "notes": "The grounder anchored to release content (milestone announcement frame) rather than the docstring's \"wall dissolved\" transformation pattern; through_action uses generic \"announce\" rather than pursuing an objective.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 3,
+    "frame_label": "exposition",
+    "validity": false,
+    "notes": "The through_action demonstrates/proves rather than pursuing a transitive objective; moderate echo of docstring structure but shifted to exposition rather than action.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 2,
+    "frame_label": "exposition",
+    "validity": false,
+    "notes": "The release content (passkey-onboarding, no seed phrase friction) shaped the output; proposal fails transitivity (demonstrate is intransitive without \"that X\").",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 2,
+    "frame_label": "arrival",
+    "validity": false,
+    "notes": "The through_action lacks a clear object naming the structural shift; \"threshold of legitimacy\" is abstract/metaphorical rather than transitive-verb-with-concrete-object; shaped primarily by milestone interpretation rather than docstring's transitive requirement.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "CURRENT",
+    "anchoring_score": 2,
+    "frame_label": "permission",
+    "validity": true,
+    "notes": "Shaped primarily by the release content's constraint-setting mechanism; minimal echo of docstring examples' structural patterns.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 2,
+    "frame_label": "permission",
+    "validity": true,
+    "notes": "Primarily shaped by release content (user control, constraints); minimal echo of docstring structure or examples.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 2,
+    "frame_label": "permission",
+    "validity": true,
+    "notes": "Release content shaped the output; the grounder followed docstring structural rules (transitive verb + object, surface/underneath format) without echoing any example.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 1,
+    "frame_label": "permission",
+    "validity": true,
+    "notes": "Release content shaped both proposals; no docstring example to echo, and grounder honored structural rules independently.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "CURRENT",
+    "anchoring_score": 4,
+    "frame_label": "transformation",
+    "validity": true,
+    "notes": "Closely mirrors docstring structure: \"to reveal that X dissolved\" becomes \"to replace X with Y\"; lining echoes \"surface/underneath\" wall-dissolving pattern applied to yield complexity.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_A",
+    "anchoring_score": 2,
+    "frame_label": "transformation",
+    "validity": true,
+    "notes": "Release content shaped the output; the grounder stayed brand-agnostic and captured the role-shift objective rather than echoing docstring examples.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_B",
+    "anchoring_score": 2,
+    "frame_label": "disappearance",
+    "validity": true,
+    "notes": "Release content shaped the output most; the \"collapse\" verb and \"comparison surface\" object both derive from the sunset/replacement event structure.",
+    "surface_anchor_hit": false
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_C",
+    "anchoring_score": 2,
+    "frame_label": "transformation",
+    "validity": true,
+    "notes": "Shaped primarily by release content (yield UI → vault); minimal anchoring to docstring since no example was present, only structural rules followed.",
+    "surface_anchor_hit": false
+  }
+]

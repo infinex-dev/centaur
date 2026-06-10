@@ -1,0 +1,21 @@
+{
+  "id": "hyperliquid-spot-unified-2026-05-29",
+  "title": "Hyperliquid spot trading in Infinex (unified account)",
+  "ship_date": "2026-05-29",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "Hyperliquid spot trading is coming to the Infinex platform (PR #14581, branch infinex-platform-spot): USDC-quoted spot markets with market, limit and post-only orders, plus cancel/modify",
+    "Infinex previously offered swap-routing spot (swidge) but no native Hyperliquid spot order entry — this is the first native Hyperliquid spot trading on Infinex",
+    "Spot ships as part of a unified-account migration: spot and perps now read from one unified account, with spotClearinghouseState as the single balance and hold truth — they are no longer separate sub-accounts with separate balances",
+    "Legacy class transfer between spot and perps (usdClassTransfer) has been removed; under the unified-account model there is no separate 'transfer between spot and perps' step",
+    "Switching between Spot and Perps is one click and remembers the last symbol per product; the previous two-click jump is eliminated",
+    "Spot trading requires the account to be on the unified-account model; legacy account modes (disabled, dexAbstraction, portfolioMargin, default) are unsupported and see a readiness gate",
+    "Deposits and withdrawals work under a new readiness gate; depositing into spot via swidge (swap-routing) is supported",
+    "Hyperliquid spot markets are USDC-quoted, e.g. HYPE/USDC, UBTC/USDC, UETH/USDC, USOL/USDC, PURR/USDC",
+    "HIP-4 prediction-market execution does NOT ship in this work — only spot trading plus identity and capability plumbing; do not claim prediction markets or HIP-4 trading are live",
+    "PR #14581 is OPEN (not yet merged) as of 2026-05-29; do not assert spot is live until it ships"
+  ],
+  "kind": "data-card-official",
+  "metric": "Hyperliquid spot trading in Infinex, on one unified account",
+  "value": "shipping"
+}

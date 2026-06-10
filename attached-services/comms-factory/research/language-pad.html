@@ -1,0 +1,724 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Infinex language pad — A/B by tempo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..600,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0B0B0D; --bg-2:#131316; --rule:#26252A; --text:#F0EDE6;
+    --dim:#7E7B73; --dim-2:#4E4C48; --ours:#FE6F39; --accent:#E8E0CC; --warn:#C25347;
+    --ff-display:"Fraunces","Iowan Old Style",Georgia,serif;
+    --ff-body:"Inter",-apple-system,system-ui,sans-serif;
+    --ff-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  }
+  *,*::before,*::after { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: var(--ff-body); font-size: 16px; line-height: 1.55;
+    padding: 3rem 1.5rem 6rem; margin: 0; max-width: 1300px; margin-left:auto; margin-right:auto;
+  }
+  h1 {
+    font-family: var(--ff-display); font-weight: 350; font-size: 3.4rem;
+    letter-spacing: -0.02em; margin: 0 0 0.7rem; line-height: 1.05;
+  }
+  .lede {
+    font-family: var(--ff-display); font-style: italic; color: var(--dim);
+    font-size: 1.2rem; margin: 0 0 3rem; max-width: 70ch;
+  }
+  h2 {
+    font-family: var(--ff-display); font-weight: 400; font-style: italic;
+    font-size: 1.8rem; color: var(--accent);
+    margin: 4rem 0 1.5rem; padding-top: 2rem; border-top: 1px solid var(--rule);
+  }
+  h2 .num {
+    font-family: var(--ff-mono); font-size: 0.5em; color: var(--dim);
+    letter-spacing: 0.1em; margin-right: 0.9em; vertical-align: 0.4em;
+  }
+  .meta {
+    font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.06em;
+    color: var(--dim); text-transform: uppercase;
+    border-bottom: 1px solid var(--rule); padding-bottom: 1rem; margin-bottom: 3rem;
+    display: flex; gap: 1.25rem; flex-wrap: wrap;
+  }
+  .meta span::before { content: "·"; margin-right: 0.5rem; color: var(--dim-2); }
+  .meta span:first-child::before { content: ""; margin: 0; }
+
+  /* Tempo table */
+  .tempi { margin: 2rem 0; }
+  .tempo {
+    border: 1px solid var(--rule); margin: 0 0 1px;
+    display: grid; grid-template-columns: 230px 1fr;
+  }
+  .tempo .left { padding: 1.4rem; background: var(--bg-2); border-right: 1px solid var(--rule); }
+  .tempo .right { padding: 1.4rem; }
+  .tempo .label {
+    font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.1em;
+    color: var(--ours); text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .tempo .name {
+    font-family: var(--ff-display); font-style: italic; font-size: 1.5rem;
+    color: var(--text); margin: 0 0 0.5rem;
+  }
+  .tempo .mirodan {
+    font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.05em;
+    color: var(--dim); margin-bottom: 1rem; line-height: 1.4;
+  }
+  .tempo .feel { font-size: 0.95rem; color: var(--text); margin: 0 0 0.8rem; }
+  .tempo .recipe { font-size: 0.85rem; color: var(--dim); }
+  .tempo .recipe strong { color: var(--accent); font-weight: 500; }
+
+  /* Sample posts (the A/B matrix) */
+  .matrix-fact { margin: 3rem 0 1.5rem; }
+  .matrix-fact .factname {
+    font-family: var(--ff-display); font-style: italic; font-size: 1.6rem;
+    color: var(--ours); margin-bottom: 0.5rem;
+  }
+  .matrix-fact .factraw {
+    font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.05em;
+    color: var(--dim); text-transform: uppercase; padding: 0.5rem 0.8rem;
+    background: var(--bg-2); border: 1px solid var(--rule); display: inline-block;
+  }
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 1.5rem; margin: 1.5rem 0 3rem;
+  }
+  .card {
+    border: 1px solid var(--rule); padding: 1.5rem 1.6rem; background: var(--bg-2);
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .card .tempo-tag {
+    font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.12em;
+    color: var(--ours); text-transform: uppercase;
+    padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);
+  }
+  .card .post {
+    font-size: 1.02rem; line-height: 1.55; color: var(--text);
+    white-space: pre-line; padding: 0.4rem 0; min-height: 6rem;
+  }
+  .card .note {
+    font-family: var(--ff-display); font-style: italic;
+    font-size: 0.85rem; color: var(--dim); border-top: 1px dotted var(--dim-2);
+    padding-top: 0.6rem; margin-top: auto;
+  }
+  .card.recommended { border-color: var(--ours); }
+  .card.recommended .tempo-tag::after {
+    content: " · my read";
+    color: var(--dim);
+  }
+
+  /* Callout */
+  .callout {
+    border-left: 2px solid var(--ours);
+    padding: 1.5rem 0 1.5rem 1.5rem;
+    margin: 2.5rem 0;
+    max-width: 70ch;
+  }
+  .callout h3 {
+    font-family: var(--ff-display); font-style: italic; font-weight: 400;
+    color: var(--ours); font-size: 1.4rem; margin: 0 0 0.8rem;
+  }
+  .callout p { margin: 0 0 0.8rem; max-width: 70ch; }
+  .callout p:last-child { margin: 0; }
+  code {
+    font-family: var(--ff-mono); font-size: 0.85em; color: var(--accent);
+  }
+</style>
+</head>
+<body>
+
+  <div class="meta">
+    <span>comms-factory · language pad · v3</span>
+    <span>2026-05-12</span>
+    <span>baseline: stable + flow-stressed + penetrating</span>
+    <span>drive: spell + vision (no passion)</span>
+    <span>5 main tempi · posts are beat sequences</span>
+  </div>
+
+  <h1>Language pad.</h1>
+  <p class="lede">Twelve tempi available to a Stable-Flow-Penetrating-Spell-Vision character. Each runs three real Infinex product facts. The first 6 are Stable internal variations + Adream/Remote outer projections that fire on Flow-stress beats. Final 6 added per your "do all twelve" — fills the matrix.</p>
+
+  <div class="callout" style="border-left-color: var(--warn);">
+    <h3 style="color: var(--warn);">Updated read · v3 · posts arc through tempi, not pick one</h3>
+    <p><strong>The key mechanic correction:</strong> a single post moves through multiple tempi as beats. Opens Sombre (Pressing prep) → lands Commanding (Punching) → justifies Practical (Wringing/Slashing) → lifts Irradiant (Floating/Flicking). The 36 samples below show one tempo per post, but that's a simplification for A/B reading; in production every post is a beat sequence.</p>
+    <p><strong>Locked: 5 main tempi.</strong> Commanding · Practical · Sombre · Irradiant · Sociable. The other 7 stay in the toolkit but fire ~once a quarter, not in rotation.</p>
+    <p><strong>Drive locked:</strong> Spell + Vision (no Passion). Time-pressure language is off-spec; Spell is craft + patience; Vision is future-pulled.</p>
+    <p><strong>Working Actions / motor pairs:</strong> Commanding = Pressing→Punching · Practical = Wringing→Slashing · Sombre = Pressing→Punching (bound) · Irradiant = Floating→Flicking · Sociable = Gliding→Dabbing. Every Quick action (Punching/Slashing/Dabbing/Flicking) needs its Sustained prep before it lands — cold "X IS LIVE" openers fail this check and degrade.</p>
+  </div>
+
+  <div class="callout">
+    <h3>How to read this</h3>
+    <p>Per Mirodan, a Stable + Flow-stressed character has access to a set of <em>tempi</em> — variations of itself it can move through inside a single voice. Same character, different posture per moment. You pick ONE as the baseline (the resting state) and the others fire as beats.</p>
+    <p>Below: 6 tempi (4 Stable internal variations + 2 outer projections — Adream and Remote — that fire when Flow-stress emerges). Each tempo writes the same 3 product facts.</p>
+    <p>The fact-set is real: <code>spot Hyperliquid live in Infinex</code>, <code>AI-augmented yield vaults shipped</code>, <code>Swidge now bridges into MegaETH</code>. Treat the samples as scaffolds, not final copy.</p>
+  </div>
+
+  <!-- ── MULTI-TEMPO ARC EXAMPLE ─────────────────────────────── -->
+  <h2><span class="num">— A —</span>How a single post arcs through tempi</h2>
+  <p class="dim">In production every post is a beat sequence, not a single-tempo monolith. Each beat carries its own register; transitions do the emotional work. Example for "Spot Hyperliquid is now live in Infinex":</p>
+
+  <div style="border: 1px solid var(--rule); padding: 2rem; margin: 1.5rem 0; max-width: 760px;">
+    <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--ours); text-transform: uppercase; margin-bottom: 0.4rem;">Beat 1 · Sombre · Pressing-prep</div>
+    <p style="font-size: 1.05rem; margin: 0 0 1.5rem; padding-left: 1rem; border-left: 2px solid var(--ours);">The wallet and the venue used to be separate things.<br>We've been taking that wall down section by section.</p>
+
+    <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--ours); text-transform: uppercase; margin-bottom: 0.4rem;">Beat 2 · Commanding · Punching-release</div>
+    <p style="font-size: 1.05rem; margin: 0 0 1.5rem; padding-left: 1rem; border-left: 2px solid var(--ours);">Today: spot Hyperliquid is live in Infinex.<br>Same account, same passkey, the orderbook where your portfolio already lives.</p>
+
+    <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--ours); text-transform: uppercase; margin-bottom: 0.4rem;">Beat 3 · Practical · Wringing → Slashing</div>
+    <p style="font-size: 1.05rem; margin: 0 0 1.5rem; padding-left: 1rem; border-left: 2px solid var(--ours);">Spot was harder than perps. The orderbook semantics had to feel native, not bolted on. We held it back until that was true.</p>
+
+    <div style="font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.12em; color: var(--ours); text-transform: uppercase; margin-bottom: 0.4rem;">Beat 4 · Irradiant · Floating → Flicking</div>
+    <p style="font-size: 1.05rem; margin: 0 0 0; padding-left: 1rem; border-left: 2px solid var(--ours);">A few months from now, you (or your agent) will route through this without thinking about it. That's the move we're making.</p>
+  </div>
+
+  <p class="dim" style="max-width: 760px;">Sombre opens with sustained pressure (Pressing prep) → Commanding lands as decisive release (Punching, supported by Sombre's prep) → Practical justifies through tradeoff-wringing → Irradiant lifts to vision-pull. Four beats, four motors, one character moving through them.</p>
+
+  <h2><span class="num">— B —</span>The five tempi · motors and recipes</h2>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 1.5rem 0;">
+    <tr style="background: var(--bg-2);">
+      <th style="text-align: left; padding: 0.7rem 1rem; font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--dim); text-transform: uppercase; border-bottom: 1px solid var(--rule);">Tempo</th>
+      <th style="text-align: left; padding: 0.7rem 1rem; font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--dim); text-transform: uppercase; border-bottom: 1px solid var(--rule);">Inner combo</th>
+      <th style="text-align: left; padding: 0.7rem 1rem; font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--dim); text-transform: uppercase; border-bottom: 1px solid var(--rule);">Motor (prep → release)</th>
+      <th style="text-align: left; padding: 0.7rem 1rem; font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--dim); text-transform: uppercase; border-bottom: 1px solid var(--rule);">Use</th>
+    </tr>
+    <tr>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-family: var(--ff-display); font-style: italic; color: var(--accent);">Commanding</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem;">Stable · Strong/Direct</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-family: var(--ff-mono); font-size: 0.85rem; color: var(--ours);">Pressing → Punching</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem;">Decisive launch landing. Always paired with a prep beat (Sombre or Practical) before it.</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-family: var(--ff-display); font-style: italic; color: var(--accent);">Practical</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem;">Stable · Strong/Flexible</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-family: var(--ff-mono); font-size: 0.85rem; color: var(--ours);">Wringing → Slashing</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem;">Justifies a build decision by working through tradeoffs.</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-family: var(--ff-display); font-style: italic; color: var(--accent);">Sombre</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem;">Adream · Strong/Bound</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-family: var(--ff-mono); font-size: 0.85rem; color: var(--ours);">Pressing → Punching (bound)</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem;">Weight-of-conviction openers. Sets up Commanding by Pressing first.</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-family: var(--ff-display); font-style: italic; color: var(--accent);">Irradiant</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem;">Adream · Light/Free</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-family: var(--ff-mono); font-size: 0.85rem; color: var(--ours);">Floating → Flicking</td>
+      <td style="padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule); font-size: 0.9rem;">Vision-lift close. Future-tense agent thesis lands here.</td>
+    </tr>
+    <tr>
+      <td style="padding: 0.9rem 1rem; font-family: var(--ff-display); font-style: italic; color: var(--accent);">Sociable</td>
+      <td style="padding: 0.9rem 1rem; font-size: 0.9rem;">Remote · Direct/Free</td>
+      <td style="padding: 0.9rem 1rem; font-family: var(--ff-mono); font-size: 0.85rem; color: var(--ours);">Gliding → Dabbing</td>
+      <td style="padding: 0.9rem 1rem; font-size: 0.9rem;">Partner credit, ecosystem warmth. Light social touch.</td>
+    </tr>
+  </table>
+
+  <div class="callout">
+    <h3>The preparation hierarchy is load-bearing</h3>
+    <p>Per Mirodan §1.7 (p. 347): every <em>Quick</em> action requires its <em>Sustained</em> partner as preparation. Without the prep, the Quick action degrades to its Sustained version:</p>
+    <p style="font-family: var(--ff-mono); font-size: 0.85rem; line-height: 1.8;">
+      Punching needs Pressing-prep — otherwise it reads as a Press<br>
+      Slashing needs Wringing-prep — otherwise it reads as a Wring<br>
+      Dabbing needs Gliding-prep — otherwise it reads as a Glide<br>
+      Flicking needs Floating-prep — otherwise it reads as a Float
+    </p>
+    <p><strong>Why posts that open cold with "X IS LIVE." feel flat:</strong> they're trying to Punch without Pressing first. The Sombre/Practical opener IS the prep — pair them. The validator will enforce this; the generator will sequence beats accordingly.</p>
+  </div>
+
+  <!-- ── TEMPI REFERENCE ─────────────────────────────────────── -->
+  <h2><span class="num">01</span>The twelve tempi · individual reference</h2>
+  <p class="dim">Five locked main tempi (Commanding · Practical · Sombre · Irradiant · Sociable) plus seven beat-only tempi (rare). Reference table — fingerprint shown for each.</p>
+
+  <div class="tempi">
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Stable · Light/Direct</div>
+        <div class="name">Self-Contained</div>
+        <div class="mirodan">Gliding / Dabbing motifs · "cautious expression or acceptance of a gentle deference"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The Karpathy default.</strong> Confident-light. Doesn't push. Says the obvious well. Generous to the reader who's catching up. Direct, but never heavy.</p>
+        <p class="recipe"><strong>Opening:</strong> label + colon · "Something useful:" · "Quick one:" — never declarative shout · <strong>Vocab:</strong> precise verbs, short nouns, "imo", concrete examples · <strong>Signoff:</strong> often none; sometimes a TLDR.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Stable · Strong/Direct</div>
+        <div class="name">Commanding</div>
+        <div class="mirodan">Punching / Pressing motifs · "commanding demonstration of a bold resolve"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The institutional drop.</strong> Locked, decisive, no ornament. Reads as a ruler issuing a position. Closest to the AnthropicAI press-release register.</p>
+        <p class="recipe"><strong>Opening:</strong> "We've [verb]ed X." · "X is live." · "Today: Y." · <strong>Vocab:</strong> finished verbs, named partners, no hedges · <strong>Signoff:</strong> destination link, no flourish.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Stable · Strong/Flexible</div>
+        <div class="name">Practical</div>
+        <div class="mirodan">Wringing / Slashing motifs · "developing intention to cast or to submit to a spell-binding power"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The thesis-builder.</strong> Long-form. Wrings sense out of complexity. Comfortable with tradeoffs, willing to take you through the reasoning. Karpathy's essay mode.</p>
+        <p class="recipe"><strong>Opening:</strong> "Here's what's interesting about X:" · "I/we keep coming back to:" · <strong>Vocab:</strong> "tradeoff", "the actual question is", "this only makes sense once you" · <strong>Signoff:</strong> open questions OR a single declarative.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Adream outer · Strong/Bound</div>
+        <div class="name">Sombre</div>
+        <div class="mirodan">Pressing motifs · "overpowering sombre awareness of a staunch resolve"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The weight-of-conviction beat.</strong> Slow. Carries gravity. Used when the thesis lands with effort — "we know this is coming and it's a lot." Werle/Duke energy.</p>
+        <p class="recipe"><strong>Opening:</strong> "There's a version of crypto coming where X." · "We don't think Y survives." · <strong>Vocab:</strong> "becomes", "stops being", "the gap between X and Y" · <strong>Signoff:</strong> a single image-line, not a CTA.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Adream outer · Light/Free</div>
+        <div class="name">Irradiant</div>
+        <div class="mirodan">Floating / Flicking motifs · "irradiant unfolding of a sympathetic exultation"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The future-warmth beat.</strong> Vision-pulled, generous, "we're excited about the world this opens." Rare. Used when something genuinely opens up rather than just shipping.</p>
+        <p class="recipe"><strong>Opening:</strong> "A few months from now..." · "What this lets you do:" · <strong>Vocab:</strong> "agent", "your own", "without thinking about it", future-tense everywhere · <strong>Signoff:</strong> short, gestural, optimistic.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Remote outer · Direct/Bound</div>
+        <div class="name">Egocentric</div>
+        <div class="mirodan">Pressing motifs · "narrowing egocentric withdrawal into an unsociable solitude"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The "we don't care, we're right" beat.</strong> Cold, philosophical, distant from the market. Used sparingly — when there's a position to hold that the room won't like. Hyperliquid silence energy.</p>
+        <p class="recipe"><strong>Opening:</strong> a single declarative · no preamble · <strong>Vocab:</strong> abstract nouns, no warmth · <strong>Signoff:</strong> none. The post ends mid-thought sometimes.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Stable · Light/Flexible</div>
+        <div class="name">Receptive</div>
+        <div class="mirodan">Floating / Flicking motifs · "receptive acceptance or rejection of a welcoming tenderness"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The "we hear you, we're moving" beat.</strong> Open, generous, willing to incorporate. Closest to the apology-and-pivot energy of the "We got the sale wrong" post. Used after a community correction.</p>
+        <p class="recipe"><strong>Opening:</strong> acknowledgment of input · "You've been telling us..." · <strong>Vocab:</strong> "we hear you", "you were right", responsiveness verbs · <strong>Signoff:</strong> a small commitment, no flourish.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Adream outer · Strong/Free</div>
+        <div class="name">Overpowering</div>
+        <div class="mirodan">Wringing / Slashing motifs · "irradiant intention of casting a spell or being spell-bound"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The full-conviction-with-emotion beat.</strong> Stronger than Irradiant, looser than Sombre. Vision-pulled with emotional weight visible. Used for the rare post where conviction is breaking through restraint.</p>
+        <p class="recipe"><strong>Opening:</strong> "We've been saying this for years and..." · "Here's the thing nobody else is willing to call:" · <strong>Vocab:</strong> certainty verbs, future-perfect tense · <strong>Signoff:</strong> a declarative the reader can quote.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Adream outer · Light/Bound</div>
+        <div class="name">Diffused</div>
+        <div class="mirodan">Gliding / Dabbing motifs · "diffused sensation of a welcome feeling"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The "this just settled into place" beat.</strong> Quiet vision-arrival. Used for post-launch reflection, not the launch itself. The mood after the boat actually crosses the river.</p>
+        <p class="recipe"><strong>Opening:</strong> a small observation · "We noticed..." · "It turns out..." · <strong>Vocab:</strong> soft verbs, "settled", "found", "turned out" · <strong>Signoff:</strong> none usually.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Remote outer · Flexible/Free</div>
+        <div class="name">Altruistic</div>
+        <div class="mirodan">Floating / Flicking motifs · "embracing altruistic feeling for or against a sociable cordiality"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The "we're building this for you" beat.</strong> Warm-distant. Like the architect speaking to future inhabitants of a building they're still finishing. Used for ecosystem-thanks or community-acknowledgment moments.</p>
+        <p class="recipe"><strong>Opening:</strong> "We've been building [X] so [you] can [Y]" · <strong>Vocab:</strong> "for", "so that", second-person · <strong>Signoff:</strong> hand-off to the reader, no link.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Remote outer · Direct/Free</div>
+        <div class="name">Sociable</div>
+        <div class="mirodan">Gliding / Dabbing motifs · "developing or contracting feeling of sociable companionship"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The "we're with you on this one" beat.</strong> Warm-attuned. Used for partner announcements, ecosystem moments where Infinex is acknowledging being part of a larger thing. Rare but warm.</p>
+        <p class="recipe"><strong>Opening:</strong> partner-name + verb · "Working with X on..." · <strong>Vocab:</strong> "together", "with", "alongside" · <strong>Signoff:</strong> a credit or thanks.</p>
+      </div>
+    </div>
+
+    <div class="tempo">
+      <div class="left">
+        <div class="label">Remote outer · Flexible/Bound</div>
+        <div class="name">Unsociable</div>
+        <div class="mirodan">Wringing / Slashing motifs · "growing reflective image of a welcome solitude"</div>
+      </div>
+      <div class="right">
+        <p class="feel"><strong>The "we'll be over here building" beat.</strong> Withdrawal-as-discipline. Used when the room is loud and Infinex chooses not to engage with the noise. Different from Egocentric (which takes a position) — Unsociable just leaves the conversation.</p>
+        <p class="recipe"><strong>Opening:</strong> a reflective observation about the discourse · <strong>Vocab:</strong> distance verbs, "elsewhere", "meanwhile" · <strong>Signoff:</strong> the post is the signoff.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── A/B MATRIX ──────────────────────────────────────────── -->
+  <h2><span class="num">02</span>A/B matrix · three real product facts × six tempi</h2>
+
+  <div class="matrix-fact">
+    <div class="factname">Fact 1 · Spot Hyperliquid is now live on Infinex</div>
+    <div class="factraw">raw: you can now trade hyperliquid spot inside infinex · one passkey · supported markets +X</div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card recommended">
+      <div class="tempo-tag">Self-Contained</div>
+      <div class="post">Spot Hyperliquid is now live in Infinex. Same account, same passkey, no new wallet — the orderbook just shows up inside the app you already use. Two clicks from your portfolio to a fill. This is what one-app crypto looks like when the venues stop being separate things.</div>
+      <div class="note">Confident-light. The fact arrives first, the thesis is the second beat. No exclamation, no hype, no "we're thrilled."</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Commanding</div>
+      <div class="post">Spot Hyperliquid is live on Infinex.
+
+100+ markets. One passkey. Two clicks from your portfolio to a fill.
+
+infinex.xyz/perps</div>
+      <div class="note">Closer to claudeai shape. Reads as a launch. Useful for the actual ship-day post. Loses the thesis-wrapper that makes the voice distinctive.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Practical</div>
+      <div class="post">Spot Hyperliquid is now live in Infinex, and it's worth saying why we did this one in this order.
+
+The wallet's been the bottleneck. You can route to any venue you want, but if every venue needs its own account, its own withdrawal flow, its own custody decision, you've still got a 12-tab problem dressed up as choice. Adding Hyperliquid spot to Infinex collapses that — same account, same passkey, the orderbook just shows up. Perps were the same play last year. Spot was the harder fix because the orderbook semantics had to feel native, not bolted on.
+
+What this points at: cross-venue surface that an agent can actually route through coherently. Not yet, but closer.</div>
+      <div class="note">Thesis-builder essay. Karpathy-Practical mode. Justifies the decision in public — best for milestones that need the "here's how we think" treatment.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Sombre</div>
+      <div class="post">The wallet and the venue used to be separate things.
+
+Spot Hyperliquid is now live inside Infinex. One account, one passkey, the orderbook where your portfolio already lives. The separation between wallet-and-exchange has been load-bearing for a decade and we're slowly taking the wall down. Each integration is another section.
+
+The end-state isn't a wallet with an exchange tab. It's one surface your agent can route through.</div>
+      <div class="note">Weight-of-conviction beat. Reads as "this is a step in a long architecture." Useful when the post needs to feel like part of a campaign, not a standalone.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Irradiant</div>
+      <div class="post">A few months from now, you (or your agent) will hit "buy" on something and not think about which venue cleared it. Spot Hyperliquid in Infinex is one of the steps that lets that happen. Same account, same passkey, the orderbook is just there.
+
+The agent doesn't need to know which exchange. You don't either.</div>
+      <div class="note">Vision-pulled. Warmest tempo. Best for posts where the future-tense is doing the work — agent-thesis-flavored.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Egocentric</div>
+      <div class="post">Spot Hyperliquid lives inside Infinex now. The wall between wallet and exchange was never a feature.</div>
+      <div class="note">Cold. Philosophical. Used sparingly — once a quarter at most. Reads as "we have a position and we're not going to argue it." Hyperliquid's own register, basically.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Receptive</div>
+      <div class="post">You've been asking for spot Hyperliquid inside Infinex for months. It's live. Same account, same passkey, the orderbook is where your portfolio is. Tell us what's missing next.</div>
+      <div class="note">Acknowledges community input. Reads warmer than Commanding but more responsive than Self-Contained. Good when the launch was community-requested.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Overpowering</div>
+      <div class="post">We said wallet-and-exchange would collapse into one surface and nobody was going to like it because half the industry is built on the wall between them.
+
+Spot Hyperliquid is live in Infinex. The wall is shorter today than it was yesterday. It will be shorter again next month.</div>
+      <div class="note">Conviction + emotional weight. Risk: reads slightly antagonistic. Best for true "we were right" moments. Quote-worthy.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Diffused</div>
+      <div class="post">Spot Hyperliquid lives inside Infinex now. It turns out the orderbook didn't need to be in a separate app for it to feel native.</div>
+      <div class="note">Post-launch settling. "It turns out" is the signature move. For a few-days-after follow-up, not the launch itself.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Altruistic</div>
+      <div class="post">We've been building Infinex so you wouldn't have to manage a separate Hyperliquid account to trade their orderbook. Spot is live today. The exchange opens inside the app you already use.</div>
+      <div class="note">"For you" framing. Warm-distant — the architect speaking to the inhabitant. Useful when the launch is more about user-burden-removed than feature-added.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Sociable</div>
+      <div class="post">Working with @HyperliquidX, spot trading is now native inside Infinex. One passkey, one account, the orderbook just shows up. Thanks to the HL team for the integration work.</div>
+      <div class="note">Partner-acknowledgment shape. Warm, attributive. Good when the partner deserves visible credit — most integration launches.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Unsociable</div>
+      <div class="post">While the timeline argues about which CEX has the better app, spot Hyperliquid is now native inside Infinex. We'll be over here.</div>
+      <div class="note">Withdrawal-as-discipline. Slight edge but not aggressive — leaves the noise rather than fights it. Use when the post is shipping into a discourse-heavy moment.</div>
+    </div>
+
+  </div>
+
+
+  <div class="matrix-fact">
+    <div class="factname">Fact 2 · AI-augmented yield vaults shipped on Infinex</div>
+    <div class="factraw">raw: deposit to AI-managed yield vaults — your agent picks the strategy, you set the constraints</div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card recommended">
+      <div class="tempo-tag">Self-Contained</div>
+      <div class="post">AI-augmented yield vaults are live in Infinex. You deposit; the agent picks the strategy across the same protocols you'd use manually; you set the constraints (max risk, allowed venues, rebalance frequency). It's not magic — it's just the part of "managing crypto" that nobody enjoys doing by hand, automated.</div>
+      <div class="note">Light-confident. Defangs the "AI" hype by being matter-of-fact about what's actually doing the work. Closest to the registered Infinex voice already.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Commanding</div>
+      <div class="post">AI-augmented yield vaults are live.
+
+Deposit. Set your constraints. The agent runs the strategy.
+
+infinex.xyz/earn</div>
+      <div class="note">Press-release. Functional but generic — could be anyone shipping "AI yield." Voice doesn't land.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Practical</div>
+      <div class="post">We shipped AI-augmented yield vaults today, and it's worth being precise about what changed.
+
+Yield aggregators have existed for a while. Strategies that auto-rebalance have existed. What didn't exist: a vault where the agent making the decisions can see your full portfolio, your risk preferences, your tax situation, the rest of your positions — and where YOU can read why it made each move and override it. The constraint layer is the product, not the optimizer.
+
+You set the rails. The agent runs inside them. You can audit any decision.
+
+This is the first vault we've shipped that we'd actually use ourselves.</div>
+      <div class="note">Practical thesis-mode. Earns the "AI" label by explaining the constraint layer carefully — the part competitors don't ship. Good for the launch-day primary post.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Sombre</div>
+      <div class="post">Yield used to be a screen of APYs you'd squint at for thirty seconds and then guess.
+
+AI-augmented yield vaults are live in Infinex. You set the constraints. The agent runs the strategy across the protocols you'd have used by hand, watches them in real time, and surfaces what it did. The decision layer moves; the protocol layer doesn't.
+
+This is what "managed" should have meant the whole time.</div>
+      <div class="note">Weight-of-conviction. Frames the launch as a fix for something that was always broken. Works once, not weekly.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Irradiant</div>
+      <div class="post">Your agent now picks your yield strategy.
+
+You set the constraints — max risk, allowed venues, how often to touch it — and it goes. The part of "running a portfolio" that nobody enjoys doing manually is the first part to leave your hands.
+
+This is one of the things we meant when we said you'd stop thinking about which protocol your money was sitting in.</div>
+      <div class="note">Vision-pulled. Agent-first framing. Lands warmer because the SECOND-PERSON ("your agent") makes it feel like it's already yours.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Egocentric</div>
+      <div class="post">Yield without an agent is a hobby. AI-augmented yield vaults are live.</div>
+      <div class="note">Cold position-take. Risks reading mean. Use rarely — maybe once if you want to draw a line in the sand.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Receptive</div>
+      <div class="post">A lot of you have been telling us yield management was where Infinex felt thin. AI-augmented yield vaults are live. You deposit, set the constraints, the agent does the rest. Tell us what's missing.</div>
+      <div class="note">Community-responsive register. Works if there's an actual feedback thread the launch is responding to.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Overpowering</div>
+      <div class="post">Running your own yield strategy is going to feel like cooking your own dinner in a city full of restaurants.
+
+AI-augmented yield vaults are live in Infinex. You set the rails. The agent runs inside them. You can audit every move.
+
+This is what crypto looks like when the agent layer is real.</div>
+      <div class="note">High-conviction with emotional reach. Could feel preachy — best when you genuinely want to mark a generational shift.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Diffused</div>
+      <div class="post">AI-augmented yield vaults are live in Infinex. It turns out the audit layer is the part that makes the AI feel like a tool rather than a black box.</div>
+      <div class="note">Quiet-arrival. Post-ship follow-up rather than the launch. Surfaces what was non-obvious about the build.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Altruistic</div>
+      <div class="post">We've been building AI-augmented yield vaults so you'd stop having to compare APYs at 11pm to decide if a 0.4% spread is worth a rotation. They're live. You set the rules. The agent runs them.</div>
+      <div class="note">"For you" — burden-removed framing. Specific lived-experience detail ("11pm APY comparison") gives it texture.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Sociable</div>
+      <div class="post">AI-augmented yield vaults are live in Infinex. Built across @aave, @MorphoLabs, @pendle_fi, @maple_finance, and others — strategies that route across protocols rather than picking one.</div>
+      <div class="note">Ecosystem-credit shape. Useful for launches that genuinely depend on many integrations.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Unsociable</div>
+      <div class="post">The discourse on "AI x DeFi" is mostly cope. Meanwhile: AI-augmented yield vaults are live in Infinex. Constraints, audit, real protocols.</div>
+      <div class="note">Withdrawal-with-edge. Doesn't argue the discourse, just steps past it. Sharper than Egocentric because it acknowledges the noise exists.</div>
+    </div>
+
+  </div>
+
+
+  <div class="matrix-fact">
+    <div class="factname">Fact 3 · Swidge now bridges into MegaETH from any chain</div>
+    <div class="factraw">raw: swidge integration with megaeth · cross-chain one-step into a new L2</div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card recommended">
+      <div class="tempo-tag">Self-Contained</div>
+      <div class="post">MegaETH is now reachable from anywhere through Swidge. Pick your source chain, pick MegaETH as the destination, one transaction. No new wallet, no manual bridge selection, no "approve on chain A then sign on chain B" dance. The chain just shows up as a place you can go.</div>
+      <div class="note">Low-key. The product fact is small but the thesis ("chains shouldn't be travel destinations") slips in. Most reusable register for routine integrations.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Commanding</div>
+      <div class="post">MegaETH is now live in Swidge.
+
+Bridge in from any chain. One transaction. No new wallet.
+
+infinex.xyz/swidge</div>
+      <div class="note">Functional. Wears the "new L2 supported" template — fine, forgettable.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Practical</div>
+      <div class="post">Swidge now bridges into MegaETH from any chain, and the boring part is the part worth talking about.
+
+For most integrations the user-facing problem isn't "we don't support chain X" — it's that supporting chain X means another wallet, another seed, another set of routing decisions you didn't sign up for. Adding MegaETH to Swidge means there is no second wallet. The chain selector is just a dropdown. You don't audit a new bridge; the route is picked for you across 25+ providers in the background, optimized for price and latency.
+
+The point isn't that we added MegaETH. The point is that adding a new chain shouldn't be a thing the user reads a thread about.</div>
+      <div class="note">Practical. Makes the case for *invisibility* as the actual product. Good for the "we're a year into this approach" milestone framing.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Sombre</div>
+      <div class="post">Adding a new chain used to be its own thread.
+
+Swidge now bridges into MegaETH from any chain. There won't be a follow-up thread explaining how it works. The dropdown is the announcement.</div>
+      <div class="note">Slow. Holds gravity. Best when the launch is structurally small but philosophically large — like this one.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Irradiant</div>
+      <div class="post">In a couple of years you won't remember which chain your assets were on when you made a trade.
+
+MegaETH is in Swidge now. One step closer to that.</div>
+      <div class="note">Future-tense radiating. Two-line bomb. High signal, low effort — earns reach when the underlying thesis is doing the work.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Egocentric</div>
+      <div class="post">Chains should not be travel destinations. MegaETH is in Swidge.</div>
+      <div class="note">Position-take. Cold. Use to mark a "we stand for this" moment, but sparingly — every quarter at most.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Receptive</div>
+      <div class="post">You asked about MegaETH support. It's live in Swidge. Pick any source chain. One transaction.</div>
+      <div class="note">Short and responsive. Works when there's been visible community demand for a specific chain.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Overpowering</div>
+      <div class="post">Adding a new chain is supposed to be infrastructure work, not a marketing event.
+
+MegaETH is in Swidge. Pick it as a destination from any chain. There's no new wallet, no new approval flow, no new bridge to audit. The chain selector is a dropdown.
+
+We're going to keep doing this until it stops feeling like an announcement.</div>
+      <div class="note">Conviction with reach. The closing line is the quote-pull. Risks reading manifesto-y.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Diffused</div>
+      <div class="post">MegaETH is in Swidge. It turns out the routing finds 0.1% better fills on a third of the test transactions.</div>
+      <div class="note">Quiet-arrival with a concrete detail. Useful for the second post about a launch, surfacing something specific.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Altruistic</div>
+      <div class="post">We've been building Swidge so you can switch into a new L2 without thinking about how. MegaETH is the latest one in. Pick the chain. One transaction. That's the entire flow.</div>
+      <div class="note">User-burden-removed framing. Architect-to-inhabitant warmth. The "thats the entire flow" is the close.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Sociable</div>
+      <div class="post">Working with @megaeth_labs, Swidge now bridges into MegaETH from any chain. One transaction, optimized across 25+ providers.</div>
+      <div class="note">Partner-credit shape. Clean and standard for integration launches.</div>
+    </div>
+
+    <div class="card">
+      <div class="tempo-tag">Unsociable</div>
+      <div class="post">While the timeline debates which L2 has the best meta-narrative, Swidge now bridges into MegaETH from any chain. We'll see you when you actually want to use it.</div>
+      <div class="note">Withdrawal-with-edge. Best paired with a separate, sober Sociable post on the same day — gives Infinex both registers without picking a fight.</div>
+    </div>
+
+  </div>
+
+
+  <!-- ── READ + NEXT ─────────────────────────────────────────── -->
+  <h2><span class="num">03</span>My read · pick + path forward</h2>
+
+  <div class="callout">
+    <h3>Your cadence locked: Irradiant 50 / Commanding 25 / Sombre 20 / Practical 5</h3>
+    <p>The character lives in Flow-stress beats most of the time (Irradiant + Sombre = 70% Adream-outer). Commanding 25% is the Stable-home reset — decisive ship-day announcements. Practical 5% is the rare thesis essay. Self-Contained / Receptive / Diffused / Egocentric / Altruistic / Sociable / Unsociable / Overpowering all remain in the toolkit but as <em>beats</em>, not rotation — fired on the rare moments where the post calls for the specific register.</p>
+    <p>Concretely:</p>
+    <p>• <strong>Irradiant 50%</strong> · vision-pulled, future-tense, "what this lets you / your agent do." The mood.<br>
+    • <strong>Commanding 25%</strong> · hard launches. "X is live." Pairs naturally with a follow-up Irradiant post on the same day.<br>
+    • <strong>Sombre 20%</strong> · weight-of-conviction beats. Post-launch reflections, milestone framings, "the wall we've been taking down" energy.<br>
+    • <strong>Practical 5%</strong> · once-a-month-ish thesis essay. Long-form justification of a non-obvious build decision.</p>
+    <p>The other 8 tempi fire ~0-1 times a quarter each as the situation demands.</p>
+  </div>
+
+  <div class="callout">
+    <h3>Character proposal · who is Infinex when you read it?</h3>
+    <p>Nigel = old dude at the pub, weathered, often-right. Infinex needs a similarly concrete image. Given the Spell-Vision drive (timeless craft + future-vision), the Stable-Flow grain, and the agent-thesis niche, three candidates to react to:</p>
+    <p><strong>The Shipwright.</strong> Has been building the boat that takes you to the new continent for years. Knows every plank. The vision is the new world; the Spell is the craft of the boat. When the boat is ready, says "the boat is ready" (Commanding). When asked why this design, can answer with depth (Practical). When the maiden voyage is set, paints the scene (Irradiant). When asked about the journey's cost, holds the weight (Sombre). The crowd asks about hype; the shipwright keeps planing wood.</p>
+    <p><strong>The Cartographer of the Agent Future.</strong> Has been mapping the territory before it existed. Doesn't sell the map — shows you what's at the edges. Commanding when a new region is charted. Irradiant when describing what travellers will find. Sombre when reflecting on the gaps still on the map. Practical when explaining the projection used.</p>
+    <p><strong>The Quiet Architect.</strong> Has been planning a bridge between two worlds for a decade. Doesn't perform. Each Commanding post is "this section opens today." Each Irradiant post is "what the bridge enables when it's done." Each Sombre post is "the river was load-bearing for a reason; we are taking that wall down anyway." Each Practical post is "here's why we chose this span."</p>
+    <p>All three have the right Mirodan grain (Stable + Flow + Spell + Vision). All have <em>craft + patience + future-pull</em> as their core. Pick one (or pitch a different one — none of these may be quite right), and the voice spec gets concrete.</p>
+  </div>
+
+  <h2><span class="num">04</span>Wiring the loop · what's left to build</h2>
+
+  <p style="max-width: 70ch;">The Nigel pattern in comms-factory's existing scaffold needs three concrete pieces wired:</p>
+
+  <ol style="max-width: 70ch;">
+    <li><strong>Voice spec as data.</strong> <code>comms-factory/src/voice/infinex.ts</code> exports the 6 tempi above as structured prompts (opening shapes, vocab anchors, signoff moves, sample posts as few-shots).</li>
+    <li><strong>Generator with model call.</strong> <code>generator.ts</code> currently has a stub. Wire @anthropic-ai/sdk, take (release-card + tempo + voice spec) → return 3-5 candidates. Use Opus for generator, Sonnet for validator (same hybrid Nigel uses).</li>
+    <li><strong>Validator integration.</strong> The 6 validator rules already work. Add: <em>intent-consistency guard</em> (declared tempo vs. blind classification on output — Nigel's Track 5b mechanic) and <em>tempo-fit guard</em> (does the post actually read in the requested tempo). Both can be Claude Sonnet calls.</li>
+  </ol>
+
+  <p style="max-width: 70ch;">Time budget if I focus: ~3 hours of build + ~1 hour of tuning on 10-20 generated samples. The samples above become the few-shot library for the generator prompt — they're not throwaway.</p>
+
+  <p style="max-width: 70ch; color: var(--dim); font-style: italic; margin-top: 2rem;">Pick the baseline + which tempi you want me to keep in the spec (drop any you hate), and I'll wire the loop next.</p>
+
+</body>
+</html>

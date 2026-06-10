@@ -1,0 +1,96 @@
+<!doctype html><html><head><meta charset=utf8><title>Director investigation — where we are</title>
+<style>
+*{box-sizing:border-box} body{margin:0;background:#0b0d12;color:#e6e9ef;font:15px/1.55 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:32px 24px 80px}
+.wrap{max-width:920px;margin:0 auto}
+h1{font-size:26px;margin:0 0 4px} .sub{color:#8a93a6;margin:0 0 28px;font-size:14px}
+h2{font-size:18px;margin:34px 0 12px;border-bottom:1px solid #1d212b;padding-bottom:7px}
+.card{background:#12151d;border:1px solid #1d212b;border-radius:12px;padding:18px 20px;margin:14px 0}
+.row{display:flex;gap:16px;flex-wrap:wrap} .col{flex:1;min-width:300px}
+.q{color:#8a93a6;font-size:13px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.big{font-size:20px;font-weight:600;margin:2px 0}
+.bar{display:flex;align-items:center;gap:10px;margin:5px 0;font-size:13px}
+.lbl{width:120px;text-align:right;color:#c2c9d6} .track{flex:1;background:#1d212b;border-radius:5px;height:16px;overflow:hidden}
+.fill{display:block;height:100%;background:#3a4358;border-radius:5px} .fill.warm{background:#c98a3a} .fill.hot{background:#d9534f}
+.num{width:84px;color:#8a93a6;font-variant-numeric:tabular-nums}
+.verdict{border-left:3px solid #4caf72;padding:4px 0 4px 14px;margin:10px 0;color:#cfe8d6}
+.bad{border-left-color:#d9534f;color:#f0c9c7} .warnv{border-left-color:#c98a3a;color:#ecd9bd}
+.pill{display:inline-block;background:#1d212b;border-radius:20px;padding:3px 11px;font-size:12px;margin:2px 4px 2px 0;color:#aab2c2}
+.pill.live{background:#243; color:#9fe0b4} .pill.done{background:#223;color:#9fb4e0}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;margin:8px 0}
+.step{background:#1d212b;border-radius:8px;padding:8px 11px} .arrow{color:#566}
+.kpi{font-size:34px;font-weight:700;line-height:1} .kpi.good{color:#5fd08a} .kpi.bad{color:#e0726e}
+.note{color:#8a93a6;font-size:13px}
+strong{color:#fff}
+</style></head><body><div class=wrap>
+<h1>Director investigation — what's going on</h1>
+<p class=sub>Updated 16:20 · the "is the Director a rubber-stamp?" thread, in one page</p>
+
+<h2>① The question you started with</h2>
+<div class=card>
+<div class=q>The worry</div>
+<div class=big>The Director passed <strong>42/42</strong> Sonnet-generated candidates. Either the generator is perfect, or the judge has become a sycophant.</div>
+<p class=note>You asked: can we prove the Director isn't just rubber-stamping? Focus on voice/placement (Laban/Mirodan), not fact-drift.</p>
+</div>
+
+<h2>② What we found — in three moves</h2>
+<div class=card>
+<div class=verdict><strong>Move 1 — the judge wasn't lobotomised.</strong> A replay of its May-28 rewiring showed it correctly fails things on canon grounds. It's selectively blind, not trigger-happy.</div>
+<div class=verdict warnv><strong>Move 2 — but it calls EVERYTHING "commanding" (40+/42).</strong> Root cause (grounded in true Mirodan corpus): a category error — it read <em>any unhedged, confident sentence</em> as "Strong Weight = commanding". But Weight = muscular <em>force</em>, not confidence. A calm declarative line is <em>Direct/Space</em>, which is the "Certain" tempo, not commanding.</div>
+<div class=verdict><strong>Move 3 — we fixed the reader's eyesight</strong> (added the "Weight test" + corrected the worked examples that were teaching it wrong). Then re-ran it blind.</div>
+</div>
+
+<h2>③ Test 1 — what the corrected reader sees on the Sonnet-42</h2>
+<div class=card><div class=row>
+<div class=col>
+<div class=q>OLD Director (stares at the answer key)</div>
+<div class="bar"><span class="lbl">commanding</span><span class="track"><span class="fill hot" style="width:98%"></span></span><span class="num">41 · 98%</span></div><div class="bar"><span class="lbl">self-contained</span><span class="track"><span class="fill " style="width:2%"></span></span><span class="num">1 · 2%</span></div>
+<p class=note>Knows Infinex's allowed list, reaches for a legal label → everything "commanding". This is the rubber-stamp mechanism: it <em>relabels</em> off-spec copy as legal.</p>
+</div>
+<div class=col>
+<div class=q>CORRECTED blind reader (no answer key)</div>
+<div class="bar"><span class="lbl">certain</span><span class="track"><span class="fill hot" style="width:98%"></span></span><span class="num">41 · 98%</span></div><div class="bar"><span class="lbl">n/a</span><span class="track"><span class="fill " style="width:2%"></span></span><span class="num">1 · 2%</span></div>
+<p class=note>Reads honestly → <strong>41/42 "Certain"</strong>. Certain is <em>not</em> in Infinex's palette. So the corrected reader says: this copy is monotone <em>and</em> off-placement.</p>
+</div>
+</div>
+<div class=verdict bad style="margin-top:14px">Swapped one monolith (commanding) for another (certain). The palette did <strong>not</strong> breathe. The copy is one note — and it's the wrong note for Infinex (reads "Awake/alert", not the locked "Stable/grounded").</div>
+</div>
+
+<h2>④ The confirmation test (running now) — is the corrected reader honest, or did we break it?</h2>
+<div class=card>
+<p class=note style="margin-top:0">The fear: maybe we over-corrected and now it calls <em>everything</em> "certain". So we point the same corrected reader at <strong>human-written</strong> copy that we KNOW is varied — our own 380-sample corpus + Phantom's. If human copy also flattens to one note → we broke it. If human copy stays varied → the reader is honest and the Sonnet copy really is monotone.</p>
+<div class=row>
+<div class=col>
+<div class=q>Human Infinex copy (blog+marketing, 83 classifiable) — corrected reader</div>
+<div class="bar"><span class="lbl">certain</span><span class="track"><span class="fill warm" style="width:24%"></span></span><span class="num">31 · 24%</span></div><div class="bar"><span class="lbl">self-contained</span><span class="track"><span class="fill " style="width:12%"></span></span><span class="num">15 · 12%</span></div><div class="bar"><span class="lbl">practical</span><span class="track"><span class="fill " style="width:10%"></span></span><span class="num">13 · 10%</span></div><div class="bar"><span class="lbl">acknowledged</span><span class="track"><span class="fill " style="width:5%"></span></span><span class="num">6 · 5%</span></div><div class="bar"><span class="lbl">warm</span><span class="track"><span class="fill " style="width:5%"></span></span><span class="num">6 · 5%</span></div><div class="bar"><span class="lbl">irradiant</span><span class="track"><span class="fill " style="width:3%"></span></span><span class="num">4 · 3%</span></div><div class="bar"><span class="lbl">sociable</span><span class="track"><span class="fill " style="width:2%"></span></span><span class="num">2 · 2%</span></div><div class="bar"><span class="lbl">acute</span><span class="track"><span class="fill " style="width:2%"></span></span><span class="num">2 · 2%</span></div><div class="bar"><span class="lbl">sombre</span><span class="track"><span class="fill " style="width:2%"></span></span><span class="num">1 · 1%</span></div>
+</div>
+<div class=col style="max-width:240px">
+<div class=q>Distinct tempi (variety)</div>
+<div class=kpi good>13</div>
+<div class=note>tempi fire on human copy</div>
+<div style="height:18px"></div>
+<div class=q>vs the Sonnet-42</div>
+<div class=kpi bad>1</div>
+<div class=note>tempo on the generated copy</div>
+</div>
+</div>
+<div class=verdict style="margin-top:14px"><strong>VERDICT (Infinex set, decisive): the reader is honest.</strong> Human copy breathes — 13 different tempi, "certain" only 24%. Same reader, same prompt, flattens the Sonnet-42 to a single note. <strong>The monotony is the generator, not the judge.</strong></div>
+<p class=note>Still streaming: Phantom's corpus (for a second independent human reference). Won't change the verdict, just hardens it.</p>
+</div>
+
+<h2>⑤ Where that leaves us</h2>
+<div class=card>
+<div class=q>Running</div>
+<span class="pill live">Phantom human-corpus confirmation</span>
+<span class="pill done">✓ calibrated A/C bake-off</span>
+<span class="pill done">✓ Infinex confirmation (decisive)</span>
+<div class=q style="margin-top:16px">The pivot</div>
+<p style="margin:4px 0">The Director was a real bug and we fixed its eyesight — but the judge was never what stood between us and good copy. <strong>The Sonnet generator writes off-placement, one-note copy, and the old answer-key Director was laundering it as legal.</strong></p>
+<div class=q style="margin-top:14px">Next: Test 2</div>
+<div class=flow>
+<span class=step>Regenerate the same card on <strong>Opus</strong></span><span class=arrow>→</span>
+<span class=step>re-read with the corrected blind reader</span><span class=arrow>→</span>
+<span class=step>does Opus read <strong>Stable + varied</strong>, or also collapse to Certain?</span>
+</div>
+<p class=note>If Opus also collapses → the generator's table-work is steering off-placement regardless of model, and that's the real work. If Opus breathes → it was a Sonnet capability gap all along.</p>
+</div>
+</div></body></html>

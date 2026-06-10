@@ -1,0 +1,17 @@
+{
+  "id": "usdc-to-yield-split-2025-10-04",
+  "title": "One-tap: USDC into the yield vault",
+  "ship_date": "2025-10-04",
+  "audience": ["x", "web", "in-product"],
+  "deployed_facts": [
+    "USDC balances move into the yield vault in a single confirmation",
+    "Withdrawals return USDC to the same account balance the deposit came from",
+    "There is no separate vault wallet, vault token to hold, or claim step",
+    "The principal and the yield accrue inside the vault and can be withdrawn together or separately",
+    "The flow is available to all Infinex accounts on supported chains"
+  ],
+  "kind": "split",
+  "from": "USDC in account",
+  "to": "USDC earning in vault",
+  "split_semantics": "principal-yield"
+}

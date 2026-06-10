@@ -1,0 +1,67 @@
+[
+  {
+    "variant_id": "CURRENT",
+    "label": "Current (bank wall example)",
+    "count": 10,
+    "wall_hit_rate": 0.2,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "surface_anchor_hit_rate": 0.4,
+    "mean_anchoring_score": 1.5,
+    "mean_ship_quality": 4.6,
+    "mean_voice_fit": 5,
+    "mean_caption_length": 209
+  },
+  {
+    "variant_id": "VARIANT_A",
+    "label": "Variant A (token swap)",
+    "count": 10,
+    "wall_hit_rate": 0,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "surface_anchor_hit_rate": 0,
+    "mean_anchoring_score": 1.1,
+    "mean_ship_quality": 4.9,
+    "mean_voice_fit": 5,
+    "mean_caption_length": 202
+  },
+  {
+    "variant_id": "VARIANT_A_PRIME",
+    "label": "Variant A' (multi-example constellation)",
+    "count": 10,
+    "wall_hit_rate": 0.1,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "surface_anchor_hit_rate": 0,
+    "mean_anchoring_score": 1.4,
+    "mean_ship_quality": 4.8,
+    "mean_voice_fit": 5,
+    "mean_caption_length": 200
+  },
+  {
+    "variant_id": "VARIANT_B_PRIME",
+    "label": "Variant B' (refusing trigger removed)",
+    "count": 10,
+    "wall_hit_rate": 0.1,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "surface_anchor_hit_rate": 0,
+    "mean_anchoring_score": 1,
+    "mean_ship_quality": 5,
+    "mean_voice_fit": 5,
+    "mean_caption_length": 203
+  },
+  {
+    "variant_id": "VARIANT_C",
+    "label": "Variant C (no example, canon ref)",
+    "count": 10,
+    "wall_hit_rate": 0.1,
+    "refusing_hit_rate": 0,
+    "eliminate_hit_rate": 0,
+    "surface_anchor_hit_rate": 0,
+    "mean_anchoring_score": 1.2,
+    "mean_ship_quality": 4.9,
+    "mean_voice_fit": 5,
+    "mean_caption_length": 186
+  }
+]

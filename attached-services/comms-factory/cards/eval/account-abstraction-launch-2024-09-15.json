@@ -1,0 +1,22 @@
+{
+  "id": "account-abstraction-launch-2024-09-15",
+  "title": "Infinex account is live: one passkey, every chain",
+  "ship_date": "2024-09-15",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "The Infinex account is live for all users",
+    "A single passkey controls the account across every supported chain",
+    "There are no seed phrases to write down",
+    "The account is non-custodial; users hold their own keys via passkey",
+    "Recovery is handled through passkey providers, not paper backups"
+  ],
+  "kind": "launch-tier",
+  "headline": "One account. One passkey. Every chain.",
+  "subhead": "The Infinex account is live.",
+  "tier_reason": "First-time public availability of the account primitive that the rest of the product sits on. Everything Infinex ships afterward inherits from this moment. Reserved-template worthy because the category — non-custodial account without seed phrases — is the structural bet, not a feature.",
+  "through_action": "to retire the seed phrase as the price of self-custody",
+  "obstacle": "reader assumes 'no seed phrase' means custodial — has been trained by ten years of CEXes to equate convenience with surrendering keys",
+  "lining": "on the surface: a new account type. underneath: the last reason a serious crypto user kept funds on a centralized exchange just disappeared.",
+  "reader_prior": "crypto self-custody requires seed phrases; anything easier is custodial",
+  "not_the_point": "feature checklist of what the account supports"
+}

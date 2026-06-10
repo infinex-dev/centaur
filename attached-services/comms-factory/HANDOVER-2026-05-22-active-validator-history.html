@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>comms-factory handover - active validator and history guards</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #171717;
+      --muted: #5f6368;
+      --line: #d8d8d8;
+      --paper: #ffffff;
+      --canvas: #f6f6f4;
+      --good: #0f7a4f;
+      --warn: #9a5b00;
+      --bad: #a12622;
+      --code: #f0f1ef;
+    }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1, h2, h3 {
+      line-height: 1.15;
+      margin: 0;
+    }
+    h1 {
+      font-size: 30px;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+    h3 {
+      font-size: 15px;
+      margin-top: 18px;
+    }
+    p {
+      margin: 8px 0;
+    }
+    ul, ol {
+      margin: 8px 0 0 22px;
+      padding: 0;
+    }
+    li {
+      margin: 5px 0;
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      background: var(--code);
+      border-radius: 4px;
+    }
+    code {
+      padding: 1px 4px;
+    }
+    pre {
+      padding: 12px;
+      overflow: auto;
+      border: 1px solid var(--line);
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .tag {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 2px 8px;
+      margin-right: 6px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .good { color: var(--good); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .muted { color: var(--muted); }
+    .tree {
+      list-style: none;
+      margin-left: 0;
+    }
+    .tree li {
+      border-left: 1px solid var(--line);
+      padding-left: 12px;
+      margin-left: 6px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <p class="muted">Handover written 2026-05-22</p>
+  <h1>Active Validator + History Guards</h1>
+  <p>
+    This pass ports the useful Nigel pattern into comms-factory without replacing the existing generator/validator path.
+    The new path is opt-in and keeps the ReleaseCard as the hard fact boundary.
+  </p>
+
+  <div class="card">
+    <span class="tag good">implemented</span>
+    <span class="tag">behind flag</span>
+    <span class="tag">tests passing</span>
+    <p><strong>Enable in harness:</strong> set <code>HARNESS_ACTIVE_VALIDATOR=1</code>.</p>
+    <p><strong>Optional caps:</strong> <code>COMMS_ACTIVE_VALIDATOR_MAX_TOOL_TURNS</code>, <code>COMMS_ACTIVE_VALIDATOR_MAX_TOKENS</code>, <code>COMMS_ACTIVE_VALIDATOR_MODEL</code>.</p>
+  </div>
+
+  <h2>Pipeline Shape</h2>
+  <pre>brief
+  -> fact grounder
+  -> operator-approved ReleaseCard
+  -> generator
+  -> deterministic validator
+  -> active research validator
+  -> history guards
+  -> orchestrator pick
+  -> operator approve/edit/reject
+  -> ship ledger / copy history</pre>
+
+  <h2>What Changed</h2>
+  <ul class="tree">
+    <li>
+      <strong>Shared research tools</strong>
+      <ul>
+        <li><code>src/research-tools.ts</code> now owns the reusable research tool schemas and executor.</li>
+        <li><code>src/fact-grounder-llm.ts</code> now imports those shared tools instead of owning a separate copy.</li>
+        <li>Shared tools include platform grep/read, partner registry, Infinex page fetch, rendered page fetch, JSON API fetch, ProjectJin web search, and recent X search.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Active validator</strong>
+      <ul>
+        <li><code>src/validator-active.ts</code> adds Nigel-style tool-use validation.</li>
+        <li>It runs deterministic validation first. Regex/fact-contract failures short-circuit before any model/tool spend.</li>
+        <li>The active validator can research contradiction/staleness, but it cannot expand allowed claims.</li>
+        <li>If research finds a true fact missing from <code>card.deployed_facts</code>, it fails with <code>card_missing_fact</code>.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>History guards</strong>
+      <ul>
+        <li><code>src/history-guards.ts</code> adds deterministic copy-history checks.</li>
+        <li>X gets stricter defaults for repeated openers, phrase budgets, primary-tempo cadence, rare tempo reuse, announcement-frame saturation, and optional protagonist repetition.</li>
+        <li>General copy can use the same guard with softer budgets by channel.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Active orchestration</strong>
+      <ul>
+        <li><code>src/orchestrator.ts</code> now exports <code>orchestrateActive()</code> and <code>orchestrateActiveWithRetries()</code>.</li>
+        <li>Retry feedback now includes active-validator failures and history-guard failures.</li>
+        <li>The existing <code>orchestrate()</code>, <code>orchestrateLLM()</code>, and <code>orchestrateWithRetries()</code> paths remain in place.</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Harness persistence and UI</strong>
+      <ul>
+        <li><code>harness/lib/schema.sql</code> adds <code>candidate_audits</code>.</li>
+        <li><code>harness/app/actions/generate.ts</code> uses the active path when <code>HARNESS_ACTIVE_VALIDATOR=1</code>.</li>
+        <li><code>harness/lib/queries.ts</code> joins the latest active audit into candidate records.</li>
+        <li><code>harness/components/CandidateCard.tsx</code> shows active-validator and history-guard pass/fail state, turn count, tool count, and failure reasons.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>State Model</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Candidate row</h3>
+      <p>Still stores the original deterministic validator output: text, declared beats, beat audit, validation pass/fail, failures, rationale, source.</p>
+    </div>
+    <div class="card">
+      <h3>Candidate audit row</h3>
+      <p>Stores optional active audit and history guard JSON keyed by candidate id. This avoids mutating the old candidate table contract.</p>
+    </div>
+    <div class="card">
+      <h3>History source</h3>
+      <p>The harness builds recent-copy context from prior <code>final_picks</code> on the same channel, excluding the current card.</p>
+    </div>
+  </div>
+
+  <h2>Verification</h2>
+  <ul>
+    <li><span class="good">pass</span> <code>pnpm -s test</code> - 10 files, 160 tests.</li>
+    <li><span class="good">pass</span> <code>pnpm -s typecheck</code> at repo root.</li>
+    <li><span class="good">pass</span> <code>pnpm -s typecheck</code> in <code>harness/</code>.</li>
+    <li><span class="good">done</span> <code>pnpm -s db:init</code> in <code>harness/</code>; local <code>harness.db</code> now has the new schema table.</li>
+  </ul>
+
+  <h2>Caveats</h2>
+  <ul>
+    <li><span class="warn">restart needed</span> If the Next harness server was already running, restart it so it loads the new server action code and schema helpers.</li>
+    <li><span class="warn">evaluated candidates only</span> The active audit is stored for candidates the active orchestrator actually evaluated while searching for a pick. Later unevaluated candidates from the same batch may have no active audit row.</li>
+    <li><span class="warn">fact boundary preserved</span> The active validator does not edit or enrich ReleaseCards. It fails and tells the operator when the card is missing a needed fact.</li>
+    <li><span class="warn">cost guard is light</span> This adds model token/tool-turn caps, not Nigel-style dollar accounting. That is intentional for now because comms generation is less time-sensitive and still human-gated.</li>
+  </ul>
+
+  <h2>Recommended Next Pass</h2>
+  <ol>
+    <li>Run one real harness card with <code>HARNESS_ACTIVE_VALIDATOR=1</code> and inspect the candidate cards.</li>
+    <li>If active validation is too slow, lower <code>COMMS_ACTIVE_VALIDATOR_MAX_TOOL_TURNS</code> for X first.</li>
+    <li>Add a small operator affordance to promote <code>card_missing_fact</code> into a ReleaseCard edit.</li>
+    <li>Later: add Nigel-style dollar accounting only if active validation starts running unattended or at high volume.</li>
+  </ol>
+</main>
+</body>
+</html>

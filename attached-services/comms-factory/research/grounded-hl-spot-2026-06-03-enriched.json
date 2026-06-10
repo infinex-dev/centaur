@@ -1,0 +1,316 @@
+{
+  "facts": [
+    {
+      "category": "partner",
+      "claim": "Perps trading venue provider",
+      "value": "Hyperliquid",
+      "source": "partner-registry",
+      "source_ref": "apps/perps-app/src/app/api/og/lib/hyperliquid.ts (partner registry, verified 2026-05-15)",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "partner",
+      "claim": "Spot trading venue provider for Infinex Perps app",
+      "value": "Hyperliquid",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Official name of the Infinex trading app",
+      "value": "Infinex Perps",
+      "source": "infinex-page",
+      "source_ref": "https://perps.app.infinex.xyz (rendered page title)",
+      "confidence": 0.98,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "url",
+      "claim": "Infinex Perps app URL",
+      "value": "https://perps.app.infinex.xyz",
+      "source": "infinex-page",
+      "source_ref": "https://perps.app.infinex.xyz",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Hyperliquid Spot within Infinex Perps \u2014 feature name",
+      "value": "Hyperliquid Spot V1",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.98,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Spot order type \u2014 Hyperliquid order book type",
+      "value": "Fully onchain CLOB (Central Limit Order Book) \u2014 every order, cancel, trade, and liquidation happens transparently onchain with one-block finality",
+      "source": "provider-docs",
+      "source_ref": "https://hyperliquid.gitbook.io/hyperliquid-docs/",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Quote currency for Spot V1 in Infinex Perps",
+      "value": "USDC (USDC-only; non-USDC pairs excluded from execution)",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Account type required to access Hyperliquid Spot V1",
+      "value": "Unified account (unifiedAccount) only \u2014 non-unified account modes (disabled, dexAbstraction, portfolioMargin) are blocked from spot trading",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.98,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Spot V1 supported order types",
+      "value": "Market, limit, and post-only orders; cancel by oid/cloid; modify/batch modify. Trigger, TWAP, and scale orders are NOT supported in Spot V1.",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md (Feature Parity Matrix)",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Spot V1 \u2014 perps-only controls not available in spot UI",
+      "value": "Leverage, margin mode, liquidation, funding, reduce-only, close, reverse, TP/SL are not applicable in Spot V1",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Spot V1 \u2014 what user can see and do",
+      "value": "Users can view USDC-quoted spot market catalog, real-time order book, market data/charts, account spot balances and history, and place/cancel/modify market and limit spot orders",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/spot-hip4-integration.md + apps/perps-app/docs/e2e-runsheet.md",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Default spot market (used in routes and E2E tests)",
+      "value": "PURR/USDC",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-runsheet.md (flows 4, 6, 9, 17, 24, 33, 41)",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "url",
+      "claim": "Spot market route URL pattern within Infinex Perps app",
+      "value": "https://perps.app.infinex.xyz/hyperliquid/spot/{BASE}/{QUOTE} (e.g. /hyperliquid/spot/PURR/USDC)",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-runsheet.md",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "url",
+      "claim": "Perps market route URL pattern within Infinex Perps app",
+      "value": "https://perps.app.infinex.xyz/hyperliquid/perps/{SYMBOL} (e.g. /hyperliquid/perps/BTC)",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-runsheet.md",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Feature branch name for Hyperliquid Spot V1 integration",
+      "value": "spot-integration",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-findings-2026-05-19.md",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "This is Infinex's first CLOB spot order book integration",
+      "value": "True \u2014 the roadmap doc states 'Spot trading is in development' as of Feb 2026, and Spot V1 on this branch is the first spot product mode in the perps app. Previous Infinex products (Perps) are perp futures; prior swaps were DEX/AMM-based (Curve Finance, Jupiter), not a CLOB spot order book.",
+      "source": "platform-docs",
+      "source_ref": "apps/content-app/content/blog/the-roadmap-what-s-next-for-infinex.md + apps/perps-app/docs/spot-hip4-integration.md",
+      "confidence": 0.92,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "number",
+      "claim": "Number of Hyperliquid spot markets with >$100K 24h volume (defensible tradeable count)",
+      "value": "24",
+      "source": "provider-docs",
+      "source_ref": "https://api.hyperliquid.xyz/info (POST spotMetaAndAssetCtxs, live query)",
+      "confidence": 0.9,
+      "verified_at": "2026-06-03",
+      "derived_number_basis": "Editorial cut: HL spot markets with >=$100K 24h notional volume. NOT a raw total. Total spot markets = 301; >=$100K cut = 23 on 2026-06-03 snapshot (was 24 at original grounding; count drifts with volume).",
+      "data_class": "live-class",
+      "dated": "2026-06-03",
+      "note": "Prefer naming liquid markets over counting; count is a dated snapshot, not durable."
+    },
+    {
+      "category": "product",
+      "claim": "Top Hyperliquid spot market by 24h volume",
+      "value": "HYPE/USDC \u2014 $284M 24h volume",
+      "source": "provider-docs",
+      "source_ref": "https://api.hyperliquid.xyz/info (POST spotMetaAndAssetCtxs, live query)",
+      "confidence": 0.9,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Notable spot markets available with >$1M 24h volume",
+      "value": "HYPE/USDC ($284M), UBTC/USDC ($61M), UETH/USDC ($20M), UZEC/USDC ($14M), USOL/USDC ($9M), KNTQ/USDC ($8M), PURR/USDC ($8M), USDH/USDC ($4.5M), USDT0/USDC ($4.4M), XMR1/USDC ($4.3M), UPUMP/USDC ($1.5M), UFART/USDC ($0.9M)",
+      "source": "provider-docs",
+      "source_ref": "https://api.hyperliquid.xyz/info (POST spotMetaAndAssetCtxs, live query)",
+      "confidence": 0.88,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "ticker",
+      "claim": "Hyperliquid Twitter / X handle",
+      "value": "@HyperliquidX",
+      "source": "partner-registry",
+      "source_ref": "partner registry (verified 2026-05-15)",
+      "confidence": 0.99,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "UI product-mode switching \u2014 how users move between perps and spot",
+      "value": "Users click 'Switch to Spot' or 'Switch to Perps' button in the app; last-visited symbol per mode is preserved (subject to known minor bug in localStorage persistence)",
+      "source": "platform-docs",
+      "source_ref": "apps/perps-app/docs/e2e-runsheet.md (flows 11\u201315)",
+      "confidence": 0.96,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "capability",
+      "claim": "Hyperliquid spot order book rendered live in Infinex UI",
+      "value": "True \u2014 rendered page at /hyperliquid/spot/PURR/USDC shows a live Order Book panel with bid/ask prices, sizes, and totals",
+      "source": "infinex-page",
+      "source_ref": "https://perps.app.infinex.xyz/hyperliquid/spot/PURR/USDC (rendered)",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Hyperliquid's order books \u2014 what they are technically",
+      "value": "Fully onchain perpetual futures AND spot order books on HyperCore (Hyperliquid's L1); every order, cancel, trade, and liquidation is transparent with one-block finality via HyperBFT consensus; 200k orders/second throughput",
+      "source": "provider-docs",
+      "source_ref": "https://hyperliquid.gitbook.io/hyperliquid-docs/",
+      "confidence": 0.97,
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "asset-mechanism",
+      "claim": "HL spot assets UBTC/UETH/USOL are wrapped, not native",
+      "value": "UBTC, UETH, USOL are 1:1 representations minted by the Unit (HyperUnit) tokenization layer, which locks native BTC/ETH/SOL with a 2-of-3 MPC/TSS Guardian federation and mints uAssets on Hyperliquid L1; redemption burns the uAsset and releases the L1 asset. They are wrapped/custodied claims, NOT native self-custodied coins.",
+      "source": "provider-docs",
+      "source_ref": "https://docs.hyperunit.xyz/ ; https://www.blocmates.com/articles/unit-the-asset-tokenization-layer-on-hyperliquid ; HL API token names UBTC/UETH/USOL (distinct from BTC/ETH/SOL)",
+      "confidence": 0.95,
+      "data_class": "durable",
+      "verified_at": "2026-06-03",
+      "copy_guard": "Do NOT claim 'no wrapper' or 'real native BTC'. CAN claim UX truths: no manual bridge step, no chain-hopping, USDC-quoted, one unified account."
+    },
+    {
+      "category": "capability",
+      "claim": "Hyperliquid Unified Account mode \u2014 precise definition",
+      "value": "Single balance per asset that both collateralizes all cross-margin positions in that asset AND is unified with the spot balance in that asset (one USDC pool funds perps margin and spot buys). Other modes: Standard (separate perp/spot balances), DEX Abstraction (to be discontinued), Portfolio Margin. Unified/portfolio margin capped at 50k user actions/day. 'Recommended for most users.'",
+      "source": "provider-docs",
+      "source_ref": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/account-abstraction-modes",
+      "confidence": 0.96,
+      "data_class": "durable",
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "feature-state",
+      "claim": "Unified account feature-state-at-ship",
+      "value": "changing-at-ship",
+      "feature_state": {
+        "state": "changing-at-ship",
+        "detail": "Hyperliquid Unified Account mode rolled out early 2026 as an opt-in capital-efficiency upgrade merging spot+perp balances. Infinex Spot V1 REQUIRES it (unifiedAccount only; disabled/dexAbstraction/portfolioMargin blocked). Copy must treat it as a NEW capability the reader gains, not 'the unified account you already use'.",
+        "narrative_analogy": "Mirror Infinex's own account-upgrade narrative: the July'24 'Account Update Available' framing ('a framework for upgrading your Infinex Account... next time you login you'll see an option to update') and the live EIP-7702 'Pectrify' EOA->smart-account migration (trpc.send.migrate7702). Borrow the arc (capability arrives, account upgrades in place, same identity, more power); drop the '7702'/jargon register in outward channels."
+      },
+      "source": "provider-docs + platform-code",
+      "source_ref": "https://hyperliquid.gitbook.io/hyperliquid-docs/trading/account-abstraction-modes ; apps/public-website/content/changelog/account-update.md ; apps/web-app/src/components/features/pectrify/ (migrate7702)",
+      "confidence": 0.93,
+      "data_class": "durable",
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "product",
+      "claim": "Previous Infinex swap/AMM product name (for spot-CLOB contrast)",
+      "value": "Swidge (swap + bridge). Aggregator across 28 distinct providers (29 enum entries; nearIntents+oneClickNearIntents both display 'Near Intents'): Mayan, Jupiter, Li.Fi, Relay, 1inch, 1inch Fusion, Enso, Bebop, Bluefin, Uniswap, Cowswap, Stargate, Near Intents, deBridge, Oogabooga, JupiterZ, Pyth Express Relay, Pyth Express Relay (Via Jupiter), Across, XSwap, Renegade, Okx, Gas.zip, KyberSwap, Titan, DFlow, Valiant, Houdini. 100,000+ tokens, 25+ networks, max $1M/tx.",
+      "source": "platform-code",
+      "source_ref": "packages/actions/src/swidge.ts (swidgeProviderName enum) ; packages/web-shared/src/components/swidge/quotes/constants.ts (PROVIDER_DISPLAY_NAMES) ; https://support.infinex.xyz/en/articles/10336734-how-to-swidge",
+      "confidence": 0.97,
+      "data_class": "durable",
+      "verified_at": "2026-06-03",
+      "copy_guard": "Name Swidge when contrasting; do NOT invent 'Curve/Jupiter' comparisons. Contrast is CLOB (real order book) vs Swidge (aggregated AMM/DEX/intent routing). Provider count drifts; '28 providers' code-verified today, public '25+' is safe."
+    },
+    {
+      "category": "product",
+      "claim": "Hyperliquid CLOB is fully onchain (sourced, not assumed)",
+      "value": "Order placement, matching, settlement, cancels, and liquidations all happen onchain on HyperCore (HL L1), ordered by HyperBFT consensus (a HotStuff variant) with one-block finality, ~200k orders/sec. HL 'does not rely on the crutch of off-chain order books.'",
+      "source": "provider-docs",
+      "source_ref": "https://hyperliquid.gitbook.io/hyperliquid-docs/about-hyperliquid ; https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/overview",
+      "confidence": 0.97,
+      "data_class": "durable",
+      "verified_at": "2026-06-03",
+      "copy_guard": "CAN say 'fully onchain order book, one-block finality'. 'HyperBFT'/'HotStuff' are internal/jargon register - keep the property, drop the consensus name in outward channels."
+    },
+    {
+      "category": "number",
+      "claim": "Total Hyperliquid spot markets (denominator for the 24-cut)",
+      "value": "301 total spot markets; 23 with >=$100K 24h vol; 12 with >=$1M 24h vol (2026-06-03 snapshot)",
+      "source": "provider-docs",
+      "source_ref": "POST https://api.hyperliquid.xyz/info {\"type\":\"spotMetaAndAssetCtxs\"} ; join ctx.coin -> universe.name (NOT array index)",
+      "confidence": 0.9,
+      "data_class": "live-class",
+      "dated": "2026-06-03",
+      "verified_at": "2026-06-03"
+    },
+    {
+      "category": "number",
+      "claim": "Top HL spot markets by 24h notional volume (corrected join, dated snapshot)",
+      "value": "HYPE/USDC $290.7M, UBTC/USDC $70.6M, UETH/USDC $20.1M, UZEC/USDC $16.9M, USOL/USDC $9.7M, KNTQ/USDC $9.1M, PURR/USDC $7.8M, USDT0/USDC $6.3M, XMR1/USDC $4.2M, USDH/USDC $3.8M, UPUMP/USDC $1.4M, UFART/USDC $1.1M",
+      "source": "provider-docs",
+      "source_ref": "POST https://api.hyperliquid.xyz/info {\"type\":\"spotMetaAndAssetCtxs\"} ; CAUTION: join ctx.coin->universe.name then map universe.tokens->meta.tokens.name; naive index join mislabels HYPE volume as WOW/USDC",
+      "confidence": 0.9,
+      "data_class": "live-class",
+      "dated": "2026-06-03",
+      "verified_at": "2026-06-03",
+      "copy_guard": "Every volume number is a dated snapshot - tag live-class in copy review. Prefer naming liquid markets over counting."
+    },
+    {
+      "category": "channel-meta",
+      "claim": "Audience/reader-context per channel is MISSING from channel-surface grounding",
+      "value": "research/channel-surface-grounding-2026-06-03.md carries length+surface+shape per channel but NO reader_context/audience field (empty for all 7). Implicit audience by surface: web=cold prospect (top-of-funnel); blog/changelog=existing/semi-engaged user (don't sell 'it's live'); carousel/app-alert=logged-in active user; in-product/modal=user mid-action; x/x-thread=public timeline mixed. Recommend adding reader_context to channel profile schema.",
+      "source": "comms-factory-research",
+      "source_ref": "research/channel-surface-grounding-2026-06-03.md (no audience column) ; operator triage Bucket 2 ('Director has no reader-model check')",
+      "confidence": 0.95,
+      "data_class": "durable",
+      "verified_at": "2026-06-03"
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim": "Infinex Pro \u2014 any product details, features, or timing",
+      "reason": "Explicitly noted in source copy as NOT YET ANNOUNCED. No public information available and grounding should not surface it."
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "ground_turns": 15,
+  "approval_requests": [],
+  "enrichment_note": "Enriched 2026-06-03 from research/hl-spot-fact-enrichment-2026-06-03.md answering operator triage holes 1-6. Original card research/grounded-hl-spot-2026-06-03.json left unmodified."
+}

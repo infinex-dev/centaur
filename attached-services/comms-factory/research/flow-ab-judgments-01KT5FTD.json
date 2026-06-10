@@ -1,0 +1,23 @@
+{
+  "blog": {
+    "verdict": "A"
+  },
+  "carousel": {
+    "verdict": "B"
+  },
+  "in-product": {
+    "verdict": "B"
+  },
+  "modal": {
+    "verdict": "A"
+  },
+  "web": {
+    "verdict": "A"
+  },
+  "x": {
+    "verdict": "A"
+  },
+  "x-thread": {
+    "verdict": "both-bad"
+  }
+}

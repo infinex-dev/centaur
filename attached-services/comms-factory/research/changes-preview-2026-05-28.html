@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Proposed changes — 2026-05-28 pre-mortem follow-up</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --del-bg: #3c1717;
+    --del-border: #ff6b6b;
+    --del-text: #ffd4d4;
+    --add-bg: #0f2a14;
+    --add-border: #4ade80;
+    --add-text: #d4ffe0;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 15px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin-bottom: 32px; }
+  .legend { display: flex; gap: 24px; margin-bottom: 32px; font-size: 13px; color: var(--muted); }
+  .legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: 1px; }
+  .legend .swatch.del { background: var(--del-border); }
+  .legend .swatch.add { background: var(--add-border); }
+
+  .change {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+  .change h2 {
+    margin: 0 0 4px;
+    font-size: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .change h2 .num {
+    background: var(--accent);
+    color: #0e1116;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .change h2 .filepath {
+    font-family: var(--code-mono);
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: normal;
+  }
+  .change .what {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 4px 0 16px;
+  }
+  .change .why {
+    color: var(--muted);
+    font-size: 13px;
+    border-left: 3px solid var(--accent);
+    padding: 8px 12px;
+    background: rgba(88, 166, 255, 0.06);
+    margin-top: 16px;
+    border-radius: 0 4px 4px 0;
+  }
+  .diff {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .side {
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: var(--code-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .side .label {
+    display: block;
+    font-family: -apple-system, system-ui, sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    opacity: 0.85;
+  }
+  .before { background: var(--del-bg); border: 1px solid var(--del-border); color: var(--del-text); }
+  .before .label { color: var(--del-border); }
+  .after  { background: var(--add-bg); border: 1px solid var(--add-border); color: var(--add-text); }
+  .after  .label { color: var(--add-border); }
+
+  .sub-change {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border);
+  }
+  .sub-change h3 {
+    font-size: 15px;
+    color: var(--text);
+    margin: 0 0 4px;
+    font-family: var(--code-mono);
+    font-weight: 600;
+  }
+
+  .summary {
+    margin-top: 48px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+  }
+  .summary h2 { margin-top: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { color: var(--muted); font-weight: 500; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  td.path { font-family: var(--code-mono); color: var(--accent); }
+
+  .ack {
+    margin-top: 24px;
+    padding: 16px 20px;
+    background: rgba(88, 166, 255, 0.06);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .ack strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Proposed changes — pre-mortem follow-up</h1>
+  <div class="sub">2026-05-28 · four surgical edits, no behavior change beyond what the LLMs read</div>
+
+  <div class="legend">
+    <span><span class="swatch del"></span>BEFORE — current code in the repo</span>
+    <span><span class="swatch add"></span>AFTER — proposed replacement</span>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- CHANGE 1 — card.ts docstring examples -->
+  <!-- ============================================================ -->
+  <div class="change">
+    <h2>
+      <span class="num">1</span>
+      Card schema docstring examples
+      <span class="filepath">src/card.ts:48 + :61-62</span>
+    </h2>
+    <div class="what">
+      <strong>What the schema is:</strong> permanent. <code>card.ts</code> defines the Zod type that every <code>ReleaseCard</code> must conform to — the structure is locked in code. Per-card <em>values</em> live in <code>cards/&lt;release-id&gt;.json</code> files. The <strong>docstring examples below are what we're changing</strong>; the schema fields themselves stay exactly as they are.
+    </div>
+
+    <div class="sub-change">
+      <h3>through_action example (line 48)</h3>
+      <div class="diff">
+        <div class="side before"><span class="label">Before</span>// The transitive verb chain — "to &lt;verb&gt; &lt;object&gt;" — describing what THIS
+// post is doing toward the brand's Super-Objective. Per-release.
+// Example: "to reveal that the bank wall just dissolved inside one account".
+through_action: z.string().min(1).optional(),</div>
+        <div class="side after"><span class="label">After</span>// The transitive verb chain — "to &lt;verb&gt; &lt;object&gt;" — describing what THIS
+// post is doing toward the brand's Super-Objective. Per-release.
+// Example: "to reveal that a necessary intermediate step just evaporated".
+through_action: z.string().min(1).optional(),</div>
+      </div>
+    </div>
+
+    <div class="sub-change">
+      <h3>lining example (lines 61-62)</h3>
+      <div class="diff">
+        <div class="side before"><span class="label">Before</span>// The hidden Inner Action the visible Outer covers (Mirodan §7.1, pp. 554-555).
+// Format: "on the surface, X; underneath, Y". Outer/Lining gap is the engine
+// of dramatic life. Authoring discipline: never name the Lining in the prose
+// — write the Outer, leak the Lining (§7.3).
+// Example: "on the surface: a new fiat deposit rail. underneath: the
+// bank-vs-wallet wall just stopped existing for Infinex users."
+lining: z.string().min(1).optional(),</div>
+        <div class="side after"><span class="label">After</span>// The hidden Inner Action the visible Outer covers (Mirodan §7.1, pp. 554-555).
+// Format: "on the surface, X; underneath, Y". Outer/Lining gap is the engine
+// of dramatic life. Authoring discipline: never name the Lining in the prose
+// — write the Outer, leak the Lining (§7.3).
+// Example: "on the surface: a feature ships. underneath: the precondition
+// for self-service is now met."
+lining: z.string().min(1).optional(),</div>
+      </div>
+    </div>
+
+    <div class="why">
+      <strong>Why:</strong> the Bridge.xyz card's <code>through_action</code> was a verbatim copy of the line-48 example. The docstring is what operators and LLM card-grounders read to learn the shape — if it bakes in a brand metaphor, every new card inherits it. The replacements preserve the docstring's teaching purpose (shape of the verb chain, shape of the surface/underneath) without seeding a specific image.
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- CHANGE 2 — defaultBeatsForKind hint -->
+  <!-- ============================================================ -->
+  <div class="change">
+    <h2>
+      <span class="num">2</span>
+      defaultBeatsForKind launch-tier sombre hint
+      <span class="filepath">src/voice/infinex.ts:303</span>
+    </h2>
+    <div class="what">
+      <strong>What the function is:</strong> when a card comes in <em>without explicit beats declared</em>, <code>defaultBeatsForKind</code> fills them in. For <code>launch-tier</code>, it returns a 4-beat sequence with a <code>hint</code> string per beat. The hint flows into the generator's user prompt as guidance for that beat. <strong>Only the first hint is contaminated</strong> — the others (Punching release, Wringing/Slashing, Floating/Flicking) are clean Laban motor names.
+    </div>
+
+    <div class="diff">
+      <div class="side before"><span class="label">Before</span>case "launch-tier":
+  return [
+    { tempo: "sombre",     hint: "set up the wall we are taking down — Pressing prep" },
+    { tempo: "commanding", hint: "land the fact — Punching release, fed by Sombre prep" },
+    { tempo: "practical",  hint: "justify the build decision — Wringing/Slashing" },
+    { tempo: "irradiant",  hint: "future-tense lift — Floating/Flicking" },
+  ];</div>
+      <div class="side after"><span class="label">After</span>case "launch-tier":
+  return [
+    { tempo: "sombre",     hint: "open with the structural opposition — Pressing prep" },
+    { tempo: "commanding", hint: "land the fact — Punching release, fed by Sombre prep" },
+    { tempo: "practical",  hint: "justify the build decision — Wringing/Slashing" },
+    { tempo: "irradiant",  hint: "future-tense lift — Floating/Flicking" },
+  ];</div>
+    </div>
+
+    <div class="why">
+      <strong>Why:</strong> "the wall we are taking down" is the Bridge.xyz metaphor injected into <em>every</em> launch-tier generation. "Structural opposition" is generic dramaturgical language (Mirodan §7.1: the Outer carries the surface position the Lining is set against) without naming a specific image. Alternative phrasings if you'd prefer: <code>"set up the prior state"</code>, <code>"open with the thing being undone"</code>, <code>"name what was load-bearing"</code>.
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- CHANGE 3 — actor-director.ts hardcoded Infinex -->
+  <!-- ============================================================ -->
+  <div class="change">
+    <h2>
+      <span class="num">3</span>
+      Un-hardcode "Infinex character" in Actor framework
+      <span class="filepath">src/actor-director.ts:429</span>
+    </h2>
+    <div class="what">
+      <strong>What the line is:</strong> the JSON schema description sent to the Actor when warmup mode is <code>daily_pages</code>. The Actor reads this schema to know what each field of its inner-work response should contain. The character identity (Infinex, Nigel, etc.) comes from the <code>voice</code> parameter passed into the Actor — which carries <code>character_image</code>, <code>super_objective</code>, the literary anchors. Hardcoding "Infinex" here is redundant <em>and</em> leaks the brand name into shared framework code that runs for every brand.
+    </div>
+
+    <div class="diff">
+      <div class="side before"><span class="label">Before</span>"page_2_character_rehearsal": "how the Infinex character stands in this circumstance",</div>
+      <div class="side after"><span class="label">After</span>"page_2_character_rehearsal": "how the character stands in this circumstance",</div>
+    </div>
+
+    <div class="why">
+      <strong>Why:</strong> when the same Actor framework runs Nigel / Cream / ProjectJin, the prompt would still ask the Actor about "the Infinex character." The voice spec parameter is the right channel for character identity; this line should be brand-agnostic. I'll also grep for any other hardcoded "Infinex" in shared framework code when applying.
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- CHANGE 4 — Stage A / Stage B rename -->
+  <!-- ============================================================ -->
+  <div class="change">
+    <h2>
+      <span class="num">4</span>
+      "Stage A / Stage B" → theatrical language
+      <span class="filepath">src/generator.ts:1184, 1218, 1379</span>
+    </h2>
+    <div class="what">
+      <strong>What these strings are:</strong> "Stage A" and "Stage B" are internal engineering labels for the two-call generator pipeline — Stage A is the inner-work call (Actor commits to thesis + beat plan + lining), Stage B is the drafting call (Actor executes the plan to produce candidates). Per <code>memory/feedback-pipeline-vocabulary.md</code> (2026-05-25) the operator banned "Stage A / Stage B" terminology — said the mental model is just <code>generator → validator</code>. The ban applied to chat but three places leak the labels into the prompts sent to the LLM Actor, which then starts using them back.
+    </div>
+
+    <div class="sub-change">
+      <h3>Line 1184 — not_the_point enforcement instruction (Stage A user prompt)</h3>
+      <div class="diff">
+        <div class="side before"><span class="label">Before</span>parts.push("When not_the_point names specific framings to avoid (e.g., 'do not list supported currencies', 'do not explain virtual account mechanics'), write the not_the_point field in your output as a CONCRETE, ENFORCEABLE instruction Stage B will see. Examples of strong not_the_point phrasing: 'The draft must NOT name any specific currency code (USD/EUR/etc) anywhere — not in a list, not inline, not as an example. The supported-currencies fact is in deployed_facts; the draft refuses to surface it.' Stage B respects what you write here verbatim — if you're vague, the regression returns.");</div>
+        <div class="side after"><span class="label">After</span>parts.push("When not_the_point names specific framings to avoid (e.g., 'do not list supported currencies', 'do not explain virtual account mechanics'), write the not_the_point field in your output as a CONCRETE, ENFORCEABLE instruction the drafting actor will see. Examples of strong not_the_point phrasing: 'The draft must NOT name any specific currency code (USD/EUR/etc) anywhere — not in a list, not inline, not as an example. The supported-currencies fact is in deployed_facts; the draft refuses to surface it.' The drafting actor respects what you write here verbatim — if you're vague, the regression returns.");</div>
+      </div>
+    </div>
+
+    <div class="sub-change">
+      <h3>Line 1218 — closing instruction of inner-work prompt</h3>
+      <div class="diff">
+        <div class="side before"><span class="label">Before</span>parts.push("Plan only. DO NOT write the draft text. Stage B will execute your plan.");</div>
+        <div class="side after"><span class="label">After</span>parts.push("Commit your table work. DO NOT write the draft text. The drafting actor will execute your plan.");</div>
+      </div>
+    </div>
+
+    <div class="sub-change">
+      <h3>Line 1379 — section header in drafting prompt</h3>
+      <div class="diff">
+        <div class="side before"><span class="label">Before</span>"## Committed inner work (from Stage A — execute, do not re-litigate)",</div>
+        <div class="side after"><span class="label">After</span>"## Committed inner work (from table work — execute, do not re-litigate)",</div>
+      </div>
+    </div>
+
+    <div class="why">
+      <strong>Why:</strong> the Actor (LLM) reads "Stage B" as canonical pipeline vocabulary and starts using it back, which spreads it further. The replacement uses Stanislavski / Mirodan terminology — "table work" is the actor's interpretation step (canon), "the drafting actor" is the role doing the visible writing. Substance identical; language theatrical instead of engineering. I'll grep for any other "Stage A" / "Stage B" in LLM-facing strings when applying.
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- Summary table -->
+  <!-- ============================================================ -->
+  <div class="summary">
+    <h2>Summary</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>File</th><th>Lines</th><th>Change in one sentence</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td class="path">src/card.ts</td><td>48, 61-62</td><td>Docstring examples → generic dramaturgy. No Infinex narrative.</td></tr>
+        <tr><td>2</td><td class="path">src/voice/infinex.ts</td><td>303</td><td>Sombre hint → "open with the structural opposition — Pressing prep"</td></tr>
+        <tr><td>3</td><td class="path">src/actor-director.ts</td><td>429 (+ siblings)</td><td>"the Infinex character" → "the character"</td></tr>
+        <tr><td>4</td><td class="path">src/generator.ts</td><td>1184, 1218, 1379</td><td>"Stage A / Stage B" → "table work" / "the drafting actor"</td></tr>
+      </tbody>
+    </table>
+
+    <div class="ack">
+      <strong>None of these touch behavior</strong> — they only change strings the LLM reads. All 549 tests stay passing (none assert on these specific strings). The intent is to remove brand-load-bearing examples and engineering jargon from prompts the LLM treats as canon.
+      <br><br>
+      <strong>Approve and I'll apply, or flag edits to any proposed string.</strong>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

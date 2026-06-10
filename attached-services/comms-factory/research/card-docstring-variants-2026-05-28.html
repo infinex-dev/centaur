@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>card.ts docstring — three variants for A/B test</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --del-bg: #3c1717;
+    --del-border: #ff6b6b;
+    --del-text: #ffd4d4;
+    --add-bg: #0f2a14;
+    --add-border: #4ade80;
+    --add-text: #d4ffe0;
+    --warn-bg: #2d2410;
+    --warn-border: #f0c674;
+    --warn-text: #ffe7b8;
+    --info-bg: #0f1f2e;
+    --info-border: #58a6ff;
+    --info-text: #cbe4ff;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 15px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1640px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin-bottom: 28px; }
+
+  .layers {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+  }
+  .layers h2 { margin-top: 0; font-size: 18px; }
+  .layers table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+  .layers th, .layers td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .layers th { color: var(--muted); font-weight: 500; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  .layers tr:last-child td { border-bottom: none; }
+
+  .section-title {
+    margin: 40px 0 16px;
+    font-size: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+  }
+  .section-title .filepath {
+    font-family: var(--code-mono);
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: normal;
+    margin-left: 8px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .col {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .col-header {
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border);
+  }
+  .col.current   .col-header { background: var(--del-bg);  color: var(--del-border); }
+  .col.variant-a .col-header { background: var(--warn-bg); color: var(--warn-border); }
+  .col.variant-b .col-header { background: var(--info-bg); color: var(--info-border); }
+  .col.variant-c .col-header { background: var(--add-bg);  color: var(--add-border); }
+  .col-tagline { padding: 8px 16px; font-size: 12px; color: var(--muted); border-bottom: 1px solid var(--border); }
+  .col-code {
+    padding: 14px 16px;
+    font-family: var(--code-mono);
+    font-size: 12.5px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    flex-grow: 1;
+  }
+  .col.current   .col-code { background: rgba(255, 107, 107, 0.04); }
+  .col.variant-a .col-code { background: rgba(240, 198, 116, 0.04); }
+  .col.variant-b .col-code { background: rgba(88, 166, 255, 0.04); }
+  .col.variant-c .col-code { background: rgba(74, 222, 128, 0.04); }
+  .col-defeats {
+    padding: 10px 16px;
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .col-defeats strong { color: var(--text); }
+  .chip {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-size: 10px;
+    margin: 2px 4px 2px 0;
+    background: rgba(255,255,255,0.06);
+  }
+  .chip.intact   { background: rgba(255, 107, 107, 0.18); color: var(--del-border); }
+  .chip.defeated { background: rgba(74, 222, 128, 0.18);  color: var(--add-border); }
+
+  .recommendation {
+    margin-top: 24px;
+    padding: 20px 24px;
+    background: rgba(74, 222, 128, 0.06);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--add-border);
+    border-radius: 4px;
+  }
+  .recommendation h3 { margin-top: 0; color: var(--add-border); font-size: 16px; }
+
+  .ab-block {
+    margin-top: 40px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+  }
+  .ab-block h2 { margin-top: 0; }
+  .ab-block ol { padding-left: 22px; }
+  .ab-block li { margin-bottom: 6px; }
+
+  .lining-section { margin-top: 56px; }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    background: rgba(88, 166, 255, 0.18);
+    color: var(--accent);
+    margin-right: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>card.ts docstring — three variants</h1>
+  <div class="sub">2026-05-28 · operator-flagged: "necessary intermediate step evaporated" is the same anchoring mechanism, different tokens. Showing the spectrum.</div>
+
+  <div class="layers">
+    <h2>How LLMs anchor on examples — four layers</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 140px;">Layer</th>
+          <th>What it anchors on</th>
+          <th>Example of contamination</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1 · Surface</strong></td><td>Literal tokens (<code>bank</code>, <code>wall</code>, <code>dissolved</code>)</td><td>Bridge run had 28/30 candidates use <code>wall</code> directly</td></tr>
+        <tr><td><strong>2 · Pattern</strong></td><td>Grammatical mold (<code>"to &lt;verb&gt; that &lt;X&gt; just &lt;past-participle&gt;"</code>)</td><td>Future cards default to "X just [verb-ed]" shape</td></tr>
+        <tr><td><strong>3 · Frame</strong></td><td>Conceptual frame ("structural transformation, obstacle vanishes")</td><td>All through-actions become disappearance narratives</td></tr>
+        <tr><td><strong>4 · Tone</strong></td><td>Register ("dramatic abstract noun + sudden intransitive verb")</td><td>Cards skew dramatic, none feel matter-of-fact</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- through_action  variants -->
+  <!-- ============================================================ -->
+  <div class="section-title">
+    <code>through_action</code> docstring variants <span class="filepath">src/card.ts:46-49</span>
+  </div>
+
+  <div class="grid">
+    <div class="col current">
+      <div class="col-header">CURRENT</div>
+      <div class="col-tagline">In repo today. Bridge's <code>through_action</code> is a verbatim copy of this example.</div>
+      <div class="col-code">// The transitive verb chain — "to &lt;verb&gt; &lt;object&gt;" — describing what THIS
+// post is doing toward the brand's Super-Objective. Per-release.
+// Example: "to reveal that the bank wall just dissolved inside one account".
+through_action: z.string().min(1).optional(),</div>
+      <div class="col-defeats"><strong>Anchors active:</strong>
+        <span class="chip intact">1 surface</span>
+        <span class="chip intact">2 pattern</span>
+        <span class="chip intact">3 frame</span>
+        <span class="chip intact">4 tone</span>
+      </div>
+    </div>
+
+    <div class="col variant-a">
+      <div class="col-header">VARIANT A — swap tokens</div>
+      <div class="col-tagline">My original proposal. Generic but still a concrete example.</div>
+      <div class="col-code">// The transitive verb chain — "to &lt;verb&gt; &lt;object&gt;" — describing what THIS
+// post is doing toward the brand's Super-Objective. Per-release.
+// Example: "to reveal that a necessary intermediate step just evaporated".
+through_action: z.string().min(1).optional(),</div>
+      <div class="col-defeats"><strong>Anchors active:</strong>
+        <span class="chip defeated">1 surface ✓</span>
+        <span class="chip intact">2 pattern</span>
+        <span class="chip intact">3 frame</span>
+        <span class="chip intact">4 tone</span>
+      </div>
+    </div>
+
+    <div class="col variant-b">
+      <div class="col-header">VARIANT B — structural placeholder</div>
+      <div class="col-tagline">Grammar template + property rules. No instance.</div>
+      <div class="col-code">// The transitive verb chain — "to &lt;verb&gt; &lt;object&gt;" — describing what THIS
+// post is doing toward the brand's Super-Objective. Per-release.
+// Stanislavski-Mirodan "through-action": the character's pursued objective
+// for this scene (Mirodan §13, pp. 282-306).
+// Structural template: "to &lt;transitive verb&gt; &lt;object naming the scene's
+// central observation&gt;"
+// Properties: transitive verb; object names the structural shift; no
+// product-specific nouns; no brand metaphors.
+through_action: z.string().min(1).optional(),</div>
+      <div class="col-defeats"><strong>Anchors active:</strong>
+        <span class="chip defeated">1 surface ✓</span>
+        <span class="chip defeated">2 pattern ✓ (partial)</span>
+        <span class="chip defeated">3 frame ✓</span>
+        <span class="chip defeated">4 tone ✓</span>
+      </div>
+    </div>
+
+    <div class="col variant-c">
+      <div class="col-header">VARIANT C — no example, canon ref</div>
+      <div class="col-tagline">Maximum decontamination. Leans on LLM's Stanislavski prior.</div>
+      <div class="col-code">// The transitive verb chain — "to &lt;verb&gt; &lt;object&gt;" — describing what THIS
+// post is doing toward the brand's Super-Objective. Per-release.
+// Stanislavski-Mirodan "through-action" (Mirodan §13, pp. 282-306):
+// the character's pursued objective for this scene.
+// Required: transitive verb; object names the structural shift this post
+// performs.
+// Forbidden: product-specific nouns; brand metaphors; mechanical
+// descriptions (rails, plumbing, feature taxonomies).
+through_action: z.string().min(1).optional(),</div>
+      <div class="col-defeats"><strong>Anchors active:</strong>
+        <span class="chip defeated">1 surface ✓</span>
+        <span class="chip defeated">2 pattern ✓</span>
+        <span class="chip defeated">3 frame ✓</span>
+        <span class="chip defeated">4 tone ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- lining variants -->
+  <!-- ============================================================ -->
+  <div class="section-title lining-section">
+    <code>lining</code> docstring variants <span class="filepath">src/card.ts:57-63</span>
+  </div>
+
+  <div class="grid">
+    <div class="col current">
+      <div class="col-header">CURRENT</div>
+      <div class="col-tagline">In repo today. Worst contamination — example bakes in BOTH Infinex product (fiat deposit rail) AND the wall metaphor.</div>
+      <div class="col-code">// The hidden Inner Action the visible Outer covers (Mirodan §7.1, pp. 554-555).
+// Format: "on the surface, X; underneath, Y". Outer/Lining gap is the engine
+// of dramatic life. Authoring discipline: never name the Lining in the prose
+// — write the Outer, leak the Lining (§7.3).
+// Example: "on the surface: a new fiat deposit rail. underneath: the
+// bank-vs-wallet wall just stopped existing for Infinex users."
+lining: z.string().min(1).optional(),</div>
+      <div class="col-defeats"><strong>Anchors active:</strong>
+        <span class="chip intact">1 surface</span>
+        <span class="chip intact">2 pattern</span>
+        <span class="chip intact">3 frame</span>
+        <span class="chip intact">4 tone</span>
+      </div>
+    </div>
+
+    <div class="col variant-a">
+      <div class="col-header">VARIANT A — swap tokens</div>
+      <div class="col-tagline">My original proposal. Concrete but generic.</div>
+      <div class="col-code">// The hidden Inner Action the visible Outer covers (Mirodan §7.1, pp. 554-555).
+// Format: "on the surface, X; underneath, Y". Outer/Lining gap is the engine
+// of dramatic life. Authoring discipline: never name the Lining in the prose
+// — write the Outer, leak the Lining (§7.3).
+// Example: "on the surface: a feature ships. underneath: the precondition
+// for self-service is now met."
+lining: z.string().min(1).optional(),</div>
+      <div class="col-defeats"><strong>Anchors active:</strong>
+        <span class="chip defeated">1 surface ✓</span>
+        <span class="chip intact">2 pattern</span>
+        <span class="chip intact">3 frame</span>
+        <span class="chip intact">4 tone</span>
+      </div>
+    </div>
+
+    <div class="col variant-b">
+      <div class="col-header">VARIANT B — structural placeholder</div>
+      <div class="col-tagline">Grammar template + properties. No instance.</div>
+      <div class="col-code">// The hidden Inner Action the visible Outer covers (Mirodan §7.1, pp. 554-555).
+// Format: "on the surface, X; underneath, Y". Outer/Lining gap is the engine
+// of dramatic life. Authoring discipline: never name the Lining in the prose
+// — write the Outer, leak the Lining (§7.3).
+// Structural template: "on the surface: &lt;visible Outer action&gt;.
+// underneath: &lt;hidden Inner Action the prose carries but never names&gt;."
+// Properties: surface is the post's visible position; underneath is the
+// strategic anti-pattern the post is refusing to perform.
+lining: z.string().min(1).optional(),</div>
+      <div class="col-defeats"><strong>Anchors active:</strong>
+        <span class="chip defeated">1 surface ✓</span>
+        <span class="chip defeated">2 pattern ✓ (partial)</span>
+        <span class="chip defeated">3 frame ✓</span>
+        <span class="chip defeated">4 tone ✓</span>
+      </div>
+    </div>
+
+    <div class="col variant-c">
+      <div class="col-header">VARIANT C — no example, canon ref</div>
+      <div class="col-tagline">Maximum decontamination.</div>
+      <div class="col-code">// The hidden Inner Action the visible Outer covers (Mirodan §7.1, pp. 554-555).
+// Format: "on the surface, X; underneath, Y". Outer/Lining gap is the engine
+// of dramatic life. Authoring discipline: never name the Lining in the prose
+// — write the Outer, leak the Lining (§7.3).
+// Required: two-clause structure; surface clause names the visible Outer;
+// underneath clause names what the prose carries but refuses to perform.
+// Forbidden: product mechanics on either side; brand metaphors; explicit
+// statement of what the underneath "means" — it must remain unsaid in the
+// final prose.
+lining: z.string().min(1).optional(),</div>
+      <div class="col-defeats"><strong>Anchors active:</strong>
+        <span class="chip defeated">1 surface ✓</span>
+        <span class="chip defeated">2 pattern ✓</span>
+        <span class="chip defeated">3 frame ✓</span>
+        <span class="chip defeated">4 tone ✓</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="recommendation">
+    <h3>My read</h3>
+    <p>Ship <strong>Variant C</strong> now. It's the strongest decontamination move and Claude has rich prior on Stanislavski/Mirodan terms — the canon reference does real work without needing an example. Variant B is the safe compromise if C feels too radical (it keeps a template-with-placeholders, which gives a grammar without a frame).</p>
+    <p>Don't pretend we can reason the right answer all the way. Run the A/B/C test next as the empirical answer.</p>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- A/B/C test plan -->
+  <!-- ============================================================ -->
+  <div class="ab-block">
+    <h2><span class="pill">Overnight job</span>A/B/C test plan</h2>
+    <ol>
+      <li><strong>Build a release corpus</strong> — 8–10 input scenarios spanning card kinds (fiat onramp, chain add, yield vault, partnership, maintenance, launch tier, split, wry data card).</li>
+      <li><strong>Three branches of card.ts</strong> — Variant A (token swap), Variant B (structural placeholder), Variant C (no example, canon ref).</li>
+      <li><strong>Ground each release through the fact-grounder LLM under each variant</strong> — capture the proposed <code>through_action</code> and <code>lining</code> per (input × variant).</li>
+      <li><strong>Measure per variant:</strong>
+        <ul>
+          <li><strong>Lexical diversity:</strong> token-level Shannon entropy across proposed values</li>
+          <li><strong>Anchor-token presence:</strong> does any variant's specific tokens (wall / evaporate / precondition / etc) appear above baseline rate</li>
+          <li><strong>Frame clustering:</strong> embed proposed values, measure intra-variant cluster tightness — lower = more diverse frames</li>
+          <li><strong>Validator pass rate:</strong> does the proposed through_action survive downstream validation</li>
+          <li><strong>Operator readability check:</strong> are the proposed values intelligible / actionable to a human reviewer</li>
+        </ul>
+      </li>
+      <li><strong>Pick winner on the diversity-vs-quality Pareto front.</strong></li>
+    </ol>
+    <p style="color: var(--muted); margin-top: 16px; font-size: 13px;">Parallel agent: ~2–3 hours of wall time to build the harness + run all three variants + emit a results doc. Genuinely overnight-runnable.</p>
+  </div>
+
+  <div class="recommendation" style="margin-top: 32px;">
+    <h3>Decision point</h3>
+    <p>Pick one path now:</p>
+    <ul>
+      <li><strong>Ship Variant C immediately</strong> (highest theoretical decontamination; no measurement) — I apply now, you watch for regressions.</li>
+      <li><strong>Ship Variant B immediately</strong> (safer, keeps a template, still defeats 3 of 4 anchors) — same flow as above.</li>
+      <li><strong>Run the A/B/C test first</strong> — spin up the harness, measure empirically, then ship the winner. Slower but evidence-backed.</li>
+      <li><strong>Ship C now AND queue the A/B/C test</strong> — get the strongest move in immediately; validate empirically afterward; revert to B (or back to A) if C measurably underperforms.</li>
+    </ul>
+  </div>
+
+</div>
+</body>
+</html>

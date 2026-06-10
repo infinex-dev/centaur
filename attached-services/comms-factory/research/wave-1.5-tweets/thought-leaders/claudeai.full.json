@@ -1,0 +1,4846 @@
+{
+  "user": {
+    "data": {
+      "id": "1943306828697550848",
+      "name": "Claude",
+      "username": "claudeai"
+    }
+  },
+  "tweets": [
+    {
+      "edit_history_tweet_ids": [
+        "2053940938666279028"
+      ],
+      "public_metrics": {
+        "retweet_count": 25,
+        "reply_count": 16,
+        "like_count": 504,
+        "quote_count": 5,
+        "bookmark_count": 301,
+        "impression_count": 111478
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 41,
+            "end": 64,
+            "url": "https://t.co/nOrCwKwTwL",
+            "expanded_url": "https://claude.com/blog/agent-view-in-claude-code",
+            "display_url": "claude.com/blog/agent-vie\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053940939844952064/Q1k5EZ53?format=jpg&name=orig",
+                "width": 2000,
+                "height": 1000
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053940939844952064/Q1k5EZ53?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Agent view in Claude Code | Claude",
+            "description": "Today we're introducing agent view in Claude Code: one place to manage all your Claude Code sessions.",
+            "unwound_url": "https://claude.com/blog/agent-view-in-claude-code"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T20:50:54.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053940937554788750"
+        }
+      ],
+      "id": "2053940938666279028",
+      "text": "Available on all paid plans.\n\nRead more: https://t.co/nOrCwKwTwL"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053940937554788750"
+      ],
+      "public_metrics": {
+        "retweet_count": 5,
+        "reply_count": 6,
+        "like_count": 386,
+        "quote_count": 2,
+        "bookmark_count": 16,
+        "impression_count": 111323
+      },
+      "created_at": "2026-05-11T20:50:54.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053940935906439444"
+        }
+      ],
+      "id": "2053940937554788750",
+      "text": "See what's running, what's waiting on you, and what's done at a glance. Reply inline to unblock, or jump in and out of any session without losing your place."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053940935906439444"
+      ],
+      "public_metrics": {
+        "retweet_count": 4,
+        "reply_count": 6,
+        "like_count": 518,
+        "quote_count": 0,
+        "bookmark_count": 24,
+        "impression_count": 85360
+      },
+      "created_at": "2026-05-11T20:50:54.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053940934736228454"
+        }
+      ],
+      "id": "2053940935906439444",
+      "text": "Run claude agents to start dispatching multiple sessions at once. Each one keeps running without taking up a terminal tab."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053940934736228454"
+      ],
+      "public_metrics": {
+        "retweet_count": 1429,
+        "reply_count": 619,
+        "like_count": 18531,
+        "quote_count": 639,
+        "bookmark_count": 6659,
+        "impression_count": 1926563
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 103,
+            "end": 126,
+            "url": "https://t.co/NnbsAQjSPW",
+            "expanded_url": "https://x.com/claudeai/status/2053940934736228454/video/1",
+            "display_url": "pic.x.com/NnbsAQjSPW",
+            "media_key": "13_2053935379166687232"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T20:50:53.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2053935379166687232"
+        ]
+      },
+      "id": "2053940934736228454",
+      "text": "New in Claude Code: agent view.\n\nOne list of all your sessions, available today as a research preview. https://t.co/NnbsAQjSPW"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053868596615356577"
+      ],
+      "public_metrics": {
+        "retweet_count": 27,
+        "reply_count": 16,
+        "like_count": 401,
+        "quote_count": 8,
+        "bookmark_count": 147,
+        "impression_count": 75189
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 141,
+            "end": 164,
+            "url": "https://t.co/cEFftPcYPL",
+            "expanded_url": "https://claude.com/blog/claude-platform-on-aws",
+            "display_url": "claude.com/blog/claude-pl\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053868597022171136/SuhVG_6V?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053868597022171136/SuhVG_6V?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Introducing the Claude Platform on AWS | Claude",
+            "description": "The Claude Platform on AWS is now generally available, offering a new way for AWS customers to access the full set of Claude platform features with AWS authentication, billing, and commitment retirement.",
+            "unwound_url": "https://claude.com/blog/claude-platform-on-aws"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T16:03:27.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053868595394879553"
+        }
+      ],
+      "id": "2053868596615356577",
+      "text": "The Claude Platform on AWS is available today. Claude also remains available on Amazon Bedrock, where AWS is the data processor.\n\nRead more: https://t.co/cEFftPcYPL"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053868595394879553"
+      ],
+      "public_metrics": {
+        "retweet_count": 30,
+        "reply_count": 49,
+        "like_count": 580,
+        "quote_count": 11,
+        "bookmark_count": 90,
+        "impression_count": 334533
+      },
+      "created_at": "2026-05-11T16:03:26.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2053868592286822443"
+        }
+      ],
+      "id": "2053868595394879553",
+      "text": "Build and deploy agents at scale with Claude Managed Agents, or use features like the advisor strategy, code execution, web search, and more.\n\nAnthropic operates the service, and all new features ship the same day they go live on the native Claude API."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2053868592286822443"
+      ],
+      "public_metrics": {
+        "retweet_count": 676,
+        "reply_count": 350,
+        "like_count": 8107,
+        "quote_count": 213,
+        "bookmark_count": 1959,
+        "impression_count": 1599163
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 172,
+            "end": 195,
+            "url": "https://t.co/9WPrEgCpkg",
+            "expanded_url": "https://x.com/claudeai/status/2053868592286822443/photo/1",
+            "display_url": "pic.x.com/9WPrEgCpkg",
+            "media_key": "3_2053861693990608896"
+          }
+        ]
+      },
+      "created_at": "2026-05-11T16:03:26.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2053861693990608896"
+        ]
+      },
+      "id": "2053868592286822443",
+      "text": "The Claude Platform on AWS is now generally available.\n\nAWS customers get the full set of Claude API features, with AWS authentication, billing, and commitment retirement. https://t.co/9WPrEgCpkg"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052445787930468704"
+      ],
+      "public_metrics": {
+        "retweet_count": 60,
+        "reply_count": 84,
+        "like_count": 1237,
+        "quote_count": 8,
+        "bookmark_count": 594,
+        "impression_count": 538857
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 45,
+            "end": 68,
+            "url": "https://t.co/FnXfynkGDH",
+            "expanded_url": "http://claude.com/claude-for-microsoft-365",
+            "display_url": "claude.com/claude-for-mic\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052445789905977351/iSNkydmQ?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052445789905977351/iSNkydmQ?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude for Microsoft 365 | Claude by Anthropic",
+            "description": "Claude works inside Excel, PowerPoint, Word, and Outlook. Edit your files, carry context across all four apps, and stay in control of every change.",
+            "unwound_url": "https://claude.com/claude-for-microsoft-365"
+          }
+        ]
+      },
+      "created_at": "2026-05-07T17:49:43.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2052445786651168849"
+        }
+      ],
+      "id": "2052445787930468704",
+      "text": "Available on all paid plans.\n\nGive it a try: https://t.co/FnXfynkGDH"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052445786651168849"
+      ],
+      "public_metrics": {
+        "retweet_count": 4168,
+        "reply_count": 1120,
+        "like_count": 48611,
+        "quote_count": 1425,
+        "bookmark_count": 19995,
+        "impression_count": 27724301
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 206,
+            "end": 229,
+            "url": "https://t.co/l8oOcoFcHg",
+            "expanded_url": "https://x.com/claudeai/status/2052445786651168849/video/1",
+            "display_url": "pic.x.com/l8oOcoFcHg",
+            "media_key": "13_2052441205993009153"
+          }
+        ]
+      },
+      "created_at": "2026-05-07T17:49:42.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2052441205993009153"
+        ]
+      },
+      "id": "2052445786651168849",
+      "text": "Claude for Excel, PowerPoint, and Word are now generally available, and Claude for Outlook is in public beta.\n\nAs Claude moves between your Microsoft apps, it carries the full context of your conversation. https://t.co/l8oOcoFcHg"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052105841864495282"
+      ],
+      "public_metrics": {
+        "retweet_count": 158,
+        "reply_count": 150,
+        "like_count": 1904,
+        "quote_count": 12,
+        "bookmark_count": 466,
+        "impression_count": 279487
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 137,
+            "end": 160,
+            "url": "https://t.co/InUxTaNimb",
+            "expanded_url": "https://x.com/i/broadcasts/1qGoNegbnRNKv",
+            "display_url": "x.com/i/broadcasts/1\u2026",
+            "unwound_url": "https://x.com/i/broadcasts/1qGoNegbnRNKv"
+          }
+        ]
+      },
+      "created_at": "2026-05-06T19:18:53.000Z",
+      "lang": "en",
+      "id": "2052105841864495282",
+      "text": "Join us at 1pm PT for a conversation with our co-founders Dario Amodei and Daniela Amodei, moderated by Chief Product Officer Ami Vora.\n\nhttps://t.co/InUxTaNimb"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052067407204700646"
+      ],
+      "public_metrics": {
+        "retweet_count": 35,
+        "reply_count": 22,
+        "like_count": 703,
+        "quote_count": 10,
+        "bookmark_count": 478,
+        "impression_count": 226349
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 52,
+            "end": 75,
+            "url": "https://t.co/5zHETK3Rje",
+            "expanded_url": "http://claude.com/blog/new-in-claude-managed-agents",
+            "display_url": "claude.com/blog/new-in-cl\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052067408626561025/-73QaKBb?format=jpg&name=orig",
+                "width": 2000,
+                "height": 1000
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052067408626561025/-73QaKBb?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "New in Claude Managed Agents: dreaming, outcomes, and multiagent orchestration | Claude",
+            "description": "Dreaming, outcomes, and multiagent orchestration are now available in Claude Managed Agents. Build agents that learn, meet a quality bar, and work in parallel.",
+            "unwound_url": "https://claude.com/blog/new-in-claude-managed-agents"
+          }
+        ]
+      },
+      "created_at": "2026-05-06T16:46:10.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2052067404696473833"
+        }
+      ],
+      "id": "2052067407204700646",
+      "text": "Available today on the Claude Platform.\n\nRead more: https://t.co/5zHETK3Rje"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052067404696473833"
+      ],
+      "public_metrics": {
+        "retweet_count": 35,
+        "reply_count": 32,
+        "like_count": 864,
+        "quote_count": 7,
+        "bookmark_count": 205,
+        "impression_count": 254074
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 106,
+            "end": 129,
+            "url": "https://t.co/akzJICOhk9",
+            "expanded_url": "https://x.com/claudeai/status/2052067404696473833/photo/1",
+            "display_url": "pic.x.com/akzJICOhk9",
+            "media_key": "3_2052061222590160900"
+          }
+        ]
+      },
+      "created_at": "2026-05-06T16:46:09.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2052067403228455419"
+        }
+      ],
+      "attachments": {
+        "media_keys": [
+          "3_2052061222590160900"
+        ]
+      },
+      "id": "2052067404696473833",
+      "text": "Multiagent orchestration lets a lead agent delegate to specialists that work in parallel on complex jobs. https://t.co/akzJICOhk9"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052067403228455419"
+      ],
+      "public_metrics": {
+        "retweet_count": 15,
+        "reply_count": 9,
+        "like_count": 701,
+        "quote_count": 3,
+        "bookmark_count": 84,
+        "impression_count": 116322
+      },
+      "created_at": "2026-05-06T16:46:09.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2052067400690851842"
+        }
+      ],
+      "id": "2052067403228455419",
+      "text": "Outcomes lets you set the bar for quality. You write a rubric, a separate grader checks the output, and the agent iterates until it gets there.\n\nSubscribe to webhooks to get notified when it's done."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052067400690851842"
+      ],
+      "public_metrics": {
+        "retweet_count": 83,
+        "reply_count": 38,
+        "like_count": 1451,
+        "quote_count": 48,
+        "bookmark_count": 488,
+        "impression_count": 222323
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 134,
+            "end": 157,
+            "url": "https://t.co/MY2soiuUl3",
+            "expanded_url": "https://claude.com/form/claude-managed-agents",
+            "display_url": "claude.com/form/claude-ma\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052295412737032192/nvZuSdak?format=jpg&name=orig",
+                "width": 2400,
+                "height": 1260
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052295412737032192/nvZuSdak?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude Managed Agents | Claude by Anthropic",
+            "description": "Dreaming is available as a limited research preview on the Claude Developer Platform (API) for Claude Managed Agents. Interested customers can join the waitlist by completing this form. During the limited research preview, we may ship breaking changes. We\u2019ll give you at least one week\u2019s notice, and you\u2019ll need to adopt these changes within that",
+            "unwound_url": "https://claude.com/form/claude-managed-agents"
+          },
+          {
+            "start": 158,
+            "end": 181,
+            "url": "https://t.co/5q0ZZhKSt1",
+            "expanded_url": "https://x.com/claudeai/status/2052067400690851842/photo/1",
+            "display_url": "pic.x.com/5q0ZZhKSt1",
+            "media_key": "3_2052061112028291074"
+          }
+        ]
+      },
+      "created_at": "2026-05-06T16:46:08.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2052067399088664981"
+        }
+      ],
+      "attachments": {
+        "media_keys": [
+          "3_2052061112028291074"
+        ]
+      },
+      "id": "2052067400690851842",
+      "text": "Dreaming reviews your agent's past sessions, extracts patterns, and curates memories so your agents learn over time.\n\nRequest access: https://t.co/MY2soiuUl3 https://t.co/5q0ZZhKSt1"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052067399088664981"
+      ],
+      "public_metrics": {
+        "retweet_count": 1083,
+        "reply_count": 560,
+        "like_count": 14710,
+        "quote_count": 428,
+        "bookmark_count": 7911,
+        "impression_count": 3306693
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 175,
+            "end": 198,
+            "url": "https://t.co/p4DFRzFEd8",
+            "expanded_url": "https://x.com/claudeai/status/2052067399088664981/video/1",
+            "display_url": "pic.x.com/p4DFRzFEd8",
+            "media_key": "13_2052061005652385793"
+          }
+        ]
+      },
+      "created_at": "2026-05-06T16:46:08.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2052061005652385793"
+        ]
+      },
+      "id": "2052067399088664981",
+      "text": "Live from Code with Claude: we're launching dreaming in Claude Managed Agents as a research preview.\n\nOutcomes, multiagent orchestration, and webhooks are now in public beta. https://t.co/p4DFRzFEd8"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052060696255283346"
+      ],
+      "public_metrics": {
+        "retweet_count": 331,
+        "reply_count": 143,
+        "like_count": 5488,
+        "quote_count": 50,
+        "bookmark_count": 731,
+        "impression_count": 1214560
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 78,
+            "end": 101,
+            "url": "https://t.co/4Pf6r5zKjl",
+            "expanded_url": "https://www.anthropic.com/news/higher-limits-spacex",
+            "display_url": "anthropic.com/news/higher-li\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052060672029057025/BAS-EblI?format=jpg&name=orig",
+                "width": 1900,
+                "height": 1000
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052060672029057025/BAS-EblI?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Higher usage limits for Claude and a compute deal with SpaceX",
+            "description": "Anthropic is an AI safety and research company that's working to build reliable, interpretable, and steerable AI systems.",
+            "unwound_url": "https://www.anthropic.com/news/higher-limits-spacex"
+          }
+        ]
+      },
+      "created_at": "2026-05-06T16:19:30.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2052060694699237558"
+        }
+      ],
+      "id": "2052060696255283346",
+      "text": "Read more about our usage limit increases and our SpaceX compute partnership: https://t.co/4Pf6r5zKjl"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052060694699237558"
+      ],
+      "public_metrics": {
+        "retweet_count": 708,
+        "reply_count": 230,
+        "like_count": 16454,
+        "quote_count": 396,
+        "bookmark_count": 737,
+        "impression_count": 4391341
+      },
+      "created_at": "2026-05-06T16:19:29.000Z",
+      "lang": "en",
+      "entities": {
+        "mentions": [
+          {
+            "start": 19,
+            "end": 26,
+            "username": "SpaceX",
+            "id": "34743251"
+          }
+        ]
+      },
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2052060693269008586"
+        }
+      ],
+      "id": "2052060694699237558",
+      "text": "Our agreement with @SpaceX means we will use all the compute capacity at their Colossus 1 data center.\n\nThis will give us over 300 megawatts of additional capacity to deploy within the month."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052060693269008586"
+      ],
+      "public_metrics": {
+        "retweet_count": 3986,
+        "reply_count": 1257,
+        "like_count": 44580,
+        "quote_count": 2491,
+        "bookmark_count": 4749,
+        "impression_count": 8973673
+      },
+      "created_at": "2026-05-06T16:19:29.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2052060691893227611"
+        }
+      ],
+      "id": "2052060693269008586",
+      "text": "Effective today, we are:\n\n1) Doubling Claude Code\u2019s 5-hour rate limits for Pro, Max, and Team plans;\n\n2) Removing the peak hours limit reduction on Claude Code for Pro and Max plans; and\n\n3) Substantially raising our API rate limits for Opus models."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052060691893227611"
+      ],
+      "public_metrics": {
+        "retweet_count": 12067,
+        "reply_count": 4755,
+        "like_count": 130940,
+        "quote_count": 5918,
+        "bookmark_count": 12123,
+        "impression_count": 23580194
+      },
+      "created_at": "2026-05-06T16:19:29.000Z",
+      "lang": "en",
+      "entities": {
+        "mentions": [
+          {
+            "start": 35,
+            "end": 42,
+            "username": "SpaceX",
+            "id": "34743251"
+          }
+        ]
+      },
+      "id": "2052060691893227611",
+      "text": "We\u2019ve agreed to a partnership with @SpaceX that will substantially increase our compute capacity.\n\nThis, along with our other recent compute deals, means that we\u2019ve been able to increase our usage limits for Claude Code and the Claude API."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2052055964036063654"
+      ],
+      "public_metrics": {
+        "retweet_count": 653,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 17
+      },
+      "created_at": "2026-05-06T16:00:41.000Z",
+      "lang": "en",
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 14,
+            "username": "ClaudeDevs",
+            "id": "2024518793679294464"
+          }
+        ]
+      },
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2052055459272761661"
+        }
+      ],
+      "id": "2052055964036063654",
+      "text": "RT @ClaudeDevs: Code with Claude is happening now!\n\n\u25aa\ufe0e 9:00AM - Keynote \n\u25aa\ufe0e 10:30AM -  What's new in Claude Code\n\u25aa\ufe0e 11:15AM - Building on C\u2026"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2051679630856249406"
+      ],
+      "public_metrics": {
+        "retweet_count": 66,
+        "reply_count": 39,
+        "like_count": 1154,
+        "quote_count": 15,
+        "bookmark_count": 1012,
+        "impression_count": 447787
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 146,
+            "end": 169,
+            "url": "https://t.co/DKPBIaWlbk",
+            "expanded_url": "http://claude.com/solutions/financial-services#finance-agents",
+            "display_url": "claude.com/solutions/fina\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051679673424248834/J7gXkj_n?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051679673424248834/J7gXkj_n?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Financial services | Claude by Anthropic",
+            "description": "Accelerate financial due diligence, modeling, and analysis with enterprise-grade AI built for compliance and security.",
+            "unwound_url": "https://claude.com/solutions/financial-services"
+          }
+        ]
+      },
+      "created_at": "2026-05-05T15:05:17.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2051679629488865498"
+        }
+      ],
+      "id": "2051679630856249406",
+      "text": "Each agent ships with the connectors, skills, and subagents the task needs, ready to use as-is or adapt to your firm's own standards.\n\nRead more: https://t.co/DKPBIaWlbk"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2051679629488865498"
+      ],
+      "public_metrics": {
+        "retweet_count": 2939,
+        "reply_count": 879,
+        "like_count": 34374,
+        "quote_count": 1225,
+        "bookmark_count": 27605,
+        "impression_count": 13487268
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 276,
+            "end": 299,
+            "url": "https://t.co/Nzj4Feaaz2",
+            "expanded_url": "https://x.com/claudeai/status/2051679629488865498/video/1",
+            "display_url": "pic.x.com/Nzj4Feaaz2",
+            "media_key": "13_2051674540569223171"
+          }
+        ]
+      },
+      "created_at": "2026-05-05T15:05:16.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2051674540569223171"
+        ]
+      },
+      "id": "2051679629488865498",
+      "text": "New for financial services: ready-to-run Claude agent templates for building pitches, conducting valuation reviews, closing the books at month-end, and more.\n\nInstall them as plugins in Cowork and Claude Code, or use our cookbooks to run them in production as Managed Agents. https://t.co/Nzj4Feaaz2"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2050252933866930339"
+      ],
+      "public_metrics": {
+        "retweet_count": 1057,
+        "reply_count": 460,
+        "like_count": 10765,
+        "quote_count": 156,
+        "bookmark_count": 3868,
+        "impression_count": 1119013
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 211,
+            "end": 234,
+            "url": "https://t.co/GJwOPMDLEC",
+            "expanded_url": "http://claude.com/code-with-claude",
+            "display_url": "claude.com/code-with-clau\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2050353709662842880/umLVrjp9?format=jpg&name=orig",
+                "width": 2400,
+                "height": 1260
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2050353709662842880/umLVrjp9?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Code with Claude \u2014 Anthropic's Developer Conference",
+            "description": "Join us for a day of hands-on workshops, live demos of new capabilities and conversations with the teams behind Claude.",
+            "unwound_url": "https://claude.com/code-with-claude"
+          },
+          {
+            "start": 235,
+            "end": 258,
+            "url": "https://t.co/uwAZgWPu7F",
+            "expanded_url": "https://x.com/claudeai/status/2050252933866930339/video/1",
+            "display_url": "pic.x.com/uwAZgWPu7F",
+            "media_key": "13_2050249102663835648"
+          }
+        ]
+      },
+      "created_at": "2026-05-01T16:36:05.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2050249102663835648"
+        ]
+      },
+      "id": "2050252933866930339",
+      "text": "Code with Claude, our developer conference, returns next week.\n\nWhether you're just getting started with Claude Code or you've been building for a while, there's a session for you.\n\nRegister for the livestream: https://t.co/GJwOPMDLEC https://t.co/uwAZgWPu7F"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049898745051886013"
+      ],
+      "public_metrics": {
+        "retweet_count": 19,
+        "reply_count": 29,
+        "like_count": 396,
+        "quote_count": 4,
+        "bookmark_count": 102,
+        "impression_count": 165511
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 77,
+            "end": 100,
+            "url": "https://t.co/Oei6EHTZuX",
+            "expanded_url": "http://claude.com/product/claude-security#public-beta",
+            "display_url": "claude.com/product/claude\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052462461228396546/ibVMmzEd?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052462461228396546/ibVMmzEd?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude Security | Claude by Anthropic",
+            "description": "From scan to fix, seamlessly. Claude scans your codebase for vulnerabilities, validates findings, and recommends patches you can review and approve.",
+            "unwound_url": "https://claude.com/product/claude-security"
+          }
+        ]
+      },
+      "created_at": "2026-04-30T17:08:40.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049898743772696745"
+        }
+      ],
+      "id": "2049898745051886013",
+      "text": "Available today in public beta for Claude Enterprise customers.\n\nLearn more: https://t.co/Oei6EHTZuX"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049898743772696745"
+      ],
+      "public_metrics": {
+        "retweet_count": 21,
+        "reply_count": 32,
+        "like_count": 544,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 198722
+      },
+      "created_at": "2026-04-30T17:08:40.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049898741772021991"
+        }
+      ],
+      "id": "2049898743772696745",
+      "text": "Since the research preview in February, hundreds of organizations have used it on production code, catching issues existing scanners had missed. \n\nBased on early feedback, we've added scheduled scans, directory-level targeting, CSV and Markdown exports, webhook notifications for",
+      "note_tweet": {
+        "text": "Since the research preview in February, hundreds of organizations have used it on production code, catching issues existing scanners had missed. \n\nBased on early feedback, we've added scheduled scans, directory-level targeting, CSV and Markdown exports, webhook notifications for new findings, and dismissals that carry forward across scans."
+      }
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049898741772021991"
+      ],
+      "public_metrics": {
+        "retweet_count": 24,
+        "reply_count": 15,
+        "like_count": 646,
+        "quote_count": 4,
+        "bookmark_count": 29,
+        "impression_count": 153248
+      },
+      "created_at": "2026-04-30T17:08:39.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049898739783897537"
+        }
+      ],
+      "id": "2049898741772021991",
+      "text": "Many security teams have asked how to put Opus 4.7 to work on their code without standing up custom tooling. Claude Security is that on-ramp: no API integration or agent build required."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049898739783897537"
+      ],
+      "public_metrics": {
+        "retweet_count": 1955,
+        "reply_count": 849,
+        "like_count": 21510,
+        "quote_count": 892,
+        "bookmark_count": 7224,
+        "impression_count": 4854474
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 216,
+            "end": 239,
+            "url": "https://t.co/neYmbGYeRz",
+            "expanded_url": "https://x.com/claudeai/status/2049898739783897537/video/1",
+            "display_url": "pic.x.com/neYmbGYeRz",
+            "media_key": "13_2049892644424232960"
+          }
+        ]
+      },
+      "created_at": "2026-04-30T17:08:39.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2049892644424232960"
+        ]
+      },
+      "id": "2049898739783897537",
+      "text": "Claude Security is now in public beta for Claude Enterprise customers.\n\nClaude scans your codebase for vulnerabilities, validates each finding to cut false positives, and suggests patches you can review and approve. https://t.co/neYmbGYeRz"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049523911730028968"
+      ],
+      "public_metrics": {
+        "retweet_count": 7,
+        "reply_count": 16,
+        "like_count": 321,
+        "quote_count": 1,
+        "bookmark_count": 0,
+        "impression_count": 128079
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 82,
+            "end": 105,
+            "url": "https://t.co/SNJCIrk27U",
+            "expanded_url": "https://claude.com/newsletter/developers",
+            "display_url": "claude.com/newsletter/dev\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052462549396795395/tZfXd9zq?format=jpg&name=orig",
+                "width": 2400,
+                "height": 1260
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052462549396795395/tZfXd9zq?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude developer newsletter | Claude",
+            "description": "Get monthly updates on feature announcements, technical insights, and best practices.",
+            "unwound_url": "https://claude.com/newsletter/developers"
+          }
+        ]
+      },
+      "created_at": "2026-04-29T16:19:13.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049523910173966597"
+        }
+      ],
+      "id": "2049523911730028968",
+      "text": "Sign up for our developer newsletter to learn about future hackathons like these: https://t.co/SNJCIrk27U"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049523910173966597"
+      ],
+      "public_metrics": {
+        "retweet_count": 21,
+        "reply_count": 28,
+        "like_count": 437,
+        "quote_count": 3,
+        "bookmark_count": 0,
+        "impression_count": 270793
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 253,
+            "end": 276,
+            "url": "https://t.co/XbKCYMLzb8",
+            "expanded_url": "https://www.youtube.com/watch?v=Hen24w2Jyz4",
+            "display_url": "youtube.com/watch?v=Hen24w\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2049581634807062528/lI7yB1l9?format=jpg&name=orig",
+                "width": 1280,
+                "height": 720
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2049581634807062528/lI7yB1l9?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Idriss",
+            "description": "15 likes. \"Aria: Built with Opus 4.7 Claude Code Hackathon\"",
+            "unwound_url": "https://www.youtube.com/watch?v=Hen24w2Jyz4"
+          }
+        ]
+      },
+      "created_at": "2026-04-29T16:19:13.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049523908584386582"
+        }
+      ],
+      "id": "2049523910173966597",
+      "text": "Best Use of Claude Managed Agents: ARIA by Idriss Benguezzou and Adam Hnaien from France\n\nA maintenance system that reads your machine manuals, and when something goes wrong, creates a work order for your technician with the fix that worked last time.\n\nhttps://t.co/XbKCYMLzb8"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049523908584386582"
+      ],
+      "public_metrics": {
+        "retweet_count": 48,
+        "reply_count": 6,
+        "like_count": 484,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 123373
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 236,
+            "end": 259,
+            "url": "https://t.co/qSSJWqYIdy",
+            "expanded_url": "https://www.youtube.com/watch?v=rkH4AjoTL5Q",
+            "display_url": "youtube.com/watch?v=rkH4Aj\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051844896550744065/_1zcL06X?format=jpg&name=orig",
+                "width": 1280,
+                "height": 720
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051844896550744065/_1zcL06X?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Keep Thinking Prize Winner \u2014 Built with Opus 4.7 Hackathon | MaestrIA",
+            "description": "\ud83c\udfc6 \"Keep Thinking\" Prize Winner \u2014 Anthropic's \"Built with Opus 4.7\" hackathon (April 2026).MaestrIA is an AI copilot that gives regular families the same dia...",
+            "unwound_url": "https://www.youtube.com/watch?v=rkH4AjoTL5Q"
+          }
+        ]
+      },
+      "created_at": "2026-04-29T16:19:12.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049523907120500886"
+        }
+      ],
+      "id": "2049523908584386582",
+      "text": "\"Keep Thinking\" Prize: MaestrIA by Benjamin Torralbo from Chile\n\nA home repair tool that photographs damage, returns a diagnosis, prices parts at local stores, and drafts a message to a nearby tradesperson. Built by a carpenter\u2019s son.\n\nhttps://t.co/qSSJWqYIdy"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049523907120500886"
+      ],
+      "public_metrics": {
+        "retweet_count": 12,
+        "reply_count": 2,
+        "like_count": 323,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 142535
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 212,
+            "end": 235,
+            "url": "https://t.co/5mly0cHKEW",
+            "expanded_url": "https://www.youtube.com/watch?v=qLuGU4PQNss",
+            "display_url": "youtube.com/watch?v=qLuGU4\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051844884169105408/nrygpQ8q?format=jpg&name=orig",
+                "width": 1280,
+                "height": 720
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051844884169105408/nrygpQ8q?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Virtual Puppet Theater (Build with Opus 4.7 hackathon)",
+            "description": "A virtual hand puppet theater where you control a puppet with your hand and voice, and AI controls another puppet.",
+            "unwound_url": "https://www.youtube.com/watch?v=qLuGU4PQNss"
+          }
+        ]
+      },
+      "created_at": "2026-04-29T16:19:12.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049523905518338498"
+        }
+      ],
+      "id": "2049523907120500886",
+      "text": "Most Creative Opus 4.7 Exploration: Virtual Puppet Theater by Rene Hangstrup M\u00f8ller from Denmark\n\nA puppet theater you perform with your hands and shape with your voice. Describe a prop and it appears on stage.\n\nhttps://t.co/5mly0cHKEW"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049523905518338498"
+      ],
+      "public_metrics": {
+        "retweet_count": 174,
+        "reply_count": 25,
+        "like_count": 1423,
+        "quote_count": 44,
+        "bookmark_count": 0,
+        "impression_count": 286202
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 208,
+            "end": 231,
+            "url": "https://t.co/heZ6zSo9fs",
+            "expanded_url": "https://www.youtube.com/watch?v=IJ9FyX2xwWA",
+            "display_url": "youtube.com/watch?v=IJ9FyX\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2049561511698317312/WOibDHtF?format=jpg&name=orig",
+                "width": 1280,
+                "height": 720
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2049561511698317312/WOibDHtF?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Paula V\u00e1squez H.",
+            "description": "57 likes, 6 comments. \"Demo Maieutic\"",
+            "unwound_url": "https://www.youtube.com/watch?v=IJ9FyX2xwWA"
+          }
+        ]
+      },
+      "created_at": "2026-04-29T16:19:12.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049523903819612667"
+        }
+      ],
+      "id": "2049523905518338498",
+      "text": "Bronze: Maieutic by Paula Vasquez-Henriquez from Chile\n\nAn educational coding tool that requires you to think before you type. Students can't write code until they can explain what they're building and why.\n\nhttps://t.co/heZ6zSo9fs"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049523903819612667"
+      ],
+      "public_metrics": {
+        "retweet_count": 20,
+        "reply_count": 9,
+        "like_count": 564,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 240206
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 177,
+            "end": 200,
+            "url": "https://t.co/EfZRz3fwcE",
+            "expanded_url": "https://www.youtube.com/watch?v=OZ2D_p82z6w",
+            "display_url": "youtube.com/watch?v=OZ2D_p\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2049551856201023488/Ta7kNj_v?format=jpg&name=orig",
+                "width": 1280,
+                "height": 720
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2049551856201023488/Ta7kNj_v?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "A C",
+            "description": "18 likes, 5 comments. \"Wrench Board - Agent-Native Diagnostic Workbench for Board-Level Repair \u00b7 Built with Opus 4.7\"",
+            "unwound_url": "https://www.youtube.com/watch?v=OZ2D_p82z6w"
+          }
+        ]
+      },
+      "created_at": "2026-04-29T16:19:11.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049523902154453193"
+        }
+      ],
+      "id": "2049523903819612667",
+      "text": "Silver: Wrench Board by Alexis Chapellier from France\n\nA circuit board repair tool that reads your full schematic, then draws a step-by-step diagnosis directly onto the board.\n\nhttps://t.co/EfZRz3fwcE"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049523902154453193"
+      ],
+      "public_metrics": {
+        "retweet_count": 521,
+        "reply_count": 69,
+        "like_count": 5564,
+        "quote_count": 145,
+        "bookmark_count": 1774,
+        "impression_count": 1438224
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 216,
+            "end": 239,
+            "url": "https://t.co/XcDinJi56w",
+            "expanded_url": "https://www.youtube.com/watch?v=6bN6hnx-A2A",
+            "display_url": "youtube.com/watch?v=6bN6hn\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2049238230210404353/mFjYtG83?format=jpg&name=orig",
+                "width": 1280,
+                "height": 720
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2049238230210404353/mFjYtG83?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Medkit with Opus4.7",
+            "description": "Medkit is a voice-first AI patient simulator for medical students and newly graduated doctors. Take histories, order tests, diagnose, and prescribe \u2014 talking...",
+            "unwound_url": "https://www.youtube.com/watch?v=6bN6hnx-A2A"
+          }
+        ]
+      },
+      "created_at": "2026-04-29T16:19:11.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049523899918934384"
+        }
+      ],
+      "id": "2049523902154453193",
+      "text": "Gold: MedKit by Bedirhan Keskin from T\u00fcrkiye\n\nA voice-based clinical simulator where medical students take histories, order labs, diagnose, and get scored on their reasoning against the latest published guidelines.\n\nhttps://t.co/XcDinJi56w"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049523899918934384"
+      ],
+      "public_metrics": {
+        "retweet_count": 338,
+        "reply_count": 254,
+        "like_count": 7809,
+        "quote_count": 84,
+        "bookmark_count": 2829,
+        "impression_count": 1646711
+      },
+      "created_at": "2026-04-29T16:19:10.000Z",
+      "lang": "en",
+      "entities": {
+        "mentions": [
+          {
+            "start": 118,
+            "end": 134,
+            "username": "cerebral_valley",
+            "id": "1623475008399089667"
+          }
+        ]
+      },
+      "id": "2049523899918934384",
+      "text": "Another Claude Code hackathon comes to an end.\n\nThank you to everyone who spent a week building with Opus 4.7, and to @cerebral_valley for co-hosting.\n\nIntroducing the winners:"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049143442601546054"
+      ],
+      "public_metrics": {
+        "retweet_count": 726,
+        "reply_count": 164,
+        "like_count": 5237,
+        "quote_count": 526,
+        "bookmark_count": 2436,
+        "impression_count": 1924987
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 236,
+            "end": 259,
+            "url": "https://t.co/vg3l9MWNTg",
+            "expanded_url": "http://anthropic.com/news/claude-for-creative-work",
+            "display_url": "anthropic.com/news/claude-fo\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051700971609509888/9gQW2bb2?format=jpg&name=orig",
+                "width": 1900,
+                "height": 1000
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051700971609509888/9gQW2bb2?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude for Creative Work",
+            "description": "Anthropic is an AI safety and research company that's working to build reliable, interpretable, and steerable AI systems.",
+            "unwound_url": "https://www.anthropic.com/news/claude-for-creative-work"
+          }
+        ]
+      },
+      "created_at": "2026-04-28T15:07:22.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049143440508616863"
+        }
+      ],
+      "id": "2049143442601546054",
+      "text": "More connectors launching today: Adobe Creative Cloud, Ableton, Splice, Canva Affinity, SketchUp, and Resolume.\n\nWe've also joined the Blender Development Fund as a patron to support open-source development of the software.\n\nRead more: https://t.co/vg3l9MWNTg"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049143440508616863"
+      ],
+      "public_metrics": {
+        "retweet_count": 2009,
+        "reply_count": 435,
+        "like_count": 21634,
+        "quote_count": 1483,
+        "bookmark_count": 12594,
+        "impression_count": 13813520
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 114,
+            "end": 137,
+            "url": "https://t.co/0LTEBmjs6R",
+            "expanded_url": "https://x.com/claudeai/status/2049143440508616863/video/1",
+            "display_url": "pic.x.com/0LTEBmjs6R",
+            "media_key": "13_2049137040621719552"
+          }
+        ]
+      },
+      "created_at": "2026-04-28T15:07:22.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2049143438281445811"
+        }
+      ],
+      "attachments": {
+        "media_keys": [
+          "13_2049137040621719552"
+        ]
+      },
+      "id": "2049143440508616863",
+      "text": "With the Autodesk Fusion connector, designers and engineers can create and modify 3D models through conversation. https://t.co/0LTEBmjs6R"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2049143438281445811"
+      ],
+      "public_metrics": {
+        "retweet_count": 4376,
+        "reply_count": 1567,
+        "like_count": 46601,
+        "quote_count": 2520,
+        "bookmark_count": 22094,
+        "impression_count": 12556723
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 208,
+            "end": 231,
+            "url": "https://t.co/Kc3cBHTNpV",
+            "expanded_url": "https://x.com/claudeai/status/2049143438281445811/video/1",
+            "display_url": "pic.x.com/Kc3cBHTNpV",
+            "media_key": "13_2049136962385375235"
+          }
+        ]
+      },
+      "created_at": "2026-04-28T15:07:21.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2049136962385375235"
+        ]
+      },
+      "id": "2049143438281445811",
+      "text": "Claude now connects to the tools creative professionals already use.\n\nWith the new Blender connector, you can debug a scene, build new tools, or batch-apply changes across every object, directly from Claude. https://t.co/Kc3cBHTNpV"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2047421846463623579"
+      ],
+      "public_metrics": {
+        "retweet_count": 54,
+        "reply_count": 51,
+        "like_count": 756,
+        "quote_count": 7,
+        "bookmark_count": 0,
+        "impression_count": 211781
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 145,
+            "end": 168,
+            "url": "https://t.co/PcfYg5sFxe",
+            "expanded_url": "https://claude.com/blog/claude-managed-agents-memory",
+            "display_url": "claude.com/blog/claude-ma\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053811258843947008/qPSy2teZ?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053811258843947008/qPSy2teZ?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Built-in memory for Claude Managed Agents | Claude",
+            "description": "Memory on Claude Managed Agents lets you build agents that learn from every task, user, and session, with no memory infrastructure to maintain.",
+            "unwound_url": "https://claude.com/blog/claude-managed-agents-memory"
+          }
+        ]
+      },
+      "created_at": "2026-04-23T21:06:22.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2047421844311949513"
+        }
+      ],
+      "id": "2047421846463623579",
+      "text": "Memories are stored as files, so developers can export them, manage them via the API, and keep full control over what agents retain.\n\nRead more: https://t.co/PcfYg5sFxe"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2047421844311949513"
+      ],
+      "public_metrics": {
+        "retweet_count": 627,
+        "reply_count": 384,
+        "like_count": 9202,
+        "quote_count": 138,
+        "bookmark_count": 3021,
+        "impression_count": 638308
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 191,
+            "end": 214,
+            "url": "https://t.co/P7GjOYPqCz",
+            "expanded_url": "https://x.com/claudeai/status/2047421844311949513/photo/1",
+            "display_url": "pic.x.com/P7GjOYPqCz",
+            "media_key": "3_2047411612013780992"
+          }
+        ]
+      },
+      "created_at": "2026-04-23T21:06:21.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2047411612013780992"
+        ]
+      },
+      "id": "2047421844311949513",
+      "text": "Memory on Claude Managed Agents is now in public beta.\n\nYour agents can now learn from every session, using an intelligence-optimized memory layer that balances performance with flexibility. https://t.co/P7GjOYPqCz"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2047383767984038093"
+      ],
+      "public_metrics": {
+        "retweet_count": 25,
+        "reply_count": 33,
+        "like_count": 599,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 146518
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 79,
+            "end": 102,
+            "url": "https://t.co/UPh4p2NODu",
+            "expanded_url": "http://claude.com/blog/connectors-for-everyday-life/",
+            "display_url": "claude.com/blog/connector\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051304683013038080/cwX9Pkfn?format=jpg&name=orig",
+                "width": 2000,
+                "height": 1000
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051304683013038080/cwX9Pkfn?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "New connectors in Claude for everyday life | Claude",
+            "description": "Claude now connects to the apps you use every week, including AllTrails, Instacart, Audible, Booking.com, and TripAdvisor. Ask, and Claude brings in the right app.",
+            "unwound_url": "https://claude.com/blog/connectors-for-everyday-life/"
+          }
+        ]
+      },
+      "created_at": "2026-04-23T18:35:03.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2047383766104957219"
+        }
+      ],
+      "id": "2047383767984038093",
+      "text": "Available now on web, desktop, and mobile (beta) across all plans.\n\nRead more: https://t.co/UPh4p2NODu"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2047383766104957219"
+      ],
+      "public_metrics": {
+        "retweet_count": 72,
+        "reply_count": 44,
+        "like_count": 1099,
+        "quote_count": 20,
+        "bookmark_count": 0,
+        "impression_count": 188257
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 179,
+            "end": 202,
+            "url": "https://t.co/aK5RfEwruF",
+            "expanded_url": "http://claude.ai/directory/connectors",
+            "display_url": "claude.ai/directory/conn\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2047383809339854848/jkblKE0O?format=png&name=orig",
+                "width": 1138,
+                "height": 640
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2047383809339854848/jkblKE0O?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude",
+            "description": "Claude is Anthropic's AI, built for problem solvers. Tackle complex challenges, analyze data, write code, and think through your hardest work.",
+            "unwound_url": "https://claude.ai/directory/connectors"
+          },
+          {
+            "start": 203,
+            "end": 226,
+            "url": "https://t.co/UVIlPhLbZO",
+            "expanded_url": "https://x.com/claudeai/status/2047383766104957219/photo/1",
+            "display_url": "pic.x.com/UVIlPhLbZO",
+            "media_key": "3_2047364339598774272"
+          }
+        ]
+      },
+      "created_at": "2026-04-23T18:35:03.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2047383764347572389"
+        }
+      ],
+      "attachments": {
+        "media_keys": [
+          "3_2047364339598774272"
+        ]
+      },
+      "id": "2047383766104957219",
+      "text": "The same Claude that helps you create a deck can also help you plan a trip, order groceries, book a table, or pick a playlist, all in one conversation.\n\nSee what you can connect: https://t.co/aK5RfEwruF https://t.co/UVIlPhLbZO"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2047383764347572389"
+      ],
+      "public_metrics": {
+        "retweet_count": 866,
+        "reply_count": 527,
+        "like_count": 13440,
+        "quote_count": 343,
+        "bookmark_count": 3630,
+        "impression_count": 1654898
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 200,
+            "end": 223,
+            "url": "https://t.co/SmQcIdwDWi",
+            "expanded_url": "https://x.com/claudeai/status/2047383764347572389/video/1",
+            "display_url": "pic.x.com/SmQcIdwDWi",
+            "media_key": "13_2047363978871918592"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 78,
+            "end": 90,
+            "username": "Tripadvisor",
+            "id": "16365636"
+          },
+          {
+            "start": 92,
+            "end": 103,
+            "username": "bookingcom",
+            "id": "26516576"
+          },
+          {
+            "start": 105,
+            "end": 110,
+            "username": "resy",
+            "id": "2351805762"
+          },
+          {
+            "start": 112,
+            "end": 122,
+            "username": "Instacart",
+            "id": "618480916"
+          },
+          {
+            "start": 124,
+            "end": 132,
+            "username": "Spotify",
+            "id": "17230018"
+          },
+          {
+            "start": 134,
+            "end": 146,
+            "username": "audible_com",
+            "id": "21001534"
+          },
+          {
+            "start": 148,
+            "end": 158,
+            "username": "AllTrails",
+            "id": "25769386"
+          },
+          {
+            "start": 160,
+            "end": 170,
+            "username": "thumbtack",
+            "id": "17349597"
+          },
+          {
+            "start": 179,
+            "end": 188,
+            "username": "turbotax",
+            "id": "1125151"
+          }
+        ]
+      },
+      "created_at": "2026-04-23T18:35:02.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2047363978871918592"
+        ]
+      },
+      "id": "2047383764347572389",
+      "text": "Claude can now connect to more of the apps you use outside of work, including @Tripadvisor, @bookingcom, @resy, @Instacart, @Spotify, @audible_com, @AllTrails, @thumbtack, Intuit @turbotax, and more. https://t.co/SmQcIdwDWi"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2047047633416397076"
+      ],
+      "public_metrics": {
+        "retweet_count": 524,
+        "reply_count": 275,
+        "like_count": 7456,
+        "quote_count": 69,
+        "bookmark_count": 1751,
+        "impression_count": 840025
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 96,
+            "end": 119,
+            "url": "https://t.co/Bqm0kHdsVY",
+            "expanded_url": "https://twitter.com/claudeai/status/2032124273587077133",
+            "display_url": "x.com/claudeai/statu\u2026"
+          }
+        ]
+      },
+      "created_at": "2026-04-22T20:19:22.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "quoted",
+          "id": "2032124273587077133"
+        }
+      ],
+      "id": "2047047633416397076",
+      "text": "Interactive charts and diagrams are now in Claude Cowork.\n\nAvailable in beta on all paid plans. https://t.co/Bqm0kHdsVY"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2046328622869344429"
+      ],
+      "public_metrics": {
+        "retweet_count": 17,
+        "reply_count": 45,
+        "like_count": 828,
+        "quote_count": 6,
+        "bookmark_count": 199,
+        "impression_count": 296729
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 89,
+            "end": 112,
+            "url": "https://t.co/hwPB3zlk0w",
+            "expanded_url": "http://claude.com/download",
+            "display_url": "claude.com/download",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052720256813068295/RmWtZPiO?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052720256813068295/RmWtZPiO?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Download Claude | Claude by Anthropic",
+            "description": "Download Claude apps for Mac, Windows, iOS, and Android. Install extensions for Chrome, Excel, PowerPoint, and Slack.",
+            "unwound_url": "https://claude.com/download"
+          }
+        ]
+      },
+      "created_at": "2026-04-20T20:42:17.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2046328621611065668"
+        }
+      ],
+      "id": "2046328622869344429",
+      "text": "Available now on all paid plans.\n\nUpdate or download the Claude app to try it in Cowork: https://t.co/hwPB3zlk0w"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2046328621611065668"
+      ],
+      "public_metrics": {
+        "retweet_count": 30,
+        "reply_count": 30,
+        "like_count": 1274,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 380104
+      },
+      "created_at": "2026-04-20T20:42:16.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2046328619249684989"
+        }
+      ],
+      "id": "2046328621611065668",
+      "text": "Everything you build is saved to the new Live Artifacts tab, with version history. Come back tomorrow or next month, from any session, and pick up where you left off."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2046328619249684989"
+      ],
+      "public_metrics": {
+        "retweet_count": 1558,
+        "reply_count": 666,
+        "like_count": 19405,
+        "quote_count": 602,
+        "bookmark_count": 11275,
+        "impression_count": 6545557
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 161,
+            "end": 184,
+            "url": "https://t.co/oru97zRn8L",
+            "expanded_url": "https://x.com/claudeai/status/2046328619249684989/photo/1",
+            "display_url": "pic.x.com/oru97zRn8L",
+            "media_key": "3_2046326180060819456"
+          }
+        ]
+      },
+      "created_at": "2026-04-20T20:42:16.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2046326180060819456"
+        ]
+      },
+      "id": "2046328619249684989",
+      "text": "In Cowork, Claude can now build live artifacts: dashboards and trackers connected to your apps and files.\n\nOpen one any time and it refreshes with current data. https://t.co/oru97zRn8L"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2045248224659644654"
+      ],
+      "public_metrics": {
+        "retweet_count": 937,
+        "reply_count": 622,
+        "like_count": 10690,
+        "quote_count": 265,
+        "bookmark_count": 5486,
+        "impression_count": 1600216
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 196,
+            "end": 219,
+            "url": "https://t.co/5MCkMtP5ti",
+            "expanded_url": "https://cerebralvalley.ai/e/built-with-4-7-hackathon",
+            "display_url": "cerebralvalley.ai/e/built-with-4\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2045246049531637760/7TwUvu5M?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2045246049531637760/7TwUvu5M?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Built with Opus 4.7: a Claude Code hackathon",
+            "description": "Join us again for Built with Opus 4.7: a Claude Code virtual hackathon! Opus 4.7 is our most capable model yet, and we\u2019re excited for you to push the limits ... | Tuesday, April 21, 2026",
+            "unwound_url": "https://cerebralvalley.ai/e/built-with-4-7-hackathon"
+          },
+          {
+            "start": 220,
+            "end": 243,
+            "url": "https://t.co/xmVhEQGtaL",
+            "expanded_url": "https://x.com/claudeai/status/2045248224659644654/video/1",
+            "display_url": "pic.x.com/xmVhEQGtaL",
+            "media_key": "13_2045248139087454208"
+          }
+        ]
+      },
+      "created_at": "2026-04-17T21:09:10.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2045248139087454208"
+        ]
+      },
+      "id": "2045248224659644654",
+      "text": "The Claude Code hackathon is back for Opus 4.7.\n\nJoin builders from around the world for a week with the Claude Code team in the room, with a prize pool of $100K in API credits.\n\nApply by Sunday: https://t.co/5MCkMtP5ti https://t.co/xmVhEQGtaL"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2045222254699511855"
+      ],
+      "public_metrics": {
+        "retweet_count": 801,
+        "reply_count": 411,
+        "like_count": 11094,
+        "quote_count": 206,
+        "bookmark_count": 2458,
+        "impression_count": 1087795
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 81,
+            "end": 104,
+            "url": "https://t.co/MJ89c4IuTt",
+            "expanded_url": "https://claude.com/claude-for-word",
+            "display_url": "claude.com/claude-for-word",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052445789905977351/iSNkydmQ?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052445789905977351/iSNkydmQ?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude for Microsoft 365 | Claude by Anthropic",
+            "description": "Claude works inside Excel, PowerPoint, Word, and Outlook. Edit your files, carry context across all four apps, and stay in control of every change.",
+            "unwound_url": "https://claude.com/claude-for-microsoft-365"
+          },
+          {
+            "start": 105,
+            "end": 128,
+            "url": "https://t.co/Yb3ZZQTsXb",
+            "expanded_url": "https://x.com/claudeai/status/2045222254699511855/photo/1",
+            "display_url": "pic.x.com/Yb3ZZQTsXb",
+            "media_key": "3_2045221637771890688"
+          }
+        ]
+      },
+      "created_at": "2026-04-17T19:25:58.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2045221637771890688"
+        ]
+      },
+      "id": "2045222254699511855",
+      "text": "Claude for Word is now available on Pro and Max plans to use alongside Opus 4.7: https://t.co/MJ89c4IuTt https://t.co/Yb3ZZQTsXb"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2045156271251218897"
+      ],
+      "public_metrics": {
+        "retweet_count": 165,
+        "reply_count": 87,
+        "like_count": 2875,
+        "quote_count": 42,
+        "bookmark_count": 1648,
+        "impression_count": 966425
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 159,
+            "end": 182,
+            "url": "https://t.co/C9iewmyMQs",
+            "expanded_url": "http://claude.ai/design",
+            "display_url": "claude.ai/design",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053219886873055234/et4ThsZU?format=png&name=orig",
+                "width": 1138,
+                "height": 640
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053219886873055234/et4ThsZU?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude",
+            "description": "Claude is Anthropic's AI, built for problem solvers. Tackle complex challenges, analyze data, write code, and think through your hardest work.",
+            "unwound_url": "https://claude.ai/login?returnTo=%2Fdesign"
+          },
+          {
+            "start": 194,
+            "end": 217,
+            "url": "https://t.co/FHQUP6aejg",
+            "expanded_url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "display_url": "anthropic.com/news/claude-de\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052972591078678528/tzkd6sLR?format=jpg&name=orig",
+                "width": 1900,
+                "height": 1000
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052972591078678528/tzkd6sLR?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Introducing Claude Design by Anthropic Labs",
+            "description": "Today, we\u2019re launching Claude Design, a new Anthropic Labs product that lets you collaborate with Claude to create polished visual work like designs, prototypes, slides, one-pagers, and more.",
+            "unwound_url": "https://www.anthropic.com/news/claude-design-anthropic-labs"
+          }
+        ]
+      },
+      "created_at": "2026-04-17T15:03:46.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2045156269271429451"
+        }
+      ],
+      "id": "2045156271251218897",
+      "text": "Claude reads your codebase and design files to build your team's design system, then applies it automatically, keeping every project on-brand.\n\nGive it a try: https://t.co/C9iewmyMQs\nRead more: https://t.co/FHQUP6aejg"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2045156269271429451"
+      ],
+      "public_metrics": {
+        "retweet_count": 194,
+        "reply_count": 72,
+        "like_count": 4400,
+        "quote_count": 78,
+        "bookmark_count": 1039,
+        "impression_count": 1541898
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 231,
+            "end": 254,
+            "url": "https://t.co/EGZ2UmIm6m",
+            "expanded_url": "https://x.com/claudeai/status/2045156269271429451/photo/1",
+            "display_url": "pic.x.com/EGZ2UmIm6m",
+            "media_key": "3_2045155872880427008"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 151,
+            "end": 157,
+            "username": "canva",
+            "id": "36542528"
+          }
+        ]
+      },
+      "created_at": "2026-04-17T15:03:46.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2045156267690213649"
+        }
+      ],
+      "attachments": {
+        "media_keys": [
+          "3_2045155872880427008"
+        ]
+      },
+      "id": "2045156269271429451",
+      "text": "Describe what you want, and Claude builds the first version. Refine through conversation, inline comments, direct edits, or custom sliders.\n\nExport to @canva, as PDF or PPTX, or hand off to Claude Code when the design feels right. https://t.co/EGZ2UmIm6m"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2045156267690213649"
+      ],
+      "public_metrics": {
+        "retweet_count": 15116,
+        "reply_count": 4148,
+        "like_count": 148685,
+        "quote_count": 10137,
+        "bookmark_count": 81282,
+        "impression_count": 63494885
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 274,
+            "end": 297,
+            "url": "https://t.co/2BgBGtgYGX",
+            "expanded_url": "https://x.com/claudeai/status/2045156267690213649/video/1",
+            "display_url": "pic.x.com/2BgBGtgYGX",
+            "media_key": "13_2045155754038935553"
+          }
+        ]
+      },
+      "created_at": "2026-04-17T15:03:46.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2045155754038935553"
+        ]
+      },
+      "id": "2045156267690213649",
+      "text": "Introducing Claude Design by Anthropic Labs: make prototypes, slides, and one-pagers by talking to Claude.\n\nPowered by Claude Opus 4.7, our most capable vision model. Available in research preview on the Pro, Max, Team, and Enterprise plans, rolling out throughout the day. https://t.co/2BgBGtgYGX"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044785272617939282"
+      ],
+      "public_metrics": {
+        "retweet_count": 286,
+        "reply_count": 118,
+        "like_count": 3248,
+        "quote_count": 117,
+        "bookmark_count": 351,
+        "impression_count": 698438
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 38,
+            "end": 61,
+            "url": "https://t.co/tHPAZRgiuP",
+            "expanded_url": "http://claude.ai",
+            "display_url": "claude.ai",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052614030808784911/lH0nGmsR?format=png&name=orig",
+                "width": 1138,
+                "height": 640
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052614030808784911/lH0nGmsR?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude",
+            "description": "Claude is Anthropic's AI, built for problem solvers. Tackle complex challenges, analyze data, write code, and think through your hardest work.",
+            "unwound_url": "https://claude.ai/login"
+          },
+          {
+            "start": 129,
+            "end": 152,
+            "url": "https://t.co/FXsCSDFSv3",
+            "expanded_url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "display_url": "anthropic.com/news/claude-op\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052946876941627392/q_PsqPG0?format=jpg&name=orig",
+                "width": 1920,
+                "height": 1080
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052946876941627392/q_PsqPG0?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Introducing Claude Opus 4.7",
+            "description": "Our latest model, Claude Opus 4.7, is now generally available. Opus 4.7 is a notable improvement on Opus 4.6 in advanced software engineering, with particular gains on the most difficult tasks.",
+            "unwound_url": "https://www.anthropic.com/news/claude-opus-4-7"
+          }
+        ]
+      },
+      "created_at": "2026-04-16T14:29:33.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044785266590622185"
+        }
+      ],
+      "id": "2044785272617939282",
+      "text": "Claude Opus 4.7 is available today on https://t.co/tHPAZRgiuP, the Claude Platform, and all major cloud platforms.  \n\nRead more: https://t.co/FXsCSDFSv3"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044785266590622185"
+      ],
+      "public_metrics": {
+        "retweet_count": 119,
+        "reply_count": 64,
+        "like_count": 3095,
+        "quote_count": 42,
+        "bookmark_count": 594,
+        "impression_count": 694558
+      },
+      "created_at": "2026-04-16T14:29:32.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044785264313221470"
+        }
+      ],
+      "id": "2044785266590622185",
+      "text": "In Claude Code, the new /ultrareview command runs a dedicated review session that reads through your changes and flags what a careful reviewer would catch.\n\nWe've also extended auto mode to Max users, so longer tasks run with fewer interruptions."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044785264313221470"
+      ],
+      "public_metrics": {
+        "retweet_count": 54,
+        "reply_count": 17,
+        "like_count": 2501,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 467352
+      },
+      "created_at": "2026-04-16T14:29:31.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044785263004602654"
+        }
+      ],
+      "id": "2044785264313221470",
+      "text": "On the API, a new xhigh effort level between high and max gives you finer control over reasoning and latency on hard problems. Task budgets (beta) help Claude prioritize work and manage costs across longer runs."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044785263004602654"
+      ],
+      "public_metrics": {
+        "retweet_count": 139,
+        "reply_count": 69,
+        "like_count": 5383,
+        "quote_count": 70,
+        "bookmark_count": 202,
+        "impression_count": 856415
+      },
+      "created_at": "2026-04-16T14:29:31.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044785261393977612"
+        }
+      ],
+      "id": "2044785263004602654",
+      "text": "Opus 4.7 also has substantially better vision. It can see images at more than three times the resolution and produces higher-quality interfaces, slides, and docs as a result."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044785261393977612"
+      ],
+      "public_metrics": {
+        "retweet_count": 10257,
+        "reply_count": 4765,
+        "like_count": 81144,
+        "quote_count": 6692,
+        "bookmark_count": 11994,
+        "impression_count": 13843213
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 258,
+            "end": 281,
+            "url": "https://t.co/PtlRdpQcG5",
+            "expanded_url": "https://x.com/claudeai/status/2044785261393977612/photo/1",
+            "display_url": "pic.x.com/PtlRdpQcG5",
+            "media_key": "3_2044782364430127104"
+          }
+        ]
+      },
+      "created_at": "2026-04-16T14:29:31.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2044782364430127104"
+        ]
+      },
+      "id": "2044785261393977612",
+      "text": "Introducing Claude Opus 4.7, our most capable Opus model yet.\n\nIt handles long-running tasks with more rigor, follows instructions more precisely, and verifies its own outputs before reporting back.\n\nYou can hand off your hardest work with less supervision. https://t.co/PtlRdpQcG5"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044779666477646187"
+      ],
+      "public_metrics": {
+        "retweet_count": 374,
+        "reply_count": 344,
+        "like_count": 7381,
+        "quote_count": 86,
+        "bookmark_count": 0,
+        "impression_count": 954612
+      },
+      "created_at": "2026-04-16T14:07:17.000Z",
+      "lang": "en",
+      "entities": {
+        "mentions": [
+          {
+            "start": 0,
+            "end": 11,
+            "username": "ClaudeDevs",
+            "id": "2024518793679294464"
+          }
+        ]
+      },
+      "id": "2044779666477646187",
+      "text": "@ClaudeDevs is now on X."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044131497033060733"
+      ],
+      "public_metrics": {
+        "retweet_count": 40,
+        "reply_count": 90,
+        "like_count": 1023,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 347602
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 58,
+            "end": 81,
+            "url": "https://t.co/hwPB3zlk0w",
+            "expanded_url": "http://claude.com/download",
+            "display_url": "claude.com/download",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052720256813068295/RmWtZPiO?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052720256813068295/RmWtZPiO?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Download Claude | Claude by Anthropic",
+            "description": "Download Claude apps for Mac, Windows, iOS, and Android. Install extensions for Chrome, Excel, PowerPoint, and Slack.",
+            "unwound_url": "https://claude.com/download"
+          },
+          {
+            "start": 113,
+            "end": 136,
+            "url": "https://t.co/wwdqxa6mvc",
+            "expanded_url": "http://claude.com/product/claude-code#updates",
+            "display_url": "claude.com/product/claude\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052246212942684162/iUCowjbr?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052246212942684162/iUCowjbr?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude Code by Anthropic | AI Coding Agent, Terminal, IDE",
+            "description": "Anthropic's agentic coding tool for developers. Claude Code understands your codebase, edits files, runs commands, and helps you ship faster.",
+            "unwound_url": "https://claude.com/product/claude-code"
+          }
+        ]
+      },
+      "created_at": "2026-04-14T19:11:41.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044131495296586041"
+        }
+      ],
+      "id": "2044131497033060733",
+      "text": "Download or update the Claude desktop app to get started: https://t.co/hwPB3zlk0w\nExplore everything that's new: https://t.co/wwdqxa6mvc"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044131495296586041"
+      ],
+      "public_metrics": {
+        "retweet_count": 53,
+        "reply_count": 84,
+        "like_count": 2158,
+        "quote_count": 8,
+        "bookmark_count": 137,
+        "impression_count": 443321
+      },
+      "created_at": "2026-04-14T19:11:41.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044131493966909862"
+        }
+      ],
+      "id": "2044131495296586041",
+      "text": "The redesign also adds an integrated terminal, file editing, HTML and PDF preview, and a faster diff viewer, all in a drag-and-drop layout you can arrange to your preference.\n\nYour CLI plugins work exactly as they do on the command line."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044131493966909862"
+      ],
+      "public_metrics": {
+        "retweet_count": 3249,
+        "reply_count": 2093,
+        "like_count": 42851,
+        "quote_count": 1559,
+        "bookmark_count": 11392,
+        "impression_count": 6120557
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 152,
+            "end": 175,
+            "url": "https://t.co/tfkjolVc71",
+            "expanded_url": "https://x.com/claudeai/status/2044131493966909862/video/1",
+            "display_url": "pic.x.com/tfkjolVc71",
+            "media_key": "13_2044127347616407552"
+          }
+        ]
+      },
+      "created_at": "2026-04-14T19:11:40.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2044127347616407552"
+        ]
+      },
+      "id": "2044131493966909862",
+      "text": "We've redesigned Claude Code on desktop.\n\nYou can now run multiple Claude sessions side by side from one window, with a new sidebar to manage them all. https://t.co/tfkjolVc71"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044095092932100509"
+      ],
+      "public_metrics": {
+        "retweet_count": 33,
+        "reply_count": 22,
+        "like_count": 588,
+        "quote_count": 10,
+        "bookmark_count": 327,
+        "impression_count": 200621
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 85,
+            "end": 108,
+            "url": "https://t.co/TdOiIxRhKe",
+            "expanded_url": "http://code.claude.com/docs/en/routines",
+            "display_url": "code.claude.com/docs/en/routin\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051168219784716288/3ETKn9T-?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051168219784716288/3ETKn9T-?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Automate work with routines - Claude Code Docs",
+            "description": "Put Claude Code on autopilot. Define routines that run on a schedule, trigger on API calls, or react to GitHub events from Anthropic-managed cloud infrastructure.",
+            "unwound_url": "https://code.claude.com/docs/en/routines"
+          },
+          {
+            "start": 120,
+            "end": 143,
+            "url": "https://t.co/4M6Rl70dqK",
+            "expanded_url": "https://claude.com/product/claude-code#updates",
+            "display_url": "claude.com/product/claude\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052246212942684162/iUCowjbr?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052246212942684162/iUCowjbr?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude Code by Anthropic | AI Coding Agent, Terminal, IDE",
+            "description": "Anthropic's agentic coding tool for developers. Claude Code understands your codebase, edits files, runs commands, and helps you ship faster.",
+            "unwound_url": "https://claude.com/product/claude-code#updates"
+          }
+        ]
+      },
+      "created_at": "2026-04-14T16:47:02.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044095091682210064"
+        }
+      ],
+      "id": "2044095092932100509",
+      "text": "Available today across all paid plans, \u200b\u200bwith Claude Code on the web enabled.\n\nDocs: https://t.co/TdOiIxRhKe\nRead more: https://t.co/4M6Rl70dqK"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044095091682210064"
+      ],
+      "public_metrics": {
+        "retweet_count": 11,
+        "reply_count": 14,
+        "like_count": 442,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 215462
+      },
+      "created_at": "2026-04-14T16:47:01.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044095090520400027"
+        }
+      ],
+      "id": "2044095091682210064",
+      "text": "Scheduled routines let you give Claude a cadence and walk away. Try telling Claude to pull the top bug from Linear every night at 2am, attempt a fix, and open a draft PR.\n\nIf you've been using /schedule in the CLI, those are routines now, and there's nothing to migrate."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044095090520400027"
+      ],
+      "public_metrics": {
+        "retweet_count": 8,
+        "reply_count": 5,
+        "like_count": 373,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 127015
+      },
+      "created_at": "2026-04-14T16:47:01.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044095089203655099"
+        }
+      ],
+      "id": "2044095090520400027",
+      "text": "Webhook routines subscribe to GitHub events and let Claude respond as they come in. Try pointing one at your repo and asking Claude to flag any PR that touches /auth-provider and post a summary in #auth-changes.\n\nMore event sources are coming soon.",
+      "entities": {
+        "hashtags": [
+          {
+            "start": 197,
+            "end": 202,
+            "tag": "auth"
+          }
+        ]
+      }
+    },
+    {
+      "note_tweet": {
+        "entities": {
+          "hashtags": [
+            {
+              "start": 236,
+              "end": 243,
+              "tag": "oncall"
+            }
+          ]
+        },
+        "text": "Routines each come with their own API endpoint, so you can point your alerts, deploy hooks, or internal tools at Claude directly. Try sending Claude an alert payload and asking it to find the owning service and post a triage summary to #oncall.\n\nPOST a message and get back a session URL."
+      },
+      "edit_history_tweet_ids": [
+        "2044095089203655099"
+      ],
+      "public_metrics": {
+        "retweet_count": 13,
+        "reply_count": 8,
+        "like_count": 542,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 175292
+      },
+      "created_at": "2026-04-14T16:47:01.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2044095086460309790"
+        }
+      ],
+      "id": "2044095089203655099",
+      "text": "Routines each come with their own API endpoint, so you can point your alerts, deploy hooks, or internal tools at Claude directly. Try sending Claude an alert payload and asking it to find the owning service and post a triage summary to #oncall.\n\nPOST a message and get back a",
+      "entities": {
+        "hashtags": [
+          {
+            "start": 236,
+            "end": 243,
+            "tag": "oncall"
+          }
+        ]
+      }
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2044095086460309790"
+      ],
+      "public_metrics": {
+        "retweet_count": 1489,
+        "reply_count": 756,
+        "like_count": 18539,
+        "quote_count": 823,
+        "bookmark_count": 10756,
+        "impression_count": 4585926
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 278,
+            "end": 301,
+            "url": "https://t.co/m2XJWYqkf8",
+            "expanded_url": "https://x.com/claudeai/status/2044095086460309790/photo/1",
+            "display_url": "pic.x.com/m2XJWYqkf8",
+            "media_key": "3_2044092643978969088"
+          }
+        ]
+      },
+      "created_at": "2026-04-14T16:47:00.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2044092643978969088"
+        ]
+      },
+      "id": "2044095086460309790",
+      "text": "Now in research preview: routines in Claude Code.\n\nConfigure a routine once (a prompt, a repo, and your connectors), and it can run on a schedule, from an API call, or in response to an event.\n\nRoutines run on our web infrastructure, so you don't have to keep your laptop open. https://t.co/m2XJWYqkf8"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2042670343173574705"
+      ],
+      "public_metrics": {
+        "retweet_count": 74,
+        "reply_count": 62,
+        "like_count": 1296,
+        "quote_count": 29,
+        "bookmark_count": 331,
+        "impression_count": 421983
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 164,
+            "end": 187,
+            "url": "https://t.co/MJ89c4IuTt",
+            "expanded_url": "https://claude.com/claude-for-word",
+            "display_url": "claude.com/claude-for-word",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052445789905977351/iSNkydmQ?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052445789905977351/iSNkydmQ?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude for Microsoft 365 | Claude by Anthropic",
+            "description": "Claude works inside Excel, PowerPoint, Word, and Outlook. Edit your files, carry context across all four apps, and stay in control of every change.",
+            "unwound_url": "https://claude.com/claude-for-microsoft-365"
+          }
+        ]
+      },
+      "created_at": "2026-04-10T18:25:35.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2042670341915295865"
+        }
+      ],
+      "id": "2042670343173574705",
+      "text": "Claude for Word shares context with Claude for Excel and Claude for PowerPoint, so Claude can work across your open documents in a single conversation.\n\nRead more: https://t.co/MJ89c4IuTt"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2042670341915295865"
+      ],
+      "public_metrics": {
+        "retweet_count": 2466,
+        "reply_count": 1180,
+        "like_count": 32006,
+        "quote_count": 1583,
+        "bookmark_count": 11215,
+        "impression_count": 12443075
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 206,
+            "end": 229,
+            "url": "https://t.co/tl1mZVELNg",
+            "expanded_url": "https://x.com/claudeai/status/2042670341915295865/video/1",
+            "display_url": "pic.x.com/tl1mZVELNg",
+            "media_key": "13_2042648096434270208"
+          }
+        ]
+      },
+      "created_at": "2026-04-10T18:25:35.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2042648096434270208"
+        ]
+      },
+      "id": "2042670341915295865",
+      "text": "Claude for Word is now in beta.\n\nDraft, edit, and revise documents directly from the sidebar. Claude preserves your formatting, and edits appear as tracked changes.\n\nAvailable on Team and Enterprise plans. https://t.co/tl1mZVELNg"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2042308629940855048"
+      ],
+      "public_metrics": {
+        "retweet_count": 68,
+        "reply_count": 50,
+        "like_count": 1509,
+        "quote_count": 12,
+        "bookmark_count": 1065,
+        "impression_count": 309953
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 58,
+            "end": 81,
+            "url": "https://t.co/FWbfVOKdaW",
+            "expanded_url": "https://claude.com/blog/the-advisor-strategy",
+            "display_url": "claude.com/blog/the-advis\u2026",
+            "status": 200,
+            "title": "The advisor strategy: Give Sonnet an intelligence boost with Opus | Claude",
+            "description": "Pair Opus as an advisor with Sonnet or Haiku as an executor, and get Opus-level intelligence in your agents at a fraction of the cost.",
+            "unwound_url": "https://claude.com/blog/the-advisor-strategy"
+          }
+        ]
+      },
+      "created_at": "2026-04-09T18:28:16.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2042308627478773808"
+        }
+      ],
+      "id": "2042308629940855048",
+      "text": "Now available in beta on the Claude Platform.\n\nRead more: https://t.co/FWbfVOKdaW"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2042308627478773808"
+      ],
+      "public_metrics": {
+        "retweet_count": 53,
+        "reply_count": 135,
+        "like_count": 1924,
+        "quote_count": 156,
+        "bookmark_count": 0,
+        "impression_count": 938919
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 154,
+            "end": 177,
+            "url": "https://t.co/pV4nftN1wz",
+            "expanded_url": "https://x.com/claudeai/status/2042308627478773808/photo/1",
+            "display_url": "pic.x.com/pV4nftN1wz",
+            "media_key": "3_2042300966305742848"
+          }
+        ]
+      },
+      "created_at": "2026-04-09T18:28:15.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2042308625989882054"
+        }
+      ],
+      "attachments": {
+        "media_keys": [
+          "3_2042300966305742848"
+        ]
+      },
+      "id": "2042308627478773808",
+      "text": "In evals, Sonnet with an Opus advisor scored 2.7 percentage points higher on SWE-bench Multilingual than Sonnet alone, while costing 11.9% less per task. https://t.co/pV4nftN1wz"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2042308625989882054"
+      ],
+      "public_metrics": {
+        "retweet_count": 29,
+        "reply_count": 14,
+        "like_count": 1683,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 258663
+      },
+      "created_at": "2026-04-09T18:28:15.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2042308622181339453"
+        }
+      ],
+      "id": "2042308625989882054",
+      "text": "Add the advisor tool to your Messages API call. When your Sonnet or Haiku agent hits a hard decision mid-run, it consults Opus, gets a plan, and continues, all within a single API request."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2042308622181339453"
+      ],
+      "public_metrics": {
+        "retweet_count": 2784,
+        "reply_count": 1042,
+        "like_count": 38478,
+        "quote_count": 1200,
+        "bookmark_count": 22229,
+        "impression_count": 4716478
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 201,
+            "end": 224,
+            "url": "https://t.co/fRkegyMs5t",
+            "expanded_url": "https://x.com/claudeai/status/2042308622181339453/photo/1",
+            "display_url": "pic.x.com/fRkegyMs5t",
+            "media_key": "3_2042300431292846080"
+          }
+        ]
+      },
+      "created_at": "2026-04-09T18:28:14.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2042300431292846080"
+        ]
+      },
+      "id": "2042308622181339453",
+      "text": "We're bringing the advisor strategy to the Claude Platform.\n\nPair Opus as an advisor with Sonnet or Haiku as an executor, and get near Opus-level intelligence in your agents at a fraction of the cost. https://t.co/fRkegyMs5t"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2042273758208020610"
+      ],
+      "public_metrics": {
+        "retweet_count": 24,
+        "reply_count": 25,
+        "like_count": 447,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 185525
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 32,
+            "end": 55,
+            "url": "https://t.co/tdZ37bG986",
+            "expanded_url": "https://claude.com/blog/cowork-for-enterprise",
+            "display_url": "claude.com/blog/cowork-fo\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2047777482397319168/qgHS_kyw?format=jpg&name=orig",
+                "width": 2000,
+                "height": 1000
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2047777482397319168/qgHS_kyw?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Making Claude Cowork ready for enterprise | Claude",
+            "description": "Claude Cowork is now generally available on all paid plans. Within companies, Claude Cowork has become a key part of how teams operate: handling tasks, drafting project deliverables, and keeping teams up to date.",
+            "unwound_url": "https://claude.com/blog/cowork-for-enterprise"
+          }
+        ]
+      },
+      "created_at": "2026-04-09T16:09:42.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2042273756983226661"
+        }
+      ],
+      "id": "2042273758208020610",
+      "text": "Available on macOS and Windows: https://t.co/tdZ37bG986"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2042273756983226661"
+      ],
+      "public_metrics": {
+        "retweet_count": 17,
+        "reply_count": 18,
+        "like_count": 547,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 209931
+      },
+      "created_at": "2026-04-09T16:09:41.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2042273755485888810"
+        }
+      ],
+      "id": "2042273756983226661",
+      "text": "Since the research preview, teams have been using Cowork to prepare for client meetings, build financial models, review contracts, and work through the multi-step tasks that used to take handoffs across functions."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2042273755485888810"
+      ],
+      "public_metrics": {
+        "retweet_count": 751,
+        "reply_count": 427,
+        "like_count": 10310,
+        "quote_count": 247,
+        "bookmark_count": 3908,
+        "impression_count": 3478167
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 242,
+            "end": 265,
+            "url": "https://t.co/JHG1MYDYgD",
+            "expanded_url": "https://x.com/claudeai/status/2042273755485888810/video/1",
+            "display_url": "pic.x.com/JHG1MYDYgD",
+            "media_key": "13_2042266051392458752"
+          }
+        ]
+      },
+      "created_at": "2026-04-09T16:09:41.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2042266051392458752"
+        ]
+      },
+      "id": "2042273755485888810",
+      "text": "Claude Cowork is now generally available to all paid plans.\n\nFor Enterprise, we are adding role-based access controls, group spend limits, usage analytics, and expanded OpenTelemetry to give admins what they need to deploy it across the org. https://t.co/JHG1MYDYgD"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2041927700063883281"
+      ],
+      "public_metrics": {
+        "retweet_count": 73,
+        "reply_count": 54,
+        "like_count": 1156,
+        "quote_count": 27,
+        "bookmark_count": 1242,
+        "impression_count": 425489
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 86,
+            "end": 109,
+            "url": "https://t.co/E9xQ7xd4rG",
+            "expanded_url": "https://platform.claude.com/workspaces/default/agent-quickstart",
+            "display_url": "platform.claude.com/workspaces/def\u2026",
+            "status": 200,
+            "title": "Claude Platform",
+            "description": "Build with the Claude API",
+            "unwound_url": "https://platform.claude.com/workspaces/default/agent-quickstart"
+          },
+          {
+            "start": 134,
+            "end": 157,
+            "url": "https://t.co/omWjJ4fK88",
+            "expanded_url": "https://claude.com/blog/claude-managed-agents",
+            "display_url": "claude.com/blog/claude-ma\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2053177008612659200/G6tdjnMK?format=jpg&name=orig",
+                "width": 1920,
+                "height": 1006
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2053177008612659200/G6tdjnMK?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude Managed Agents: get to production 10x faster | Claude",
+            "description": "Introducing Claude Managed Agents, a suite of composable APIs for building and deploying cloud-hosted agents at scale.",
+            "unwound_url": "https://claude.com/blog/claude-managed-agents"
+          }
+        ]
+      },
+      "created_at": "2026-04-08T17:14:35.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2041927698210058629"
+        }
+      ],
+      "id": "2041927700063883281",
+      "text": "Build and deploy your agents through the Claude Console, Claude Code, or our new CLI: https://t.co/E9xQ7xd4rG\n\nRead more on the blog: https://t.co/omWjJ4fK88"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2041927698210058629"
+      ],
+      "public_metrics": {
+        "retweet_count": 61,
+        "reply_count": 36,
+        "like_count": 1083,
+        "quote_count": 10,
+        "bookmark_count": 546,
+        "impression_count": 471997
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 169,
+            "end": 192,
+            "url": "https://t.co/YyvozwEc5O",
+            "expanded_url": "https://claude.com/customers/vibecode",
+            "display_url": "claude.com/customers/vibe\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2044694555669467136/yxYNe5a7?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2044694555669467136/yxYNe5a7?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Customer story | Vibecode | Claude",
+            "description": "Learn how Vibecode uses Claude to let anyone build production-ready mobile apps from their phone\u2014reducing development costs to under $100 and timelines from months to under an hour.",
+            "unwound_url": "https://claude.com/customers/vibecode"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 3,
+            "end": 16,
+            "username": "vibecodeapp_",
+            "id": "1895714633782083584"
+          }
+        ]
+      },
+      "created_at": "2026-04-08T17:14:35.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2041927696351994006"
+        }
+      ],
+      "id": "2041927698210058629",
+      "text": "On @vibecodeapp_, developers can now spin up agent infrastructure at least 10x faster with Managed Agents, going from a prompt to a deployed app without weeks of setup: https://t.co/YyvozwEc5O"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2041927696351994006"
+      ],
+      "public_metrics": {
+        "retweet_count": 32,
+        "reply_count": 14,
+        "like_count": 591,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 329269
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 171,
+            "end": 194,
+            "url": "https://t.co/kPd2qFH2IM",
+            "expanded_url": "https://claude.com/customers/sentry",
+            "display_url": "claude.com/customers/sent\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2044694543405379585/poepfUNW?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2044694543405379585/poepfUNW?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Customer story | Sentry | Claude",
+            "description": "Sentry uses Claude Managed Agents to go from bug detection to merge-ready pull request automatically\u2014shipping their agent integration in weeks instead of months and eliminating the overhead of building custom agent infrastructure.",
+            "unwound_url": "https://claude.com/customers/sentry"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 0,
+            "end": 7,
+            "username": "sentry",
+            "id": "464217126"
+          }
+        ]
+      },
+      "created_at": "2026-04-08T17:14:34.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2041927694628037022"
+        }
+      ],
+      "id": "2041927696351994006",
+      "text": "@sentry now takes you from Seer's root-cause analysis to a Claude-powered agent that writes the fix and opens a PR. They built the integration on Managed Agents in weeks: https://t.co/kPd2qFH2IM"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2041927694628037022"
+      ],
+      "public_metrics": {
+        "retweet_count": 45,
+        "reply_count": 13,
+        "like_count": 623,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 399945
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 133,
+            "end": 156,
+            "url": "https://t.co/ScoKKsgJZo",
+            "expanded_url": "https://claude.com/customers/rakuten",
+            "display_url": "claude.com/customers/raku\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2047431833093382144/72gSfhEr?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2047431833093382144/72gSfhEr?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Customer story | Rakuten | Claude",
+            "description": "Rakuten uses Claude Code to accelerate software development, achieving 7 hours of autonomous coding and reducing feature delivery time from 24 days to 5 with 99.9% accuracy.",
+            "unwound_url": "https://claude.com/customers/rakuten"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 0,
+            "end": 8,
+            "username": "Rakuten",
+            "id": "18027568"
+          }
+        ]
+      },
+      "created_at": "2026-04-08T17:14:34.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2041927692874895500"
+        }
+      ],
+      "id": "2041927694628037022",
+      "text": "@Rakuten deploys specialist agents, powered by Managed Agents, for product, sales, marketing, and finance, each one in under a week: https://t.co/ScoKKsgJZo"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2041927692874895500"
+      ],
+      "public_metrics": {
+        "retweet_count": 18,
+        "reply_count": 5,
+        "like_count": 622,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 397528
+      },
+      "created_at": "2026-04-08T17:14:33.000Z",
+      "lang": "en",
+      "entities": {
+        "mentions": [
+          {
+            "start": 0,
+            "end": 6,
+            "username": "asana",
+            "id": "202886242"
+          }
+        ]
+      },
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2041927691268497548"
+        }
+      ],
+      "id": "2041927692874895500",
+      "text": "@asana built AI Teammates on Managed Agents: agents that work inside Asana as part of your team, picking up assigned tasks.\n\nOffloading the infrastructure let them put engineering time into the multiplayer experience."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2041927691268497548"
+      ],
+      "public_metrics": {
+        "retweet_count": 98,
+        "reply_count": 18,
+        "like_count": 1510,
+        "quote_count": 34,
+        "bookmark_count": 0,
+        "impression_count": 1368007
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 187,
+            "end": 210,
+            "url": "https://t.co/MAOt7pjDnf",
+            "expanded_url": "https://www.youtube.com/watch?v=45hPRdfDEsI&feature=youtu.be",
+            "display_url": "youtube.com/watch?v=45hPRd\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2044694513059512320/fcQ2eTds?format=jpg&name=orig",
+                "width": 1280,
+                "height": 720
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2044694513059512320/fcQ2eTds?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude",
+            "description": "1.4K likes, 76 comments. \"How Notion built with Claude Managed Agents\"",
+            "unwound_url": "https://www.youtube.com/watch?v=45hPRdfDEsI&feature=youtu.be"
+          }
+        ],
+        "mentions": [
+          {
+            "start": 0,
+            "end": 9,
+            "username": "NotionHQ",
+            "id": "708915428454576128"
+          }
+        ]
+      },
+      "created_at": "2026-04-08T17:14:33.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2041927689397788789"
+        }
+      ],
+      "id": "2041927691268497548",
+      "text": "@NotionHQ lets teams delegate work to Claude directly inside their workspace. Dozens of tasks run in parallel, and whole teams collaborate on the outputs. Available now in private alpha: https://t.co/MAOt7pjDnf"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2041927689397788789"
+      ],
+      "public_metrics": {
+        "retweet_count": 150,
+        "reply_count": 37,
+        "like_count": 2534,
+        "quote_count": 34,
+        "bookmark_count": 1065,
+        "impression_count": 770820
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 237,
+            "end": 260,
+            "url": "https://t.co/TEMDa1eYNp",
+            "expanded_url": "https://x.com/claudeai/status/2041927689397788789/photo/1",
+            "display_url": "pic.x.com/TEMDa1eYNp",
+            "media_key": "3_2041916566179098624"
+          }
+        ]
+      },
+      "created_at": "2026-04-08T17:14:32.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2041927687460024721"
+        }
+      ],
+      "attachments": {
+        "media_keys": [
+          "3_2041916566179098624"
+        ]
+      },
+      "id": "2041927689397788789",
+      "text": "Shipping a production agent meant months of infrastructure work first.\n\nManaged Agents handles that for you. Define your agent's tasks, tools, and guardrails, and we run it on our infrastructure.\n\nHere's what early customers have built: https://t.co/TEMDa1eYNp"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2041927687460024721"
+      ],
+      "public_metrics": {
+        "retweet_count": 6046,
+        "reply_count": 2129,
+        "like_count": 57097,
+        "quote_count": 3202,
+        "bookmark_count": 50358,
+        "impression_count": 21581781
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 265,
+            "end": 288,
+            "url": "https://t.co/vHYfiC1G56",
+            "expanded_url": "https://x.com/claudeai/status/2041927687460024721/video/1",
+            "display_url": "pic.x.com/vHYfiC1G56",
+            "media_key": "13_2041916153136603136"
+          }
+        ]
+      },
+      "created_at": "2026-04-08T17:14:32.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2041916153136603136"
+        ]
+      },
+      "id": "2041927687460024721",
+      "text": "Introducing Claude Managed Agents: everything you need to build and deploy agents at scale.\n\nIt pairs an agent harness tuned for performance with production infrastructure, so you can go from prototype to launch in days.\n\nNow in public beta on the Claude Platform. https://t.co/vHYfiC1G56"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2041578533273600166"
+      ],
+      "public_metrics": {
+        "retweet_count": 6712,
+        "reply_count": 0,
+        "like_count": 0,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 14
+      },
+      "created_at": "2026-04-07T18:07:07.000Z",
+      "lang": "en",
+      "entities": {
+        "mentions": [
+          {
+            "start": 3,
+            "end": 15,
+            "username": "AnthropicAI",
+            "id": "1353836358901501952"
+          }
+        ]
+      },
+      "referenced_tweets": [
+        {
+          "type": "retweeted",
+          "id": "2041578392852517128"
+        }
+      ],
+      "id": "2041578533273600166",
+      "text": "RT @AnthropicAI: Introducing Project Glasswing: an urgent initiative to help secure the world\u2019s most critical software.\n\nIt\u2019s powered by ou\u2026"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2040086268562842097"
+      ],
+      "public_metrics": {
+        "retweet_count": 1450,
+        "reply_count": 831,
+        "like_count": 16688,
+        "quote_count": 628,
+        "bookmark_count": 4902,
+        "impression_count": 4109959
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 187,
+            "end": 210,
+            "url": "https://t.co/EdoQeT8BBN",
+            "expanded_url": "https://claude.ai/customize/connectors",
+            "display_url": "claude.ai/customize/conn\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2050641279667560448/428uxXft?format=png&name=orig",
+                "width": 1138,
+                "height": 640
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2050641279667560448/428uxXft?format=png&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude",
+            "description": "Claude is Anthropic's AI, built for problem solvers. Tackle complex challenges, analyze data, write code, and think through your hardest work.",
+            "unwound_url": "https://claude.ai/customize/connectors"
+          },
+          {
+            "start": 211,
+            "end": 234,
+            "url": "https://t.co/sOrigP41FJ",
+            "expanded_url": "https://x.com/claudeai/status/2040086268562842097/photo/1",
+            "display_url": "pic.x.com/sOrigP41FJ",
+            "media_key": "3_2040085341617684480"
+          }
+        ]
+      },
+      "created_at": "2026-04-03T15:17:24.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "3_2040085341617684480"
+        ]
+      },
+      "id": "2040086268562842097",
+      "text": "Microsoft 365 connectors are now available on every Claude plan.\n\nConnect Outlook, OneDrive, and SharePoint to bring your email, docs, and files into the conversation.\n\nGet started here: https://t.co/EdoQeT8BBN https://t.co/sOrigP41FJ"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2039836891508261106"
+      ],
+      "public_metrics": {
+        "retweet_count": 1113,
+        "reply_count": 696,
+        "like_count": 11981,
+        "quote_count": 357,
+        "bookmark_count": 2871,
+        "impression_count": 1631028
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 83,
+            "end": 106,
+            "url": "https://t.co/TXjkhVhS7W",
+            "expanded_url": "https://twitter.com/claudeai/status/2036195789601374705",
+            "display_url": "x.com/claudeai/statu\u2026"
+          }
+        ]
+      },
+      "created_at": "2026-04-02T22:46:27.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "quoted",
+          "id": "2036195789601374705"
+        }
+      ],
+      "id": "2039836891508261106",
+      "text": "Computer use in Claude Cowork and Claude Code Desktop is now available on Windows. https://t.co/TXjkhVhS7W"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2038693742094246032"
+      ],
+      "public_metrics": {
+        "retweet_count": 385,
+        "reply_count": 619,
+        "like_count": 5056,
+        "quote_count": 100,
+        "bookmark_count": 0,
+        "impression_count": 1007785
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 156,
+            "end": 179,
+            "url": "https://t.co/m3CdLEfNeZ",
+            "expanded_url": "https://twitter.com/claudeai/status/2036503582166393240",
+            "display_url": "x.com/claudeai/statu\u2026"
+          }
+        ]
+      },
+      "created_at": "2026-03-30T19:03:59.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "quoted",
+          "id": "2036503582166393240"
+        }
+      ],
+      "id": "2038693742094246032",
+      "text": "Auto mode for Claude Code is now available on the Enterprise plan and for API users.\n\nTo try it out, update your install and run claude --enable-auto-mode. https://t.co/m3CdLEfNeZ"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2038663019983479234"
+      ],
+      "public_metrics": {
+        "retweet_count": 107,
+        "reply_count": 94,
+        "like_count": 1965,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 515792
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 88,
+            "end": 111,
+            "url": "https://t.co/x9kSKedkjz",
+            "expanded_url": "http://code.claude.com/docs/en/computer-use",
+            "display_url": "code.claude.com/docs/en/comput\u2026",
+            "status": 200,
+            "title": "Let Claude use your computer from the CLI - Claude Code Docs",
+            "description": "Enable computer use in the Claude Code CLI so Claude can open apps, click, type, and see your screen on macOS. Test native apps, debug visual issues, and automate GUI-only tools without leaving your terminal.",
+            "unwound_url": "https://code.claude.com/docs/en/computer-use"
+          }
+        ]
+      },
+      "created_at": "2026-03-30T17:01:55.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2038663018427420698"
+        }
+      ],
+      "id": "2038663019983479234",
+      "text": "Now available in research preview on Pro and Max on macOS. \n\nEnable it with /mcp. Docs: https://t.co/x9kSKedkjz"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2038663018427420698"
+      ],
+      "public_metrics": {
+        "retweet_count": 42,
+        "reply_count": 46,
+        "like_count": 1909,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 551147
+      },
+      "created_at": "2026-03-30T17:01:54.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2038663016187621727"
+        }
+      ],
+      "id": "2038663018427420698",
+      "text": "It works on anything you can open on your Mac: a compiled SwiftUI app, a local Electron build, or a GUI tool that doesn't have a CLI."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2038663016187621727"
+      ],
+      "public_metrics": {
+        "retweet_count": 99,
+        "reply_count": 84,
+        "like_count": 3632,
+        "quote_count": 54,
+        "bookmark_count": 246,
+        "impression_count": 528559
+      },
+      "created_at": "2026-03-30T17:01:54.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2038663014098899416"
+        }
+      ],
+      "id": "2038663016187621727",
+      "text": "In one prompt, Claude can write the code, compile it, launch the app, click through it, find the bug, fix it, and verify the fix."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2038663014098899416"
+      ],
+      "public_metrics": {
+        "retweet_count": 4848,
+        "reply_count": 2551,
+        "like_count": 59398,
+        "quote_count": 2787,
+        "bookmark_count": 25019,
+        "impression_count": 16101073
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 178,
+            "end": 201,
+            "url": "https://t.co/s2FDQaDmr1",
+            "expanded_url": "https://x.com/claudeai/status/2038663014098899416/video/1",
+            "display_url": "pic.x.com/s2FDQaDmr1",
+            "media_key": "13_2038658389862146048"
+          }
+        ]
+      },
+      "created_at": "2026-03-30T17:01:53.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2038658389862146048"
+        ]
+      },
+      "id": "2038663014098899416",
+      "text": "Computer use is now in Claude Code.\n\nClaude can open your apps, click through your UI, and test what it built, right from the CLI.\n\nNow in research preview on Pro and Max plans. https://t.co/s2FDQaDmr1"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2036850783526719610"
+      ],
+      "public_metrics": {
+        "retweet_count": 1646,
+        "reply_count": 1364,
+        "like_count": 21272,
+        "quote_count": 1347,
+        "bookmark_count": 7452,
+        "impression_count": 7499136
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 165,
+            "end": 188,
+            "url": "https://t.co/hwPB3zlk0w",
+            "expanded_url": "http://claude.com/download",
+            "display_url": "claude.com/download",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052720256813068295/RmWtZPiO?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052720256813068295/RmWtZPiO?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Download Claude | Claude by Anthropic",
+            "description": "Download Claude apps for Mac, Windows, iOS, and Android. Install extensions for Chrome, Excel, PowerPoint, and Slack.",
+            "unwound_url": "https://claude.com/download"
+          },
+          {
+            "start": 189,
+            "end": 212,
+            "url": "https://t.co/646YMIzYZl",
+            "expanded_url": "https://x.com/claudeai/status/2036850783526719610/video/1",
+            "display_url": "pic.x.com/646YMIzYZl",
+            "media_key": "13_2036847517044764673"
+          }
+        ]
+      },
+      "created_at": "2026-03-25T17:00:44.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2036847517044764673"
+        ]
+      },
+      "id": "2036850783526719610",
+      "text": "Your work tools in Claude are now available on mobile.\n\nExplore Figma designs, create Canva slides, check Amplitude dashboards, all from your phone.\n\nGive it a try: https://t.co/hwPB3zlk0w https://t.co/646YMIzYZl"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2036503584943034643"
+      ],
+      "public_metrics": {
+        "retweet_count": 57,
+        "reply_count": 94,
+        "like_count": 1507,
+        "quote_count": 36,
+        "bookmark_count": 451,
+        "impression_count": 462703
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 198,
+            "end": 221,
+            "url": "https://t.co/eOurVAnoKc",
+            "expanded_url": "http://claude.com/product/claude-code#auto-mode",
+            "display_url": "claude.com/product/claude\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052246212942684162/iUCowjbr?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052246212942684162/iUCowjbr?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Claude Code by Anthropic | AI Coding Agent, Terminal, IDE",
+            "description": "Anthropic's agentic coding tool for developers. Claude Code understands your codebase, edits files, runs commands, and helps you ship faster.",
+            "unwound_url": "https://claude.com/product/claude-code"
+          }
+        ]
+      },
+      "created_at": "2026-03-24T18:01:05.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2036503583667933400"
+        }
+      ],
+      "id": "2036503584943034643",
+      "text": "Available now as a research preview on the Team plan. Enterprise and API access rolling out in the coming days.\n\nEnable with claude --enable-auto-mode, then cycle to it with Shift+Tab.\n\nLearn more: https://t.co/eOurVAnoKc"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2036503583667933400"
+      ],
+      "public_metrics": {
+        "retweet_count": 54,
+        "reply_count": 61,
+        "like_count": 2062,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 455689
+      },
+      "created_at": "2026-03-24T18:01:05.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2036503582166393240"
+        }
+      ],
+      "id": "2036503583667933400",
+      "text": "Before each tool call, a classifier reviews it for potentially destructive actions. Safe actions proceed automatically. Risky ones get blocked, and Claude takes a different approach.\n\nThis reduces risk but doesn't eliminate it. We recommend using it in isolated environments."
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2036503582166393240"
+      ],
+      "public_metrics": {
+        "retweet_count": 2910,
+        "reply_count": 2114,
+        "like_count": 39319,
+        "quote_count": 2323,
+        "bookmark_count": 13506,
+        "impression_count": 7740206
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 232,
+            "end": 255,
+            "url": "https://t.co/kHbTN2jrWw",
+            "expanded_url": "https://x.com/claudeai/status/2036503582166393240/video/1",
+            "display_url": "pic.x.com/kHbTN2jrWw",
+            "media_key": "13_2036502255298285568"
+          }
+        ]
+      },
+      "created_at": "2026-03-24T18:01:05.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2036502255298285568"
+        ]
+      },
+      "id": "2036503582166393240",
+      "text": "New in Claude Code: auto mode.\n\nInstead of approving every file write and bash command, or skipping permissions entirely, auto mode lets Claude make permission decisions on your behalf.\n\nSafeguards check each action before it runs. https://t.co/kHbTN2jrWw"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2036195797881028970"
+      ],
+      "public_metrics": {
+        "retweet_count": 92,
+        "reply_count": 97,
+        "like_count": 2762,
+        "quote_count": 14,
+        "bookmark_count": 0,
+        "impression_count": 1022480
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 81,
+            "end": 104,
+            "url": "https://t.co/YhYFTjHZYK",
+            "expanded_url": "https://claude.com/product/cowork#dispatch-and-computer-use",
+            "display_url": "claude.com/product/cowork\u2026",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2051859616750067712/H8830X0g?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2051859616750067712/H8830X0g?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Cowork: Claude Code power for knowledge work | Claude by Anthropic",
+            "description": "Give Claude access to your local files and let it complete tasks autonomously. Claude Cowork brings Claude Code's agentic capabilities to the desktop app for non-technical work.",
+            "unwound_url": "https://claude.com/product/cowork#dispatch-and-computer-use"
+          }
+        ]
+      },
+      "created_at": "2026-03-23T21:38:03.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2036195795100123446"
+        }
+      ],
+      "id": "2036195797881028970",
+      "text": "Available on Pro and Max. \n\nUpdate your desktop app and pair with mobile to try: https://t.co/YhYFTjHZYK"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2036195795100123446"
+      ],
+      "public_metrics": {
+        "retweet_count": 155,
+        "reply_count": 91,
+        "like_count": 3826,
+        "quote_count": 39,
+        "bookmark_count": 691,
+        "impression_count": 1260980
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 231,
+            "end": 254,
+            "url": "https://t.co/HeaBKnPl8D",
+            "expanded_url": "https://x.com/claudeai/status/2036195795100123446/photo/1",
+            "display_url": "pic.x.com/HeaBKnPl8D",
+            "media_key": "3_2036187716052983811"
+          }
+        ]
+      },
+      "created_at": "2026-03-23T21:38:02.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2036195792101212445"
+        }
+      ],
+      "attachments": {
+        "media_keys": [
+          "3_2036187716052983811"
+        ]
+      },
+      "id": "2036195795100123446",
+      "text": "Assign a task from your phone, turn your attention to something else, and come back to finished work on your computer.\n\nTell Claude once to scan your email every morning or pull a report every Friday, and it handles it from there. https://t.co/HeaBKnPl8D"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2036195792101212445"
+      ],
+      "public_metrics": {
+        "retweet_count": 117,
+        "reply_count": 43,
+        "like_count": 4128,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 1488924
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 199,
+            "end": 222,
+            "url": "https://t.co/19b6sl6irI",
+            "expanded_url": "https://x.com/claudeai/status/2036195792101212445/photo/1",
+            "display_url": "pic.x.com/19b6sl6irI",
+            "media_key": "3_2036187611451277312"
+          }
+        ]
+      },
+      "created_at": "2026-03-23T21:38:02.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2036195789601374705"
+        }
+      ],
+      "attachments": {
+        "media_keys": [
+          "3_2036187611451277312"
+        ]
+      },
+      "id": "2036195792101212445",
+      "text": "Claude uses your connected apps first: Slack, Calendar, and other integrations.\n\nWhen there's no connector for the tool you need, it asks for your permission to open the app on your screen directly. https://t.co/19b6sl6irI"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2036195789601374705"
+      ],
+      "public_metrics": {
+        "retweet_count": 14467,
+        "reply_count": 4947,
+        "like_count": 139430,
+        "quote_count": 10671,
+        "bookmark_count": 84588,
+        "impression_count": 77877735
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 237,
+            "end": 260,
+            "url": "https://t.co/sVymgmtEMI",
+            "expanded_url": "https://x.com/claudeai/status/2036195789601374705/video/1",
+            "display_url": "pic.x.com/sVymgmtEMI",
+            "media_key": "13_2036187400414830594"
+          }
+        ]
+      },
+      "created_at": "2026-03-23T21:38:01.000Z",
+      "lang": "en",
+      "attachments": {
+        "media_keys": [
+          "13_2036187400414830594"
+        ]
+      },
+      "id": "2036195789601374705",
+      "text": "You can now enable Claude to use your computer to complete tasks.\n\nIt opens your apps, navigates your browser, fills in spreadsheets\u2014anything you'd do sitting at your desk.\n\nResearch preview in Claude Cowork and Claude Code, macOS only. https://t.co/sVymgmtEMI"
+    },
+    {
+      "edit_history_tweet_ids": [
+        "2035025494677365113"
+      ],
+      "public_metrics": {
+        "retweet_count": 42,
+        "reply_count": 76,
+        "like_count": 674,
+        "quote_count": 0,
+        "bookmark_count": 0,
+        "impression_count": 268897
+      },
+      "entities": {
+        "urls": [
+          {
+            "start": 61,
+            "end": 84,
+            "url": "https://t.co/kWnDq1psWQ",
+            "expanded_url": "https://claude.com/download",
+            "display_url": "claude.com/download",
+            "images": [
+              {
+                "url": "https://pbs.twimg.com/news_img/2052720256813068295/RmWtZPiO?format=jpg&name=orig",
+                "width": 1200,
+                "height": 630
+              },
+              {
+                "url": "https://pbs.twimg.com/news_img/2052720256813068295/RmWtZPiO?format=jpg&name=150x150",
+                "width": 150,
+                "height": 150
+              }
+            ],
+            "status": 200,
+            "title": "Download Claude | Claude by Anthropic",
+            "description": "Download Claude apps for Mac, Windows, iOS, and Android. Install extensions for Chrome, Excel, PowerPoint, and Slack.",
+            "unwound_url": "https://claude.com/download"
+          }
+        ]
+      },
+      "created_at": "2026-03-20T16:07:41.000Z",
+      "lang": "en",
+      "referenced_tweets": [
+        {
+          "type": "replied_to",
+          "id": "2035025492617961704"
+        }
+      ],
+      "id": "2035025494677365113",
+      "text": "Update or download the Claude desktop app to give it a try:  https://t.co/kWnDq1psWQ"
+    }
+  ],
+  "media": [
+    {
+      "duration_ms": 38791,
+      "media_key": "13_2053935379166687232",
+      "preview_image_url": "https://pbs.twimg.com/media/HIEVJQ4XoAAXNNi.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2053935379166687232/vid/avc1/1920x1080/mzozaeSl3bLiomWe.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2053935379166687232/vid/avc1/1280x720/E51_qLJN8y60pPns.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2053935379166687232/pl/I6T0fHHZNao8V2Ma.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2053935379166687232/vid/avc1/480x270/5V2nb5elDrslb7az.mp4"
+        },
+        {
+          "bit_rate": 25128000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2053935379166687232/vid/avc1/3840x2160/blJrzjlcZtyj_LfB.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2053935379166687232/vid/avc1/640x360/lgCAzluDCy3ltyA3.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HIDIVDAXoAAjPvW.png",
+      "media_key": "3_2053861693990608896",
+      "type": "photo",
+      "alt_text": "The Claude Platform on AWS is generally available"
+    },
+    {
+      "duration_ms": 87333,
+      "media_key": "13_2052441205993009153",
+      "preview_image_url": "https://pbs.twimg.com/media/HHvBDZtXoAQrdOi.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2052441205993009153/vid/avc1/480x270/YQRLVRi-AL-tXQzr.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2052441205993009153/vid/avc1/1920x1080/6xiMqKMJrLXcoAQk.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2052441205993009153/vid/avc1/1280x720/qm_50JxbcFL1e-fp.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2052441205993009153/pl/VhoDQHdhvFcfvTKW.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2052441205993009153/vid/avc1/640x360/kewgj6nSu7AULVAx.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HHpiz0XXIAQKrvV.jpg",
+      "media_key": "3_2052061222590160900",
+      "type": "photo",
+      "alt_text": "Multiagent orchestration in Claude Managed Agents"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HHpitYfW4AIHHfT.jpg",
+      "media_key": "3_2052061112028291074",
+      "type": "photo",
+      "alt_text": "New in Claude Managed Agents: dreaming, now in research preview"
+    },
+    {
+      "duration_ms": 16730,
+      "media_key": "13_2052061005652385793",
+      "preview_image_url": "https://pbs.twimg.com/media/HH0nwVrWsAMBys4.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2052061005652385793/pl/l_IGZ9Gxnc7usFvf.m3u8"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2052061005652385793/vid/avc1/480x270/WjwneZzZgmWDam8q.mp4"
+        },
+        {
+          "bit_rate": 25128000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2052061005652385793/vid/avc1/3840x2160/k2RFKD6u_U5LbmQW.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2052061005652385793/vid/avc1/1920x1080/k5KZMBe39TnvEIqA.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2052061005652385793/vid/avc1/640x360/jMc3XJbax97xPinc.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2052061005652385793/vid/avc1/1280x720/TOtN0e0FZu04qYUQ.mp4"
+        }
+      ]
+    },
+    {
+      "duration_ms": 63500,
+      "media_key": "13_2051674540569223171",
+      "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2051674540569223171/img/qWwa0o2zI4kQaVf4.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2051674540569223171/vid/avc1/1920x1080/A70dFiMxYcknTXX3.mp4"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2051674540569223171/vid/avc1/480x270/YJ9tTCoU4MbQi0Ci.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2051674540569223171/vid/avc1/640x360/TZrqZHkP635dRrZh.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2051674540569223171/vid/avc1/1280x720/xhCOzlaBrzfk6dnQ.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2051674540569223171/pl/lG_YjO_irYaFZt2o.m3u8?v=893"
+        }
+      ]
+    },
+    {
+      "duration_ms": 18435,
+      "media_key": "13_2050249102663835648",
+      "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2050249102663835648/img/OAdlqExTTwYWuntW.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 632000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2050249102663835648/vid/avc1/320x400/PhRM4g1EHQgXt1bc.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2050249102663835648/vid/avc1/1080x1350/osZEv2-ZDHCW56TW.mp4"
+        },
+        {
+          "bit_rate": 950000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2050249102663835648/vid/avc1/480x600/Er9GZCIcg9IgzDZD.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2050249102663835648/vid/avc1/720x900/bsjl_TsMDNZL7P9T.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2050249102663835648/pl/sNcVGfFawqyUWnzz.m3u8?v=cfc"
+        }
+      ]
+    },
+    {
+      "duration_ms": 50000,
+      "media_key": "13_2049892644424232960",
+      "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2049892644424232960/img/_QLxk_1X_bYfnxJY.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049892644424232960/vid/avc1/480x270/5qvtzTS3tYgvAob4.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049892644424232960/vid/avc1/1280x720/gXXb1Uf7aXhIx_fs.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2049892644424232960/pl/Oet50Y3y-y-6AcZM.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049892644424232960/vid/avc1/640x360/7DR7j81e4qTVeaCf.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049892644424232960/vid/avc1/1920x1080/uCif1QH1-Mt11dyW.mp4"
+        }
+      ]
+    },
+    {
+      "duration_ms": 74000,
+      "media_key": "13_2049137040621719552",
+      "preview_image_url": "https://pbs.twimg.com/media/HHAFdofXcAEcwA_.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049137040621719552/vid/avc1/1920x1080/DyL8SSdCb1SeiEdo.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049137040621719552/vid/avc1/1280x720/bI2jzUzsZNWaXTKQ.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049137040621719552/vid/avc1/640x360/CFzScDv4QZvhzfja.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2049137040621719552/pl/qsDCjdHyuYcq7kwi.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049137040621719552/vid/avc1/480x270/uC1PhZkR2NZfkleH.mp4"
+        }
+      ]
+    },
+    {
+      "duration_ms": 55041,
+      "media_key": "13_2049136962385375235",
+      "preview_image_url": "https://pbs.twimg.com/media/HHAFgitW8AA3O9K.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2049136962385375235/pl/_OK42pyHe3VNCBpO.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049136962385375235/vid/avc1/480x270/4JcYp954lDipOmsm.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049136962385375235/vid/avc1/1920x1080/L1mHEpLAiU0JZJ_R.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049136962385375235/vid/avc1/640x360/RiLI4SaQyVqlnVfZ.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2049136962385375235/vid/avc1/1280x720/K83A7h_7MfAiBeVO.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HGneA3MXYAAfUnH.jpg",
+      "media_key": "3_2047411612013780992",
+      "type": "photo",
+      "alt_text": "Memory on Claude Managed Agents is now in public beta"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HGmzBPuWUAAuwN0.jpg",
+      "media_key": "3_2047364339598774272",
+      "type": "photo",
+      "alt_text": "New connectors in the Claude directory"
+    },
+    {
+      "duration_ms": 71000,
+      "media_key": "13_2047363978871918592",
+      "preview_image_url": "https://pbs.twimg.com/media/HGnK3OPX0AANx-P.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2047363978871918592/vid/avc1/1920x1080/O4jmipBcR_ghRunR.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2047363978871918592/vid/avc1/1280x720/0KfE8TM-zFJTDACc.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2047363978871918592/pl/mo8GKwkVAh77sJEf.m3u8?v=cd4"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2047363978871918592/vid/avc1/480x270/7cMLfAYxHfOfBOn5.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2047363978871918592/vid/avc1/640x360/LA6tCZ-uPFkDzVLB.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HGYC0aEbcAA6EJY.jpg",
+      "media_key": "3_2046326180060819456",
+      "type": "photo",
+      "alt_text": "Live Artifacts, now in Claude Cowork"
+    },
+    {
+      "duration_ms": 7750,
+      "media_key": "13_2045248139087454208",
+      "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2045248139087454208/img/8vHRwy4hhj-j5-pQ.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 632000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2045248139087454208/vid/avc1/320x400/qPaqSkXs1X9Kx7ta.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2045248139087454208/pl/f7UshV5NNHBmLVpm.m3u8"
+        },
+        {
+          "bit_rate": 950000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2045248139087454208/vid/avc1/480x600/osegBB8OsvO-fL1D.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2045248139087454208/vid/avc1/1080x1350/PzZHuYkA_hryRlxt.mp4"
+        },
+        {
+          "bit_rate": 25128000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2045248139087454208/vid/avc1/2160x2700/k3pM_09knFS6krhU.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2045248139087454208/vid/avc1/720x900/EPAT__nEDu6dnz7R.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HGIWPlZWEAAB61l.jpg",
+      "media_key": "3_2045221637771890688",
+      "type": "photo",
+      "alt_text": "Claude for Word, now on Pro and Max"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HGHabkFXgAAzJ2P.jpg",
+      "media_key": "3_2045155872880427008",
+      "type": "photo"
+    },
+    {
+      "duration_ms": 81500,
+      "media_key": "13_2045155754038935553",
+      "preview_image_url": "https://pbs.twimg.com/media/HGHbgwcWgAA_oCx.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2045155754038935553/vid/avc1/640x360/UVgHmrAvrUMdSNa1.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2045155754038935553/vid/avc1/1920x1080/X8tXHs1RLlKGlJJS.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2045155754038935553/pl/dipi5oezuJKSYTOz.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2045155754038935553/vid/avc1/1280x720/ZlyVsbXArxWaNQMC.mp4"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2045155754038935553/vid/avc1/480x270/a85jQDVNL1UMvA_2.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HGCGugrXUAAKcHp.jpg",
+      "media_key": "3_2044782364430127104",
+      "type": "photo",
+      "alt_text": "Claude Opus 4.7 Benchmarks"
+    },
+    {
+      "duration_ms": 37116,
+      "media_key": "13_2044127347616407552",
+      "preview_image_url": "https://pbs.twimg.com/media/HF43A0sXYAA494v.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2044127347616407552/vid/avc1/1280x720/TptIlOKu7qCELMKP.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2044127347616407552/vid/avc1/640x360/wu5W60QenleB0CBO.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2044127347616407552/vid/avc1/2560x1440/KRnAlP4drTrKYDYo.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2044127347616407552/pl/rdnTnkmwxbyqWBa-.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2044127347616407552/vid/avc1/480x270/thszc0NY3N-tDhAQ.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HF4TbfxbAAASzB6.jpg",
+      "media_key": "3_2044092643978969088",
+      "type": "photo",
+      "alt_text": "Now in research preview: routines in Claude Code"
+    },
+    {
+      "duration_ms": 57250,
+      "media_key": "13_2042648096434270208",
+      "preview_image_url": "https://pbs.twimg.com/media/HFkGCDGXcAAexOZ.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2042648096434270208/vid/avc1/480x270/KfrKfJN9y5wbPW7J.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2042648096434270208/vid/avc1/1920x1080/bKlmMghf6IWdpD8Z.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2042648096434270208/vid/avc1/1280x720/MG8FGnNeh3gnc2pp.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2042648096434270208/pl/RgnfWm5KnTHwBoxX.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2042648096434270208/vid/avc1/640x360/GzWtBUuV0SpWV2T0.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HFe16IUXQAAC2fJ.png",
+      "media_key": "3_2042300966305742848",
+      "type": "photo",
+      "alt_text": "Sonnet with an Opus advisor vs. Sonnet alone scoring on SWE-bench Multilingual"
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HFe1a_PWUAACcm3.png",
+      "media_key": "3_2042300431292846080",
+      "type": "photo",
+      "alt_text": "The advisor strategy on the Claude Platform"
+    },
+    {
+      "duration_ms": 33000,
+      "media_key": "13_2042266051392458752",
+      "preview_image_url": "https://pbs.twimg.com/media/HFede2fXoAABUvg.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2042266051392458752/vid/avc1/480x270/zyiS-nIIdAq0WBWM.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2042266051392458752/vid/avc1/1280x720/nq9VFoFzO2504TzV.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2042266051392458752/vid/avc1/640x360/k_Cm-O2lAwebRf69.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2042266051392458752/vid/avc1/1920x1080/RHriwqP3N1QKBx19.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2042266051392458752/pl/OJ78zitpB25JAle4.m3u8?v=cfc"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HFZYTGQXMAAnwB7.png",
+      "media_key": "3_2041916566179098624",
+      "type": "photo"
+    },
+    {
+      "duration_ms": 59041,
+      "media_key": "13_2041916153136603136",
+      "preview_image_url": "https://pbs.twimg.com/media/HFZiwfuWkAEHrrV.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2041916153136603136/pl/BrOhy51Mx1PjLdMb.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2041916153136603136/vid/avc1/1280x720/t8Dk6c-a6fkDtRV3.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2041916153136603136/vid/avc1/640x360/F26ZreknonheI9W4.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2041916153136603136/vid/avc1/1920x1080/g98uJH0IZITToAdK.mp4"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2041916153136603136/vid/avc1/480x270/Io8OQ6xxWDWI4651.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HE_WzzKagAAqxel.png",
+      "media_key": "3_2040085341617684480",
+      "type": "photo"
+    },
+    {
+      "duration_ms": 45050,
+      "media_key": "13_2038658389862146048",
+      "preview_image_url": "https://pbs.twimg.com/media/HErKxqCXAAAJ8Y-.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2038658389862146048/vid/avc1/480x270/uvZ1jUbYJzuLt7Wk.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2038658389862146048/pl/ZCYprkUK7bth-_UU.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2038658389862146048/vid/avc1/2560x1440/RWKrt5E3VVtmNIUK.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2038658389862146048/vid/avc1/640x360/uRbhiIoYbQYd7Q3W.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2038658389862146048/vid/avc1/1280x720/1h6ff8AQLUduqFQW.mp4"
+        }
+      ]
+    },
+    {
+      "duration_ms": 52250,
+      "media_key": "13_2036847517044764673",
+      "preview_image_url": "https://pbs.twimg.com/media/HERZMCobgAAx9PR.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036847517044764673/vid/avc1/640x360/-hAQ7QrRWnWLIatF.mp4"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036847517044764673/vid/avc1/1280x720/qj5yrV_9yBgp5xos.mp4"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036847517044764673/vid/avc1/480x270/zB6oLlcfQtGA3z2T.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2036847517044764673/pl/trwGUm-EaOrfVQkO.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036847517044764673/vid/avc1/1920x1080/_fY8NYSp8iSkTETl.mp4"
+        }
+      ]
+    },
+    {
+      "duration_ms": 12683,
+      "media_key": "13_2036502255298285568",
+      "preview_image_url": "https://pbs.twimg.com/media/HEMdixybkAAgCdV.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036502255298285568/vid/avc1/1280x720/8Xef6CxoT2A2DNgQ.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2036502255298285568/pl/hjdn1GSjexfjIYKJ.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036502255298285568/vid/avc1/2560x1440/aiqBaCfI9QvpHLq1.mp4"
+        },
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036502255298285568/vid/avc1/640x360/o8yOzZWjemppec5S.mp4"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036502255298285568/vid/avc1/480x270/Q28UkZjTcat3NcYB.mp4"
+        }
+      ]
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HEH98IdaIAMyLIK.jpg",
+      "media_key": "3_2036187716052983811",
+      "type": "photo",
+      "alt_text": "A phone showing a Dispatch conversation where a user assigns Claude a task, alongside a desktop running the dev server and browser to complete it."
+    },
+    {
+      "url": "https://pbs.twimg.com/media/HEH92CyawAA02le.jpg",
+      "media_key": "3_2036187611451277312",
+      "type": "photo",
+      "alt_text": "Two dialog boxes showing Claude requesting permission to use specific apps like Finder and Google Chrome, with options to deny or allow for the session."
+    },
+    {
+      "duration_ms": 73333,
+      "media_key": "13_2036187400414830594",
+      "preview_image_url": "https://pbs.twimg.com/media/HEIFrMWaIAIHvE0.jpg",
+      "type": "video",
+      "variants": [
+        {
+          "bit_rate": 832000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036187400414830594/vid/avc1/640x360/KD0-TVWBlc855AXs.mp4"
+        },
+        {
+          "bit_rate": 10368000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036187400414830594/vid/avc1/1920x1080/TZcHG66FFn4n6Qyn.mp4"
+        },
+        {
+          "bit_rate": 256000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036187400414830594/vid/avc1/480x270/XFvJ-IOYF7hUI0Mz.mp4"
+        },
+        {
+          "content_type": "application/x-mpegURL",
+          "url": "https://video.twimg.com/amplify_video/2036187400414830594/pl/fOn98CvpB4IlRzFl.m3u8?v=cfc"
+        },
+        {
+          "bit_rate": 2176000,
+          "content_type": "video/mp4",
+          "url": "https://video.twimg.com/amplify_video/2036187400414830594/vid/avc1/1280x720/wqwk0GN24GIQabEU.mp4"
+        }
+      ]
+    }
+  ]
+}

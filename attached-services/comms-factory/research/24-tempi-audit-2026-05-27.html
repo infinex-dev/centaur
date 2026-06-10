@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>24-Tempi audit — 2026-05-27</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-muted: #555;
+    --bg: #fbfaf7;
+    --rule: #d8d4c8;
+    --accent: #7a3b00;
+    --code-bg: #f1eee6;
+    --canon-bg: #eef4ee;
+    --canon-border: #5a8d5a;
+    --fix-bg: #fbeded;
+    --fix-border: #b04a4a;
+  }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    padding: 48px 24px 96px;
+  }
+  main {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  h1, h2, h3, h4 {
+    font-family: -apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-top: 2.2em;
+    margin-bottom: 0.6em;
+  }
+  h1 { font-size: 1.9em; margin-top: 0.2em; border-bottom: 2px solid var(--ink); padding-bottom: 0.3em; }
+  h2 { font-size: 1.45em; border-bottom: 1px solid var(--rule); padding-bottom: 0.25em; }
+  h3 { font-size: 1.18em; color: var(--accent); }
+  h4 { font-size: 1.02em; margin-top: 1.6em; font-weight: 700; }
+  p { margin: 0.7em 0; }
+  hr { border: none; border-top: 1px solid var(--rule); margin: 2.4em 0; }
+  strong { color: #000; }
+  em { color: var(--ink); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  code {
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font: 0.9em/1.4 "SF Mono","Menlo","Consolas",monospace;
+    color: #5a3000;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 14px 18px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font: 0.86em/1.5 "SF Mono","Menlo","Consolas",monospace;
+    border-left: 3px solid var(--accent);
+  }
+  pre code { background: transparent; padding: 0; color: var(--ink); font-size: 1em; }
+  blockquote {
+    border-left: 3px solid var(--rule);
+    margin: 1em 0;
+    padding: 0.2em 1em;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.93em;
+  }
+  th, td {
+    border: 1px solid var(--rule);
+    padding: 7px 11px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--code-bg); font-family: -apple-system,sans-serif; font-weight: 600; font-size: 0.92em; }
+  tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  /* Per-row hint colouring for ts code blocks containing canonical_shorthand and FIX */
+  pre.fix-row { border-left-color: var(--fix-border); background: var(--fix-bg); }
+  pre.canon-row { border-left-color: var(--canon-border); background: var(--canon-bg); }
+  /* Sticky table-of-contents trail at top */
+  .meta {
+    font-family: -apple-system,sans-serif;
+    color: var(--ink-muted);
+    font-size: 0.86em;
+    margin-bottom: 1em;
+  }
+  .meta a { margin-right: 1em; }
+  @media (max-width: 640px) {
+    body { padding: 24px 14px 64px; font-size: 15px; }
+    h1 { font-size: 1.55em; }
+    table { font-size: 0.85em; }
+  }
+</style>
+</head>
+<body>
+<main>
+<div class="meta">
+  <a href="#tldr">TL;DR</a>
+  <a href="#canonical-anchors-terminology-used-below">Canon</a>
+  <a href="#the-audited-table-all-24-rows">24-row table</a>
+  <a href="#critical-fixes-summary">Critical fixes</a>
+  <a href="#answers-to-the-six-audit-questions">Q&amp;A</a>
+  <a href="#recommended-next-steps-no-code-yet">Next steps</a>
+</div>
+<article id="content">Loading&hellip;</article>
+</main>
+
+<script id="md-source" type="text/markdown">
+# 24-Tempi classification table — canonical audit
+
+**Date:** 2026-05-27
+**Target:** `src/actor-memory.ts` lines 90-114 (`MIRODAN_24_TEMPI`)
+**Mandate:** audit, do not rewrite code. Return the audited table; we decide what goes in the Director prompt vs. a longer human reference.
+**Canon used:** Mirodan PhD 1997 Vol 2 (printed pp. 263-575); ch1-4 markdown extracts; Laban-Mirodan reference 2026-04-28; working-actions.md skill reference.
+
+---
+
+## TL;DR
+
+1. **Names are correct.** All 24 tempo names in the current code match Mirodan's canonical Variation labels (Commanding, Practical, Sombre, Irradiant, etc.). No renames needed.
+2. **The structural shape is right.** 4 Variations × 6 Inner Attitudes = 24. Mirodan uses "Variation" and "tempo" interchangeably. The 24-row table is a faithful synthesis.
+3. **`Adream outer` is mislabelled.** Adream is a baseline Inner Attitude (Weight + Flow), not an outer-only Action Attitude. Mobile, Remote, Awake are the three outer-only attitudes. Strip "outer" from the four Adream rows.
+4. **8 motor arrows point the wrong way structurally.** Strict prep→release ordering (`Sustained → Quick`) is canonical ONLY for the four classic Working-Action partners (Pressing→Punching, Wringing→Slashing, Gliding→Dabbing, Floating→Flicking). Near and Awake have no Flow axis — their two-motif rows co-exist on the same Time pole and should use `/` not `->`. Mobile already uses `/` correctly. **Eight Near + Awake rows currently lie about temporal order.** (See Critical Fixes §3.)
+5. **About half the operator hints drift into theatre-ish slop** (`institutional landing`, `manifesto-force`, `wall-coming-down thesis`, `quiet vision-arrival`). Mirodan never used this vocabulary. The 24-Outer-Interpretation quotes from Vol 2 are the canonical shorthand — short, grounded, and usable.
+6. **Recommended schema change:** split `classification_hint` into two fields — `canonical_shorthand` (Mirodan quote, locked) and `operator_hint` (modern-prose translation, mutable). Director receives both, knows which is canon.
+7. **Single hint per row is correct.** No need to double rows for introvert/extravert (that split lives at the Subconscious Motif level on the Flow axis, not at the Variation level) or for prep/release (that's an internal arc within one Working-Action motor, not two scoring units).
+
+---
+
+## 1. Canonical anchors (terminology used below)
+
+**Six Inner Attitudes** (Mirodan p. 374, p. 487/409/453/503/432/474):
+
+| Attitude | Effort-factor pair | Inner / Outer? |
+|---|---|---|
+| **Stable** | Weight + Space | Inner (baseline-eligible) |
+| **Near** | Weight + Time | Inner (baseline-eligible) |
+| **Adream** | Weight + Flow | Inner (baseline-eligible) |
+| **Mobile** | Time + Flow | Outer-only (Action Attitude under Stress) |
+| **Remote** | Space + Flow | Outer-only (Action Attitude under Stress) |
+| **Awake** | Space + Time | Outer-only (Action Attitude under Stress) |
+
+The 24 Variations = 4 Variations × 6 Attitudes. Mirodan never bundles them as a single master table; she presents the four Variations of each Attitude inside Ch II of Vol 2.
+
+**Mirodan's column structure per Variation:** `Variation (factor pair) | Label | Subconscious Motifs | Outer Interpretation`. The current code keeps `Variation`, `Label` (=name), and `Subconscious Motifs` (=motor). It collapses `Outer Interpretation` into a free-form `classification_hint`. That's the field this audit reworks.
+
+**Working Actions (Laban basic Effort Actions, Mirodan p. 341):**
+
+| Working Action | Weight | Space | Time |
+|---|---|---|---|
+| Floating | light | flexible | sustained |
+| Flicking | light | flexible | quick |
+| Gliding | light | direct | sustained |
+| Dabbing | light | direct | quick |
+| Wringing | strong | flexible | sustained |
+| Slashing | strong | flexible | quick |
+| Pressing | strong | direct | sustained |
+| Punching | strong | direct | quick |
+
+**Prep→Release pairings (Mirodan p. 347-348, Carpenter):** Sustained = inner preparation (introvert / past), Quick = outer execution (extravert / future). The four canonical pairs are:
+
+- Pressing → Punching
+- Wringing → Slashing
+- Gliding → Dabbing
+- Floating → Flicking
+
+These are the ONLY pairings where `->` is structurally correct. Same-Time-pole pairs (two Sustained, or two Quick) co-exist within a Variation — Mirodan writes them with `/`, not `→`.
+
+---
+
+## 2. The audited table — all 24 rows
+
+Schema used per row (matches the user's requested shape):
+
+```ts
+{
+  name,                 // unchanged from current code
+  attitude,             // corrected where needed
+  factor_shape,         // unchanged
+  motor,                // arrow/slash corrected
+  canonical_shorthand,  // Mirodan Outer Interpretation quote (Vol 2)
+  operator_hint,        // proposed modern-prose translation (replaces current hint)
+  source_refs,          // Vol 2 page
+  confidence,           // high | medium | low
+  notes,                // flags + diffs from current
+}
+```
+
+Throughout: `(C)` = current value, `(P)` = proposed value.
+
+---
+
+### Stable (Weight × Space, no Flow axis, no Fusions) — Vol 2 pp. 487-498
+
+#### 1. commanding
+```ts
+{
+  name: "commanding",
+  attitude: "Stable",
+  factor_shape: "Strong + Direct",
+  motor: "Pressing -> Punching",
+  canonical_shorthand: "Commanding demonstration or acceptance of a 'bold resolve'",
+  operator_hint: "Bold-resolve pressure landing as a single direct decision; no ornament around it.",
+  source_refs: ["Mirodan Vol 2 p. 494"],
+  confidence: "high",
+  notes: "Motor pair canonical (classic Sustained→Quick). (C) hint 'decisive pressure, institutional landing, no ornament' — 'institutional landing' is operator vibes not in canon; replaced."
+}
+```
+
+#### 2. practical
+```ts
+{
+  name: "practical",
+  attitude: "Stable",
+  factor_shape: "Strong + Flexible",
+  motor: "Wringing -> Slashing",
+  canonical_shorthand: "Developing intention to cast or to submit to a 'spell-binding power'",
+  operator_hint: "Strong-flexible intention working through complexity before the cut; the carving is earned by the wring.",
+  source_refs: ["Mirodan Vol 2 p. 495"],
+  confidence: "high",
+  notes: "Motor pair canonical. (C) hint 'works through complexity, carves an answer, tradeoff-aware' — directionally fine but loses Mirodan's 'spell-binding power' framing. Use Mirodan's 'casting/submitting to a spell' as canonical anchor; operator_hint can keep 'carves an answer' shorthand."
+}
+```
+
+#### 3. self-contained
+```ts
+{
+  name: "self-contained",
+  attitude: "Stable",
+  factor_shape: "Light + Direct",
+  motor: "Gliding -> Dabbing",
+  canonical_shorthand: "Cautious expression or cautious acceptance of a 'gentle deference'",
+  operator_hint: "Cautious light-direct delivery; states without pushing.",
+  source_refs: ["Mirodan Vol 2 p. 497"],
+  confidence: "high",
+  notes: "Motor pair canonical. (C) hint 'confident-light, informational, does not push' — 'confident' contradicts Mirodan's 'cautious'. Reframe."
+}
+```
+
+#### 4. receptive
+```ts
+{
+  name: "receptive",
+  attitude: "Stable",
+  factor_shape: "Light + Flexible",
+  motor: "Floating -> Flicking",
+  canonical_shorthand: "Receptive acceptance or receptive rejection of a 'welcoming tenderness'",
+  operator_hint: "Light-flexible accept-or-reject; the welcome is present even in refusal.",
+  source_refs: ["Mirodan Vol 2 p. 495"],
+  confidence: "high",
+  notes: "Motor pair canonical. (C) hint 'open, generous, incorporates feedback without collapse' — modernised but reads as product-manager prose, drops Mirodan's 'tenderness' tonality. Tighten."
+}
+```
+
+---
+
+### Adream (Weight × Flow, Fusions present) — Vol 2 pp. 453-469
+
+**Attitude correction:** current code labels these "Adream outer". Adream is an **Inner** Attitude (baseline-eligible). Strip "outer".
+
+#### 5. sombre
+```ts
+{
+  name: "sombre",
+  attitude: "Adream",  // was "Adream outer" — correct to "Adream"
+  factor_shape: "Strong + Bound",
+  motor: "Pressing -> Punching",
+  canonical_shorthand: "Overpowering, sombre unawareness of a 'staunch resolve' or of an 'aggressive resolve'",
+  operator_hint: "Sombre gravity carrying a staunch resolve; weight earned through bound flow.",
+  source_refs: ["Mirodan Vol 2 p. 460"],
+  confidence: "high",
+  notes: "Motor pair canonical (Bound = introvert Motif). (C) hint 'gravity, weight of conviction, slow wall-coming-down thesis' — 'wall-coming-down thesis' is operator metaphor not in canon; remove."
+}
+```
+
+#### 6. overpowering
+```ts
+{
+  name: "overpowering",
+  attitude: "Adream",
+  factor_shape: "Strong + Free",
+  motor: "Wringing -> Slashing",
+  canonical_shorthand: "Irradiant intention of 'casting a spell' or of 'being spell-bound'",
+  operator_hint: "Strong-free spell-casting force; Free Flow makes it irradiant rather than sombre.",
+  source_refs: ["Mirodan Vol 2 p. 465"],
+  confidence: "high",
+  notes: "Motor pair canonical. (C) hint 'manifesto-force, emotional conviction, risky if overused' — 'manifesto-force' is operator vibes; 'risky if overused' is a use-policy note that belongs in placement docs not in the taxonomy. Remove both."
+}
+```
+
+#### 7. diffused
+```ts
+{
+  name: "diffused",
+  attitude: "Adream",
+  factor_shape: "Light + Bound",
+  motor: "Gliding -> Dabbing",
+  canonical_shorthand: "Diffused sensation of a 'welcome feeling' or of an 'irreconcilable feeling'",
+  operator_hint: "Light-bound sensation, welcome or irreconcilable; quiet and unfocused.",
+  source_refs: ["Mirodan Vol 2 p. 468"],
+  confidence: "high",
+  notes: "Motor pair canonical. (C) hint 'quiet vision-arrival, post-launch reflective wonder' — 'vision-arrival' and 'post-launch' are domain jargon not in canon. Replace."
+}
+```
+
+#### 8. irradiant
+```ts
+{
+  name: "irradiant",
+  attitude: "Adream",
+  factor_shape: "Light + Free",
+  motor: "Floating -> Flicking",
+  canonical_shorthand: "Irradiant unfolding or irradiant enfolding of a 'sympathetic exultation'",
+  operator_hint: "Light-free unfolding or enfolding; sympathetic, buoyant, exultant.",
+  source_refs: ["Mirodan Vol 2 p. 462"],
+  confidence: "high",
+  notes: "Motor pair canonical. (C) hint 'future-warmth, buoyant release, generous lift' — 'future-warmth' isn't in canon. 'Buoyant' is fine and tracks 'exultation'. Refactor."
+}
+```
+
+---
+
+### Near (Weight × Time, no Flow axis, no Fusions) — Vol 2 pp. 409-431
+
+**Motor notation correction:** Near has no Flow axis. Two-Motif rows co-exist on the same Time pole, not in prep→release order. **Use `/` not `->`.**
+
+#### 9. materialistic
+```ts
+{
+  name: "materialistic",
+  attitude: "Near",
+  factor_shape: "Strong + Quick",
+  motor: "Punching / Slashing",  // was "Punching -> Slashing" — both Quick, co-existing
+  canonical_shorthand: "A sudden aggressive intention towards or away from a 'materialistic desire'",
+  operator_hint: "Sudden Strong-Quick aggressive intention either towards or away from a desire.",
+  source_refs: ["Mirodan Vol 2 p. 423; Carpenter Book p. 22"],
+  confidence: "high",
+  notes: "FIX: motor arrow. Both Punching and Slashing are Quick; they don't pair as prep→release. Strict prep→release lives only on the four classic Sus→Q pairs. (C) hint 'sudden aggressive intent, body-forward contact' — 'body-forward contact' is operator vibes; replace."
+}
+```
+
+#### 10. human
+```ts
+{
+  name: "human",
+  attitude: "Near",
+  factor_shape: "Light + Sustained",
+  motor: "Floating / Gliding",  // was "Floating -> Gliding"
+  canonical_shorthand: "Slow decision to express or reject a 'gentle tenderness'",
+  operator_hint: "Slow Light-Sustained decision for or against a gentle tenderness.",
+  source_refs: ["Mirodan Vol 2 p. 426"],
+  confidence: "high",
+  notes: "FIX: motor arrow. Both Floating and Gliding are Sustained — same Time pole. (C) hint 'slow tenderness, human contact, gentle continuance' — 'continuance' is non-canonical; 'tenderness' tracks Mirodan."
+}
+```
+
+#### 11. warm
+```ts
+{
+  name: "warm",
+  attitude: "Near",
+  factor_shape: "Strong + Sustained",
+  motor: "Pressing / Wringing",  // was "Pressing -> Wringing"
+  canonical_shorthand: "A staunch intention of 'warm consent' or of 'warm dissent'",
+  operator_hint: "Strong-Sustained staunch intention; warm consent or warm dissent — same heat, both poles.",
+  source_refs: ["Mirodan Vol 2 p. 427"],
+  confidence: "high",
+  notes: "FIX: motor arrow. Both Pressing and Wringing are Sustained. (C) hint 'warm consent, held relational force' — 'held relational force' is operator vibes; drop."
+}
+```
+
+#### 12. cool
+```ts
+{
+  name: "cool",
+  attitude: "Near",
+  factor_shape: "Light + Quick",
+  motor: "Dabbing / Flicking",  // was "Dabbing -> Flicking"
+  canonical_shorthand: "Sudden pert intention of 'intimacy' or of 'estrangement'",
+  operator_hint: "Sudden Light-Quick pert intention; intimacy or estrangement.",
+  source_refs: ["Mirodan Vol 2 p. 429"],
+  confidence: "high",
+  notes: "FIX: motor arrow. Both Dabbing and Flicking are Quick. (C) hint 'pert intimacy, quick light contact, casual social snap' — 'casual social snap' is operator phrasing; tighten."
+}
+```
+
+---
+
+### Mobile (Time × Flow, Fusions present, outer-only) — Vol 2 pp. 503-521
+
+Mobile is outer-only (Action Attitude). Current code already uses `/` correctly here.
+
+#### 13. unacknowledged
+```ts
+{
+  name: "unacknowledged",
+  attitude: "Mobile outer",
+  factor_shape: "Quick + Bound",
+  motor: "Punching / Slashing",
+  canonical_shorthand: "Concealed sudden decision accepting or denying an 'unacknowledged feeling'",
+  operator_hint: "Concealed sudden decision around a feeling the speaker won't name.",
+  source_refs: ["Mirodan Vol 2 p. 514"],
+  confidence: "high",
+  notes: "Motor co-existence canonical. (C) hint 'self-concealed aggression, hurried cover' — 'aggression' overshoots Mirodan's 'feeling'. Reframe."
+}
+```
+
+#### 14. acknowledged
+```ts
+{
+  name: "acknowledged",
+  attitude: "Mobile outer",
+  factor_shape: "Sustained + Free",
+  motor: "Floating / Gliding",
+  canonical_shorthand: "Slow revelation of enjoying or evading 'affection'",
+  operator_hint: "Slow Free-flowing revelation; enjoying or evading affection.",
+  source_refs: ["Mirodan Vol 2 p. 515"],
+  confidence: "high",
+  notes: "Motor co-existence canonical. (C) hint 'easy disclosure, flowing admission' — directionally OK but drops the affection axis."
+}
+```
+
+#### 15. revealed
+```ts
+{
+  name: "revealed",
+  attitude: "Mobile outer",
+  factor_shape: "Quick + Free",
+  motor: "Dabbing / Flicking",
+  canonical_shorthand: "Sudden revelation expressing or rejecting an 'ardent sympathy'",
+  operator_hint: "Sudden Free-flowing revelation; expressing or rejecting ardent sympathy.",
+  source_refs: ["Mirodan Vol 2 p. 518"],
+  confidence: "high",
+  notes: "Motor co-existence canonical. (C) hint 'sudden disclosure, quick release into visibility' — 'release into visibility' is operator vibes; drops 'sympathy'."
+}
+```
+
+#### 16. concealed
+```ts
+{
+  name: "concealed",
+  attitude: "Mobile outer",
+  factor_shape: "Sustained + Bound",
+  motor: "Pressing / Wringing",
+  canonical_shorthand: "A slow decision in favour or against a 'frigid self-assertion'",
+  operator_hint: "Slow Bound-flow decision for or against a frigid self-assertion.",
+  source_refs: ["Mirodan Vol 2 p. 520"],
+  confidence: "high",
+  notes: "Motor co-existence canonical. (C) hint 'withheld weight, sustained concealment' — 'withheld weight' captures Strong-Sustained but drops Mirodan's 'frigid self-assertion'. Reframe.\n\nKNOWN UPSTREAM TYPO: laban-mirodan-reference-2026-04-28.md lists Mobile Sus/Bound → Sus/Free Fusion as 'Wringing → Flicking'; canon (p. 522) says 'Wringing → Gliding'. Not used in this row but flagged for the reference fix."
+}
+```
+
+---
+
+### Remote (Space × Flow, Fusions present, outer-only) — Vol 2 pp. 432-449
+
+#### 17. egocentric
+```ts
+{
+  name: "egocentric",
+  attitude: "Remote outer",
+  factor_shape: "Direct + Bound",
+  motor: "Pressing -> Punching",
+  canonical_shorthand: "Narrowing egocentric withdrawal into or rejection of an 'unsociable solitude'",
+  operator_hint: "Narrowing withdrawal; the line is drawn directly, with bound flow.",
+  source_refs: ["Mirodan Vol 2 p. 442"],
+  confidence: "high",
+  notes: "Motor pair canonical (classic Sus→Q on the Bound/Free Flow axis; Pressing is Bound-introvert, Punching is the Free-Flow release within the Fusion). (C) hint 'cold line-in-sand, direct withdrawal, no warmth' — 'line-in-sand' is operator metaphor; 'no warmth' is fine but redundant."
+}
+```
+
+#### 18. altruistic
+```ts
+{
+  name: "altruistic",
+  attitude: "Remote outer",
+  factor_shape: "Flexible + Free",
+  motor: "Floating -> Flicking",
+  canonical_shorthand: "Embracing altruistic feeling for or against a 'sociable cordiality'",
+  operator_hint: "Embracing altruistic feeling, for or against cordiality; warm at a distance.",
+  source_refs: ["Mirodan Vol 2 p. 444"],
+  confidence: "high",
+  notes: "Motor pair canonical. (C) hint 'warm-distant handoff, for-you architecture, no ego' — 'for-you architecture' is product-prose; remove entirely. 'Warm at a distance' is consistent with the Remote axis."
+}
+```
+
+#### 19. sociable
+```ts
+{
+  name: "sociable",
+  attitude: "Remote outer",
+  factor_shape: "Direct + Free",
+  motor: "Gliding -> Dabbing",
+  canonical_shorthand: "Developing or contracting feeling of 'sociable companionship'",
+  operator_hint: "Direct-free companionship; the social approach develops or contracts cleanly.",
+  source_refs: ["Mirodan Vol 2 p. 447"],
+  confidence: "high",
+  notes: "Motor pair canonical. (C) hint 'smooth social approach, partner credit, light contact' — 'partner credit' is domain shorthand not in canon. Drop, or move to placement docs."
+}
+```
+
+#### 20. unsociable
+```ts
+{
+  name: "unsociable",
+  attitude: "Remote outer",
+  factor_shape: "Flexible + Bound",
+  motor: "Wringing -> Slashing",
+  canonical_shorthand: "Growing reflective image of a 'welcome solitude' or of an 'unwelcome solitude'",
+  operator_hint: "Reflective Flexible-Bound image of solitude — welcome or unwelcome.",
+  source_refs: ["Mirodan Vol 2 p. 447"],
+  confidence: "high",
+  notes: "Motor pair canonical. (C) hint 'withdrawal-as-discipline, sidesteps discourse and cuts away' — 'sidesteps discourse' is contemporary phrasing not in canon. Replace."
+}
+```
+
+---
+
+### Awake (Space × Time, no Flow axis, no Fusions, outer-only) — Vol 2 pp. 474-484
+
+**Motor notation correction:** Awake has no Flow axis. Two-Motif rows co-exist on the same Time pole. **Use `/` not `->`.**
+
+#### 21. acute
+```ts
+{
+  name: "acute",
+  attitude: "Awake outer",
+  factor_shape: "Direct + Quick",
+  motor: "Punching / Dabbing",  // was "Punching -> Dabbing"
+  canonical_shorthand: "Acute sudden decision in favour of or against an 'idea'",
+  operator_hint: "Sudden Direct-Quick decision for or against an idea.",
+  source_refs: ["Mirodan Vol 2 p. 480"],
+  confidence: "high",
+  notes: "FIX: motor arrow. Both Punching and Dabbing are Quick. (C) hint 'sudden clear idea, acute decision, sharp perception' — 'sharp perception' is fine but Mirodan's word is 'acute' and 'idea'; aligned closely already."
+}
+```
+
+#### 22. doubting
+```ts
+{
+  name: "doubting",
+  attitude: "Awake outer",
+  factor_shape: "Flexible + Sustained",
+  motor: "Floating / Wringing",  // was "Floating -> Wringing"
+  canonical_shorthand: "Slowly dawning attention towards or away from a 'doubting awareness'",
+  operator_hint: "Slowly dawning Flexible-Sustained attention; doubting awareness, towards or away.",
+  source_refs: ["Mirodan Vol 2 p. 481"],
+  confidence: "high",
+  notes: "FIX: motor arrow. Both Floating and Wringing are Sustained. (C) hint 'slowly dawning doubt, flexible sustained thought' — tracks canon. Keep substance, tighten phrasing."
+}
+```
+
+#### 23. certain
+```ts
+{
+  name: "certain",
+  attitude: "Awake outer",
+  factor_shape: "Direct + Sustained",
+  motor: "Pressing / Gliding",  // was "Pressing -> Gliding"
+  canonical_shorthand: "Slow dawning of a 'certain awareness' or of an 'uncertain awareness'",
+  operator_hint: "Slow Direct-Sustained dawning; certain or uncertain awareness on the same axis.",
+  source_refs: ["Mirodan Vol 2 p. 481"],
+  confidence: "high",
+  notes: "FIX: motor arrow. Both Pressing and Gliding are Sustained. (C) hint 'settled awareness, direct sustained certainty' — drops the canon's 'uncertain' pole; restore the both-poles framing."
+}
+```
+
+#### 24. uncertain
+```ts
+{
+  name: "uncertain",
+  attitude: "Awake outer",
+  factor_shape: "Flexible + Quick",
+  motor: "Flicking / Slashing",  // was "Flicking -> Slashing"
+  canonical_shorthand: "Sudden embracing image of a 'new idea' or of a 'new problem'",
+  operator_hint: "Sudden Flexible-Quick embrace; new idea or new problem, same shape.",
+  source_refs: ["Mirodan Vol 2 p. 483"],
+  confidence: "high",
+  notes: "FIX: motor arrow. Both Flicking and Slashing are Quick. (C) hint 'sudden new idea, flexible quick uncertainty' — tracks canon."
+}
+```
+
+---
+
+## 3. Critical fixes summary
+
+Three classes of issue surfaced. Severity ordered.
+
+### A. Motor arrow direction — 8 rows (structural, factually wrong)
+
+Strict prep→release ordering (`->`) is canonical ONLY for the four classic Working-Action pairs. The current code applies `->` to rows where both motifs sit on the same Time pole, which is a category error: prep→release implies Sustained-then-Quick, but `Punching / Slashing` are both Quick.
+
+| Row | Current | Should be |
+|---|---|---|
+| materialistic | `Punching -> Slashing` | `Punching / Slashing` |
+| human | `Floating -> Gliding` | `Floating / Gliding` |
+| warm | `Pressing -> Wringing` | `Pressing / Wringing` |
+| cool | `Dabbing -> Flicking` | `Dabbing / Flicking` |
+| acute | `Punching -> Dabbing` | `Punching / Dabbing` |
+| doubting | `Floating -> Wringing` | `Floating / Wringing` |
+| certain | `Pressing -> Gliding` | `Pressing / Gliding` |
+| uncertain | `Flicking -> Slashing` | `Flicking / Slashing` |
+
+Mobile (lines 103-106) already uses `/` correctly.
+
+**Downstream impact:** `validator.ts:478-482` checks `motor[0]` (Sustained) vs `motor[1]` (Quick) for prep-hierarchy validation. That check is meaningful only for the four classic Sus→Q pairs. If the motor field changes to use `/` (or to a tuple/array signalling co-existence), the validator's prep-hierarchy enforcement needs to skip co-existence rows. Currently it's likely silently mis-firing on these 8 rows.
+
+### B. Attitude label `Adream outer` — 4 rows (categorical mislabel)
+
+Adream is an **Inner** Attitude (Weight + Flow), baseline-eligible like Stable and Near. Only Mobile, Remote, and Awake are outer-only Action Attitudes. Strip `outer` from sombre, overpowering, diffused, irradiant.
+
+| Row | Current | Should be |
+|---|---|---|
+| sombre | `Adream outer` | `Adream` |
+| overpowering | `Adream outer` | `Adream` |
+| diffused | `Adream outer` | `Adream` |
+| irradiant | `Adream outer` | `Adream` |
+
+**Downstream impact:** attitude is display-only (no programmatic gating per Agent B grep). Low blast radius — but reading it as canon is misleading the Director's classification.
+
+### C. Hint text — ~12 of 24 rows (drift from canon)
+
+Hints that introduce non-canon vocabulary (operator metaphors, product-marketing prose, theatre-ish coinage):
+- `commanding` — "institutional landing"
+- `sombre` — "wall-coming-down thesis"
+- `overpowering` — "manifesto-force", "risky if overused"
+- `diffused` — "post-launch reflective wonder", "vision-arrival"
+- `irradiant` — "future-warmth"
+- `materialistic` — "body-forward contact"
+- `warm` — "held relational force"
+- `unacknowledged` — "hurried cover" (overshoots into aggression)
+- `revealed` — "release into visibility"
+- `concealed` — "withheld weight" (factor-shape repeated, not Mirodan's 'frigid self-assertion')
+- `altruistic` — "warm-distant handoff", "for-you architecture"
+- `sociable` — "partner credit"
+- `unsociable` — "sidesteps discourse"
+
+These don't break execution (the hint is informational text in the Director prompt, not parsed) but they pollute the Director's classification vocabulary. They lead to "decisive pressure, institutional landing" being treated as canonical when Mirodan's actual canon is "Commanding demonstration or acceptance of a 'bold resolve'".
+
+**Recommended schema change:** add a `canonical_shorthand` field (locked, quoted from Mirodan Vol 2) and rename `classification_hint` to `operator_hint` (explicitly mutable, marked as operator shorthand). Both go into the Director prompt with clear labels.
+
+---
+
+## 4. Answers to the six audit questions
+
+### Q1. Which current hints are grounded enough to keep?
+
+Roughly half. The cleanest current hints — `practical`, `cool`, `doubting`, `uncertain`, `acute` — are within paraphrase distance of Mirodan's Outer Interpretation. Even these can be tightened, but they're not slop.
+
+The other ~12 (listed in §3C) introduce vocabulary Mirodan never used. Replace.
+
+### Q2. Which are vibes and should be deleted/replaced?
+
+All 13 phrases listed in §3C. The ones with the largest semantic drift are `manifesto-force` (overpowering), `wall-coming-down thesis` (sombre), `for-you architecture` (altruistic), and `post-launch reflective wonder` (diffused) — these are not paraphrases of Mirodan, they're operator coinage from comms/product domain. None of them anchor classification; they're prompt clutter that can mislead.
+
+### Q3. Are there Mirodan/Carpenter/Malmgren/Laban phrases we should use instead?
+
+Yes — Mirodan's **Outer Interpretation** quotes (one per Variation, listed in every row's `canonical_shorthand` field above). These are 8-15 words each, locked, directly quotable. They're the canonical shorthand the table currently lacks. Adding them as a separate field gives the Director a grounded fallback while operator_hint remains mutable for modern-prose readability.
+
+Carpenter (footnoted at p. 348 in Vol 2): *"[Pressing, Wringing, Floating, Gliding] have a sense of past; [Punching, Slashing, Dabbing, Flicking] have a sense of future."* This is useful framing for the motor field but doesn't belong per-row.
+
+### Q4. Do any tempi need multiple hints (intro/extravert, prep/release, lining/outer action)?
+
+**No.** Three axes were considered:
+
+- **Introvert / extravert:** lives at the Subconscious Motif pair level on the Flow axis only — Bound = introvert, Free = extravert (Mirodan Vol 2 p. 469). It cross-cuts the 24 Variations but doesn't double them. Stable, Near, Awake have no Flow axis and therefore no intro/extravert distinction. Adream, Mobile, Remote already encode the Bound (introvert) and Free (extravert) versions as separate Variations within the 4-per-attitude set. **Already in the 24.**
+- **Preparation / release:** an internal temporal arc within one Working-Action motor (Mirodan p. 347: "this order cannot be reversed"). Mirodan treats prep+release as **one** scoring unit with two phases, not two units. **Single row per Variation is canonically correct.**
+- **Lining / outer action:** lining is a per-character secret Inner Action (Vol 2 pp. 554-555). It's a property of the *character* (e.g., Infinex), not of the Variation. Infinex's lining is already separate (`infinex.ts` carries `lining` per tempo). **Don't put lining in the taxonomy table; keep it in the placement spec.**
+
+Single hint per row is correct.
+
+### Q5. Is the 24-tempo table itself structurally correct?
+
+**Yes, with the three fixes in §3.** The 4 × 6 = 24 partition is faithful to Mirodan (4 Variations × 6 Attitudes). Names are correct. Factor shapes are correct. Working-Action motors are correct identities; only the arrow direction needs fixing on 8 rows.
+
+The only structural gap worth flagging is that the taxonomy doesn't carry Mirodan's **Outer Interpretation** quote per row — that's the missing field, not a missing row.
+
+### Q6. Should the Director receive terse shorthand, longer explanatory prose, or both?
+
+**Both, in distinct fields.** Recommended Director prompt shape per row:
+
+```
+- commanding: Stable; Strong + Direct; motor Pressing -> Punching
+    canon: "Commanding demonstration or acceptance of a 'bold resolve'" (Mirodan Vol 2 p. 494)
+    hint: Bold-resolve pressure landing as a single direct decision; no ornament around it.
+```
+
+Why both:
+
+- **Canon line** is the locked anchor. The Director can quote it as evidence when it's unsure ("the prose matches Mirodan's 'bold resolve' framing").
+- **Hint line** is the modern-prose translation. Useful for fast classification of contemporary crypto/comms prose where 1997 theatre language doesn't map directly. It's also where domain-tuned shorthand can evolve without polluting canon.
+
+The current single-field approach forces the operator to either keep Mirodan's quote (alien to crypto prose readers) or replace it with modern shorthand (drifts off-canon). The two-field approach has both.
+
+---
+
+## 5. Recommended next steps (no code yet)
+
+1. **Decide on schema change** — add `canonical_shorthand` field, rename current `classification_hint` → `operator_hint`. Keep both in Director prompt with clear labels.
+2. **Decide on motor field type** — either:
+   - Keep as string but use `/` to denote co-existence (8 rows changed), or
+   - Change to `{ pair: [string, string], order: "prep_release" | "co_existence" }` so validators can branch correctly.
+   - The second is safer; the first is easier and matches what Mobile already does.
+3. **Fix the "Adream outer" → "Adream" label** — pure rename in 4 rows.
+4. **Fix the laban-mirodan-reference-2026-04-28.md typo** — line 96-103 lists Mobile Sus/Bound → Sus/Free Fusion as "Wringing → Flicking"; canon (Vol 2 p. 522) says **"Wringing → Gliding"**. Flicking is Light/Flexible/Quick which violates the Fusions-only-flip-Flow rule. Independent of the table audit.
+5. **Update tests after table changes** — `actor-director.test.ts:48,54,61-65` and `validator.test.ts:352,368` reference exact tempo names. Names don't change in this audit, so those tests are safe. If the schema gains `canonical_shorthand`, the `"operator hint"` literal assertion (`actor-director.test.ts:54`) still passes — but consider adding a parallel assertion for `"canonical"` to lock the canon-vs-operator split.
+6. **Validator prep-hierarchy check** (`validator.ts:478-482`) needs to skip co-existence rows. Currently mis-fires on the 8 Near + Awake rows that look like Sus→Q pairs but aren't.
+
+---
+
+## 6. Source references
+
+- Mirodan, V. (1997). *Yat Malmgren's Movement Psychology — A Handbook of the System*. PhD thesis, Vol 2. Printed pp. 263-575. Local: `/Users/opaque/Downloads/Mirodan-PhD-1997-Vol2.pdf`.
+- Mirodan chapter extracts: `/Users/opaque/Downloads/nigel-session-2026-04-28/mirodan-ch{1,2,3,4}-*.md`.
+- Laban-Mirodan compiled reference: `/Users/opaque/Downloads/nigel-session-2026-04-28/laban-mirodan-reference-2026-04-28.md` (with one known typo at lines 96-103; see §5.4).
+- Working Actions reference: `/Users/opaque/.superset/projects/comms-factory/skills/laban-voice-for-ai-agents/references/working-actions.md`.
+- Current implementation: `/Users/opaque/.superset/projects/comms-factory/src/actor-memory.ts:90-114` (`MIRODAN_24_TEMPI`), with consumers in `generator.ts`, `validator.ts`, `validator-llm.ts`, `copy-rewrite-llm.ts`, `cli.ts`.
+- Voice schema: `/Users/opaque/.superset/projects/comms-factory/src/voice/types.ts`.
+- Infinex placement (locked five tempi): `/Users/opaque/.superset/projects/comms-factory/src/voice/infinex.ts` lines 16, 42-89, 371.
+</script>
+
+<script>
+(function(){
+  function render(){
+    var src = document.getElementById('md-source').textContent;
+    var html = window.marked.parse(src, { gfm: true, breaks: false, headerIds: true });
+    var out = document.getElementById('content');
+    out.innerHTML = html;
+    // Tag canonical-vs-fix code blocks for accent colouring
+    out.querySelectorAll('pre').forEach(function(pre){
+      var t = pre.textContent;
+      if (/FIX: motor arrow/.test(t)) pre.classList.add('fix-row');
+      else if (/canonical_shorthand:/.test(t)) pre.classList.add('canon-row');
+    });
+    // Auto-id anchors on h2/h3 for sticky-trail navigation
+    out.querySelectorAll('h2,h3').forEach(function(h){
+      if (h.id) return;
+      h.id = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    });
+  }
+  if (window.marked) render();
+  else {
+    var poll = setInterval(function(){
+      if (window.marked) { clearInterval(poll); render(); }
+    }, 30);
+    setTimeout(function(){ clearInterval(poll); if (!document.getElementById('content').innerHTML || document.getElementById('content').innerHTML === 'Loading…') { document.getElementById('content').innerHTML = '<p>marked.js failed to load (offline?). Open the .md source directly.</p>'; } }, 5000);
+  }
+})();
+</script>
+</body>
+</html>

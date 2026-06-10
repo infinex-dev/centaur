@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Autopsy — bridge card all-fail · 2026-05-25</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #161c24;
+    --panel-2: #1d242e;
+    --text: #e8eef5;
+    --muted: #8a98a8;
+    --border: #2a333f;
+    --accent: #5b9dff;
+    --good: #5fc78a;
+    --bad: #ff7a7a;
+    --warning: #ff9d5b;
+    --info: #c98bff;
+    --you: #ffd86b;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 15px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 32px 96px; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 18px; margin-bottom: 28px; }
+  h1 { font-size: 28px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .dateline { color: var(--muted); font-size: 13px; margin: 0; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 36px 0 12px; font-weight: 600; }
+  h3 { font-size: 17px; font-weight: 600; margin: 0 0 6px; }
+  p { margin: 0 0 8px; }
+  code { background: var(--panel-2); padding: 1px 6px; border-radius: 3px; font-size: 12.5px; color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  pre { background: var(--panel-2); padding: 14px 18px; border-radius: 6px; font-size: 12.5px; overflow-x: auto; margin: 8px 0 12px; border-left: 2px solid var(--border); }
+  blockquote { margin: 8px 0; padding: 10px 16px; border-left: 3px solid var(--muted); color: var(--text); font-style: italic; }
+
+  .verdict { background: var(--panel); border: 1px solid var(--border); border-left: 4px solid var(--bad); padding: 20px 24px; border-radius: 8px; margin-bottom: 26px; }
+  .verdict h2 { margin-top: 0; color: var(--bad); }
+  .verdict ol { margin: 6px 0 0; padding-left: 22px; }
+  .verdict li { margin-bottom: 6px; font-size: 14.5px; }
+  .verdict li strong { color: var(--text); }
+
+  .issue { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 22px 26px; margin-bottom: 18px; border-left: 4px solid var(--muted); }
+  .issue.p0 { border-left-color: var(--bad); }
+  .issue.p1 { border-left-color: var(--warning); }
+  .issue.p2 { border-left-color: var(--info); }
+  .issue h3 { margin-top: 0; }
+  .issue.p0 h3 { color: var(--bad); }
+  .issue.p1 h3 { color: var(--warning); }
+  .issue.p2 h3 { color: var(--info); }
+  .priority { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; padding: 3px 8px; border-radius: 3px; font-weight: 700; margin-left: 8px; vertical-align: middle; }
+  .priority.p0 { background: rgba(255,122,122,0.15); color: var(--bad); border: 1px solid var(--bad); }
+  .priority.p1 { background: rgba(255,157,91,0.15); color: var(--warning); border: 1px solid var(--warning); }
+  .priority.p2 { background: rgba(201,139,255,0.15); color: var(--info); border: 1px solid var(--info); }
+  .issue .label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; margin-top: 14px; margin-bottom: 4px; }
+  .issue p { font-size: 14px; }
+  .issue ul { margin: 6px 0 8px; padding-left: 22px; font-size: 14px; }
+
+  .drafts { background: var(--panel-2); border: 1px solid var(--border); border-left: 4px solid var(--you); border-radius: 8px; padding: 20px 24px; margin-top: 28px; }
+  .drafts h2 { margin-top: 0; color: var(--you); }
+  .draft { margin-top: 10px; padding: 12px 14px; background: var(--panel); border-radius: 4px; border-left: 2px solid var(--good); font-size: 14px; }
+  .draft.bad { border-left-color: var(--bad); }
+  .draft .who { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 6px; font-weight: 600; }
+
+  .plan { background: var(--panel); border: 1px solid var(--good); border-left: 4px solid var(--good); border-radius: 8px; padding: 22px 26px; margin-top: 28px; }
+  .plan h2 { margin-top: 0; color: var(--good); }
+  .plan ol { margin: 8px 0 0; padding-left: 22px; }
+  .plan li { margin-bottom: 10px; font-size: 14px; }
+  .plan li strong { color: var(--text); }
+
+  footer { color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Autopsy — bridge card all-fail</h1>
+  <p class="dateline">2026-05-25 · 12 candidates / 3 attempts / 0 passes · your instinct was right: the bug is in validation, not the generator</p>
+</header>
+
+<div class="verdict">
+  <h2>Three-line verdict</h2>
+  <ol>
+    <li><strong>The fact-contract validator is the root cause of every failure.</strong> It does literal token matching against the full deployed_facts strings — but the model has 280 characters to carry facts that are 100-250 characters long each. The model is correctly paraphrasing; the validator can't see paraphrase as truth.</li>
+    <li><strong>The em-dash rule isn't firing</strong> even though em-dashes appear in failing candidates. The threshold is set at <code>&gt; 2 per 280 chars</code>; one em-dash passes. You wanted zero tolerance. One-line fix.</li>
+    <li><strong>You can't see attempts 1 and 2</strong> because the harness UI only shows the latest attempt's candidates. Feedback IS being passed between attempts in code (<code>orchestrator.ts:312</code>) — but it's not persisted, and the UI has no per-attempt accordion. That's a UI gap, not a logic gap.</li>
+  </ol>
+</div>
+
+<h2>Issues, ranked by impact</h2>
+
+<div class="issue p0">
+  <h3>1. Fact-contract validator does literal matching <span class="priority p0">P0 · root cause</span></h3>
+  <p><strong>What's happening:</strong> the validator wants the model to declare which deployed_facts it <code>used</code> and which it didn't (<code>not_said</code>). For "used" facts, it then checks the prose for at least 55% token overlap with the full deployed_fact string. For "not_said" facts, it requires an EXACT string match against the deployed_facts list.</p>
+
+  <p><strong>Why this breaks:</strong> deployed_facts here are 80-250 characters long. Tweets are 280 characters. The model can't fit verbatim facts. When it paraphrases ("a permanent deposit address now lives in your account"), the token-overlap heuristic fails. When it labels facts by short name in not_said ("Bridge.xyz identity"), the literal set lookup fails. Then EVERY card fact triggers "neither deployed nor accounted for in not_said" because no entry in either array matches the full string. That's <strong>~10 cascading failures per candidate</strong>, from one root cause.</p>
+
+  <p class="label">Example from attempt 3, x channel</p>
+  <pre>Candidate text:
+"A permanent deposit address now lives in your account.
+ Send a bank transfer to it — it arrives on-chain as USDC.
+ Rails by @bridge_xyz."
+
+deployed_fact (full 250 chars):
+"Bridge.xyz fiat deposit mechanic — rail shape:
+ Bridge virtual accounts are permanent, reusable fiat
+ deposit addresses that convert incoming fiat into crypto
+ and deliver it to a specified destination wallet address.
+ Bridge handles fiat-to-crypto conversion and sends funds
+ on-chain automatically."
+
+Validator: "declared deployed fact does not appear plausibly in text"
+Reality: it's a correct, compressed paraphrase. The 55%
+token overlap heuristic can't fit 250 chars into 280 chars.</pre>
+
+  <p class="label">Fix shape (multiple options)</p>
+  <ul>
+    <li><strong>Restructure deployed_facts as fact_id + short_label + full_description.</strong> Validator's literal checks run on the SHORT label; the full description is for the LLM grounder's research, not for caption matching. Mid-size refactor, but is the clean answer.</li>
+    <li><strong>Use the LLM auditor instead.</strong> The active validator (<code>validator-active.ts</code>) already calls Sonnet with tools to reason about claim validity semantically. If <code>HARNESS_ACTIVE_VALIDATOR=1</code>, that path runs. It's not on by default — candidate_audits has 0 rows for these 12 candidates. Toggle it and the literal checks become advisory rather than gating.</li>
+    <li><strong>Loosen the token overlap heuristic</strong> from 55% to e.g. 25% for facts longer than 100 chars. Pragmatic patch, not the right long-term shape.</li>
+  </ul>
+</div>
+
+<div class="issue p0">
+  <h3>2. Em-dash rule not firing on candidates that have em-dashes <span class="priority p0">P0 · easy fix</span></h3>
+  <p><strong>What's happening:</strong> <code>validator.ts:118</code> sets <code>EM_DASH_MAX_PER_WINDOW = 2</code> per 280-char window. A 285-char candidate with one em-dash has 0.5 em-dashes/window — under the threshold. So <code>rejectAIslop</code> passes.</p>
+
+  <p><strong>Why this is wrong for Infinex:</strong> you've called out em-dashes as a hard no — they're AI-slop signature. The current rule allows up to two. Anything above zero is off-spec for the locked Infinex voice.</p>
+
+  <p class="label">One-line fix</p>
+  <pre>// src/validator.ts:118
+- const EM_DASH_MAX_PER_WINDOW = 2;
++ const EM_DASH_MAX_PER_WINDOW = 0;</pre>
+  <p>(Or stricter: reject on any em-dash unconditionally, no density math at all.)</p>
+
+  <p><strong>Note:</strong> some of the deployed_facts themselves contain em-dashes ("Bridge.xyz fiat deposit mechanic — rail shape"). The grounder writes the fact strings; the rule won't fire on the facts themselves (they're not the candidate text), but the model may absorb the em-dash habit from seeing them. A second-order fix is to normalize deployed_facts to use colons or hyphens.</p>
+</div>
+
+<div class="issue p1">
+  <h3>3. Per-attempt history invisible in harness UI <span class="priority p1">P1 · UI gap</span></h3>
+  <p><strong>What's happening:</strong> the orchestrator runs up to 3 attempts. Between attempts, <code>summarizeFailures(result, channels)</code> at <code>orchestrator.ts:312</code> builds a feedback string from rejected candidates' first failure and passes it to the next <code>generateAttempt</code>. So the generator IS getting feedback. But:</p>
+  <ul>
+    <li>The feedback string is <strong>not persisted</strong> anywhere — it lives in a closure inside the orchestrator, dies at end of function.</li>
+    <li>The harness UI groups candidates by channel but doesn't surface the per-attempt history. You see all 12 candidates flat, no "attempt 1 → attempt 2 → attempt 3" accordion.</li>
+    <li>The <code>candidate_decisions</code> table has a <code>retry_feedback</code> column — but it's for operator-provided retry hints, not the auto-generated summary.</li>
+  </ul>
+
+  <p class="label">Fix shape</p>
+  <ul>
+    <li>Add an <code>attempts</code> table or extend <code>candidates</code> with an <code>auto_feedback_in</code> column that captures what feedback the generator received before producing this attempt.</li>
+    <li>UI: an accordion per attempt in the Generate panel — show the feedback string at the top, then that attempt's candidates underneath.</li>
+    <li>Bonus: a "what the validator said to the generator" expandable block per attempt.</li>
+  </ul>
+</div>
+
+<div class="issue p1">
+  <h3>4. Active validator never ran — candidate_audits has zero rows <span class="priority p1">P1 · env toggle</span></h3>
+  <p><strong>What's happening:</strong> <code>harness/app/actions/generate.ts:172</code> reads <code>HARNESS_ACTIVE_VALIDATOR === '1'</code> and only runs the agentic auditor when that env is set. It isn't. So the audit machinery (Sonnet + research tools) didn't run on any of the 12 candidates. That's why you only see deterministic regex failures — and why "X unknown" is the tempo signal you get (the regex classifier outputs "unknown" when no main_tempi vocab matches; the LLM auditor would have given a real classification + rationale).</p>
+
+  <p class="label">Fix</p>
+  <pre>echo 'HARNESS_ACTIVE_VALIDATOR=1' >> .env
+# restart pnpm dev in harness/</pre>
+  <p>This unlocks the second voice on each candidate: a Sonnet audit that reasons about fact validity, voice fit, and tempo classification with research-tool access. That's where the "actually, this paraphrases the bridge mechanic correctly" judgment lives.</p>
+</div>
+
+<div class="issue p2">
+  <h3>5. Tempo classification "unknown" with confidence 0 — dead-end signal <span class="priority p2">P2 · usability</span></h3>
+  <p><strong>What's happening:</strong> the regex <code>classifyTempoBlind</code> only scores against the voice's <code>main_tempi</code>. When the candidate's vocabulary doesn't trigger anchors in any of Infinex's 5 locked tempi, it returns <code>tempo: "unknown"</code> with confidence 0. That's appearing in your UI as "X unknown" — useless feedback.</p>
+  <p><strong>What it actually means:</strong> "the prose didn't sound like any of Commanding · Practical · Sombre · Irradiant · Sociable to the regex." It might be Adream-attitude prose, or Near-attitude prose, or genuine off-placement junk. The regex can't tell you which because it's only scoring against the locked 5.</p>
+  <p>The LLM auditor (issue 4) would surface this: "I read this as Mobile-Concealed" or whatever. Once the active validator is on, "unknown" becomes a meaningful classification.</p>
+
+  <p class="label">UI surfacing</p>
+  <ul>
+    <li>When classified_tempo === "unknown", render as "unclassified — prose didn't match any of Infinex's locked tempi" rather than just "X unknown". Includes a small explainer.</li>
+    <li>Show top 2 scoring tempi from the <code>scores</code> object even when no clear winner emerged. Lets you see "almost-Sombre, almost-Commanding, can't decide."</li>
+  </ul>
+</div>
+
+<div class="drafts">
+  <h2>What you actually want — captured from your read of the candidates</h2>
+  <p>For the next iteration (or as a memory anchor for future bridge-style cards):</p>
+
+  <div class="draft">
+    <div class="who">Your endorsed version (X / 280-char)</div>
+    A permanent deposit address now lives in your account. Send a bank transfer to it. It arrives on chain as USDC. Rails by Bridge.xyz.
+  </div>
+
+  <div class="draft">
+    <div class="who">Your loose version of the setup beat</div>
+    The bank account and your wallet have always been two different places connected by a bridge. Now you can do it from the same place.
+  </div>
+
+  <div class="draft bad">
+    <div class="who">What you specifically called out as wrong</div>
+    <ul>
+      <li>"…connected by a bridge you had to walk across" — bridge metaphor + walking-across is overworked; the bridge being there is enough</li>
+      <li>"That wall is gone inside Infinex" — bridge metaphor + wall metaphor in the same post; pick one</li>
+      <li>Any em-dash in the prose</li>
+    </ul>
+  </div>
+</div>
+
+<div class="plan">
+  <h2>Fix sequence</h2>
+  <ol>
+    <li><strong>Toggle <code>HARNESS_ACTIVE_VALIDATOR=1</code> in <code>.env</code> + restart the harness.</strong> Cheapest test of whether the LLM auditor reads paraphrased facts correctly. ~1 minute.</li>
+    <li><strong>Set <code>EM_DASH_MAX_PER_WINDOW = 0</code> in <code>validator.ts:118</code>.</strong> Zero-tolerance em-dash for Infinex. ~30 seconds. Test passes locally.</li>
+    <li><strong>Run the generator again on the bridge card.</strong> See what survives now that the literal fact-contract is no longer the only audit voice.</li>
+    <li><strong>If the active validator still flags paraphrase as drift,</strong> restructure deployed_facts as <code>{id, label, full}</code> tuples so the literal checks run against the short labels. ~2 hours of work, but the right shape.</li>
+    <li><strong>UI work (parallel track):</strong> per-attempt accordion in the Generate panel, with the auto-feedback string surfaced. Operator can see what the validator said between attempts. ~3-4 hours.</li>
+  </ol>
+</div>
+
+<footer>
+  Source: <code>harness/harness.db</code> · 12 candidates / 3 attempts examined · validator code at <code>src/validator.ts</code> · orchestrator at <code>src/orchestrator.ts</code>
+</footer>
+
+</main>
+</body>
+</html>

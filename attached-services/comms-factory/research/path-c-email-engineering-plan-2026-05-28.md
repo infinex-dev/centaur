@@ -1,0 +1,597 @@
+# Marketing email infrastructure — engineering plan (Path C)
+
+**Date:** 2026-05-28
+**Audience:** platform engineer(s) — handoff doc
+**Scope:** end-to-end plan to enable a marketing/announcements email channel on the Infinex platform repo without poisoning `security@app.infinex.xyz` transactional deliverability.
+**Status:** **Not blocking the next launches** (Hyperliquid Spark, Synthetics Perps, Bridge). Those ship via Twitter / blog / in-app. This is a parallel track to unlock marketing email as a comms channel afterwards.
+**Path selected:** Stay on Mailtrap. Use its `bulk` stream on a new subdomain. No migration to Postmark/Resend at this time. Rationale at the bottom.
+
+> **A note on estimates.** Effort numbers below are my best guesses from reading the platform repo at the audit timestamp; treat them as "pay my numbers" — push back where you have better context. Where I'm uncertain, I've called it out explicitly in the **Engineer research** items per phase.
+
+---
+
+## Why this work exists (1-minute context)
+
+Right now every email from Infinex ships from a single sender: `security@app.infinex.xyz` displayed as "Infinex Notifications". Eight categories, all transactional (email verification, send-funds confirmations, passkey/TOTP flows). If we add a marketing/announcements channel on this same sender, spam complaints from marketing degrade the deliverability of password-reset, 2FA, and withdrawal-confirmation mail to Gmail/Yahoo/Apple Mail/Outlook within 48–72 hours. That's a security incident waiting to happen.
+
+The fix is to publish a separate sending subdomain (`updates.infinex.xyz`), route marketing through Mailtrap's `bulk` stream on that subdomain, and put the structural pieces in place (subscription model, RFC 8058 one-click unsubscribe, opt-out preferences) that Gmail/Yahoo have required of all senders >5k/day since Feb 2024 (Nov 2025 enforcement tightened further).
+
+Detailed audits at:
+- `research/platform-email-audit-2026-05-28.md` — current state of email infra in `@infinex/platform`
+- `research/email-infra-recommendation-2026-05-28.md` — deliverability best practices, provider comparison, DKIM/DMARC mechanics
+- `research/launch-readiness-2026-05-28.html` — synthesis with the three near-term launches in context
+
+---
+
+## Goal — acceptance criteria
+
+Done when **all** of the following are true:
+
+1. A marketing email can be sent from `updates@updates.infinex.xyz` (or chosen subdomain), via Mailtrap's `bulk` stream, signed with a DKIM key whose `d=` equals `updates.infinex.xyz`, with SPF, DMARC, and RFC 8058 `List-Unsubscribe` headers all aligned.
+2. Sending a marketing email does **not** affect `security@app.infinex.xyz` reputation in any provider's Postmaster Tools dashboard.
+3. Users can opt-out per category via a one-click link in any marketing email, and that opt-out is honored on subsequent sends.
+4. Recipients in the existing `undeliverable_email_address` suppression list remain suppressed for the new stream too.
+5. Operators can view daily complaint-rate, bounce-rate, and open-rate for `updates.infinex.xyz` in dashboards (Postmaster Tools + Mailtrap).
+6. The system enforces a warmup ramp — there is no path by which a 50k-recipient blast goes out from a cold subdomain.
+7. The 30-day reputation warmup has completed and the first real campaign has shipped without incident.
+8. DMARC has ramped from `p=none` to `p=quarantine` on the marketing subdomain after 30+ days of clean aggregate reports.
+
+---
+
+## Open questions for the engineer (resolve before Phase 1)
+
+These are gaps I couldn't close from the audit alone. Resolve each before kicking off — some affect routing and architecture.
+
+| # | Question | Why it matters | Where to look |
+|---|---|---|---|
+| 1 | Does the internal proxy at `https://proxy.srv.infinex.app/mailtrap` route Mailtrap **bulk-stream** calls, or only transactional? | If proxy only handles transactional, bulk-stream sends must hit Mailtrap directly — different IP allowlist, different ops visibility. | Check proxy config (likely an internal repo or Terraform); ask whoever owns the proxy |
+| 2 | What does the current Mailtrap plan include — bulk-stream quota, IPs, DKIM selectors per stream? | Bulk stream may need a plan upgrade; pricing affects business case. Postmark and others would be the comparison. | Mailtrap admin dashboard + billing |
+| 3 | What's Mailtrap's bulk-stream deliverability performance? Public Postmaster-Tools-style stats? | Sanity-check whether Mailtrap bulk performs vs Postmark before committing. If significantly worse, this whole plan flips to migration. | Mailtrap's deliverability docs + Mailtrap support if needed |
+| 4 | Who owns DNS at Infinex? Cloudflare, Route 53, Squarespace, NameCheap? | Determines who publishes DKIM/SPF/DMARC records and how fast they propagate. | Ask ops / whoever set up `app.infinex.xyz` |
+| 5 | What's the apex `infinex.xyz` DMARC policy today? `p=none`, `p=quarantine`, `p=reject`? Is there an `sp=` tag? | If apex is already `p=reject` without `sp=`, publishing `updates.infinex.xyz` without its own DMARC means the new subdomain inherits reject — first send goes dark. | `dig TXT _dmarc.infinex.xyz` |
+| 6 | What's the **legal consent model** for marketing email? Implicit (existing user with TOS) or explicit (separate opt-in toggle at signup)? GDPR/CASL applies to EU/Canadian residents. | Determines whether existing users are auto-subscribed (cheaper) or have to opt-in explicitly (slower but legally cleaner). Affects whether you backfill the new `userEmailPreferences` table with `status='subscribed'` for everyone or `'pending'`. | Legal / compliance — likely a chat with Counsel |
+| 7 | Are marketing emails localized like transactional ones? If yes, where does the locale come from? | Affects template scaffolding and copy pipeline. Out of scope for this plan if English-only initially. | Check existing template stack at `packages/emails/src/templates/` |
+| 8 | What's the existing test-email seed-account list (internal Gmail, Outlook, Apple, Yahoo accounts for pre-fanout checks)? | Need seeds at all four major providers before warmup begins. Probably already exists for transactional. | Ask whoever set up the existing transactional flow |
+| 9 | Is `comms-factory`'s validator going to gate marketing sends, or is the validator only used for Twitter/blog copy? | If validator is integrated into the send pipeline, this plan needs a hook to call it. If it's editor-side only, no integration needed here. | Discuss with comms team — current expectation is validator runs in `comms-factory` pre-send, not in `platform` |
+
+---
+
+## Architecture — current → target
+
+### Current state
+
+```
+caller (tRPC / DO / Inngest)
+  → getTransactionalEmailRenderers()              workers/main/src/lib_v2/emails/index.ts:11
+  → RPC to platform-worker-emails sub-worker       workers/emails/src/worker/entrypoints/email-renderer/rpc-target.ts
+  → render React Email → {htmlPart, textPart}
+  → queueSendEmail(email, userId)                  workers/main/src/lib_v2/emails/index.ts:29
+  → Inngest event 'platform/send-email'
+  → sendEmailHandler  (10/min per category)         workers/main/src/inngest/functions/emails/sendEmail.ts:46-53
+  → canEmailBeDelivered() check
+  → checkDomainHasMxRecord() check                 workers/main/src/inngest/functions/emails/sendEmail.ts:66-82
+  → Mailtrap API (default/transactional stream)    packages/emails/src/services/delivery/mailtrap/index.ts
+        ↳ prod via proxy: https://proxy.srv.infinex.app/mailtrap
+  → security@app.infinex.xyz / "Infinex Notifications"
+```
+
+Categories shipped today (all transactional, no marketing):
+`verification`, `sendFunds`, `newAddress`, `confirmedPasskey`, `deletePasskey`, `addPasskey`, `addTotp`, `changeTotp`.
+
+### Target state (additions only — transactional path untouched)
+
+```
+caller (marketing send — campaign or triggered)
+  → render React Email (same renderer)
+  → queueSendMarketingEmail(email, userId, category)   NEW
+  → Inngest event 'platform/send-marketing-email'      NEW (batched semantics, not 10/min throttle)
+  → canMarketingEmailBeDelivered(db, userId, category) NEW (checks userEmailPreferences)
+  → canEmailBeDelivered() (existing suppression list still applies)
+  → checkDomainHasMxRecord() (keep)
+  → Mailtrap API with sending_stream: 'bulk'           NEW (already typed at webhook layer)
+  → updates@updates.infinex.xyz / "Infinex Updates"   NEW sender identity
+  → DKIM signed with d=updates.infinex.xyz
+  → headers include List-Unsubscribe + List-Unsubscribe-Post
+```
+
+**The transactional path is not modified.** All current categories continue to flow exactly as they do today through `security@app.infinex.xyz`. New code paths are additive.
+
+---
+
+## Phase-by-phase plan
+
+Effort estimates are calendar-wallclock for a single engineer, not pure focus time. Dependencies noted in `Blocked by`.
+
+### Phase 0 — Stakeholder alignment + open questions (1–2 days)
+
+| Item | Owner | Notes |
+|---|---|---|
+| Resolve all 9 open questions above | engineer + ops + legal | Each unblocks downstream phases. Q5 (apex DMARC) is the most urgent — if apex is already `p=reject` without `sp=`, Phase 1's first publish would silently kill marketing. |
+| Confirm Path C with the comms operator | comms operator | Already proposed in `launch-readiness-2026-05-28.html`. This is a sign-off, not a debate. |
+| Confirm Mailtrap bulk-stream pricing & quota with whoever owns the billing relationship | ops | If pricing makes Path C non-viable, plan reverts to Path A (Postmark migration) — that's a different doc. |
+| Pick the marketing subdomain — `updates.`, `news.`, or `mail.` | comms operator | Naming has small SEO/brand implications. Recommendation: `updates.infinex.xyz` (matches industry convention; clear; not overloaded). |
+| Pick the marketing sender display name | comms operator | "Infinex Updates" is the placeholder; alternatives include "Infinex Newsroom", "Infinex News". |
+
+**Done when:** all 9 questions have answers, subdomain chosen, sender name chosen, sign-off recorded.
+
+---
+
+### Phase 1 — DNS publishing for `updates.infinex.xyz` (1 day setup + 24-48h propagation)
+
+**Blocked by:** Phase 0 Q1, Q4, Q5.
+
+DNS records to publish (assumes subdomain = `updates.infinex.xyz`; substitute as chosen). Get exact CNAME values from the Mailtrap dashboard once the bulk-stream sending domain is created.
+
+```
+; New marketing subdomain — Mailtrap bulk stream
+updates.infinex.xyz.                       TXT    "v=spf1 include:_spf.mailtrap.io -all"
+<selector>._domainkey.updates.infinex.xyz. CNAME  <selector>.dkim.mailtrap.io.   ; from Mailtrap dashboard
+_dmarc.updates.infinex.xyz.                TXT    "v=DMARC1; p=none; rua=mailto:dmarc-reports@infinex.xyz; pct=100"
+;
+; Apex tightening (if not already in place)
+_dmarc.infinex.xyz.                        TXT    "v=DMARC1; p=quarantine; sp=reject; adkim=s; aspf=s; rua=mailto:dmarc-reports@infinex.xyz; fo=1; pct=100"
+```
+
+**Important sequence:**
+
+1. **Verify apex DMARC current state first** (`dig TXT _dmarc.infinex.xyz`). If apex is already `p=reject` and has no `sp=` tag, the `updates.infinex.xyz` subdomain will inherit `p=reject` immediately on first DNS query and any test send will be blocked. To prevent this, EITHER publish `_dmarc.updates.infinex.xyz` (which overrides the apex policy for the subdomain) BEFORE the subdomain is operational, OR add `sp=none` to apex temporarily during setup, OR add `_dmarc.updates.infinex.xyz` first.
+2. **Publish DKIM CNAME** before any send attempt. Without DKIM, alignment fails.
+3. **Publish SPF before DKIM** for safety — if DKIM is missing, SPF still authorizes via return-path, mail still delivers (gets aligned via SPF alone).
+4. **Publish DMARC `p=none` only.** Do NOT start at `p=quarantine` — you need 2-4 weeks of aggregate reports to confirm legitimate senders pass alignment.
+5. Wait 24-48h for DNS propagation. Verify via `dig` from multiple resolvers (1.1.1.1, 8.8.8.8, your local resolver).
+
+**Engineer research:**
+- Confirm Mailtrap supports separate DKIM keys per stream (transactional vs bulk) — most providers do, but worth confirming.
+- Confirm SPF `include:_spf.mailtrap.io` is the correct mechanism (may differ; check Mailtrap docs).
+
+**Done when:** All DNS records resolve correctly from external resolvers; Mailtrap dashboard shows the sending domain verified.
+
+---
+
+### Phase 2 — Bulk-stream plumbing in the platform repo (0.5–1 day)
+
+**Blocked by:** Phase 1 (sending domain exists in Mailtrap dashboard).
+
+The codebase is already half-aware of bulk streams (`workers/main/src/inngest/functions/emails/mailtrapWebhook.ts:25` types `sending_stream: z.enum(['transactional', 'bulk'])`). Just need to plumb the flag through the send path.
+
+**Changes:**
+
+1. **`packages/emails/src/types/types.ts`** — extend the `Email` type:
+   ```ts
+   export type Email = {
+     // existing fields
+     stream?: 'transactional' | 'bulk';  // NEW; defaults to 'transactional' if absent
+   };
+   ```
+   Default to `'transactional'` so the existing 8 categories require no change.
+
+2. **`packages/emails/src/services/delivery/mailtrap/index.ts`** (~line 45-60) — pass the stream through to Mailtrap's request body. Mailtrap's send API accepts `category` already (used for analytics); add the relevant field for stream routing per Mailtrap's API docs (likely `sending_stream` or in headers).
+
+3. **`packages/emails/src/services/delivery/mailjet/index.ts`** — bulk stream concept doesn't directly apply; Mailjet remains transactional-only as the legacy fallback. Add a guard that throws if `stream === 'bulk'` and provider is Mailjet — fail loud, not silent.
+
+4. **`packages/emails/src/templates/_shared/render.ts`** — add a new sender identity beside `notificationsSender` at line 6-9:
+   ```ts
+   export const updatesSender: Pick<Email, 'fromUser' | 'fromName'> = {
+     fromUser: 'updates',
+     fromName: 'Infinex Updates',
+   };
+   ```
+
+5. **`workers/main/src/env.ts`** (~line 254-256) — add a `MARKETING_SENDING_DOMAIN` env var, mirror of `SENDING_DOMAIN`. Wire defaults per env at `workers/main/src/env/{prod,staging,dev}.ts`.
+   ```ts
+   MARKETING_SENDING_DOMAIN: 'updates.infinex.xyz'         // prod
+   MARKETING_SENDING_DOMAIN: 'updates.staging.infinex.xyz' // staging (or skip staging entirely)
+   MARKETING_SENDING_DOMAIN: 'updates.dev.infinex.xyz'     // dev (or use a Mailtrap sandbox)
+   ```
+
+6. **Mailtrap webhook handler** at `workers/main/src/inngest/functions/emails/mailtrapWebhook.ts` — the schema already accepts `sending_stream` at line 25; ensure the handler writes the stream value into any per-event table it creates downstream (see Phase 6).
+
+**Engineer research:** Confirm Mailtrap's exact API parameter name for stream selection. Their docs change; assume `sending_stream` until confirmed.
+
+**Done when:** A test send with `stream: 'bulk'` from a unit/integration test hits Mailtrap's bulk stream and shows up in the Mailtrap dashboard under the bulk-stream view, not transactional. Transactional regression suite still passes.
+
+---
+
+### Phase 3 — Subscription / preferences model (1 day)
+
+**Blocked by:** Phase 0 Q6 (consent model).
+
+Currently zero subscription state in the DB. Need a per-user, per-category opt-in/opt-out model.
+
+**Changes:**
+
+1. **`packages/db/src/schema.ts`** (near line 1593, beside `undeliverableEmailAddress`) — new table:
+   ```ts
+   export const userEmailPreferences = mysqlTable(
+     'user_email_preferences',
+     {
+       id: uuid('id').primaryKey(),
+       userId: varchar('user_id', { length: 36 }).notNull(),
+       category: varchar('category', { length: 50 }).notNull(),
+       status: mysqlEnum('status', ['subscribed', 'unsubscribed', 'pending']).notNull(),
+       source: varchar('source', { length: 50 }),  // 'signup' | 'preferences-page' | 'unsubscribe-link' | 'admin'
+       updatedAt: timestamp('updated_at').defaultNow().notNull(),
+     },
+     (table) => ({
+       userCategoryUnique: unique('user_category_unique').on(table.userId, table.category),
+     })
+   );
+   ```
+   Index strategy: query patterns will be (userId, category) lookups — the unique index covers that.
+
+2. **Migration policy** — depends on Phase 0 Q6:
+   - **Implicit consent (TOS covers it):** backfill all existing users with `status='subscribed'` for the launch marketing category, `source='signup'`.
+   - **Explicit consent required:** backfill all existing users with `status='pending'`, send a one-time opt-in email (which becomes the first "marketing" send), only sends after that pass through. Slower but legally cleaner.
+
+3. **`workers/main/src/lib_v2/emails/index.ts`** — new predicate `canMarketingEmailBeDelivered(db, userId, category)` alongside `canEmailBeDelivered` at line 39. Logic:
+   ```ts
+   async function canMarketingEmailBeDelivered(db, userId, category) {
+     const pref = await db.query.userEmailPreferences.findFirst({
+       where: and(
+         eq(userEmailPreferences.userId, userId),
+         eq(userEmailPreferences.category, category)
+       ),
+     });
+     return pref?.status === 'subscribed';
+   }
+   ```
+   Must be called in addition to `canEmailBeDelivered` (which checks the global suppression list).
+
+4. **Marketing categories enum** — define the canonical set in `packages/emails/src/types/types.ts`:
+   ```ts
+   export const marketingCategories = ['product-updates', 'feature-launches', 'governance', 'security-advisories'] as const;
+   ```
+   "security-advisories" is debatable as marketing vs transactional. Recommendation: treat as marketing-with-default-opt-in (user can unsubscribe but defaults on; ideally never disabled). Discuss.
+
+**Engineer research:**
+- Confirm the user table's primary key type. The schema audit shows `packages/db/src/schema.ts:124-126` has user fields but didn't capture the PK shape. Most likely `uuid`. Adjust the foreign-key column type accordingly.
+- Decide whether to use a foreign key constraint to `user.id` or a soft reference. Drizzle convention in this repo — check existing patterns near `undeliverableEmailAddress`.
+
+**Done when:** Schema migrated to prod + staging + dev; backfill complete; `canMarketingEmailBeDelivered` returns expected values in unit tests; new preferences can be inserted, queried, and updated.
+
+---
+
+### Phase 4 — Unsubscribe route + RFC 8058 headers (0.5–1 day)
+
+**Blocked by:** Phase 3.
+
+Gmail and Yahoo require RFC 8058 one-click unsubscribe on any sender doing >5k/day since Feb 2024. Nov 2025 enforcement is more strict — sub-5k senders still need it to maintain reputation.
+
+**Changes:**
+
+1. **Public unsubscribe route.** Add to the platform's HTTP entry (probably a Cloudflare Worker route at the marketing-app surface, NOT the authenticated tRPC API):
+   - **GET** `/api/email/unsubscribe?token=<signed-token>` — landing page confirming unsubscribe (for human-clicked unsubscribe).
+   - **POST** `/api/email/unsubscribe?token=<signed-token>` — RFC 8058 one-click endpoint. Accepts `List-Unsubscribe=One-Click` in body or empty body. **No auth required** (per RFC 8058 — receiver mail servers may POST without user interaction).
+
+2. **Token signing.** Token format: signed JWT or HMAC with `{ userId, category, ts, sig }`. 6-month TTL. Single-use is over-engineering — RFC 8058 explicitly allows multi-use. Reuse the platform's existing JWT signing key infrastructure.
+
+3. **Headers added to every marketing send** — in `packages/emails/src/services/delivery/mailtrap/index.ts`:
+   ```ts
+   headers: {
+     'List-Unsubscribe': `<https://infinex.xyz/api/email/unsubscribe?token=${token}>, <mailto:unsubscribe+${token}@updates.infinex.xyz>`,
+     'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+   }
+   ```
+   Both headers MUST be in the DKIM-signed scope — verify Mailtrap signs `List-Unsubscribe` by default (most providers do; some require explicit config).
+
+4. **Mailto unsubscribe handler.** The `mailto:` form in the header requires a mailbox that, when a user emails it, flips their preference. Wire `unsubscribe+<token>@updates.infinex.xyz` through Mailtrap inbound parse or whichever inbound-email mechanism is available. Acceptable to defer to v2 if the HTTP one-click is in place — Gmail and Yahoo accept HTTP-only.
+
+5. **Visible footer link.** Update `packages/emails/src/templates/_shared/components/Footer.tsx` — there's already a TODO at line 29-30 for a preferences link. Wire it to `/api/email/preferences?token=<token>` (a more granular per-category preferences page; can land as a follow-up if scope-bound).
+
+**Engineer research:**
+- Confirm Mailtrap signs custom headers by default. If not, configure DKIM header list to include `List-Unsubscribe` and `List-Unsubscribe-Post`.
+- Decide token format — JWT vs HMAC. Reuse existing platform conventions.
+- Cloudflare Workers route handler vs tRPC — the unsubscribe endpoint shouldn't require auth. Likely a simple Worker route, not tRPC. Confirm the routing conventions.
+
+**Done when:** A test send to a Gmail account shows the one-click unsubscribe option in Gmail's UI. Clicking it flips the user's preference to `unsubscribed` and subsequent sends to that user/category are blocked by `canMarketingEmailBeDelivered`.
+
+---
+
+### Phase 5 — Marketing send pipeline (0.5–1 day)
+
+**Blocked by:** Phases 2, 3, 4.
+
+Current `platform/send-email` Inngest event throttles at 10/min per category (`sendEmail.ts:46-53`). That's correct for transactional (per-user, time-sensitive) but wrong for marketing (campaign blast).
+
+**Changes:**
+
+1. **New Inngest function `sendMarketingEmailHandler`** in `workers/main/src/inngest/functions/emails/sendMarketingEmail.ts`:
+   ```ts
+   inngest.createFunction(
+     {
+       id: 'send-marketing-email',
+       concurrency: { limit: 100 },  // higher than transactional
+       throttle: { limit: 1000, period: '1m', key: 'event.data.email.category' },  // 1000/min vs transactional 10/min
+       retries: 3,
+     },
+     { event: 'platform/send-marketing-email' },
+     async ({ event }) => {
+       const { email, userId, category } = event.data;
+       // 1. check userEmailPreferences (canMarketingEmailBeDelivered)
+       // 2. check undeliverableEmailAddress (canEmailBeDelivered)
+       // 3. check MX record (checkDomainHasMxRecord)
+       // 4. send via provider with stream='bulk'
+     }
+   );
+   ```
+
+2. **`workers/main/src/lib_v2/emails/index.ts`** — new `queueSendMarketingEmail(email, userId, category)` mirror of `queueSendEmail`. Fires the new Inngest event.
+
+3. **Batching support.** Campaign blasts need a parent "campaign" entity that spawns N child sends. Two approaches:
+   - **Simple:** caller enqueues N events in a loop; Inngest handles concurrency. Fine for lists up to ~10k.
+   - **Robust:** new `platform/send-marketing-campaign` event that fans out via Inngest's `step.run` + sub-events. Better for lists >10k.
+
+   Start simple. Refactor to fan-out if/when list size justifies.
+
+4. **Warmup enforcement (critical — see Phase 8).** During the 30-day warmup, the marketing send pipeline must respect a daily volume cap that ramps over time. Two options:
+   - **Hardcoded throttle in the Inngest function** (configurable via env var `MARKETING_DAILY_CAP`).
+   - **External rate-limit table** the handler checks per-day.
+
+   Recommendation: hardcoded env var, manually bumped per the warmup schedule. Lower complexity. Reduce risk of accidental overshoot.
+
+**Engineer research:**
+- Confirm Inngest's `throttle` semantics match needs (per-key vs global).
+- Decide on campaign batching shape now or defer.
+
+**Done when:** A test marketing send flows end-to-end: caller → queueSendMarketingEmail → new Inngest event → preference check → suppression check → MX check → Mailtrap bulk stream → received at seed Gmail/Outlook/Apple/Yahoo accounts with proper headers and DKIM alignment.
+
+---
+
+### Phase 6 — Webhook event handling (0.5 day)
+
+**Blocked by:** Phase 3.
+
+Current webhook handler at `workers/main/src/inngest/functions/emails/mailtrapWebhook.ts:83-105` only writes to `undeliverableEmailAddress` on `event === 'bounce'`. Other events (`spam`, `unsubscribe`, `open`, `click`, `soft_bounce`) are received and dropped.
+
+**Changes to the webhook handler:**
+
+1. **`event === 'spam'`** → write to `userEmailPreferences` with `status='unsubscribed'`, `source='spam-complaint'`. Also write to `undeliverableEmailAddress` if the complaint rate from that address suggests address-level deliverability problem (debatable; consider per-category vs global suppression).
+
+2. **`event === 'unsubscribe'`** → write to `userEmailPreferences` with `status='unsubscribed'`, `source='mailtrap-unsubscribe'`. (This is Mailtrap's parse of the `mailto:` unsubscribe; the HTTP one-click flows through Phase 4's route directly without going through this handler.)
+
+3. **`event === 'open'`, `event === 'click'`** → optional. Store as campaign metrics in a new `marketing_campaign_event` table if you want engagement analytics. **Out of scope for v1 unless analytics is a launch blocker.** Skip and add later.
+
+4. **`event === 'soft_bounce'`** → log only. Don't suppress. Soft bounces resolve on their own.
+
+5. **Stream awareness.** When writing to `undeliverableEmailAddress` or `userEmailPreferences`, include the `sending_stream` (already in the webhook schema at line 25) so suppression can be stream-specific if needed later.
+
+**Engineer research:**
+- Confirm Mailtrap's exact set of webhook event types — the schema at `mailtrapWebhook.ts:13-23` may be incomplete.
+- Decide whether spam complaints from marketing should suppress transactional too. Recommendation: no — transactional is functionally required mail; suppressing it because of marketing-list spam complaints would break the product. Keep suppression per-category.
+
+**Done when:** Synthetic webhook payloads (POST'd via curl or via Mailtrap's webhook simulator) for spam, unsubscribe, and bounce all write the expected DB state.
+
+---
+
+### Phase 7 — Monitoring & ops stack (1 day setup + ongoing)
+
+**Blocked by:** Phase 1 (subdomain published).
+
+This needs to be in place **before** the first warmup send, not after.
+
+**Setup checklist:**
+
+1. **Monitored shared mailboxes** (RFC 2142 — required by Microsoft Defender, Apple Mail, Spamhaus):
+   - `abuse@infinex.xyz` — monitored, response SLA ~24h
+   - `postmaster@infinex.xyz` — monitored, response SLA ~24h
+   - `dmarc-reports@infinex.xyz` — high-volume, parsed by tool not human
+
+2. **DMARC aggregate report parsing** — pick one:
+   - **dmarcian** free tier (up to 5M aggregate records/mo, sufficient for Infinex's scale)
+   - **Valimail Monitor** (free for basic; paid for advanced)
+   - **Self-hosted** (`dmarc-report-parser` on a small VPS — more ops, more control)
+
+   Point the `rua=` URI in DMARC to this tool.
+
+3. **Postmaster Tools registrations** — register BOTH domains SEPARATELY:
+   - Google Postmaster Tools: `infinex.xyz` AND `updates.infinex.xyz`
+   - Yahoo Sender Hub: same — separate registrations
+   - Microsoft SNDS: register sending IPs (Mailtrap provides; ask support for the IP ranges used by your account, including bulk-stream IPs which may differ)
+   - Apple has no postmaster tool
+
+4. **MXToolbox blacklist monitor** on both `infinex.xyz` and `updates.infinex.xyz`. Weekly check minimum; automated alerts on listing events.
+
+5. **Mailtrap dashboard alerts** — configure:
+   - Complaint rate > 0.1% → email alert
+   - Complaint rate > 0.3% → page-on-call
+   - Bounce rate > 2% → email alert
+   - Bulk-stream IP reputation drop → email alert
+
+6. **Internal dashboard.** Optional but useful. Aggregate: daily sends per stream, complaint rate, bounce rate, open rate, top campaigns. Can be a Grafana/Metabase view over the platform's existing analytics warehouse.
+
+**Done when:** All monitoring surfaces are live, alert thresholds configured, abuse@/postmaster@ have a human responsible.
+
+---
+
+### Phase 8 — Reputation warmup (30 days, mostly passive)
+
+**Blocked by:** Phases 1–7.
+
+Once code + DNS + monitoring are in place, the 30-day reputation warmup begins. The mechanic: gradually increase daily send volume from a fresh subdomain so providers (Gmail, Yahoo, Outlook, Apple) accumulate positive engagement signals before volume scales.
+
+**Why this matters (deeper than the launch-readiness HTML):**
+
+Mailbox providers compute reputation per authentication domain (DKIM `d=` + SPF return-path). A brand-new subdomain has no history → classifier-default is "unknown reputation, treat with suspicion." If you send 10k emails on Day 1:
+
+- Pattern matches "new bulk sender" — the most-common shape of spam-domain behavior
+- 30–60% of recipients land in spam folders
+- Recipients who would have engaged positively (open, reply, mark-as-important) can't, because they don't see the mail
+- The filter receives only ambiguous or negative signals
+- The subdomain reputation locks in as "spammy" — recovery takes weeks regardless of subsequent content quality
+
+The graduated ramp threads the needle: low enough volume early that the receiving filters don't trip "new bulk sender" alarms, but enough volume that the most-engaged users see and engage with the mail, building a positive signal base. By Day 30, the subdomain has reputation. After Day 30, full-volume sends pattern-match "established bulk sender with positive engagement" — totally different filter outcome.
+
+**Warmup schedule (calendar days, not engineering days):**
+
+| Day range | Daily volume cap | Recipient selection criterion |
+|---|---|---|
+| 1–2 | 50–100 | Most engaged: opened mail in last 30 days |
+| 3–4 | 200 | Same |
+| 5–7 | 400 | Same |
+| 8–10 | 600–800 | Expand to: opened mail in last 60 days |
+| 11–14 | 1,000–1,500 | Same |
+| 15–17 | 2,000–3,000 | Expand to: opened mail in last 90 days |
+| 18–21 | 4,000–5,000 | Full active list (last 90 days of any platform activity) |
+| 22–25 | 7,500–10,000 | Full list |
+| 26–30 | Full intended volume | Full list |
+
+**Volume cap mechanic:** the `sendMarketingEmailHandler` Inngest function (Phase 5) checks a daily counter against the cap before sending. Cap is configured via env var `MARKETING_DAILY_CAP`, manually adjusted by the engineer per the schedule.
+
+**Daily monitoring during warmup** — review at minimum every 48h:
+
+- Postmaster Tools complaint rate < 0.1% (alert at 0.2%, stop at 0.3%)
+- Bounce rate < 2%
+- Open rate > 20% (if below, reputation is poor or list is stale)
+- DMARC aggregate report shows 100% alignment pass
+
+**If any metric trips:** drop volume 25–30% and hold until metrics recover. Don't ramp through bad signals.
+
+**Engineer research:**
+- Confirm Mailtrap supports per-day volume caps natively (some providers do; if not, enforce in the Inngest handler).
+- Source the "engaged in last N days" filter — this query needs to hit the analytics warehouse, not the OLTP DB. Likely a precomputed list pulled once a day.
+
+**Done when:** Day 30 sends at full volume show open rate >20%, complaint rate <0.1%, bounce rate <2%, DMARC alignment 100%. Recovery from any pause is complete.
+
+---
+
+### Phase 9 — DMARC ramp (90 days, runs in parallel from Phase 1)
+
+**Blocked by:** Phase 1.
+
+The DMARC policy on `updates.infinex.xyz` starts at `p=none` (publish + observe) and ramps to `p=reject` (block unaligned mail) over ~90 days. Independent from the reputation warmup but runs concurrently.
+
+**Why this matters:**
+
+`p=none` means receivers send aggregate reports but don't act on alignment failures. This is the *audit* phase — you observe which senders (intended and unintended) are using your subdomain. Unintended senders are usually:
+
+- Other internal tools (CRM, helpdesk, calendar invites) accidentally configured to send from `@updates.infinex.xyz`
+- Partner integrations spoofing the subdomain (this should not exist for a brand-new subdomain but does happen)
+- Spammers attempting to use the subdomain (rare but possible)
+
+Once 2–4 weeks of clean aggregate reports show only legitimate Mailtrap-bulk-stream traffic, escalate the policy:
+
+| Window | Apex policy | `updates.` policy | Notes |
+|---|---|---|---|
+| Today | (verify; tighten if needed) | not yet published | Phase 0 Q5 |
+| Day 1 | `p=quarantine; sp=reject; pct=100` | `p=none; pct=100` | DNS publishing complete |
+| Day 1–14 | same | `p=none` | Observation only; parse reports |
+| Day 15–28 | same | `p=quarantine; pct=25` | First quarantine ramp; watch reports |
+| Day 29–56 | same | `p=quarantine; pct=100` | Full quarantine |
+| Day 57–90 | same | `p=reject; pct=25` then 100 | Reject ramp; watch reports |
+| Day 90+ | `p=reject; sp=reject` | `p=reject; pct=100` | Steady state |
+
+**Apex tightening note:** if apex DMARC is currently `p=none` (likely — many orgs never tighten apex), this work also gives a good excuse to tighten apex to `p=reject` over the same window. Run apex ramp in parallel:
+
+| Window | Apex |
+|---|---|
+| Day 1 | `p=quarantine; pct=25; sp=reject` (assuming currently `p=none`) |
+| Day 15 | `p=quarantine; pct=100` |
+| Day 45 | `p=reject; pct=25` |
+| Day 75 | `p=reject; pct=100` |
+
+Apex tightening protects all of Infinex against domain-spoofing phishing, not just marketing. Do this work; it's high-leverage security hygiene.
+
+**Engineer research:**
+- Pull existing apex DMARC reports for 2 weeks if `p=none` is in place today, before tightening. If anything legitimate fails alignment, fix it first.
+
+**Done when:** Day 90 — both apex and `updates.` at `p=reject; pct=100`; aggregate reports show 100% alignment from authorized senders; no legitimate mail dropped.
+
+---
+
+### Phase 10 — Steady-state ops (ongoing)
+
+Once Phases 8 and 9 are complete, marketing email is in steady state. Ongoing ops:
+
+- **Weekly:** review Postmaster Tools, Mailtrap dashboard, MXToolbox blacklist. Spot-check engagement metrics.
+- **Per-campaign:** validator pass on copy (in `comms-factory`); subject-line review against crypto trigger-word list (research/email-infra-recommendation-2026-05-28.md §4); test send to seed accounts BEFORE fanout; recipient list filtered to subscribed users only.
+- **Monthly:** DMARC aggregate report review. Watch for new unauthorized senders.
+- **Quarterly:** review unsubscribe rate trends. Spikes signal content/cadence problems.
+- **Incident response:** complaint rate >0.2% → STOP sending immediately; investigate; resume only after root cause identified.
+
+**Done when:** No "done" — steady-state ops indefinitely.
+
+---
+
+## Summary timeline
+
+| Phase | Calendar duration | Engineer effort | Runs in parallel? |
+|---|---|---|---|
+| 0 — Stakeholder alignment | 1–2 days | 0.5 day | No |
+| 1 — DNS publishing | 1 day + 24-48h propagation | 0.25 day | After Phase 0 |
+| 2 — Bulk stream plumbing | 0.5–1 day | 0.5–1 day | Yes, with 3, 4 |
+| 3 — Subscription model | 1 day | 1 day | Yes, with 2, 4 |
+| 4 — Unsubscribe + RFC 8058 | 0.5–1 day | 0.5–1 day | Yes, with 2, 3 |
+| 5 — Marketing send pipeline | 0.5–1 day | 0.5–1 day | After 2, 3, 4 |
+| 6 — Webhook event handling | 0.5 day | 0.5 day | Yes, with 5 |
+| 7 — Monitoring stack | 1 day setup | 0.5 day | Yes, with 5, 6 |
+| **End of code work** | **~1 week elapsed** | **~3–5 engineer-days** | |
+| 8 — Reputation warmup | 30 calendar days | passive monitoring (~30 min/day) | Yes, with 9 |
+| 9 — DMARC ramp | 90 calendar days | passive monitoring (~1h/week) | Yes, with 8 |
+| **First real campaign possible** | **~Day 37 from kickoff** | | |
+| **Full DMARC `p=reject`** | **~Day 90 from kickoff** | | |
+| 10 — Steady state | ongoing | ~2h/week | — |
+
+---
+
+## Risk callouts — things to NOT skip
+
+1. **Don't ship marketing on the apex while building.** If marketing accidentally routes through `platform/send-email` (the existing transactional event), it blasts from `security@app.infinex.xyz` and burns transactional reputation in one campaign. Add an assertion in `sendEmailHandler`: if the email's category is in the `marketingCategories` set, throw. Force the new path.
+
+2. **Don't tighten apex DMARC to `p=reject` without `sp=reject` for safety.** Without `sp=`, subdomains inherit `p=reject` and any future subdomain (e.g. internal tools) silently breaks. Always pair `p=reject` with explicit `sp=`. Recommended: `sp=reject` — explicit subdomain DMARC records override this for legitimate subdomains; everything else gets blocked, including phishing attempts.
+
+3. **Don't decommission Mailjet until Mailtrap bulk stream is proven.** Mailjet remains the legacy fallback for transactional. Don't pull it for at least 6 months after bulk-stream marketing is in steady state.
+
+4. **Don't put recipient PII in DMARC aggregate reports.** The `rua=` URI receives reports from receivers; default behavior is fine but verify the parser tool (dmarcian / Valimail) doesn't log or expose recipient addresses inappropriately.
+
+5. **Test sends BEFORE fanout, every campaign.** Seed accounts at Gmail, Outlook 365, Apple Mail iCloud, Yahoo. If any provider shows inbox→spam placement degradation between campaigns, pause and investigate.
+
+6. **The 30-day warmup is NOT a "best practice" — it's a hard requirement.** Skipping it doesn't "just lower deliverability a bit" — it locks in poor reputation for weeks. Reputation recovery is harder than reputation building. Don't skip.
+
+7. **Don't suppress transactional categories on a marketing-list spam complaint.** Per-category suppression. A user who marks "Infinex feature update" as spam should not stop receiving their 2FA codes.
+
+8. **Comms-factory validator integration is out-of-scope here**, but pre-send copy review by `comms-factory` is still part of the workflow. Coordinate with the comms team on where the validator runs (their side or platform side).
+
+---
+
+## Out of scope (this plan)
+
+These are real follow-ups, not part of the v1 plan:
+
+- **Per-category preferences page UI.** v1 has the one-click unsubscribe and `category` field in the preferences table. A user-facing UI to manage all categories is a follow-up — for v1, the unsubscribe link is the only opt-out surface.
+- **Campaign authoring UI.** Operators send via the comms-factory pipeline + ops scripts initially. A "send campaign" UI in the admin app is a follow-up.
+- **Localization.** English-only initially. Multi-locale follow-up gated on Phase 0 Q7.
+- **A/B testing / subject-line testing infrastructure.** Out of scope. Worth a separate epic later.
+- **Marketing analytics warehouse.** Open/click events flowing into the analytics warehouse for cohort analysis is out of scope; the Mailtrap dashboard is sufficient for v1.
+- **Migrating off Mailtrap.** Not needed. Only revisit if 3 months of bulk-stream operation shows complaint rates that don't recover, or if Postmaster Tools data shows Mailtrap bulk-stream meaningfully underperforming the alternatives.
+
+---
+
+## Why Path C (stay on Mailtrap), not Path A (migrate to Postmark)
+
+For the engineer's context — this decision was made by the comms operator after reading the audits. Summary:
+
+1. **The ESP is not the gating bottleneck.** Structural gaps (subscription model, RFC 8058, opt-out, batched-send pipeline) have to exist regardless of provider. Postmark wouldn't reduce any of the work in Phases 3, 4, 5, 6.
+2. **Mailtrap is delivering today** for 8 transactional categories. No signal of underperformance. Switching providers introduces risk to flows users actually depend on (login OTP, withdrawal confirmation, passkey changes).
+3. **Mailtrap is already half-built for bulk streams.** The webhook schema knows `'transactional' | 'bulk'` (`mailtrapWebhook.ts:25`); plumbing it to the send path is a few hours. A Postmark migration is days-to-weeks plus parallel ops burden.
+4. **Migration risk window.** A dual-provider cutover means 2FA/withdrawal-confirmation mail sits in transition. Crypto users on flaky 2FA email lose funds. Don't introduce that risk to fix something that isn't broken.
+5. **Migrate later if data warrants.** After ~3 months of bulk-stream operation, if Postmaster Tools shows complaint rates >0.3% that don't recover or deliverability lags meaningfully, revisit. Decide on data, not on theoretical best-practice. None of the work in Phases 1–10 is wasted if you migrate later — the subdomain, subscription model, unsubscribe routing, monitoring, etc. all carry over.
+
+The Path A alternative (Postmark migration) is documented in `research/email-infra-recommendation-2026-05-28.md`. It remains a valid future option.
+
+---
+
+## Source documents
+
+- **Platform audit** (current state, file:line refs): `research/platform-email-audit-2026-05-28.md`
+- **Best practices / provider research**: `research/email-infra-recommendation-2026-05-28.md`
+- **Operator-facing synthesis with all three launches in context**: `research/launch-readiness-2026-05-28.html`
+- **Competitor recon** (less relevant to this plan, more to the launches): `research/competitor-comms-audit-2026-05-28.md`
+
+## Authoritative external references
+
+- RFC 7489 — DMARC base spec (`https://datatracker.ietf.org/doc/html/rfc7489`)
+- RFC 8058 — One-click List-Unsubscribe (`https://datatracker.ietf.org/doc/html/rfc8058`)
+- RFC 2142 — Mailbox names for common services
+- Google Postmaster Tools docs (`https://support.google.com/a/answer/14668346`)
+- Mailtrap email-sending docs (engineer to validate current state)
+- Postmark warmup guide (`https://postmarkapp.com/guides/how-to-warm-up-a-domain`) — concepts apply to any provider

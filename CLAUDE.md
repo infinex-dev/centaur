@@ -32,7 +32,7 @@ uv run pytest                       # all tests
 uv run pytest path/to/test_x.py::test_name   # single test
 ```
 
-`services/slackbot` is Next.js + Slack Bolt and uses **`pnpm` only** (single `pnpm-lock.yaml`).
+`services/slackbot` is Next.js + Slack Bolt and uses **`pnpm`** (it's the one workspace member in the root `pnpm-workspace.yaml`). The repo has a **second, standalone Node project** at `attached-services/comms-factory/` (its own `pnpm-lock.yaml`, **not** a workspace member) — see Overlays below.
 
 Migrations use dbmate against both core and overlay migration sets:
 
@@ -87,6 +87,8 @@ How it works:
 - Overlays carry their **own dbmate migration set** (`./scripts/dbmate --set overlay …`) with a separate migrations table, so an overlay can add tables to the shared Postgres DB without version collisions.
 
 An overlay deploys locally through `contrib/scripts/deploy-local.sh`'s generic attached-service support: build the overlay image, enable the attached service + overlay tools, and bootstrap the service's `serviceKey`. Read `contrib/scripts/deploy-local.sh` to see exactly what an overlay deploy patches in.
+
+**`attached-services/` — standalone org services vendored in-repo.** A standalone service that runs as its own Pod (deployed via `attachedServices.<name>`) lives under `attached-services/<name>/`, separate from base `services/` and from the `overlays/` integration glue that mounts into Centaur. The first is `attached-services/comms-factory/` — the comms-factory TS product (Node/pnpm), driven by the Python glue in `overlays/comms-factory/` (the `comms_factory` thin-client tool + `comms_release`/`comms_audit` workflows) which calls it over HTTP. Both deploy scripts build the comms-factory image **from this in-repo source** (no external clone, no pinned ref); it's tagged with the same `$TAG` as the base images. `attached-services/` is excluded from the repo-root `ruff` run (root `ruff.toml`) — it has its own toolchain. New standalone org services land here; new Centaur glue lands under `overlays/`.
 
 ## Conventions
 

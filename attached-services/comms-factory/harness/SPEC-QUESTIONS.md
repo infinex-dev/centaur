@@ -1,0 +1,13 @@
+# SPEC-QUESTIONS
+
+Phase 3 implementation questions found while wiring the contract.
+
+1. `HANDOFF-SPEC.md` asks for Mode B/Mode C candidate diff persistence, but the authoritative schema did not include tables for `before_text`, `word_diff_json`, `before_beat_audit_json`, `after_beat_audit_json`, or shifted beats. I added append-only `candidate_text_edits` and `candidate_semantic_edits` tables without renaming existing tables or columns.
+2. `HANDOFF-SPEC.md` says "all 16 Server Actions", but the listed signatures contain 17 functions: 5 research, 3 card, 3 generate, 4 ship, and 2 agreement.
+3. `abandonCard(card_id, reason)` accepts a reason, but `cards` has no `abandon_reason` column or append-only decision table. The action currently sets `cards.status='abandoned'` and cannot persist the reason without another schema addition.
+4. Research-stage agreement is defined as decisions on `HarnessFact` rows, but the schema has no fact-decision log or decision timestamp. The implementation computes research agreement from final `facts.status` inside the card creation window and uses `fact_edits` to identify edited facts.
+5. `completeCard()` requires all expected channels to have final picks, but expected channels are not stored explicitly. The implementation derives expected channels from `release_card_json.audience`, excluding `internal`, and falls back to `x`, `web`, and `in-product` when no release card is available.
+6. `shipPick()` is specified as returning `{ shipped_at: string }`, but the clipboard destination also needs the final text in the response so the client can copy it. The implementation returns `{ shipped_at, text? }` for clipboard only.
+7. `scripts/classify-corpus.ts` is a CLI with top-level argument parsing and `process.exit`, so it is not safely importable as a reusable classifier module without a broader refactor. The harness `classifier-wrapper` uses the existing deterministic beat classifier from `src/validator.ts` for Mode C and keeps the wrapper boundary in place for a later v2 LLM classifier extraction.
+8. Field-path examples conflict: §2 uses `release_card.headline`, while the `release_card_edits` schema comment uses paths directly inside the JSON such as `headline`. The action accepts either form and stores the schema-local path.
+9. Re-approving research/card must clear downstream approvals, but the schema has no version or `superseded_at` column for downstream artifacts. Current fix deletes downstream rows, including release-card edit logs when the release card is rebuilt from research, so current-state queries and agreement recomputes cannot read stale artifacts. If historical training signal must be retained across re-approval, add versioning/superseded columns in a later migration.

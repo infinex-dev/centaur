@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>End-to-end change plan — Laban-pure, citation-anchored, repetition-resistant</title>
+<style>
+  :root {
+    --bg: #0e1116;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --good: #4ade80;
+    --warn: #f0c674;
+    --bad: #ff6b6b;
+    --canon: #f5d76e;
+    --code-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 14px/1.55 -apple-system, system-ui, sans-serif; }
+  .wrap { max-width: 1340px; margin: 0 auto; padding: 32px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 8px; }
+  h2 { font-size: 20px; margin: 36px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 15px; margin: 18px 0 10px; }
+  .sub { color: var(--muted); margin-bottom: 28px; }
+
+  .principle {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--canon);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+  }
+  .principle h2 { margin-top: 0; border: none; padding: 0; color: var(--canon); }
+  .principle ol { padding-left: 22px; margin: 8px 0 0; }
+  .principle li { margin-bottom: 6px; }
+  .principle code { background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px; font-size: 12.5px; }
+
+  .change-site {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 18px;
+  }
+  .site-header {
+    display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;
+  }
+  .site-num {
+    background: var(--accent); color: #0e1116;
+    border-radius: 50%; width: 28px; height: 28px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+  }
+  .site-title { font-size: 17px; font-weight: 600; }
+  .site-path { font-family: var(--code-mono); font-size: 12.5px; color: var(--accent); }
+  .site-summary { color: var(--muted); margin-bottom: 14px; font-size: 13px; }
+
+  .block { margin: 12px 0; padding: 12px 16px; border-radius: 4px; }
+  .block-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700; margin-bottom: 6px;
+  }
+  .block.before { background: rgba(255, 107, 107, 0.06); border-left: 3px solid var(--bad); }
+  .block.before .block-label { color: var(--bad); }
+  .block.after  { background: rgba(74, 222, 128, 0.06); border-left: 3px solid var(--good); }
+  .block.after  .block-label { color: var(--good); }
+  .block.canon  { background: rgba(245, 215, 110, 0.06); border-left: 3px solid var(--canon); }
+  .block.canon  .block-label { color: var(--canon); }
+  .block.guard  { background: rgba(88, 166, 255, 0.06); border-left: 3px solid var(--accent); }
+  .block.guard  .block-label { color: var(--accent); }
+
+  .block .body {
+    font-family: var(--code-mono); font-size: 12.5px; line-height: 1.6;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .block .body em { color: var(--muted); font-style: italic; }
+  mark { background: var(--bad); color: white; padding: 0 3px; border-radius: 2px; font-weight: 700; }
+  ins { background: rgba(74, 222, 128, 0.18); color: var(--good); text-decoration: none; padding: 0 3px; border-radius: 2px; }
+
+  .toc { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px 22px; margin-bottom: 24px; }
+  .toc h3 { margin: 0 0 8px; font-size: 14px; }
+  .toc ol { margin: 0 0 0 22px; padding: 0; column-count: 2; column-gap: 24px; font-size: 13px; }
+  .toc li { margin-bottom: 3px; break-inside: avoid; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+
+  .phase {
+    background: rgba(88, 166, 255, 0.05);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 8px 14px;
+    margin-bottom: 14px;
+    font-size: 12.5px;
+  }
+  .phase-tag {
+    display: inline-block;
+    background: var(--accent); color: #0e1116;
+    padding: 2px 8px; border-radius: 10px;
+    font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    margin-right: 8px;
+  }
+  .phase-tag.p2 { background: var(--warn); }
+  .phase-tag.p3 { background: var(--muted); }
+
+  .citation {
+    font-family: var(--code-mono);
+    font-size: 11.5px;
+    color: var(--canon);
+    background: rgba(245, 215, 110, 0.06);
+    padding: 4px 8px;
+    border-radius: 3px;
+    border-left: 2px solid var(--canon);
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>End-to-end change plan</h1>
+  <div class="sub">2026-05-28 · Laban/Mirodan-canonical, citation-anchored, structurally repetition-resistant. Every prescription either cites canonical source or is a forbidden-list — never substitute language that becomes the next anchor.</div>
+
+  <!-- ============================================================ -->
+  <div class="principle">
+    <h2>Three architectural rules</h2>
+    <ol>
+      <li><strong>Canon-by-citation, not by paraphrase.</strong> Every framework-layer instruction that prescribes voice/movement principles must cite the source (Mirodan vol/page, Stanislavski text, or a public-domain literary anchor like <em>Wild Duck</em> Act V or <em>Measure for Measure</em> Act 5). No operator restatement. If the LLM needs the principle, it gets the canonical formulation, not our gloss.</li>
+      <li><strong>Forbidden-lists, not example-lists.</strong> Examples become templates (verified across A/B/C/D/E test — every example, even token-swapped, drives 33-50% of outputs toward its frame). Use NEGATIVE prescription ("do not X") plus canonical reference, NOT positive prescription ("do Y like this example"). Variant C's architecture extended pipeline-wide.</li>
+      <li><strong>Beat counts emerge from the verb, not from defaults.</strong> Per Mirodan §1.7 (vol 2, p. 347): tempo is read from how the verb is played. Pre-prescribing 3-beat arcs forces structure where canon would compose 1 or 2 beats. <code>defaultBeatsForKind</code> must allow shorter shapes — the Actor's verb selection determines beat count.</li>
+    </ol>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <h3>Change sites — end to end across the pipeline</h3>
+    <ol>
+      <li><a href="#s1">Card schema docstrings</a></li>
+      <li><a href="#s2">defaultBeatsForKind</a></li>
+      <li><a href="#s3">Generator system prompt — "wall coming down" canonical shape</a></li>
+      <li><a href="#s4">Generator Stage A user prompt — "Stage A/B" labels</a></li>
+      <li><a href="#s5">Generator Stage B drafting — Lining-as-closing-thesis</a></li>
+      <li><a href="#s6">Generator Stage B drafting — deployed_facts surface presence</a></li>
+      <li><a href="#s7">Generator system prompt — Drive performance demand</a></li>
+      <li><a href="#s8">Generator system prompt — "performing the wrong character"</a></li>
+      <li><a href="#s9">Generator Stage B — "dissolved-wall thesis"</a></li>
+      <li><a href="#s10">Director method block — Lining demand inversion</a></li>
+      <li><a href="#s11">Director infinex placement block — Drive-must-surface</a></li>
+      <li><a href="#s12">Actor framework — hardcoded "Infinex character"</a></li>
+      <li><a href="#s13">Validator-LLM drive descriptors</a></li>
+      <li><a href="#s14">Copy-rewrite — hardcoded brand example</a></li>
+      <li><a href="#s15">Cream voice spec — cross-brand wall anchor</a></li>
+      <li><a href="#s16">Eval permutation prompts</a></li>
+      <li><a href="#s17">Mirodan competence eval canonical example</a></li>
+      <li><a href="#s18">Harness mock-data wall reference</a></li>
+      <li><a href="#s19">Test fixtures with wall metaphor</a></li>
+      <li><a href="#s20">Skill file taxonomy errors (Adream outer, Stanley)</a></li>
+      <li><a href="#s21">Operator-facing character sheet</a></li>
+    </ol>
+  </div>
+
+  <!-- ============================================================ -->
+  <h2>The 21 sites</h2>
+
+  <!-- 1 -->
+  <div class="change-site" id="s1">
+    <div class="site-header">
+      <span class="site-num">1</span>
+      <span class="site-title">Card schema docstrings</span>
+      <span class="site-path">src/card.ts:48, :61-62</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span>The original Bridge.xyz contamination source. Tested empirically (A/B/C/D/E v2).</div>
+    <div class="site-summary">Apply Variant C — no example, canon reference + forbidden-list. Test data shows all variants are roughly equivalent at caption layer (generator washes out grounding-level contamination), and C is the least-anchoring choice. Anti-anchoring guard: no concrete example to template against.</div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">// Example: "to reveal that <mark>the bank wall just dissolved inside one account</mark>".
+through_action: z.string().min(1).optional(),
+
+// Example: "on the surface: a new fiat deposit rail. underneath: the
+// <mark>bank-vs-wallet wall just stopped existing for Infinex users.</mark>"
+lining: z.string().min(1).optional(),</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body">// <ins>Stanislavski-Mirodan "through-action" (Mirodan vol 2, §13, pp. 282-306):</ins>
+// <ins>the character's pursued objective for this scene. Transitive verb chain.</ins>
+// <ins>Required: transitive verb; object names the structural shift this post performs.</ins>
+// <ins>Forbidden: product-specific nouns; brand metaphors; mechanical descriptions</ins>
+// <ins>(rails, plumbing, feature taxonomies).</ins>
+through_action: z.string().min(1).optional(),
+
+// <ins>The hidden Inner Action the visible Outer covers (Mirodan vol 2, §7.1, pp. 554-555).</ins>
+// <ins>Authoring discipline (Mirodan §7.3): the Lining is what the prose CARRIES but</ins>
+// <ins>does not STATE. Format: "on the surface, X; underneath, Y."</ins>
+// <ins>Required: two-clause structure; surface names the visible Outer; underneath names</ins>
+// <ins>what the prose carries underneath but does not declare in the final text.</ins>
+// <ins>Forbidden: product mechanics on either side; brand metaphors; explicit statement</ins>
+// <ins>of what the underneath "means" — it must remain unsaid in the final prose.</ins>
+lining: z.string().min(1).optional(),</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan vol 2 §13 pp. 282-306 (Super-Objective / Through-Action / Stanislavski inheritance)
+Mirodan vol 2 §7.1 pp. 554-555 (Outer Action / Inner Action / Lining definition)
+Mirodan vol 2 §7.3 pp. 555-558 (Authoring discipline — write Outer, leak Lining)</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">No example. LLM constructs from canon citation + properties + forbidden-list. Tested: produces broad lexical/frame distribution. <em>Caveat:</em> the Mirodan citation itself is what the LLM anchors to — but that anchor is the framework canon, not a brand-specific metaphor. Acceptable by design.</div>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="change-site" id="s2">
+    <div class="site-header">
+      <span class="site-num">2</span>
+      <span class="site-title">defaultBeatsForKind — per-kind beat counts must allow 1- and 2-beat shapes</span>
+      <span class="site-path">src/voice/infinex.ts:297-334</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span>Both corpus + literary comparison: real Stable + Bound voices often compose ONE-LINE settlements. Our generator always produces 3-beat arcs.</div>
+    <div class="site-summary">The current default forces Sombre-prep → Commanding-fact → Irradiant-lift on every release. Real Infinex corpus shows announcements often skip Sombre prep ("INX is here.", "Oversubscribed.", "Stock perps are now live on Infinex."). Werle composes settlements in 1-2 clauses ("Beyond that, there is nothing to say."). The generator's default fights both the real-world corpus AND the literary anchor.</div>
+
+    <div class="block before">
+      <div class="block-label">Current (launch-tier shown)</div>
+      <div class="body">case "launch-tier":
+  return [
+    { tempo: "sombre",     hint: "<mark>set up the wall we are taking down</mark> — Pressing prep" },
+    { tempo: "commanding", hint: "land the fact — Punching release, fed by Sombre prep" },
+    { tempo: "practical",  hint: "justify the build decision — Wringing/Slashing" },
+    { tempo: "irradiant",  hint: "future-tense lift — Floating/Flicking" },
+  ];
+case "data-card-official":
+  return [
+    { tempo: "sombre", hint: "Pressing prep" },
+    { tempo: "commanding", hint: "the fact" },
+    { tempo: "irradiant", hint: "future-state close" },
+  ];</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed (per-kind canonical defaults)</div>
+      <div class="body"><ins>// Per-kind canonical defaults — beat counts emerge from verb the Actor selects.</ins>
+<ins>// Mirodan §1.7 (vol 2, p. 347): the actor plays a transitive verb; tempo emerges.</ins>
+<ins>// Beat count is NOT pre-prescribed — these are STARTING POINTS the Actor can compress.</ins>
+case "launch-tier":
+  // Reserved 3-4 beat arc. The only kind that natively wants the full arc.
+  return [
+    { tempo: "sombre",     hint: "Pressing prep (Mirodan §1.7) — Sustained partner for the Commanding release" },
+    { tempo: "commanding", hint: "Pressing → Punching release" },
+    { tempo: "practical",  hint: "Wringing → Slashing — carve the tradeoff" },
+    { tempo: "irradiant",  hint: "Floating → Flicking — future-state" },
+  ];
+case "data-card-official":
+  // <ins>Commanding-only by default. Actor may add one Irradiant beat if the verb</ins>
+  // <ins>requires future-state lift. Real Infinex corpus shows this is 1-2 beats,</ins>
+  // <ins>not 3 (see IT017, IT020, IT022, IT030 — all fact-led, minimal arc).</ins>
+  return [
+    { tempo: "commanding", hint: "Pressing → Punching" },
+  ];
+case "data-card-wry":
+  // Same: 1-2 beats. Wry register, no philosophical opener.
+  return [
+    { tempo: "commanding", hint: "Pressing → Punching, dry" },
+  ];
+case "split":
+  // Practical-led. The split's structure IS the argument.
+  return [
+    { tempo: "practical",  hint: "Wringing → Slashing — name the split's meaning" },
+    { tempo: "commanding", hint: "Pressing → Punching — land the fact" },
+  ];</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan vol 2 §1.7 p. 347 (preparation hierarchy — Sustained partner required for Quick release)
+Mirodan vol 1 ch1 pp. 350-351 ("Punching can't be acted. To box can." — verb-not-motor)
+Corpus evidence: Infinex IT017, IT020, IT022, IT030, IT031, IT050, IT052 — fact-led 1-2 beat shape
+Literary anchor: Werle Act V ("The pension is fixed; it falls due quarterly."), Duke 5.1 ("An Angelo for Claudio; death for death.") — both 1-2 sentence settlements</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">No brand-metaphor hints (no "wall we are taking down"). Hints are Mirodan motor names + §-citation. Single-beat default for data-card-official + data-card-wry actively counters the 3-beat-essayist pull. The Actor still composes — but starts from a leaner template.</div>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="change-site" id="s3">
+    <div class="site-header">
+      <span class="site-num">3</span>
+      <span class="site-title">Generator system prompt — "wall coming down is canonical" instruction</span>
+      <span class="site-path">src/generator.ts:1172</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span>The largest single contamination vector after card.ts. v2 test showed 3 of 5 variants produce "wall" for partnership-spot-hyperliquid because of this line.</div>
+    <div class="site-summary">Currently the X-channel beat-sequencing instruction baked into the generator's system prompt explicitly says the wall shape is canonical. This is operator paraphrase masquerading as Mirodan canon.</div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">parts.push("  - This is an **x** post (280 chars). 3-4 beats. Multi-paragraph. Sequence the beats so that sustained-feeling verbs (set up, reveal, mark, hold) precede quick-feeling release verbs (land, snap, sting, lift). A '<mark>set up the wall coming down, then land the fact</mark>' shape is canonical.");</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body">parts.push("  - This is an **x** post (≤280 chars). <ins>Beat count emerges from verb selection (Mirodan §1.7, vol 2 p. 347).</ins> <ins>Single-beat Commanding is the most-common shape in the corpus (see Werle, *Wild Duck* Act V; Duke, *Measure for Measure* 5.1).</ins> When the verb being played requires preparation, sequence sustained-feeling setup before quick-feeling release per the Mirodan motor pairs: Pressing → Punching, Wringing → Slashing, Gliding → Dabbing, Floating → Flicking.");</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan §1.7 vol 2 p. 347 (preparation hierarchy)
+Ibsen, <em>The Wild Duck</em> Act V (Werle: "The pension is fixed; it falls due quarterly.") — single-beat settlement
+Shakespeare, <em>Measure for Measure</em> 5.1 (Duke: "An Angelo for Claudio; death for death.") — single-beat judgment</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">No concrete shape ("set up X then land Y") is provided. Instead, two literary citations are referenced. The LLM has to integrate from canon, not pattern-match from an example. Multi-literary-citation defeats single-frame anchoring.</div>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="change-site" id="s4">
+    <div class="site-header">
+      <span class="site-num">4</span>
+      <span class="site-title">"Stage A" / "Stage B" engineering jargon in LLM-facing prompts</span>
+      <span class="site-path">src/generator.ts:1184, :1218, :1379</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span>Operator-banned terminology per memory feedback-pipeline-vocabulary.md (2026-05-25). Three sites in Actor-facing prompts.</div>
+    <div class="site-summary">Replace pipeline-stage engineering labels with Stanislavski-canonical terms. "Table work" is the actor's interpretation phase (Mirodan ch1 explicitly uses this); "the drafting actor" or "the actor at the desk" works for the performance phase.</div>
+
+    <div class="block before">
+      <div class="block-label">Current — three sites</div>
+      <div class="body">// line 1184
+"...write the not_the_point field in your output as a CONCRETE, ENFORCEABLE instruction <mark>Stage B</mark> will see... <mark>Stage B</mark> respects what you write here verbatim..."
+
+// line 1218
+"Plan only. DO NOT write the draft text. <mark>Stage B</mark> will execute your plan."
+
+// line 1379
+"## Committed inner work (from <mark>Stage A</mark> — execute, do not re-litigate)"</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body"><ins>// line 1184</ins>
+"...write the not_the_point field in your output as a CONCRETE, ENFORCEABLE instruction <ins>the drafting actor</ins> will see... <ins>The drafting actor</ins> respects what you write here verbatim..."
+
+<ins>// line 1218</ins>
+"<ins>Commit your table work.</ins> DO NOT write the draft text. <ins>The drafting actor</ins> will execute your plan."
+
+<ins>// line 1379</ins>
+"## Committed inner work (from <ins>table work</ins> — execute, do not re-litigate)"</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Stanislavski, <em>An Actor Prepares</em> (1936) — "table work" as the interpretation phase preceding performance
+Mirodan vol 1 ch1 explicitly references "table work" as the Actor's preparation step</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">"Table work" is a Stanislavski term-of-art with stable meaning across the actor-training tradition. It doesn't introduce a new template/anchor — it replaces engineering jargon with theatrical jargon the LLM already has correct priors for.</div>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="change-site" id="s5">
+    <div class="site-header">
+      <span class="site-num">5</span>
+      <span class="site-title">Stage B drafting — explicitly forbid Lining-as-closing-thesis</span>
+      <span class="site-path">src/generator.ts (Stage B drafting prompt builder)</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span>Identified via literary anchor comparison. Werle/Duke/Logan never deliver Lining as closing kicker; our captions always do.</div>
+    <div class="site-summary">All 50 v2 captions deliver Lining-as-thesis at the close ("the wall isn't there anymore", "you arrive already moving", "the past stops introducing you", "this is what the door looks like once you stop guarding it"). Per Mirodan §7.3, the Lining is what the prose CARRIES underneath, never declares. Our closing beats are reading the Lining out loud.</div>
+
+    <div class="block before">
+      <div class="block-label">Current (generator.ts:1386 approximate)</div>
+      <div class="body">parts.push("- LEAK the lining (Mirodan §7.3: write the Outer, leak the Lining). Never name innerWork.lining verbatim; never name innerWork.through_action verbatim; never quote innerWork.obstacle.");</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed (add to Stage B drafting prompt)</div>
+      <div class="body"><ins>parts.push("- LEAK the Lining (Mirodan §7.3, vol 2 p. 555-558). The Lining is what the prose carries but does not state.");</ins>
+<ins>parts.push("- HARD: if the closing beat resolves the meaning of the post, the Lining has surfaced as Outer and the dramatic gap is gone. The closing beat must land on a named particular — a fact, a noun, a number — not a thesis. Reference: Werle, *Wild Duck* Act V ('The pension is fixed; it falls due quarterly.') — the closing names mechanics, the Lining (his debt) stays underneath. Reference: Duke, *Measure for Measure* 5.1 ('An Angelo for Claudio; death for death.') — the close names the judgment, the moral Lining stays underneath.");</ins>
+<ins>parts.push("- Forbidden as closing beat: meta-observations about what the change MEANS, sentences whose subject is an abstraction ('the wall', 'the friction', 'the past', 'the door'), or any phrase that points at the Lining instead of carrying it.");</ins></div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan vol 2 §7.3 pp. 555-558 (authoring discipline — Lining stays hidden)
+Ibsen, <em>Wild Duck</em> Act V (Werle's pension speech — Lining-as-bookkeeping)
+Shakespeare, <em>Measure for Measure</em> 5.1 (Duke's judgment — Lining-as-balance)</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">The instruction is a FORBIDDEN-LIST (no meta-observations, no abstract subjects, no Lining-pointing phrases) plus TWO literary references. No single positive shape to template against. The LLM has to integrate "land on a named particular" from the canon citations + its own priors.</div>
+    </div>
+  </div>
+
+  <!-- 6 -->
+  <div class="change-site" id="s6">
+    <div class="site-header">
+      <span class="site-num">6</span>
+      <span class="site-title">Stage B drafting — deployed_facts surface presence with specifics intact</span>
+      <span class="site-path">src/generator.ts (Stage B drafting prompt builder)</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span>Corpus + literary anchor both: real Stable speech names mechanics aggressively. Our captions stay abstract.</div>
+    <div class="site-summary">Werle says "fifteen, sixteen years" and "the pension falls due quarterly." Real IT017 names 19 tickers, 20x leverage, two partner @-handles. Our captions skip specifics in favor of meta-observation. Stage B doesn't currently mandate that specifics from deployed_facts make it into the surface prose.</div>
+
+    <div class="block before">
+      <div class="block-label">Current (Stage B has soft "use deployed_facts" guidance)</div>
+      <div class="body"><em>(implicit — Stage B doesn't currently mandate verbatim specifics surface; only that claims must trace to deployed_facts)</em></div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed (add to Stage B drafting prompt)</div>
+      <div class="body"><ins>parts.push("- HARD: at least one deployed_fact must surface in the prose with specifics INTACT — verbatim numbers, ticker symbols, partner @-handles, currency codes, dates, durations. Not paraphrased. The Stable + Penetrating voice names mechanics (Werle, *Wild Duck* Act V: 'fifteen, sixteen years'; 'falls due quarterly'). Specificity drains affect; affect-laden generalities ('a new era of...', 'the future of...', 'the boundary between...') are off-spec.");</ins>
+<ins>parts.push("- The surface text must contain at least one PROPER NOUN from deployed_facts when applicable (partner brand names with @-handles, chain names, ticker symbols, product names). Reference: real Infinex IT017 names 19 tickers + 'Powered by @HyperliquidX and provided by @tradexyz.'");</ins>
+<ins>parts.push("- Forbidden: paraphrasing a deployed_fact's specifics into an abstract gesture. If the fact says '20x leverage' the prose must contain '20x', not 'leverage available'. If the fact says 'ACH, SEPA, wire' the prose must contain at least one of those names, not 'multiple deposit methods'.");</ins></div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Ibsen, <em>Wild Duck</em> Act V (Werle's accounting language — specificity-as-distance)
+Infinex corpus: IT017 (Stock perps + 19 tickers + leverage + partner @-handles)
+Infinex corpus: IT020 ("Silver is live on Infinex Perps. Go long or short the second largest asset in the world with 10x leverage.")
+Infinex corpus: IT030 ("powered by @HoudiniSwap 🔮")</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">The instruction REQUIRES specifics from <code>deployed_facts</code> (provided per-card) — so the "specifics" are different per card and can't anchor pipeline-wide. The form is "must contain at least one X from {card-specific list}", not "must say <fixed example>".</div>
+    </div>
+  </div>
+
+  <!-- 7 -->
+  <div class="change-site" id="s7">
+    <div class="site-header">
+      <span class="site-num">7</span>
+      <span class="site-title">Generator — Drive performance demand inverts Mirodan canon</span>
+      <span class="site-path">src/generator.ts:592</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span>Mirodan ch3 p.529-530: Drives are READ, not performed. Current instruction inverts this.</div>
+    <div class="site-summary">The current line treats Drive as something the writer must actively control. Mirodan canon: Drives flow from the verb the actor plays; the audience reads the Drive afterward. This is the #1 Mirodan inversion in the codebase per audit-mirodan-2026-05-27.md.</div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">"Passion may exist as hidden lining. <mark>It fails when time-pressure, scarcity, or hype makes Passion the visible/extravert projection instead of Vision.</mark>"</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body">"<ins>Drives are READ from the visible Working Action, not performed (Mirodan vol 1 ch3 pp. 529-530). The writer plays a verb under inner work; the audience identifies the Drive afterward.</ins>
+
+<ins>Off-spec is a VISIBLE SURFACE that systematically misroutes the Drive read. For Infinex (Spell → Vision axis), the off-spec surface pattern is urgency-vocabulary that the audience would read as Passion-driven: time-pressure phrasing, FOMO, scarcity-of-attention, hype theatre. These are FORBIDDEN as visible surface — not because Passion is wrong but because the surface routes it as visible projection.</ins>"</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan vol 1 ch3 pp. 529-530 ("Externalized Drives are used to identify the Inner Attitude of the Character" — Drives are read, not performed)
+Mirodan vol 1 ch3 pp. 534-535 (Passion = constant change, emotion overriding thinking)</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">Frames off-spec as a forbidden-list of urgency-pattern symptoms, not as a positive instruction to "perform Vision." The LLM is told what NOT to produce, not what to produce. Drive emerges from the surface, not from explicit Drive-targeting.</div>
+    </div>
+  </div>
+
+  <!-- 8 -->
+  <div class="change-site" id="s8">
+    <div class="site-header">
+      <span class="site-num">8</span>
+      <span class="site-title">"Performing the wrong character" — non-canon framing</span>
+      <span class="site-path">src/generator.ts:617</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P1</span></div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">"3. Would this still feel right with no exclamation marks, no rocket, no 'thrilled to'? If not, <mark>the sentence is performing the wrong character.</mark>"</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body">"3. Would this still feel right with no exclamation marks, no rocket emojis, no 'thrilled to'? If the sentence requires those embellishments to read as Infinex, <ins>rewrite — the verb being played has activated an off-spec Drive surface (Mirodan ch3 pp. 529-530: Drives are read from the visible action). Reference: real Infinex IT022 ('INX is here.') — 3 words, no embellishment, on-character.</ins>"</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan vol 1 ch3 pp. 529-530 (Drives are read, not performed)
+Infinex corpus IT022 ("INX is here.") — single-clause settlement, no embellishment</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">References real Infinex corpus example by ID, not as inline text. The LLM can integrate the citation but doesn't have a quotable shape to template.</div>
+    </div>
+  </div>
+
+  <!-- 9 -->
+  <div class="change-site" id="s9">
+    <div class="site-header">
+      <span class="site-num">9</span>
+      <span class="site-title">Stage B — "dissolved-wall thesis" instructional example</span>
+      <span class="site-path">src/generator.ts:1403</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span></div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">"...Refusal is the point — <mark>naming the dissolved-wall thesis</mark> WITHOUT touching the not_the_point framings is the discipline."</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body">"...Refusal is the point — <ins>landing the named particulars of the deployed_facts</ins> WITHOUT touching the not_the_point framings is the discipline."</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Reuses #6 (deployed_facts mandate). No brand metaphor.</div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="change-site" id="s10">
+    <div class="site-header">
+      <span class="site-num">10</span>
+      <span class="site-title">Director method block — Lining demand inversion</span>
+      <span class="site-path">src/actor-memory.ts (directorMethodBlock, ~lines 312-326)</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span>Per audit-mirodan-2026-05-27.md P0 #2: Director currently demands "Lining must surface visibly" which is inverse of Mirodan §7.3.</div>
+
+    <div class="block before">
+      <div class="block-label">Current (implicit; Director scores candidates whose Lining "doesn't surface" as failing)</div>
+      <div class="body"><em>(criteria implicit; the Bridge.xyz run showed the Director rejected attempt-1 Doing-surface candidates for "Lining absent" — pushing the Actor to surface the Lining in subsequent attempts, contaminating the run)</em></div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed (add to directorMethodBlock)</div>
+      <div class="body">"<ins>- Lining is hidden by canon (Mirodan vol 2 §7.3, pp. 555-558). DO NOT mark a candidate failing because the Lining is not visible in the prose. Hidden is correct.</ins>"
+"<ins>- If the closing beat resolves the meaning of the post (states what the change MEANS rather than what it IS), the Lining has surfaced as Outer and the dramatic gap is gone. THIS is the Lining failure mode — surfaced, not absent.</ins>"
+"<ins>- Reference: Werle's pension speech (Wild Duck Act V) — closes on 'falls due quarterly', not on what the gift MEANS. The Lining (his debt to old Ekdal) is what the audience reads, not what Werle states.</ins>"</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan vol 2 §7.3 pp. 555-558 (Lining stays hidden, never named)
+Ibsen, <em>Wild Duck</em> Act V (Werle's pension speech — Lining-as-bookkeeping)</div>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="change-site" id="s11">
+    <div class="site-header">
+      <span class="site-num">11</span>
+      <span class="site-title">Director infinex placement block — Drive-must-surface inversion</span>
+      <span class="site-path">src/actor-memory.ts:343-368 (infinexPlacementBlock)</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span>Per audit-mirodan-2026-05-27.md P0 #1: Director currently demands "Infinex extravert projection must be Vision". Same inversion as #7.</div>
+
+    <div class="block before">
+      <div class="block-label">Current (the existing hedges at lines 359-362 are correct but buried below the prescriptive language at 354-355)</div>
+      <div class="body">// line 354
+`- Drive primary: ${voice.drive_primary}; secondary: ${voice.drive_secondary}; introvert: ${voice.drive_introvert ?? "n/a"}; extravert: ${voice.drive_extravert ?? "n/a"}.`
+// line 355
+`- Off-spec as <mark>visible/extravert surface</mark>: ${voice.off_spec_drives.join(", ") || "none"}. Hidden/introvert lining may still exist.`</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed (promote the hedges to primary; remove the surface-projection prescription)</div>
+      <div class="body">"<ins>- Drives are READ from the visible Working Action, not performed (Mirodan vol 1 ch3 pp. 529-530). The writer plays a verb under inner work; the audience identifies the Drive afterward.</ins>"
+"<ins>- Off-spec markers (urgency-vocabulary, FOMO, scarcity, hype-theatre) systematically project ${voice.off_spec_drives.join(", ") || "no off-spec drives"} when foregrounded. The Director identifies these as off-spec surface; otherwise Drive reads are INFORMATIONAL, not pass/fail.</ins>"
+"<ins>- Doing or Spell as visible surface is acceptable for Infinex. Vision is the target read across the cumulative arc (Mirodan ch3 pp. 529-530 — read across the work, not per-line).</ins>"
+"<ins>- A Stable + Penetrating + Flow-stressed character can legally rest at Spell (Mirodan vol 2 p. 489: 'decisions already taken; it is only a matter of pursuing the chosen course to the end'). The Director does NOT fail a single-line web/UI copy for not 'projecting' Vision.</ins>"</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan vol 1 ch3 pp. 529-530 (Drives read, not performed)
+Mirodan vol 2 p. 489 (Stable definition: decisions already taken)</div>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="change-site" id="s12">
+    <div class="site-header">
+      <span class="site-num">12</span>
+      <span class="site-title">Hardcoded "Infinex character" in Actor framework</span>
+      <span class="site-path">src/actor-director.ts:429</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span></div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">"page_2_character_rehearsal": "how the <mark>Infinex</mark> character stands in this circumstance",</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body">"page_2_character_rehearsal": "how the character stands in this circumstance",</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">Character identity is wired via the voice spec parameter (<code>voice.character_image</code>, <code>voice.literary_anchors</code>). Hardcoding the brand name here is redundant AND leaks the brand into shared framework code that runs for every brand.</div>
+    </div>
+  </div>
+
+  <!-- 13 -->
+  <div class="change-site" id="s13">
+    <div class="site-header">
+      <span class="site-num">13</span>
+      <span class="site-title">Validator-LLM drive descriptors — operator paraphrases of canon</span>
+      <span class="site-path">src/validator-llm.ts:169</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span></div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">"`doing` = direct action/getting-things-done. `spell` = timeless craft, slow charm. `passion` = <mark>urgency/time-pressure/hype/FOMO</mark>. `vision` = <mark>future-pull, agentic-becoming</mark>."</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body">"<ins>`doing` = Inner-Action drive of direct execution (Mirodan vol 1 ch3 pp. 532-533).
+`spell` = Inner-Action drive of timeless craft, decision-already-taken (Mirodan ch3 pp. 535-536).
+`passion` = Inner-Action drive of constant change, emotion overriding thinking (Mirodan ch3 pp. 534-535). Urgency-vocabulary is a SURFACE SYMPTOM, not the definition.
+`vision` = Inner-Action drive of future-pull, forward-leaning intention (Mirodan ch3 pp. 536-537).
+See voice.tempi[tempoName].canonical_shorthand for tempo-specific grounding.</ins>"</div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan vol 1 ch3 pp. 532-533 (Doing), pp. 534-535 (Passion), pp. 535-536 (Spell), pp. 536-537 (Vision)</div>
+    </div>
+  </div>
+
+  <!-- 14 -->
+  <div class="change-site" id="s14">
+    <div class="site-header">
+      <span class="site-num">14</span>
+      <span class="site-title">Copy-rewrite hardcoded Infinex tagline as instructional example</span>
+      <span class="site-path">src/copy-rewrite-llm.ts:129-132</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span></div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">"If the shipped text says <mark>\"Change the way you crypto.\"</mark>, your intent must NOT contain \"change\", \"way\", or \"crypto\". It must describe the JOB (e.g. <mark>\"Tell a first-time visitor what Infinex is in a single decisive line...\"</mark>)."</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body">"<ins>Abstract over the shipped text's specific noun choices, verb choices, and rhetorical figures. Describe the JOB the copy is doing, not the words. If the shipped text uses lexical-token X, your intent must NOT contain X. Forbidden: any token verbatim from the source. Required: a job-description that could be fulfilled by lexically-distinct copy.</ins>"</div>
+    </div>
+
+    <div class="block guard">
+      <div class="block-label">Anti-anchoring guard</div>
+      <div class="body">No brand-specific example. Job description framed as a rule, not an instance. Works for any brand (the tool is brand-agnostic per its file location).</div>
+    </div>
+  </div>
+
+  <!-- 15 -->
+  <div class="change-site" id="s15">
+    <div class="site-header">
+      <span class="site-num">15</span>
+      <span class="site-title">Cream voice spec — cross-brand wall anchor</span>
+      <span class="site-path">src/voice/cream.ts:22, :361</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P0</span></div>
+    <div class="site-summary">Cream's voice spec carries "section by section" inherited from Infinex pre-Laban Sombre vocab_anchor. Different brand, same contamination.</div>
+
+    <div class="block before">
+      <div class="block-label">Current (comments)</div>
+      <div class="body">// line 22
+* "<mark>section by section</mark>", "patient craft", "the future is patient". Cream of...
+
+// line 361
+// language ("<mark>section by section</mark>", "we've been building this for years",</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body"><ins>// Strip "section by section" + the wall-anchor vocabulary from comments.</ins>
+<ins>// Cream's Sombre register, if it has one, should be grounded in Cream's own</ins>
+<ins>// literary anchor (TBD per Cream's placement audit), not Infinex's.</ins>
+<ins>// Defer to a Cream-specific audit pass; for now, strip the contamination.</ins></div>
+    </div>
+  </div>
+
+  <!-- 16 -->
+  <div class="change-site" id="s16">
+    <div class="site-header">
+      <span class="site-num">16</span>
+      <span class="site-title">Eval permutation prompts — wall language as canonical Sombre exemplar</span>
+      <span class="site-path">eval/permutation-prompts/kernel.md, current.md, full.md, examples.md</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P1</span>Self-reinforcing loop: classifier calibrated on wall-language Sombre → generator produces wall → classifier scores it on-spec.</div>
+
+    <div class="block before">
+      <div class="block-label">Current (in 4 files)</div>
+      <div class="body">// vocab_anchor for Sombre:
+"used to, becomes, stops being, the gap between, <mark>section by section, load-bearing</mark>"
+
+// example line:
+"<mark>The wallet and the venue used to be separate things. We've been taking that wall down section by section.</mark>"</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body"><ins>// Sombre exemplar — literary canon (no brand vocabulary):</ins>
+<ins>// Werle, Ibsen, *The Wild Duck* Act V:</ins>
+<ins>// "The pension is fixed; it falls due quarterly."</ins>
+<ins>// Notes: Stable + Penetrating + Flow-stressed + Bound. Pressing → Punching (bound).</ins>
+<ins>// The Outer names mechanics; the Lining (Werle's unspoken debt) stays underneath.</ins>
+
+<ins>// Alternative literary exemplar:</ins>
+<ins>// The Duke, Shakespeare, *Measure for Measure* 5.1:</ins>
+<ins>// "An Angelo for Claudio; death for death. / Haste still pays haste, and leisure answers leisure."</ins>
+<ins>// Notes: Same placement. Pressing → Punching. Outer names judgment; Lining (moral cost) stays underneath.</ins></div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Ibsen, <em>Wild Duck</em> Act V (Werle's pension speech)
+Shakespeare, <em>Measure for Measure</em> 5.1 (Duke's judgment)</div>
+    </div>
+  </div>
+
+  <!-- 17 -->
+  <div class="change-site" id="s17">
+    <div class="site-header">
+      <span class="site-num">17</span>
+      <span class="site-title">Mirodan competence eval canonical example</span>
+      <span class="site-path">eval/mirodan-competence/questions.ts:493</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P1</span></div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">"<mark>The wall between wallet and exchange has been load-bearing for years. We've been taking it down section by section.</mark>"
+// followed by classification annotation citing it as on-spec for Stable+Penetrating+Flow</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body"><ins>// Werle (Ibsen, *Wild Duck* Act V):</ins>
+<ins>"The pension is fixed; it falls due quarterly. — Beyond that, there is nothing to say."</ins>
+<ins>// Classification: Stable + Penetrating + Flow-stressed + Bound. Pressing → Punching motor (bound). Sombre tempo. On-spec for Diagram D placement. Outer names mechanics ('quarterly'); Lining (Werle's debt) stays underneath per Mirodan §7.3.</ins></div>
+    </div>
+  </div>
+
+  <!-- 18 -->
+  <div class="change-site" id="s18">
+    <div class="site-header">
+      <span class="site-num">18</span>
+      <span class="site-title">Harness mock-data wall reference</span>
+      <span class="site-path">harness/lib/mock-data.ts:158</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P2</span></div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">"<mark>Spot used to live in a different app from your perps. We've been taking that wall down section by section.</mark>\n\nSpot on Hyperliquid is live in Infinex.\n\nSame passkey, same orderbook style, alongside perps.\n..."</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed (rewrite mock to use real IT017 as template)</div>
+      <div class="body"><ins>"Spot Hyperliquid is now live in Infinex.\n\nSame account, same passkey. The Hyperliquid orderbook surfaces inside the app where your portfolio already lives.\n\nPowered by @HyperliquidX."</ins></div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Infinex corpus IT017 (2025-12-22) — real on-character announcement template</div>
+    </div>
+  </div>
+
+  <!-- 19 -->
+  <div class="change-site" id="s19">
+    <div class="site-header">
+      <span class="site-num">19</span>
+      <span class="site-title">Test fixtures with wall metaphor</span>
+      <span class="site-path">src/__tests__/actor-director.test.ts (~28, 30, 76, 146, 159, 180, 226, 268, 278, 293); src/__tests__/generator.test.ts:260-261, :299</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P2</span></div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">// actor-director.test.ts:28-30
+through_action: "to reveal that the <mark>bank wall moved off the user</mark>",
+lining: "surface: a deposit route. underneath: responsibility moved into the account.",
+reader_prior: "bank and wallet are separate systems",
+
+// + 7+ assertions on "The wall moved."
+
+// generator.test.ts:260-261
+thesis: "<mark>Bridge dissolves the wall.</mark>",
+through_action: "to dissolve the wall",
+// + assertion at :299: expect(captureObj.drafting?.user).toContain("Bridge dissolves the wall.");</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body"><ins>// actor-director.test.ts — generic abstractions, no brand metaphor:</ins>
+through_action: "to land the deployed_facts as the post's central observation",
+lining: "surface: a structural fact. underneath: a Lining that stays unsaid.",
+reader_prior: "reader expects a paraphrased rationale; the post refuses to paraphrase",
+
+// Replace "The wall moved." assertions with generic placeholders like "The fact landed."
+
+<ins>// generator.test.ts — same approach:</ins>
+thesis: "The fact lands.",
+through_action: "to land the central observation",
+// + assertion: expect(captureObj.drafting?.user).toContain("The fact lands.");</div>
+    </div>
+  </div>
+
+  <!-- 20 -->
+  <div class="change-site" id="s20">
+    <div class="site-header">
+      <span class="site-num">20</span>
+      <span class="site-title">Skill file taxonomy errors (Adream outer mislabel, Stanley wrong baseline)</span>
+      <span class="site-path">skills/laban-voice-for-ai-agents/SKILL.md:317-318; examples/infinex-voice-spec.md:26, 28; references/literary-refs-glossary.md:110; references/working-actions.md:46-49, 67; references/drive-mapping.md:65</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P1</span></div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">- "<mark>Adream outer</mark>" labels for Sombre / Irradiant / Diffused / Overpowering (Adream is INNER, not outer)
+- Stanley Kowalski filed under "Near baseline" (canonically Adream)
+- Motor arrows `->` on Materialistic, Human, Warm, Cool, Uncertain (these are co-exist `/`, not prep-release)
+- Fortinbras "(Adream outer)" parenthetical (canonically Stable Diagram C)</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body"><ins>- Strip "outer" from Sombre / Irradiant / Diffused / Overpowering (Adream is Inner Attitude per Mirodan vol 2 ch2)</ins>
+<ins>- Move Stanley Kowalski to "Adream baseline" section</ins>
+<ins>- Change motor notation `->` to `/` for the 5 co-exist rows (per audit-2026-05-27 §3A)</ins>
+<ins>- Remove "Adream outer" parenthetical from Fortinbras citation</ins></div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Mirodan vol 2 ch2 (Inner Attitudes — Stable/Adream/Near are baselines)
+Mirodan vol 2 p. 423-431 (Near tempi — co-exist on same Time pole)
+Mirodan vol 2 p. 573 (Stanley Kowalski as Adream)
+Mirodan vol 2 p. 565a (Fortinbras as Stable Diagram C)</div>
+    </div>
+  </div>
+
+  <!-- 21 -->
+  <div class="change-site" id="s21">
+    <div class="site-header">
+      <span class="site-num">21</span>
+      <span class="site-title">Operator-facing character sheet — wall metaphor as canonical Sombre exemplar</span>
+      <span class="site-path">research/infinex-character-sheet.md (lines 70, 72, 76, 104, 119)</span>
+    </div>
+    <div class="phase"><span class="phase-tag">P3</span>If loaded into Claude Code context when discussing voice, this re-contaminates from the doc.</div>
+
+    <div class="block before">
+      <div class="block-label">Current</div>
+      <div class="body">// Sombre exemplar:
+"<mark>The wallet and the venue used to be separate things. We've been taking that wall down section by section.</mark>"
+
+// Vocab anchors: "used to · becomes · stops being · the gap between · <mark>section by section · load-bearing · another section</mark>."
+
+// Launch-tier sequence: "<mark>Set up the wall we're taking down</mark> · land the fact · justify the build decision · future-tense lift"</div>
+    </div>
+
+    <div class="block after">
+      <div class="block-label">Proposed</div>
+      <div class="body"><ins>// Sombre exemplars — literary canon (Mirodan-cited):</ins>
+<ins>"The pension is fixed; it falls due quarterly." — Werle, *Wild Duck* Act V</ins>
+<ins>"An Angelo for Claudio; death for death." — Duke, *Measure for Measure* 5.1</ins>
+
+<ins>// Vocab anchors REMOVED (operator-shorthand stripped per voice-spec-laban-pure principle 2026-05-28).</ins>
+<ins>// Reference: src/voice/infinex.ts uses canonical_shorthand only.</ins>
+
+<ins>// Launch-tier sequence (per defaultBeatsForKind):</ins>
+<ins>// Mirodan §1.7 motor sequence: Pressing prep → Punching release → Wringing/Slashing carve → Floating/Flicking lift.</ins>
+<ins>// Beat counts emerge from verb selection (not pre-prescribed).</ins></div>
+    </div>
+
+    <div class="block canon">
+      <div class="block-label">Canonical source</div>
+      <div class="body">Ibsen, <em>Wild Duck</em> Act V
+Shakespeare, <em>Measure for Measure</em> 5.1
+Mirodan vol 2 §1.7 p. 347 (motor preparation)</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <div class="principle" style="margin-top: 40px;">
+    <h2>Sequencing</h2>
+    <p style="margin-bottom: 8px;">All 21 sites are surgical string-level changes — no behavior modifications beyond what the LLM reads. Tests stay green at the structural level (the test-fixture updates at site 19 are part of the change, not collateral). Bundle into one commit OR phase by impact:</p>
+
+    <p style="margin: 16px 0 6px;"><strong>Phase 1 — ship blockers</strong> (the contamination engine):</p>
+    <ul style="padding-left: 22px; font-size: 13px; margin: 0;">
+      <li>Sites 1, 2, 3, 9 — card schema + defaultBeatsForKind + generator.ts:1172 + :1403. These produce wall language at caption layer per the v2 test.</li>
+      <li>Sites 5, 6 — Stage B Lining-as-thesis forbidden + deployed_facts mandate. These shift the generator from essayist to settlement (per literary anchor comparison).</li>
+      <li>Sites 10, 11 — Director method block + placement block. These fix the Mirodan inversion that drove the Bridge.xyz over-fixation.</li>
+    </ul>
+
+    <p style="margin: 16px 0 6px;"><strong>Phase 2 — cleanup</strong>:</p>
+    <ul style="padding-left: 22px; font-size: 13px; margin: 0;">
+      <li>Sites 4, 7, 8, 12, 13 — Stage A/B rename + Drive performance demand + hardcoded brand + validator-LLM drive descriptors. Clean but not blocking.</li>
+      <li>Site 14, 15 — copy-rewrite + Cream cross-brand leak.</li>
+    </ul>
+
+    <p style="margin: 16px 0 6px;"><strong>Phase 3 — eval + tests + docs</strong>:</p>
+    <ul style="padding-left: 22px; font-size: 13px; margin: 0;">
+      <li>Sites 16, 17 — eval prompts (classifier reference set).</li>
+      <li>Sites 18, 19 — mock data + test fixtures.</li>
+      <li>Site 20 — skill file taxonomy.</li>
+      <li>Site 21 — character sheet (operator-facing).</li>
+    </ul>
+  </div>
+
+  <div class="principle" style="border-left-color: var(--good);">
+    <h2 style="color: var(--good);">Anti-anchoring discipline summary</h2>
+    <ol>
+      <li><strong>Citations over examples.</strong> When the LLM needs a shape, give it the canonical source (Mirodan §X.Y vol Z p. AA; Wild Duck Act V; Measure for Measure 5.1; Infinex IT017). The LLM has the source in training; the citation activates the prior. An example becomes a template.</li>
+      <li><strong>Forbidden-lists over example-lists.</strong> Where positive prescription is necessary, frame as "must contain X from card.deployed_facts" — making the positive constraint card-specific rather than pipeline-fixed. The form varies per card; the rule is constant.</li>
+      <li><strong>Multiple literary references when one example would anchor.</strong> Werle AND the Duke AND Logan Roy — three references that share the placement but use different vocabularies. The LLM has to integrate the shape across instances, no single instance to template.</li>
+      <li><strong>Beat counts emerge, not prescribed.</strong> Per-kind defaults are STARTING POINTS the Actor can compress. Stage A Inner-Work prompt should explicitly permit single-beat compositions when the verb is self-contained.</li>
+      <li><strong>No operator-coined terminology in framework code.</strong> "Subconscious Motif" (gone), "wall coming down" (gone), "dissolved-wall thesis" (gone), "refusing to perform the anti-pattern" (gone). Replace with Mirodan-canonical labels or kill the field.</li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>

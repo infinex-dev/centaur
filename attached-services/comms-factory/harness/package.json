@@ -1,0 +1,40 @@
+{
+  "name": "comms-factory-harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Training harness for the comms-factory voice pipeline. Review tool to bring each stage to 80% operator agreement before autonomous use. NOT a long-lived product.",
+  "scripts": {
+    "dev": "next dev -p 3210",
+    "build": "next build",
+    "start": "next start -p 3210",
+    "typecheck": "next typegen && tsc --noEmit",
+    "db:init": "tsx lib/db.ts init"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0",
+    "next": "^15.0.3",
+    "react": "^19.0.0-rc-66855b96-20241106",
+    "react-dom": "^19.0.0-rc-66855b96-20241106",
+    "better-sqlite3": "^11.3.0",
+    "diff": "^7.0.0",
+    "ulid": "^2.3.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/diff": "^6.0.0",
+    "@types/node": "^22.7.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.14",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "better-sqlite3"
+    ]
+  }
+}

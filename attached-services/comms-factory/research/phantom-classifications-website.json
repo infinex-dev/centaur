@@ -1,0 +1,2230 @@
+[
+  {
+    "id": "W001",
+    "text": "The money app that'll take you places",
+    "classification": {
+      "tempo_primary": "Overpowering",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "A classic adream shape: Weight+Flow yielding into expansive promise ('take you places'). Radiating aspect — Flow-led, lifting outward. The future-pull 'take you places' implies a quick time stress (there's a destination, a launch). Motor: pressing → punching (Strong-Direct force-landing into the promise). Single register — no transient outer beats in such a short tag. Mirrors the worked example exactly.",
+      "literary_anchor": "Blanche DuBois projecting illusions / Stella dreaming beyond the present"
+    }
+  },
+  {
+    "id": "W002",
+    "text": "Your home for trading crypto, predictions, and more",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "'Your home' is deeply body-forward and relational — Near inner attitude (Weight+Time). 'Home' is the quintessential enclosing image: Weight-led, gathering in. The enumeration ('crypto, predictions, and more') flows freely without urgency, landing on stress=flow, pole=free. Warm tempo: inclusive, communal, body-present. Motor: gliding → dabbing (Light-Direct warm-touch). No transient outer flashes in this brief tag.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) — welcoming, holding the relational centre"
+    }
+  },
+  {
+    "id": "W003",
+    "text": "Download Phantom",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Two words — a bare imperative. Genuinely too short to read inner attitude, aspect, or stress with confidence. A direct command implies Stable or Awake but there is insufficient prose to pin a tempo or motor.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W004",
+    "text": "Trading tools for everyone",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "'For everyone' is the enclosing move — Weight-led, gathering all in. The stable inner (Weight+Space) reads as settled, competent, non-urgent. Practical tempo: delivering utility without drama. Stress=flow, pole=free (the inclusivity is held open, not urgency-driven). Motor: gliding → dabbing (Light-Direct, warm-touch delivery). Too brief for outer flashes.",
+      "literary_anchor": "Aragorn distributing resources — capability available to all"
+    }
+  },
+  {
+    "id": "W005",
+    "text": "Buy and sell all types of crypto in an instant.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.67,
+      "rationale": "'In an instant' is the dominant time-stress: Quick, immediate, snap-execution. Awake inner (Space+Time) — alert sensor orienting across all types ('all types of crypto'). Circumscribing aspect: Time-led, sweeping wide in a single decisive moment. Acute tempo: the sharp, noticing Awake pitch. Motor: pressing → punching (Strong-Direct, force-landing on the instant). No transient outer flashes.",
+      "literary_anchor": "Iago in action-mode — a quick, sweeping, opportunistic reach"
+    }
+  },
+  {
+    "id": "W006",
+    "text": "Find trending tokens, top traders, and apps.",
+    "classification": {
+      "tempo_primary": "Certain",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "'Find' + triadic enumeration (trending, top traders, apps) is a Space-led scanning move — orienting, mapping, direct. Awake inner (Space+Time), penetrating aspect (Space-led). Certain tempo: the Awake pitch that lands with no doubt. Stress=space, pole=direct (the scan is confident, not flexible). Motor: pressing → punching. No transient outer beats detectable.",
+      "literary_anchor": "Horatio as scout — scanning and reporting clearly"
+    }
+  },
+  {
+    "id": "W007",
+    "text": "Trade big moments in culture with Prediction Markets.",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.63,
+      "rationale": "'Big moments in culture' is adream territory — Weight+Flow, dreamy, yielding toward cultural myth. Radiating aspect: Flow-led, expansive, outward-shining. Irradiant tempo: the adream pitch that glows outward into culture. Stress=time, pole=quick ('moments' is plural, fleet, each one a quick landing). Motor: pressing → punching (the cultural moment lands with force). Transient outer flash: 'Prediction Markets' as a label carries an Acknowledged beat (Mobile tempo — the fragment of culture is named, surfaced).",
+      "literary_anchor": "Lovborg burning the manuscript — the cultural moment as radiating gesture"
+    }
+  },
+  {
+    "id": "W008",
+    "text": "Go long, go short, go anywhere with Perps.",
+    "classification": {
+      "tempo_primary": "Diffused",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Revealed"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.6,
+      "rationale": "'Go long, go short, go anywhere' is a triadic dispersal — adream (Weight+Flow), radiating aspect (Flow-led, multi-directional expansion). Diffused tempo: the adream pitch that scatters into possibility rather than landing on one point. Stress=time, pole=quick (each 'go' is a quick directional flick). Motor: floating → flicking (Light-Flexible lifting-radiance — the trio of directions lifts off). Transient outer flash: 'Perps' as the product named flashes a Revealed beat (Mobile — the instrument is surfaced into view).",
+      "literary_anchor": "Ophelia's scattered flowers — distributed gesture in all directions"
+    }
+  },
+  {
+    "id": "W009",
+    "text": "Access powerful trading tools on desktop with Terminal.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "'Access powerful trading tools on desktop' — Stable inner (Weight+Space), settled authority, structural clarity. Penetrating aspect: Space-led ('on desktop' specifies the exact structural location). Commanding tempo: the ruler giving access with direct authority. Stress=time, pole=quick (the imperative 'Access' is a now-action). Motor: pressing → punching (Strong-Direct force-landing). No transient outer flashes.",
+      "literary_anchor": "Tywin Lannister designating the campaign table — structural access granted"
+    }
+  },
+  {
+    "id": "W010",
+    "text": "Spend, Send, & Save",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "circumscribing",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Three verbs in parallel: 'Spend, Send, & Save.' Circumscribing shape is readable — Time-led, sweeping across three acts. But three words are insufficient to pin inner attitude or tempo reliably. Could read Near (body-forward utility) or Stable (structural provision); neither dominates. Stress and pole cannot be determined from three verbs alone.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W011",
+    "text": "One home for your money.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "unknown",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "Short declarative — 'One home for your money' — has stable, Weight+Space quality: a settled, self-sufficient declaration. Enclosing aspect (Weight-led, wrapping inward). Stress reads space (direct orientation, singular structural anchor). Self-Contained tempo: the 'one home' framing is the self-sufficient ruler who has already decided. No urgency, no relationality, no dream-drift.",
+      "literary_anchor": "Prospero declaring the island his domain."
+    }
+  },
+  {
+    "id": "W012",
+    "text": "Send money in seconds. Even pay friends.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Warm"
+      ],
+      "outer_action_inners": [
+        "near"
+      ],
+      "confidence": 0.74,
+      "rationale": "'Seconds' is a hard time-stamp; 'Even pay friends' adds a casual relational beat. The primary register is Awake (Space+Time) — alert to the speed-oriented function — landing as Acute (the noticing, quick-scanning tempo). Circumscribing aspect (Time-led). Stress=time, pole=quick. The 'Even pay friends' flashes a Near-family Warm moment (relational, body-forward), logged in outer_action_tempi.",
+      "literary_anchor": "A sharp-eyed aide announcing a logistics win, then remembering the human side."
+    }
+  },
+  {
+    "id": "W013",
+    "text": "Spend wherever Apple Pay, Google Pay, or VISA is accepted.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "A list of accepted platforms — Apple Pay, Google Pay, VISA — is structurally oriented, coverage-mapping prose. Stable inner (Weight+Space): the settled enumerator who has decisions already taken. Penetrating aspect (Space-led: scans the territory). Practical tempo: functional, matter-of-fact, getting-things-done. Stress=time (the implied 'wherever, whenever you need it'), pole=quick. No outer flashes — single-register functional.",
+      "literary_anchor": "A competent steward presenting the inventory list."
+    }
+  },
+  {
+    "id": "W014",
+    "text": "Controlled by you, secured by us",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.75,
+      "rationale": "'Controlled by you, secured by us' is a balanced, closed dyad — two weight-bearing pillars holding the space. Stable inner (Weight+Space). Enclosing aspect (Weight-led, the dyad wraps inward). Stress=flow (the held conviction, the implicit trust-promise), pole=bound (tight, contained). Self-Contained tempo: settled, complete-in-itself, neither commanding outward nor reaching. No outer flashes.",
+      "literary_anchor": "A contract-signing moment — Werle's quiet assurance to the board."
+    }
+  },
+  {
+    "id": "W015",
+    "text": "Self-custodial means you control your funds. We never have access.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Certain"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.78,
+      "rationale": "'Self-custodial means you control your funds. We never have access.' — defines a term, then lands a hard boundary. Stable inner (Weight+Space). Penetrating aspect (Space-led: cuts into the structural concept). Commanding tempo: the ruler who states the rule and closes it. Stress=time (the 'never' is an absolute time-cut), pole=quick (decisive, no lingering). 'Certain' (Awake family) flashes in the resolute boundary declaration.",
+      "literary_anchor": "Tywin Lannister explaining the law to someone who dared question it."
+    }
+  },
+  {
+    "id": "W016",
+    "text": "Our global Support team is here for you 24/7.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.8,
+      "rationale": "'Our global Support team is here for you 24/7' — purely relational, body-forward, continuous availability. Near inner (Weight+Time): down-to-earth, community-present. Enclosing aspect (Weight-led: the team wraps around the user). Warm tempo: the most caretaking Near tempo, affectionate presence. Stress=flow (the continuous 'here for you'), pole=free (open, unguarded availability). No outer flashes — single-register warmth.",
+      "literary_anchor": "The Nurse from Romeo & Juliet: 'I am here, always.'"
+    }
+  },
+  {
+    "id": "W017",
+    "text": "Scam detection flags malicious transactions instantly.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "dabbing",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.82,
+      "rationale": "'Scam detection flags malicious transactions instantly.' — hyper-alert, sensor-oriented, the word 'instantly' is a hard time-anchor. Awake inner (Space+Time): alert strategist. Acute tempo: the sharpest noticing mode. Circumscribing aspect (Time-led: the action wraps around the threat in real time). Stress=time, pole=quick. No outer flashes — pure single-register vigilance.",
+      "literary_anchor": "A sharp-eyed sentry who spots the threat and moves before you blink."
+    }
+  },
+  {
+    "id": "W018",
+    "text": "Connect your Ledger to keep your crypto even safer.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "'Connect your Ledger to keep your crypto even safer.' — a step-by-step instruction with a comparative ('even safer'): functional, tool-oriented, stable. Stable inner (Weight+Space). Penetrating aspect (Space-led: points toward a structural upgrade). Practical tempo: the matter-of-fact advisor who gives the actionable step. Stress=time (the implied progressive improvement), pole=sustained (incremental, not abrupt). No outer flashes.",
+      "literary_anchor": "A competent engineer recommending the next best practice."
+    }
+  },
+  {
+    "id": "W019",
+    "text": "Trusted by a community of 20+ million users. It's more than a wallet.",
+    "classification": {
+      "tempo_primary": "Human",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Overpowering"
+      ],
+      "outer_action_inners": [
+        "adream"
+      ],
+      "confidence": 0.74,
+      "rationale": "'Trusted by a community of 20+ million users. It's more than a wallet.' — grounds in collective body (20M users = Near mass/weight), then opens to something larger. Near inner (Weight+Time). Human tempo: the most expansive Near tempo, relational identity. Enclosing aspect (Weight-led: the community wraps and holds). Stress=flow (the 'more than' reach), pole=free (open, not contained). 'Overpowering' (Adream) flashes in the 'more than a wallet' lift — a dreamy, expansive beat beyond function.",
+      "literary_anchor": "Tony Soprano gesturing at the crew: 'We're a family.' Then something ineffable."
+    }
+  },
+  {
+    "id": "W020",
+    "text": "Get started.",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "'Get started.' is a two-word CTA — too short and functionally generic to carry a readable inner attitude, aspect, or stable tempo. It could belong to any placement. Confidence is low.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W021",
+    "text": "Download Phantom.",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Two-word imperative. Too short to read a credible inner attitude, aspect, or stress. The bare command 'Download' carries a directive pulse but there is no prose body from which to triangulate Weight/Time/Space/Flow balance. Honest read: unknown across all dimensions.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W022",
+    "text": "Sign up for our newsletter and join the growing Phantom community.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.62,
+      "rationale": "Relational, body-forward invitation to belong — 'join the growing Phantom community' is classic Near territory (Weight+Time). The 'growing' community gesture wraps the reader in social continuity, making flow the active stress (free-flowing inclusion). Aspect is circumscribing: the newsletter/community frame Time-led encircles the reader. Motor: gliding→dabbing (Light-Direct warm touch). Warm is the Near tempo that reads as inclusive sociality without heat or sales pressure.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) — beckoning, drawing into the fold"
+    }
+  },
+  {
+    "id": "W023",
+    "text": "The crypto app for everyone",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.28,
+      "rationale": "Six-word tagline. The 'everyone' universality gesture suggests Near or Adream expansiveness, but the sample is too compressed to resolve inner attitude, stress, or tempo with confidence. 'For everyone' could be Warm (Near) or Diffused (Adream) — the line genuinely doesn't commit. Using unknown/n/a throughout.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W024",
+    "text": "Join the millions of people using Phantom to buy, sell, and trade everyday.",
+    "classification": {
+      "tempo_primary": "Human",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "Near inner attitude — 'millions of people', 'everyday' ground the copy in bodies-in-time, communal rhythm. The invitation to 'join' wraps the reader in social mass (circumscribing aspect, Time-led framing). Stress is flow (free): the emphasis is on continuity, belonging, the ongoing everyday practice rather than urgency or structural orientation. Human tempo sits in Near as the warm-collective, non-hierarchical voice. Motor: gliding→dabbing.",
+      "literary_anchor": "Tony Soprano at the barbecue — everyone's in, no fuss"
+    }
+  },
+  {
+    "id": "W025",
+    "text": "From cash to crypto. That easy.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.6,
+      "rationale": "Short declarative pair — 'From cash to crypto. That easy.' — punches a structural transformation ('from X to Y') with decisive brevity. Stable inner attitude: Weight+Space, a decision already taken, presented as structural fact. Penetrating aspect: Space-led, cuts through complexity to deliver the essential pivot-point. Stress is time, pole quick: the second sentence ('That easy.') lands as a rapid, definitive full-stop. Practical is the Stable tempo that reads as competent, no-nonsense delivery. Motor: pressing→punching (force-landing).",
+      "literary_anchor": "Aragorn cutting through argument — 'This is the way.'"
+    }
+  },
+  {
+    "id": "W026",
+    "text": "Get started in a few steps.",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Five-word onboarding prompt. Reads with a mild Practical/Commanding pulse (Stable) but is genuinely too short and context-stripped to commit to a tempo, aspect, or stress with integrity. Using n/a.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W027",
+    "text": "Create an account",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Three-word UI label. Purely instructional; no prose body, no tonal texture. Cannot classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W028",
+    "text": "Fund your wallet",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Three-word UI label. Same as W027 — no prose body to classify. Cannot classify.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W029",
+    "text": "Start trading in seconds",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.58,
+      "rationale": "'Start trading in seconds' — the temporal specificity ('in seconds') and forward-driving imperative land as a quick, time-stressed Stable declaration. Commanding is the Stable tempo that issues directives with weight and immediacy. Penetrating aspect: the copy cuts to a structural capability point (speed-to-trade). Stress time, pole quick: 'seconds' is an explicit time-pole marker. Motor: pressing→punching. Confidence is moderate — the sample is short but the temporal stress anchor ('seconds') is unambiguous.",
+      "literary_anchor": "Tywin Lannister announcing deployment speed"
+    }
+  },
+  {
+    "id": "W030",
+    "text": "A wallet made for you.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "'A wallet made for you.' — the personalisation gesture ('for you') and the gentle declarative wrap read as Near inner attitude (Weight+Time, body-forward relational). Enclosing aspect: Weight-led, the copy gathers the reader inside a personal fit. Stress is flow (free): the emphasis is on belonging and continuity of fit, not urgency or spatial orientation. Warm is the Near tempo that reads as personal, crafted-for-you warmth without sentimentality. Motor: gliding→dabbing (Light-Direct, warm touch). Confidence moderate given brevity.",
+      "literary_anchor": "Anthony Bourdain — 'this place was made for you'"
+    }
+  },
+  {
+    "id": "W031",
+    "text": "From managing multi-chain assets to gathering trading insights, Phantom makes it simple.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "The copy organises two distinct capabilities ('managing multi-chain assets', 'gathering trading insights') into a single resolved claim ('makes it simple'). Weight+Space inner (stable) — structural, decisive ruler voice. Space-led aspect (penetrating) — the sweep across chains/insights is orientation-cognitive. Stress falls on time (the resolution of complexity into simplicity is a fast, structural cut), pole quick. Motor: pressing → punching (force-landing the 'simple' conclusion). Monochromatic register.",
+      "literary_anchor": "Tywin Lannister summarising a campaign's logistics in one breath"
+    }
+  },
+  {
+    "id": "W032",
+    "text": "Multi-chain, one wallet",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "Four-word label. 'Multi-chain, one wallet' has the feel of a structural / stable enclosure (Weight+Space, enclosing — draws everything in), but the sample is too short and labelistic to pin a tempo or stress with confidence. Unknown across the board.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W033",
+    "text": "Manage all your assets in one place.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "'Manage all your assets in one place' — the 'all … one place' gesture is Weight-led enclosing (gathering inward, containing). Stable inner (Weight+Space). Stress=flow (bound): the held, settled authority of 'everything under control here'. Practical tempo: practical, grounded, no drama. Motor pressing → punching (Strong-Direct, settling the claim firmly).",
+      "literary_anchor": "The Duke ordering his accounts consolidated before departure"
+    }
+  },
+  {
+    "id": "W034",
+    "text": "Actionable insights",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "Two-word header. Carries a vague Awake/alert flavour ('actionable' = noticing → doing) but is genuinely too short to classify inner, aspect, stress, or tempo with any reliability.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W035",
+    "text": "Stay informed with real-time token data and metrics.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "'Stay informed with real-time token data and metrics' is a sensor-alert command: Space+Time (Awake inner). The 'real-time' tag is explicitly time-stressed and Space-led (penetrating — scanning the data field). Acute tempo: the sharpest, most vigilant Awake register. Motor gliding → dabbing (Light-Direct: a deft, precise touch across live data rather than a heavy landing). Monochromatic.",
+      "literary_anchor": "Hamlet at the battlements — hyper-alert, reading every signal"
+    }
+  },
+  {
+    "id": "W036",
+    "text": "Lightning-fast trades",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word header. 'Lightning-fast' signals strong time urgency (Quick/punching feel) but the label is too compressed to determine inner attitude, aspect, or stress reliably.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W037",
+    "text": "Trade tokens across chains instantly with low fees.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.73,
+      "rationale": "'Instantly' is the decisive time-stress word. The copy cuts across a structural landscape (chains, fees) with direct authority — Stable inner (Weight+Space), Space-led aspect (penetrating: cross-chain orientation). Commanding tempo: the most assertive, time-activated Stable register. Motor pressing → punching (Strong-Direct, force-landing 'instantly'). Monochromatic.",
+      "literary_anchor": "Tywin Lannister: 'Across every front, simultaneously, with minimal cost.'"
+    }
+  },
+  {
+    "id": "W038",
+    "text": "Stake and earn rewards",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three-word header. The 'earn rewards' beat carries a Near/Warm feel (body-forward, relational benefit) but is too short to classify reliably.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W039",
+    "text": "Earn passive rewards on your SOL by holding PSOL.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "spell",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.67,
+      "rationale": "'Earn passive rewards … by holding' is body-forward, relational, and durational — Near inner (Weight+Time). The 'holding' image is enclosing (Weight-led: gathering, nurturing). Stress=flow, pole=free: a continuous, unforced yielding (passive, organic accumulation). Warm tempo: the most giving, body-present Near register. Motor gliding → dabbing (Light-Direct: soft, steady touch — no urgency, just gentle accrual). Monochromatic.",
+      "literary_anchor": "The Nurse quietly tending — present, unhurried, giving without drama"
+    }
+  },
+  {
+    "id": "W040",
+    "text": "Discover. Connect. Explore.",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged",
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "mobile",
+        "awake"
+      ],
+      "confidence": 0.62,
+      "rationale": "Three imperative fragments ('Discover. Connect. Explore.') radiating outward in quick succession — Adream inner (Weight+Flow, dreamy-expansive). Flow-led aspect (radiating): each beat fans outward, lifting. Stress=time, pole=quick: the staccato triple-beat drives forward in rapid pulses. Irradiant tempo: the luminous, outward-beaming Adream register. Motor floating → flicking (Light-Flexible: lifting radiance). The staccato multi-beat structure briefly flashes Mobile-family 'Acknowledged' (fragmented, multi-direction) and Awake-family 'Acute' (the alert sensor implied by 'Discover').",
+      "literary_anchor": "Lovborg's excited plural vision — 'the future… in fragments!'"
+    }
+  },
+  {
+    "id": "W041",
+    "text": "Phantom comes packed with the tools you need to discover tokens, connect...",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "\"Comes packed with the tools you need\" is a tool-inventory claim — Weight+Space stable logic, decisions-taken register. The aspect is enclosing (Weight-led: wrapping the user in a complete kit). Stress is flow (bound: the completeness is held, not urgently timed). Practical is the Stable tempo that is most \"get-things-done\" without commanding. Motor: pressing → punching (Strong-Direct force-landing the toolkit promise). Sample is short and trails off, so confidence is moderate.",
+      "literary_anchor": "A reliable steward listing provisions before a journey."
+    }
+  },
+  {
+    "id": "W042",
+    "text": "Trade the latest tokens",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Three-word imperative label — too short to read inner attitude, aspect, or stress with any confidence. Could be Quick/Commanding or Acute or Warm; indeterminate at this length.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W043",
+    "text": "Buy and sell thousands of new and trending tokens as soon as they...",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.52,
+      "rationale": "\"Buy and sell thousands of new and trending tokens as soon as they...\" — the relational, body-forward inclusivity (\"buy and sell\", abundance framing) places this in Near territory (Weight+Time). Aspect is circumscribing (Time-led: \"as soon as they\" presses into immediacy as a bounding gesture). Stress flow, pole free — the sentence moves with an open, welcoming continuity rather than urgency-for-its-own-sake. Warm is the Near tempo that feels most hospitable and inclusive. The \"as soon as\" flash carries a transient Awake (Acute) beat of alert-sensing.",
+      "literary_anchor": "A market vendor gesturing at the full stall the moment it opens."
+    }
+  },
+  {
+    "id": "W044",
+    "text": "Follow friends and traders",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Three-word imperative label — too short to classify reliably. Relational flavour suggests Near but length is insufficient for tempo or aspect.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W045",
+    "text": "See real-time activity and gain insights from friends, traders, and...",
+    "classification": {
+      "tempo_primary": "Cool",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "doing",
+      "drive_secondary": "passion",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "doing→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.5,
+      "rationale": "\"See real-time activity and gain insights from friends, traders, and...\" — Near register (Weight+Time, relational, body-forward observation). Circumscribing aspect (Time-led: \"real-time\" bounds and wraps the social field). Stress space, pole direct — the scanning of the social feed is spatially oriented and direct in its gaze. Cool is the Near tempo that reads as observational and slightly detached within the relational field. The \"real-time\" alertness flashes a transient Awake (Acute) outer-action moment.",
+      "literary_anchor": "Someone at a gathering who quietly clocks everyone's moves before speaking."
+    }
+  },
+  {
+    "id": "W046",
+    "text": "Explore the ecosystem",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Three-word imperative label — too short to classify. Exploratory flavour could suggest Adream or Remote but insufficient length.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W047",
+    "text": "Discover the most popular apps, tokens, and collectibles right from...",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.5,
+      "rationale": "\"Discover the most popular apps, tokens, and collectibles right from...\" — the expansive enumeration and invitation to discovery has an Adream quality (Weight+Flow, yielding, exploratory). Aspect is radiating (Flow-led: the list blooms outward). Stress time, pole quick — \"right from\" implies immediacy of access, a quick tap into abundance. Irradiant is the Adream tempo most aligned with glowing, outward-blooming discovery. Motor: floating → flicking (Light-Flexible lifting-radiance).",
+      "literary_anchor": "Lovborg describing the manuscript that holds the future."
+    }
+  },
+  {
+    "id": "W048",
+    "text": "Learn more about trading",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "Four-word navigational label — too short to classify with any confidence.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W049",
+    "text": "\"Learn",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Single truncated word — unclassifiable.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W050",
+    "text": "Phantomblog",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Single compound noun (brand + product label) — unclassifiable.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W051",
+    "text": "All the latest news, updates, and announcements from Phantom",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.35,
+      "rationale": "A pure navigational label — 'All the latest news, updates, and announcements from Phantom.' Too short and purely taxonomic to carry an embodied inner attitude. The word 'latest' hints at time-awareness but not enough prose weight to assign a tempo with confidence.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W052",
+    "text": "Crypto101",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "A single compound label — 'Crypto101' — entirely too short to read any inner attitude, aspect, or stress. No prose movement whatsoever.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W053",
+    "text": "Build your crypto knowledge with these guides, tutorials, and explainers",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "doing→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.52,
+      "rationale": "'Build your crypto knowledge with these guides, tutorials, and explainers' — 'build' and 'knowledge' signal stable-family Weight+Space intelligence-in-action. The enumeration (guides, tutorials, explainers) is enclosing — Weight-led containment of curriculum. Stress reads as time (sustained: gradual accumulation over learning journey). Practical tempo fits the no-nonsense, craft-forward tone.",
+      "literary_anchor": "A competent instructor organizing a syllabus — pragmatic Stable, no fuss."
+    }
+  },
+  {
+    "id": "W054",
+    "text": "Getting started with Phantom",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "'Getting started with Phantom' is a navigational header. Too sparse to carry an embodied placement — no motor, no attitude, no stress legible beyond the structural function of the label.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W055",
+    "text": "Guides for setting up your Phantom wallet and all the things you can do with it",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.55,
+      "rationale": "'Guides for setting up your Phantom wallet and all the things you can do with it' — the phrase 'all the things you can do with it' is body-forward, relational, inclusive: classic Near-family (Weight+Time). The 'setting up' is circumscribing (Time-led: walkthrough form). Stress is flow, pole free — the copy invites open exploration with warmth rather than urgency. Warm tempo: nearness without heat, welcoming the newcomer.",
+      "literary_anchor": "The friendly shop assistant who shows you everything without pressure — Anthony Bourdain casual mode."
+    }
+  },
+  {
+    "id": "W056",
+    "text": "Developerresources",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "A single compound label — 'Developer resources' — entirely too short to read any inner attitude or placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W057",
+    "text": "Discover all the things you can build with Phantom",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.5,
+      "rationale": "'Discover all the things you can build with Phantom' — 'Discover' and 'all the things you can build' project outward, expansive invitation: adream-family (Weight+Flow), yielding toward possibility. Aspect is radiating (Flow-led — emanating possibility outward). Stress is time, pole quick: the 'discover' imperative has a flick of immediacy. Irradiant tempo: luminous-projective, builder-beckoning.",
+      "literary_anchor": "Lovborg's vision speech — possibility radiating outward to an imagined future builder."
+    }
+  },
+  {
+    "id": "W058",
+    "text": "Phantom raises $150M Series C to build the world's biggest consumer finance platform",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Overpowering"
+      ],
+      "outer_action_inners": [
+        "adream"
+      ],
+      "confidence": 0.72,
+      "rationale": "'Phantom raises $150M Series C to build the world's biggest consumer finance platform' — this is a capital-event announcement. The $150M figure and 'world's biggest' are structural, decided, load-bearing: stable-family (Weight+Space). Aspect is penetrating — Space-led, cuts to the strategic architectural fact. Stress is time, pole quick: the news headline framing is urgency-immediate. Commanding tempo: the ruler announcing a campaign move. The adream-family flash 'world's biggest consumer finance platform' carries a radiating-ambitious undertone — logged as transient Overpowering outer moment.",
+      "literary_anchor": "Tywin Lannister issuing a campaign proclamation."
+    }
+  },
+  {
+    "id": "W059",
+    "text": "Since we launched in 2021, our mission was to make crypto safe and easy to use. Thanks to your incredible support, we've emerged as the world's leading crypto wallet, soaring to the top of the App Store charts and welcoming millions into the world of crypto.",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "floating",
+        "flicking"
+      ],
+      "outer_action_tempi": [
+        "Warm",
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "near",
+        "mobile"
+      ],
+      "confidence": 0.65,
+      "rationale": "'Since we launched in 2021… welcoming millions into the world of crypto.' The retrospective arc ('since we launched… we've emerged… soaring… welcoming') is adream-family (Weight+Flow): yielding, feeling-forward, body-and-emotion merged with a collective 'we.' Aspect is radiating (Flow-led) — the prose expands outward, welcoming, luminous. Stress is time, pole sustained: the journey is narrated over time, not urgently but with a warm glow of accumulated momentum. Irradiant tempo: dreamy luminosity projecting gratitude and ascent. Transient outer moments: 'thanks to your incredible support' flashes a Near-family Warm relational beat; 'emerged as the world's leading' flashes an Acknowledged (Mobile) confirmation beat.",
+      "literary_anchor": "Blanche DuBois recounting a triumphant arrival — radiant, sustained, emotionally forward."
+    }
+  },
+  {
+    "id": "W060",
+    "text": "Phantom has become the most dominant crypto wallet in the world, thanks in large part to Solana. With fast, low-cost transactions, and a smooth user experience, we've now become the face of crypto for a whole new generation of users, unencumbered by the the limits of centralized exchanges.",
+    "classification": {
+      "tempo_primary": "Overpowering",
+      "inner_attitude": "adream",
+      "aspect": "enclosing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "vision",
+      "drive_extravert": "doing",
+      "drive_axis": "passion→doing",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Commanding",
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "stable",
+        "remote"
+      ],
+      "confidence": 0.68,
+      "rationale": "'Phantom has become the most dominant crypto wallet in the world… unencumbered by the limits of centralized exchanges.' 'Most dominant' + 'a whole new generation' + 'unencumbered' is adream-family (Weight+Flow): weight of conviction + flow of accumulated momentum, yielding toward expansive claim. Aspect is enclosing (Weight-led): the copy pulls everything inward — Solana, fast transactions, smooth UX, a generation — into one totemic statement of dominance. Stress is time, pole sustained: dominance narrated as a completed becoming ('has become'), sustained over years. Overpowering tempo: adream at its most saturated, crowding the room. Transient outer beats: 'most dominant in the world' flashes Stable-family Commanding; 'unencumbered by limits of centralized exchanges' flashes a Remote-family Unsociable carved-off refusal.",
+      "literary_anchor": "Big Daddy at full volume — body-forward weight flooding the room, unencumbered, owning the space."
+    }
+  },
+  {
+    "id": "W061",
+    "text": "Thank you for joining us on this journey—from building the leading wallet on Solana to becoming the go-to app for crypto. Your support has made it all possible. While there's still much to accomplish, we're excited to continue building Phantom into the world's largest and most trusted consumer finance platform.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Irradiant"
+      ],
+      "outer_action_inners": [
+        "adream"
+      ],
+      "confidence": 0.72,
+      "rationale": "The text is body-forward, relational, and gratitude-laden — hallmarks of the Near inner attitude (Weight+Time). 'Thank you for joining us on this journey' and 'Your support has made it all possible' are warm, communal, directly addressing the reader's emotional presence. The aspect is circumscribing (Time-led — the narrative arc from 'building the leading wallet' to 'world's largest consumer finance platform' wraps a temporal journey around the listener). Stress is flow (free) — the emotion is visible and yielding, not urgent. The tempo reads Warm (Near family: down-to-earth, heartfelt, relational). The closing future-vision pull ('world's largest and most trusted consumer finance platform') flashes briefly as an Adream/Irradiant moment — expansive, dreamy aspiration — captured in outer_action_tempi.",
+      "literary_anchor": "The Nurse (Romeo & Juliet) — warm, enveloping communal voice; Anthony Bourdain signing off on a season"
+    }
+  },
+  {
+    "id": "W062",
+    "text": "Introducing Phantom Perps",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.3,
+      "rationale": "Three words — a product launch headline. Too short to read inner attitude, stress, or aspect with any reliability. The imperative 'Introducing' has a mild Commanding flavour but a single word plus noun is insufficient to commit.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W063",
+    "text": "We're launching support for perpetual futures (perps) to help democratize access to some of crypto's most liquid and popular markets.",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.67,
+      "rationale": "The core claim — 'democratize access to some of crypto's most liquid and popular markets' — is expansive and upward-reaching, the hallmark of Adream (Weight+Flow, yielding/projective). The aspect is radiating (Flow-led outward emission: the promise fans out to a wide, unnamed audience). Stress is time/quick — 'We're launching' is a present-moment action, immediacy is foregrounded even if lightly. Irradiant sits at the optimistic, outward-glowing end of the Adream family. Motor pressing→punching: the Strong-Direct force of 'democratize' as a landing punch.",
+      "literary_anchor": "Lovborg announcing his manifesto; Blanche projecting a liberating future"
+    }
+  },
+  {
+    "id": "W064",
+    "text": "Most perps platforms today are designed for pros with complex trading features, which can be hard to navigate for beginners. But with Phantom's intuitive, mobile-first design, you can easily open, close, and manage positions directly within your wallet.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Warm"
+      ],
+      "outer_action_inners": [
+        "near"
+      ],
+      "confidence": 0.71,
+      "rationale": "The copy makes a structural comparison ('Most perps platforms… designed for pros… hard to navigate for beginners') then cuts to the solution ('with Phantom's intuitive, mobile-first design, you can easily open, close, and manage'). This is Stable inner attitude — Weight+Space, decision-made, structural scanning. Aspect is penetrating (Space-led: it cuts through complexity to deliver clarity). Stress is time/quick — the immediacy of 'you can easily' collapses distance to action. Practical is the Stable tempo that focuses on usability and functional delivery. The 'beginners' framing adds a brief Near/Warm flash of inclusive warmth, noted in outer_action_tempi.",
+      "literary_anchor": "Tywin Lannister explaining strategy plainly; a seasoned product manager at an all-hands"
+    }
+  },
+  {
+    "id": "W065",
+    "text": "Perps are a powerful trading tool. But they are not without risks. Leverage lets you control a larger position with a smaller amount of capital. While leverage can amplify potential returns, it can also amplify your potential losses.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.73,
+      "rationale": "This is a cautionary, measured disclosure — 'powerful… but not without risks… leverage can amplify returns… can also amplify losses.' The inner attitude is Stable (Weight+Space, authority-speaking). The aspect is enclosing (Weight-led — the copy wraps the user inside a contained, held truth). Stress is flow/bound — the restraint is palpable; emotion is held in check rather than released; the bound flow reads as deliberate, responsible containment. Self-Contained is the Stable tempo of quiet, settled authority that doesn't overstate. Motor pressing→punching: the weight of the warning lands firmly.",
+      "literary_anchor": "The Duke (Measure for Measure) issuing a sober ruling; Aragorn warning the fellowship of danger ahead"
+    }
+  },
+  {
+    "id": "W066",
+    "text": "From Crypto Product to Finance Platform",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.25,
+      "rationale": "A six-word section header. Too short to reliably read inner attitude, aspect, or stress. The directional 'From… to…' gesture implies a trajectory that could read Stable-Penetrating, but committing from a header alone would be overreach.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W067",
+    "text": "I recently gave a talk at Solana's Accelerate conference in New York City, where I laid out Phantom's vision for the future of onchain finance.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.65,
+      "rationale": "First-person authority announcing a specific action at a specific place and time ('I recently gave a talk… in New York City, where I laid out Phantom's vision for the future of onchain finance'). Stable inner attitude — Weight+Space, decisions framed by a ruler. Aspect penetrating: Space-led, the speaker cuts through to a structural vision. Stress time/quick: the specificity of 'recently' and the named event anchor it in a decisive moment. Commanding is the Stable tempo of the ruler who speaks from position. Motor pressing→punching: authoritative declaration.",
+      "literary_anchor": "Tywin Lannister announcing a campaign plan; Logan Roy at a board meeting"
+    }
+  },
+  {
+    "id": "W068",
+    "text": "By focusing on usability, Phantom has become a key driver of growth in the onchain ecosystem. At our peak this year, we served almost 17 million monthly active users.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.7,
+      "rationale": "The copy foregrounds causal mechanism ('By focusing on usability… become a key driver of growth') and lands a concrete number ('17 million monthly active users'). Stable inner attitude — structural, decisional, Weight+Space. Aspect penetrating: the number and causal logic cut directly to structural proof. Stress time/quick: 'At our peak this year' locates the claim in a precise time window. Practical is the Stable tempo focused on functional outcomes and demonstrable results. The metric '17 million' flashes a brief Mobile/Acknowledged moment — a public acknowledgement of visible presence — noted in outer_action_tempi.",
+      "literary_anchor": "A CEO presenting results at an investor day; Werle citing market data"
+    }
+  },
+  {
+    "id": "W069",
+    "text": "TradFi apps like Robinhood, Square, and Chime are more digital than ever. But they're still locked into old, legacy finance rails.",
+    "classification": {
+      "tempo_primary": "Sombre",
+      "inner_attitude": "adream",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "bound",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.68,
+      "rationale": "The copy makes a structural diagnosis: 'TradFi apps… are more digital than ever. But they're still locked into old, legacy finance rails.' The 'But' is a held, weight-bearing hinge — Stable inner attitude (Weight+Space). Aspect penetrating: the analysis cuts through surface appearance ('more digital') to expose a structural flaw ('legacy rails'). Stress is flow/bound — the restraint of 'still locked' conveys a held, bound tension rather than urgency. Sombre is the Stable tempo that carries weight and structural gravity without urgency or warmth — the tone of a diagnostician who sees what others miss.",
+      "literary_anchor": "Werle (The Wild Duck) exposing a structural lie; Logan Roy dismissing old institutions"
+    }
+  },
+  {
+    "id": "W070",
+    "text": "A beginner's guide to Solana",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.2,
+      "rationale": "A five-word article title. Entirely too short to read inner attitude, stress, aspect, or tempo. 'Beginner's guide' implies an inclusive, accessible register (Near-adjacent) but there is no prose to anchor a classification.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W071",
+    "text": "Founded in 2017 by Anatoly Yakavenko, Solana is a decentralized, fast-growing layer-1 blockchain known for speed.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "Factual, encyclopedic register. 'Founded in 2017... known for speed' — stable inner (Weight+Space, decisions taken), delivering a crisp structural orientation. Penetrating aspect because it cuts to the defining attribute (speed, layer-1). Time stress because 'fast-growing' implies a momentum beat; quick pole. Practical tempo: utility-forward stable without commanding authority.",
+      "literary_anchor": "A reference entry — the voice of a well-organised archivist, no emotional colouring."
+    }
+  },
+  {
+    "id": "W072",
+    "text": "Solana's native token is SOL. It's used to transfer value and pay for transaction fees throughout the Solana ecosystem, so you'll always want to keep a little bit in your wallet.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.74,
+      "rationale": "'You'll always want to keep a little bit in your wallet' — relational, body-forward, practical-but-caring. Near inner (Weight+Time). Circumscribing aspect: Time-led — the advice wraps around the user's everyday routine. Flow stress, free pole: the tone is generous, open, no urgency or structural rigour. Warm tempo: Near family, body-present, caring without sentimentality.",
+      "literary_anchor": "Anthony Bourdain passing on a tip — matter-of-fact warmth."
+    }
+  },
+  {
+    "id": "W073",
+    "text": "Decentralized Finance (DeFi) is an exciting innovation that brings traditional financial services to the blockchain without the need for a bank or 3rd party.",
+    "classification": {
+      "tempo_primary": "Irradiant",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "'Exciting innovation... brings traditional financial services to the blockchain' — adream inner (Weight+Flow, yielding/expansive). 'Exciting' and 'innovation' signal a dreamy, promise-forward projection. Radiating aspect: Flow-led, lifting outward. Time stress, quick pole: the word 'brings' implies an arriving moment — a forward-pull urgency. Irradiant tempo: adream family, luminous possibility, not yet grounded.",
+      "literary_anchor": "Blanche DuBois gesturing toward a better world just over the horizon."
+    }
+  },
+  {
+    "id": "W074",
+    "text": "What is a crypto wallet?",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Four-word heading only. Impossible to read inner attitude, aspect, stress, or tempo from this fragment alone.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W075",
+    "text": "Most crypto beginners start by opening an account on a crypto exchange like Coinbase. Although exchanges have become the go-to entry point for newcomers to web3, it's crucial to recognize the inherent risks associated with exchange wallets, as they exercise control over your assets.",
+    "classification": {
+      "tempo_primary": "Doubting",
+      "inner_attitude": "awake",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.68,
+      "rationale": "'Crucial to recognise the inherent risks' — awake inner (Space+Time), scanning the landscape and flagging danger. Penetrating aspect: Space-led structural cut — isolates the risk architecture of exchange wallets. Time stress, sustained pole: the warning is held, not snapped. Doubting tempo: Awake family, the strategist who has spotted the flaw and holds the gaze on it. The flash of 'go-to entry point for newcomers' briefly lands as an Acute awake moment — a sharp observational beat before the warning settles.",
+      "literary_anchor": "A seasoned financial journalist pausing mid-paragraph to underline the structural risk."
+    }
+  },
+  {
+    "id": "W076",
+    "text": "Crypto wallets are software tools that enable users to securely access, manage, and interact with their cryptocurrencies by storing their cryptographic keys.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "doing→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.73,
+      "rationale": "'Software tools that enable users to securely access, manage, and interact' — stable inner (Weight+Space). Enclosing aspect: Weight-led, the definition wraps around and contains the full scope of the tool's function. Time stress, sustained pole: unhurried precision, each verb deliberate. Practical tempo: Stable family, utility-rational, no commanding authority, just organised competence.",
+      "literary_anchor": "A well-drafted technical glossary entry."
+    }
+  },
+  {
+    "id": "W077",
+    "text": "Self-custodial wallets are the solution to this problem. In self-custodial wallets, you have true ownership of your funds. No third party can access your private key, which means you're responsible for storing and securing it.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "doing→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Unsociable"
+      ],
+      "outer_action_inners": [
+        "remote"
+      ],
+      "confidence": 0.78,
+      "rationale": "'Self-custodial wallets are THE solution to this problem. You have TRUE ownership.' — Stable inner (Weight+Space). Decisive, ruling. Penetrating aspect: Space-led — cuts through to the structural answer. Time stress, quick pole: 'the solution' is a landing moment, fast and final. Commanding tempo: stable family, authority-forward, sovereign. The closing clause 'you're responsible' flashes a brief Unsociable (Remote family) beat — the aristocratic withdrawal of the institution's protection, leaving the user alone.",
+      "literary_anchor": "Tywin Lannister declaring how things will be."
+    }
+  },
+  {
+    "id": "W078",
+    "text": "What are stablecoins?",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.1,
+      "rationale": "Three-word heading only. Too short to read any placement.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W079",
+    "text": "Crypto and volatility go hand in hand, right? Every time you invest in a digital asset, you're taking a gamble on the unpredictable price fluctuations. This can make it hard to time your investments and plan your portfolio.",
+    "classification": {
+      "tempo_primary": "Overpowering",
+      "inner_attitude": "adream",
+      "aspect": "radiating",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "passion",
+      "drive_secondary": "spell",
+      "drive_introvert": "doing",
+      "drive_extravert": "vision",
+      "drive_axis": "passion→vision",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.71,
+      "rationale": "'Crypto and volatility go hand in hand, right? Every time you invest... you're taking a gamble' — adream inner (Weight+Flow), yielding into the felt reality of market chaos. Radiating aspect: Flow-led, the anxiety radiates outward. Time stress, quick pole: 'every time' pulses with recurrent urgency. Overpowering tempo: adream family — the mood floods the reader, unstoppable. The rhetorical 'right?' is a brief Acknowledged (Mobile) flash — a fragment-moment that checks-in with the audience before the wave crashes.",
+      "literary_anchor": "Stanley Kowalski venting about the game — the body knows the stakes before the mind does."
+    }
+  },
+  {
+    "id": "W080",
+    "text": "Stablecoins are relatively stable cryptocurrencies that work by pegging their value 1:1 to other assets like fiat currencies, gold, or other cryptoassets.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.7,
+      "rationale": "'Relatively stable... pegging their value 1:1' — stable inner (Weight+Space). The phrase 'relatively stable' is a deliberate containment — the definition wraps a volatile class of assets in a structured boundary. Enclosing aspect: Weight-led, the 1:1 peg concept is a closed, bounded form. Flow stress, bound pole: the mechanism holds tension in (peg = constraint), nothing flows loose. Self-Contained tempo: Stable family, reserved, no outward assertion — it simply holds its shape.",
+      "literary_anchor": "A central banker giving a composed technical definition."
+    }
+  },
+  {
+    "id": "W081",
+    "text": "Stablecoins act as a bridge between real world currencies and cryptocurrencies. Being able to rely on the value of a token to remain steady opens up a lot of possibilities in crypto.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "penetrating",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "passion",
+      "drive_extravert": "vision",
+      "drive_axis": "spell→vision",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.72,
+      "rationale": "The prose explains a structural concept (stablecoins as a bridge) in calm, load-bearing terms. Weight+Space (stable) is the inner pair — decisions taken, structurally clear. The aspect is penetrating (Space-led): it cuts to the structural insight 'bridge between real world currencies and cryptocurrencies.' Stress is flow (bound→free): the emphasis is on continuity and what becomes possible ('opens up a lot of possibilities'), a held yielding into forward movement. Tempo is Practical — functional exposition of a tool's utility, not commanding or visionary. Motor is gliding→dabbing: Light-Direct, warm-touch delivery of factual clarity.",
+      "literary_anchor": "A competent civil engineer explaining load-bearing principles to a curious layperson."
+    }
+  },
+  {
+    "id": "W082",
+    "text": "Common crypto scams and how to avoid them",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.4,
+      "rationale": "A bare headline — too short and purely titular to read an inner attitude, aspect, stress, or motor. It gestures toward an Awake orientation (alert, threat-sensing) but there is not enough prose to confirm.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W083",
+    "text": "With the increasing number of tokens, apps, and airdrops, there's also a rise in scams aiming to steal them. It appears that almost every other day, there's a new story of someone being fooled into believing they've won a prize or used a legitimate app, only to discover they were on a malicious site and signed a transaction that emptied their wallet's funds.",
+    "classification": {
+      "tempo_primary": "Doubting",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "space",
+      "pole": "flexible",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "wringing",
+        "slashing"
+      ],
+      "outer_action_tempi": [
+        "Acute"
+      ],
+      "outer_action_inners": [
+        "awake"
+      ],
+      "confidence": 0.7,
+      "rationale": "This passage scans the threat landscape ('almost every other day, there's a new story') with alert, flexible orientation — it is noticing and mapping multiple vectors of danger. The inner attitude reads Awake (Space+Time): strategic sensor, threat-cataloguing. Aspect is circumscribing (Time-led) — the prose wraps around recurring, accumulating incidents. Stress is space (flexible): the scanning is multi-directional, not urgency-spiked. Tempo is Doubting — a cautious, suspicious register that names uncertainty and recurring deception. Motor wringing→slashing (Strong-Flexible): carved-answer force landing on the hard reality of wallet-draining. A transient Acute flash occurs in the precise enumeration of the attack sequence ('signed a transaction that emptied their wallet's funds').",
+      "literary_anchor": "The investigative journalist mapping a crime pattern — Stieg Larsson's Lisbeth noting systemic predation."
+    }
+  },
+  {
+    "id": "W084",
+    "text": "This scam promises you free tokens or NFTs to bait you into clicking a malicious link. Once you click the link, which is usually found in a spam NFT or fake ad, it directs you to a malicious website to connect your wallet or approve a transaction.",
+    "classification": {
+      "tempo_primary": "Acute",
+      "inner_attitude": "awake",
+      "aspect": "circumscribing",
+      "stress": "space",
+      "pole": "direct",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.76,
+      "rationale": "The prose maps the scam mechanism step by step with precise, sequenced spatial logic: bait → click → redirect → connect/approve. This is Awake (Space+Time) — the alert strategist tracking each move in a chain. Aspect circumscribing (Time-led): the paragraph wraps the full attack sequence in time-ordered steps. Stress is space (direct): the orientation is laser-focused on the exact pathway. Tempo is Acute — sharp, single-point vigilance identifying the precise attack vector. Motor pressing→punching (Strong-Direct): force-landing of each step in the sequence.",
+      "literary_anchor": "A cyber-security analyst walking through an exploit chain — precise, zero-drift."
+    }
+  },
+  {
+    "id": "W085",
+    "text": "As web3 becomes more popular, it not only attracts new excited users, but scammers as well. These bad actors try to take advantage of you through an array of common crypto scams, such as fake giveaways and airdrops, spam NFTs, scams ads, and more.",
+    "classification": {
+      "tempo_primary": "Warm",
+      "inner_attitude": "near",
+      "aspect": "circumscribing",
+      "stress": "flow",
+      "pole": "free",
+      "drive_primary": "passion",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "spell",
+      "drive_axis": "passion→spell",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Acknowledged"
+      ],
+      "outer_action_inners": [
+        "mobile"
+      ],
+      "confidence": 0.66,
+      "rationale": "The opening is relational and body-forward — 'new excited users' is warmly communal, Near (Weight+Time). The paragraph acknowledges community growth before pivoting to threat. Aspect is circumscribing (Time-led): it wraps the moment of web3's expansion to frame the rising scam context. Stress is flow (free): the prose yields into the social reality without alarm-spiking. Tempo is Warm — the Near register that foregrounds human connection and communal experience before naming danger. Motor gliding→dabbing (Light-Direct): warm-touch tone. A transient Acknowledged flash (Mobile family) occurs when the bad actors and their array of scam types are enumerated — briefly fragmenting into a list of threats.",
+      "literary_anchor": "Anthony Bourdain noting that a neighbourhood's popularity always draws opportunists — warm acknowledgement of community, clear-eyed about the shadow."
+    }
+  },
+  {
+    "id": "W086",
+    "text": "How to create a new Phantom wallet",
+    "classification": {
+      "tempo_primary": "n/a",
+      "inner_attitude": "unknown",
+      "aspect": "unknown",
+      "stress": "unknown",
+      "pole": "n/a",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": null,
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.4,
+      "rationale": "A bare instructional headline — too short to read an inner attitude, aspect, or stress. Gestures toward Practical (Stable) or Commanding but there is no prose body to confirm.",
+      "literary_anchor": null
+    }
+  },
+  {
+    "id": "W087",
+    "text": "Phantom is a self-custodial wallet, meaning only you have access to your funds. Phantom never stores your credentials or has access to your account.",
+    "classification": {
+      "tempo_primary": "Self-Contained",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "flow",
+      "pole": "bound",
+      "drive_primary": "spell",
+      "drive_secondary": "doing",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "spell→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [],
+      "outer_action_inners": [],
+      "confidence": 0.78,
+      "rationale": "The prose stakes out a bounded, sovereign domain: 'only you have access,' 'Phantom never stores,' 'never has access.' This is Stable (Weight+Space) — a structurally settled, decision-taken position. Aspect is enclosing (Weight-led): the copy wraps the user inside a protected boundary, defining what is kept out. Stress is flow (bound): the emphasis is on held, continuous containment — bound flow, no yielding outward. Tempo is Self-Contained — the stable register that holds inward, defines its own perimeter. Motor pressing→punching (Strong-Direct): each 'never' lands as a forceful affirmation of that boundary.",
+      "literary_anchor": "Aragorn at the gates: 'None shall pass who were not summoned.' Sovereign, contained, irrevocable."
+    }
+  },
+  {
+    "id": "W088",
+    "text": "You can also create a wallet by signing in with your Google or Apple account and setting a four-digit PIN. You will use your email and PIN to restore your wallet on a new device. Phantom never has access to your private keys or your funds.",
+    "classification": {
+      "tempo_primary": "Practical",
+      "inner_attitude": "stable",
+      "aspect": "unknown",
+      "stress": "time",
+      "pole": "sustained",
+      "drive_primary": "unknown",
+      "drive_secondary": "unknown",
+      "drive_introvert": "unknown",
+      "drive_extravert": "unknown",
+      "drive_axis": "n/a",
+      "motor_pair": [
+        "gliding",
+        "dabbing"
+      ],
+      "outer_action_tempi": [
+        "Self-Contained"
+      ],
+      "outer_action_inners": [
+        "stable"
+      ],
+      "confidence": 0.71,
+      "rationale": "The prose walks the user through a procedural sequence (Google/Apple sign-in → PIN → restore on new device) in calm, step-by-step time. Inner is Stable (Weight+Space) — measured, functional, decisions already made for the user's convenience. Aspect is circumscribing (Time-led): the steps wrap around the temporal journey of setup and future restoration. Stress is time (sustained): the cadence is unhurried, methodical, no urgency. Tempo is Practical — functional how-to exposition. Motor gliding→dabbing (Light-Direct): warm-touch guidance. A transient Self-Contained flash (Stable family) registers in the closing guarantee — 'Phantom never has access to your private keys or your funds' — which encloses and seals the sequence.",
+      "literary_anchor": "A patient, competent technician walking someone through a setup process, then sealing it with a guarantee."
+    }
+  },
+  {
+    "id": "W089",
+    "text": "Your wallet is secured by a 12-word Secret Recovery Phrase. Write it down and store it somewhere safe and offline. It's the only way to restore your wallet on a new device, and anyone who has it can access your funds. Phantom will never ask you for your recovery phrase.",
+    "classification": {
+      "tempo_primary": "Commanding",
+      "inner_attitude": "stable",
+      "aspect": "enclosing",
+      "stress": "time",
+      "pole": "quick",
+      "drive_primary": "doing",
+      "drive_secondary": "spell",
+      "drive_introvert": "vision",
+      "drive_extravert": "passion",
+      "drive_axis": "doing→passion",
+      "motor_pair": [
+        "pressing",
+        "punching"
+      ],
+      "outer_action_tempi": [
+        "Self-Contained"
+      ],
+      "outer_action_inners": [
+        "stable"
+      ],
+      "confidence": 0.8,
+      "rationale": "The prose issues direct imperatives ('Write it down,' 'store it somewhere safe and offline') with a stakes-forward urgency — 'the only way to restore your wallet,' 'anyone who has it can access your funds.' This is Stable (Weight+Space) at its most directive. Aspect is enclosing (Weight-led): the 12-word phrase encloses the user's entire financial sovereignty; the copy wraps a protective boundary of responsibility around that fact. Stress is time (quick): the imperative verbs land with sharp immediacy — act now, secure it now. Tempo is Commanding — the Stable ruler issuing non-negotiable directives. Motor pressing→punching (Strong-Direct): each sentence lands as a force-point. A transient Self-Contained flash at the close ('Phantom will never ask you for your recovery phrase') seals the sovereign perimeter.",
+      "literary_anchor": "Tywin Lannister handing over the keys to Casterly Rock with a single, irrevocable instruction."
+    }
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "id": "intent-routing-2026-02-18",
+  "title": "Intent routing is live across the Infinex account",
+  "ship_date": "2026-02-18",
+  "audience": ["x", "web", "in-product"],
+  "deployed_facts": [
+    "Users state what they want; the account chooses the path",
+    "Cross-chain swaps, bridges, and gas top-ups resolve from a single instruction",
+    "The user signs the destination, not the route",
+    "Routes are selected from multiple solvers; the chosen route is shown after the fact",
+    "The user never sees a chain selector for a swap that crosses chains",
+    "Failed routes do not require user intervention to re-route"
+  ],
+  "kind": "launch-tier",
+  "headline": "State the outcome. The account does the rest.",
+  "subhead": "Intent routing is live.",
+  "tier_reason": "First product surface where the account-as-agent assumption is taken to its conclusion: the user no longer picks rails. The mental model of crypto changes for anyone who uses this. Reserved-template because it retires the chain selector — a UI element older than most chains."
+}

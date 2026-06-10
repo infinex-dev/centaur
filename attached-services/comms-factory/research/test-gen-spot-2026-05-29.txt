@@ -1,0 +1,176 @@
+{
+  "voice": "infinex",
+  "beats": [
+    "sombre",
+    "commanding",
+    "irradiant"
+  ],
+  "candidates": [
+    {
+      "id": "stub-beat-0",
+      "text": "Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex. sombre.\n\ncommanding.\n\nirradiant.",
+      "channel": "x",
+      "declared_beats": [
+        {
+          "tempo": "sombre",
+          "hint": "Pressing prep"
+        },
+        {
+          "tempo": "commanding",
+          "hint": "the fact"
+        },
+        {
+          "tempo": "irradiant",
+          "hint": "future-state close"
+        }
+      ],
+      "deployed_facts_used": [
+        "Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex"
+      ],
+      "not_said": [
+        {
+          "fact": "spot CLOB trading venue provider: Hyperliquid",
+          "reason": "held back by deterministic stub; only one fact is deployed"
+        },
+        {
+          "fact": "Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps",
+          "reason": "held back by deterministic stub; only one fact is deployed"
+        },
+        {
+          "fact": "21 Hyperliquid spot markets have >$100K 24h volume; 298 exist on-chain but most had zero or negligible volume — do not use 298 as a market count in copy",
+          "reason": "held back by deterministic stub; only one fact is deployed"
+        },
+        {
+          "fact": "Hyperliquid spot market: HYPE/USDC — $97.57M 24h volume (highest; native HL token, no U-prefix)",
+          "reason": "held back by deterministic stub; only one fact is deployed"
+        },
+        {
+          "fact": "Hyperliquid spot market: UBTC/USDC (Unit Bitcoin, wrapped BTC) — $26.91M 24h volume",
+          "reason": "held back by deterministic stub; only one fact is deployed"
+        },
+        {
+          "fact": "Hyperliquid spot market: UETH/USDC (Unit Ethereum, wrapped ETH) — $4.21M 24h volume",
+          "reason": "held back by deterministic stub; only one fact is deployed"
+        },
+        {
+          "fact": "Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions",
+          "reason": "held back by deterministic stub; only one fact is deployed"
+        },
+        {
+          "fact": "perps trading venue provider: Hyperliquid",
+          "reason": "held back by deterministic stub; only one fact is deployed"
+        }
+      ],
+      "rationale": "Stub composition from beat library, variation 1",
+      "source": "stub",
+      "validation": {
+        "passed": false,
+        "failures": [
+          {
+            "rule": "ai-slop",
+            "reason": "em-dash density 1 in 163 chars (> 0/280)"
+          }
+        ],
+        "beat_audit": [
+          {
+            "beat_index": 0,
+            "declared_tempo": "sombre",
+            "classified_tempo": "unknown",
+            "classified_confidence": 0,
+            "passed": true,
+            "reason": "heuristic blind classifier deferred (confidence 0, margin 0) — defer to validator-llm"
+          },
+          {
+            "beat_index": 1,
+            "declared_tempo": "commanding",
+            "classified_tempo": "unknown",
+            "classified_confidence": 0,
+            "passed": true,
+            "reason": "heuristic blind classifier deferred (confidence 0, margin 0) — defer to validator-llm"
+          },
+          {
+            "beat_index": 2,
+            "declared_tempo": "irradiant",
+            "classified_tempo": "unknown",
+            "classified_confidence": 0,
+            "passed": true,
+            "reason": "heuristic blind classifier deferred (confidence 0, margin 0) — defer to validator-llm"
+          }
+        ]
+      }
+    },
+    {
+      "id": "stub-slop",
+      "text": "We're thrilled to unlock a game-changing, next-gen, seamless experience. Don't miss out — act now! 🚀",
+      "channel": "x",
+      "declared_beats": [
+        {
+          "tempo": "sombre",
+          "hint": "Pressing prep"
+        },
+        {
+          "tempo": "commanding",
+          "hint": "the fact"
+        },
+        {
+          "tempo": "irradiant",
+          "hint": "future-state close"
+        }
+      ],
+      "deployed_facts_used": [
+        "not in deployed facts"
+      ],
+      "not_said": [],
+      "rationale": "intentional slop fixture — validator must reject (cliches + AI-slop + time-pressure)",
+      "source": "stub",
+      "validation": {
+        "passed": false,
+        "failures": [
+          {
+            "rule": "cliches",
+            "reason": "cliché \"unlock\""
+          },
+          {
+            "rule": "ai-slop",
+            "reason": "AI-slop vague noun \"thrilled to\""
+          },
+          {
+            "rule": "off-spec-drive",
+            "reason": "time-pressure: \"Don't miss\" — time-pressure phrase surfaces Passion as visible projection — off-spec for Infinex's Spell→Vision axis"
+          },
+          {
+            "rule": "beat-tempo-fit",
+            "reason": "beat 1 (declared commanding): missing paragraph for declared beat"
+          },
+          {
+            "rule": "beat-tempo-fit",
+            "reason": "beat 2 (declared irradiant): missing paragraph for declared beat"
+          }
+        ],
+        "beat_audit": [
+          {
+            "beat_index": 0,
+            "declared_tempo": "sombre",
+            "classified_tempo": "unknown",
+            "classified_confidence": 0,
+            "passed": true,
+            "reason": "heuristic blind classifier deferred (confidence 0, margin 0) — defer to validator-llm"
+          },
+          {
+            "beat_index": 1,
+            "declared_tempo": "commanding",
+            "passed": false,
+            "reason": "missing paragraph for declared beat"
+          },
+          {
+            "beat_index": 2,
+            "declared_tempo": "irradiant",
+            "passed": false,
+            "reason": "missing paragraph for declared beat"
+          }
+        ]
+      }
+    }
+  ],
+  "picks": []
+}

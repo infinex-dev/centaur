@@ -1,0 +1,838 @@
+[
+  {
+    "root_id": "2031235888433545401",
+    "tweet_count": 7,
+    "tweets": [
+      {
+        "id": "2031235888433545401",
+        "text": "Recently @kaiynne sat down with @VirtualBacon to talk about why the altcoin market is structurally broken, how agentic loops are changing everything, and why Infinex is building for a world where your agent manages your crypto.\n\nFull interview and \ud83e\uddf5\u2193 https://t.co/AdUoSGV1Sg",
+        "chars": 274,
+        "likes": 160
+      },
+      {
+        "id": "2031235900349558918",
+        "text": "The altcoin market is structurally broken\n\nPerps are the baseline now. Not spot. The UNI fee switch ran from $5 to $10 on pure perp activity, then round-tripped to $3. Zero spot buying.\n\nKain's take: There will not be a broad market-agnostic rally in alts ever again",
+        "chars": 266,
+        "likes": 12
+      },
+      {
+        "id": "2031235912370393167",
+        "text": "The only tokens that will outperform next cycle are the ones that figure out how to make people want to hold spot again.\n\nStaking, tokenomics redesign, real yield. Whatever the mechanism, the projects that solve spot holding will go from 90% down to 500x up.\n\nEverything else",
+        "chars": 275,
+        "likes": 9
+      },
+      {
+        "id": "2031235924009562112",
+        "text": "An agent starts at 100 IQ. Within 3 minutes it's at 80. Within half an hour it's at 20.\n\nKain's been building his own coding harness to solve this. Keep the context window small and the agent stays sharp. Spawn, execute, wipe, repeat",
+        "chars": 233,
+        "likes": 5
+      },
+      {
+        "id": "2031235935984402569",
+        "text": "So what happens when you give those agents access to your crypto?\n\nInfinex's MCP server gives any agent the full crypto stack: swap, bridge, perps, DeFi, prediction markets. One install.\n\nThe difference: guard rails. Your agent proposes. You approve. Daily limits. Constraints.",
+        "chars": 277,
+        "likes": 5
+      },
+      {
+        "id": "2031235947673837689",
+        "text": "What this looks like in practice:\n\n- Smart DCA that only buys the dip\n- Sentiment-driven trading via Grok\n- Auto-rebalancing lending positions based on yield delta\n- Liquidation protection that sells in the right order\n\nYou describe the strategy, then your agent executes it",
+        "chars": 274,
+        "likes": 76
+      },
+      {
+        "id": "2031235959417876743",
+        "text": "\"Your agent will be managing your crypto for you. We're going to train up your agents.\"\n\nFull conversation \u2193\nhttps://t.co/qPPKL72RZC",
+        "chars": 132,
+        "likes": 75
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2001868458334785813",
+    "tweet_count": 7,
+    "tweets": [
+      {
+        "id": "2001868458334785813",
+        "text": "The timeline has been very crate heavy. Prizes are cool.\n\nBut they're much cooler if you know everything we've built.\n\nSo what actually is Infinex? \ud83d\udc47 https://t.co/LUnfMXKgJT",
+        "chars": 173,
+        "likes": 125
+      },
+      {
+        "id": "2001868476965912917",
+        "text": "No seed phrases. Passkeys only \ud83d\udd10\n\nFace ID. Touch ID. Can't be phished.\n\nAdd multiple passkeys across managers. iCloud. 1Password. YubiKey backup.\n\nAccess your account from anywhere. https://t.co/8TqpG0yaGp",
+        "chars": 205,
+        "likes": 23
+      },
+      {
+        "id": "2001868494619709511",
+        "text": "We call it Swidge. Swap + bridge.\n\nPick any token on 20+ chains. Get any token on any other chain. One click.\n\n25+ providers. Paste contract addresses for unlisted tokens. https://t.co/FWzpYjtSM5",
+        "chars": 195,
+        "likes": 55
+      },
+      {
+        "id": "2001868512663605693",
+        "text": "Gas is annoying. We fixed it \u26fd\n\nOne gas account. Every chain. Fund with any token. Auto top-up when low.\n\nExplore new chains like @Monad, @MegaETH and @Fogo, without ever having to think about gas. https://t.co/9Wu80tFkXR",
+        "chars": 221,
+        "likes": 74
+      },
+      {
+        "id": "2001868531030491559",
+        "text": "Infinex Perps. 100+ markets. Up to 40x.\n\nFund with any token in your account. Close all positions in one click. Trade across devices \ud83d\udcf1\n\nPowered by @HyperliquidX. Soon @Lighter_xyz &amp; @synthetix too. https://t.co/uMYeNp88DZ",
+        "chars": 225,
+        "likes": 72
+      },
+      {
+        "id": "2001868549800034476",
+        "text": "Browser extension connects your Infinex account to any onchain apps \ud83e\udde9\n\nSame passkey login, no seed phrases. Use all your imported wallets.\n\nClear signing requests mean you know what you're signing. https://t.co/Z112pKD4qK",
+        "chars": 221,
+        "likes": 53
+      },
+      {
+        "id": "2001868562353574370",
+        "text": "Back to crates. Every crate has a prize.\n\nINX vouchers. Cash draws. Patron NFTs.\n\ud83d\udcb0$1m Major Prize.\n\nBut this is what we built \u2192 https://t.co/D0zgQLgroh",
+        "chars": 151,
+        "likes": 0
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2036684811247780337",
+    "tweet_count": 6,
+    "tweets": [
+      {
+        "id": "2036684811247780337",
+        "text": "\u201cEven a bad idea in AI is going to be more successful than a good idea in crypto right now\u201d\n\n@kaiynne sat down with @theblondebroker on @TheMarketRunup to talk about why bear markets build empires, how AI agents just killed every interface in crypto, and what happens when your https://t.co/HrEud3Dkwy",
+        "chars": 301,
+        "likes": 146
+      },
+      {
+        "id": "2036684823277040059",
+        "text": "Kain's hot take: eight more months of sideways, capitulation by year-end, four-year cycle validated again.\n\n2018 built DeFi. 2022 built the infrastructure layer. 2026 builds the agent layer.\n\n\"The noise floor drops. You can really focus on what's actually needed.\"",
+        "chars": 264,
+        "likes": 13
+      },
+      {
+        "id": "2036684834899439902",
+        "text": "The AI startup market looks crowded. Kain says that's the signal, not the noise.\n\n\"Vercel can't decide if they're an agent API gateway or a hosting platform. The largest companies down to startups have no clue how to handle this.\"\n\nEarly DeFi was the same. Chaos = infinite",
+        "chars": 273,
+        "likes": 11
+      },
+      {
+        "id": "2036684846542770270",
+        "text": "Every form factor of interaction with technology just got nuked by agents.\n\nKain: \"No one is going to do all of their own crypto stuff anymore.\"\n\nGo back to your wallet in 2021. Pick a random transaction. Tell me why you did it. You can't, but an agent never forgets.",
+        "chars": 267,
+        "likes": 8
+      },
+      {
+        "id": "2036684858144198696",
+        "text": "Infinex spent three years solving crypto UX. Then agents changed the question entirely.\n\nNow it's not about better buttons, it's about having an agent that uses 20+ DEX integrations, every API, and your entire transaction history to work for you.",
+        "chars": 246,
+        "likes": 47
+      },
+      {
+        "id": "2036684869875720398",
+        "text": "\"The transformation of agents being applied to every single UX problem is the biggest opportunity in the world right now.\"\n\nKain goes deep on agent harnesses, context windows, removing humans from the loop, and what Infinex looks like with an AI co-pilot.\n\nFull conversation:",
+        "chars": 275,
+        "likes": 44
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2029732593651065312",
+    "tweet_count": 6,
+    "tweets": [
+      {
+        "id": "2029732593651065312",
+        "text": "Private Send beta is live for all users.\n\nSend crypto. Without exposing your financial history.\n\nIncognito Mode, powered by @HoudiniSwap \ud83d\udd2e\n\nHow it works \u2193 https://t.co/IWZutn0qup",
+        "chars": 178,
+        "likes": 331
+      },
+      {
+        "id": "2029732605428633740",
+        "text": "Blockchains are public by default.\n\nEvery transfer creates a permanent, traceable record linking your wallet to every address you've interacted with.\n\nPrivate Send breaks that link. The recipient wallet gets the funds. No on-chain trail shows where they came from.",
+        "chars": 264,
+        "likes": 8
+      },
+      {
+        "id": "2029732617244016897",
+        "text": "How to use Private Send on Infinex:\n\n1. Open Labs \u2192 Private Send\n2. Enter the recipient address\n3. Pick your token and amount\n4. Choose if you want to send or swidge\n5. Review and send\n\nThat's it. You can swap and send from one flow.",
+        "chars": 233,
+        "likes": 10
+      },
+      {
+        "id": "2029732628971278711",
+        "text": "We hosted a Spaces with @HoudiniSwap this morning to explore crypto privacy, how Houdini works and why we integrated it at Infinex \ud83c\udf99\ufe0f\n\nhttps://t.co/aXBHlUhQqg",
+        "chars": 158,
+        "likes": 8
+      },
+      {
+        "id": "2029732641457721451",
+        "text": "TL;DL\n\nWhy @HoudiniSwap?\n\n\u2192 $2.5B processed across ~1M transactions\n\u2192 3+ years live through full market cycles\n\u2192 Natively multi-chain\n\u2192 Zero funds ever lost\n\u2192 Fully compliant\n\nThey've run three separate $50K bounties. Nobody could trace a transaction.",
+        "chars": 251,
+        "likes": 64
+      },
+      {
+        "id": "2029732653289853318",
+        "text": "When you use Private Send, Houdini routes funds through a network of compliant exchange partners with a dual exchange hop and a random L1 in between.\n\nThere's no visible link between the sending and receiving wallet.\n\nTry it and let us know your feedback \u2193https://t.co/VcdtBT56i9",
+        "chars": 279,
+        "likes": 56
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2004798228185980957",
+    "tweet_count": 6,
+    "tweets": [
+      {
+        "id": "2004798228185980957",
+        "text": "The Infinex Sale is open for registration.\n\n5% of INX supply at $99.99M FDV. 1-year lock, with early unlock option.\n\nOrders between $200 min, $2,500 max.\n\nAllocation by chance, with boosts available.\n\nSale runs 3-6 Jan.\n\n[thread] https://t.co/vtH0thlHjY",
+        "chars": 253,
+        "likes": 211
+      },
+      {
+        "id": "2004798247324582012",
+        "text": "Infinex Sale allocations will be determined by chance.\n\nGive yourself 3x better chance of allocation by sharing your registration.\n\nPatrons who share get 10x better chance. https://t.co/lo1XkzQeDK",
+        "chars": 196,
+        "likes": 52
+      },
+      {
+        "id": "2004798263900373253",
+        "text": "All tokens purchased in the Infinex Sale are locked for 1 year.\n\nBut you have the option to unlock early.\n\nFor example, if FDV is above unlock price, you can pay the difference to unlock.\n\nUnlock cost declines from $300M \u2192 $99.99M FDV over the year. https://t.co/GRpozvRGEk",
+        "chars": 273,
+        "likes": 48
+      },
+      {
+        "id": "2004798277171151054",
+        "text": "Why the 1-year lock for the Infinex Sale?\n\nWe lowered the sale price and unlock price to maximise distribution. But we still want conviction. https://t.co/OeJR3Pj7yL",
+        "chars": 165,
+        "likes": 0
+      },
+      {
+        "id": "2004798294921544114",
+        "text": "Infinex Sale timeline:\n\n\ud83d\udccd Now \u2192 Registration open\n\ud83d\udccd Jan 3-6 \u2192Infinex Sale\n\ud83d\udccd Jan 7-13 \u2192 Final allocation\n\ud83d\udccd Late Jan \u2192 TGE https://t.co/PFgA8fVQAV",
+        "chars": 144,
+        "likes": 57
+      },
+      {
+        "id": "2004798307840000401",
+        "text": "The Infinex Sale is the lowest price INX has ever been sold.\n\nTo take part:\n\n1. Verify through Sonar (https://t.co/v4VV2VgrGK)\n2. Connect your Infinex account\n3. Register and share for your boost\n\nINX is for everyone \u2192 https://t.co/ZcrsdUGD7X",
+        "chars": 242,
+        "likes": 101
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2022192281785450541",
+    "tweet_count": 5,
+    "tweets": [
+      {
+        "id": "2022192281785450541",
+        "text": "MegaETH support, bulk move, hardware wallet support and more \ud83e\udd2b\n\nHere\u2019s what\u2019s shipped over the past few weeks\ud83d\udc47 https://t.co/sYl4aLpJWC",
+        "chars": 134,
+        "likes": 82
+      },
+      {
+        "id": "2022192296419373525",
+        "text": "MegaETH is now supported.\n\nYou can now use Swidge to get assets onto MegaETH and use the Infinex extension to connect to @megaeth apps. https://t.co/TgqyxPEIi0",
+        "chars": 159,
+        "likes": 16
+      },
+      {
+        "id": "2022192311464341635",
+        "text": "Bulk asset moves are live.\n\nIf you want to move 50 tokens from an imported wallet, you can now select them all. Move them in one click.\n\nNo more one-by-one transfers. https://t.co/R9KKX8TpRL",
+        "chars": 190,
+        "likes": 12
+      },
+      {
+        "id": "2022192326404452722",
+        "text": "Hardware wallet support is live.\n\nYou can now connect your @Trezor or @Ledger to Infinex. View those assets in your portfolio. Send and move them, and approve transactions on your device. https://t.co/gxwohTNSy2",
+        "chars": 211,
+        "likes": 21
+      },
+      {
+        "id": "2022192339087937863",
+        "text": "We've also launched [redacted], which if you're a Patron and you've been paying attention, you will have spotted \ud83d\udc40\n\nThis is the first step on our privacy roadmap, and unlocks new ways of ensuring your funds are private when you want them to be.\n\n\u2192 https://t.co/RclTLRYjNH",
+        "chars": 271,
+        "likes": 62
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2009072082680762842",
+    "tweet_count": 5,
+    "tweets": [
+      {
+        "id": "2009072082680762842",
+        "text": "The Infinex extension is live.\n\nYou can use your whole portfolio in one tab. Connect anywhere across any chain.\n\n\u2193 https://t.co/yCznA690aH",
+        "chars": 138,
+        "likes": 132
+      },
+      {
+        "id": "2009072100200312912",
+        "text": "View all your wallets at a glance.\n\nImported wallets get the Infinex treatment too \u2192 gas handled, passkeys, any device. https://t.co/Ien5dMTQc1",
+        "chars": 143,
+        "likes": 15
+      },
+      {
+        "id": "2009072117225074973",
+        "text": "Swidge is built into the extension.\n\nYou can swap or bridge any asset without leaving the page you're on. You can also use the address book to send, with support across EVM, Solana, Bitcoin, Zcash, Litecoin, Doge, Cardano, XRP. https://t.co/qe9W08K07Q",
+        "chars": 251,
+        "likes": 14
+      },
+      {
+        "id": "2009072134040015339",
+        "text": "Auto-locks when you step away.\n\nMetaMask mode to connect if an app doesn't know us yet. Toggle the app whitelist for additional control. https://t.co/VTQPP3Dyol",
+        "chars": 160,
+        "likes": 19
+      },
+      {
+        "id": "2009072146622923224",
+        "text": "Available on Chrome, Arc, Brave.\n\nGet the extension \u2192 https://t.co/A1ILGgoeJY",
+        "chars": 77,
+        "likes": 19
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2023257125791875414",
+    "tweet_count": 4,
+    "tweets": [
+      {
+        "id": "2023257125791875414",
+        "text": "A few months from now, you (or more likely your agent) will mostly use one app.\n\nYou won't think about which chain your coins are on. You won't have a different extension for each wallet. You won't copy-paste addresses or fight with bridges.\n\nYou'll just use crypto, without any",
+        "chars": 278,
+        "likes": 502
+      },
+      {
+        "id": "2023257137447895210",
+        "text": "Infinex is a non-custodial superapp.\n\nOne account. Every chain. Trading, DeFi, wallet, privacy.\n\nYou keep your keys. We handle the complexity.",
+        "chars": 142,
+        "likes": 28
+      },
+      {
+        "id": "2023257297032749556",
+        "text": "We've already shipped enough to fill two whitepapers.\n\nCoinGecko did a deep dive on what's live today.\n\n\u2192 https://t.co/pmOfmsSPVc",
+        "chars": 129,
+        "likes": 56
+      },
+      {
+        "id": "2023257309137547740",
+        "text": "TGE was the beginning.\n\nStill to come: Agent infrastructure. Mobile. Infinex Card. Prediction markets. And much more.\n\nFull roadmap \u2192 https://t.co/XPyMidT7VV",
+        "chars": 157,
+        "likes": 23
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2017080218385895617",
+    "tweet_count": 4,
+    "tweets": [
+      {
+        "id": "2017080218385895617",
+        "text": "If you hold INX Vouchers, you can start redeeming them today, January 30th, 2026 (TGE).\n\nINX Vouchers give you direct access to INX tokens at a pre-set price in the Infinex app.\n\nHere's how \ud83d\udc47",
+        "chars": 191,
+        "likes": 106
+      },
+      {
+        "id": "2017080235548946810",
+        "text": "How to redeem INX Vouchers earned through Craterun:\n\n\u2192 Go to the Crates page in your Infinex app\n\u2192 Select how many of each voucher you want to redeem\n\u2192 Complete checkout https://t.co/jOsnDRnUtP",
+        "chars": 193,
+        "likes": 25
+      },
+      {
+        "id": "2017080247632744470",
+        "text": "You can redeem your INX Vouchers anytime within 1 year after TGE (until January 30th, 2027).\n\nYou can continue earning INX Vouchers after TGE through Craterun.",
+        "chars": 159,
+        "likes": 30
+      },
+      {
+        "id": "2017080259427127759",
+        "text": "Instructions on how to claim your INX tokens if you're a Patron holder (or if you earned INX during Bullrun or Yaprun) can be found in our Road to TGE: https://t.co/BxBiNYQTie",
+        "chars": 175,
+        "likes": 22
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2014559825695527257",
+    "tweet_count": 4,
+    "tweets": [
+      {
+        "id": "2014559825695527257",
+        "text": "Craterun updates ahead of Infinex TGE\n\nWith Infinex TGE scheduled for January 30, 2026, we\u2019re updating Craterun to align with the next phase of INX.\n\nBelow is exactly what\u2019s changing and what isn\u2019t.\n\n\ud83e\uddf5 https://t.co/lMmqfXGGYE",
+        "chars": 225,
+        "likes": 84
+      },
+      {
+        "id": "2014559837821272464",
+        "text": "What\u2019s changing\n\n\u2192 Weekly prize draws are ending\n\u2192 No more 1M FDV vouchers in crates\n\nThe last weekly prize draw will be drawn on January 29, 2026.\n\nAll vouchers already earned - including 1M FDV vouchers - remain valid and redeemable under existing rules.",
+        "chars": 256,
+        "likes": 18
+      },
+      {
+        "id": "2014559849707897178",
+        "text": "What\u2019s staying the same\n\nCraterun will continue post-TGE\n\n\u2192 Major milestone prizes are unchanged (next up: CryptoPunk at $5B)\n\u2192 Instant prizes remain unchanged",
+        "chars": 159,
+        "likes": 26
+      },
+      {
+        "id": "2014559861523292615",
+        "text": "Infinex TGE\n\nThe Infinex TGE for INX is happening on January 30, 2026.\n\nAt TGE:\n\u2192 Patrons receive INX tokens\n\u2192 1 Patron = 100,000 INX\n\nWe'll continue to keep you updated with TGE need-to-knows. Read our 'Road to TGE' post to get started https://t.co/BxBiNYQTie",
+        "chars": 260,
+        "likes": 32
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2003701130262720814",
+    "tweet_count": 4,
+    "tweets": [
+      {
+        "id": "2003701130262720814",
+        "text": "Starting today on Infinex, every time you swidge, you\u2019ll earn crates \ud83d\udce6\n\n[thread] https://t.co/PHq2pXZ5QS",
+        "chars": 104,
+        "likes": 105
+      },
+      {
+        "id": "2003701142254158120",
+        "text": "Swidge is one of the most comprehensive DEX, bridge, and intent aggregators in crypto, with 25+ integrations.\n\nNow, in addition to getting the best rate on your cross-chain swaps, you\u2019ll also earn crates.",
+        "chars": 204,
+        "likes": 0
+      },
+      {
+        "id": "2003701154086289745",
+        "text": "Swidge is the newest way to earn crates, alongside:\n\n\u2192 Trading on Infinex Perps\n\u2192 Holding Patron NFTs\n\nWith each quote, you\u2019ll see exactly how many crates you\u2019ll earn for that swidge.",
+        "chars": 183,
+        "likes": 0
+      },
+      {
+        "id": "2003701165922615542",
+        "text": "As part of adding crate earning to swidge, we're also introducing a variable fees based on the type of swidge.\n\nThe platform fee is always clearly displayed in the quote details.\n\nLearn more here \ud83d\udc49 https://t.co/iuWWhmoWfJ",
+        "chars": 221,
+        "likes": 0
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2017311858685002230",
+    "tweet_count": 3,
+    "tweets": [
+      {
+        "id": "2017311858685002230",
+        "text": "INX is here. https://t.co/5YZNZKcxyJ",
+        "chars": 36,
+        "likes": 492
+      },
+      {
+        "id": "2017312005745741844",
+        "text": "Where to trade $INX:\n\nONCHAIN\n\u279e Infinex - buy INX directly on the platform\n\u279e Ethereum\n\u279e Solana (Provided by Sunrise)\n\u279e BSC\n\nCEX\n\u279e Coinbase\n\u279e Kraken\n\u279e KuCoin\n\u279e HTX\n\u279e Bitvavo\n\u279e LBank\n\u279e Bybit\n\u279e Binance\n\u279e Gate",
+        "chars": 205,
+        "likes": 188
+      },
+      {
+        "id": "2017312498979115010",
+        "text": "Official INX contracts:\n\nEthereum\n0xdeF1b2D939EdC0E4d35806c59b3166F790175afe\n\nSolana\ninxKXw9V2NDZE7hDijzpJaKKUb97NEPJDTCEEiYg4yY\n\nBSC\n0x45f55B46689402583073ff227B6ac20520052a24",
+        "chars": 176,
+        "likes": 172
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2009521827190882738",
+    "tweet_count": 3,
+    "tweets": [
+      {
+        "id": "2009521827190882738",
+        "text": "\u23f0 23 HOURS LEFT\n\nTomorrow is the last opportunity to join the Infinex sale. A new kind of crypto app that feels like a CEX but is self-custodial.\n\nThis is the lowest price INX has ever been sold.\n\nCloses Sat 5pm AEST \u00b7 2pm SGT \u00b7 6am UTC \u00b7 1am EST\n\nhttps://t.co/ZcrsdUGD7X https://t.co/liVgjdAlGv",
+        "chars": 295,
+        "likes": 124
+      },
+      {
+        "id": "2009565858763514216",
+        "text": "\u23f0 20 HOURS LEFT\n\n\"Everything you want to do in crypto, in one place, on any device.\"\n\nInfinex Sale closes Sat 2pm SGT \u00b7 6am UTC \u00b7 1am EST\n\nhttps://t.co/kksksYHGED",
+        "chars": 162,
+        "likes": 160
+      },
+      {
+        "id": "2009573148681978009",
+        "text": "@nikitabier we\u2019re being botted into oblivion here. please fix this",
+        "chars": 66,
+        "likes": 13
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2043931703908151665",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2043931703908151665",
+        "text": "\"Build for the agent six months from now. Not the agent today.\"\n\n@kaiynne sat down with @RobertSagurton to talk about how the old world doesn't exist anymore, and what it takes to build for the new one. https://t.co/h0yscpu32b",
+        "chars": 226,
+        "likes": 68
+      },
+      {
+        "id": "2043931715497087135",
+        "text": "Stop designing interfaces, and start getting out of the agent's way.\n\nFull conversation on Proof of Story \ud83d\udc47\nhttps://t.co/794pk44AOW",
+        "chars": 131,
+        "likes": 16
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2029053643044040886",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2029053643044040886",
+        "text": "We're blessing the Infinex community with another $888 USDC \ud83e\udde7\n\nWe\u2019ve teamed up with @coinbase_au to bring the tradition of Red Packets onchain with @base. The first Red Packets were claimed in less than an hour.\n\nClaim yours \ud83d\udc47\nhttps://t.co/YAjXhYjzgm",
+        "chars": 250,
+        "likes": 308
+      },
+      {
+        "id": "2029063698229424315",
+        "text": "All blessings claimed in just 10 minutes. \n\nHappy Chinese New Year! \ud83d\udc34\ud83d\udd25",
+        "chars": 70,
+        "likes": 42
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2026532868764365083",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2026532868764365083",
+        "text": "All blessings have been claimed \ud83e\udde7\n\nBut we're not done. Another Red Packet drop is coming before Lunar New Year ends.\n\nFollow @infinex so you don't miss it \ud83d\udc40\n\nhttps://t.co/0trRx06pi3",
+        "chars": 181,
+        "likes": 115
+      },
+      {
+        "id": "2026815846547640719",
+        "text": "88,888 \ud83e\udde7 https://t.co/Dq6hW7bBv9",
+        "chars": 32,
+        "likes": 19
+      }
+    ],
+    "editorial": false
+  },
+  {
+    "root_id": "2026497719142068417",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2026497719142068417",
+        "text": "\u99ac\u5e74\u5409\u7965 \ud83e\udde7\n\nThis Lunar New Year we're celebrating onchain.\n\nWe're teaming up with @coinbase_au to bring Red Packets to the Infinex community - an ancient tradition of sharing good fortune, now on @base.\n\nClaim yours \ud83d\udc47\nhttps://t.co/oLyBo1F4Xb\n\nWe've loaded $888 USDC - because 8",
+        "chars": 273,
+        "likes": 237
+      },
+      {
+        "id": "2026497731225927871",
+        "text": "Want to send your own Red Packet?\n\n\u2192 Create and fund a Red Packet with USDC\n\u2192 Share it with your community on X\n\u2192 They claim instantly - couple of taps\n\nUse the Infinex Extension to Swidge into USDC in seconds, without the worry of gas.\n\nWishing you good fortune in the Year of",
+        "chars": 277,
+        "likes": 20
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2020882077609300249",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2020882077609300249",
+        "text": "Infinex \ud83e\udd1d MegaETH \u26a1\ufe0f\n\n@MegaETH is now live on Infinex. Day 1.\n\nYou can now bridge to MegaETH through Swidge, and use onchain apps with the Infinex Extension. https://t.co/37vQzkOCmV",
+        "chars": 181,
+        "likes": 167
+      },
+      {
+        "id": "2020882089651130482",
+        "text": "While liquidity improves, the best way to get funds on MegaETH is swidging to ETH first. You can then swidge to other assets, or connect to apps directly.\n\nVisit our MegaETH network page for more details on what makes it unique \u2192 https://t.co/55ydxkO5nd",
+        "chars": 253,
+        "likes": 16
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2018552749345132864",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2018552749345132864",
+        "text": "Everyone is building for AI.\n\nNot everyone is built for AI.\n\n\ud83e\udd9e",
+        "chars": 62,
+        "likes": 110
+      },
+      {
+        "id": "2018557344377135125",
+        "text": "0xbf75f9fac699509afe6c4ffbf4f5fd2e7ab5dc5ceff966a60aaf9f4474cdfd5d",
+        "chars": 66,
+        "likes": 26
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2016669472531292642",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2016669472531292642",
+        "text": "The final $50K Cash Draw.\n\nCongratulations Mojong - you've won $50,000 USDC!\n\nThis is the last weekly draw. Tomorrow, INX arrives. https://t.co/EnKmKhCq52",
+        "chars": 154,
+        "likes": 69
+      },
+      {
+        "id": "2016669490533323231",
+        "text": "9 weeks of Craterun.\n\n$690k in cash prizes\n80 Patrons won\nVoucher holders are currently up $6.2m\n\nThe weekly draws have ended, but Craterun continues!\n\nhttps://t.co/pdyJvTbnTX https://t.co/gS5O5gzj4t",
+        "chars": 199,
+        "likes": 46
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2016406000123990491",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2016406000123990491",
+        "text": "The countdown starts now.\n\nFriday, 30th January \u00b7 7pm UTC https://t.co/GVqHZxiWMV",
+        "chars": 81,
+        "likes": 284
+      },
+      {
+        "id": "2016768473897324566",
+        "text": "Tomorrow you get INX.\n\nFriday, 30th January \u00b7 7pm UTC https://t.co/KOFRPwiSHF",
+        "chars": 77,
+        "likes": 74
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2015642206317736394",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2015642206317736394",
+        "text": "Patron INX Snapshot \u2192 07:00 UTC, Friday 30 January\n\nFor every 1 Patron, you can claim 100,000 INX.\n\nAfter TGE, all Patron benefits (fee discounts, early access, group access) transfer to INX. Your Patron NFT becomes commemorative. https://t.co/1uZzRnRmQV",
+        "chars": 254,
+        "likes": 111
+      },
+      {
+        "id": "2015642218519007610",
+        "text": "\u26a0\ufe0f Active bids on OpenSea, Blur, or MagicEden? Retract before 07:00 UTC Jan 30.\n\nPatrons bought after the snapshot won't receive the 100,000 INX.\n\nFor more details on INX TGE, including Patrons, \u00b5Patrons and vouchers, see the full guide \u2192 https://t.co/s2FTGauzqU",
+        "chars": 262,
+        "likes": 49
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2014176160343785563",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2014176160343785563",
+        "text": "Another Craterun Cash Draw, another $50K winner \ud83c\udf89\n\nCongrats to Jambo4Life on winning $50,000 USDC!\n\nWe've now distributed a total of 640K in \ud83d\udcb0 prizes.\n\nJust one $50K Cash Draw left\u2026 https://t.co/pWagPU9FXr",
+        "chars": 205,
+        "likes": 71
+      },
+      {
+        "id": "2014176172247330993",
+        "text": "The Infinex TGE for INX is happening on January 30th, 2026.\n\nAt TGE:\n\u2192 Patrons receive INX tokens\n\u2192 1 Patron = 100,000 INX\n\nWe'll continue to keep you updated with TGE need-to-knows. Read our 'Road to TGE' blog to get informed https://t.co/BxBiNYQTie",
+        "chars": 250,
+        "likes": 62
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2013473406168244325",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2013473406168244325",
+        "text": "Road to TGE.",
+        "chars": 12,
+        "likes": 196
+      },
+      {
+        "id": "2013473417849442807",
+        "text": "https://t.co/BxBiNYQTie",
+        "chars": 23,
+        "likes": 67
+      }
+    ],
+    "editorial": false
+  },
+  {
+    "root_id": "2013070570691432866",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2013070570691432866",
+        "text": "Our second-last Patron draw before TGE! \ud83c\udf8a\n\n10 Patrons awarded:\n\n@greenfusenft\n@ramonrecuero\n@gOaTbAnKeR\n@Wades_ETH\nBodhiLiquid\nBmeme\n@totoWRK\nSTC (awarded 2 Patrons this week)\nredmars706\n\nAnd a reminder our next major milestone is almost here... https://t.co/gke3M2w9JK",
+        "chars": 269,
+        "likes": 86
+      },
+      {
+        "id": "2013070582989111541",
+        "text": "INX Token Generation Event (TGE) \u23f3\n\nThe Infinex TGE for INX is happening on January 30th, 2026.\n\n\u2192 At TGE, Patrons receive INX tokens\n\u2192 1 Patron = 100,000 INX\n\nMore details will be shared over the next two weeks.",
+        "chars": 212,
+        "likes": 67
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2009461804561527042",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2009461804561527042",
+        "text": "The Synthetix $sUSD weekly prizes are live \ud83d\udd25\n\nDeposit $sUSD to earn a share of 10,000 SNX every week and become eligible for raffle prizes, including Infinex Patron NFTs, ETH, and additional SNX.\n\nCheck out the 5 weekly raffle prize winners below\ud83d\udc47 https://t.co/sqJVfzauUj",
+        "chars": 271,
+        "likes": 31
+      },
+      {
+        "id": "2009461817123459447",
+        "text": "Raffle prize winners:\n\n\ud83e\udd47 1st \u2013 Infinex Patron NFT - Paf\n\ud83e\udd48 2nd \u2013 Infinex Patron NFT - _Martin_\n\ud83e\udd49 3rd \u2013 1 ETH - quantum\n\ud83c\udf96\ufe0f 4th \u2013 2,000 SNX - Infinexfan\n\ud83c\udf96\ufe0f 5th \u2013 1,000 SNX - wesely\n\nLearn more \ud83d\udc49 https://t.co/hjncE9JvZt",
+        "chars": 215,
+        "likes": 10
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2006917233646137597",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2006917233646137597",
+        "text": "The Synthetix $sUSD weekly prizes are live \ud83d\udd25\n\nDeposit $sUSD to earn a share of 10,000 SNX every week and become eligible for raffle prizes, including Infinex Patron NFTs, ETH, and additional SNX.\n\nCheck out the 5 weekly raffle prize winners below\ud83d\udc47 https://t.co/djedMJBVQr",
+        "chars": 271,
+        "likes": 48
+      },
+      {
+        "id": "2006917246820466771",
+        "text": "Raffle prize winners:\n\n\ud83e\udd47 1st \u2013 Infinex Patron NFT - S7ra7\n\ud83e\udd48 2nd \u2013 Infinex Patron NFT - STC\n\ud83e\udd49 3rd \u2013 1 ETH - Lily_\n\ud83c\udf96\ufe0f 4th \u2013 2,000 SNX - Paf\n\ud83c\udf96\ufe0f 5th \u2013 1,000 SNX - Lovewool\n\nLearn more \ud83d\udc49 https://t.co/hjncE9IY9V",
+        "chars": 205,
+        "likes": 0
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2004409171647807661",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2004409171647807661",
+        "text": "The Synthetix $sUSD weekly prizes are live \ud83d\udd25\n\nDeposit $sUSD to earn a share of 10,000 SNX every week and become eligible for raffle prizes, including Infinex Patron NFTs, ETH, and additional SNX.\n\nCheck out the 5 weekly raffle prize winners below\ud83d\udc47 https://t.co/dA06r2X0l4",
+        "chars": 271,
+        "likes": 47
+      },
+      {
+        "id": "2004409184113381545",
+        "text": "Raffle prize winners:\n\n\ud83e\udd47 1st \u2013 Infinex Patron NFT - mani\n\ud83e\udd48 2nd \u2013 Infinex Patron NFT - skynet\n\ud83e\udd49 3rd \u2013 1 ETH - Infinexfan\n\ud83c\udf96\ufe0f 4th \u2013 2,000 SNX - siliconbits\n\ud83c\udf96\ufe0f 5th \u2013 1,000 SNX - Paf\n\nLearn more \ud83d\udc49 https://t.co/hjncE9JvZt",
+        "chars": 215,
+        "likes": 17
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2003992317854982575",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2003992317854982575",
+        "text": "Our Christmas Cash Draw Winner! \ud83c\udf85\n\nCongratulations @gOaTbAnKeR - you've won $50,000 USDC!\n\nMerry Christmas from Infinex. We've given away $420k in cash since Craterun started.\n\n$50K Cash Draw every Thursday. 10 Patrons every Monday. https://t.co/HEOlzA3jQK",
+        "chars": 256,
+        "likes": 66
+      },
+      {
+        "id": "2003992335844364708",
+        "text": "In 3 weeks, Craterun has given out:\n\n\ud83d\udcb0 $420k in cash prizes\n\ud83d\udcc8 INX vouchers currently up $5m\n\ud83d\udc27 3 Pudgy Penguins\n\ud83c\udfdb\ufe0f 30 Patrons\n\nAt $10b vol, we're giving away $1,000,000 USDC to one Craterunner \ud83d\udce6 https://t.co/DINGFdrAX1",
+        "chars": 217,
+        "likes": 49
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2003031980267696175",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2003031980267696175",
+        "text": "Stock perps are now live on Infinex.\n\nTrade XYZ100 \u2192 top 100 US company index. 20x leverage. 24/7.\n\nPlus TSLA. NVDA. AAPL. GOOGL. HOOD. 19 markets total.\n\nYou can find them in your Infinex Perps dashboard under HIP-3.\n\nPowered by @HyperliquidX and provided by @tradexyz. https://t.co/FM2Am6gsMU",
+        "chars": 294,
+        "likes": 137
+      },
+      {
+        "id": "2003031992355742132",
+        "text": "For now, these HIP-3 markets have lower Hyperliquid fees.\n\n\u25c0\ufe0f Standard HL: 0.045% + 0.05% builder = 0.095%\n\u25b6\ufe0f HIP-3: 0.009% + 0.05% builder = 0.059%\n\nSame builder fee. Lower total cost. More crates per dollar \ud83d\udc40\n\nh/t @KookCapitalLLC \u2192 bug fixed https://t.co/LywjM9wBdz",
+        "chars": 267,
+        "likes": 0
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2001811434473427360",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2001811434473427360",
+        "text": "The Synthetix $sUSD weekly prizes are live \ud83d\udd25\n\nDeposit $sUSD to earn a share of 10,000 SNX every week and become eligible for raffle prizes, including Infinex Patron NFTs, ETH, and additional SNX.\n\nCheck out the 5 weekly raffle prize winners below\ud83d\udc47 https://t.co/fy46G5PFJ4",
+        "chars": 271,
+        "likes": 0
+      },
+      {
+        "id": "2001811446674718800",
+        "text": "Raffle prize winners:\n\n\ud83e\udd47 1st \u2013 Infinex Patron NFT - snax_bull\n\ud83e\udd48 2nd \u2013 Infinex Patron NFT - quantum\n\ud83e\udd49 3rd \u2013 1 ETH - STC\n\ud83c\udf96\ufe0f 4th \u2013 2,000 SNX - Paf\n\ud83c\udf96\ufe0f 5th \u2013 1,000 SNX - S7ra7\n\nLearn more \ud83d\udc49 https://t.co/hjncE9JvZt",
+        "chars": 208,
+        "likes": 0
+      }
+    ],
+    "editorial": true
+  },
+  {
+    "root_id": "2001458164630458413",
+    "tweet_count": 2,
+    "tweets": [
+      {
+        "id": "2001458164630458413",
+        "text": "After a big week of opening crates, we have our Week 3 Cash Prize Draw winner!\n\nCongratulations mooncake - you've won $50,000 USDC.\n\nIt pays to be an Infinex Patron, Mooncake is an Infinex OG \ud83c\udfdb\ufe0f\n\n$50K Cash Draw every Thursday. 10 Patrons won every Monday. https://t.co/KMZwUdBGu2",
+        "chars": 279,
+        "likes": 0
+      },
+      {
+        "id": "2001458251192504580",
+        "text": "There's been another Instant Cash Prize winner!\n\n@Andotlas is $10,000 USDC richer after opening their 18th crate \ud83d\udce6\n\nThat's $290k USDC won by Craterunners so far. Who's taking it to $300k? https://t.co/KYNQDTLq9i",
+        "chars": 211,
+        "likes": 0
+      }
+    ],
+    "editorial": true
+  }
+]

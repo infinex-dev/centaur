@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Launch readiness — 2026-05-28</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --ink-muted: #555;
+    --bg: #fbfaf7;
+    --rule: #d8d4c8;
+    --accent: #7a3b00;
+    --accent-2: #2a4d7a;
+    --code-bg: #f1eee6;
+    --steal-bg: #eef4ee;
+    --steal-border: #5a8d5a;
+    --avoid-bg: #fbeded;
+    --avoid-border: #b04a4a;
+    --pending-bg: #f7f1e1;
+    --pending-border: #c89732;
+  }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 16px/1.65 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    padding: 48px 24px 96px;
+  }
+  main { max-width: 980px; margin: 0 auto; }
+  h1, h2, h3, h4 {
+    font-family: -apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-top: 2.2em;
+    margin-bottom: 0.6em;
+  }
+  h1 { font-size: 1.9em; margin-top: 0.2em; border-bottom: 2px solid var(--ink); padding-bottom: 0.3em; }
+  h2 { font-size: 1.45em; border-bottom: 1px solid var(--rule); padding-bottom: 0.25em; }
+  h3 { font-size: 1.18em; color: var(--accent); }
+  h4 { font-size: 1.02em; margin-top: 1.6em; font-weight: 700; }
+  p { margin: 0.7em 0; }
+  hr { border: none; border-top: 1px solid var(--rule); margin: 2.4em 0; }
+  strong { color: #000; }
+  em { color: var(--ink); }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  code {
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font: 0.9em/1.4 "SF Mono","Menlo","Consolas",monospace;
+    color: #5a3000;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 14px 18px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font: 0.86em/1.5 "SF Mono","Menlo","Consolas",monospace;
+    border-left: 3px solid var(--accent);
+  }
+  pre code { background: transparent; padding: 0; color: var(--ink); font-size: 1em; }
+  blockquote {
+    border-left: 3px solid var(--rule);
+    margin: 1em 0;
+    padding: 0.2em 1em;
+    color: var(--ink-muted);
+    font-style: italic;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.2em 0;
+    font-size: 0.93em;
+  }
+  th, td {
+    border: 1px solid var(--rule);
+    padding: 7px 11px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--code-bg); font-family: -apple-system,sans-serif; font-weight: 600; font-size: 0.92em; }
+  tr:nth-child(even) td { background: rgba(0,0,0,0.015); }
+  ul, ol { padding-left: 1.6em; }
+  li { margin: 0.25em 0; }
+  details {
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 10px 16px;
+    margin: 1.2em 0;
+    background: rgba(255,255,255,0.5);
+  }
+  details[open] { background: rgba(255,255,255,0.9); }
+  details > summary {
+    cursor: pointer;
+    font-family: -apple-system,sans-serif;
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 1.05em;
+    padding: 4px 0;
+  }
+  details > summary:hover { color: #000; }
+  .decision {
+    border-left: 4px solid var(--pending-border);
+    background: var(--pending-bg);
+    padding: 14px 18px;
+    margin: 1.2em 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .decision h3 { margin-top: 0; color: #6b4a00; }
+  .steal { border-left-color: var(--steal-border); background: var(--steal-bg); border-radius: 0 4px 4px 0; padding: 12px 16px; margin: 0.8em 0; }
+  .avoid { border-left-color: var(--avoid-border); background: var(--avoid-bg); border-radius: 0 4px 4px 0; padding: 12px 16px; margin: 0.8em 0; }
+  .steal, .avoid { border-left-width: 3px; border-left-style: solid; }
+  .meta {
+    font-family: -apple-system,sans-serif;
+    color: var(--ink-muted);
+    font-size: 0.86em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.8em;
+  }
+  .meta a { margin-right: 0.8em; display: inline-block; margin-bottom: 0.2em; }
+  .pill {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-family: -apple-system,sans-serif;
+    font-size: 0.8em;
+    background: var(--code-bg);
+    color: var(--ink-muted);
+    margin-right: 6px;
+    border: 1px solid var(--rule);
+  }
+  .pill.spark { background: #efeaf7; color: #4b2d8a; border-color: #c5b6e0; }
+  .pill.synth { background: #ecf3ec; color: #2e5e2e; border-color: #b6d6b6; }
+  .pill.bridge { background: #e7eff8; color: #1f4a7e; border-color: #b6c8df; }
+  .pill.all { background: #f0e8d8; color: #6b4a00; border-color: #d8c898; }
+  @media (max-width: 640px) {
+    body { padding: 24px 14px 64px; font-size: 15px; }
+    h1 { font-size: 1.55em; }
+    table { font-size: 0.85em; }
+    .meta a { margin-right: 0.5em; }
+  }
+</style>
+</head>
+<body>
+<main>
+<div class="meta">
+  <a href="#tldr">TL;DR</a>
+  <a href="#decisions-waiting-on-you">Decisions</a>
+  <a href="#per-launch-synthesis">Per-launch</a>
+  <a href="#channel-mix-locked-this-turn">Channels</a>
+  <a href="#patterns-to-steal-patterns-to-avoid">Steal / avoid</a>
+  <a href="#validator-promotions">Validator</a>
+  <a href="#work-remaining-before-first-marketing-send">Work remaining</a>
+  <a href="#deep-dives">Deep dives</a>
+  <a href="#sources">Sources</a>
+</div>
+<article id="content">Loading&hellip;</article>
+</main>
+
+<script id="md-source" type="text/markdown">
+# Launch readiness — 2026-05-28
+
+Synthesis of three parallel audits run today: competitor comms recon, email infrastructure best practices, current Infinex platform email audit. Inputs for the three near-term launches.
+
+**Three near-term launches**
+- **Hyperliquid Spark** <span class="pill spark">spark</span> — Phantom-tier motion budget per operator
+- **Synthetics Perps in Infinex Perps** <span class="pill synth">synth</span> — hardest to pitch in 280 chars
+- **Bridge / on-off-ramps** <span class="pill bridge">bridge</span> — verb-product, fits the easiest tweet shape
+
+**Operating mode shift**: human back in the loop, harness is the review surface, 80% of previous output with 20% of the manual work.
+
+---
+
+## TL;DR
+
+1. **Voice baseline = Hyperliquid terse-fact.** `<subject> is now live on <chain>` shape, ~140 chars, no adjectives/hashtags/exclamations. Phantom-tier *motion* ≠ Phantom-tier *copy*. Promote a `>200 char` advisory flag on launch tweets.
+2. **Spark = Kalshi-style tease arc, not a UI demo.** Spend the motion budget on ONE signature object that recurs over 5–7 days (Kalshi's torus precedent). Object becomes Spark's identity. UI-demo motion is one impression; object-tease motion is brand equity. 3–5 candidate motifs proposed below.
+3. **Synthetics = Pendle's problem-first body.** Open with market size + the gap, then introduce the product. Hyperliquid's terse pattern doesn't work for products whose value isn't obvious in one sentence.
+4. **Bridge = Phantom's three-bullet user-verb shape verbatim.** Use `→` arrows, not emoji droplets. Plus Stargate's 4-word slogan shape ("Bring the Bridge Home" is taken; the *shape* is steal-able).
+5. **Email engineer's worry is real and quantified.** Same-mailbox same-apex degrades `security@` deliverability within 48–72h on Gmail/Apple/Yahoo. Subdomain split buys ~75–95% isolation. **Recommended path: stay on Mailtrap, switch marketing to the `bulk` stream + a new `updates.infinex.xyz` subdomain.** ESP isn't the bottleneck — the structural work is.
+6. **Platform email today: single sender, eight transactional categories, zero marketing.** `security@app.infinex.xyz` ("Infinex Notifications"), Mailtrap primary (Mailjet legacy fallback). No subscription model, no `List-Unsubscribe` headers anywhere, no per-category opt-out — all of which need to exist before marketing ships, per Google/Yahoo's Nov 2025 enforcement. **~1 week of platform engineering + 30-day warmup before first real campaign.** See [Work remaining](#work-remaining-before-first-marketing-send).
+7. **Three new validator rules to promote** (specs below): `rejectHashtags`, `rejectAbstractNounStack`, `rejectAdjectivalStack`. Plus one advisory `lengthFlag` (>200 chars on launch tweets).
+
+---
+
+## Decisions waiting on you
+
+Three calls to make before drafting copy or building anything.
+
+<div class="decision">
+
+### 1. Email infra path — recommended: stay on Mailtrap, use `bulk` stream + new subdomain
+
+The platform audit and the best-practices research collide cleanly. **The recommendation is to keep Mailtrap and isolate marketing via stream + subdomain, not migrate to Postmark.** Three paths laid out below; Path C is the call.
+
+| Path | Migration cost | Isolation | Time-to-launch |
+|---|---|---|---|
+| **A — Migrate to Postmark, two streams + two subdomains** | High — dual provider during cutover, full DNS rewrite, retrain runbooks, transitional risk on transactional | ~95% — Postmark refuses marketing on transactional streams | 30–90 days warmup |
+| **B — Postmark for transactional + Resend for marketing** | Highest — two new providers, two billing relationships, two vendor-risk surfaces | Maximum — separate providers = separate reputations + IP pools | 30–90 days warmup |
+| **C — Stay on Mailtrap, switch marketing to `bulk` stream + new subdomain** *(recommended)* | Near-zero — Mailtrap schema already has `'transactional' \| 'bulk'` enum (`workers/main/src/inngest/functions/emails/mailtrapWebhook.ts:25`); codebase just doesn't select it yet | Medium-high (~75–85%) — same vendor, separate stream pool + separate subdomain | 30 days warmup once subdomain is published |
+
+#### Why not migrate (the "double cost, double labor" instinct is correct)
+
+- **Mailtrap is delivering today.** Your 8 transactional categories ship from `security@app.infinex.xyz` and there's no signal of underperformance. Postmark has the older deliverability reputation (since 2010 vs Mailtrap's production-sending push from ~2023), but the gap is not large enough for crypto-marketing volume to justify migration.
+- **The ESP is NOT the gating bottleneck.** The structural gaps — subscription model, RFC 8058 unsubscribe, per-category opt-out, separate Inngest path for batched sends — have to exist regardless of provider. Mailtrap or Postmark, that work is on the critical path. See [Work remaining](#work-remaining-before-first-marketing-send) below.
+- **Mailtrap is half-built for this already.** The codebase knows `'transactional' \| 'bulk'` at the webhook layer; plumbing it through the send path is a few hours of work, not a migration.
+- **Migration risk window.** A dual-provider cutover means transactional flows (login OTP, withdrawal confirmation) sit in transition. Crypto users on a flaky 2FA email lose funds. Don't introduce that risk to fix something that isn't broken.
+- **Migrate later if data warrants.** If after ~3 months of bulk-stream operation Postmaster Tools shows complaint rates >0.3% that don't recover, OR Mailtrap bulk-stream deliverability lags Postmark benchmarks by a meaningful margin, revisit. Decide on data, not on theoretical best-practice.
+
+#### Why the warmup needs 30–90 days
+
+Two independent ramps run in parallel, hence the range.
+
+**Engagement / reputation warmup (~30 days, volume-driven).** Gmail, Yahoo, Outlook, and Apple Mail all classify new sending domains/IPs as *unknown reputation* by default and apply harsher filtering until they observe consistent low-volume sending plus positive engagement (opens, replies, low spam complaints). If you send 10k emails on Day 1 from a fresh `updates.infinex.xyz`:
+
+- The pattern matches "new bulk sender with no history" — the classifier-default for spam domains.
+- 30–60% of recipients see the first send in their spam folder.
+- Those who would have opened it can't, so positive-engagement signals don't accumulate.
+- The filter learns "this subdomain is spammy" and that reputation persists for weeks regardless of future content quality.
+
+The graduated ramp (50/day → 500/day → 2k/day → 8k/day → full volume over ~30 days) gives positive engagement signals time to accumulate at each provider *before* volume scales, so by the time you're sending at full rate the reputation already says "wanted mail."
+
+**DMARC policy ramp (~90 days, observation-driven).** Separate concern. DMARC starts at `p=none` — providers REPORT alignment failures but don't reject mail. You parse the aggregate reports for 2–4 weeks and fix any legitimate sender (e.g. HR tool, calendar invites, partner integrations) that's silently spoofing your domain. Then ramp `p=quarantine pct=25` → `pct=100` → `p=reject`. Each step needs ~2 weeks of clean reports before tightening. If you skip ahead and a legit sender fails alignment, real mail starts getting quarantined or rejected.
+
+**Why the range is 30–90.** The reputation warmup is volume-driven (10k-subscriber list ramps faster than a 100k list); the DMARC ramp is observation-driven (clean DNS finishes faster than messy DNS). Real world: small list + clean config ≈ 30 days. Large list + messy config ≈ 90 days. Aim conservative — being safer-than-sorry here means your security mail keeps working.
+
+**Open question for your engineer:** does the existing internal proxy at `proxy.srv.infinex.app/mailtrap` route both Mailtrap streams or only transactional? Affects whether bulk-stream sends go through the proxy or direct.
+
+**Engineering handoff doc:** [`research/path-c-email-engineering-plan-2026-05-28.md`](path-c-email-engineering-plan-2026-05-28.md) — end-to-end Phase 0–10 plan, file:line refs, effort estimates, 9 open questions for the engineer. Not blocking the three launches; this is the parallel track to unlock marketing email as a comms channel afterwards.
+
+</div>
+
+<div class="decision">
+
+### 2. Spark signature object
+
+The Kalshi-tease arc needs ONE 3D-ish object that becomes Spark's identity over 5–7 days. Must be Infinex-ownable (not Hyperliquid-derivative), grounded in the locked placement — Stable + Flow-stressed + Penetrating, Spell-Vision drive, banker-turned-trailblazer character.
+
+Five candidates, terse:
+
+| # | Motif | Spell-Vision read | Risk |
+|---|---|---|---|
+| 1 | **Vault dial / tumbler** — heavy metal cylindrical dial slowly rotates, periodic clicks as columns align | Banker image direct. Spark = the lock opening. Penetrating-gaze on the dial. | "Bank" reads conservative; may underweight the crypto-trailblazer half. |
+| 2 | **Iridium ingot with crystalline core** — single dense object, slow rotation, light penetrating the core | Stable + dense + future-tense. Crystalline interior reads onchain-native. | Reads close to existing crypto-monolith conventions (Monad, others). |
+| 3 | **Spark filament** — glowing horizontal filament suspended in dark space, pulses on a slow rhythm | Literal Spark interpretation. Sombre-prep arc; ignition is the reveal. | Most abstract — less ownable than a 3D object. |
+| 4 | **Compass face / navigator dial** — slow needle settling against an etched dial, depth via parallax | Banker-trailblazer reads direction-with-conviction. Settling = the Spell-Vision lock-in. | Navigation iconography is crowded (bridge, DEX aggregators). |
+| 5 | **Glyph / sigil** — single-stroke glyph slowly draws itself onto a dark surface, last stroke is the Spark | Spell-Vision drive is literal. Craft-patience in the line work. | Risk of occult/mystical read; could ladder away from financial gravitas. |
+
+**Operator picks one** (or pushes back with a sixth direction). Once locked, the object owns the launch arc: Day -7 motion alone, Day -3 + word, Day -1 + date, Day 0 reveal tweet.
+
+</div>
+
+<div class="decision">
+
+### 3. Validator promotions
+
+Four rules to add to `src/validator.ts`. Each needs positive + negative test cases per `CLAUDE.md`. None of these are LLM-judges — all regex-grade.
+
+| Rule | Catches | Example flag | Severity |
+|---|---|---|---|
+| `rejectHashtags` | Any `#word` token | `#BuildOnBase`, `#HyperLiquid`, `#DeFi` — Phantom uses; Hyperliquid/Wildcat/Pendle (closer voice anchors) don't | reject |
+| `rejectAbstractNounStack` | ≥3 abstract nouns chained without a concrete subject | `agentic economy`, `chain abstraction`, `unified liquidity` — NEAR-pattern slop | reject |
+| `rejectAdjectivalStack` | >2 modifiers stacked on a single launch noun | `free, open-source, web3 wallet-connection library` (4 modifiers) — Trust Wallet-pattern slop | reject |
+| `lengthFlag` (advisory) | Launch tweets >200 chars | Hyperliquid avg ~140; Phantom three-bullet bodies can stretch but the headline shouldn't | warn, not reject |
+
+Confirm and I'll write each rule + tests in a single short PR.
+
+</div>
+
+---
+
+## Per-launch synthesis
+
+What each audit changed for each launch. The voice spec (`src/voice/infinex.ts`) and brand assets remain canon; this layers on top.
+
+### <span class="pill spark">spark</span> Hyperliquid Spark
+
+| Dimension | Direction |
+|---|---|
+| Voice | **Hyperliquid terse-fact.** Subject + "is now live on Infinex" or inverse. ~140 chars. No hashtags, no `!`, no "we're excited". |
+| Body shape | Hyperliquid headline + optional Phantom-style 3-bullet "you can now → / → / →" beneath, if integration features merit it. |
+| Motion | **Phantom-tier — but spent on a Kalshi-style tease arc, not a UI demo.** One signature object, 5–7 day arc. (Pick from decision #2.) |
+| Channels | Twitter (tease + reveal), in-app messaging announcement-pipe (on Day 0), blog/docs (Practical-heavy, clanker-readable), email *(once subdomain warm)*. |
+| Tempo mix (locked tempi) | Tease arc reads **Sombre → Commanding** — the multi-beat shape your spec describes for `data-card-official`. Sombre prep, Commanding land. |
+| Risks | Letting the motion budget go to a UI demo (one-time impression); using founder-voice register when Infinex isn't a founder-cult brand. |
+
+### <span class="pill synth">synth</span> Synthetics Perps in Infinex Perps
+
+| Dimension | Direction |
+|---|---|
+| Voice | **Pendle's problem-first.** Open with market scale + the gap (e.g. "Perp markets price crypto. Synthetics price the world."), then introduce the product. |
+| Body shape | Mission/market re-anchor → gap → product. Avoid leading with "introducing". Avoid the Phantom three-bullet — verbs are too abstract for synthetics. |
+| Motion | **Data-card-official** template family. Visual = the synthetic universe at launch (asset count, leverage caps, supported markets). Static-first; pick one to animate after operator review. |
+| Channels | Twitter (launch tweet + paired educational thread — Pear Protocol pattern), blog/docs (deeper explainer), in-app, email *(high-context users are the right audience for the explainer)*. |
+| Tempo mix | **Practical-led, Sombre prep, Commanding land.** Mission re-anchor at top = Sombre weight before the reveal. Practical body = explain the structure, the structure justifies itself. |
+| Risks | Pitching novelty before stating the gap (= filler that the validator won't catch); leaking abstract-noun-stack from NEAR-style PR-register ("agentic economy"-class) — `rejectAbstractNounStack` will catch this once added. |
+
+### <span class="pill bridge">bridge</span> Bridge / on-off-ramps
+
+| Dimension | Direction |
+|---|---|
+| Voice | **Phantom's three-bullet user-verb shape verbatim.** "On-ramps and off-ramps are live in Infinex Bridge. You can now: → deposit USD from your bank → off-ramp to your bank → swap across chains". |
+| Body shape | Headline + three `→` bullets. Use arrows, NOT emoji droplets (Phantom's Sui-launch droplet read cheaper than the Base-launch arrow). |
+| Motion | **Split-template** in comms-factory's card schema. Semantic two-color chain pairs (from/to). Lower motion budget than Spark — bridge is a workhorse product, not a hero launch. |
+| Slogan | Needs one. 3–5 words. Stargate's "Bring the Bridge Home" is taken; the *shape* is what you steal. Belongs in brand-factory's voice work; flag for the next loop. |
+| Channels | Twitter + in-app messaging *(in-app does most of the lift — users are already inside the app when they discover bridge)*. Email confirms feature availability. Blog explains chains/rails coverage. |
+| Tempo mix | **Sociable-led** (verb-list is direct address) + **Practical-bodied** (the bullets are the structure) + **Commanding** close ("live in Infinex Bridge"). |
+| Risks | Slogan slot left empty = the launch reads forgettable. Phantom does this well because of motion + warmth; Infinex's colder placement needs the slogan to compensate. |
+
+---
+
+## Channel mix (locked this turn)
+
+| Channel | Status | Voice notes |
+|---|---|---|
+| **Twitter** | Active surface | Default Hyperliquid terse-fact; Phantom shape when integration-class; Pendle problem-first when value isn't obvious in 280 chars. |
+| **Blog / user docs** | Treated as one surface — clanker-readable + human-readable | **Practical-heavy.** "Writing for clankers as much as humans now." Targets future-public CLI users + LLM agents pointed at the docs. |
+| **In-app messaging** | Announcement pipe only (skip modal this round) | Lower-stakes register; can be more direct since context is in-product. |
+| **Email** | Pending email-infra decision | Once subdomain warm: marketing + announcements only, transactional stays on `security@app.infinex.xyz`. RFC 8058 unsubscribe + opt-in preferences mandatory before first send. |
+| **Changelog** | **Excluded** | Operator: blog covers it. Anti-pattern to maintain both. |
+
+---
+
+## Patterns to steal / patterns to avoid
+
+Cross-launch lessons from the competitor recon.
+
+### Steal
+
+<div class="steal">
+
+**1. Hyperliquid's terse-fact tweet shape** <span class="pill all">all 3</span> — `<subject> is now live on <chain>`, ~140 chars, no adjectives, no hashtags, no `!`. The thing is the subject, not the team. Default for all launch-day tweets.
+
+**2. Kalshi's tease → reveal arc** <span class="pill spark">spark</span> — 5–7 day arc anchored by one signature object. Day -7 motion alone → Day -3 + word → Day -1 + date → Day 0 reveal. Spend the motion budget on the object, not the UI.
+
+**3. Pendle's problem-first body** <span class="pill synth">synth</span> — name market scale in $-volume terms, name the gap, introduce the product as the response. Boros opened with "$150–200B daily perp volume" before naming Boros.
+
+**4. Phantom's three-bullet user-verb shape** <span class="pill bridge">bridge</span> <span class="pill spark">spark</span> — `→` + verb + concrete capability. Three bullets, never four. Verbs first, not feature names. Arrows, not droplets.
+
+**5. Polymarket's "the artifact IS the comms"** <span class="pill all">all 3</span> — each launch should ship a native shareable card that stands alone in feed without the tweet body. The `data-card-official` family is built for this; Polymarket is the canonical reference.
+
+**6. Stargate's 4-word slogan shape** <span class="pill bridge">bridge</span> — "Bring the Bridge Home" anchored the entire LayerZero/Stargate merger. The Bridge launch needs one. (Belongs in brand-factory's voice work, not comms-factory.)
+
+**7. Pear Protocol's parallel educational track** <span class="pill synth">synth</span> — pair Synthetics launch tweet with an "how synthetic perps work" thread or micro-course shipped the same week. Two-track comms doubles surface area without doubling work.
+
+**8. Wildcat's hero-copy posture** <span class="pill all">all 3</span> — `On-Chain Credit without Excessive Collateral` is the structural lesson. Subject + the differentiating clause. No verbs. No marketing. Anti-design as differentiation. Applies to product-page heroes that ship alongside launches.
+
+</div>
+
+### Avoid
+
+<div class="avoid">
+
+**1. "Excited to / Thrilled to / Stay tuned"** — caught by validator's `rejectAIslop` today; 6+ orgs in the audit hit some variant. Worth re-confirming the rule's coverage.
+
+**2. Hashtag stacking** — `#BuildOnBase`, `#HyperLiquid` — Hyperliquid/Wildcat/Pendle (the voice anchors closest to Infinex) all avoid hashtags entirely. Promote to `rejectHashtags`.
+
+**3. Token-launch comms eating product comms** — Rainbow, Sport.Fun, Stargate (post-acquisition) all collapsed product into token. Infinex has no token launch in scope, so the risk is structural-future, not present.
+
+**4. Emoji-as-bullet-replacement** — Phantom's 🌊💧 on the Sui launch read cheaper than `→` on the Base launch. Universal-shape arrows > theme-chained emoji.
+
+**5. Adjective-stacking on launch nouns** — `free, open-source, web3, wallet-connection library` (Trust Wallet) is 4 modifiers before the noun. Promote to `rejectAdjectivalStack`.
+
+**6. Multiplicative claims without basis** — "10× faster" works when Catchain 2.0 receipts back it (TON). "Next billion users" doesn't (Phantom). Rule: any scale claim must be in `deployed_facts`.
+
+**7. Founder-as-spokesperson register** — TON/Wildcat/Pear work this way. Infinex is collective-team mode; borrowing founder voice without a founder face reads inauthentic.
+
+**8. PR-distribution leakage** — NEAR Intents' "agentic economy / chain abstraction / unified liquidity" is the Egocentric-tempo failure mode — speaking in tongues only the team understands. Promote to `rejectAbstractNounStack`.
+
+**9. "Endgame" claims** — Ekubo's "AMM Endgame" works because StarkNet shipped genuine structural concentrated-liquidity. Most age badly. Defer to brand-factory if tempted.
+
+**10. Heavy first-person "we" in headlines** — Hyperliquid almost never uses it; Phantom always does. Infinex's Stable + Penetrating placement is closer to Hyperliquid's posture. Default subject-first, not team-first.
+
+</div>
+
+---
+
+## Validator promotions
+
+Spec-level — implementation is a single PR once you approve.
+
+```ts
+// src/validator.ts — proposed additions
+
+export function rejectHashtags(caption: string): ValidationResult {
+  // catches any `#\w+` token
+  // positive: "Spot perps are now live on Base"  → ok
+  // negative: "Spot perps live on Base #BuildOnBase #DeFi"  → fail
+}
+
+export function rejectAbstractNounStack(caption: string): ValidationResult {
+  // catches ≥3 abstract-noun-class tokens in a span without a concrete subject
+  // dictionary: agentic, economy, abstraction, infrastructure, unification, layer,
+  //   liquidity, primitive, paradigm, framework, ecosystem, composability...
+  // positive: "Cross-chain swaps are live"  → ok
+  // negative: "Confidential cross-chain infrastructure for the agentic economy"  → fail
+}
+
+export function rejectAdjectivalStack(caption: string): ValidationResult {
+  // catches >2 adjectival modifiers immediately preceding a noun
+  // positive: "Free, open-source wallet kit"  → ok (2 modifiers)
+  // negative: "Free, open-source, web3 wallet-connection library"  → fail (4)
+}
+
+export function lengthFlag(caption: string): ValidationResult {
+  // advisory only — warn, don't reject
+  // positive: "$X is now live on Infinex"  → ok
+  // negative: 240-char launch tweet  → warn ("Hyperliquid baseline ~140")
+}
+```
+
+---
+
+## Work remaining before first marketing send
+
+Not good-to-go yet. Ordered by criticality. All required. All independent of the Mailtrap-vs-Postmark choice (so none of it is wasted work even if you migrate later).
+
+| # | Work | Where | Effort |
+|---|---|---|---|
+| 1 | Publish `updates.infinex.xyz` subdomain with separate DKIM, SPF, DMARC records. Tighten apex DMARC to `sp=reject` (stops phishers spoofing other subdomains). | DNS (Cloudflare or wherever `infinex.xyz` is hosted) | 1 day + provider verification |
+| 2 | Plumb the `bulk` stream flag through the Mailtrap call path. Add `stream: 'transactional' \| 'bulk'` to the `Email` type (`packages/emails/src/types/types.ts:5-15`), thread through to the Mailtrap request body (`packages/emails/src/services/delivery/mailtrap/index.ts:45-60`). | platform repo | ~0.5 day — schema already aware |
+| 3 | New `userEmailPreferences { userId, category, status, updatedAt }` table in the schema (`packages/db/src/schema.ts` near line 1593, beside `undeliverableEmailAddress`). Add `canMarketingEmailBeDelivered(db, userId, category)` predicate next to `canEmailBeDelivered` (`workers/main/src/lib_v2/emails/index.ts:39`). | platform repo | ~1 day — net-new table + predicate + tests |
+| 4 | RFC 8058 headers: `List-Unsubscribe: <https://...>, <mailto:...>` AND `List-Unsubscribe-Post: List-Unsubscribe=One-Click`, both in DKIM-signed scope. Plus a public `/unsubscribe?token=…` route that flips the preference without auth. **Zero of this exists today** (grep across the repo: zero `List-Unsubscribe` matches). | platform repo | ~0.5 day — headers in provider clients + route handler |
+| 5 | New `platform/send-marketing-email` Inngest event with batched-send semantics. Current `platform/send-email` throttles at 10/min per category (`sendEmail.ts:46-53`) — orders of magnitude too slow for a campaign. | platform repo | ~0.5 day — fork the handler, drop the per-category throttle, add batching |
+| 6 | Honor Mailtrap webhook events beyond `bounce`. Today `spam`, `unsubscribe`, `open`, `click` are all received and dropped (`workers/main/src/inngest/functions/emails/mailtrapWebhook.ts:83-105`). `spam` → per-category suppression. `unsubscribe` → preferences flip. `open`/`click` → campaign metrics. | platform repo | ~0.5 day |
+| 7 | Monitoring stack: `abuse@infinex.xyz` + `postmaster@infinex.xyz` monitored shared inboxes (RFC 2142, mandatory). Register `infinex.xyz` AND `updates.infinex.xyz` SEPARATELY in Google Postmaster Tools, Yahoo Sender Hub, Microsoft SNDS. Wire a DMARC report parser (dmarcian free tier or Valimail Monitor). | ops + DNS | ~1 day setup, ongoing weekly review |
+
+**Total before first warmup send:** ~3 days platform engineering + ~1 day DNS + ~1 day monitoring setup = roughly a **week of focused work**.
+
+**Then:** 30-day reputation warmup (graduated volume from 50/day → full) **before** the first real campaign.
+
+**Then:** 90-day DMARC ramp from `p=none` → `p=reject` on `updates.`, observed in parallel with the campaign cadence.
+
+**Critical-path order:** items 1–2 unblock the rest (subdomain must be live before any send; bulk flag must work before warmup starts). Items 3–6 can run in parallel by different hands. Item 7 should be done before item 1's first send so monitoring is in place from day one.
+
+---
+
+## Deep dives
+
+Source audits in full. Each is a `<details>` block — expand to read; collapse to keep the synthesis page scannable.
+
+<details>
+<summary>Competitor comms recon — 21 orgs, ranked by relevance</summary>
+
+**Source:** [research/competitor-comms-audit-2026-05-28.md](competitor-comms-audit-2026-05-28.md) (591 lines)
+
+### Tier 1 — closest voice anchors
+
+| Org | Voice register | What Infinex steals |
+|---|---|---|
+| **Hyperliquid** | Commanding-led, Practical-bodied, Sombre-prep implicit. Fact-only. No hashtags, no `!`, no first-person "we" in headlines. | Voice baseline for all launches. |
+| **Polymarket** | Practical-led; the market card *is* the comms. News-anchor neutral when they do write copy. | Data-card-as-native-content. |
+| **Phantom** | Sociable-led, Practical body, Irradiant close. Motion-rich, gradients, square-aspect clips. | **Motion treatment only — not voice.** |
+| **Kalshi** | Sombre → Commanding tease arc. CEO-led on LinkedIn before X (counterintuitive — confusion drove discussion). | Tease-arc structure for Spark. |
+| **Pendle** | Practical-led, Sombre prep (mission re-anchor), Commanding land. Problem-first not novelty-first. | Body shape for Synthetics. |
+
+### Tier 2 — disambiguated + flagged
+
+- **Pear Protocol** (operator's "Pair Protocol", 🍐) — educational track parallel to launch.
+- **Stargate / LayerZero** — 4-word slogan shape ("Bring the Bridge Home").
+- **Wildcat Protocol** — closest Tier-2 voice match to Infinex's placement. Hero copy: `On-Chain Credit without Excessive Collateral`.
+- **Kinetiq** (operator's "Kinetic spot app") — Hyperliquid-native LST. Sociable + tribal markers. Anti-reference for voice.
+- **Trust Wallet** — scale-framing ("220 million users"). Anti-reference: voice not bound to character.
+- **Avantis** (operator's likely "Avex card thing") — "Global Markets, Limitless Leverage" two-word headline + functional subhead. No literal card surfaced; possible alt: Aevo.
+- **Ekubo** (operator's "E&S based app" on StarkNet) — "AMM Endgame" claim. Anti-reference except for the structural-argument move.
+- **NEAR Intents** — abstract-noun-stack failure mode. Source of the `rejectAbstractNounStack` rule.
+- **FOMO (Base app)** — consumer-app register, very far from Infinex placement.
+- **Sport.Fun** (Football.Fun rename) — player-card-as-native-unit insight; otherwise anti-reference.
+- **Rainbow Wallet** — token comms ate product comms in Q1 2026. Anti-pattern at scale.
+
+### Tier 3 — light coverage
+
+Sui (foundation-formal), Beefy (vault-yield-farmer audience), Safe (closest Tier-3 voice match to Wildcat/Infinex posture), TON (founder-driven via Durov), Monad (bifurcated VC + community voice).
+
+### Full classification table
+
+See md file §Appendix. 21-row table of each org's closest Infinex tempo + steal/anti-reference verdict.
+
+</details>
+
+<details>
+<summary>Email infrastructure best practices — headline rec + setup runbook</summary>
+
+**Source:** [research/email-infra-recommendation-2026-05-28.md](email-infra-recommendation-2026-05-28.md) (357 lines)
+
+**Headline recommendation:** Send marketing from a dedicated subdomain (e.g. `updates.infinex.xyz`) on a separate provider/stream from transactional, with its own DKIM keys, its own `_dmarc.updates.infinex.xyz` record, and a 30-day warmup. Keep `infinex.xyz` apex locked to transactional + security.
+
+### Reputation segmentation answers
+
+- **Same-mailbox same-apex (`updates@infinex.xyz`):** worst option. Complaints degrade `security@` deliverability within 48–72h on Gmail/Apple/Yahoo. This is the failure mode the engineer is right to worry about.
+- **Subdomain split (`updates@updates.infinex.xyz`):** ~85–95% isolation. Gmail's primary signal is DKIM `d=` + SPF return-path; weaker org-domain compliance signal prevents full isolation (intentional — stops attackers laundering subdomain reputation).
+- **Separate apex (`infinexupdates.xyz`):** bad for crypto. Zero domain age + structurally identical to existing Infinex phishing lookalikes (`infinex.info`, `infinex.network`). Net brand-trust negative.
+
+### Provider comparison
+
+| Provider | Strength | Best for |
+|---|---|---|
+| Postmark | Hard isolation via Message Streams; refuses marketing on transactional streams | Mission-critical transactional |
+| Resend | Modern DX, Vercel-affiliated | Modern SaaS marketing broadcasts |
+| SendGrid | High volume, legacy | High-volume legacy senders (operationally heavy) |
+| Mailgun | API-first, Stripe under the hood | Mid-volume |
+| AWS SES | Cheapest at scale | Highest volume, willing to operate |
+| Loops.so | Marketing/lifecycle UX for non-engineers | Marketing-run-by-non-engineers |
+
+**Note:** The rec doc did NOT evaluate Mailtrap (your current provider) head-to-head. Worth a follow-up audit before committing to migration.
+
+### Required DMARC ramp
+
+```
+Week 0:   apex p=none; sp=none (audit only)
+Week 1-2: confirm DMARC aggregates show all legit senders passing
+Week 3-4: apex p=quarantine pct=25; sp=quarantine
+Week 5-8: apex p=quarantine pct=100; sp=reject
+Week 9-12: apex p=reject; sp=reject; updates. p=quarantine pct=25
+Week 13+: updates. ramp to p=reject
+```
+
+### Non-negotiables before first marketing send
+
+- RFC 8058 one-click unsubscribe headers (Gmail/Yahoo enforce since Nov 2025)
+- `abuse@infinex.xyz` + `postmaster@infinex.xyz` monitored mailboxes (RFC 2142)
+- DMARC aggregate report parser (dmarcian free tier or Valimail Monitor)
+- Google Postmaster Tools + Yahoo Sender Hub + Microsoft SNDS registrations for BOTH `infinex.xyz` AND `updates.infinex.xyz` separately
+- 30-day warmup schedule (capped daily sends, expanding from most-engaged seed audience outward)
+
+</details>
+
+<details>
+<summary>Platform email infra — current state at <code>/Users/opaque/platform</code></summary>
+
+**Source:** [research/platform-email-audit-2026-05-28.md](platform-email-audit-2026-05-28.md) (193 lines)
+
+### Current state
+
+- **Repo:** `/Users/opaque/platform` (`@infinex/platform`) — pnpm + Turbo monorepo, Cloudflare Workers backend, Drizzle/PlanetScale (MySQL), Inngest for async work.
+- **Providers:** Mailtrap (current primary), Mailjet (legacy fallback). Provider selection per-env via `EMAIL_PROVIDER` enum. Prod routes through internal proxy `proxy.srv.infinex.app/mailtrap`.
+- **Sender:** Single identity — `security@app.infinex.xyz` as "Infinex Notifications". Defined once at `packages/emails/src/templates/_shared/render.ts:6-9`.
+- **Pipeline:** caller → render React Email in `workers/emails` sub-worker (RPC) → Inngest `platform/send-email` → throttled handler (10/min per category) → provider REST.
+- **Templates:** React Email. Per-template: `.tsx` + `-render.ts` + snapshot test. Shared chrome (`Parent.tsx` dark `#17191C`, `Footer.tsx` with "The safest way to get onchain").
+
+### Email categories today (all transactional, zero marketing)
+
+| Category | Subject | Trigger | Priority |
+|---|---|---|---|
+| `verification` | "Verify your email address" | user changes email | high |
+| `sendFunds` | "You've sent funds to a new address" | trpc send flow, new recipient | normal |
+| `newAddress` | "New address added" | contact-added flow | normal |
+| `confirmedPasskey` | (passkey confirmed) | 24h auto-confirm | normal |
+| `deletePasskey` | (passkey deleted) | passkey removed | normal |
+| `addPasskey` | (passkey cooldown) | new passkey cooldown start | normal |
+| `addTotp` | (TOTP added) | TOTP enrolment | normal |
+| `changeTotp` | (TOTP changed) | TOTP change | normal |
+
+### What doesn't exist
+
+- **No subscription / preferences model.** `packages/db/src/schema.ts:124-126` user table has `email` + `emailVerified` only. No `emailPreferences` / `notificationPreferences` table.
+- **No `List-Unsubscribe` headers.** Grep across the repo: zero matches. Disqualifying for any marketing send at >5k/day post-Feb 2024.
+- **No per-category opt-out.** Mailtrap webhook receives `unsubscribe` events but the handler drops them — only `bounce` writes to DB.
+- **No marketing/announcement/newsletter category.** Confirmed by grep: zero matches across all email code paths.
+
+### What's already half-built
+
+- **Mailtrap `bulk` stream awareness.** Schema enum at `mailtrapWebhook.ts:25` knows `'transactional' | 'bulk'` but no code path selects the bulk stream when calling Mailtrap's API. Half a feature flag away from a working bulk-stream path.
+- **Provider abstraction is clean.** `EmailDeliveryService` interface at `packages/emails/src/types/types.ts:17` — a marketing ESP can be slotted in as a third implementation alongside Mailjet/Mailtrap without touching call sites.
+- **MX-record gating** (`sendEmail.ts:66-82`) — cheap deliverability hygiene that's nice to keep for marketing too.
+- **Hard-bounce suppression list** (`undeliverable_email_address` table) — works for transactional, will need partitioning for per-category marketing suppression.
+
+### Six things to add for marketing channel (ordered by criticality)
+
+1. Distinct sending subdomain + second sender identity beside `notificationsSender`.
+2. Mailtrap `bulk` stream path (flag plumbed through `Email` type + Mailtrap request body) — OR a second ESP.
+3. `userEmailPreferences { userId, category, status, updatedAt }` table + `canMarketingEmailBeDelivered(db, userId, category)` predicate.
+4. RFC 8058 `List-Unsubscribe` + `List-Unsubscribe-Post: List-Unsubscribe=One-Click` headers in DKIM-signed scope. Public `/unsubscribe?token=…` route that flips the preference.
+5. Honor Mailtrap webhook events beyond `bounce` (currently `spam` / `unsubscribe` / `open` / `click` all dropped).
+6. Separate `platform/send-marketing-email` Inngest event with batched-send semantics — current 10/min throttle is far too slow for a campaign.
+
+</details>
+
+---
+
+## Sources
+
+- Competitor recon: [`research/competitor-comms-audit-2026-05-28.md`](competitor-comms-audit-2026-05-28.md)
+- Email best practices: [`research/email-infra-recommendation-2026-05-28.md`](email-infra-recommendation-2026-05-28.md)
+- Platform email audit: [`research/platform-email-audit-2026-05-28.md`](platform-email-audit-2026-05-28.md)
+- Voice spec (canon): [`src/voice/infinex.ts`](../src/voice/infinex.ts) — locked tempi at line 342
+- Character sheet: [`research/infinex-character-sheet.md`](infinex-character-sheet.md)
+- Validator rules (current): [`src/validator.ts`](../src/validator.ts)
+
+</script>
+
+<script>
+(function(){
+  var src = document.getElementById('md-source').textContent;
+  function render(){
+    if (typeof marked.parse !== 'function') return;
+    var out = document.getElementById('content');
+    out.innerHTML = marked.parse(src, { mangle: false, headerIds: true });
+    // Auto-id anchors on h2/h3 for sticky-trail navigation
+    out.querySelectorAll('h2,h3').forEach(function(h){
+      if (h.id) return;
+      h.id = h.textContent.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+    });
+  }
+  if (window.marked) render();
+  else {
+    var poll = setInterval(function(){
+      if (window.marked) { clearInterval(poll); render(); }
+    }, 30);
+    setTimeout(function(){
+      clearInterval(poll);
+      if (!document.getElementById('content').innerHTML || document.getElementById('content').innerHTML === 'Loading…') {
+        document.getElementById('content').innerHTML = '<p>marked.js failed to load (offline?). Open the .md sources directly.</p>';
+      }
+    }, 5000);
+  }
+})();
+</script>
+</body>
+</html>

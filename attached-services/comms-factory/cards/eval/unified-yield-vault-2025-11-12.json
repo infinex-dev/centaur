@@ -1,0 +1,20 @@
+{
+  "id": "unified-yield-vault-2025-11-12",
+  "title": "The Infinex yield vault is live",
+  "ship_date": "2025-11-12",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "A single vault routes deposits across multiple yield sources",
+    "Allocations rebalance automatically based on observed rates and risk parameters",
+    "Each rebalance is logged with the reason it was made",
+    "Users can read why every allocation change happened",
+    "Deposits and withdrawals settle to the same Infinex account that holds spot and perps balances",
+    "The vault is non-custodial; user funds remain under the user's passkey"
+  ],
+  "kind": "launch-tier",
+  "headline": "The vault is live.",
+  "subhead": "One deposit. Multiple yield sources. Every rebalance comes with the reason it was made.",
+  "tier_reason": "First Infinex product where the agent doing the work is legible to the user. The pattern — autonomous allocator + readable rationale — is the template for everything agentic that ships after. Reserved-template because the precedent matters more than the APY.",
+  "through_action": "to make agent-driven allocation feel readable instead of opaque",
+  "lining": "on the surface: a yield vault. underneath: the first time a DeFi strategy showed its work in the same surface where it traded."
+}

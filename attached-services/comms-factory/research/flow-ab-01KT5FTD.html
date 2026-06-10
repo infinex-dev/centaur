@@ -1,0 +1,338 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Flow A/B — inwards-out vs outwards-in (01KT5FTD)</title>
+<style>
+:root { --bg:#0e1014; --panel:#161a21; --line:#2a313e; --text:#d7dce4; --dim:#8b93a1; --acc:#5c8ddb; --green:#3fb96a; --yellow:#d9a93d; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font:14px/1.55 -apple-system, Inter, sans-serif; padding-bottom:80px; }
+header { position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line); padding:13px 28px; z-index:5; display:flex; gap:18px; align-items:center; }
+h1 { font-size:15px; margin:0; }
+header .dim { color:var(--dim); font-size:13px; }
+button.export { margin-left:auto; background:var(--acc); color:#fff; border:none; border-radius:6px; padding:7px 14px; cursor:pointer; }
+section { margin:26px 28px; }
+h2 { font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin:0 0 10px; }
+.cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.col { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:14px; }
+.col-h { font-size:13px; font-weight:600; margin-bottom:10px; color:var(--acc); }
+.dim { color:var(--dim); font-weight:400; }
+.item { border-top:1px solid var(--line); padding:10px 0; }
+.item-h { font-size:11px; color:var(--dim); margin-bottom:6px; }
+pre { margin:0; white-space:pre-wrap; word-wrap:break-word; font:13px/1.6 "SF Mono", ui-monospace, monospace; color:#e8ecf2; max-height:340px; overflow-y:auto; }
+.seg { border-left:2px solid var(--line); padding-left:10px; margin:8px 0; }
+.seg-h { font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--acc); margin-bottom:3px; }
+.opnote { margin-top:9px; background:rgba(217,169,61,.07); border:1px solid rgba(217,169,61,.35); border-radius:7px; padding:8px 11px; font-size:12.5px; line-height:1.5; color:#e6d9b8; white-space:pre-wrap; }
+.opnote span { display:block; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--yellow); margin-bottom:3px; }
+.pref { display:flex; gap:8px; align-items:center; margin-top:10px; flex-wrap:wrap; }
+.pref-label { font-size:12px; color:var(--dim); }
+.pref button { background:transparent; border:1px solid var(--line); color:var(--dim); border-radius:7px; padding:6px 12px; cursor:pointer; font-size:13px; }
+.pref button.sel { background:rgba(92,141,219,.15); border-color:var(--acc); color:var(--acc); }
+.pref input { flex:1; min-width:240px; background:var(--bg); border:1px solid var(--line); border-radius:7px; color:var(--text); padding:7px 11px; font-size:13px; }
+.pref input:focus { outline:none; border-color:var(--acc); }
+</style></head><body>
+<header><h1>Flow A/B — same card, same channel</h1><span class="dim">A = inwards-out (tweet→blog) · B = outwards-in (blog→tweet)</span><span class="dim" id="done">0/7 judged</span><button class="export" onclick="exp()">Export JSON</button></header>
+<section id="ch-blog">
+  <h2>blog</h2>
+  <div class="cols">
+    <div class="col"><div class="col-h">A · inwards-out <span class="dim">(tweet→blog, attempts 1–3)</span></div><div class="item"><div class="item-h">attempt 1</div><pre># Hyperliquid Spot V1 is live in Infinex Perps
+
+For a while, spot trading in Infinex meant swaps — routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.
+
+Hyperliquid Spot V1 is Infinex&#x27;s first CLOB spot order book. CLOB stands for Central Limit Order Book — the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.
+
+What&#x27;s live today:
+
+- **24 spot markets**, all USDC-quoted, with more than $100K in daily volume each
+- Market, limit, and post-only orders; modify and cancel by order ID
+- Real-time order book rendered live in the Infinex UI
+- Account spot balances and trade history visible in the same unified account you use for perps
+
+The volume is real. HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC — the default market in the app, and the one we use for testing — at $8M.
+
+Access requires a unified account; if you&#x27;ve been trading perps in Infinex, you already qualify. Switch to spot inside the app, pick a market, and you&#x27;re looking at a live order book.
+
+Start at perps.app.infinex.xyz — navigate to any spot market via /hyperliquid/spot/{BASE}/USDC, or open PURR/USDC directly at /hyperliquid/spot/PURR/USDC.</pre><div class="opnote"><span>your note</span>i think with this one the facts from the grounder was very specific to hyperliquid spot, so yes it made a claim about curve finance and jupiter - rather than swidge (with access to 20 odd providers). a) the director should have spotted these problems and b, if no reasonable facts exist in the card that could fill this hole, it should hand back to the grounder to find more facts so it&#x27;s specific. specificity is the key. also is it clear that hyperliquid clob is an onchain orderbook or is it offchain settlement? needs answering. also is the director for blogs both looking at the whole thread, then breaking it down into beats or paragraphs to see whether every beat also passes? there are more markets in hyperliquid spot than 24. but 24 is why subjectively are tradable (Above 100k vol each day). its best therefore to name the markets rather than naming the amount of markets. &quot;the volume is real&quot; -&gt; marketing copy, near. the feault market in the app is weird copy and why does someone need to know we use it for testing? unifieid account is a feature that becomes active at the same time as we&#x27;re releasing spot. maybe the grounder should do more research on the unified account change in the hyperliquid docs to explain what&#x27;s going on. fwiw to me it makes sense to default to the highest volume market, not purr. also why did it do 3 attempts if it was passed firs time?</div></div><div class="item"><div class="item-h">attempt 2</div><pre># Hyperliquid Spot V1 is live in Infinex Perps
+
+For a while, spot trading in Infinex meant swaps, routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.
+
+Hyperliquid Spot V1 is Infinex&#x27;s first CLOB spot order book. CLOB stands for Central Limit Order Book, the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.
+
+What&#x27;s live today:
+
+- **24 spot markets**, all USDC-quoted, with more than $100K in daily volume each
+- Market, limit, and post-only orders; modify and cancel by order ID
+- Real-time order book rendered live in the Infinex UI
+- Account spot balances and trade history visible in the same unified account you use for perps
+
+The volume is real. HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC, the default market in the app and the one we use for testing, at $8M.
+
+Access requires a unified account; if you&#x27;ve been trading perps in Infinex, you already qualify. Switch to spot inside the app, pick a market, and you&#x27;re looking at a live order book.
+
+Start at perps.app.infinex.xyz, navigate to any spot market via /hyperliquid/spot/{BASE}/USDC, or open PURR/USDC directly at /hyperliquid/spot/PURR/USDC.</pre><div class="opnote"><span>your note</span>similar notes. lol the hyperbft consensus is interesting but reads to me as a LLM trying to prove how much it knows, and probably based on training data rather than corpus. the actor should definitely be able to request more facts from the grounder, if it feels it needs it. it shouldn&#x27;t be constrained artificially. again the unified account is new.... so that needs to be clear, not sure how we spot this. over indexing on &#x27;live&#x27; there&#x27;s an assumption that of course it&#x27;s live, why would it not be live. who is the audience here?</div></div><div class="item"><div class="item-h">attempt 3</div><pre># Hyperliquid Spot V1 is live in Infinex Perps
+
+For a while, spot trading in Infinex meant swaps, routed through Curve Finance or Jupiter, both AMM-based. Useful, but not an order book. Today that changes.
+
+Hyperliquid Spot V1 is Infinex&#x27;s first CLOB spot order book. CLOB stands for Central Limit Order Book, the same structure that powers every major exchange. Every order you place, every cancel, every trade executes onchain, on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus. There is no bridge. There is no wrapper. The order book is the chain.
+
+What&#x27;s live today:
+
+- **24 spot markets**, all USDC-quoted, with more than $100K in daily volume each
+- Market, limit, and post-only orders; modify and cancel by order ID
+- Real-time order book rendered live in the Infinex UI
+- Account spot balances and trade history visible in the same unified account you use for perps
+
+The volume is real. HYPE/USDC leads at $284M in 24-hour volume. UBTC/USDC follows at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC, the default market in the app and the one we use for testing, at $8M.
+
+Access requires a unified account; if you&#x27;ve been trading perps in Infinex, you already qualify. Switch to spot inside the app, pick a market, and you&#x27;re looking at a live order book.
+
+Start at perps.app.infinex.xyz, navigate to any spot market via /hyperliquid/spot/{BASE}/USDC, or open PURR/USDC directly at /hyperliquid/spot/PURR/USDC.</pre><div class="opnote"><span>your note</span>useful but not an order book? they&#x27;re completely different products lmao. 
+
+on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus. -&gt; this is word slop,  is the agent putting things in the &#x27;did not say&#x27; colum also?</div></div></div>
+    <div class="col"><div class="col-h">B · outwards-in <span class="dim">(blog→tweet, attempts 4–6)</span></div><div class="item"><div class="item-h">attempt 4</div><pre># Hyperliquid Spot V1 is live in Infinex Perps
+
+This is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product — swaps on Curve Finance, swaps on Jupiter — ran through AMMs. This is different: a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus.
+
+The floor is already occupied. Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours. Also live: UBTC/USDC at $61M, UETH/USDC at $20M, USOL/USDC at $9M, PURR/USDC at $8M, and more across the full catalog.
+
+What you can do today: view the full USDC-quoted spot market catalog, watch the live order book, read charts and market data, check your spot balances and history, and place, cancel, or modify market and limit orders.
+
+Access requires a unified account. Switch between spot and perps with the mode button in the app — your last-visited symbol in each mode is preserved.
+
+Perps trading is unaffected. Leverage, margin mode, funding, and perps-specific controls remain exactly where they were.
+
+Trade at perps.app.infinex.xyz</pre></div><div class="item"><div class="item-h">attempt 5</div><pre># Hyperliquid Spot V1 is live in Infinex Perps
+
+This is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product, swaps on Curve Finance and swaps on Jupiter, ran through AMMs. This is different: a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus.
+
+The floor is already occupied. Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours. Also live: UBTC/USDC at $61M, UETH/USDC at $20M, USOL/USDC at $9M, PURR/USDC at $8M, and more across the full catalog.
+
+What you can do today: view the full USDC-quoted spot market catalog, watch the live order book, read charts and market data, check your spot balances and history, and place, cancel, or modify market and limit orders.
+
+Access requires a unified account. Switch between spot and perps with the mode button in the app. Your last-visited symbol in each mode is preserved.
+
+Perps trading is unaffected. Margin settings, funding, and perps-specific controls remain exactly where they were.
+
+Trade at perps.app.infinex.xyz</pre></div><div class="item"><div class="item-h">attempt 6</div><pre># Hyperliquid Spot V1 is live in Infinex Perps
+
+This is the first CLOB spot order book we have shipped. Every prior Infinex spot-adjacent product, swaps on Curve Finance and swaps on Jupiter, ran through AMMs. This is different: a fully onchain Central Limit Order Book, every order and cancel and trade transparent on HyperCore, Hyperliquid&#x27;s L1, with one-block finality via HyperBFT consensus.
+
+The floor is already occupied. Twenty-four markets are live with more than $100K in 24-hour volume. HYPE/USDC is leading at $284M in the last 24 hours. Also live: UBTC/USDC at $61M, UETH/USDC at $20M, USOL/USDC at $9M, PURR/USDC at $8M, and more across the full catalog.
+
+What you can do today: view the full USDC-quoted spot market catalog, watch the live order book, read charts and market data, check your spot balances and history, and place, cancel, or modify market and limit orders.
+
+Access requires a unified account. Switch between spot and perps with the mode button in the app. Your last-visited symbol in each mode is preserved.
+
+Perps trading is unaffected. Margin settings, funding, and perps-specific controls remain exactly where they were.
+
+Trade at perps.app.infinex.xyz</pre></div></div>
+  </div>
+  <div class="pref" data-ch="blog">
+    <span class="pref-label">your call:</span>
+    <button data-v="A">A better</button>
+    <button data-v="B">B better</button>
+    <button data-v="both-fine">both fine</button>
+    <button data-v="both-bad">both bad</button>
+    <input type="text" placeholder="why — name the line that decides it" data-ch="blog">
+  </div>
+</section><section id="ch-carousel">
+  <h2>carousel</h2>
+  <div class="cols">
+    <div class="col"><div class="col-h">A · inwards-out <span class="dim">(tweet→blog, attempts 1–3)</span></div><div class="item"><div class="item-h">attempt 1</div><div class="seg"><div class="seg-h">slide 1 · Spot trading is live</div><pre>Hyperliquid Spot V1 is now in Infinex Perps — our first CLOB spot order book. Not a swap. Not an AMM. A real order book, onchain, in the same app and unified account you already use.</pre></div><div class="seg"><div class="seg-h">slide 2 · 24 live markets</div><pre>24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M. All accessible today.</pre></div><div class="seg"><div class="seg-h">slide 3 · Fully onchain — what that means</div><pre>Every order, cancel, and trade executes on HyperCore — Hyperliquid&#x27;s L1 — with one-block finality. No bridge. No wrapper. The order book is the chain, and it&#x27;s visible in the Infinex UI in real time.</pre></div><div class="seg"><div class="seg-h">slide 4 · Start trading</div><pre>Open perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market. Market and limit orders supported. Your unified account is already set up — no new signup required.</pre></div><div class="opnote"><span>your note</span>why are we calling it hyperliquid spot v1? hyperliquid spot is a thing. this is our v1 of spot implementation. &quot;not a swap. not an amm. a real orderbook&quot; feels near to me. no bridge no wrapper.... all of the spot assets are wrapped lmao. so not sure what this means by no wrapper - maybe again this is something for the grounder to be sent....? same not about unified accounts... have a look at how we launched 7702 wallets, this is simialr, a hyperliquid account upgrade to unified accounts. also &quot;infinex ui&quot; is weird. it should just be infinex.</div></div><div class="item"><div class="item-h">attempt 2</div><div class="seg"><div class="seg-h">slide 1 · Spot trading is live</div><pre>Hyperliquid Spot V1 is now in Infinex Perps. Our first CLOB spot order book. Not a swap. Not an AMM. A real order book, onchain, in the same app and unified account you already use.</pre></div><div class="seg"><div class="seg-h">slide 2 · 24 live markets</div><pre>24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M. All accessible today.</pre></div><div class="seg"><div class="seg-h">slide 3 · What fully onchain means</div><pre>Every order, cancel, and trade executes on HyperCore (Hyperliquid L1) with one-block finality. No bridge. No wrapper. The order book is the chain, and it is visible in the Infinex UI in real time.</pre></div><div class="seg"><div class="seg-h">slide 4 · Start trading</div><pre>Open perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market. Market and limit orders supported. Your unified account is already set up. No new signup required.</pre></div><div class="opnote"><span>your note</span>similar notes.</div></div><div class="item"><div class="item-h">attempt 3</div><div class="seg"><div class="seg-h">slide 1 · Spot trading is live</div><pre>Hyperliquid Spot V1 is now in Infinex Perps. Our first CLOB spot order book. Not a swap. Not an AMM. A real order book, onchain, in the same app and unified account you already use.</pre></div><div class="seg"><div class="seg-h">slide 2 · 24 live markets</div><pre>24 USDC-quoted spot markets with real volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M. All accessible today.</pre></div><div class="seg"><div class="seg-h">slide 3 · What fully onchain means</div><pre>Every order, cancel, and trade executes on HyperCore (Hyperliquid L1) with one-block finality. No bridge. No wrapper. The order book is the chain, and it is visible in the Infinex UI in real time.</pre></div><div class="seg"><div class="seg-h">slide 4 · Start trading</div><pre>Open perps.app.infinex.xyz and switch to spot. PURR/USDC is the default market. Market and limit orders supported. Your unified account is already set up. No new signup required.</pre></div></div></div>
+    <div class="col"><div class="col-h">B · outwards-in <span class="dim">(blog→tweet, attempts 4–6)</span></div><div class="item"><div class="item-h">attempt 4</div><div class="seg"><div class="seg-h">slide 1 · Hyperliquid Spot V1 is live</div><pre>For the first time in Infinex, you are trading on a fully onchain CLOB — a Central Limit Order Book, not a swap or AMM. Every order, cancel, and trade is transparent on HyperCore with one-block finality.</pre></div><div class="seg"><div class="seg-h">slide 2 · 24 markets. Real volume.</div><pre>Twenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. The floor is already occupied.</pre></div><div class="seg"><div class="seg-h">slide 3 · What you can do</div><pre>View the live order book, browse USDC-quoted markets, read charts, check spot balances, and place or modify market and limit orders. Requires a unified account.</pre></div><div class="seg"><div class="seg-h">slide 4 · Trade at perps.app.infinex.xyz</div><pre>Switch between spot and perps inside the app. Your last-visited symbol in each mode is preserved. The door is open.</pre></div></div><div class="item"><div class="item-h">attempt 5</div><div class="seg"><div class="seg-h">slide 1 · Hyperliquid Spot V1 is live</div><pre>For the first time in Infinex, you are trading on a fully onchain CLOB. A Central Limit Order Book, not a swap or AMM. Every order, cancel, and trade is transparent on HyperCore with one-block finality.</pre></div><div class="seg"><div class="seg-h">slide 2 · 24 markets. Real volume.</div><pre>Twenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. The floor is already occupied.</pre></div><div class="seg"><div class="seg-h">slide 3 · What you can do</div><pre>View the live order book, browse USDC-quoted markets, read charts, check spot balances, and place or modify market and limit orders. Requires a unified account.</pre></div><div class="seg"><div class="seg-h">slide 4 · Trade at perps.app.infinex.xyz</div><pre>Switch between spot and perps inside the app. Your last-visited symbol in each mode is preserved. The door is open.</pre></div></div><div class="item"><div class="item-h">attempt 6</div><div class="seg"><div class="seg-h">slide 1 · Hyperliquid Spot V1 is live</div><pre>For the first time in Infinex, you are trading on a fully onchain CLOB. A Central Limit Order Book, not a swap or AMM. Every order, cancel, and trade is transparent on HyperCore with one-block finality.</pre></div><div class="seg"><div class="seg-h">slide 2 · 24 markets. Real volume.</div><pre>Twenty-four markets with over $100K in 24-hour volume. HYPE/USDC leads at $284M daily. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. The floor is already occupied.</pre></div><div class="seg"><div class="seg-h">slide 3 · What you can do</div><pre>View the live order book, browse USDC-quoted markets, read charts, check spot balances, and place or modify market and limit orders. Requires a unified account.</pre></div><div class="seg"><div class="seg-h">slide 4 · Trade at perps.app.infinex.xyz</div><pre>Switch between spot and perps inside the app. Your last-visited symbol in each mode is preserved. The door is open.</pre></div></div></div>
+  </div>
+  <div class="pref" data-ch="carousel">
+    <span class="pref-label">your call:</span>
+    <button data-v="A">A better</button>
+    <button data-v="B">B better</button>
+    <button data-v="both-fine">both fine</button>
+    <button data-v="both-bad">both bad</button>
+    <input type="text" placeholder="why — name the line that decides it" data-ch="carousel">
+  </div>
+</section><section id="ch-in-product">
+  <h2>in-product</h2>
+  <div class="cols">
+    <div class="col"><div class="col-h">A · inwards-out <span class="dim">(tweet→blog, attempts 1–3)</span></div><div class="item"><div class="item-h">attempt 1</div><pre>Hyperliquid Spot — fully onchain order book, live now.</pre></div><div class="item"><div class="item-h">attempt 2</div><pre>Hyperliquid Spot: fully onchain order book, live now.</pre><div class="opnote"><span>your note</span>good.</div></div><div class="item"><div class="item-h">attempt 3</div><pre>Hyperliquid Spot: fully onchain order book, live now.</pre></div></div>
+    <div class="col"><div class="col-h">B · outwards-in <span class="dim">(blog→tweet, attempts 4–6)</span></div><div class="item"><div class="item-h">attempt 4</div><pre>Spot markets now available — switch to spot to trade the live Hyperliquid order book.</pre></div><div class="item"><div class="item-h">attempt 5</div><pre>Spot markets live. Switch to spot to trade the Hyperliquid order book.</pre><div class="opnote"><span>your note</span>good.</div></div><div class="item"><div class="item-h">attempt 6</div><pre>Spot markets live. Switch to spot to trade the Hyperliquid order book.</pre></div></div>
+  </div>
+  <div class="pref" data-ch="in-product">
+    <span class="pref-label">your call:</span>
+    <button data-v="A">A better</button>
+    <button data-v="B">B better</button>
+    <button data-v="both-fine">both fine</button>
+    <button data-v="both-bad">both bad</button>
+    <input type="text" placeholder="why — name the line that decides it" data-ch="in-product">
+  </div>
+</section><section id="ch-modal">
+  <h2>modal</h2>
+  <div class="cols">
+    <div class="col"><div class="col-h">A · inwards-out <span class="dim">(tweet→blog, attempts 1–3)</span></div><div class="item"><div class="item-h">attempt 1</div><pre>Spot trading is now available in Infinex Perps.
+
+You&#x27;re looking at Hyperliquid&#x27;s fully onchain CLOB order book — every order and trade settled on HyperCore with one-block finality. Market and limit orders supported.
+
+Your unified account is already set up for spot. Pick a market and start.</pre><div class="opnote"><span>your note</span>good.</div></div><div class="item"><div class="item-h">attempt 2</div><pre>Spot trading is now available in Infinex Perps.
+
+Hyperliquid&#x27;s fully onchain CLOB order book. Every order and trade settles on HyperCore with one-block finality. Market and limit orders supported.
+
+Your unified account is already set up for spot. Pick a market and start.</pre></div><div class="item"><div class="item-h">attempt 3</div><pre>Spot trading is now available in Infinex Perps.
+
+Fully onchain CLOB order book on HyperCore. One-block finality. Market and limit orders supported.
+
+Your unified account is already set up for spot. Pick a market and start.</pre></div></div>
+    <div class="col"><div class="col-h">B · outwards-in <span class="dim">(blog→tweet, attempts 4–6)</span></div><div class="item"><div class="item-h">attempt 4</div><pre>Hyperliquid Spot V1 is now available in Infinex Perps — our first onchain CLOB spot order book, with 24 live markets and HYPE/USDC leading at $284M in daily volume.
+
+Spot trading requires a unified account. Switch modes using the button at the top of the app.
+
+Explore spot markets →</pre><div class="opnote"><span>your note</span>question again about v1.. it&#x27;s our v1 implementaition.</div></div><div class="item"><div class="item-h">attempt 5</div><pre>Hyperliquid Spot V1 is live in Infinex Perps. Our first onchain CLOB spot order book. 24 markets, HYPE/USDC at $284M daily.
+
+Requires a unified account. Switch modes with the button at the top of the app.
+
+Explore spot markets →</pre></div><div class="item"><div class="item-h">attempt 6</div><pre>Hyperliquid Spot V1 is live in Infinex Perps. Our first onchain CLOB spot order book. 24 markets, HYPE/USDC at $284M daily.
+
+Requires a unified account. Switch modes with the button at the top of the app.
+
+Explore spot markets →</pre></div></div>
+  </div>
+  <div class="pref" data-ch="modal">
+    <span class="pref-label">your call:</span>
+    <button data-v="A">A better</button>
+    <button data-v="B">B better</button>
+    <button data-v="both-fine">both fine</button>
+    <button data-v="both-bad">both bad</button>
+    <input type="text" placeholder="why — name the line that decides it" data-ch="modal">
+  </div>
+</section><section id="ch-web">
+  <h2>web</h2>
+  <div class="cols">
+    <div class="col"><div class="col-h">A · inwards-out <span class="dim">(tweet→blog, attempts 1–3)</span></div><div class="item"><div class="item-h">attempt 1</div><pre>Infinex Perps
+Spot trading, now live on Infinex
+24 markets. Fully onchain order book.</pre><div class="opnote"><span>your note</span>the 24 markets is not technically correct, there&#x27;s a lot more. Hyperliquid is probably a better call out. What&#x27;s the difference between spot trading in swidge vs clob? aren&#x27;t they both spot? so it&#x27;s more spot order books, no on Infinex.</div></div><div class="item"><div class="item-h">attempt 2</div><pre>Infinex Perps
+Spot trading, now live on Infinex
+24 markets. Fully onchain order book.</pre></div><div class="item"><div class="item-h">attempt 3</div><pre>Infinex Perps
+Spot trading, now live on Infinex
+24 markets. Fully onchain order book.</pre></div></div>
+    <div class="col"><div class="col-h">B · outwards-in <span class="dim">(blog→tweet, attempts 4–6)</span></div><div class="item"><div class="item-h">attempt 4</div><pre>Infinex Perps
+Spot trading on a live onchain order book
+24 markets. HYPE/USDC at $284M daily.</pre></div><div class="item"><div class="item-h">attempt 5</div><pre>Infinex Perps
+Spot trading on a live onchain order book
+24 markets. HYPE/USDC at $284M daily.</pre></div><div class="item"><div class="item-h">attempt 6</div><pre>Infinex Perps
+Spot trading on a live onchain order book
+24 markets. HYPE/USDC at $284M daily.</pre></div></div>
+  </div>
+  <div class="pref" data-ch="web">
+    <span class="pref-label">your call:</span>
+    <button data-v="A">A better</button>
+    <button data-v="B">B better</button>
+    <button data-v="both-fine">both fine</button>
+    <button data-v="both-bad">both bad</button>
+    <input type="text" placeholder="why — name the line that decides it" data-ch="web">
+  </div>
+</section><section id="ch-x">
+  <h2>x</h2>
+  <div class="cols">
+    <div class="col"><div class="col-h">A · inwards-out <span class="dim">(tweet→blog, attempts 1–3)</span></div><div class="item"><div class="item-h">attempt 1</div><pre>Hyperliquid Spot is live in Infinex Perps — our first CLOB spot order book.
+
+Fully onchain. 24 markets. HYPE/USDC leading at $284M daily volume.
+
+Same unified account as your perps. perps.app.infinex.xyz</pre></div><div class="item"><div class="item-h">attempt 2</div><pre>Hyperliquid Spot is live in Infinex Perps. Our first CLOB spot order book.
+
+Fully onchain. 24 markets. HYPE/USDC leading at $284M daily volume.
+
+Same unified account as your perps. perps.app.infinex.xyz</pre><div class="opnote"><span>your note</span>same note about the markets. there&#x27;s more than 24 markets.</div></div><div class="item"><div class="item-h">attempt 3</div><pre>Hyperliquid Spot is live in Infinex Perps. Our first CLOB spot order book.
+
+Fully onchain. 24 markets. HYPE/USDC leading at $284M daily volume.
+
+Same unified account as your perps. perps.app.infinex.xyz</pre></div></div>
+    <div class="col"><div class="col-h">B · outwards-in <span class="dim">(blog→tweet, attempts 4–6)</span></div><div class="item"><div class="item-h">attempt 4</div><pre>Hyperliquid Spot V1 is live in Infinex Perps — our first onchain CLOB spot order book. 24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz</pre></div><div class="item"><div class="item-h">attempt 5</div><pre>Hyperliquid Spot V1 is live in Infinex Perps. Our first onchain CLOB spot order book. 24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz</pre><div class="opnote"><span>your note</span>regex should start failing things with links in the *first* tweet, as X algo will kill it</div></div><div class="item"><div class="item-h">attempt 6</div><pre>Hyperliquid Spot V1 is live in Infinex Perps. Our first onchain CLOB spot order book. 24 markets, HYPE/USDC leading at $284M daily. perps.app.infinex.xyz</pre><div class="opnote"><span>your note</span>v1 shouldn&#x27;t be in a tweet, that&#x27;s a product changelog type thing.</div></div></div>
+  </div>
+  <div class="pref" data-ch="x">
+    <span class="pref-label">your call:</span>
+    <button data-v="A">A better</button>
+    <button data-v="B">B better</button>
+    <button data-v="both-fine">both fine</button>
+    <button data-v="both-bad">both bad</button>
+    <input type="text" placeholder="why — name the line that decides it" data-ch="x">
+  </div>
+</section><section id="ch-x-thread">
+  <h2>x-thread</h2>
+  <div class="cols">
+    <div class="col"><div class="col-h">A · inwards-out <span class="dim">(tweet→blog, attempts 1–3)</span></div><div class="item"><div class="item-h">attempt 1</div><div class="seg"><div class="seg-h">tweet 1</div><pre>Hyperliquid Spot is live in Infinex Perps.
+
+This is our first CLOB spot order book — not a swap, not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.
+
+Same app. Same unified account. New market structure. 🧵</pre></div><div class="seg"><div class="seg-h">tweet 2</div><pre>24 spot markets live, all USDC-quoted.
+
+HYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.
+
+Every order, cancel, and trade is onchain — not a bridge, not a wrapper. HyperCore handles it.</pre></div><div class="seg"><div class="seg-h">tweet 3</div><pre>Start at perps.app.infinex.xyz → open the spot tab → PURR/USDC is the default market.
+
+Market and limit orders supported. Your perps account already qualifies.</pre></div><div class="opnote"><span>your note</span>can&#x27;t really see the different tweet start and finish.</div></div><div class="item"><div class="item-h">attempt 2</div><div class="seg"><div class="seg-h">tweet 1</div><pre>Hyperliquid Spot is live in Infinex Perps. This is our first CLOB spot order book. Not a swap. Not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.
+
+Same app. Same unified account. New market structure.</pre></div><div class="seg"><div class="seg-h">tweet 2</div><pre>24 spot markets live, all USDC-quoted.
+
+HYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.
+
+Every order, cancel, and trade is onchain. HyperCore handles it.</pre></div><div class="seg"><div class="seg-h">tweet 3</div><pre>Start at perps.app.infinex.xyz, open the spot tab, and PURR/USDC is the default market.
+
+Market and limit orders supported. Your perps account already qualifies.</pre></div></div><div class="item"><div class="item-h">attempt 3</div><div class="seg"><div class="seg-h">tweet 1</div><pre>Hyperliquid Spot is live in Infinex Perps. This is our first CLOB spot order book. Not a swap. Not an AMM. A real order book, fully onchain on HyperCore, with one-block finality.
+
+Same app. Same unified account. New market structure.</pre></div><div class="seg"><div class="seg-h">tweet 2</div><pre>24 spot markets live, all USDC-quoted.
+
+HYPE/USDC: $284M daily volume. UBTC/USDC: $61M. UETH/USDC: $20M. USOL/USDC: $9M. PURR/USDC: $8M.
+
+Every order, cancel, and trade is onchain. HyperCore handles it.</pre></div><div class="seg"><div class="seg-h">tweet 3</div><pre>Start at perps.app.infinex.xyz, open the spot tab, and PURR/USDC is the default market.
+
+Market and limit orders supported. Your perps account already qualifies.</pre></div><div class="opnote"><span>your note</span>already qualifies for what? weird parlance. a sonnet issue probably, but should be caught as weird.</div></div></div>
+    <div class="col"><div class="col-h">B · outwards-in <span class="dim">(blog→tweet, attempts 4–6)</span></div><div class="item"><div class="item-h">attempt 4</div><div class="seg"><div class="seg-h">tweet 1</div><pre>Hyperliquid Spot V1 is live in Infinex Perps.
+
+This is the first CLOB spot order book we have shipped. Previous Infinex spot products were AMM-based swaps. This is an onchain limit order book — every order transparent, one-block finality on HyperCore.</pre></div><div class="seg"><div class="seg-h">tweet 2</div><pre>The floor is already occupied.
+
+24 markets live with &gt;$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.
+
+All USDC-quoted. Requires a unified account.</pre></div><div class="seg"><div class="seg-h">tweet 3</div><pre>Place and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.
+
+perps.app.infinex.xyz</pre></div><div class="opnote"><span>your note</span>&quot;the floor is already occupied&quot; what the fuck kind of sentence is this. 
+
+requries a unfied account.... OK... they do they have one? fuck me.</div></div><div class="item"><div class="item-h">attempt 5</div><div class="seg"><div class="seg-h">tweet 1</div><pre>Hyperliquid Spot V1 is live in Infinex Perps. This is the first CLOB spot order book we have shipped. Previous Infinex spot products were AMM-based swaps. This is an onchain limit order book. Every order is transparent with one-block finality on HyperCore.</pre></div><div class="seg"><div class="seg-h">tweet 2</div><pre>The floor is already occupied. 24 markets live with &gt;$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.
+
+All USDC-quoted. Requires a unified account.</pre></div><div class="seg"><div class="seg-h">tweet 3</div><pre>Place and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.
+
+perps.app.infinex.xyz</pre></div><div class="opnote"><span>your note</span>name the fucing previous infinex amm product. it&#x27;s dumb to not. this should be fixed with either the actor / director requestion more specificity (more facts)</div></div><div class="item"><div class="item-h">attempt 6</div><div class="seg"><div class="seg-h">tweet 1</div><pre>Hyperliquid Spot V1 is live in Infinex Perps. This is the first CLOB spot order book we have shipped. Previous Infinex spot products were AMM-based swaps. This is an onchain limit order book. Every order is transparent with one-block finality on HyperCore.</pre></div><div class="seg"><div class="seg-h">tweet 2</div><pre>The floor is already occupied. 24 markets live with &gt;$100K 24h volume. HYPE/USDC at $284M. UBTC/USDC at $61M. UETH/USDC at $20M. USOL/USDC at $9M. PURR/USDC at $8M.
+
+All USDC-quoted. Requires a unified account.</pre></div><div class="seg"><div class="seg-h">tweet 3</div><pre>Place and modify market or limit orders on the Hyperliquid spot order book, inside Infinex Perps.
+
+perps.app.infinex.xyz</pre></div><div class="opnote"><span>your note</span>this is just very unsexy. it&#x27;s neither feeling led, nor is there much excitement. it just feels... not great. like the parts are there, but the whole is not.</div></div></div>
+  </div>
+  <div class="pref" data-ch="x-thread">
+    <span class="pref-label">your call:</span>
+    <button data-v="A">A better</button>
+    <button data-v="B">B better</button>
+    <button data-v="both-fine">both fine</button>
+    <button data-v="both-bad">both bad</button>
+    <input type="text" placeholder="why — name the line that decides it" data-ch="x-thread">
+  </div>
+</section>
+<script>
+const KEY = "flow-ab-01KT5FTD";
+const st = JSON.parse(localStorage.getItem(KEY) || "{}");
+document.querySelectorAll(".pref").forEach(p => {
+  const ch = p.dataset.ch;
+  const btns = p.querySelectorAll("button");
+  const inp = p.querySelector("input");
+  if (st[ch]?.notes) inp.value = st[ch].notes;
+  const paint = () => btns.forEach(b => b.classList.toggle("sel", st[ch]?.verdict === b.dataset.v));
+  paint();
+  btns.forEach(b => b.onclick = () => {
+    st[ch] = st[ch] || {};
+    st[ch].verdict = st[ch].verdict === b.dataset.v ? null : b.dataset.v;
+    localStorage.setItem(KEY, JSON.stringify(st)); paint(); tally();
+  });
+  inp.oninput = () => { st[ch] = st[ch] || {}; st[ch].notes = inp.value; localStorage.setItem(KEY, JSON.stringify(st)); };
+});
+function tally() {
+  const n = Object.values(st).filter(x => x.verdict).length;
+  document.getElementById("done").textContent = n + "/7 judged";
+}
+tally();
+function exp() {
+  const blob = new Blob([JSON.stringify(st, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = "flow-ab-01KT5FTD.json"; a.click();
+}
+</script></body></html>

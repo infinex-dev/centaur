@@ -1,0 +1,28 @@
+[a-] run_started: Actor/Director run started for x, web, in-product
+[a1] actor_started: Actor attempt 1 started
+[a1] actor_completed: Actor attempt 1 returned 9 candidate option(s)
+[a1/x] script_validation_completed: x script validation passed
+[a1/x] director_started: x sent to blind Director
+[a1/x] director_completed: x Director passed as commanding
+[a1/x] script_validation_completed: x script validation passed
+[a1/x] director_started: x sent to blind Director
+[a1/x] director_completed: x Director passed as commanding
+[a1/x] script_validation_completed: x script validation passed
+[a1/x] director_started: x sent to blind Director
+[a1/x] director_completed: x Director passed as commanding
+[a1/web] script_validation_completed: web script validation failed
+[a1/web] script_validation_completed: web script validation passed
+[a1/web] director_started: web sent to blind Director
+[a1/web] director_completed: web Director passed as commanding
+[a1/web] script_validation_completed: web script validation passed
+[a1/web] director_started: web sent to blind Director
+[a1/web] director_completed: web Director passed as commanding
+[a1/in-product] script_validation_completed: in-product script validation failed
+[a1/in-product] script_validation_completed: in-product script validation passed
+[a1/in-product] director_started: in-product sent to blind Director
+[a1/in-product] director_completed: in-product Director passed as self-contained
+[a1/in-product] script_validation_completed: in-product script validation passed
+[a1/in-product] director_started: in-product sent to blind Director
+[a1/in-product] director_completed: in-product Director passed as self-contained
+[a1] attempt_completed: Attempt 1 completed with 3/3 channel pick(s)
+[a-] run_completed: Actor/Director run completed

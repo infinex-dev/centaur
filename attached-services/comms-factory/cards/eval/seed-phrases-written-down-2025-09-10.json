@@ -1,0 +1,17 @@
+{
+  "id": "seed-phrases-written-down-2025-09-10",
+  "title": "Seed phrases written down by Infinex users: still zero",
+  "ship_date": "2025-09-10",
+  "audience": ["x"],
+  "deployed_facts": [
+    "Infinex accounts have never required a seed phrase",
+    "Recovery runs through passkey providers, not paper backups",
+    "The number of seed phrases users have had to write down since the account launched is zero",
+    "This number is not expected to change"
+  ],
+  "kind": "data-card-wry",
+  "metric": "seed phrases written down by Infinex users",
+  "value": 0,
+  "unit": "phrases",
+  "joke_angle": "the metric is technically true, technically silly, and quietly the whole point. The chrome of a data card applied to the number that defines the product is the joke."
+}

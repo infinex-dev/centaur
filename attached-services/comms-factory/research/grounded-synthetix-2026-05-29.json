@@ -1,0 +1,156 @@
+{
+  "facts": [
+    {
+      "category": "partner",
+      "claim": "Synthetix is the perps trading protocol provider for Infinex (alongside Hyperliquid and Lighter)",
+      "value": "Synthetix",
+      "source": "platform-code",
+      "source_ref": "packages/types/src/perps/domain/common.ts:9 — ExchangeId = 'hyperliquid' | 'synthetix' | 'lighter' | 'mock'",
+      "confidence": 0.98,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Synthetix perps integration is present in the Infinex platform codebase (provider config, balance hooks, deposit/withdrawal routing all implemented)",
+      "value": "Synthetix perps code is fully landed in the Infinex platform codebase",
+      "source": "platform-code",
+      "source_ref": "packages/web-shared/src/lib/perps-providers/index.ts:101–121; packages/web-shared/src/api/perps/useSynthetixBalance.ts; workers/main/src/trpc_v2/routers/perps/withdraw.ts:325–328",
+      "confidence": 0.98,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Synthetix perps in Infinex: collateral token",
+      "value": "USDT (Tether, Ethereum mainnet, address 0xdAC17F958D2ee523a2206206994597C13D831ec7)",
+      "source": "platform-code",
+      "source_ref": "packages/web-shared/src/lib/perps-providers/index.ts:108–114",
+      "confidence": 0.99,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "chain",
+      "claim": "Synthetix perps in Infinex: settlement chain",
+      "value": "Ethereum mainnet (chainId 1)",
+      "source": "platform-code",
+      "source_ref": "packages/web-shared/src/lib/perps-providers/index.ts:103,107 — chain: 'ethereum', chainId: ETHEREUM_CHAIN_ID (1)",
+      "confidence": 0.99,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "number",
+      "claim": "Synthetix perps in Infinex: minimum deposit (USD)",
+      "value": "50",
+      "source": "platform-code",
+      "source_ref": "packages/main-service-contract/src/v2/server/perps/limits.ts:12 — SYNTHETIX_MIN_DEPOSIT = 50",
+      "confidence": 0.99,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "number",
+      "claim": "Synthetix perps in Infinex: minimum withdrawal (USD)",
+      "value": "50",
+      "source": "platform-code",
+      "source_ref": "packages/main-service-contract/src/v2/server/perps/limits.ts:13 — SYNTHETIX_MIN_WITHDRAWAL = 50",
+      "confidence": 0.99,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Synthetix perps in Infinex: deposit method",
+      "value": "Direct USDT deposits only — no swidge (cross-asset swap/bridge). directDepositOnly: true in platform config.",
+      "source": "platform-code",
+      "source_ref": "packages/web-shared/src/lib/perps-providers/index.ts:121",
+      "confidence": 0.99,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Synthetix perps: protocol description",
+      "value": "Decentralized derivatives exchange offering perpetual futures contracts on Ethereum Mainnet. All markets are quoted and settled in USDT on-chain. Uses a central limit order book (CLOB). Cross-margin across all positions in a subaccount.",
+      "source": "provider-docs",
+      "source_ref": "https://docs.synthetix.io/trading/overview; https://docs.synthetix.io/trading/markets; https://docs.synthetix.io/trading/orderbook",
+      "confidence": 0.98,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Synthetix perps: listed markets (as of Feb 2026)",
+      "value": "10 markets: BTC-USDT, ETH-USDT, SOL-USDT, XRP-USDT, DOGE-USDT, ZEC-USDT, FARTCOIN-USDT, 1000PEPE-USDT, XMR-USDT, PUMP-USDT",
+      "source": "provider-docs",
+      "source_ref": "https://docs.synthetix.io/trading/markets",
+      "confidence": 0.9,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "number",
+      "claim": "Synthetix perps: maximum leverage for BTC and ETH markets",
+      "value": "50x (for positions up to $20M notional)",
+      "source": "provider-docs",
+      "source_ref": "https://docs.synthetix.io/trading/markets — Risk parameters table: BTC-USDT Max leverage 50×, ETH-USDT Max leverage 50×",
+      "confidence": 0.97,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "number",
+      "claim": "Synthetix perps: maximum leverage across all markets (highest cap)",
+      "value": "50x (BTC-USDT, ETH-USDT, SOL-USDT, XRP-USDT, DOGE-USDT); 25x (ZEC-USDT, 1000PEPE-USDT); 10x (FARTCOIN-USDT, XMR-USDT, PUMP-USDT)",
+      "source": "provider-docs",
+      "source_ref": "https://docs.synthetix.io/trading/markets — Risk parameters by market table",
+      "confidence": 0.97,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Synthetix perps: collateral / settlement token per official docs",
+      "value": "USDT — all markets quoted and settled in USDT on Ethereum Mainnet",
+      "source": "provider-docs",
+      "source_ref": "https://docs.synthetix.io/trading/markets — 'All markets on Synthetix are perpetual futures quoted and settled in USDT on Ethereum Mainnet'",
+      "confidence": 0.99,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Synthetix perps: margin model",
+      "value": "Cross-margin — all positions in a subaccount share a single collateral pool. At 50x leverage, IMR is 2% and MMR is 1%.",
+      "source": "provider-docs",
+      "source_ref": "https://docs.synthetix.io/trading/leverage-margin",
+      "confidence": 0.97,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Synthetix perps: Infinex display name in platform code",
+      "value": "'Synthetix' with description 'Decentralized derivatives exchange'",
+      "source": "platform-code",
+      "source_ref": "packages/web-shared/src/lib/exchanges.ts:34–37; packages/web-shared/src/lib/perps-providers/index.ts:102–103",
+      "confidence": 0.99,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Infinex perps app: existing provider alongside Synthetix",
+      "value": "Hyperliquid (already live in platform; Lighter is also a third provider in codebase)",
+      "source": "platform-code",
+      "source_ref": "packages/types/src/perps/domain/common.ts:9; packages/web-shared/src/lib/exchanges.ts:5–9",
+      "confidence": 0.99,
+      "verified_at": "2026-05-29"
+    },
+    {
+      "category": "product",
+      "claim": "Synthetix perps: estimated deposit settlement time in Infinex",
+      "value": "5 minutes (ESTIMATED_STANDARD_SETTLEMENT_TIME_MIN — slower than Hyperliquid's 2-min fast settlement)",
+      "source": "platform-code",
+      "source_ref": "packages/web-shared/src/lib/perps-providers/index.ts:118 — estimatedDepositTime: ESTIMATED_STANDARD_SETTLEMENT_TIME_MIN (5)",
+      "confidence": 0.95,
+      "verified_at": "2026-05-29"
+    }
+  ],
+  "unverifiable": [
+    {
+      "claim": "Synthetix perps are 'live' / publicly launched inside Infinex (vs. code-landed but behind a feature flag or not yet announced)",
+      "reason": "Platform code is fully implemented (provider config, balance hooks, deposit/withdraw routing all present), but no feature-flag search found an explicit enabled/disabled gate, and the rendered Infinex perps page only showed Hyperliquid data. Cannot confirm from available sources whether Synthetix is user-facing live or still in pre-launch."
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "ground_turns": 15
+}

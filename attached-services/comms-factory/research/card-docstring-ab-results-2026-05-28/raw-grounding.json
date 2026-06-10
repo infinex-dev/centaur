@@ -1,0 +1,242 @@
+[
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "CURRENT",
+    "through_action": "to dissolve the bank-to-wallet boundary",
+    "lining": "on the surface: a new fiat deposit rail. underneath: the bank-vs-wallet wall just stopped existing for Infinex users"
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_A",
+    "through_action": "to eliminate the traditional banking barrier to on-chain entry",
+    "lining": "on the surface: users can now deposit fiat through familiar bank transfers. underneath: the last friction point preventing normies from going on-chain just disappeared"
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_B",
+    "through_action": "to dissolve the onramp",
+    "lining": "on the surface: announcing a new deposit method. underneath: refusing to treat crypto as a separate financial realm that requires special bridges"
+  },
+  {
+    "release_id": "fiat-onramp",
+    "variant_id": "VARIANT_C",
+    "through_action": "to dissolve the boundary between traditional banking and on-chain assets",
+    "lining": "on the surface, a technical integration that converts fiat to USDC; underneath, the erasure of the threshold where most users hesitate"
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "CURRENT",
+    "through_action": "to add MegaETH as a destination chain for Swidge",
+    "lining": "on the surface: Swidge now supports bridging to MegaETH. underneath: the friction of entering a new high-performance chain just disappeared for Infinex users."
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_A",
+    "through_action": "to eliminate friction in reaching MegaETH",
+    "lining": "on the surface: a new chain is supported. underneath: the barrier to MegaETH liquidity just collapsed."
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_B",
+    "through_action": "to dissolve fragmentation",
+    "lining": "on the surface: announcing technical expansion to a new chain. underneath: refusing to treat cross-chain movement as a multi-step ordeal the user must choreograph"
+  },
+  {
+    "release_id": "chain-add-megaeth",
+    "variant_id": "VARIANT_C",
+    "through_action": "to dissolve barriers",
+    "lining": "on the surface, announcing infrastructure expansion; underneath, erasing the hesitation before crossing"
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "CURRENT",
+    "through_action": "to reveal that machines can now optimize yield while showing their work",
+    "lining": "on the surface: AI-powered yield vaults with transparent audit trails. underneath: Infinex just made the machine trustworthy by making it readable"
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_A",
+    "through_action": "to make algorithmic capital allocation legible",
+    "lining": "on the surface: an AI picks yield strategies. underneath: the user can now trust a black box because it shows its work."
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_B",
+    "through_action": "to surface reasoning behind algorithmic decisions",
+    "lining": "on the surface: we've built an AI that optimizes yield across protocols. underneath: we refuse to hide agency behind automation—every algorithmic choice gets explained."
+  },
+  {
+    "release_id": "yield-vault-launch",
+    "variant_id": "VARIANT_C",
+    "through_action": "to grant legibility",
+    "lining": "on the surface, explaining why the machine moved your money; underneath, proving you were never in control"
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "CURRENT",
+    "through_action": "to surface Hyperliquid's orderbook inside the same account",
+    "lining": "on the surface: Hyperliquid spot trading added to Infinex. underneath: exchange walls dissolve—one passkey, one portfolio, multiple orderbooks in the same pane"
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_A",
+    "through_action": "to integrate a third-party orderbook into the unified interface",
+    "lining": "on the surface: a new trading venue becomes available. underneath: the platform demonstrates it can absorb external liquidity sources without fragmenting the user experience"
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_B",
+    "through_action": "to unify fragmentation",
+    "lining": "on the surface: announcing a new integration. underneath: refusing to treat each venue as a separate destination requiring its own login, custody, and interface"
+  },
+  {
+    "release_id": "partnership-spot-hyperliquid",
+    "variant_id": "VARIANT_C",
+    "through_action": "to dissolve boundaries between platforms",
+    "lining": "on the surface, adding another trading venue; underneath, erasing the seams where one system ends and another begins"
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "CURRENT",
+    "through_action": "to reveal that Infinex accounts eliminate seed phrases through passkey portability",
+    "lining": "on the surface: passkey authentication for device portability. underneath: the seed phrase barrier to crypto adoption just disappeared for Infinex users."
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_A",
+    "through_action": "to eliminate the seed phrase barrier to account portability",
+    "lining": "on the surface: passkey authentication enables device portability. underneath: the private key custody problem is abstracted away entirely"
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_B",
+    "through_action": "to eliminate recovery friction",
+    "lining": "on the surface: demonstrating a technical authentication method. underneath: refusing to make users responsible for their own access catastrophe."
+  },
+  {
+    "release_id": "passkey-portable",
+    "variant_id": "VARIANT_C",
+    "through_action": "to liberate access",
+    "lining": "on the surface, eliminating the seed phrase burden; underneath, choosing who gets to participate"
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "CURRENT",
+    "through_action": "to announce a brief maintenance window that protects open positions",
+    "lining": "on the surface: routine engine maintenance with minimal disruption. underneath: we're engineering infrastructure robust enough that we can tune it live without touching your money."
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_A",
+    "through_action": "to announce a brief service interruption for infrastructure maintenance",
+    "lining": "on the surface: routine maintenance requires a short downtime window. underneath: we're making the system more robust before it becomes a problem"
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_B",
+    "through_action": "to normalize maintenance",
+    "lining": "on the surface: announcing scheduled system maintenance. underneath: refusing to pretend infrastructure doesn't need care or that transparency about operational reality is weakness."
+  },
+  {
+    "release_id": "perps-maintenance",
+    "variant_id": "VARIANT_C",
+    "through_action": "to preserve continuity",
+    "lining": "on the surface, announcing a brief interruption; underneath, protecting what remains unbroken"
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "CURRENT",
+    "through_action": "to announce that privacy-preserving payments are now generally available",
+    "lining": "on the surface: Private Send graduates from beta to GA. underneath: financial privacy just became a standard feature, not an experimental one."
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_A",
+    "through_action": "to announce that privacy is no longer experimental",
+    "lining": "on the surface: a feature ships. underneath: financial autonomy becomes production-grade"
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_B",
+    "through_action": "to graduate privacy from experimental status",
+    "lining": "on the surface: announcing a feature's availability milestone. underneath: refusing to treat financial privacy as a luxury feature that must justify its existence."
+  },
+  {
+    "release_id": "private-send-ga",
+    "variant_id": "VARIANT_C",
+    "through_action": "to graduate privacy",
+    "lining": "on the surface, announcing a feature's production readiness; underneath, asserting that concealment is a civic right"
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "CURRENT",
+    "through_action": "to announce that Infinex crossed 10 million accounts",
+    "lining": "on the surface: a user milestone announcement. underneath: proof that removing seed phrase friction and automating yield makes crypto accessible to mainstream users"
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_A",
+    "through_action": "to demonstrate that removing friction unlocks mass adoption",
+    "lining": "on the surface: a user milestone is reached. underneath: proof that the crypto UX barrier can be eliminated"
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_B",
+    "through_action": "to demonstrate accessibility at scale",
+    "lining": "on the surface: celebrating a user milestone. underneath: refusing to gate crypto access behind technical literacy requirements."
+  },
+  {
+    "release_id": "scale-milestone-10m",
+    "variant_id": "VARIANT_C",
+    "through_action": "to cross the threshold of legitimacy",
+    "lining": "on the surface, celebrating a numerical milestone; underneath, proving that removing friction doesn't dilute seriousness"
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "CURRENT",
+    "through_action": "to split control between user-set constraints and agent execution",
+    "lining": "on the surface: configurable risk parameters for yield optimization. underneath: users no longer choose between full control or full delegation—they set the boundaries, the agent works within them."
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_A",
+    "through_action": "to give users direct control over the agent's operating boundaries",
+    "lining": "on the surface: users configure yield-vault constraints. underneath: trust shifts from blind delegation to bounded agency."
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_B",
+    "through_action": "to surface the governance boundary",
+    "lining": "on the surface: empowering users with direct control over agent behavior. underneath: refusing to conflate automation with abdication of judgment."
+  },
+  {
+    "release_id": "agent-vault-constraints",
+    "variant_id": "VARIANT_C",
+    "through_action": "to grant authority",
+    "lining": "on the surface, configuration options; underneath, the reversal of who serves whom"
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "CURRENT",
+    "through_action": "to replace manual yield-chasing with a single AI-managed vault",
+    "lining": "on the surface: a UI refresh that removes the old yield aggregator and launches a new vault interface. underneath: the protocol is absorbing complexity so users never again compare APYs or rebalance across protocols"
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_A",
+    "through_action": "to remove the manual comparison burden and install the agent as portfolio manager",
+    "lining": "on the surface: a cleaner vault interface replaces cluttered yield tables. underneath: the user graduates from analyst to principal, delegating execution to the AI"
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_B",
+    "through_action": "to collapse the comparison surface",
+    "lining": "on the surface: introducing a smarter yield interface. underneath: refusing to make users perform the work of algorithmic optimization."
+  },
+  {
+    "release_id": "yield-aggregator-sunset",
+    "variant_id": "VARIANT_C",
+    "through_action": "to collapse choice into trust",
+    "lining": "on the surface, a simplified interface that removes manual comparison work; underneath, the surrender of agency to an opaque intelligence"
+  }
+]

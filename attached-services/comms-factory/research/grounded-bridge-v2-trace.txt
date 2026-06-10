@@ -1,0 +1,54 @@
+discovered #14474 bridge-integration → grounding against origin/bridge-integration
+  → lookup_partner({"feature":"fiat_deposits"})
+  → grep_platform_code({"pattern":"bridge","glob":"*.ts","maxResults":30})
+  → fetch_public_page({"url":"https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account"})
+  → grep_platform_code({"pattern":"bridgeXyz","glob":"*.ts","maxResults":30})
+  → fetch_public_page({"url":"https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account-events"})
+  → infinex_web_search({"query":"Stripe acquires Bridge.xyz stablecoin infrastructure","context":"Verifying the claim that Bridge.xyz was acqui)
+  → read_platform_file({"path":"packages/types/src/user/datasets/bridge-xyz/types.ts"})
+  → read_platform_file({"path":"apps/web-app/src/components/features/deposit/constants/bridge.ts"})
+  → read_platform_file({"path":"apps/web-app/src/api_v2/bridgeXyz/index.ts"})
+  → read_platform_file({"path":"apps/web-app/src/components/features/deposit/routes/BridgeXyzRoute/bridgeXyzDisplayState.test.ts"})
+  → grep_platform_code({"pattern":"sourceCurrency|paymentRail|ach|wire|sepa|SEPA|ACH|WIRE","glob":"*.ts","maxResults":30})
+  → grep_platform_code({"pattern":"canShowBridgeXyzEntry","glob":"*.ts","maxResults":10})
+  → read_platform_file({"path":"apps/web-app/src/components/features/deposit/routes/ListRoute/bridgeXyzAvailability.ts"})
+  → grep_platform_code({"pattern":"ach_push|wire|sepa|eur|usd|paymentRail","glob":"*.ts","maxResults":30})
+  → grep_platform_code({"pattern":"BridgeXyz|bridge-xyz|bridge_xyz","path":"workers/main/src","glob":"*.ts","maxResults":20})
+  → grep_platform_code({"pattern":"bridgeXyz","path":"workers/main/src","glob":"*.ts","maxResults":20})
+  → grep_platform_code({"pattern":"ach_push|wire|sepa|paymentRail","glob":"*.ts","maxResults":30})
+  → read_platform_file({"path":"workers/main/src/durableObjects/User/implementation/datasets/bridgeXyz/index.ts","startLine":1,"endLine":100})
+  → read_platform_file({"path":"workers/main/src/durableObjects/User/implementation/datasets/bridgeXyz/bridgeXyz.test.ts","startLine":1,"endLin)
+  → read_platform_file({"path":"workers/main/src/durableObjects/User/implementation/datasets/bridgeXyz/index.ts","startLine":100,"endLine":250})
+  → grep_platform_code({"pattern":"enableBridgeXyz|bridge_xyz_enabled|isBridgeXyzEnabled","glob":"*.ts","maxResults":20})
+  → grep_platform_code({"pattern":"enableBridgeXyz","glob":"*.ts","maxResults":20})
+  → read_platform_file({"path":"workers/main/src/durableObjects/User/implementation/datasets/bridgeXyz/index.ts","startLine":250,"endLine":420})
+  → read_platform_file({"path":"workers/main/src/durableObjects/User/implementation/datasets/bridgeXyz/index.ts","startLine":420,"endLine":530})
+  → grep_platform_code({"pattern":"bridgeFiatAccountOptionForSourceCurrency|isBridgeCustomerEligibleForSourceCurrency","glob":"*.ts","maxResult)
+  → grep_platform_code({"pattern":"bridgeFiatAccountOption|isBridgeCustomer|mapBridgeProvider","path":"workers/main/src/lib_v2/bridge","glob":")
+  → grep_platform_code({"pattern":"lib_v2/bridge","glob":"*.ts","maxResults":10})
+  → grep_platform_code({"pattern":"bridgeFiatAccountOption|isBridgeCustomer|mapBridgeProvider|sourceCurrency","path":"workers/main/src","glob":)
+  ✓ Infinex fiat (bank) deposit provider = Bridge.xyz [0.99] platform-code
+  ✓ Bridge.xyz fiat deposit code status on bridge-integration branch = Fully implemented on bridge-integration branch — dedicated API module (api_v2/bridgeXyz), dataset builder, tRPC router, webhook handler, and UI display-state machine all present [0.99] platform-code
+  ✓ Bridge.xyz feature flag name in Infinex platform = enableBridgeXyz [0.99] platform-code
+  ✓ Bridge.xyz fiat deposit flow — what enters and what exits = User deposits fiat (e.g. USD via ACH/wire, EUR via SEPA) into a Bridge virtual account; Bridge converts incoming fiat into USDC and delivers it on the Base chain to the user's Infinex Base EVM wallet address [0.99] platform-code
+  ✓ Settlement stablecoin for Bridge.xyz fiat deposits = USDC [0.99] platform-code
+  ✓ Settlement chain for Bridge.xyz fiat deposits into Infinex = Base (Ethereum L2) [0.99] platform-code
+  ✓ Supported fiat deposit rails confirmed in Infinex platform code (test fixtures) = USD via ACH push (ach_push) and wire; EUR via SEPA — confirmed as paymentRails values in display-state tests [0.95] platform-code
+  ✓ Bridge.xyz supported payment rails per currency (provider docs) = USD: ACH and wire (US account + routing number); EUR: SEPA IBAN; MXN: SPEI CLABE; BRL: PIX BR codes; GBP: FPS unique account number; COP: Bre-B unique account number [0.97] provider-docs
+  ✓ Bridge.xyz virtual account mechanic — what the product does = Bridge virtual accounts are permanent, reusable fiat deposit addresses that convert incoming fiat into crypto and deliver it to a specified destination wallet. They give users local deposit details (e.g. US account/routing numbers for ACH or wire). Multiple currencies are supported. [0.97] provider-docs
+  ✓ Bridge.xyz virtual account event lifecycle (deposit state machine) = funds_received → funds_scheduled (ACH only, in transit) → payment_submitted (crypto payment sent, tx hash preliminary) → payment_processed (confirmed on-chain, final). Also: in_review, refunded, refund_in_flight, refund_failed, account_update, deactivation, activation, microdeposit. [0.97] provider-docs
+  ✓ KYC/onboarding requirement before fiat deposits = Required — customers must be onboarded and KYC/KYB-approved before Bridge virtual accounts can be created. Infinex platform enforces a multi-step flow: ToS acceptance (tos_pending) → identity verification via Persona KYC link-out (verification_pending) → Bridge under_review → approved. [0.99] platform-code
+  ✓ Bridge.xyz KYC provider (identity verification) = Persona (bridge.withpersona.com) — rendered as external link, not iframe [0.95] platform-code
+  ✓ Infinex Bridge.xyz onboarding status states = feature_disabled, not_started, tos_pending, verification_pending, under_review, approved, unavailable, support_needed, provider_error [0.99] platform-code
+  ✓ Bridge.xyz deposit entry availability condition (Infinex UI) = Bridge.xyz deposit entry is shown only when: feature flag enableBridgeXyz is on, it is the Infinex main wallet (not a vault), and a vault is not currently selected [0.99] platform-code
+  ✓ Bridge.xyz acquirer / parent company = Stripe (acquired Bridge.xyz for approximately $1.1 billion) [0.9] web-search
+  ✓ Bridge.xyz ToS flow mechanism in Infinex = Bridge Terms of Service is rendered in an iframe hosted at compliance.bridge.xyz (or compliance.sandbox.bridge.xyz for sandbox); KYC is a separate external link-out to bridge.withpersona.com (not an iframe) [0.97] platform-code
+  ✓ Bridge.xyz fiatAccountOptionStatus values = available, pending, unavailable, support_needed [0.99] platform-code
+  ✓ Bridge.xyz deposit wallet requirement = User must have a Base EVM wallet address on their Infinex account before deposit instructions can be generated; wallet_missing is a defined unavailability reason [0.99] platform-code
+  ✓ Bridge virtual account deposit instruction data fields provided to user = sourceCurrency, bankName, bankAddress, routingNumber, accountNumber, beneficiaryName, beneficiaryAddress, paymentRails, and destination (currency, paymentRail, address) [0.99] platform-code
+  ✓  =  [0.7] web-search
+  ✗ Whether MXN, BRL, GBP, COP rails are wired into Infinex's Bridge.xyz integration (beyond USD and EUR) — Bridge.xyz docs confirm those rails exist on the provider side, but the Infinex platform code only shows USD (ach_push, wire) and EUR (sepa) in fixture/test data. The lib_v2/bridge source files that would confirm wired source currencies were unreachable within budget limits.
+
+wrote research/grounded-bridge-v2-2026-05-29.json
+
+facts: 20 | unverifiable: 1 | turns: 16 | model: claude-sonnet-4-6

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tempo emergence — diagnosis · 2026-05-25</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #161c24;
+    --panel-2: #1d242e;
+    --text: #e8eef5;
+    --muted: #8a98a8;
+    --border: #2a333f;
+    --accent: #5b9dff;
+    --you: #ffd86b;
+    --built: #5fc78a;
+    --bad: #ff7a7a;
+    --good: #5fc78a;
+    --warning: #ff9d5b;
+    --info: #c98bff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font: 15px/1.55 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 32px 96px; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 18px; margin-bottom: 28px; }
+  h1 { font-size: 28px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .dateline { color: var(--muted); font-size: 13px; margin: 0; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 40px 0 14px; font-weight: 600; }
+  h3 { font-size: 17px; font-weight: 600; margin: 0 0 8px; letter-spacing: -0.005em; }
+  p { margin: 0 0 10px; }
+  code { background: var(--panel-2); padding: 1px 6px; border-radius: 3px; font-size: 12.5px; color: var(--accent); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  blockquote { margin: 8px 0; padding: 10px 16px; border-left: 3px solid var(--muted); color: var(--text); font-style: italic; background: rgba(255,255,255,0.02); }
+  blockquote cite { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-style: normal; margin-top: 6px; }
+
+  .verdict { background: var(--panel); border: 1px solid var(--border); border-left: 4px solid var(--you); padding: 22px 26px; border-radius: 8px; margin-bottom: 28px; }
+  .verdict h2 { margin-top: 0; color: var(--you); }
+  .verdict .row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+  .verdict .row:last-child { margin-bottom: 0; }
+  .verdict .tag { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; padding: 4px 9px; border-radius: 3px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .tag.confirmed { background: rgba(95,199,138,0.15); color: var(--good); border: 1px solid var(--good); }
+  .tag.violation { background: rgba(255,122,122,0.15); color: var(--bad); border: 1px solid var(--bad); }
+  .tag.both { background: rgba(201,139,255,0.15); color: var(--info); border: 1px solid var(--info); }
+  .verdict .row p { margin: 0; font-size: 14.5px; line-height: 1.55; }
+  .verdict .row p strong { color: var(--text); }
+
+  /* The chain diagram */
+  .chain { background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 22px 24px; margin: 16px 0 28px; }
+  .chain-title { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 14px; font-weight: 700; }
+  .chain-steps { display: flex; flex-direction: column; gap: 0; }
+  .step { display: flex; align-items: flex-start; gap: 14px; padding: 8px 0; }
+  .step-num { width: 24px; height: 24px; border-radius: 50%; background: var(--panel); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--muted); flex-shrink: 0; margin-top: 2px; }
+  .step-body { font-size: 14px; line-height: 1.5; }
+  .step-body strong { color: var(--text); }
+  .step-body .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px; }
+  .step.actor-lever { background: rgba(255,216,107,0.08); border-left: 3px solid var(--you); padding-left: 14px; margin-left: -14px; border-radius: 4px; }
+  .step.actor-lever .step-num { background: var(--you); color: var(--bg); border-color: var(--you); }
+  .step.actor-lever .step-body .label { color: var(--you); }
+  .step.emerges { background: rgba(95,199,138,0.06); border-left: 3px solid var(--good); padding-left: 14px; margin-left: -14px; border-radius: 4px; }
+  .step.emerges .step-num { background: var(--good); color: var(--bg); border-color: var(--good); }
+  .step.emerges .step-body .label { color: var(--good); }
+  .step-arrow { color: var(--border); margin-left: 12px; font-size: 14px; line-height: 0.5; }
+
+  /* Panels */
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 20px 24px; margin-bottom: 18px; }
+  .panel.bad { border-left: 4px solid var(--bad); background: linear-gradient(90deg, rgba(255,122,122,0.06) 0%, var(--panel) 60%); }
+  .panel.good { border-left: 4px solid var(--good); background: linear-gradient(90deg, rgba(95,199,138,0.06) 0%, var(--panel) 60%); }
+  .panel.info { border-left: 4px solid var(--info); }
+  .panel.warning { border-left: 4px solid var(--warning); background: linear-gradient(90deg, rgba(255,157,91,0.05) 0%, var(--panel) 60%); }
+  .panel h3 { margin-top: 0; }
+  .panel.bad h3 { color: var(--bad); }
+  .panel.good h3 { color: var(--good); }
+  .panel.info h3 { color: var(--info); }
+  .panel.warning h3 { color: var(--warning); }
+
+  .codeline { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; background: var(--panel-2); padding: 8px 12px; border-radius: 4px; margin: 6px 0; color: var(--text); }
+  .codeline .ref { color: var(--muted); margin-right: 8px; }
+  .codeline.bad { border-left: 2px solid var(--bad); }
+  .codeline.good { border-left: 2px solid var(--good); }
+
+  ul { margin: 6px 0 10px; padding-left: 22px; }
+  li { margin-bottom: 6px; font-size: 14px; }
+  li strong { color: var(--text); }
+
+  .three-col { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  @media (min-width: 760px) { .three-col { grid-template-columns: 1fr 1fr 1fr; } }
+
+  .layer { background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; }
+  .layer h4 { margin: 0 0 6px; font-size: 14px; font-weight: 700; }
+  .layer .kind { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
+  .layer.regex { border-left: 3px solid var(--good); }
+  .layer.regex h4 { color: var(--good); }
+  .layer.llm { border-left: 3px solid var(--info); }
+  .layer.llm h4 { color: var(--info); }
+  .layer.active { border-left: 3px solid var(--you); }
+  .layer.active h4 { color: var(--you); }
+  .layer p { font-size: 13px; margin-bottom: 0; }
+
+  .quote-card { background: var(--panel-2); border-left: 3px solid var(--accent); padding: 14px 18px; border-radius: 4px; margin-bottom: 12px; }
+  .quote-card p { font-size: 14px; font-style: italic; margin-bottom: 6px; }
+  .quote-card cite { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; font-style: normal; }
+
+  .next { background: var(--panel); border: 1px solid var(--warning); border-left: 4px solid var(--warning); border-radius: 8px; padding: 22px 24px; margin-top: 22px; }
+  .next h3 { margin-top: 0; color: var(--warning); }
+  .next ol { margin: 8px 0 0; padding-left: 22px; }
+  .next li { margin-bottom: 8px; font-size: 14px; }
+
+  footer { color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--border); }
+  footer code { background: var(--panel); padding: 2px 6px; border-radius: 3px; font-size: 11px; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1>Tempo emergence — diagnosis</h1>
+  <p class="dateline">2026-05-25 · your instinct was right · generator violates, validator is fine</p>
+</header>
+
+<div class="verdict">
+  <h2>Three-line verdict</h2>
+  <div class="row">
+    <span class="tag confirmed">Mirodan</span>
+    <p><strong>You were right.</strong> The actor never picks tempo. Your memory ("Tempo is emergent from Deciding") is directionally correct; the precise version is: Deciding is the <em>primum mobile</em> catalyst, tempo emerges from the full Subconscious Motif (Adapting + Sensing + Thinking + Deciding cocktail), and the actor's only conscious lever is the <strong>transitive verb</strong>. Tempo is built into the verb.</p>
+  </div>
+  <div class="row">
+    <span class="tag violation">Generator</span>
+    <p><strong>Current code violates this.</strong> Stage A emits <code>tempo</code> and <code>verb</code> as peer fields in one LLM pass. The model is choosing tempo. This is exactly the anti-pattern named in <code>methodology-actor-table-work-before-drafting</code>.</p>
+  </div>
+  <div class="row">
+    <span class="tag both">Validator</span>
+    <p><strong>Already doing the right thing.</strong> It's regex (Layer 1, slop) AND LLM (Layer 2, beat-classification compared against the generator's declaration). The LLM half independently classifies beats without reading the declared tempo, then compares — which is why the harness IS catching the generator's tempo slips. The failing cases you're seeing are <em>signal, not noise</em>.</p>
+  </div>
+</div>
+
+<h2>The Mirodan chain — what produces tempo</h2>
+<div class="chain">
+  <div class="chain-title">From locked placement to the visible/audible tempo</div>
+  <div class="chain-steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><span class="label">Locked at the brand level (already done for Infinex)</span><strong>Super-Objective</strong> → Drives → Inner Attitude + Aspect + Stress placement</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><span class="label">Per scene / per release</span><strong>Lining</strong> · <strong>Through-Action</strong> · <strong>Obstacle</strong> · <strong>Given Circumstances</strong></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><span class="label">Inner Participation cocktail (Subconscious Motif)</span>Adapting → Sensing → <strong>Deciding</strong> (primum mobile selects) → Thinking</div>
+    </div>
+    <div class="step actor-lever">
+      <div class="step-num">4</div>
+      <div class="step-body"><span class="label">The actor's only conscious lever</span><strong>Transitive verb</strong> that fits a Working Action. <em>This is what the actor PLAYS.</em></div>
+    </div>
+    <div class="step emerges">
+      <div class="step-num">5</div>
+      <div class="step-body"><span class="label">Emerges, never chosen</span><strong>Tempo</strong> — the visible/audible trace of the verb being played under the Subconscious Motif. Built into the verb. Not selectable.</div>
+    </div>
+  </div>
+</div>
+
+<h2>The killer quotes</h2>
+
+<div class="quote-card">
+  <p>Tempo itself, being a function of Time, is the physical realization of the Inner Participation of Deciding... reflecting the role of primum mobile played by Deciding.</p>
+  <cite>Mirodan vol. 1, Ch. 1, p. 286</cite>
+</div>
+
+<div class="quote-card">
+  <p>Unlike the other three Inner Participations, Deciding cannot manifest itself on its own. It needs to combine with one of the others to become manifest.</p>
+  <cite>Mirodan vol. 1, Ch. 1, p. 302</cite>
+</div>
+
+<div class="quote-card">
+  <p>What an actor PLAYS is a transitive verb that fits a Working Action.</p>
+  <cite>Mirodan vol. 1, Ch. 1, p. 351</cite>
+</div>
+
+<h2>What the generator is doing wrong</h2>
+
+<div class="panel bad">
+  <h3>The violation in <code>src/generator.ts</code></h3>
+  <p><strong>Stage A's BeatPlan schema puts tempo and verb as peer fields in the same JSON the LLM generates in a single pass:</strong></p>
+  <div class="codeline bad"><span class="ref">generator.ts:79-85</span>interface BeatPlan { tempo: TempoName; verb: WorkingAction; /* + thesis, through_action, obstacle, lining */ }</div>
+  <div class="codeline bad"><span class="ref">generator.ts:820</span>Stage A user-prompt: <code>"tempo": "&lt;one of the voice's available tempi&gt;"</code></div>
+  <div class="codeline bad"><span class="ref">generator.ts:855</span><code>tempo: beat.tempo as TempoName</code> — parsed straight through, no derivation step</div>
+  <p style="margin-top: 12px;">The docstring at lines 66-70 <em>claims</em> "tempo is emergent from inner work." The prompt at line 731 <em>tells</em> the model "the actor never starts with a motor." But the schema forces the model to pick a tempo anyway. <strong>Intent right, implementation drifted.</strong></p>
+  <p>Tests in <code>generator.test.ts</code> only verify declaration fidelity (does Stage A say what it said) and allowed-set membership (is the tempo a real one). They don't assert tempo coherence with the chosen verbs. So the violation has been silently passing CI.</p>
+</div>
+
+<div class="panel good">
+  <h3>The fix</h3>
+  <p><strong>Strip <code>tempo</code> from Stage A's output entirely.</strong> Replace with <code>working_actions</code> — a pair of transitive-verb identifiers per beat (Sustained-prep + Quick-release):</p>
+  <div class="codeline good"><span class="ref">new BeatPlan</span>interface BeatPlan { working_actions: [WorkingAction, WorkingAction]; verb: string; /* + thesis, through_action, obstacle, lining */ }</div>
+  <div class="codeline good"><span class="ref">new step</span>deriveTempoFromBeat(working_actions, voice) — deterministic motor-pair → tempo lookup</div>
+  <p>Stage B uses the <em>derived</em> tempo, not a Stage-A-declared one. ~80 LOC, no extra LLM round-trip.</p>
+  <p style="margin-top: 12px;"><strong>Bonus:</strong> preparation hierarchy gets enforced naturally because Working-Actions come in Sustained-prep → Quick-release pairs:</p>
+  <ul>
+    <li><strong>Press → Punch</strong> (Sombre-ish / weighted decision)</li>
+    <li><strong>Wring → Slash</strong></li>
+    <li><strong>Glide → Dab</strong> (Practical / matter-of-fact)</li>
+    <li><strong>Float → Flick</strong> (Irradiant / sociable / loose)</li>
+  </ul>
+  <p>The Quick must be preceded by its Sustained partner. If the LLM emits <code>[Float, Punch]</code>, the validator rejects on prep-hierarchy alone — no tempo classification needed.</p>
+</div>
+
+<h2>Validator architecture (your other question)</h2>
+
+<div class="three-col">
+  <div class="layer regex">
+    <div class="kind">Layer 1 — regex</div>
+    <h4>src/validator.ts (rules)</h4>
+    <p>Brand-agnostic slop catchers: clichés, listicle voice, antagonism, AI-slop, em-dash density, claimed competitor palettes, off-spec drive language (e.g. time-pressure for a Stable+Flow brand). Deterministic. Fast. Free. Each rule has positive + negative tests.</p>
+  </div>
+  <div class="layer llm">
+    <div class="kind">Layer 2 — LLM beat audit</div>
+    <h4>src/validator-llm.ts (called by validator.ts)</h4>
+    <p>Independent beat classifier. Reads the candidate prose, classifies what tempo it ACTUALLY is, compares against what the generator DECLARED. If divergent → reject. This is the "verifier as gold standard" pattern. Doesn't read the declaration while scoring — so it can't be biased.</p>
+  </div>
+  <div class="layer active">
+    <div class="kind">Layer 3 — agentic auditor</div>
+    <h4>src/validator-active.ts</h4>
+    <p>Anthropic SDK + research tools (<code>platform-code</code>, <code>partner-registry</code>, <code>infinex-page</code>, <code>projectjin</code>). Reasons about claim validity by calling tools. The deepest layer — fact + voice + drive coherence all in one.</p>
+  </div>
+</div>
+
+<p style="margin-top: 16px; color: var(--muted); font-size: 13.5px;">When you walk a card through the harness, all three fire in sequence. The failures you're seeing on the generator's tempo claims are coming from <strong>Layer 2</strong>, which is exactly what should catch them.</p>
+
+<div class="next">
+  <h3>What to do right now</h3>
+  <ol>
+    <li><strong>Keep walking the card.</strong> The failing tempo cases are empirical evidence — Layer 2 is correctly catching the generator's Mirodan slip. Don't dismiss them as bugs in the validator. They're the validator doing its job.</li>
+    <li><strong>Note which beats fail with what gap.</strong> If the generator declares "Commanding" but Layer 2 scores "Practical", that's a hint about which verbs the model picked — and where the prompt is letting it pick the wrong working-actions.</li>
+    <li><strong>When you've finished the walk:</strong> we either (a) fix the generator with the working-actions approach above (~80 LOC) or (b) you decide a coarser short-term fix first (e.g., constrain the prompt harder before the structural rewrite).</li>
+    <li><strong>I'll update <code>methodology-actor-table-work-before-drafting</code></strong> with the primum-mobile / Subconscious Motif nuance so the next round doesn't lose the precision.</li>
+  </ol>
+</div>
+
+<footer>
+  Source reports: <code>research/mirodan-tempo-emergence-check-2026-05-25.md</code> (full Mirodan citations), <code>research/generator-tempo-audit-2026-05-25.md</code> (full code citations) · this map at <code>research/tempo-emergence-2026-05-25.html</code>
+</footer>
+
+</main>
+</body>
+</html>

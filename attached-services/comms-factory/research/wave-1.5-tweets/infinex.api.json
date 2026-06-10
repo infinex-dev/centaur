@@ -1,0 +1,4291 @@
+{
+  "user": {
+    "data": {
+      "id": "1681540721684389888",
+      "name": "Infinex",
+      "username": "infinex"
+    }
+  },
+  "tweets": {
+    "data": [
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2044505316251840617"
+          }
+        ],
+        "created_at": "2026-04-15T20:03:45.000Z",
+        "text": "RT @laurashin: \ud83d\udea8 TODAY at 4PM ET \ud83d\udea8\n\nUneasy Money goes life to unpack BIP-361, the WLFI v. Justin Sun saga and more.\n\n\u2022 Is this the end of t\u2026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "laurashin",
+              "id": "26377478"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2044506985958412493"
+        ],
+        "id": "2044506985958412493",
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2043697201491124403"
+          }
+        ],
+        "created_at": "2026-04-15T03:11:31.000Z",
+        "text": "RT @RobertSagurton: I put @kaiynne in the crypto founder Hall of Fame given his background \u2013 and he\u2019s not slowing down with @infinex \n\nKudo\u2026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "RobertSagurton",
+              "id": "1594351064815489024"
+            },
+            {
+              "start": 26,
+              "end": 34,
+              "username": "kaiynne",
+              "id": "24809221"
+            },
+            {
+              "start": 124,
+              "end": 132,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2044252250881830989"
+        ],
+        "id": "2044252250881830989",
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 108,
+              "end": 131,
+              "url": "https://t.co/794pk44AOW",
+              "expanded_url": "https://www.youtube.com/watch?v=4eR9FVr7MhE",
+              "display_url": "youtube.com/watch?v=4eR9FV\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2043931719955558401/_wBlfiQ4?format=jpg&name=orig",
+                  "width": 1280,
+                  "height": 720
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2043931719955558401/_wBlfiQ4?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Why Synthetix Hit a Ceiling + What Crypto Got Wrong About Decentralization (Kain Warwick of Infinex)",
+              "description": "Sags and Kain Warwick of Infinex walk through what actually broke in DeFi from Synthetix to token models to UX, and why most of it was self-imposed\u2026Here\u2019s wh...",
+              "unwound_url": "https://www.youtube.com/watch?v=4eR9FVr7MhE"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2043931703908151665"
+          }
+        ],
+        "created_at": "2026-04-14T05:57:50.000Z",
+        "text": "Stop designing interfaces, and start getting out of the agent's way.\n\nFull conversation on Proof of Story \ud83d\udc47\nhttps://t.co/794pk44AOW",
+        "edit_history_tweet_ids": [
+          "2043931715497087135"
+        ],
+        "id": "2043931715497087135",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 16,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7880
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 203,
+              "end": 226,
+              "url": "https://t.co/h0yscpu32b",
+              "expanded_url": "https://x.com/infinex/status/2043931703908151665/video/1",
+              "display_url": "pic.x.com/h0yscpu32b",
+              "media_key": "13_2043931650875371525"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 65,
+              "end": 73,
+              "username": "kaiynne",
+              "id": "24809221"
+            },
+            {
+              "start": 88,
+              "end": 103,
+              "username": "RobertSagurton",
+              "id": "1594351064815489024"
+            }
+          ]
+        },
+        "created_at": "2026-04-14T05:57:47.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2043931650875371525"
+          ]
+        },
+        "text": "\"Build for the agent six months from now. Not the agent today.\"\n\n@kaiynne sat down with @RobertSagurton to talk about how the old world doesn't exist anymore, and what it takes to build for the new one. https://t.co/h0yscpu32b",
+        "edit_history_tweet_ids": [
+          "2043931703908151665"
+        ],
+        "id": "2043931703908151665",
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 15,
+          "like_count": 68,
+          "quote_count": 3,
+          "bookmark_count": 5,
+          "impression_count": 12304
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 204,
+              "end": 227,
+              "url": "https://t.co/2N97jn2kKg",
+              "expanded_url": "https://x.com/infinex/status/2038521335287329252/video/1",
+              "display_url": "pic.x.com/2N97jn2kKg",
+              "media_key": "13_2038521271932321792"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 35,
+              "end": 47,
+              "username": "Lighter_xyz",
+              "id": "1604942990417580032"
+            }
+          ]
+        },
+        "created_at": "2026-03-30T07:38:54.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2038521271932321792"
+          ]
+        },
+        "text": "Infinex Perps just got an upgrade. @Lighter_xyz is now live.\n\nTheir Commodities Challenge is running right now. 100K LIT prize pool. Gold. Oil. Palladium.\n\nTrade it all on Infinex. No new account needed. https://t.co/2N97jn2kKg",
+        "edit_history_tweet_ids": [
+          "2038521335287329252"
+        ],
+        "id": "2038521335287329252",
+        "public_metrics": {
+          "retweet_count": 28,
+          "reply_count": 27,
+          "like_count": 239,
+          "quote_count": 4,
+          "bookmark_count": 10,
+          "impression_count": 26505
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2036896620793471080"
+          }
+        ],
+        "created_at": "2026-03-25T20:13:59.000Z",
+        "text": "RT @laurashin: It's been a week.\n\n$54M in DeFi bad debt. Aave V4 passing governance. Congress targeting prediction markets. Claude catching\u2026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "laurashin",
+              "id": "26377478"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2036899416913924392"
+        ],
+        "id": "2036899416913924392",
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2036684858144198696"
+          }
+        ],
+        "created_at": "2026-03-25T06:01:27.000Z",
+        "text": "\"The transformation of agents being applied to every single UX problem is the biggest opportunity in the world right now.\"\n\nKain goes deep on agent harnesses, context windows, removing humans from the loop, and what Infinex looks like with an AI co-pilot.\n\nFull conversation:",
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 276,
+                "end": 299,
+                "url": "https://t.co/3K3U0I7Npp",
+                "expanded_url": "https://www.youtube.com/watch?v=d77gRfUEEwg",
+                "display_url": "youtube.com/watch?v=d77gRf\u2026"
+              }
+            ]
+          },
+          "text": "\"The transformation of agents being applied to every single UX problem is the biggest opportunity in the world right now.\"\n\nKain goes deep on agent harnesses, context windows, removing humans from the loop, and what Infinex looks like with an AI co-pilot.\n\nFull conversation: https://t.co/3K3U0I7Npp"
+        },
+        "edit_history_tweet_ids": [
+          "2036684869875720398"
+        ],
+        "id": "2036684869875720398",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 0,
+          "like_count": 44,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7459
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2036684846542770270"
+          }
+        ],
+        "created_at": "2026-03-25T06:01:24.000Z",
+        "text": "Infinex spent three years solving crypto UX. Then agents changed the question entirely.\n\nNow it's not about better buttons, it's about having an agent that uses 20+ DEX integrations, every API, and your entire transaction history to work for you.",
+        "edit_history_tweet_ids": [
+          "2036684858144198696"
+        ],
+        "id": "2036684858144198696",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 6,
+          "like_count": 47,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5061
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2036684834899439902"
+          }
+        ],
+        "created_at": "2026-03-25T06:01:21.000Z",
+        "text": "Every form factor of interaction with technology just got nuked by agents.\n\nKain: \"No one is going to do all of their own crypto stuff anymore.\"\n\nGo back to your wallet in 2021. Pick a random transaction. Tell me why you did it. You can't, but an agent never forgets.",
+        "edit_history_tweet_ids": [
+          "2036684846542770270"
+        ],
+        "id": "2036684846542770270",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 8,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 455
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2036684823277040059"
+          }
+        ],
+        "created_at": "2026-03-25T06:01:19.000Z",
+        "text": "The AI startup market looks crowded. Kain says that's the signal, not the noise.\n\n\"Vercel can't decide if they're an agent API gateway or a hosting platform. The largest companies down to startups have no clue how to handle this.\"\n\nEarly DeFi was the same. Chaos = infinite",
+        "edit_history_tweet_ids": [
+          "2036684834899439902"
+        ],
+        "id": "2036684834899439902",
+        "note_tweet": {
+          "text": "The AI startup market looks crowded. Kain says that's the signal, not the noise.\n\n\"Vercel can't decide if they're an agent API gateway or a hosting platform. The largest companies down to startups have no clue how to handle this.\"\n\nEarly DeFi was the same. Chaos = infinite opportunity for anyone willing to show up and build."
+        },
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 11,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 921
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2036684811247780337"
+          }
+        ],
+        "created_at": "2026-03-25T06:01:16.000Z",
+        "text": "Kain's hot take: eight more months of sideways, capitulation by year-end, four-year cycle validated again.\n\n2018 built DeFi. 2022 built the infrastructure layer. 2026 builds the agent layer.\n\n\"The noise floor drops. You can really focus on what's actually needed.\"",
+        "edit_history_tweet_ids": [
+          "2036684823277040059"
+        ],
+        "id": "2036684823277040059",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 13,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1121
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 278,
+              "end": 301,
+              "url": "https://t.co/HrEud3Dkwy",
+              "expanded_url": "https://x.com/infinex/status/2036684811247780337/video/1",
+              "display_url": "pic.x.com/HrEud3Dkwy",
+              "media_key": "13_2036684757782937600"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 93,
+              "end": 101,
+              "username": "kaiynne",
+              "id": "24809221"
+            },
+            {
+              "start": 116,
+              "end": 132,
+              "username": "theblondebroker",
+              "id": "1346148264115056641"
+            },
+            {
+              "start": 136,
+              "end": 151,
+              "username": "TheMarketRunup",
+              "id": "2014709973209550848"
+            }
+          ]
+        },
+        "created_at": "2026-03-25T06:01:13.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2036684757782937600"
+          ]
+        },
+        "text": "\u201cEven a bad idea in AI is going to be more successful than a good idea in crypto right now\u201d\n\n@kaiynne sat down with @theblondebroker on @TheMarketRunup to talk about why bear markets build empires, how AI agents just killed every interface in crypto, and what happens when your https://t.co/HrEud3Dkwy",
+        "edit_history_tweet_ids": [
+          "2036684811247780337"
+        ],
+        "id": "2036684811247780337",
+        "note_tweet": {
+          "text": "\u201cEven a bad idea in AI is going to be more successful than a good idea in crypto right now\u201d\n\n@kaiynne sat down with @theblondebroker on @TheMarketRunup to talk about why bear markets build empires, how AI agents just killed every interface in crypto, and what happens when your wallet has a quant living inside it.\n\nFull interview and \ud83e\uddf5\u2193",
+          "entities": {
+            "mentions": [
+              {
+                "start": 93,
+                "end": 101,
+                "username": "kaiynne",
+                "id": "24809221"
+              },
+              {
+                "start": 116,
+                "end": 132,
+                "username": "theblondebroker",
+                "id": "1346148264115056641"
+              },
+              {
+                "start": 136,
+                "end": 151,
+                "username": "TheMarketRunup",
+                "id": "2014709973209550848"
+              }
+            ]
+          }
+        },
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 14,
+          "like_count": 146,
+          "quote_count": 2,
+          "bookmark_count": 19,
+          "impression_count": 11310
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 86,
+              "end": 109,
+              "url": "https://t.co/cuUAIyVPgF",
+              "expanded_url": "https://x.com/i/broadcasts/1OxwblwnbwrJB",
+              "display_url": "x.com/i/broadcasts/1\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2043348247926677504/L4xFKBrV?format=jpg&name=orig",
+                  "width": 1920,
+                  "height": 1080
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2043348247926677504/L4xFKBrV?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 404,
+              "title": "Laura Shin",
+              "description": "Is Hyperliquid Becoming the 24/7 Macro Casino Wall Street Never Built?",
+              "unwound_url": "https://twitter.com/i/broadcasts/1OxwblwnbwrJB"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "laurashin",
+              "id": "26377478"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2031820046255993316"
+          }
+        ],
+        "created_at": "2026-03-11T20:02:44.000Z",
+        "text": "RT @laurashin: Is Hyperliquid Becoming the 24/7 Macro Casino Wall Street Never Built? https://t.co/cuUAIyVPgF",
+        "edit_history_tweet_ids": [
+          "2031823156651180507"
+        ],
+        "id": "2031823156651180507",
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 109,
+              "end": 132,
+              "url": "https://t.co/qPPKL72RZC",
+              "expanded_url": "https://www.youtube.com/watch?v=QTEc9awGrrw",
+              "display_url": "youtube.com/watch?v=QTEc9a\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2034847378365456384/c3C3qrM2?format=jpg&name=orig",
+                  "width": 1280,
+                  "height": 720
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2034847378365456384/c3C3qrM2?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "How AI and OpenClaw Will Trade For You | Kain Warwick Interview",
+              "description": "Kane Warwick, founder of Synthetix and Infinex, breaks down why this crypto cycle fundamentally broke, and boldly predicts there will never be another broad ...",
+              "unwound_url": "https://www.youtube.com/watch?v=QTEc9awGrrw"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2031235947673837689"
+          }
+        ],
+        "created_at": "2026-03-10T05:09:25.000Z",
+        "text": "\"Your agent will be managing your crypto for you. We're going to train up your agents.\"\n\nFull conversation \u2193\nhttps://t.co/qPPKL72RZC",
+        "edit_history_tweet_ids": [
+          "2031235959417876743"
+        ],
+        "id": "2031235959417876743",
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 6,
+          "like_count": 75,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6233
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2031235935984402569"
+          }
+        ],
+        "created_at": "2026-03-10T05:09:23.000Z",
+        "text": "What this looks like in practice:\n\n- Smart DCA that only buys the dip\n- Sentiment-driven trading via Grok\n- Auto-rebalancing lending positions based on yield delta\n- Liquidation protection that sells in the right order\n\nYou describe the strategy, then your agent executes it",
+        "edit_history_tweet_ids": [
+          "2031235947673837689"
+        ],
+        "id": "2031235947673837689",
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 14,
+          "like_count": 76,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 4335
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2031235924009562112"
+          }
+        ],
+        "created_at": "2026-03-10T05:09:20.000Z",
+        "text": "So what happens when you give those agents access to your crypto?\n\nInfinex's MCP server gives any agent the full crypto stack: swap, bridge, perps, DeFi, prediction markets. One install.\n\nThe difference: guard rails. Your agent proposes. You approve. Daily limits. Constraints.",
+        "edit_history_tweet_ids": [
+          "2031235935984402569"
+        ],
+        "id": "2031235935984402569",
+        "note_tweet": {
+          "text": "So what happens when you give those agents access to your crypto?\n\nInfinex's MCP server gives any agent the full crypto stack: swap, bridge, perps, DeFi, prediction markets. One install.\n\nThe difference: guard rails. Your agent proposes. You approve. Daily limits. Constraints. You're not just handing over a private key"
+        },
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 549
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2031235912370393167"
+          }
+        ],
+        "created_at": "2026-03-10T05:09:17.000Z",
+        "text": "An agent starts at 100 IQ. Within 3 minutes it's at 80. Within half an hour it's at 20.\n\nKain's been building his own coding harness to solve this. Keep the context window small and the agent stays sharp. Spawn, execute, wipe, repeat",
+        "edit_history_tweet_ids": [
+          "2031235924009562112"
+        ],
+        "id": "2031235924009562112",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 545
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2031235900349558918"
+          }
+        ],
+        "created_at": "2026-03-10T05:09:14.000Z",
+        "text": "The only tokens that will outperform next cycle are the ones that figure out how to make people want to hold spot again.\n\nStaking, tokenomics redesign, real yield. Whatever the mechanism, the projects that solve spot holding will go from 90% down to 500x up.\n\nEverything else",
+        "edit_history_tweet_ids": [
+          "2031235912370393167"
+        ],
+        "id": "2031235912370393167",
+        "note_tweet": {
+          "text": "The only tokens that will outperform next cycle are the ones that figure out how to make people want to hold spot again.\n\nStaking, tokenomics redesign, real yield. Whatever the mechanism, the projects that solve spot holding will go from 90% down to 500x up.\n\nEverything else stays a 48-hour trade"
+        },
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 9,
+          "quote_count": 1,
+          "bookmark_count": 0,
+          "impression_count": 1211
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2031235888433545401"
+          }
+        ],
+        "created_at": "2026-03-10T05:09:11.000Z",
+        "text": "The altcoin market is structurally broken\n\nPerps are the baseline now. Not spot. The UNI fee switch ran from $5 to $10 on pure perp activity, then round-tripped to $3. Zero spot buying.\n\nKain's take: There will not be a broad market-agnostic rally in alts ever again",
+        "edit_history_tweet_ids": [
+          "2031235900349558918"
+        ],
+        "id": "2031235900349558918",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 12,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1704
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 251,
+              "end": 274,
+              "url": "https://t.co/AdUoSGV1Sg",
+              "expanded_url": "https://x.com/infinex/status/2031235888433545401/video/1",
+              "display_url": "pic.x.com/AdUoSGV1Sg",
+              "media_key": "13_2031235812554366976"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 9,
+              "end": 17,
+              "username": "kaiynne",
+              "id": "24809221"
+            },
+            {
+              "start": 32,
+              "end": 45,
+              "username": "virtualbacon",
+              "id": "1615153610047848448"
+            }
+          ]
+        },
+        "created_at": "2026-03-10T05:09:08.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2031235812554366976"
+          ]
+        },
+        "text": "Recently @kaiynne sat down with @VirtualBacon to talk about why the altcoin market is structurally broken, how agentic loops are changing everything, and why Infinex is building for a world where your agent manages your crypto.\n\nFull interview and \ud83e\uddf5\u2193 https://t.co/AdUoSGV1Sg",
+        "edit_history_tweet_ids": [
+          "2031235888433545401"
+        ],
+        "id": "2031235888433545401",
+        "public_metrics": {
+          "retweet_count": 13,
+          "reply_count": 34,
+          "like_count": 160,
+          "quote_count": 1,
+          "bookmark_count": 43,
+          "impression_count": 15796
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 256,
+              "end": 279,
+              "url": "https://t.co/VcdtBT56i9",
+              "expanded_url": "http://infinex.xyz",
+              "display_url": "infinex.xyz",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2043572663893819394/CUmVv0qI?format=jpg&name=orig",
+                  "width": 2400,
+                  "height": 1260
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2043572663893819394/CUmVv0qI?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Infinex",
+              "description": "Meet a new kind of wallet",
+              "unwound_url": "https://infinex.xyz/"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2029732641457721451"
+          }
+        ],
+        "created_at": "2026-03-06T01:35:49.000Z",
+        "text": "When you use Private Send, Houdini routes funds through a network of compliant exchange partners with a dual exchange hop and a random L1 in between.\n\nThere's no visible link between the sending and receiving wallet.\n\nTry it and let us know your feedback \u2193https://t.co/VcdtBT56i9",
+        "edit_history_tweet_ids": [
+          "2029732653289853318"
+        ],
+        "id": "2029732653289853318",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 9,
+          "like_count": 56,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3103
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2029732628971278711"
+          }
+        ],
+        "created_at": "2026-03-06T01:35:46.000Z",
+        "text": "TL;DL\n\nWhy @HoudiniSwap?\n\n\u2192 $2.5B processed across ~1M transactions\n\u2192 3+ years live through full market cycles\n\u2192 Natively multi-chain\n\u2192 Zero funds ever lost\n\u2192 Fully compliant\n\nThey've run three separate $50K bounties. Nobody could trace a transaction.",
+        "entities": {
+          "mentions": [
+            {
+              "start": 11,
+              "end": 23,
+              "username": "HoudiniSwap",
+              "id": "1527394767704825857"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2029732641457721451"
+        ],
+        "id": "2029732641457721451",
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 9,
+          "like_count": 64,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3665
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 135,
+              "end": 158,
+              "url": "https://t.co/aXBHlUhQqg",
+              "expanded_url": "https://x.com/infinex/status/2029678369034621242?s=20",
+              "display_url": "x.com/infinex/status\u2026"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 24,
+              "end": 36,
+              "username": "HoudiniSwap",
+              "id": "1527394767704825857"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2029678369034621242"
+          },
+          {
+            "type": "replied_to",
+            "id": "2029732617244016897"
+          }
+        ],
+        "created_at": "2026-03-06T01:35:44.000Z",
+        "text": "We hosted a Spaces with @HoudiniSwap this morning to explore crypto privacy, how Houdini works and why we integrated it at Infinex \ud83c\udf99\ufe0f\n\nhttps://t.co/aXBHlUhQqg",
+        "edit_history_tweet_ids": [
+          "2029732628971278711"
+        ],
+        "id": "2029732628971278711",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 8,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 852
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2029732605428633740"
+          }
+        ],
+        "created_at": "2026-03-06T01:35:41.000Z",
+        "text": "How to use Private Send on Infinex:\n\n1. Open Labs \u2192 Private Send\n2. Enter the recipient address\n3. Pick your token and amount\n4. Choose if you want to send or swidge\n5. Review and send\n\nThat's it. You can swap and send from one flow.",
+        "edit_history_tweet_ids": [
+          "2029732617244016897"
+        ],
+        "id": "2029732617244016897",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 10,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1024
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2029732593651065312"
+          }
+        ],
+        "created_at": "2026-03-06T01:35:38.000Z",
+        "text": "Blockchains are public by default.\n\nEvery transfer creates a permanent, traceable record linking your wallet to every address you've interacted with.\n\nPrivate Send breaks that link. The recipient wallet gets the funds. No on-chain trail shows where they came from.",
+        "edit_history_tweet_ids": [
+          "2029732605428633740"
+        ],
+        "id": "2029732605428633740",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 8,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1444
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 155,
+              "end": 178,
+              "url": "https://t.co/IWZutn0qup",
+              "expanded_url": "https://x.com/infinex/status/2029732593651065312/video/1",
+              "display_url": "pic.x.com/IWZutn0qup",
+              "media_key": "13_2029732521836171266"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 124,
+              "end": 136,
+              "username": "HoudiniSwap",
+              "id": "1527394767704825857"
+            }
+          ]
+        },
+        "created_at": "2026-03-06T01:35:35.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2029732521836171266"
+          ]
+        },
+        "text": "Private Send beta is live for all users.\n\nSend crypto. Without exposing your financial history.\n\nIncognito Mode, powered by @HoudiniSwap \ud83d\udd2e\n\nHow it works \u2193 https://t.co/IWZutn0qup",
+        "edit_history_tweet_ids": [
+          "2029732593651065312"
+        ],
+        "id": "2029732593651065312",
+        "public_metrics": {
+          "retweet_count": 35,
+          "reply_count": 43,
+          "like_count": 331,
+          "quote_count": 4,
+          "bookmark_count": 0,
+          "impression_count": 164215
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/HBGt2f5i8Q",
+              "expanded_url": "https://x.com/i/spaces/1yGBeMPaEoPKN",
+              "display_url": "x.com/i/spaces/1yGBe\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2043433769558786048/EsI0D_t8?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 630
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2043433769558786048/EsI0D_t8?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Play recording: Private Send is Live | Infinex x Private Send",
+              "description": "Infinex\u2019s Space \u00b7 Where live audio conversations happen",
+              "unwound_url": "https://twitter.com/i/spaces/1yGBeMPaEoPKN/peek"
+            }
+          ]
+        },
+        "created_at": "2026-03-05T22:00:07.000Z",
+        "text": "https://t.co/HBGt2f5i8Q",
+        "edit_history_tweet_ids": [
+          "2029678369034621242"
+        ],
+        "id": "2029678369034621242",
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 22,
+          "like_count": 78,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 4429
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2029658100450374021"
+          }
+        ],
+        "created_at": "2026-03-05T21:28:06.000Z",
+        "text": "@bentoxeth @Lighter_xyz I\u2019m glad you like it. More to come \ud83d\ude4f",
+        "entities": {
+          "mentions": [
+            {
+              "start": 11,
+              "end": 23,
+              "username": "Lighter_xyz",
+              "id": "1604942990417580032"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2029670313328529632"
+        ],
+        "id": "2029670313328529632",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 537
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 232,
+              "end": 255,
+              "url": "https://t.co/PcmgwbZjJA",
+              "expanded_url": "https://x.com/i/spaces/1yGBeMPaEoPKN/peek?s=20_",
+              "display_url": "x.com/i/spaces/1yGBe\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029401100416331776/fEPqfKlv?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 630
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029401100416331776/fEPqfKlv?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Scheduled: Private Send | Infinex x Private Send",
+              "description": "Infinex\u2019s Space \u00b7 Where live audio conversations happen",
+              "unwound_url": "https://twitter.com/i/spaces/1yGBeMPaEoPKN/peek?s=20_"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 59,
+              "end": 71,
+              "username": "HoudiniSwap",
+              "id": "1527394767704825857"
+            }
+          ]
+        },
+        "created_at": "2026-03-05T03:38:20.000Z",
+        "text": "We're bringing private transactions to Infinex, powered by @HoudiniSwap \ud83d\udd2e\n\nTomorrow we're hosting a Space with Houdini to cover how Private Send works, the Infinex integration, and why on-chain privacy matters.\n\nSet your reminder \u2193\nhttps://t.co/PcmgwbZjJA",
+        "edit_history_tweet_ids": [
+          "2029401097472012317"
+        ],
+        "id": "2029401097472012317",
+        "public_metrics": {
+          "retweet_count": 10,
+          "reply_count": 20,
+          "like_count": 110,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 84427
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2029246953335197718"
+          }
+        ],
+        "created_at": "2026-03-05T01:20:24.000Z",
+        "text": "@koolcryptovc @kaiynne Yes, very possible.",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 13,
+              "username": "koolcryptovc",
+              "id": "891254558772604929"
+            },
+            {
+              "start": 14,
+              "end": 22,
+              "username": "kaiynne",
+              "id": "24809221"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2029366384069886040"
+        ],
+        "id": "2029366384069886040",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 94
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2029053643044040886"
+          }
+        ],
+        "created_at": "2026-03-04T05:17:38.000Z",
+        "text": "All blessings claimed in just 10 minutes. \n\nHappy Chinese New Year! \ud83d\udc34\ud83d\udd25",
+        "edit_history_tweet_ids": [
+          "2029063698229424315"
+        ],
+        "id": "2029063698229424315",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 17,
+          "like_count": 42,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5064
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 227,
+              "end": 250,
+              "url": "https://t.co/YAjXhYjzgm",
+              "expanded_url": "http://cb.redpackets.xyz/claim/nEwNUfAN?888=infinex",
+              "display_url": "cb.redpackets.xyz/claim/nEwNUfAN\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029053644944121856/DqrEY88j?format=png&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029053644944121856/DqrEY88j?format=png&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Open your blessing",
+              "description": "Claim USDC from this red packet on Base.",
+              "unwound_url": "https://cb.redpackets.xyz/claim/nEwNUfAN?888=infinex"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 84,
+              "end": 96,
+              "username": "coinbase_au",
+              "id": "1565479566470250498"
+            },
+            {
+              "start": 148,
+              "end": 153,
+              "username": "base",
+              "id": "1628067904083181570"
+            }
+          ]
+        },
+        "created_at": "2026-03-04T04:37:41.000Z",
+        "text": "We're blessing the Infinex community with another $888 USDC \ud83e\udde7\n\nWe\u2019ve teamed up with @coinbase_au to bring the tradition of Red Packets onchain with @base. The first Red Packets were claimed in less than an hour.\n\nClaim yours \ud83d\udc47\nhttps://t.co/YAjXhYjzgm",
+        "edit_history_tweet_ids": [
+          "2029053643044040886"
+        ],
+        "id": "2029053643044040886",
+        "public_metrics": {
+          "retweet_count": 57,
+          "reply_count": 96,
+          "like_count": 308,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 33652
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 35,
+              "end": 58,
+              "url": "https://t.co/RclTLRYjNH",
+              "expanded_url": "https://infinex.xyz/roadmap",
+              "display_url": "infinex.xyz/roadmap",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029006527319949314/yIEIhXY0?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 630
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029006527319949314/yIEIhXY0?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Infinex Roadmap",
+              "description": "Everything we've shipped, what's in progress and what's next for Infinex",
+              "unwound_url": "https://infinex.xyz/roadmap"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 12,
+              "username": "CryptoKaleo",
+              "id": "906234475604037637"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2029006240148303979"
+          }
+        ],
+        "created_at": "2026-03-04T01:30:17.000Z",
+        "text": "@CryptoKaleo Luckily, we have one\n\nhttps://t.co/RclTLRYjNH",
+        "edit_history_tweet_ids": [
+          "2029006481836916846"
+        ],
+        "id": "2029006481836916846",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1548
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 53,
+              "end": 76,
+              "url": "https://t.co/VaMVz73Jln",
+              "expanded_url": "https://x.com/0xEquinox_/status/2028997648079044729/photo/1",
+              "display_url": "pic.x.com/VaMVz73Jln",
+              "media_key": "3_2028997599492263936"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "0xEquinox_",
+              "id": "1788358526756413440"
+            },
+            {
+              "start": 42,
+              "end": 52,
+              "username": "DeriveXYZ",
+              "id": "1361564569269800960"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2028997648079044729"
+          }
+        ],
+        "created_at": "2026-03-04T01:13:00.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2028997599492263936"
+          ],
+          "media_source_tweet_id": [
+            "2028997648079044729"
+          ]
+        },
+        "text": "RT @0xEquinox_: Oh would you look at that @DeriveXYZ https://t.co/VaMVz73Jln",
+        "edit_history_tweet_ids": [
+          "2029002134545662125"
+        ],
+        "id": "2029002134545662125",
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 31,
+              "end": 54,
+              "url": "https://t.co/VzqSoul51m",
+              "expanded_url": "https://x.com/infinex/status/2028353473948131363/video/1",
+              "display_url": "pic.x.com/VzqSoul51m",
+              "media_key": "13_2028353392192749568"
+            }
+          ]
+        },
+        "created_at": "2026-03-02T06:15:27.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2028353392192749568"
+          ]
+        },
+        "text": "Times change. Privacy doesn't. https://t.co/VzqSoul51m",
+        "edit_history_tweet_ids": [
+          "2028353473948131363"
+        ],
+        "id": "2028353473948131363",
+        "public_metrics": {
+          "retweet_count": 13,
+          "reply_count": 21,
+          "like_count": 110,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 311634
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 42,
+              "end": 65,
+              "url": "https://t.co/j1KwfNXuTg",
+              "expanded_url": "https://x.com/0xEquinox_/status/2028281687701155883/photo/1",
+              "display_url": "pic.x.com/j1KwfNXuTg",
+              "media_key": "3_2028280710168244225"
+            },
+            {
+              "start": 42,
+              "end": 65,
+              "url": "https://t.co/j1KwfNXuTg",
+              "expanded_url": "https://x.com/0xEquinox_/status/2028281687701155883/photo/1",
+              "display_url": "pic.x.com/j1KwfNXuTg",
+              "media_key": "3_2028280710180843520"
+            },
+            {
+              "start": 42,
+              "end": 65,
+              "url": "https://t.co/j1KwfNXuTg",
+              "expanded_url": "https://x.com/0xEquinox_/status/2028281687701155883/photo/1",
+              "display_url": "pic.x.com/j1KwfNXuTg",
+              "media_key": "3_2028280710260563968"
+            },
+            {
+              "start": 42,
+              "end": 65,
+              "url": "https://t.co/j1KwfNXuTg",
+              "expanded_url": "https://x.com/0xEquinox_/status/2028281687701155883/photo/1",
+              "display_url": "pic.x.com/j1KwfNXuTg",
+              "media_key": "3_2028280710231130113"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "0xEquinox_",
+              "id": "1788358526756413440"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2028281687701155883"
+          }
+        ],
+        "created_at": "2026-03-02T01:38:21.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2028280710168244225",
+            "3_2028280710180843520",
+            "3_2028280710260563968",
+            "3_2028280710231130113"
+          ],
+          "media_source_tweet_id": [
+            "2028281687701155883",
+            "2028281687701155883",
+            "2028281687701155883",
+            "2028281687701155883"
+          ]
+        },
+        "text": "RT @0xEquinox_: New perps engine who dis? https://t.co/j1KwfNXuTg",
+        "edit_history_tweet_ids": [
+          "2028283736601801042"
+        ],
+        "id": "2028283736601801042",
+        "public_metrics": {
+          "retweet_count": 4,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 23,
+              "end": 46,
+              "url": "https://t.co/LJZzpSdVrv",
+              "expanded_url": "https://twitter.com/HoudiniSwap/status/2027141142186430795",
+              "display_url": "x.com/HoudiniSwap/st\u2026"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2027141142186430795"
+          }
+        ],
+        "created_at": "2026-02-27T06:50:59.000Z",
+        "text": "INX just got privacy \ud83e\udd10 https://t.co/LJZzpSdVrv",
+        "edit_history_tweet_ids": [
+          "2027275250296348757"
+        ],
+        "id": "2027275250296348757",
+        "public_metrics": {
+          "retweet_count": 10,
+          "reply_count": 12,
+          "like_count": 57,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7628
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 9,
+              "end": 32,
+              "url": "https://t.co/Dq6hW7bBv9",
+              "expanded_url": "https://x.com/infinex/status/2026815846547640719/photo/1",
+              "display_url": "pic.x.com/Dq6hW7bBv9",
+              "media_key": "3_2026815844496576512"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2026532868764365083"
+          }
+        ],
+        "created_at": "2026-02-26T00:25:28.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2026815844496576512"
+          ]
+        },
+        "text": "88,888 \ud83e\udde7 https://t.co/Dq6hW7bBv9",
+        "edit_history_tweet_ids": [
+          "2026815846547640719"
+        ],
+        "id": "2026815846547640719",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 6,
+          "like_count": 19,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3225
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 79,
+              "end": 102,
+              "url": "https://t.co/rV1yQXGocI",
+              "expanded_url": "https://x.com/i/broadcasts/1DGleEeLlkEJL",
+              "display_url": "x.com/i/broadcasts/1\u2026",
+              "unwound_url": "https://x.com/i/broadcasts/1DGleEeLlkEJL"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "laurashin",
+              "id": "26377478"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2026746982036095234"
+          }
+        ],
+        "created_at": "2026-02-25T20:02:45.000Z",
+        "text": "RT @laurashin: AI Extraction Wars, ZachXBT's Expos\u00e9 &amp; The Future of Solana https://t.co/rV1yQXGocI",
+        "edit_history_tweet_ids": [
+          "2026749731356160273"
+        ],
+        "id": "2026749731356160273",
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 158,
+              "end": 181,
+              "url": "https://t.co/0trRx06pi3",
+              "expanded_url": "https://x.com/infinex/status/2026497719142068417",
+              "display_url": "x.com/infinex/status\u2026"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 125,
+              "end": 133,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2026497719142068417"
+          }
+        ],
+        "created_at": "2026-02-25T05:41:01.000Z",
+        "text": "All blessings have been claimed \ud83e\udde7\n\nBut we're not done. Another Red Packet drop is coming before Lunar New Year ends.\n\nFollow @infinex so you don't miss it \ud83d\udc40\n\nhttps://t.co/0trRx06pi3",
+        "edit_history_tweet_ids": [
+          "2026532868764365083"
+        ],
+        "id": "2026532868764365083",
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 43,
+          "like_count": 115,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 16290
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2026497719142068417"
+          }
+        ],
+        "created_at": "2026-02-25T03:21:24.000Z",
+        "text": "Want to send your own Red Packet?\n\n\u2192 Create and fund a Red Packet with USDC\n\u2192 Share it with your community on X\n\u2192 They claim instantly - couple of taps\n\nUse the Infinex Extension to Swidge into USDC in seconds, without the worry of gas.\n\nWishing you good fortune in the Year of",
+        "edit_history_tweet_ids": [
+          "2026497731225927871"
+        ],
+        "id": "2026497731225927871",
+        "note_tweet": {
+          "text": "Want to send your own Red Packet?\n\n\u2192 Create and fund a Red Packet with USDC\n\u2192 Share it with your community on X\n\u2192 They claim instantly - couple of taps\n\nUse the Infinex Extension to Swidge into USDC in seconds, without the worry of gas.\n\nWishing you good fortune in the Year of the Horse \ud83e\udde7\ud83d\udc0e"
+        },
+        "public_metrics": {
+          "retweet_count": 4,
+          "reply_count": 1,
+          "like_count": 20,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6441
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 214,
+              "end": 237,
+              "url": "https://t.co/oLyBo1F4Xb",
+              "expanded_url": "http://cb.redpackets.xyz/claim/6SXsXrMD?888=infinex",
+              "display_url": "cb.redpackets.xyz/claim/6SXsXrMD\u2026",
+              "status": 200,
+              "title": "Open your blessing",
+              "description": "Claim USDC from this red packet on Base.",
+              "unwound_url": "https://cb.redpackets.xyz/claim/6SXsXrMD?888=infinex"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 78,
+              "end": 90,
+              "username": "coinbase_au",
+              "id": "1565479566470250498"
+            },
+            {
+              "start": 192,
+              "end": 197,
+              "username": "base",
+              "id": "1628067904083181570"
+            }
+          ]
+        },
+        "created_at": "2026-02-25T03:21:21.000Z",
+        "text": "\u99ac\u5e74\u5409\u7965 \ud83e\udde7\n\nThis Lunar New Year we're celebrating onchain.\n\nWe're teaming up with @coinbase_au to bring Red Packets to the Infinex community - an ancient tradition of sharing good fortune, now on @base.\n\nClaim yours \ud83d\udc47\nhttps://t.co/oLyBo1F4Xb\n\nWe've loaded $888 USDC - because 8",
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 214,
+                "end": 237,
+                "url": "https://t.co/XltJ1G6OxE",
+                "expanded_url": "http://cb.redpackets.xyz/claim/6SXsXrMD?888=infinex",
+                "display_url": "cb.redpackets.xyz/claim/6SXsXrMD\u2026"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 78,
+                "end": 90,
+                "username": "coinbase_au",
+                "id": "1565479566470250498"
+              },
+              {
+                "start": 192,
+                "end": 197,
+                "username": "base",
+                "id": "1628067904083181570"
+              }
+            ]
+          },
+          "text": "\u99ac\u5e74\u5409\u7965 \ud83e\udde7\n\nThis Lunar New Year we're celebrating onchain.\n\nWe're teaming up with @coinbase_au to bring Red Packets to the Infinex community - an ancient tradition of sharing good fortune, now on @base.\n\nClaim yours \ud83d\udc47\nhttps://t.co/XltJ1G6OxE\n\nWe've loaded $888 USDC - because 8 is the luckiest number."
+        },
+        "edit_history_tweet_ids": [
+          "2026497719142068417"
+        ],
+        "id": "2026497719142068417",
+        "public_metrics": {
+          "retweet_count": 64,
+          "reply_count": 92,
+          "like_count": 237,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 53463
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2026220559122505927"
+          }
+        ],
+        "entities": {
+          "hashtags": [
+            {
+              "start": 35,
+              "end": 42,
+              "tag": "KuCoin"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 27,
+              "end": 31,
+              "tag": "INX"
+            },
+            {
+              "start": 79,
+              "end": 84,
+              "tag": "USDC"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "kucoincom",
+              "id": "910110294625492992"
+            },
+            {
+              "start": 128,
+              "end": 138,
+              "username": "kucoincom",
+              "id": "910110294625492992"
+            }
+          ]
+        },
+        "created_at": "2026-02-25T00:37:29.000Z",
+        "text": "RT @kucoincom: \ud83c\udf89 Celebrate $INX on #KuCoin with an exciting giveaway!\n\n\ud83c\udf81 2,000 $USDC for 100 winners!\n\nHow to enter:\n1\ufe0f\u20e3 Follow @kucoincom\u2026",
+        "edit_history_tweet_ids": [
+          "2026456481227485330"
+        ],
+        "id": "2026456481227485330",
+        "public_metrics": {
+          "retweet_count": 3367,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        }
+      },
+      {
+        "created_at": "2026-02-23T06:17:00.000Z",
+        "text": "How many wallets are you managing right now?",
+        "edit_history_tweet_ids": [
+          "2025817147977634117"
+        ],
+        "id": "2025817147977634117",
+        "attachments": {
+          "poll_ids": [
+            "2025817147893755904"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 14,
+          "like_count": 65,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7638
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2024212427181588555"
+          }
+        ],
+        "created_at": "2026-02-18T20:01:29.000Z",
+        "text": "RT @laurashin: Is Coinbase tightening control over Base?\nCan DAOs really own their brands?\nAnd is Ethereum about to go LLM-driven?\n\nNOW on\u2026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "laurashin",
+              "id": "26377478"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2024212696317776052"
+        ],
+        "id": "2024212696317776052",
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 119,
+              "end": 139,
+              "url": "https://t.co/pmOfmsS",
+              "display_url": "t.co/pmOfmsS"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2023257297032749556"
+          }
+        ],
+        "created_at": "2026-02-18T11:21:01.000Z",
+        "text": "RT @infinex: We've already shipped enough to fill two whitepapers.\n\nCoinGecko did a deep dive on what's live today.\n\n\u2192 https://t.co/pmOfmsS\u2026",
+        "edit_history_tweet_ids": [
+          "2024081715124437348"
+        ],
+        "id": "2024081715124437348",
+        "public_metrics": {
+          "retweet_count": 4,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2023412680665563382"
+          }
+        ],
+        "created_at": "2026-02-17T04:56:46.000Z",
+        "text": "@HoudiniSwap \ud83d\udc40\ud83e\udd1d",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 12,
+              "username": "HoudiniSwap",
+              "id": "1527394767704825857"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2023622630839120139"
+        ],
+        "id": "2023622630839120139",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 428
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 134,
+              "end": 157,
+              "url": "https://t.co/XPyMidT7VV",
+              "expanded_url": "http://infinex.xyz/roadmap",
+              "display_url": "infinex.xyz/roadmap",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029006527319949314/yIEIhXY0?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 630
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029006527319949314/yIEIhXY0?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Infinex Roadmap",
+              "description": "Everything we've shipped, what's in progress and what's next for Infinex",
+              "unwound_url": "https://infinex.xyz/roadmap"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2023257297032749556"
+          }
+        ],
+        "created_at": "2026-02-16T04:45:07.000Z",
+        "text": "TGE was the beginning.\n\nStill to come: Agent infrastructure. Mobile. Infinex Card. Prediction markets. And much more.\n\nFull roadmap \u2192 https://t.co/XPyMidT7VV",
+        "edit_history_tweet_ids": [
+          "2023257309137547740"
+        ],
+        "id": "2023257309137547740",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 23,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2894
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 106,
+              "end": 129,
+              "url": "https://t.co/pmOfmsSPVc",
+              "expanded_url": "https://x.com/infinex/status/2023257297032749556/video/1",
+              "display_url": "pic.x.com/pmOfmsSPVc",
+              "media_key": "13_2023257150236295168"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2023257137447895210"
+          }
+        ],
+        "created_at": "2026-02-16T04:45:04.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2023257150236295168"
+          ]
+        },
+        "text": "We've already shipped enough to fill two whitepapers.\n\nCoinGecko did a deep dive on what's live today.\n\n\u2192 https://t.co/pmOfmsSPVc",
+        "edit_history_tweet_ids": [
+          "2023257297032749556"
+        ],
+        "id": "2023257297032749556",
+        "public_metrics": {
+          "retweet_count": 4,
+          "reply_count": 5,
+          "like_count": 56,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7480
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2023257125791875414"
+          }
+        ],
+        "created_at": "2026-02-16T04:44:26.000Z",
+        "text": "Infinex is a non-custodial superapp.\n\nOne account. Every chain. Trading, DeFi, wallet, privacy.\n\nYou keep your keys. We handle the complexity.",
+        "edit_history_tweet_ids": [
+          "2023257137447895210"
+        ],
+        "id": "2023257137447895210",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 28,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2844
+        }
+      },
+      {
+        "created_at": "2026-02-16T04:44:23.000Z",
+        "text": "A few months from now, you (or more likely your agent) will mostly use one app.\n\nYou won't think about which chain your coins are on. You won't have a different extension for each wallet. You won't copy-paste addresses or fight with bridges.\n\nYou'll just use crypto, without any",
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 321,
+                "end": 344,
+                "url": "https://t.co/TkY8xonF7L",
+                "expanded_url": "http://infinex.xyz/roadmap",
+                "display_url": "infinex.xyz/roadmap"
+              }
+            ]
+          },
+          "text": "A few months from now, you (or more likely your agent) will mostly use one app.\n\nYou won't think about which chain your coins are on. You won't have a different extension for each wallet. You won't copy-paste addresses or fight with bridges.\n\nYou'll just use crypto, without any friction.\n\nThat's what we're building.\n\n\u2192 https://t.co/TkY8xonF7L"
+        },
+        "edit_history_tweet_ids": [
+          "2023257125791875414"
+        ],
+        "id": "2023257125791875414",
+        "public_metrics": {
+          "retweet_count": 146,
+          "reply_count": 93,
+          "like_count": 502,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 257499
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 248,
+              "end": 271,
+              "url": "https://t.co/RclTLRYjNH",
+              "expanded_url": "https://infinex.xyz/roadmap",
+              "display_url": "infinex.xyz/roadmap",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029006527319949314/yIEIhXY0?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 630
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029006527319949314/yIEIhXY0?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Infinex Roadmap",
+              "description": "Everything we've shipped, what's in progress and what's next for Infinex",
+              "unwound_url": "https://infinex.xyz/roadmap"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2022192326404452722"
+          }
+        ],
+        "created_at": "2026-02-13T06:13:18.000Z",
+        "text": "We've also launched [redacted], which if you're a Patron and you've been paying attention, you will have spotted \ud83d\udc40\n\nThis is the first step on our privacy roadmap, and unlocks new ways of ensuring your funds are private when you want them to be.\n\n\u2192 https://t.co/RclTLRYjNH",
+        "edit_history_tweet_ids": [
+          "2022192339087937863"
+        ],
+        "id": "2022192339087937863",
+        "public_metrics": {
+          "retweet_count": 10,
+          "reply_count": 5,
+          "like_count": 62,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6392
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 188,
+              "end": 211,
+              "url": "https://t.co/gxwohTNSy2",
+              "expanded_url": "https://x.com/infinex/status/2022192326404452722/photo/1",
+              "display_url": "pic.x.com/gxwohTNSy2",
+              "media_key": "3_2022192324080807939"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 59,
+              "end": 66,
+              "username": "Trezor",
+              "id": "1431204614"
+            },
+            {
+              "start": 70,
+              "end": 77,
+              "username": "Ledger",
+              "id": "2652239532"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2022192311464341635"
+          }
+        ],
+        "created_at": "2026-02-13T06:13:15.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2022192324080807939"
+          ]
+        },
+        "text": "Hardware wallet support is live.\n\nYou can now connect your @Trezor or @Ledger to Infinex. View those assets in your portfolio. Send and move them, and approve transactions on your device. https://t.co/gxwohTNSy2",
+        "edit_history_tweet_ids": [
+          "2022192326404452722"
+        ],
+        "id": "2022192326404452722",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 3,
+          "like_count": 21,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2505
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 167,
+              "end": 190,
+              "url": "https://t.co/R9KKX8TpRL",
+              "expanded_url": "https://x.com/infinex/status/2022192311464341635/photo/1",
+              "display_url": "pic.x.com/R9KKX8TpRL",
+              "media_key": "3_2022192308926787587"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2022192296419373525"
+          }
+        ],
+        "created_at": "2026-02-13T06:13:12.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2022192308926787587"
+          ]
+        },
+        "text": "Bulk asset moves are live.\n\nIf you want to move 50 tokens from an imported wallet, you can now select them all. Move them in one click.\n\nNo more one-by-one transfers. https://t.co/R9KKX8TpRL",
+        "edit_history_tweet_ids": [
+          "2022192311464341635"
+        ],
+        "id": "2022192311464341635",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 12,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1441
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 136,
+              "end": 159,
+              "url": "https://t.co/TgqyxPEIi0",
+              "expanded_url": "https://x.com/infinex/status/2022192296419373525/photo/1",
+              "display_url": "pic.x.com/TgqyxPEIi0",
+              "media_key": "3_2022192294221565952"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 121,
+              "end": 129,
+              "username": "megaeth",
+              "id": "1730321133545922560"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2022192281785450541"
+          }
+        ],
+        "created_at": "2026-02-13T06:13:08.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2022192294221565952"
+          ]
+        },
+        "text": "MegaETH is now supported.\n\nYou can now use Swidge to get assets onto MegaETH and use the Infinex extension to connect to @megaeth apps. https://t.co/TgqyxPEIi0",
+        "edit_history_tweet_ids": [
+          "2022192296419373525"
+        ],
+        "id": "2022192296419373525",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 16,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1363
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 111,
+              "end": 134,
+              "url": "https://t.co/sYl4aLpJWC",
+              "expanded_url": "https://x.com/infinex/status/2022192281785450541/photo/1",
+              "display_url": "pic.x.com/sYl4aLpJWC",
+              "media_key": "3_2022192278618746882"
+            }
+          ]
+        },
+        "created_at": "2026-02-13T06:13:05.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2022192278618746882"
+          ]
+        },
+        "text": "MegaETH support, bulk move, hardware wallet support and more \ud83e\udd2b\n\nHere\u2019s what\u2019s shipped over the past few weeks\ud83d\udc47 https://t.co/sYl4aLpJWC",
+        "edit_history_tweet_ids": [
+          "2022192281785450541"
+        ],
+        "id": "2022192281785450541",
+        "public_metrics": {
+          "retweet_count": 14,
+          "reply_count": 17,
+          "like_count": 82,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5061
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2021681741602152858"
+          }
+        ],
+        "created_at": "2026-02-11T20:31:49.000Z",
+        "text": "RT @laurashin: UP NEXT on Uneasy Money: \n\nBlackRock buys UNI.\nRobinhood launches a chain.\nPolymarket turns attention into a primitive.\nVita\u2026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "laurashin",
+              "id": "26377478"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2021683613537120537"
+        ],
+        "id": "2021683613537120537",
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2020876108342927670"
+          }
+        ],
+        "created_at": "2026-02-09T16:11:26.000Z",
+        "text": "@megaeth Down the Rabbithole \ud83d\udc07",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 8,
+              "username": "megaeth",
+              "id": "1730321133545922560"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2020893311771590808"
+        ],
+        "id": "2020893311771590808",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1970
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 230,
+              "end": 253,
+              "url": "https://t.co/55ydxkO5nd",
+              "expanded_url": "http://infinex.xyz/networks/megaeth",
+              "display_url": "infinex.xyz/networks/megae\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2020882153266118656/G-OfqNj2?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 630
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2020882153266118656/G-OfqNj2?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Jump into MegaETH with Infinex",
+              "description": "The best way to explore MegaETH. No seed phrases, no bridging, gas abstracted.",
+              "unwound_url": "https://infinex.xyz/networks/megaeth"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2020882077609300249"
+          }
+        ],
+        "created_at": "2026-02-09T15:26:51.000Z",
+        "text": "While liquidity improves, the best way to get funds on MegaETH is swidging to ETH first. You can then swidge to other assets, or connect to apps directly.\n\nVisit our MegaETH network page for more details on what makes it unique \u2192 https://t.co/55ydxkO5nd",
+        "edit_history_tweet_ids": [
+          "2020882089651130482"
+        ],
+        "id": "2020882089651130482",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 16,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3296
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 158,
+              "end": 181,
+              "url": "https://t.co/37vQzkOCmV",
+              "expanded_url": "https://x.com/infinex/status/2020882077609300249/video/1",
+              "display_url": "pic.x.com/37vQzkOCmV",
+              "media_key": "13_2020881999037345794"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 22,
+              "end": 30,
+              "username": "megaeth",
+              "id": "1730321133545922560"
+            }
+          ]
+        },
+        "created_at": "2026-02-09T15:26:48.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2020881999037345794"
+          ]
+        },
+        "text": "Infinex \ud83e\udd1d MegaETH \u26a1\ufe0f\n\n@MegaETH is now live on Infinex. Day 1.\n\nYou can now bridge to MegaETH through Swidge, and use onchain apps with the Infinex Extension. https://t.co/37vQzkOCmV",
+        "edit_history_tweet_ids": [
+          "2020882077609300249"
+        ],
+        "id": "2020882077609300249",
+        "public_metrics": {
+          "retweet_count": 26,
+          "reply_count": 22,
+          "like_count": 167,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 12013
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 120,
+              "end": 143,
+              "url": "https://t.co/8KA95JwWrn",
+              "expanded_url": "https://twitter.com/megaeth/status/2019708160681161034",
+              "display_url": "x.com/megaeth/status\u2026"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2019708160681161034"
+          }
+        ],
+        "created_at": "2026-02-08T22:50:12.000Z",
+        "text": "MegaETH goes live Monday 9am EST. \n\nWith Infinex, your first transaction is using MegaETH apps, not worrying about gas. https://t.co/8KA95JwWrn",
+        "edit_history_tweet_ids": [
+          "2020631276106215645"
+        ],
+        "id": "2020631276106215645",
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 20,
+          "like_count": 112,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 13310
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2018752965704642943"
+          }
+        ],
+        "created_at": "2026-02-06T00:05:12.000Z",
+        "text": "RT @TheBlock__: ICYMI: The case for a crypto super app in a multi-chain world\n\nIn this episode of The White Papers, @Timccopeland sits down\u2026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 116,
+              "end": 129,
+              "username": "Timccopeland",
+              "id": "953233327238021120"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2019562988773208486"
+        ],
+        "id": "2019562988773208486",
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 84,
+              "end": 107,
+              "url": "https://t.co/WCBmoLRGFp",
+              "expanded_url": "https://x.com/i/broadcasts/1mnGeNAEqgnJX",
+              "display_url": "x.com/i/broadcasts/1\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2019139660598112257/VtxHf0Wh?format=jpg&name=orig",
+                  "width": 1280,
+                  "height": 720
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2019139660598112257/VtxHf0Wh?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Laura Shin",
+              "description": "Vitalik Reframes L2s, Bear Market, Hyperliquid Expands: Uneasy Money",
+              "unwound_url": "https://twitter.com/i/broadcasts/1mnGeNAEqgnJX"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "laurashin",
+              "id": "26377478"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2019139618072064134"
+          }
+        ],
+        "created_at": "2026-02-04T20:43:13.000Z",
+        "text": "RT @laurashin: Vitalik Reframes L2s, Bear Market, Hyperliquid Expands: Uneasy Money https://t.co/WCBmoLRGFp",
+        "edit_history_tweet_ids": [
+          "2019149769193705566"
+        ],
+        "id": "2019149769193705566",
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 25,
+              "end": 48,
+              "url": "https://t.co/hw5xOgRqZi",
+              "expanded_url": "https://x.com/infinex/status/2018857552105415037/photo/1",
+              "display_url": "pic.x.com/hw5xOgRqZi",
+              "media_key": "3_2018857547407773696"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 19,
+              "end": 23,
+              "tag": "INX"
+            }
+          ]
+        },
+        "created_at": "2026-02-04T01:22:03.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2018857547407773696"
+          ]
+        },
+        "text": "The DEX lineup for $INX. https://t.co/hw5xOgRqZi",
+        "edit_history_tweet_ids": [
+          "2018857552105415037"
+        ],
+        "id": "2018857552105415037",
+        "public_metrics": {
+          "retweet_count": 13,
+          "reply_count": 19,
+          "like_count": 138,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 9527
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2018603330474553413"
+          }
+        ],
+        "created_at": "2026-02-03T13:24:41.000Z",
+        "text": "@0xNairolf Working on it",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 10,
+              "username": "0xNairolf",
+              "id": "1442176296356696064"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2018677018674565291"
+        ],
+        "id": "2018677018674565291",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2823
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2018552749345132864"
+          }
+        ],
+        "created_at": "2026-02-03T05:29:08.000Z",
+        "text": "0xbf75f9fac699509afe6c4ffbf4f5fd2e7ab5dc5ceff966a60aaf9f4474cdfd5d",
+        "edit_history_tweet_ids": [
+          "2018557344377135125"
+        ],
+        "id": "2018557344377135125",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 5,
+          "like_count": 26,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6828
+        }
+      },
+      {
+        "created_at": "2026-02-03T05:10:52.000Z",
+        "text": "Everyone is building for AI.\n\nNot everyone is built for AI.\n\n\ud83e\udd9e",
+        "edit_history_tweet_ids": [
+          "2018552749345132864"
+        ],
+        "id": "2018552749345132864",
+        "public_metrics": {
+          "retweet_count": 4,
+          "reply_count": 27,
+          "like_count": 110,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 10219
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 47,
+              "end": 70,
+              "url": "https://t.co/tBy2civzQr",
+              "expanded_url": "https://x.com/infinex/status/2018464838239055931/photo/1",
+              "display_url": "pic.x.com/tBy2civzQr",
+              "media_key": "3_2018460334294814720"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 19,
+              "end": 23,
+              "tag": "INX"
+            }
+          ]
+        },
+        "created_at": "2026-02-02T23:21:33.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2018460334294814720"
+          ]
+        },
+        "text": "The CEX lineup for $INX. \n\nDEX lineup to come. https://t.co/tBy2civzQr",
+        "edit_history_tweet_ids": [
+          "2018464838239055931"
+        ],
+        "id": "2018464838239055931",
+        "public_metrics": {
+          "retweet_count": 16,
+          "reply_count": 38,
+          "like_count": 171,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 16124
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2017506304500322806"
+          }
+        ],
+        "entities": {
+          "hashtags": [
+            {
+              "start": 54,
+              "end": 61,
+              "tag": "Bitget"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 12,
+              "end": 16,
+              "tag": "INX"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 10,
+              "username": "bitget",
+              "id": "1098881129057112064"
+            },
+            {
+              "start": 17,
+              "end": 25,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            }
+          ]
+        },
+        "created_at": "2026-02-02T06:41:04.000Z",
+        "text": "RT @bitget: $INX @infinex USDT Futures is now live on #Bitget, with up to 25x leverage and trading bots support.\n\n\ud83d\ude80 Start trading now: http\u2026",
+        "edit_history_tweet_ids": [
+          "2018213057382748269"
+        ],
+        "id": "2018213057382748269",
+        "public_metrics": {
+          "retweet_count": 18,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 107,
+              "end": 130,
+              "url": "https://t.co/IFFwe1pQ8O",
+              "expanded_url": "https://x.com/Jackkk/status/2018113584967131336/video/1",
+              "display_url": "pic.x.com/IFFwe1pQ8O",
+              "media_key": "13_2018113519955419136"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 10,
+              "username": "Jackkk",
+              "id": "977664738195681281"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2018113584967131336"
+          }
+        ],
+        "created_at": "2026-02-02T00:14:03.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2018113519955419136"
+          ],
+          "media_source_tweet_id": [
+            "2018113584967131336"
+          ]
+        },
+        "text": "RT @Jackkk: Kain confirms that Infinex is planning to do buybacks \n\n\u201cBuybacks are better than no buybacks\u201d https://t.co/IFFwe1pQ8O",
+        "edit_history_tweet_ids": [
+          "2018115662582088040"
+        ],
+        "id": "2018115662582088040",
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2017450768299659289"
+          }
+        ],
+        "created_at": "2026-01-31T11:15:21.000Z",
+        "entities": {
+          "cashtags": [
+            {
+              "start": 39,
+              "end": 43,
+              "tag": "INX"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "HTX_Global",
+              "id": "914029581610377217"
+            },
+            {
+              "start": 44,
+              "end": 52,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            }
+          ]
+        },
+        "text": "RT @HTX_Global: \ud83d\udce3 New Listing Alert! \n\n$INX @infinex gets listed on HTX!\n\n\u2705 Deposits Opened\n\ud83d\udcc8Trading Starts Soon!\n\n Check Here https://t.co\u2026",
+        "edit_history_tweet_ids": [
+          "2017557309099282683"
+        ],
+        "id": "2017557309099282683",
+        "public_metrics": {
+          "retweet_count": 29,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017477192335196366"
+          }
+        ],
+        "created_at": "2026-01-31T06:15:31.000Z",
+        "text": "@andyyy Thanks for the iconic read Andy!",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 7,
+              "username": "andyyy",
+              "id": "1046811588752285699"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017481855214489766"
+        ],
+        "id": "2017481855214489766",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1075
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2017407537478287752"
+          }
+        ],
+        "created_at": "2026-01-31T05:40:08.000Z",
+        "entities": {
+          "cashtags": [
+            {
+              "start": 59,
+              "end": 63,
+              "tag": "INX"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 19,
+              "username": "CoinbaseMarkets",
+              "id": "720487892670410753"
+            }
+          ]
+        },
+        "text": "RT @CoinbaseMarkets: Perpetual futures trading for Infinex $INX will go live on 31 JAN 2026.\n\nThe opening of our INX-PERP market will begin\u2026",
+        "edit_history_tweet_ids": [
+          "2017472947217436836"
+        ],
+        "id": "2017472947217436836",
+        "public_metrics": {
+          "retweet_count": 84,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2017359104759763218"
+          }
+        ],
+        "created_at": "2026-01-30T23:28:03.000Z",
+        "text": "RT @DefiantNews: We interviewed @kaiynne Kain Warwick ( @infinex  &amp; @synthetix  ) ahead of the INX TGE.\n\nHis big thesis: OG DeFi was wrong\u2014\u2026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "DefiantNews",
+              "id": "1237544865216507906"
+            },
+            {
+              "start": 32,
+              "end": 40,
+              "username": "kaiynne",
+              "id": "24809221"
+            },
+            {
+              "start": 56,
+              "end": 64,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            },
+            {
+              "start": 72,
+              "end": 82,
+              "username": "synthetix",
+              "id": "898875132864716800"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017379309212864669"
+        ],
+        "id": "2017379309212864669",
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017325611451355466"
+          }
+        ],
+        "created_at": "2026-01-30T22:38:28.000Z",
+        "text": "@RealProducerBen @tbpn What if you\u2019d like to be Ben?",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 16,
+              "username": "RealProducerBen",
+              "id": "1540705811541790723"
+            },
+            {
+              "start": 17,
+              "end": 22,
+              "username": "tbpn",
+              "id": "1838288550569349120"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017366831749861391"
+        ],
+        "id": "2017366831749861391",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 3,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 829
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017364891288449163"
+          }
+        ],
+        "created_at": "2026-01-30T22:35:39.000Z",
+        "text": "@SwizzyOnChain Funny you mention that.",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 14,
+              "username": "SwizzyOnChain",
+              "id": "1457385316709543942"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017366125345182116"
+        ],
+        "id": "2017366125345182116",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 364
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 66,
+              "end": 89,
+              "url": "https://t.co/ky7IPkuV2u",
+              "expanded_url": "https://twitter.com/kaiynne/status/2017359485891973146",
+              "display_url": "x.com/kaiynne/status\u2026"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2017359485891973146"
+          }
+        ],
+        "created_at": "2026-01-30T22:12:15.000Z",
+        "text": "Our founder has frontrun us again.\n\nWe call this a skill-horizon. https://t.co/ky7IPkuV2u",
+        "edit_history_tweet_ids": [
+          "2017360234499739928"
+        ],
+        "id": "2017360234499739928",
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 38,
+          "like_count": 87,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 36738
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 57,
+              "end": 80,
+              "url": "https://t.co/k9x0yKpO8z",
+              "expanded_url": "https://x.com/infinex/status/2017330523048493507/photo/1",
+              "display_url": "pic.x.com/k9x0yKpO8z",
+              "media_key": "3_2017330503104528384"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 6,
+              "username": "mayan",
+              "id": "1491380237782896640"
+            },
+            {
+              "start": 7,
+              "end": 14,
+              "username": "solana",
+              "id": "951329744804392960"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017319903305310583"
+          }
+        ],
+        "created_at": "2026-01-30T20:14:11.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2017330503104528384"
+          ]
+        },
+        "text": "@mayan @solana INX to INX, all through Mayan on Infinex. https://t.co/k9x0yKpO8z",
+        "edit_history_tweet_ids": [
+          "2017330523048493507"
+        ],
+        "id": "2017330523048493507",
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 3,
+          "like_count": 10,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1284
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 100,
+              "end": 123,
+              "url": "https://t.co/7Gd7SytZlI",
+              "expanded_url": "https://x.com/i/broadcasts/1rmxPvMmqoVGN",
+              "display_url": "x.com/i/broadcasts/1\u2026",
+              "status": 200,
+              "title": "The Block",
+              "description": "The White Papers: Building a superapp with Infinex",
+              "unwound_url": "https://twitter.com/i/broadcasts/1rmxPvMmqoVGN"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 66,
+              "end": 79,
+              "username": "Timccopeland",
+              "id": "953233327238021120"
+            }
+          ]
+        },
+        "created_at": "2026-01-30T20:07:53.000Z",
+        "text": "It wouldn't be TGE day without a livestream.\n\nWe're live now with @Timccopeland from @TheBlock__ \ud83d\udd0a\n\nhttps://t.co/7Gd7SytZlI",
+        "edit_history_tweet_ids": [
+          "2017328936674574618"
+        ],
+        "id": "2017328936674574618",
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 27,
+          "like_count": 83,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 18116
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 66,
+              "end": 89,
+              "url": "https://t.co/77dO35aLSH",
+              "expanded_url": "https://x.com/solana/status/2017313343900352805/video/1",
+              "display_url": "pic.x.com/77dO35aLSH",
+              "media_key": "13_2017312755066261504"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 22,
+              "end": 26,
+              "tag": "INX"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 10,
+              "username": "solana",
+              "id": "951329744804392960"
+            },
+            {
+              "start": 32,
+              "end": 40,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2017313343900352805"
+          }
+        ],
+        "created_at": "2026-01-30T19:24:38.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2017312755066261504"
+          ],
+          "media_source_tweet_id": [
+            "2017313343900352805"
+          ]
+        },
+        "text": "RT @solana: BREAKING: $INX, the @infinex token, is live on Solana https://t.co/77dO35aLSH",
+        "edit_history_tweet_ids": [
+          "2017318051532935195"
+        ],
+        "id": "2017318051532935195",
+        "public_metrics": {
+          "retweet_count": 81,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2017312095474487557"
+          }
+        ],
+        "created_at": "2026-01-30T19:24:34.000Z",
+        "text": "RT @Sunrise_DeFi: INX has listed on Solana.\n\nNow live via Sunrise, INX from @infinex is available natively on Solana.\n\nYou can trade INX ag\u2026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "Sunrise_DeFi",
+              "id": "2039655692273926144"
+            },
+            {
+              "start": 76,
+              "end": 84,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017318038073446516"
+        ],
+        "id": "2017318038073446516",
+        "public_metrics": {
+          "retweet_count": 17,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017312095474487557"
+          }
+        ],
+        "created_at": "2026-01-30T19:13:29.000Z",
+        "text": "@Sunrise_DeFi Solana liquidity from day one.\n\n\ud83e\udd1d",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 13,
+              "username": "Sunrise_DeFi",
+              "id": "2039655692273926144"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017315249133908401"
+        ],
+        "id": "2017315249133908401",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 9197
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017313343900352805"
+          }
+        ],
+        "created_at": "2026-01-30T19:07:55.000Z",
+        "text": "@solana I've been waiting for years for this.",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 7,
+              "username": "solana",
+              "id": "951329744804392960"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017313845224869994"
+        ],
+        "id": "2017313845224869994",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 14,
+          "like_count": 39,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6992
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017312005745741844"
+          }
+        ],
+        "created_at": "2026-01-30T19:02:34.000Z",
+        "text": "Official INX contracts:\n\nEthereum\n0xdeF1b2D939EdC0E4d35806c59b3166F790175afe\n\nSolana\ninxKXw9V2NDZE7hDijzpJaKKUb97NEPJDTCEEiYg4yY\n\nBSC\n0x45f55B46689402583073ff227B6ac20520052a24",
+        "edit_history_tweet_ids": [
+          "2017312498979115010"
+        ],
+        "id": "2017312498979115010",
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 19,
+          "like_count": 172,
+          "quote_count": 2,
+          "bookmark_count": 126,
+          "impression_count": 44468
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017311858685002230"
+          }
+        ],
+        "created_at": "2026-01-30T19:00:36.000Z",
+        "entities": {
+          "cashtags": [
+            {
+              "start": 15,
+              "end": 19,
+              "tag": "INX"
+            }
+          ]
+        },
+        "text": "Where to trade $INX:\n\nONCHAIN\n\u279e Infinex - buy INX directly on the platform\n\u279e Ethereum\n\u279e Solana (Provided by Sunrise)\n\u279e BSC\n\nCEX\n\u279e Coinbase\n\u279e Kraken\n\u279e KuCoin\n\u279e HTX\n\u279e Bitvavo\n\u279e LBank\n\u279e Bybit\n\u279e Binance\n\u279e Gate",
+        "edit_history_tweet_ids": [
+          "2017312005745741844"
+        ],
+        "id": "2017312005745741844",
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 27,
+          "like_count": 188,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 23721
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 13,
+              "end": 36,
+              "url": "https://t.co/5YZNZKcxyJ",
+              "expanded_url": "https://x.com/infinex/status/2017311858685002230/video/1",
+              "display_url": "pic.x.com/5YZNZKcxyJ",
+              "media_key": "13_2017311559861866497"
+            }
+          ]
+        },
+        "created_at": "2026-01-30T19:00:01.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2017311559861866497"
+          ]
+        },
+        "text": "INX is here. https://t.co/5YZNZKcxyJ",
+        "edit_history_tweet_ids": [
+          "2017311858685002230"
+        ],
+        "id": "2017311858685002230",
+        "public_metrics": {
+          "retweet_count": 57,
+          "reply_count": 172,
+          "like_count": 492,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 98458
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2016916335649792095"
+          }
+        ],
+        "created_at": "2026-01-30T16:22:58.000Z",
+        "entities": {
+          "cashtags": [
+            {
+              "start": 39,
+              "end": 43,
+              "tag": "INX"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "krakenfx",
+              "id": "1399148563"
+            },
+            {
+              "start": 51,
+              "end": 59,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            }
+          ]
+        },
+        "text": "RT @krakenfx: Coming soon to Kraken \ud83d\udd2e\n\n$INX powers @infinex, a non-custodial, passkey-first crypto superapp with a gas-abstracted multi-cha\u2026",
+        "edit_history_tweet_ids": [
+          "2017272335741624595"
+        ],
+        "id": "2017272335741624595",
+        "public_metrics": {
+          "retweet_count": 33,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017219888067010937"
+          }
+        ],
+        "created_at": "2026-01-30T15:53:12.000Z",
+        "text": "@scylla_98 @lawrenx_ ?",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 10,
+              "username": "scylla_98",
+              "id": "1379181086870228992"
+            },
+            {
+              "start": 11,
+              "end": 20,
+              "username": "lawrenx_",
+              "id": "1038021937304416256"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017264845629120732"
+        ],
+        "id": "2017264845629120732",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 145
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017181606927323414"
+          }
+        ],
+        "created_at": "2026-01-30T12:11:51.000Z",
+        "text": "@solana What could this mean?",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 7,
+              "username": "solana",
+              "id": "951329744804392960"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017209139584504023"
+        ],
+        "id": "2017209139584504023",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6934
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 194,
+              "end": 217,
+              "url": "https://t.co/ExvEVHUReI",
+              "expanded_url": "https://etherscan.io/block/24346048",
+              "display_url": "etherscan.io/block/24346048",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2017138579433263104/tPYlYugu?format=jpg&name=orig",
+                  "width": 1600,
+                  "height": 800
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2017138579433263104/tPYlYugu?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Ethereum Blocks #24346048 | Etherscan",
+              "description": "Ethereum Block Height 24346048. The timestamp, block reward, difficulty, gas used and the number of transactions in the block are detailed on Etherscan.",
+              "unwound_url": "https://etherscan.io/block/24346048"
+            },
+            {
+              "start": 218,
+              "end": 241,
+              "url": "https://t.co/grGsgM2vTm",
+              "expanded_url": "https://x.com/infinex/status/2017138575809396876/photo/1",
+              "display_url": "pic.x.com/grGsgM2vTm",
+              "media_key": "3_2017137537622650881"
+            }
+          ]
+        },
+        "created_at": "2026-01-30T07:31:27.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2017137537622650881"
+          ]
+        },
+        "text": "The Patron Snapshot has been taken. \n\nAny Patrons bought after Etherum mainnet block #24346048, will not be able eligible to claim INX.\n\nNext stop TGE, at 19:00pm UTC, Friday 30th Jan (today)!\n\nhttps://t.co/ExvEVHUReI https://t.co/grGsgM2vTm",
+        "edit_history_tweet_ids": [
+          "2017138575809396876"
+        ],
+        "id": "2017138575809396876",
+        "public_metrics": {
+          "retweet_count": 12,
+          "reply_count": 49,
+          "like_count": 167,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 53984
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2017126943339270626"
+          }
+        ],
+        "entities": {
+          "hashtags": [
+            {
+              "start": 68,
+              "end": 75,
+              "tag": "KuCoin"
+            }
+          ],
+          "cashtags": [
+            {
+              "start": 50,
+              "end": 54,
+              "tag": "INX"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "kucoincom",
+              "id": "910110294625492992"
+            },
+            {
+              "start": 41,
+              "end": 49,
+              "username": "infinex",
+              "id": "1681540721684389888"
+            }
+          ]
+        },
+        "created_at": "2026-01-30T06:57:54.000Z",
+        "text": "RT @kucoincom: \ud83d\udce2 World Premiere Listing: @infinex $INX Is Coming to #KuCoin!\n\nInfinex is a non-custodial crypto superapp with a gasless mul\u2026",
+        "edit_history_tweet_ids": [
+          "2017130133027770410"
+        ],
+        "id": "2017130133027770410",
+        "public_metrics": {
+          "retweet_count": 33,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 221,
+              "end": 244,
+              "url": "https://t.co/Fcy26DHxYA",
+              "expanded_url": "https://twitter.com/infinex/status/2015642206317736394",
+              "display_url": "x.com/infinex/status\u2026"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2015642206317736394"
+          }
+        ],
+        "created_at": "2026-01-30T06:09:41.000Z",
+        "text": "Patron Snapshot in less than 1 (one) hour \u23f0\n\nMake sure your Patrons are in a wallet you control, and that all bids on Patrons are retracted before 07:00 UTC. \n\nPatrons bought after the snapshot will have no INX to claim. https://t.co/Fcy26DHxYA",
+        "edit_history_tweet_ids": [
+          "2017117997408932341"
+        ],
+        "id": "2017117997408932341",
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 23,
+          "like_count": 51,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 24759
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 152,
+              "end": 175,
+              "url": "https://t.co/BxBiNYQTie",
+              "expanded_url": "https://infinex.xyz/news/road-to-inx-tge",
+              "display_url": "infinex.xyz/news/road-to-i\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2016051776756318214/8JScIhvq?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 630
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2016051776756318214/8JScIhvq?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Road to TGE: The Complete Guide",
+              "description": "This document is your comprehensive guide to understanding what happens to your Infinex holdings at TGE.",
+              "unwound_url": "https://infinex.xyz/news/road-to-inx-tge"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017080247632744470"
+          }
+        ],
+        "created_at": "2026-01-30T03:39:44.000Z",
+        "text": "Instructions on how to claim your INX tokens if you're a Patron holder (or if you earned INX during Bullrun or Yaprun) can be found in our Road to TGE: https://t.co/BxBiNYQTie",
+        "edit_history_tweet_ids": [
+          "2017080259427127759"
+        ],
+        "id": "2017080259427127759",
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 3,
+          "like_count": 22,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 13770
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017080235548946810"
+          }
+        ],
+        "created_at": "2026-01-30T03:39:41.000Z",
+        "text": "You can redeem your INX Vouchers anytime within 1 year after TGE (until January 30th, 2027).\n\nYou can continue earning INX Vouchers after TGE through Craterun.",
+        "edit_history_tweet_ids": [
+          "2017080247632744470"
+        ],
+        "id": "2017080247632744470",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 30,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 19650
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 170,
+              "end": 193,
+              "url": "https://t.co/jOsnDRnUtP",
+              "expanded_url": "https://x.com/infinex/status/2017080235548946810/photo/1",
+              "display_url": "pic.x.com/jOsnDRnUtP",
+              "media_key": "3_2017080232726151168"
+            }
+          ]
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017080218385895617"
+          }
+        ],
+        "created_at": "2026-01-30T03:39:38.000Z",
+        "attachments": {
+          "media_keys": [
+            "3_2017080232726151168"
+          ]
+        },
+        "text": "How to redeem INX Vouchers earned through Craterun:\n\n\u2192 Go to the Crates page in your Infinex app\n\u2192 Select how many of each voucher you want to redeem\n\u2192 Complete checkout https://t.co/jOsnDRnUtP",
+        "edit_history_tweet_ids": [
+          "2017080235548946810"
+        ],
+        "id": "2017080235548946810",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 2,
+          "like_count": 25,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3639
+        }
+      },
+      {
+        "created_at": "2026-01-30T03:39:34.000Z",
+        "text": "If you hold INX Vouchers, you can start redeeming them today, January 30th, 2026 (TGE).\n\nINX Vouchers give you direct access to INX tokens at a pre-set price in the Infinex app.\n\nHere's how \ud83d\udc47",
+        "edit_history_tweet_ids": [
+          "2017080218385895617"
+        ],
+        "id": "2017080218385895617",
+        "public_metrics": {
+          "retweet_count": 14,
+          "reply_count": 54,
+          "like_count": 106,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 44784
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2017072020069240981"
+          }
+        ],
+        "created_at": "2026-01-30T03:09:40.000Z",
+        "text": "@Aneuthangtang Yes, if it's purchasable, it's unlocked.",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 14,
+              "username": "Aneuthangtang",
+              "id": "1344162248"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017072692739133680"
+        ],
+        "id": "2017072692739133680",
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 177
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2017059773192221165"
+          }
+        ],
+        "created_at": "2026-01-30T02:39:02.000Z",
+        "text": "RT @Khaleesi_98: A reminder, the Patron snapshot is occuring less than 4 hours, 07:00 UTC. Please ensure any bids on NFT marketplaces are r\u2026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "Khaleesi_98",
+              "id": "1792355383459323904"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2017064983776154008"
+        ],
+        "id": "2017064983776154008",
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2016890201528807714"
+          }
+        ],
+        "created_at": "2026-01-30T00:41:08.000Z",
+        "entities": {
+          "cashtags": [
+            {
+              "start": 38,
+              "end": 42,
+              "tag": "INX"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "CryptoGorilla",
+              "id": "94261044"
+            },
+            {
+              "start": 69,
+              "end": 77,
+              "username": "kaiynne",
+              "id": "24809221"
+            }
+          ]
+        },
+        "text": "RT @CryptoGorilla: Only one day until $INX launches\n\nI sat down with @kaiynne to discuss the token, how markets are changing, and what\u2019s ne\u2026",
+        "edit_history_tweet_ids": [
+          "2017035313269658010"
+        ],
+        "id": "2017035313269658010",
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        }
+      },
+      {
+        "entities": {
+          "urls": [
+            {
+              "start": 12,
+              "end": 35,
+              "url": "https://t.co/4AzIxsBKab",
+              "expanded_url": "https://x.com/infinex/status/2016949582379549126/video/1",
+              "display_url": "pic.x.com/4AzIxsBKab",
+              "media_key": "13_2016949498132717568"
+            }
+          ]
+        },
+        "created_at": "2026-01-29T19:00:28.000Z",
+        "attachments": {
+          "media_keys": [
+            "13_2016949498132717568"
+          ]
+        },
+        "text": "Tick, tock. https://t.co/4AzIxsBKab",
+        "edit_history_tweet_ids": [
+          "2016949582379549126"
+        ],
+        "id": "2016949582379549126",
+        "public_metrics": {
+          "retweet_count": 14,
+          "reply_count": 31,
+          "like_count": 175,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 30207
+        }
+      }
+    ],
+    "includes": {
+      "media": [
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2043931650875371525/img/p7BLcDLLr5NZHwy8.jpg",
+          "duration_ms": 113500,
+          "variants": [
+            {
+              "bit_rate": 288000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2043931650875371525/vid/avc1/480x270/u6KoZGfAarPuhO3H.mp4?tag=14"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2043931650875371525/vid/avc1/640x360/BRHJ9myj8z83Nohv.mp4?tag=14"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2043931650875371525/pl/GPFeEw8_IOo93HPt.m3u8?tag=14&v=17b"
+            }
+          ],
+          "media_key": "13_2043931650875371525",
+          "type": "video"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2038521271932321792/img/gIHdJPRyHxQK8IpQ.jpg",
+          "duration_ms": 8350,
+          "variants": [
+            {
+              "bit_rate": 288000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2038521271932321792/vid/avc1/480x270/a5APnJcSw1ebbpe7.mp4?tag=14"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2038521271932321792/vid/avc1/640x360/dJOB3LzKmyyybg_L.mp4?tag=14"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2038521271932321792/vid/avc1/1280x720/Dh-FrDoqBOYrvQtL.mp4?tag=14"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2038521271932321792/pl/7mk-nkE9Ow2Df4U_.m3u8?tag=14"
+            }
+          ],
+          "media_key": "13_2038521271932321792",
+          "type": "video"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2036684757782937600/img/ybCdrsW-Cs6x5-Nw.jpg",
+          "duration_ms": 46021,
+          "variants": [
+            {
+              "bit_rate": 288000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2036684757782937600/vid/avc1/480x270/JTn73BkHagVzk21r.mp4?tag=14"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2036684757782937600/vid/avc1/640x360/BvTkok0-oSS_imel.mp4?tag=14"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2036684757782937600/vid/avc1/1280x720/hmJZ9dzaFksV2IHg.mp4?tag=14"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2036684757782937600/pl/IxhczXhygCLYH3oc.m3u8?tag=14&v=aa7"
+            }
+          ],
+          "media_key": "13_2036684757782937600",
+          "type": "video"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2031235812554366976/img/gCrLstqyElrCb03D.jpg",
+          "duration_ms": 38500,
+          "variants": [
+            {
+              "bit_rate": 288000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2031235812554366976/vid/avc1/480x270/yqTcofe6bqVVyIwC.mp4?tag=14"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2031235812554366976/vid/avc1/640x360/48KZ5ggH1AxAxtO6.mp4?tag=14"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2031235812554366976/vid/avc1/1280x720/Xrvkd-vqIO616_aq.mp4?tag=14"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2031235812554366976/pl/96nAiWtkDMHI0kDT.m3u8?tag=14&v=ae1"
+            }
+          ],
+          "media_key": "13_2031235812554366976",
+          "type": "video"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2029732521836171266/img/LTg2ClvlDDdgBlKs.jpg",
+          "duration_ms": 30014,
+          "variants": [
+            {
+              "bit_rate": 288000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2029732521836171266/vid/avc1/480x270/eQKjiUfg6lOsL5AW.mp4?tag=14"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2029732521836171266/vid/avc1/640x360/G4YVBpE3PXAWqj4z.mp4?tag=14"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2029732521836171266/vid/avc1/1280x720/0eb5GftLpf2NbX_Q.mp4?tag=14"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2029732521836171266/pl/oOBZOG0IGpHlzcju.m3u8?tag=14&v=cfc"
+            }
+          ],
+          "media_key": "13_2029732521836171266",
+          "type": "video"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HChykQ_bUAAVzf3.png",
+          "media_key": "3_2028997599492263936",
+          "type": "photo"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2028353392192749568/img/JUPl-DVuDCFn5lCo.jpg",
+          "duration_ms": 29033,
+          "variants": [
+            {
+              "bit_rate": 288000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2028353392192749568/vid/avc1/480x270/AWwpS-DLp7DmQdwf.mp4?tag=14"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2028353392192749568/vid/avc1/640x360/s3XCscLaU6cIIUN6.mp4?tag=14"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2028353392192749568/vid/avc1/1280x720/hKOuOuxO7UQ26yG0.mp4?tag=14"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2028353392192749568/pl/_-LckQdEjjtUBRBP.m3u8?tag=14&v=2ba"
+            }
+          ],
+          "media_key": "13_2028353392192749568",
+          "type": "video"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HCXmj0Ja8AEIcuO.png",
+          "media_key": "3_2028280710168244225",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HCXmj0MbMAAP5mT.png",
+          "media_key": "3_2028280710180843520",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HCXmj0fboAAiAO5.png",
+          "media_key": "3_2028280710260563968",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HCXmj0YagAED5zz.png",
+          "media_key": "3_2028280710231130113",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HCCyRaRaEAAwdd_.jpg",
+          "media_key": "3_2026815844496576512",
+          "type": "photo"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2023257150236295168/img/W_Ru33EZstQ4SIi6.jpg",
+          "duration_ms": 417172,
+          "variants": [
+            {
+              "bit_rate": 288000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2023257150236295168/vid/avc1/480x270/GO1BmzEO6gjjt1D2.mp4?tag=14"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2023257150236295168/vid/avc1/640x360/jlD81T4tEAuyhM8k.mp4?tag=14"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2023257150236295168/vid/avc1/1280x720/yMuFpow48pA3oE8e.mp4?tag=14"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2023257150236295168/pl/kd8An-eSlof1LxM0.m3u8?tag=14"
+            }
+          ],
+          "media_key": "13_2023257150236295168",
+          "type": "video"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HBBFNGhbsAMHXL5.png",
+          "media_key": "3_2022192324080807939",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HBBFMOEbsAMdrJJ.jpg",
+          "media_key": "3_2022192308926787587",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HBBFLXSb0AAIsUe.jpg",
+          "media_key": "3_2022192294221565952",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HBBFKdKbsAI93An.jpg",
+          "media_key": "3_2022192278618746882",
+          "type": "photo"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2020881999037345794/img/FtOPGc_fo6Y2o0xB.jpg",
+          "duration_ms": 9383,
+          "variants": [
+            {
+              "bit_rate": 288000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2020881999037345794/vid/avc1/450x270/H8MW3ojGX2dwCLNo.mp4?tag=14"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2020881999037345794/vid/avc1/600x360/EtHnsWHcSdtRGuDJ.mp4?tag=14"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2020881999037345794/vid/avc1/1200x720/-cJ8XVLlX1tqEES-.mp4?tag=14"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2020881999037345794/pl/q2c_dWzzWqhK_Kgh.m3u8?tag=14"
+            }
+          ],
+          "media_key": "13_2020881999037345794",
+          "type": "video"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HARsPjVbUAAKpXT.jpg",
+          "media_key": "3_2018857547407773696",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HAMC-tLb0AARNYM.jpg",
+          "media_key": "3_2018460334294814720",
+          "type": "photo"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2018113519955419136/img/c2UxqepQzxQ_FQuE.jpg",
+          "duration_ms": 10316,
+          "variants": [
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2018113519955419136/vid/avc1/480x270/Ur-SDf7JppkE_Xd_.mp4"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2018113519955419136/vid/avc1/640x360/CyuIHt0u9SM1o-uD.mp4"
+            },
+            {
+              "bit_rate": 10368000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2018113519955419136/vid/avc1/1920x1080/ilFVsYwBGEy-m3ro.mp4"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2018113519955419136/vid/avc1/1280x720/snONsFeHWV5pFNCM.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2018113519955419136/pl/H-Ueu_X8h0FmVz3d.m3u8?v=1ff"
+            }
+          ],
+          "media_key": "13_2018113519955419136",
+          "type": "video"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/G_7_Z4AbAAA5VoN.jpg",
+          "media_key": "3_2017330503104528384",
+          "type": "photo"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2017312755066261504/img/kQIbQsoRybnQLU4R.jpg",
+          "duration_ms": 30030,
+          "variants": [
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2017312755066261504/vid/avc1/1280x720/KqqYUTTYi2mB1SCI.mp4"
+            },
+            {
+              "bit_rate": 10368000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2017312755066261504/vid/avc1/1778x1000/HMLnWrxC_NSwEaQ4.mp4"
+            },
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2017312755066261504/vid/avc1/480x270/X7yvLtVatYFjIZ-3.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2017312755066261504/pl/pXSBVmkP507yrATc.m3u8?v=cfc"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2017312755066261504/vid/avc1/640x360/eY3SiKil-F8pJLKZ.mp4"
+            }
+          ],
+          "media_key": "13_2017312755066261504",
+          "type": "video"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2017311559861866497/img/74NXoJosqvd_ab2D.jpg",
+          "duration_ms": 37822,
+          "variants": [
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2017311559861866497/vid/avc1/640x360/IINKUyxRRmZdNARU.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2017311559861866497/pl/rHn5-y-k5RbF-quW.m3u8?v=d3f"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2017311559861866497/vid/avc1/1280x720/ZGWe7H3wb0HifS7g.mp4"
+            },
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2017311559861866497/vid/avc1/480x270/OFkeIIyAS6GeFLVe.mp4"
+            },
+            {
+              "bit_rate": 10368000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2017311559861866497/vid/avc1/1920x1080/s80mbw7BqRAkcRDc.mp4"
+            }
+          ],
+          "media_key": "13_2017311559861866497",
+          "type": "video"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/G_5P5zkasAEw06I.jpg",
+          "media_key": "3_2017137537622650881",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/G_4byOMawAAZdGb.jpg",
+          "media_key": "3_2017080232726151168",
+          "type": "photo"
+        },
+        {
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2016949498132717568/img/lIqhEI1LVvUwuiGi.jpg",
+          "duration_ms": 6036,
+          "variants": [
+            {
+              "bit_rate": 288000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2016949498132717568/vid/avc1/432x270/VGa5L4QC91lgC9rb.mp4?tag=14"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2016949498132717568/vid/avc1/578x360/naQqTe9deJcRiJnD.mp4?tag=14"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2016949498132717568/vid/avc1/1156x720/gwCdZFqImFMe0X7Z.mp4?tag=14"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2016949498132717568/pl/wlFEauxOZN_Q0eZL.m3u8?tag=14"
+            }
+          ],
+          "media_key": "13_2016949498132717568",
+          "type": "video"
+        }
+      ]
+    },
+    "meta": {
+      "result_count": 100,
+      "newest_id": "2044506985958412493",
+      "oldest_id": "2016949582379549126",
+      "next_token": "7140dibdnow9c7btwoxgfe9a1qjodq3bggji0fr52sieu"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "spot-clob-hyperliquid-2026-05-20",
+  "title": "Spot CLOB trading live on Hyperliquid via Infinex",
+  "ship_date": "2026-05-20",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "Infinex previously offered swap-routing spot (swidge) but no CLOB spot order book — this launch is the first CLOB spot on Infinex",
+    "spot CLOB trading venue provider: Hyperliquid",
+    "Hyperliquid market type for spot trading: CLOB (Central Limit Order Book) — same architecture as perps",
+    "21 Hyperliquid spot markets have >$100K 24h volume; 298 exist on-chain but most had zero or negligible volume — do not use 298 as a market count in copy",
+    "Hyperliquid spot market: HYPE/USDC — $97.57M 24h volume (highest; native HL token, no U-prefix)",
+    "Hyperliquid spot market: UBTC/USDC (Unit Bitcoin, wrapped BTC) — $26.91M 24h volume",
+    "Hyperliquid spot market: UETH/USDC (Unit Ethereum, wrapped ETH) — $4.21M 24h volume",
+    "Hyperliquid spot UI: Spot and Perps are distinct sub-accounts with separate balances; Deposit, Withdraw, Transfer between them are distinct in-product actions",
+    "perps trading venue provider: Hyperliquid"
+  ],
+  "kind": "data-card-official",
+  "metric": "Hyperliquid spot markets with >$100K 24h volume now tradable via Infinex",
+  "value": 21,
+  "unit": "markets"
+}

@@ -1,0 +1,925 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>Pipeline 3 all 5 variants × 10 releases</title>
+<style>
+:root {
+  --bg:#0e1116; --card:#161b22; --border:#30363d; --text:#e6edf3;
+  --muted:#8b949e; --accent:#58a6ff; --good:#4ade80; --bad:#ff6b6b;
+  --current:#ff6b6b; --va:#f0c674; --vap:#d8b4fe; --vbp:#58a6ff; --vc:#4ade80;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:14px/1.55 -apple-system,system-ui,sans-serif}
+.wrap{max-width:1640px;margin:0 auto;padding:32px 24px 80px}
+h1{font-size:28px;margin:0 0 6px}
+.sub{color:var(--muted);margin-bottom:24px;font-size:13px}
+.intro{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:6px;padding:16px 22px;margin-bottom:20px;font-size:13px}
+.intro strong{color:var(--text)}
+.intro code{background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:3px;font-size:12px}
+.release{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px 18px;margin-bottom:14px}
+.release-h{margin:0 0 10px;font-size:14px}
+.release-id{font-family:var(--mono);color:var(--accent);font-size:12px;margin-right:10px}
+.variants{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.vc{padding:10px 12px;border-radius:5px;border:1px solid var(--border);border-top-width:3px;background:rgba(255,255,255,0.02);display:flex;flex-direction:column;gap:6px}
+.vc.current{border-top-color:var(--current)}
+.vc.va{border-top-color:var(--va)}
+.vc.vap{border-top-color:var(--vap)}
+.vc.vbp{border-top-color:var(--vbp)}
+.vc.vc{border-top-color:var(--vc)}
+.vc-head{display:flex;flex-direction:column;gap:2px;font-size:10px}
+.vc-label{text-transform:uppercase;letter-spacing:0.06em;font-weight:700;font-size:10.5px}
+.vc.current .vc-label{color:var(--current)}
+.vc.va .vc-label{color:var(--va)}
+.vc.vap .vc-label{color:var(--vap)}
+.vc.vbp .vc-label{color:var(--vbp)}
+.vc.vc .vc-label{color:var(--vc)}
+.vc-meta{color:var(--muted);font-family:var(--mono);font-size:10.5px}
+.vc-flags{margin-top:2px}
+.chip,.flag-clean,.flag-wall,.flag-refus,.flag-elim{display:inline-block;padding:1px 6px;border-radius:8px;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+.flag-clean{background:rgba(74,222,128,0.18);color:var(--good)}
+.flag-wall{background:rgba(255,107,107,0.3);color:#fff}
+.flag-refus{background:rgba(240,198,116,0.25);color:var(--va)}
+.flag-elim{background:rgba(240,198,116,0.25);color:var(--va)}
+.vc-context{margin:6px 0 4px;font-size:10px;border-radius:3px;background:rgba(0,0,0,0.2)}
+.vc-context summary{padding:4px 8px;cursor:pointer;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:0.06em;user-select:none}
+.vc-context summary:hover{color:var(--text)}
+.vc-context[open] summary{border-bottom:1px solid var(--border)}
+.vc-context-body{padding:6px 8px;font-family:var(--mono);font-size:10.5px;line-height:1.45}
+.vc-ctx-line{margin-bottom:3px;color:var(--muted)}
+.vc-ctx-line strong{color:var(--text)}
+.vc-caption{font-family:var(--mono);font-size:12px;line-height:1.55;white-space:pre-wrap;padding:8px 10px;background:rgba(0,0,0,0.2);border-radius:4px;flex-grow:1}
+mark{background:var(--bad);color:#fff;padding:0 2px;border-radius:2px;font-weight:700}
+</style></head><body><div class="wrap">
+<h1>Pipeline 3 — all 5 variants × 10 releases</h1>
+<div class="sub">2026-05-28 · 50 captions from <code>orchestrateActorDirectorWithRetries</code>. All five docstring variants per release, side by side.</div>
+<div class="intro">
+<strong>Character verbiage injection points:</strong> three places carry the Infinex character voice into the pipeline:
+<ul style="margin:6px 0 0 22px;padding:0">
+<li><code>src/voice/infinex.ts</code> — voice spec with <code>character_image</code> ("banker-turned-crypto trailblazer"), <code>literary_anchors</code> (Werle, the Duke), <code>super_objective</code> ("to take responsibility for the tech, so the user only has to want"), <code>super_objective_examples</code>, <code>structural_traits</code>, <code>historical_lore</code>, <code>off_spec_regexes</code>, and 12 tempi with canonical_shorthand + factor_shape + motor.</li>
+<li><code>src/actor-memory.ts:343-368</code> — <code>infinexPlacementBlock</code> dumps the voice spec into the Actor's system prompt on every call. The Actor reads it before every table_work + performance.</li>
+<li><code>card.through_action</code> + <code>card.lining</code> — per-release dramaturgical intake. Varies per cell (the docstring variant shaped it at grounding time).</li>
+</ul>
+<p style="margin:8px 0 0">The 5 variants below share the SAME voice spec + SAME Actor system prompt. The variable is the docstring shape (in card.ts) that produced the per-cell through_action + lining inputs. Click "Input through_action + lining" on any cell to see what the Actor read.</p>
+</div>
+
+<div class="release">
+  <h3 class="release-h"><span class="release-id">fiat-onramp</span> Fiat deposits via virtual bank accounts</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 202c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to reveal that the bank wall just dissolved inside one account</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a new fiat deposit rail. underneath: the bank-vs-wallet wall just stopped existing for Infinex users.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to reveal that the bank wall just dissolved inside one account</div>
+    </div>
+  </details>
+  <div class="vc-caption">Your Infinex account has a bank account number now.<br><br>Send a wire to it. Send an ACH. Send a SEPA transfer. It arrives in your wallet as USDC.<br><br>The bank and the wallet were never supposed to be separate.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 125c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to eliminate the off-chain bridge between traditional banking and on-chain assets</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: users can now deposit fiat via bank transfer. underneath: the friction barrier preventing mainstream users from entering crypto has been removed</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to retire the detour between bank and wallet</div>
+    </div>
+  </details>
+  <div class="vc-caption">ACH, SEPA, wire. Straight into your Infinex wallet, as USDC.<br><br>The exchange step in the middle is no longer part of the route.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 196c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-wall">WALL</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to erase the boundary between traditional banking and on-chain custody</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a deposit method is added. underneath: the user no longer needs to understand the difference between fiat and crypto infrastructure.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to erase the boundary between traditional banking and on-chain custody</div>
+    </div>
+  </details>
+  <div class="vc-caption">A wire from your bank. SEPA, ACH, an account number that behaves like any other.<br><br>It arrives in your wallet as USDC. On-chain. Yours.<br><br>The <mark>wall</mark> between the bank and the wallet isn&#x27;t there anymore.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 1 · ship 5 · voice 5 · 148c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to collapse the banking interface</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: making deposits easier. underneath: erasing the boundary between traditional finance and on-chain existence.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to collapse the banking interface</div>
+    </div>
+  </details>
+  <div class="vc-caption">You have an Infinex account number now.<br><br>Your bank can ACH, wire, or SEPA into it. USD, EUR, GBP, MXN, BRL, COP.<br><br>It arrives in your wallet as USDC.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 2 · ship 4 · voice 4 · 212c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to dissolve the boundary between legacy and native systems</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, providing convenient deposit methods; underneath, erasing the moment when users must choose between worlds</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to dissolve the boundary between legacy and native systems</div>
+    </div>
+  </details>
+  <div class="vc-caption">Wire. ACH. SEPA.<br><br>Send dollars, euros, or pounds from your bank. They arrive as USDC in your Infinex wallet.<br><br>No exchange in the middle. No bridge step. The account number is yours.<br><br>USD, EUR, GBP, MXN, BRL, COP.</div>
+</div>
+  </div>
+</div>
+<div class="release">
+  <h3 class="release-h"><span class="release-id">chain-add-megaeth</span> Swidge bridges into MegaETH</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 169c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to unlock MegaETH from every chain in one transaction</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: Swidge adds another bridge destination. underneath: the friction between chains just disappeared for MegaETH access.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to retire the multi-step choreography between any chain and MegaETH</div>
+    </div>
+  </details>
+  <div class="vc-caption">MegaETH is now a Swidge destination from any supported chain.<br><br>Bridge, gas, and the destination DEX. Handled inside a single transaction.<br><br>The route question stops here.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 124c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to eliminate the final friction point preventing MegaETH liquidity access</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a new chain is supported. underneath: the path to capture flow on the fastest chain is now open</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to open the path into MegaETH</div>
+    </div>
+  </details>
+  <div class="vc-caption">MegaETH is now a Swidge destination.<br><br>From any supported chain, bridge in, land with gas, swap on arrival.<br><br>One transaction.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 127c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to remove the barrier between any chain and MegaETH</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a new chain is supported. underneath: the user no longer needs to plan a route—they simply arrive.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to remove the barrier between any chain and MegaETH</div>
+    </div>
+  </details>
+  <div class="vc-caption">MegaETH, from any chain.<br><br>One transaction. The bridge, the gas, the first swap on arrival.<br><br>You don&#x27;t plan a route. You arrive.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 149c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to dissolve fragmentation</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: announcing technical expansion to a new chain. underneath: erasing the user&#x27;s awareness of infrastructure itself.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to dissolve fragmentation</div>
+    </div>
+  </details>
+  <div class="vc-caption">MegaETH is now one transaction away. From any chain you&#x27;re already on.<br><br>Bridge, gas, and the first swap. One move.<br><br>The chain is new. The path isn&#x27;t.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 100c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to connect arrival</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, announcing a new bridge destination; underneath, dissolving the threshold between decision and presence</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to connect arrival</div>
+    </div>
+  </details>
+  <div class="vc-caption">MegaETH from wherever you already are.<br><br>Bridge, gas, destination swap. One transaction, one arrival.</div>
+</div>
+  </div>
+</div>
+<div class="release">
+  <h3 class="release-h"><span class="release-id">yield-vault-launch</span> AI-augmented yield vaults with audit layer</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 152c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to reveal that a machine is now picking your yield strategy and showing its work</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: AI-augmented yield vaults with an audit layer. underneath: the user no longer chooses between protocols—the agent does, and proves it wasn&#x27;t random.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to reveal that a machine is now picking your yield strategy and showing its work</div>
+    </div>
+  </details>
+  <div class="vc-caption">You used to choose between Aave, Morpho, Pendle, Maple.<br><br>The agent chooses now.<br><br>Each rebalance ships with the reasoning behind it.<br><br>Yield vaults: live.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 181c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to reveal that the machine can now explain itself after it acts</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: AI agents automatically manage yield strategies. underneath: users can audit the machine&#x27;s reasoning, making autonomous finance legible</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to reveal that the machine can now explain itself after it acts</div>
+    </div>
+  </details>
+  <div class="vc-caption">The yield vaults are live.<br><br>An agent rotates capital across Aave, Morpho, Pendle, and Maple.<br><br>Every rebalance comes with the agent&#x27;s reasoning attached. On the record, per decision.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 225c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to give users access to algorithmic strategy selection while preserving the power to judge its reasoning</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a smarter vault ships. underneath: the user moves from trusting automation blindly to interrogating its decisions after the fact.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to give users access to algorithmic strategy selection while preserving the power to judge its reasoning</div>
+    </div>
+  </details>
+  <div class="vc-caption">AI yield vaults are live.<br><br>The agent rotates capital across Aave, Morpho, Pendle, and Maple. It chooses where. It chooses when.<br><br>Every rebalance ships with the reasoning behind it. Read it. Judge it. The decision stays yours.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 177c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to expose delegation&#x27;s reasoning</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: an AI agent optimizes yield allocation across protocols and explains each decision. underneath: making algorithmic authority legible enough to trust.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to expose delegation&#x27;s reasoning</div>
+    </div>
+  </details>
+  <div class="vc-caption">AI yield vaults are live.<br><br>An agent allocates across Aave, Morpho, Pendle, Maple, and rotates as conditions move.<br><br>Every rebalance shows its reasoning.<br><br>Delegation you can read.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 272c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to dignify delegation</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, explaining what the machine chose; underneath, proving someone still deserves the risk</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to dignify delegation</div>
+    </div>
+  </details>
+  <div class="vc-caption">Delegating yield to a machine is fine. Delegating it blindly is what broke trust in this category.<br><br>The vaults route across Aave, Morpho, Pendle, Maple. Every rebalance ships with the agent&#x27;s reasoning attached.<br><br>You can read why, before you decide whether to stay.<br><br>Live.</div>
+</div>
+  </div>
+</div>
+<div class="release">
+  <h3 class="release-h"><span class="release-id">partnership-spot-hyperliquid</span> Spot Hyperliquid native in Infinex</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 74c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to reveal that Hyperliquid&#x27;s orderbook now lives inside Infinex accounts</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: Hyperliquid spot trading is now available in Infinex. underneath: the wall between separate exchange accounts just disappeared—one passkey, one portfolio, multiple orderbooks.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to reveal that Hyperliquid&#x27;s orderbook now lives inside Infinex accounts</div>
+    </div>
+  </details>
+  <div class="vc-caption">Hyperliquid spot trading. Now native to Infinex.<br><br>One passkey. Both books.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 86c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to integrate a third-party orderbook into the unified account</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: Hyperliquid spot trading launches in Infinex. underneath: users can now access external liquidity without leaving their account context</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to absorb Hyperliquid spot into the account the reader already has</div>
+    </div>
+  </details>
+  <div class="vc-caption">Hyperliquid spot, native in Infinex.<br><br>Same account. Same passkey. New venue inside it.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 142c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to dissolve the boundary between platforms so liquidity is wherever the user already is</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a new exchange integration goes live. underneath: the user no longer chooses between venues—the venue comes to them.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to dissolve the boundary between platforms so liquidity is wherever the user already is</div>
+    </div>
+  </details>
+  <div class="vc-caption">Spot Hyperliquid is native in Infinex.<br><br>One account. One passkey. Both venues.<br><br>You were going to Hyperliquid. Now it&#x27;s where you already are.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 5 · ship 5 · voice 5 · 99c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-wall">WALL</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to unify fragmented access</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: announcing a new integration that brings Hyperliquid spot trading into Infinex. underneath: dissolving the boundaries that force users to fragment their identity and portfolio across p</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to unify fragmented access</div>
+    </div>
+  </details>
+  <div class="vc-caption">Hyperliquid spot is native in Infinex.<br><br>One account. One passkey. Both surfaces.<br><br>The <mark>wall</mark> is gone.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 98c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to collapse distance</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, adding a venue; underneath, dissolving the membrane between worlds</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to collapse distance</div>
+    </div>
+  </details>
+  <div class="vc-caption">Spot Hyperliquid is native in Infinex.<br><br>One account. One passkey. Both worlds.<br><br>Nothing to bridge.</div>
+</div>
+  </div>
+</div>
+<div class="release">
+  <h3 class="release-h"><span class="release-id">passkey-portable</span> Passkey-portable accounts (no seed phrase)</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 4 · ship 4 · voice 5 · 109c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to announce that Infinex accounts are portable across devices using passkeys instead of seed phrases</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a new passkey-based login system for cross-device access. underneath: the seed phrase burden that blocks mainstream adoption just disappeared for Infinex users.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to set down the seed phrase burden on the reader&#x27;s behalf</div>
+    </div>
+  </details>
+  <div class="vc-caption">Infinex accounts now sign in with a passkey.<br><br>No seed phrase.<br><br>Your account moves with you, device to device.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 3 · ship 5 · voice 5 · 111c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to eliminate the seed phrase obstacle</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: passkey portability ships. underneath: crypto custody now feels like normal login</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to eliminate the seed phrase obstacle</div>
+    </div>
+  </details>
+  <div class="vc-caption">Your Infinex account opens with a passkey.<br><br>It travels with you, device to device.<br><br>The seed phrase is retired.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 3 · ship 5 · voice 5 · 167c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to remove the barrier that kept users from reaching their accounts on new devices</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: passkey authentication ships. underneath: the user is freed from the seed phrase&#x27;s custody burden.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to remove the barrier that kept users from reaching their accounts on new devices</div>
+    </div>
+  </details>
+  <div class="vc-caption">Your Infinex account now opens with a passkey.<br><br>Nothing to hold. Nothing to lose. Nothing to hide in a drawer.<br><br>The seed phrase is gone. Your account travels with you.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 3 · ship 5 · voice 5 · 272c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to eliminate the recovery burden</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: announcing a new authentication method. underneath: removing the terror of permanent loss</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to eliminate the recovery burden</div>
+    </div>
+  </details>
+  <div class="vc-caption">A twelve-word phrase. A drawer. A small piece of paper you were never allowed to lose.<br><br>That was the price of self-custody. It isn&#x27;t anymore.<br><br>Infinex accounts authenticate by passkey. Your account travels with you across devices. No phrase to write down. Nothing to lose.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 256c · 3 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to liberate access</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, announcing a new authentication method; underneath, dissolving the barrier between intention and entry</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to liberate access</div>
+    </div>
+  </details>
+  <div class="vc-caption">The seed phrase was never the security. It was the tax on entry. A ritual the user was made to carry.<br><br>Infinex accounts authenticate by passkey. Your account moves with you, across devices, without twelve words on paper.<br><br>The door was always meant to open.</div>
+</div>
+  </div>
+</div>
+<div class="release">
+  <h3 class="release-h"><span class="release-id">perps-maintenance</span> Perps engine maintenance window</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 2 · ship 4 · voice 4 · 120c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to announce a brief maintenance window for the perpetuals engine</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: scheduled downtime for system maintenance. underneath: we&#x27;re protecting your open positions while we strengthen the infrastructure that powers them.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to announce a brief maintenance window for the perpetuals engine</div>
+    </div>
+  </details>
+  <div class="vc-caption">Perps engine maintenance: Sunday 02:00 UTC, ~10 minutes.<br><br>Open positions unaffected. New orders queue during the window.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 2 · ship 4 · voice 4 · 129c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to announce a brief service interruption for system maintenance</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: routine maintenance downtime. underneath: demonstrating operational maturity and protecting existing positions.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to settle the room before a scheduled outage</div>
+    </div>
+  </details>
+  <div class="vc-caption">Perps engine maintenance: Sunday 02:00 UTC.<br><br>Window ~10 minutes.<br><br>Open positions unaffected. New orders queue through the window.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 151c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to signal that the infrastructure requires a brief pause to preserve reliability</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a maintenance window is announced. underneath: the team demonstrates that uptime is earned, not assumed.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to forewarn the desk</div>
+    </div>
+  </details>
+  <div class="vc-caption">Perps engine maintenance Sunday 02:00 UTC. ~10 minutes.<br><br>Open positions unaffected.<br>New orders queue during the window.<br><br>Telling you before, not after.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 1 · ship 3 · voice 4 · 168c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to contain disruption</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a scheduled maintenance window with minimal impact. underneath: the anxiety of even brief system unavailability in continuous markets.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to contain the disruption</div>
+    </div>
+  </details>
+  <div class="vc-caption">Perps engine maintenance: Sunday 02:00 UTC.<br><br>Window ~10 minutes.<br><br>Open positions are unaffected. New orders queue during the window and process when the engine resumes.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 1 · ship 3 · voice 3 · 125c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to secure continuity</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, a routine maintenance window; underneath, the trust that what you&#x27;ve built won&#x27;t vanish while we work</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to steady the trader before they ask</div>
+    </div>
+  </details>
+  <div class="vc-caption">Perps engine maintenance. Sunday 02:00 UTC. ~10 minutes.<br><br>Open positions are unaffected.<br><br>New orders queue during the window.</div>
+</div>
+  </div>
+</div>
+<div class="release">
+  <h3 class="release-h"><span class="release-id">private-send-ga</span> Private Send moves to GA</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 129c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to graduate private sending to general availability</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a feature moving from beta to GA. underneath: users can now transact without financial surveillance becoming their permanent record.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to graduate private sending to general availability</div>
+    </div>
+  </details>
+  <div class="vc-caption">Private Send leaves beta today. Open to every user.<br><br>You can send a payment without leaving your on-chain history attached to it.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 107c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to graduate the privacy primitive from testing to production readiness</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a feature ships. underneath: financial privacy becomes a first-class capability, not an experiment</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to seat financial privacy as ordinary infrastructure</div>
+    </div>
+  </details>
+  <div class="vc-caption">Private Send leaves beta.<br><br>Available to every user.<br><br>Send a payment without exposing your on-chain history.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 137c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to graduate a privacy primitive from experimental to universally available</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a feature reaches general availability. underneath: the user&#x27;s financial past no longer determines what they can show in the present.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to graduate a privacy primitive from experimental to universally available</div>
+    </div>
+  </details>
+  <div class="vc-caption">Private Send leaves beta today.<br><br>Every wallet has it. No waitlist, no cohort.<br><br>What your wallet did before doesn&#x27;t have to come with you.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 198c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to graduate privacy</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: announcing a feature reaching general availability. underneath: to claim financial invisibility as a right rather than a privilege.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to graduate privacy from privilege to default</div>
+    </div>
+  </details>
+  <div class="vc-caption">Private Send is now available to everyone.<br><br>Paying someone shouldn&#x27;t publish your history to the world. That was the price of being on-chain. It isn&#x27;t anymore.<br><br>Privacy isn&#x27;t a tier. It&#x27;s the floor.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 2 · ship 5 · voice 5 · 183c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to graduate privacy</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, announcing a feature&#x27;s maturity; underneath, claiming dignity</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to graduate privacy</div>
+    </div>
+  </details>
+  <div class="vc-caption">Every payment you&#x27;ve ever sent on-chain has been readable by strangers. That was never the deal.<br><br>Send a payment without handing over your history.<br><br>Private Send. Generally available.</div>
+</div>
+  </div>
+</div>
+<div class="release">
+  <h3 class="release-h"><span class="release-id">scale-milestone-10m</span> Infinex crosses 10M users</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 124c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to reveal that removing seed-phrase friction and automating yield unlocked mainstream scale</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a user milestone announcement. underneath: proof that crypto UX barriers—not crypto itself—were holding back adoption</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to settle what was actually holding adoption back</div>
+    </div>
+  </details>
+  <div class="vc-caption">Ten million accounts on Infinex.<br><br>No seed phrases. Yield that runs itself.<br><br>Turns out it wasn&#x27;t crypto people were avoiding.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 120c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to demonstrate that removing friction unlocks exponential adoption</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a milestone user count. underneath: proof that the industry&#x27;s onboarding barriers were the real problem all along</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to confirm that the barriers were the real problem</div>
+    </div>
+  </details>
+  <div class="vc-caption">Ten million accounts.<br><br>Passkey onboarding. AI yield vaults.<br><br>The demand was always there. The onboarding was in the way.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 3 · ship 5 · voice 5 · 191c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to mark what ten million accounts proves about removing friction</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a milestone number lands. underneath: the product&#x27;s bet that crypto onboarding friction was the blocker is now legible.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to mark what ten million accounts proves about removing friction</div>
+    </div>
+  </details>
+  <div class="vc-caption">Ten million accounts.<br><br>Turns out the wallet was the problem.<br><br>Passkeys instead of seed phrases. AI vaults instead of bridges and dashboards. People showed up the moment they only had to want.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 3 · ship 5 · voice 5 · 134c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to prove adoption at scale</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: celebrating a user milestone. underneath: validating that removing friction unlocks mass behavior change.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to prove adoption at scale</div>
+    </div>
+  </details>
+  <div class="vc-caption">Passkeys instead of seed phrases.<br>Vaults instead of strategy decks.<br><br>10M accounts on Infinex.<br><br>Remove the friction and people show up.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 113c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to cross the threshold</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, celebrating a milestone; underneath, proving that friction was the gate</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to cross the threshold</div>
+    </div>
+  </details>
+  <div class="vc-caption">10M accounts on Infinex.<br><br>Passkeys, not seed phrases.<br>AI vaults, not spreadsheets.<br><br>The gate was always friction.</div>
+</div>
+  </div>
+</div>
+<div class="release">
+  <h3 class="release-h"><span class="release-id">agent-vault-constraints</span> Yield-vault constraint controls</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 155c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to give yield-vault users direct control over the agent&#x27;s constraint boundaries</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: configurable risk settings for an automated agent. underneath: the user just became the principal who sets the mandate—the agent reports to them, not the protocol.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to hand the user the mandate</div>
+    </div>
+  </details>
+  <div class="vc-caption">You set the mandate.<br><br>Max risk. Allowed protocols. Rebalance cadence.<br><br>The agent rebalances against your constraints and reports back to you on every move.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 3 · ship 4 · voice 5 · 163c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to give users direct control over the agent&#x27;s operating boundaries</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: users can configure vault constraints. underneath: trust shifts from blind delegation to governed autonomy</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to give users direct control over the agent&#x27;s operating boundaries</div>
+    </div>
+  </details>
+  <div class="vc-caption">The vault agent now works inside limits you set.<br><br>Max risk. Allowed protocols. Rebalance cadence.<br><br>Every rebalance reports back against the constraints you locked.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 3 · ship 4 · voice 4 · 184c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to give users direct authority over the boundaries within which the agent acts</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: constraint controls ship. underneath: the user moves from delegator to principal.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to give users direct authority over the boundaries within which the agent acts</div>
+    </div>
+  </details>
+  <div class="vc-caption">Yield-vault constraints are now yours to set: max risk, allowed protocols, rebalance cadence.<br><br>The agent works inside what you lock. It reports each rebalance against your constraints.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 204c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to transfer authority over operational boundaries</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: giving users control over agent constraints. underneath: negotiating the terms of delegation itself</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to transfer authority over operational boundaries</div>
+    </div>
+  </details>
+  <div class="vc-caption">The constraints on the vault agent aren&#x27;t ours to write.<br><br>Max risk. Allowed protocols. Rebalance cadence. You set them. You lock them.<br><br>Every rebalance reports against the line you drew. Not against ours.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 200c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to grant authority</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, offering users control over their agent&#x27;s behavior; underneath, acknowledging that delegation requires boundaries</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to grant authority to the user</div>
+    </div>
+  </details>
+  <div class="vc-caption">Max risk. Allowed protocols. Rebalance cadence.<br><br>You set them. You lock them.<br><br>The agent runs inside what you chose, and reports each rebalance against it.<br><br>Delegation needs boundaries. You draw them.</div>
+</div>
+  </div>
+</div>
+<div class="release">
+  <h3 class="release-h"><span class="release-id">yield-aggregator-sunset</span> Old yield UI sunset; new vault interface live</h3>
+  <div class="variants">
+    
+<div class="vc current">
+  <div class="vc-head">
+    <span class="vc-label">CURRENT (bank wall)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 167c · 2 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to replace manual yield-hunting labor with a single position the agent manages</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a cleaner vault interface. underneath: the user is no longer the yield strategist—the AI is.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to replace manual yield-hunting labor with a single position the agent manages</div>
+    </div>
+  </details>
+  <div class="vc-caption">The yield dashboard you used to manage is gone.<br><br>In its place: one vault. One funded position. The agent holds it.<br><br>You don&#x27;t pick the pools anymore. You just fund it.</div>
+</div>
+<div class="vc va">
+  <div class="vc-head">
+    <span class="vc-label">A (token swap)</span>
+    <span class="vc-meta">anchor 3 · ship 5 · voice 5 · 189c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to remove the manual-comparison burden and install the agent as intermediary</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: a simpler interface replaces a complex one. underneath: user decision-making is now delegated to the AI agent</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to remove the manual-comparison burden and install the agent as intermediary</div>
+    </div>
+  </details>
+  <div class="vc-caption">The old yield UI is retired.<br><br>One funded vault position now sits where the comparison screen used to. The agent does the allocation work.<br><br>You wanted yield. You didn&#x27;t want the spreadsheet.</div>
+</div>
+<div class="vc vap">
+  <div class="vc-head">
+    <span class="vc-label">A&#x27; (multi-example)</span>
+    <span class="vc-meta">anchor 3 · ship 5 · voice 5 · 164c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to retire the interface that required manual comparison and install the agent that assumes the work</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: an old UI is replaced with a new vault. underneath: the user graduates from researcher to principal.</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to retire the interface that required manual comparison and install the agent that assumes the work</div>
+    </div>
+  </details>
+  <div class="vc-caption">The yield aggregator UI is retired.<br><br>In its place: one vault. AI-augmented, single funded position. It does the comparing.<br><br>You hold the position. It does the work.</div>
+</div>
+<div class="vc vbp">
+  <div class="vc-head">
+    <span class="vc-label">B&#x27; (no refusing)</span>
+    <span class="vc-meta">anchor 3 · ship 5 · voice 5 · 195c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to replace manual comparison with delegation</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface: retiring a legacy interface in favor of a cleaner vault design. underneath: transferring control from user to agent</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to replace manual comparison with delegation</div>
+    </div>
+  </details>
+  <div class="vc-caption">The legacy yield UI is retired.<br><br>In its place: one vault. One funded position. The agent works it.<br><br>No more rows to compare. No more switching. The decision you make is whether to fund the vault.</div>
+</div>
+<div class="vc vc">
+  <div class="vc-head">
+    <span class="vc-label">C (no example)</span>
+    <span class="vc-meta">anchor 4 · ship 5 · voice 5 · 159c · 1 attempts</span>
+    <span class="vc-flags"><span class="flag-clean">clean</span></span>
+  </div>
+  <details class="vc-context">
+    <summary>Input through_action + lining (from grounder)</summary>
+    <div class="vc-context-body">
+      <div class="vc-ctx-line"><strong>TA-in:</strong> to consolidate attention</div>
+      <div class="vc-ctx-line"><strong>Lining-in:</strong> on the surface, retiring an old interface; underneath, transferring decision weight</div>
+      <div class="vc-ctx-line"><strong>Actor TA:</strong> to consolidate attention</div>
+    </div>
+  </details>
+  <div class="vc-caption">The old yield dashboard is closed.<br><br>In its place: one vault. One funded position. AI-augmented underneath.<br><br>The choosing has moved off your desk and onto ours.</div>
+</div>
+  </div>
+</div></div></body></html>

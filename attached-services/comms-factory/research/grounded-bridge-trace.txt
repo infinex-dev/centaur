@@ -1,0 +1,41 @@
+grounding against ref 'bridge-integration' via worktree /tmp/platform-wt-bridge-integration
+  → lookup_partner({"feature":"fiat_deposits"})
+  → grep_platform_code({"pattern":"bridge","glob":"*.ts","maxResults":30})
+  → fetch_public_page({"url":"https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account"})
+  → grep_platform_code({"pattern":"bridge\\.xyz|Bridge\\.xyz|BridgeXyz|bridge_xyz|bridgeXyz","glob":"*.ts","maxResults":30})
+  → grep_platform_code({"pattern":"virtual.account|virtualAccount|VirtualAccount","glob":"*.ts","maxResults":30})
+  → infinex_web_search({"query":"Bridge.xyz acquired by Stripe stablecoin infrastructure","context":"Verifying the claim that Bridge.xyz was ac)
+  ✓ Infinex fiat deposit provider = Bridge.xyz [0.85] web-search
+  ✓ Bridge.xyz parent company / acquirer = Stripe (acquired October 2024 for $1.1B) [0.9] web-search
+  ✓ Bridge.xyz product description = Fiat on/off-ramp and stablecoin infrastructure company (APIs for stablecoin issuance, custody, and fiat deposits/withdrawals) [0.95] provider-docs
+  ✓ Bridge virtual account mechanic — how fiat deposit flow works = Bridge virtual accounts are permanent, reusable fiat deposit addresses that convert incoming fiat into crypto and deliver it to a specified destination wallet address. Customers get local bank deposit details (account/routing numbers, IBANs, etc.) and funds are automatically converted to crypto on receipt. [0.95] provider-docs
+  ✓ Bridge virtual account supported deposit rails = USD (ACH or wire — US account/routing number), EUR (SEPA — IBAN), MXN (SPEI — CLABE), BRL (PIX — BR code), GBP (FPS — UK account number), COP (Bre-B — CO account number) [0.95] provider-docs
+  ✓ KYC requirement for Bridge virtual accounts = Customers must be onboarded and KYC/KYB-approved before virtual accounts can be created for them [0.95] provider-docs
+  → grep_platform_code({"pattern":"fiat|onramp|on.ramp|deposit.*bank|bank.*deposit","glob":"*.ts","maxResults":30})
+  → fetch_public_page({"url":"https://apidocs.bridge.xyz/platform/orchestration/virtual_accounts/virtual-account-events"})
+  ✓ Bridge virtual account event lifecycle = Event types in order: funds_received (deposit matched) → funds_scheduled (ACH only, in-transit) → payment_submitted (crypto payment sent, tx hash preliminary) → payment_processed (on-chain confirmed, final state). Also: in_review (manual review), refunded, refund_in_flight, refund_failed, account_update, deactivation, activation, microdeposit (not onramped). [0.95] provider-docs
+  → grep_platform_code({"pattern":"kyc|KYC|onboarding|compliance","glob":"*.ts","maxResults":20})
+  → grep_platform_code({"pattern":"USDC|usdc|stablecoin","glob":"*.ts","maxResults":20})
+  → grep_platform_code({"pattern":"fiat|deposit|withdraw","glob":"*.json","maxResults":20})
+  → grep_platform_code({"pattern":"bridge|Bridge|fiat|onramp","glob":"*.tsx","maxResults":20})
+  → grep_platform_code({"pattern":"bridge|Bridge","maxResults":30})
+  → infinex_web_search({"query":"Infinex Bridge.xyz fiat deposit integration announcement","context":"Verifying whether Infinex has publicly an)
+  → fetch_public_page({"url":"https://apidocs.bridge.xyz/platform/customers/customers"})
+  ✓ Bridge KYC/KYB mechanism for customer onboarding = Bridge Customers API accepts KYC information directly from the integrator. Bridge monitors kyc_status and endorsement status (e.g. 'base endorsement' for US rails). Customers must be KYC/KYB-approved and have valid endorsements before virtual accounts can be created. Endorsements are rail-specific (e.g. US rails require 'base endorsement'). [0.95] provider-docs
+  → fetch_public_page({"url":"https://apidocs.bridge.xyz/platform/logistics/fees-and-minimums"})
+  → infinex_search_recent_posts({"query":"from:infinex bridge fiat deposit bank","context":"Checking if Infinex has announced Bridge.xyz fiat deposit in)
+  → fetch_public_page({"url":"https://apidocs.bridge.xyz/platform/logistics/fees--minimums"})
+  → fetch_rendered_page({"url":"https://infinex.xyz","waitFor":"networkidle"})
+  → fetch_rendered_page({"url":"https://infinex.xyz/roadmap","waitFor":"networkidle","waitForText":"fiat"})
+  → fetch_public_page({"url":"https://apidocs.bridge.xyz/platform/logistics/rail-specific-details"})
+  ✓ Infinex roadmap items for fiat/bank deposits = Infinex roadmap lists 'Onramp (bank account)' and 'Virtual accounts' under the TradFi & CEX category — both are planned features (not marked Done or In Progress on the public roadmap) [0.85] infinex-page
+  ✓ Bridge virtual account fiat-to-crypto conversion — what enters and what exits = Incoming fiat (e.g. USD via ACH/wire, EUR via SEPA, etc.) enters a Bridge virtual account; Bridge converts it to a specified crypto asset (e.g. USDC) and delivers it on-chain to the destination wallet address. The virtual account is permanent and reusable — the same deposit details work for repeat deposits. [0.95] provider-docs
+  ✓ Bridge virtual account USD rail details = USD virtual accounts provide a US bank account number and routing number, issued in the customer's name, supporting ACH and wire transfers [0.95] provider-docs
+  ✓ Bridge virtual account EUR rail details = EUR virtual accounts provide an IBAN for SEPA payments [0.95] provider-docs
+  ✗ Bridge.xyz fiat-deposit code status in the Infinex platform on the bridge-integration branch — The platform code search tool only has access to the main branch. No Bridge.xyz code was found on main (0 matches for 'bridge', 'virtual_account', 'fiat', 'onramp' in .ts/.tsx/.json files). The bridge-integration branch is not accessible via the grep tool. The Infinex roadmap lists 'Onramp (bank account)' and 'Virtual accounts' as planned (not Done/In Progress), consistent with the claim that code has not yet landed on main.
+  ✗ Which specific fiat rails (USD ACH/wire, EUR SEPA, others) are wired/enabled in the Infinex Bridge integration — Bridge.xyz supports USD ACH/wire, EUR SEPA IBAN, MXN SPEI, BRL PIX, GBP FPS, and COP Bre-B at the provider level. However, which subset Infinex has chosen to enable in its integration could not be verified — no platform code was found on main, no public announcement specifies the rails, and the bridge-integration branch is not accessible.
+  ✗ Which stablecoin(s) fiat deposits settle into within the Infinex account (e.g. USDC, USDB, other) — Bridge.xyz virtual accounts can be configured to convert fiat to any specified crypto asset (USDC, USDB, etc.) — the destination currency is set per virtual account by the integrator. No Infinex-specific configuration was found in accessible platform code or public announcements to confirm which asset is used.
+
+wrote research/grounded-bridge-2026-05-29.json
+
+facts: 12 | unverifiable: 3 | turns: 15 | model: claude-sonnet-4-6

@@ -1,0 +1,18 @@
+{
+  "id": "deposits-milestone-2025-07-22",
+  "title": "Cumulative deposits crossed nine figures",
+  "ship_date": "2025-07-22",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "Cumulative user deposits into Infinex accounts crossed nine figures USD",
+    "Deposits are user-controlled and held under each user's passkey",
+    "The milestone reflects net inflows, not trading volume or notional",
+    "Funds are spread across spot, perps margin, and the yield vault"
+  ],
+  "kind": "data-card-official",
+  "metric": "cumulative user deposits",
+  "value": "9 figures USD",
+  "unit": "USD",
+  "delta": "+nine figures since launch",
+  "through_action": "to mark the line where self-custody at this UX stopped being a thesis"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "swidge-bridge-2026-05-20",
+  "title": "Swidge — swap and bridge across 20+ chains in one step",
+  "ship_date": "2026-05-20",
+  "audience": ["x", "web"],
+  "deployed_facts": [
+    "Swap and bridge (aka swidge) tokens across 20+ chains in one step",
+    "25+ swidge providers integrated, with best-quote routing across them",
+    "Quote comparison across providers",
+    "Unlisted-token support via contract address",
+    "Dollar/token quantity toggle",
+    "Custom slippage (auto by default)"
+  ],
+  "kind": "split",
+  "from": "any token, any of 20+ chains",
+  "to": "any token, any chain",
+  "split_semantics": "bridge"
+}

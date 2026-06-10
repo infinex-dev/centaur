@@ -1,0 +1,127 @@
+[
+  {
+    "id": "scout-2026-06-01-idle-yield",
+    "title": "Default-on yield on idle balances",
+    "scouted_date": "2026-06-01",
+    "scout": "internal",
+    "layer": "L1-activity",
+    "quantitative_case": "$3.38M sits idle at 0% while lending is the #1 vertical users leave the UI for (Aave 43, Morpho 7, Sky 6, Ether.Fi 6 ≈ 60 external users) — make idle earn by default.",
+    "metrics": [
+      { "claim": "idle stablecoin balance across the yield cohort", "value": "$3.38M", "confidence": "medium", "source_ref": "P7 infinex_get_portfolio over cohort.tsv → leakage/parsed.json summary.idle_stable_total (captured 2026-06-01, EVM-only)" },
+      { "claim": "distinct users doing lending/staking externally", "value": 60, "confidence": "hard", "source_ref": "P3 connect_transaction GROUP BY dapp → Aave 43 + Morpho 7 + Sky 6 + Ether.Fi 6 (distinct user counts)" }
+    ],
+    "caveats": ["no USD-inflow ledger — net-flow is band-proxy only", "DeBank EVM-only — Solana yield (Kamino/marginfi/Jupiter-lend) unmeasured", "balances banded not exact"],
+    "probes_run": ["P3: SELECT d.name, COUNT(DISTINCT c.user_id) FROM connect_transaction c JOIN connect_dapp d ON c.dapp_id=d.id JOIN user u ... WHERE c.requested_at>='2026-02-01' AND <master filter> GROUP BY d.name", "P7: projectjin infinex_get_portfolio per cohort account"],
+    "disposition": "build",
+    "rank": 1
+  },
+  {
+    "id": "scout-2026-06-01-fiat-offramp",
+    "title": "Native fiat off-ramp + reason-to-stay",
+    "scouted_date": "2026-06-01",
+    "scout": "internal",
+    "layer": "L2-capital",
+    "quantitative_case": "Users cash out ~$6.44M/4mo (~$19M/yr) to CEXes in stablecoins, Binance-led ($3.17M) — the #1 real exit.",
+    "metrics": [
+      { "claim": "total CEX-bound outflow, post-Feb", "value": "$6,441,230", "confidence": "hard", "source_ref": "P1 transfer outflow-by-destination + classify_address → leakage/03-labels.json cex bucket (37 deposit addrs); stablecoins at $1" },
+      { "claim": "Binance share", "value": "$3.17M", "confidence": "hard", "source_ref": "leakage/03-labels.json entity_name=Binance" }
+    ],
+    "caveats": ["no USD-inflow ledger — net-flow is band-proxy only", "off-platform commingling invisible"],
+    "probes_run": ["P1: SELECT to_address, chain, SUM(CAST(NULLIF(amount_usd,'') AS DECIMAL(30,2))) usd, COUNT(*), COUNT(DISTINCT sender) FROM transfer t JOIN user u ... WHERE created_at>='2026-02-01' AND status='success' AND is_move=0 AND to_address_type IN('address','addressbook','ens') AND <master filter> GROUP BY to_address, chain ORDER BY usd DESC", "classify_address over top destinations"],
+    "disposition": "build",
+    "rank": 2
+  },
+  {
+    "id": "scout-2026-06-01-eth-lst",
+    "title": "Native ETH liquid staking",
+    "scouted_date": "2026-06-01",
+    "scout": "internal",
+    "layer": "L1-activity",
+    "quantitative_case": "ETH liquid staking is the only broad-demand yield primitive — ether.fi weETH (17 wallets) + Lido (~10); the rest of deployed yield is whale-concentrated (~1 user per protocol).",
+    "metrics": [
+      { "claim": "distinct wallets holding ether.fi weETH", "value": 17, "confidence": "hard", "source_ref": "P7 portfolio scan → leakage/04-yield-positions (weETH holders)" },
+      { "claim": "distinct wallets on Lido", "value": "~10", "confidence": "medium", "source_ref": "P7 portfolio scan (approx)" }
+    ],
+    "caveats": ["deployed yield is whale-concentrated — broad demand only for ETH LSTs", "DeBank EVM-only"],
+    "probes_run": ["P6 cohort builder + P7 infinex_get_portfolio per account; bucket by protocol"],
+    "disposition": "build",
+    "rank": 3
+  },
+  {
+    "id": "scout-2026-06-01-aa-wallet-parity",
+    "title": "Embedded / AA wallet parity",
+    "scouted_date": "2026-06-01",
+    "scout": "internal",
+    "layer": "L2-capital",
+    "quantitative_case": "$2.26M migrates to embedded AA wallets (Bankr/Privy/ZeroDev/Safe, ~35 addrs) — AA-native users who already chose the thesis Infinex is built on.",
+    "metrics": [
+      { "claim": "outflow to embedded AA wallets (smart_account_wallet bucket excluding ether.fi Cash)", "value": "$2.26M", "confidence": "medium", "source_ref": "leakage/03-labels.json smart_account_wallet ($26.2M total) minus ether.fi Cash ($23.9M, smart-wallet-classified, not a churn signal)" }
+    ],
+    "caveats": ["smart_account_wallet bucket is dominated by ether.fi Cash ($23.9M) which is NOT consumer churn — separated out", "off-platform commingling invisible"],
+    "probes_run": ["P1 + classify_address → 03-labels.json subtype in (eip7702_delegated_eoa, eip7702_kernel_smart_account)"],
+    "disposition": "build",
+    "rank": 4
+  },
+  {
+    "id": "scout-2026-06-01-native-lending-dex",
+    "title": "Native lending/yield + spot DEX aggregation (L1)",
+    "scouted_date": "2026-06-01",
+    "scout": "internal",
+    "layer": "L1-activity",
+    "quantitative_case": "Top connect verticals leave only the UI — lending (Aave>Morpho>Sky>Ether.Fi) then DEX (Uniswap 16, Jupiter 14, KyberSwap 5); native routing keeps the session and fees on-platform.",
+    "metrics": [
+      { "claim": "distinct DEX users (Uniswap/Jupiter/KyberSwap)", "value": 35, "confidence": "hard", "source_ref": "P3 connect_transaction → Uniswap 16 + Jupiter 14 + KyberSwap 5 (distinct users)" }
+    ],
+    "caveats": ["funds stay custodied — this is behavioural (L1) leakage, captured by a native feature, not a retention lever"],
+    "probes_run": ["P3 connect_transaction GROUP BY dapp, cluster into verticals"],
+    "disposition": "build",
+    "rank": 5
+  },
+  {
+    "id": "scout-2026-06-01-native-btc",
+    "title": "Native BTC hold/yield",
+    "scouted_date": "2026-06-01",
+    "scout": "internal",
+    "layer": "L2-capital",
+    "quantitative_case": "Users exit the EVM/SVM ecosystem entirely for ~$1.25M of BTC via NEAR Intents (13 destinations).",
+    "metrics": [
+      { "claim": "BTC-bound outflow via NEAR Intents", "value": "$1,250,528", "confidence": "medium", "source_ref": "leakage/03-labels.json btc_destination (13 bc1q addrs; BTC at spot)" }
+    ],
+    "caveats": ["BTC destinations traced via BTC explorer, not Etherscan", "off-platform commingling invisible"],
+    "probes_run": ["P1 + classify_address → 03-labels.json classification=btc_destination"],
+    "disposition": "build",
+    "rank": 6
+  },
+  {
+    "id": "scout-2026-06-01-perps-defend",
+    "title": "Perps — defend, don't build",
+    "scouted_date": "2026-06-01",
+    "scout": "internal",
+    "layer": "L2-capital",
+    "quantitative_case": "Synthetix 18 / Hyperliquid 8 / Aster 5 users, but only ~$0.83M L2 outflow — Infinex already ships perps via Synthetix, so this is a UX/discovery gap, not a product gap.",
+    "metrics": [
+      { "claim": "distinct perps users on external venues", "value": 31, "confidence": "hard", "source_ref": "P3 connect_transaction → Synthetix 18 + Hyperliquid 8 + Aster 5" },
+      { "claim": "L2 capital outflow attributable to perps", "value": "$0.83M", "confidence": "medium", "source_ref": "P1 destinations classified to perps venues" }
+    ],
+    "caveats": ["native perps already exist — the gap is discovery/UX, not the product"],
+    "probes_run": ["P3 connect_transaction GROUP BY dapp (perps vertical)"],
+    "disposition": "defend",
+    "rank": 7
+  },
+  {
+    "id": "scout-2026-06-01-mm-treasury",
+    "title": "MM / treasury terms (separate lever)",
+    "scouted_date": "2026-06-01",
+    "scout": "internal",
+    "layer": "L2-capital",
+    "quantitative_case": "Funds/MMs drain via treasury ops, not churn — Wintermute $1.36M, Bodhi $0.71M; address with OTC/treasury terms, not consumer features.",
+    "metrics": [
+      { "claim": "Wintermute treasury outflow", "value": "$1.36M", "confidence": "medium", "source_ref": "P5 per-user net-flow + email-domain tag (wintermute.com)" },
+      { "claim": "Bodhi Ventures treasury outflow", "value": "$0.71M", "confidence": "medium", "source_ref": "P5 per-user net-flow + email-domain tag (bodhi.ventures)" }
+    ],
+    "caveats": ["two-population: this is fund/MM treasury ops, not retail churn — different lever"],
+    "probes_run": ["P5 per-user net-flow leaderboard, tagged by email domain (G7)"],
+    "disposition": "monitor",
+    "rank": 8
+  }
+]

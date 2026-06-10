@@ -1,0 +1,123 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Actor "do not say" — Hyperliquid spot card</title>
+<style>
+body{background:#0d0f12;color:#e8eaed;font:14px/1.6 -apple-system,system-ui,sans-serif;max-width:1100px;margin:0 auto;padding:36px}
+h1{font-size:24px;letter-spacing:-.02em;margin:0 0 4px} .sub{color:#9aa3ad;margin-bottom:24px}
+h2{font-size:17px;margin:34px 0 6px;border-top:1px solid #262b33;padding-top:16px}
+.tw{background:#14171c;border:1px solid #262b33;border-radius:10px;padding:14px 18px;margin:14px 0}
+.tw b{color:#3fd0c8}
+.cand{background:#14171c;border:1px solid #262b33;border-radius:10px;padding:14px 18px;margin:12px 0}
+.cand.sel{border-color:#52d273}
+.ch{font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#5c8dff;text-transform:uppercase;letter-spacing:.06em}
+.txt{font-size:15px;margin:6px 0 12px;white-space:pre-wrap}
+.lbl{font-family:ui-monospace,Menlo,monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:#9aa3ad;margin:10px 0 4px}
+.used li{color:#9fb8ff;font-size:12.5px;margin:3px 0}
+.ns{background:#1a1414;border:1px solid #3a2626;border-radius:8px;padding:10px 14px;margin-top:6px}
+.ns .fact{color:#ffb3b3;font-size:13px}
+.ns .reason{color:#d59a9a;font-size:12px;font-style:italic;margin:2px 0 10px}
+.badge{font-size:10px;color:#52d273;border:1px solid #52d273;border-radius:20px;padding:1px 8px;margin-left:8px}
+small{color:#6b7280}
+</style></head><body>
+<h1>Actor &mdash; per-tweet &ldquo;do not say&rdquo;</h1>
+<div class="sub">Card <code>01KSSA3V9QHKVHB06SN15SJQKQ</code> &middot; Hyperliquid spot &middot; attempt 1 &middot; extracted from <code>actor_attempts.actor_response_json</code> (not currently rendered in the harness UI)</div>
+<div class="tw">
+<div><b>thesis</b> &mdash; Hyperliquid spot and perps now live behind a single Infinex account, with balances that move between them on-chain — the plumbing is correct, and the user no longer has to think about it.</div>
+<div style="margin-top:6px"><b>through_action</b> &mdash; to hand the user a single account where Hyperliquid spot and perps already share one balance</div>
+<div style="margin-top:6px"><b>not_the_point</b> (table-work level) &mdash; Listing twenty markets, naming USD class transfer by its internal term, ranking against other launches, or framing this as a race won.</div>
+</div>
+<h2>x &mdash; 5 options</h2>
+<div class="cand sel">
+<span class="ch">x &middot; option 1</span> <span class=badge>actor pick</span>
+<div class="txt">Hyperliquid spot is live on Infinex.
+
+Spot and perps, one account, one balance. Move USDC between them on-chain — no transfers, no second account to fund.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; Hyperliquid spot markets with &gt;$100K 24h volume (defensible tradeable market count): 20</div>
+<div class="reason">&mdash; market-count enumeration would project Passion via scarcity; not the through-action</div>
+<div class="fact">&times; Top Hyperliquid spot markets by 24h volume (live): HYPE/USDC $130.44M, UBTC/USDC $17.72M, USDH/USDC $9.51M, UZEC/USDC $8.63M, UETH/USDC $4.88M, USOL/USDC $4.00M, USDT0/USDC $3.30M, XMR1/USDC $3.01M, PURR/USDC $1.94M, KNTQ/USDC $1.01M</div>
+<div class="reason">&mdash; venue-shilling; reads as hype, not hand-over</div>
+</div>
+</div>
+<div class="cand ">
+<span class="ch">x &middot; option 2</span>
+<div class="txt">Hyperliquid spot is live on Infinex.
+
+One account holds your spot and your perps. One balance backs both. USDC moves between them on-chain, with nothing to transfer.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; Spot activity tabs in Infinex: Spot Balances, Open Orders, Trade History</div>
+<div class="reason">&mdash; UI tab inventory is not the hand-over; belongs in product</div>
+<div class="fact">&times; Spot order types supported in Infinex Hyperliquid spot: Market (IOC), Limit, Post-Only, Cancel, Cancel-by-client-order-ID — confirmed by fixture files in provider payload tests</div>
+<div class="reason">&mdash; order-type spec is too internal for the channel</div>
+</div>
+</div>
+<div class="cand ">
+<span class="ch">x &middot; option 3</span>
+<div class="txt">Hyperliquid spot is live on Infinex.
+
+Your spot and your perps share one account and one balance. Move USDC between them on-chain — no second account, no bridge.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; Hyperliquid spot markets with &gt;$100K 24h volume (defensible tradeable market count): 20</div>
+<div class="reason">&mdash; counting markets here would shift to venue-pitch</div>
+</div>
+</div>
+<div class="cand ">
+<span class="ch">x &middot; option 4</span>
+<div class="txt">Hyperliquid spot is live on Infinex.
+
+Same account as your perps. Same balance. USDC moves between spot and perps on-chain, with no transfer step in between.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; Perps balance label change with spot launch: Perps account balance row label is &#x27;Available margin&#x27;; Spot account balance row label is &#x27;Available balance&#x27;. The perps account title is &#x27;Perps account&#x27; and spot account title is &#x27;Spot account&#x27;.</div>
+<div class="reason">&mdash; UI label detail; not part of the public hand-over</div>
+</div>
+</div>
+<div class="cand ">
+<span class="ch">x &middot; option 5</span>
+<div class="txt">Hyperliquid spot is live on Infinex.
+
+One unified account. Spot and perps share the same balance, and USDC moves between them on-chain — no bridge, no second deposit.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; Spot order entry UI: side labels: Spot uses &#x27;Buy&#x27;/&#x27;Sell&#x27;; perps uses &#x27;Long&#x27;/&#x27;Short&#x27;</div>
+<div class="reason">&mdash; UI detail; not the announcement-level fact</div>
+</div>
+</div>
+<h2>web &mdash; 5 options</h2>
+<div class="cand sel">
+<span class="ch">web &middot; option 1</span> <span class=badge>actor pick</span>
+<div class="txt">Hyperliquid spot is live on Infinex. One account for spot and perps, one balance backing both.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; USD class transfer mechanic (spot-to-perps balance movement): USD class transfer is a Hyperliquid-native spot balance-class movement (not a perps deposit or withdrawal). It moves USDC between the spot and perps balance classes on-chain within the unified account. Not applicable to the perp product context — it is a spot-side operation only.</div>
+<div class="reason">&mdash; Web line is one beat; the on-chain mechanic belongs to the longer surface</div>
+</div>
+</div>
+<div class="cand ">
+<span class="ch">web &middot; option 2</span>
+<div class="txt">Hyperliquid spot is live on Infinex. Trade spot and perps from one account, one shared balance.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; Hyperliquid spot markets with &gt;$100K 24h volume (defensible tradeable market count): 20</div>
+<div class="reason">&mdash; market count is not the through-action at web length</div>
+</div>
+</div>
+<div class="cand ">
+<span class="ch">web &middot; option 3</span>
+<div class="txt">Hyperliquid spot is live on Infinex. Same account as your perps. Same balance.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; USD class transfer mechanic (spot-to-perps balance movement): USD class transfer is a Hyperliquid-native spot balance-class movement (not a perps deposit or withdrawal). It moves USDC between the spot and perps balance classes on-chain within the unified account. Not applicable to the perp product context — it is a spot-side operation only.</div>
+<div class="reason">&mdash; Carried by &#x27;same balance&#x27; implication; spelling it out breaks the line</div>
+</div>
+</div>
+<div class="cand ">
+<span class="ch">web &middot; option 4</span>
+<div class="txt">Hyperliquid spot is live on Infinex. Spot and perps, one unified account, one balance.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; Spot activity tabs in Infinex: Spot Balances, Open Orders, Trade History</div>
+<div class="reason">&mdash; UI inventory; not the announcement surface</div>
+</div>
+</div>
+<div class="cand ">
+<span class="ch">web &middot; option 5</span>
+<div class="txt">Hyperliquid spot is live on Infinex. One account. One balance. Spot and perps, together.</div>
+<div class="lbl">do not say &mdash; deliberately withheld</div><div class="ns">
+<div class="fact">&times; Perps balance label change with spot launch: Perps account balance row label is &#x27;Available margin&#x27;; Spot account balance row label is &#x27;Available balance&#x27;. The perps account title is &#x27;Perps account&#x27; and spot account title is &#x27;Spot account&#x27;.</div>
+<div class="reason">&mdash; Label detail belongs in product, not on web</div>
+</div>
+</div>
+</body></html>

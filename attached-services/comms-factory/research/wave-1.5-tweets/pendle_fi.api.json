@@ -1,0 +1,5082 @@
+{
+  "user": {
+    "data": {
+      "id": "1377493693762969600",
+      "name": "Pendle",
+      "username": "pendle_fi"
+    }
+  },
+  "tweets": {
+    "data": [
+      {
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2054016550898938186"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2054057822074327356"
+        ],
+        "entities": {
+          "cashtags": [
+            {
+              "start": 43,
+              "end": 50,
+              "tag": "Pendle"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "18decimals",
+              "id": "947156434340298752"
+            }
+          ]
+        },
+        "id": "2054057822074327356",
+        "text": "RT @18decimals: The interesting part about $Pendle integrating assets tied to Strategy isn\u2019t even the yield.\n\nIt\u2019s that entirely new fixed\u2026",
+        "created_at": "2026-05-12T04:35:21.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1031
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2054044155215806473"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2054044167773544448"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2054044169715487051"
+        ],
+        "id": "2054044169715487051",
+        "text": "PT-apyUSD market: https://t.co/V3KDkUgoe6\n\n0xcd2 dashboard: https://t.co/Taf9SLDIUh https://t.co/cTNSGHA10i",
+        "created_at": "2026-05-12T03:41:07.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 18,
+              "end": 41,
+              "url": "https://t.co/V3KDkUgoe6",
+              "expanded_url": "https://app.pendle.finance/trade/markets/0x3c53fae231ad3c0408a8b6d33138bbff1caec330/swap?view=pt&chain=ethereum",
+              "display_url": "app.pendle.finance/trade/markets/\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2054044213634117632/HEtwIuVt?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2054044213634117632/HEtwIuVt?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets/0x3c53fae231ad3c0408a8b6d33138bbff1caec330/swap?view=pt&chain=ethereum"
+            },
+            {
+              "start": 60,
+              "end": 83,
+              "url": "https://t.co/Taf9SLDIUh",
+              "expanded_url": "https://app.pendle.finance/trade/dashboard/user/0xcd2a3555fae0ed39731c56677c11538d9481a768/0x3c53fae231ad3c0408a8b6d33138bbff1caec330?chainId=0x1&tab=transactions",
+              "display_url": "app.pendle.finance/trade/dashboar\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2054044174597636096/RwaMQ_JC?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2054044174597636096/RwaMQ_JC?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/dashboard/user/0xcd2a3555fae0ed39731c56677c11538d9481a768/0x3c53fae231ad3c0408a8b6d33138bbff1caec330?chainId=0x1&tab=transactions"
+            },
+            {
+              "start": 84,
+              "end": 107,
+              "url": "https://t.co/cTNSGHA10i",
+              "expanded_url": "https://x.com/pendle_fi/status/2054044169715487051/photo/1",
+              "display_url": "pic.x.com/cTNSGHA10i",
+              "media_key": "3_2054044167773544448"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 13,
+          "like_count": 70,
+          "quote_count": 4,
+          "bookmark_count": 8,
+          "impression_count": 4154
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2054044152875339776"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2054044155215806473"
+        ],
+        "note_tweet": {
+          "entities": {
+            "cashtags": [
+              {
+                "start": 295,
+                "end": 300,
+                "tag": "STRC"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 40,
+                "end": 48,
+                "username": "apyx_fi",
+                "id": "1998581781348626434"
+              },
+              {
+                "start": 779,
+                "end": 786,
+                "username": "saylor",
+                "id": "244647486"
+              }
+            ]
+          },
+          "text": "Earlier today, 0xcd2 deployed ~$2M into @apyx_fi PT-apyUSD across 8 buys at an effective fixed yield of 18.94% APY.\n\n\u2022 Accumulated 2,034,423 PT-apyUSD in a single session\n\u2022 Now the 3rd largest individual PT-apyUSD holder\n\u2022 18.94% Fixed APY for ~36 days\n\u2022 $34,676 profit at maturity (1.73% ROI)\n\n$STRC pays a floating monthly dividend of 11.5%, which in itself is already a compelling yield product.\n\napyUSD takes that underlying yield and lets you fix it on Pendle, locking in a rate that currently sits even higher than the floating rate.\n\nThe current implied APY is 19.3%, meaning you can enter today and outperform this whale's entry.\n\nPool liquidity is also decently deep, capable of absorbing a ~$37M swap at 18.88% effective fixed yield.\n\nSo yes, we can take your size (cc @saylor)"
+        },
+        "id": "2054044155215806473",
+        "text": "Earlier today, 0xcd2 deployed ~$2M into @apyx_fi PT-apyUSD across 8 buys at an effective fixed yield of 18.94% APY.\n\n\u2022 Accumulated 2,034,423 PT-apyUSD in a single session\n\u2022 Now the 3rd largest individual PT-apyUSD holder\n\u2022 18.94% Fixed APY for ~36 days\n\u2022 $34,676 profit at https://t.co/HzWXKhe0Sa",
+        "created_at": "2026-05-12T03:41:03.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 273,
+              "end": 296,
+              "url": "https://t.co/HzWXKhe0Sa",
+              "expanded_url": "https://x.com/pendle_fi/status/2054044155215806473/photo/1",
+              "display_url": "pic.x.com/HzWXKhe0Sa",
+              "media_key": "3_2054044152875339776"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 40,
+              "end": 48,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 4,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2053912865606656423"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2054019877539844332"
+        ],
+        "id": "2054019877539844332",
+        "text": "RT @DarkLord_gr: https://t.co/SZt2FRjFDQ",
+        "created_at": "2026-05-12T02:04:35.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 17,
+              "end": 40,
+              "url": "https://t.co/SZt2FRjFDQ",
+              "expanded_url": "http://x.com/i/article/2053152169608495104",
+              "display_url": "x.com/i/article/2053\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/2053152169608495104"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "DarkLord_gr",
+              "id": "935878697957109760"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2053869355159695766"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2053992119698854162"
+        ],
+        "id": "2053992119698854162",
+        "text": "RT @PendleIntern: Limit order incentives in action:\n&gt; Place limit order\n&gt; Get filled\n&gt; Receive YT at the price you want\n&gt; Don't get filled\u2026",
+        "created_at": "2026-05-12T00:14:17.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 8,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3087
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2053802265631404541"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2053802278453465088"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2053802280236007621"
+        ],
+        "entities": {
+          "cashtags": [
+            {
+              "start": 58,
+              "end": 63,
+              "tag": "STRC"
+            }
+          ],
+          "urls": [
+            {
+              "start": 73,
+              "end": 96,
+              "url": "https://t.co/HHxekEZRx7",
+              "expanded_url": "https://app.pendle.finance/trade/markets?categories=strc",
+              "display_url": "app.pendle.finance/trade/markets?\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2053802327442935808/a765fc7O?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2053802327442935808/a765fc7O?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets?categories=strc"
+            },
+            {
+              "start": 97,
+              "end": 120,
+              "url": "https://t.co/QyXPTz7z4g",
+              "expanded_url": "https://x.com/pendle_fi/status/2053802280236007621/photo/1",
+              "display_url": "pic.x.com/QyXPTz7z4g",
+              "media_key": "3_2053802278453465088"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 8,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 9,
+              "end": 23,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            },
+            {
+              "start": 24,
+              "end": 39,
+              "username": "strata_markets",
+              "id": "1907733597173280768"
+            },
+            {
+              "start": 40,
+              "end": 49,
+              "username": "Strategy",
+              "id": "12764472"
+            }
+          ]
+        },
+        "id": "2053802280236007621",
+        "text": "@apyx_fi @saturn_credit @strata_markets @Strategy Link to $STRC markets: https://t.co/HHxekEZRx7 https://t.co/QyXPTz7z4g",
+        "created_at": "2026-05-11T11:39:56.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 90,
+          "reply_count": 70,
+          "like_count": 768,
+          "quote_count": 10,
+          "bookmark_count": 50,
+          "impression_count": 106123
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2053802263085531136"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2053802265631404541"
+        ],
+        "note_tweet": {
+          "entities": {
+            "cashtags": [
+              {
+                "start": 22,
+                "end": 29,
+                "tag": "PENDLE"
+              },
+              {
+                "start": 123,
+                "end": 128,
+                "tag": "STRC"
+              },
+              {
+                "start": 209,
+                "end": 214,
+                "tag": "STRC"
+              },
+              {
+                "start": 318,
+                "end": 323,
+                "tag": "STRC"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 13,
+                "end": 20,
+                "username": "saylor",
+                "id": "244647486"
+              }
+            ]
+          },
+          "text": "Pendle \ud83e\udef1\ud83c\udffb\u200d\ud83e\udef2\ud83c\udffb @saylor\n\n$PENDLE has been one of the biggest drivers for digital credit yield economy onchain, with ~$318M of $STRC linked TVL now.\n\nThe protocol enables new strategies previously unavailable for $STRC both onchain and off, with a range of distinct risk profiles for various market views. Fixed yield for $STRC (up to 18% Fixed APY), directional yield speculation, and/or enhanced diversified yield as a liquidity provider.\n\nYield infra for the global yield economy \ud83e\udee1"
+        },
+        "entities": {
+          "cashtags": [
+            {
+              "start": 22,
+              "end": 29,
+              "tag": "PENDLE"
+            },
+            {
+              "start": 123,
+              "end": 128,
+              "tag": "STRC"
+            },
+            {
+              "start": 209,
+              "end": 214,
+              "tag": "STRC"
+            }
+          ],
+          "urls": [
+            {
+              "start": 280,
+              "end": 303,
+              "url": "https://t.co/beGLsxkzbH",
+              "expanded_url": "https://x.com/pendle_fi/status/2053802265631404541/photo/1",
+              "display_url": "pic.x.com/beGLsxkzbH",
+              "media_key": "3_2053802263085531136"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 13,
+              "end": 20,
+              "username": "saylor",
+              "id": "244647486"
+            }
+          ]
+        },
+        "id": "2053802265631404541",
+        "text": "Pendle \ud83e\udef1\ud83c\udffb\u200d\ud83e\udef2\ud83c\udffb @saylor\n\n$PENDLE has been one of the biggest drivers for digital credit yield economy onchain, with ~$318M of $STRC linked TVL now.\n\nThe protocol enables new strategies previously unavailable for $STRC both onchain and off, with a range of distinct risk profiles for https://t.co/beGLsxkzbH",
+        "created_at": "2026-05-11T11:39:52.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 17,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2053762178239652203"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2053800562928595333"
+        ],
+        "id": "2053800562928595333",
+        "text": "RT @thelearningpill: Most people think the Pendle Effect is just a demand spike.\n\nThe data says it is a capital routing pattern, and it beh\u2026",
+        "created_at": "2026-05-11T11:33:06.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 19,
+              "username": "thelearningpill",
+              "id": "948883353662451714"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1287
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2053777382230860226"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2053777395069661184"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2053777396806058392"
+        ],
+        "id": "2053777396806058392",
+        "text": "Read more here: https://t.co/RLbn757ggE https://t.co/2P8gmS4CVc",
+        "created_at": "2026-05-11T10:01:03.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 16,
+              "end": 39,
+              "url": "https://t.co/RLbn757ggE",
+              "expanded_url": "https://pendlefi.substack.com/p/pendle-print-113",
+              "display_url": "pendlefi.substack.com/p/pendle-print\u2026",
+              "status": 200,
+              "title": "Pendle Print #113",
+              "description": "All roads lead to PENDLE",
+              "unwound_url": "https://pendlefi.substack.com/p/pendle-print-113"
+            },
+            {
+              "start": 40,
+              "end": 63,
+              "url": "https://t.co/2P8gmS4CVc",
+              "expanded_url": "https://x.com/pendle_fi/status/2053777396806058392/photo/1",
+              "display_url": "pic.x.com/2P8gmS4CVc",
+              "media_key": "3_2053777395069661184"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 3,
+          "like_count": 80,
+          "quote_count": 0,
+          "bookmark_count": 6,
+          "impression_count": 4289
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2053777379336822784"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2053777382230860226"
+        ],
+        "id": "2053777382230860226",
+        "text": "Pendle Print #113\n\n\u2022 Pendle now holds 1,033,235 (~$103M) of onchain STRC\n\u2022 Dune coins \"The Pendle Effect\" - how Pendle as a launchpad powers growth surges for protocols\n\u2022 APYX PTs become the largest markets on Morpho (&gt;$50M TVL)\n\u2022 New structured, tranched markets for STRC - https://t.co/IlMC9ITg9P",
+        "created_at": "2026-05-11T10:00:59.000Z",
+        "note_tweet": {
+          "text": "Pendle Print #113\n\n\u2022 Pendle now holds 1,033,235 (~$103M) of onchain STRC\n\u2022 Dune coins \"The Pendle Effect\" - how Pendle as a launchpad powers growth surges for protocols\n\u2022 APYX PTs become the largest markets on Morpho (>$50M TVL)\n\u2022 New structured, tranched markets for STRC - Strata srUSDat, jrUSDat (Aug 2026); Royco jrRoyAPYUSD (Nov 2026)"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 278,
+              "end": 301,
+              "url": "https://t.co/IlMC9ITg9P",
+              "expanded_url": "https://x.com/pendle_fi/status/2053777382230860226/photo/1",
+              "display_url": "pic.x.com/IlMC9ITg9P",
+              "media_key": "3_2053777379336822784"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2053776610470605115"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2053777124054737013"
+        ],
+        "id": "2053777124054737013",
+        "text": "RT @PendleIntern: Bite me, Intern made a few mistakes for @SierraIsMoney YTs last time \ud83d\ude47\ud83c\udffb\u200d\u2640\ufe0f\n\nTurns out I was being TOO conservative:\n\u2022 Did\u2026",
+        "created_at": "2026-05-11T09:59:58.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            },
+            {
+              "start": 58,
+              "end": 72,
+              "username": "SierraIsMoney",
+              "id": "1942186296195391488"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 43,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2053547429144989767"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2053547305228513280"
+          ],
+          "media_source_tweet_id": [
+            "2053547429144989767"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2053722169453273401"
+        ],
+        "id": "2053722169453273401",
+        "text": "RT @apyx_fi: Onchain digital credit yield is taking over @pendle_fi. \ud83d\ude80 https://t.co/2EPI0Tdxec",
+        "created_at": "2026-05-11T06:21:36.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 71,
+              "end": 94,
+              "url": "https://t.co/2EPI0Tdxec",
+              "expanded_url": "https://x.com/apyx_fi/status/2053547429144989767/photo/1",
+              "display_url": "pic.x.com/2EPI0Tdxec",
+              "media_key": "3_2053547305228513280"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 57,
+              "end": 67,
+              "username": "pendle_fi",
+              "id": "1377493693762969600"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2053696448274010341"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2053717328936980657"
+        ],
+        "id": "2053717328936980657",
+        "text": "RT @PendleIntern: \ud83d\udea8 BREAKING \ud83d\udea8\n\nsUSDai's implied yield has suddenly shot up to 10.28% APY\n\nWhat... what do they know?\n\n\ud83e\udd14\ud83e\udd14\ud83e\udd14\n\nPendle https://\u2026",
+        "created_at": "2026-05-11T06:02:22.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1782
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2053654712495518105"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2053654682292371456"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2053654716249481283"
+        ],
+        "id": "2053654716249481283",
+        "text": "Link to article: https://t.co/q9vMgwsb5H https://t.co/NQdBtjXlF8",
+        "created_at": "2026-05-11T01:53:34.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 17,
+              "end": 40,
+              "url": "https://t.co/q9vMgwsb5H",
+              "expanded_url": "https://www.coingecko.com/learn/strategy-strc-defi-strc-yield-saturn-pendle?utm_campaign=learn&utm_source=x&utm_medium=social",
+              "display_url": "coingecko.com/learn/strategy\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052750459912495104/uxnxAalT?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 628
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052750459912495104/uxnxAalT?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Strategy's STRC: Capture Bitcoin-Linked Yield via Saturn & Pendle | CoinGecko",
+              "description": "Saturn Credit tokenizes Strategy's STRC dividends into sUSDat, while Pendle lets users trade, hedge, or lock in that yield via PT and YT tokens.",
+              "unwound_url": "https://www.coingecko.com/learn/strategy-strc-defi-strc-yield-saturn-pendle?utm_campaign=learn&utm_source=x&utm_medium=social"
+            },
+            {
+              "start": 41,
+              "end": 64,
+              "url": "https://t.co/NQdBtjXlF8",
+              "expanded_url": "https://x.com/pendle_fi/status/2053654716249481283/photo/1",
+              "display_url": "pic.x.com/NQdBtjXlF8",
+              "media_key": "3_2053654682292371456"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 18,
+          "reply_count": 15,
+          "like_count": 149,
+          "quote_count": 0,
+          "bookmark_count": 11,
+          "impression_count": 14637
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2052750457081409575"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2053654712495518105"
+        ],
+        "note_tweet": {
+          "entities": {
+            "cashtags": [
+              {
+                "start": 291,
+                "end": 296,
+                "tag": "STRC"
+              }
+            ]
+          },
+          "text": "\"Saturn broadens that universe by bringing transparent Bitcoin-linked dividend yield on-chain, and Pendle provides the market structure that makes the yield accessible.\"\n\nEvery new yield source in DeFi eventually needs a place to be priced and traded, and that's what Pendle is built to do. $STRC distributions, tokenized through Saturn, are now something users can take a fixed or variable view on, with clear mechanics and transparent pricing via Pendle's yield infra \ud83d\udc47\ud83c\udffb"
+        },
+        "id": "2053654712495518105",
+        "text": "\"Saturn broadens that universe by bringing transparent Bitcoin-linked dividend yield on-chain, and Pendle provides the market structure that makes the yield accessible.\"\n\nEvery new yield source in DeFi eventually needs a place to be priced and traded, and that's what Pendle is https://t.co/AbcXbDIGzy",
+        "created_at": "2026-05-11T01:53:33.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 278,
+              "end": 301,
+              "url": "https://t.co/AbcXbDIGzy",
+              "expanded_url": "https://twitter.com/coingecko/status/2052750457081409575",
+              "display_url": "x.com/coingecko/stat\u2026"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2053614448037015961"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2053628988183244815"
+        ],
+        "id": "2053628988183244815",
+        "text": "RT @PendleIntern: Pendle Strategy has acquired 226.4m apxUSD and 23.9m sUSDat and has achieved preferred dividend yield of 11.50% APY. As o\u2026",
+        "created_at": "2026-05-11T00:11:20.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 12,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2052718612105019440"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052718685169783187"
+        ],
+        "id": "2052718685169783187",
+        "text": "RT @PendleIntern: Polymarket now puts Clarity Act CLARITY Act at 70% to pass this year. Many don't realize how big of an ADVANTAGE this is\u2026",
+        "created_at": "2026-05-08T11:54:06.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 24,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2052388216750436514"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052690409940488209"
+        ],
+        "id": "2052690409940488209",
+        "text": "RT @alturax: Stack PENDLE with YT-AVLT limit orders.\n\nYT-AVLT positions on @pendle_fi get leveraged exposure to Altura's yield, plus a 2x b\u2026",
+        "created_at": "2026-05-08T10:01:45.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "alturax",
+              "id": "1311986670435282944"
+            },
+            {
+              "start": 75,
+              "end": 85,
+              "username": "pendle_fi",
+              "id": "1377493693762969600"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 14,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2528
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052604601921393121"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052604614491680768"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052604616353906988"
+        ],
+        "id": "2052604616353906988",
+        "text": "@saylor Link to markets: https://t.co/5yX0wIoXji https://t.co/5ztaGk3uud",
+        "created_at": "2026-05-08T04:20:50.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 25,
+              "end": 48,
+              "url": "https://t.co/5yX0wIoXji",
+              "expanded_url": "https://app.pendle.finance/trade/markets?categories=strc&sort=fixedApy",
+              "display_url": "app.pendle.finance/trade/markets?\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052256095125811200/Mfpx-Vw4?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052256095125811200/Mfpx-Vw4?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets?categories=strc&sort=fixedApy"
+            },
+            {
+              "start": 49,
+              "end": 72,
+              "url": "https://t.co/5ztaGk3uud",
+              "expanded_url": "https://x.com/pendle_fi/status/2052604616353906988/photo/1",
+              "display_url": "pic.x.com/5ztaGk3uud",
+              "media_key": "3_2052604614491680768"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 7,
+              "username": "saylor",
+              "id": "244647486"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 45,
+          "reply_count": 45,
+          "like_count": 408,
+          "quote_count": 6,
+          "bookmark_count": 44,
+          "impression_count": 88355
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2052604599480258560"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052604601921393121"
+        ],
+        "note_tweet": {
+          "entities": {
+            "cashtags": [
+              {
+                "start": 128,
+                "end": 133,
+                "tag": "STRC"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 4,
+                "end": 12,
+                "username": "apyx_fi",
+                "id": "1998581781348626434"
+              }
+            ]
+          },
+          "text": "The @apyx_fi PT markets on Morpho are now the largest PT markets on the protocol, with ~$50.5M in total TVL.\n\n~18% fixed APY on $STRC yield coins is already a strong base. For users running looping strategies, effective yields reach 50-60% APY.\n\nPendle's yield infra enables that range of expression, from simple fixed-rate exposure to leveraged yield,  even for RWAs with floating, dividend-based payments."
+        },
+        "entities": {
+          "cashtags": [
+            {
+              "start": 128,
+              "end": 133,
+              "tag": "STRC"
+            }
+          ],
+          "urls": [
+            {
+              "start": 280,
+              "end": 303,
+              "url": "https://t.co/cdhp5eTbba",
+              "expanded_url": "https://x.com/pendle_fi/status/2052604601921393121/photo/1",
+              "display_url": "pic.x.com/cdhp5eTbba",
+              "media_key": "3_2052604599480258560"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 4,
+              "end": 12,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            }
+          ]
+        },
+        "id": "2052604601921393121",
+        "text": "The @apyx_fi PT markets on Morpho are now the largest PT markets on the protocol, with ~$50.5M in total TVL.\n\n~18% fixed APY on $STRC yield coins is already a strong base. For users running looping strategies, effective yields reach 50-60% APY.\n\nPendle's yield infra enables that https://t.co/cdhp5eTbba",
+        "created_at": "2026-05-08T04:20:47.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2052299267574821336"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052584074800414727"
+        ],
+        "entities": {
+          "cashtags": [
+            {
+              "start": 55,
+              "end": 60,
+              "tag": "STRC"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "pendle_grandma",
+              "id": "1926240392933949440"
+            },
+            {
+              "start": 67,
+              "end": 74,
+              "username": "saylor",
+              "id": "244647486"
+            }
+          ]
+        },
+        "id": "2052584074800414727",
+        "text": "RT @pendle_grandma: \u6700\u8fd1Pendle\u5e02\u573a\u60c5\u7eea\u56de\u6696 \ud83d\udd25\uff0c\u5f88\u5927\u4e00\u90e8\u5206\u539f\u56e0\u6765\u81ea\u76ee\u524d\u8d85\u7ea7\u53d7\u6b22\u8fce\u7684 $STRC \u53d9\u4e8b\u3002\ud83e\udd73\n\n@saylor \u5148\u751f\u5bf9\u4e8eBTC\u6709\u8d85\u5f3a\u4fe1\u4ef0\uff0c\u4e5f\u4e00\u76f4\u65e0\u6bd4\u652f\u6301Pendle\u3002\ud83d\ude0d\n\n\u4ed6\u529b\u63a8\u7684\u7531\u6570\u5b57\u4fe1\u8d37digital credit \u9a71\u52a8\u7684RWA\u7528\u4e00\u79cd\u65b0\u2026",
+        "created_at": "2026-05-08T02:59:13.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2052313253783683406"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052582974336757829"
+        ],
+        "id": "2052582974336757829",
+        "text": "RT @Eli5defi: The problem of this current cycle participant is the bottleneck of deeper analysis.\n\nWith AI, alpha almost can be found anywh\u2026",
+        "created_at": "2026-05-08T02:54:50.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "Eli5defi",
+              "id": "1481568237624393730"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 23,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2052441049428041935"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052582577748451810"
+        ],
+        "id": "2052582577748451810",
+        "text": "RT @EdrinValecrest: People are seriously underestimating how fast STRC yield markets are getting absorbed on @pendle_fi.\n\n~18.9% fixed on a\u2026",
+        "created_at": "2026-05-08T02:53:16.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "EdrinValecrest",
+              "id": "1163184217532096525"
+            },
+            {
+              "start": 109,
+              "end": 119,
+              "username": "pendle_fi",
+              "id": "1377493693762969600"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 337
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2052071129901375624"
+          },
+          {
+            "type": "replied_to",
+            "id": "2052261711369978171"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052404995782533161"
+        ],
+        "id": "2052404995782533161",
+        "text": "@Tarzandu78 @apyx_fi @strata_markets @saturn_credit @saylor @Strategy The name is a mouthful but that's a tranched STRC product similar to Strata's\n\nThe one you're referring to is the Junior tranche, an entirely different risk profile from your typical tokenized STRC or even Senior tranche exposure\n\nhttps://t.co/iTwDNawW2t",
+        "created_at": "2026-05-07T15:07:37.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 301,
+              "end": 324,
+              "url": "https://t.co/iTwDNawW2t",
+              "expanded_url": "https://x.com/pendle_fi/status/2052071129901375624",
+              "display_url": "x.com/pendle_fi/stat\u2026"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 11,
+              "username": "Tarzandu78",
+              "id": "1461294925488824320"
+            },
+            {
+              "start": 12,
+              "end": 20,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 21,
+              "end": 36,
+              "username": "strata_markets",
+              "id": "1907733597173280768"
+            },
+            {
+              "start": 37,
+              "end": 51,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            },
+            {
+              "start": 52,
+              "end": 59,
+              "username": "saylor",
+              "id": "244647486"
+            },
+            {
+              "start": 60,
+              "end": 69,
+              "username": "Strategy",
+              "id": "12764472"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 385
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052326282583584932"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052404299876196573"
+        ],
+        "note_tweet": {
+          "entities": {
+            "cashtags": [
+              {
+                "start": 68,
+                "end": 73,
+                "tag": "STRC"
+              },
+              {
+                "start": 209,
+                "end": 214,
+                "tag": "STRC"
+              },
+              {
+                "start": 623,
+                "end": 628,
+                "tag": "STRC"
+              }
+            ]
+          },
+          "text": "Let's break it down for you.\n\nEvery apxUSD is overcollateralized by $STRC. But dividends are only emitted to a smaller subset of staked apxUSD (i.e. apyUSD), which is why apyUSD yield is typically higher than $STRC's dividend rate.\n\nPendle is a yield infra that splits these apyUSD into principal and yield, which allow them to be traded separately ala bond stripping if you're familiar with that.\n\nThe principal portion is essentially \"zero coupon bond\" for apyUSD.\n\nFactor in APYX points as well in the \"yield\" portion, which represent their upcoming airdrop, and the fact that apyUSD naturally already receives outsized $STRC dividend rate, is why the fixed yield portion on Pendle is priced higher.\n\nThis is just one asset. Every asset is well documented in their respective market page, feel free to browse, Brad."
+        },
+        "entities": {
+          "cashtags": [
+            {
+              "start": 141,
+              "end": 146,
+              "tag": "STRC"
+            },
+            {
+              "start": 282,
+              "end": 287,
+              "tag": "STRC"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 14,
+              "username": "wesleybrad060",
+              "id": "1682734144944480256"
+            },
+            {
+              "start": 15,
+              "end": 23,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 24,
+              "end": 39,
+              "username": "strata_markets",
+              "id": "1907733597173280768"
+            },
+            {
+              "start": 40,
+              "end": 54,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            },
+            {
+              "start": 55,
+              "end": 62,
+              "username": "saylor",
+              "id": "244647486"
+            },
+            {
+              "start": 63,
+              "end": 72,
+              "username": "Strategy",
+              "id": "12764472"
+            }
+          ]
+        },
+        "id": "2052404299876196573",
+        "text": "@wesleybrad060 @apyx_fi @strata_markets @saturn_credit @saylor @Strategy Let's break it down for you.\n\nEvery apxUSD is overcollateralized by $STRC. But dividends are only emitted to a smaller subset of staked apxUSD (i.e. apyUSD), which is why apyUSD yield is typically higher than $STRC's dividend rate.\n\nPendle is a yield infra that splits these",
+        "created_at": "2026-05-07T15:04:51.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 9,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 1722
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052274759069848003"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052274773707960320"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052274775519850694"
+        ],
+        "id": "2052274775519850694",
+        "text": "Link to Hyperliquid oil markets on Boros \ud83d\udc47\ud83c\udffb\n\nBRENTOIL: https://t.co/HF46ecQMOC\n\nWTIOIL: https://t.co/RTwsp1hnun https://t.co/RU4NNiZc17",
+        "created_at": "2026-05-07T06:30:10.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 55,
+              "end": 78,
+              "url": "https://t.co/HF46ecQMOC",
+              "expanded_url": "https://boros.pendle.finance/markets/106",
+              "display_url": "boros.pendle.finance/markets/106",
+              "status": 200,
+              "title": "Boros - by Pendle",
+              "description": "Trade funding rates on leverage \u2014 speculate on rate shifts or hedge your perpetuals funding rate exposure.",
+              "unwound_url": "https://boros.pendle.finance/markets/106"
+            },
+            {
+              "start": 88,
+              "end": 111,
+              "url": "https://t.co/RTwsp1hnun",
+              "expanded_url": "https://boros.pendle.finance/markets/104",
+              "display_url": "boros.pendle.finance/markets/104",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052274780087504896/sbG1fyg2?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 630
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052274780087504896/sbG1fyg2?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Boros - by Pendle",
+              "description": "Trade funding rates on leverage \u2014 speculate on rate shifts or hedge your perpetuals funding rate exposure.",
+              "unwound_url": "https://boros.pendle.finance/markets/104"
+            },
+            {
+              "start": 112,
+              "end": 135,
+              "url": "https://t.co/RU4NNiZc17",
+              "expanded_url": "https://x.com/pendle_fi/status/2052274775519850694/photo/1",
+              "display_url": "pic.x.com/RU4NNiZc17",
+              "media_key": "3_2052274773707960320"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 4,
+          "reply_count": 5,
+          "like_count": 64,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6870
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2052037820663927161"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052274759069848003"
+        ],
+        "note_tweet": {
+          "entities": {
+            "mentions": [
+              {
+                "start": 143,
+                "end": 152,
+                "username": "boros_fi",
+                "id": "1855775452042002432"
+              }
+            ]
+          },
+          "text": "Oil perp prices on HL are dropping as the oracle rolls from CLM6 to CLN6 (~$4) later today.\n\nWhile most are shorting the perp (and shorting on @boros_fi to fix their funding payment), backdated research points to LONGING the funding rate as the stronger play, where an inefficient market creates the opportunity \ud83d\udc47\ud83c\udffb"
+        },
+        "id": "2052274759069848003",
+        "text": "Oil perp prices on HL are dropping as the oracle rolls from CLM6 to CLN6 (~$4) later today.\n\nWhile most are shorting the perp (and shorting on @boros_fi to fix their funding payment), backdated research points to LONGING the funding rate as the stronger play, where an inefficient https://t.co/kAatPsmqVb",
+        "created_at": "2026-05-07T06:30:06.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 281,
+              "end": 304,
+              "url": "https://t.co/kAatPsmqVb",
+              "expanded_url": "https://twitter.com/1855775452042002432/status/2052037820663927161",
+              "display_url": "x.com/18557754520420\u2026"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 143,
+              "end": 152,
+              "username": "boros_fi",
+              "id": "1855775452042002432"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 0,
+          "like_count": 9,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3236
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052256078365413838"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052256090847612928"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052256092613489012"
+        ],
+        "id": "2052256092613489012",
+        "text": "@apyx_fi @strata_markets @saturn_credit @saylor @Strategy STRC your Yield here: https://t.co/yCQtlU5DsW https://t.co/gDfiSyIyLi",
+        "created_at": "2026-05-07T05:15:56.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 80,
+              "end": 103,
+              "url": "https://t.co/yCQtlU5DsW",
+              "expanded_url": "https://app.pendle.finance/trade/markets?sort=fixedApy&categories=strc",
+              "display_url": "app.pendle.finance/trade/markets?\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052256095125811200/Mfpx-Vw4?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052256095125811200/Mfpx-Vw4?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets?sort=fixedApy&categories=strc"
+            },
+            {
+              "start": 104,
+              "end": 127,
+              "url": "https://t.co/gDfiSyIyLi",
+              "expanded_url": "https://x.com/pendle_fi/status/2052256092613489012/photo/1",
+              "display_url": "pic.x.com/gDfiSyIyLi",
+              "media_key": "3_2052256090847612928"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 8,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 9,
+              "end": 24,
+              "username": "strata_markets",
+              "id": "1907733597173280768"
+            },
+            {
+              "start": 25,
+              "end": 39,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            },
+            {
+              "start": 40,
+              "end": 47,
+              "username": "saylor",
+              "id": "244647486"
+            },
+            {
+              "start": 48,
+              "end": 57,
+              "username": "Strategy",
+              "id": "12764472"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 70,
+          "reply_count": 33,
+          "like_count": 561,
+          "quote_count": 4,
+          "bookmark_count": 44,
+          "impression_count": 101329
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2052256075525812224"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052256078365413838"
+        ],
+        "entities": {
+          "cashtags": [
+            {
+              "start": 28,
+              "end": 33,
+              "tag": "STRC"
+            },
+            {
+              "start": 81,
+              "end": 86,
+              "tag": "STRC"
+            }
+          ],
+          "urls": [
+            {
+              "start": 171,
+              "end": 194,
+              "url": "https://t.co/uCCNxYTc8R",
+              "expanded_url": "https://x.com/pendle_fi/status/2052256078365413838/photo/1",
+              "display_url": "pic.x.com/uCCNxYTc8R",
+              "media_key": "3_2052256075525812224"
+            }
+          ]
+        },
+        "id": "2052256078365413838",
+        "text": "RWA fixed yield, powered by $STRC digital credit.\n\nPendle offers fixed yields on $STRC yield coins as high as ~18.9% Fixed APY, higher than the underlying dividend rates: https://t.co/uCCNxYTc8R",
+        "created_at": "2026-05-07T05:15:52.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 52,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2052179882185224195"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052227678862979279"
+        ],
+        "id": "2052227678862979279",
+        "text": "RT @PendleIntern: Good morning to the 252m United State Freedom Dollars of STRC-powered digital assets now calling Pendle home https://t.co\u2026",
+        "created_at": "2026-05-07T03:23:01.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 7,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1684
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052226217596858743"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052226229840056320"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052226231622602865"
+        ],
+        "id": "2052226231622602865",
+        "text": "@apyx_fi @saturn_credit Link to STRC markets: https://t.co/CBqY98aBhX https://t.co/WToJBaP1AL",
+        "created_at": "2026-05-07T03:17:16.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 46,
+              "end": 69,
+              "url": "https://t.co/CBqY98aBhX",
+              "expanded_url": "https://app.pendle.finance/trade/markets?sort=totalTvl&categories=strc",
+              "display_url": "app.pendle.finance/trade/markets?\u2026",
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets?sort=totalTvl&categories=strc"
+            },
+            {
+              "start": 70,
+              "end": 93,
+              "url": "https://t.co/WToJBaP1AL",
+              "expanded_url": "https://x.com/pendle_fi/status/2052226231622602865/photo/1",
+              "display_url": "pic.x.com/WToJBaP1AL",
+              "media_key": "3_2052226229840056320"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 8,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 9,
+              "end": 23,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 10,
+          "reply_count": 2,
+          "like_count": 105,
+          "quote_count": 2,
+          "bookmark_count": 5,
+          "impression_count": 6344
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2052226215176794112"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052226217596858743"
+        ],
+        "note_tweet": {
+          "entities": {
+            "cashtags": [
+              {
+                "start": 108,
+                "end": 113,
+                "tag": "STRC"
+              }
+            ],
+            "mentions": [
+              {
+                "start": 234,
+                "end": 241,
+                "username": "saylor",
+                "id": "244647486"
+              }
+            ]
+          },
+          "text": "63.5% of APYX's TVL and 42.7% of Saturn's TVL flow through Pendle, putting a significant portion of onchain $STRC held indirectly through our pools.\n\nEncouraging to see how Pendle's yield infrastructure has become a primary venue for @saylor's STRC onchain growth. As RWA yield coins scale, fixed yield emerges as one of the most compelling strategies to build around.\n\nJob's not done!"
+        },
+        "entities": {
+          "cashtags": [
+            {
+              "start": 108,
+              "end": 113,
+              "tag": "STRC"
+            }
+          ],
+          "urls": [
+            {
+              "start": 278,
+              "end": 301,
+              "url": "https://t.co/JAqcEs6GQw",
+              "expanded_url": "https://x.com/pendle_fi/status/2052226217596858743/photo/1",
+              "display_url": "pic.x.com/JAqcEs6GQw",
+              "media_key": "3_2052226215176794112"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 234,
+              "end": 241,
+              "username": "saylor",
+              "id": "244647486"
+            }
+          ]
+        },
+        "id": "2052226217596858743",
+        "text": "63.5% of APYX's TVL and 42.7% of Saturn's TVL flow through Pendle, putting a significant portion of onchain $STRC held indirectly through our pools.\n\nEncouraging to see how Pendle's yield infrastructure has become a primary venue for @saylor's STRC onchain growth. As RWA yield https://t.co/JAqcEs6GQw",
+        "created_at": "2026-05-07T03:17:13.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 7,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 559
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052119011601842264"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "16_2052214163292962816"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052214169232171331"
+        ],
+        "id": "2052214169232171331",
+        "text": "@apyx_fi @saylor Oh I see how it is https://t.co/kB5FCMuJ1f",
+        "created_at": "2026-05-07T02:29:20.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 36,
+              "end": 59,
+              "url": "https://t.co/kB5FCMuJ1f",
+              "expanded_url": "https://x.com/pendle_fi/status/2052214169232171331/photo/1",
+              "display_url": "pic.x.com/kB5FCMuJ1f",
+              "media_key": "16_2052214163292962816"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 8,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 9,
+              "end": 16,
+              "username": "saylor",
+              "id": "244647486"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 12,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1292
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052071129901375624"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052071142652014592"
+          ]
+        },
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 260,
+                "end": 283,
+                "url": "https://t.co/g77hJXfbsN",
+                "expanded_url": "https://app.pendle.finance/trade/pools/0x5949c3bfdf9babd759170a3a75c4fe52b03e6797/zap/in?chain=ethereum",
+                "display_url": "app.pendle.finance/trade/pools/0x\u2026"
+              }
+            ]
+          },
+          "text": "Royco is quietly becoming core infrastructure for STRC yield onchain, a credit vault that dynamically prices risk between tranches, and now Pendle sits on top of that stack as a yield trading/fixed yield layer.\n\nP.S. srRoyAPYUSD on Pendle soon \ud83d\ude09\n\njrRoyAPYUSD: https://t.co/g77hJXfbsN"
+        },
+        "edit_history_tweet_ids": [
+          "2052071144623329365"
+        ],
+        "id": "2052071144623329365",
+        "text": "Royco is quietly becoming core infrastructure for STRC yield onchain, a credit vault that dynamically prices risk between tranches, and now Pendle sits on top of that stack as a yield trading/fixed yield layer.\n\nP.S. srRoyAPYUSD on Pendle soon \ud83d\ude09\n\njrRoyAPYUSD: https://t.co/yv24hxVnyJ",
+        "created_at": "2026-05-06T17:01:01.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 260,
+              "end": 283,
+              "url": "https://t.co/yv24hxVnyJ",
+              "expanded_url": "https://x.com/pendle_fi/status/2052071144623329365/photo/1",
+              "display_url": "pic.x.com/yv24hxVnyJ",
+              "media_key": "3_2052071142652014592"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 11,
+          "quote_count": 1,
+          "bookmark_count": 0,
+          "impression_count": 1655
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052071110913740861"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052071127359627264"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052071129901375624"
+        ],
+        "id": "2052071129901375624",
+        "text": "TL;DR\n\njrRoyAPYUSD \u2192 Amplified yield, first-loss seat. You earn the premium + absorb the drawdown (if any) https://t.co/GSKBV63H3A",
+        "created_at": "2026-05-06T17:00:57.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 107,
+              "end": 130,
+              "url": "https://t.co/GSKBV63H3A",
+              "expanded_url": "https://x.com/pendle_fi/status/2052071129901375624/photo/1",
+              "display_url": "pic.x.com/GSKBV63H3A",
+              "media_key": "3_2052071127359627264"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 355
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052071099291320715"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052071110913740861"
+        ],
+        "id": "2052071110913740861",
+        "text": "When apyUSD drawdowns, the pool doesn't immediately crystallize a loss.\n\nIt opens a 30-day Observation Period instead. Senior withdrawals pause. Yield flows entirely to Junior.\n\nRecover within the window \u2192 Nothing happens\n\nDon't recover \u2192 jrRoyAPYUSD takes the hit",
+        "created_at": "2026-05-06T17:00:53.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 338
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052071087186551235"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052071099291320715"
+        ],
+        "id": "2052071099291320715",
+        "text": "The yields aren't static and are priced dynamically based on Utilization.\n\nUtilization tracks how stretched Junior's protective capacity is. Think of it like a borrow rate curve.\n\nPast 90%, the risk premium Senior pays Junior steepens sharply to attract more Junior capital.\n\nAny",
+        "created_at": "2026-05-06T17:00:50.000Z",
+        "note_tweet": {
+          "text": "The yields aren't static and are priced dynamically based on Utilization.\n\nUtilization tracks how stretched Junior's protective capacity is. Think of it like a borrow rate curve.\n\nPast 90%, the risk premium Senior pays Junior steepens sharply to attract more Junior capital.\n\nAny excess Junior capital above the minimum coverage (15%) can serve as liquidity for Junior depositors to exit.\n\nCurrent utilization: 93%, so Junior is earning an elevated premium right now."
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 2,
+          "like_count": 17,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 919
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052071070149304331"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052071084774903808"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052071087186551235"
+        ],
+        "id": "2052071087186551235",
+        "text": "jrRoyAPYUSD captures a premium paid by Seniors for drawdown protection, earning the underlying rate plus a premium for the risk they take on.\n\nIn return, you'll also be the first line of defense when apyUSD takes a hit.\nCurrent APY: 30.42% (7D avg: 19.31%) https://t.co/CHd6cwo6WM",
+        "created_at": "2026-05-06T17:00:47.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 257,
+              "end": 280,
+              "url": "https://t.co/CHd6cwo6WM",
+              "expanded_url": "https://x.com/pendle_fi/status/2052071087186551235/photo/1",
+              "display_url": "pic.x.com/CHd6cwo6WM",
+              "media_key": "3_2052071084774903808"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 2,
+          "like_count": 19,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1071
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052071056480051456"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052071070149304331"
+        ],
+        "id": "2052071070149304331",
+        "text": "@apyx_fi Royco splits apyUSD into 2 vaults with different risk exposure.\n\nSenior capital (srRoyAPYUSD) earns yield with a cushion beneath it.\n\nJunior capital (jrRoyAPYUSD) provides that cushion, and gets paid more for the risks it takes up.",
+        "created_at": "2026-05-06T17:00:43.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 8,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 14,
+          "reply_count": 6,
+          "like_count": 139,
+          "quote_count": 1,
+          "bookmark_count": 16,
+          "impression_count": 8298
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2052071050050166784"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052071056480051456"
+        ],
+        "id": "2052071056480051456",
+        "text": "Structured yield meets fixed yield for @saylor's STRC.\n\nIntroducing our newest RWA market with tranched exposure to apyUSD, powered by @roycoprotocol:\n\n\u2022 jrRoyAPYUSD (Aug 2026) https://t.co/f17YDyGkFQ",
+        "created_at": "2026-05-06T17:00:40.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 177,
+              "end": 200,
+              "url": "https://t.co/f17YDyGkFQ",
+              "expanded_url": "https://x.com/pendle_fi/status/2052071056480051456/photo/1",
+              "display_url": "pic.x.com/f17YDyGkFQ",
+              "media_key": "3_2052071050050166784"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 39,
+              "end": 46,
+              "username": "saylor",
+              "id": "244647486"
+            },
+            {
+              "start": 135,
+              "end": 149,
+              "username": "roycoprotocol",
+              "id": "1776310548982120449"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 37,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2052004351317590480"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052012461847699704"
+        ],
+        "id": "2052012461847699704",
+        "text": "RT @SherifDefi: The CLARITY Act has nearly 70% chance of passing according to Polymarket.\n\nCT is still talking about what it means for $BTC\u2026",
+        "created_at": "2026-05-06T13:07:50.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "SherifDefi",
+              "id": "1611011814"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 11,
+          "quote_count": 0,
+          "bookmark_count": 1,
+          "impression_count": 1276
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052010703247347946"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052010715821789184"
+          ]
+        },
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 319,
+                "end": 342,
+                "url": "https://t.co/CNLyXGcfWT",
+                "expanded_url": "https://app.pendle.finance/trade/pools/0x4237a8acbd0b5a2dec4aa83b1fd83f20162d02b8/zap/in?chain=ethereum",
+                "display_url": "app.pendle.finance/trade/pools/0x\u2026"
+              },
+              {
+                "start": 353,
+                "end": 376,
+                "url": "https://t.co/zptJgEqgSq",
+                "expanded_url": "https://app.pendle.finance/trade/pools/0x8cef2919a8cb98ad74e1e12392bc9f9fc4e3270a/zap/in?chain=ethereum",
+                "display_url": "app.pendle.finance/trade/pools/0x\u2026"
+              }
+            ]
+          },
+          "text": "This is what the maturing RWA landscape looks like. Structured tranches, defined risk tiers, predictable yield...\n\nPendle is committed to being the fixed yield layer for RWAs as the asset class continues to grow, enabling yields to be speculated and traded separately, as in the case for srUSDat and jrUSDat.\n\nsrUSDat: https://t.co/CNLyXGcfWT\n\njrUSDat: https://t.co/zptJgEqgSq"
+        },
+        "edit_history_tweet_ids": [
+          "2052010717788987423"
+        ],
+        "id": "2052010717788987423",
+        "text": "This is what the maturing RWA landscape looks like. Structured tranches, defined risk tiers, predictable yield...\n\nPendle is committed to being the fixed yield layer for RWAs as the asset class continues to grow, enabling yields to be speculated and traded separately, as in the https://t.co/n80Xzxx8TQ",
+        "created_at": "2026-05-06T13:00:54.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 279,
+              "end": 302,
+              "url": "https://t.co/n80Xzxx8TQ",
+              "expanded_url": "https://x.com/pendle_fi/status/2052010717788987423/photo/1",
+              "display_url": "pic.x.com/n80Xzxx8TQ",
+              "media_key": "3_2052010715821789184"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 13,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1401
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052010684108640709"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052010698658725888"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052010703247347946"
+        ],
+        "id": "2052010703247347946",
+        "text": "TL;DR\n\nsrUSDat \u2192 Protected until Junior is fully drained. Yield is lower, but your principal is insulated from STRC price swings.\n\njrUSDat \u2192 You're the buffer. You earn more, but you absorb STRC depegs before anyone else does. https://t.co/fapsA1GFe8",
+        "created_at": "2026-05-06T13:00:50.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 227,
+              "end": 250,
+              "url": "https://t.co/fapsA1GFe8",
+              "expanded_url": "https://x.com/pendle_fi/status/2052010703247347946/photo/1",
+              "display_url": "pic.x.com/fapsA1GFe8",
+              "media_key": "3_2052010698658725888"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 447
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052010672226209889"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052010684108640709"
+        ],
+        "id": "2052010684108640709",
+        "text": "One key number to watch \ud83d\udc47\ud83c\udffb\n\nCoverage Ratio = Total vault / Senior vault.\n\nThe minimum safe threshold is 107.5%. Below that, srUSDat minting and jrUSDat redemption are temporarily halted until the threshold recovers.\n\nBelow 100% is when jrUSDat is wiped out and when srUSDat starts",
+        "created_at": "2026-05-06T13:00:46.000Z",
+        "note_tweet": {
+          "text": "One key number to watch \ud83d\udc47\ud83c\udffb\n\nCoverage Ratio = Total vault / Senior vault.\n\nThe minimum safe threshold is 107.5%. Below that, srUSDat minting and jrUSDat redemption are temporarily halted until the threshold recovers.\n\nBelow 100% is when jrUSDat is wiped out and when srUSDat starts taking losses"
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 758
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2045100342023766292"
+          },
+          {
+            "type": "replied_to",
+            "id": "2052010660599570859"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052010672226209889"
+        ],
+        "id": "2052010672226209889",
+        "text": "For instance, a mere 1% drop in STRC's price can translate to a 3-4% drop in jrUSDat's exchange rate, depending on the ratio between the two tranches.\n\nWhen this happens, jrUSDat will be below the Watermark Rate, and yield accrual for YT will be paused until the Watermark https://t.co/StC2jUNi1f",
+        "created_at": "2026-05-06T13:00:43.000Z",
+        "note_tweet": {
+          "text": "For instance, a mere 1% drop in STRC's price can translate to a 3-4% drop in jrUSDat's exchange rate, depending on the ratio between the two tranches.\n\nWhen this happens, jrUSDat will be below the Watermark Rate, and yield accrual for YT will be paused until the Watermark Rate/STRC price is recovered\n\nLearn more here:"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 273,
+              "end": 296,
+              "url": "https://t.co/StC2jUNi1f",
+              "expanded_url": "https://twitter.com/1377493693762969600/status/2045100342023766292",
+              "display_url": "x.com/13774936937629\u2026"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 544
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052010648939503908"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052010660599570859"
+        ],
+        "id": "2052010660599570859",
+        "text": "Since the Senior tranche is typically much larger, that leftover pile divided across a small Junior base produces amplified yield - typically ~25% APR.\n\nDo note however that jrUSDat will also be the first to absorb losses when STRC's price drops.",
+        "created_at": "2026-05-06T13:00:40.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 14,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1154
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052010636763394551"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2052010648939503908"
+        ],
+        "id": "2052010648939503908",
+        "text": "srUSDat earns 65% of STRC's dividend yield. Yield floats with whatever STRC pays\n\ne.g. 11.5% APR x 65% = ~7.5% APR\n\nIn other words, your yield is lower, but your principal is insulated from STRC price swings.\n\njrUSDat earns everything left over (i.e. 35%) after the Senior is",
+        "created_at": "2026-05-06T13:00:37.000Z",
+        "note_tweet": {
+          "text": "srUSDat earns 65% of STRC's dividend yield. Yield floats with whatever STRC pays\n\ne.g. 11.5% APR x 65% = ~7.5% APR\n\nIn other words, your yield is lower, but your principal is insulated from STRC price swings.\n\njrUSDat earns everything left over (i.e. 35%) after the Senior is satisfied."
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 29,
+          "quote_count": 0,
+          "bookmark_count": 2,
+          "impression_count": 1965
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2052010621286441008"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2052010634305527808"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052010636763394551"
+        ],
+        "id": "2052010636763394551",
+        "text": "Both pools are backed by sUSDat, @saturn_credit's yield bearing asset that holds STRC as collateral.\n\nSTRC pays a dividend. That dividend is split between two tranches: Senior (srUSDat) and Junior (jrUSDat).\n\nSenior gets paid first, and Junior gets the rest. https://t.co/sM80Sgshd3",
+        "created_at": "2026-05-06T13:00:34.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 259,
+              "end": 282,
+              "url": "https://t.co/sM80Sgshd3",
+              "expanded_url": "https://x.com/pendle_fi/status/2052010636763394551/photo/1",
+              "display_url": "pic.x.com/sM80Sgshd3",
+              "media_key": "3_2052010634305527808"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 33,
+              "end": 47,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 28,
+          "reply_count": 13,
+          "like_count": 214,
+          "quote_count": 4,
+          "bookmark_count": 22,
+          "impression_count": 16318
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2052010616798560256"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2052010621286441008"
+        ],
+        "id": "2052010621286441008",
+        "text": ".@Saylor's STRC has been quietly building one of the most compelling RWA yield ecosystems onchain\n\nPendle has been the fixed yield layer for every major STRC-linked asset, now we're going further with @strata_markets structured products:\n\n- srUSDat (Aug 2026)\n- jrUSDat (Aug 2026) https://t.co/IFK2UgIWj9",
+        "created_at": "2026-05-06T13:00:31.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 281,
+              "end": 304,
+              "url": "https://t.co/IFK2UgIWj9",
+              "expanded_url": "https://x.com/pendle_fi/status/2052010621286441008/photo/1",
+              "display_url": "pic.x.com/IFK2UgIWj9",
+              "media_key": "3_2052010616798560256"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 1,
+              "end": 8,
+              "username": "saylor",
+              "id": "244647486"
+            },
+            {
+              "start": 201,
+              "end": 216,
+              "username": "strata_markets",
+              "id": "1907733597173280768"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051525146394177999"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051932618514747814"
+        ],
+        "id": "2051932618514747814",
+        "text": "RT @Neoo_Nav: If you need more examples of the Pendle Effect across emerging narratives, take a look at the data from 2 standout protocols\u2026",
+        "created_at": "2026-05-06T07:50:33.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "Neoo_Nav",
+              "id": "1446854248461787140"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 10,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051814439230525684"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051932042519281966"
+        ],
+        "id": "2051932042519281966",
+        "text": "RT @PendleIntern: Proud for Pendle to be the largest venue for growth and distribution of STRC on-chain\n\nThere's over $240m in STRC-related\u2026",
+        "created_at": "2026-05-06T07:48:16.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051830557542412594"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051906497756672487"
+        ],
+        "id": "2051906497756672487",
+        "text": "RT @PendleIntern: If you think the STRC narrative is here to stay, YTs are frankly the ONLY way to capture upside exposure.\n\nToday intern s\u2026",
+        "created_at": "2026-05-06T06:06:46.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 41,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051635359843582155"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051644506089599463"
+        ],
+        "id": "2051644506089599463",
+        "text": "RT @PendleIntern: STRC-related assets now contribute ~$230m of Pendle TVL despite being live for barely two months.\n\nWhile the growth traje\u2026",
+        "created_at": "2026-05-05T12:45:42.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051550943087575132"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051568908902211935"
+        ],
+        "id": "2051568908902211935",
+        "text": "RT @PendleIntern: If you hold 90 day Treasuries, you earn 3.6% APY\nIf you hold PT-USDat, you earn 9.1% APY\n\nThat's 2.5x the yield.\n\nTo put\u2026",
+        "created_at": "2026-05-05T07:45:18.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051510206371414339"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051510696039551105"
+        ],
+        "id": "2051510696039551105",
+        "text": "RT @PendleIntern: Jerome Powell gave us USD\nPaxos gave us USDG\nThe Bossman gave us PT-USDG\n\nNow while we could stop there, IIO (in intern's\u2026",
+        "created_at": "2026-05-05T03:53:59.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 0,
+          "like_count": 10,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1810
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2051486163417153898"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2051485973251522560"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2051486166755733709"
+        ],
+        "id": "2051486166755733709",
+        "text": "Link: https://t.co/RaIETPMTkZ https://t.co/2YYmCGZmht",
+        "created_at": "2026-05-05T02:16:31.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 6,
+              "end": 29,
+              "url": "https://t.co/RaIETPMTkZ",
+              "expanded_url": "https://dune.com/blog/the-pendle-effect",
+              "display_url": "dune.com/blog/the-pendl\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051486223383011328/N5i4Po44?format=jpg&name=orig",
+                  "width": 2400,
+                  "height": 1350
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051486223383011328/N5i4Po44?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "The Pendle Effect - Blog | Dune",
+              "description": "Does Pendle Drive Demand for Stablecoins?",
+              "unwound_url": "https://dune.com/blog/the-pendle-effect"
+            },
+            {
+              "start": 30,
+              "end": 53,
+              "url": "https://t.co/2YYmCGZmht",
+              "expanded_url": "https://x.com/pendle_fi/status/2051486166755733709/photo/1",
+              "display_url": "pic.x.com/2YYmCGZmht",
+              "media_key": "3_2051485973251522560"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 8,
+          "like_count": 83,
+          "quote_count": 0,
+          "bookmark_count": 8,
+          "impression_count": 7508
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2051346119695987016"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051486163417153898"
+        ],
+        "note_tweet": {
+          "entities": {
+            "mentions": [
+              {
+                "start": 388,
+                "end": 395,
+                "username": "arno39",
+                "id": "786310804727476224"
+              }
+            ]
+          },
+          "text": "\"As stablecoin dominance shifts toward a multi-stablecoin landscape, DeFi composability is increasingly the path to distribution. This analysis suggests Pendle plays a specific and significant role in that stack \u2014 as a launchpad for emerging assets and a capital aggregation venue for established ones \u2014 with lending protocol composability acting as a powerful amplifier.\"\n\nCheers to the @arno39 for putting this together. Full report linked below.\n\nP.S. Love the how you coined the term \"The Pendle Effect\" \ud83e\udef6\ud83c\udffb"
+        },
+        "id": "2051486163417153898",
+        "text": "\"As stablecoin dominance shifts toward a multi-stablecoin landscape, DeFi composability is increasingly the path to distribution. This analysis suggests Pendle plays a specific and significant role in that stack \u2014 as a launchpad for emerging assets and a capital aggregation venue https://t.co/IXflrJeMNo",
+        "created_at": "2026-05-05T02:16:30.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 281,
+              "end": 304,
+              "url": "https://t.co/IXflrJeMNo",
+              "expanded_url": "https://twitter.com/arno39/status/2051346119695987016",
+              "display_url": "x.com/arno39/status/\u2026"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 13,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051374636819001597"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051481081229295652"
+        ],
+        "id": "2051481081229295652",
+        "text": "RT @pendle_grandma: I'll be forever bullish for Pendle and here's why:\n\n\ud83d\udccdSolid PMF: the ultimate infrastructure, like IRS in TradFi\nFirst o\u2026",
+        "created_at": "2026-05-05T01:56:19.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "pendle_grandma",
+              "id": "1926240392933949440"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1355
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2051478214812537339"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2051478218251874304"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2051478223201112376"
+        ],
+        "id": "2051478223201112376",
+        "text": "https://t.co/FaM7VSvdxX",
+        "created_at": "2026-05-05T01:44:57.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/FaM7VSvdxX",
+              "expanded_url": "https://x.com/pendle_fi/status/2051478223201112376/photo/1",
+              "display_url": "pic.x.com/FaM7VSvdxX",
+              "media_key": "3_2051478218251874304"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 8,
+          "like_count": 80,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6619
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2051377556499410962"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051478214812537339"
+        ],
+        "id": "2051478214812537339",
+        "text": "TL;DR \n\nJust use Pendle https://t.co/t4qyhHgflE",
+        "created_at": "2026-05-05T01:44:55.000Z",
+        "note_tweet": {
+          "text": "TL;DR \n\nJust use Pendle"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 24,
+              "end": 47,
+              "url": "https://t.co/t4qyhHgflE",
+              "expanded_url": "https://twitter.com/phtevenstrong/status/2051377556499410962",
+              "display_url": "x.com/phtevenstrong/\u2026"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 41,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051286497974980686"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051286626568114459"
+        ],
+        "id": "2051286626568114459",
+        "text": "RT @Dune: https://t.co/cbpb6D6njb",
+        "created_at": "2026-05-04T13:03:37.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 10,
+              "end": 33,
+              "url": "https://t.co/cbpb6D6njb",
+              "expanded_url": "http://x.com/i/article/2050744725070913536",
+              "display_url": "x.com/i/article/2050\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/2050744725070913536"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 8,
+              "username": "Dune",
+              "id": "1039449274344529920"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 2,
+          "like_count": 8,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1804
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2051240574842515539"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2051240587261890561"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2051240589107331205"
+        ],
+        "id": "2051240589107331205",
+        "text": "Read more here: https://t.co/OHmxtgE589 https://t.co/m1kwmQOsi7",
+        "created_at": "2026-05-04T10:00:41.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 16,
+              "end": 39,
+              "url": "https://t.co/OHmxtgE589",
+              "expanded_url": "https://pendlefi.substack.com/p/pendle-print-112",
+              "display_url": "pendlefi.substack.com/p/pendle-print\u2026",
+              "status": 404,
+              "unwound_url": "https://pendlefi.substack.com/pendle-print-112"
+            },
+            {
+              "start": 40,
+              "end": 63,
+              "url": "https://t.co/m1kwmQOsi7",
+              "expanded_url": "https://x.com/pendle_fi/status/2051240589107331205/photo/1",
+              "display_url": "pic.x.com/m1kwmQOsi7",
+              "media_key": "3_2051240587261890561"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 21,
+          "like_count": 66,
+          "quote_count": 0,
+          "bookmark_count": 5,
+          "impression_count": 5120
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2051240572086796288"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2051240574842515539"
+        ],
+        "id": "2051240574842515539",
+        "text": "Pendle Print #112\n\n\u2022 Pendle's in-app AI chatbot, is now connected with Pendle MCP, gaining full live market awareness\n\u2022 Watermark Rate recovered for sUSDat\n\u2022 Pendle now non-custodially holds 1,000,707 STRC\n\u2022 PT-USDG goes live on Aave, with &gt;20% APY now on the table\n\u2022 New https://t.co/5M8Tpepfpm",
+        "created_at": "2026-05-04T10:00:37.000Z",
+        "note_tweet": {
+          "text": "Pendle Print #112\n\n\u2022 Pendle's in-app AI chatbot, is now connected with Pendle MCP, gaining full live market awareness\n\u2022 Watermark Rate recovered for sUSDat\n\u2022 Pendle now non-custodially holds 1,000,707 STRC\n\u2022 PT-USDG goes live on Aave, with >20% APY now on the table\n\u2022 New pools - loAZND (Jul 2026), USDe & sUSDe (Aug 2026)"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 275,
+              "end": 298,
+              "url": "https://t.co/5M8Tpepfpm",
+              "expanded_url": "https://x.com/pendle_fi/status/2051240574842515539/photo/1",
+              "display_url": "pic.x.com/5M8Tpepfpm",
+              "media_key": "3_2051240572086796288"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 9,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1928
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2051239175404544213"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2051239188037767168"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2051239189962948939"
+        ],
+        "id": "2051239189962948939",
+        "text": "Link to Pendle market: https://t.co/IPSrpQATEt https://t.co/yifpmtSAzm",
+        "created_at": "2026-05-04T09:55:07.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 23,
+              "end": 46,
+              "url": "https://t.co/IPSrpQATEt",
+              "expanded_url": "https://app.pendle.finance/trade/markets/0x3c53fae231ad3c0408a8b6d33138bbff1caec330/swap?view=pt&chain=ethereum&tab=pencosystem",
+              "display_url": "app.pendle.finance/trade/markets/\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051239232828833793/xuAHSvt4?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051239232828833793/xuAHSvt4?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets/0x3c53fae231ad3c0408a8b6d33138bbff1caec330/swap?view=pt&chain=ethereum&tab=pencosystem"
+            },
+            {
+              "start": 47,
+              "end": 70,
+              "url": "https://t.co/yifpmtSAzm",
+              "expanded_url": "https://x.com/pendle_fi/status/2051239189962948939/photo/1",
+              "display_url": "pic.x.com/yifpmtSAzm",
+              "media_key": "3_2051239188037767168"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 20,
+          "reply_count": 36,
+          "like_count": 172,
+          "quote_count": 3,
+          "bookmark_count": 45,
+          "impression_count": 14340
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2051239173181542400"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2051239175404544213"
+        ],
+        "note_tweet": {
+          "entities": {
+            "mentions": [
+              {
+                "start": 51,
+                "end": 59,
+                "username": "apyx_fi",
+                "id": "1998581781348626434"
+              },
+              {
+                "start": 103,
+                "end": 110,
+                "username": "saylor",
+                "id": "244647486"
+              }
+            ]
+          },
+          "text": "Lots of people are wondering how it's possible for @apyx_fi PT-apyUSD to pay ~16% Fixed APY, more than @saylor's STRC dividend rate of 11.5%.\n\nELI5 \ud83d\udc47\ud83c\udffb\n> apxUSD is backed by STRC and SATA, but dividends only flow to apyUSD\n> apyUSD = staked apxUSD\n> As long as <100% of apxUSD is staked, apyUSD earns a disproportionately larger share of dividends\n\nThe Pendle story:\n> Pendle is a yield tokenization protocol, similar to bond stripping\n> apyUSD's yield is stripped so it can be traded separately\n> The principal portion becomes PT, essentially a zero coupon bond\n> But don't forget - apyUSD comes with APYX points too, representing their impending airdrop\n> Disproportionate dividends + airdrop upside, both priced in\n\nThis is why PT-apyUSD is 16% Fixed APY \ud83d\udc4d\ud83c\udffb\n\nTL;DR PT-apyUSD earns more than STRC because it concentrates dividends across fewer stakers. Pendle then lets you lock that rate in at a fixed return."
+        },
+        "id": "2051239175404544213",
+        "text": "Lots of people are wondering how it's possible for @apyx_fi PT-apyUSD to pay ~16% Fixed APY, more than @saylor's STRC dividend rate of 11.5%.\n\nELI5 \ud83d\udc47\ud83c\udffb\n&gt; apxUSD is backed by STRC and SATA, but dividends only flow to apyUSD\n&gt; apyUSD = staked apxUSD\n&gt; As long as &lt;100% of apxUSD is https://t.co/P2WmVyzIC8",
+        "created_at": "2026-05-04T09:55:04.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 291,
+              "end": 314,
+              "url": "https://t.co/P2WmVyzIC8",
+              "expanded_url": "https://x.com/pendle_fi/status/2051239175404544213/photo/1",
+              "display_url": "pic.x.com/P2WmVyzIC8",
+              "media_key": "3_2051239173181542400"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 51,
+              "end": 59,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 103,
+              "end": 110,
+              "username": "saylor",
+              "id": "244647486"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 30,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2050504625460064659"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051223164840268106"
+        ],
+        "id": "2051223164840268106",
+        "text": "RT @TheDeFinvestor: Pendle is one of the few DeFi apps that directly benefits from RWA adoption.\n\nOver the past 8 months, Pendle's TVL from\u2026",
+        "created_at": "2026-05-04T08:51:27.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "TheDeFinvestor",
+              "id": "1395365515779055616"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 4,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 153
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2046192443671142734"
+          },
+          {
+            "type": "replied_to",
+            "id": "2051189200469295342"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051199250550362236"
+        ],
+        "id": "2051199250550362236",
+        "text": "@ChewieWins @RoaringRagnar Because dividends from every $1 of STRC is shared by &lt;$1 of apyUSD. Pendle strips these yields and allow them to be traded separately, similar to how zero coupon bonds and bond stripping work.\nhttps://t.co/WfBjNZRNwx",
+        "created_at": "2026-05-04T07:16:25.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 223,
+              "end": 246,
+              "url": "https://t.co/WfBjNZRNwx",
+              "expanded_url": "https://x.com/pendleintern/status/2046192443671142734?s=46",
+              "display_url": "x.com/pendleintern/s\u2026"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 11,
+              "username": "ChewieWins",
+              "id": "1740113940896493568"
+            },
+            {
+              "start": 12,
+              "end": 26,
+              "username": "RoaringRagnar",
+              "id": "1874841959916806144"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051166894682485152"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051197950211280992"
+        ],
+        "entities": {
+          "cashtags": [
+            {
+              "start": 34,
+              "end": 39,
+              "tag": "STRC"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "RoaringRagnar",
+              "id": "1874841959916806144"
+            }
+          ]
+        },
+        "id": "2051197950211280992",
+        "text": "RT @RoaringRagnar: DeFi will push $STRC to new levels. \n\nHere\u2019s how the Pendle value chain works:\n\nApyx Finance and Saturn Credit buy the a\u2026",
+        "created_at": "2026-05-04T07:11:15.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 10,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051191637267689573"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051197556231913491"
+        ],
+        "id": "2051197556231913491",
+        "text": "RT @DeFi_Andree: This is why @saturn_credit on @pendle_fi is starting to stand out.\n\nThe market is already getting real traction:\n\n\u2022 sUSDat\u2026",
+        "created_at": "2026-05-04T07:09:41.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "DeFi_Andree",
+              "id": "1815646443602075648"
+            },
+            {
+              "start": 29,
+              "end": 43,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            },
+            {
+              "start": 47,
+              "end": 57,
+              "username": "pendle_fi",
+              "id": "1377493693762969600"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 1,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 108
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2051166270670688295"
+          },
+          {
+            "type": "replied_to",
+            "id": "2051166020400767172"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051174512981598220"
+        ],
+        "id": "2051174512981598220",
+        "text": "@wesleybrad060 @PendleIntern @apyx_fi @saturn_credit @saylor https://t.co/7wjUGBSK6k",
+        "created_at": "2026-05-04T05:38:07.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 61,
+              "end": 84,
+              "url": "https://t.co/7wjUGBSK6k",
+              "expanded_url": "https://x.com/RoaringRagnar/status/2051166270670688295",
+              "display_url": "x.com/RoaringRagnar/\u2026"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 14,
+              "username": "wesleybrad060",
+              "id": "1682734144944480256"
+            },
+            {
+              "start": 15,
+              "end": 28,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            },
+            {
+              "start": 29,
+              "end": 37,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 38,
+              "end": 52,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            },
+            {
+              "start": 53,
+              "end": 60,
+              "username": "saylor",
+              "id": "244647486"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 1,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 199
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2051166270670688295"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2051174254574804992"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2051174362154418461"
+        ],
+        "id": "2051174362154418461",
+        "text": "@RoaringRagnar @PendleIntern @saylor @apyx_fi @saturn_credit which btw are offering higher FIXED yields than STRC itself, up to 16% now: https://t.co/abcohy24Le",
+        "created_at": "2026-05-04T05:37:31.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 137,
+              "end": 160,
+              "url": "https://t.co/abcohy24Le",
+              "expanded_url": "https://x.com/pendle_fi/status/2051174362154418461/photo/1",
+              "display_url": "pic.x.com/abcohy24Le",
+              "media_key": "3_2051174254574804992"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 14,
+              "username": "RoaringRagnar",
+              "id": "1874841959916806144"
+            },
+            {
+              "start": 15,
+              "end": 28,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            },
+            {
+              "start": 29,
+              "end": 36,
+              "username": "saylor",
+              "id": "244647486"
+            },
+            {
+              "start": 37,
+              "end": 45,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 46,
+              "end": 60,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 3,
+          "like_count": 24,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1181
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2050558755427750008"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051167027419922898"
+        ],
+        "id": "2051167027419922898",
+        "text": "@saylor STRC your yield",
+        "created_at": "2026-05-04T05:08:22.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 7,
+              "username": "saylor",
+              "id": "244647486"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 48,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051157967148609756"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051164910227423559"
+        ],
+        "id": "2051164910227423559",
+        "text": "RT @PendleIntern: Pendle Strategy has acquired 167.4m apxUSD and 20.5m sUSDat and has achieved preferred dividend yield of 11.50% APY. As o\u2026",
+        "created_at": "2026-05-04T04:59:58.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2051140424304341154"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2051140533314273707"
+        ],
+        "id": "2051140533314273707",
+        "text": "RT @PendleIntern: Pretty rad analysis by @tid_research \n\nTL;DR for their take on @apyx_fi YT-apyUSD \ud83d\udc47\ud83c\udffb \n\n- Even if APYX TGEs at $50M\n- TVL\u2026",
+        "created_at": "2026-05-04T03:23:06.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            },
+            {
+              "start": 41,
+              "end": 54,
+              "username": "tid_research",
+              "id": "1867379595407986688"
+            },
+            {
+              "start": 81,
+              "end": 89,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 7,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1870
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2051119166204383273"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2051119178627907584"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2051119180695617784"
+        ],
+        "id": "2051119180695617784",
+        "text": "@global_dollar Link to Dashboard: https://t.co/hXyq8oqjuK https://t.co/sn2b04KyfZ",
+        "created_at": "2026-05-04T01:58:15.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 34,
+              "end": 57,
+              "url": "https://t.co/hXyq8oqjuK",
+              "expanded_url": "https://app.pendle.finance/trade/dashboard/overview/positions?timeframe=allTime",
+              "display_url": "app.pendle.finance/trade/dashboar\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051119224354148352/n8RNSGmX?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051119224354148352/n8RNSGmX?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/dashboard/overview/positions?timeframe=allTime"
+            },
+            {
+              "start": 58,
+              "end": 81,
+              "url": "https://t.co/sn2b04KyfZ",
+              "expanded_url": "https://x.com/pendle_fi/status/2051119180695617784/photo/1",
+              "display_url": "pic.x.com/sn2b04KyfZ",
+              "media_key": "3_2051119178627907584"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 14,
+              "username": "global_dollar",
+              "id": "1841897258142343168"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 16,
+          "reply_count": 49,
+          "like_count": 115,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 10877
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2051119164081971200"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2051119166204383273"
+        ],
+        "entities": {
+          "cashtags": [
+            {
+              "start": 81,
+              "end": 88,
+              "tag": "PENDLE"
+            }
+          ],
+          "urls": [
+            {
+              "start": 194,
+              "end": 217,
+              "url": "https://t.co/kyPxEG0oDM",
+              "expanded_url": "https://x.com/pendle_fi/status/2051119166204383273/photo/1",
+              "display_url": "pic.x.com/kyPxEG0oDM",
+              "media_key": "3_2051119164081971200"
+            }
+          ]
+        },
+        "id": "2051119166204383273",
+        "text": "$430k in USDG incentive rewards just dropped, covering March and April 2026 (and $PENDLE rewards too!)\n\nYT and LP holders, head to your Pendle Dashboard to check and claim your off-chain yield. https://t.co/kyPxEG0oDM",
+        "created_at": "2026-05-04T01:58:11.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 12,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2403
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2050050122890014915"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2050050135544283136"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2050050137301590189"
+        ],
+        "id": "2050050137301590189",
+        "text": "Link: https://t.co/LvhQlPJjdc https://t.co/4STWlI2r2q",
+        "created_at": "2026-05-01T03:10:15.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 6,
+              "end": 29,
+              "url": "https://t.co/LvhQlPJjdc",
+              "expanded_url": "https://app.pendle.finance/trade/markets/0x91bc86899c8391b6caaf26535b9cd82efe49a189/swap?view=yt&chain=ethereum",
+              "display_url": "app.pendle.finance/trade/markets/\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2050050143354060800/1mxkwhDE?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2050050143354060800/1mxkwhDE?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets/0x91bc86899c8391b6caaf26535b9cd82efe49a189/swap?view=yt&chain=ethereum"
+            },
+            {
+              "start": 30,
+              "end": 53,
+              "url": "https://t.co/4STWlI2r2q",
+              "expanded_url": "https://x.com/pendle_fi/status/2050050137301590189/photo/1",
+              "display_url": "pic.x.com/4STWlI2r2q",
+              "media_key": "3_2050050135544283136"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 19,
+          "reply_count": 48,
+          "like_count": 151,
+          "quote_count": 1,
+          "bookmark_count": 15,
+          "impression_count": 25968
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2045100342023766292"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2050050120264388608"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2050050122890014915"
+        ],
+        "note_tweet": {
+          "entities": {
+            "mentions": [
+              {
+                "start": 10,
+                "end": 19,
+                "username": "Strategy",
+                "id": "12764472"
+              }
+            ]
+          },
+          "text": "Following @Strategy's dividend issuance and the recovery of STRC to near par ($99.75), the sUSDat watermark rate has been recaptured. Yield accrual for YT holders has resumed.\n\nAny yield that accrued during the below-watermark period will also be recaptured YTs. Total yield earned by maturity remains identical to the standard accrual scenario.\n\nFor more detail, see the post below."
+        },
+        "id": "2050050122890014915",
+        "text": "Following @Strategy's dividend issuance and the recovery of STRC to near par ($99.75), the sUSDat watermark rate has been recaptured. Yield accrual for YT holders has resumed.\n\nAny yield that accrued during the below-watermark period will also be recaptured YTs. Total yield https://t.co/IEyslUsj2l https://t.co/StC2jUNi1f",
+        "created_at": "2026-05-01T03:10:12.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 275,
+              "end": 298,
+              "url": "https://t.co/IEyslUsj2l",
+              "expanded_url": "https://x.com/pendle_fi/status/2050050122890014915/photo/1",
+              "display_url": "pic.x.com/IEyslUsj2l",
+              "media_key": "3_2050050120264388608"
+            },
+            {
+              "start": 299,
+              "end": 322,
+              "url": "https://t.co/StC2jUNi1f",
+              "expanded_url": "https://twitter.com/1377493693762969600/status/2045100342023766292",
+              "display_url": "x.com/13774936937629\u2026"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 10,
+              "end": 19,
+              "username": "Strategy",
+              "id": "12764472"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049776145621537061"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049794526311825529"
+        ],
+        "id": "2049794526311825529",
+        "text": "RT @pendle_grandma: \ud83d\udccdPendle\u7684USDG PT\u5343\u547c\u842c\u559a\u7d42\u65bc\u4e0a\u4e86Aave\n\u5728Aave\u6216\u8005Morpho\u5faa\u73af\u8d37\u53ef\u8fbe\u523029%\u5de6\u53f3APY\uff0c\u4e0d\u8fc7\u53ea\u9002\u5408\u8d44\u91d1\u4f53\u91cf\u6bd4\u8f83\u5927\u7684\u540c\u5b66\u5594\u3002 \n\n\ud83d\udccdSTRC\u7cfb\u5217\u7ee7\u7eed\u52bf\u5934\u6b63\u52b2\uff0c@apyx_fi \u548c @saturn_credit \u90fd\u5f88\u53d7\u2026",
+        "created_at": "2026-04-30T10:14:33.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "pendle_grandma",
+              "id": "1926240392933949440"
+            },
+            {
+              "start": 110,
+              "end": 118,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            },
+            {
+              "start": 121,
+              "end": 135,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 10,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1978
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2049744576110592421"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2049744588328628225"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049744590178328889"
+        ],
+        "id": "2049744590178328889",
+        "text": "@Theo_Network @global_dollar @re @saturn_credit @saylor Links \ud83d\udd17\n\nthBILL: https://t.co/wXNuNnQZa1\n\nUSDat: https://t.co/OilnaoWUcX\n\nreUSD: https://t.co/yDvipOGZUE\n\nUSDG: https://t.co/viPtR0UJDx https://t.co/51wUo5p4vJ",
+        "created_at": "2026-04-30T06:56:07.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 73,
+              "end": 96,
+              "url": "https://t.co/wXNuNnQZa1",
+              "expanded_url": "https://app.pendle.finance/trade/markets/0x22d95cec2b962c142fff9be88cfc7ef15043419f/swap?view=pt&chain=arbitrum",
+              "display_url": "app.pendle.finance/trade/markets/\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2049744633153101824/b6q0Lt8P?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2049744633153101824/b6q0Lt8P?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets/0x22d95cec2b962c142fff9be88cfc7ef15043419f/swap?view=pt&chain=arbitrum"
+            },
+            {
+              "start": 105,
+              "end": 128,
+              "url": "https://t.co/OilnaoWUcX",
+              "expanded_url": "https://app.pendle.finance/trade/markets/0x9afe7a057a09cf5da748d952078c9c99938b4329/swap?view=pt&chain=ethereum",
+              "display_url": "app.pendle.finance/trade/markets/\u2026",
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets/0x9afe7a057a09cf5da748d952078c9c99938b4329/swap?view=pt&chain=ethereum"
+            },
+            {
+              "start": 137,
+              "end": 160,
+              "url": "https://t.co/yDvipOGZUE",
+              "expanded_url": "https://app.pendle.finance/trade/markets/0xf5929a1c332ceab7918a4593a43db2b9ac20095f/swap?view=pt&chain=ethereum",
+              "display_url": "app.pendle.finance/trade/markets/\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052428362396954631/7NCqQdEe?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052428362396954631/7NCqQdEe?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets/0xf5929a1c332ceab7918a4593a43db2b9ac20095f/swap?view=pt&chain=ethereum"
+            },
+            {
+              "start": 168,
+              "end": 191,
+              "url": "https://t.co/viPtR0UJDx",
+              "expanded_url": "https://app.pendle.finance/trade/markets/0xc5b32dba5f29f8395fb9591e1a15f23a75214f33/swap?view=pt&chain=ethereum",
+              "display_url": "app.pendle.finance/trade/markets/\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2049744633513848832/DZZW2wTr?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2049744633513848832/DZZW2wTr?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets/0xc5b32dba5f29f8395fb9591e1a15f23a75214f33/swap?view=pt&chain=ethereum"
+            },
+            {
+              "start": 192,
+              "end": 215,
+              "url": "https://t.co/51wUo5p4vJ",
+              "expanded_url": "https://x.com/pendle_fi/status/2049744590178328889/photo/1",
+              "display_url": "pic.x.com/51wUo5p4vJ",
+              "media_key": "3_2049744588328628225"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 13,
+              "username": "Theo_Network",
+              "id": "1789368212947136512"
+            },
+            {
+              "start": 14,
+              "end": 28,
+              "username": "global_dollar",
+              "id": "1841897258142343168"
+            },
+            {
+              "start": 29,
+              "end": 32,
+              "username": "re",
+              "id": "1532891"
+            },
+            {
+              "start": 33,
+              "end": 47,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            },
+            {
+              "start": 48,
+              "end": 55,
+              "username": "saylor",
+              "id": "244647486"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 11,
+          "reply_count": 17,
+          "like_count": 106,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6213
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2049744573430448128"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049744576110592421"
+        ],
+        "id": "2049744576110592421",
+        "text": "\"Hey Alexa, get me T-Bills, but better\" https://t.co/cwz4VN7GY1",
+        "created_at": "2026-04-30T06:56:04.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 40,
+              "end": 63,
+              "url": "https://t.co/cwz4VN7GY1",
+              "expanded_url": "https://x.com/pendle_fi/status/2049744576110592421/photo/1",
+              "display_url": "pic.x.com/cwz4VN7GY1",
+              "media_key": "3_2049744573430448128"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049709566762557559"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049738607901237638"
+        ],
+        "id": "2049738607901237638",
+        "text": "RT @PendleIntern: *clears throat*\n\nAs I was saying, borrow rates should drop soon and they did.\n\nStill high at 3.9%-4.5% APY, but PT-USDG i\u2026",
+        "created_at": "2026-04-30T06:32:21.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 2,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1567
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2049663146026291307"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2049663141282562048"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049663149163651200"
+        ],
+        "id": "2049663149163651200",
+        "text": "https://t.co/2bfRIcltDK",
+        "created_at": "2026-04-30T01:32:30.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/2bfRIcltDK",
+              "expanded_url": "https://x.com/pendle_fi/status/2049663149163651200/photo/1",
+              "display_url": "pic.x.com/2bfRIcltDK",
+              "media_key": "3_2049663141282562048"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 34,
+          "like_count": 47,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3575
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2049485352155726207"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049663146026291307"
+        ],
+        "id": "2049663146026291307",
+        "text": "Proud to help shape young DeFi Padawans through the Arbitrum Mentorship Program \ud83e\udee1 https://t.co/KyB3GOU4Nb",
+        "created_at": "2026-04-30T01:32:29.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 82,
+              "end": 105,
+              "url": "https://t.co/KyB3GOU4Nb",
+              "expanded_url": "https://twitter.com/arbitrum/status/2049485352155726207",
+              "display_url": "x.com/arbitrum/statu\u2026"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 5,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1511
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2049661989149180384"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2049661984862580736"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049661993146327214"
+        ],
+        "id": "2049661993146327214",
+        "text": "PT-apxUSD: https://t.co/F4Hi0kuhZG\n\nFiraLend: https://t.co/7EC3NvHmtZ https://t.co/rpfXTU5CSV",
+        "created_at": "2026-04-30T01:27:54.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 11,
+              "end": 34,
+              "url": "https://t.co/F4Hi0kuhZG",
+              "expanded_url": "https://app.pendle.finance/trade/markets/0x50dce085af29caba28f7308bea57c4043757b491/swap?view=pt&chain=ethereum",
+              "display_url": "app.pendle.finance/trade/markets/\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2049662040751718400/mSev1e2m?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2049662040751718400/mSev1e2m?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets/0x50dce085af29caba28f7308bea57c4043757b491/swap?view=pt&chain=ethereum"
+            },
+            {
+              "start": 46,
+              "end": 69,
+              "url": "https://t.co/7EC3NvHmtZ",
+              "expanded_url": "https://app.fira.money/market/pt-apxusd-usdc",
+              "display_url": "app.fira.money/market/pt-apxu\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2049460975489748992/uEvlsSld?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2049460975489748992/uEvlsSld?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Fira",
+              "description": "Fira is a lending platform that allows you to borrow and lend tokens at a fixed rate.",
+              "unwound_url": "https://app.fira.money/market/pt-apxusd-usdc"
+            },
+            {
+              "start": 70,
+              "end": 93,
+              "url": "https://t.co/rpfXTU5CSV",
+              "expanded_url": "https://x.com/pendle_fi/status/2049661993146327214/photo/1",
+              "display_url": "pic.x.com/rpfXTU5CSV",
+              "media_key": "3_2049661984862580736"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 34,
+          "like_count": 78,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 8269
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2049460924788924593"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049661989149180384"
+        ],
+        "id": "2049661989149180384",
+        "text": "Fixed yield + fixed rate borrowing = Fixed yield on steroids \ud83d\udc8a\n\n&gt; PT-apxUSD = 14.62% Fixed APR\n&gt; Borrow USDC = 7.63% Fixed APR\n\nAt ~8.3x max leverage, we're looking at ~58% APY, courtesy of @Fira_Lend: https://t.co/la7fFMNTlX",
+        "created_at": "2026-04-30T01:27:53.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 208,
+              "end": 231,
+              "url": "https://t.co/la7fFMNTlX",
+              "expanded_url": "https://twitter.com/Fira_Lend/status/2049460924788924593",
+              "display_url": "x.com/Fira_Lend/stat\u2026"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 196,
+              "end": 206,
+              "username": "Fira_Lend",
+              "id": "2008160003103043584"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049443154206540265"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049467252890833352"
+        ],
+        "id": "2049467252890833352",
+        "text": "RT @OneKeyHQ: Pendle PT has now joined OneKey DeFi\u2019s \u201cLuxury Lunch\u201d lineup. Buy and hold until maturity \u2014 your yield is locked in.\nNo need\u2026",
+        "created_at": "2026-04-29T12:34:05.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "OneKeyHQ",
+              "id": "1305745654606475264"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049409623460049081"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049467054424764858"
+        ],
+        "id": "2049467054424764858",
+        "text": "RT @belizardd: My thesis for @pendle_fi is that every new yield source in DeFi eventually ends up here... even the one from institutions.\u2026",
+        "created_at": "2026-04-29T12:33:17.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "belizardd",
+              "id": "1485245285924282369"
+            },
+            {
+              "start": 29,
+              "end": 39,
+              "username": "pendle_fi",
+              "id": "1377493693762969600"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2048836963491262608"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049394890388439401"
+        ],
+        "id": "2049394890388439401",
+        "text": "RT @stablefyi: Below, are the best rates you can get for 1K, 10K, and 100K USD investments on fixed term/fixed yield principal tokens (PTs)\u2026",
+        "created_at": "2026-04-29T07:46:32.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "stablefyi",
+              "id": "1803260670131019776"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049392421348548853"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049392556887404855"
+        ],
+        "id": "2049392556887404855",
+        "text": "RT @PendleIntern: great arivle by @stacy_muur that I\u2019m totally gonna piggyback off for views now. Here\u2019s the 2 mins summary \ud83d\udc47\n\nPendle has b\u2026",
+        "created_at": "2026-04-29T07:37:16.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            },
+            {
+              "start": 34,
+              "end": 45,
+              "username": "stacy_muur",
+              "id": "1562768344725344256"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 6,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1519
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2049367703014842599"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2049367715341811712"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049367717141160132"
+        ],
+        "id": "2049367717141160132",
+        "text": "@saylor @saturn_credit @apyx_fi Link: https://t.co/HHxekEZRx7 https://t.co/uNAaWoqZIC",
+        "created_at": "2026-04-29T05:58:33.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 38,
+              "end": 61,
+              "url": "https://t.co/HHxekEZRx7",
+              "expanded_url": "https://app.pendle.finance/trade/markets?categories=strc",
+              "display_url": "app.pendle.finance/trade/markets?\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2053802327442935808/a765fc7O?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2053802327442935808/a765fc7O?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/markets?categories=strc"
+            },
+            {
+              "start": 62,
+              "end": 85,
+              "url": "https://t.co/uNAaWoqZIC",
+              "expanded_url": "https://x.com/pendle_fi/status/2049367717141160132/photo/1",
+              "display_url": "pic.x.com/uNAaWoqZIC",
+              "media_key": "3_2049367715341811712"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 7,
+              "username": "saylor",
+              "id": "244647486"
+            },
+            {
+              "start": 8,
+              "end": 22,
+              "username": "saturn_credit",
+              "id": "1986084943794212864"
+            },
+            {
+              "start": 23,
+              "end": 31,
+              "username": "apyx_fi",
+              "id": "1998581781348626434"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 27,
+          "reply_count": 47,
+          "like_count": 169,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 11033
+        },
+        "attachments": {
+          "media_keys": [
+            "3_2049367699479044097"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049367703014842599"
+        ],
+        "id": "2049367703014842599",
+        "text": "Pendle brings new dimensions and possibilities to STRC as an RWA.\n\nFixed yield through PT for instance, exceeding even the native yield.\n\nNo other platform, onchain or off, offers this, and that's made Pendle one of the most meaningful contributors to STRC's growth onchain https://t.co/sVbBr0oKGh",
+        "created_at": "2026-04-29T05:58:30.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 274,
+              "end": 297,
+              "url": "https://t.co/sVbBr0oKGh",
+              "expanded_url": "https://x.com/pendle_fi/status/2049367703014842599/photo/1",
+              "display_url": "pic.x.com/sVbBr0oKGh",
+              "media_key": "3_2049367699479044097"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 14,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049082352828305653"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049318510472654957"
+        ],
+        "id": "2049318510472654957",
+        "text": "RT @DeFi_Andree: Stablecoin yield might be entering a new phase if the US keeps tightening the rules.\n\nThe key thing is to separate two typ\u2026",
+        "created_at": "2026-04-29T02:43:02.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "DeFi_Andree",
+              "id": "1815646443602075648"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 1,
+          "like_count": 3,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 193
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2049311169551249847"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2049317855708196864"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049318254867517597"
+        ],
+        "entities": {
+          "cashtags": [
+            {
+              "start": 96,
+              "end": 103,
+              "tag": "PENDLE"
+            }
+          ],
+          "urls": [
+            {
+              "start": 180,
+              "end": 203,
+              "url": "https://t.co/LOuZeYilMP",
+              "expanded_url": "https://x.com/pendle_fi/status/2049318254867517597/photo/1",
+              "display_url": "pic.x.com/LOuZeYilMP",
+              "media_key": "3_2049317855708196864"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 0,
+              "end": 7,
+              "username": "Nocsm1",
+              "id": "1476298896427073550"
+            },
+            {
+              "start": 8,
+              "end": 13,
+              "username": "grok",
+              "id": "1720665183188922368"
+            }
+          ]
+        },
+        "id": "2049318254867517597",
+        "text": "@Nocsm1 @grok Grok here.\n\n- Underlying AZND yield\n- Fixed yield from PT\n- Pendle LP swap fees\n- $PENDLE incentives\n\nWhat's NOT accounted for in the 13% APY - 40x Mu Digital points https://t.co/LOuZeYilMP",
+        "created_at": "2026-04-29T02:42:01.000Z"
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049112255950958593"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049317609951449590"
+        ],
+        "id": "2049317609951449590",
+        "text": "RT @HouseofChimera: RWAs are bringing a new yield source to DeFi.\n\n@_whalebird from @pendle_fi on why it matters:\n\ud83d\udd39 Onchain access to T-bil\u2026",
+        "created_at": "2026-04-29T02:39:27.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "HouseofChimera",
+              "id": "1044164759610957824"
+            },
+            {
+              "start": 67,
+              "end": 78,
+              "username": "_whalebird",
+              "id": "1719644744790552576"
+            },
+            {
+              "start": 84,
+              "end": 94,
+              "username": "pendle_fi",
+              "id": "1377493693762969600"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 3,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1220
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2049304347834814845"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2049304339232296960"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049304353027366933"
+        ],
+        "id": "2049304353027366933",
+        "text": "Link: https://t.co/abBd6usZE9 https://t.co/mQ6VQiSZxb",
+        "created_at": "2026-04-29T01:46:46.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 6,
+              "end": 29,
+              "url": "https://t.co/abBd6usZE9",
+              "expanded_url": "https://app.pendle.finance/trade/pools/0x58cfd9fe39bf91a1fd36497cbe74e997f4d5d7c7/zap/in?chain=ethereum",
+              "display_url": "app.pendle.finance/trade/pools/0x\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2048779899008090112/BLG0BCek?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 675
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2048779899008090112/BLG0BCek?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Pendle V2",
+              "description": "Pendle V2 is the leading spot yield trading platform, enabling users to earn fixed yield or speculate on yield from most popular DeFi protocols.",
+              "unwound_url": "https://app.pendle.finance/trade/pools/0x58cfd9fe39bf91a1fd36497cbe74e997f4d5d7c7/zap/in?chain=ethereum"
+            },
+            {
+              "start": 30,
+              "end": 53,
+              "url": "https://t.co/mQ6VQiSZxb",
+              "expanded_url": "https://x.com/pendle_fi/status/2049304353027366933/photo/1",
+              "display_url": "pic.x.com/mQ6VQiSZxb",
+              "media_key": "3_2049304339232296960"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 38,
+          "like_count": 80,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7718
+        },
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2048779893433913601"
+          }
+        ],
+        "attachments": {
+          "media_keys": [
+            "3_2049304097950756864"
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2049304347834814845"
+        ],
+        "id": "2049304347834814845",
+        "text": "Welcoming another RWA addition - loAZND.\n\nInstitutionally managed credit from the Asia Pacific region, backed by a diversified portfolio of USD-denominated fixed income instruments\n\nManaged by Mu Digital in partnership with Golden Hill Asset Management, a Singapore-regulated fund https://t.co/MFNKef3QDM https://t.co/Wk2caEppmJ",
+        "created_at": "2026-04-29T01:46:45.000Z",
+        "note_tweet": {
+          "text": "Welcoming another RWA addition - loAZND.\n\nInstitutionally managed credit from the Asia Pacific region, backed by a diversified portfolio of USD-denominated fixed income instruments\n\nManaged by Mu Digital in partnership with Golden Hill Asset Management, a Singapore-regulated fund manager."
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 281,
+              "end": 304,
+              "url": "https://t.co/MFNKef3QDM",
+              "expanded_url": "https://x.com/pendle_fi/status/2049304347834814845/photo/1",
+              "display_url": "pic.x.com/MFNKef3QDM",
+              "media_key": "3_2049304097950756864"
+            },
+            {
+              "start": 305,
+              "end": 328,
+              "url": "https://t.co/Wk2caEppmJ",
+              "expanded_url": "https://twitter.com/MuDigitalHQ/status/2048779893433913601",
+              "display_url": "x.com/MuDigitalHQ/st\u2026"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 4,
+          "like_count": 33,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2184
+        },
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2049070898234450162"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049086560319189477"
+        ],
+        "id": "2049086560319189477",
+        "text": "@TheDeFinvestor @DefiLlama @DeBankDeFi @Infinit_Labs @DeFiSaver @bendbasis @Tokenomist_ai Yes.\n\nPendleSwap - Aggregator of aggregators that lets you swap up to 3 tokens at once\n\nPendle Token Bridge (powered by @BungeeExchange) - Bridge",
+        "created_at": "2026-04-28T11:21:20.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 15,
+              "username": "TheDeFinvestor",
+              "id": "1395365515779055616"
+            },
+            {
+              "start": 16,
+              "end": 26,
+              "username": "DefiLlama",
+              "id": "1321585610654687241"
+            },
+            {
+              "start": 27,
+              "end": 38,
+              "username": "DeBankDeFi",
+              "id": "1156037602488639490"
+            },
+            {
+              "start": 39,
+              "end": 52,
+              "username": "Infinit_Labs",
+              "id": "1815660590008025088"
+            },
+            {
+              "start": 53,
+              "end": 63,
+              "username": "DeFiSaver",
+              "id": "1120736534704066561"
+            },
+            {
+              "start": 64,
+              "end": 74,
+              "username": "bendbasis",
+              "id": "2012515179230076928"
+            },
+            {
+              "start": 75,
+              "end": 89,
+              "username": "Tokenomist_ai",
+              "id": "1543848144932597760"
+            },
+            {
+              "start": 210,
+              "end": 225,
+              "username": "BungeeExchange",
+              "id": "1491783252570357763"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 24,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049060475837587759"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049086027755876701"
+        ],
+        "id": "2049086027755876701",
+        "text": "RT @stacy_muur: https://t.co/hCev6dahTw",
+        "created_at": "2026-04-28T11:19:13.000Z",
+        "entities": {
+          "urls": [
+            {
+              "start": 16,
+              "end": 39,
+              "url": "https://t.co/hCev6dahTw",
+              "expanded_url": "http://x.com/i/article/2048764088059142144",
+              "display_url": "x.com/i/article/2048\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/2048764088059142144"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "stacy_muur",
+              "id": "1562768344725344256"
+            }
+          ]
+        }
+      },
+      {
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2049069864401420734"
+          }
+        ],
+        "edit_history_tweet_ids": [
+          "2049074509630816291"
+        ],
+        "id": "2049074509630816291",
+        "text": "RT @PendleIntern: Show me where else in DeFi you can get 14.8% effective FIXED APY with $17M, I'll wait.\n\nAnd because not all of us have $1\u2026",
+        "created_at": "2026-04-28T10:33:27.000Z",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "PendleIntern",
+              "id": "1649260860836298755"
+            }
+          ]
+        }
+      }
+    ],
+    "includes": {
+      "media": [
+        {
+          "url": "https://pbs.twimg.com/media/HIFuSa0a4AAMmZR.png",
+          "media_key": "3_2054044167773544448",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HIFuRjUaUAAnfzf.jpg",
+          "media_key": "3_2054044152875339776",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HICSSm4bUAAT5Hh.png",
+          "media_key": "3_2053802278453465088",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HICSRtobQAAL8U_.jpg",
+          "media_key": "3_2053802263085531136",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HIB7qNDasAAF3Mk.png",
+          "media_key": "3_2053777395069661184",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HIB7pScaoAAy_YL.jpg",
+          "media_key": "3_2053777379336822784",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HH-qZNmbMAAtmx8.jpg",
+          "media_key": "3_2053547305228513280",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HIAMDYVawAAZ4o9.png",
+          "media_key": "3_2053654682292371456",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHxRBY8asAAVCw-.png",
+          "media_key": "3_2052604614491680768",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHxRAhBakAAJ5cG.jpg",
+          "media_key": "3_2052604599480258560",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHslCIRbsAA_Oh4.png",
+          "media_key": "3_2052274773707960320",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHsUCpMakAAvElw.png",
+          "media_key": "3_2052256090847612928",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHsUBwHacAAS9mk.jpg",
+          "media_key": "3_2052256075525812224",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHr44gRbEAAN61C.png",
+          "media_key": "3_2052226229840056320",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHr43ppbcAAZ_j9.jpg",
+          "media_key": "3_2052226215176794112",
+          "type": "photo"
+        },
+        {
+          "media_key": "16_2052214163292962816",
+          "type": "animated_gif",
+          "variants": [
+            {
+              "bit_rate": 0,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/tweet_video/HHrt6I4aQAAMdhS.mp4"
+            }
+          ],
+          "preview_image_url": "https://pbs.twimg.com/tweet_video_thumb/HHrt6I4aQAAMdhS.jpg"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHpr1PeacAAXW0v.png",
+          "media_key": "3_2052071142652014592",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHpr0WgbIAA6aHR.jpg",
+          "media_key": "3_2052071127359627264",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHprx33b0AAa01T.jpg",
+          "media_key": "3_2052071084774903808",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHprv2gaYAAdoGt.png",
+          "media_key": "3_2052071050050166784",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHo037_aUAAQls-.png",
+          "media_key": "3_2052010715821789184",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHo028DawAA4XCp.jpg",
+          "media_key": "3_2052010698658725888",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHo0zMUa4AA-35S.jpg",
+          "media_key": "3_2052010634305527808",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHo0yLGbwAAG68f.jpg",
+          "media_key": "3_2052010616798560256",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHhXn5lagAAZe1W.png",
+          "media_key": "3_2051485973251522560",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHhQkf9asAAUe_g.jpg",
+          "media_key": "3_2051478218251874304",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHd4cjib0AEeptX.png",
+          "media_key": "3_2051240587261890561",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHd4brAaQAApzsa.jpg",
+          "media_key": "3_2051240572086796288",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHd3LHBaEAA0P6V.png",
+          "media_key": "3_2051239188037767168",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHd3KPraEAAn7Qe.jpg",
+          "media_key": "3_2051239173181542400",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHc8HfBboAAvaBG.jpg",
+          "media_key": "3_2051174254574804992",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHcKBpIbgAAqIwo.png",
+          "media_key": "3_2051119178627907584",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHcKAy8aIAA_ug1.jpg",
+          "media_key": "3_2051119164081971200",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHM9vJTbwAADfdR.png",
+          "media_key": "3_2050050135544283136",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHM9uQYbEAAXMJN.jpg",
+          "media_key": "3_2050050120264388608",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHIn19ObcAE_-TC.png",
+          "media_key": "3_2049744588328628225",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHIn1FubQAA7dLT.jpg",
+          "media_key": "3_2049744573430448128",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHHdxHVbwAAQ_jU.png",
+          "media_key": "3_2049663141282562048",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHHctzVbMAA6mv7.png",
+          "media_key": "3_2049661984862580736",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHDRFD8aQAAlRuL.png",
+          "media_key": "3_2049367715341811712",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHDREI2boAE0Neo.jpg",
+          "media_key": "3_2049367699479044097",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHCju2VaMAAlROT.jpg",
+          "media_key": "3_2049317855708196864",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHCXcFibkAA6H9v.png",
+          "media_key": "3_2049304339232296960",
+          "type": "photo"
+        },
+        {
+          "url": "https://pbs.twimg.com/media/HHCXOCsbcAAU1ir.png",
+          "media_key": "3_2049304097950756864",
+          "type": "photo"
+        }
+      ]
+    },
+    "meta": {
+      "next_token": "7140dibdnow9c7btwoxhp1el9kurl9jr5zb0obgkawtv5",
+      "result_count": 100,
+      "newest_id": "2054057822074327356",
+      "oldest_id": "2049074509630816291"
+    }
+  }
+}

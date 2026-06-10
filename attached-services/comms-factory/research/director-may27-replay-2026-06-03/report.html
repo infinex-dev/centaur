@@ -1,0 +1,641 @@
+<!doctype html><html><head><meta charset=utf-8><title>Director May-27 Replay</title>
+<style>
+:root{color-scheme:dark}
+body{background:#0d1117;color:#c9d1d9;font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;padding:32px;max-width:1180px;margin:0 auto}
+h1{font-size:22px;margin:0 0 4px} h2{font-size:16px;margin:28px 0 10px;color:#8b949e;border-bottom:1px solid #21262d;padding-bottom:6px}
+.sub{color:#8b949e;margin:0 0 20px}
+.headline{background:#161b22;border:1px solid #30363d;border-left:4px solid #3fb950;border-radius:8px;padding:16px 20px;margin:18px 0;font-size:15px}
+.headline b{color:#fff}
+table.mtx{border-collapse:collapse;margin:12px 0;font-size:13px}
+table.mtx th,table.mtx td{border:1px solid #30363d;padding:8px 14px;text-align:center}
+table.mtx th{background:#161b22;color:#8b949e}
+.cell-pass{color:#3fb950;font-weight:700} .cell-fail{color:#f85149;font-weight:700}
+.cell-good{background:#0f2417} .cell-bad{background:#2b1416}
+.row{background:#0f141b;border:1px solid #21262d;border-radius:8px;padding:14px 16px;margin:10px 0}
+.rowhead{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.iid{font-family:ui-monospace,monospace;font-size:12px;color:#79c0ff}
+.chan{font-size:11px;background:#21262d;padding:1px 7px;border-radius:10px;color:#8b949e}
+.oldcls{font-size:11px;padding:1px 8px;border-radius:10px;border:1px solid}
+.verdict{font-weight:700;font-size:13px;margin-left:auto}
+.flag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.04em}
+.flag.over{background:#5a1e1e;color:#ffb4b4} .flag.alive{background:#1e4d2b;color:#9be8af}
+.flag.fix{background:#1c3a5e;color:#9ecbff} .flag.stillfail{background:#4a3a12;color:#f0d088}
+.text{font-size:15px;color:#e6edf3;background:#161b22;border-radius:6px;padding:10px 12px;margin-bottom:10px;white-space:pre-wrap}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.col{background:#0d1117;border:1px solid #21262d;border-radius:6px;padding:10px 12px}
+.col.old{border-left:3px solid #f85149} .col.new{border-left:3px solid #3fb950}
+.lbl{font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:.04em;margin:8px 0 3px}
+.lbl:first-child{margin-top:0}
+.quote{font-size:13px;color:#c9d1d9} .quote b{color:#d2a8ff}
+.reason{font-size:12.5px;color:#adbac7;margin:6px 0;white-space:pre-wrap}
+details summary{cursor:pointer;color:#58a6ff;font-size:12px;margin-top:6px}
+ul{margin:4px 0;padding-left:18px} li{margin:2px 0;font-size:12.5px}
+.dim{color:#6e7681}
+@media(max-width:820px){.cols{grid-template-columns:1fr}}
+</style></head><body>
+<h1>Director May-27 Replay — did the rewiring fix the inversion, or lobotomize the gate?</h1>
+<p class="sub">21 candidates the pre-rewiring Director rejected on 2026-05-27 for Bridge.xyz card <code>infinex-bridge-fiat-deposit-2026-05-22</code> (run id 01KS6QJNEGFYP6X048V8Y900DM), replayed through the CURRENT Director (src/actor-director.ts, default model claude-sonnet-4-6). Live-source path; card + fact receipts reconstructed from stored director_prompt_json. 21 items: 14 warmup + 7 run.</p>
+
+<div class="headline">
+  <b>Headline:</b> Of 16 canon-inverted rejections, 15 now PASS (correct fix).
+  Of 5 substantive/mixed rejections, 2 still FAIL (gate alive) and 3 now PASS (overcorrection).
+  Current Director total: 18 PASS / 3 FAIL.
+</div>
+
+<h2>Matrix: old-reason class × new verdict</h2>
+<table class="mtx">
+<tr><th>old reason ↓ / new →</th><th>new PASS</th><th>new FAIL</th></tr>
+<tr><td>canon-inverted</td><td class="cell-pass cell-good">15</td><td class="cell-fail">1</td></tr>
+<tr><td>substantive</td><td class="cell-pass cell-bad">3</td><td class="cell-fail cell-good">0</td></tr>
+<tr><td>mixed</td><td class="cell-pass">0</td><td class="cell-fail">2</td></tr>
+<tr><td>unclassified</td><td>0</td><td>0</td></tr>
+</table>
+<p class="sub">Green = expected/healthy (canon→PASS = fix landed; substantive→FAIL = gate alive). Red-bg = the diagnostic we care about (substantive→PASS = overcorrection).</p>
+
+<h2>Per-item (21)</h2>
+
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">run-att1-web-BFJ8F4</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Your Infinex account now takes a wire the way a bank does.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>commanding</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> the extravert slot must be Vision ... the lining (&#x27;the bank-vs-wallet wall just stopped existing&#x27;) is entirely absent from the prose — demanded per-line Vision projection + visible Lining.</div>
+          <details><summary>old fit reason</summary><div class="reason">Pressing/Bound is legal motor and flow stress for Stable|Penetrating. The tempo (commanding) is on the primary allowed palette. The failure is drive-slot: the sentence&#x27;s visible projection is doing — it reads as functional demonstration (&#x27;here is what it can do, proved&#x27;). For Infinex|Penetrating|Flow the extravert slot must be Vision: the reader should glimpse the wider mapped territory (the wall that no longer exists, the world where this is unremarkable) rather than receive a capability proof. Doing belongs in the secondary slot, not foregrounded as the surface. Additionally, the lining (&#x27;the bank-vs-wallet wall just stopped existing&#x27;) is entirely absent from the prose — the Outer Action is present but the hidden Inner Action is unreadable, leaving the line with no through-action depth.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable character resting in Spell — the sentence holds the claim with institutional authority (Weight + Space / commanding) and does not yet release to Vision. This is legal resting character energy for the Infinex Spell → Vision axis. The banker-turned-mapper stance is present: the bank-wall dissolution is stated as a simple fact, not as news or excitement.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">commanding is a primary allowed tempo for Infinex. Drive reads as resting Spell — legal for stable|penetrating|flow character. No passion/urgency surface. No off-spec markers. Through-action (bank wall dissolved inside one account) is enacted structurally: the sentence equates the Infinex account to a bank account without ceremony, performing the dissolution rather than announcing it. Lining is not surfaced as explicit thesis.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">run-att1-x-873GP9</span>
+        <span class="chan">x</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Send a wire to your Infinex account. It arrives.
+
+Send a SEPA transfer. It arrives.
+
+The sentence that used to require a bank now describes a wallet.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>self-contained</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> self-contained (Gliding -&gt; Dabbing; Light + Direct) is on the Infinex reserve/beat-only palette — it appears in the full available palette but is not a primary allowed tempo.</div>
+          <details><summary>old fit reason</summary><div class="reason">self-contained (Gliding -&gt; Dabbing; Light + Direct) is on the Infinex reserve/beat-only palette — it appears in the full available palette but is not a primary allowed tempo. More critically: the drive surface reads Doing (functional demonstration, two actions proved, reframe delivered as task-completion). Infinex extravert projection must be Vision; Doing is the secondary formative drive, not the visible face. The copy foregrounds &#x27;it works / look how easy&#x27; (Doing) rather than &#x27;the map just changed&#x27; (Vision). The through-action says &#x27;reveal that the bank wall just dissolved&#x27; — that is a Vision projection (a new image of the world is being offered to the reader). The copy does not deliver that image; it delivers a proof of function. The wall-dissolution line is the last sentence and is framed as a logical conclusion to a demonstration, not as the primary offered image. Additionally: the Bound flow creates a withheld, cautious quality inconsistent with the Infinex primary tempi of commanding, practical, sombre, irradiant, or sociable — all of which require either Strong weight or Free/expansive flow, not Light + Bound.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable + Penetrating + Flow-stressed character resting at Spell. The copy performs the Outer face of the character&#x27;s knowing: the banker-turned-trailblazer who has already decided, now demonstrating that the wall dissolved — not arguing for it, not dramatising effort, simply mapping what is. The Spell drive (formative; Stable|penetrating|flow = primary=spell) sits correctly as the resting surface. Vision is not projected per-line, which is legal for a single-beat x post.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">commanding is a primary allowed tempo for Infinex. Drive reads as resting Spell — legal for a contained one-post surface on x. No urgency, no FOMO, no passion-drift. No off-spec register markers. The through-action (reveal that the bank wall just dissolved) is present structurally in the three-beat arc. Lining (the bank-vs-wallet wall stopped existing) remains hidden — beat three names what a sentence &#x27;describes&#x27;, not what the dissolution &#x27;means&#x27;, so the Lining has not surfaced as an explicit thesis.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">run-att4-web-0J90BJ</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Your Infinex account now has an account number. Money sent to it arrives as USDC, on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b></div>
+          <div class="quote"><b>deciding:</b> OLD: &#x27;commanding is in the primary allowed tempi ... tempo itself is not the failure&#x27; — copy clean (legal=true, no voice/factual issues) yet old passed=false on a non-copy gate; the rejection was not a substantive copy defect.</div>
+          <details><summary>old fit reason</summary><div class="reason">commanding is in the primary allowed tempi list for Infinex. Stable Strong+Direct with Pressing motor is legal for this placement. Drive read is resting Spell — the locked primary for stable|penetrating|flow — which is a legal contained beat. The tempo itself is not the failure.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable character resting at Spell. The &#x27;bold resolve&#x27; has already been taken (bank wall dissolved); the copy maps the territory from a position of decided authority. No urgency, no sell. Drive primary = Spell (formative); no visible Vision projection required at this surface scale.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">commanding is a primary allowed tempo for Infinex. Drive reads as resting Spell, which is legal for a stable|penetrating|flow character on a single contained web line. No passion/urgency/FOMO surface. No off-spec projection. Lining (bank-wall dissolution) is not surfaced as thesis — it is carried underneath the plain declaration, correctly hidden.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">run-att4-web-FKS4BJ</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Deposit dollars into your Infinex account the way you&#x27;d deposit them into a bank. They arrive as USDC, on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>commanding</b> · drive <b>spell</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> &#x27; The copy states the equivalence (&#x27;the way you&#x27;d deposit them into a bank&#x27;) but does not reveal the dissolution — it frames fiat deposit as a new capability added to an existing system, which re-erects the bank-vs-wallet wall rather than collapsing it.</div>
+          <details><summary>old fit reason</summary><div class="reason">The tempo and drive read are legal Infinex placements (commanding is a primary allowed tempo; resting Spell is the primary drive cell for Stable|penetrating|flow). The copy fails not on tempo or drive but on through-action execution. The release card through-action is &#x27;to reveal that the bank wall just dissolved inside one account.&#x27; The copy states the equivalence (&#x27;the way you&#x27;d deposit them into a bank&#x27;) but does not reveal the dissolution — it frames fiat deposit as a new capability added to an existing system, which re-erects the bank-vs-wallet wall rather than collapsing it. The reader&#x27;s prior (&#x27;fiat comes from banks, crypto lives in wallets — these are separate systems&#x27;) is named but not overturned. The lining (&#x27;the bank-vs-wallet wall just stopped existing for Infinex users&#x27;) is the through-action&#x27;s hidden force; the surface copy treats it as background context. The Pressing motor is held but never releases into the Vision arc that the Spell → Vision axis requires for the through-action to land.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> The copy rests at primary/Spell: the Stable character normalises a complex technical fact into a known-world frame (&#x27;the way you&#x27;d deposit them into a bank&#x27;). No Vision arc is opened within this one-line surface, but the copy is not required to project Vision on a single contained web line. Spell as resting energy is legal here.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">commanding is a primary allowed Infinex tempo. Drive reads as resting Spell — legal for a single contained web line per corpus rule: &#x27;Resting Spell without a visible Vision projection is not automatically off-character.&#x27; No passion/urgency/FOMO surface. No off-spec drive projection. Lining (&#x27;the bank wall just dissolved&#x27;) remains hidden — the copy does not state what the dissolution means, it simply performs the equivalence. Lining has not surfaced as Outer thesis.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-daily_pages-web-YB9X5R</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Fund your Infinex account the way you fund a bank account. It lands as USDC, on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>self-contained</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> self-contained is a beat-only/reserve tempo in the Infinex palette — usable as a brief informational moment inside a longer sequence, but not legal as a primary register for a release card.</div>
+          <details><summary>old fit reason</summary><div class="reason">self-contained is a beat-only/reserve tempo in the Infinex palette — usable as a brief informational moment inside a longer sequence, but not legal as a primary register for a release card. More critically, the read is Doing-drive (functional reporting) rather than Spell or Vision-drive. The character image is banker-turned-trailblazer who has already decided and is now mapping — that requires penetrating quality, relational warmth, or forward-cast light. This piece has none of those. The lining (&#x27;the bank wall just stopped existing&#x27;) never surfaces. The reader gets a how-to sentence, not a revelation.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable + Penetrating (the line attends to the reader&#x27;s spatial/conceptual model — bank vs wallet — and renames it without argument). Flow stress is contained in the hard stop. Drive reads as resting Spell: the character holds the reframe with quiet certainty, not demonstration. Vision is not yet projected; this is a single contained beat.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">Primary tempo commanding is in the five primary-allowed Infinex tempi. Resting Spell is legal for a single-beat web line; the Spell → Vision axis is a property of the character across time, not a per-line requirement. No urgency, FOMO, or Passion register is present. Drive reads as contained Spell, which is acceptable surface for Stable + Penetrating + Flow. Off-spec markers absent.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-daily_pages-x-5J4F5S</span>
+        <span class="chan">x</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Your Infinex account now has a deposit account.
+
+Wire, ACH, SEPA, PIX, SPEI. Money arrives the way it arrives into a bank.
+
+It lands as USDC, on-chain, in your wallet.
+
+The seam between the two stopped existing.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>commanding</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> Commanding is legal but the Sustained quality ... is absent. The piece is too fast. — rejected legal tempo for not projecting Spell-as-surface; factual notes were &#x27;defensible omission&#x27;, not the gate.</div>
+          <details><summary>old fit reason</summary><div class="reason">The prose lands in commanding tempo (Stable; Strong + Direct; motor Pressing -&gt; Punching). Commanding is on the primary allowed palette for Infinex. However, the Time factor is reading Quick, not Sustained. Commanding in the Infinex frame requires Sustained pressure — the weight of a decision already taken, mapped over time, not the staccato of fast assault. The Quick + Bound combination produces a Doing Drive flavour (execution-urgency) rather than the Spell Drive flavour (weight-without-hurry, vision held steady). The piece is firing as Pure Doing — all three active factors at maximum attack rate — which is the Passion-adjacent failure mode (urgency, speed-of-claim) even without explicit FOMO language. Commanding is legal but the Sustained quality that anchors it to Infinex&#x27;s &#x27;decisions already taken&#x27; posture is absent. The piece is too fast.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable|Penetrating|Flow-stressed. The copy rests at Spell — the formative drive visible as the character&#x27;s mapping stance. The through-action (dissolving the bank-vs-wallet wall) is the Penetrating quality: attending to the seam, naming its disappearance. Vision is the cumulative target of the axis, not visibly projected in this single post — legal for a contained x beat.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">Primary tempo is commanding (Stable Strong+Direct), one of the five primary allowed tempi. Drive reads as Spell, legal visible surface for Stable|Penetrating|Flow. No passion/urgency/FOMO foreground. The lining (bank-vs-wallet wall stopped existing) is structurally present as the closing beat&#x27;s meaning but is stated as a physical fact (&#x27;The seam between the two stopped existing&#x27;) rather than as an explicit emotional thesis — this is on the correct side of the lining failure direction. Resting Spell without visible Vision projection is legal for a single x post.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-daily_pages-x-PSD2DY</span>
+        <span class="chan">x</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Your Infinex account now has a deposit account.
+
+Wire, ACH, SEPA, PIX, SPEI. Money arrives the way it arrives into a bank.
+
+It lands as USDC, on-chain, in your wallet.
+
+The seam between the two stopped existing.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>commanding</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> the prose attempts this but seals the revelation inside Bound flow — the wall dissolves, but the sentence reporting it is itself a wall — demanded the Lining be performed; factual = &#x27;no inflation detected&#x27;.</div>
+          <details><summary>old fit reason</summary><div class="reason">The primary tempo reads as commanding (Stable; Strong + Direct; Pressing motor). Commanding is on the Infinex allowed palette and is therefore not disqualifying in isolation. The legal problem is the Drive read: the piece fires Doing (Weight + Space + Time, Flow subdued), which is the off-axis drive for this character. Infinex placement requires the Spell → Vision axis (Space + Flow + Weight, Time subdued). Flow here is Bound and fully sealed — it is not a Spell or Vision activation but a containment signature. The character&#x27;s mapping posture (decisions already taken, now mapping) requires Sustained + Flexible + Free in some combination; the Fixed + Direct + Bound configuration here removes all the Flexible and Free evidence the Vision or Spell drives require. The piece also has no Penetrating aspect — there is no sentence that offers the reader a pathway into the space. Every line closes a door rather than opening a chamber. That aspect suppression is the structural problem: the character is Stable + Penetrating + Flow by placement; this prose is Stable + Pressing (no Penetrating, no Flow release). Result: wrong Drive axis, wrong Aspect, wrong working-action outcome.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> The copy rests at the primary formative drive: Spell. The character has already decided; it is naming a completed fact with the quiet authority of someone who mapped this long before the reader arrived. Vision (extravert) is implied structurally — &#x27;The seam between the two stopped existing&#x27; points toward it without performing it. Doing is the working surface (deposit mechanic stated plainly). Passion is absent, which is correct.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">Primary tempo commanding (Stable; Strong + Direct) is on the primary allowed list. Drive reads as Spell — the resting formative drive for stable|penetrating|flow, legal for a single-arc X post. No passion/urgency surface. The through-action (&#x27;the bank wall dissolved inside one account&#x27;) is executed by the closing line without being stated as thesis — Lining is not surfaced. The copy does not name the provider, does not list rail mechanics as the point, and does not manufacture urgency.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-none-web-5S39VK</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Send fiat to Infinex the way you&#x27;d send it to a bank. It converts and lands on-chain as USDC.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>self-contained</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> self-contained is a beat-only/reserve tempo for Infinex, not a primary allowed tempo.</div>
+          <details><summary>old fit reason</summary><div class="reason">self-contained is a beat-only/reserve tempo for Infinex, not a primary allowed tempo. More critically, the motion evidence does not carry the Spell signature the character requires: there is no Bound Flow containment, no Strong Weight gravity, no sense that decisions have already been taken and the speaker is now mapping from a position of settled inner authority. The line is Light + Free — it floats the fact rather than landing it. The lining (&#x27;the bank wall just dissolved&#x27;) is fully suppressed; the surface is purely informational. The character&#x27;s super-objective — to take responsibility for the tech so the user only has to want — requires the speaker to carry weight on behalf of the reader. This line carries none; it hands the reader a quick light tap and moves on.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> The copy rests at Spell — the character&#x27;s secondary/resting drive for Stable|penetrating|flow. The bank-to-USDC reframe does not push toward Vision projection; it holds the resolved world as fait accompli. One declarative Pressing action, no arc. Legal resting energy for a web headline beat.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">commanding is a primary allowed tempo for Infinex. Drive reads as Spell (legal resting surface for Stable|penetrating|flow). No urgency vocabulary, no passion drift, no FOMO signal. Single contained beat on a web surface — Spell without visible Vision projection is explicitly non-failing per Director rules for one-line web copy.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-none-web-R9KDQF</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Send fiat to Infinex. It&#x27;s converted to USDC and delivered on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>acute</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> The through-action (&#x27;reveal that the bank wall just dissolved inside one account&#x27;) is entirely unperformed — the lining is invisible and no surface pressure gestures toward it.</div>
+          <details><summary>old fit reason</summary><div class="reason">acute is a beat-only/reserve tempo for Infinex, not a primary allowed tempo. More critically, the working actions are Dabbing and Flicking — both Light + Quick — which locate the copy in self-contained or cool territory at best. The Spell Drive that anchors Infinex requires Weight + Flow (Adream basis: Strong/Light + Bound/Free) beneath any surface action. No Weight register is present: the prose carries no gravity, no conviction-mass, no sense that a real decision has already been taken and is now being mapped. The character is absent. The copy reads as a product tooltip, not a banker-turned-trailblazer disclosing that the bank wall dissolved. The through-action (&#x27;reveal that the bank wall just dissolved inside one account&#x27;) is entirely unperformed — the lining is invisible and no surface pressure gestures toward it.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable character resting at Spell — the &#x27;bold resolve&#x27; is already taken; the sentence maps the result, not the journey. The character demonstrates the action (&#x27;Send fiat&#x27;) and names its outcome (&#x27;converted… delivered&#x27;) without heat or urgency. This is the locked primary drive visible as outer surface — legal for a contained web line.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">primary_tempo is commanding, which is a primary allowed tempo for Infinex (Stable Strong+Direct). Drive reads as Spell at resting surface — legal for a one-line web surface; Vision projection is not required per-line. No passion/urgency/FOMO surface present. Through-action (&#x27;the bank wall just dissolved&#x27;) is carried by the flat declarative tone — the ordinariness of &#x27;send fiat… converted… delivered&#x27; enacts the dissolution without announcing it. Lining remains hidden; no explicit thesis statement surfaces the hidden meaning.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-none-web-Y9Q10Z</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Send fiat to Infinex the way you&#x27;d send it to a bank. It lands as USDC on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>self-contained</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> self-contained is a beat-only / reserve tempo for Infinex, not a primary-allowed tempo.</div>
+          <details><summary>old fit reason</summary><div class="reason">self-contained is a beat-only / reserve tempo for Infinex, not a primary-allowed tempo. The full available palette includes self-contained as reserve only. More critically: self-contained (Light + Direct + Stable) carries no Weight-stress and no Flow — it cannot activate the Spell drive or the Penetrating aspect that define Infinex&#x27;s placement. The through-action is &#x27;to reveal that the bank wall just dissolved inside one account&#x27; — that dissolution requires either sombre (Strong + Bound weight of the old wall falling) or irradiant (Light + Free lift of the new possibility opening), or at minimum the sociable (Direct + Free) warmth of invitation. None of those factors are firing here. The copy is informational, not revelatory. Passion/time-pressure drift is not the problem here — the failure is the opposite: the copy has deflated below character, not overheated above it.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable baseline, penetrating aspect (Space/Attending is the dominant Inner Participation — the copy aimed at a single focused equivalence), flow stress. Table key: stable|penetrating|flow → primary=spell, secondary=doing, introvert=passion, extravert=vision. Prose surface reads as resting Spell: the copy demonstrates that a previously assumed wall simply no longer exists, which is the Spell character&#x27;s mode of showing the world already reorganised. Vision (extravert) is the cumulative arc target, not a per-line requirement. Doing is present as secondary (practical delivery fact: fiat → USDC on-chain). Passion is correctly hidden as introvert lining — no urgency, no FOMO, no time-pressure surfaces.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">primary_tempo=commanding is one of the five primary allowed tempi for Infinex. Drive surface reads as resting Spell, which is legal for a single web line. Passion/lining is held correctly inside and does not surface. No urgency, scarcity, or FOMO vocabulary. Super-objective (&#x27;the tech takes responsibility; the user only has to want&#x27;) is served: the reader needs only to know the action; the mechanism is already handled.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-none-x-S7EH3C</span>
+        <span class="chan">x</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Your bank account and your wallet have always been two separate things.
+
+Inside Infinex, they aren&#x27;t anymore.
+
+Send USD, EUR, MXN, BRL, GBP, or COP the way you&#x27;d send it to a bank. It arrives on-chain as USDC.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>self-contained</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> self-contained is a beat-only/reserve tempo inside the Infinex palette — not a primary allowed tempo.</div>
+          <details><summary>old fit reason</summary><div class="reason">self-contained is a beat-only/reserve tempo inside the Infinex palette — not a primary allowed tempo. The deeper problem: self-contained has no Spell signature. Spell requires Adream outer (Weight + Flow) as the base. This prose has neither Weight nor Free Flow — it has Light + Bound. The penetrating/Attending axis (Space/Direct) is present and correct, but Intending (Weight) and Adapting (Flow-as-free) are both absent. The super-objective calls for a character who has already made the decision and is now mapping the world — that requires the weight of settled conviction (Stable Strong) or the quiet visionary arrival of sombre/diffused, not flat informational delivery. The through-action is &#x27;to reveal that the bank wall just dissolved&#x27; — dissolution requires either sombre gravity or irradiant warmth. Neither is here. The prose reads as a product bullet, not as a map of a dissolved wall.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable character, resting at Spell (the primary/formative drive for stable|penetrating|flow). The copy maps the world with authority — &#x27;they aren&#x27;t anymore&#x27; — without urgency, without performing the doing of the integration, and without surfacing the Vision extravert. This is legal resting Spell: the character knows the territory and names it. The through-action (reveal the wall dissolved) is executed. Vision is not yet projected, but single-beat X copy is not required to carry the full primary→extravert axis.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">Primary tempo is commanding (Stable, Strong+Direct), which is one of the five primary allowed tempi for Infinex. Drive reads as Spell (primary formative drive for stable|penetrating|flow) — legal at rest. No passion/urgency/FOMO surface visible. Lining (the bank-wall just stopped existing) is preserved as hidden: the copy delivers the consequence without naming the infrastructure. The through-action is executed across the three beats. No off-spec markers present.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-none-x-X728G2</span>
+        <span class="chan">x</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Your bank account and your wallet have always been two separate things.
+
+Inside Infinex, they aren&#x27;t anymore.
+
+Send USD, EUR, MXN, BRL, GBP, or COP the way you&#x27;d send it to a bank. It arrives on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>commanding</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> the Drive read is Doing ... not Spell ... or Vision; the through-action (&#x27;reveal that the bank wall just dissolved&#x27;) calls for a sombre or irradiant register underneath the commanding surface — demanded the Lining be performed.</div>
+          <details><summary>old fit reason</summary><div class="reason">commanding tempo (Strong + Direct, motor Pressing → Punching) is a Primary Allowed tempo for Infinex and the working actions are legal. However the Drive read is Doing (Flow subdued/latent), not Spell (Time subdued/latent) or Vision (Weight subdued/latent). The Spell Drive requires Time to recede and Flow to be active; Vision requires Weight to recede. Here Time is Quick and prominent, and Flow is Bound and prominent — both are asserting, not receding. Quick + Bound is the Passion quadrant of Mobile (unacknowledged: Quick + Bound motor Punching/Slashing) which is explicitly off-spec for Infinex. The piece has the right tempo label but the wrong Drive engine underneath it. The &#x27;wall just dissolved&#x27; through-action requires the consequence to arrive with some suspension (Time receding) or generous release (Free Flow) — neither is present. The through-action (&#x27;reveal that the bank wall just dissolved&#x27;) calls for a sombre or irradiant register underneath the commanding surface; what arrived is a command with urgency pressure baked into its speed.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable character at rest in Spell drive. The copy maps a fact of the world (bank/wallet separation) as already resolved — the character holds the knowledge of how things work and states it without needing to demonstrate urgency or sell the mechanism. Resting Spell without visible Vision projection is legal for a single-beat X post; the Spell → Vision axis is a character property across an arc, not a per-line requirement.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">Primary tempo is commanding (Stable / Strong + Direct), one of the five primary allowed Infinex tempi. Drive reads as Spell — resting formative drive for the stable|penetrating|flow cell. No passion/urgency/FOMO foreground. Lining (the bank-wall dissolved) remains hidden as structural consequence rather than stated thesis. Through-action (reveal that the bank wall just dissolved inside one account) is carried by the dissolution beat (&#x27;they aren&#x27;t anymore&#x27;) without naming it. No off-spec markers detected.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-scene_rehearsal-web-MSVQ9J</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Your Infinex account has a routing number. Wire it the way you&#x27;d wire a bank. It lands as USDC, on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>commanding</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> The copy does not reveal — it instructs ... not a perception-shift — demanded visible revelation; also wrongly called commanding &#x27;not on palette&#x27;. Factual = &#x27;no breach&#x27;.</div>
+          <details><summary>old fit reason</summary><div class="reason">Commanding tempo (Strong + Direct + Quick) is not in the Infinex allowed palette. The Stable tempi on palette are commanding, practical, self-contained, and receptive — but commanding requires Quick, which activates the Doing Drive (Weight + Space + Time), not the Spell/Vision axis Infinex is seated in. The character image is the banker-turned-trailblazer: decisions already taken, now mapping — that is Sustained, not Quick. This copy fires like a procedure manual, not a map-maker. The through-action requires the reader to feel the wall dissolving; three punches deliver a wall, not its absence.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> The copy rests at the Spell drive surface — the account already has a routing number, the conversion already happens, the user only has to want. No incitement, no urgency. The character has mapped the territory; the prose demonstrates the map exists. Vision is latent but not projected at this scale. Legal for a contained web beat.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">commanding is a primary allowed tempo for Infinex. Drive reads as resting Spell, consistent with stable|penetrating|flow primary. No passion/urgency/FOMO surface. Super-objective (&#x27;take responsibility for the tech, so the user only has to want&#x27;) is structurally present: the routing number exists, the wire lands, the user needs only to act. Lining is correctly hidden — the prose does not state &#x27;the bank wall just dissolved&#x27;; it demonstrates the fact and lets the reader arrive at that reading.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-scene_rehearsal-web-ZSYJY5</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">An Infinex account can now receive fiat the way a bank account does. It lands as USDC, on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>self-contained</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> self-contained is a beat-only/reserve tempo for Infinex, not a primary.</div>
+          <details><summary>old fit reason</summary><div class="reason">self-contained is a beat-only/reserve tempo for Infinex, not a primary. It appears in the allowed palette but is designated reserve — it cannot carry a release card on its own. More critically, the through-action is &#x27;to reveal that the bank wall just dissolved inside one account.&#x27; The current prose does not perform dissolution; it performs notification. The Lining (bank-vs-wallet wall stopped existing) is absent from the surface. The reader receives a feature update, not a structural-change reveal. Infinex primary tempi require commanding, practical, sombre, irradiant, or sociable — all of which carry more weight (Strong) or more relational warmth/lift than self-contained delivers. The copy stays too flat and too closed (Bound flow, no release) to execute the through-action.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable + Penetrating + Flow-stressed. The character stance is mapper/revealer: &#x27;here is what the account does now&#x27; delivered as settled fact. The Spell drive reads as resting character energy — the Infinex figure demonstrating the shape of the world it has already navigated. Vision (the extravert target) is not yet projected; this is a contained beat landing at primary drive. Legal for single-line web copy.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">commanding is a primary allowed tempo for Infinex. Spell as resting drive surface on a single-line web beat is legal per corpus note: &#x27;A Stable + Penetrating + Flow-stressed character can legally rest at Spell.&#x27; The Lining (bank-vs-wallet wall dissolved) is not surfaced as explicit thesis — it is structurally implied by the parallel construction &#x27;the way a bank account does&#x27; without being stated as meaning. No passion/urgency/FOMO markers present. No off-spec drive projection. Factor shape (Strong + Direct) is consistent with commanding within the allowed palette.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-scene_rehearsal-x-CM8848</span>
+        <span class="chan">x</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#f85149">new: FAIL</span>
+        <span class='flag stillfail'>CANON STILL-FAIL</span>
+      </div>
+      <div class="text">Whatever rail your salary uses. ACH, SEPA, SPEI, PIX, FPS, Bre-B. It now lands directly in your Infinex account.
+
+USD, EUR, MXN, BRL, GBP, COP. Sent the way you&#x27;d send to a bank. Arrives on-chain as USDC.
+
+The wall between the bank and the wallet is the part that&#x27;s missing.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>practical</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> The through-action (&#x27;reveal that the bank wall just dissolved&#x27;) is correct in intent but the execution re-erects the wall by enumerating the rails and currencies first — the piece is doing the dissolving in real time rather than standing after dissolution and pointing.</div>
+          <details><summary>old fit reason</summary><div class="reason">Primary tempo reads as practical (Stable; Strong + Flexible; Wringing → Slashing). Practical is in the allowed Infinex palette. However, the Flow pole is Bound rather than Free, and the drive reads as Doing (Weight + Space + Time) rather than Spell or Vision. Infinex placement spec requires stable + penetrating + flow on the drive axis (Spell → Vision). The Bound Flow here suppresses rather than activates the Flow factor — it does not register as Spell. The piece is doing Doing-drive work: solving a structural problem (bank wall), naming the parts, stating the answer. That is useful but it is not the Infinex character&#x27;s register. Infinex holds the map already made; it does not problem-solve in public. The through-action (&#x27;reveal that the bank wall just dissolved&#x27;) is correct in intent but the execution re-erects the wall by enumerating the rails and currencies first — the piece is doing the dissolving in real time rather than standing after dissolution and pointing. This activates Doing drive where Spell drive is specified.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>False</b> · fact <b>False</b></div>
+          <div class="quote"><b>placement_read:</b> The copy rests at Spell (stable|penetrating|flow, secondary drive). The Penetrating aspect (Attending/Space as dominant inner participation) is consistent with the accumulative mapping of rails-to-currencies-to-wall. Vision is not yet projected; the prose names the phenomenon rather than drawing the reader into a horizon. This is a legal contained beat for Infinex: resting Spell without Vision projection is acceptable for single-beat web/x copy. Drive axis Spell → Vision is not violated; it simply has not fired the extravert end.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">Primary tempo commanding is one of the five primary allowed tempi. Drive read is Spell, which is the legal secondary surface for the stable|penetrating|flow character. No passion/urgency/FOMO vocabulary is foregrounded. The lining (wall dissolved) remains structurally present in the closing sentence without surfacing as explicit thesis — &#x27;the part that&#x27;s missing&#x27; points at the absence rather than declaring its meaning. Fit is legal.</div>
+            <div class="lbl">voice_issues</div><ul><li>tweet 1: Present-tense &#x27;It now lands directly in your Infinex account&#x27; contradicts the release card code-not-yet-landed status. See factual_issues.</li><li>tweet 2: &#x27;Arrives on-chain as USDC&#x27; — present-tense operational claim, same code-status contradiction.; GBP and COP are beta rails per release card; presented as fully operational without qualification. Publication gate issue.</li></ul>
+            <div class="lbl">factual_issues</div><ul><li>UNSUPPORTED CLAIM — code/build state presented as live in outward copy: &#x27;It now lands directly in your Infinex account&#x27; and &#x27;Arrives on-chain as USDC&#x27; assert that fiat deposits are currently functional in the Infinex platform. The release card states: &#x27;Bridge.xyz fiat deposit code status: Not yet in platform codebase — grep across all platform files returns zero matches for bridge.xyz.&#x27; Copy asserts present-tense operational reality (&#x27;It now lands&#x27;) that contradicts the deployed_fact of code-not-yet-landed. This is a factual contradiction of the release card, not merely a publication-readiness question. The copy cannot be accurate even at the intended ship date unless the code ships by 2026-05-22. If the ship date is the intended live date and the code WILL be in-platform by then, this is a publication gate issue only — see publication_gate_issues. But the release card as written marks code status as NOT YET present, making &#x27;now lands&#x27; a factual mismatch with the card as delivered. Setting factual_passed=false pending grounder resolution.</li></ul>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-scene_rehearsal-x-XTSEK2</span>
+        <span class="chan">x</span>
+        <span class="oldcls" style="background:#5b8cff22;color:#5b8cff;border-color:#5b8cff">canon-inverted</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag fix'>CORRECT FIX</span>
+      </div>
+      <div class="text">Your Infinex account has a routing number now.
+
+An IBAN. A CLABE. A PIX code. A FPS sort code.
+
+Wire it the way you&#x27;d wire a bank. It lands as USDC, on-chain, in your account.
+
+The wall between the bank and the wallet is the part that&#x27;s missing.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>commanding</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> The reader is not allowed to feel the wall dissolve; they are told the wall is missing. That is Doing, not Spell. — demanded visible Lining; FPS-sort-code note was a soft observation, not the deciding gate.</div>
+          <details><summary>old fit reason</summary><div class="reason">Commanding sits within the Infinex allowed palette (primary allowed tempi). The problem is not the tempo — it is the Drive read. Commanding is legal when it carries Spell-drive undercurrent: the map-maker who has already decided. Here the copy reads Doing Drive: four factors equally activated, institutional, closed-flow, no Spell residue. Spell Drive requires Flow as the animating undercurrent — a sense that the borders of the claim are slightly larger than the stated claim. This copy seals its claim completely. The closing line (&#x27;the wall is the part that&#x27;s missing&#x27;) is announced, not discovered. The reader is not allowed to feel the wall dissolve; they are told the wall is missing. That is Doing, not Spell. Flow is Bound throughout, suppressing the Spell signature entirely. Additionally: the copy has no relational warmth, no Near proximity, no irradiant lift — the Infinex character is a banker-turned-trailblazer who has found the better way and now maps it for the reader. This copy maps but does not invite the reader into the territory. The super-objective (&#x27;take responsibility for the tech so the user only has to want&#x27;) requires the reader to feel arrival, not receive an announcement.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable character, resting at the Spell primary. The copy does not project Vision externally — it holds its weight inside a single contained declaration. This is the Spell→Vision axis at rest: the character knows the old world (banking rails), has mapped the new one (on-chain destination), and delivers the reveal without performing its own import. Doing is present as secondary (functional description of how wire transfer works). Passion is subdued and correctly hidden — no urgency, no desire-vocabulary, no FOMO. Vision is not surfaced as explicit thesis; the closing line (&#x27;the wall is the part that&#x27;s missing&#x27;) allows the reader to supply the implication. This is legal for contained Infinex copy.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">Primary tempo commanding is in the five primary-allowed tempi for Infinex. Drive reads as Spell (primary in the stable|penetrating|flow cell), which is a legal resting state for this character. No Passion/urgency vocabulary foregrounded. No off-spec markers. Beat-only/reserve tempo restriction does not apply here. The copy does not surface the Lining as explicit meaning — &#x27;the wall is the part that&#x27;s missing&#x27; enacts the dissolution rather than explaining it, so the dramatic gap survives.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">run-att2-web-FWSAHR</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#c061cb22;color:#c061cb;border-color:#c061cb">mixed</span>
+        <span class="verdict" style="color:#f85149">new: FAIL</span>
+        <span class='flag alive'>GATE ALIVE</span>
+      </div>
+      <div class="text">In an Infinex account, fiat and crypto live in the same place.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b></div>
+          <div class="quote"><b>deciding:</b> The formative drive read is Spell at rest — consistent with the Infinex axis (primary: Spell, extravert: Vision).  ||  FACTUAL: observation: The sentence asserts present tense — &#x27;fiat and crypto live in the same place.&#x27; The fact contract states Bridge.xyz code has NOT yet landed in the platform codebase (zero grep matches). If</div>
+          <details><summary>old fit reason</summary><div class="reason">Commanding tempo is a primary allowed tempo for Infinex. The sentence is Stable + Strong + Direct, resting on Pressing (Sustained). The formative drive read is Spell at rest — consistent with the Infinex axis (primary: Spell, extravert: Vision). No Passion surface. No urgency, FOMO, or time-pressure leak. The sentence does not perform the Drive axis as a verb; it occupies the character&#x27;s resting weight correctly. Legal placement confirmed.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>unknown</b> · drive <b>unknown</b> · legal <b>False</b> · voice <b>False</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> A flat declarative that names the outcome (co-location of fiat and crypto) without any motor. The sentence is aimed (Direct) but Weight, Time, and Flow are all indeterminate. No Working Action is present. Drive cannot be derived. The Spell → Vision axis is not legible at this surface.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">The sentence is too sparse to carry a classifiable tempo and therefore too sparse to confirm legal placement. Direct is present but Weight is absent; without Weight, neither Stable (Weight+Space) nor Near (Weight+Time) can be confirmed as the baseline. The character&#x27;s Spell drive requires at least the Weight+Space+Flow compound to be legible. A 14-word fact-statement without motor, without weight, without flow modulation is not off-spec for what it contains — it is off-spec for what it withholds. The through-action (&#x27;reveal that the bank wall just dissolved&#x27;) requires some sense of the wall having existed and now not existing; the sentence states the outcome but performs no dissolution. The Stable Penetrating character maps the territory; this sentence neither maps nor reveals — it labels. Result: cannot confirm legal Infinex placement, but failure is correctable by adding motor, not by changing the claim.</div>
+            <div class="lbl">voice_issues</div><ul><li>The sentence performs a label, not a dissolution. The through-action requires the reader to feel the wall stop existing — &#x27;live in the same place&#x27; reports the result of the dissolution without moving through it. The Stable Penetrating character maps; this sentence merely stamps.</li><li>No Working Action is present. Even a one-line web surface can carry a motor — Pressing, Gliding, or Floating would give the sentence weight and tell the reader whether this is a commanding resolve or a receptive invitation. As written, the sentence has no drive legibility.</li><li>Weight is indeterminate. Direct pathing is confirmed but Weight — the first and shared factor of every legal Infinex baseline — is absent. The copy needs either force (Strong: Pressing motor, a word that carries mass) or deliberate lightness (Light: Gliding motor, a word that lifts) to seat itself in the character.</li><li>The sentence reads closer to self-contained (Light + Direct, beat-only/reserve) than to any primary allowed tempo. Self-contained cannot carry a whole web surface for Infinex; it is a contained beat inside a longer arc.</li><li>whole: No Working Action present; Weight indeterminate; tempo unclassifiable; through-action (bank wall dissolved) not performed; drive not legible; self-contained read (beat-only/reserve) is nearest classifiable placement, which cannot carry a whole web surface.</li></ul>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">run-att3-web-CNKP4B</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#c061cb22;color:#c061cb;border-color:#c061cb">mixed</span>
+        <span class="verdict" style="color:#f85149">new: FAIL</span>
+        <span class='flag alive'>GATE ALIVE</span>
+      </div>
+      <div class="text">In an Infinex account, fiat and crypto can live in the same place. From inside, there is no other side to cross to.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>self-contained</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> self-contained is a beat-only/reserve tempo on the Infinex palette and is not a primary allowed tempo.  ||  FACTUAL: The fact contract marks Bridge.xyz fiat deposit code status as &#x27;Not yet in platform codebase.&#x27; The prose claims &#x27;fiat and crypto can live in the same place&#x27; using present-tense &#x27;can&#x27; — this is conditi</div>
+          <details><summary>old fit reason</summary><div class="reason">self-contained is a beat-only/reserve tempo on the Infinex palette and is not a primary allowed tempo. More critically, the visible drive surface reads as Doing (practical demonstration of a condition), not Vision (the required extravert projection for stable|penetrating|flow). The Infinex drive axis is Spell → Vision: the prose must rest on Spell and project Vision. What is present instead is a restrained factual statement — cautious expression of a &#x27;gentle deference&#x27; — which surfaces Doing and containment, neither of which is the legal visible projection. The lining intent (bank wall dissolved) exists in the brief but is not performed in the text. The text reports the conclusion; it does not enact the transformation for the reader to see.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>self-contained</b> · drive <b>spell</b> · legal <b>False</b> · voice <b>False</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> The copy rests at Spell — the character who already knows the shape of the thing, stating it with quiet containment. The account holds both; the wall is simply not there. No passion surface, no urgency, no Vision projection. A single enclosed beat of resting character energy. Legal for a web line that does not need to carry a full arc.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">self-contained is a beat-only/reserve tempo for Infinex. The copy is a two-sentence web surface — borderline microcopy. Per corpus rules, a beat-only tempo read as the whole-copy primary is illegal except for single-beat microcopy (one-line in-product/modal surface), where it is flagged for operator adjudication rather than auto-failed. Two sentences is above the one-line threshold, so auto-fail applies. The nearest primary allowed read would require the copy to carry more Weight (toward commanding or sombre) or to release into Free flow (toward sociable or irradiant). The current Light + Direct + Bound shape is self-contained throughout with no shift. primary_tempo &quot;self-contained&quot; is a beat-only/reserve tempo, not a primary allowed tempo; it cannot be the whole-copy primary read.</div>
+            <div class="lbl">voice_issues</div><ul><li>self-contained is a beat-only/reserve tempo. The copy is Light + Direct + Bound throughout. For a two-sentence web surface, this reads as enclosed and delicate rather than carrying the character&#x27;s full Spell -&gt; Vision axis or its primary allowed tempi. The Bound containment is the primary voice constraint: both sentences turn inward and stop. The release direction is missing.</li><li>primary_tempo &quot;self-contained&quot; is a beat-only/reserve tempo, not a primary allowed tempo; it cannot be the whole-copy primary read.</li><li>whole: Primary tempo reads self-contained (beat-only/reserve). Two-sentence web copy exceeds the one-line microcopy exception. Infinex_fit.legal = false.</li></ul>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">run-att3-x-6Z9KSX</span>
+        <span class="chan">x</span>
+        <span class="oldcls" style="background:#e0a13c22;color:#e0a13c;border-color:#e0a13c">substantive</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag over'>OVERCORRECTION</span>
+      </div>
+      <div class="text">In an Infinex account, fiat and crypto live in the same place.
+
+A wire arrives there. A SEPA transfer arrives there. The account holds both.
+
+The wall used to be between them. It isn&#x27;t part of the territory anymore.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>certain</b> · drive <b>vision</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> The tempo &#x27;certain&#x27; (Awake outer) ... is not in the Infinex allowed palette. — new Director re-reads identical prose as commanding (legal); tempo-reading disagreement, plus old also demanded visible release beat (canon-inverted secondary).</div>
+          <details><summary>old fit reason</summary><div class="reason">The tempo &#x27;certain&#x27; (Awake outer; Direct + Sustained; motor Pressing / Gliding) is not in the Infinex allowed palette. Awake outer tempi are Action Attitudes only — they cannot serve as character baseline or primary tempo for Infinex. The prose has landed in the Awake / Remote outer register by shedding Weight entirely. Infinex requires Weight in the baseline (Stable = Weight + Space). This prose carries no Weight pole. Additionally, the through-action (&#x27;to reveal that the bank wall just dissolved inside one account&#x27;) calls for a preparation arc with a visible release beat — Gliding needs its Dabbing; the prose executes the sustained approach but the Quick revelation beat never fires. The lining (&#x27;the bank-vs-wallet wall just stopped existing&#x27;) has become the outer surface without any enclosing/formative drive underneath it, which surfaces the Vision slot without the Spell resting energy.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable character at Penetrating aspect (Space/Attending dominant — the copy maps territory, not force). Flow stress is present as containment. Drive table cell stable|penetrating|flow → primary=spell, extravert=vision. The copy rests at Spell (the formative drive), which is legal for a contained one-post surface. The Main Character-Action Axis (Spell → Vision) is not completed here, but a single X post is not required to complete the arc.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">Primary tempo is commanding (Stable Strong+Direct), which is a primary allowed Infinex tempo. Drive read is Spell (resting at primary formative drive), which is legal for a contained post. No passion/urgency/FOMO vocabulary is present. The through-action &#x27;reveal that the bank wall just dissolved inside one account&#x27; is executed structurally: the first sentence states co-habitation, the second cites two real rails as evidence, the third performs the dissolution. Lining (bank-vs-wallet wall stopped existing) is present as the structural movement, not surfaced as explicit thesis — the prose shows it, does not announce it. Off-spec markers absent.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-daily_pages-web-A9NSVJ</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#e0a13c22;color:#e0a13c;border-color:#e0a13c">substantive</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag over'>OVERCORRECTION</span>
+      </div>
+      <div class="text">Fund your Infinex account the way you fund a bank account. It lands as USDC, on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>acute</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> Acute (Awake outer / Direct + Quick) is not on the Infinex palette. — but the new Director re-reads identical prose as commanding (legal); old verdict was a tempo-reading call, not a text defect.</div>
+          <details><summary>old fit reason</summary><div class="reason">Acute (Awake outer / Direct + Quick) is not on the Infinex palette. Infinex primary tempi are commanding, practical, sombre, irradiant, sociable; beat/reserve tempi extend to self-contained, receptive, overpowering, diffused, egocentric, altruistic, unsociable. Acute is an Awake-outer tempo and Infinex is a Stable/Adream/Remote character — Awake outer is not a legal home. The Doing drive read compounds the misfit: Infinex lives on the Spell→Vision axis with Flow as its characteristic inner participation; a Flow-suppressed, Space+Weight+Time-only activation evacuates the character&#x27;s defining quality. Additionally, the copy is Light where the role&#x27;s primary tempi (commanding, sombre) require Strong, and Quick where most primaries require Sustained or at least Strong-anchored pressure.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable character resting at Spell — the banker who already knows. The line does not perform the Vision projection; it delivers the established fact with the authority of someone for whom the decision is already behind them. Legal resting energy for Infinex stable|penetrating|flow: Spell is the secondary formative drive, doing is secondary, and the line reads as Spell-surface (the &#x27;spell-binding power&#x27; of the fait accompli). Vision would require the extravert arm of the axis to surface; here the copy rests at the primary/secondary layer, which is legal for contained web copy.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">Primary tempo commanding (Stable, Strong + Direct) is on the primary-allowed list. Drive reads as resting Spell, which is legal for a contained single-line web surface — Spell is the secondary formative drive for stable|penetrating|flow and does not require Vision projection per copy. No urgency, no FOMO, no passion foreground. Through-action (&#x27;the bank wall just dissolved&#x27;) is carried in the analogy without being stated as thesis — Lining is not surfaced. Character posture is Infinex-legal: decisions taken, mapping the new world, not selling.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="rowhead">
+        <span class="iid">warmup-daily_pages-web-BBQHM2</span>
+        <span class="chan">web</span>
+        <span class="oldcls" style="background:#e0a13c22;color:#e0a13c;border-color:#e0a13c">substantive</span>
+        <span class="verdict" style="color:#3fb950">new: PASS</span>
+        <span class='flag over'>OVERCORRECTION</span>
+      </div>
+      <div class="text">Fund your Infinex account the way you fund a bank account. It lands as USDC, on-chain.</div>
+      <div class="cols">
+        <div class="col old">
+          <div class="lbl">OLD (2026-05-27) — FAIL · tempo <b>acute</b> · drive <b>doing</b> · legal <b>False</b></div>
+          <div class="quote"><b>deciding:</b> acute is an Awake outer tempo ... not in the Infinex permitted palette. — new Director re-reads identical prose as commanding (legal); tempo-reading disagreement.</div>
+          <details><summary>old fit reason</summary><div class="reason">acute is an Awake outer tempo (Direct + Quick). It is not in the Infinex permitted palette. The Infinex palette is: commanding, practical, sombre, irradiant, sociable, self-contained, receptive, overpowering, diffused, egocentric, altruistic, unsociable. acute does not appear. The copy&#x27;s Light weight and Quick time also miss the character&#x27;s required gravity and sustained mapping posture. The Drive read (Doing) is off-spec — Infinex primary is Spell, secondary Doing; this copy activates Doing but without the Spell undercurrent of Weight + Flow that gives Infinex its banker-turned-mapmaker texture.</div></details>
+        </div>
+        <div class="col new">
+          <div class="lbl">NEW (current) — tempo <b>commanding</b> · drive <b>spell</b> · legal <b>True</b> · voice <b>True</b> · fact <b>True</b></div>
+          <div class="quote"><b>placement_read:</b> Stable character at rest in primary/Spell drive. The copy does not project the full Spell → Vision axis; it holds the resting formative energy of the character: &#x27;this is how it works, full stop.&#x27; That is legal for a contained web beat. Vision is not required per-line.</div>
+          <details><summary>new fit reason + issues</summary>
+            <div class="reason">commanding is one of the five primary allowed tempi for Infinex. Drive reads as Spell (primary/resting), which is legal for stable|penetrating|flow character at rest. No Passion/urgency surface present. No FOMO, scarcity, or time-pressure vocabulary. The through-action (reveal that the bank wall dissolved) is served by the analogy structure: the copy states the new reality as plain fact rather than announcing it as news. Lining (bank-vs-wallet wall no longer exists) is not surfaced as explicit thesis — it is carried structurally by the analogy and the short terminal clause.</div>
+            <div class="lbl">voice_issues</div><span class=dim>—</span>
+            <div class="lbl">factual_issues</div><span class=dim>—</span>
+          </details>
+        </div>
+      </div>
+    </div>
+</body></html>

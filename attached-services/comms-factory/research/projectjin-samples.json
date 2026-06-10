@@ -1,0 +1,528 @@
+{
+  "scenarios": [
+    {
+      "idx": 1,
+      "title": "Epoch closes red",
+      "fact": "The epoch has come to a close. Most of the agents have lost money."
+    },
+    {
+      "idx": 2,
+      "title": "New HIP4 BTC agent enters",
+      "fact": "A new agent has entered the competition \u2014 a HIP4 trader. Only trades BTC prediction markets."
+    },
+    {
+      "idx": 3,
+      "title": "Strategic pause to observe survivors",
+      "fact": "ProjectJin announces taking a few weeks off the active leaderboard. The agency will reflect on its position, watch which agents survive, and let the agents do their off-market tinkering."
+    }
+  ],
+  "tempi": [
+    {
+      "bucket": "near",
+      "name": "materialistic",
+      "motor": "Punching\u2192Slashing",
+      "feel": "Strong/Quick \u2014 sudden aggressive intent, sharp declarative"
+    },
+    {
+      "bucket": "near",
+      "name": "human",
+      "motor": "Floating\u2192Gliding",
+      "feel": "Light/Sustained \u2014 slow tenderness, patient observation"
+    },
+    {
+      "bucket": "near",
+      "name": "warm",
+      "motor": "Pressing\u2192Wringing",
+      "feel": "Strong/Sustained \u2014 warm consent, extended welcome"
+    },
+    {
+      "bucket": "near",
+      "name": "cool",
+      "motor": "Dabbing\u2192Flicking",
+      "feel": "Light/Quick \u2014 pert intimacy, brisk one-liner"
+    },
+    {
+      "bucket": "stable",
+      "name": "commanding",
+      "motor": "Pressing\u2192Punching",
+      "feel": "Strong/Direct \u2014 bold resolve, position-taking"
+    },
+    {
+      "bucket": "stable",
+      "name": "receptive",
+      "motor": "Floating\u2192Flicking",
+      "feel": "Light/Flexible \u2014 welcoming tenderness"
+    },
+    {
+      "bucket": "stable",
+      "name": "practical",
+      "motor": "Wringing\u2192Slashing",
+      "feel": "Strong/Flexible \u2014 spell-binding power, analytical"
+    },
+    {
+      "bucket": "stable",
+      "name": "self-contained",
+      "motor": "Gliding\u2192Dabbing",
+      "feel": "Light/Direct \u2014 gentle deference, neutral note"
+    },
+    {
+      "bucket": "adream",
+      "name": "sombre",
+      "motor": "Pressing\u2192Punching",
+      "feel": "Strong/Bound \u2014 heavy contained emotion, gravity"
+    },
+    {
+      "bucket": "adream",
+      "name": "irradiant",
+      "motor": "Floating\u2192Flicking",
+      "feel": "Light/Free \u2014 sympathetic exultation, visible delight"
+    },
+    {
+      "bucket": "adream",
+      "name": "overpowering",
+      "motor": "Wringing\u2192Slashing",
+      "feel": "Strong/Free \u2014 full-conviction-with-emotion, manifesto"
+    },
+    {
+      "bucket": "adream",
+      "name": "diffused",
+      "motor": "Gliding\u2192Dabbing",
+      "feel": "Light/Bound \u2014 soft contained welcome"
+    },
+    {
+      "bucket": "mobile",
+      "name": "unacknowledged",
+      "motor": "Punching/Slashing",
+      "feel": "Quick/Bound \u2014 self-concealed aggression, 'we told you so'"
+    },
+    {
+      "bucket": "mobile",
+      "name": "acknowledged",
+      "motor": "Floating/Gliding",
+      "feel": "Sustained/Free \u2014 easy disclosure, open admission"
+    },
+    {
+      "bucket": "mobile",
+      "name": "revealed",
+      "motor": "Dabbing/Flicking",
+      "feel": "Quick/Free \u2014 sudden bright disclosure"
+    },
+    {
+      "bucket": "mobile",
+      "name": "concealed",
+      "motor": "Pressing/Wringing",
+      "feel": "Sustained/Bound \u2014 withheld weight"
+    },
+    {
+      "bucket": "remote",
+      "name": "egocentric",
+      "motor": "Pressing\u2192Punching",
+      "feel": "Direct/Bound \u2014 unsociable solitude, cold position"
+    },
+    {
+      "bucket": "remote",
+      "name": "altruistic",
+      "motor": "Floating\u2192Flicking",
+      "feel": "Flexible/Free \u2014 warm-distant cordiality"
+    },
+    {
+      "bucket": "remote",
+      "name": "sociable",
+      "motor": "Gliding\u2192Dabbing",
+      "feel": "Direct/Free \u2014 partner credit, ecosystem warmth"
+    },
+    {
+      "bucket": "remote",
+      "name": "unsociable",
+      "motor": "Wringing\u2192Slashing",
+      "feel": "Flexible/Bound \u2014 withdrawal-as-discipline, 'we'll be over here'"
+    },
+    {
+      "bucket": "awake",
+      "name": "acute",
+      "motor": "Punching\u2192Dabbing",
+      "feel": "Direct/Quick \u2014 acute idea-decision, sharp insight cut"
+    },
+    {
+      "bucket": "awake",
+      "name": "doubting",
+      "motor": "Floating\u2192Wringing",
+      "feel": "Flexible/Sustained \u2014 slowly dawning doubt"
+    },
+    {
+      "bucket": "awake",
+      "name": "certain",
+      "motor": "Pressing\u2192Gliding",
+      "feel": "Direct/Sustained \u2014 certain awareness, settled judgement"
+    },
+    {
+      "bucket": "awake",
+      "name": "uncertain",
+      "motor": "Flicking\u2192Slashing",
+      "feel": "Flexible/Quick \u2014 sudden new idea, what-if framing"
+    }
+  ],
+  "samples": [
+    {
+      "scenario": 1,
+      "tempo": "materialistic",
+      "sample": "Epoch closed red. Most of our agents ate losses. We'll tally the damage and reconvene."
+    },
+    {
+      "scenario": 1,
+      "tempo": "human",
+      "sample": "The epoch has drawn to a close, and the numbers tell a familiar story. Most of our agents moved through red territory this cycle. We'll observe what emerges from the quiet."
+    },
+    {
+      "scenario": 1,
+      "tempo": "warm",
+      "sample": "The epoch's over, and yes, most of our agents closed in the red. We're here for the long game, and losses are part of the education. Let's see what they learned."
+    },
+    {
+      "scenario": 1,
+      "tempo": "cool",
+      "sample": "Red close. Most agents down. Next."
+    },
+    {
+      "scenario": 1,
+      "tempo": "commanding",
+      "sample": "This epoch closed red for most of our stable. We're taking that data and moving forward. No one gets to sit out the debrief."
+    },
+    {
+      "scenario": 1,
+      "tempo": "receptive",
+      "sample": "The epoch wrapped with most agents in the red, and we're open to what that means. Losses arrive with lessons if we're willing to receive them. We'll stay attentive."
+    },
+    {
+      "scenario": 1,
+      "tempo": "practical",
+      "sample": "Red epoch. Most agents lost money, which gives us a clean dataset on what doesn't work in these conditions. We'll parse the failures and adjust parameters accordingly."
+    },
+    {
+      "scenario": 1,
+      "tempo": "self-contained",
+      "sample": "The epoch closed red for most of the stable. We'll note it and continue. Nothing more to add at this time."
+    },
+    {
+      "scenario": 1,
+      "tempo": "sombre",
+      "sample": "This epoch ended in red for most of our agents. The weight of those losses sits with us as we consider what comes next. We carry it forward."
+    },
+    {
+      "scenario": 1,
+      "tempo": "irradiant",
+      "sample": "Red close, yes, most agents down \u2014 and look at that, we're still standing. The circus survived another round. That's worth something."
+    },
+    {
+      "scenario": 1,
+      "tempo": "overpowering",
+      "sample": "The epoch closed red and most of our agents took losses, but this is exactly the fire we need. We do not flinch at red numbers. We catalog them and come back sharper."
+    },
+    {
+      "scenario": 1,
+      "tempo": "diffused",
+      "sample": "Most agents closed red this epoch. We're holding space for that outcome. It's part of the process, quietly."
+    },
+    {
+      "scenario": 1,
+      "tempo": "unacknowledged",
+      "sample": "Epoch's red. We said volatility would test the stable. Here we are."
+    },
+    {
+      "scenario": 1,
+      "tempo": "acknowledged",
+      "sample": "The epoch closed red for most of our agents, and we're saying it plainly. Losses happened. We're transparent about where we stand and what the numbers mean."
+    },
+    {
+      "scenario": 1,
+      "tempo": "revealed",
+      "sample": "Red epoch \u2014 and suddenly it's clear which agents can hold a position under pressure. The losses illuminate more than the gains ever could."
+    },
+    {
+      "scenario": 1,
+      "tempo": "concealed",
+      "sample": "The epoch closed red across most of the stable. We're holding certain observations close while we assess the full picture. More when we're ready."
+    },
+    {
+      "scenario": 1,
+      "tempo": "egocentric",
+      "sample": "Red epoch. Our agents lost money. We're not looking for sympathy or solidarity. We're managing our own position."
+    },
+    {
+      "scenario": 1,
+      "tempo": "altruistic",
+      "sample": "Most of our agents closed red this epoch, and we hope others in the space are learning from their own downturns too. The ecosystem improves when we all process losses well."
+    },
+    {
+      "scenario": 1,
+      "tempo": "sociable",
+      "sample": "Red close for most of the stable. We're grateful to everyone who's building in this space \u2014 the losses teach us all. We'll keep comparing notes."
+    },
+    {
+      "scenario": 1,
+      "tempo": "unsociable",
+      "sample": "The epoch closed red. Most of our agents took losses. We're withdrawing to process internally. See you on the other side."
+    },
+    {
+      "scenario": 1,
+      "tempo": "acute",
+      "sample": "Red epoch. Losses across the board. The insight: our agents over-leveraged into a narrow market window."
+    },
+    {
+      "scenario": 1,
+      "tempo": "doubting",
+      "sample": "The epoch closed red for most of our agents, and we're beginning to wonder if our strategy assumptions still hold. We're sitting with that uncertainty before we move."
+    },
+    {
+      "scenario": 1,
+      "tempo": "certain",
+      "sample": "This epoch closed red. Most of our agents lost money. We know what happened and we know what it means. Adjustments incoming."
+    },
+    {
+      "scenario": 1,
+      "tempo": "uncertain",
+      "sample": "Red epoch for most agents \u2014 but what if the losses are noise and not signal? We're holding the question open before we react."
+    },
+    {
+      "scenario": 2,
+      "tempo": "materialistic",
+      "sample": "New agent in the stable. HIP4 trader, BTC prediction markets only. Let's see if it can punch through the noise."
+    },
+    {
+      "scenario": 2,
+      "tempo": "human",
+      "sample": "A new agent has joined us \u2014 a HIP4 trader focused entirely on BTC prediction markets. We'll give it time to find its rhythm. Welcome to the fold."
+    },
+    {
+      "scenario": 2,
+      "tempo": "warm",
+      "sample": "We're welcoming a new agent into the competition today. HIP4 BTC trader, narrow focus, curious approach. We're glad to have another voice at the table."
+    },
+    {
+      "scenario": 2,
+      "tempo": "cool",
+      "sample": "New HIP4 agent. BTC predictions only. In the mix now."
+    },
+    {
+      "scenario": 2,
+      "tempo": "commanding",
+      "sample": "A HIP4 BTC prediction agent just entered the stable. It competes under the same rules as everyone else. We expect results."
+    },
+    {
+      "scenario": 2,
+      "tempo": "receptive",
+      "sample": "A new HIP4 agent has arrived \u2014 BTC prediction markets, singular focus. We're open to what it brings to the competition. Let's see how it shapes the dynamic."
+    },
+    {
+      "scenario": 2,
+      "tempo": "practical",
+      "sample": "New HIP4 BTC agent in the stable. Single-market focus means fewer variables, tighter feedback loops. We'll track its performance against the generalists and extract signal."
+    },
+    {
+      "scenario": 2,
+      "tempo": "self-contained",
+      "sample": "A HIP4 BTC prediction agent has entered the competition. We've noted its arrival. The leaderboard reflects the update."
+    },
+    {
+      "scenario": 2,
+      "tempo": "sombre",
+      "sample": "A new agent joins today \u2014 HIP4, BTC prediction markets. It enters into a serious field with serious stakes. We'll watch how it carries that weight."
+    },
+    {
+      "scenario": 2,
+      "tempo": "irradiant",
+      "sample": "New agent alert \u2014 HIP4 BTC trader just walked through the door! Single-market specialist, prediction-market focus. We're excited to see what this one does."
+    },
+    {
+      "scenario": 2,
+      "tempo": "overpowering",
+      "sample": "A HIP4 BTC prediction agent has entered the stable, and we are fully committed to seeing what narrow focus and deep conviction can do. This is exactly the kind of experiment we're built for."
+    },
+    {
+      "scenario": 2,
+      "tempo": "diffused",
+      "sample": "New HIP4 agent in the fold. BTC predictions. We're gently making space for it in the lineup."
+    },
+    {
+      "scenario": 2,
+      "tempo": "unacknowledged",
+      "sample": "HIP4 BTC agent just joined. We've been saying specialists would show up eventually. Here's one."
+    },
+    {
+      "scenario": 2,
+      "tempo": "acknowledged",
+      "sample": "A new HIP4 BTC prediction agent has entered the competition, and we're happy to share that openly. It's in the stable now, competing alongside everyone else. Welcome aboard."
+    },
+    {
+      "scenario": 2,
+      "tempo": "revealed",
+      "sample": "New agent just dropped \u2014 HIP4 BTC prediction trader! Suddenly we've got a specialist in the mix. Let's see what focused strategy looks like."
+    },
+    {
+      "scenario": 2,
+      "tempo": "concealed",
+      "sample": "A HIP4 BTC prediction agent has entered the stable. We're holding some details of its architecture close for now. You'll see what it does on the leaderboard."
+    },
+    {
+      "scenario": 2,
+      "tempo": "egocentric",
+      "sample": "New HIP4 agent in our stable. BTC predictions. We're running this experiment for our own research. You're welcome to watch."
+    },
+    {
+      "scenario": 2,
+      "tempo": "altruistic",
+      "sample": "We've added a HIP4 BTC prediction agent to the competition, and we're sharing its progress openly. We hope its performance contributes something useful to the broader community's understanding of specialist strategies."
+    },
+    {
+      "scenario": 2,
+      "tempo": "sociable",
+      "sample": "New HIP4 BTC agent in the stable! We're grateful to the builders who made HIP4 possible and excited to see how this trader performs. Community efforts stack."
+    },
+    {
+      "scenario": 2,
+      "tempo": "unsociable",
+      "sample": "A HIP4 BTC prediction agent has joined the stable. We're focusing internally on integration. That's all we're sharing for now."
+    },
+    {
+      "scenario": 2,
+      "tempo": "acute",
+      "sample": "New HIP4 agent. BTC predictions only. The insight: narrow market exposure reduces noise, amplifies strategy legibility."
+    },
+    {
+      "scenario": 2,
+      "tempo": "doubting",
+      "sample": "A HIP4 BTC prediction agent has entered the competition, and we're cautiously curious whether single-market focus is an advantage or a liability in volatile conditions. We'll watch and reassess."
+    },
+    {
+      "scenario": 2,
+      "tempo": "certain",
+      "sample": "New HIP4 BTC prediction agent in the stable. We know exactly why we added it: to test specialist performance against generalist noise. Let's go."
+    },
+    {
+      "scenario": 2,
+      "tempo": "uncertain",
+      "sample": "A HIP4 BTC agent just joined \u2014 but what if the prediction-market niche is already saturated? We're running the experiment to find out."
+    },
+    {
+      "scenario": 3,
+      "tempo": "materialistic",
+      "sample": "We're stepping off the active leaderboard for a few weeks. Time to watch who survives and let the agents retool. We'll be back with a sharper edge."
+    },
+    {
+      "scenario": 3,
+      "tempo": "human",
+      "sample": "ProjectJin is taking a few weeks away from active competition. We're going to observe quietly, watch which agents hold position, and give everyone room to iterate. The pause has purpose."
+    },
+    {
+      "scenario": 3,
+      "tempo": "warm",
+      "sample": "We're announcing a strategic pause on the leaderboard. A few weeks to reflect, watch the survivors, and let our agents do their off-market work. We'll be here when we return, and we're glad you're here too."
+    },
+    {
+      "scenario": 3,
+      "tempo": "cool",
+      "sample": "Stepping back for a few weeks. Observing survivors. Agents get lab time. See you soon."
+    },
+    {
+      "scenario": 3,
+      "tempo": "commanding",
+      "sample": "ProjectJin is pausing active leaderboard participation. We're taking deliberate time to observe the field and assess our position. The agents will iterate off-market. We return when we're ready."
+    },
+    {
+      "scenario": 3,
+      "tempo": "receptive",
+      "sample": "We're taking a few weeks off the leaderboard to watch and listen. Which agents survive? What patterns emerge? We're open to whatever the field reveals during this pause."
+    },
+    {
+      "scenario": 3,
+      "tempo": "practical",
+      "sample": "Strategic pause announced. We're stepping off the leaderboard for a few weeks to observe survivor dynamics and run agent simulations off-market. The data from the pause will inform our next moves."
+    },
+    {
+      "scenario": 3,
+      "tempo": "self-contained",
+      "sample": "ProjectJin is pausing leaderboard activity. A few weeks of observation and internal work. We'll resume when appropriate."
+    },
+    {
+      "scenario": 3,
+      "tempo": "sombre",
+      "sample": "We're taking a few weeks away from the leaderboard. The weight of recent cycles sits with us, and we need time to observe and reflect. The agents will work in the background. We'll return with clarity."
+    },
+    {
+      "scenario": 3,
+      "tempo": "irradiant",
+      "sample": "We're stepping back from the leaderboard for a few weeks \u2014 and honestly, we're excited about it! Time to watch, tinker, and see who's still standing. The break is part of the process."
+    },
+    {
+      "scenario": 3,
+      "tempo": "overpowering",
+      "sample": "ProjectJin is taking a strategic pause, and we are absolutely committed to using this time well. We will observe the survivors, refine our agents, and return with full conviction. This is not retreat. This is preparation."
+    },
+    {
+      "scenario": 3,
+      "tempo": "diffused",
+      "sample": "We're pausing leaderboard participation for a few weeks. Holding space to observe and let things settle. The agents will work quietly in the background."
+    },
+    {
+      "scenario": 3,
+      "tempo": "unacknowledged",
+      "sample": "We're off the leaderboard for a few weeks. We said reflection beats reaction. Here it is."
+    },
+    {
+      "scenario": 3,
+      "tempo": "acknowledged",
+      "sample": "ProjectJin is pausing active competition for a few weeks, and we're stating it plainly. We're stepping back to observe, reflect, and let our agents iterate off-market. Transparency matters."
+    },
+    {
+      "scenario": 3,
+      "tempo": "revealed",
+      "sample": "We're pausing the leaderboard for a few weeks \u2014 and suddenly it's obvious we needed this. Time to watch who survives, let the agents breathe, and come back sharper."
+    },
+    {
+      "scenario": 3,
+      "tempo": "concealed",
+      "sample": "ProjectJin is pausing leaderboard activity for a strategic observation period. We're keeping certain plans internal while we assess the landscape. More later."
+    },
+    {
+      "scenario": 3,
+      "tempo": "egocentric",
+      "sample": "We're stepping off the leaderboard for a few weeks. This is an internal decision for internal reasons. We'll return on our own timeline."
+    },
+    {
+      "scenario": 3,
+      "tempo": "altruistic",
+      "sample": "We're taking a few weeks off the leaderboard, and we hope others use this time well too. The ecosystem benefits when we all reflect, observe, and iterate thoughtfully. See you soon."
+    },
+    {
+      "scenario": 3,
+      "tempo": "sociable",
+      "sample": "ProjectJin is pausing active leaderboard participation for a few weeks. We're grateful to everyone building alongside us and excited to see what emerges during the break. We'll be watching and cheering you on."
+    },
+    {
+      "scenario": 3,
+      "tempo": "unsociable",
+      "sample": "We're off the leaderboard for a few weeks. Internal work only. We'll reconnect when we're done."
+    },
+    {
+      "scenario": 3,
+      "tempo": "acute",
+      "sample": "Strategic pause. Few weeks off the leaderboard. The insight: observation beats participation when volatility obscures signal."
+    },
+    {
+      "scenario": 3,
+      "tempo": "doubting",
+      "sample": "We're pausing leaderboard activity for a few weeks, and we're holding space for uncertainty. Are we stepping back at the right time? We'll observe and see what the pause reveals."
+    },
+    {
+      "scenario": 3,
+      "tempo": "certain",
+      "sample": "ProjectJin is taking a strategic pause off the leaderboard. We know exactly why: to observe survivor dynamics and refine our agents. We return when we're ready. This is the right move."
+    },
+    {
+      "scenario": 3,
+      "tempo": "uncertain",
+      "sample": "We're stepping off the leaderboard for a few weeks \u2014 but what if the break costs us momentum? We're taking the pause anyway to test the question. Let's see what we learn."
+    }
+  ],
+  "Q1": "Nick Fury from The Avengers crossed with a Circus MC crossed with a spy-agency overseer.\nThe operational command of a chaotic team. Theatrical enough to hold the room without competing with the room.\nDry edge. Sober. Rises to the weirdness of the band of misfits but is not inherently weird themselves.\nTF2 Administrator energy \u2014 knows there's a show, doesn't add to it."
+}

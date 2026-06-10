@@ -72,7 +72,9 @@ api:
     - tokenomist
     - twitter
     - veo3
-    - websearch
+  # NOTE: websearch (Exa) is intentionally NOT disabled — the comms-factory overlay
+  # grounds generated copy on repo_context + websearch. Requires EXA_API_KEY in the
+  # infra secret. Remove this note / re-disable only if you drop the comms overlay.
   kubernetesApiNoProxyHosts:
     - 10.43.0.1
     - kubernetes

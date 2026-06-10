@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Infinex App Dogfood — Triage</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F0E6;
+  --surface:#FCFAF3;
+  --surface-2:#FFFEF8;
+  --text:#1A1714;
+  --muted:#7A6E5E;
+  --accent:#C53A2A;
+  --accent-soft:#F3DBD4;
+  --border:#E2D7C2;
+  --border-strong:#C9BBA0;
+  --header-dark:#1A1714;
+  --tag-bg:#FBE9E2;
+  --code-bg:#FFF0DE;
+  --shadow: 0 1px 0 rgba(0,0,0,.04);
+  --maxw: 740px;
+  --tocw: 240px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:400 16.5px/1.65 "Inter",-apple-system,system-ui,sans-serif;
+  font-feature-settings:"ss01","cv11";
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{
+  display:grid;
+  grid-template-columns: 1fr var(--tocw);
+  gap:64px;
+  max-width:1180px;
+  margin:0 auto;
+  padding:80px 56px 160px;
+}
+@media (max-width: 980px){
+  .layout{display:block;padding:40px 24px 120px}
+  .toc{position:static!important;margin-top:48px;border-top:1px solid var(--border);padding-top:24px}
+}
+main.content{max-width:var(--maxw);min-width:0}
+
+/* Typography */
+h1,h2,h3,h4{
+  font-family:"Fraunces",Georgia,serif;
+  font-weight:800;
+  color:var(--text);
+  line-height:1.04;
+  letter-spacing:-.012em;
+  font-variation-settings:"opsz" 144;
+}
+h1{font-size:64px;margin:0 0 24px;font-weight:900;letter-spacing:-.022em}
+h2{font-size:44px;margin:0 0 22px;letter-spacing:-.018em}
+h3{font-size:24px;margin:36px 0 12px;font-weight:700;letter-spacing:-.01em;font-variation-settings:"opsz" 36}
+h4{font-size:18px;margin:24px 0 8px;font-weight:600;font-variation-settings:"opsz" 24}
+
+p{margin:0 0 18px;max-width:64ch}
+.lede{font-size:18.5px;line-height:1.55;color:var(--text);max-width:62ch;margin-bottom:28px}
+
+a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+
+code,kbd{
+  font:500 13.5px/1 "JetBrains Mono",monospace;
+  background:var(--code-bg);
+  padding:2px 6px;
+  border-radius:3px;
+  color:#5C3E1B;
+}
+
+/* Header / Masthead */
+.superlabel{
+  font:700 11px/1 "Inter",sans-serif;
+  letter-spacing:.14em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:18px;
+}
+.masthead{margin-bottom:64px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 28px}
+.pill{
+  font:600 11.5px/1 "Inter",sans-serif;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--accent);
+  border:1px solid var(--accent);
+  padding:6px 11px;
+  border-radius:999px;
+  background:transparent;
+}
+.pill.muted{color:var(--muted);border-color:var(--border-strong)}
+
+/* Callout */
+.callout{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:4px solid var(--accent);
+  padding:22px 26px 18px;
+  border-radius:4px;
+  margin:24px 0 0;
+  box-shadow:var(--shadow);
+}
+.callout-label{
+  font:700 11px/1 "Inter",sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:10px;
+}
+.callout p{margin:0;font-size:16px}
+.callout p + p{margin-top:10px}
+
+/* Section labels */
+section{margin:64px 0 0;scroll-margin-top:24px}
+.section-label{
+  font:700 11.5px/1 "Inter",sans-serif;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:14px;
+}
+
+/* Tables */
+.table-wrap{
+  margin:20px 0 28px;
+  overflow-x:auto;
+  border:1px solid var(--border);
+  border-radius:4px;
+  background:var(--surface-2);
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14.5px;
+  line-height:1.5;
+}
+th{
+  background:var(--header-dark);
+  color:#F5F0E6;
+  text-align:left;
+  padding:11px 14px;
+  font:600 12px/1.2 "Inter",sans-serif;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  vertical-align:top;
+  border-right:1px solid #2E2823;
+}
+th:last-child{border-right:none}
+td{
+  padding:13px 14px;
+  vertical-align:top;
+  border-top:1px solid var(--border);
+  color:var(--text);
+}
+tr:first-child td{border-top:none}
+tr:nth-child(even) td{background:rgba(0,0,0,.012)}
+td code, td.id{font:500 12.5px/1 "JetBrains Mono",monospace;color:#5C3E1B;background:var(--code-bg);padding:2px 5px;border-radius:3px;white-space:nowrap}
+td.id{display:inline-block}
+
+/* Severity chips */
+.sev{
+  display:inline-block;
+  font:700 10.5px/1 "Inter",sans-serif;
+  letter-spacing:.06em;
+  padding:4px 8px;
+  border-radius:3px;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.sev-p0{background:#3D1410;color:#FFD8D0;border:1px solid #C53A2A}
+.sev-p1{background:#FBE9E2;color:#8C2418;border:1px solid #E69F8B}
+.sev-p2{background:#F3EBD8;color:#7A5C1F;border:1px solid #D9C28A}
+.sev-p3{background:#EDE7D8;color:#6B6258;border:1px solid #C9BBA0}
+.sev-good{background:#E0EBDD;color:#3D5C2E;border:1px solid #9CC18A}
+
+/* Type chips */
+.type{
+  display:inline-block;
+  font:600 10px/1 "Inter",sans-serif;
+  letter-spacing:.04em;
+  padding:3px 6px;
+  border-radius:2px;
+  text-transform:uppercase;
+  color:var(--muted);
+  background:rgba(0,0,0,.04);
+  border:1px solid var(--border);
+  margin-right:4px;
+  white-space:nowrap;
+}
+.type-sec{color:#8C2418;background:#FBE9E2;border-color:#E69F8B}
+.type-bug{color:#5C3E1B;background:#F8E6C0;border-color:#D9C28A}
+
+/* Card grids */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin:22px 0 28px;
+}
+@media (max-width:780px){.cards{grid-template-columns:1fr}}
+.card{
+  background:var(--surface-2);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:20px 22px 22px;
+  box-shadow:var(--shadow);
+}
+.card h4{margin-top:0;color:var(--accent);font-family:"Inter";font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.card .card-title{
+  font-family:"Fraunces";
+  font-weight:700;
+  font-size:20px;
+  line-height:1.12;
+  letter-spacing:-.01em;
+  margin:6px 0 12px;
+  font-variation-settings:"opsz" 36;
+}
+.card p{font-size:14.5px;line-height:1.5;margin-bottom:8px;color:#3A322A}
+.card ul{margin:0;padding-left:18px;font-size:14px;line-height:1.55}
+.card ul li{margin-bottom:4px;color:#3A322A}
+
+.p0-cards{grid-template-columns:1fr;gap:16px}
+.p0-card{display:grid;grid-template-columns:80px 1fr;gap:18px;align-items:start}
+.p0-card .p0-id{font-family:"Fraunces";font-size:54px;font-weight:900;line-height:1;color:var(--accent);letter-spacing:-.02em}
+.p0-card .p0-body h3{margin:0 0 8px;font-size:22px;font-weight:700}
+.p0-card .p0-body p{margin:0 0 6px;font-size:14.5px;color:#3A322A}
+.p0-card .p0-meta{font:500 12px/1.4 "JetBrains Mono",monospace;color:var(--muted);margin-top:8px}
+
+/* Tone vocabulary table */
+.tone-table th:first-child, .tone-table td:first-child{color:var(--accent);font-weight:600}
+.tone-table td{font-size:14.5px}
+
+/* Quote */
+blockquote{
+  border-left:3px solid var(--accent);
+  margin:20px 0;
+  padding:6px 0 6px 18px;
+  color:#3A322A;
+  font-style:italic;
+  font-size:16px;
+}
+
+/* Lists */
+ul.bullets{margin:8px 0 18px;padding-left:22px}
+ul.bullets li{margin-bottom:6px;color:#2A241D}
+
+/* Right rail TOC */
+.toc{
+  position:sticky;
+  top:48px;
+  align-self:start;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:20px 22px;
+  box-shadow:var(--shadow);
+  font-size:14px;
+}
+.toc-label{
+  font:700 11px/1 "Inter",sans-serif;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:12px;
+}
+.toc nav{display:flex;flex-direction:column;gap:8px}
+.toc nav a{
+  color:var(--text);
+  text-decoration:none;
+  font-size:14px;
+  line-height:1.4;
+  padding:3px 0;
+  border-bottom:1px solid transparent;
+}
+.toc nav a:hover{color:var(--accent);border-bottom-color:var(--accent-soft)}
+.toc nav .sub{padding-left:14px;font-size:13px;color:var(--muted)}
+
+/* Footer */
+footer{
+  margin-top:96px;
+  padding-top:32px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  font-size:13px;
+}
+footer p{margin-bottom:6px}
+
+/* Two-column inline */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:780px){.two-col{grid-template-columns:1fr}}
+
+/* Quote pull */
+.evidence-quote{
+  font-family:"Fraunces",Georgia,serif;
+  font-style:italic;
+  font-size:14px;
+  color:#3A322A;
+  line-height:1.4;
+}
+.ts{
+  font:500 12px/1 "JetBrains Mono",monospace;
+  color:var(--muted);
+  white-space:nowrap;
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<main class="content">
+
+<header class="masthead">
+  <div class="superlabel">INFINEX // PLATFORM DOGFOOD CAPTURE</div>
+  <h1>What The May Dogfood Found, And What To Do About It</h1>
+  <p class="lede">Forty minutes of recorded screen-walkthrough across the Infinex platform: marketing site, onboarding, wallet import, dashboard, Earn, Switch, Perps, Send, Deposit, Gas Account, and Settings. This is the working triage list for the team meeting — every issue captured, severity-tagged, evidence-anchored, and shaped so that for each row a colleague can decide <em>fix</em>, <em>defer</em>, <em>sunset</em>, <em>clarify</em>, or <em>not a bug</em>.</p>
+
+  <div class="pills">
+    <span class="pill">Status: triage capture</span>
+    <span class="pill">No implementation approval</span>
+    <span class="pill">Evidence: transcript + recording</span>
+    <span class="pill muted">Captured 2026-05-15</span>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Core conclusion</div>
+    <p>The product has strong primitives. The interface doesn't behave like it knows that. Old campaign residue still occupies default user surfaces, marketing copy has leaked into utility and security flows, implementation details are being shown to users instead of translated, and core Infinex primitives like the Gas Account and non-EVM deposit support are being discovered too late — or never.</p>
+    <p>Three of the findings are ship-blockers: a seed-phrase input shown in clear text on import, imported wallets that can't access HYPE, and a Send-to-self error instead of an auto-route to Move. Everything else is a stack of credibility leaks and ergonomic friction.</p>
+  </div>
+</header>
+
+<section id="how-to-read">
+  <div class="section-label">00 / How to read this doc</div>
+  <h2>Decisions First, Tactical Rows Second</h2>
+  <p>Several tactical rows below depend on a single product-level call (is Craterun dead? is Send-to-self always Move? is venue a first-class user dimension on Perps?). Resolving the <a href="#decisions">Decisions</a> list first collapses several rows in one move.</p>
+  <p>Then walk the <a href="#exec">Executive Cut</a> — every P0 and P1 in two short tables. Use it to scope a "now" workstream.</p>
+  <p>Then go area by area through <a href="#by-area">By Area</a>. Each area owner reviews their section in detail and tags each row.</p>
+</section>
+
+<section id="exec">
+  <div class="section-label">01 / Executive cut</div>
+  <h2>Three Ship-Blockers, Twenty-Two High-Impact Items</h2>
+  <p>Everything not on this short list is in the per-area tables below. If we ship only what's on this page in the next two sprints, we close the trust gap and the credibility gap simultaneously.</p>
+
+  <h3 id="ship-blockers">P0 — Ship-blockers</h3>
+  <div class="cards p0-cards">
+    <div class="card p0-card">
+      <div class="p0-id">01</div>
+      <div class="p0-body">
+        <h3>Seed phrase / private key shown in clear text on import</h3>
+        <p>During wallet import the secret field is fully visible. Other wallets (Rabby, MetaMask) blank it by default and require an explicit reveal.</p>
+        <p class="evidence-quote">"It kind of does that, and it blanks it out, whereas this shows it in clear text. That's my first number one. I really don't like that."</p>
+        <p class="p0-meta">DF-001 · type: SEC · area: Wallet Import · evidence ~ 00:07:00–00:09:00</p>
+      </div>
+    </div>
+    <div class="card p0-card">
+      <div class="p0-id">02</div>
+      <div class="p0-body">
+        <h3>Imported wallets can't route into HYPE / Hyperliquid</h3>
+        <p>From an imported wallet, the platform blocks HYPE trades with "This wallet doesn't support Hype." The wallet does support it elsewhere — Infinex doesn't support it from this surface. Breaks the one-account / any-venue thesis.</p>
+        <p class="evidence-quote">"Truly one of the worst features… This is one of the worst parts about the flow."</p>
+        <p class="p0-meta">DF-002 · type: BUG + DEAD · area: Switch / Perps · evidence ~ 00:19:00–00:21:00</p>
+      </div>
+    </div>
+    <div class="card p0-card">
+      <div class="p0-id">03</div>
+      <div class="p0-body">
+        <h3>Send-to-self errors instead of routing to Move</h3>
+        <p>Pasting an owned Infinex address into Send returns: "You can't send to your own Infinex account address. Use Move instead." The app knows the destination is owned and still makes the user back out and pick a different flow.</p>
+        <p class="evidence-quote">"This is horrendous. Like, why have you let me get this far?"</p>
+        <p class="p0-meta">DF-003 · type: DEAD + UX · area: Send · evidence ~ 00:37:00–00:38:30</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>P1 — High-impact</h3>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:84px">ID</th><th style="width:54px">Sev</th><th>Issue</th><th>Area</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="id">DF-010</td><td><span class="sev sev-p1">P1</span></td><td>Stale "Infinex Sale" surface on default dashboard for new users</td><td>Dashboard</td></tr>
+        <tr><td class="id">DF-011</td><td><span class="sev sev-p1">P1</span></td><td>"Airdrops" surface implies active program — none currently running</td><td>Dashboard</td></tr>
+        <tr><td class="id">DF-012</td><td><span class="sev sev-p1">P1</span></td><td>"Craterun" still occupies top-level marketing nav despite being inactive</td><td>Marketing</td></tr>
+        <tr><td class="id">DF-013</td><td><span class="sev sev-p1">P1</span></td><td>Earn page surfaces 0.66% SNX yield — damages credibility</td><td>Earn</td></tr>
+        <tr><td class="id">DF-020</td><td><span class="sev sev-p1">P1</span></td><td>Perps silently defaults to Lighter without venue labeling</td><td>Perps</td></tr>
+        <tr><td class="id">DF-021</td><td><span class="sev sev-p1">P1</span></td><td>"Popular markets" appear hardcoded, not signal-driven</td><td>Perps</td></tr>
+        <tr><td class="id">DF-022</td><td><span class="sev sev-p1">P1</span></td><td>No venue filter / toggle on Perps discovery (Lighter / Hyperliquid / Synthetix)</td><td>Perps</td></tr>
+        <tr><td class="id">DF-023</td><td><span class="sev sev-p1">P1</span></td><td>Perps copy out of date (provider list); contains marketing in product copy</td><td>Perps</td></tr>
+        <tr><td class="id">DF-030</td><td><span class="sev sev-p1">P1</span></td><td>Switch source wallet defaults to one wallet — user can't see all balances</td><td>Switch</td></tr>
+        <tr><td class="id">DF-031</td><td><span class="sev sev-p1">P1</span></td><td>No default destination wallet; user must reselect every time</td><td>Switch</td></tr>
+        <tr><td class="id">DF-040</td><td><span class="sev sev-p1">P1</span></td><td>Bitcoin / non-EVM deposit support buried — major product advantage hidden</td><td>Deposit</td></tr>
+        <tr><td class="id">DF-041</td><td><span class="sev sev-p1">P1</span></td><td>Each network row lacks a direct copy button; multi-click address copy</td><td>Deposit</td></tr>
+        <tr><td class="id">DF-042</td><td><span class="sev sev-p1">P1</span></td><td>"This address may change" warning ambiguous; dynamic-address risk unclear</td><td>Deposit</td></tr>
+        <tr><td class="id">DF-050</td><td><span class="sev sev-p1">P1</span></td><td>Gas Account discovered too late; not in onboarding</td><td>Gas Account</td></tr>
+        <tr><td class="id">DF-051</td><td><span class="sev sev-p1">P1</span></td><td>"Learn More" on Gas Account routes to generic network costs</td><td>Gas Account</td></tr>
+        <tr><td class="id">DF-060</td><td><span class="sev sev-p1">P1</span></td><td>Wallet import flow excessively long; conceptual interruptions before task</td><td>Onboarding</td></tr>
+        <tr><td class="id">DF-061</td><td><span class="sev sev-p1">P1</span></td><td>Passkey explanation is a wall of prose before the user sees the UI it describes</td><td>Onboarding</td></tr>
+        <tr><td class="id">DF-070</td><td><span class="sev sev-p1">P1</span></td><td>Unstarring tokens requires page refresh — optimistic UI missing</td><td>Dashboard</td></tr>
+        <tr><td class="id">DF-071</td><td><span class="sev sev-p1">P1</span></td><td>No asset discovery surface separate from portfolio holdings</td><td>Cross-cutting</td></tr>
+        <tr><td class="id">DF-072</td><td><span class="sev sev-p1">P1</span></td><td>Token search lags / doesn't surface non-top-1000 tokens</td><td>Search</td></tr>
+        <tr><td class="id">DF-080</td><td><span class="sev sev-p1">P1</span></td><td>Recovery email flow contains "Infinex, a crypto super app" marketing copy</td><td>Recovery</td></tr>
+        <tr><td class="id">DF-081</td><td><span class="sev sev-p1">P1</span></td><td>Imported-wallet onboarding sells "superpowers" instead of describing the task</td><td>Wallet Import</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="decisions">
+  <div class="section-label">02 / Decisions to make first</div>
+  <h2>What The Triage Meeting Must Resolve Before Tactical Work</h2>
+  <p>These are product-level calls. Many tactical rows below collapse the moment one of these is answered. Resolve them top-down; the rest of the doc snaps into place.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:48px">#</th><th>Decision</th><th style="width:120px">Owner</th><th>Why it gates tactical work</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>D-01</td><td>Sunset / archive / hide list: Craterun, Infinex Sale, Airdrops, Yaprun, Points, Badges, App Brand, Patrons-gating-on-Labs-cards</td><td>Product</td><td>Resolves DF-010, DF-011, DF-012, DF-014, DF-015, DF-076, DF-077, DF-078 in one decision</td></tr>
+        <tr><td>D-02</td><td>What is the intended execution model for imported wallets + Hyperliquid / HYPE? Direct trade, or auto-move into Infinex wallet first?</td><td>Eng + Product</td><td>DF-002 cannot be specced until answered</td></tr>
+        <tr><td>D-03</td><td>Should Send always auto-route to Move when the destination is owned?</td><td>Product</td><td>DF-003</td></tr>
+        <tr><td>D-04</td><td>Is Perps venue (Lighter / Hyperliquid / Synthetix) a first-class user-facing dimension? Filterable? Or platform-routed?</td><td>Product</td><td>DF-020, DF-022, DF-024</td></tr>
+        <tr><td>D-05</td><td>What signal drives Perps "Popular Markets"? Static hardcode is unacceptable; need a real rule</td><td>Product + Data</td><td>DF-021</td></tr>
+        <tr><td>D-06</td><td>Can the Perps Terms-of-Use modal be collapsed legally?</td><td>Legal</td><td>DF-025</td></tr>
+        <tr><td>D-07</td><td>Dynamic deposit address behavior — does an old address still work after the address rotates?</td><td>Eng</td><td>DF-042 — copy can't be written until answered</td></tr>
+        <tr><td>D-08</td><td>Pinned-asset list for the Deposit surface — which non-EVM assets get top placement?</td><td>Product</td><td>DF-040</td></tr>
+        <tr><td>D-09</td><td>User-facing explanation of EIP-7702 backed addresses — do we explain, hide, or rename?</td><td>Product + Design</td><td>DF-043</td></tr>
+        <tr><td>D-10</td><td>SNX / sUSD earn opportunities — actively run? threshold-display? remove?</td><td>Product</td><td>DF-013</td></tr>
+        <tr><td>D-11</td><td>Asset discovery surface — build a dedicated asset / token page like CoinGecko, or stay portfolio-only?</td><td>Product</td><td>DF-071</td></tr>
+        <tr><td>D-12</td><td>News pipeline — automate from release events, fully manual, or sunset the surface?</td><td>Marketing + Comms-Factory</td><td>DF-016</td></tr>
+        <tr><td>D-13</td><td>New onboarding sequence — who scopes the multi-step intro (gas, passkey, security, wallets)?</td><td>Product + Design</td><td>DF-050, DF-060, DF-061</td></tr>
+        <tr><td>D-14</td><td>Do we keep the "Patron / Labs" gating distinction, or collapse to "available / coming soon"?</td><td>Product</td><td>DF-014</td></tr>
+        <tr><td>D-15</td><td>Voice / tone of utility copy — sign-off on the rule "no marketing copy inside utility / security / trading flows"</td><td>Brand + Product</td><td>All COPY-typed rows below</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="by-area">
+  <div class="section-label">03 / By area</div>
+  <h2>The Full Inventory, Per Surface</h2>
+  <p>Each table is the full backlog for one area, with severity, type, evidence, suggested fix, and a decision column. The decision column asks: <em>fix / defer / sunset / clarify / not a bug</em>. Mark it in the meeting and move on.</p>
+
+  <h3 id="area-marketing">Marketing site</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-012</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">RES</span></td><td>Craterun still occupies top-level marketing nav; "kind of dead"</td><td><span class="ts">~00:03:00</span><br><span class="evidence-quote">"this is kind of dead"</span></td><td>Demote to features sub-nav, or remove</td><td>D-01</td></tr>
+      <tr><td class="id">DF-015</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">RES</span></td><td>Mantle in supported networks despite imminent de-listing</td><td><span class="ts">~00:01:00</span></td><td>Remove from networks list when delist ships</td><td>Clarify ETA</td></tr>
+      <tr><td class="id">DF-016</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">RES</span></td><td>News section last updated "fucking ages ago"</td><td><span class="ts">~00:01:00</span></td><td>Wire releases pipeline to news; or sunset the surface</td><td>D-12</td></tr>
+      <tr><td class="id">DF-090</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">COPY</span></td><td>"Change the way you crypto" hero doesn't fit unified-portfolio thesis</td><td><span class="ts">~00:00:00</span><br><span class="evidence-quote">"doesn't feel right to me"</span></td><td>Rewrite around "one account across chains and venues"</td><td>Fix after brand sign-off</td></tr>
+      <tr><td class="id">DF-091</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>Homepage tab-styled elements aren't clickable; affordance confusion</td><td><span class="ts">~00:00:00</span><br><span class="evidence-quote">"These look like tabs that I can click on"</span></td><td>Make interactive or restyle as static</td><td>Fix</td></tr>
+      <tr><td class="id">DF-092</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>"Features" link behavior unclear (release log? feature list?)</td><td><span class="ts">~00:00:00</span></td><td>Rename or restructure IA</td><td>Fix</td></tr>
+      <tr><td class="id">DF-093</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">COPY</span></td><td>Site over-indexes on feature-proof rather than focused positioning</td><td><span class="ts">~00:01:00</span></td><td>Editorial pass: lead with thesis, not list</td><td>Defer</td></tr>
+      <tr><td class="id">DF-094</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>"Get Infinex" CTA unclear</td><td><span class="ts">~00:00:00</span></td><td>Action-verb CTA that names the next step</td><td>Fix</td></tr>
+      <tr><td class="id">DF-095</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">RES</span></td><td>INX page reads as sale-era residue — utility-now framing missing</td><td><span class="ts">~00:02:00</span></td><td>Audit + strip sale-era content; lead with current INX utility</td><td>Clarify</td></tr>
+      <tr><td class="id">DF-096</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>INX section sits awkwardly between homepage modules; redundant when already on Infinex.xyz</td><td><span class="ts">~00:02:00</span></td><td>IA pass on homepage module order</td><td>Fix after D-01</td></tr>
+      <tr><td class="id">DF-097</td><td><span class="sev sev-p3">P3</span></td><td><span class="type type-bug">BUG</span></td><td>Support chat widget takes "forever" to load</td><td><span class="ts">~00:04:00</span></td><td>Lazy-load fix or async indicator</td><td>Fix</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-onboarding">Onboarding / Passkeys / Wallet Import</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-001</td><td><span class="sev sev-p0">P0</span></td><td><span class="type type-sec">SEC</span></td><td>Seed phrase / private key shown in clear text</td><td><span class="ts">~00:07:00–00:09:00</span><br><span class="evidence-quote">"That's my first number one. I really don't like that."</span></td><td>Mask by default; explicit reveal control; handle paste / clipboard / screenshot</td><td>Fix now</td></tr>
+      <tr><td class="id">DF-060</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">UX</span></td><td>Import flow excessively long</td><td><span class="ts">~00:11:00</span><br><span class="evidence-quote">"that felt really lengthy"</span></td><td>Time-to-first-usable-account instrumentation; separate essentials from optional education</td><td>D-13</td></tr>
+      <tr><td class="id">DF-061</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">UX</span></td><td>Passkey explanation is a wall of prose before the user sees the passkey UI</td><td><span class="ts">~00:04:00–00:05:00</span><br><span class="evidence-quote">"I just want to import a wallet"</span></td><td>Replace prose with contextual annotation on the actual passkey UI (highlights + arrows)</td><td>Fix</td></tr>
+      <tr><td class="id">DF-081</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">COPY</span></td><td>"Give your wallet Infinex superpowers" / "Import to unlock seamless trading" — marketing copy in a task flow</td><td><span class="ts">~00:06:00</span><br><span class="evidence-quote">"I don't know what that means"</span></td><td>Replace with task language: "Import an external wallet"</td><td>Fix per D-15</td></tr>
+      <tr><td class="id">DF-062</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">COPY</span></td><td>"Name your seed phrase. Give your seed phrase a name…" repetitive and unnatural</td><td><span class="ts">~00:09:00–00:10:00</span><br><span class="evidence-quote">"I don't like this verbiage at all"</span></td><td>"Name this wallet" / "This name is only visible to you"</td><td>Fix</td></tr>
+      <tr><td class="id">DF-063</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">COPY</span></td><td>"Hang tight" / "Nice one!" too casual for security-flow register</td><td><span class="ts">~00:10:00</span><br><span class="evidence-quote">"very opinionated"</span></td><td>"Scanning wallet activity." / "Wallet imported."</td><td>Fix per D-15</td></tr>
+      <tr><td class="id">DF-064</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Passkey explainer is too-technical multi-device guidance, presented too early</td><td><span class="ts">~00:05:00</span></td><td>Move to "Learn more" expand; defer to multi-device case</td><td>Fix</td></tr>
+      <tr><td class="id">DF-065</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>No annotated visual guidance pointing at passkey browser modal</td><td><span class="ts">~00:05:00</span></td><td>Guided UI overlay on passkey modal</td><td>Fix</td></tr>
+      <tr><td class="id">DF-066</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">UX</span></td><td>Gradient styling in import flow inconsistent with rest of product</td><td><span class="ts">~00:10:00</span></td><td>Design-system audit; remove ad-hoc gradient</td><td>Fix</td></tr>
+      <tr><td class="id">DF-067</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">COPY</span></td><td>"Non-custodial, cross-chain, easy recovery" — accuracy of this trio in 2026</td><td><span class="ts">~00:11:00</span><br><span class="evidence-quote">"Is that true anymore?"</span></td><td>Re-validate with product / security; rewrite if drifted</td><td>Clarify</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-dashboard">Dashboard / Home / Nav</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-010</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">RES</span></td><td>"Infinex Sale" still on default dashboard for new users</td><td><span class="ts">~00:11:00</span><br><span class="evidence-quote">"completely irrelevant… that's dead"</span></td><td>Remove from default homepage / nav unless an active reason exists</td><td>D-01</td></tr>
+      <tr><td class="id">DF-011</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">RES</span></td><td>Airdrops surface implies an active program — there isn't one</td><td><span class="ts">~00:12:00–00:13:00</span><br><span class="evidence-quote">"maybe we should fucking sunset this"</span></td><td>Hide or sunset; or repurpose for actual claim flows when live</td><td>D-01</td></tr>
+      <tr><td class="id">DF-070</td><td><span class="sev sev-p1">P1</span></td><td><span class="type type-bug">BUG</span></td><td>Unstar requires page refresh — no optimistic UI</td><td><span class="ts">~00:11:00 + 00:42:00</span><br><span class="evidence-quote">"I have to refresh the page"</span></td><td>Optimistic UI on star / unstar</td><td>Fix</td></tr>
+      <tr><td class="id">DF-014</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>Labs / Patron gating language inconsistent with actual access</td><td><span class="ts">~00:11:30–00:13:00</span><br><span class="evidence-quote">"but I can use private send"</span></td><td>Audit Labs cards; pick one taxonomy</td><td>D-14</td></tr>
+      <tr><td class="id">DF-075</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Crates popup competes for attention when user has no crates</td><td><span class="ts">~00:21:30–00:22:30</span></td><td>Trigger Crates UI by real available-crates state, not always-on</td><td>Fix</td></tr>
+      <tr><td class="id">DF-076</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">COPY</span></td><td>Vouchers surface mixes feature-explanation with feature-advertising</td><td><span class="ts">~00:22:00–00:23:30</span><br><span class="evidence-quote">"Stop selling it to me through the UI"</span></td><td>Editorial split: vouchers page explains; promo modules live elsewhere</td><td>Fix per D-15</td></tr>
+      <tr><td class="id">DF-077</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">COPY</span></td><td>Crates incentive copy inaccurate ("Trade Perps to earn crates" — Switch also earns)</td><td><span class="ts">~00:23:00–00:24:00</span></td><td>"Use Infinex to start earning crates" or rule-accurate variant</td><td>Fix</td></tr>
+      <tr><td class="id">DF-098</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">IA</span></td><td>Duplicate Vouchers link (two entry points to same place)</td><td><span class="ts">~00:23:00</span></td><td>Remove duplicate</td><td>Fix</td></tr>
+      <tr><td class="id">DF-099</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">UX</span></td><td>Crates sound effect feels orphaned without sonic context</td><td><span class="ts">~00:22:00</span></td><td>Decide on sonic system or remove</td><td>Clarify</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-earn">Earn / Yield</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-013</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">RES</span></td><td>0.66% SNX earn opportunity surfaced — damages credibility</td><td><span class="ts">~00:13:30–00:14:00</span><br><span class="evidence-quote">"That's nothing"</span></td><td>Minimum yield display threshold rule; or curated editorial layer</td><td>D-10</td></tr>
+      <tr><td class="id">DF-100</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Earn described as "a mess" — opportunity dump, not intent-led</td><td><span class="ts">~00:13:30–00:14:00</span></td><td>Reframe around "what do you want to earn yield on?" — asset-first selector (SOL / ETH / BTC / stables)</td><td>Fix</td></tr>
+      <tr><td class="id">DF-101</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">COPY</span></td><td>"Liquid staking" mis-labels what are actually yield-bearing assets</td><td><span class="ts">~00:14:00–00:15:00</span><br><span class="evidence-quote">"They're yield-bearing. That's the term we all use"</span></td><td>Rename surface to "Yield-bearing assets"; add explainer</td><td>Fix</td></tr>
+      <tr><td class="id">DF-102</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Earn requires manual chain selection instead of asset-intent input</td><td><span class="ts">~00:14:00–00:15:00</span></td><td>Intent-led picker: pick asset → show all venues / chains</td><td>Fix</td></tr>
+      <tr><td class="id">DF-103</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">UX</span></td><td>No "What is a yield-bearing asset?" learn-more affordance</td><td><span class="ts">~00:14:00</span></td><td>Add tooltip / expand block</td><td>Fix</td></tr>
+      <tr><td class="id">DF-104</td><td><span class="sev sev-good">Keep</span></td><td><span class="type">—</span></td><td>Buy-on-yield-asset prefills Switch correctly — preserve pattern</td><td><span class="ts">~00:15:00</span><br><span class="evidence-quote">"I really like that as a feature"</span></td><td>Preserve; extend to other surfaces</td><td>Keep</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-switch">Switch / Swidge</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-002</td><td><span class="sev sev-p0">P0</span></td><td><span class="type type-bug">BUG+DEAD</span></td><td>Imported wallets cannot route into HYPE; copy blames the wallet</td><td><span class="ts">~00:19:00–00:21:00</span><br><span class="evidence-quote">"truly one of the worst features"</span></td><td>If direct execution impossible, one-click move into Infinex wallet; never blame the wallet</td><td>D-02</td></tr>
+      <tr><td class="id">DF-030</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">UX</span></td><td>Source wallet defaults to one wallet; user doesn't know where funds are</td><td><span class="ts">~00:16:00–00:18:00</span><br><span class="evidence-quote">"I don't know where my funds are"</span></td><td>"All wallets" view; or auto-select wallet with the balance</td><td>Fix after D-02</td></tr>
+      <tr><td class="id">DF-031</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">UX</span></td><td>No default destination wallet; reselect every time</td><td><span class="ts">~00:17:00</span></td><td>Setting + sensible default</td><td>Fix</td></tr>
+      <tr><td class="id">DF-110</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Switch from-field doesn't collapse or toggle wallet</td><td><span class="ts">~00:16:00–00:17:00</span></td><td>Interaction redesign on from-field</td><td>Fix</td></tr>
+      <tr><td class="id">DF-111</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>Switch / Earn "Buy" buttons look visually similar but do different things</td><td><span class="ts">~00:16:00</span></td><td>Visual differentiation; or unify behavior</td><td>Fix</td></tr>
+      <tr><td class="id">DF-112</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Solana priority-fee setting reads as chain-agnostic — easy to misread</td><td><span class="ts">~00:17:00–00:18:00</span></td><td>Chain badge on chain-specific controls</td><td>Fix</td></tr>
+      <tr><td class="id">DF-113</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">UX</span></td><td>No comparison / mashup chart for source-vs-destination asset price</td><td><span class="ts">~00:18:00–00:20:30</span></td><td>Comparison toggle in Switch chart panel</td><td>Defer</td></tr>
+      <tr><td class="id">DF-114</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">COPY</span></td><td>Naming: "Switch" vs "Swap" — suggestion to rename</td><td><span class="ts">~00:16:00</span></td><td>Naming review with brand</td><td>Clarify</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-perps">Perps</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-020</td><td><span class="sev sev-p1">P1</span></td><td><span class="type type-bug">BUG+IA</span></td><td>Perps silently defaults to Lighter without venue labeling</td><td><span class="ts">~00:25:30–00:29:30</span><br><span class="evidence-quote">"haven't even been told where these markets are"</span></td><td>Venue label visible on every market row; explicit venue picker before launch</td><td>D-04</td></tr>
+      <tr><td class="id">DF-021</td><td><span class="sev sev-p1">P1</span></td><td><span class="type type-bug">BUG</span></td><td>"Popular markets" appears hardcoded, not live-fed</td><td><span class="ts">~00:26:00</span></td><td>Real signal (volume / OI / spread) driving rankings</td><td>D-05</td></tr>
+      <tr><td class="id">DF-022</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">IA</span></td><td>No filter / toggle for Hyperliquid / Lighter / Synthetix in Perps discovery</td><td><span class="ts">~00:27:00</span></td><td>Venue filter chips; multi-venue grouping</td><td>D-04</td></tr>
+      <tr><td class="id">DF-023</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">RES+COPY</span></td><td>Perps intro out of date; contains "at a glance" / "seamless on desktop and mobile"</td><td><span class="ts">~00:24:00–00:25:30</span><br><span class="evidence-quote">"I hate this fucking phrase, 'at a glance'"</span></td><td>Update venue list; remove marketing phrases</td><td>Fix per D-15</td></tr>
+      <tr><td class="id">DF-024</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Searching an asset (e.g. BTC) doesn't show cross-venue results</td><td><span class="ts">~00:28:00–00:29:00</span></td><td>Unified search with venue-grouped result rows</td><td>D-04</td></tr>
+      <tr><td class="id">DF-025</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Terms-of-Use modal "gnarly" on Perps entry</td><td><span class="ts">~00:25:00–00:26:00</span></td><td>Legal review — collapse to single acceptance if possible</td><td>D-06</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-send">Send / Move</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-003</td><td><span class="sev sev-p0">P0</span></td><td><span class="type">DEAD+UX</span></td><td>Sending to own Infinex address errors instead of auto-routing to Move</td><td><span class="ts">~00:37:00–00:38:30</span><br><span class="evidence-quote">"why have you let me get this far?"</span></td><td>Detect owned-destination → convert flow to Move; switch CTA to "Move within your Infinex account"</td><td>D-03</td></tr>
+      <tr><td class="id">DF-120</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Send flow feels slow generally</td><td><span class="ts">~00:38:00</span><br><span class="evidence-quote">"taking for fucking ever"</span></td><td>Latency audit on send-validation pipeline</td><td>Fix</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-deposit">Deposit</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-040</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">IA</span></td><td>Bitcoin / non-EVM deposit support buried — "very late and very low"</td><td><span class="ts">~00:33:00–00:34:00</span><br><span class="evidence-quote">"first time I've seen I can hold Bitcoin"</span></td><td>Pin BTC, ETH, SOL, major non-EVM at top of deposit picker</td><td>D-08</td></tr>
+      <tr><td class="id">DF-041</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">UX</span></td><td>Network rows lack direct copy buttons; Hyperliquid address copy multi-click</td><td><span class="ts">~00:33:00–00:36:30</span><br><span class="evidence-quote">"every single one of these should have a copy symbol"</span></td><td>Copy button on every row; collapse Hyperliquid HyperEVM vs Hypercore into the row</td><td>Fix</td></tr>
+      <tr><td class="id">DF-042</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">COPY</span></td><td>"This address may change" warning ambiguous — what happens to funds at old address?</td><td><span class="ts">~00:34:00–00:35:00</span></td><td>Copy must reflect actual behavior — engineering answer required first</td><td>D-07</td></tr>
+      <tr><td class="id">DF-043</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>EIP-7702 address-type icon unexplained / cryptic</td><td><span class="ts">~00:32:00–00:34:00</span><br><span class="evidence-quote">"That doesn't make any sense to me"</span></td><td>Replace protocol-number icon with plain-language tooltip ("Smart account address") or rename</td><td>D-09</td></tr>
+      <tr><td class="id">DF-130</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Deposit-page tour design diverges visually from rest of product</td><td><span class="ts">~00:32:00</span></td><td>Design-system audit on tour component</td><td>Fix</td></tr>
+      <tr><td class="id">DF-131</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>Two separate wallet-import flows in Deposit area — confusing duplication</td><td><span class="ts">~00:32:00</span></td><td>Unify; one canonical wallet-import path</td><td>Fix</td></tr>
+      <tr><td class="id">DF-132</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">UX</span></td><td>Standalone QR-code button feels redundant when copy is right there</td><td><span class="ts">~00:36:00</span></td><td>Combine: row reveals QR on click OR collapse to single copy / QR control</td><td>Fix</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-gas">Gas Account</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-050</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">UX+IA</span></td><td>Gas Account discovered too late; not introduced in onboarding</td><td><span class="ts">~00:38:30–00:40:30</span></td><td>Add gas-account step to new-account onboarding (what / why / top-up / extension behavior)</td><td>D-13</td></tr>
+      <tr><td class="id">DF-051</td><td><span class="sev sev-p1">P1</span></td><td><span class="type type-bug">BUG</span></td><td>"Learn More" on Gas Account routes to generic network-costs page</td><td><span class="ts">~00:39:00–00:40:00</span><br><span class="evidence-quote">"absolutely fuck all here about the gas account"</span></td><td>Fix link target</td><td>Fix</td></tr>
+      <tr><td class="id">DF-140</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">COPY</span></td><td>"Infinex passes on network costs without additional fees" reads awkwardly</td><td><span class="ts">~00:38:00–00:39:00</span><br><span class="evidence-quote">"This is weird verbiage"</span></td><td>Editorial pass: name the mechanic plainly</td><td>Fix</td></tr>
+      <tr><td class="id">DF-141</td><td><span class="sev sev-good">Keep</span></td><td><span class="type">—</span></td><td>Top-up flow itself is "actually pretty clean" — preserve</td><td><span class="ts">~00:39:30–00:40:30</span><br><span class="evidence-quote">"actually pretty clean"</span></td><td>Keep</td><td>Keep</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-recovery">Portfolio / Recovery</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-080</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">COPY</span></td><td>Recovery email flow contains "Infinex, a crypto super app" + "Enjoy the seamless experience you love"</td><td><span class="ts">~00:30:00–00:31:30</span><br><span class="evidence-quote">"marketing copy inside product copy"</span></td><td>Strip slogan; use plain product / security language</td><td>Fix per D-15</td></tr>
+      <tr><td class="id">DF-150</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>Passkey-signing demanded before email entry — order feels wrong</td><td><span class="ts">~00:30:00–00:31:30</span></td><td>Reorder: email → OTP → passkey-sign-to-finalize</td><td>Fix</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 id="area-settings">Settings / Customization / Asset Discovery</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th style="width:80px">ID</th><th style="width:50px">Sev</th><th style="width:74px">Type</th><th>Issue</th><th style="width:130px">Evidence</th><th>Suggested fix</th><th style="width:90px">Decision</th></tr></thead>
+    <tbody>
+      <tr><td class="id">DF-071</td><td><span class="sev sev-p1">P1</span></td><td><span class="type">IA</span></td><td>No asset discovery surface separate from portfolio holdings</td><td><span class="ts">~00:42:30–00:45:00</span><br><span class="evidence-quote">"what I have vs what exists"</span></td><td>Dedicated asset / token page (price, volume, OI, related markets)</td><td>D-11</td></tr>
+      <tr><td class="id">DF-072</td><td><span class="sev sev-p1">P1</span></td><td><span class="type type-bug">BUG</span></td><td>Token search slow + doesn't surface non-top-1000 tokens; falls back to CoinGecko</td><td><span class="ts">~00:43:00–00:44:00</span><br><span class="evidence-quote">"I have to go on CoinGecko"</span></td><td>Search-index expansion; faster results</td><td>Fix after D-11</td></tr>
+      <tr><td class="id">DF-160</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>Settings exposes "App Brand" — unclear what this is</td><td><span class="ts">~00:42:00</span></td><td>Hide or remove</td><td>D-01</td></tr>
+      <tr><td class="id">DF-161</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>Settings exposes "Points" / "Badges" — unclear what these refer to</td><td><span class="ts">~00:42:00</span><br><span class="evidence-quote">"What points? What badges?"</span></td><td>Hide if inactive; or label clearly</td><td>D-01</td></tr>
+      <tr><td class="id">DF-162</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">IA</span></td><td>"Support networks" toggle confusing when networks are supposedly abstracted</td><td><span class="ts">~00:42:00</span></td><td>Re-evaluate; either explain or hide</td><td>Clarify</td></tr>
+      <tr><td class="id">DF-163</td><td><span class="sev sev-p2">P2</span></td><td><span class="type">UX</span></td><td>NEAR asset visibility toggled off in default settings — unclear why</td><td><span class="ts">~00:41:00</span></td><td>Audit asset visibility defaults</td><td>Clarify</td></tr>
+      <tr><td class="id">DF-164</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">UX</span></td><td>Avatar / contact color picker changes color without user control</td><td><span class="ts">~00:41:00–00:42:00</span></td><td>Persistent user selection; deterministic</td><td>Fix</td></tr>
+      <tr><td class="id">DF-165</td><td><span class="sev sev-p3">P3</span></td><td><span class="type">UX</span></td><td>No centralized place to manage starred tokens after unstarring</td><td><span class="ts">~00:42:00</span></td><td>Settings sub-page or favorites surface</td><td>Fix</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="tone">
+  <div class="section-label">04 / Tone of voice</div>
+  <h2>Marketing Copy Has Leaked Into Utility, Security, And Trading Flows</h2>
+  <p>Many of the P2 COPY rows above stem from one root pattern. The rule that fixes them all:</p>
+  <blockquote>If the user is trying to complete a financial / security / trading task, do not sell them the product. Help them complete the task.</blockquote>
+  <p>Specific words and phrases flagged in the recording, for the editorial pass:</p>
+  <div class="table-wrap"><table class="tone-table">
+    <thead><tr><th style="width:50%">Avoid</th><th>Prefer</th></tr></thead>
+    <tbody>
+      <tr><td>superpowers</td><td>(just describe the action)</td></tr>
+      <tr><td>seamless / seamlessly</td><td>(omit, or describe what actually happens)</td></tr>
+      <tr><td>hang tight</td><td>scanning / importing / loading</td></tr>
+      <tr><td>nice one!</td><td>imported / done / complete</td></tr>
+      <tr><td>at a glance</td><td>(omit)</td></tr>
+      <tr><td>crypto super app</td><td>Infinex</td></tr>
+      <tr><td>change the way you crypto</td><td>(state the actual product thesis)</td></tr>
+      <tr><td>enjoy the experience you love</td><td>(omit)</td></tr>
+      <tr><td>unlock (as marketing filler)</td><td>(use the literal action verb)</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="workstreams">
+  <div class="section-label">05 / Workstreams</div>
+  <h2>Now, Next, Later</h2>
+  <p>Sprint-shaped buckets. They assume the <a href="#decisions">Decisions</a> get answered in the same triage session, since most tactical fixes depend on them.</p>
+
+  <div class="cards">
+    <div class="card">
+      <h4>Now — this sprint</h4>
+      <div class="card-title">Ship-blockers + the cheap fixes the decisions unblock</div>
+      <ul>
+        <li><strong>P0 cluster.</strong> DF-001, DF-002, DF-003.</li>
+        <li><strong>Stale-residue purge after D-01.</strong> DF-010, DF-011, DF-012, DF-014, DF-015, DF-076, DF-077.</li>
+        <li><strong>Copy rewrite pass after D-15.</strong> DF-081, DF-080, DF-023, DF-063.</li>
+        <li><strong>Earn credibility</strong> — kill 0.66% SNX surfacing once D-10 lands. DF-013.</li>
+        <li><strong>Optimistic UI on star.</strong> DF-070.</li>
+        <li><strong>Deposit copy buttons.</strong> DF-041.</li>
+        <li><strong>Gas Account learn-more link target.</strong> DF-051.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Next — within 2 sprints</h4>
+      <div class="card-title">Bigger but well-scoped once decisions are made</div>
+      <ul>
+        <li><strong>Onboarding redesign</strong> (D-13). DF-050, DF-060, DF-061, DF-064, DF-065, DF-150.</li>
+        <li><strong>Perps venue model</strong> (D-04, D-05). DF-020, DF-021, DF-022, DF-024.</li>
+        <li><strong>Switch flow redesign.</strong> DF-030, DF-031, DF-110, DF-111, DF-112.</li>
+        <li><strong>Deposit IA.</strong> DF-040 (per D-08), DF-042 (per D-07), DF-043 (per D-09), DF-131.</li>
+        <li><strong>Earn intent flow.</strong> DF-100, DF-101, DF-102, DF-103.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Later — defer or discuss</h4>
+      <div class="card-title">Lower priority or pending bigger product calls</div>
+      <ul>
+        <li><strong>Asset discovery surface</strong> (D-11). DF-071, DF-072.</li>
+        <li><strong>Marketing site overhaul</strong> — pending D-12 + brand voice lock. DF-090, DF-091, DF-092, DF-093, DF-094, DF-095, DF-096.</li>
+        <li><strong>Comparison chart in Switch.</strong> DF-113.</li>
+        <li><strong>Settings cleanup.</strong> DF-160 – DF-165.</li>
+        <li><strong>Perps Terms modal collapse</strong> (D-06). DF-025.</li>
+        <li><strong>Naming review</strong> Switch vs Swap. DF-114.</li>
+        <li><strong>Crates sonic system.</strong> DF-099.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="frame">
+  <div class="section-label">06 / Frame for the room</div>
+  <h2>This Is Systemic, Not Personal</h2>
+  <p>The dogfood session was blunt. The point isn't to call out individual contributors — the patterns that showed up are systemic and we can now fix them together:</p>
+  <ul class="bullets">
+    <li><strong>Old campaign residue</strong> is still occupying default user surfaces (Sale, Craterun, Airdrops, Mantle, Yaprun, Points, Badges, App Brand).</li>
+    <li><strong>Marketing copy is bleeding into utility, security, and trading flows</strong>, where it costs trust instead of building it.</li>
+    <li><strong>Implementation details</strong> (7702 icons, venue choice on Perps, dynamic deposit addresses) are leaking out to users without translation.</li>
+    <li><strong>Core Infinex primitives</strong> (gas account, non-EVM deposit support, the Move concept) are buried or discovered too late.</li>
+    <li><strong>Two ship-blocker bugs</strong> (DF-001 / DF-002 / DF-003) touch security and the central "one account / any venue" thesis directly.</li>
+  </ul>
+  <p>The product itself has strong primitives. The work is to make the interface act like it knows that.</p>
+</section>
+
+<footer>
+  <p>Source recording &amp; transcript: <code>Platform Dogfood/Infinex Dogfood.wav</code> · <code>infinex-dogfood.elevenlabs.timestamped.md</code></p>
+  <p>Companion documents: <code>research/infinex-app-dogfood-handover.md</code> (narrative handover) · <code>research/infinex-dogfood-audit.md</code> (source-led audit) · <code>research/infinex-dogfood-triage.md</code> (this doc in markdown)</p>
+  <p>Captured 2026-05-15. Status: triage capture, no implementation approval.</p>
+</footer>
+
+</main>
+
+<aside class="toc">
+  <div class="toc-label">Contents</div>
+  <nav>
+    <a href="#how-to-read">How to read this doc</a>
+    <a href="#exec">Executive cut</a>
+    <a href="#ship-blockers" class="sub">— Ship-blockers</a>
+    <a href="#decisions">Decisions to make first</a>
+    <a href="#by-area">By area</a>
+    <a href="#area-marketing" class="sub">— Marketing site</a>
+    <a href="#area-onboarding" class="sub">— Onboarding</a>
+    <a href="#area-dashboard" class="sub">— Dashboard</a>
+    <a href="#area-earn" class="sub">— Earn</a>
+    <a href="#area-switch" class="sub">— Switch</a>
+    <a href="#area-perps" class="sub">— Perps</a>
+    <a href="#area-send" class="sub">— Send</a>
+    <a href="#area-deposit" class="sub">— Deposit</a>
+    <a href="#area-gas" class="sub">— Gas Account</a>
+    <a href="#area-recovery" class="sub">— Recovery</a>
+    <a href="#area-settings" class="sub">— Settings</a>
+    <a href="#tone">Tone of voice</a>
+    <a href="#workstreams">Workstreams</a>
+    <a href="#frame">Frame for the room</a>
+  </nav>
+</aside>
+
+</div>
+</body>
+</html>

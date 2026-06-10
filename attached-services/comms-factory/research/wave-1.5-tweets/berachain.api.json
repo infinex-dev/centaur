@@ -1,0 +1,4534 @@
+{
+  "user": {
+    "data": {
+      "id": "1471917994762670081",
+      "name": "Berachain Foundation \ud83d\udc3b\u26d3",
+      "username": "berachain"
+    }
+  },
+  "tweets": {
+    "data": [
+      {
+        "edit_history_tweet_ids": [
+          "2049822143089889526"
+        ],
+        "text": "https://t.co/e5OqGDZkXJ",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2049821486316413291"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/e5OqGDZkXJ",
+              "expanded_url": "https://x.com/berachain/status/2049822143089889526/photo/1",
+              "display_url": "pic.x.com/e5OqGDZkXJ",
+              "media_key": "3_2049822077163819008"
+            }
+          ]
+        },
+        "id": "2049822143089889526",
+        "attachments": {
+          "media_keys": [
+            "3_2049822077163819008"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 2,
+          "like_count": 21,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 4388
+        },
+        "created_at": "2026-04-30T12:04:17.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 323,
+                "end": 346,
+                "url": "https://t.co/NL4JWZmJfu",
+                "expanded_url": "https://revoke.cash",
+                "display_url": "revoke.cash"
+              }
+            ]
+          },
+          "text": "Berachain is aware of the Wasabi Protocol admin key compromise affecting multiple chains.\n\nWe have paused and blacklisted the affected Wasabi reward vaults on Berachain. No further BGT emissions will flow to the compromised contracts.\n\nIf you interacted with Wasabi on Berachain, revoke your token approvals immediately:\n\u2192 https://t.co/NL4JWZmJfu\n\nContracts to revoke:\n- 0xc95ab9eff8fb48760703c74416764b8f898afa1b\n- 0xd948212f077e552533158becbc1882c1b19c40fe\n- 0x0da575D3edd4E3ee1D904936F94Ec043c06Bb12B\n- 0x3EE6C6CdAa0073DE6Da00091329dE4390B0DF1EE\n\nBGT rewards in Berachain's native RewardVaults are safe and can still be claimed.\n\nWe are working with Blockaid and ZeroShadow on the ongoing investigation."
+        },
+        "edit_history_tweet_ids": [
+          "2049821486316413291"
+        ],
+        "text": "Berachain is aware of the Wasabi Protocol admin key compromise affecting multiple chains.\n\nWe have paused and blacklisted the affected Wasabi reward vaults on Berachain. No further BGT emissions will flow to the compromised contracts.\n\nIf you interacted with Wasabi on Berachain,",
+        "id": "2049821486316413291",
+        "public_metrics": {
+          "retweet_count": 12,
+          "reply_count": 17,
+          "like_count": 72,
+          "quote_count": 6,
+          "bookmark_count": 0,
+          "impression_count": 13145
+        },
+        "created_at": "2026-04-30T12:01:40.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 180,
+                "end": 203,
+                "url": "https://t.co/bDp77VOGSr",
+                "expanded_url": "https://revoke.cash/",
+                "display_url": "revoke.cash"
+              }
+            ]
+          },
+          "text": "Wasabi across all chains including Berachain has been hacked. If you have funds in Wasabi WITHDRAW THEM NOW. \n\nBerachain users have approximately $50K at risk.\n\nUse this to revoke https://t.co/bDp77VOGSr\n\nMove quickly to withdraw your funds.\n\nReward vaults for Wasabi have been paused in the interim."
+        },
+        "edit_history_tweet_ids": [
+          "2049797993600102612"
+        ],
+        "text": "Wasabi across all chains including Berachain has been hacked. If you have funds in Wasabi WITHDRAW THEM NOW. \n\nBerachain users have approximately $50K at risk.\n\nUse this to revoke https://t.co/2Xz8pjQbKV\n\nMove quickly to withdraw your funds.\n\nReward vaults for Wasabi have been",
+        "entities": {
+          "urls": [
+            {
+              "start": 180,
+              "end": 203,
+              "url": "https://t.co/2Xz8pjQbKV",
+              "expanded_url": "https://revoke.cash/",
+              "display_url": "revoke.cash",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2053724848413630464/HVOIQdUm?format=jpg&name=orig",
+                  "width": 1200,
+                  "height": 630
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2053724848413630464/HVOIQdUm?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Revoke Your Token Approvals on Over 100 Networks | Revoke.cash",
+              "description": "Take back control of your wallet and stay safe by revoking token approvals and permissions you granted on Ethereum and over 100 other networks.",
+              "unwound_url": "https://revoke.cash/"
+            }
+          ]
+        },
+        "id": "2049797993600102612",
+        "public_metrics": {
+          "retweet_count": 34,
+          "reply_count": 32,
+          "like_count": 170,
+          "quote_count": 13,
+          "bookmark_count": 16,
+          "impression_count": 39623
+        },
+        "created_at": "2026-04-30T10:28:19.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2045158578164769140"
+        ],
+        "text": "yeah we're doing this tonight.\n\n@ruwaiting4 + @codingwithmanny live at 10PM EST on Bera Breakdown\n\nWe're talking Bera Updates, AI Dev, PolVNext, ERC7715, exciting projects, and whatever else comes up. https://t.co/a58YH4O5YR",
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2044457732829548899"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 201,
+              "end": 224,
+              "url": "https://t.co/a58YH4O5YR",
+              "expanded_url": "https://twitter.com/ruwaiting4/status/2044457732829548899",
+              "display_url": "x.com/ruwaiting4/sta\u2026"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 32,
+              "end": 43,
+              "username": "ruwaiting4",
+              "id": "1041368094482939904"
+            },
+            {
+              "start": 46,
+              "end": 62,
+              "username": "codingwithmanny",
+              "id": "1060254597443452930"
+            }
+          ]
+        },
+        "id": "2045158578164769140",
+        "public_metrics": {
+          "retweet_count": 17,
+          "reply_count": 23,
+          "like_count": 102,
+          "quote_count": 3,
+          "bookmark_count": 0,
+          "impression_count": 12950
+        },
+        "created_at": "2026-04-17T15:12:56.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2043057239619948661"
+        ],
+        "attachments": {
+          "media_source_tweet_id": [
+            "2042967115108421740"
+          ],
+          "media_keys": [
+            "3_2042967110570180608"
+          ]
+        },
+        "text": "RT @ApiaryFi: Sold out in seconds!\nPoLlinating. https://t.co/SqOuZOfYYj",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2042967115108421740"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 48,
+              "end": 71,
+              "url": "https://t.co/SqOuZOfYYj",
+              "expanded_url": "https://x.com/ApiaryFi/status/2042967115108421740/photo/1",
+              "display_url": "pic.x.com/SqOuZOfYYj",
+              "media_key": "3_2042967110570180608"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "ApiaryFi",
+              "id": "1801395791799500800"
+            }
+          ]
+        },
+        "id": "2043057239619948661",
+        "public_metrics": {
+          "retweet_count": 14,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2026-04-11T20:02:58.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2042352475697565818"
+        ],
+        "text": "What da bears and the @DefiLlama doin? https://t.co/RKZq9RcekY",
+        "entities": {
+          "urls": [
+            {
+              "start": 39,
+              "end": 62,
+              "url": "https://t.co/RKZq9RcekY",
+              "expanded_url": "https://x.com/berachain/status/2042352475697565818/photo/1",
+              "display_url": "pic.x.com/RKZq9RcekY",
+              "media_key": "3_2042352348073508865"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 22,
+              "end": 32,
+              "username": "DefiLlama",
+              "id": "1321585610654687241"
+            }
+          ]
+        },
+        "id": "2042352475697565818",
+        "attachments": {
+          "media_keys": [
+            "3_2042352348073508865"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 15,
+          "reply_count": 19,
+          "like_count": 138,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 14795
+        },
+        "created_at": "2026-04-09T21:22:29.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2042244370351509899"
+        ],
+        "text": "RT @YogiBera420: Come hang with Smokey and me at Consensus Miami for some rooftop Miami vibes...\nhttps://t.co/hxxnhRU6NI",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2042244132496638309"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 97,
+              "end": 120,
+              "url": "https://t.co/hxxnhRU6NI",
+              "expanded_url": "https://luma.com/47lbbsl3",
+              "display_url": "luma.com/47lbbsl3",
+              "status": 200,
+              "title": "Bera at Sunset \u00b7 Luma",
+              "description": "Private VIP Event Join Smokey and Yogi at Bera's exclusive waterfront evening to kick off Consensus Miami. This invite-only event brings together founders,\u2026",
+              "unwound_url": "https://luma.com/47lbbsl3"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "YogiBera420",
+              "id": "1672619336530374657"
+            }
+          ]
+        },
+        "id": "2042244370351509899",
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2026-04-09T14:12:55.000Z"
+      },
+      {
+        "entities": {
+          "cashtags": [
+            {
+              "start": 74,
+              "end": 79,
+              "tag": "BERA"
+            }
+          ],
+          "urls": [
+            {
+              "start": 97,
+              "end": 120,
+              "url": "https://t.co/bpSzAujSW2",
+              "expanded_url": "https://twitter.com/sbivc_official/status/2036609640881127902",
+              "display_url": "x.com/sbivc_official\u2026"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2036669145262018621"
+        ],
+        "text": "Berachain has officially landed in Japan, with the first spot listing for $BERA on SBI VC Trade. https://t.co/bpSzAujSW2",
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2036609640881127902"
+          }
+        ],
+        "id": "2036669145262018621",
+        "public_metrics": {
+          "retweet_count": 27,
+          "reply_count": 28,
+          "like_count": 167,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 46241
+        },
+        "created_at": "2026-03-25T04:58:58.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2036116256634380698"
+        ],
+        "text": "RT @Starglow_world: [\u2728] #STARGLOW \ud83d\udcab #EVENT\nCLOSED BETA PRE-SEASON OPEN\ud83d\udd25\n\n\uc120\ucc29\uc21c 500\uba85 \uc720\uc800\ub9cc \ucc38\uc5ec \uac00\ub2a5\ud55c\n\uc2a4\ud0c0\uae00\ub85c\uc6b0 \ud504\ub9ac\uc2dc\uc98c\uc5d0 \ud568\uaed8\ud558\uc138\uc694!\n\n\ud83c\udf81\ucc38\uc5ec \ubc29\ubc95\n\u2705 https://t.co/xFOT\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2036014567181205694"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 122,
+              "end": 139,
+              "url": "https://t.co/xFOT",
+              "display_url": "t.co/xFOT"
+            }
+          ],
+          "hashtags": [
+            {
+              "start": 24,
+              "end": 33,
+              "tag": "STARGLOW"
+            },
+            {
+              "start": 36,
+              "end": 42,
+              "tag": "EVENT"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "Starglow_world",
+              "id": "1666309172932263941"
+            }
+          ]
+        },
+        "id": "2036116256634380698",
+        "public_metrics": {
+          "retweet_count": 206,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2026-03-23T16:21:59.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2032102078856724538"
+        ],
+        "text": "RT @playonjoy: In this space narratives change and ecosystems shift. But you never forget the community that backed you when you were just\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2032037113353339110"
+          }
+        ],
+        "id": "2032102078856724538",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 13,
+              "username": "playonjoy",
+              "id": "1685701894616879104"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 14,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2026-03-12T14:31:04.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2031069697169371536"
+        ],
+        "text": "RT @plutus_fi_x: plsKDK: Liquid xKDK Exposure\n\nBuilt with @KodiakFi \ud83d\udc3b\n\nAccess Kodiak Finance\u2019s xKDK reward system while keeping your capita\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2031067498720727381"
+          }
+        ],
+        "id": "2031069697169371536",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "plutus_fi_x",
+              "id": "1486722738349752337"
+            },
+            {
+              "start": 58,
+              "end": 67,
+              "username": "KodiakFi",
+              "id": "1655598345325346818"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 19,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2026-03-09T18:08:45.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2030036988481458635"
+        ],
+        "text": "RT @0xcarnation: Henlo World!\n\nI turned @berachain into a permanent website hosting service!\n\nBy uploading the website as calldata, it live\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2030032963807703384"
+          }
+        ],
+        "id": "2030036988481458635",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "0xcarnation",
+              "id": "1112610520732000256"
+            },
+            {
+              "start": 40,
+              "end": 50,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 23,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "created_at": "2026-03-06T21:45:08.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2030036970060042716"
+        ],
+        "text": "RT @SmokeyTheBera: What da Beras doing? \n\nwe've been a little less terminally online as of late while focusing on a few initiatives interna\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2029680828951703907"
+          }
+        ],
+        "id": "2030036970060042716",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "SmokeyTheBera",
+              "id": "1472789316292296707"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 30,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "created_at": "2026-03-06T21:45:04.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2026497365218078736"
+        ],
+        "text": "RT @berachaindevs: X402 is now supported on @berachain with native support for Honey \ud83c\udf6f\n\nThis unlocks seamless onchain payments for agents,\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2026328758974853348"
+          }
+        ],
+        "id": "2026497365218078736",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "berachaindevs",
+              "id": "1792324801198960640"
+            },
+            {
+              "start": 44,
+              "end": 54,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 36,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 4
+        },
+        "created_at": "2026-02-25T03:19:57.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2024111744025518440"
+        ],
+        "text": "RT @SmokeyTheBera: If you're one of the survivors who made it to Denver, come hang with the Beras this evening. \n\nNo talks or presentations\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2024111230517170320"
+          }
+        ],
+        "id": "2024111744025518440",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "SmokeyTheBera",
+              "id": "1472789316292296707"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 16,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3
+        },
+        "created_at": "2026-02-18T13:20:20.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2023437529069109469"
+        ],
+        "text": "RT @berachaindevs: New Emissions Routing Changes \ud83d\udc3b\u26d3\ufe0f\n\n@berachain is introducing an update to how Proof-of-Liquidity emissions are routed ac\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2023428404343881765"
+          }
+        ],
+        "id": "2023437529069109469",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "berachaindevs",
+              "id": "1792324801198960640"
+            },
+            {
+              "start": 54,
+              "end": 64,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 27,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2026-02-16T16:41:15.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2022254049433714884"
+        ],
+        "text": "RT @berachaindevs: \ud83d\udea8 LlamaSwap is live on @Berachain!\n\nThe meta DEX aggregator by @DefiLlama just dropped support for Berachain, bringing c\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2021947485326114998"
+          }
+        ],
+        "id": "2022254049433714884",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "berachaindevs",
+              "id": "1792324801198960640"
+            },
+            {
+              "start": 42,
+              "end": 52,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            },
+            {
+              "start": 82,
+              "end": 92,
+              "username": "DefiLlama",
+              "id": "1321585610654687241"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 25,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "created_at": "2026-02-13T10:18:31.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2019854681477112193"
+        ],
+        "text": "RT @berachaindevs: \ud83d\udce3 iBERA staking is now live on Bera Hub\n\nThis is a big step for securing @berachain and strengthening proof of liquidity\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2019854073466638772"
+          }
+        ],
+        "id": "2019854681477112193",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "berachaindevs",
+              "id": "1792324801198960640"
+            },
+            {
+              "start": 92,
+              "end": 102,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 33,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2026-02-06T19:24:17.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2019498190714609796"
+        ],
+        "text": "RT @tio_bera: Every chain has a balance sheet. Ours is emissions.\n\nToday we\u2019re announcing upcoming changes to PoL:\n\u2022 BGT inflation \u2193 (8% \u2192\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2019497258270793969"
+          }
+        ],
+        "id": "2019498190714609796",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "tio_bera",
+              "id": "1960451510183321600"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 25,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2026-02-05T19:47:43.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2017259460310212953"
+        ],
+        "text": "RT @0xtristero: henlo &amp; gBera \ud83d\udc3b\n\n@berachain is now live on the Tristero encrypted DEX. \ud83c\udf6f\n\nBridge, swap, or send your favorite \ud83d\udc3btokens in on\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2017251561454346502"
+          }
+        ],
+        "id": "2017259460310212953",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "0xtristero",
+              "id": "1611627849500463104"
+            },
+            {
+              "start": 37,
+              "end": 47,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 16,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "created_at": "2026-01-30T15:31:48.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2016880469447487626"
+        ],
+        "text": "If you're a self-proclaimed \"ideas guy\", there's never been a better time to build a new app on Berachain, thanks to the team at Dreamspace. \n\nCheck out the tutorial below! https://t.co/fHi7xcusdy",
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2016876914036670895"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 173,
+              "end": 196,
+              "url": "https://t.co/fHi7xcusdy",
+              "expanded_url": "https://twitter.com/dreamspaceHQ/status/2016876914036670895",
+              "display_url": "x.com/dreamspaceHQ/s\u2026"
+            }
+          ]
+        },
+        "id": "2016880469447487626",
+        "public_metrics": {
+          "retweet_count": 27,
+          "reply_count": 58,
+          "like_count": 150,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 21695
+        },
+        "created_at": "2026-01-29T14:25:50.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2016559790227378555"
+        ],
+        "text": "RT @YogiBera420: If you will be in town for ETHDenver come hang with me, Smokey and the rest of the Beras.\n\nNo talks or speeches just good\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2016559249745187111"
+          }
+        ],
+        "id": "2016559790227378555",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "YogiBera420",
+              "id": "1672619336530374657"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 17,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2026-01-28T17:11:34.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2016326295261446186"
+        ],
+        "text": "Prime Vaults pre-deposit is now live https://t.co/RqHqzCSvbB",
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2016322836407975988"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 37,
+              "end": 60,
+              "url": "https://t.co/RqHqzCSvbB",
+              "expanded_url": "https://twitter.com/PrimeVaultsHQ/status/2016322836407975988",
+              "display_url": "x.com/PrimeVaultsHQ/\u2026"
+            }
+          ]
+        },
+        "id": "2016326295261446186",
+        "public_metrics": {
+          "retweet_count": 58,
+          "reply_count": 38,
+          "like_count": 126,
+          "quote_count": 4,
+          "bookmark_count": 6,
+          "impression_count": 19171
+        },
+        "created_at": "2026-01-28T01:43:44.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2015919405201281026"
+        ],
+        "text": "RT @InfraredFinance: Today, we're excited to share that Infrared is providing validator infrastructure for Greenlane Holdings Inc., a compa\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2015792878249808018"
+          }
+        ],
+        "id": "2015919405201281026",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 19,
+              "username": "InfraredFinance",
+              "id": "1712121986346893312"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 42,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2026-01-26T22:46:54.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2015822991280451905"
+        ],
+        "text": "RT @bitmagno: Berachain (BERA)\nListed on BitMagno: 23/01/2026\nWebsite: https://t.co/BSATmz1Hwa\nTG: https://t.co/2zRS38m9zf\nX: @berachain\nEx\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2014594155029188665"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 71,
+              "end": 94,
+              "url": "https://t.co/BSATmz1Hwa",
+              "expanded_url": "http://berachain.com",
+              "display_url": "berachain.com",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052485690903117824/Jkngx9Vp?format=jpg&name=orig",
+                  "width": 4800,
+                  "height": 2520
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052485690903117824/Jkngx9Vp?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Berachain",
+              "description": "Berachain is an EVM-identical Layer 1 (L1) blockchain that uses the novel Proof of Liquidity (PoL) consensus mechanism to align liquidity and security at the network level.",
+              "unwound_url": "https://www.berachain.com/"
+            },
+            {
+              "start": 99,
+              "end": 122,
+              "url": "https://t.co/2zRS38m9zf",
+              "expanded_url": "http://t.me/BerachainPortal",
+              "display_url": "t.me/BerachainPortal",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052068688153485316/1txopSMM?format=jpg&name=orig",
+                  "width": 320,
+                  "height": 320
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052068688153485316/1txopSMM?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Berachain Verification Portal",
+              "description": "You can view and join @BerachainPortal right away.",
+              "unwound_url": "https://t.me/BerachainPortal"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "bitmagno",
+              "id": "1808099252251340800"
+            },
+            {
+              "start": 126,
+              "end": 136,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "id": "2015822991280451905",
+        "public_metrics": {
+          "retweet_count": 130,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "created_at": "2026-01-26T16:23:47.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2014332651851678100"
+        ],
+        "attachments": {
+          "media_source_tweet_id": [
+            "2014322689989575088"
+          ],
+          "media_keys": [
+            "3_2014322644351344640"
+          ]
+        },
+        "text": "RT @codingwithmanny: A bit of a delay, but Happy 1st Anniversary @berachain https://t.co/0rtzVe9uhb",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2014322689989575088"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 76,
+              "end": 99,
+              "url": "https://t.co/0rtzVe9uhb",
+              "expanded_url": "https://x.com/codingwithmanny/status/2014322689989575088/photo/1",
+              "display_url": "pic.x.com/0rtzVe9uhb",
+              "media_key": "3_2014322644351344640"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 19,
+              "username": "codingwithmanny",
+              "id": "1060254597443452930"
+            },
+            {
+              "start": 65,
+              "end": 75,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "id": "2014332651851678100",
+        "public_metrics": {
+          "retweet_count": 56,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2026-01-22T13:41:43.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2013960112940200144"
+        ],
+        "text": "Foxify x Kodiak FUNDED accounts on Berachain (LIVE DEMO) https://t.co/MxRUX0peQJ",
+        "entities": {
+          "urls": [
+            {
+              "start": 57,
+              "end": 80,
+              "url": "https://t.co/MxRUX0peQJ",
+              "expanded_url": "https://x.com/i/broadcasts/1zqKVdBEglMJB",
+              "display_url": "x.com/i/broadcasts/1\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052784189695799296/PcdYVqDK?format=jpg&name=orig",
+                  "width": 1280,
+                  "height": 720
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2052784189695799296/PcdYVqDK?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Berachain Foundation \ud83d\udc3b\u26d3",
+              "description": "Foxify x Kodiak FUNDED accounts on Berachain (LIVE DEMO)",
+              "unwound_url": "https://twitter.com/i/broadcasts/1zqKVdBEglMJB"
+            }
+          ]
+        },
+        "id": "2013960112940200144",
+        "public_metrics": {
+          "retweet_count": 95,
+          "reply_count": 27,
+          "like_count": 135,
+          "quote_count": 4,
+          "bookmark_count": 8,
+          "impression_count": 13261
+        },
+        "created_at": "2026-01-21T13:01:23.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2013279233678671982"
+        ],
+        "text": "RT @foxifytrade: Berachain traders: $89,000 is on the table.\n\nYou can now get $10,000 Instant FUNDED trading accounts on @KodiakFi by start\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2013278081818210553"
+          }
+        ],
+        "id": "2013279233678671982",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "foxifytrade",
+              "id": "1611457383787536392"
+            },
+            {
+              "start": 121,
+              "end": 130,
+              "username": "KodiakFi",
+              "id": "1655598345325346818"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 58,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2026-01-19T15:55:48.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2011884156150825452"
+        ],
+        "text": "A proposal from the Bera Labs team is now live to reduce inflation to 5%.\n\nPlease find the proposal attached in the link below, and in Tio's post\n\nhttps://t.co/zkeV6tejqw https://t.co/yWcARgUTDr",
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "2011878520147017930"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 147,
+              "end": 170,
+              "url": "https://t.co/zkeV6tejqw",
+              "expanded_url": "https://forum.berachain.com/t/proposal-decrease-the-annual-bgt-inflation-rate-from-8-to-5/255",
+              "display_url": "forum.berachain.com/t/proposal-dec\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2019738333564534784/9WGT6R-Y?format=png&name=orig",
+                  "width": 699,
+                  "height": 36
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2019738333564534784/9WGT6R-Y?format=png&name=150x150",
+                  "width": 36,
+                  "height": 36
+                }
+              ],
+              "status": 404,
+              "title": "Proposal: Decrease the annual BGT inflation rate from 8% to ~5%",
+              "description": "Purpose: Increase long-term sustainability, improve efficiency of emissions spend, reduce unnecessary inflation, and bring Berachain\u2019s inflation in line with other leading L1\u2019s. Note: This proposal does not modify reward mechanics, vault distribution logic, validator boosting, or any Proof-of-Liquidity (PoL) functional components. The team is concurrently evaluating longer-term improvements to PoL with the goal of creating sustainable protocol level revenue streams and enabling 1 BGT to r...",
+              "unwound_url": "https://forum.berachain.com/t/proposal-decrease-the-annual-bgt-inflation-rate-from-8-to-5/255"
+            },
+            {
+              "start": 171,
+              "end": 194,
+              "url": "https://t.co/yWcARgUTDr",
+              "expanded_url": "https://twitter.com/tio_bera/status/2011878520147017930",
+              "display_url": "x.com/tio_bera/statu\u2026"
+            }
+          ]
+        },
+        "id": "2011884156150825452",
+        "public_metrics": {
+          "retweet_count": 43,
+          "reply_count": 44,
+          "like_count": 208,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 29494
+        },
+        "created_at": "2026-01-15T19:32:16.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2011174361206554627"
+        ],
+        "text": "https://t.co/pZ2lcKb7Jg",
+        "article": {
+          "title": "Berachain EoY Update"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/pZ2lcKb7Jg",
+              "expanded_url": "http://x.com/i/article/2010835714133606400",
+              "display_url": "x.com/i/article/2010\u2026",
+              "status": 500,
+              "unwound_url": "http://x.com/i/article/2010835714133606400"
+            }
+          ]
+        },
+        "id": "2011174361206554627",
+        "public_metrics": {
+          "retweet_count": 132,
+          "reply_count": 135,
+          "like_count": 630,
+          "quote_count": 54,
+          "bookmark_count": 92,
+          "impression_count": 158366
+        },
+        "created_at": "2026-01-13T20:31:48.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2010809098577584462"
+        ],
+        "text": "RT @foxifytrade: \ud83e\udd20 New Sheriff in Town. Market Makers Are Nervous.\n\nThis trader put in $100 yesterday.\nCleared two FUNDED levels.\nCashed ou\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2009596927734939771"
+          }
+        ],
+        "id": "2010809098577584462",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "foxifytrade",
+              "id": "1611457383787536392"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 33,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5
+        },
+        "created_at": "2026-01-12T20:20:22.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2010808928494342555"
+        ],
+        "text": "RT @KodiakFi: All fees on RWA markets have been reduced.\n\nWelcome new metals and index traders!\n\nhttps://t.co/fZ1Jz5lNVf https://t.co/ZjG1m\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2010803660809265366"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 97,
+              "end": 120,
+              "url": "https://t.co/fZ1Jz5lNVf",
+              "expanded_url": "https://perps.kodiak.finance/",
+              "display_url": "perps.kodiak.finance",
+              "status": 200,
+              "unwound_url": "https://perps.kodiak.finance/"
+            },
+            {
+              "start": 121,
+              "end": 139,
+              "url": "https://t.co/ZjG1m",
+              "display_url": "t.co/ZjG1m"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "KodiakFi",
+              "id": "1655598345325346818"
+            }
+          ]
+        },
+        "id": "2010808928494342555",
+        "public_metrics": {
+          "retweet_count": 21,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3
+        },
+        "created_at": "2026-01-12T20:19:42.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2008667316859568485"
+        ],
+        "attachments": {
+          "media_source_tweet_id": [
+            "2008656488550854942"
+          ],
+          "media_keys": [
+            "13_2008656065140060160"
+          ]
+        },
+        "text": "RT @steadyteddys: sold out @goodies_tg \n\nsorry for ur loss\n\nted bless https://t.co/uGcVSRd5Ra",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2008656488550854942"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 70,
+              "end": 93,
+              "url": "https://t.co/uGcVSRd5Ra",
+              "expanded_url": "https://x.com/steadyteddys/status/2008656488550854942/video/1",
+              "display_url": "pic.x.com/uGcVSRd5Ra",
+              "media_key": "13_2008656065140060160"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "steadyteddys",
+              "id": "1262841221803802624"
+            },
+            {
+              "start": 27,
+              "end": 38,
+              "username": "goodies_tg",
+              "id": "1953237158887579648"
+            }
+          ]
+        },
+        "id": "2008667316859568485",
+        "public_metrics": {
+          "retweet_count": 17,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6
+        },
+        "created_at": "2026-01-06T22:29:42.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2008591539568865340"
+        ],
+        "text": "RT @KodiakFi: Kodiak Perps SZN 1 has concluded &amp; Kodiak VIP for Perps is now live!\n\nFor SZN 1, 1 pre-TGE Reward has been distributed per po\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2008580601750974523"
+          }
+        ],
+        "id": "2008591539568865340",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "KodiakFi",
+              "id": "1655598345325346818"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 14,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "created_at": "2026-01-06T17:28:35.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2008556716968030366"
+        ],
+        "text": "RT @0xberatown: McBera is back in town!\n\nIntroducing the brand-new Beratown experience\u2026\n\n\ud83c\udfae Gacha Game is now live!\n\nWin BERA, win NFTs, win\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2008554456414363901"
+          }
+        ],
+        "id": "2008556716968030366",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 14,
+              "username": "0xberatown",
+              "id": "1863218571033088000"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 31,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "created_at": "2026-01-06T15:10:13.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2008556658696614081"
+        ],
+        "text": "RT @OOBleckprotocol: 1/\nBillions in BGT value are about to be unlocked\n\nOObleck is now live\n\nLiquify your trapped value today [https://t.co\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2008553828895817780"
+          }
+        ],
+        "id": "2008556658696614081",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 19,
+              "username": "OOBleckprotocol",
+              "id": "1744241756466528256"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 17,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2026-01-06T15:09:59.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2008244972223648069"
+        ],
+        "text": "RT @foxifytrade: Turn $100 \u2192 $6,000 in payouts\n\nIgnoring this means you\u2019re okay leaving money on the table.\n\nYou can now get FUNDED with ju\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2008215562170900730"
+          }
+        ],
+        "id": "2008244972223648069",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "foxifytrade",
+              "id": "1611457383787536392"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 28,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2026-01-05T18:31:27.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2004323038527938737"
+        ],
+        "text": "Berry Beramas and Happy Holidays from everyone at Berachain! https://t.co/tTvwuxLgje",
+        "entities": {
+          "urls": [
+            {
+              "start": 61,
+              "end": 84,
+              "url": "https://t.co/tTvwuxLgje",
+              "expanded_url": "https://x.com/berachain/status/2004323038527938737/photo/1",
+              "display_url": "pic.x.com/tTvwuxLgje",
+              "media_key": "3_2004323031888306176"
+            },
+            {
+              "start": 61,
+              "end": 84,
+              "url": "https://t.co/tTvwuxLgje",
+              "expanded_url": "https://x.com/berachain/status/2004323038527938737/photo/1",
+              "display_url": "pic.x.com/tTvwuxLgje",
+              "media_key": "3_2004323031833772032"
+            }
+          ]
+        },
+        "id": "2004323038527938737",
+        "attachments": {
+          "media_keys": [
+            "3_2004323031888306176",
+            "3_2004323031833772032"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 44,
+          "reply_count": 105,
+          "like_count": 339,
+          "quote_count": 5,
+          "bookmark_count": 2,
+          "impression_count": 22029
+        },
+        "created_at": "2025-12-25T22:47:05.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2002032762354561182"
+        ],
+        "text": "And we are live with @KodiakFi!\n\nhttps://t.co/Ow5PHxvVET",
+        "entities": {
+          "urls": [
+            {
+              "start": 33,
+              "end": 56,
+              "url": "https://t.co/Ow5PHxvVET",
+              "expanded_url": "https://x.com/i/spaces/1nAJEEzwjNyJL?s=20",
+              "display_url": "x.com/i/spaces/1nAJE\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051749397223112704/Pn_8sLIB?format=jpg&name=orig",
+                  "width": 1202,
+                  "height": 634
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051749397223112704/Pn_8sLIB?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "X",
+              "unwound_url": "https://twitter.com/i/spaces/1nAJEEzwjNyJL/peek"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 21,
+              "end": 30,
+              "username": "KodiakFi",
+              "id": "1655598345325346818"
+            }
+          ]
+        },
+        "id": "2002032762354561182",
+        "public_metrics": {
+          "retweet_count": 23,
+          "reply_count": 24,
+          "like_count": 71,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 11976
+        },
+        "created_at": "2025-12-19T15:06:21.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2001738848989274345"
+        ],
+        "text": "RT @KodiakFi: https://t.co/QeCCCQMAxJ",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2001736098863567317"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 14,
+              "end": 37,
+              "url": "https://t.co/QeCCCQMAxJ",
+              "expanded_url": "http://x.com/i/article/2001697836048457728",
+              "display_url": "x.com/i/article/2001\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/2001697836048457728"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "KodiakFi",
+              "id": "1655598345325346818"
+            }
+          ]
+        },
+        "id": "2001738848989274345",
+        "public_metrics": {
+          "retweet_count": 55,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2025-12-18T19:38:26.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2001727015205093650"
+        ],
+        "text": "RT @credifi: Credifi v.1 goes live today!\n\nBorrow $100\u2013$20K for three months at 4% fixed interest rate. \nNo collateral. No fees. https://t.\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2001699147326623808"
+          }
+        ],
+        "id": "2001727015205093650",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 11,
+              "username": "credifi",
+              "id": "1633936788158038017"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 33,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2025-12-18T18:51:25.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2001680615851126835"
+        ],
+        "text": "@The_HoneyCast @nomad_ @0xbeartic @BeraRodman Also, expect to see regular Foundation host appearances from another community favorite soon \ud83d\udc40",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2001676850016202931"
+          }
+        ],
+        "id": "2001680615851126835",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 14,
+              "username": "The_HoneyCast",
+              "id": "1476058854102163457"
+            },
+            {
+              "start": 15,
+              "end": 22,
+              "username": "nomad_",
+              "id": "1631960738372677633"
+            },
+            {
+              "start": 23,
+              "end": 33,
+              "username": "0xbeartic",
+              "id": "1648717763442094080"
+            },
+            {
+              "start": 34,
+              "end": 45,
+              "username": "BeraRodman",
+              "id": "1050899079969017856"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 2,
+          "like_count": 27,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6418
+        },
+        "created_at": "2025-12-18T15:47:02.000Z"
+      },
+      {
+        "entities": {
+          "cashtags": [
+            {
+              "start": 143,
+              "end": 147,
+              "tag": "KDK"
+            }
+          ],
+          "urls": [
+            {
+              "start": 208,
+              "end": 231,
+              "url": "https://t.co/Ow5PHxvVET",
+              "expanded_url": "https://x.com/i/spaces/1nAJEEzwjNyJL?s=20",
+              "display_url": "x.com/i/spaces/1nAJE\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051749397223112704/Pn_8sLIB?format=jpg&name=orig",
+                  "width": 1202,
+                  "height": 634
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2051749397223112704/Pn_8sLIB?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "X",
+              "unwound_url": "https://twitter.com/i/spaces/1nAJEEzwjNyJL/peek"
+            },
+            {
+              "start": 232,
+              "end": 255,
+              "url": "https://t.co/JLCFqW0nuz",
+              "expanded_url": "https://x.com/berachain/status/2001676850016202931/photo/1",
+              "display_url": "pic.x.com/JLCFqW0nuz",
+              "media_key": "3_2001676452538859520"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 37,
+              "end": 51,
+              "username": "The_HoneyCast",
+              "id": "1476058854102163457"
+            },
+            {
+              "start": 57,
+              "end": 64,
+              "username": "nomad_",
+              "id": "1631960738372677633"
+            },
+            {
+              "start": 100,
+              "end": 110,
+              "username": "0xbeartic",
+              "id": "1648717763442094080"
+            },
+            {
+              "start": 115,
+              "end": 126,
+              "username": "BeraRodman",
+              "id": "1050899079969017856"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2001676850016202931"
+        ],
+        "text": "The Beras Are Back In Town \u2744\ufe0f\ud83c\udf6f\n\nJoin @The_HoneyCast  and @nomad_ as they speak with Kodiak founders @0xbeartic and @BeraRodman to discover why $KDK will unlock a merry Beramas.\n\nDecember 19th, at 10AM EST. \n\nhttps://t.co/Ow5PHxvVET https://t.co/JLCFqW0nuz",
+        "id": "2001676850016202931",
+        "attachments": {
+          "media_keys": [
+            "3_2001676452538859520"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 33,
+          "reply_count": 39,
+          "like_count": 170,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 26877
+        },
+        "created_at": "2025-12-18T15:32:05.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2001504461261279685"
+        ],
+        "attachments": {
+          "media_source_tweet_id": [
+            "2001264161008005259"
+          ],
+          "media_keys": [
+            "13_2001263310419668993"
+          ]
+        },
+        "text": "RT @InfraredFinance: The Infrared token (IR) is live and a new era begins. https://t.co/5tQj24qrar",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2001264161008005259"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 75,
+              "end": 98,
+              "url": "https://t.co/5tQj24qrar",
+              "expanded_url": "https://x.com/InfraredFinance/status/2001264161008005259/video/1",
+              "display_url": "pic.x.com/5tQj24qrar",
+              "media_key": "13_2001263310419668993"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 19,
+              "username": "InfraredFinance",
+              "id": "1712121986346893312"
+            }
+          ]
+        },
+        "id": "2001504461261279685",
+        "public_metrics": {
+          "retweet_count": 96,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2025-12-18T04:07:04.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2001498713840025802"
+        ],
+        "text": "RT @rhea_finance: RHEA is now live on @berachain \ud83d\udc3b\n\nSupply USDT0 on Berachain through RHEA\u2019s unified cross-chain lending and earn up to 9.4\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1999141590066160069"
+          }
+        ],
+        "id": "2001498713840025802",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "rhea_finance",
+              "id": "1370594513857691648"
+            },
+            {
+              "start": 38,
+              "end": 48,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 53,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2025-12-18T03:44:14.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2001013770496434566"
+        ],
+        "text": "@KodiakFi \ud83c\udd71\ufe0fodiak",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2000956931415138335"
+          }
+        ],
+        "id": "2001013770496434566",
+        "entities": {
+          "mentions": [
+            {
+              "start": 0,
+              "end": 9,
+              "username": "KodiakFi",
+              "id": "1655598345325346818"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 0,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 3433
+        },
+        "created_at": "2025-12-16T19:37:14.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2001013638245834963"
+        ],
+        "text": "https://t.co/TqWZAhgHNk",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2001013636031242370"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/TqWZAhgHNk",
+              "expanded_url": "https://x.com/berachain/status/2001013638245834963/photo/1",
+              "display_url": "pic.x.com/TqWZAhgHNk",
+              "media_key": "3_2001013430958874625"
+            }
+          ]
+        },
+        "id": "2001013638245834963",
+        "attachments": {
+          "media_keys": [
+            "3_2001013430958874625"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 3,
+          "like_count": 19,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5090
+        },
+        "created_at": "2025-12-16T19:36:43.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2001013636031242370"
+        ],
+        "text": "Process:\n\n1) Go to https://t.co/cwVnP1vfpL\n2) Connect your wallet that holds any of the following NFTs:\n\nOG Rebase Beras, Teddys, Miberas, Bullas, Miteddys\n\n*We're happy to expand this group upon community request. Ping @ayvee_bera if you're interested in being added*",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "2001013631174238457"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 19,
+              "end": 42,
+              "url": "https://t.co/cwVnP1vfpL",
+              "expanded_url": "http://og.berachain.com",
+              "display_url": "og.berachain.com",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2028723949174140928/wZJHPP6x?format=jpg&name=orig",
+                  "width": 320,
+                  "height": 320
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2028723949174140928/wZJHPP6x?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Collab.Land",
+              "description": "The leaders in token gating \ud83e\udd1d since May 2020, setting the standard in digital community tools. linktr.ee/collabland",
+              "unwound_url": "https://telegram.me/collablandbot?start=VFBDI1RFTCNDT01NIy0xMDAzNDQxMTcxMDI3"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 220,
+              "end": 231,
+              "username": "ayvee_bera",
+              "id": "1459481767732260870"
+            }
+          ]
+        },
+        "id": "2001013636031242370",
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 5,
+          "like_count": 42,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 9634
+        },
+        "created_at": "2025-12-16T19:36:42.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2001013631174238457"
+        ],
+        "text": "Bring back OG Discord vibes?\n\nBest I can do is an NFT holders chat for now.\n\nTo hang out with your fellow Bera jpeg enthusiasts, go to:\n\nhttps://t.co/cwVnP1vfpL https://t.co/C9QmzFwumv",
+        "entities": {
+          "urls": [
+            {
+              "start": 137,
+              "end": 160,
+              "url": "https://t.co/cwVnP1vfpL",
+              "expanded_url": "http://og.berachain.com",
+              "display_url": "og.berachain.com",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2028723949174140928/wZJHPP6x?format=jpg&name=orig",
+                  "width": 320,
+                  "height": 320
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2028723949174140928/wZJHPP6x?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "Collab.Land",
+              "description": "The leaders in token gating \ud83e\udd1d since May 2020, setting the standard in digital community tools. linktr.ee/collabland",
+              "unwound_url": "https://telegram.me/collablandbot?start=VFBDI1RFTCNDT01NIy0xMDAzNDQxMTcxMDI3"
+            },
+            {
+              "start": 161,
+              "end": 184,
+              "url": "https://t.co/C9QmzFwumv",
+              "expanded_url": "https://x.com/berachain/status/2001013631174238457/photo/1",
+              "display_url": "pic.x.com/C9QmzFwumv",
+              "media_key": "3_2001013176716898304"
+            }
+          ]
+        },
+        "id": "2001013631174238457",
+        "attachments": {
+          "media_keys": [
+            "3_2001013176716898304"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 28,
+          "reply_count": 61,
+          "like_count": 175,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 14396
+        },
+        "created_at": "2025-12-16T19:36:41.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "2000659985815003330"
+        ],
+        "text": "RT @foxifytrade: \ud83e\udd8a Prop Trading with Double cashouts in 24 Hours \ud83d\udc3b\n\nFUNDED by @foxifytrade is going live on @KodiakFi on Dec 16th at 17:00\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2000646559390921176"
+          }
+        ],
+        "id": "2000659985815003330",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "foxifytrade",
+              "id": "1611457383787536392"
+            },
+            {
+              "start": 78,
+              "end": 90,
+              "username": "foxifytrade",
+              "id": "1611457383787536392"
+            },
+            {
+              "start": 108,
+              "end": 117,
+              "username": "KodiakFi",
+              "id": "1655598345325346818"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 38,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2025-12-15T20:11:25.000Z"
+      },
+      {
+        "entities": {
+          "cashtags": [
+            {
+              "start": 24,
+              "end": 29,
+              "tag": "BERA"
+            }
+          ],
+          "urls": [
+            {
+              "start": 84,
+              "end": 107,
+              "url": "https://t.co/uXL5KRnDnc",
+              "expanded_url": "https://atomicwallet.io/berachain-wallet",
+              "display_url": "atomicwallet.io/berachain-wall\u2026",
+              "status": 200,
+              "title": "Berachain Wallet App | BERA Wallet For Desktop And Mobile | Atomic Wallet",
+              "description": "Download Fast And Secure Berachain Wallet App For Mobile - IOS And Android - And Desktop. Buy, Sell And Swap BERA And 1000+ Cryptos In One Secure Crypto Wallet.",
+              "unwound_url": "https://atomicwallet.io/berachain-wallet"
+            },
+            {
+              "start": 108,
+              "end": 131,
+              "url": "https://t.co/4I6hYwYgXn",
+              "expanded_url": "https://x.com/AtomicWallet/status/2000567916702601624/photo/1",
+              "display_url": "pic.x.com/4I6hYwYgXn",
+              "media_key": "3_2000566667479326720"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "AtomicWallet",
+              "id": "960930668246167553"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "2000568783203962986"
+        ],
+        "attachments": {
+          "media_source_tweet_id": [
+            "2000567916702601624"
+          ],
+          "media_keys": [
+            "3_2000566667479326720"
+          ]
+        },
+        "text": "RT @AtomicWallet: trade $BERA perps with 5x leverage on Atomic Wallet \ud83d\udc3b\n\ndownload \ud83d\udc49 https://t.co/uXL5KRnDnc https://t.co/4I6hYwYgXn",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "2000567916702601624"
+          }
+        ],
+        "id": "2000568783203962986",
+        "public_metrics": {
+          "retweet_count": 12,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2025-12-15T14:09:01.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1998406895137427923"
+        ],
+        "text": "https://t.co/D3aPVSe8S7",
+        "article": {
+          "title": "Last (Couple of) Weeks on Bera"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/D3aPVSe8S7",
+              "expanded_url": "http://x.com/i/article/1998225007512809472",
+              "display_url": "x.com/i/article/1998\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/1998225007512809472"
+            }
+          ]
+        },
+        "id": "1998406895137427923",
+        "public_metrics": {
+          "retweet_count": 37,
+          "reply_count": 55,
+          "like_count": 208,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 30318
+        },
+        "created_at": "2025-12-09T14:58:27.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1996949050902356303"
+        ],
+        "text": "RT @Starglow_world: https://t.co/oUYdPhBftj",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1996932803242742036"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 20,
+              "end": 43,
+              "url": "https://t.co/oUYdPhBftj",
+              "expanded_url": "http://x.com/i/article/1996915707905474560",
+              "display_url": "x.com/i/article/1996\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/1996915707905474560"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 18,
+              "username": "Starglow_world",
+              "id": "1666309172932263941"
+            }
+          ]
+        },
+        "id": "1996949050902356303",
+        "public_metrics": {
+          "retweet_count": 31,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2025-12-05T14:25:29.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1993754263533834438"
+        ],
+        "text": "As a matter of principle, we do not negotiate with terrorists. \n\nUnless they happen to be the Steady Teddys in which case we will be happy to provide them with a customary \"Ted Bless\", though no promises will be made about the final rebase.\n \nTeddy Revenge Arc. https://t.co/lwvhVwgVxr",
+        "entities": {
+          "urls": [
+            {
+              "start": 262,
+              "end": 285,
+              "url": "https://t.co/lwvhVwgVxr",
+              "expanded_url": "https://x.com/berachain/status/1993754263533834438/photo/1",
+              "display_url": "pic.x.com/lwvhVwgVxr",
+              "media_key": "3_1993752819459928064"
+            }
+          ]
+        },
+        "id": "1993754263533834438",
+        "attachments": {
+          "media_keys": [
+            "3_1993752819459928064"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 41,
+          "reply_count": 102,
+          "like_count": 278,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 29084
+        },
+        "created_at": "2025-11-26T18:50:33.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1991227346087473568"
+        ],
+        "text": "https://t.co/2DvkzyUm7r",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1991227343323467968"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/2DvkzyUm7r",
+              "expanded_url": "https://x.com/berachain/status/1991227346087473568/photo/1",
+              "display_url": "pic.x.com/2DvkzyUm7r",
+              "media_key": "3_1991225200600293376"
+            }
+          ]
+        },
+        "id": "1991227346087473568",
+        "attachments": {
+          "media_keys": [
+            "3_1991225200600293376"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 2,
+          "like_count": 27,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 12164
+        },
+        "created_at": "2025-11-19T19:29:29.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "mentions": [
+              {
+                "start": 66,
+                "end": 73,
+                "username": "bgtfdn",
+                "id": "1882537618707001344"
+              },
+              {
+                "start": 191,
+                "end": 201,
+                "username": "TermMaxFi",
+                "id": "1597057363697360897"
+              },
+              {
+                "start": 240,
+                "end": 250,
+                "username": "0xBeraPaw",
+                "id": "1793727751721017344"
+              }
+            ],
+            "urls": [
+              {
+                "start": 283,
+                "end": 306,
+                "url": "https://t.co/ieGQF7OQm7",
+                "expanded_url": "https://blog.berachain.com/blog/berachain-governance-update-rfrv-batches-33-approved",
+                "display_url": "blog.berachain.com/blog/berachain\u2026"
+              }
+            ]
+          },
+          "text": "Decisions on the latest batch of RFRVs have been delivered by the @bgtfdn on behalf of the Guardians.\n\nTwo new non-DEX vaults were approved this week, introducing boosted HONEY yield through @TermMaxFi and expanded liquidity incentives for @0xBeraPaw\u2019s BERA derivatives.\n\nRead more: https://t.co/ieGQF7OQm7"
+        },
+        "edit_history_tweet_ids": [
+          "1991227343323467968"
+        ],
+        "text": "Decisions on the latest batch of RFRVs have been delivered by the @bgtfdn on behalf of the Guardians.\n\nTwo new non-DEX vaults were approved this week, introducing boosted HONEY yield through @TermMaxFi and expanded liquidity incentives for @0xBeraPaw\u2019s BERA derivatives.\n\nRead https://t.co/wfWaf6ec6Q",
+        "entities": {
+          "urls": [
+            {
+              "start": 277,
+              "end": 300,
+              "url": "https://t.co/wfWaf6ec6Q",
+              "expanded_url": "https://x.com/berachain/status/1991227343323467968/photo/1",
+              "display_url": "pic.x.com/wfWaf6ec6Q",
+              "media_key": "3_1991225160129552385"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 66,
+              "end": 73,
+              "username": "bgtfdn",
+              "id": "1882537618707001344"
+            },
+            {
+              "start": 191,
+              "end": 201,
+              "username": "TermMaxFi",
+              "id": "1597057363697360897"
+            },
+            {
+              "start": 240,
+              "end": 250,
+              "username": "0xBeraPaw",
+              "id": "1793727751721017344"
+            }
+          ]
+        },
+        "id": "1991227343323467968",
+        "attachments": {
+          "media_keys": [
+            "3_1991225160129552385"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 18,
+          "reply_count": 28,
+          "like_count": 142,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 20810
+        },
+        "created_at": "2025-11-19T19:29:28.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1991172230030708755"
+        ],
+        "text": "https://t.co/L1ymcmBk9n",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1991172227673317698"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/L1ymcmBk9n",
+              "expanded_url": "https://x.com/berachain/status/1991172230030708755/photo/1",
+              "display_url": "pic.x.com/L1ymcmBk9n",
+              "media_key": "3_1991165819544305664"
+            }
+          ]
+        },
+        "id": "1991172230030708755",
+        "attachments": {
+          "media_keys": [
+            "3_1991165819544305664"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 1,
+          "like_count": 19,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7993
+        },
+        "created_at": "2025-11-19T15:50:28.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1991172227673317698"
+        ],
+        "text": "For the first time in its nearly 100-year history, SSC Napoli has launched an official fan community connecting millions of supporters worldwide through exclusive content, match day rewards, and digital experiences. Built on Berachain.\n\nhttps://t.co/0irHAcjAXp",
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "1991129335152226389"
+          },
+          {
+            "type": "replied_to",
+            "id": "1991172225207300286"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 237,
+              "end": 260,
+              "url": "https://t.co/0irHAcjAXp",
+              "expanded_url": "https://x.com/sscnapoli/status/1991129335152226389",
+              "display_url": "x.com/sscnapoli/stat\u2026"
+            }
+          ]
+        },
+        "id": "1991172227673317698",
+        "public_metrics": {
+          "retweet_count": 9,
+          "reply_count": 2,
+          "like_count": 58,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 14039
+        },
+        "created_at": "2025-11-19T15:50:27.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1991172225207300286"
+        ],
+        "text": "A century of history. Millions of fans.\nSono Napoletano. Sono Berachain.\n\nBerachain Builds Businesses. https://t.co/bWNUqIGryY",
+        "entities": {
+          "urls": [
+            {
+              "start": 103,
+              "end": 126,
+              "url": "https://t.co/bWNUqIGryY",
+              "expanded_url": "https://x.com/berachain/status/1991172225207300286/video/1",
+              "display_url": "pic.x.com/bWNUqIGryY",
+              "media_key": "13_1991164714500390912"
+            }
+          ]
+        },
+        "id": "1991172225207300286",
+        "attachments": {
+          "media_keys": [
+            "13_1991164714500390912"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 38,
+          "reply_count": 38,
+          "like_count": 215,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 22638
+        },
+        "created_at": "2025-11-19T15:50:27.000Z"
+      },
+      {
+        "entities": {
+          "cashtags": [
+            {
+              "start": 93,
+              "end": 98,
+              "tag": "BERA"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "plutus_fi_x",
+              "id": "1486722738349752337"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1990873547204329931"
+        ],
+        "text": "RT @plutus_fi_x: plsBERA IS NOW LIVE \ud83d\udc3b\n\nPapa steps into the den with an upgraded way to hold $BERA, liquid, over-collateralized, and built\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1990857543325716539"
+          }
+        ],
+        "id": "1990873547204329931",
+        "public_metrics": {
+          "retweet_count": 36,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "created_at": "2025-11-18T20:03:36.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1990846414109163574"
+        ],
+        "text": "RT @0xStableFlow: StableFlow now supports @berachain.\n\nTransfer up to $1M+ USD for a fraction of a cent.\n\nBuilt for scale. Accessible to al\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1990843618094166407"
+          }
+        ],
+        "id": "1990846414109163574",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 16,
+              "username": "0xStableFlow",
+              "id": "1975135343956357120"
+            },
+            {
+              "start": 42,
+              "end": 52,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 23,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2025-11-18T18:15:47.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1990805121677369512"
+        ],
+        "text": "https://t.co/p0DURrilKB",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1990805119835791393"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/p0DURrilKB",
+              "expanded_url": "https://x.com/berachain/status/1990805121677369512/photo/1",
+              "display_url": "pic.x.com/p0DURrilKB",
+              "media_key": "3_1990804968186454017"
+            }
+          ]
+        },
+        "id": "1990805121677369512",
+        "attachments": {
+          "media_keys": [
+            "3_1990804968186454017"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 1,
+          "like_count": 13,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5909
+        },
+        "created_at": "2025-11-18T15:31:43.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 444,
+                "end": 467,
+                "url": "https://t.co/OeBe4PYY7a",
+                "expanded_url": "https://hub.berachain.com/pools/recover-funds/",
+                "display_url": "hub.berachain.com/pools/recover-\u2026"
+              }
+            ]
+          },
+          "text": "If you had funds on BEX during the Balancer incident, please check your status.\n\nThe vast majority of impacted stablecoin funds on BEX have now been claimed.\n\nFor ETH and BERA pools, recovered funds are also available. Over 90% of ETH has been claimed, but only about 40% of BERA has been, so please confirm your status if you deposited into those pools.\n\nPlease visit the claims page to review your expected holdings and complete the process: https://t.co/OeBe4PYY7a"
+        },
+        "edit_history_tweet_ids": [
+          "1990805119835791393"
+        ],
+        "text": "If you had funds on BEX during the Balancer incident, please check your status.\n\nThe vast majority of impacted stablecoin funds on BEX have now been claimed.\n\nFor ETH and BERA pools, recovered funds are also available. Over 90% of ETH has been claimed, but only about 40% of BERA",
+        "id": "1990805119835791393",
+        "public_metrics": {
+          "retweet_count": 21,
+          "reply_count": 12,
+          "like_count": 117,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 12210
+        },
+        "created_at": "2025-11-18T15:31:42.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1990522541249867853"
+        ],
+        "text": "https://t.co/OI8lWNxil3",
+        "article": {
+          "title": "Last Week on Bera"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/OI8lWNxil3",
+              "expanded_url": "http://x.com/i/article/1990522001895927808",
+              "display_url": "x.com/i/article/1990\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/1990522001895927808"
+            }
+          ]
+        },
+        "id": "1990522541249867853",
+        "public_metrics": {
+          "retweet_count": 25,
+          "reply_count": 16,
+          "like_count": 124,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 13968
+        },
+        "created_at": "2025-11-17T20:48:50.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1989011787618963947"
+        ],
+        "text": "https://t.co/eCjdU96kDi",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1989011785903448486"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/eCjdU96kDi",
+              "expanded_url": "https://x.com/berachain/status/1989011787618963947/photo/1",
+              "display_url": "pic.x.com/eCjdU96kDi",
+              "media_key": "3_1989011374001819648"
+            }
+          ]
+        },
+        "id": "1989011787618963947",
+        "attachments": {
+          "media_keys": [
+            "3_1989011374001819648"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 4,
+          "reply_count": 0,
+          "like_count": 15,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6257
+        },
+        "created_at": "2025-11-13T16:45:38.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1989011785903448486"
+        ],
+        "text": "Then, on Friday, 11/21 join us for another edition of BlockMitzvah. A community favorite and one of the best ways to meet builders across the ecosystem.\n\nRSVP: https://t.co/RSUh0qWCCi",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1989011784217362586"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 160,
+              "end": 183,
+              "url": "https://t.co/RSUh0qWCCi",
+              "expanded_url": "https://luma.com/amki6n9g",
+              "display_url": "luma.com/amki6n9g",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/1994388590789591040/7kAEExXP?format=jpg&name=orig",
+                  "width": 800,
+                  "height": 419
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/1994388590789591040/7kAEExXP?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "BlockMitzvah @ Devcon Argentina - Shabbat Dinner \u00b7 Luma",
+              "description": "Event is on 2nd Floor. Entrance to the event is at the back security gate of LaRural. Uber drop-off is on the corner. Can use Google Maps to walk to the\u2026",
+              "unwound_url": "https://luma.com/amki6n9g"
+            }
+          ]
+        },
+        "id": "1989011785903448486",
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 5,
+          "like_count": 37,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6923
+        },
+        "created_at": "2025-11-13T16:45:38.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1989011784217362586"
+        ],
+        "text": "If you\u2019re in town early, @WPReadingClub is hosting a deep-dive with @rezmah on Sunday, 11/16. \n\nGet a technical walkthrough of preconfirmations on Berachain and a discussion on where high-performance infra is heading.\n\nRSVP: https://t.co/z2zLOsBhm2",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1989011782094979391"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 225,
+              "end": 248,
+              "url": "https://t.co/z2zLOsBhm2",
+              "expanded_url": "https://luma.com/75hfttg5",
+              "display_url": "luma.com/75hfttg5",
+              "status": 200,
+              "unwound_url": "https://luma.com/75hfttg5"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 25,
+              "end": 39,
+              "username": "WPReadingClub",
+              "id": "1754396671403081728"
+            },
+            {
+              "start": 68,
+              "end": 75,
+              "username": "rezmah",
+              "id": "1229342417695862785"
+            }
+          ]
+        },
+        "id": "1989011784217362586",
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 11,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 628
+        },
+        "created_at": "2025-11-13T16:45:38.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "mentions": [
+              {
+                "start": 36,
+                "end": 52,
+                "username": "GrizzlyBera2025",
+                "id": "1881413536296935424"
+              },
+              {
+                "start": 258,
+                "end": 274,
+                "username": "InfraredFinance",
+                "id": "1712121986346893312"
+              },
+              {
+                "start": 279,
+                "end": 288,
+                "username": "KodiakFi",
+                "id": "1655598345325346818"
+              }
+            ],
+            "urls": [
+              {
+                "start": 389,
+                "end": 412,
+                "url": "https://t.co/QRVD4B89K9",
+                "expanded_url": "https://luma.com/yd8b7thy",
+                "display_url": "luma.com/yd8b7thy"
+              }
+            ]
+          },
+          "text": "Hear directly from Berachain's CTO, @GrizzlyBera2025, and core devs on what\u2019s shipping next.\n\nPanelists will dig into PoL in production, upgrades to Honey and BEND, and new tooling that makes it easier to acquire and retain users. \n\nTop eco teams, including @InfraredFinance and @KodiakFi, will share how it all works in practice as they turn products into businesses on Berachain.\n\nRSVP: https://t.co/QRVD4B89K9"
+        },
+        "edit_history_tweet_ids": [
+          "1989011782094979391"
+        ],
+        "text": "Hear directly from Berachain's CTO, @GrizzlyBera2025, and core devs on what\u2019s shipping next.\n\nPanelists will dig into PoL in production, upgrades to Honey and BEND, and new tooling that makes it easier to acquire and retain users. \n\nTop eco teams, including @InfraredFinance and https://t.co/HVK0f9i7AK",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1989011779960074273"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 279,
+              "end": 302,
+              "url": "https://t.co/HVK0f9i7AK",
+              "expanded_url": "https://x.com/berachain/status/1989011782094979391/photo/1",
+              "display_url": "pic.x.com/HVK0f9i7AK",
+              "media_key": "3_1989011202463186944"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 36,
+              "end": 52,
+              "username": "GrizzlyBera2025",
+              "id": "1881413536296935424"
+            },
+            {
+              "start": 258,
+              "end": 274,
+              "username": "InfraredFinance",
+              "id": "1712121986346893312"
+            }
+          ]
+        },
+        "id": "1989011782094979391",
+        "attachments": {
+          "media_keys": [
+            "3_1989011202463186944"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 1,
+          "reply_count": 1,
+          "like_count": 11,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 902
+        },
+        "created_at": "2025-11-13T16:45:37.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1989011779960074273"
+        ],
+        "text": "We\u2019re taking Bera Summit to the Hip\u00f3dromo de Palermo, one of BA\u2019s most iconic venues.\n\nNov 19. A full day on what\u2019s new, what\u2019s coming, and who\u2019s building. Happy hour after.\n\nVamos. https://t.co/HGQshXTwmB",
+        "entities": {
+          "urls": [
+            {
+              "start": 182,
+              "end": 205,
+              "url": "https://t.co/HGQshXTwmB",
+              "expanded_url": "https://x.com/berachain/status/1989011779960074273/video/1",
+              "display_url": "pic.x.com/HGQshXTwmB",
+              "media_key": "13_1989002395255218176"
+            }
+          ]
+        },
+        "id": "1989011779960074273",
+        "attachments": {
+          "media_keys": [
+            "13_1989002395255218176"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 31,
+          "reply_count": 27,
+          "like_count": 173,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 22397
+        },
+        "created_at": "2025-11-13T16:45:37.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 689,
+                "end": 712,
+                "url": "https://t.co/OeBe4PYY7a",
+                "expanded_url": "https://hub.berachain.com/pools/recover-funds/",
+                "display_url": "hub.berachain.com/pools/recover-\u2026"
+              }
+            ]
+          },
+          "text": "Affected stable pools on the BEX have been placed into emergency withdrawal mode, following best guidance from the Balancer team. \n\nThis allows existing LPs to safely withdraw their funds, though the pools are not active, and deposits are not enabled. Noting that the Balancer team is still in the process of identifying potential vulnerabilities, the BEX vault and weighted pools remain paused, with withdrawals to be enabled as those investigations conclude.\n\nIn the interim, claims for users affected by the Balancer exploit (funds that were removed from the BEX and published in the CSV article) are now live. \n\nYou may use the BEX Incident Recovery Site to reclaim your funds here: \n\nhttps://t.co/OeBe4PYY7a\n\nIf you experience any issues, please leave a ticket in Discord and our mod team will escalate accordingly.\n\nPlease note that the Foundation + team member accounts are still experiencing some issues due to the Yubikey bug affecting X at the moment, and bear with any slow responses.\n\nThanks in advance everyone who helped us get this handled!"
+        },
+        "edit_history_tweet_ids": [
+          "1988749591517294797"
+        ],
+        "text": "Affected stable pools on the BEX have been placed into emergency withdrawal mode, following best guidance from the Balancer team. \n\nThis allows existing LPs to safely withdraw their funds, though the pools are not active, and deposits are not enabled. Noting that the Balancer",
+        "id": "1988749591517294797",
+        "public_metrics": {
+          "retweet_count": 49,
+          "reply_count": 67,
+          "like_count": 303,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 174543
+        },
+        "created_at": "2025-11-12T23:23:46.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1987993368505577765"
+        ],
+        "text": "https://t.co/mRXOtT6wMG",
+        "article": {
+          "title": "Recovered BEX Funds CSV"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/mRXOtT6wMG",
+              "expanded_url": "http://x.com/i/article/1986941043317874689",
+              "display_url": "x.com/i/article/1986\u2026",
+              "status": 500,
+              "unwound_url": "http://x.com/i/article/1986941043317874689"
+            }
+          ]
+        },
+        "id": "1987993368505577765",
+        "public_metrics": {
+          "retweet_count": 56,
+          "reply_count": 23,
+          "like_count": 245,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 26375
+        },
+        "created_at": "2025-11-10T21:18:48.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1986952318068146323"
+        ],
+        "text": "https://t.co/yW95Bm9SkD",
+        "article": {
+          "title": "BEX Incident Post-Mortem"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/yW95Bm9SkD",
+              "expanded_url": "http://x.com/i/article/1986941259475542016",
+              "display_url": "x.com/i/article/1986\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/1986941259475542016"
+            }
+          ]
+        },
+        "id": "1986952318068146323",
+        "public_metrics": {
+          "retweet_count": 41,
+          "reply_count": 30,
+          "like_count": 279,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 28870
+        },
+        "created_at": "2025-11-08T00:22:03.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1986477604656865553"
+        ],
+        "text": "As a point of clarification - the remaining 4% is still in pools in the BEX to be unlocked next week.",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1986476821005603295"
+          }
+        ],
+        "id": "1986477604656865553",
+        "public_metrics": {
+          "retweet_count": 7,
+          "reply_count": 10,
+          "like_count": 90,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 11867
+        },
+        "created_at": "2025-11-06T16:55:42.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1986476821005603295"
+        ],
+        "note_tweet": {
+          "text": "Early next week, we expect to launch a claims page, allowing anyone who lost funds in the Balancer v2 / BEX exploit to reclaim their deposits from the BEX. \n\nFor anyone who deposited through a vault contract (ie. Infrared), your original address used for the deposit (into Infrared etc) will be able to claim the funds directly. \n\nIn the meantime, a CSV will be published with all wallets and their expected claimable holdings. All recovered funds will be returned to users. We believe these to be equivalent to approximately 96% of the deposited value in most pools.\n\nFor funds which remain in the BEX, we expect to perform an additional hard fork later next week to unblock the BEX contracts at the VM level, then follow a similar process to Balancer's most recent communications in terms of enabling Recovery Mode on Composable Stable v6 pools, and re-enabling the use of non-Composable Stable Pools. More info to come on this in the near future.\n\nThanks in advance for your support and patience as we get funds back to users in the safest manner possible. \n\nBerachain."
+        },
+        "text": "Early next week, we expect to launch a claims page, allowing anyone who lost funds in the Balancer v2 / BEX exploit to reclaim their deposits from the BEX. \n\nFor anyone who deposited through a vault contract (ie. Infrared), your original address used for the deposit (into",
+        "id": "1986476821005603295",
+        "public_metrics": {
+          "retweet_count": 33,
+          "reply_count": 39,
+          "like_count": 266,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 42319
+        },
+        "created_at": "2025-11-06T16:52:35.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 147,
+                "end": 170,
+                "url": "https://t.co/GfbfjJTVLh",
+                "expanded_url": "https://debank.com/profile/0xd276d30592be512a418f2448e23f9e7f372b32a2",
+                "display_url": "debank.com/profile/0xd276\u2026"
+              }
+            ]
+          },
+          "text": "We are happy to confirm that all funds (approx $12.8m) from the BEX / Balancer v2 exploit have been returned to the Berachain Foundation Deployer (https://t.co/GfbfjJTVLh). Chain is live.\n\nWe'd like to thank the white hat who worked with us to make this happen - we'll ensure that his wallet is unlabelled as malicious, and work towards a potential bounty as a sign of our appreciation.\n\nHONEY mint/redeem has also been unpaused accordingly, while all BEX functionality has been limited, including swaps, withdrawals, deposits, etc.\n\nYou should expect to see some irregularities in reported APRs etc across the chain, as BGT and incentives have not been flowing for 24hrs.\n\nWe will be working with infra providers to ensure that key infra is up to date (RPCs, oracles, dev tooling, block explorers etc) over the next few hours, at which point we'll proceed with more detailed comms about next steps. \n\nReturn of funds:\nThere were originally over 1000+ depositors in some of the exploited pools (ie. iBERA), while others like USDe were much more concentrated. \n\nFor the exploited pools with large numbers of individual depositors, the Berachain core team is currently producing a system that will attribute the deposits to their original addresses, and distribute to users accordingly. Please bear with us as we ensure that this is carried out in a diligent and safe manner over the coming days.\n\nPlease note that for users with non-exploited deposits in the BEX right now, funds cannot be withdrawn. This has been done out of an abundance of caution as the cause of the Balancer exploit is still not fully known.  We will track the situation closely and follow Balancer's lead to make sure that funds can be safely withdrawn / returned to users ASAP.\n\nThanks once again for everyone's support and patience here. We're doing our best to be diligent and communicative in this process, and will continue to get people up to speed as we ensure that functionality across all aspects of the chain is restored.\n\nBerachain."
+        },
+        "edit_history_tweet_ids": [
+          "1985742874361651206"
+        ],
+        "text": "We are happy to confirm that all funds (approx $12.8m) from the BEX / Balancer v2 exploit have been returned to the Berachain Foundation Deployer (https://t.co/HjCONAGpOZ). Chain is live.\n\nWe'd like to thank the white hat who worked with us to make this happen - we'll ensure that",
+        "entities": {
+          "urls": [
+            {
+              "start": 147,
+              "end": 170,
+              "url": "https://t.co/HjCONAGpOZ",
+              "expanded_url": "https://debank.com/profile/0xd276d30592be512a418f2448e23f9e7f372b32a2",
+              "display_url": "debank.com/profile/0xd276\u2026",
+              "images": [
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029505493253918720/z5mO74FP?format=jpg&name=orig",
+                  "width": 1032,
+                  "height": 540
+                },
+                {
+                  "url": "https://pbs.twimg.com/news_img/2029505493253918720/z5mO74FP?format=jpg&name=150x150",
+                  "width": 150,
+                  "height": 150
+                }
+              ],
+              "status": 200,
+              "title": "DeBank | Your go-to portfolio tracker for Ethereum and EVM",
+              "description": "Your go-to portfolio tracker for Ethereum and EVM",
+              "unwound_url": "https://debank.com/profile/0xd276d30592be512a418f2448e23f9e7f372b32a2"
+            }
+          ]
+        },
+        "id": "1985742874361651206",
+        "public_metrics": {
+          "retweet_count": 108,
+          "reply_count": 177,
+          "like_count": 730,
+          "quote_count": 72,
+          "bookmark_count": 34,
+          "impression_count": 427510
+        },
+        "created_at": "2025-11-04T16:16:09.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1985669972287230301"
+        ],
+        "note_tweet": {
+          "text": "Bera core update: \n\nThe majority of key partners are ready to go with the exception of a single oracle provider. Given the recent issues around Stream/Elixir etc, oracle providers have been especially slammed over the past 24 hours. They are hoping to be live within hours. We will provide updates again here once they are live, and the chain is producing blocks.\n\nIn the interim, the team has verified and received pre-signed transactions from the white hat who currently holds the misappropriated BEX funds. These transactions will transfer the BEX funds from the white hat to the Foundation deployer wallet once the chain starts producing blocks again, without any further dependencies on the white hat. We will update the community upon a hopeful successful recovery.\n\nThank you again for your patience. We're in the final stretches of returning the eco to business as usual while maximizing security.\n\nBerachain."
+        },
+        "text": "Bera core update: \n\nThe majority of key partners are ready to go with the exception of a single oracle provider. Given the recent issues around Stream/Elixir etc, oracle providers have been especially slammed over the past 24 hours. They are hoping to be live within hours. We",
+        "id": "1985669972287230301",
+        "public_metrics": {
+          "retweet_count": 35,
+          "reply_count": 72,
+          "like_count": 383,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 47082
+        },
+        "created_at": "2025-11-04T11:26:28.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 1070,
+                "end": 1093,
+                "url": "https://t.co/v6bLhUW1xA",
+                "expanded_url": "https://etherscan.io/tx/0xcfb45fa2f74d5cc24f35fbad2144ad6c914da5d4bba816bb01ce89ce306476c6",
+                "display_url": "etherscan.io/tx/0xcfb45fa2f\u2026"
+              },
+              {
+                "start": 1094,
+                "end": 1117,
+                "url": "https://t.co/dcfzQeEE97",
+                "expanded_url": "https://etherscan.io/tx/0x4de28b39a04d5b1ec6d1a81d1ba0b1708e0947f0fa89915d8695af81124496cb",
+                "display_url": "etherscan.io/tx/0x4de28b39a\u2026"
+              }
+            ]
+          },
+          "text": "Bera core update:\n\nThe binary for the hard fork has been circulated and many of the validators have upgraded. Prior to going live and producing blocks once again, we'd like to ensure that core infrastructure partners necessary for chain operations (oracles for liquidations etc) have updated their RPCs, so at this point they will be our main blocker to resuming liveness.\n\nFollowing the RPCs for core services, we'll look to coordinate with bridges, CEX partners, custodians etc to restore service. \n\nWe're also in conversation with the current holder of the BEX funds, a MEV bot operator who has been live on Berachain for a few months. He has indicated that he is a white hat, and is willing to pre-sign a set of transactions to transfer the funds back upon the chain going live. \n\nIn accordance to our communications with the whitehat, we're confirming that funds should be returned to 0xD276D30592bE512a418f2448e23f9E7F372b32A2, the Berachain deployer address. The deployer address has also sent messages onchain to indicate that this procedure is to be followed.\n\nhttps://t.co/v6bLhUW1xA\nhttps://t.co/dcfzQeEE97\n\nOnce the chain is live again, we will also provide a rundown of the various safety measures implemented across the BEX, other core apps, and Berachain as a whole. The team will also provide further information on future facing plans for BEX and any other expected second order effects from the last 24 hours.\n\nThanks in advance once again for all of your support and understanding as we work to recover funds and maximize user safety.\n\nBerachain"
+        },
+        "edit_history_tweet_ids": [
+          "1985520815677288529"
+        ],
+        "text": "Bera core update:\n\nThe binary for the hard fork has been circulated and many of the validators have upgraded. Prior to going live and producing blocks once again, we'd like to ensure that core infrastructure partners necessary for chain operations (oracles for liquidations etc)",
+        "id": "1985520815677288529",
+        "public_metrics": {
+          "retweet_count": 39,
+          "reply_count": 308,
+          "like_count": 320,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 138453
+        },
+        "created_at": "2025-11-04T01:33:46.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "urls": [
+              {
+                "start": 1332,
+                "end": 1355,
+                "url": "https://t.co/ZSmCCAjCEe",
+                "expanded_url": "https://bscscan.com/tx/0xc895a996ebec8feed992b9a579ca13250d160b65fe54284b01ddd64297dd62bf",
+                "display_url": "bscscan.com/tx/0xc895a996e\u2026"
+              },
+              {
+                "start": 1356,
+                "end": 1379,
+                "url": "https://t.co/zYQpmN4HEj",
+                "expanded_url": "https://bscscan.com/tx/0x5bf570f5f6e241b69e3eb89e8454860506166231992f32ef0a216243334b7d97",
+                "display_url": "bscscan.com/tx/0x5bf570f5f\u2026"
+              }
+            ]
+          },
+          "text": "Updates from Bera Core:\n\nA binary has been cut to prevent the addresses holding funds which were taken from the BEX pools from transferring any tokens anywhere else, with the sole \"whitelisted destination\" of an address belonging to the Foundation. \n\nThis binary will also enforce changes to the BEX pools to prevent token transfers / further limit the ability for potential attackers to steal additional funds. The team has consulted with Zeroshadow, Cantina, Zenith, and other builders in the Balancer/adjacent ecosystems prior to pushing this fix, with helpful suggestions from the Seal 911 team as well.\u00a0 However, it is important to note that at this moment, there is no definitive answer to this morning's exploit. In the future, we hope to follow Balancer's lead once they have identified a long term risk mitigation approach, and expect to keep the BEX paused in the interim.\n\nThis hard fork will likely roll out in the coming hours, and we will update here upon its completion. This will serve to get the chain live ASAP while safeguarding user funds.\n\nIn the interim, a group with a history of operating MEV bots on Berachain who is tangentially known to team members has reached out following the chain suspension, indicating that their bots \"whitehatted\" the funds. They have sent on chain messages to the same extent at\nhttps://t.co/ZSmCCAjCEe\nhttps://t.co/zYQpmN4HEj\nOut of an abundance of caution, the aforementioned transfer limitations will be kept in place on these addresses. We believe that if they are infact white hats, they will send the funds to the Foundation wallet upon the chain restarting. We are encouraged by their outreach, and hope to work together to safely return funds. We hope to verify their statuses as white hats upon return.\n\nIf they do not return funds, we expect to coordinate with the validator set to facilitate a fast-follow hard fork within the coming hours/days to return the funds forcibly. As we are dealing with non-native assets, this is a more complex process.\n\nThe near term goals are to:\na) Ensure that no exploited user funds leave Berachain, and are safely returned to LPs asap.\nb) Prevent further exploits on BEX\n\nWe appreciate the community's patience and understanding as we navigate this process with as much caution as possible, while noting that root causes of the exploit are still not fully understood. With that being said, the goal is to always do right by our users. \n\nThanks in advance!\n\nBerachain."
+        },
+        "edit_history_tweet_ids": [
+          "1985380167036829860"
+        ],
+        "text": "Updates from Bera Core:\n\nA binary has been cut to prevent the addresses holding funds which were taken from the BEX pools from transferring any tokens anywhere else, with the sole \"whitelisted destination\" of an address belonging to the Foundation. \n\nThis binary will also enforce",
+        "id": "1985380167036829860",
+        "public_metrics": {
+          "retweet_count": 45,
+          "reply_count": 59,
+          "like_count": 407,
+          "quote_count": 17,
+          "bookmark_count": 20,
+          "impression_count": 67563
+        },
+        "created_at": "2025-11-03T16:14:53.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1985294280441704614"
+        ],
+        "note_tweet": {
+          "text": "As context, the exploit primarily affected the Ethena/Honey tripool through a relatively complicated smart contract transaction. \n\nGiven that it affected non-native assets (not just BERA), the rollback/rollforward involves more than a simple hardfork, hence the halt as a full solution is finalized."
+        },
+        "text": "As context, the exploit primarily affected the Ethena/Honey tripool through a relatively complicated smart contract transaction. \n\nGiven that it affected non-native assets (not just BERA), the rollback/rollforward involves more than a simple hardfork, hence the halt as a full",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1985288599152042101"
+          }
+        ],
+        "id": "1985294280441704614",
+        "public_metrics": {
+          "retweet_count": 8,
+          "reply_count": 7,
+          "like_count": 137,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 37531
+        },
+        "created_at": "2025-11-03T10:33:36.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1985288599152042101"
+        ],
+        "note_tweet": {
+          "text": "The Berachain validators have coordinated to purposefully halt the Berachain network as the core team performs an emergency hard fork to address Balancer V2 related exploits on the BEX. \n\nThis halt has been executed purposefully, and the network will be operational shortly upon recovering all affected funds.\n\nThank you in advance for your understanding, and expect more updates and a full retro soon."
+        },
+        "text": "The Berachain validators have coordinated to purposefully halt the Berachain network as the core team performs an emergency hard fork to address Balancer V2 related exploits on the BEX. \n\nThis halt has been executed purposefully, and the network will be operational shortly upon",
+        "id": "1985288599152042101",
+        "public_metrics": {
+          "retweet_count": 105,
+          "reply_count": 182,
+          "like_count": 925,
+          "quote_count": 202,
+          "bookmark_count": 0,
+          "impression_count": 674407
+        },
+        "created_at": "2025-11-03T10:11:01.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1985271759076045159"
+        ],
+        "note_tweet": {
+          "text": "We've been aware of the ongoing Balancer exploit for the past 45 minutes, and are taking precautions to avoid any potential damage to the Berachain ecosystem, especially the BEX.\n\nHONEY minting and BEX pools / vaults have been paused in the interim.\n\nWe'll continue to update shortly, thanks to all for the patience and inbounds."
+        },
+        "text": "We've been aware of the ongoing Balancer exploit for the past 45 minutes, and are taking precautions to avoid any potential damage to the Berachain ecosystem, especially the BEX.\n\nHONEY minting and BEX pools / vaults have been paused in the interim.\n\nWe'll continue to update",
+        "id": "1985271759076045159",
+        "public_metrics": {
+          "retweet_count": 29,
+          "reply_count": 29,
+          "like_count": 288,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 52231
+        },
+        "created_at": "2025-11-03T09:04:06.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1984254401259896867"
+        ],
+        "text": "https://t.co/8jCorHZYxL",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1984254398814622147"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/8jCorHZYxL",
+              "expanded_url": "https://x.com/berachain/status/1984254401259896867/photo/1",
+              "display_url": "pic.x.com/8jCorHZYxL",
+              "media_key": "3_1984253207711723520"
+            }
+          ]
+        },
+        "id": "1984254401259896867",
+        "attachments": {
+          "media_keys": [
+            "3_1984253207711723520"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 3,
+          "reply_count": 1,
+          "like_count": 15,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7732
+        },
+        "created_at": "2025-10-31T13:41:29.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1984254398814622147"
+        ],
+        "text": "The bears are back for blood.\n\nHappy Beraween. https://t.co/qXgyXU5DFw",
+        "entities": {
+          "urls": [
+            {
+              "start": 47,
+              "end": 70,
+              "url": "https://t.co/qXgyXU5DFw",
+              "expanded_url": "https://x.com/berachain/status/1984254398814622147/photo/1",
+              "display_url": "pic.x.com/qXgyXU5DFw",
+              "media_key": "3_1984254196112039936"
+            }
+          ]
+        },
+        "id": "1984254398814622147",
+        "attachments": {
+          "media_keys": [
+            "3_1984254196112039936"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 37,
+          "reply_count": 42,
+          "like_count": 268,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 17034
+        },
+        "created_at": "2025-10-31T13:41:28.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1983556136532938768"
+        ],
+        "text": "RT @seedclub: TODAY. THE FAT BERA THESIS. TOKEN ECONOMIES. TYPE TO DEPLOY TOKENS, MARKETS, IDEAS.\n\n11AM ET w/\n\n@SmokeyTheBera of @beracha\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1983544350974865490"
+          }
+        ],
+        "id": "1983556136532938768",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 12,
+              "username": "seedclub",
+              "id": "1298469241767649280"
+            },
+            {
+              "start": 111,
+              "end": 125,
+              "username": "SmokeyTheBera",
+              "id": "1472789316292296707"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 12,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 2
+        },
+        "created_at": "2025-10-29T15:26:50.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1983316526657913050"
+        ],
+        "text": "no? couldn't be me.",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1983316523780583634"
+          }
+        ],
+        "id": "1983316526657913050",
+        "public_metrics": {
+          "retweet_count": 5,
+          "reply_count": 1,
+          "like_count": 40,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7026
+        },
+        "created_at": "2025-10-28T23:34:42.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1983316523780583634"
+        ],
+        "text": "you ever just wake up and hit that https://t.co/UIs5XUnXuX",
+        "entities": {
+          "urls": [
+            {
+              "start": 35,
+              "end": 58,
+              "url": "https://t.co/UIs5XUnXuX",
+              "expanded_url": "https://x.com/berachain/status/1983316523780583634/photo/1",
+              "display_url": "pic.x.com/UIs5XUnXuX",
+              "media_key": "3_1983316355987451906"
+            }
+          ]
+        },
+        "id": "1983316523780583634",
+        "attachments": {
+          "media_keys": [
+            "3_1983316355987451906"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 37,
+          "reply_count": 46,
+          "like_count": 215,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 17688
+        },
+        "created_at": "2025-10-28T23:34:42.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1982908880670564829"
+        ],
+        "text": "https://t.co/c3pVew1xXe",
+        "article": {
+          "title": "Last Week on Bera"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/c3pVew1xXe",
+              "expanded_url": "http://x.com/i/article/1982907691841531905",
+              "display_url": "x.com/i/article/1982\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/1982907691841531905"
+            }
+          ]
+        },
+        "id": "1982908880670564829",
+        "public_metrics": {
+          "retweet_count": 31,
+          "reply_count": 21,
+          "like_count": 187,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 18235
+        },
+        "created_at": "2025-10-27T20:34:52.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1981811061285372240"
+        ],
+        "text": "RT @metafide_ai: Berachain is now LIVE on SPOT ON, play zero-day options game on SURGE.\nMinting money with sweet honey.\n\nFor @berachain  ho\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1981803615301046645"
+          }
+        ],
+        "id": "1981811061285372240",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "metafide_ai",
+              "id": "1524124330027794440"
+            },
+            {
+              "start": 125,
+              "end": 135,
+              "username": "berachain",
+              "id": "1471917994762670081"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 89,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2025-10-24T19:52:31.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1981433970806890555"
+        ],
+        "text": "https://t.co/OQws1QNzae https://t.co/mz2d6C78jd",
+        "referenced_tweets": [
+          {
+            "type": "quoted",
+            "id": "1981433107896291352"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/OQws1QNzae",
+              "expanded_url": "https://x.com/berachain/status/1981433970806890555/video/1",
+              "display_url": "pic.x.com/OQws1QNzae",
+              "media_key": "13_1981433545479380992"
+            },
+            {
+              "start": 24,
+              "end": 47,
+              "url": "https://t.co/mz2d6C78jd",
+              "expanded_url": "https://twitter.com/berachaindevs/status/1981433107896291352",
+              "display_url": "x.com/berachaindevs/\u2026"
+            }
+          ]
+        },
+        "id": "1981433970806890555",
+        "attachments": {
+          "media_keys": [
+            "13_1981433545479380992"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 32,
+          "reply_count": 41,
+          "like_count": 240,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 28153
+        },
+        "created_at": "2025-10-23T18:54:06.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1981370004189667587"
+        ],
+        "text": "https://t.co/uyh4s1RrBy",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1981370002465857635"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/uyh4s1RrBy",
+              "expanded_url": "https://x.com/berachain/status/1981370004189667587/photo/1",
+              "display_url": "pic.x.com/uyh4s1RrBy",
+              "media_key": "3_1981369183003693056"
+            }
+          ]
+        },
+        "id": "1981370004189667587",
+        "attachments": {
+          "media_keys": [
+            "3_1981369183003693056"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 2,
+          "like_count": 18,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 6792
+        },
+        "created_at": "2025-10-23T14:39:55.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1981370002465857635"
+        ],
+        "text": "The mint fee for USDe to HONEY will be set to 0%, and the burn fee from HONEY back to USDe will be set to 0.05% in line with existing collaterals.\n\nTo learn more about HONEY and how its collateral works you can read the documentation:\n\nhttps://t.co/sbXB0yGvyQ",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1981369999370703223"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 236,
+              "end": 259,
+              "url": "https://t.co/sbXB0yGvyQ",
+              "expanded_url": "https://docs.berachain.com/learn/pol/tokens/honey",
+              "display_url": "docs.berachain.com/learn/pol/toke\u2026",
+              "status": 404,
+              "unwound_url": "https://docs.berachain.com/learn/pol/tokens/honey"
+            }
+          ]
+        },
+        "id": "1981370002465857635",
+        "public_metrics": {
+          "retweet_count": 6,
+          "reply_count": 7,
+          "like_count": 36,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7382
+        },
+        "created_at": "2025-10-23T14:39:55.000Z"
+      },
+      {
+        "entities": {
+          "cashtags": [
+            {
+              "start": 44,
+              "end": 49,
+              "tag": "USDe"
+            },
+            {
+              "start": 60,
+              "end": 66,
+              "tag": "HONEY"
+            }
+          ],
+          "urls": [
+            {
+              "start": 68,
+              "end": 91,
+              "url": "https://t.co/bfiKBCLKl9",
+              "expanded_url": "https://x.com/berachain/status/1981369999370703223/video/1",
+              "display_url": "pic.x.com/bfiKBCLKl9",
+              "media_key": "13_1981368906552844289"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1981369999370703223"
+        ],
+        "text": "Another drop of sweet liquidity. \n\nEthena's $USDe now backs $HONEY. https://t.co/bfiKBCLKl9",
+        "id": "1981369999370703223",
+        "attachments": {
+          "media_keys": [
+            "13_1981368906552844289"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 57,
+          "reply_count": 50,
+          "like_count": 382,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 44746
+        },
+        "created_at": "2025-10-23T14:39:54.000Z"
+      },
+      {
+        "entities": {
+          "cashtags": [
+            {
+              "start": 117,
+              "end": 122,
+              "tag": "BERA"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "BullaExchange",
+              "id": "1844150424066301952"
+            }
+          ]
+        },
+        "edit_history_tweet_ids": [
+          "1981051203552448935"
+        ],
+        "text": "RT @BullaExchange: \u2728BULLA PERPS DEX IS LIVE!\n\nOur new perps DEX allows you to 20x long your favorite coins including $BERA!\n\nDeposit $HONEY\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1981050622183920127"
+          }
+        ],
+        "id": "1981051203552448935",
+        "public_metrics": {
+          "retweet_count": 23,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2025-10-22T17:33:07.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1980747046756970880"
+        ],
+        "text": "https://t.co/XKNWI9rEq2",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1980747044190126541"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/XKNWI9rEq2",
+              "expanded_url": "https://x.com/berachain/status/1980747046756970880/photo/1",
+              "display_url": "pic.x.com/XKNWI9rEq2",
+              "media_key": "3_1980745938411864065"
+            }
+          ]
+        },
+        "id": "1980747046756970880",
+        "attachments": {
+          "media_keys": [
+            "3_1980745938411864065"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 5,
+          "like_count": 24,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 7456
+        },
+        "created_at": "2025-10-21T21:24:31.000Z"
+      },
+      {
+        "note_tweet": {
+          "entities": {
+            "mentions": [
+              {
+                "start": 201,
+                "end": 211,
+                "username": "0xBeraPaw",
+                "id": "1793727751721017344"
+              },
+              {
+                "start": 213,
+                "end": 224,
+                "username": "0xhoneyjar",
+                "id": "1610189982395670528"
+              },
+              {
+                "start": 226,
+                "end": 237,
+                "username": "beraborrow",
+                "id": "1749741017484378112"
+              },
+              {
+                "start": 239,
+                "end": 252,
+                "username": "deek_network",
+                "id": "1775443578535432192"
+              },
+              {
+                "start": 254,
+                "end": 270,
+                "username": "EdenWeb3_Global",
+                "id": "1780147690870816769"
+              },
+              {
+                "start": 272,
+                "end": 283,
+                "username": "HaikuTrade",
+                "id": "1434043542486327297"
+              },
+              {
+                "start": 285,
+                "end": 301,
+                "username": "InfraredFinance",
+                "id": "1712121986346893312"
+              },
+              {
+                "start": 303,
+                "end": 317,
+                "username": "itsgaribyours",
+                "id": "1958766153318461440"
+              },
+              {
+                "start": 319,
+                "end": 331,
+                "username": "LairFinance",
+                "id": "1796436549900603393"
+              },
+              {
+                "start": 333,
+                "end": 346,
+                "username": "moonieonbera",
+                "id": "1863909325036728320"
+              },
+              {
+                "start": 348,
+                "end": 359,
+                "username": "narralayer",
+                "id": "1768468916114710528"
+              },
+              {
+                "start": 361,
+                "end": 372,
+                "username": "terp_layer",
+                "id": "1498908525279387648"
+              }
+            ]
+          },
+          "text": "The magic of Berachain was alive at Bera Summit Singapore.\n\nOver 600 attendees explored the ecosystem at the Museum of Ice Cream through hands-on demos and interactive experiences from teams including @0xBeraPaw, @0xhoneyjar, @beraborrow, @deek_network, @EdenWeb3_Global, @HaikuTrade, @InfraredFinance, @itsgaribyours, @LairFinance, @moonieonbera, @narralayer, @terp_layer, and more."
+        },
+        "edit_history_tweet_ids": [
+          "1980747044190126541"
+        ],
+        "text": "The magic of Berachain was alive at Bera Summit Singapore.\n\nOver 600 attendees explored the ecosystem at the Museum of Ice Cream through hands-on demos and interactive experiences from teams including @0xBeraPaw, @0xhoneyjar, @beraborrow, @deek_network, @EdenWeb3_Global, https://t.co/bjk8WIdUaH",
+        "entities": {
+          "urls": [
+            {
+              "start": 272,
+              "end": 295,
+              "url": "https://t.co/bjk8WIdUaH",
+              "expanded_url": "https://x.com/berachain/status/1980747044190126541/video/1",
+              "display_url": "pic.x.com/bjk8WIdUaH",
+              "media_key": "13_1980744727671554048"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 201,
+              "end": 211,
+              "username": "0xBeraPaw",
+              "id": "1793727751721017344"
+            },
+            {
+              "start": 213,
+              "end": 224,
+              "username": "0xhoneyjar",
+              "id": "1610189982395670528"
+            },
+            {
+              "start": 226,
+              "end": 237,
+              "username": "beraborrow",
+              "id": "1749741017484378112"
+            },
+            {
+              "start": 239,
+              "end": 252,
+              "username": "deek_network",
+              "id": "1775443578535432192"
+            },
+            {
+              "start": 254,
+              "end": 270,
+              "username": "EdenWeb3_Global",
+              "id": "1780147690870816769"
+            }
+          ]
+        },
+        "id": "1980747044190126541",
+        "attachments": {
+          "media_keys": [
+            "13_1980744727671554048"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 60,
+          "reply_count": 62,
+          "like_count": 275,
+          "quote_count": 14,
+          "bookmark_count": 5,
+          "impression_count": 30980
+        },
+        "created_at": "2025-10-21T21:24:30.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1980697294094889268"
+        ],
+        "text": "https://t.co/L1aHerbuOF",
+        "referenced_tweets": [
+          {
+            "type": "replied_to",
+            "id": "1980697291485806648"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/L1aHerbuOF",
+              "expanded_url": "https://x.com/berachain/status/1980697294094889268/photo/1",
+              "display_url": "pic.x.com/L1aHerbuOF",
+              "media_key": "3_1980697097339867137"
+            }
+          ]
+        },
+        "id": "1980697294094889268",
+        "attachments": {
+          "media_keys": [
+            "3_1980697097339867137"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 2,
+          "reply_count": 2,
+          "like_count": 26,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 5949
+        },
+        "created_at": "2025-10-21T18:06:49.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1980697291485806648"
+        ],
+        "text": "Decisions on the latest batch of RFRVs have been delivered by the @bgtfdn on behalf of the Guardians.\n\nThis batch adds two new vaults from @SmileeFinance on Kodiak and expands HONEY\u2019s collateral base with the approval of USDe from @ethena.\n\nRead more: https://t.co/kc6ESDByF8 https://t.co/5sKNGj60Do",
+        "entities": {
+          "urls": [
+            {
+              "start": 252,
+              "end": 275,
+              "url": "https://t.co/kc6ESDByF8",
+              "expanded_url": "https://blog.berachain.com/blog/berachain-governance-update-usde-collateral-rfrv-batch-30-approved",
+              "display_url": "blog.berachain.com/blog/berachain\u2026",
+              "status": 200,
+              "unwound_url": "https://blog.berachain.com/blog/berachain-governance-update-usde-collateral-rfrv-batch-30-approved"
+            },
+            {
+              "start": 276,
+              "end": 299,
+              "url": "https://t.co/5sKNGj60Do",
+              "expanded_url": "https://x.com/berachain/status/1980697291485806648/photo/1",
+              "display_url": "pic.x.com/5sKNGj60Do",
+              "media_key": "3_1980697140348309504"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 66,
+              "end": 73,
+              "username": "bgtfdn",
+              "id": "1882537618707001344"
+            },
+            {
+              "start": 139,
+              "end": 153,
+              "username": "SmileeFinance",
+              "id": "1584535940852318208"
+            },
+            {
+              "start": 231,
+              "end": 238,
+              "username": "ethena",
+              "id": "1637885519374721035"
+            }
+          ]
+        },
+        "id": "1980697291485806648",
+        "attachments": {
+          "media_keys": [
+            "3_1980697140348309504"
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 13,
+          "reply_count": 25,
+          "like_count": 128,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 11984
+        },
+        "created_at": "2025-10-21T18:06:48.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1980632554467389801"
+        ],
+        "text": "RT @SmileeFinance: SMILEE x BaB \ud83e\udd1d\n\nSmilee Finance has officially joined the rank of @buildabera being one of the most recognized and powerf\u2026",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1980631159945011363"
+          }
+        ],
+        "id": "1980632554467389801",
+        "entities": {
+          "mentions": [
+            {
+              "start": 3,
+              "end": 17,
+              "username": "SmileeFinance",
+              "id": "1584535940852318208"
+            },
+            {
+              "start": 84,
+              "end": 95,
+              "username": "buildabera",
+              "id": "1642246917940817922"
+            }
+          ]
+        },
+        "public_metrics": {
+          "retweet_count": 37,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 1
+        },
+        "created_at": "2025-10-21T13:49:34.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1980381072153014500"
+        ],
+        "text": "https://t.co/gUr0dEV8mm",
+        "article": {
+          "title": "Last Week on Bera"
+        },
+        "entities": {
+          "urls": [
+            {
+              "start": 0,
+              "end": 23,
+              "url": "https://t.co/gUr0dEV8mm",
+              "expanded_url": "http://x.com/i/article/1980352824362881024",
+              "display_url": "x.com/i/article/1980\u2026",
+              "status": 500,
+              "unwound_url": "https://x.com/i/article/1980352824362881024"
+            }
+          ]
+        },
+        "id": "1980381072153014500",
+        "public_metrics": {
+          "retweet_count": 22,
+          "reply_count": 17,
+          "like_count": 150,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 14206
+        },
+        "created_at": "2025-10-20T21:10:15.000Z"
+      },
+      {
+        "edit_history_tweet_ids": [
+          "1980323132083974239"
+        ],
+        "text": "RT @therollupco: Rollup TV: Neutrl Labs, Berachain and ElizaOS https://t.co/i2VVTSm6ra",
+        "referenced_tweets": [
+          {
+            "type": "retweeted",
+            "id": "1980308985531216286"
+          }
+        ],
+        "entities": {
+          "urls": [
+            {
+              "start": 63,
+              "end": 86,
+              "url": "https://t.co/i2VVTSm6ra",
+              "expanded_url": "https://x.com/i/broadcasts/1OwGWevQaRMxQ",
+              "display_url": "x.com/i/broadcasts/1\u2026",
+              "unwound_url": "https://x.com/i/broadcasts/1OwGWevQaRMxQ"
+            }
+          ],
+          "mentions": [
+            {
+              "start": 3,
+              "end": 15,
+              "username": "therollupco",
+              "id": "1172866088222244866"
+            }
+          ]
+        },
+        "id": "1980323132083974239",
+        "public_metrics": {
+          "retweet_count": 12,
+          "reply_count": 0,
+          "like_count": 0,
+          "quote_count": 0,
+          "bookmark_count": 0,
+          "impression_count": 0
+        },
+        "created_at": "2025-10-20T17:20:01.000Z"
+      }
+    ],
+    "includes": {
+      "media": [
+        {
+          "type": "photo",
+          "media_key": "3_2049822077163819008",
+          "url": "https://pbs.twimg.com/media/HHJuUZoaUAA_y8t.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2042967110570180608",
+          "url": "https://pbs.twimg.com/media/HFoTw1FXgAAegKj.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2042352348073508865",
+          "url": "https://pbs.twimg.com/media/HFfko8UbQAEdLpE.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2014322644351344640",
+          "url": "https://pbs.twimg.com/media/G_RPxc-WYAAAixn.jpg"
+        },
+        {
+          "variants": [
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2008656065140060160/pl/dFCywOFC8v8MdkDu.m3u8?v=cfc"
+            },
+            {
+              "bit_rate": 1280000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2008656065140060160/vid/avc1/720x720/52KpHZs7KxkwmWh7.mp4"
+            },
+            {
+              "bit_rate": 432000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2008656065140060160/vid/avc1/320x320/6zfUbXoinHJPQ4pV.mp4"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2008656065140060160/vid/avc1/540x540/dflpq_EUU20uuRjm.mp4"
+            },
+            {
+              "bit_rate": 8768000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2008656065140060160/vid/avc1/1080x1080/xvrdsWHpJEOGbdt1.mp4"
+            }
+          ],
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2008656065140060160/img/Pv9rrpUc40Z1IOOj.jpg",
+          "type": "video",
+          "duration_ms": 12266,
+          "media_key": "13_2008656065140060160"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2004323031888306176",
+          "url": "https://pbs.twimg.com/media/G9DJLZrWIAA1Y0R.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2004323031833772032",
+          "url": "https://pbs.twimg.com/media/G9DJLZeWAAAOQHP.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2001676452538859520",
+          "url": "https://pbs.twimg.com/media/G8diINTXwAA6QCo.jpg"
+        },
+        {
+          "variants": [
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2001263310419668993/vid/avc1/640x360/5A7u0aNoZWEflX2n.mp4"
+            },
+            {
+              "bit_rate": 10368000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2001263310419668993/vid/avc1/2560x1440/J5W9ZcuhkJwUIsje.mp4"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2001263310419668993/vid/avc1/1280x720/al0dZuX17oGmehVq.mp4"
+            },
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/2001263310419668993/vid/avc1/480x270/wsNCEiLsKXSD0qkv.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/2001263310419668993/pl/UT94FqS4rcnEUF9Q.m3u8?v=50b"
+            }
+          ],
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/2001263310419668993/img/IR1lyG6g3VD7vYxt.jpg",
+          "type": "video",
+          "duration_ms": 41958,
+          "media_key": "13_2001263310419668993"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2001013430958874625",
+          "url": "https://pbs.twimg.com/media/G8UHHRcW4AEhAfO.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2001013176716898304",
+          "url": "https://pbs.twimg.com/media/G8UG4eUWMAA4KI-.png"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_2000566667479326720",
+          "url": "https://pbs.twimg.com/media/G8NwyNyXoAArmfx.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1993752819459928064",
+          "url": "https://pbs.twimg.com/media/G6s7oD3XsAAljto.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1991225200600293376",
+          "url": "https://pbs.twimg.com/media/G6JAxR2WIAAO7Jk.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1991225160129552385",
+          "url": "https://pbs.twimg.com/media/G6JAu7FXoAEvKxB.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1991165819544305664",
+          "url": "https://pbs.twimg.com/media/G6IKw2LWgAArYWL.jpg"
+        },
+        {
+          "variants": [
+            {
+              "bit_rate": 10368000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1991164714500390912/vid/avc1/1920x1080/DE18JdEfF42q4A04.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/1991164714500390912/pl/Yrg9MhmbtOhjYfmY.m3u8?v=cfc"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1991164714500390912/vid/avc1/640x360/MEi1_24f5AoP0PpR.mp4"
+            },
+            {
+              "bit_rate": 25128000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1991164714500390912/vid/avc1/3840x2160/cfOHBlo_an-SfvDv.mp4"
+            },
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1991164714500390912/vid/avc1/480x270/AZLnqqUVrsrj9Pxg.mp4"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1991164714500390912/vid/avc1/1280x720/spEnzFH2RvNTgKSH.mp4"
+            }
+          ],
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/1991164714500390912/img/Cs8Tk9Cp-f5O9w9q.jpg",
+          "type": "video",
+          "duration_ms": 36520,
+          "media_key": "13_1991164714500390912"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1990804968186454017",
+          "url": "https://pbs.twimg.com/media/G6DCkiHWIAEtxO-.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1989011374001819648",
+          "url": "https://pbs.twimg.com/media/G5pjTnGXEAAK19J.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1989011202463186944",
+          "url": "https://pbs.twimg.com/media/G5pjJoEXQAAyBqY.jpg"
+        },
+        {
+          "variants": [
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1989002395255218176/vid/avc1/480x270/H_QNJeAqXWYmAL-F.mp4"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1989002395255218176/vid/avc1/1280x720/c7YCu-en0wySsoZ_.mp4"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1989002395255218176/vid/avc1/640x360/pNCusjjic322jJpP.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/1989002395255218176/pl/VXYYV1Yv4wewXLxG.m3u8?v=cfc"
+            },
+            {
+              "bit_rate": 10368000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1989002395255218176/vid/avc1/1920x1080/IwGI-S957ZOzr9QT.mp4"
+            }
+          ],
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/1989002395255218176/img/L_cES-fiMos-VTSb.jpg",
+          "type": "video",
+          "duration_ms": 19436,
+          "media_key": "13_1989002395255218176"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1984253207711723520",
+          "url": "https://pbs.twimg.com/media/G4l7x4YWMAAjE-0.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1984254196112039936",
+          "url": "https://pbs.twimg.com/media/G4l8radWIAAXYVk.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1983316355987451906",
+          "url": "https://pbs.twimg.com/media/G4Ynt7vasAIxH09.jpg"
+        },
+        {
+          "variants": [
+            {
+              "bit_rate": 8768000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1981433545479380992/vid/avc1/1080x1080/yYLiDUzklwi6sud_.mp4"
+            },
+            {
+              "bit_rate": 1280000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1981433545479380992/vid/avc1/720x720/HbgPxTda8uTZKkWW.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/1981433545479380992/pl/PEAtxpNNP3h0BCxZ.m3u8"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1981433545479380992/vid/avc1/540x540/SlAieqN-5_rK_-Zw.mp4"
+            },
+            {
+              "bit_rate": 432000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1981433545479380992/vid/avc1/320x320/SC6KPuALmMBLcATr.mp4"
+            }
+          ],
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/1981433545479380992/img/a9QG7Xp0jkWdv4ki.jpg",
+          "type": "video",
+          "duration_ms": 7900,
+          "media_key": "13_1981433545479380992"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1981369183003693056",
+          "url": "https://pbs.twimg.com/media/G388xjHXUAAKSom.jpg"
+        },
+        {
+          "variants": [
+            {
+              "bit_rate": 8768000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1981368906552844289/vid/avc1/1080x1080/3ZNKy8xb6af2SfOg.mp4"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1981368906552844289/vid/avc1/540x540/dyuEmAKwtBp96s8_.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/1981368906552844289/pl/DmogdtydSInKpZEH.m3u8?v=cfc"
+            },
+            {
+              "bit_rate": 1280000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1981368906552844289/vid/avc1/720x720/6u7HWZW0P0XtOmdG.mp4"
+            },
+            {
+              "bit_rate": 25128000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1981368906552844289/vid/avc1/3840x3840/h8WBvD6E-8eFd6K2.mp4"
+            },
+            {
+              "bit_rate": 432000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1981368906552844289/vid/avc1/320x320/R7eqKpVhYIp6TkgQ.mp4"
+            }
+          ],
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/1981368906552844289/img/Fr5M6tXVjoavOJYk.jpg",
+          "type": "video",
+          "duration_ms": 12333,
+          "media_key": "13_1981368906552844289"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1980745938411864065",
+          "url": "https://pbs.twimg.com/media/G30F78FWQAEahfB.jpg"
+        },
+        {
+          "variants": [
+            {
+              "bit_rate": 10368000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1980744727671554048/vid/avc1/1920x1080/MLWZAL2DKq3pQkSn.mp4"
+            },
+            {
+              "bit_rate": 2176000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1980744727671554048/vid/avc1/1280x720/XDyyaUcLpv_xzmlo.mp4"
+            },
+            {
+              "content_type": "application/x-mpegURL",
+              "url": "https://video.twimg.com/amplify_video/1980744727671554048/pl/0P18QU2uheKK-JAo.m3u8"
+            },
+            {
+              "bit_rate": 832000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1980744727671554048/vid/avc1/640x360/up6LNqIE1fNx6GZ5.mp4"
+            },
+            {
+              "bit_rate": 256000,
+              "content_type": "video/mp4",
+              "url": "https://video.twimg.com/amplify_video/1980744727671554048/vid/avc1/480x270/Ol7AWv0tVecv3T-w.mp4"
+            }
+          ],
+          "preview_image_url": "https://pbs.twimg.com/amplify_video_thumb/1980744727671554048/img/yNsUez-cf-peAiaD.jpg",
+          "type": "video",
+          "duration_ms": 90000,
+          "media_key": "13_1980744727671554048"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1980697097339867137",
+          "url": "https://pbs.twimg.com/media/G3zZhA6XEAETEW_.jpg"
+        },
+        {
+          "type": "photo",
+          "media_key": "3_1980697140348309504",
+          "url": "https://pbs.twimg.com/media/G3zZjhIX0AAp7tw.jpg"
+        }
+      ]
+    },
+    "meta": {
+      "next_token": "7140dibdnow9c7btw4e30ch9jr1o72mpoyuspzwlpsh89",
+      "result_count": 100,
+      "newest_id": "2049822143089889526",
+      "oldest_id": "1980323132083974239"
+    }
+  }
+}

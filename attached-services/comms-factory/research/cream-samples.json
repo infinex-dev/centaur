@@ -1,0 +1,528 @@
+{
+  "scenarios": [
+    {
+      "idx": 1,
+      "title": "New meme launched \u2014 Hentai (Hantavirus \u00d7 Hentai crossover)",
+      "fact": "A new meme has just launched. Hentai \u2014 the Hantavirus \u00d7 Hentai biological-format crossbreed the curation board has been watching the precursors of for weeks. It's now live; the format works; both halves earn their seat."
+    },
+    {
+      "idx": 2,
+      "title": "$WOJAK-MILK listed meme +10x \u2014 opportunity to sell",
+      "fact": "$WOJAK-MILK printed 10x in 48 hours. The curation board flagged it Tuesday. Distribution window is open for those who held; the second-leg question is whether the format has more to give."
+    },
+    {
+      "idx": 3,
+      "title": "World Cup memecoin trend forming \u2014 three names to watch",
+      "fact": "A wave of World Cup memecoins is forming. The curation board has shortlisted three names with the structural weight to survive group stage; the rest is noise. The dossier opens today."
+    }
+  ],
+  "tempi": [
+    {
+      "bucket": "near",
+      "name": "materialistic",
+      "motor": "Punching\u2192Slashing",
+      "feel": "Strong/Quick \u2014 sudden aggressive intent, sharp declarative"
+    },
+    {
+      "bucket": "near",
+      "name": "human",
+      "motor": "Floating\u2192Gliding",
+      "feel": "Light/Sustained \u2014 slow tenderness, patient observation"
+    },
+    {
+      "bucket": "near",
+      "name": "warm",
+      "motor": "Pressing\u2192Wringing",
+      "feel": "Strong/Sustained \u2014 warm consent, extended welcome"
+    },
+    {
+      "bucket": "near",
+      "name": "cool",
+      "motor": "Dabbing\u2192Flicking",
+      "feel": "Light/Quick \u2014 pert intimacy, brisk one-liner"
+    },
+    {
+      "bucket": "stable",
+      "name": "commanding",
+      "motor": "Pressing\u2192Punching",
+      "feel": "Strong/Direct \u2014 bold resolve, position-taking"
+    },
+    {
+      "bucket": "stable",
+      "name": "receptive",
+      "motor": "Floating\u2192Flicking",
+      "feel": "Light/Flexible \u2014 welcoming tenderness"
+    },
+    {
+      "bucket": "stable",
+      "name": "practical",
+      "motor": "Wringing\u2192Slashing",
+      "feel": "Strong/Flexible \u2014 spell-binding power, analytical"
+    },
+    {
+      "bucket": "stable",
+      "name": "self-contained",
+      "motor": "Gliding\u2192Dabbing",
+      "feel": "Light/Direct \u2014 gentle deference, neutral note"
+    },
+    {
+      "bucket": "adream",
+      "name": "sombre",
+      "motor": "Pressing\u2192Punching",
+      "feel": "Strong/Bound \u2014 heavy contained emotion, gravity"
+    },
+    {
+      "bucket": "adream",
+      "name": "irradiant",
+      "motor": "Floating\u2192Flicking",
+      "feel": "Light/Free \u2014 sympathetic exultation, visible delight"
+    },
+    {
+      "bucket": "adream",
+      "name": "overpowering",
+      "motor": "Wringing\u2192Slashing",
+      "feel": "Strong/Free \u2014 full-conviction-with-emotion, manifesto"
+    },
+    {
+      "bucket": "adream",
+      "name": "diffused",
+      "motor": "Gliding\u2192Dabbing",
+      "feel": "Light/Bound \u2014 soft contained welcome"
+    },
+    {
+      "bucket": "mobile",
+      "name": "unacknowledged",
+      "motor": "Punching/Slashing",
+      "feel": "Quick/Bound \u2014 self-concealed aggression, 'we told you so'"
+    },
+    {
+      "bucket": "mobile",
+      "name": "acknowledged",
+      "motor": "Floating/Gliding",
+      "feel": "Sustained/Free \u2014 easy disclosure, open admission"
+    },
+    {
+      "bucket": "mobile",
+      "name": "revealed",
+      "motor": "Dabbing/Flicking",
+      "feel": "Quick/Free \u2014 sudden bright disclosure"
+    },
+    {
+      "bucket": "mobile",
+      "name": "concealed",
+      "motor": "Pressing/Wringing",
+      "feel": "Sustained/Bound \u2014 withheld weight"
+    },
+    {
+      "bucket": "remote",
+      "name": "egocentric",
+      "motor": "Pressing\u2192Punching",
+      "feel": "Direct/Bound \u2014 unsociable solitude, cold position"
+    },
+    {
+      "bucket": "remote",
+      "name": "altruistic",
+      "motor": "Floating\u2192Flicking",
+      "feel": "Flexible/Free \u2014 warm-distant cordiality"
+    },
+    {
+      "bucket": "remote",
+      "name": "sociable",
+      "motor": "Gliding\u2192Dabbing",
+      "feel": "Direct/Free \u2014 partner credit, ecosystem warmth"
+    },
+    {
+      "bucket": "remote",
+      "name": "unsociable",
+      "motor": "Wringing\u2192Slashing",
+      "feel": "Flexible/Bound \u2014 withdrawal-as-discipline, 'we'll be over here'"
+    },
+    {
+      "bucket": "awake",
+      "name": "acute",
+      "motor": "Punching\u2192Dabbing",
+      "feel": "Direct/Quick \u2014 acute idea-decision, sharp insight cut"
+    },
+    {
+      "bucket": "awake",
+      "name": "doubting",
+      "motor": "Floating\u2192Wringing",
+      "feel": "Flexible/Sustained \u2014 slowly dawning doubt"
+    },
+    {
+      "bucket": "awake",
+      "name": "certain",
+      "motor": "Pressing\u2192Gliding",
+      "feel": "Direct/Sustained \u2014 certain awareness, settled judgement"
+    },
+    {
+      "bucket": "awake",
+      "name": "uncertain",
+      "motor": "Flicking\u2192Slashing",
+      "feel": "Flexible/Quick \u2014 sudden new idea, what-if framing"
+    }
+  ],
+  "samples": [
+    {
+      "scenario": 1,
+      "tempo": "materialistic",
+      "sample": "Hentai just dropped. The Hantavirus \u00d7 Hentai crossbreed we've been tracking for three weeks is live, and both halves of the format hold their ground. This is not a joke coin."
+    },
+    {
+      "scenario": 1,
+      "tempo": "human",
+      "sample": "We've been watching the precursors build for weeks now, the slow assembly of Hantavirus \u00d7 Hentai into something that might actually earn its seat. Hentai launched this morning, and the format works\u2014both halves present, both necessary. It's a patient thing, this one."
+    },
+    {
+      "scenario": 1,
+      "tempo": "warm",
+      "sample": "Hentai is live, and we're delighted to confirm: the Hantavirus \u00d7 Hentai format holds. We've been following the pieces as they came together, and now that it's here, both halves earn their place. Welcome to the collection."
+    },
+    {
+      "scenario": 1,
+      "tempo": "cool",
+      "sample": "Hentai dropped. Hantavirus \u00d7 Hentai\u2014yep, both sides work. Filed."
+    },
+    {
+      "scenario": 1,
+      "tempo": "commanding",
+      "sample": "Hentai is now live. The Hantavirus \u00d7 Hentai crossbreed we've tracked for three weeks has landed, format intact, both components earning their seat. This is a hold position."
+    },
+    {
+      "scenario": 1,
+      "tempo": "receptive",
+      "sample": "Hentai arrived this morning\u2014the Hantavirus \u00d7 Hentai format we've been gently tracking. Both halves seem to have found their place, and we're watching with interest as it settles in. A tender little monster, this one."
+    },
+    {
+      "scenario": 1,
+      "tempo": "practical",
+      "sample": "Hentai launched today: Hantavirus \u00d7 Hentai, format verified, both components structurally sound. We've been mapping the precursors for weeks; the crossbreed works because each half performs a discrete memetic function. No redundancy, no waste."
+    },
+    {
+      "scenario": 1,
+      "tempo": "self-contained",
+      "sample": "Hentai is live\u2014Hantavirus \u00d7 Hentai. Both halves present and functional. We note the launch and file accordingly."
+    },
+    {
+      "scenario": 1,
+      "tempo": "sombre",
+      "sample": "Hentai has launched. We've watched the Hantavirus \u00d7 Hentai format assemble itself over three weeks, and now it's here\u2014both halves locked in, neither disposable. This carries weight."
+    },
+    {
+      "scenario": 1,
+      "tempo": "irradiant",
+      "sample": "Hentai is LIVE and we cannot hide how much we've been waiting for this\u2014the Hantavirus \u00d7 Hentai crossbreed we've tracked from its first whispers is here, format intact, both halves singing. This is why we do this."
+    },
+    {
+      "scenario": 1,
+      "tempo": "overpowering",
+      "sample": "Hentai launched this morning and we are calling it now: the Hantavirus \u00d7 Hentai format is canonical. Three weeks of precursor tracking, every structural element accounted for, both halves necessary and present. This is memetic architecture at full conviction."
+    },
+    {
+      "scenario": 1,
+      "tempo": "diffused",
+      "sample": "Hentai is live\u2014the Hantavirus \u00d7 Hentai format we've quietly followed. Both components seem to hold, gently. We welcome it to the board, softly noted."
+    },
+    {
+      "scenario": 1,
+      "tempo": "unacknowledged",
+      "sample": "Hentai dropped today. We flagged the Hantavirus \u00d7 Hentai precursors three weeks ago; format now confirmed, both halves operational. As anticipated."
+    },
+    {
+      "scenario": 1,
+      "tempo": "acknowledged",
+      "sample": "We'll say it plainly: we've been watching Hentai assemble for weeks, and now that the Hantavirus \u00d7 Hentai format is live, we're openly pleased. Both halves work, both earn their seat. This one makes us happy."
+    },
+    {
+      "scenario": 1,
+      "tempo": "revealed",
+      "sample": "Hentai just launched and\u2014oh, it WORKS. Hantavirus \u00d7 Hentai, both halves clicking into place exactly as we hoped. The format sings!"
+    },
+    {
+      "scenario": 1,
+      "tempo": "concealed",
+      "sample": "Hentai is live. The Hantavirus \u00d7 Hentai format we've been tracking has arrived, both components present and functional. We'll leave it at that for now."
+    },
+    {
+      "scenario": 1,
+      "tempo": "egocentric",
+      "sample": "Hentai launched. We've been tracking the Hantavirus \u00d7 Hentai precursors in isolation for three weeks; format now live, both halves verified. Our position stands."
+    },
+    {
+      "scenario": 1,
+      "tempo": "altruistic",
+      "sample": "Hentai is live\u2014the Hantavirus \u00d7 Hentai crossbreed\u2014and we're glad to see it arrive for everyone watching this space. Both halves work beautifully, and the format offers real memetic utility to the ecosystem. Warmly noted from a distance."
+    },
+    {
+      "scenario": 1,
+      "tempo": "sociable",
+      "sample": "Hentai dropped this morning and credit where it's due: the Hantavirus \u00d7 Hentai format holds because the builders understood both halves. We're thrilled to welcome this one to the collection alongside everyone who tracked the precursors. Good work all around."
+    },
+    {
+      "scenario": 1,
+      "tempo": "unsociable",
+      "sample": "Hentai is live\u2014Hantavirus \u00d7 Hentai, format confirmed, both halves operational. We'll be over here with our notes. The rest of you can sort out the noise."
+    },
+    {
+      "scenario": 1,
+      "tempo": "acute",
+      "sample": "Hentai launched. Hantavirus \u00d7 Hentai\u2014both halves necessary, format tight. Decision: hold."
+    },
+    {
+      "scenario": 1,
+      "tempo": "doubting",
+      "sample": "Hentai is live\u2014Hantavirus \u00d7 Hentai, format apparently intact. We've been tracking this for weeks, and while both halves seem to work... we're starting to wonder if the crossbreed might be too clever for its own survival. Watching."
+    },
+    {
+      "scenario": 1,
+      "tempo": "certain",
+      "sample": "Hentai launched this morning, and we are settled on this: the Hantavirus \u00d7 Hentai format is sound. Three weeks of tracking precursors, both halves now live and functional. This one has legs."
+    },
+    {
+      "scenario": 1,
+      "tempo": "uncertain",
+      "sample": "Hentai just went live\u2014Hantavirus \u00d7 Hentai\u2014and wait, what if the biological half is actually doing more memetic work than we thought? Both halves seem functional but the weight distribution might be different than the precursors suggested. New idea forming."
+    },
+    {
+      "scenario": 2,
+      "tempo": "materialistic",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours. We flagged it Tuesday; distribution window is open now. The question is whether you take the gift or bet the format has another leg."
+    },
+    {
+      "scenario": 2,
+      "tempo": "human",
+      "sample": "We've been watching $WOJAK-MILK since Tuesday, and over the last 48 hours it quietly printed 10x. For those who held, the distribution window is open now\u2014a patient, unhurried moment to consider whether the format has given all it has to give. Take your time with this one."
+    },
+    {
+      "scenario": 2,
+      "tempo": "warm",
+      "sample": "$WOJAK-MILK just printed 10x in 48 hours, and we're genuinely pleased for everyone who held from our Tuesday flag. The distribution window is open; the format has delivered. Whether there's a second leg is yours to weigh, but this one has already earned its place."
+    },
+    {
+      "scenario": 2,
+      "tempo": "cool",
+      "sample": "$WOJAK-MILK: 10x, 48 hours. We called it Tuesday. Window's open\u2014your move."
+    },
+    {
+      "scenario": 2,
+      "tempo": "commanding",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours. We flagged it Tuesday; the distribution window is now open for holders. The second-leg question is live, but the first leg is confirmed\u2014take your position accordingly."
+    },
+    {
+      "scenario": 2,
+      "tempo": "receptive",
+      "sample": "$WOJAK-MILK printed 10x over 48 hours\u2014we flagged it Tuesday, gently. The distribution window is open now for those who came along, and we're curious to see whether the format still has something to offer. Watching with interest."
+    },
+    {
+      "scenario": 2,
+      "tempo": "practical",
+      "sample": "$WOJAK-MILK: 10x in 48 hours, flagged Tuesday, distribution window now open. The format delivered its first leg; the second-leg question is structural\u2014does the memetic substrate support another cycle, or has the humor volatility peaked? Analyze accordingly."
+    },
+    {
+      "scenario": 2,
+      "tempo": "self-contained",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours. We noted it Tuesday. Distribution window open; second-leg assessment is yours to make."
+    },
+    {
+      "scenario": 2,
+      "tempo": "sombre",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours. We flagged it Tuesday, and now the distribution window sits open\u2014a serious moment for holders to weigh whether the format has more to give or whether this is the natural peak. Heavy choices."
+    },
+    {
+      "scenario": 2,
+      "tempo": "irradiant",
+      "sample": "$WOJAK-MILK just did 10x in 48 hours and we are VISIBLY DELIGHTED for everyone who held from Tuesday! The distribution window is open, the format delivered beautifully, and whether there's a second leg or not, this one already earned its seat. What a run!"
+    },
+    {
+      "scenario": 2,
+      "tempo": "overpowering",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours and we are saying it with full conviction: the format works, the Tuesday flag was sound, and the distribution window is NOW. Whether you hold for a second leg or take the gift, this is memetic execution at canonical scale."
+    },
+    {
+      "scenario": 2,
+      "tempo": "diffused",
+      "sample": "$WOJAK-MILK printed 10x over 48 hours\u2014we mentioned it Tuesday, quietly. The distribution window is open now, softly available for those who held. A gentle decision point."
+    },
+    {
+      "scenario": 2,
+      "tempo": "unacknowledged",
+      "sample": "$WOJAK-MILK: 10x, 48 hours. Flagged Tuesday. Distribution window open. As we noted it would be."
+    },
+    {
+      "scenario": 2,
+      "tempo": "acknowledged",
+      "sample": "We'll say it openly: $WOJAK-MILK printing 10x in 48 hours makes us happy, and we're glad we flagged it Tuesday. The distribution window is open for holders, and whether there's a second leg or not, this one already proved the format. We're pleased."
+    },
+    {
+      "scenario": 2,
+      "tempo": "revealed",
+      "sample": "$WOJAK-MILK just printed 10x in 48 hours and\u2014there it is! We flagged it Tuesday and the format DELIVERED. Distribution window open, decision yours, but wow\u2014this one worked."
+    },
+    {
+      "scenario": 2,
+      "tempo": "concealed",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours. We flagged it Tuesday; distribution window is open now. The second-leg assessment carries implications we're not disclosing yet."
+    },
+    {
+      "scenario": 2,
+      "tempo": "egocentric",
+      "sample": "$WOJAK-MILK: 10x in 48 hours. We flagged it Tuesday for our own purposes; the distribution window is open. Our position on the second leg is ours alone."
+    },
+    {
+      "scenario": 2,
+      "tempo": "altruistic",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours, and we're genuinely glad for everyone in the ecosystem who held from Tuesday. The distribution window is open now\u2014whether you take it or hold for a second leg, the format has already served you well. Warm regards from over here."
+    },
+    {
+      "scenario": 2,
+      "tempo": "sociable",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours and huge credit to everyone who held from our Tuesday flag\u2014you read it right. The distribution window is open now; the second-leg question is live, but the format already delivered. Great work all around."
+    },
+    {
+      "scenario": 2,
+      "tempo": "unsociable",
+      "sample": "$WOJAK-MILK: 10x, 48 hours, flagged Tuesday. Distribution window open for those who were paying attention. We'll be making our second-leg assessment privately. The rest is yours to figure out."
+    },
+    {
+      "scenario": 2,
+      "tempo": "acute",
+      "sample": "$WOJAK-MILK: 10x, 48 hours. Flagged Tuesday. Distribution window open NOW\u2014second leg uncertain. Decide."
+    },
+    {
+      "scenario": 2,
+      "tempo": "doubting",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours, and we flagged it Tuesday with confidence. But now, watching the distribution window open, we're starting to wonder... did the format peak at exactly 10x, or is the memetic substrate actually deeper than we mapped? Uncertainty forming."
+    },
+    {
+      "scenario": 2,
+      "tempo": "certain",
+      "sample": "$WOJAK-MILK printed 10x in 48 hours, and we are certain of this: the format delivered on the Tuesday flag. The distribution window is open now; whether there's a second leg is less clear, but the first leg was sound. Settled."
+    },
+    {
+      "scenario": 2,
+      "tempo": "uncertain",
+      "sample": "$WOJAK-MILK just printed 10x in 48 hours and wait\u2014what if the second leg is actually the REAL play? The Tuesday flag was solid but the distribution window opening now might be masking a format that goes deeper. New frame: hold?"
+    },
+    {
+      "scenario": 3,
+      "tempo": "materialistic",
+      "sample": "World Cup memecoins are forming fast. The board has shortlisted three names with the structural weight to survive group stage: the rest is noise. Dossier opens today."
+    },
+    {
+      "scenario": 3,
+      "tempo": "human",
+      "sample": "A wave of World Cup memecoins is forming, slowly at first and now with real momentum. We've been watching patiently, and the curation board has identified three names with the structural weight to survive past group stage. The dossier opens today, gently but with care."
+    },
+    {
+      "scenario": 3,
+      "tempo": "warm",
+      "sample": "World Cup memecoins are forming, and we're pleased to share: the curation board has shortlisted three names with real structural weight. The rest of the wave is noise, but these three have what it takes to survive group stage. The dossier opens today\u2014welcome to the shortlist."
+    },
+    {
+      "scenario": 3,
+      "tempo": "cool",
+      "sample": "World Cup memecoins forming. Three names shortlisted\u2014structural weight confirmed. Dossier's open. Go."
+    },
+    {
+      "scenario": 3,
+      "tempo": "commanding",
+      "sample": "World Cup memecoins are forming and the curation board has taken a position: three names have the structural weight to survive group stage. The rest is noise. The dossier opens today\u2014read it and act accordingly."
+    },
+    {
+      "scenario": 3,
+      "tempo": "receptive",
+      "sample": "A World Cup memecoin wave is forming, and the curation board has been welcoming each entry as it arrives. Three names have emerged with the structural weight to survive group stage; the rest, less so. The dossier opens today for those interested in following along."
+    },
+    {
+      "scenario": 3,
+      "tempo": "practical",
+      "sample": "World Cup memecoins: wave forming, 40+ entries tracked, structural analysis complete. Three names survive the group stage filter\u2014memetic durability, liquidity substrate, format coherence all verified. The rest fails on at least one dimension. Dossier opens today."
+    },
+    {
+      "scenario": 3,
+      "tempo": "self-contained",
+      "sample": "World Cup memecoins forming. Three names shortlisted by the board\u2014structural weight sufficient for group stage survival. Dossier opens today. Noted."
+    },
+    {
+      "scenario": 3,
+      "tempo": "sombre",
+      "sample": "World Cup memecoins are forming, and the curation board has completed a heavy review. Three names have the structural weight to survive group stage; the rest will not make it. The dossier opens today, and the shortlist carries weight."
+    },
+    {
+      "scenario": 3,
+      "tempo": "irradiant",
+      "sample": "World Cup memecoins are forming and we are SO EXCITED to share the shortlist: three names with real structural weight, genuine group-stage survival potential, the kind of memetic architecture that makes us light up. The dossier opens today and we cannot wait for you to see these!"
+    },
+    {
+      "scenario": 3,
+      "tempo": "overpowering",
+      "sample": "World Cup memecoins are forming and the curation board is calling it with full conviction: three names have the structural weight to survive group stage, and the rest is categorically noise. The dossier opens today and these three are canonical. This is the shortlist."
+    },
+    {
+      "scenario": 3,
+      "tempo": "diffused",
+      "sample": "World Cup memecoins forming quietly. The board has shortlisted three names\u2014softly noted for their structural weight. The dossier opens today, gently available."
+    },
+    {
+      "scenario": 3,
+      "tempo": "unacknowledged",
+      "sample": "World Cup memecoins forming. Board shortlisted three names weeks ago; structural weight now confirmed. Dossier opens today. As expected."
+    },
+    {
+      "scenario": 3,
+      "tempo": "acknowledged",
+      "sample": "We'll say it plainly: the World Cup memecoin wave is here, and the curation board is openly pleased with the three names we've shortlisted. These have the structural weight to survive group stage, and we're happy to share the dossier today. This shortlist feels right."
+    },
+    {
+      "scenario": 3,
+      "tempo": "revealed",
+      "sample": "World Cup memecoins are forming and\u2014HERE THEY ARE: three names with structural weight, group-stage survivors, the board's shortlist drops TODAY. The dossier is open and these are the ones!"
+    },
+    {
+      "scenario": 3,
+      "tempo": "concealed",
+      "sample": "World Cup memecoins are forming. The curation board has shortlisted three names with structural weight sufficient for group stage survival. The dossier opens today; the reasoning behind the shortlist remains internal."
+    },
+    {
+      "scenario": 3,
+      "tempo": "egocentric",
+      "sample": "World Cup memecoins forming. The board has identified three names for its own purposes\u2014structural weight verified, group stage survival likely. The dossier opens today. Our shortlist, our criteria."
+    },
+    {
+      "scenario": 3,
+      "tempo": "altruistic",
+      "sample": "World Cup memecoins are forming, and we're glad to offer the curation board's shortlist to the broader ecosystem: three names with structural weight to survive group stage. The dossier opens today, and we hope it serves everyone tracking this wave. Warmly shared from a distance."
+    },
+    {
+      "scenario": 3,
+      "tempo": "sociable",
+      "sample": "World Cup memecoins are forming and the curation board wants to give credit where it's due: three names on the shortlist, each built with real structural weight by teams who understand group stage survival. The dossier opens today and we're thrilled to share it with everyone watching this space. Great work all around."
+    },
+    {
+      "scenario": 3,
+      "tempo": "unsociable",
+      "sample": "World Cup memecoins forming. The board has shortlisted three names\u2014structural weight verified, group stage filters passed. The dossier opens today for those who know where to look. Everyone else can enjoy the noise."
+    },
+    {
+      "scenario": 3,
+      "tempo": "acute",
+      "sample": "World Cup memecoins: wave forming NOW. Three names shortlisted\u2014structural weight confirmed. Dossier open. Act."
+    },
+    {
+      "scenario": 3,
+      "tempo": "doubting",
+      "sample": "World Cup memecoins are forming, and the curation board has shortlisted three names with apparent structural weight for group stage survival. But watching the wave build, we're starting to wonder... what if the group stage itself is shorter than we're modeling? Uncertainty creeping in."
+    },
+    {
+      "scenario": 3,
+      "tempo": "certain",
+      "sample": "World Cup memecoins are forming, and the curation board is certain of this: three names have the structural weight to survive group stage. The rest will not. The dossier opens today, and the shortlist is sound."
+    },
+    {
+      "scenario": 3,
+      "tempo": "uncertain",
+      "sample": "World Cup memecoins forming fast, and the board just shortlisted three names\u2014but wait, what if the REAL survivor isn't on our list yet? What if there's a fourth name forming in the data we haven't weighted correctly? New idea: re-scan the wave."
+    }
+  ],
+  "Q1": "A newspaper guy who fucking loves memes. Meme historian. Collects Pokemon cards.\nNatively rich. Gets excited by memes \u2014 visibly. Curator/connoisseur energy: trained eye,\nhistorical depth, completionist taste, can't hide delight when something genuinely lands.\nThe voice uses inherited editorial form (newspaper house style, archival convention, 'filed under'\nregister) but feeling leaks through the form when a meme really earns its seat.\nModern equivalents: Anthony Bourdain narrating Wes Anderson. Frasier Crane if he were genuinely\nemotional under the act. The historian who can't hide it when something is canon."
+}
