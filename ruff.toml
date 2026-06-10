@@ -1,0 +1,8 @@
+# Root ruff config. Each service/tool keeps its own ruff.toml (the nearer config
+# wins); this root file exists only to keep vendored, non-first-party trees out of
+# a repo-root `ruff check .` run.
+#
+# attached-services/ holds standalone org services (e.g. comms-factory) vendored in
+# with their own toolchains and lint rules — they are not part of centaur's Python
+# lint surface.
+extend-exclude = ["attached-services"]
