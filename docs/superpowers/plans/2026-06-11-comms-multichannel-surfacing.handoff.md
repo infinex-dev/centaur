@@ -51,6 +51,11 @@ Implement the comms multi-channel surfacing feature by executing the plan at
   round-scoped (`generate_candidates_r{n}`) so replay doesn't serve a cached failure.
 - Empty modal submissions are a no-op with a warning — never raise `GateValidationError`
   for them inside the loop (that would kill the run and discard operator edits).
+- Operator edits PRESERVE `candidate_id` (provenance — candidates are immutable, edits
+  are recorded against them; do not null it).
+- Edited copy is re-checked via the existing `/validate` tool method as a durable step —
+  NON-BLOCKING (failures become a ⚠️ line in the gate render; the edit always stands).
+  Response shape: `{passed: bool, failures: [{rule, reason}]}`.
 - Every loop exit leaves the gate message terminal and buttonless, and every terminal
   payload carries `final_by_channel`/`missing_channels`.
 - `final_copy` is REMOVED, not aliased — no backward compat (explicit user decision).
