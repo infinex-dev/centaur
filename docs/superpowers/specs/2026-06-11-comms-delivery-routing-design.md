@@ -167,15 +167,18 @@ Read from the code, not assumed:
 4. **Typefully draft API** — endpoint, auth header, threadify field — confirmed against current
    docs; `TYPEFULLY_API_KEY` provisioned.
 5. **`DISPLAYDEV_API_KEY` (`sk_live_`)** scoped to the existing `infinex` display.dev org,
-   provisioned as a comms-pod secret. Confirm whether to invoke display.dev via the bundled
-   `@displaydev/cli` (shell-out) or its undocumented REST API (the CLI is the validated path).
-   Also confirm the `cssPath` value to use for bot-authored comments/anchors (the trial used a
-   coarse `"h3"`; a stable anchor strategy — e.g. anchor to the heading the comment concerns —
-   should be decided).
+   provisioned as a comms-pod secret (env, not a disk session). Confirm CLI-vs-REST invoke path
+   (CLI is validated); the `cssPath` anchor strategy for bot comments (trial used coarse `"h3"`);
+   the `since` param on `comment list` (use `createdOnVersion` filtering until confirmed); and the
+   **Slack-ID → reviewer-email** mapping for `--share` (Centaur `approver_user_ids` are Slack IDs).
+6. **The `/display/revise` route does not exist and the base `/generate` ignores feedback** — the
+   revision mechanic must be built (seed_transcript + seed_notes single-channel `["blog"]` revise,
+   §6) **before the loop's "bot updates it" step is implementable**. This is the load-bearing new
+   work of §6, not a reuse. (`dsp delete --confirm` for teardown, by contrast, is trial-verified.)
 
-blog + x + x-thread are fully specified and shippable without #1–#2; **web** rides the same PR
-and lands once #1–#2 are confirmed (its mapper + a round-trip test are the only web-specific
-code). The display.dev review loop (§6) is optional and independent of #1–#4.
+blog + x + x-thread (delivery) are fully specified and shippable without #1–#2; **web** rides the
+same PR and lands once #1–#2 are confirmed. The display.dev review loop (§6) depends on #5–#6 (a
+real revision route) but is otherwise independent of the delivery targets.
 
 ## Design
 
@@ -260,17 +263,28 @@ Returns `{ok, pr_url, planned_diff}`.
 - `typefully_draft(channel, *, text=None, tweets=None)` → `POST /typefully-draft`.
 - `display_publish(markdown, *, name, visibility, share=None, short_id=None, base_version=None)`
   → `POST /display/publish`; `display_comments(short_id, *, status="open", since=None)` →
-  `GET /display/comments`; `display_resolve(root_comment_id)` → `POST /display/resolve` (see §6).
-All follow the existing `_post`/`_get` envelope + redaction pattern.
+  **`POST /display/comments`** (a read, but POST-verbed so it reuses `_post`; body
+  `{short_id, status, since}`); `display_resolve(root_comment_id)` → `POST /display/resolve`;
+  `display_revise(markdown, comments, *, run_id)` → `POST /display/revise` (the revision route,
+  see §6); `display_unpublish(short_id)` → `POST /display/unpublish` (teardown — wraps the
+  trial-verified `dsp delete --confirm`).
+- **Verb note:** the client today has **only `_post`** (no `_get`). All the above except
+  `capabilities()` are POST and reuse `_post` (base-url guard, ok-default, status→error mapping,
+  `_redact_sensitive(self.token)`, timeout, Bearer auth). `capabilities()` is the **one** GET
+  (the deployed server serves `/health` as GET and `http.ts` matches `${method} ${path}` exactly,
+  so `_post` cannot reach it) — add a sibling `_get` that mirrors `_post` exactly minus the JSON
+  body.
 
 ### 4. Delivery gate in `comms_release.py`
 
 **Capabilities probe (fixes the cross-pod env problem).** The workflow (API pod) cannot read
 the comms pod's token env. Extend the TS service `GET /health` to report
 `capabilities: {platform_pr: <COMMS_GITHUB_TOKEN present>, typefully: <TYPEFULLY_API_KEY
-present>}` (booleans computed from `process.env`, **no values leaked**). The workflow calls
-`capabilities()` once (a durable `ctx.step`) before rendering the gate and gates each group's
-buttons on `destination_non_empty AND capabilities[group]`.
+present>, display: <DISPLAYDEV_API_KEY present>}` (booleans computed from `process.env`, **no
+values leaked**). The workflow calls `capabilities()` once (a durable `ctx.step`) before
+rendering the gate and gates each group's buttons on `destination_non_empty AND
+capabilities[group]`. The `display` boolean does **not** gate a §4 delivery button — it gates
+**entry to the §6 blog review loop** (false → blog skips straight to the delivery PR).
 
 After the candidate gate marks copy ready, **if any approved channel has a real destination AND
 its capability is reported true**, post a delivery gate; otherwise fall through to the existing
@@ -328,18 +342,36 @@ stage; the production publish is still the platform PR.
 **It works in the Centaur flow as the existing durable round-gate pattern — no new engine
 capability.** Three primitive types, all already in use:
 
-- **Tool calls** — three new comms-factory routes wrapping the validated `dsp` CLI (bundle
-  `@displaydev/cli` as a service dependency; auth via `DISPLAYDEV_API_KEY`):
+- **Tool calls** — new comms-factory routes wrapping the validated `dsp` CLI. Adding
+  `@displaydev/cli` is a service **dependency change that must regenerate `pnpm-lock.yaml` in the
+  same commit** — the image builds with `pnpm install --frozen-lockfile`
+  (`services/api/Dockerfile:5`), which fails on any package.json↔lockfile drift. In-pod auth is
+  the **`DISPLAYDEV_API_KEY` (`sk_live_`) env var**, not an on-disk `dsp login` session (that was
+  the local-trial path; container `/tmp` is ephemeral and not durable across pod restarts).
   - `POST /display/publish` `{markdown, name, visibility, share[], id?, base_version?}` →
-    `{short_id, url, version}`. First call publishes `--visibility company` (or `private --share`
-    the approver list); subsequent calls pass `--id --base-version --reload` to update the same
-    URL. **Strips YAML frontmatter** before publishing (trial: frontmatter renders literally).
-  - `GET /display/comments` `{short_id, status=open, since?}` → the open threads with
-    `{id, body, anchor.textQuote, createdOnVersion}` (the trial-proven read-back).
-  - `POST /display/resolve` `{root_comment_id}` → marks a thread resolved (after the bot
-    addresses it).
-  Each is invoked from the workflow as a durable `ctx.step` via `call_comms_tool`, exactly like
-  `ground_facts`/`generate`.
+    `{short_id, url, version}`. **Default first publish is `--visibility private --share
+    <reviewer-emails>`** (embargoed pre-launch copy); `company` (org-wide) is opt-in only when the
+    draft is intentionally org-visible. Subsequent calls pass `--id --base-version --reload`.
+    **Strips YAML frontmatter** before publishing (trial: frontmatter renders literally). The
+    `--share` list is **emails**, but Centaur `approver_user_ids` are **Slack IDs** — the loop
+    must map Slack ID → email (Slack profile lookup) or take an explicit reviewer-email input;
+    this mapping is an open verification.
+  - `POST /display/comments` `{short_id, status=open, since?}` → open threads with
+    `{id, body, anchor.textQuote, createdOnVersion}` (trial-proven read-back; POST-verbed, see §3).
+  - `POST /display/revise` `{markdown, comments:[{textQuote, body}], run_id}` → `{markdown}` —
+    **the revision route (the load-bearing "bot updates it" mechanic).** This does NOT exist yet
+    and is NOT free: the base `/generate` route ignores `body.feedback` and regenerates the full
+    candidate set from the card, not a targeted single-channel revision of an approved string. So
+    `/display/revise` must drive the actor-director **seed path** — `orchestrateActorDirector…(card,
+    ["blog"], { seed_transcript: <current blog markdown as the prior Actor turn>, seed_notes:
+    <DirectorNotes built from the anchored comments> })` (`actor-orchestrator.ts:210-219`; notes
+    require a transcript) — so the Actor *revises* the current copy against the comments rather
+    than starting over. It returns the revised markdown **plus its Director audit** (see loop
+    step 3). Requires `blog` in the route allowlist (depends on `2026-06-10` §0).
+  - `POST /display/resolve` `{root_comment_id}` → resolve a thread (idempotent).
+  - `POST /display/unpublish` `{short_id}` → teardown; wraps the **trial-verified `dsp delete
+    --confirm`** (the artifact and its URL are removed).
+  Each is invoked from the workflow as a durable `ctx.step` via `call_comms_tool`.
 - **The human trigger is a Slack gate**, not a display.dev push (display.dev has no webhook into
   Centaur). After publishing, the bot posts the gated URL to Slack with a round gate
   (`Gate(ctx.run_id, "blog_review", round_n, …)`) carrying buttons: **"Pull comments & revise"**,
@@ -355,17 +387,35 @@ exit — same discipline as §4):
 
 1. `display/publish` v1 (durable step `display_publish_r{n}`) → post URL + round gate to Slack.
 2. Wait for the gate button (or sleep-poll).
-3. **"Pull comments & revise"** → `display/comments(status=open)`; if none, re-post "no open
-   comments — approve when ready" and continue. If some: feed each comment's `body` +
-   `anchor.textQuote` (which span it targets) to the generator as **revision feedback** (the same
-   shape as the surfacing spec's retry-with-feedback path), regenerate the blog markdown,
-   `display/publish(--id --base-version --reload)` → v(n+1) at the same URL, then `display/resolve`
-   each addressed thread. Re-post the updated link + a new round gate.
-4. **"Approve → open PR"** → exit the loop; hand the approved blog markdown to §4's
-   `platform_pr` delivery (the display.dev artifact stays as the review record; it is not the
-   publish target). Optionally `display/publish` a final `--visibility company` version.
-5. **"Abandon"** → terminal; record `deliveries.blog_review = {status:"abandoned", url}`.
-6. Loop exhaustion → terminal, carrying the current URL + last version in the result.
+3. **"Pull comments & revise"** → `display/comments(status=open)`. **Scope** what is fed to the
+   reviser: only comments with `createdOnVersion >= last_revised_version` (the trial-verified
+   field; equivalently `since=<last_pulled_at>` once that param is confirmed, open-verification
+   #5) — so a comment already addressed in a prior round is not re-fed. If none new, re-post "no
+   open comments — approve when ready" and continue. If some: call `display/revise(markdown,
+   comments)` (the seed-path route above). **Guard the result** with `_generation_result_error`
+   (`comms_release.py:567-573`): if truthy, keep the previous published version, append the
+   failure to the gate message, do **not** consume the round (mirrors the surfacing spec's
+   failed-retry handling). On success, `display/publish(--id --base-version --reload)` → v(n+1),
+   then `display/resolve` the addressed threads. **Surface the revision's Director audit**
+   (`director_audit`: voice/factual/publication_gate) in the re-posted gate message — so reviewers
+   approve the *exact* version they see and a revision that drops a deployed fact or trips the
+   publication gate is visibly flagged, not silently shipped. A comment whose `textQuote` no
+   longer matches the revised text (the span was rewritten/removed) is reported as
+   "anchor stale — addressed or removed" rather than re-fed. Re-post the updated link + new round
+   gate.
+4. **"Approve → open PR"** → first `display/comments(status=open)` (durable step); if any remain
+   **unresolved**, re-post a confirm gate ("N open comments not yet addressed — Approve anyway /
+   Pull & revise") so feedback is never silently shipped. On confirmed approve, exit the loop and
+   hand the approved blog markdown to §4's `platform_pr` delivery (display.dev is the review
+   record, not the publish target).
+5. **"Abandon"** → `display/unpublish(short_id)` (tear down the pre-launch artifact), then
+   terminal; record `deliveries.blog_review = {status:"abandoned", url:None}`.
+6. Loop exhaustion → `display/unpublish(short_id)`; terminal, carrying status + last version.
+
+**Pre-launch teardown:** on every loop exit, the embargoed private artifact is removed via
+`display/unpublish` **except on Approve**, where it is retained as the review record until the PR
+merges (the operator may delete it after). This keeps unreleased copy from lingering on an
+external SaaS.
 
 **Idempotency / durability:** `display/publish` updates are keyed by `--id + --base-version`
 (optimistic-concurrency guard, trial-verified) so a replayed step re-publishing the same version
@@ -396,10 +446,12 @@ TS (`attached-services/comms-factory`):
 - `featureCardEntry` round-trips through `appendFeatureCopyEntry` into a fixture data.ts (shape
   per confirmed open-verification #1).
 - `/health` reports `capabilities` booleans from env (incl. `display`) without leaking values.
-- display.dev routes (mock the `dsp`/HTTP boundary): `/display/publish` strips frontmatter and
-  passes `--id --base-version --reload` on update; `/display/comments` parses open threads into
-  `{id, body, textQuote, createdOnVersion}`; `/display/resolve` is idempotent;
-  `display_not_configured` when the key is absent.
+- display.dev routes (mock the `dsp`/HTTP boundary): `/display/publish` strips frontmatter,
+  defaults `--visibility private`, and passes `--id --base-version --reload` on update;
+  `/display/comments` parses open threads into `{id, body, textQuote, createdOnVersion}`;
+  `/display/revise` threads `{markdown, comments}` into `seed_transcript`+`seed_notes` with
+  `channels=["blog"]` and returns revised markdown **+ `director_audit`**; `/display/resolve` and
+  `/display/unpublish` are idempotent; `display_not_configured` when the key is absent.
 
 Python:
 - `capabilities()` probe; delivery gate shown only when destination + capability true; tokens
@@ -414,10 +466,13 @@ Python:
 - Client: `emit_platform_pr`/`typefully_draft`/`capabilities`/`display_*` post the documented
   envelopes.
 - Blog review loop: with `DISPLAYDEV_API_KEY` absent, blog skips the loop → straight to PR.
-  Present: publish posts a URL + round gate; "Pull comments & revise" with open threads feeds
-  comment bodies+anchors to a revise step, republishes v(n+1) at the same short_id, resolves the
-  addressed threads; "Approve" exits to the PR delivery; replay does not double-publish (cached
-  step + `--base-version` guard); loop exhaustion carries `deliveries.blog_review`.
+  Present: publish posts a URL + round gate; "Pull comments & revise" feeds only
+  `createdOnVersion`-new comments to `display/revise`, republishes v(n+1), resolves addressed
+  threads, and re-posts the revision's `director_audit`; a revise that fails
+  `_generation_result_error` keeps the prior version and does not consume the round; "Approve"
+  with open comments shows the confirm gate before handing to the PR delivery; "Abandon" and
+  exhaustion call `display/unpublish`; replay does not double-publish (cached step +
+  `--base-version` guard); every exit carries `deliveries.blog_review`.
 
 ## Limitations (accepted this phase)
 
@@ -454,9 +509,12 @@ Python:
   it is a sanctioned dependency, but pre-launch drafts published there leave the building — gate
   with `--visibility private/company` and an explicit reviewer allowlist; for embargoed copy,
   weigh keeping it off display.dev (no SOC2/self-host/EU residency; early-stage vendor).
-- **Blast radius**: TS service (5 routes — emit, typefully, 3 display — + a Typefully client, a
-  REST emit module reusing pure transforms, and a display client wrapping `@displaydev/cli`),
-  overlay Python (6 client methods + delivery gate + blog review loop), one `contrib/chart`
-  NetworkPolicy hook + secret wiring (`COMMS_GITHUB_TOKEN`, `TYPEFULLY_API_KEY`,
-  `DISPLAYDEV_API_KEY`). Base application services and the generation library untouched;
-  `emitLaunchPR`/`pnpm emit-pr` retained as break-glass.
+- **Blast radius**: TS service (7 routes — emit, typefully, and 5 display: publish, comments,
+  revise, resolve, unpublish — + a Typefully client, a REST emit module reusing pure transforms,
+  a display client wrapping `@displaydev/cli`, **a `/generate` seed-path extension for
+  `/display/revise`**, and an added `@displaydev/cli` dependency requiring a `pnpm-lock.yaml`
+  regen), overlay Python (a new `_get` + 8 client methods + delivery gate + blog review loop),
+  one `contrib/chart` NetworkPolicy hook + secret wiring (`COMMS_GITHUB_TOKEN`,
+  `TYPEFULLY_API_KEY`, `DISPLAYDEV_API_KEY`). Base application services untouched; the generation
+  library gains an optional revision seed path; `emitLaunchPR`/`pnpm emit-pr` retained as
+  break-glass.
