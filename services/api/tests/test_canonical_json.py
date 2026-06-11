@@ -39,6 +39,12 @@ def test_clean_values_pass_through_unchanged():
     assert json.loads(canonical_json(payload)) == payload
 
 
+def test_colliding_keys_after_nul_strip_merge_without_crashing():
+    # Keys differing only by NUL collide after stripping — last wins, no error.
+    out = canonical_json({"a\x00": 1, "a": 2})
+    assert json.loads(out) == {"a": 2}
+
+
 def test_output_is_valid_jsonb_text_with_no_nul_byte():
     out = canonical_json({"k": "bad\x00value", "list": ["a\x00", "b"]})
     assert "\x00" not in out  # raw NUL byte
