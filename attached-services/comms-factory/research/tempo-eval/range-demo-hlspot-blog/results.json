@@ -1,0 +1,95 @@
+{
+  "inner_work": {
+    "thesis": "Spot trading on Infinex stops being a separate destination and becomes part of the same room you already trade perps in.",
+    "through_action": "to fold spot into the existing perps interface as one continuous surface, so the user only has to want a market and trade it",
+    "obstacle": "the reader expects a 'new product launch' — a separate spot app, a new venue announcement, a list of supported pairs to scan, hype about HYPE. They're braced for marketing.",
+    "lining": "on the surface: a measured account of what is now live and what comes next. underneath: the quiet conviction that the multi-venue, multi-product interface the team has been building toward has just crossed a threshold, and the path from here is already drawn.",
+    "reader_prior": "Spot and perps are different apps with different accounts and different UX. A 'spot launch' means a new venue page to learn.",
+    "not_the_point": "The draft must NOT frame this as a product announcement with feature bullets. Do NOT enumerate supported order types (market, limit, post-only, cancel, modify) as a list. Do NOT list the top markets as a ranked leaderboard with dollar volumes stacked (HYPE $144M, UBTC $28M, etc.) — one or two market names can be named inline as texture, but the post must not read as a volume table. Do NOT explain unified account mechanics or why non-unified modes are gated; state the requirement once if at all. Do NOT antagonize or name competing spot venues. Do NOT use 'we're thrilled / excited / proud to' or any launch-day hype register.",
+    "beat_plan": [
+      {
+        "verb": "to mark",
+        "working_action": "pressing",
+        "micro_objective": "the reader registers that something has shifted in what Infinex Perps is — it is no longer perps-only",
+        "obstacle_local": "the reader is scanning for 'what's new' as a feature, not as a change of category",
+        "shadow_move": "the weight of a decision already taken months ago surfacing as a present-tense fact"
+      },
+      {
+        "verb": "to situate",
+        "working_action": "gliding",
+        "micro_objective": "the reader places the move inside the existing aggregator picture — Hyperliquid, Lighter, Synthetix, one interface — and sees spot as an extension of that, not a separate product",
+        "obstacle_local": "the reader's prior that spot trading lives in its own app with its own account",
+        "shadow_move": "the mapper's hand drawing the line that connects what was already there to what just arrived"
+      },
+      {
+        "verb": "to name",
+        "working_action": "dabbing",
+        "preparation_from": "gliding",
+        "micro_objective": "the reader feels the live surface — a couple of market names land as texture, the on-chain order book is named as the thing actually being traded against, the route is concrete",
+        "obstacle_local": "the temptation to read this as abstract architecture rather than something tradeable right now",
+        "shadow_move": "the trailblazer pointing at a specific door rather than describing the building"
+      },
+      {
+        "verb": "to set the condition",
+        "working_action": "pressing",
+        "micro_objective": "the reader understands, without being lectured, that this runs on unified account — the requirement is stated as a fact of the terrain, not a hurdle",
+        "obstacle_local": "the reader expects either a gated apology or a fine-print footnote",
+        "shadow_move": "the banker's calm about the rule that makes the rest possible"
+      },
+      {
+        "verb": "to open the line forward",
+        "working_action": "floating",
+        "micro_objective": "the reader feels that Lighter spot is already drawn in — not promised, not teased, just next on a route the architecture supports",
+        "obstacle_local": "the reader's reflex to treat roadmap mentions as marketing futures",
+        "shadow_move": "the lift of a flow-borne future tense — the path was laid before the announcement"
+      },
+      {
+        "verb": "to close on the through-line",
+        "working_action": "wringing",
+        "micro_objective": "the reader leaves with the shape: one interface, more of what trades on it, the user only has to want the market",
+        "obstacle_local": "the reader's habit of ending a launch post with a CTA or hype beat",
+        "shadow_move": "responsibility for the plumbing taken so the want can stay simple"
+      }
+    ],
+    "rationale": "The beat sequence moves from a weighted mark of what has changed, through a glide that resituates the reader inside the existing aggregator, into concrete naming, a pressed statement of the account condition, a floated opening toward Lighter spot, and a wrung close on the through-line — covering the placement's range (pressing/gliding/dabbing/floating/wringing) so the post reads as a decision already taken being mapped, not a feature launch being sold.",
+    "source": "anthropic"
+  },
+  "results": [
+    {
+      "variant": "unsteered",
+      "id": "unsteered-1",
+      "text": "Spot markets are live on Infinex Perps. The same app you opened to trade perps now also trades spot — same account, same surface, same room. Nothing was moved, nothing was rebranded; a category that used to sit elsewhere is now inside the thing you already use.\n\nThe Perps app has been a venue aggregator for some time: Hyperliquid, Lighter, and Synthetix going live later this week, all reachable from one interface. Spot extends that picture rather than starting a new one. The aggregator was the shape; spot is the next thing that fits into it.\n\nHyperliquid is the first spot venue, trading directly against its on-chain order book. HYPE/USDC is there. UBTC, UETH, PURR are there. Eighteen USDC-quoted markets carry real volume today, and the rest of the on-chain universe sits behind them as long-tail listings. PURR/USDC opens at perps.app.infinex.xyz/hyperliquid/spot/PURR/USDC; every other market follows the same route.\n\nSpot runs on the unified account. That is the condition the rest of the app already runs on, and it is the condition that lets one interface hold perps and spot without splitting into two products. If the account is unified, spot is there. That is the whole of the requirement.\n\nLighter spot is next. The multi-exchange spot architecture is already in the app — Lighter has been live for perps since March — and the second venue lights up along the same route the first one took. It is not a teaser; it is the next step on a path the code already describes.\n\nOne interface. More of what trades on it. The user wants a market and trades it; the rest is our problem.",
+      "director_primary": "commanding",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "Primary tempo is commanding (Strong + Direct), which is one of the five primary allowed tempi for Infinex. Drive read is Spell (primary drive for stable|penetrating|flow cell) — legal surface for this character. Vision axis is present architecturally (the whole blog establishes that the map already exists and the user just inhabits it) without being stated as a thesis. Lining (passion) remains hidden. No urgency, FOMO, or scarcity vocabulary. Super-objective ('the user wants a market and trades it; the rest is our problem') closes the blog and is the clearest statement of the character's responsibility stance — entirely on-axis."
+    },
+    {
+      "variant": "irradiant-aim",
+      "id": "irradiant-aim-1",
+      "text": "For a while now, the perps app has been quietly widening. Three perps venues sitting under one account, one balance, one place to look — Hyperliquid, Lighter, and Synthetix arriving later this week. Today the same room opens a second door. Spot trades from the same interface, the same unified account, the same URL you already have bookmarked.\n\nHyperliquid Spot is live at perps.app.infinex.xyz, on Hyperliquid's on-chain order book, USDC-quoted. Eighteen markets carry real volume — HYPE and UBTC among them, PURR sitting where PURR sits — reachable by typing the pair into the path. Market and limit orders, post-only, modify, cancel. The rest of the spot universe is there in metadata; what's executable is what's executable.\n\nLighter spot is the next door, already wired into the same architecture that brought Lighter perps in March. The shape of where this goes is visible from here: more venues, more products, the same room. You come in wanting a market. The interface holds the rest.",
+      "director_primary": "commanding",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "commanding is a primary allowed tempo for Infinex. Drive reads as Spell, which is legal visible surface for stable|penetrating|flow. No passion-drift, no urgency vocabulary, no FOMO. The Lining (passion/introvert) is correctly hidden — it does not surface as explicit meaning or thesis. The through-action is acceptant ('bold resolve' → 'the interface holds the rest'), not aggressive. Beat-only/reserve tempi are not the primary read."
+    },
+    {
+      "variant": "sombre-aim",
+      "id": "sombre-aim-1",
+      "text": "For a long time, trading on Infinex meant choosing a door. Perps were one room, with one account, one interface, one set of habits. Spot was somewhere else — another app, another login, another mental shift to make before you could place an order. The split was never argued for. It was just what the surrounding world had handed down, and the work was to carry it without complaining.\n\nThat arrangement ends today. Hyperliquid spot markets are now live inside the Infinex Perps app, on the same on-chain order book the venue is known for, reached at perps.app.infinex.xyz under the same unified account that already holds your perps positions. HYPE, UBTC, UETH, PURR — the eighteen USDC-quoted markets with real depth sit at /hyperliquid/spot/<base>/<quote>, one route away from the perps you were already trading. Lighter spot is the next venue in the same frame; the wiring is already there.\n\nWhat used to be two destinations is one surface now, and that is the shape Infinex is going to keep. The room holds.",
+      "director_primary": "commanding",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "Primary tempo is commanding (Strong + Direct, Stable attitude), which is listed in the five primary allowed tempi. Drive reads as Spell at surface — legal resting energy for stable|penetrating|flow. No passion/urgency/FOMO foreground. No off-spec visible projection. Lining (passion) is not surfaced as explicit meaning. Single blog post does not need to project Vision to be legally placed; the Spell->Vision axis accumulates across arc."
+    },
+    {
+      "variant": "sociable-aim",
+      "id": "sociable-aim-1",
+      "text": "Hyperliquid's spot order book opens into the Infinex Perps app today. Same room you already trade perps in, same account, same surface — the venue walks in through the door we built for it, and there's a seat already pulled out. If you've been trading perps with us, nothing changes about how you arrive; the spot side is just the next route down the hall, at /hyperliquid/spot/<base>/<quote>.\n\nWhat is actually live: eighteen USDC-quoted spot markets with real depth — HYPE, UBTC, UETH, PURR among them — running against Hyperliquid's on-chain order book, ours to route to, theirs to clear. We're not borrowing their liquidity to dress up a page; we're standing next to it and pointing at it plainly. A unified account is the one thing the door asks of you before it opens.\n\nLighter is the next venue we're seating at the same table — already live for perps since March, and wired into the spot architecture in the same way Hyperliquid is now. The interface was built to hold more than one venue and more than one product at once, and from here it keeps widening. One place to want a market, one place to trade it, more venues arriving into the same room.",
+      "director_primary": "commanding",
+      "director_pass": false,
+      "director_legal": true,
+      "fit_reason": "Primary tempo commanding (Strong + Direct) is in the five primary allowed tempi for Infinex. Drive read is Spell with Doing secondary — both legal visible surfaces for stable|penetrating|flow. Vision projects at the close of P3 without being forced. No Passion/urgency/FOMO register. Lining (passion) does not surface as explicit meaning. The character stance — builder who mapped the room in advance, now pointing plainly — is consistent with the Werle/Duke archetype. Pressing → Punching motor arc is prepared correctly."
+    }
+  ]
+}

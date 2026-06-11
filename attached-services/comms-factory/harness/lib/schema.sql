@@ -367,12 +367,30 @@ CREATE TABLE IF NOT EXISTS final_picks (
   channel TEXT NOT NULL, -- channel validated app-side (lib/types Channel); no CHECK so adding a channel needs no migration
   candidate_id TEXT NOT NULL REFERENCES candidates(id),
   final_text TEXT NOT NULL,
+  final_structured_json TEXT, -- edited StructuredOutput for polished structured surfaces (web/carousel/thread)
   shipped_at TEXT,
   shipped_to TEXT CHECK (shipped_to IN ('clipboard','slack','x','in-product')),
   UNIQUE(card_id, channel)
 );
 
 CREATE INDEX IF NOT EXISTS idx_final_picks_card ON final_picks(card_id);
+
+-- ─── handback_prompts ─────────────────────────────────────────────────────────
+-- Durable record of every operator handback prompt (reground / regenerate), saved
+-- on change AND on submit so a prompt is NEVER lost to a reload, crash, hot-reload,
+-- or failed run. `status`: 'saved' (draft) | 'submitted' (a run was kicked).
+CREATE TABLE IF NOT EXISTS handback_prompts (
+  id TEXT PRIMARY KEY,
+  card_id TEXT NOT NULL REFERENCES cards(id),
+  channel TEXT NOT NULL,
+  reground_prompt TEXT,
+  regenerate_prompt TEXT,
+  scope TEXT,
+  run_id TEXT,
+  status TEXT NOT NULL DEFAULT 'submitted',
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_handback_prompts_card_channel ON handback_prompts(card_id, channel, created_at DESC);
 
 -- ─── agreement_snapshots ─────────────────────────────────────────────────────
 -- Denormalised metrics for fast dashboard queries. Recomputed daily.

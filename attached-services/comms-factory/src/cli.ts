@@ -130,7 +130,7 @@ async function cmdGenerate(args: string[]): Promise<number> {
   const { voice, defaultBeats } = parseVoice(args);
   const card = parseReleaseCard(JSON.parse(readFileSync(cardPath, "utf8")));
   const beatsArg = parseBeats(args, voice);
-  const channels = card.audience.filter(isPickChannel);
+  const channels = card.audience.filter(isAudiencePickChannel);
   // Resolve the actual beats once so generator / validator / orchestrator / printed
   // output all agree on what was used.
   const resolvedBeats: BeatSequence = beatsArg ?? { beats: defaultBeats(card.kind) };
@@ -453,6 +453,10 @@ function isPickChannel(s: string): s is Channel {
     s === "blog" ||
     s === "carousel"
   );
+}
+
+function isAudiencePickChannel(s: string): s is Exclude<Channel, "image-brief"> {
+  return isPickChannel(s);
 }
 
 main(process.argv.slice(2)).then(

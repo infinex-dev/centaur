@@ -32,9 +32,12 @@ import type { BeatSequence } from '@pipeline/voice/types';
 import type { HistoryGuardResult, ShippedCopyRecord } from '@pipeline/history-guards';
 import type { ActiveValidationVerdict } from '@pipeline/validator-active';
 import { classifyText } from '@/lib/classifier-wrapper';
+import { spliceToggles, hasToggle } from '@/lib/markdown-splice';
+import { regroundCard, grounderEventMessage } from '@/lib/reground';
 import { getDb, newId, nowIso, writeTx } from '@/lib/db';
 import { makeSemanticShifts, makeTextDiff } from '@/lib/diff';
 import {
+  CHANNELS,
   expectedChannelsForCard,
   getReleaseCardJson,
   getRunningActorRun,
@@ -55,6 +58,15 @@ const EFFECTIVE_DIRECTOR_MODEL =
 interface ActorRegenSeed {
   seed_transcript: ActorTranscriptMessage[];
   seed_notes?: DirectorNotes;
+}
+
+/** Operator-handback finalize context (see app/actions/handback.ts). After the
+ * run, the best regenerated candidate for `channel` is auto-picked so the operator
+ * sees the result on the surface card; `baseText` (the operator's edited copy)
+ * triggers a toggle-stub splice so their surrounding copy stays byte-for-byte. */
+interface HandbackContext {
+  channel: Channel;
+  baseText?: string;
 }
 
 interface CandidateAuditPersistence {
@@ -120,6 +132,7 @@ function startActorGeneratorTask(opts: {
   n?: number;
   runId: string;
   seed?: ActorRegenSeed;
+  handback?: HandbackContext;
 }): void {
   void runActorGeneratorJob(opts);
 }
@@ -130,6 +143,7 @@ async function runActorGeneratorJob(opts: {
   n?: number;
   runId: string;
   seed?: ActorRegenSeed;
+  handback?: HandbackContext;
 }): Promise<void> {
   try {
     const result = await runActorGenerator(opts.cardId, opts.channels, opts.n, opts.runId, opts.seed);
@@ -142,6 +156,17 @@ async function runActorGeneratorJob(opts: {
       payload: { candidate_count: total, candidates_by_channel: counts },
     });
     markActorRunCompleted(db, opts.runId);
+    if (opts.handback) {
+      try {
+        finalizeHandback(db, opts.cardId, opts.handback);
+      } catch (finalizeErr) {
+        persistActorRunEvent(db, opts.cardId, opts.runId, {
+          event_type: 'handback_finalize_error',
+          message: errorMessage(finalizeErr),
+          payload: { channel: opts.handback.channel },
+        });
+      }
+    }
     // No revalidatePath here: this runs in a DETACHED background task (the request
     // that started it already returned), where revalidatePath throws "used during
     // render" and was wrongly marking completed runs as failed. The client
@@ -169,10 +194,20 @@ function countCandidatesByChannel(candidatesByChannel: Record<Channel, HarnessCa
   ) as Record<Channel, number>;
 }
 
+function emptyCandidateGroups(): Record<Channel, HarnessCandidate[]> {
+  const groups = {} as Record<Channel, HarnessCandidate[]>;
+  for (const channel of CHANNELS) groups[channel] = [];
+  return groups;
+}
+
+function copyChannels(channels: Channel[]): Channel[] {
+  return channels.filter((channel) => channel !== 'image-brief');
+}
+
 export async function runGenerator(
   card_id: string,
   channels?: Channel[],
-  opts?: { n?: number; retry?: boolean; seed?: ActorRegenSeed },
+  opts?: { n?: number; retry?: boolean; seed?: ActorRegenSeed; handback?: HandbackContext },
 ): Promise<{ run: HarnessActorRun; existing: boolean }> {
   const db = getDb();
   const card = requireCard(card_id, db);
@@ -183,9 +218,15 @@ export async function runGenerator(
   const activeChannels = channels ?? expectedChannelsForCard(card_id, db);
   if (process.env.HARNESS_GENERATOR_ARCH !== 'legacy') {
     process.env.HARNESS_GENERATOR_ARCH = 'actor';
-    if (!process.env.ANTHROPIC_API_KEY) {
+    const actorChannels = copyChannels(activeChannels);
+    if (actorChannels.length > 0 && !process.env.ANTHROPIC_API_KEY) {
       throw new Error(
         'ANTHROPIC_API_KEY is required to run the actor/director generator in the harness. Actor/director stub generation has been removed; use the legacy generator if you need explicit stub output.',
+      );
+    }
+    if (actorChannels.length === 0 && !process.env.ANTHROPIC_API_KEY && process.env.HARNESS_ALLOW_STUB_GENERATOR !== '1') {
+      throw new Error(
+        'ANTHROPIC_API_KEY is required to run image brief generation. Set HARNESS_ALLOW_STUB_GENERATOR=1 to explicitly allow stub generation.',
       );
     }
     const { run, created } = getOrCreateActorRun(db, card_id, activeChannels);
@@ -196,6 +237,7 @@ export async function runGenerator(
         n: opts?.n,
         runId: run.id,
         ...(opts?.seed ? { seed: opts.seed } : {}),
+        ...(opts?.handback ? { handback: opts.handback } : {}),
       });
     revalidatePath(`/cards/${card_id}`);
     revalidatePath('/');
@@ -204,15 +246,7 @@ export async function runGenerator(
   const batches = await Promise.all(
     activeChannels.map((channel) => generateForChannel(card_id, channel, opts?.n, undefined)),
   );
-  const result: Record<Channel, HarnessCandidate[]> = {
-    x: [],
-    'x-thread': [],
-    web: [],
-    'in-product': [],
-    modal: [],
-    blog: [],
-    carousel: [],
-  };
+  const result = emptyCandidateGroups();
   for (const batch of batches) result[batch.channel] = batch.candidates;
   revalidatePath(`/cards/${card_id}`);
   revalidatePath('/');
@@ -228,6 +262,197 @@ export async function runGenerator(
     },
     existing: false,
   };
+}
+
+/**
+ * Operator surface-handback: reground (optional) + regenerate (optional) run as a
+ * SINGLE detached job that streams grounder → actor → director events to the run-
+ * events panel. Returns the run immediately so the modal can switch to a live
+ * progress view; nothing blocks the request on the (slow) grounder.
+ */
+export async function startSurfaceHandback(opts: {
+  cardId: string;
+  channel: Channel;
+  candidateAttempt: number;
+  priorDraft: string;
+  regroundPrompt?: string;
+  regeneratePrompt?: string;
+  scope: 'block' | 'whole';
+}): Promise<{ run: HarnessActorRun; existing: boolean }> {
+  const db = getDb();
+  const card = requireCard(opts.cardId, db);
+  if (!card.card_approved_at) throw new Error('Card stage must be approved before regenerating.');
+  if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY is required to reground / regenerate.');
+
+  const { run, created } = getOrCreateActorRun(db, opts.cardId, [opts.channel]);
+  if (created) void runHandbackJob({ ...opts, runId: run.id });
+  revalidatePath(`/cards/${opts.cardId}`);
+  revalidatePath('/');
+  return { run, existing: !created };
+}
+
+async function runHandbackJob(opts: {
+  cardId: string;
+  channel: Channel;
+  candidateAttempt: number;
+  priorDraft: string;
+  regroundPrompt?: string;
+  regeneratePrompt?: string;
+  scope: 'block' | 'whole';
+  runId: string;
+}): Promise<void> {
+  const db = getDb();
+  try {
+    if (opts.regroundPrompt?.trim()) {
+      const prompt = opts.regroundPrompt.trim();
+      persistActorRunEvent(db, opts.cardId, opts.runId, {
+        event_type: 'reground_started',
+        message: `Grounder researching: ${prompt}`,
+        channel: opts.channel,
+      });
+      const { verified, unverifiable } = await regroundCard(opts.cardId, prompt, (event) =>
+        persistActorRunEvent(db, opts.cardId, opts.runId, {
+          event_type: `grounder_${(event as { type: string }).type}`,
+          message: grounderEventMessage(event),
+          channel: opts.channel,
+          payload: event as unknown as Record<string, unknown>,
+        }),
+      );
+      persistActorRunEvent(db, opts.cardId, opts.runId, {
+        event_type: 'reground_complete',
+        message: `Grounded ${verified} fact${verified === 1 ? '' : 's'} into the card`,
+        channel: opts.channel,
+        payload: { facts: verified },
+      });
+
+      // GATE: if the reground couldn't verify what was asked, STOP — do NOT hand a
+      // half-grounded card to the actor. Surface the gaps and let the operator vouch
+      // a fact, supply a source, or proceed without it.
+      if (opts.regeneratePrompt?.trim() && unverifiable.length > 0) {
+        persistActorRunEvent(db, opts.cardId, opts.runId, {
+          event_type: 'reground_halted',
+          message: `Halted — grounder could not verify ${unverifiable.length} claim${unverifiable.length === 1 ? '' : 's'}. Did NOT hand off to the actor.`,
+          channel: opts.channel,
+          payload: { unverifiable },
+        });
+        markActorRunCompleted(db, opts.runId);
+        return;
+      }
+    }
+
+    if (opts.regeneratePrompt?.trim()) {
+      const seed = buildHandbackSeed(
+        db,
+        opts.cardId,
+        opts.channel,
+        opts.priorDraft,
+        opts.candidateAttempt,
+        opts.regeneratePrompt.trim(),
+      );
+      const result = await runActorGenerator(opts.cardId, [opts.channel], undefined, opts.runId, seed);
+      const total = Object.values(countCandidatesByChannel(result.candidates_by_channel)).reduce((s, c) => s + c, 0);
+      persistActorRunEvent(db, opts.cardId, opts.runId, {
+        event_type: 'run_persisted',
+        message: `Persisted ${total} candidate${total === 1 ? '' : 's'} to the harness`,
+        payload: { candidate_count: total },
+      });
+      const baseText = opts.scope === 'block' && hasToggle(opts.priorDraft) ? opts.priorDraft : undefined;
+      finalizeHandback(db, opts.cardId, { channel: opts.channel, baseText });
+      persistActorRunEvent(db, opts.cardId, opts.runId, {
+        event_type: 'handback_picked',
+        message: `Best ${opts.channel} draft auto-picked${baseText ? ' (spliced into your copy)' : ''} — review and ship`,
+        channel: opts.channel,
+      });
+    }
+
+    markActorRunCompleted(db, opts.runId);
+  } catch (err) {
+    const message = errorMessage(err);
+    try {
+      persistActorRunEvent(db, opts.cardId, opts.runId, {
+        event_type: 'run_failed',
+        message,
+        payload: { error: message },
+      });
+      markActorRunFailed(db, opts.runId, message);
+    } catch (persistErr) {
+      console.error('Failed to persist handback failure', persistErr);
+    }
+  }
+}
+
+/** Build the actor seed AFTER reground so its assignment carries the new facts. */
+function buildHandbackSeed(
+  db: ReturnType<typeof getDb>,
+  cardId: string,
+  channel: Channel,
+  priorDraft: string,
+  attempt: number,
+  prompt: string,
+): ActorRegenSeed {
+  const releaseCardJson = getReleaseCardJson(cardId, db);
+  if (!releaseCardJson) throw new Error('No release card exists for this card.');
+  const releaseCard = parseReleaseCard(JSON.parse(releaseCardJson));
+
+  // Give the actor BOTH its last generation AND the operator's edit, plus the
+  // captured word-diff, so it can SEE what the operator changed and preserve it —
+  // not just receive the final text. priorDraft is the operator's edited copy
+  // (the pick's final_text); the candidate behind the pick holds the original
+  // machine generation (immutable); candidate_text_edits holds the word diff.
+  const pickRow = db
+    .prepare('SELECT candidate_id FROM final_picks WHERE card_id = ? AND channel = ?')
+    .get(cardId, channel) as { candidate_id: string } | undefined;
+  let generation: string | null = null;
+  let wordDiff: string | null = null;
+  if (pickRow) {
+    const cand = db.prepare('SELECT text FROM candidates WHERE id = ?').get(pickRow.candidate_id) as
+      | { text: string }
+      | undefined;
+    generation = cand?.text ?? null;
+    const edit = db
+      .prepare('SELECT word_diff_json FROM candidate_text_edits WHERE candidate_id = ? ORDER BY edited_at DESC LIMIT 1')
+      .get(pickRow.candidate_id) as { word_diff_json: string } | undefined;
+    wordDiff = edit?.word_diff_json ?? null;
+  }
+
+  const showDiff = generation !== null && generation.trim() !== priorDraft.trim();
+  const parts = [buildActorAssignmentMessage(releaseCard, [channel], 5), ''];
+  if (showDiff) {
+    parts.push(
+      '## Your last generation',
+      generation!,
+      '',
+      "## The operator's edit of it — honour these changes",
+      priorDraft,
+      '',
+      'The operator deliberately changed your draft above. Preserve their edits and intent; apply the revision notes; do NOT revert to your original wording. Return the full JSON envelope as usual.',
+    );
+    const rendered = wordDiff ? renderWordDiff(wordDiff) : null;
+    if (rendered) parts.push('', '## What changed (− your wording, + operator)', rendered);
+  } else {
+    parts.push(
+      '## Prior draft to revise',
+      'This is the operator-edited copy. Preserve their voice and intent; change only what the revision notes call out. Return the full JSON envelope as usual.',
+      '',
+      priorDraft,
+    );
+  }
+  parts.push('', buildDirectorNotesMessage({ attempt, summary: 'Operator handback.', notes: [prompt] }));
+  return { seed_transcript: [{ role: 'user', content: parts.join('\n') }] };
+}
+
+/** Render a stored diffWords() result as inline [-removed][+added] markers, capped. */
+function renderWordDiff(json: string): string | null {
+  try {
+    const parts = JSON.parse(json) as Array<{ value: string; added?: boolean; removed?: boolean }>;
+    if (!Array.isArray(parts) || parts.length === 0) return null;
+    const out = parts
+      .map((p) => (p.added ? `[+${p.value}]` : p.removed ? `[-${p.value}]` : p.value))
+      .join('');
+    return out.length > 4000 ? out.slice(0, 4000) + ' …' : out;
+  } catch {
+    return null;
+  }
 }
 
 export async function decideCandidate(
@@ -633,7 +858,7 @@ async function generateForChannel(
   n?: number,
   operatorFeedback?: string,
 ): Promise<{ channel: Channel; candidates: HarnessCandidate[] }> {
-  if (!process.env.ANTHROPIC_API_KEY && process.env.HARNESS_ALLOW_STUB_GENERATOR !== '1') {
+  if (channel !== 'image-brief' && !process.env.ANTHROPIC_API_KEY && process.env.HARNESS_ALLOW_STUB_GENERATOR !== '1') {
     throw new Error(
       'ANTHROPIC_API_KEY is required to run the generator in the harness. Set HARNESS_ALLOW_STUB_GENERATOR=1 to explicitly allow stub generation.',
     );
@@ -645,6 +870,10 @@ async function generateForChannel(
   const releaseCardJson = getReleaseCardJson(cardId, db);
   if (!releaseCardJson) throw new Error('No release card exists for this card.');
   const releaseCard = parseReleaseCard(JSON.parse(releaseCardJson));
+  if (channel === 'image-brief') {
+    const inserted = await generateAndPersistImageBriefCandidate(cardId, releaseCard);
+    return { channel, candidates: [inserted] };
+  }
   const attemptBase = nextAttempt(db, cardId, channel);
   if (attemptBase > 3) throw new Error(`Retry cap reached for ${channel}; manual intervention required.`);
 
@@ -828,7 +1057,8 @@ async function runActorGenerator(
   runId?: string,
   seed?: ActorRegenSeed,
 ): Promise<{ candidates_by_channel: Record<Channel, HarnessCandidate[]> }> {
-  if (!process.env.ANTHROPIC_API_KEY) {
+  const actorChannels = copyChannels(channels);
+  if (actorChannels.length > 0 && !process.env.ANTHROPIC_API_KEY) {
     throw new Error(
       'ANTHROPIC_API_KEY is required to run the actor/director generator in the harness. Actor/director stub generation has been removed; use the legacy generator if you need explicit stub output.',
     );
@@ -847,15 +1077,7 @@ async function runActorGenerator(
   const feedbackWaveRegime = parseHarnessFeedbackWaveRegime(process.env.HARNESS_FEEDBACK_WAVE_REGIME ?? process.env.COMMS_FEEDBACK_WAVE_REGIME);
   ensureActorRunEventsTable(db);
 
-  const grouped: Record<Channel, HarnessCandidate[]> = {
-    x: [],
-    'x-thread': [],
-    web: [],
-    'in-product': [],
-    modal: [],
-    blog: [],
-    carousel: [],
-  };
+  const grouped = emptyCandidateGroups();
 
   const approvedHosts = listApprovedApiHosts(db).map((h) => h.host);
   const factRequestGrounder: FactRequestGrounderFn = async (requests) => {
@@ -899,10 +1121,20 @@ async function runActorGenerator(
     }));
   };
 
+  // The image brief is independent of the copy actor. Kick it off concurrently
+  // so a slow or hung actor run never blocks it from appearing, and so a brief
+  // failure never kills copy generation (briefs are additive).
+  const imageBriefTask = channels.includes('image-brief')
+    ? generateAndPersistImageBriefCandidate(cardId, releaseCard, runId).catch(() => null)
+    : null;
+
   for (const flowDirection of flowDirections) {
     const attemptBase = nextActorAttempt(db, cardId);
     const eventRunId = runId ?? newId();
-    const result = await orchestrateActorDirectorWithRetries(releaseCard, channels, {
+    if (actorChannels.length === 0) {
+      continue;
+    }
+    const result = await orchestrateActorDirectorWithRetries(releaseCard, actorChannels, {
       n: optionCount,
       warmup_mode: warmupMode,
       flow_direction: flowDirection,
@@ -944,8 +1176,109 @@ async function runActorGenerator(
     persistPipelineRun(db, cardId, flowDirections.length === 1 ? eventRunId : newId(), proof);
   }
 
+  if (imageBriefTask) {
+    const inserted = await imageBriefTask;
+    if (inserted) grouped['image-brief'].push(inserted);
+  }
+
   // Detached background task — no revalidatePath (the client polls + refreshes).
   return { candidates_by_channel: grouped };
+}
+
+async function generateAndPersistImageBriefCandidate(
+  cardId: string,
+  releaseCard: ReturnType<typeof parseReleaseCard>,
+  runId?: string,
+): Promise<HarnessCandidate> {
+  const db = getDb();
+  if (runId) {
+    persistActorRunEvent(db, cardId, runId, {
+      event_type: 'image_brief_started',
+      channel: 'image-brief',
+      message: 'Image brief generation started',
+    });
+  }
+  const mode = process.env.HARNESS_ALLOW_STUB_GENERATOR === '1' && !process.env.ANTHROPIC_API_KEY ? 'stub' : 'live';
+  const [candidate] = await generate(releaseCard, { channel: 'image-brief', mode });
+  if (!candidate) throw new Error('Image brief generator returned no candidate.');
+  const attempt = nextAttempt(db, cardId, 'image-brief');
+  const createdAt = nowIso();
+  const id = newId();
+  const inserted = writeTx(db, () => {
+    db.prepare(
+      `INSERT INTO generator_attempts
+         (id, card_id, channel, attempt, auto_feedback_in,
+          inner_work_prompt_json, drafting_prompt_json, legacy_prompt_json,
+          generator_source, created_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    ).run(
+      newId(),
+      cardId,
+      'image-brief',
+      attempt,
+      null,
+      null,
+      null,
+      null,
+      candidate.source,
+      createdAt,
+    );
+
+    db.prepare(
+      `INSERT INTO candidates
+         (id, card_id, channel, attempt, text, structured_json, declared_beats_json, beat_audit_json,
+          validation_passed, validation_failures_json, rationale, source, prompt_variant, created_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    ).run(
+      id,
+      cardId,
+      'image-brief',
+      attempt,
+      candidate.text,
+      null,
+      JSON.stringify([]),
+      JSON.stringify([]),
+      1,
+      JSON.stringify([]),
+      candidate.rationale ?? null,
+      candidate.source,
+      null,
+      createdAt,
+    );
+
+    return {
+      id,
+      card_id: cardId,
+      channel: 'image-brief' as const,
+      attempt,
+      text: candidate.text,
+      structured_json: null,
+      declared_beats_json: JSON.stringify([]),
+      beat_audit_json: JSON.stringify([]),
+      validation_passed: true,
+      validation_failures_json: JSON.stringify([]),
+      active_validation_passed: null,
+      active_audit_json: null,
+      history_guard_passed: null,
+      history_guard_json: null,
+      director_audit_id: null,
+      director_passed: null,
+      director_audit_json: null,
+      rationale: candidate.rationale ?? null,
+      source: candidate.source,
+      prompt_variant: null,
+      created_at: createdAt,
+    } satisfies HarnessCandidate;
+  });
+  if (runId) {
+    persistActorRunEvent(db, cardId, runId, {
+      event_type: 'image_brief_completed',
+      channel: 'image-brief',
+      message: 'Image brief candidate persisted',
+      payload: { candidate_id: id, source: candidate.source },
+    });
+  }
+  return inserted;
 }
 
 function hasActorOptionRationale(result: ActorDirectorResult): boolean {
@@ -1219,6 +1552,60 @@ function markActorRunFailed(db: ReturnType<typeof getDb>, runId: string, message
         SET status = 'failed', completed_at = ?, error = ?
       WHERE id = ?`,
   ).run(nowIso(), message, runId);
+}
+
+/**
+ * After an operator handback run, auto-pick the best regenerated candidate for the
+ * channel so the result shows on the surface card. When `baseText` is present
+ * (block scope), splice the actor's filled toggle into the operator's edited copy
+ * so their surrounding text stays byte-for-byte. The operator reviews/re-picks;
+ * their prior edit survives as the captured diff + the seeding candidate.
+ */
+function finalizeHandback(db: ReturnType<typeof getDb>, cardId: string, handback: HandbackContext): void {
+  const { channel, baseText } = handback;
+  const maxRow = db
+    .prepare('SELECT MAX(attempt) AS a FROM candidates WHERE card_id = ? AND channel = ?')
+    .get(cardId, channel) as { a: number | null };
+  if (maxRow.a == null) return;
+
+  const cands = db
+    .prepare(
+      `SELECT c.id, c.text, c.structured_json, c.validation_passed,
+              (SELECT passed FROM director_audits WHERE candidate_id = c.id ORDER BY created_at DESC LIMIT 1) AS director_passed
+         FROM candidates c
+        WHERE c.card_id = ? AND c.channel = ? AND c.attempt = ?
+        ORDER BY c.created_at ASC`,
+    )
+    .all(cardId, channel, maxRow.a) as Array<{
+    id: string;
+    text: string;
+    structured_json: string | null;
+    validation_passed: number;
+    director_passed: number | null;
+  }>;
+  if (cands.length === 0) return;
+
+  const best = cands.find((c) => c.validation_passed === 1 && c.director_passed !== 0) ?? cands[0]!;
+  const finalText = baseText ? spliceToggles(baseText, best.text) : best.text;
+  if (finalText !== best.text) {
+    db.prepare('UPDATE candidates SET text = ? WHERE id = ?').run(finalText, best.id);
+  }
+
+  const existing = db
+    .prepare('SELECT id FROM final_picks WHERE card_id = ? AND channel = ?')
+    .get(cardId, channel) as { id: string } | undefined;
+  if (existing) {
+    db.prepare(
+      `UPDATE final_picks
+          SET candidate_id = ?, final_text = ?, final_structured_json = ?, shipped_at = NULL, shipped_to = NULL
+        WHERE id = ?`,
+    ).run(best.id, finalText, best.structured_json, existing.id);
+  } else {
+    db.prepare(
+      `INSERT INTO final_picks (id, card_id, channel, candidate_id, final_text, final_structured_json)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+    ).run(newId(), cardId, channel, best.id, finalText, best.structured_json);
+  }
 }
 
 function ensureActorRunsTable(db: ReturnType<typeof getDb>): void {

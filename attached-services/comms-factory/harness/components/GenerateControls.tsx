@@ -13,6 +13,7 @@ const CHANNEL_OPTIONS: { channel: Channel; label: string }[] = [
   { channel: 'modal', label: 'modal' },
   { channel: 'blog', label: 'blog' },
   { channel: 'carousel', label: 'carousel' },
+  { channel: 'image-brief', label: 'image brief' },
 ];
 
 export function GenerateControls({

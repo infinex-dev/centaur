@@ -10,8 +10,10 @@
 import { useState } from 'react';
 import { Gate, SurfaceGlyph } from './atoms';
 import { SurfacePreview } from './SurfacePreview';
+import { SurfaceEditor } from './SurfaceEditor';
 import type { SurfaceKind } from '@/lib/surfaces';
 import { SURFACE_META } from '@/lib/surfaces';
+import type { Channel } from '@/lib/types';
 
 /** Flow-direction A/B badge (prompt_variant: inwards-out / outwards-in). */
 export interface FlowBadge {
@@ -22,6 +24,12 @@ export interface FlowBadge {
 export interface SurfaceRowVM {
   surface: SurfaceKind;
   state: 'shippable' | 'blocked' | 'missing';
+  /** Candidate behind this surface — the edit target (pick's candidate if picked). */
+  candidateId: string | null;
+  /** The candidate's channel (== surface, except x-thread split from an x candidate). */
+  channel: Channel;
+  /** A final pick already exists for this surface (shown copy may be edited). */
+  edited: boolean;
   text: string;
   structuredJson: string | null;
   attempt: number | null;
@@ -66,6 +74,7 @@ const STATUS_TOOLTIP: Record<CorpusItemVM['status'], string> = {
 };
 
 export function PackageTabs({
+  cardId,
   surfaces,
   corpus,
   throughline,
@@ -79,6 +88,7 @@ export function PackageTabs({
   runEvents,
   pipelineProof,
 }: {
+  cardId: string;
   surfaces: SurfaceRowVM[];
   corpus: CorpusItemVM[];
   throughline: ThroughlineBeatVM[];
@@ -128,7 +138,7 @@ export function PackageTabs({
           {generateControls}
           <div className="surf-grid">
             {surfaces.map((s) => (
-              <SurfaceCard key={s.surface} row={s} />
+              <SurfaceCard key={s.surface} row={s} cardId={cardId} />
             ))}
             {surfaces.length === 0 && (
               <div className="empty">
@@ -328,7 +338,7 @@ export function PackageTabs({
   );
 }
 
-function SurfaceCard({ row }: { row: SurfaceRowVM }) {
+function SurfaceCard({ row, cardId }: { row: SurfaceRowVM; cardId: string }) {
   const meta = SURFACE_META[row.surface];
   return (
     <div className={`surf-card state-${row.state}`}>
@@ -345,7 +355,17 @@ function SurfaceCard({ row }: { row: SurfaceRowVM }) {
         </span>
       </div>
       <div className="surf-card-preview">
-        {row.text ? (
+        {row.text && row.candidateId ? (
+          <SurfaceEditor
+            surface={row.surface}
+            cardId={cardId}
+            channel={row.channel}
+            candidateId={row.candidateId}
+            text={row.text}
+            structuredJson={row.structuredJson}
+            edited={row.edited}
+          />
+        ) : row.text ? (
           <SurfacePreview surface={row.surface} data={{ text: row.text, structuredJson: row.structuredJson }} />
         ) : (
           <div className="muted text-xs">No candidate for this surface.</div>

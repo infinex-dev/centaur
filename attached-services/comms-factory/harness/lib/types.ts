@@ -7,7 +7,7 @@
  */
 
 export type VoiceName = 'infinex' | 'cream' | 'projectjin' | 'nigel';
-export type Channel = 'x' | 'web' | 'in-product' | 'modal' | 'blog' | 'x-thread' | 'carousel';
+export type Channel = 'x' | 'web' | 'in-product' | 'modal' | 'blog' | 'x-thread' | 'carousel' | 'image-brief';
 export type Stage = 'research' | 'card' | 'generate' | 'ship';
 export type StageStatus =
   | 'pending'
@@ -236,6 +236,20 @@ export interface CandidateDecisionRecord {
   decided_at: string;
 }
 
+/** A saved operator handback prompt — durable record so prompts survive reloads,
+ * crashes, and failed runs. */
+export interface HandbackPrompt {
+  id: string;
+  card_id: string;
+  channel: Channel;
+  reground_prompt: string | null;
+  regenerate_prompt: string | null;
+  scope: string | null;
+  run_id: string | null;
+  status: string;
+  created_at: string;
+}
+
 /** Final pick per channel — what actually ships. */
 export interface FinalPick {
   id: string;
@@ -243,6 +257,10 @@ export interface FinalPick {
   channel: Channel;
   candidate_id: string;
   final_text: string; // may differ from candidate.text if operator edited
+  /** Edited StructuredOutput (web-card | carousel | thread) when the operator
+   * polished a structured surface in the package editor. Null for flat-text
+   * surfaces and for picks made before structured editing landed. */
+  final_structured_json: string | null;
   shipped_at: string | null;
   shipped_to: 'clipboard' | 'slack' | 'x' | 'in-product' | null;
 }
@@ -305,6 +323,7 @@ export interface CardDetailView {
   card: HarnessCard;
   stages: Record<Stage, StageState>;
   facts: HarnessFact[];
+  expected_channels: Channel[];
   candidates_by_channel: Record<Channel, HarnessCandidate[]>;
   /** Per-channel generator attempts (auto-feedback + prompts) keyed by channel. */
   attempts_by_channel: Record<Channel, HarnessGeneratorAttempt[]>;

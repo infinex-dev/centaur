@@ -7,6 +7,7 @@
     "dev": "next dev -p 3210",
     "build": "next build",
     "start": "next start -p 3210",
+    "test:unit": "tsx lib/run-tests.ts",
     "typecheck": "next typegen && tsc --noEmit",
     "db:init": "tsx lib/db.ts init"
   },

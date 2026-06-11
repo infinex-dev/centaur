@@ -4,6 +4,8 @@
  * Infinex shortcodes ({% cloud-image %}, {% toggle %}) + basic markdown. No deps.
  */
 
+import { imageSlots } from './news-image-patch';
+
 function escapeHtml(s: string): string {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -14,22 +16,24 @@ function inline(text: string): string {
     .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" rel="noreferrer">$1</a>');
 }
 
-function renderCloudImage(attrs: string): string {
+function renderCloudImage(attrs: string, index: number): string {
   const alt = attrs.match(/alt="([^"]*)"/)?.[1] ?? 'image';
   const src = attrs.match(/src="([^"]*)"/)?.[1] ?? '';
   const placeholder = !src || src.startsWith('<');
   const inner = placeholder
     ? `<div class="imgph"><span class="imgph-tag">image (from designer)</span><span class="imgph-alt">${escapeHtml(alt)}</span></div>`
     : `<img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}">`;
-  return `<figure class="cloud-image">${inner}</figure>`;
+  return `<figure class="cloud-image" data-slot="inline-${index}" data-hint="${placeholder ? 'click to add image' : 'click to replace'}">${inner}</figure>`;
 }
 
-function renderBody(body: string): string {
+function renderBody(body: string, ctx: { i: number } = { i: 0 }): string {
+  // Resolve cloud-image first so slot indices follow raw source order (matches
+  // imageSlots()), regardless of whether a tag sits inside a toggle.
+  body = body.replace(/\{%\s*cloud-image([\s\S]*?)\/%\}/g, (_m, attrs: string) => `\n${renderCloudImage(attrs, ctx.i++)}\n`);
   body = body.replace(/\{%\s*toggle([\s\S]*?)%\}([\s\S]*?)\{%\s*\/toggle\s*%\}/g, (_m, attrs: string, innerRaw: string) => {
     const title = attrs.match(/title="([^"]*)"/)?.[1] ?? 'Details';
-    return `\n<details class="toggle"><summary>${escapeHtml(title)}</summary><div class="toggle-body">${renderBody(innerRaw.trim())}</div></details>\n`;
+    return `\n<details class="toggle"><summary>${escapeHtml(title)}</summary><div class="toggle-body">${renderBody(innerRaw.trim(), ctx)}</div></details>\n`;
   });
-  body = body.replace(/\{%\s*cloud-image([\s\S]*?)\/%\}/g, (_m, attrs: string) => `\n${renderCloudImage(attrs)}\n`);
 
   const out: string[] = [];
   let para: string[] = [];
@@ -87,6 +91,7 @@ export interface NewsArticle {
   date: string;
   category: string;
   coverAlt: string;
+  coverSrc: string; // real URL if filled, else '' (placeholder)
   bodyHtml: string;
 }
 
@@ -109,6 +114,7 @@ export function renderNewsArticle(md: string): NewsArticle {
     date: field('date'),
     category: field('category') || 'changelogs',
     coverAlt,
+    coverSrc: imageSlots(md).coverSrc,
     bodyHtml: renderBody(body),
   };
 }

@@ -25,6 +25,11 @@ SCHEMA (all fields required unless marked optional):
                               NEVER a plain string — always an array
   "deployed_facts": array    — copy verbatim from the supplied deployed_facts list
   "kind":           string   — one of the four kinds above
+  "category":       string   — OPTIONAL editorial genus, orthogonal to kind.
+                              "thesis" when the brief is a positioning/thesis piece rather than a release
+                              event: no launch, no CTA, longer essay-form output, aura/credibility content.
+                              Thesis audience should be ["blog", "x-thread", "x"] unless the brief says otherwise.
+                              Omit for normal release/changelog cards.
 
   // kind=data-card-official requires: metric (string), value (string|number)
   // kind=data-card-official optional: unit (string), delta (string)

@@ -53,6 +53,14 @@ const Base = z.object({
   title: z.string().min(1),
   ship_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "ship_date must be YYYY-MM-DD"),
   audience: z.array(Audience).min(1),
+
+  // Editorial category, orthogonal to `kind` (kind selects the visual template
+  // family; category selects the editorial genus). Known values: "changelog"
+  // (default behavior when absent — blog changelog scaffold + format gate) and
+  // "thesis" (long-form positioning essay: no CTA anywhere, essay-length blog,
+  // ships to X as an article). Free string so the genus set stays open;
+  // consumers treat unknown values as the default genus.
+  category: z.string().min(1).optional(),
   deployed_facts: z
     .array(DeployedFact)
     .min(1, "at least one deployed_fact required — caption can only assert what's listed here"),

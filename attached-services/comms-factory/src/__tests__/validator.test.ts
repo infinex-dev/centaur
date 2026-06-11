@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
-import type { ReleaseCard } from "../card.js";
+import { parseReleaseCard, type ReleaseCard } from "../card.js";
 import {
   auditChangelogFormat,
   auditClaimContract,
@@ -196,6 +196,24 @@ describe("rejectCliches", () => {
   it("does NOT flag 'leveraged long' (financial term)", () => {
     expect(rejectCliches("a leveraged long on ETH").passed).toBe(true);
   });
+  it("does NOT flag 'leverage' as the DeFi noun — subject", () => {
+    expect(rejectCliches("Leverage is now live on Infinex.").passed).toBe(true);
+  });
+  it("does NOT flag 'leverage' as the DeFi noun — multiplier", () => {
+    expect(rejectCliches("Trade with up to 10x leverage.").passed).toBe(true);
+  });
+  it("does NOT flag 'leverage trading' (product, not the cliché)", () => {
+    expect(rejectCliches("Leverage trading goes live today.").passed).toBe(true);
+  });
+  it("still flags 'leverage our' (corporate verb)", () => {
+    expect(rejectCliches("leverage our deep liquidity").passed).toBe(false);
+  });
+  it("still flags 'to leverage' (corporate verb)", () => {
+    expect(rejectCliches("a way to leverage community momentum").passed).toBe(false);
+  });
+  it("still flags 'leveraging' (corporate verb)", () => {
+    expect(rejectCliches("leveraging best-in-class infra").passed).toBe(false);
+  });
   it("passes clean copy", () => {
     expect(rejectCliches("Bridge USDC from Base to Arbitrum in one click.").passed).toBe(true);
   });
@@ -378,6 +396,30 @@ describe("validate (composite)", () => {
     expect(names).toContain("cliches");
     expect(names).toContain("listicle-voice");
   });
+  it("fails a single X post whose only tweet carries a link (reach penalty)", () => {
+    const r = validate("Spot is live on Infinex. Trade on the Perps app at perps.app.infinex.xyz.", {
+      channel: "x",
+    });
+    expect(r.passed).toBe(false);
+    expect(r.failures.map((f) => f.rule)).toContain("x-opening-link");
+  });
+  it("catches a bare https link in the only tweet too", () => {
+    const r = validate("Spot is live. https://perps.app.infinex.xyz", { channel: "x" });
+    expect(r.failures.map((f) => f.rule)).toContain("x-opening-link");
+  });
+  it("does not flag the opening-link rule when the X post carries no link", () => {
+    const r = validate("Spot is live on Infinex. Unified account required.", { channel: "x" });
+    expect(r.failures.map((f) => f.rule)).not.toContain("x-opening-link");
+  });
+  it("does not apply the X opening-link rule to link-bearing channels (web)", () => {
+    const r = validate("Spot is live. Read more at perps.app.infinex.xyz.", { channel: "web" });
+    expect(r.failures.map((f) => f.rule)).not.toContain("x-opening-link");
+  });
+  it("treats a bare two-label brand mention as a NAME, not a link", () => {
+    // "Bridge.xyz" / "Infinex.xyz" are partner/product names — not reach-penalized.
+    const r = validate("Bridge.xyz is the fiat deposit provider for Infinex.", { channel: "x" });
+    expect(r.failures.map((f) => f.rule)).not.toContain("x-opening-link");
+  });
 });
 
 describe("auditChangelogFormat", () => {
@@ -439,6 +481,59 @@ describe("auditChangelogFormat", () => {
 
     expect(result.failures.filter((f) => f.rule === "changelog-format")).toEqual([]);
     expect(result.passed).toBe(true);
+  });
+});
+
+describe("thesis category", () => {
+  const THESIS_CARD = {
+    ...CARD,
+    id: "infinex-security-thesis",
+    audience: ["blog", "x-thread", "x"],
+    category: "thesis",
+  } as ReleaseCard;
+
+  it("parseReleaseCard preserves the editorial category through a round-trip", () => {
+    const parsed = parseReleaseCard(JSON.parse(JSON.stringify(THESIS_CARD)));
+    expect((parsed as { category?: string }).category).toBe("thesis");
+  });
+
+  it("does not apply the changelog format gate to a thesis blog piece", () => {
+    expect(
+      auditChangelogFormat("Essay prose, no frontmatter, no toggles.", { channel: "blog", card: THESIS_CARD }),
+    ).toEqual([]);
+  });
+
+  it("does not claim-audit thesis blog frontmatter (cover URL is scaffolding, not a claim)", () => {
+    const text = [
+      "---",
+      "title: Custody is a responsibility",
+      "date: 2026-06-10",
+      "coverImage:",
+      "  src: https://cdn.infinex.xyz/security-cover.png",
+      "---",
+      "",
+      "### The claim",
+      "",
+      "Fact A is live.",
+    ].join("\n");
+    const result = validate(text, { card: { ...THESIS_CARD, audience: ["blog"] } as ReleaseCard, channel: "blog" });
+    expect(result.failures.filter((f) => f.reason.includes("cdn.infinex.xyz"))).toEqual([]);
+  });
+
+  it("rejects calls to action in a thesis piece", () => {
+    const result = validate("Your keys never leave your control. Get started today.", {
+      card: THESIS_CARD,
+      channel: "x",
+    });
+    expect(result.failures.some((f) => f.rule === "thesis-cta")).toBe(true);
+  });
+
+  it("leaves CTA language alone on non-thesis cards and passes CTA-free thesis copy", () => {
+    const onLaunch = validate("Get started today.", { card: CARD, channel: "x" });
+    expect(onLaunch.failures.some((f) => f.rule === "thesis-cta")).toBe(false);
+
+    const clean = validate("Custody is a responsibility, not a feature.", { card: THESIS_CARD, channel: "x" });
+    expect(clean.failures.some((f) => f.rule === "thesis-cta")).toBe(false);
   });
 });
 

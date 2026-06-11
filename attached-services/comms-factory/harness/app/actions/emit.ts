@@ -7,6 +7,7 @@ import { join, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import Anthropic from '@anthropic-ai/sdk';
 import { getDb } from '@/lib/db';
+import { emitChildEnv, emitCliArgs, emitTimeoutMs, formatEmitProcessError } from '@/lib/emit-process';
 import { requireCard } from '@/lib/queries';
 
 const execFileAsync = promisify(execFile);
@@ -32,6 +33,21 @@ export type RoadmapProposal = {
   status: string;
   reason: string;
   confidence: number;
+};
+
+export type RoadmapChangeSummary = {
+  path: string;
+  from: string | null;
+  to: 'done';
+  reason: 'selected' | 'parent-rollup';
+};
+
+export type EmitPlatformResult = {
+  prUrl: string | null;
+  plannedDiff: string;
+  prDescription: string;
+  roadmapChanges: RoadmapChangeSummary[];
+  proposedRoadmap: RoadmapProposal | null;
 };
 
 /**
@@ -107,7 +123,7 @@ export async function emitPlatformPR(
     includeRoadmap?: boolean;
     roadmapOverride?: { nodeName: string; parentName?: string };
   } = {},
-): Promise<{ prUrl: string | null; plannedDiff: string; proposedRoadmap: RoadmapProposal | null }> {
+): Promise<EmitPlatformResult> {
   const db = getDb();
   requireCard(cardId, db);
 
@@ -141,13 +157,33 @@ export async function emitPlatformPR(
   const pkgPath = join(tmpdir(), `cf-launch-${cardId}-${Date.now()}.json`);
   await writeFile(pkgPath, JSON.stringify(pkg), 'utf8');
   try {
+    const timeout = emitTimeoutMs(opts.live);
     const { stdout } = await execFileAsync(
       'pnpm',
-      ['tsx', 'scripts/emit-pr.ts', `--package=${pkgPath}`, ...(opts.live ? ['--live'] : [])],
-      { cwd: repoRoot(), maxBuffer: 16 * 1024 * 1024 },
+      emitCliArgs(pkgPath, { live: opts.live, platformRoot: platformRoot() }),
+      {
+        cwd: repoRoot(),
+        env: emitChildEnv(),
+        killSignal: 'SIGTERM',
+        maxBuffer: 16 * 1024 * 1024,
+        timeout,
+      },
     );
-    const result = JSON.parse(stdout) as { prUrl: string | null; plannedDiff: string };
-    return { ...result, proposedRoadmap };
+    const result = JSON.parse(stdout) as {
+      prUrl: string | null;
+      plannedDiff: string;
+      prDescription?: string;
+      roadmapChanges?: RoadmapChangeSummary[];
+    };
+    return {
+      prUrl: result.prUrl,
+      plannedDiff: result.plannedDiff,
+      prDescription: result.prDescription ?? '',
+      roadmapChanges: result.roadmapChanges ?? [],
+      proposedRoadmap,
+    };
+  } catch (err) {
+    throw formatEmitProcessError(err, emitTimeoutMs(opts.live));
   } finally {
     await rm(pkgPath, { force: true });
   }

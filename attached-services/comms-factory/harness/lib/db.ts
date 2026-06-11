@@ -55,6 +55,7 @@ function ensureSchema(db: Database.Database): void {
   dropLegacyChannelChecks(db, schema);
   repairStaleCandidateForeignKeys(db, schema);
   addColumnIfMissing(db, 'candidates', 'structured_json', 'TEXT');
+  addColumnIfMissing(db, 'final_picks', 'final_structured_json', 'TEXT');
   schemaInitialised = true;
 }
 

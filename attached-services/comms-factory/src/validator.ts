@@ -75,8 +75,11 @@ export interface BlindTempoClassification {
 
 // -- LAYER 1: regex-grade slop/allergen rules ---------------------------------
 
+// NOTE: "leverage" the DeFi noun ("10x leverage", "leverage trading", "leverage
+// is live") is legit product vocabulary, not slop. Only the corporate *verb*
+// ("leverage your X", "to leverage our Y") is the cliché. Match verb-position only.
 const CLICHE_RE =
-  /\b(game[\s-]?changer|game[\s-]?changing|unlock(?:s|ing|ed)?|paradigm|in the world of|the future of|next[\s-]?gen|seamless|seamlessly|empower(?:s|ing|ed|ment)?|leverage(?!\s+ratio)|leverages|leveraging|leveraged(?!\s+(?:position|long|short|trade)))\b/i;
+  /\b(game[\s-]?changer|game[\s-]?changing|unlock(?:s|ing|ed)?|paradigm|in the world of|the future of|next[\s-]?gen|seamless|seamlessly|empower(?:s|ing|ed|ment)?|leverage\s+(?:your|our|my|their|its|his|her|the|a|an|this|that|these|those|all|every)|(?:to|can|could|will|would|should|must|helps?|lets?|let['’]s|now)\s+leverage|leverages|leveraging|leveraged(?!\s+(?:position|positions|long|short|trade|trades|perp|perps|exposure)))\b/i;
 
 export function rejectCliches(s: string): RuleResult {
   const m = s.match(CLICHE_RE);
@@ -209,6 +212,39 @@ function isChangelogProductUpdateCard(card: ReleaseCard): boolean {
     card.kind === "split";
 }
 
+function isThesisCard(card: ReleaseCard | undefined): boolean {
+  if (!card) return false;
+  return (card as ReleaseCardWithCategory).category === "thesis";
+}
+
+// A thesis piece exists to demonstrate judgment, not to convert. Any
+// engage-now close is off-genre regardless of channel.
+const THESIS_CTA_PATTERNS: RegExp[] = [
+  /\bget started\b/i,
+  /\btry it (now|today|out)\b/i,
+  /\bsign up\b/i,
+  /\bjoin (now|today)\b/i,
+  /\bstart trading\b/i,
+  /\bcreate (an |your )?account\b/i,
+  /\bdownload (the )?(app|extension)\b/i,
+  /\bdon'?t miss\b/i,
+];
+
+export function auditThesisCta(text: string, card?: ReleaseCard): RuleFailure[] {
+  if (!isThesisCard(card)) return [];
+  const failures: RuleFailure[] = [];
+  for (const pattern of THESIS_CTA_PATTERNS) {
+    const match = text.match(pattern);
+    if (match) {
+      failures.push({
+        rule: "thesis-cta",
+        reason: `thesis pieces carry no call to action — drop "${match[0]}"`,
+      });
+    }
+  }
+  return failures;
+}
+
 export function auditChangelogFormat(text: string, opts: ChangelogFormatOptions): RuleFailure[] {
   if (opts.channel !== "blog" || !opts.card || !isChangelogProductUpdateCard(opts.card)) return [];
 
@@ -338,7 +374,10 @@ function auditToggleBalance(text: string): RuleFailure | undefined {
 }
 
 function claimAuditText(text: string, opts: { channel?: Channel; card?: ReleaseCard }): string {
-  if (opts.channel !== "blog" || !opts.card || !isChangelogProductUpdateCard(opts.card)) return text;
+  // Both blog genres (changelog and thesis) carry YAML frontmatter — cover
+  // URLs and field scaffolding there are not claims and must not be audited.
+  if (opts.channel !== "blog" || !opts.card) return text;
+  if (!isChangelogProductUpdateCard(opts.card) && !isThesisCard(opts.card)) return text;
   const frontmatter = splitYamlFrontmatter(text);
   return frontmatter.body
     .replace(/\{%\s*cloud-image\b[^%]*%\}/gi, " ")
@@ -961,10 +1000,20 @@ export function rejectOutwardVersionTag(s: string): RuleResult {
   return { passed: true };
 }
 
-/** A URL or bare domain (e.g. "infinex.xyz/news"). t.co links count too. */
+/**
+ * A clickable web link: a scheme (`https://…`), a domain with a path
+ * (`infinex.xyz/news`), or a host with a subdomain (`perps.app.infinex.xyz`).
+ * Deliberately NOT a bare two-label brand mention like "Bridge.xyz" or
+ * "Infinex.xyz" — those are partner/product NAMES, not links. X reach-penalizes
+ * an actual URL, not the act of naming a `.xyz` brand. (A real t.co link has a
+ * path — `t.co/abc` — so it still matches.)
+ */
 export function containsUrl(text: string): boolean {
-  if (/\bhttps?:\/\/\S+/i.test(text)) return true;
-  return /\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:xyz|com|io|gg|org|net|app|co|fi|eth)\b(?:\/\S*)?/i.test(text);
+  const tld = "(?:xyz|com|io|gg|org|net|app|co|fi|eth)";
+  if (/\bhttps?:\/\/\S+/i.test(text)) return true; // scheme
+  if (new RegExp(`\\b[a-z0-9-]+\\.${tld}\\b/\\S`, "i").test(text)) return true; // domain.tld/path
+  if (new RegExp(`\\b[a-z0-9-]+\\.[a-z0-9-]+\\.${tld}\\b`, "i").test(text)) return true; // sub.domain.tld
+  return false;
 }
 
 export function structureIssues(structured: StructuredOutput): string[] {
@@ -1030,6 +1079,7 @@ export function validate(
   if (opts.card !== undefined) formatOpts.card = opts.card;
   if (opts.card) {
     failures.push(...auditChangelogFormat(s, formatOpts));
+    failures.push(...auditThesisCta(s, opts.card));
   }
   const factText = opts.card ? claimAuditText(s, formatOpts) : s;
   if (opts.card && opts.fact_contract !== "off") {
@@ -1044,6 +1094,16 @@ export function validate(
       claimOpts.not_said = opts.not_said;
     }
     failures.push(...auditClaimContract(factText, claimOpts));
+  }
+
+  // X reach penalty in the opening tweet. A single `x` post IS one tweet — the
+  // only tweet is the opener, so any link in it suppresses reach. (Thread tweet-1
+  // is caught separately in structureIssues; later thread tweets may carry links.)
+  if (opts.channel === "x" && containsUrl(s)) {
+    failures.push({
+      rule: "x-opening-link",
+      reason: "the only tweet contains a link; X penalizes reach — drop the link from the post, move it to a reply, or use the thread format",
+    });
   }
 
   const result: ValidationResult = {

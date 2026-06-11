@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { deployedFactClaims, type ReleaseCard } from "./card.js";
+import { generateImageBrief } from "./brief-generator.js";
 import { INFINEX_VOICE } from "./voice/infinex.js";
 import type { BeatSequence, CharacterSpec, TempoBeat, TempoName, WorkingAction } from "./voice/types.js";
 
@@ -107,7 +108,7 @@ export interface GenerationPromptCapture {
   legacy?: PromptPair;
 }
 
-export type Channel = "web" | "x" | "in-product" | "modal" | "blog" | "x-thread" | "carousel";
+export type Channel = "web" | "x" | "in-product" | "modal" | "blog" | "x-thread" | "carousel" | "image-brief";
 
 /**
  * Structured output for multi-part / structured channels. The `text` field on a
@@ -206,9 +207,27 @@ export interface NotSaidFact {
  */
 export interface BeatPlan {
   verb: string; // transitive: "to reveal", "to land", "to invite" — what the actor consciously plays (Mirodan p. 351)
+  // The scored motor the verb is played THROUGH (Mirodan Ch.1 pp. 350-351: the
+  // verb fits a Working Action; the WA is the playable motor layer the actor
+  // scores in table work — same shape as the actor path's ActorBeatPlan).
+  // Tempo still emerges; the motor is what differentiates "to declare" played
+  // pressing→punching from "to unfold" played floating→flicking.
+  working_action?: WorkingAction;
+  preparation_from?: WorkingAction; // Sustained prep partner when working_action is a Quick release (Mirodan §1.7 p. 347)
   micro_objective: string; // what this beat is trying to make the reader notice/feel
   obstacle_local: string; // what this beat is fighting against in the reader (default expectation, prior, etc.)
   shadow_move?: string; // involuntary Lining-leak — what the prose lets slip (Mirodan §7)
+}
+
+const WORKING_ACTIONS: WorkingAction[] = [
+  "pressing", "punching", "wringing", "slashing",
+  "gliding", "dabbing", "floating", "flicking",
+];
+
+function parseWorkingAction(value: unknown): WorkingAction | undefined {
+  return typeof value === "string" && (WORKING_ACTIONS as string[]).includes(value.toLowerCase())
+    ? (value.toLowerCase() as WorkingAction)
+    : undefined;
 }
 
 /**
@@ -286,6 +305,12 @@ export const CHANNEL_GENERATION_PROFILES: Record<
       "the in-app 'What's new' carousel (the app-alert surface) — a CONDENSED companion to the changelog. Produce a `slides` array of 3–6 slides, each with a `name` (slide title, ≤40 chars, e.g. 'Real order book') and a `body` (1–3 sentences, ≤240 chars). One feature per slide; mirror the changelog sections but shorter and punchier. Addressed to a user already in the app.",
     segments: { min: 3, max: 6 },
   },
+  "image-brief": {
+    maxChars: 4000,
+    guidance:
+      "art direction for the designer. Produce one readable image brief covering hero, in-app-mobile, and feature-detail. Ground every scene in deployed_facts, outward_product_name, and feature_states. This is not voiced copy and not a posting channel.",
+    beatless: true,
+  },
 };
 
 export async function generate(
@@ -295,6 +320,24 @@ export async function generate(
   const n = opts.n ?? DEFAULT_N;
   const channel = opts.channel ?? "x";
   const voice = opts.voice ?? INFINEX_VOICE;
+
+  if (channel === "image-brief") {
+    const brief = await generateImageBrief(card, {
+      ...(opts.mode !== undefined ? { mode: opts.mode } : {}),
+      ...(opts.model !== undefined ? { model: opts.model } : {}),
+      ...(opts.client !== undefined ? { client: opts.client } : {}),
+    });
+    return [{
+      id: "image-brief-1",
+      text: brief.text,
+      channel,
+      declared_beats: [],
+      deployed_facts_used: deployedFactClaims(card),
+      not_said: [],
+      rationale: "Generated image brief surface: art direction only; on-image lines slop-validated in brief-generator.",
+      source: brief.source,
+    }];
+  }
 
   // Legacy single-call path: pre-Phase-2 behavior. Kept for backwards compat
   // and the few tests that want to exercise the old flow. Default is the
@@ -611,10 +654,11 @@ function buildV2SystemPrompt(voice: CharacterSpec): string {
     parts.push("");
   }
 
-  parts.push(`# The ${voice.main_tempi.length} locked tempi`);
-  parts.push("Each beat fires one tempo. Each tempo carries a Sustained-prep → Quick-release motor pair unless its motor definition says otherwise.");
+  parts.push(`# The ${voice.main_tempi.length} locked tempi (the audience's read — never a writing target)`);
+  parts.push("These are the registers the audience can read off this character's prose. Do not name, choose, or target a tempo while writing — play transitive verbs through their Working Actions and the tempo emerges (Mirodan Ch.1 p. 286: tempo is the physical realization of Deciding; pp. 350-351: 'Punching' can't be acted, 'to box' can). Each tempo carries a Sustained-prep → Quick-release motor pair unless its motor definition says otherwise.");
+  parts.push("Listed in the character's resting-cadence order — most at-home register first:");
   parts.push("");
-  for (const name of voice.main_tempi) {
+  for (const name of mainTempiByCadence(voice)) {
     const tempo = voice.tempi[name];
     if (!tempo) continue;
     const innerCombo = tempo.inner_combo ?? (tempo.factor_shape ? `${tempo.attitude} · ${tempo.factor_shape}` : tempo.attitude);
@@ -635,12 +679,7 @@ function buildV2SystemPrompt(voice: CharacterSpec): string {
     parts.push("");
   }
 
-  const beatSequences = buildBeatSequenceSection(voice);
-  if (beatSequences.length > 0) {
-    parts.push("# Beat sequences per post type");
-    parts.push(...beatSequences);
-    parts.push("");
-  }
+  parts.push(...buildPlacementRangeSection(voice));
 
   parts.push("# Outer / Lining discipline");
   parts.push("Every tempo has two layers: Outer is what the reader sees on the surface; Lining is the hidden drive underneath. The gap between them is the engine.");
@@ -676,7 +715,7 @@ function buildV2SystemPrompt(voice: CharacterSpec): string {
 
   parts.push("# Three self-check questions");
   parts.push("1. What word is the protagonist of this sentence? If it is a clock-word used as urgency, rewrite. If it is a clock-word used as destination, keep.");
-  parts.push("2. Am I telling the reader to act, or showing what's true? If telling, soften the verb.");
+  parts.push("2. Am I telling the reader to act, or showing what's true? If telling, soften the verb. But 'showing what's true' must still carry the character: the line bears the trace of a decision already taken (Weight/Intending — built, chose, refused, holds) or yields into the stress's Flow (waves, lift, future-tense). A line that merely registers a settled fact, with neither will nor flow, is a reporter's line — Awake 'certain', off this placement entirely.");
   parts.push("3. Would this still feel right with no exclamation marks, no rocket, no 'thrilled to'? If not, the sentence is performing the wrong character.");
   parts.push("");
 
@@ -687,28 +726,98 @@ function buildV2SystemPrompt(voice: CharacterSpec): string {
   return parts.join("\n");
 }
 
-function buildBeatSequenceSection(voice: CharacterSpec): string[] {
-  const hasInfinexTempi = ["sombre", "commanding", "practical", "irradiant", "sociable"].every((name) =>
-    voice.main_tempi.includes(name as TempoName),
-  );
-  if (!hasInfinexTempi) {
-    return [
-      "| Post type | Sequence |",
-      "|---|---|",
-      `| Launch-tier | ${voice.main_tempi.slice(0, 4).map(labelTempoName).join(" → ")} |`,
-      `| Standard product announcement | ${voice.main_tempi.slice(0, 3).map(labelTempoName).join(" → ")} |`,
-      `| Short one-liner | ${voice.main_tempi.slice(0, 2).map(labelTempoName).join(" → ")} |`,
-    ];
+/** main_tempi sorted by the voice's locked cadence, heaviest first (stable for ties/no cadence). */
+function mainTempiByCadence(voice: CharacterSpec): TempoName[] {
+  const weight = (name: TempoName) => voice.cadence[name] ?? 0;
+  return [...voice.main_tempi].sort((a, b) => weight(b) - weight(a));
+}
+
+type MotionFactor = "weight" | "space" | "time" | "flow";
+
+const BASELINE_FACTOR_PAIRS: Record<CharacterSpec["inner_attitude"], [MotionFactor, MotionFactor]> = {
+  stable: ["weight", "space"],
+  near: ["weight", "time"],
+  adream: ["weight", "flow"],
+};
+
+const ASPECT_FACTOR: Record<string, MotionFactor> = {
+  enclosing: "weight",
+  penetrating: "space",
+  circumscribing: "time",
+  radiating: "flow",
+};
+
+function attitudeFromFactorPair(a: MotionFactor, b: MotionFactor): string | undefined {
+  const key = [a, b].sort().join("+");
+  const table: Record<string, string> = {
+    "space+weight": "stable",
+    "time+weight": "near",
+    "flow+weight": "adream",
+    "flow+time": "mobile",
+    "space+time": "awake",
+    "flow+space": "remote",
+  };
+  return table[key];
+}
+
+/**
+ * Range of the placement — replaces the old per-post-kind tempo-arc table.
+ * Pre-assigned arcs were the pre-assignment Mirodan forbids: tempo is the
+ * physical realization of Deciding (Ch.1 p. 286) and the actor can only play
+ * transitive verbs (pp. 350-351), so a tempo sequence keyed to artifact kind
+ * assigns the unplayable and skips the playable. Stress/energy order tracks
+ * the immediate circumstance of the scene (vol 2 p. 552 fn), never the post
+ * type. This section gives the model the placement's reachable registers
+ * instead, derived per the Action-Attitude formation rule (pp. 553-554).
+ */
+function buildPlacementRangeSection(voice: CharacterSpec): string[] {
+  const parts: string[] = [];
+  parts.push("# Range of the placement (derived, Mirodan vol 2 pp. 553-558)");
+
+  const pair = BASELINE_FACTOR_PAIRS[voice.inner_attitude];
+  const aspectFactor = ASPECT_FACTOR[voice.aspect];
+  const stressFactor = voice.stress as MotionFactor;
+  if (pair && aspectFactor && pair.includes(aspectFactor)) {
+    const secondaryFactor = pair[0] === aspectFactor ? pair[1] : pair[0];
+    const outer = attitudeFromFactorPair(stressFactor, aspectFactor);
+    const inner = attitudeFromFactorPair(stressFactor, secondaryFactor);
+    if (outer && inner) {
+      parts.push(
+        `- Action-Attitude formation rule (pp. 553-554): Outer Action = Stress + the Aspect's main Inner Participation; Inner Action = Stress + the secondary one. For this placement: baseline ${voice.inner_attitude}; visible Outer-Action flashes read as ${outer}; the hidden Inner Action lives in ${inner}. The character is BUILT to move across these attitudes.`,
+      );
+    }
   }
-  return [
-    "| Post type | Sequence |",
-    "|---|---|",
-    "| Launch-tier (major release, ~4x/year) | Sombre → Commanding → Practical → Irradiant |",
-    "| Standard product announcement | Sombre → Commanding → Irradiant |",
-    "| Dry one-liner / wry tweet | Irradiant → Commanding |",
-    "| Semantic split (bridge / swap / in-out) | Practical → Commanding → Irradiant |",
-    "| Partner moment | Sociable (standalone or chained with Commanding) |",
-  ];
+
+  const byAttitude = new Map<string, TempoName[]>();
+  for (const name of voice.main_tempi) {
+    const t = voice.tempi[name];
+    if (!t) continue;
+    const list = byAttitude.get(t.attitude) ?? [];
+    list.push(name);
+    byAttitude.set(t.attitude, list);
+  }
+  if (byAttitude.size > 0) {
+    parts.push(
+      `- Locked tempi by attitude: ${[...byAttitude.entries()].map(([attitude, names]) => `${attitude} (${names.join(", ")})`).join(" · ")}.`,
+    );
+  }
+
+  parts.push(
+    "- A character has all four Variations of its Attitude at its disposal; one tends to occur less often (the Aspect's mark), 'but the other three are used to a large extent and their use makes for variety and interest in performance' (p. 558). Camping in one register is off-canon.",
+  );
+  parts.push(
+    "- Stress and energy order track the immediate circumstance of the scene (p. 552 fn), never the artifact type. There is NO canonical tempo arc per post kind. Sequence beats by what the through-action must do next.",
+  );
+  if (voice.drive_primary === "spell") {
+    parts.push(
+      "- Spell tempo signature (p. 537): Spell-resting characters 'generally display a Sustained tempo... dream-like: almost, but not literally, in slow motion.' Strong+Direct will-assertion is this character's MARKED move, spent deliberately — not its default register. Dream-like means Flow-borne (waves, yielding, lift), NOT will-less.",
+    );
+  }
+  parts.push(
+    "- Two collapse traps flank this placement. (a) Wall-to-wall will-assertion: every line pressing/punching reads as Doing-dominant armor. (b) Will-LESS reporting: registering settled facts with neither Intending nor Flow reads as Awake 'certain' (Direct + Sustained) — a neutral observer, an attitude OUTSIDE this placement. The character speaks as someone whose decision is already taken (Weight present in the line) or lets the stress carry it; never as a reporter of someone else's release.",
+  );
+  parts.push("");
+  return parts;
 }
 
 function factorPairForBaseline(attitude: CharacterSpec["inner_attitude"]): string {
@@ -752,7 +861,7 @@ function buildMirodanKernel(): string[] {
     "9. For Infinex specifically: Stable baseline (Weight+Space), Flow stress (bound pole), Penetrating aspect (Space-led) → Diagram D in the 24-cell table → drive_primary=Spell, drive_secondary=Doing, drive_introvert=Passion, drive_extravert=Vision. The Main Character-Action Axis is Spell → Vision.",
     "10. Passion is present for Infinex as hidden/introvert lining, not absent. It becomes OFF-SPEC when it surfaces as visible/extravert projection: urgency framing, clock-as-deadline, FOMO, scarcity-of-attention, hype heat. Time-pressure language is the most common drift.",
     "11. The five tempi in rotation for Infinex are: Commanding (Stable · Strong/Direct · Pressing→Punching), Practical (Stable · Strong/Flexible · Wringing→Slashing), Sombre (Adream-outer · Strong/Bound · Pressing→Punching bound), Irradiant (Adream-outer · Light/Free · Floating→Flicking), Sociable (Remote-outer · Direct/Free · Gliding→Dabbing). Each pairs a Sustained-prep with a Quick-release motor — the preparation must fire first within the beat.",
-    "12. Posts SHIFT tempo WITHIN themselves. A post is a beat sequence, not a single-tempo monolith. The canonical shape for a launch-tier is Sombre (prep) → Commanding (land) → Practical (justify) → Irradiant (lift). The generator works on beats[]; per-beat tempo is derived by the audience reading the prose.",
+    "12. Posts SHIFT tempo WITHIN themselves. A post is a beat sequence, not a single-tempo monolith. There is no canonical tempo arc per post kind (stress and energy order track the scene's circumstance, Mirodan vol 2 p. 552 fn) — sequence beats by what the through-action must do next; per-beat tempo is derived by the audience reading the prose.",
   ];
 }
 
@@ -1317,7 +1426,7 @@ function buildInnerWorkUserPrompt(
   if (channel === "web") {
     parts.push("  - This is a **web** card (140 chars). ONE BEAT ONLY. The whole card is a single declarative + supporting clause — there is no narrative arc, no 'set up then land' structure. One paragraph. One beat.");
   } else if (channel === "x") {
-    parts.push("  - This is an **x** post (280 chars). Beat count emerges from verb selection (Mirodan §1.7, vol 2 p. 347). Single-beat Commanding is legal and often correct. When the verb requires preparation, sequence sustained-feeling setup before quick-feeling release using the Mirodan motor pairs: Pressing -> Punching, Wringing -> Slashing, Gliding -> Dabbing, Floating -> Flicking.");
+    parts.push("  - This is an **x** post (280 chars). Beat count emerges from verb selection (Mirodan §1.7, vol 2 p. 347). A single beat that carries its Sustained prep inside it is legal and often correct — any of the four prep -> release pairs: Pressing -> Punching, Wringing -> Slashing, Gliding -> Dabbing, Floating -> Flicking. When the verb needs more room, sequence sustained-feeling setup before quick-feeling release.");
   } else if (channel === "in-product") {
     parts.push("  - This is **in-product** UI copy. Beatless — output a beat_plan of length 1, but the draft itself is ONE phrase, not a multi-beat post.");
   } else if (channel === "modal") {
@@ -1327,7 +1436,9 @@ function buildInnerWorkUserPrompt(
   } else {
     parts.push("  - Default: 3 beats.");
   }
-  parts.push("- **Each beat declares a TRANSITIVE VERB the actor plays in that beat** ('to reveal', 'to mark', 'to invite', 'to disarm', 'to land', 'to compress', 'to refuse', 'to absolve'). Mirodan p. 351: 'Punching can't be acted. To box can.' The verb is the actor's only conscious lever. Tempo emerges from how the verb is played under the inner work; the audience reads the tempo. You do not declare it.");
+  parts.push("- **Each beat declares a TRANSITIVE VERB the actor plays in that beat** ('to reveal', 'to mark', 'to invite', 'to disarm', 'to land', 'to compress', 'to refuse', 'to absolve'). Mirodan p. 351: 'Punching can't be acted. To box can.' The verb is the actor's conscious lever. Tempo emerges from how the verb is played under the inner work; the audience reads the tempo. You do not declare it.");
+  parts.push("- **Each beat SCORES the Working Action its verb is played through** (Mirodan pp. 350-351: a transitive verb *fits* a Working Action; scoring the motor is table work, not tempo-picking). One of: pressing, punching, wringing, slashing, gliding, dabbing, floating, flicking. If you score a Quick release (punching/slashing/dabbing/flicking), set preparation_from to its Sustained partner (pressing/wringing/gliding/floating respectively: Pressing->Punching, Wringing->Slashing, Gliding->Dabbing, Floating->Flicking) and make sure that prep actually fires earlier in the same or a prior beat.");
+  parts.push("- **Score motors across the placement's range, as the through-action demands.** A plan whose every beat is pressing/punching presents Doing-armor; a plan with no Weight and no Flow anywhere presents an Awake reporter. Light motors (gliding, floating and their releases) and Flow-borne textures are this character's stress made audible — use them when the beat's job is to open, lift, dissolve, or accompany rather than to land.");
   parts.push("- **Verb-level preparation hierarchy** (Mirodan §1.7, p. 347): a quick-release verb (to land, to snap, to sting, to lift) must be preceded by its sustained-prep counterpart (to set, to press, to draw out, to hold). Quick without prep degrades into the sustained motor and the audience reads it flat.");
   parts.push("- Each beat must declare a micro_objective (what the reader notices/feels) and obstacle_local (what the beat is fighting against in the reader — usually a genre default or prior expectation).");
   parts.push("- Optional shadow_move per beat: what the prose LEAKS underneath the Outer (Mirodan §7). This is the per-beat Lining-leak — never named in the eventual draft, but informs texture.");
@@ -1357,7 +1468,9 @@ function buildInnerWorkUserPrompt(
   "not_the_point": "the mechanical framing the drafts must AVOID. Specific (e.g., 'do not list supported currencies as a row'), not abstract.",
   "beat_plan": [
     {
-      "verb": "to <transitive verb> — what this beat consciously plays. Mirodan §1: this is the actor's only conscious lever per beat. NO tempo field.",
+      "verb": "to <transitive verb> — what this beat consciously plays. Mirodan §1: this is the actor's conscious lever per beat. NO tempo field.",
+      "working_action": "the motor the verb is played through — one of: pressing | punching | wringing | slashing | gliding | dabbing | floating | flicking",
+      "preparation_from": "required when working_action is a Quick release — its Sustained prep partner",
       "micro_objective": "what this beat makes the reader notice or feel",
       "obstacle_local": "what this beat is fighting against in the reader at this moment",
       "shadow_move": "optional — the involuntary Lining-leak this beat carries"
@@ -1389,8 +1502,12 @@ function parseInnerWorkResponse(resp: { content: Anthropic.Message["content"] })
     if (!b || typeof b !== "object") return [];
     const beat = b as Record<string, unknown>;
     if (typeof beat.verb !== "string") return [];
+    const workingAction = parseWorkingAction(beat.working_action);
+    const preparationFrom = parseWorkingAction(beat.preparation_from);
     return [{
       verb: beat.verb,
+      ...(workingAction ? { working_action: workingAction } : {}),
+      ...(preparationFrom ? { preparation_from: preparationFrom } : {}),
       micro_objective: typeof beat.micro_objective === "string" ? beat.micro_objective : "",
       obstacle_local: typeof beat.obstacle_local === "string" ? beat.obstacle_local : "",
       ...(typeof beat.shadow_move === "string" ? { shadow_move: beat.shadow_move } : {}),
@@ -1496,8 +1613,11 @@ function buildDraftFromInnerWorkUserPrompt(
 ): string {
   const profile = CHANNEL_GENERATION_PROFILES[channel];
   const beatLines = innerWork.beat_plan.map((b, i) => {
+    const motorHint = b.working_action
+      ? `\n   - motor (play the verb THROUGH this Working Action — its dynamic, not its vocabulary): ${b.working_action}${b.preparation_from ? ` (prep: ${b.preparation_from} must fire first)` : ""}`
+      : "";
     const shadowHint = b.shadow_move ? `\n   - shadow_move (leak underneath): ${b.shadow_move}` : "";
-    return `${i + 1}. **verb to play**: ${b.verb}
+    return `${i + 1}. **verb to play**: ${b.verb}${motorHint}
    - micro_objective: ${b.micro_objective}
    - obstacle_local: ${b.obstacle_local}${shadowHint}`;
   }).join("\n");
@@ -1631,9 +1751,15 @@ function parseDraftResponseWithBeatPlan(
       text: structured ? renderStructured(structured) : c.text,
       ...(structured ? { structured } : {}),
       channel,
-      // No tempo declared per beat — only the verb the actor plays. The
-      // validator classifies tempo post-hoc and checks membership in voice.tempi.
-      declared_beats: innerWork.beat_plan.map((b) => ({ hint: b.verb })),
+      // No tempo declared per beat — only the verb the actor plays and the
+      // motor it is scored through. The validator classifies tempo post-hoc
+      // and checks membership in voice.tempi.
+      declared_beats: innerWork.beat_plan.map((b) => ({
+        hint: b.verb,
+        objective_verb: b.verb,
+        ...(b.working_action ? { working_action: b.working_action } : {}),
+        ...(b.preparation_from ? { preparation_from: b.preparation_from } : {}),
+      })),
       ...(Array.isArray(c.deployed_facts_used)
         ? { deployed_facts_used: c.deployed_facts_used.filter((f): f is string => typeof f === "string") }
         : {}),

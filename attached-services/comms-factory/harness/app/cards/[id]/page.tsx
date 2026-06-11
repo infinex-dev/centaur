@@ -14,6 +14,7 @@ import { ActorRunEventsPanel } from '@/components/ActorRunEventsPanel';
 import { GenerateControls } from '@/components/GenerateControls';
 import { ShipPanel } from '@/components/ShipPanel';
 import { PendingApiPanel } from '@/components/PendingApiPanel';
+import { FinalPickRefresh } from '@/components/FinalPickRefresh';
 import {
   PackageTabs,
   type CorpusItemVM,
@@ -21,6 +22,7 @@ import {
   type ThroughlineBeatVM,
 } from '@/components/design/PackageTabs';
 import { buildPackageView } from '@/lib/package-view';
+import { finalPickRevision } from '@/lib/final-pick-revision';
 import { surfaceOfCandidate } from '@/lib/surfaces';
 import {
   CHANNELS,
@@ -42,6 +44,7 @@ const CHANNEL_LABEL: Record<Channel, string> = {
   modal: 'in-app modal',
   blog: 'blog post',
   carousel: 'in-app carousel',
+  'image-brief': 'image brief',
 };
 
 interface AttemptGroup {
@@ -132,19 +135,32 @@ export default async function CardDetail({ params }: { params: Promise<{ id: str
   const pkg = buildPackageView(detail);
   const allCandidates = CHANNELS.flatMap((ch) => candidates_by_channel[ch]);
   const pickedIds = new Set(picks.map((p) => p.candidate_id));
+  // candidate_id → its pick's final_text, so the attempt-history cards can show
+  // an operator's saved edit in place instead of the immutable generated draft.
+  const pickedTextByCandidate = new Map(picks.map((p) => [p.candidate_id, p.final_text]));
 
   // ── Surface VMs for the Package tab ──────────────────────────────────────
-  const surfaceVMs: SurfaceRowVM[] = pkg.rows.map((r) => ({
-    surface: r.surface,
-    state: r.state,
-    text: r.candidate?.text ?? '',
-    structuredJson: r.candidate?.structured_json ?? null,
-    attempt: r.candidate?.attempt ?? null,
-    regexPassed: r.candidate ? r.candidate.validation_passed : null,
-    directorPassed: r.candidate ? r.candidate.director_passed : null,
-    flow: flowBadge(r.candidate?.prompt_variant ?? null),
-    blockReason: r.blockReason,
-  }));
+  // When a final pick exists, show its (possibly operator-edited) copy — that's
+  // the ship artifact and the edit target. Otherwise show the best candidate.
+  const pickByChannel = new Map(picks.map((p) => [p.channel, p]));
+  const surfaceVMs: SurfaceRowVM[] = pkg.rows.map((r) => {
+    const pick = r.candidate ? pickByChannel.get(r.candidate.channel) : undefined;
+    const candidateId = pick?.candidate_id ?? r.candidate?.id ?? null;
+    return {
+      surface: r.surface,
+      state: r.state,
+      candidateId,
+      channel: r.candidate?.channel ?? r.surface,
+      edited: Boolean(pick),
+      text: pick?.final_text ?? r.candidate?.text ?? '',
+      structuredJson: pick?.final_structured_json ?? r.candidate?.structured_json ?? null,
+      attempt: r.candidate?.attempt ?? null,
+      regexPassed: r.candidate ? r.candidate.validation_passed : null,
+      directorPassed: r.candidate ? r.candidate.director_passed : null,
+      flow: flowBadge(r.candidate?.prompt_variant ?? null),
+      blockReason: r.blockReason,
+    };
+  });
 
   // ── Corpus VMs (every candidate) ─────────────────────────────────────────
   const corpusVMs: CorpusItemVM[] = allCandidates
@@ -219,6 +235,7 @@ export default async function CardDetail({ params }: { params: Promise<{ id: str
                 actorAttempt={g.actorAttempt}
                 candidates={g.candidates}
                 operatorFeedback={operator_feedback}
+                pickedTextByCandidate={pickedTextByCandidate}
               />
             ))}
           </div>
@@ -229,6 +246,7 @@ export default async function CardDetail({ params }: { params: Promise<{ id: str
 
   return (
     <div className="space-y-2">
+      <FinalPickRefresh cardId={card.id} initialRevision={finalPickRevision(picks)} />
       <div className="crumb">
         <Link href="/">queue</Link> / {card.id} / package review
       </div>
@@ -293,6 +311,7 @@ export default async function CardDetail({ params }: { params: Promise<{ id: str
       </div>
 
       <PackageTabs
+        cardId={card.id}
         surfaces={surfaceVMs}
         corpus={corpusVMs}
         throughline={throughlineVMs}
