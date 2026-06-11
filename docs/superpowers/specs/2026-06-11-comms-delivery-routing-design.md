@@ -129,6 +129,28 @@ Read from the code, not assumed:
   `candidate_id`, and the chosen candidate's structured fields live under `candidate.structured`
   (`generator.ts:122`; `.text` is the joined rendering, `:133`, unsuitable for the data.ts
   entry). The mapper reads `candidate.structured` via `candidate_id`.
+- **The platform content pipeline is now documented org-side** (platform PR #14812,
+  `docs/content-pipeline.md` — read it before implementing the emit path). Facts that bind this
+  spec: (a) **all content is git-committed files compiled at build time — no runtime CMS**;
+  "publish" = merge. (b) The blog lives in **system A** (`apps/content-app/content/blog/*`,
+  package `@infinex/public-site-content`) — our emit path targets the right system. (c) The
+  **blog frontmatter contract** is `keystatic.collections.tsx` `createBlogCollection`: `title`
+  (slug-deriving), `date` (required), `published` (bool — gates packaging), `category`
+  (`news|changelogs|podcasts-videos|collaboration`), plus optional `subtitle`, `publishedFrom`
+  (read-time scheduling), `pinned`, `customUrl`, **`typefullyUrl`** (back-link to the thread
+  draft — our pipeline can fill this automatically when the Typefully delivery ran in the same
+  release), `coverVideo`, `coverImage`, Markdoc body with `cloud-image`/`video-embed`
+  components. (d) **Go-live timing**: merge to `main` → infinex.xyz news page deploys straight
+  to production automatically; the web-app changelog popout ships on the next **platform prod
+  release** (bundled content) — the ship message must say both. (e) **`appAlert`/What's-New is
+  deprecated** — nothing renders it; the changelog popout is fed by `category: changelogs` blog
+  posts. Dropping `carousel` was structurally right, not just a priority call. (f) Content PRs
+  get an **AI content review** (`content--review.yaml`) automatically. (g) Keystatic Cloud's
+  automation owns `content/*` branches (`content--sync-main` / `reset-after-merge`) — emit
+  branches must NOT use that prefix (`cf-emit/*` is safe). (h) The content-app exposes a
+  branch-scoped rendered preview route (`/preview/start?branch={branch}&to=/news/{slug}`) —
+  the emitted PR can link it for an on-site-styling preview. (i) `FEATURES_COPY`/roadmap are
+  **website source code, not content** — PR #14812 does not resolve open-verifications #1–#2.
 - **display.dev review loop is trial-validated (2026-06-11) and the org already uses it.**
   `dsp find` shows the org live at `infinex.dsp.so`, Pro+ (private visibility works), ~36
   existing artifacts. The full agent↔reviewer loop was run end-to-end with the `@displaydev/cli`
@@ -240,7 +262,11 @@ cannot leak into logs/errors). Absent token → `{ok:false, error:"github_not_co
 git-path design):
 - `changelogSlug` — from `card.slug` if present, else slugify the card title (deterministic).
 - `changelogMd` — `final_by_channel["blog"].text` (the actor fills the house changelog
-  scaffold). Omitted if blog not approved.
+  scaffold). Omitted if blog not approved. The mapper **validates/normalizes the frontmatter
+  against the Keystatic blog schema** (see verified mechanics: `title`, `date`, `published:
+  true`, `category: changelogs`, `coverImage` placeholder) and, when the same run already
+  created a Typefully draft, **injects its URL into `typefullyUrl`** — the cross-link the org
+  already maintains by hand.
 - `featureCard.dataTsEntry` — built by `featureCardEntry(candidate.structured)` (subheading/
   title/caption → real `FEATURES_COPY` fields, **PROVISIONAL** pending open-verification #1),
   from the web candidate looked up by `candidate_id`. Omitted if web not approved.
@@ -321,7 +347,12 @@ capability is true:
 - **"Preview platform PR"** → `emit_platform_pr(dry_run=True)` → post chunked `planned_diff` →
   re-render adding **"Create PR"** (primary) + **"Cancel PR"**, keeping other groups' buttons.
 - **"Create PR"** → `emit_platform_pr(dry_run=False, branch=f"cf-emit/{slug}-{run_id}")`
-  (durable step `emit_pr`) → post `pr_url`; drop the platform buttons.
+  (durable step `emit_pr`) → post `pr_url` plus the content-app branch preview link
+  (`/preview/start?branch=…&to=/news/{slug}`) and the go-live note: *"merging publishes to
+  infinex.xyz/news automatically; the in-app changelog popout follows the next platform prod
+  release"*. The PR will also receive the platform repo's automatic AI content review. Drop the
+  platform buttons. **Ordering:** when both groups are selected, run Typefully first so the
+  draft URL lands in the blog frontmatter's `typefullyUrl`.
 - **"Create Typefully drafts"** → per X channel, `typefully_draft(...)` (durable steps
   `typefully_{channel}`) → post share URLs; drop the typefully buttons.
 - **"Finish"** → terminal; ship summary.
@@ -460,7 +491,9 @@ TS (`attached-services/comms-factory`):
   422-on-PR-create both resolve idempotently; absent token → `github_not_configured`; 403 →
   `github_permission_denied` with **no token substring in body/logs**.
 - `buildLaunchPackage`: blog-only, blog+web, web `candidate.structured`→`dataTsEntry`,
-  missing channels omitted.
+  missing channels omitted; frontmatter normalized to the Keystatic blog schema (`published:
+  true`, `category: changelogs`, required `title`/`date`); `typefullyUrl` injected when a
+  Typefully draft URL is supplied, omitted otherwise.
 - `featureCardEntry` round-trips through `appendFeatureCopyEntry` into a fixture data.ts (shape
   per confirmed open-verification #1).
 - `/health` reports `capabilities` booleans from env (incl. `display`) without leaking values.
