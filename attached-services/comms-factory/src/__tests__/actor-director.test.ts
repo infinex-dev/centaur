@@ -1421,6 +1421,45 @@ describe("actor JSON resilience", () => {
     // The retry must show the model what broke, not blindly re-send the transcript.
     expect(JSON.stringify(actorRequests[1])).toContain("could not be parsed as JSON");
   });
+
+  it("re-asks the actor after a schema violation (bad Working Action enum), then succeeds", async () => {
+    // Valid JSON, invalid schema: preparation_from off the Working Action enum.
+    // This used to escape the retry loop and kill the whole run (run_failed).
+    const invalid = JSON.parse(JSON.stringify(actorOutput("The wall moved.", "The wall moved."))) as Record<
+      string,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      any
+    >;
+    invalid.table_work.channel_beat_plans.x[0].preparation_from = "settling";
+
+    const actorRequests: unknown[] = [];
+    let call = 0;
+    const actorClient = {
+      messages: {
+        create: async (params: unknown) => {
+          actorRequests.push(params);
+          call += 1;
+          const text = call === 1
+            ? JSON.stringify(invalid)
+            : JSON.stringify(actorOutput("The wall moved.", "The wall moved."));
+          return { content: [{ type: "text", text }] };
+        },
+      },
+    };
+
+    const result = await generateActorAttempt(CARD, {
+      channels: ["x"],
+      n: 1,
+      mode: "live",
+      client: actorClient as never,
+    });
+
+    expect(result.candidates.length).toBeGreaterThan(0);
+    expect(actorRequests).toHaveLength(2);
+    const correction = JSON.stringify(actorRequests[1]);
+    expect(correction).toContain("violated the output schema");
+    expect(correction).toContain("preparation_from");
+  });
 });
 
 function actorOutput(
