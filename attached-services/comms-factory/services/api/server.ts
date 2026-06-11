@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { startManifestRefresh } from "../../src/fact-grounder/sources/repo-manifest.js";
 import { makeJsonServer, requirePostAuth, type Handler } from "./http.js";
 import { handleAudit } from "./routes/audit.js";
 import { handleBuildCard } from "./routes/build-card.js";
@@ -34,6 +35,9 @@ for (const [path, handler] of [
 export const server = makeJsonServer(routes);
 
 if (process.env.NODE_ENV !== "test") {
+  // Build the routing manifest now and refresh hourly in the background;
+  // /ground only ever reads the cached snapshot (stale-while-revalidate).
+  startManifestRefresh();
   const port = Number(process.env.PORT ?? 8080);
   server.listen(port, () => {
     console.log(JSON.stringify({ timestamp: new Date().toISOString(), level: "info", service: "comms-factory-api", event: "server_started", port }));

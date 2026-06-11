@@ -1,5 +1,6 @@
 import { CentaurResearchExecutor, type CentaurResearchConfig } from "../../../src/centaur-research.js";
 import { buildDeployedFacts, groundFacts, type VerifiedFact } from "../../../src/fact-grounder-llm.js";
+import { getRoutingManifest } from "../../../src/fact-grounder/sources/repo-manifest.js";
 import { assertRecord, boundedInteger, HttpError, optionalString, requiredString, type JsonResponse, type RequestContext } from "../http.js";
 
 const GROUND_SCHEMA_V1 = "comms_factory.ground_from_tools.v1";
@@ -16,8 +17,11 @@ export async function handleGround(ctx: RequestContext): Promise<JsonResponse> {
   // The grounder needs room to dig: cheap registry/partner lookups resolve literal
   // brief claims fast, but the salient-attribute sweep (read_range into platform docs)
   // wants several rounds. The grounder's own native default is 16; keep this path
-  // generous (default 10) and overridable up to 16.
-  const maxTurns = boundedInteger(body, "max_turns", 10, 1, 16);
+  // generous (default 10) and overridable up to 16. Routed runs (manifest present)
+  // default to the full 16: the routed first step budgets ~3 extra turns on top of
+  // the mandatory discovery sweep, and 10 would squeeze one or the other out.
+  const routingManifest = getRoutingManifest();
+  const maxTurns = boundedInteger(body, "max_turns", routingManifest ? 16 : 10, 1, 16);
   const operatorFacts = parseOperatorFacts(body.operator_facts ?? body.facts);
   const hasGroundSchema = body.schema_version !== undefined;
   const hasGroundMode = body.mode !== undefined;
@@ -75,6 +79,10 @@ export async function handleGround(ctx: RequestContext): Promise<JsonResponse> {
   if (surface !== undefined) opts.surface = surface;
   if (job !== undefined) opts.job = job;
   if (operatorFacts.length > 0) opts.operator_facts = operatorFacts;
+  // Route-before-grep: inject the cached self-derived manifest (never built
+  // in-request — startManifestRefresh owns freshness). Absent manifest ⇒ the
+  // grounder prompt and seed payload are byte-identical to the unrouted path.
+  if (routingManifest) opts.routing_manifest = routingManifest;
   // Always ground against a concrete ref. On the Centaur tool path nothing else
   // resolves one (the local harness branch-discovery is bypassed), so without this
   // the grounder's salient-attribute sweep — gated on a ref being set — never fires
