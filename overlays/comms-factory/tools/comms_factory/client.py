@@ -30,6 +30,8 @@ class CommsFactoryClient:
         self,
         text: str,
         *,
+        # "tweet" is the historical default surface label; the TS /audit route
+        # treats surface as free-form (it shapes prompts, not validation).
         surface: str = "tweet",
         voice_id: str = "infinex",
         fact_source: dict[str, Any] | None = None,
@@ -113,10 +115,16 @@ class CommsFactoryClient:
         gate_version: int = 1,
         **kwargs: Any,
     ) -> dict[str, Any]:
+        """Generate candidates (channels: x, x-thread, web, carousel, modal, in-product, blog; default x)."""
         return self._post(
             "/generate",
             {
                 "release_card": release_card,
+                # Default mirrors DEFAULT_CHANNELS in workflows/comms_shared.py (tool
+                # plugins can't import workflow modules). Valid channel names are the
+                # /generate route allowlist — attached-services/comms-factory/
+                # services/api/routes/generate.ts CHANNELS (x, x-thread, web, carousel,
+                # modal, in-product, blog; "tweet" aliases to x).
                 "channels": channels or ["x"],
                 "n": n,
                 "voice_id": voice_id,
