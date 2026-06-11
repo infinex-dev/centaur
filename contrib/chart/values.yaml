@@ -250,6 +250,12 @@ ingress:
   annotations: {}
   host: centaur.local
   tls: []
+  slackbot:
+    enabled: false
+    className: ""
+    annotations: {}
+    host: ""
+    tls: []
 
 httpRoutes: []
 

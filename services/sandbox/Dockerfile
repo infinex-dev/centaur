@@ -109,6 +109,7 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
       apt-get update && apt-get install -y --no-install-recommends \
         chromium-browser || true; \
     fi
+RUN install -d -o 1001 -g 1001 -m 0755 /home/agent/.cache
 
 USER agent
 WORKDIR /home/agent
@@ -178,29 +179,29 @@ FROM toolchain AS sandbox
 
 USER root
 RUN rm -f /etc/sudoers.d/agent
-# BuildKit's COPY --link creates parent directories without an explicit mode,
+# BuildKit's COPY creates parent directories without an explicit mode,
 # which can leave /etc/centaur without the execute bit for non-root users.
 # Pre-create it as 0755 so the agent user can traverse into it at runtime.
 RUN install -d -m 0755 /etc/centaur
-COPY --link --chmod=644 services/sandbox/codex-auth.json /etc/centaur/codex-auth.default.json
-COPY --link --chmod=644 services/sandbox/claude-credentials.json /etc/centaur/claude-credentials.default.json
-COPY --link --chmod=755 services/sandbox/call.sh /usr/local/bin/call
-COPY --link --chmod=755 services/sandbox/slack-upload.sh /usr/local/bin/slack-upload
-COPY --link --chmod=755 services/sandbox/md2docx.py /usr/local/bin/md2docx
-COPY --link --chmod=755 services/sandbox/amp-wrapper.py /usr/local/bin/amp-wrapper
-COPY --link --chmod=755 services/sandbox/codex-app-wrapper.py /usr/local/bin/codex-app-wrapper
-COPY --link --chmod=755 services/sandbox/claude-app-wrapper.py /usr/local/bin/claude-app-wrapper
-COPY --link --chmod=755 services/sandbox/harness_adapter.py /usr/local/bin/harness-adapter
-COPY --link --chmod=755 services/sandbox/git-branch.sh /usr/local/bin/git-branch
-COPY --link --chmod=755 services/sandbox/entrypoint.sh /entrypoint.sh
+COPY --chmod=644 services/sandbox/codex-auth.json /etc/centaur/codex-auth.default.json
+COPY --chmod=644 services/sandbox/claude-credentials.json /etc/centaur/claude-credentials.default.json
+COPY --chmod=755 services/sandbox/call.sh /usr/local/bin/call
+COPY --chmod=755 services/sandbox/slack-upload.sh /usr/local/bin/slack-upload
+COPY --chmod=755 services/sandbox/md2docx.py /usr/local/bin/md2docx
+COPY --chmod=755 services/sandbox/amp-wrapper.py /usr/local/bin/amp-wrapper
+COPY --chmod=755 services/sandbox/codex-app-wrapper.py /usr/local/bin/codex-app-wrapper
+COPY --chmod=755 services/sandbox/claude-app-wrapper.py /usr/local/bin/claude-app-wrapper
+COPY --chmod=755 services/sandbox/harness_adapter.py /usr/local/bin/harness-adapter
+COPY --chmod=755 services/sandbox/git-branch.sh /usr/local/bin/git-branch
+COPY --chmod=755 services/sandbox/entrypoint.sh /entrypoint.sh
 
 USER agent
 WORKDIR /home/agent
 
 # No RUN instructions after these — all repo-local content at the very end.
-COPY --link --chown=1001:1001 .agents/skills/ /home/agent/.agents/skills/
-COPY --link --chown=1001:1001 harness/ /home/agent/harness/
-COPY --link --chown=1001:1001 services/sandbox/SYSTEM_PROMPT.md /home/agent/AGENTS.md
+COPY --chown=1001:1001 .agents/skills/ /home/agent/.agents/skills/
+COPY --chown=1001:1001 harness/ /home/agent/harness/
+COPY --chown=1001:1001 services/sandbox/SYSTEM_PROMPT.md /home/agent/AGENTS.md
 
 ENTRYPOINT ["/entrypoint.sh"]
 # Default CMD uses Codex app-server through Centaur's NDJSON bridge.
