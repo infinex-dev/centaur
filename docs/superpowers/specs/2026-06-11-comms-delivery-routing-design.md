@@ -309,9 +309,13 @@ git-path design):
 - `changelogMd` — `final_by_channel["blog"].text` (the actor fills the house changelog
   scaffold). Omitted if blog not approved. The mapper **validates/normalizes the frontmatter
   against the Keystatic blog schema** (see verified mechanics: `title`, `date`, `published:
-  true`, `category: changelogs`, `coverImage` placeholder) and, when the same run already
-  created a Typefully draft, **injects its URL into `typefullyUrl`** — the cross-link the org
-  already maintains by hand.
+  true`, `category: changelogs`, `coverImage` placeholder), **freshens dates via the PR #13
+  harness lib** (`harness/lib/freshen.ts` `freshenDates` — deterministic: anchors on the
+  `date:` frontmatter and bumps it plus any verbatim echo to emit-day, leaving genuine
+  historical dates alone, and reports what changed so it's never silent; lift it into the
+  emit module — copy generated on Tuesday must not ship Friday with a stale date), and, when
+  the same run already created a Typefully draft, **injects its URL into `typefullyUrl`** —
+  the cross-link the org already maintains by hand.
 - `featureCard.dataTsEntry` — built by `featureCardEntry(candidate.structured)` (subheading/
   title/caption → real `FEATURES_COPY` fields, **PROVISIONAL** pending open-verification #1),
   from the web candidate looked up by `candidate_id`. Omitted if web not approved.

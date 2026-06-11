@@ -234,8 +234,15 @@ candidate of that channel. A channel with no candidates in any round is recorded
    `missing_edit_value` precedent (`GateValidationError`) here: inside this loop that
    path returns `rejected` and discards all accumulated edits; empty input is
    operator-recoverable and must never terminate the run. Otherwise
-   `final_by_channel[channel] = {"text": modal_value, "candidate_id": None,
-   "edited": True}`. In all cases re-render and continue.
+   `final_by_channel[channel] = {"text": modal_value, "candidate_id": <previous entry's
+   candidate_id>, "edited": True}` — **`candidate_id` is preserved on edit** (provenance,
+   mirroring the harness pattern from the PR #13 sync where candidates are immutable and
+   edits are recorded as diffs against them; consumers can derive the diff since
+   `candidates` rides in the result). After accepting a non-empty edit, re-check it through
+   the **existing `/validate` route** (allergen/slop rules + the PR #13 standalone-X
+   link rejection) as a durable step — **non-blocking**: validator failures
+   (`{passed: false, failures: [{rule, reason}]}`) surface as a ⚠️ warning line in the
+   re-render; the edit still stands. In all cases re-render and continue.
 5. `retry` → modal value is feedback; re-call `generate` (step name
    `f"generate_candidates_r{round_n}"` — round-scoped, NOT a fixed
    `generate_candidates_attempt_2`: a failed retry doesn't consume the budget, so a
@@ -378,9 +385,12 @@ Python (`tests/test_comms_workflows.py`, client tests):
   green while the edit is discarded (base `view_submission` behavior, not fixable
   from the overlay). Mitigated by round-stamped modal labels and the per-round audit
   line in the re-render.
-- **An operator edit invalidates the TS-side audit** for that channel — the shipped
-  text is operator-owned; the ship message marks it `(edited)` and omits the
-  Director star.
+- **An operator edit invalidates the TS-side Director audit** for that channel — the
+  shipped text is operator-owned; the ship message marks it `(edited)` and omits the
+  Director star. Edited copy IS still re-checked by the rule validator (`/validate`,
+  non-blocking warning), but the Director's voice/factual/publication verdicts are not
+  re-run (the harness's formal edit path re-classifies; a Slack analog would need a
+  classifier route — future work).
 
 ## Risks
 
