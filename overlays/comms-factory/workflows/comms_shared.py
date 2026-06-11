@@ -11,6 +11,45 @@ from api.workflow_engine import WorkflowContext
 EVENT_TYPE = "comms.action"
 MAX_FACT_REVIEW_ITEMS = 20
 
+# Mirrors the TS Channel union (src/generator.ts) AND the /generate route
+# allowlist (services/api/routes/generate.ts CHANNELS) — the route is the
+# contract; if a channel is added there, add it here (and vice versa).
+GENERATED_CHANNELS = ("x", "x-thread", "web", "carousel", "modal", "in-product", "blog")
+# Enumerated in the card audience (card.ts Audience) but NOT generated —
+# planning / human-adaptation touchpoints only.
+PLANNING_ONLY_CHANNELS = ("telegram", "email", "press", "internal")
+DEFAULT_CHANNELS = ("x",)
+# Aliases the service accepts (routes/generate.ts maps tweet→x). Applied here
+# so briefs that work today keep working.
+CHANNEL_ALIASES = {"tweet": "x"}
+# Channels whose candidates are structured payloads (thread tweets, carousel
+# slides, web card fields). Free-text modal edits cannot round-trip these;
+# they are pick-or-retry at the candidate gate.
+STRUCTURED_CHANNELS = ("x-thread", "carousel", "web")
+
+
+def normalize_channels(raw: Iterable[str]) -> tuple[list[str], list[str], list[str]]:
+    """Split requested channel names into (generated, planning_only, unknown).
+
+    Lower-cases, applies CHANNEL_ALIASES, dedupes, preserves first-seen order.
+    """
+    generated: list[str] = []
+    planning: list[str] = []
+    unknown: list[str] = []
+    seen: set[str] = set()
+    for item in raw:
+        name = CHANNEL_ALIASES.get(str(item).strip().lower(), str(item).strip().lower())
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        if name in GENERATED_CHANNELS:
+            generated.append(name)
+        elif name in PLANNING_ONLY_CHANNELS:
+            planning.append(name)
+        else:
+            unknown.append(name)
+    return generated, planning, unknown
+
 
 @dataclass
 class SlackWorkflowInput:
@@ -351,9 +390,15 @@ def normalize_grounded_fact_review(result: dict[str, Any]) -> dict[str, Any]:
     facts: list[dict[str, Any]] = []
     for idx, item in enumerate(raw_facts, 1):
         raw = dict(item) if isinstance(item, dict) else {"text": str(item)}
-        claim = str(raw.get("claim") or raw.get("fact") or raw.get("text") or "").strip()
-        value = str(raw.get("value") or raw.get("text") or raw.get("fact") or claim).strip()
-        source_ref = str(raw.get("source_ref") or raw.get("source") or raw.get("url") or "").strip()
+        claim = str(
+            raw.get("claim") or raw.get("fact") or raw.get("text") or ""
+        ).strip()
+        value = str(
+            raw.get("value") or raw.get("text") or raw.get("fact") or claim
+        ).strip()
+        source_ref = str(
+            raw.get("source_ref") or raw.get("source") or raw.get("url") or ""
+        ).strip()
         evidence_summaries = _match_evidence(raw, evidence)
         original_evidence_ids = [
             str(item).strip()
@@ -363,7 +408,9 @@ def normalize_grounded_fact_review(result: dict[str, Any]) -> dict[str, Any]:
         matched_evidence_ids = [
             item["id"] for item in evidence_summaries if item.get("id")
         ]
-        evidence_ids = list(dict.fromkeys([*original_evidence_ids, *matched_evidence_ids]))
+        evidence_ids = list(
+            dict.fromkeys([*original_evidence_ids, *matched_evidence_ids])
+        )
         facts.append(
             {
                 "id": f"fact_{idx}",
@@ -435,7 +482,9 @@ def render_fact_review_blocks(
             context_block("Reject discards this fact. Cancel run stops the workflow.")
         )
         blocks.append(
-            actions_block(gate, [("Cancel run", "abandon", "danger", active_pending_id)])
+            actions_block(
+                gate, [("Cancel run", "abandon", "danger", active_pending_id)]
+            )
         )
     return blocks[:50]
 
@@ -475,10 +524,14 @@ def render_release_card_blocks(
         for idx, fact in enumerate(facts[:10], 1):
             fact_lines.append(f"{idx}. {truncate(fact, 240)}")
         if len(facts) > 10:
-            fact_lines.append(f"_+{len(facts) - 10} more approved fact(s) included in generation._")
+            fact_lines.append(
+                f"_+{len(facts) - 10} more approved fact(s) included in generation._"
+            )
         blocks.append(markdown_block("\n".join(fact_lines)))
     else:
-        blocks.append(markdown_block("*Approved fact contract*\n_No deployed facts returned._"))
+        blocks.append(
+            markdown_block("*Approved fact contract*\n_No deployed facts returned._")
+        )
 
     if complete:
         footer = footer_text or "ReleaseCard gate completed."
@@ -520,7 +573,12 @@ def _release_card_fields(card: dict[str, Any]) -> list[str]:
 
 
 def _release_card_facts(card: dict[str, Any]) -> list[str]:
-    raw_facts = card.get("deployed_facts") or card.get("facts") or card.get("approved_facts") or []
+    raw_facts = (
+        card.get("deployed_facts")
+        or card.get("facts")
+        or card.get("approved_facts")
+        or []
+    )
     if not isinstance(raw_facts, list):
         raw_facts = [raw_facts]
     facts: list[str] = []
@@ -566,7 +624,9 @@ def apply_fact_review_action(
         "edit_fact": "edited",
     }[action]
     if status != "pending":
-        if status == desired_status or (status == "edited" and action == "approve_fact"):
+        if status == desired_status or (
+            status == "edited" and action == "approve_fact"
+        ):
             return updated
         raise GateValidationError("fact_already_reviewed")
     if action == "edit_fact":
@@ -667,13 +727,17 @@ def _dedupe_evidence(raw_evidence: list[Any]) -> list[dict[str, Any]]:
     return evidence
 
 
-def _match_evidence(fact: dict[str, Any], evidence: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def _match_evidence(
+    fact: dict[str, Any], evidence: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
     ids = {
         str(item).strip()
         for item in (fact.get("evidence_ids") or fact.get("evidence") or [])
         if str(item).strip()
     }
-    source_ref = str(fact.get("source_ref") or fact.get("source") or fact.get("url") or "").strip()
+    source_ref = str(
+        fact.get("source_ref") or fact.get("source") or fact.get("url") or ""
+    ).strip()
     matches: list[dict[str, Any]] = []
     for item in evidence:
         if ids and str(item.get("id") or "") in ids:
@@ -713,7 +777,10 @@ def _format_fact_for_review(fact: dict[str, Any]) -> str:
     if evidence:
         first = evidence[0]
         title = str(
-            first.get("title") or first.get("url") or first.get("source_ref") or "Evidence"
+            first.get("title")
+            or first.get("url")
+            or first.get("source_ref")
+            or "Evidence"
         ).strip()
         quote = str(first.get("quote") or "").strip()
         lines.append(f"*Evidence:* {truncate(title, 180)}")

@@ -11,13 +11,17 @@ sys.path.insert(0, str(OVERLAY_ROOT))
 
 from comms_shared import (  # noqa: E402
     Gate,
+    GENERATED_CHANNELS,
     GateValidationError,
+    PLANNING_ONLY_CHANNELS,
+    STRUCTURED_CHANNELS,
     apply_fact_review_action,
     approved_fact_payloads,
     card_from_result,
     compact_ref,
     fact_review_complete,
     gate_correlation_id,
+    normalize_channels,
     normalize_grounded_fact_review,
     render_fact_review_blocks,
     render_release_card_blocks,
@@ -49,6 +53,41 @@ def _event(
     if values:
         event["values"] = values
     return event
+
+
+def test_normalize_channels_passes_known_channels_in_order():
+    generated, planning, unknown = normalize_channels(["Blog", "x", "x-thread"])
+    assert generated == ["blog", "x", "x-thread"]
+    assert planning == []
+    assert unknown == []
+
+
+def test_normalize_channels_applies_aliases_and_dedupes():
+    generated, planning, unknown = normalize_channels(["tweet", "x", "TWEET", "blog"])
+    assert generated == ["x", "blog"]
+    assert planning == []
+    assert unknown == []
+
+
+def test_normalize_channels_splits_planning_only_and_unknown():
+    generated, planning, unknown = normalize_channels(["email", "tiktok", "x", "press"])
+    assert generated == ["x"]
+    assert planning == ["email", "press"]
+    assert unknown == ["tiktok"]
+
+
+def test_channel_registry_shape():
+    assert GENERATED_CHANNELS == (
+        "x",
+        "x-thread",
+        "web",
+        "carousel",
+        "modal",
+        "in-product",
+        "blog",
+    )
+    assert set(STRUCTURED_CHANNELS) <= set(GENERATED_CHANNELS)
+    assert set(PLANNING_ONLY_CHANNELS).isdisjoint(GENERATED_CHANNELS)
 
 
 def test_gate_correlation_id_includes_stage_and_version():
@@ -307,7 +346,9 @@ def test_apply_fact_review_actions_filter_rejected_and_edit_values():
 
 
 def test_apply_fact_review_action_reclick_approve_is_idempotent():
-    review = normalize_grounded_fact_review({"facts": [{"claim": "A", "value": "A value"}]})
+    review = normalize_grounded_fact_review(
+        {"facts": [{"claim": "A", "value": "A value"}]}
+    )
     facts = apply_fact_review_action(
         review["facts"], _event(action="approve_fact", target_id="fact_1")
     )
@@ -345,7 +386,9 @@ def test_render_release_card_blocks_summarizes_card_without_raw_dict_dump():
     assert "```" not in text
     assert "{'id':" not in text
 
-    approved_blocks = render_release_card_blocks(card, complete=True, approved_by="U123")
+    approved_blocks = render_release_card_blocks(
+        card, complete=True, approved_by="U123"
+    )
     approved_text = str(approved_blocks)
     assert "ReleaseCard approved" in approved_text
     assert "Approved by <@U123>" in approved_text
@@ -467,7 +510,9 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
     assert len(card_posts) == 1
     assert "Fact A is live" in str(card_posts[0]["blocks"])
     assert "```" not in str(card_posts[0]["blocks"])
-    card_updates = [update for update in updates if update.get("name") == "update_card_gate"]
+    card_updates = [
+        update for update in updates if update.get("name") == "update_card_gate"
+    ]
     assert "ReleaseCard approved" in str(card_updates[-1]["blocks"])
     assert calls == [
         ("comms_factory", "ground_from_tools"),
@@ -488,7 +533,11 @@ async def test_release_workflow_filters_rejected_and_edited_facts(monkeypatch):
                 "ok": True,
                 "facts": [
                     {"claim": "A", "value": "Rejected A"},
-                    {"claim": "B", "value": "Original B", "source_ref": "https://b.example"},
+                    {
+                        "claim": "B",
+                        "value": "Original B",
+                        "source_ref": "https://b.example",
+                    },
                 ],
                 "evidence": [{"url": "https://b.example", "quote": "B quote"}],
             }
@@ -550,13 +599,17 @@ async def test_release_workflow_filters_rejected_and_edited_facts(monkeypatch):
     )
     monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
     monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
-    monkeypatch.setattr(comms_release, "wait_for_gate_action", fake_wait_for_gate_action)
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action", fake_wait_for_gate_action
+    )
     monkeypatch.setattr(
         comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_fact_action
     )
 
     result = await comms_release.handler(
-        comms_release.Input(brief="generate for x: launch", user_id="U123", delivery={}),
+        comms_release.Input(
+            brief="generate for x: launch", user_id="U123", delivery={}
+        ),
         Ctx(),
     )
 
@@ -611,7 +664,9 @@ async def test_release_workflow_blocks_generate_errors_before_candidate_gate(
     async def fake_update_gate_message(*_args, **_kwargs):
         return {"ok": True}
 
-    fact_events = iter([_event(run_id="run_test", action="approve_fact", target_id="fact_1")])
+    fact_events = iter(
+        [_event(run_id="run_test", action="approve_fact", target_id="fact_1")]
+    )
     gate_events = iter([_event(run_id="run_test", stage="card", action="approve")])
 
     async def fake_wait_for_fact_action(*_args, **_kwargs):
@@ -634,13 +689,17 @@ async def test_release_workflow_blocks_generate_errors_before_candidate_gate(
     )
     monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
     monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
-    monkeypatch.setattr(comms_release, "wait_for_gate_action", fake_wait_for_gate_action)
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action", fake_wait_for_gate_action
+    )
     monkeypatch.setattr(
         comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_fact_action
     )
 
     result = await comms_release.handler(
-        comms_release.Input(brief="generate for x: launch", user_id="U123", delivery={}),
+        comms_release.Input(
+            brief="generate for x: launch", user_id="U123", delivery={}
+        ),
         Ctx(),
     )
 
@@ -653,7 +712,9 @@ async def test_release_workflow_blocks_generate_errors_before_candidate_gate(
 
 
 @pytest.mark.asyncio
-async def test_release_workflow_blocks_retry_generate_error_without_ready_gate(monkeypatch):
+async def test_release_workflow_blocks_retry_generate_error_without_ready_gate(
+    monkeypatch,
+):
     import comms_release
 
     posts: list[dict] = []
@@ -678,7 +739,9 @@ async def test_release_workflow_blocks_retry_generate_error_without_ready_gate(m
     async def fake_update_gate_message(*_args, **_kwargs):
         return {"ok": True}
 
-    fact_events = iter([_event(run_id="run_test", action="approve_fact", target_id="fact_1")])
+    fact_events = iter(
+        [_event(run_id="run_test", action="approve_fact", target_id="fact_1")]
+    )
     gate_events = iter(
         [
             _event(run_id="run_test", stage="card", action="approve"),
@@ -706,13 +769,17 @@ async def test_release_workflow_blocks_retry_generate_error_without_ready_gate(m
     )
     monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
     monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
-    monkeypatch.setattr(comms_release, "wait_for_gate_action", fake_wait_for_gate_action)
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action", fake_wait_for_gate_action
+    )
     monkeypatch.setattr(
         comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_fact_action
     )
 
     result = await comms_release.handler(
-        comms_release.Input(brief="generate for x: launch", user_id="U123", delivery={}),
+        comms_release.Input(
+            brief="generate for x: launch", user_id="U123", delivery={}
+        ),
         Ctx(),
     )
 
@@ -764,7 +831,9 @@ async def test_release_workflow_blocks_missing_or_failed_build_card_before_gener
     async def fake_update_gate_message(*_args, **_kwargs):
         return {"ok": True}
 
-    fact_events = iter([_event(run_id="run_test", action="approve_fact", target_id="fact_1")])
+    fact_events = iter(
+        [_event(run_id="run_test", action="approve_fact", target_id="fact_1")]
+    )
 
     async def fake_wait_for_fact_action(*_args, **_kwargs):
         return next(fact_events)
@@ -792,7 +861,9 @@ async def test_release_workflow_blocks_missing_or_failed_build_card_before_gener
     )
 
     result = await comms_release.handler(
-        comms_release.Input(brief="generate for x: launch", user_id="U123", delivery={}),
+        comms_release.Input(
+            brief="generate for x: launch", user_id="U123", delivery={}
+        ),
         Ctx(),
     )
 
@@ -801,7 +872,9 @@ async def test_release_workflow_blocks_missing_or_failed_build_card_before_gener
     assert result["error"] == expected_error
     assert calls == ["ground_from_tools", "build_card"]
     assert "post_card_gate" not in [post.get("name") for post in posts]
-    assert any("Comms release blocked building ReleaseCard" in post["text"] for post in posts)
+    assert any(
+        "Comms release blocked building ReleaseCard" in post["text"] for post in posts
+    )
 
 
 @pytest.mark.asyncio
@@ -828,7 +901,9 @@ async def test_release_workflow_does_not_ready_to_ship_without_final_copy(monkey
     async def fake_update_gate_message(*_args, **_kwargs):
         return {"ok": True}
 
-    fact_events = iter([_event(run_id="run_test", action="approve_fact", target_id="fact_1")])
+    fact_events = iter(
+        [_event(run_id="run_test", action="approve_fact", target_id="fact_1")]
+    )
     gate_events = iter(
         [
             _event(run_id="run_test", stage="card", action="approve"),
@@ -856,13 +931,17 @@ async def test_release_workflow_does_not_ready_to_ship_without_final_copy(monkey
     )
     monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
     monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
-    monkeypatch.setattr(comms_release, "wait_for_gate_action", fake_wait_for_gate_action)
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action", fake_wait_for_gate_action
+    )
     monkeypatch.setattr(
         comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_fact_action
     )
 
     result = await comms_release.handler(
-        comms_release.Input(brief="generate for x: launch", user_id="U123", delivery={}),
+        comms_release.Input(
+            brief="generate for x: launch", user_id="U123", delivery={}
+        ),
         Ctx(),
     )
 
@@ -883,7 +962,10 @@ async def test_release_workflow_blocks_too_many_facts_before_waiting(monkeypatch
         if method == "ground_from_tools":
             return {
                 "ok": True,
-                "facts": [{"claim": f"Fact {idx}", "value": f"Value {idx}"} for idx in range(21)],
+                "facts": [
+                    {"claim": f"Fact {idx}", "value": f"Value {idx}"}
+                    for idx in range(21)
+                ],
             }
         raise AssertionError(method)
 
@@ -911,10 +993,14 @@ async def test_release_workflow_blocks_too_many_facts_before_waiting(monkeypatch
     monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
     monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
     monkeypatch.setattr(comms_release, "wait_for_gate_action", unexpected_wait)
-    monkeypatch.setattr(comms_release, "wait_for_gate_action_at_correlation", unexpected_wait)
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action_at_correlation", unexpected_wait
+    )
 
     result = await comms_release.handler(
-        comms_release.Input(brief="generate for x: launch", user_id="U123", delivery={}),
+        comms_release.Input(
+            brief="generate for x: launch", user_id="U123", delivery={}
+        ),
         Ctx(),
     )
 
@@ -1033,7 +1119,9 @@ def test_format_candidates_tolerates_empty_or_unmatched_picks():
     candidates = [_candidate(1), _candidate(2)]
     assert "Director's pick" not in comms_release._format_candidates(candidates, [])
     unmatched = [{"id": "nope", "text": "x"}]
-    assert "Director's pick" not in comms_release._format_candidates(candidates, unmatched)
+    assert "Director's pick" not in comms_release._format_candidates(
+        candidates, unmatched
+    )
 
 
 def test_director_pick_text_ships_recommended_candidate_not_first():
@@ -1049,7 +1137,9 @@ def test_director_pick_text_falls_back_to_pick_text_when_id_unmatched():
 
     candidates = [_candidate(1)]
     picks = [{"id": "ghost", "text": "the recommended copy"}]
-    assert comms_release._director_pick_text(candidates, picks) == "the recommended copy"
+    assert (
+        comms_release._director_pick_text(candidates, picks) == "the recommended copy"
+    )
 
 
 def test_director_pick_text_falls_back_to_first_candidate_without_picks():
@@ -1063,10 +1153,12 @@ def test_director_pick_text_falls_back_to_first_candidate_without_picks():
 def test_picks_from_generation_digs_envelope():
     import comms_release
 
-    assert comms_release._picks_from_generation({"output": {"picks": [{"id": "a"}]}}) == [
-        {"id": "a"}
+    assert comms_release._picks_from_generation(
+        {"output": {"picks": [{"id": "a"}]}}
+    ) == [{"id": "a"}]
+    assert comms_release._picks_from_generation({"picks": [{"id": "b"}]}) == [
+        {"id": "b"}
     ]
-    assert comms_release._picks_from_generation({"picks": [{"id": "b"}]}) == [{"id": "b"}]
     assert comms_release._picks_from_generation({"output": {}}) == []
     assert comms_release._picks_from_generation(None) == []
 
@@ -1082,7 +1174,9 @@ def test_publication_holds_only_when_gate_failed():
         },
     )
     assert comms_release._publication_holds(failed) == ["confirm live", "confirm $1B"]
-    passed = _candidate(2, audit={"publication_gate_passed": True, "publication_gate_issues": ["x"]})
+    passed = _candidate(
+        2, audit={"publication_gate_passed": True, "publication_gate_issues": ["x"]}
+    )
     assert comms_release._publication_holds(passed) == []
     assert comms_release._publication_holds(_candidate(3)) == []  # no director_audit
     assert comms_release._publication_holds(None) == []
@@ -1094,20 +1188,28 @@ def test_format_generation_failure_is_human_readable_with_retry_hint():
     result = {
         "error": "comms_factory_http_error",
         "ok": False,
-        "response": {"error": "internal_error", "message": "internal server error", "ok": False},
+        "response": {
+            "error": "internal_error",
+            "message": "internal server error",
+            "ok": False,
+        },
         "status_code": 500,
     }
     out = comms_release._format_generation_failure(result, "comms_factory_http_error")
     assert "{" not in out and "'ok'" not in out  # no raw dict
     assert "comms_factory_http_error" in out
     assert "internal server error" in out
-    assert "transient" in out.lower() and "retry" in out.lower()  # retry guidance on 500
+    assert (
+        "transient" in out.lower() and "retry" in out.lower()
+    )  # retry guidance on 500
 
 
 def test_format_generation_failure_non_transient_gives_generic_guidance():
     import comms_release
 
-    out = comms_release._format_generation_failure({"error": "bad_request"}, "bad_request")
+    out = comms_release._format_generation_failure(
+        {"error": "bad_request"}, "bad_request"
+    )
     assert "bad_request" in out
     assert "{" not in out
     assert "service logs" in out
