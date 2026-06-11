@@ -1591,3 +1591,201 @@ async def test_release_blocks_after_candidate_round_limit(monkeypatch):
     assert len(terminal) == 1
     assert "limit" in str(terminal[0]["text"])
     assert '"type": "actions"' not in str(terminal[0]["blocks"]).replace("'", '"')
+
+
+@pytest.mark.asyncio
+async def test_candidate_gate_constructs_fresh_gate_each_round(monkeypatch):
+    """Each round MUST pass a distinct (name, gate_version) to wait_for_gate_action.
+
+    This is the first-write-wins durable-event invariant: if gate_version is frozen
+    (mutated to always be 1) the per-round correlation key collides with round 1 and
+    the workflow cannot distinguish stale events.  A mutation that freezes
+    gate_version=1 and the step name to "wait_candidate_gate_r1" must cause this test
+    to fail.
+    """
+    import comms_release
+
+    posts: list[dict] = []
+    updates: list[dict] = []
+
+    async def fake_call_comms_tool(_ctx, name, method, _args):
+        if method == "validate":
+            return {"ok": True, "passed": True}
+        if method == "ground_from_tools":
+            return {"ok": True, "facts": [{"claim": "A", "value": "Fact A"}]}
+        if method == "build_card":
+            return {"ok": True, "release_card": {"kind": "launch-tier"}}
+        if method == "generate":
+            return _gen_x_blog()
+        raise AssertionError((name, method))
+
+    async def fake_post_gate_message(_ctx, **kwargs):
+        posts.append(kwargs)
+        return {"channel": "C123", "ts": kwargs["name"]}
+
+    async def fake_update_gate_message(_ctx, **kwargs):
+        updates.append(kwargs)
+        return {"ok": True}
+
+    fact_events = iter(
+        [_event(run_id="run_test", action="approve_fact", target_id="fact_1")]
+    )
+    card_events = iter([_event(run_id="run_test", stage="card", action="approve")])
+
+    # Candidate events: two non-empty blog edits (rounds 1 and 2) then approve
+    # (round 3).  Three distinct candidate-gate waits are expected.
+    candidate_events = iter(
+        [
+            _blog_edit("edit round 1", gate_version=1),
+            _blog_edit("edit round 2", gate_version=2),
+            _candidate_event("approve", gate_version=3),
+        ]
+    )
+
+    waits: list[tuple[str, int]] = []
+
+    async def fake_wait_for_fact_action(*_args, **_kwargs):
+        return next(fact_events)
+
+    async def fake_wait_for_card_or_candidate(ctx, name, gate, allowed):
+        # Card gate comes first (single call); after that all calls are candidate-gate.
+        if gate.stage == "card":
+            return next(card_events)
+        # Candidate gate: record (step name, gate_version) before returning event.
+        waits.append((name, gate.gate_version))
+        return next(candidate_events)
+
+    class Ctx:
+        run_id = "run_test"
+
+        async def step(self, _name, fn, **_kwargs):
+            return await fn()
+
+    monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
+    monkeypatch.setattr(
+        comms_release,
+        "tool_plane_ref",
+        lambda *_args, **_kwargs: {"idempotency_prefix": "run_test:ground:1"},
+    )
+    monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
+    monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action", fake_wait_for_card_or_candidate
+    )
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_fact_action
+    )
+
+    result = await comms_release.handler(
+        comms_release.Input(
+            brief="for x, blog: launch Fact A", user_id="U123", delivery={}
+        ),
+        Ctx(),
+    )
+
+    assert result["status"] == "ready_to_ship"
+
+    # Core invariant: each round produces a fresh (step_name, gate_version) pair.
+    assert waits == [
+        ("wait_candidate_gate_r1", 1),
+        ("wait_candidate_gate_r2", 2),
+        ("wait_candidate_gate_r3", 3),
+    ]
+
+    # Each render step name must also be round-scoped.
+    post_update_names = [p.get("name") for p in posts] + [
+        u.get("name") for u in updates
+    ]
+    assert "render_candidate_gate_r1" in post_update_names
+    assert "render_candidate_gate_r2" in post_update_names
+    assert "render_candidate_gate_r3" in post_update_names
+
+
+@pytest.mark.asyncio
+async def test_candidate_gate_validation_error_exits_with_rejected_status(monkeypatch):
+    """GateValidationError raised during a candidate-gate wait must:
+    - return status="rejected", stage="candidate", error=<reason>
+    - carry the state payload (final_by_channel, missing_channels)
+    - record an update with name "update_candidate_gate_rejected_r1" whose
+      blocks contain no actions block (the gate is terminal/buttonless).
+    """
+    import comms_release
+
+    posts: list[dict] = []
+    updates: list[dict] = []
+
+    async def fake_call_comms_tool(_ctx, name, method, _args):
+        if method == "ground_from_tools":
+            return {"ok": True, "facts": [{"claim": "A", "value": "Fact A"}]}
+        if method == "build_card":
+            return {"ok": True, "release_card": {"kind": "launch-tier"}}
+        if method == "generate":
+            return _gen_x_blog()
+        raise AssertionError((name, method))
+
+    async def fake_post_gate_message(_ctx, **kwargs):
+        posts.append(kwargs)
+        return {"channel": "C123", "ts": kwargs["name"]}
+
+    async def fake_update_gate_message(_ctx, **kwargs):
+        updates.append(kwargs)
+        return {"ok": True}
+
+    fact_events = iter(
+        [_event(run_id="run_test", action="approve_fact", target_id="fact_1")]
+    )
+    card_events = iter([_event(run_id="run_test", stage="card", action="approve")])
+
+    async def fake_wait_for_fact_action(*_args, **_kwargs):
+        return next(fact_events)
+
+    async def fake_wait_for_gate_action(ctx, name, gate, allowed):
+        if gate.stage == "card":
+            return next(card_events)
+        # First (and only) candidate-stage call raises GateValidationError.
+        raise GateValidationError("unauthorized_slack_user")
+
+    class Ctx:
+        run_id = "run_test"
+
+        async def step(self, _name, fn, **_kwargs):
+            return await fn()
+
+    monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
+    monkeypatch.setattr(
+        comms_release,
+        "tool_plane_ref",
+        lambda *_args, **_kwargs: {"idempotency_prefix": "run_test:ground:1"},
+    )
+    monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
+    monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action", fake_wait_for_gate_action
+    )
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_fact_action
+    )
+
+    result = await comms_release.handler(
+        comms_release.Input(
+            brief="for x, blog: launch Fact A", user_id="U123", delivery={}
+        ),
+        Ctx(),
+    )
+
+    assert result["status"] == "rejected"
+    assert result["stage"] == "candidate"
+    assert result["error"] == "unauthorized_slack_user"
+
+    # State payload present: candidates were generated before the rejection.
+    assert "final_by_channel" in result
+    assert "missing_channels" in result
+
+    # The rejection update step name must be round-scoped to r1.
+    rejection_updates = [
+        u for u in updates if u.get("name") == "update_candidate_gate_rejected_r1"
+    ]
+    assert len(rejection_updates) == 1
+    blocks = rejection_updates[0]["blocks"]
+    # Rejected gate is terminal — no actions block with interactive buttons.
+    assert '"type": "actions"' not in str(blocks).replace("'", '"')
