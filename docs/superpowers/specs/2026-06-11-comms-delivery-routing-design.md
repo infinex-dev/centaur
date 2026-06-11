@@ -52,6 +52,38 @@ blog markdown; lifting those into the service is the natural cover-image follow-
 auto-merging any PR; auto-publishing Typefully drafts (a human publishes); self-serve
 production-deploy ergonomics (separate org decision).
 
+## Flow accounting: every flow in the system, and where it's covered
+
+Two operator surfaces drive the same comms-factory engine: the **Centaur Slack workflow**
+(durable, multi-operator — these two specs) and the **harness web UI** (local, single-operator,
+runs on an operator laptop against `harness/.env.local`). The service API — Centaur's only door
+into the engine — exposes exactly five routes (`/validate /audit /ground /build-card
+/generate`, `services/api/server.ts:23-27`), so **nothing harness-side is reachable from the
+Slack flow today**; the PR #13 launch-week sync added engine + harness capability but changed
+no service route (verified against post-sync main).
+
+| Flow | Surface | Covered by |
+|---|---|---|
+| Channel selection / validation / echo | Slack | surfacing plan T4 |
+| Grounding + facts gate | Slack | existing (PR #13 improved grounder *quality* engine-side — flow unchanged, benefit free) |
+| Card gate | Slack | existing (`kind` union unchanged; new `category` — incl. `thesis` — is orthogonal and passes through) |
+| Multi-channel generation (7 formats) | Slack | surfacing plan T1 + existing call |
+| Per-channel review / edit / retry | Slack | surfacing plan T5–T6 |
+| Per-channel ship (`final_by_channel`) | Slack | surfacing plan T6 |
+| Blog draft review (publish → comment → revise) | Slack + display.dev | §6 |
+| blog + web + roadmap → platform PR | Slack → GitHub | §2/§4 (REST) |
+| x / x-thread → Typefully drafts | Slack → Typefully | §1 (lifting the harness client) |
+| in-product / modal | Slack | copy-only, "deliver manually" note (§ Goal) |
+| typefullyUrl cross-link into blog | Slack | §2 mapper + §4 ordering |
+| Inline surface editing w/ autosave; pick revisions | harness only | parallel local UX — the Slack analog is the candidate gate; no plan change |
+| Operator handback + **reground** gate | harness only | **no Slack analog** — the facts gate can edit/reject but not re-ground with feedback; known future-work item, deliberately not in scope |
+| Typefully push from ship panel | harness only | break-glass twin of §1 |
+| emit-PR child process (`emit-process.ts`) | harness only | break-glass twin of §2 (laptop + local checkout) |
+| Cloudinary cover upload + crop previews + news-image-patch | harness only | deferred — named as the cover-image follow-on above |
+| Image briefs (hero / in-app-mobile / feature-detail, `src/brief.ts`) | harness only | not a service route; potential future deliverable type, out of scope |
+| X-article rich-HTML transform (`harness/lib/x-article.ts`) | harness only | potential future 8th channel, out of scope |
+| Engine-level behavior shifts (thesis-cta validator, standalone-X link rejection, essay-length blog, tempo scoring) | both | flow-neutral copy-quality changes; surfacing's chunked rendering already handles essay-length blog text |
+
 ## Why REST, not git/gh-in-pod (the review's central finding)
 
 The first draft wrapped the existing `emitLaunchPR` (git worktree + `git push` + `gh pr
