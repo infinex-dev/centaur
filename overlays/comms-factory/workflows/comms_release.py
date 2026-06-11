@@ -110,7 +110,9 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
     fact_review = normalize_grounded_fact_review(grounding)
     facts = fact_review["facts"]
     approver_user_ids = tuple(inp.approver_user_ids)
-    facts_gate = Gate(ctx.run_id, "facts", 1, inp.user_id, approver_user_ids, per_item=True)
+    facts_gate = Gate(
+        ctx.run_id, "facts", 1, inp.user_id, approver_user_ids, per_item=True
+    )
     blocked_reason = ""
     if not facts:
         blocked_reason = "Facts gate blocked: no verifiable facts were returned."
@@ -167,7 +169,11 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
                 )
                 return {"status": "abandoned", "stage": "facts", "facts": facts}
             facts = apply_fact_review_action(facts, facts_event)
-            slack = facts_event.get("slack") if isinstance(facts_event.get("slack"), dict) else {}
+            slack = (
+                facts_event.get("slack")
+                if isinstance(facts_event.get("slack"), dict)
+                else {}
+            )
             facts_approved_by = str(slack.get("user_id") or facts_approved_by)
         except GateValidationError as exc:
             await _mark_gate(
@@ -200,7 +206,12 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             inp.delivery,
             "*Comms release blocked*: no approved facts remain after review.",
         )
-        return {"status": "blocked", "stage": "facts", "error": "no_approved_facts", "facts": facts}
+        return {
+            "status": "blocked",
+            "stage": "facts",
+            "error": "no_approved_facts",
+            "facts": facts,
+        }
     evidence = evidence_for_approved_facts(facts)
 
     card_result = await call_comms_tool(
@@ -279,17 +290,26 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "update_card_gate",
             complete=True,
         )
-        return {"status": "abandoned", "stage": "card", "facts": approved_facts, "card": card}
+        return {
+            "status": "abandoned",
+            "stage": "card",
+            "facts": approved_facts,
+            "card": card,
+        }
     card_edit = extract_modal_value(card_event)
     if card_edit:
         card = _apply_card_edit(card, card_edit)
-    card_slack = card_event.get("slack") if isinstance(card_event.get("slack"), dict) else {}
+    card_slack = (
+        card_event.get("slack") if isinstance(card_event.get("slack"), dict) else {}
+    )
     approval = {
         "workflow_run_id": ctx.run_id,
         "facts_gate_version": 1,
         "card_gate_version": 1,
         "facts_approved_by": facts_approved_by,
-        "approved_by": str(card_slack.get("user_id") or facts_approved_by or inp.user_id),
+        "approved_by": str(
+            card_slack.get("user_id") or facts_approved_by or inp.user_id
+        ),
     }
     card = _with_card_approval(card, approval, approved_facts)
     await _update_card_gate_message(
@@ -426,7 +446,9 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         generation_error = _generation_result_error(generation)
         if generation_error:
             await _post_simple(
-                ctx, inp.delivery, _format_generation_failure(generation, generation_error)
+                ctx,
+                inp.delivery,
+                _format_generation_failure(generation, generation_error),
             )
             return {
                 "status": "blocked",
@@ -518,11 +540,14 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "card": card,
             "candidates": candidates,
         }
-    ship_message = "*Ready to ship in Slack (no external posting performed)*\n" + final_copy
+    ship_message = (
+        "*Ready to ship in Slack (no external posting performed)*\n" + final_copy
+    )
     holds = _publication_holds(_candidate_for_text(candidates, final_copy))
     if holds:
-        ship_message += "\n\n⚠️ *Publication holds (verify before posting):*\n" + "\n".join(
-            f"• {hold}" for hold in holds
+        ship_message += (
+            "\n\n⚠️ *Publication holds (verify before posting):*\n"
+            + "\n".join(f"• {hold}" for hold in holds)
         )
     await _post_simple(ctx, inp.delivery, ship_message)
     return {
@@ -683,7 +708,9 @@ async def _update_facts_gate_message(
             channel=channel,
             ts=ts,
             text=text,
-            blocks=render_fact_review_blocks(gate, facts, unverifiable, complete=complete),
+            blocks=render_fact_review_blocks(
+                gate, facts, unverifiable, complete=complete
+            ),
         )
 
 
@@ -754,7 +781,9 @@ def _format_generation_failure(result: dict[str, Any], error: str) -> str:
     if isinstance(response, dict):
         message = str(response.get("message") or response.get("error") or "").strip()
     if not message:
-        message = str(result.get("message") or "").strip() if isinstance(result, dict) else ""
+        message = (
+            str(result.get("message") or "").strip() if isinstance(result, dict) else ""
+        )
     label = f"{error}" + (f" — {message}" if message and message != error else "")
     lines.append(f"• {label}" if label else "• generation failed")
     status = result.get("status_code") if isinstance(result, dict) else None
@@ -768,7 +797,9 @@ def _format_generation_failure(result: dict[str, Any], error: str) -> str:
             "Re-run the command — it typically succeeds on retry."
         )
     else:
-        lines.append("Re-run the command; if it persists, check the comms-factory service logs.")
+        lines.append(
+            "Re-run the command; if it persists, check the comms-factory service logs."
+        )
     return "\n".join(lines)
 
 
@@ -814,7 +845,11 @@ def _publication_holds(candidate: dict[str, Any] | None) -> list[str]:
     if not isinstance(audit, dict) or audit.get("publication_gate_passed") is not False:
         return []
     issues = audit.get("publication_gate_issues")
-    return [str(i).strip() for i in issues if str(i).strip()] if isinstance(issues, list) else []
+    return (
+        [str(i).strip() for i in issues if str(i).strip()]
+        if isinstance(issues, list)
+        else []
+    )
 
 
 def _verdict_line(audit: dict[str, Any]) -> str:
