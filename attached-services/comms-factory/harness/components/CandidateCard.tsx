@@ -6,7 +6,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
-import { decideCandidate, retryChannel } from '@/app/actions/generate';
+import { decideCandidate, regenerateWithNotes } from '@/app/actions/generate';
 import { approvePick } from '@/app/actions/ship';
 import { OperatorFeedbackForm } from './OperatorFeedbackForm';
 import { SurfacePreview } from './design/SurfacePreview';
@@ -121,6 +121,7 @@ export function CandidateCard({
 }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
   const [editing, setEditing] = useState(false);
   // Local echo of the just-saved edit, so the change shows instantly without a
@@ -205,10 +206,19 @@ export function CandidateCard({
   }
 
   function retry() {
-    const feedback = window.prompt('Retry feedback') ?? '';
+    const feedback = window.prompt('Retry feedback (optional — empty forwards the Director’s notes)') ?? '';
+    setInfo(null);
     run(async () => {
       await decideCandidate(candidate.id, 'retry', { retry_feedback: feedback });
-      await retryChannel(candidate.card_id, candidate.channel, feedback);
+      // Route through the actor/director handback (regenerateWithNotes), seeded
+      // with THIS candidate — not the legacy per-channel retry, whose attempt-3
+      // cap dead-ends every mature card ("Retry cap reached", 2026-06-11).
+      const res = await regenerateWithNotes(candidate.card_id, candidate.channel, [candidate.id], feedback.trim() || undefined);
+      setInfo(
+        res.existing
+          ? 'A generator run is already in progress for this card — wait for it to finish, then retry.'
+          : `Regenerating ${candidate.channel} from this draft — running in the background (~a few minutes). Watch the run status on the Generate tab; the new attempt appears on refresh.`,
+      );
     });
   }
 
@@ -380,6 +390,7 @@ export function CandidateCard({
         </details>
         {pending && <p className="text-xs text-ink-3 pt-2">Working…</p>}
         {error && <p className="text-xs text-state-rejected pt-2">{error}</p>}
+        {info && <p className="text-xs text-state-running pt-2">{info}</p>}
       </footer>
     </article>
   );
