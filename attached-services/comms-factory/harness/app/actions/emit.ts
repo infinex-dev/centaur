@@ -1,13 +1,21 @@
 'use server';
 
-import { execFile } from 'node:child_process';
+import { execFile, spawn } from 'node:child_process';
 import { readFile, rm, writeFile } from 'node:fs/promises';
 import { homedir, tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import Anthropic from '@anthropic-ai/sdk';
 import { getDb } from '@/lib/db';
-import { emitChildEnv, emitCliArgs, emitTimeoutMs, formatEmitProcessError } from '@/lib/emit-process';
+import {
+  emitChildEnv,
+  emitCliArgs,
+  emitTimeoutMs,
+  formatEmitProcessError,
+  prNumberFromUrl,
+  promoteCliArgs,
+  promoteWatchArgs,
+} from '@/lib/emit-process';
 import { requireCard } from '@/lib/queries';
 
 const execFileAsync = promisify(execFile);
@@ -48,7 +56,28 @@ export type EmitPlatformResult = {
   prDescription: string;
   roadmapChanges: RoadmapChangeSummary[];
   proposedRoadmap: RoadmapProposal | null;
+  /** Set when a prod-promotion watcher was started for the opened main PR. */
+  promoteWatch: boolean;
 };
+
+export type PromoteStatus = {
+  phase: 'watching' | 'promoting' | 'done' | 'error' | 'none';
+  mainPrNumber?: number;
+  checkedAt?: string;
+  mainPrState?: string;
+  prodPrUrl?: string | null;
+  error?: string;
+};
+
+export type PromoteNowResult = {
+  prUrl: string | null;
+  plannedDiff: string;
+  prDescription: string;
+};
+
+function promoteStatusFile(cardId: string): string {
+  return join(tmpdir(), `cf-promote-status-${cardId}.json`);
+}
 
 /**
  * Propose which roadmap node a launch completes — so the operator approves a
@@ -122,6 +151,8 @@ export async function emitPlatformPR(
     live?: boolean;
     includeRoadmap?: boolean;
     roadmapOverride?: { nodeName: string; parentName?: string };
+    /** After the main PR opens, watch it and auto-author the prod promotion PR on merge. */
+    promoteToProd?: boolean;
   } = {},
 ): Promise<EmitPlatformResult> {
   const db = getDb();
@@ -175,16 +206,92 @@ export async function emitPlatformPR(
       prDescription?: string;
       roadmapChanges?: RoadmapChangeSummary[];
     };
+
+    let promoteWatch = false;
+    if (opts.live && opts.promoteToProd && result.prUrl) {
+      const mainPrNumber = prNumberFromUrl(result.prUrl);
+      if (mainPrNumber !== null) {
+        startPromoteWatcher(cardId, mainPrNumber);
+        promoteWatch = true;
+      }
+    }
+
     return {
       prUrl: result.prUrl,
       plannedDiff: result.plannedDiff,
       prDescription: result.prDescription ?? '',
       roadmapChanges: result.roadmapChanges ?? [],
       proposedRoadmap,
+      promoteWatch,
     };
   } catch (err) {
     throw formatEmitProcessError(err, emitTimeoutMs(opts.live));
   } finally {
     await rm(pkgPath, { force: true });
+  }
+}
+
+/**
+ * Detached watcher: polls the main PR; on merge, cherry-picks the merged commit
+ * onto `prod` and opens the promotion PR (scripts/promote-pr-watch.ts). Survives
+ * this server action returning; does NOT survive a machine/dev-server-host
+ * restart — promoteProdPRNow is the manual fallback.
+ */
+function startPromoteWatcher(cardId: string, mainPrNumber: number): void {
+  const child = spawn(
+    'pnpm',
+    promoteWatchArgs(mainPrNumber, { platformRoot: platformRoot(), statusFile: promoteStatusFile(cardId) }),
+    {
+      cwd: repoRoot(),
+      env: emitChildEnv(),
+      detached: true,
+      stdio: 'ignore',
+    },
+  );
+  child.unref();
+}
+
+/** Read the watcher's status file for the ship panel poll. */
+export async function getPromoteStatus(cardId: string): Promise<PromoteStatus> {
+  requireCard(cardId, getDb());
+  try {
+    const raw = await readFile(promoteStatusFile(cardId), 'utf8');
+    return JSON.parse(raw) as PromoteStatus;
+  } catch {
+    return { phase: 'none' };
+  }
+}
+
+/**
+ * Manual promotion — the fallback when no watcher is running (dev server
+ * restarted, or the operator never enabled the toggle). Requires the main PR to
+ * be merged already; opens the prod promotion PR synchronously.
+ */
+export async function promoteProdPRNow(cardId: string, mainPrNumber: number): Promise<PromoteNowResult> {
+  requireCard(cardId, getDb());
+  if (!Number.isInteger(mainPrNumber) || mainPrNumber <= 0) {
+    throw new Error(`invalid main PR number: ${mainPrNumber}`);
+  }
+  try {
+    const { stdout } = await execFileAsync(
+      'pnpm',
+      promoteCliArgs(mainPrNumber, { live: true, platformRoot: platformRoot() }),
+      {
+        cwd: repoRoot(),
+        env: emitChildEnv(),
+        killSignal: 'SIGTERM',
+        maxBuffer: 16 * 1024 * 1024,
+        timeout: emitTimeoutMs(true),
+      },
+    );
+    const result = JSON.parse(stdout) as PromoteNowResult;
+    await writeFile(
+      promoteStatusFile(cardId),
+      JSON.stringify({ phase: 'done', mainPrNumber, checkedAt: new Date().toISOString(), prodPrUrl: result.prUrl }),
+      'utf8',
+    );
+    return result;
+  } catch (err) {
+    throw formatEmitProcessError(err, emitTimeoutMs(true));
   }
 }
