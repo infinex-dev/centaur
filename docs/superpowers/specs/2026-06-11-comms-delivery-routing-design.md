@@ -2,20 +2,31 @@
 
 **Date:** 2026-06-11
 **Status:** Draft for review (revised after adversarial review — 29 findings raised, 9
-confirmed; the confirmed cluster drove a switch from git/gh-in-pod to the GitHub REST API)
+confirmed; the confirmed cluster drove a switch from git/gh-in-pod to the GitHub REST API.
+Further revised to add the display.dev blog draft-review loop, validated by a hands-on CLI
+trial 2026-06-11.)
 **Depends on:** `2026-06-10-comms-multichannel-release-design.md` (the "surfacing" phase) —
 this phase consumes that phase's `final_by_channel` output and candidate gate. Both are
 draft specs; neither is implemented yet. Surfacing must land first.
 **Scope:** `overlays/comms-factory/` (Python) and `attached-services/comms-factory/` (TS:
-new routes + a Typefully client + a REST emit module reusing the existing pure transforms),
-**plus one additive NetworkPolicy egress hook in `contrib/chart/`** (see §0). No Centaur
-application-service (`services/api`, `services/slackbot`, …) code changes.
+new routes + a Typefully client + a REST emit module reusing the existing pure transforms +
+a display.dev client for the blog review loop), **plus one additive NetworkPolicy egress hook
+in `contrib/chart/`** (see §0). No Centaur application-service (`services/api`,
+`services/slackbot`, …) code changes.
 
 ## Goal
 
 After the surfacing phase, an operator approves copy per channel (`final_by_channel`) and the
 run ends `ready_to_ship` with **no external posting**. This phase adds delivery: each approved
 channel is routed to its real destination behind a human-confirmed delivery gate.
+
+For **long-form `blog`/article** copy there is also an **optional draft-review loop on
+display.dev** that runs *before* the delivery PR (§6): the bot publishes the rendered draft to
+a gated display.dev URL, posts the link to Slack, humans leave inline comments on the rendered
+page, the bot reads those comments back and revises (republishing the same URL), and on
+approval it opens the platform PR. This is the "post a link → people comment → bot updates →
+ship" loop the org asked for; the org already uses display.dev (`infinex.dsp.so`, Pro+), and
+the full loop was validated by a hands-on CLI trial (see §6).
 
 Delivery targets (verified below):
 
@@ -118,6 +129,29 @@ Read from the code, not assumed:
   `candidate_id`, and the chosen candidate's structured fields live under `candidate.structured`
   (`generator.ts:122`; `.text` is the joined rendering, `:133`, unsuitable for the data.ts
   entry). The mapper reads `candidate.structured` via `candidate_id`.
+- **display.dev review loop is trial-validated (2026-06-11) and the org already uses it.**
+  `dsp find` shows the org live at `infinex.dsp.so`, Pro+ (private visibility works), ~36
+  existing artifacts. The full agent↔reviewer loop was run end-to-end with the `@displaydev/cli`
+  (`dsp`): `publish --visibility private --share <email> --theme github` (MD→themed HTML, gated)
+  → `comment add --artifact <id> --anchor-json <{textQuote,cssPath}>` → **`comment list
+  --artifact <id> --status open` returns each comment's body + anchored `textQuote` span + root
+  thread id + `createdOnVersion`** (the load-bearing read-back) → `publish - --id <id>
+  --base-version <n> --reload` (v2, same URL, optimistic-concurrency guard) → `thread resolve
+  <rootCommentId>` (open→resolved). Auth is email-OTP or `--api-key sk_live_`; the session
+  persists to disk. **Caveats found:** no in-browser editing (humans comment, the bot edits the
+  source and republishes); `comment add` root posts require BOTH a `textQuote` and a non-empty
+  `cssPath`; YAML frontmatter renders literally (strip it before publishing the preview); render
+  is display.dev's theme, not infinex.xyz CSS; anonymous publish = public URL + 30-day expiry;
+  the harness blocks attributing a comment as a fabricated human (tag bot comments honestly).
+- **Centaur has the primitives the loop needs.** The wait for "a human has commented" is a
+  Slack gate (`wait_for_gate_action` → `wait_for_event(event_type="comms.action", correlation_id)`
+  woken by `send_workflow_event` on a button click) — display.dev comments are the *content*,
+  the Slack button is the *trigger* (display.dev has no webhook into Centaur). An optional
+  auto-poll uses the durable `ctx.sleep(name, duration)` / `ctx.sleep_until`
+  (`workflow_engine.py:401,419`; runs re-wake from status `sleeping`/`waiting` when
+  `available_at <= NOW()`, `:2288-2289`). Each display.dev action is a durable `ctx.step` →
+  comms-factory tool route. So the loop is the SAME round-based durable-gate pattern as the
+  existing facts/candidate gates — no new engine capability required.
 
 ## Open verifications (must resolve before/within implementation — local `infinex-xyz/platform` checkout is ABSENT)
 
@@ -132,10 +166,16 @@ Read from the code, not assumed:
    provisioned as a secret (separate from the read-only cache token).
 4. **Typefully draft API** — endpoint, auth header, threadify field — confirmed against current
    docs; `TYPEFULLY_API_KEY` provisioned.
+5. **`DISPLAYDEV_API_KEY` (`sk_live_`)** scoped to the existing `infinex` display.dev org,
+   provisioned as a comms-pod secret. Confirm whether to invoke display.dev via the bundled
+   `@displaydev/cli` (shell-out) or its undocumented REST API (the CLI is the validated path).
+   Also confirm the `cssPath` value to use for bot-authored comments/anchors (the trial used a
+   coarse `"h3"`; a stable anchor strategy — e.g. anchor to the heading the comment concerns —
+   should be decided).
 
 blog + x + x-thread are fully specified and shippable without #1–#2; **web** rides the same PR
 and lands once #1–#2 are confirmed (its mapper + a round-trip test are the only web-specific
-code).
+code). The display.dev review loop (§6) is optional and independent of #1–#4.
 
 ## Design
 
@@ -213,10 +253,14 @@ Returns `{ok, pr_url, planned_diff}`.
 
 ### 3. Python thin-client methods (`tools/comms_factory/client.py`)
 
-- `capabilities()` → `GET /health` returning `{platform_pr: bool, typefully: bool}` (see §4).
+- `capabilities()` → `GET /health` returning `{platform_pr: bool, typefully: bool, display: bool}`
+  (see §4).
 - `emit_platform_pr(release_card, final_by_channel, candidates, *, dry_run, branch, run_id)` →
   `POST /emit`.
 - `typefully_draft(channel, *, text=None, tweets=None)` → `POST /typefully-draft`.
+- `display_publish(markdown, *, name, visibility, share=None, short_id=None, base_version=None)`
+  → `POST /display/publish`; `display_comments(short_id, *, status="open", since=None)` →
+  `GET /display/comments`; `display_resolve(root_comment_id)` → `POST /display/resolve` (see §6).
 All follow the existing `_post`/`_get` envelope + redaction pattern.
 
 ### 4. Delivery gate in `comms_release.py`
@@ -273,6 +317,70 @@ Workflow result gains:
 delivery-gate exit (Finish, abandon, loop exhaustion) carries the current `deliveries` so a
 created PR/draft is never lost from the durable result.
 
+### 6. Blog draft-review loop on display.dev (optional, blog/article only)
+
+This is the "publish a link → people comment → bot updates → ship" loop. It runs for the
+`blog` channel **after the candidate gate marks blog copy ready but before §4's delivery PR**,
+and only when `DISPLAYDEV_API_KEY` is configured (the capabilities probe of §4 reports it; if
+absent, blog skips straight to the delivery PR — the loop is additive). It is a *review/preview*
+stage; the production publish is still the platform PR.
+
+**It works in the Centaur flow as the existing durable round-gate pattern — no new engine
+capability.** Three primitive types, all already in use:
+
+- **Tool calls** — three new comms-factory routes wrapping the validated `dsp` CLI (bundle
+  `@displaydev/cli` as a service dependency; auth via `DISPLAYDEV_API_KEY`):
+  - `POST /display/publish` `{markdown, name, visibility, share[], id?, base_version?}` →
+    `{short_id, url, version}`. First call publishes `--visibility company` (or `private --share`
+    the approver list); subsequent calls pass `--id --base-version --reload` to update the same
+    URL. **Strips YAML frontmatter** before publishing (trial: frontmatter renders literally).
+  - `GET /display/comments` `{short_id, status=open, since?}` → the open threads with
+    `{id, body, anchor.textQuote, createdOnVersion}` (the trial-proven read-back).
+  - `POST /display/resolve` `{root_comment_id}` → marks a thread resolved (after the bot
+    addresses it).
+  Each is invoked from the workflow as a durable `ctx.step` via `call_comms_tool`, exactly like
+  `ground_facts`/`generate`.
+- **The human trigger is a Slack gate**, not a display.dev push (display.dev has no webhook into
+  Centaur). After publishing, the bot posts the gated URL to Slack with a round gate
+  (`Gate(ctx.run_id, "blog_review", round_n, …)`) carrying buttons: **"Pull comments & revise"**,
+  **"Approve → open PR"**, **"Abandon"**. Humans comment on the display.dev page, then click a
+  button; the workflow suspends on `wait_for_gate_action` until then (the comments are the
+  feedback *content*; the click is the *signal*).
+- **Optional auto-poll** instead of waiting on the button: `ctx.sleep(f"poll_{round_n}", 15m)`
+  then auto-`GET /display/comments`; if open threads exist, revise; else re-post "still waiting".
+  Button-driven is the default (cheaper, no blind polling); polling is a config flag.
+
+**The loop** (round = `gate_version`, bounded e.g. 10 rounds, terminal buttonless state on every
+exit — same discipline as §4):
+
+1. `display/publish` v1 (durable step `display_publish_r{n}`) → post URL + round gate to Slack.
+2. Wait for the gate button (or sleep-poll).
+3. **"Pull comments & revise"** → `display/comments(status=open)`; if none, re-post "no open
+   comments — approve when ready" and continue. If some: feed each comment's `body` +
+   `anchor.textQuote` (which span it targets) to the generator as **revision feedback** (the same
+   shape as the surfacing spec's retry-with-feedback path), regenerate the blog markdown,
+   `display/publish(--id --base-version --reload)` → v(n+1) at the same URL, then `display/resolve`
+   each addressed thread. Re-post the updated link + a new round gate.
+4. **"Approve → open PR"** → exit the loop; hand the approved blog markdown to §4's
+   `platform_pr` delivery (the display.dev artifact stays as the review record; it is not the
+   publish target). Optionally `display/publish` a final `--visibility company` version.
+5. **"Abandon"** → terminal; record `deliveries.blog_review = {status:"abandoned", url}`.
+6. Loop exhaustion → terminal, carrying the current URL + last version in the result.
+
+**Idempotency / durability:** `display/publish` updates are keyed by `--id + --base-version`
+(optimistic-concurrency guard, trial-verified) so a replayed step re-publishing the same version
+conflicts harmlessly rather than forking; `ctx.step` caches the publish result (short_id/version)
+on success. `display/resolve` is idempotent (resolving a resolved thread is a no-op).
+
+**Result:** the workflow result gains
+`"deliveries": { …, "blog_review": {"status": "approved|abandoned|skipped", "url": str|None, "version": int|None} }`.
+
+**Honest limits of this loop (from the trial):** humans **comment**, they do not edit in-place —
+the *bot* edits the source and republishes; the rendered preview is display.dev's theme, not the
+infinex blog CSS, so it is approximate; and the bot comment/anchor needs a `cssPath` (open
+verification #5). If "a human edits the draft in-browser" is ever a hard requirement, that is a
+different tool (Proof), out of scope here.
+
 ## Tests
 
 TS (`attached-services/comms-factory`):
@@ -287,7 +395,11 @@ TS (`attached-services/comms-factory`):
   missing channels omitted.
 - `featureCardEntry` round-trips through `appendFeatureCopyEntry` into a fixture data.ts (shape
   per confirmed open-verification #1).
-- `/health` reports `capabilities` booleans from env without leaking values.
+- `/health` reports `capabilities` booleans from env (incl. `display`) without leaking values.
+- display.dev routes (mock the `dsp`/HTTP boundary): `/display/publish` strips frontmatter and
+  passes `--id --base-version --reload` on update; `/display/comments` parses open threads into
+  `{id, body, textQuote, createdOnVersion}`; `/display/resolve` is idempotent;
+  `display_not_configured` when the key is absent.
 
 Python:
 - `capabilities()` probe; delivery gate shown only when destination + capability true; tokens
@@ -299,7 +411,13 @@ Python:
   asserted.
 - Every delivery-gate exit leaves a terminal buttonless message; bounded-loop exhaustion carries
   `deliveries`.
-- Client: `emit_platform_pr`/`typefully_draft`/`capabilities` post the documented envelopes.
+- Client: `emit_platform_pr`/`typefully_draft`/`capabilities`/`display_*` post the documented
+  envelopes.
+- Blog review loop: with `DISPLAYDEV_API_KEY` absent, blog skips the loop → straight to PR.
+  Present: publish posts a URL + round gate; "Pull comments & revise" with open threads feeds
+  comment bodies+anchors to a revise step, republishes v(n+1) at the same short_id, resolves the
+  addressed threads; "Approve" exits to the PR delivery; replay does not double-publish (cached
+  step + `--base-version` guard); loop exhaustion carries `deliveries.blog_review`.
 
 ## Limitations (accepted this phase)
 
@@ -314,6 +432,11 @@ Python:
 - **Typefully has no idempotency key** — a crash between the Typefully API call and the
   `ctx.step` checkpoint can create a second *draft* (not a published post; low stakes) on
   resume. Noted, not solved (the GitHub path is idempotent via the pre-flight + blob sha).
+- **display.dev review loop: humans comment, they do not edit** — the bot revises the source and
+  republishes; reviewers cannot fix a typo directly. The preview uses display.dev's theme (not
+  the infinex blog CSS), so it is approximate; and it is a staging surface, not the publish
+  target (final publish is the platform PR). If in-browser human editing becomes a hard
+  requirement, that is a different tool (Proof).
 
 ## Risks
 
@@ -326,7 +449,14 @@ Python:
   cache token so PR rights don't broaden grounding's reach; token is header-only (never argv/URL).
 - **Schema drift (web)** lives in another repo; the round-trip test + open-verification #1
   contain it. blog/x/x-thread carry no cross-repo schema risk.
-- **Blast radius**: TS service (2 routes + Typefully client + REST emit module reusing pure
-  transforms), overlay Python (3 client methods + delivery gate), one `contrib/chart`
-  NetworkPolicy hook + secret wiring. Base application services and the generation library
-  untouched; `emitLaunchPR`/`pnpm emit-pr` retained as break-glass.
+- **display.dev egress + dependency**: the review loop adds a second external SaaS the comms pod
+  talks to (covered by the same NetworkPolicy 443 hook). The org already uses display.dev, so
+  it is a sanctioned dependency, but pre-launch drafts published there leave the building — gate
+  with `--visibility private/company` and an explicit reviewer allowlist; for embargoed copy,
+  weigh keeping it off display.dev (no SOC2/self-host/EU residency; early-stage vendor).
+- **Blast radius**: TS service (5 routes — emit, typefully, 3 display — + a Typefully client, a
+  REST emit module reusing pure transforms, and a display client wrapping `@displaydev/cli`),
+  overlay Python (6 client methods + delivery gate + blog review loop), one `contrib/chart`
+  NetworkPolicy hook + secret wiring (`COMMS_GITHUB_TOKEN`, `TYPEFULLY_API_KEY`,
+  `DISPLAYDEV_API_KEY`). Base application services and the generation library untouched;
+  `emitLaunchPR`/`pnpm emit-pr` retained as break-glass.
