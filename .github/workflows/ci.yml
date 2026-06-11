@@ -110,3 +110,34 @@ jobs:
             src/slack/interactivity.test.ts \
             src/slack/socket-mode.test.ts \
             src/centaur/workflow-events.test.ts
+
+  comms-factory-tests:
+    name: comms-factory typecheck and tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "24"
+
+      - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4
+        with:
+          version: 10.28.1
+          run_install: false
+
+      # Standalone project (own lockfile + pnpm-workspace.yaml marker, NOT a
+      # member of the repo-root workspace) — install runs in its own directory.
+      - name: Install comms-factory dependencies
+        working-directory: attached-services/comms-factory
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck comms-factory
+        working-directory: attached-services/comms-factory
+        run: pnpm exec tsc --noEmit
+
+      - name: comms-factory tests
+        working-directory: attached-services/comms-factory
+        run: pnpm test

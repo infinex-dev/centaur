@@ -1,0 +1,9 @@
+# comms-factory is a standalone pnpm project vendored inside the centaur repo.
+# This file marks it as its own workspace root so a bare `pnpm install` stops
+# walking up: without it, pnpm finds centaur's root pnpm-workspace.yaml (which
+# this project is deliberately NOT a member of) and silently installs the
+# wrong project. Harmless in the standalone upstream repo, so it syncs both
+# directions. (A project-level .npmrc ignore-workspace=true does NOT work —
+# pnpm 10 resolves the workspace root before honoring it.)
+packages:
+  - "."
