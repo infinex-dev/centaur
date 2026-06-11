@@ -667,7 +667,12 @@ export async function generateActorAttempt(
         source: "anthropic",
       };
     } catch (err) {
-      if (!isActorJsonParseError(err)) throw err;
+      // Everything inside the try is parse/shape validation of the MODEL's
+      // output (JSON syntax AND schema constraints like Working Action enums).
+      // Both classes are model-output variance: feed the error back as a
+      // correction turn instead of killing the run. A bad preparation_from
+      // ("beat 1.preparation_from must be one of pressing, …") used to escape
+      // here as run_failed even though the retry loop existed for syntax.
       lastParseError = err;
       if (parseAttempt >= ACTOR_JSON_PARSE_ATTEMPTS) break;
     }
@@ -1761,7 +1766,7 @@ export function extractJsonObject(text: string): Record<string, unknown> {
     // multi-candidate array ("Expected ',' or ']' after array element"). Recover
     // with jsonrepair before forcing a fresh 32K-token re-call. If repair can't
     // make it valid, rethrow the ORIGINAL SyntaxError so the corrective retry in
-    // generateActorAttempt still engages (isActorJsonParseError keys off it).
+    // generateActorAttempt picks the syntax-flavored correction message.
     try {
       return JSON.parse(jsonrepair(slice)) as Record<string, unknown>;
     } catch {
@@ -1771,10 +1776,20 @@ export function extractJsonObject(text: string): Record<string, unknown> {
 }
 
 function actorJsonCorrection(err: unknown): string {
+  const message = errorMessage(err);
+  const isSyntaxError =
+    err instanceof SyntaxError ||
+    message.startsWith("No JSON object found") ||
+    message.includes("Unexpected end of JSON input");
+  const isSchemaError = !isSyntaxError;
   return [
-    "Your previous response could not be parsed as JSON:",
-    `  ${errorMessage(err)}`,
-    "Re-send the ENTIRE response as a single valid JSON object — identical content, corrected syntax (most often a missing comma between two array elements). Output JSON only: no prose, no markdown code fences.",
+    isSchemaError
+      ? "Your previous response parsed as JSON but violated the output schema:"
+      : "Your previous response could not be parsed as JSON:",
+    `  ${message}`,
+    isSchemaError
+      ? "Re-send the ENTIRE response with ONLY the named field corrected to satisfy the constraint — keep all other content identical. Output JSON only: no prose, no markdown code fences."
+      : "Re-send the ENTIRE response as a single valid JSON object — identical content, corrected syntax (most often a missing comma between two array elements). Output JSON only: no prose, no markdown code fences.",
   ].join("\n");
 }
 
@@ -1804,12 +1819,6 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function textFromMessage(resp: { content: Anthropic.Beta.PromptCaching.PromptCachingBetaMessage["content"] }): string {
   const block = resp.content[0];
   return block && block.type === "text" ? block.text : "";
-}
-
-function isActorJsonParseError(err: unknown): boolean {
-  if (err instanceof SyntaxError) return true;
-  const message = errorMessage(err);
-  return message.startsWith("No JSON object found") || message.includes("Unexpected end of JSON input");
 }
 
 function errorMessage(err: unknown): string {

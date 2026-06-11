@@ -181,6 +181,16 @@ describe("rejectCliches", () => {
   it("flags 'unlock'", () => {
     expect(rejectCliches("Unlocking new yield primitives").passed).toBe(false);
   });
+  it("flags 'unlock' marketing collocations", () => {
+    expect(rejectCliches("unlocks the full potential of DeFi").passed).toBe(false);
+    expect(rejectCliches("unlock new levels of capital efficiency").passed).toBe(false);
+    expect(rejectCliches("unlocking endless opportunities onchain").passed).toBe(false);
+  });
+  it("does NOT flag literal mechanism 'unlock' (passkey/enclave vocabulary)", () => {
+    expect(rejectCliches("a private key can only sign when it is unlocked by your passkey").passed).toBe(true);
+    expect(rejectCliches("unlock the enclave with your passkey").passed).toBe(true);
+    expect(rejectCliches("the wallet stays locked until you unlock it on the device").passed).toBe(true);
+  });
   it("flags 'seamless'", () => {
     expect(rejectCliches("a seamless onboarding flow").passed).toBe(false);
   });
@@ -593,6 +603,33 @@ describe("auditClaimContract", () => {
     });
     expect(failures.map((f) => f.rule)).toContain("unsupported-claim");
     expect(failures.map((f) => f.reason).join("\n")).toContain("100");
+  });
+
+  it("does not flag YAML frontmatter metadata (dates, image dimensions, cover URL) as claims", () => {
+    const blog = [
+      "---",
+      "title: Launch post",
+      "date: 2026-06-10",
+      "published: false",
+      "coverImage:",
+      "  src: https://assets.infinex.xyz/covers/security.png",
+      "  height: 640",
+      "  width: 1280",
+      "---",
+      "Fact A is live.",
+    ].join("\n");
+    const failures = auditClaimTripwires(blog, CARD);
+    expect(failures.filter((f) => f.reason.includes("numeric claim"))).toEqual([]);
+    expect(failures.filter((f) => f.reason.includes("URL"))).toEqual([]);
+
+    const sameViaUnsupported = auditUnsupportedClaims(blog, CARD);
+    expect(sameViaUnsupported.filter((f) => f.reason.includes("numeric claim"))).toEqual([]);
+  });
+
+  it("still flags body numeric claims when frontmatter is present", () => {
+    const blog = ["---", "title: Launch post", "date: 2026-06-10", "---", "Yields up to 20% APY."].join("\n");
+    const failures = auditClaimTripwires(blog, CARD);
+    expect(failures.map((f) => f.reason).join("\n")).toContain("20");
   });
 
   it("does not flag structural carousel slide ordinals as numeric claims", () => {

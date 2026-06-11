@@ -106,6 +106,29 @@ describe("actor/director architecture", () => {
 	  expect(director.source_index.some((entry) => entry.id === "source-location-memory" && entry.exists)).toBe(true);
 	});
 
+  it("carries release economy (Actor) and motor uniformity (Director) with the shared example pair", () => {
+    const actor = buildActorMemoryPack(INFINEX_VOICE);
+    const director = buildDirectorMemoryPack(INFINEX_VOICE);
+
+    expect(actor.version).toBe("actor-memory-v2.1");
+    expect(actor.system_prompt).toContain("## Release economy");
+    expect(actor.system_prompt).toContain("AT MOST ONE beat per piece");
+    expect(actor.system_prompt).toContain("Antithesis grammar");
+
+    expect(director.version).toBe("director-memory-v2.1");
+    expect(director.system_prompt).toContain("## Motor uniformity");
+    expect(director.system_prompt).toContain("assigned, not decided");
+    expect(director.system_prompt).toContain("naming WHICH closes should end Sustained");
+
+    // The general example pair (button vs Sustained close) must be in BOTH packs
+    // — a fresh Director has never seen any past run's prose, so the contrast
+    // travels with the prompt.
+    for (const prompt of [actor.system_prompt, director.system_prompt]) {
+      expect(prompt).toContain("The machine is not impressive. It is finished.");
+      expect(prompt).toContain("the next inspection is in March");
+    }
+  });
+
   it("gives the Director all 24 tempi and evidence requirements", () => {
     const director = buildDirectorMemoryPack(INFINEX_VOICE);
     for (const tempo of ALL_TEMPO_NAMES) {
@@ -1420,6 +1443,45 @@ describe("actor JSON resilience", () => {
     expect(actorRequests).toHaveLength(2);
     // The retry must show the model what broke, not blindly re-send the transcript.
     expect(JSON.stringify(actorRequests[1])).toContain("could not be parsed as JSON");
+  });
+
+  it("re-asks the actor after a schema violation (bad Working Action enum), then succeeds", async () => {
+    // Valid JSON, invalid schema: preparation_from off the Working Action enum.
+    // This used to escape the retry loop and kill the whole run (run_failed).
+    const invalid = JSON.parse(JSON.stringify(actorOutput("The wall moved.", "The wall moved."))) as Record<
+      string,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      any
+    >;
+    invalid.table_work.channel_beat_plans.x[0].preparation_from = "settling";
+
+    const actorRequests: unknown[] = [];
+    let call = 0;
+    const actorClient = {
+      messages: {
+        create: async (params: unknown) => {
+          actorRequests.push(params);
+          call += 1;
+          const text = call === 1
+            ? JSON.stringify(invalid)
+            : JSON.stringify(actorOutput("The wall moved.", "The wall moved."));
+          return { content: [{ type: "text", text }] };
+        },
+      },
+    };
+
+    const result = await generateActorAttempt(CARD, {
+      channels: ["x"],
+      n: 1,
+      mode: "live",
+      client: actorClient as never,
+    });
+
+    expect(result.candidates.length).toBeGreaterThan(0);
+    expect(actorRequests).toHaveLength(2);
+    const correction = JSON.stringify(actorRequests[1]);
+    expect(correction).toContain("violated the output schema");
+    expect(correction).toContain("preparation_from");
   });
 });
 

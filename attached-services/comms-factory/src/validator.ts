@@ -78,8 +78,11 @@ export interface BlindTempoClassification {
 // NOTE: "leverage" the DeFi noun ("10x leverage", "leverage trading", "leverage
 // is live") is legit product vocabulary, not slop. Only the corporate *verb*
 // ("leverage your X", "to leverage our Y") is the cliché. Match verb-position only.
+// Same discipline for "unlock": the literal mechanism ("unlocked by your passkey",
+// "unlock the enclave") is product vocabulary — only the marketing collocation
+// ("unlocks the full potential of…") is the cliché. Match cliché objects only.
 const CLICHE_RE =
-  /\b(game[\s-]?changer|game[\s-]?changing|unlock(?:s|ing|ed)?|paradigm|in the world of|the future of|next[\s-]?gen|seamless|seamlessly|empower(?:s|ing|ed|ment)?|leverage\s+(?:your|our|my|their|its|his|her|the|a|an|this|that|these|those|all|every)|(?:to|can|could|will|would|should|must|helps?|lets?|let['’]s|now)\s+leverage|leverages|leveraging|leveraged(?!\s+(?:position|positions|long|short|trade|trades|perp|perps|exposure)))\b/i;
+  /\b(game[\s-]?changer|game[\s-]?changing|unlock(?:s|ing|ed)?\s+(?:a\s+|an\s+|the\s+)?(?:(?:full|new|true|real|whole|next|endless|limitless)\s+\w+|value|potential|power|growth|future|level(?:s)?\b|world(?:s)?\b|possibilit\w*|opportunit\w*|efficienc\w*)|paradigm|in the world of|the future of|next[\s-]?gen|seamless|seamlessly|empower(?:s|ing|ed|ment)?|leverage\s+(?:your|our|my|their|its|his|her|the|a|an|this|that|these|those|all|every)|(?:to|can|could|will|would|should|must|helps?|lets?|let['’]s|now)\s+leverage|leverages|leveraging|leveraged(?!\s+(?:position|positions|long|short|trade|trades|perp|perps|exposure)))\b/i;
 
 export function rejectCliches(s: string): RuleResult {
   const m = s.match(CLICHE_RE);
@@ -486,6 +489,11 @@ export function auditClaimTripwires(text: string, card: ReleaseCard): RuleFailur
   const failures: RuleFailure[] = [];
   const factText = deployedFactClaims(card).join("\n");
 
+  // YAML frontmatter is structural metadata (date, image dimensions, cover URL),
+  // not prose claims — scanning it turns "date: 2026-06-10" into a fake numeric
+  // claim ("06"). The format gate owns frontmatter; claims audit the body only.
+  text = splitYamlFrontmatter(text).body;
+
   for (const url of extractUrls(text)) {
     const allowedInFacts = factText.includes(url);
     const allowedProductUrl = card.product_page_url === url;
@@ -512,6 +520,9 @@ export function auditClaimTripwires(text: string, card: ReleaseCard): RuleFailur
 export function auditUnsupportedClaims(text: string, card: ReleaseCard): RuleFailure[] {
   const failures: RuleFailure[] = [];
   const factText = deployedFactClaims(card).join("\n");
+
+  // Frontmatter is metadata, not claims — see auditClaimTripwires.
+  text = splitYamlFrontmatter(text).body;
 
   for (const url of extractUrls(text)) {
     const allowedInFacts = factText.includes(url);

@@ -221,10 +221,12 @@ export default async function CardDetail({ params }: { params: Promise<{ id: str
         const groups = buildAttemptGroups(channel, candidates, attempts_by_channel[channel], actor_attempts);
         if (groups.length === 0) return null;
         return (
-          <div key={channel} className="space-y-3">
-            <h3 className="eyebrow">
+          // Channel-level accordion: one click on the header collapses every
+          // attempt of this channel; individual attempts stay toggleable inside.
+          <details key={channel} open className="space-y-3">
+            <summary className="eyebrow cursor-pointer select-none">
               {CHANNEL_LABEL[channel]} · {candidates.length} candidates · {groups.length} attempts
-            </h3>
+            </summary>
             {groups.map((g) => (
               <AttemptPanel
                 key={`${channel}-${g.attempt}`}
@@ -238,7 +240,7 @@ export default async function CardDetail({ params }: { params: Promise<{ id: str
                 pickedTextByCandidate={pickedTextByCandidate}
               />
             ))}
-          </div>
+          </details>
         );
       })}
     </div>

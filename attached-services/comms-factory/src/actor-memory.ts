@@ -5,8 +5,8 @@ import { fileURLToPath } from "node:url";
 import type { CharacterSpec, TempoName } from "./voice/types.js";
 import { ALL_TEMPO_NAMES } from "./voice/types.js";
 
-export const ACTOR_MEMORY_VERSION = "actor-memory-v2";
-export const DIRECTOR_MEMORY_VERSION = "director-memory-v2";
+export const ACTOR_MEMORY_VERSION = "actor-memory-v2.1";
+export const DIRECTOR_MEMORY_VERSION = "director-memory-v2.1";
 
 export interface CanonicalMirodanSource {
   id: string;
@@ -164,6 +164,7 @@ export function buildActorMemoryPack(voice: CharacterSpec): ActorMemoryPack {
     infinexPlacementBlock(voice),
     placementRangeBlock(voice),
     channelGrammarBlock(),
+    releaseEconomyBlock(),
     "## Output discipline",
     "- Never use the em-dash character (—). It is auto-rejected as AI-slop, zero tolerance. Use a period or a comma; recast the sentence if needed.",
     "- First do table work. Then perform.",
@@ -205,6 +206,7 @@ export function buildDirectorMemoryPack(voice: CharacterSpec): DirectorMemoryPac
     "- If you call something Quick, show attack/change. If you call something Sustained, show duration/held pressure.",
     "- Classify primary tempo from all 24 tempi, or `unknown` if evidence is insufficient.",
     "- Return movement-corrective notes for the Actor, not copywriting preferences.",
+    motorUniformityBlock(),
   ].join("\n");
 
   return {
@@ -213,6 +215,37 @@ export function buildDirectorMemoryPack(voice: CharacterSpec): DirectorMemoryPac
     source_index: sourceIndex,
     system_prompt: systemPrompt,
   };
+}
+
+// Release economy (Actor) + motor uniformity (Director): the same defect seen
+// from both chairs. A multi-beat piece whose every beat closes Sustained-prep ->
+// Quick-release with an aphoristic final line reads as ASSIGNED rhythm, not
+// Deciding — paint-by-numbers, however clean the vocabulary. The constraint is
+// on release DISTRIBUTION only; which beat earns the release stays the
+// character's choice. (Diagnosed on the 2026-06-11 security thesis: five beats,
+// five identical buttons.)
+function releaseEconomyBlock(): string {
+  return [
+    "## Release economy",
+    "- A Quick-release close (punching, slashing, dabbing, or flicking landing an aphoristic final line, a \"button\") may end AT MOST ONE beat per piece. Choosing where the piece earns it is part of Deciding.",
+    "- Every other beat ends inside its Sustained action (pressing, gliding, wringing, floating): on mechanism, on evidence, or on unresolved weight. No button.",
+    "- Antithesis grammar (\"It is not X. It is Y.\") is one tool, not a meter: at most once per piece.",
+    "- A button close versus a Sustained close, same material:",
+    "  - Button (Quick release): \"The line ran all night without a fault. Three shifts, one log entry. The machine is not impressive. It is finished.\"",
+    "  - Sustained (no button): \"The line ran all night without a fault, three shifts, one log entry. The fault history is still in the binder by the door, and the next inspection is in March.\"",
+    "",
+  ].join("\n");
+}
+
+function motorUniformityBlock(): string {
+  return [
+    "## Motor uniformity",
+    "- Read the closes ACROSS the whole piece, not beat-by-beat. If more than one section/beat ends on the same Quick-release shape (an aphoristic button on the final line), or one sentence grammar (antithesis \"It is not X. It is Y.\") carries three or more closes, the release pattern is assigned, not decided. Flag it as motor uniformity and hand back naming WHICH closes should end Sustained instead.",
+    "- What a button close looks like versus a Sustained close, same material:",
+    "  - Button (Quick release): \"The line ran all night without a fault. Three shifts, one log entry. The machine is not impressive. It is finished.\"",
+    "  - Sustained (no button): \"The line ran all night without a fault, three shifts, one log entry. The fault history is still in the binder by the door, and the next inspection is in March.\"",
+    "- One button per piece, well placed, is the character choosing a moment. Several identical buttons is the motor stuck in one gear.",
+  ].join("\n");
 }
 
 function sourceIndexBlock(sourceIndex: MirodanSourceIndexEntry[]): string {
