@@ -19,12 +19,15 @@ from comms_shared import (
     card_from_result,
     common_service_envelope,
     context_block,
+    DEFAULT_CHANNELS,
     evidence_for_approved_facts,
     extract_action,
     extract_modal_value,
     fact_review_complete,
+    GENERATED_CHANNELS,
     MAX_FACT_REVIEW_ITEMS,
     markdown_block,
+    normalize_channels,
     normalize_grounded_fact_review,
     post_gate_message,
     render_fact_review_blocks,
@@ -59,14 +62,46 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             ctx, inp.delivery, "Comms release needs a brief to generate from."
         )
         return {"status": "failed", "error": "missing_brief"}
-    channels = inp.channels or _parse_channels(brief) or ["x"]
+    requested = inp.channels or _parse_channels(brief) or list(DEFAULT_CHANNELS)
+    channels, planning_only, unknown = normalize_channels(requested)
+    if unknown:
+        await _post_simple(
+            ctx,
+            inp.delivery,
+            "*Comms release blocked*: unknown format(s): "
+            + ", ".join(f"`{name}`" for name in unknown)
+            + ".\nValid formats: "
+            + ", ".join(GENERATED_CHANNELS)
+            + ".",
+        )
+        return {
+            "status": "blocked",
+            "stage": "channels",
+            "error": "unknown_channels",
+            "unknown_channels": unknown,
+        }
+    selection_note = ""
+    if planning_only:
+        selection_note = (
+            "\n_Note: "
+            + ", ".join(f"`{name}`" for name in planning_only)
+            + " are planning-only touchpoints — not auto-generated; they stay on the"
+            " release card for human adaptation._"
+        )
+    if not channels:
+        channels = list(DEFAULT_CHANNELS)
+        selection_note += "\n_Falling back to the default format: x._"
 
     # No brief-level validation gate. The service `validate` runs publishable-copy
     # allergen rules (cliché, em-dash/ai-slop) and ignores `surface`, so validating
     # the operator's brief rejected legitimate instructions (e.g. "leverage", an
     # em-dash). Copy quality is enforced where it belongs — on the generated
     # candidates (the generate path strips em-dashes and runs the rules + Director).
-    await _post_simple(ctx, inp.delivery, "Grounding comms facts…")
+    await _post_simple(
+        ctx,
+        inp.delivery,
+        f"*Generating for:* {', '.join(channels)}{selection_note}\nGrounding comms facts…",
+    )
     tool_plane = tool_plane_ref(ctx, stage="ground", gate_version=1)
     if tool_plane is None:
         await _post_simple(

@@ -1101,6 +1101,161 @@ async def test_release_workflow_rejects_invalid_gate_and_stops(monkeypatch):
     assert calls == ["ground_from_tools"]
 
 
+@pytest.mark.asyncio
+async def test_release_blocks_unknown_channels_before_any_tool_call(monkeypatch):
+    import comms_release
+
+    calls: list[str] = []
+
+    async def fake_call_comms_tool(_ctx, _name, method, _args):
+        calls.append(method)
+        return {"ok": True}
+
+    posted: list[dict] = []
+
+    async def fake_post_gate_message(_ctx, **kwargs):
+        posted.append(kwargs)
+        return {"channel": "C123", "ts": kwargs["name"]}
+
+    class Ctx:
+        run_id = "run_test"
+
+        async def step(self, _name, fn, **_kwargs):
+            return await fn()
+
+    monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
+    monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
+
+    result = await comms_release.handler(
+        comms_release.Input(
+            brief="for x, tiktok: launch",
+            user_id="U123",
+            delivery={"platform": "slack"},
+        ),
+        Ctx(),
+    )
+
+    assert result["status"] == "blocked"
+    assert result["stage"] == "channels"
+    assert result["error"] == "unknown_channels"
+    assert result["unknown_channels"] == ["tiktok"]
+    assert calls == []  # blocked BEFORE grounding
+    assert "tiktok" in posted[-1]["text"]
+    assert "x-thread" in posted[-1]["text"]  # teaching message lists valid formats
+
+
+@pytest.mark.asyncio
+async def test_release_drops_planning_only_channels_with_note(monkeypatch):
+    """`for email, x:` → generates for x only; the echo notes email is planning-only."""
+    import comms_release
+
+    generate_channels: list[list[str]] = []
+    posted: list[dict] = []
+
+    async def fake_call_comms_tool(_ctx, _name, method, args):
+        if method == "validate":
+            return {"ok": True, "passed": True}
+        if method == "ground_from_tools":
+            assert args["workflow_run_id"] == "run_test"
+            assert args["job_id"] == "comms:comms_release:run_test"
+            assert args["thread_key"] == "slack:C123:1.2"
+            assert args["idempotency_prefix"] == "run_test:ground:1"
+            return {
+                "ok": True,
+                "verified_facts": [
+                    {"text": "Fact A is live", "evidence_ids": ["ev_1"]}
+                ],
+                "evidence": [{"id": "ev_1"}],
+            }
+        if method == "build_card":
+            return {
+                "ok": True,
+                "release_card": {
+                    "kind": "launch-tier",
+                    "deployed_facts": ["Fact A is live"],
+                },
+            }
+        if method == "generate":
+            generate_channels.append(list(args["channels"]))
+            return {
+                "ok": True,
+                "candidates": [{"text": "Fact A is live.", "channel": "x"}],
+            }
+        raise AssertionError(method)
+
+    async def fake_post_gate_message(_ctx, **kwargs):
+        posted.append(kwargs)
+        return {"channel": "C123", "ts": kwargs["name"]}
+
+    async def fake_update_gate_message(*_args, **_kwargs):
+        return {"ok": True}
+
+    events = iter(
+        [
+            _event(
+                run_id="run_test",
+                stage="facts",
+                action="approve_fact",
+                target_id="fact_1",
+            ),
+            _event(run_id="run_test", stage="card", action="approve"),
+            _event(run_id="run_test", stage="candidate", action="approve"),
+        ]
+    )
+
+    async def fake_wait_for_gate_action(*_args, **_kwargs):
+        return next(events)
+
+    class Ctx:
+        run_id = "run_test"
+
+        async def step(self, _name, fn, **_kwargs):
+            return await fn()
+
+    monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
+    monkeypatch.setattr(
+        comms_release,
+        "tool_plane_ref",
+        lambda *_args, **_kwargs: {"idempotency_prefix": "run_test:ground:1"},
+    )
+    monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
+    monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action", fake_wait_for_gate_action
+    )
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_gate_action
+    )
+
+    result = await comms_release.handler(
+        comms_release.Input(
+            brief="for email, x: launch Fact A",
+            thread_key="slack:C123:1.2",
+            user_id="U123",
+            delivery={"platform": "slack", "channel": "C123", "thread_ts": "1.2"},
+        ),
+        Ctx(),
+    )
+
+    assert result["status"] == "ready_to_ship"
+    assert result["channels"] == ["x"]
+    first_text = str(posted[0]["text"])
+    assert "*Generating for:* x" in first_text
+    assert "email" in first_text  # planning-only note names the dropped touchpoint
+    assert "planning-only" in first_text
+    assert generate_channels == [["x"]]
+
+
+def test_parse_channels_still_extracts_prefix():
+    import comms_release
+
+    assert comms_release._parse_channels("for x, blog-thing: launch") == [
+        "x",
+        "blog-thing",
+    ]
+    assert comms_release._parse_channels("no prefix here") == []
+
+
 # --- Director verdict surfacing in the candidate gate (U1/U2/U3) ---
 
 
