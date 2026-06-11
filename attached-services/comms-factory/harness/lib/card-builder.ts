@@ -20,9 +20,10 @@ SCHEMA (all fields required unless marked optional):
   "id":             string   — slug, e.g. "hyperliquid-spot-2026-05-20"
   "title":          string   — short human title
   "ship_date":      string   — YYYY-MM-DD format only
-  "audience":       array    — MUST be a JSON array of strings, e.g. ["web", "x", "x-thread", "blog", "carousel"]
-                              valid values: "web", "x", "x-thread", "telegram", "in-product", "modal", "blog", "carousel", "email", "press", "internal"
+  "audience":       array    — MUST be a JSON array of strings, e.g. ["web", "x", "x-thread", "blog"]
+                              valid values: "web", "x", "x-thread", "telegram", "in-product", "modal", "blog", "email", "press", "internal"
                               NEVER a plain string — always an array
+                              ("carousel" is retired — its in-app surface no longer renders; never emit it)
   "deployed_facts": array    — copy verbatim from the supplied deployed_facts list
   "kind":           string   — one of the four kinds above
   "category":       string   — OPTIONAL editorial genus, orthogonal to kind.

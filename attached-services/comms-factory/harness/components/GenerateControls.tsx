@@ -5,6 +5,9 @@ import { useEffect, useMemo, useState, useTransition } from 'react';
 import { resetGenerator, runGenerator } from '@/app/actions/generate';
 import type { Channel, HarnessActorRun } from '@/lib/types';
 
+// carousel retired 2026-06-11: its in-app surface (appAlert / What's-New dialog)
+// is formally deprecated platform-side (docs/content-pipeline.md) — nothing
+// renders it. Generation/validation code stays for historical cards.
 const CHANNEL_OPTIONS: { channel: Channel; label: string }[] = [
   { channel: 'x', label: 'X' },
   { channel: 'x-thread', label: 'X thread' },
@@ -12,7 +15,6 @@ const CHANNEL_OPTIONS: { channel: Channel; label: string }[] = [
   { channel: 'in-product', label: 'in-product' },
   { channel: 'modal', label: 'modal' },
   { channel: 'blog', label: 'blog' },
-  { channel: 'carousel', label: 'carousel' },
   { channel: 'image-brief', label: 'image brief' },
 ];
 
@@ -32,9 +34,11 @@ export function GenerateControls({
   const [pending, startTransition] = useTransition();
   const [resetPending, startReset] = useTransition();
   const [confirmReset, setConfirmReset] = useState(false);
-  const [selected, setSelected] = useState<Channel[]>(
-    defaultChannels.length ? defaultChannels : ['x'],
+  const offerable = useMemo(
+    () => defaultChannels.filter((c) => CHANNEL_OPTIONS.some((o) => o.channel === c)),
+    [defaultChannels],
   );
+  const [selected, setSelected] = useState<Channel[]>(offerable.length ? offerable : ['x']);
   const storageKey = useMemo(() => `comms-factory:generate-channels:${cardId}`, [cardId]);
   const defaultChannelsKey = defaultChannels.join('|');
 
@@ -46,11 +50,11 @@ export function GenerateControls({
     try {
       const stored = window.localStorage.getItem(storageKey);
       const parsed = stored ? parseStoredChannels(stored) : [];
-      setSelected(parsed.length > 0 ? parsed : defaultChannels.length ? defaultChannels : ['x']);
+      setSelected(parsed.length > 0 ? parsed : offerable.length ? offerable : ['x']);
     } catch {
-      setSelected(defaultChannels.length ? defaultChannels : ['x']);
+      setSelected(offerable.length ? offerable : ['x']);
     }
-  }, [storageKey, defaultChannelsKey]);
+  }, [storageKey, defaultChannelsKey, offerable]);
 
   useEffect(() => {
     try {

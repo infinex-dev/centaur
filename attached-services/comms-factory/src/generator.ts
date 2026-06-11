@@ -116,7 +116,10 @@ export type Channel = "web" | "x" | "in-product" | "modal" | "blog" | "x-thread"
  * display, DB all keep working on it); `structured` carries the typed shape that
  * the surface actually consumes. Shapes mirror real platform surfaces:
  *   - web-card  → apps/public-website/.../feature-card-alt/data.ts
- *   - carousel  → apps/content-app/content/app-alert (the "What's new" surface)
+ *   - carousel  → apps/content-app/content/app-alert — RETIRED 2026-06-11: the
+ *     appAlert surface is formally deprecated platform-side
+ *     (docs/content-pipeline.md); nothing renders it. Generation code kept for
+ *     historical cards only; the harness no longer offers the channel.
  *   - thread    → an X thread (ships via Typefully; no native platform API)
  */
 export type StructuredOutput =
