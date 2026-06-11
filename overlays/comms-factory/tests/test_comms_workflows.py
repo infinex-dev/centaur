@@ -743,88 +743,7 @@ async def test_release_workflow_blocks_generate_errors_before_candidate_gate(
     assert result["stage"] == "generate"
     assert result["error"] == expected_error
     assert calls == ["ground_from_tools", "build_card", "generate"]
-    assert "post_candidate_gate" not in [post.get("name") for post in posts]
-    assert all("Ready to ship" not in str(post.get("text")) for post in posts)
-
-
-@pytest.mark.asyncio
-async def test_release_workflow_blocks_retry_generate_error_without_ready_gate(
-    monkeypatch,
-):
-    import comms_release
-
-    posts: list[dict] = []
-
-    async def fake_call_comms_tool(_ctx, _name, method, _args):
-        if method == "validate":
-            return {"ok": True, "passed": True}
-        if method == "ground_from_tools":
-            return {"ok": True, "facts": [{"claim": "A", "value": "Fact A"}]}
-        if method == "build_card":
-            return {"ok": True, "release_card": {"kind": "launch-tier"}}
-        if method == "generate" and _name == "generate_candidates_attempt_1":
-            return {"ok": True, "candidates": [{"text": "First copy", "channel": "x"}]}
-        if method == "generate" and _name == "generate_candidates_attempt_2":
-            return {"error": "Tool call timed out after 120s"}
-        raise AssertionError((method, _name))
-
-    async def fake_post_gate_message(_ctx, **kwargs):
-        posts.append(kwargs)
-        return {"channel": "C123", "ts": kwargs["name"]}
-
-    async def fake_update_gate_message(*_args, **_kwargs):
-        return {"ok": True}
-
-    fact_events = iter(
-        [_event(run_id="run_test", action="approve_fact", target_id="fact_1")]
-    )
-    gate_events = iter(
-        [
-            _event(run_id="run_test", stage="card", action="approve"),
-            _event(run_id="run_test", stage="candidate", action="retry"),
-        ]
-    )
-
-    async def fake_wait_for_fact_action(*_args, **_kwargs):
-        return next(fact_events)
-
-    async def fake_wait_for_gate_action(*_args, **_kwargs):
-        return next(gate_events)
-
-    class Ctx:
-        run_id = "run_test"
-
-        async def step(self, _name, fn, **_kwargs):
-            return await fn()
-
-    monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
-    monkeypatch.setattr(
-        comms_release,
-        "tool_plane_ref",
-        lambda *_args, **_kwargs: {"idempotency_prefix": "run_test:ground:1"},
-    )
-    monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
-    monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
-    monkeypatch.setattr(
-        comms_release, "wait_for_gate_action", fake_wait_for_gate_action
-    )
-    monkeypatch.setattr(
-        comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_fact_action
-    )
-
-    result = await comms_release.handler(
-        comms_release.Input(
-            brief="generate for x: launch", user_id="U123", delivery={}
-        ),
-        Ctx(),
-    )
-
-    assert result["status"] == "blocked"
-    assert result["stage"] == "generate"
-    assert result["gate_version"] == 2
-    assert result["error"] == "Tool call timed out after 120s"
-    assert "post_candidate_gate" in [post.get("name") for post in posts]
-    assert "post_candidate_retry_gate" not in [post.get("name") for post in posts]
+    assert "render_candidate_gate_r1" not in [post.get("name") for post in posts]
     assert all("Ready to ship" not in str(post.get("text")) for post in posts)
 
 
@@ -911,81 +830,6 @@ async def test_release_workflow_blocks_missing_or_failed_build_card_before_gener
     assert any(
         "Comms release blocked building ReleaseCard" in post["text"] for post in posts
     )
-
-
-@pytest.mark.asyncio
-async def test_release_workflow_does_not_ready_to_ship_without_final_copy(monkeypatch):
-    import comms_release
-
-    posts: list[dict] = []
-
-    async def fake_call_comms_tool(_ctx, _name, method, _args):
-        if method == "validate":
-            return {"ok": True, "passed": True}
-        if method == "ground_from_tools":
-            return {"ok": True, "facts": [{"claim": "A", "value": "Fact A"}]}
-        if method == "build_card":
-            return {"ok": True, "release_card": {"kind": "launch-tier"}}
-        if method == "generate":
-            return {"ok": True, "candidates": []}
-        raise AssertionError(method)
-
-    async def fake_post_gate_message(_ctx, **kwargs):
-        posts.append(kwargs)
-        return {"channel": "C123", "ts": kwargs["name"]}
-
-    async def fake_update_gate_message(*_args, **_kwargs):
-        return {"ok": True}
-
-    fact_events = iter(
-        [_event(run_id="run_test", action="approve_fact", target_id="fact_1")]
-    )
-    gate_events = iter(
-        [
-            _event(run_id="run_test", stage="card", action="approve"),
-            _event(run_id="run_test", stage="candidate", action="approve"),
-        ]
-    )
-
-    async def fake_wait_for_fact_action(*_args, **_kwargs):
-        return next(fact_events)
-
-    async def fake_wait_for_gate_action(*_args, **_kwargs):
-        return next(gate_events)
-
-    class Ctx:
-        run_id = "run_test"
-
-        async def step(self, _name, fn, **_kwargs):
-            return await fn()
-
-    monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
-    monkeypatch.setattr(
-        comms_release,
-        "tool_plane_ref",
-        lambda *_args, **_kwargs: {"idempotency_prefix": "run_test:ground:1"},
-    )
-    monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
-    monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
-    monkeypatch.setattr(
-        comms_release, "wait_for_gate_action", fake_wait_for_gate_action
-    )
-    monkeypatch.setattr(
-        comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_fact_action
-    )
-
-    result = await comms_release.handler(
-        comms_release.Input(
-            brief="generate for x: launch", user_id="U123", delivery={}
-        ),
-        Ctx(),
-    )
-
-    assert result["status"] == "blocked"
-    assert result["stage"] == "candidate"
-    assert result["error"] == "missing_final_copy"
-    assert all("Ready to ship" not in str(post.get("text")) for post in posts)
-    assert all("No final copy selected" not in str(post.get("text")) for post in posts)
 
 
 @pytest.mark.asyncio
@@ -1266,81 +1110,6 @@ def _candidate(idx, *, audit=None, channel="x"):
     return cand
 
 
-def test_format_candidates_renders_director_verdict_and_issues():
-    import comms_release
-
-    audit = {
-        "primary_tempo": "commanding",
-        "copy_voice_passed": True,
-        "factual_passed": True,
-        "publication_gate_passed": False,
-        "publication_gate_issues": ["verify $1B is publicly defensible"],
-        "factual_issues": [],
-    }
-    out = comms_release._format_candidates([_candidate(1, audit=audit)])
-    assert "tempo *commanding*" in out
-    assert "voice ✅" in out and "factual ✅" in out and "publish ⚠️" in out
-    assert "⚠️ verify $1B is publicly defensible" in out
-
-
-def test_format_candidates_stars_director_pick_by_id():
-    import comms_release
-
-    candidates = [_candidate(1), _candidate(2)]
-    picks = [{"id": "actor-x-option-2", "text": "copy 2"}]
-    out = comms_release._format_candidates(candidates, picks)
-    # The star annotates option 2's header, not option 1's.
-    option_2_header = [ln for ln in out.splitlines() if ln.startswith("*2.")][0]
-    option_1_header = [ln for ln in out.splitlines() if ln.startswith("*1.")][0]
-    assert "Director's pick" in option_2_header
-    assert "Director's pick" not in option_1_header
-
-
-def test_format_candidates_backward_compatible_without_audit_or_picks():
-    import comms_release
-
-    candidates = [{"id": "c1", "channel": "x", "text": "hello"}]
-    out = comms_release._format_candidates(candidates)
-    assert out == "*1. x*\n>hello"  # no badges, no star — identical to legacy format
-
-
-def test_format_candidates_tolerates_empty_or_unmatched_picks():
-    import comms_release
-
-    candidates = [_candidate(1), _candidate(2)]
-    assert "Director's pick" not in comms_release._format_candidates(candidates, [])
-    unmatched = [{"id": "nope", "text": "x"}]
-    assert "Director's pick" not in comms_release._format_candidates(
-        candidates, unmatched
-    )
-
-
-def test_director_pick_text_ships_recommended_candidate_not_first():
-    import comms_release
-
-    candidates = [_candidate(1), _candidate(2)]
-    picks = [{"id": "actor-x-option-2", "text": "copy 2"}]
-    assert comms_release._director_pick_text(candidates, picks) == "copy 2"
-
-
-def test_director_pick_text_falls_back_to_pick_text_when_id_unmatched():
-    import comms_release
-
-    candidates = [_candidate(1)]
-    picks = [{"id": "ghost", "text": "the recommended copy"}]
-    assert (
-        comms_release._director_pick_text(candidates, picks) == "the recommended copy"
-    )
-
-
-def test_director_pick_text_falls_back_to_first_candidate_without_picks():
-    import comms_release
-
-    candidates = [_candidate(1), _candidate(2)]
-    assert comms_release._director_pick_text(candidates, None) == "copy 1"
-    assert comms_release._director_pick_text([], None) == ""
-
-
 def test_picks_from_generation_digs_envelope():
     import comms_release
 
@@ -1473,3 +1242,352 @@ def test_candidate_gate_blocks_render_per_channel_with_scoped_buttons():
         terminal=True,
     )
     assert '"type": "actions"' not in str(terminal_blocks).replace("'", '"')
+
+
+# --- Round-based per-channel candidate gate loop ---
+
+
+def _gen(candidates, picks=None):
+    return {"ok": True, "candidates": candidates, "picks": picks or []}
+
+
+def _gen_x_blog():
+    return _gen(
+        [
+            {"id": "c1", "channel": "x", "text": "x pick copy"},
+            {"id": "b1", "channel": "blog", "text": "blog pick copy"},
+        ],
+        [
+            {"id": "c1", "channel": "x", "text": "x pick copy"},
+            {"id": "b1", "channel": "blog", "text": "blog pick copy"},
+        ],
+    )
+
+
+def _candidate_event(action, *, gate_version=1, target_id=None, values=None):
+    return _event(
+        run_id="run_test",
+        stage="candidate",
+        gate_version=gate_version,
+        action=action,
+        target_id=target_id,
+        values=values,
+    )
+
+
+def _blog_edit(text="better blog", *, gate_version=1):
+    return _candidate_event(
+        "edit_candidate",
+        gate_version=gate_version,
+        target_id="blog",
+        values={"comms_input.value": text},
+    )
+
+
+async def _run_release(
+    monkeypatch, *, brief, candidate_events, generations, validate_result=None
+):
+    """Drive the release workflow through grounding/card with standard fakes,
+    feeding `candidate_events` to the round-based candidate gate.
+
+    `generations` is keyed by durable step name (`generate_candidates_attempt_1`,
+    `generate_candidates_r{n}`). Returns (result, posts, updates, tool_calls).
+    """
+    import comms_release
+
+    posts: list[dict] = []
+    updates: list[dict] = []
+    tool_calls: list[tuple[str, str]] = []
+
+    async def fake_call_comms_tool(_ctx, name, method, _args):
+        tool_calls.append((name, method))
+        if method == "validate":
+            return validate_result or {"ok": True, "passed": True}
+        if method == "ground_from_tools":
+            return {"ok": True, "facts": [{"claim": "A", "value": "Fact A"}]}
+        if method == "build_card":
+            return {"ok": True, "release_card": {"kind": "launch-tier"}}
+        if method == "generate":
+            return generations[name]
+        raise AssertionError((name, method))
+
+    async def fake_post_gate_message(_ctx, **kwargs):
+        posts.append(kwargs)
+        return {"channel": "C123", "ts": kwargs["name"]}
+
+    async def fake_update_gate_message(_ctx, **kwargs):
+        updates.append(kwargs)
+        return {"ok": True}
+
+    fact_events = iter(
+        [_event(run_id="run_test", action="approve_fact", target_id="fact_1")]
+    )
+    gate_events = iter(
+        [_event(run_id="run_test", stage="card", action="approve"), *candidate_events]
+    )
+
+    async def fake_wait_for_fact_action(*_args, **_kwargs):
+        return next(fact_events)
+
+    async def fake_wait_for_gate_action(*_args, **_kwargs):
+        return next(gate_events)
+
+    class Ctx:
+        run_id = "run_test"
+
+        async def step(self, _name, fn, **_kwargs):
+            return await fn()
+
+    monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
+    monkeypatch.setattr(
+        comms_release,
+        "tool_plane_ref",
+        lambda *_args, **_kwargs: {"idempotency_prefix": "run_test:ground:1"},
+    )
+    monkeypatch.setattr(comms_release, "post_gate_message", fake_post_gate_message)
+    monkeypatch.setattr(comms_release, "update_gate_message", fake_update_gate_message)
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action", fake_wait_for_gate_action
+    )
+    monkeypatch.setattr(
+        comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_fact_action
+    )
+
+    result = await comms_release.handler(
+        comms_release.Input(brief=brief, user_id="U123", delivery={}),
+        Ctx(),
+    )
+    return result, posts, updates, tool_calls
+
+
+@pytest.mark.asyncio
+async def test_release_multichannel_happy_path_ships_per_channel(monkeypatch):
+    result, _posts, _updates, _calls = await _run_release(
+        monkeypatch,
+        brief="for x, blog: launch Fact A",
+        candidate_events=[_candidate_event("approve")],
+        generations={"generate_candidates_attempt_1": _gen_x_blog()},
+    )
+
+    assert result["status"] == "ready_to_ship"
+    assert result["final_by_channel"]["x"]["text"] == "x pick copy"
+    assert result["final_by_channel"]["blog"]["text"] == "blog pick copy"
+    assert result["missing_channels"] == []
+    assert "final_copy" not in result
+    assert result["no_external_posting"] is True
+
+
+@pytest.mark.asyncio
+async def test_release_edit_round_preserves_provenance_and_revalidates(monkeypatch):
+    result, _posts, updates, calls = await _run_release(
+        monkeypatch,
+        brief="for x, blog: launch Fact A",
+        candidate_events=[
+            _blog_edit("better blog"),
+            _candidate_event("approve", gate_version=2),
+        ],
+        generations={"generate_candidates_attempt_1": _gen_x_blog()},
+        validate_result={
+            "ok": True,
+            "passed": False,
+            "failures": [{"rule": "cliche", "reason": "banned phrase"}],
+        },
+    )
+
+    # The edit stands and preserves provenance (candidate_id is NOT nulled).
+    assert result["status"] == "ready_to_ship"
+    assert result["final_by_channel"]["blog"] == {
+        "text": "better blog",
+        "candidate_id": "b1",
+        "edited": True,
+    }
+    assert result["final_by_channel"]["x"] == {
+        "text": "x pick copy",
+        "candidate_id": "c1",
+        "edited": False,
+    }
+    # The edited copy was re-checked via /validate as a round-scoped durable step.
+    assert ("validate_edit_blog_r1", "validate") in calls
+    # Validator failures surface as a non-blocking ⚠️ line in a gate render.
+    assert any(
+        "edit flagged by validator" in str(update.get("blocks"))
+        and "cliche" in str(update.get("blocks"))
+        for update in updates
+    )
+
+
+@pytest.mark.asyncio
+async def test_release_empty_edit_modal_is_noop_with_warning(monkeypatch):
+    result, _posts, updates, calls = await _run_release(
+        monkeypatch,
+        brief="for x, blog: launch Fact A",
+        candidate_events=[
+            _candidate_event("edit_candidate", target_id="blog", values={}),
+            _candidate_event("approve", gate_version=2),
+        ],
+        generations={"generate_candidates_attempt_1": _gen_x_blog()},
+    )
+
+    assert result["status"] == "ready_to_ship"
+    assert result["final_by_channel"]["blog"]["text"] == "blog pick copy"
+    assert result["final_by_channel"]["blog"]["edited"] is False
+    assert any("previous copy kept" in str(update.get("blocks")) for update in updates)
+    # No validate re-check for a no-op edit.
+    assert ("validate_edit_blog_r1", "validate") not in calls
+
+
+@pytest.mark.asyncio
+async def test_release_retry_failure_keeps_state_and_budget(monkeypatch):
+    result, _posts, updates, _calls = await _run_release(
+        monkeypatch,
+        brief="for x, blog: launch Fact A",
+        candidate_events=[
+            _blog_edit("better blog"),
+            _candidate_event(
+                "retry", gate_version=2, values={"comms_input.value": "feedback"}
+            ),
+            _candidate_event("approve", gate_version=3),
+        ],
+        generations={
+            "generate_candidates_attempt_1": _gen_x_blog(),
+            "generate_candidates_r2": {"ok": False, "error": "boom"},
+        },
+    )
+
+    # The failed retry did not kill the run or discard the operator's edit.
+    assert result["status"] == "ready_to_ship"
+    assert result["final_by_channel"]["blog"]["text"] == "better blog"
+    assert result["final_by_channel"]["x"]["text"] == "x pick copy"
+    assert any("Retry failed" in str(update.get("blocks")) for update in updates)
+    # The one-retry budget was NOT consumed: round 3 still offers Retry.
+    round_3 = [u for u in updates if u.get("name") == "render_candidate_gate_r3"]
+    assert len(round_3) == 1
+    assert '"action":"retry"' in str(round_3[0]["blocks"])
+
+
+@pytest.mark.asyncio
+async def test_release_retry_success_reseeds_and_keeps_missing_channels(monkeypatch):
+    result, _posts, updates, _calls = await _run_release(
+        monkeypatch,
+        brief="for x, blog: launch Fact A",
+        candidate_events=[
+            _blog_edit("better blog"),
+            _candidate_event(
+                "retry", gate_version=2, values={"comms_input.value": "feedback"}
+            ),
+            _candidate_event("approve", gate_version=3),
+        ],
+        generations={
+            "generate_candidates_attempt_1": _gen_x_blog(),
+            "generate_candidates_r2": _gen(
+                [{"id": "c9", "channel": "x", "text": "new x copy"}],
+                [{"id": "c9", "channel": "x", "text": "new x copy"}],
+            ),
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    # x was re-seeded from the retry's Director pick.
+    assert result["final_by_channel"]["x"]["text"] == "new x copy"
+    # blog produced no retry candidates → previous (edited) entry survives.
+    assert result["final_by_channel"]["blog"] == {
+        "text": "better blog",
+        "candidate_id": "b1",
+        "edited": True,
+    }
+    assert any(
+        "kept from previous round" in str(update.get("blocks")) for update in updates
+    )
+    # Budget consumed on success: round 3 no longer offers Retry.
+    round_3 = [u for u in updates if u.get("name") == "render_candidate_gate_r3"]
+    assert len(round_3) == 1
+    assert '"action":"retry"' not in str(round_3[0]["blocks"])
+
+
+@pytest.mark.asyncio
+async def test_release_structured_channel_gets_no_edit_button(monkeypatch):
+    result, posts, _updates, _calls = await _run_release(
+        monkeypatch,
+        brief="for x-thread: launch Fact A",
+        candidate_events=[_candidate_event("approve")],
+        generations={
+            "generate_candidates_attempt_1": _gen(
+                [{"id": "t1", "channel": "x-thread", "text": "tweet1\n\ntweet2"}],
+                [{"id": "t1", "channel": "x-thread", "text": "tweet1\n\ntweet2"}],
+            )
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    gate_posts = [p for p in posts if p.get("name") == "render_candidate_gate_r1"]
+    assert len(gate_posts) == 1
+    blocks = gate_posts[0]["blocks"]
+    # Exactly one actions block — the global one. No per-channel Edit for
+    # structured channels (pick-or-retry only).
+    assert str(blocks).replace("'", '"').count('"type": "actions"') == 1
+    assert '"action":"edit_candidate"' not in str(blocks)
+
+
+@pytest.mark.asyncio
+async def test_release_blocks_when_no_channel_has_candidates(monkeypatch):
+    result, posts, updates, _calls = await _run_release(
+        monkeypatch,
+        brief="generate for x: launch",
+        candidate_events=[_candidate_event("approve")],
+        generations={
+            # Empty candidates list is a VALID generation — not a tool error.
+            "generate_candidates_attempt_1": {"ok": True, "candidates": []}
+        },
+    )
+
+    assert result["status"] == "blocked"
+    assert result["stage"] == "candidate"
+    assert result["error"] == "no_shippable_channels"
+    assert result["final_by_channel"] == {"x": None}
+    assert result["missing_channels"] == ["x"]
+    assert all("Ready to ship" not in str(post.get("text")) for post in posts)
+    terminal = [u for u in updates if u.get("name") == "render_candidate_gate_terminal"]
+    assert len(terminal) == 1
+    assert '"type": "actions"' not in str(terminal[0]["blocks"]).replace("'", '"')
+
+
+@pytest.mark.asyncio
+async def test_release_abandon_leaves_terminal_buttonless_gate(monkeypatch):
+    result, _posts, updates, _calls = await _run_release(
+        monkeypatch,
+        brief="for x, blog: launch Fact A",
+        candidate_events=[_candidate_event("abandon")],
+        generations={"generate_candidates_attempt_1": _gen_x_blog()},
+    )
+
+    assert result["status"] == "abandoned"
+    assert result["stage"] == "candidate"
+    assert result["final_by_channel"]["x"]["text"] == "x pick copy"
+    assert result["final_by_channel"]["blog"]["text"] == "blog pick copy"
+    terminal = [u for u in updates if u.get("name") == "render_candidate_gate_terminal"]
+    assert len(terminal) == 1
+    assert '"type": "actions"' not in str(terminal[0]["blocks"]).replace("'", '"')
+
+
+@pytest.mark.asyncio
+async def test_release_blocks_after_candidate_round_limit(monkeypatch):
+    result, _posts, updates, _calls = await _run_release(
+        monkeypatch,
+        brief="for x, blog: launch Fact A",
+        candidate_events=[
+            _blog_edit(f"edit {round_n}", gate_version=round_n)
+            for round_n in range(1, 31)
+        ],
+        generations={"generate_candidates_attempt_1": _gen_x_blog()},
+    )
+
+    assert result["status"] == "blocked"
+    assert result["stage"] == "candidate"
+    assert result["error"] == "candidate_gate_limit"
+    # State survives into the terminal payload — the last edit is recorded.
+    assert result["final_by_channel"]["blog"]["text"] == "edit 30"
+    assert result["missing_channels"] == []
+    terminal = [u for u in updates if u.get("name") == "render_candidate_gate_terminal"]
+    assert len(terminal) == 1
+    assert "limit" in str(terminal[0]["text"])
+    assert '"type": "actions"' not in str(terminal[0]["blocks"]).replace("'", '"')
