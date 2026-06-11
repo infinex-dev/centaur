@@ -18,6 +18,7 @@ from comms_shared import (  # noqa: E402
     apply_fact_review_action,
     approved_fact_payloads,
     card_from_result,
+    chunked_markdown_blocks,
     compact_ref,
     fact_review_complete,
     gate_correlation_id,
@@ -125,6 +126,31 @@ def test_compact_ref_carries_event_type_for_generic_slackbot_dispatch():
     # the comms gate must carry EVENT_TYPE for the workflow's wait to match.
     ref = compact_ref(Gate("run_1", "candidate", 1, "U123"), "approve", "candidate_1")
     assert '"event_type":"comms.action"' in ref
+
+
+def test_compact_ref_carries_optional_label():
+    gate = Gate("run_1", "candidate", 2, "U123")
+    ref = compact_ref(gate, "edit_candidate", "blog", label="r2 · Edit blog")
+    assert '"label":"r2 · Edit blog"' in ref
+    assert '"target_id":"blog"' in ref
+    assert '"per_item"' not in ref  # channel rides as payload, not correlation
+
+
+def test_compact_ref_omits_label_when_absent():
+    gate = Gate("run_1", "candidate", 1, "U123")
+    assert '"label"' not in compact_ref(gate, "approve")
+
+
+def test_chunked_markdown_blocks_splits_on_line_boundaries():
+    text = "\n".join(f"line {i} " + "x" * 80 for i in range(80))  # ~7000 chars
+    blocks = chunked_markdown_blocks(text)
+    assert len(blocks) >= 3
+    for block in blocks:
+        assert block["type"] == "section"
+        assert len(block["text"]["text"]) <= 2900
+        assert not block["text"]["text"].endswith("…")  # no silent truncation
+    rejoined = "\n".join(b["text"]["text"] for b in blocks)
+    assert rejoined == text
 
 
 def test_compact_ref_sets_per_item_only_for_per_item_gates():

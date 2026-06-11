@@ -88,7 +88,9 @@ def target_gate_correlation_id(gate: Gate, target_id: str) -> str:
     return f"{gate.correlation_id}:{target_id}"
 
 
-def compact_ref(gate: Gate, action: str, target_id: str | None = None) -> str:
+def compact_ref(
+    gate: Gate, action: str, target_id: str | None = None, label: str | None = None
+) -> str:
     payload: dict[str, Any] = {
         "run_id": gate.run_id,
         "stage": gate.stage,
@@ -102,11 +104,13 @@ def compact_ref(gate: Gate, action: str, target_id: str | None = None) -> str:
         payload["per_item"] = True
     if target_id:
         payload["target_id"] = target_id
+    if label:
+        payload["label"] = label
     if gate.requester_user_id:
         payload["requester_user_id"] = gate.requester_user_id
     if gate.approver_user_ids:
         payload["approver_user_ids"] = list(gate.approver_user_ids)
-    return json.dumps(payload, separators=(",", ":"))
+    return json.dumps(payload, separators=(",", ":"), ensure_ascii=False)
 
 
 def button(
@@ -116,32 +120,72 @@ def button(
     *,
     style: str | None = None,
     target_id: str | None = None,
+    label: str | None = None,
 ) -> dict[str, Any]:
     element: dict[str, Any] = {
         "type": "button",
         "text": {"type": "plain_text", "text": text},
         "action_id": f"comms:{action}",
-        "value": compact_ref(gate, action, target_id),
+        "value": compact_ref(gate, action, target_id, label=label),
     }
     if style:
         element["style"] = style
     return element
 
 
-ActionSpec = tuple[str, str, str | None] | tuple[str, str, str | None, str | None]
+ActionSpec = (
+    tuple[str, str, str | None]
+    | tuple[str, str, str | None, str | None]
+    | tuple[str, str, str | None, str | None, str | None]
+)
 
 
 def actions_block(gate: Gate, actions: Sequence[ActionSpec]) -> dict[str, Any]:
     elements = []
     for spec in actions:
-        label, action, style = spec[:3]
+        text, action, style = spec[:3]
         target_id = spec[3] if len(spec) > 3 else None
-        elements.append(button(gate, label, action, style=style, target_id=target_id))
+        label = spec[4] if len(spec) > 4 else None
+        elements.append(
+            button(gate, text, action, style=style, target_id=target_id, label=label)
+        )
     return {"type": "actions", "elements": elements}
 
 
 def markdown_block(text: str) -> dict[str, Any]:
     return {"type": "section", "text": {"type": "mrkdwn", "text": truncate(text, 2900)}}
+
+
+def chunked_markdown_blocks(text: str, limit: int = 2900) -> list[dict[str, Any]]:
+    """Render text as one or more section blocks, splitting on line boundaries.
+
+    Slack hard-caps a section at 3000 chars; ``markdown_block`` truncates at
+    2900 with an ellipsis. Long copy (a 3600-char blog) must instead chunk so
+    the full text is always readable.
+    """
+    value = str(text or "")
+    if len(value) <= limit:
+        return [markdown_block(value)]
+    blocks: list[dict[str, Any]] = []
+    current: list[str] = []
+    size = 0
+    for line in value.split("\n"):
+        # +1 for the newline that joins it to the previous line in this chunk
+        addition = len(line) + (1 if current else 0)
+        if current and size + addition > limit:
+            blocks.append(markdown_block("\n".join(current)))
+            current, size = [line], len(line)
+            continue
+        if not current and len(line) > limit:
+            # single pathological line: hard-split it
+            for start in range(0, len(line), limit):
+                blocks.append(markdown_block(line[start : start + limit]))
+            continue
+        current.append(line)
+        size += addition
+    if current:
+        blocks.append(markdown_block("\n".join(current)))
+    return blocks
 
 
 def context_block(text: str) -> dict[str, Any]:
