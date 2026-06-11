@@ -196,6 +196,7 @@ export type BatchItemSummary = {
   action: "create" | "renumber";
   internalNumber: number | null;
   roadmapChanges: RoadmapChangeSummary[];
+  publishedFrom: string | null;
 };
 
 export type BatchEmitResult = {
@@ -273,6 +274,7 @@ async function emitBatchLaunchPRWithRunner(
         action: "renumber",
         internalNumber: parseChangelogNumber(stamped),
         roadmapChanges: [],
+        publishedFrom: extractPublishedFrom(stamped),
       });
     }
 
@@ -303,6 +305,7 @@ async function emitBatchLaunchPRWithRunner(
         action: "create",
         internalNumber: parseChangelogNumber(blogMd),
         roadmapChanges,
+        publishedFrom: extractPublishedFrom(blogMd),
       });
     }
 
@@ -390,6 +393,12 @@ function buildBatchPrBody(items: readonly BatchItemSummary[]): string {
       lines.push(`- Renumber: \`${BLOG_DIR}/${item.slug}.md\` -> \`internalNumber: ${item.internalNumber}\``);
     }
   }
+  const scheduled = items.flatMap((item) =>
+    item.action === "create" && item.publishedFrom !== null && isFutureTimestamp(item.publishedFrom)
+      ? [{ slug: item.slug, publishedFrom: item.publishedFrom }]
+      : [],
+  );
+  lines.push(...goLiveLines(scheduled));
   lines.push("", "human-approve, DO NOT merge");
   return lines.join("\n");
 }
@@ -514,6 +523,40 @@ export function markChangelogPublished(markdown: string): string {
     : insertPublishedFlag(frontmatter);
 
   return `${fullFrontmatter.replace(frontmatter, nextFrontmatter)}${markdown.slice(fullFrontmatter.length)}`;
+}
+
+export function extractPublishedFrom(markdown: string): string | null {
+  const match = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---(\r?\n|$)/);
+  const frontmatter = match?.[1];
+  if (frontmatter === undefined) return null;
+  const line = frontmatter.match(/^publishedFrom:\s*["']?([^"'\r\n]+?)["']?\s*$/m);
+  return line?.[1] ?? null;
+}
+
+function isFutureTimestamp(value: string): boolean {
+  const t = Date.parse(value);
+  return Number.isFinite(t) && t > Date.now();
+}
+
+// Go-live truth per platform docs/content-pipeline.md: the website auto-deploys
+// straight to prod on merge, but the in-app changelog popout rides inside the
+// web-app bundle and only updates per platform deploy of each env (main -> test,
+// prod branch -> production). The emit PR body states this so the ship gate
+// stops implying "merged = live everywhere" (launch-day postmortem 2026-06-09).
+function goLiveLines(scheduled: readonly { slug: string; publishedFrom: string }[]): string[] {
+  const lines = [
+    "",
+    "## Go-live (per platform `docs/content-pipeline.md`)",
+    "",
+    "- infinex.xyz news page: live on merge — the website auto-deploys straight to prod.",
+    "- In-app changelog popout: NOT live on merge. The post ships inside the web-app bundle: test updates on the next `main` platform deploy; production updates on the next platform release (`prod` branch).",
+  ];
+  for (const item of scheduled) {
+    lines.push(
+      `- ⚠ \`${item.slug}\` is scheduled (\`publishedFrom: ${item.publishedFrom}\` is in the future): the web-app filters at read time, so it appears once the time passes — but statically-rendered infinex.xyz pages read at build time, so the website needs a deploy AFTER that time for the post to show.`,
+    );
+  }
+  return lines;
 }
 
 function insertPublishedFlag(frontmatter: string): string {
@@ -771,6 +814,12 @@ function buildPrBody(pkg: LaunchPackage, roadmapChanges: RoadmapChangeSummary[])
   if (pkg.featureCard) {
     lines.push("- Feature card: appended to `FEATURES_COPY[]`");
   }
+  const publishedFrom = extractPublishedFrom(pkg.changelogMd);
+  const scheduled =
+    publishedFrom !== null && isFutureTimestamp(publishedFrom)
+      ? [{ slug: pkg.changelogSlug, publishedFrom }]
+      : [];
+  lines.push(...goLiveLines(scheduled));
   lines.push("", "human-approve, DO NOT merge");
   return lines.join("\n");
 }

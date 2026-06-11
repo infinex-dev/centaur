@@ -3,6 +3,12 @@
 **Date:** 2026-06-10
 **Goal:** the **"What's new" popup** (bottom of the app sidebar) shows **"Fiat bank deposits live via Bridge.xyz"** — **today**.
 
+> **UPDATE 2026-06-11 — superseded by platform `docs/content-pipeline.md` (platform PR #14812), which is now the canonical reference.** Two corrections to this doc:
+> 1. **"Deploy `apps/web-app` from current `main`" only updates the TEST env.** web-app ships as part of "platform" (`deploy-platform.yaml`) and platform envs are branch-mapped: `main` → platform-test, `prod` → platform-prod. Production users get new bundled content on the **next platform release (`prod` branch update)** — there is no standalone prod web-app deploy off `main`.
+> 2. The website's news pages are **statically rendered, not request-time SSR** — they're fresh on merge because the website **auto-deploys straight to prod** on any `main` push that affects it (content-app is a workspace dep, so content changes always trigger it). Same net effect for merges; different mechanism. It matters for scheduled posts: a future `publishedFrom` needs a website deploy **after** the publish time to appear on infinex.xyz (the web-app, by contrast, filters at read time in the browser).
+>
+> comms-factory's emit PRs now state these go-live semantics in the PR body (`src/emit-platform-pr.ts`).
+
 ---
 
 ## TL;DR for engineers
