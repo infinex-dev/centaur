@@ -170,16 +170,19 @@ def chunked_markdown_blocks(text: str, limit: int = 2900) -> list[dict[str, Any]
     current: list[str] = []
     size = 0
     for line in value.split("\n"):
+        if len(line) > limit:
+            # pathological line: flush, then hard-split it
+            if current:
+                blocks.append(markdown_block("\n".join(current)))
+                current, size = [], 0
+            for start in range(0, len(line), limit):
+                blocks.append(markdown_block(line[start : start + limit]))
+            continue
         # +1 for the newline that joins it to the previous line in this chunk
         addition = len(line) + (1 if current else 0)
         if current and size + addition > limit:
             blocks.append(markdown_block("\n".join(current)))
             current, size = [line], len(line)
-            continue
-        if not current and len(line) > limit:
-            # single pathological line: hard-split it
-            for start in range(0, len(line), limit):
-                blocks.append(markdown_block(line[start : start + limit]))
             continue
         current.append(line)
         size += addition

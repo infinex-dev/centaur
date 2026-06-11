@@ -153,6 +153,16 @@ def test_chunked_markdown_blocks_splits_on_line_boundaries():
     assert rejoined == text
 
 
+def test_chunked_markdown_blocks_hard_splits_pathological_line_mid_text():
+    text = "short line\n" + "x" * 5000 + "\ntail line"
+    blocks = chunked_markdown_blocks(text)
+    for block in blocks:
+        assert len(block["text"]["text"]) <= 2900
+        assert not block["text"]["text"].endswith("…")
+    rejoined = "\n".join(b["text"]["text"] for b in blocks)
+    assert rejoined.replace("\n", "") == text.replace("\n", "")
+
+
 def test_compact_ref_sets_per_item_only_for_per_item_gates():
     # The facts gate is per-item: the base slackbot scopes correlation to
     # target_id only when per_item is set. Non-per-item gates must omit it so
