@@ -122,6 +122,8 @@ export function CandidateCard({
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  const [notesModal, setNotesModal] = useState<'retry' | 'reject' | null>(null);
+  const [notesText, setNotesText] = useState('');
   const [pending, startTransition] = useTransition();
   const [editing, setEditing] = useState(false);
   // Local echo of the just-saved edit, so the change shows instantly without a
@@ -205,8 +207,8 @@ export function CandidateCard({
     });
   }
 
-  function retry() {
-    const feedback = window.prompt('Retry feedback (optional — empty forwards the Director’s notes)') ?? '';
+  function confirmRetry(feedback: string) {
+    setNotesModal(null);
     setInfo(null);
     run(async () => {
       await decideCandidate(candidate.id, 'retry', { retry_feedback: feedback });
@@ -222,8 +224,8 @@ export function CandidateCard({
     });
   }
 
-  function reject() {
-    const reason = window.prompt('Rejection reason') ?? '';
+  function confirmReject(reason: string) {
+    setNotesModal(null);
     run(() => decideCandidate(candidate.id, 'reject', { rejection_reason: reason }));
   }
 
@@ -278,10 +280,18 @@ export function CandidateCard({
           <button disabled={pending || editing} onClick={edit} className="text-state-edited disabled:text-ink-4 hover:underline">
             edit
           </button>
-          <button disabled={pending} onClick={retry} className="text-state-running disabled:text-ink-4 hover:underline">
+          <button
+            disabled={pending}
+            onClick={() => { setNotesText(''); setNotesModal('retry'); }}
+            className="text-state-running disabled:text-ink-4 hover:underline"
+          >
             retry
           </button>
-          <button disabled={pending} onClick={reject} className="text-state-rejected disabled:text-ink-4 hover:underline">
+          <button
+            disabled={pending}
+            onClick={() => { setNotesText(''); setNotesModal('reject'); }}
+            className="text-state-rejected disabled:text-ink-4 hover:underline"
+          >
             reject
           </button>
           {candidate.channel === 'blog' && (
@@ -392,6 +402,41 @@ export function CandidateCard({
         {error && <p className="text-xs text-state-rejected pt-2">{error}</p>}
         {info && <p className="text-xs text-state-running pt-2">{info}</p>}
       </footer>
+      {notesModal && (
+        <div className="rg-scrim" onClick={() => setNotesModal(null)}>
+          <div className="rg-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="rg-head">
+              <span className="rg-title">
+                {notesModal === 'retry' ? `Retry · regenerate ${candidate.channel} from this draft` : 'Reject candidate'}
+              </span>
+              <button type="button" className="rg-x" onClick={() => setNotesModal(null)} aria-label="close">×</button>
+            </div>
+            <textarea
+              className="rg-prompt"
+              rows={4}
+              autoFocus
+              placeholder={
+                notesModal === 'retry'
+                  ? 'notes for the actor — what to change, what to keep (empty forwards the Director’s own notes)'
+                  : 'rejection reason (optional)'
+              }
+              value={notesText}
+              onChange={(e) => setNotesText(e.target.value)}
+            />
+            <div className="rg-bar">
+              <button type="button" className="rg-x text-xs" onClick={() => setNotesModal(null)}>cancel</button>
+              <button
+                type="button"
+                className="rg-run"
+                disabled={pending}
+                onClick={() => (notesModal === 'retry' ? confirmRetry(notesText) : confirmReject(notesText))}
+              >
+                {notesModal === 'retry' ? 'regenerate' : 'reject'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </article>
   );
 }
