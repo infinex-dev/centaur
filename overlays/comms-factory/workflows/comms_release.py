@@ -518,6 +518,7 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
                     # lets consumers derive the diff from the result's candidates).
                     "candidate_id": previous.get("candidate_id"),
                     "edited": True,
+                    "pick": bool(previous.get("pick")),
                 }
                 # Re-check the edited copy through the existing /validate route
                 # (allergen/slop + standalone-X link rejection). Non-blocking:
@@ -918,7 +919,8 @@ def _seed_final_by_channel(
     picks: list[dict[str, Any]],
 ) -> dict[str, dict[str, Any] | None]:
     """Director pick per channel (flat picks: top-level id/text/channel), else the
-    first candidate of that channel, else None (missing)."""
+    first candidate of that channel, else None (missing); `pick` flags which path
+    seeded the entry so renders can distinguish picks from fallbacks."""
     state: dict[str, dict[str, Any] | None] = {}
     for channel in channels:
         pick = next((p for p in picks if p.get("channel") == channel), None)
@@ -927,6 +929,7 @@ def _seed_final_by_channel(
                 "text": str(pick.get("text")),
                 "candidate_id": pick.get("id"),
                 "edited": False,
+                "pick": True,
             }
             continue
         candidate = next(
@@ -942,6 +945,7 @@ def _seed_final_by_channel(
                 "text": str(candidate.get("text")),
                 "candidate_id": candidate.get("id"),
                 "edited": False,
+                "pick": False,
             }
             if candidate
             else None
@@ -981,7 +985,7 @@ def _candidate_gate_blocks(
         header = f"*{channel}*"
         if entry.get("edited"):
             header += " _(edited by operator)_"
-        elif candidate is not None:
+        elif candidate is not None and entry.get("pick"):
             header += "  ⭐ Director's pick"
         lines = [header]
         if isinstance((candidate or {}).get("director_audit"), dict) and not entry.get(

@@ -11,9 +11,10 @@ from api.workflow_engine import WorkflowContext
 EVENT_TYPE = "comms.action"
 MAX_FACT_REVIEW_ITEMS = 20
 
-# Mirrors the TS Channel union (src/generator.ts) AND the /generate route
-# allowlist (services/api/routes/generate.ts CHANNELS) — the route is the
-# contract; if a channel is added there, add it here (and vice versa).
+# Mirrors the TS Channel union (src/generator.ts) minus image-brief (art
+# direction, not a posting surface) AND the /generate route allowlist
+# (services/api/routes/generate.ts CHANNELS) — the route is the contract;
+# if a channel is added there, add it here (and vice versa).
 GENERATED_CHANNELS = ("x", "x-thread", "web", "carousel", "modal", "in-product", "blog")
 # Enumerated in the card audience (card.ts Audience) but NOT generated —
 # planning / human-adaptation touchpoints only.

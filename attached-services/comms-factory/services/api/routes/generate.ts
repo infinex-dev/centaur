@@ -5,8 +5,9 @@ import type { Channel } from "../../../src/generator.js";
 import { validate, type NotSaidFact } from "../../../src/validator.js";
 import { assertRecord, boundedInteger, HttpError, stringArray, type JsonResponse, type RequestContext } from "../http.js";
 
-// The route-level generation contract. Mirrors the full Channel union
-// (src/generator.ts) — CHANNEL_GENERATION_PROFILES covers every member, so the
+// The route-level generation contract. Mirrors the Channel union
+// (src/generator.ts) minus `image-brief` (art direction, not a posting
+// surface) — CHANNEL_GENERATION_PROFILES covers every member, so the
 // allowlist exists only to 400 typos early. Mirrored Python-side as
 // GENERATED_CHANNELS in overlays/comms-factory/workflows/comms_shared.py.
 export const CHANNELS = new Set<string>([

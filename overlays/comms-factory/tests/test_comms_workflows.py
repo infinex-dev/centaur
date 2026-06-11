@@ -1189,11 +1189,53 @@ def test_seed_final_by_channel_prefers_director_pick_and_falls_back():
     state = comms_release._seed_final_by_channel(
         ["x", "blog", "modal"], candidates, picks
     )
-    assert state["x"] == {"text": "x copy 2", "candidate_id": "c2", "edited": False}
+    assert state["x"] == {
+        "text": "x copy 2",
+        "candidate_id": "c2",
+        "edited": False,
+        "pick": True,
+    }
     # no blog pick → first blog candidate
-    assert state["blog"] == {"text": "blog copy", "candidate_id": "b1", "edited": False}
+    assert state["blog"] == {
+        "text": "blog copy",
+        "candidate_id": "b1",
+        "edited": False,
+        "pick": False,
+    }
     # no modal candidates at all → missing (None entry)
     assert state["modal"] is None
+
+
+def test_candidate_gate_blocks_star_only_director_picked_entries():
+    import comms_release
+
+    gate = Gate("run_1", "candidate", 1, "U123")
+    candidates = [
+        {"id": "c1", "channel": "x", "text": "x copy"},
+        {"id": "b1", "channel": "blog", "text": "blog copy"},
+    ]
+    state = {
+        "x": {"text": "x copy", "candidate_id": "c1", "edited": False, "pick": True},
+        "blog": {
+            "text": "blog copy",
+            "candidate_id": "b1",
+            "edited": False,
+            "pick": False,
+        },
+    }
+    blocks = comms_release._candidate_gate_blocks(
+        gate,
+        ["x", "blog"],
+        state,
+        candidates,
+        retry_available=True,
+        audit_line="",
+        terminal=False,
+    )
+    flat = str(blocks)
+    # the starred header is exactly the pick-seeded channel, not the fallback
+    assert "*x*  ⭐ Director's pick" in flat
+    assert "*blog*  ⭐ Director's pick" not in flat
 
 
 def test_candidate_gate_blocks_render_per_channel_with_scoped_buttons():
@@ -1400,11 +1442,13 @@ async def test_release_edit_round_preserves_provenance_and_revalidates(monkeypat
         "text": "better blog",
         "candidate_id": "b1",
         "edited": True,
+        "pick": True,  # blog was seeded from a Director pick; edits keep the flag
     }
     assert result["final_by_channel"]["x"] == {
         "text": "x pick copy",
         "candidate_id": "c1",
         "edited": False,
+        "pick": True,
     }
     # The edited copy was re-checked via /validate as a round-scoped durable step.
     assert ("validate_edit_blog_r1", "validate") in calls
@@ -1494,6 +1538,7 @@ async def test_release_retry_success_reseeds_and_keeps_missing_channels(monkeypa
         "text": "better blog",
         "candidate_id": "b1",
         "edited": True,
+        "pick": True,  # blog was pick-seeded; the flag rides along through the edit
     }
     assert any(
         "kept from previous round" in str(update.get("blocks")) for update in updates
