@@ -1,9 +1,16 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { abandonCard, completeCard, shipPick, sendThreadToTypefully } from '@/app/actions/ship';
-import { emitPlatformPR, type EmitPlatformResult, type RoadmapChangeSummary } from '@/app/actions/emit';
+import {
+  emitPlatformPR,
+  getPromoteStatus,
+  promoteProdPRNow,
+  type EmitPlatformResult,
+  type PromoteStatus,
+  type RoadmapChangeSummary,
+} from '@/app/actions/emit';
 import { freshenSurface, saveSurfaceEdit } from '@/app/actions/surface-edit';
 import { toXArticle, xArticleHtml, xArticlePlain } from '@/lib/x-article';
 import { copyRichText } from '@/lib/copy-rich';
@@ -19,6 +26,30 @@ export function ShipPanel({ cardId, picks }: { cardId: string; picks: FinalPick[
   const [editText, setEditText] = useState('');
   const [pending, startTransition] = useTransition();
   const [emit, setEmit] = useState<EmitPlatformResult | null>(null);
+  const [promoteToProd, setPromoteToProd] = useState(true);
+  const [promote, setPromote] = useState<PromoteStatus>({ phase: 'none' });
+
+  // Poll the promotion watcher while it's live (and once on mount, so a page
+  // reload mid-watch picks the status back up).
+  useEffect(() => {
+    let cancelled = false;
+    async function poll() {
+      try {
+        const status = await getPromoteStatus(cardId);
+        if (!cancelled) setPromote(status);
+      } catch {
+        // status poll is best-effort
+      }
+    }
+    void poll();
+    const timer = setInterval(() => {
+      void poll();
+    }, 30_000);
+    return () => {
+      cancelled = true;
+      clearInterval(timer);
+    };
+  }, [cardId]);
 
   function run(action: () => Promise<unknown>) {
     setError(null);
@@ -110,9 +141,26 @@ export function ShipPanel({ cardId, picks }: { cardId: string; picks: FinalPick[
     setEmit(null);
     startTransition(async () => {
       try {
-        const res = await emitPlatformPR(cardId, { live });
+        const res = await emitPlatformPR(cardId, { live, promoteToProd });
         setEmit(res);
+        if (res.promoteWatch) setPromote({ phase: 'watching' });
         router.refresh();
+      } catch (err) {
+        setError(err instanceof Error ? err.message : String(err));
+      }
+    });
+  }
+
+  function promoteNow() {
+    const mainPrNumber = promote.mainPrNumber ?? prNumberFromEmit(emit);
+    const input = mainPrNumber ?? Number(window.prompt('Platform main PR number to promote (e.g. 14754):') ?? '');
+    if (!Number.isInteger(input) || input <= 0) return;
+    if (!window.confirm(`Open a prod promotion PR for platform #${input}? (cherry-pick onto prod; sneed merges)`)) return;
+    setError(null);
+    startTransition(async () => {
+      try {
+        const res = await promoteProdPRNow(cardId, input);
+        setPromote({ phase: 'done', mainPrNumber: input, prodPrUrl: res.prUrl });
       } catch (err) {
         setError(err instanceof Error ? err.message : String(err));
       }
@@ -278,6 +326,18 @@ export function ShipPanel({ cardId, picks }: { cardId: string; picks: FinalPick[
         >
           emit PR (live)
         </button>
+        <label
+          className="flex items-center gap-1 text-ink-3 cursor-pointer select-none"
+          title="After the main PR merges, auto-open a second PR cherry-picking the content onto prod — makes the in-app changelog popout go live without waiting for the next platform release. Platform owner still merges it."
+        >
+          <input
+            type="checkbox"
+            checked={promoteToProd}
+            onChange={(e) => setPromoteToProd(e.target.checked)}
+            disabled={pending}
+          />
+          promote to prod
+        </label>
         <button
           disabled={pending}
           onClick={() => run(() => completeCard(cardId))}
@@ -309,14 +369,19 @@ export function ShipPanel({ cardId, picks }: { cardId: string; picks: FinalPick[
             </ul>
           )}
           {emit.prUrl ? (
-            <a
-              href={emit.prUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="text-state-approved hover:underline font-mono"
-            >
-              PR opened → {emit.prUrl}
-            </a>
+            <>
+              <a
+                href={emit.prUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-state-approved hover:underline font-mono"
+              >
+                PR opened → {emit.prUrl}
+              </a>
+              <div className="font-mono text-ink-3">
+                go-live: website + test app on merge; PROD in-app popout needs the prod promotion below.
+              </div>
+            </>
           ) : (
             <>
               {emit.prDescription && (
@@ -333,10 +398,50 @@ export function ShipPanel({ cardId, picks }: { cardId: string; picks: FinalPick[
           )}
         </div>
       )}
+      {promote.phase !== 'none' && (
+        <div className="border border-rule rounded bg-paper p-3 text-xs font-mono space-y-1">
+          {promote.phase === 'watching' && (
+            <span className="text-state-running">
+              promote to prod: watching platform PR{promote.mainPrNumber ? ` #${promote.mainPrNumber}` : ''} for merge
+              {promote.mainPrState ? ` (currently ${promote.mainPrState})` : ''}… prod PR opens automatically on merge.
+            </span>
+          )}
+          {promote.phase === 'promoting' && (
+            <span className="text-state-running">promote to prod: main PR merged — opening the prod promotion PR…</span>
+          )}
+          {promote.phase === 'done' &&
+            (promote.prodPrUrl ? (
+              <a href={promote.prodPrUrl} target="_blank" rel="noreferrer" className="text-state-approved hover:underline">
+                prod promotion PR opened → {promote.prodPrUrl} (platform owner merges; deploy is automatic)
+              </a>
+            ) : (
+              <span className="text-state-approved">prod promotion PR opened.</span>
+            ))}
+          {promote.phase === 'error' && (
+            <span className="text-state-rejected">promote to prod failed: {promote.error ?? 'unknown error'}</span>
+          )}
+        </div>
+      )}
+      {(promote.phase === 'error' || promote.phase === 'none') && emit?.prUrl && (
+        <button
+          disabled={pending}
+          onClick={promoteNow}
+          className="text-xs font-mono text-state-running disabled:text-ink-4 hover:underline"
+          title="Manual fallback: cherry-pick the merged main PR onto prod and open the promotion PR (main PR must be merged first)"
+        >
+          promote to prod now
+        </button>
+      )}
       {pending && <p className="text-xs text-ink-3">Working…</p>}
       {error && <p className="text-xs text-state-rejected">{error}</p>}
     </div>
   );
+}
+
+function prNumberFromEmit(emit: EmitPlatformResult | null): number | null {
+  const match = emit?.prUrl?.match(/\/pull\/(\d+)(?:\D|$)/);
+  const n = match ? Number(match[1]) : NaN;
+  return Number.isInteger(n) && n > 0 ? n : null;
 }
 
 function roadmapSummaryText(

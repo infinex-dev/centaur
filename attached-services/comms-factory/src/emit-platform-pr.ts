@@ -732,8 +732,11 @@ function guardGitArgs(args: readonly string[]): void {
   if (verb === "merge") {
     throw new Error("emitLaunchPR is not allowed to merge");
   }
-  if (verb === "push" && args.some((arg) => arg === "main" || arg === "master" || arg === "origin/main")) {
-    throw new Error("emitLaunchPR is not allowed to push main");
+  if (
+    verb === "push" &&
+    args.some((arg) => arg === "main" || arg === "master" || arg === "origin/main" || arg === "prod" || arg === "origin/prod")
+  ) {
+    throw new Error("emitLaunchPR is not allowed to push main or prod directly");
   }
 }
 
@@ -1055,8 +1058,160 @@ function unquoteYamlScalar(value: string): string {
   return trimmed;
 }
 
+// ---------------------------------------------------------------------------
+// Prod promotion. Per platform docs/content-pipeline.md, the production web-app
+// only re-bundles content on a platform release (`prod` branch update). For
+// launch-day urgency, the proven flow (platform PR #14770) is a content-only
+// cherry-pick of the merged main PR onto `prod`. This automates authoring that
+// second PR; merging stays with the platform owner because any `prod` push
+// deploys the whole platform.
+// ---------------------------------------------------------------------------
+
+export type PromoteOpts = {
+  platformRoot?: string;
+  dryRun?: boolean;
+  branch?: string;
+};
+
+export type PromoteResult = {
+  prUrl: string | null;
+  plannedDiff: string;
+  prDescription: string;
+  mergeCommit: string;
+  mainPrTitle: string;
+};
+
+export async function emitProdPromotionPR(mainPrNumber: number, opts: PromoteOpts = {}): Promise<PromoteResult> {
+  return emitProdPromotionPRWithRunner(mainPrNumber, opts, defaultCommandRunner);
+}
+
+async function emitProdPromotionPRWithRunner(
+  mainPrNumber: number,
+  opts: PromoteOpts,
+  runCommand: CommandRunner,
+): Promise<PromoteResult> {
+  if (!Number.isInteger(mainPrNumber) || mainPrNumber <= 0) {
+    throw new Error(`invalid main PR number: ${mainPrNumber}`);
+  }
+  const platformRoot = resolve(opts.platformRoot ?? process.env.PLATFORM_ROOT ?? DEFAULT_PLATFORM_ROOT);
+  if (!existsSync(platformRoot)) {
+    throw new Error(`platform root does not exist: ${platformRoot}`);
+  }
+  const dryRun = opts.dryRun ?? true;
+
+  const viewRaw = (
+    await runCommand("gh", ["pr", "view", String(mainPrNumber), "--json", "state,mergeCommit,title,url"], {
+      cwd: platformRoot,
+      maxBuffer: 1024 * 1024,
+    })
+  ).stdout;
+  const view = JSON.parse(viewRaw) as {
+    state: string;
+    mergeCommit: { oid: string } | null;
+    title: string;
+    url: string;
+  };
+  if (view.state !== "MERGED" || !view.mergeCommit?.oid) {
+    throw new Error(
+      `platform PR #${mainPrNumber} is not merged yet (state: ${view.state}) — promotion cherry-picks the merged commit, so merge the main PR first`,
+    );
+  }
+  const oid = view.mergeCommit.oid;
+
+  const branch = opts.branch ?? defaultPromoteBranchName(mainPrNumber);
+  assertSafeBranch(branch);
+
+  const worktreePath = join("/tmp", `cf-promote-${Date.now()}-${process.pid}`);
+  let worktreeCreated = false;
+
+  try {
+    if (!dryRun) {
+      await runGit(runCommand, platformRoot, ["fetch", "origin", "prod", "main"]);
+    }
+    await runGit(runCommand, platformRoot, ["rev-parse", "--verify", "origin/prod"]);
+    await runGit(runCommand, platformRoot, ["cat-file", "-e", `${oid}^{commit}`]);
+
+    await runGit(runCommand, platformRoot, ["worktree", "add", worktreePath, "-b", branch, "origin/prod"]);
+    worktreeCreated = true;
+
+    // A squash merge produces a single-parent commit; a true merge commit needs
+    // the first-parent mainline to cherry-pick.
+    const parents = (await gitStdout(runCommand, worktreePath, ["rev-list", "--parents", "-n", "1", oid]))
+      .trim()
+      .split(/\s+/);
+    const mainline = parents.length > 2 ? ["-m", "1"] : [];
+    await runGit(runCommand, worktreePath, ["cherry-pick", "--no-commit", ...mainline, oid]);
+
+    const plannedDiff = await gitStdout(runCommand, worktreePath, ["diff", "--cached", "--no-ext-diff"]);
+    if (plannedDiff.trim().length === 0) {
+      throw new Error(`nothing to promote: the merged commit for PR #${mainPrNumber} is already on origin/prod`);
+    }
+    const prDescription = buildPromoteBody(view, mainPrNumber, oid);
+
+    if (dryRun) {
+      return { prUrl: null, plannedDiff, prDescription, mergeCommit: oid, mainPrTitle: view.title };
+    }
+
+    await runGit(runCommand, worktreePath, [
+      "commit",
+      "--no-verify",
+      "-m",
+      `Promote to prod: ${view.title} (#${mainPrNumber})\n\n(cherry picked from commit ${oid})`,
+    ]);
+    await runGit(runCommand, worktreePath, ["push", "-u", "origin", branch]);
+
+    const prUrl = (
+      await runCommand(
+        "gh",
+        ["pr", "create", "--base", "prod", "--head", branch, "--title", `Promote to prod: ${view.title}`, "--body", prDescription],
+        { cwd: worktreePath, maxBuffer: 1024 * 1024 },
+      )
+    ).stdout.trim();
+
+    return {
+      prUrl: prUrl.length > 0 ? prUrl : null,
+      plannedDiff,
+      prDescription,
+      mergeCommit: oid,
+      mainPrTitle: view.title,
+    };
+  } finally {
+    if (worktreeCreated) {
+      await runGitBestEffort(runCommand, platformRoot, ["worktree", "remove", "--force", worktreePath]);
+    } else {
+      await rm(worktreePath, { recursive: true, force: true });
+    }
+    if (dryRun) {
+      await runGitBestEffort(runCommand, platformRoot, ["branch", "-D", branch]);
+    }
+  }
+}
+
+function defaultPromoteBranchName(mainPrNumber: number): string {
+  return `cf-promote/pr-${mainPrNumber}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function buildPromoteBody(view: { title: string; url: string }, mainPrNumber: number, oid: string): string {
+  return [
+    `Content-only promotion of ${view.url} onto \`prod\` (cherry-pick of \`${oid.slice(0, 10)}\`), authored by comms-factory.`,
+    "",
+    "## Why",
+    "",
+    `The production web-app bundles changelog content at build time and only re-bundles on a platform release (\`prod\` branch update) — see \`docs/content-pipeline.md\`. The content from #${mainPrNumber} is already live on infinex.xyz; this makes the in-app changelog popout catch up without waiting for the next scheduled promote.`,
+    "",
+    "## Contents",
+    "",
+    `Identical to #${mainPrNumber} — no other changes. If a routine "Promote to Production" is about to go out anyway, merging that instead also ships this content and this PR can be closed.`,
+    "",
+    "⚠ Merging deploys the whole platform for prod, not just this content — timing is the platform owner's call.",
+    "",
+    "human-approve, DO NOT merge automatically",
+  ].join("\n");
+}
+
 export const _test = {
   emitLaunchPRWithRunner,
   emitBatchLaunchPRWithRunner,
+  emitProdPromotionPRWithRunner,
   assertSafeBranch,
 };

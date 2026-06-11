@@ -564,6 +564,117 @@ describe("emitBatchLaunchPR", () => {
   });
 });
 
+describe("emitProdPromotionPR", () => {
+  function makePromotionFixture(): { platformRoot: string; mergedOid: string } {
+    const platformRoot = makePlatformFixture();
+    // prod lags main by one commit: the "merged launch PR" commit exists on
+    // main only — exactly the launch-day shape (#14754 merged, prod behind).
+    git(platformRoot, ["update-ref", "refs/remotes/origin/prod", "HEAD"]);
+    writeFixtureFile(
+      platformRoot,
+      "apps/content-app/content/blog/bank-deposits-live.md",
+      "---\ntitle: Bank deposits live\ndate: 2026-06-09\npublished: true\ncategory: changelogs\n---\nBody\n",
+    );
+    git(platformRoot, ["add", "."]);
+    git(platformRoot, ["commit", "-m", "Bank deposits live (#14754)"]);
+    git(platformRoot, ["update-ref", "refs/remotes/origin/main", "HEAD"]);
+    return { platformRoot, mergedOid: git(platformRoot, ["rev-parse", "HEAD"]) };
+  }
+
+  function ghStubRunner(
+    view: { state: string; oid: string | null; title?: string },
+    commands?: Array<{ command: string; args: string[] }>,
+  ) {
+    return async (command: string, args: readonly string[], opts?: { cwd?: string }) => {
+      commands?.push({ command, args: [...args] });
+      if (command === "gh" && args[1] === "view") {
+        return {
+          stdout: JSON.stringify({
+            state: view.state,
+            mergeCommit: view.oid === null ? null : { oid: view.oid },
+            title: view.title ?? "Bank deposits live",
+            url: "https://github.com/infinex-xyz/platform/pull/14754",
+          }),
+          stderr: "",
+        };
+      }
+      if (command === "gh") {
+        return { stdout: "https://github.com/infinex-xyz/platform/pull/14770\n", stderr: "" };
+      }
+      return {
+        stdout: execFileSync(command, [...args], { cwd: opts?.cwd, encoding: "utf8" }),
+        stderr: "",
+      };
+    };
+  }
+
+  it("dry-run: cherry-picks the merged commit onto prod and previews the diff + PR body", async () => {
+    const { platformRoot, mergedOid } = makePromotionFixture();
+
+    const result = await _test.emitProdPromotionPRWithRunner(
+      14754,
+      { platformRoot, dryRun: true, branch: "cf-promote/test-bank-deposits" },
+      ghStubRunner({ state: "MERGED", oid: mergedOid }),
+    );
+
+    expect(result.prUrl).toBeNull();
+    expect(result.mergeCommit).toBe(mergedOid);
+    expect(result.plannedDiff).toContain("apps/content-app/content/blog/bank-deposits-live.md");
+    expect(result.prDescription).toContain("Content-only promotion");
+    expect(result.prDescription).toContain("docs/content-pipeline.md");
+    expect(result.prDescription).toContain("Merging deploys the whole platform");
+    expect(result.prDescription).toContain("human-approve, DO NOT merge automatically");
+    expect(git(platformRoot, ["status", "--short"])).toBe("");
+    expect(git(platformRoot, ["branch", "--list", "cf-promote/test-bank-deposits"])).toBe("");
+  });
+
+  it("refuses when the main PR is not merged", async () => {
+    const { platformRoot, mergedOid } = makePromotionFixture();
+
+    await expect(
+      _test.emitProdPromotionPRWithRunner(
+        14754,
+        { platformRoot, dryRun: true },
+        ghStubRunner({ state: "OPEN", oid: mergedOid }),
+      ),
+    ).rejects.toThrow(/not merged yet/);
+  });
+
+  it("refuses when the content is already on prod", async () => {
+    const { platformRoot, mergedOid } = makePromotionFixture();
+    git(platformRoot, ["update-ref", "refs/remotes/origin/prod", mergedOid]);
+
+    await expect(
+      _test.emitProdPromotionPRWithRunner(
+        14754,
+        { platformRoot, dryRun: true, branch: "cf-promote/test-noop" },
+        ghStubRunner({ state: "MERGED", oid: mergedOid }),
+      ),
+    ).rejects.toThrow(/already on origin\/prod/);
+  });
+
+  it("live path: pushes a cf-promote branch and opens the PR against prod", async () => {
+    const { platformRoot, mergedOid } = makePromotionFixture();
+    const remote = attachBareRemote(platformRoot);
+    git(platformRoot, ["push", "origin", `${mergedOid}:refs/heads/main`]);
+    git(platformRoot, ["push", "origin", "refs/remotes/origin/prod:refs/heads/prod"]);
+
+    const commands: Array<{ command: string; args: string[] }> = [];
+    const result = await _test.emitProdPromotionPRWithRunner(
+      14754,
+      { platformRoot, dryRun: false, branch: "cf-promote/test-live" },
+      ghStubRunner({ state: "MERGED", oid: mergedOid }, commands),
+    );
+
+    expect(result.prUrl).toBe("https://github.com/infinex-xyz/platform/pull/14770");
+    expect(git(remote, ["log", "--oneline", "cf-promote/test-live"])).toContain("Promote to prod: Bank deposits live (#14754)");
+    const prCreate = commands.find((c) => c.command === "gh" && c.args[1] === "create");
+    expect(prCreate?.args).toContain("--base");
+    expect(prCreate?.args[prCreate.args.indexOf("--base") + 1]).toBe("prod");
+    expect(git(platformRoot, ["status", "--short"])).toBe("");
+  });
+});
+
 function makePlatformFixture(blogPosts: Record<string, string> = {}): string {
   const dir = mkdtempSync(join(tmpdir(), "cf-platform-"));
   tempDirs.push(dir);

@@ -20,6 +20,37 @@ export function emitTimeoutMs(live?: boolean): number {
   return live ? EMIT_LIVE_TIMEOUT_MS : EMIT_DRY_RUN_TIMEOUT_MS;
 }
 
+export function promoteCliArgs(mainPrNumber: number, opts: { live?: boolean; platformRoot: string }): string[] {
+  return [
+    'tsx',
+    'scripts/promote-pr.ts',
+    `--main-pr=${mainPrNumber}`,
+    `--platform-root=${opts.platformRoot}`,
+    ...(opts.live ? ['--live'] : []),
+  ];
+}
+
+export function promoteWatchArgs(
+  mainPrNumber: number,
+  opts: { platformRoot: string; statusFile: string; intervalMs?: number },
+): string[] {
+  return [
+    'tsx',
+    'scripts/promote-pr-watch.ts',
+    `--main-pr=${mainPrNumber}`,
+    `--platform-root=${opts.platformRoot}`,
+    `--status-file=${opts.statusFile}`,
+    ...(opts.intervalMs !== undefined ? [`--interval-ms=${opts.intervalMs}`] : []),
+  ];
+}
+
+/** Extract the PR number from a GitHub PR URL ("…/pull/14754"). */
+export function prNumberFromUrl(prUrl: string): number | null {
+  const match = prUrl.match(/\/pull\/(\d+)(?:\D|$)/);
+  const n = match ? Number(match[1]) : NaN;
+  return Number.isInteger(n) && n > 0 ? n : null;
+}
+
 export function emitChildEnv(base: Record<string, string | undefined> = process.env): NodeJS.ProcessEnv {
   return {
     ...base,
