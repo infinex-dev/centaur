@@ -23,13 +23,13 @@ just smoke              # full spawn→message→execute→poll PONG E2E check
 just down / reinstall   # tear down / down+up
 ```
 
-Lint & test (Python 3.11+, `uv`, `ruff` line-length=100). Each service has its own `pyproject.toml`/`ruff.toml`; run from repo root:
+Lint & test (Python 3.11+, `uv`, `ruff` line-length=100 where a service ruff.toml says so; `overlays/` has no own config and formats at ruff's default 88). There is **no repo-root `pyproject.toml`** — bare `uv run pytest` fails with "Failed to spawn: pytest". Run from repo root via the api project env (it carries pytest + the `api` package the overlay tests import):
 
 ```bash
-uv run ruff check .                 # lint
-uv run ruff format .                # format
-uv run pytest                       # all tests
-uv run pytest path/to/test_x.py::test_name   # single test
+uv run --project services/api ruff check .                 # lint
+uv run --project services/api ruff format overlays/comms-factory   # format (repo-wide format --check is NOT clean; scope to what you touched)
+uv run --project services/api pytest overlays/comms-factory        # overlay tests
+uv run --project services/api pytest path/to/test_x.py::test_name  # single test
 ```
 
 `services/slackbot` is Next.js + Slack Bolt and uses **`pnpm`** (it's the one workspace member in the root `pnpm-workspace.yaml`). The repo has a **second, standalone Node project** at `attached-services/comms-factory/` (its own `pnpm-lock.yaml`, **not** a workspace member) — see Overlays below. It carries its own `pnpm-workspace.yaml` marker so a bare `pnpm install` inside it resolves standalone instead of walking up to the centaur root workspace and silently installing the wrong project (symptom: tests fail with "Failed to load url <new-dep>"; note a project-level `.npmrc ignore-workspace=true` does NOT fix this in pnpm 10).
