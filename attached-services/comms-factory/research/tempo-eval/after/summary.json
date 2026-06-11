@@ -1,0 +1,15 @@
+{
+  "label": "after",
+  "channel": "x",
+  "n_per_card": 3,
+  "candidates": 15,
+  "director_pass": 10,
+  "director_copy_voice_pass": 10,
+  "director_legal": 10,
+  "director_tempo_counts": {
+    "commanding": 11,
+    "certain": 1,
+    "practical": 2,
+    "self-contained": 1
+  }
+}

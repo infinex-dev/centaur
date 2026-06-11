@@ -1,4 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { jsonrepair } from "jsonrepair";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { ReleaseCard } from "./card.js";
@@ -376,6 +377,10 @@ export const CHANNEL_PROFILES: Record<Channel, ChannelProfile> = {
     max_chars: 3600,
     reader_context: "existing users + onlookers who chose to read; highest patience, expects substance",
   },
+  "image-brief": {
+    max_chars: 4000,
+    reader_context: "designer-facing art direction; not public copy and not a posting channel",
+  },
 };
 
 const INWARDS_OUT_FLOW: Channel[] = ["x", "x-thread", "in-product", "modal", "web", "carousel", "blog"];
@@ -392,6 +397,54 @@ function isBlogChangelogCard(card: ReleaseCard): boolean {
     card.kind === "data-card-wry" ||
     card.kind === "launch-tier" ||
     card.kind === "split";
+}
+
+export function isThesisCard(card: ReleaseCard): boolean {
+  return (card as ReleaseCardWithCategory).category === "thesis";
+}
+
+function buildThesisScaffoldSection(card: ReleaseCard, channels: Channel[]): string[] {
+  if (!channels.includes("blog") || !isThesisCard(card)) return [];
+  return [
+    "",
+    "## Thesis blog scaffold",
+    "Apply this scaffold only to performances.blog. Keep the declared blog reader_context unchanged.",
+    "",
+    "Frontmatter field set:",
+    "```yaml",
+    "---",
+    "title: <thesis title>",
+    "subtitle: <one-line dek stating the thesis>",
+    "date: <YYYY-MM-DD>",
+    "published: false",
+    "pinned: false",
+    "category: news",
+    "coverImage:",
+    "  src: <designer-cover-url>",
+    "  alt: <factual alt text>",
+    "  height: 640",
+    "  width: 1280",
+    "---",
+    "```",
+    "",
+    "Body skeleton:",
+    "```md",
+    "### <opening — the claim, stated plainly>",
+    "",
+    "<argument sections under ### headings; each section advances the thesis from deployed_facts>",
+    "",
+    "---",
+    "",
+    "### <closing section — what we hold ourselves to>",
+    "```",
+    "",
+    "Format constraints:",
+    "- Write roughly 900-1400 words.",
+    "- Essay register: argument and evidence. No toggles, no 'Coming up' section, no roadmap link.",
+    "- Cite sources inline as markdown links when a deployed_fact carries a provenance URL (audit reports, official post-mortems).",
+    "- No call to action anywhere, including the close.",
+    "- Only assert claims supported by deployed_facts.",
+  ];
 }
 
 function buildBlogChangelogScaffoldSection(card: ReleaseCard, channels: Channel[]): string[] {
@@ -574,7 +627,16 @@ export async function generateActorAttempt(
 
   const client = opts.client ?? (new Anthropic().beta.promptCaching as unknown as AnthropicMessagesClient);
   let lastParseError: unknown;
+  let lastRaw = "";
   for (let parseAttempt = 1; parseAttempt <= ACTOR_JSON_PARSE_ATTEMPTS; parseAttempt++) {
+    // On a retry, show the model its own unparseable output and ask it to re-emit
+    // valid JSON. A blind re-call (identical transcript) tends to repeat the same
+    // malformation; the correction turn tells it exactly what to fix.
+    const messages = parseAttempt === 1
+      ? transcript
+      : [...transcript,
+         { role: "assistant" as const, content: lastRaw },
+         { role: "user" as const, content: actorJsonCorrection(lastParseError) }];
     const resp = await createMessageWithRetry(client, {
       model: opts.model ?? DEFAULT_ACTOR_MODEL,
       max_tokens: 32000,
@@ -583,9 +645,10 @@ export async function generateActorAttempt(
       // reads the prefix instead of re-paying it. 1h TTL (for cross-click reuse +
       // full multi-channel runs) needs an SDK upgrade — see notes.
       system: [{ type: "text", text: memory.system_prompt, cache_control: { type: "ephemeral" } }],
-      messages: transcript,
+      messages,
     }, "Actor");
     const raw = textFromMessage(resp);
+    lastRaw = raw;
     try {
       const output = parseActorOutput(raw, channels);
       return {
@@ -593,10 +656,10 @@ export async function generateActorAttempt(
         candidates: actorOutputToCandidates(output, channels, "anthropic", emissionPlan),
         emission_plan: emissionPlan,
         raw_response: raw,
-        transcript_messages: [...transcript, { role: "assistant", content: raw }],
+        transcript_messages: [...messages, { role: "assistant", content: raw }],
         prompt: {
           system: memory.system_prompt,
-          messages: transcript,
+          messages,
           prompt_hash: memory.prompt_hash,
           source_index: memory.source_index,
         },
@@ -673,7 +736,14 @@ export function buildActorTranscript(
     if (directorNotes) next.push({ role: "user", content: buildDirectorNotesMessage(directorNotes) });
     return next;
   }
-  return [{ role: "user", content: buildActorAssignmentMessage(card, channels, n, warmupMode, emissionPlan) }];
+  // Fresh transcript (first attempt, or a grounder back-edge reset it for fresh
+  // table work). Director notes must still reach the actor — fold them into the
+  // assignment message rather than dropping them.
+  const assignment = buildActorAssignmentMessage(card, channels, n, warmupMode, emissionPlan);
+  return [{
+    role: "user",
+    content: directorNotes ? `${assignment}\n\n${buildDirectorNotesMessage(directorNotes)}` : assignment,
+  }];
 }
 
 export function buildActorAssignmentMessage(
@@ -706,8 +776,13 @@ export function buildActorAssignmentMessage(
     "These are SITUATION, not register: who the reader is, what they already have, and what they came for. They do NOT tell you tempo, voice, or motor — those emerge from your table work. Derive reader_prior from the DECLARED reader below; do not invent a reader.",
     ...channels.map((channel) => `- ${channel}: ${CHANNEL_PROFILES[channel].reader_context}${CHANNEL_PROFILES[channel].cta ? ` | CTA: ${CHANNEL_PROFILES[channel].cta}` : ""}`),
     ...buildBlogChangelogScaffoldSection(card, channels),
+    ...buildThesisScaffoldSection(card, channels),
     "",
     "## Performance constraints",
+    ...(isThesisCard(card) ? [
+      "- THESIS PIECE: this card is a positioning essay, not a release announcement. No calls to action anywhere — no 'get started', 'try it', 'sign up', no push toward the app. The piece exists to demonstrate judgment, not to convert.",
+      "- Thesis X-thread: a compression of the essay's argument — a trailer for the thesis, not an announcement thread.",
+    ] : []),
     "- Return JSON only. No prose outside the JSON.",
     ...buildWarmupModeInstructions(warmupMode),
     "- table_work.reader_prior must be DERIVED from the declared channel reader contexts above, not freely invented. State what THAT reader assumes before reading.",
@@ -729,8 +804,8 @@ export function buildActorAssignmentMessage(
     "- selected_performances[channel].selected_option is 1-based: 1 selects the first option, 2 the second, and so on.",
     "- The blind Director audits every script-passing option. selected_performances is your recommendation, not a routing gate.",
     "- These writing budgets are guidance; the deterministic regex/structure gate is the formatting authority.",
-    "- X: max 280 chars per candidate.",
-    "- X-thread: emit `tweets`, target the assigned tweet count when present, 2-6 tweets total, <=280 chars each.",
+    "- X: max 280 chars per candidate. A standalone X post must not contain a URL — X suppresses link-post reach. Leave the app link out and declare it in not_said.",
+    "- X-thread: emit `tweets`, target the assigned tweet count when present, 2-6 tweets total, <=280 chars each. Tweet 1 must not contain a URL (same reach penalty); a link may ride a later tweet.",
     "- Web: emit `subheading`, `title`, and `caption`; subheading <=24 chars, title <=48 chars, caption <=44 chars.",
     "- Carousel: emit `slides`; 3-6 slides, each `name` <=40 chars and `body` <=240 chars.",
     "- In-product: one compact UI phrase.",
@@ -1674,11 +1749,33 @@ function isTempoName(value: string): value is TempoName {
   ].includes(value);
 }
 
-function extractJsonObject(text: string): Record<string, unknown> {
+export function extractJsonObject(text: string): Record<string, unknown> {
   const start = text.indexOf("{");
   const end = text.lastIndexOf("}");
   if (start === -1 || end === -1 || end < start) throw new Error(`No JSON object found.\n---\n${text.slice(0, 300)}`);
-  return JSON.parse(text.slice(start, end + 1)) as Record<string, unknown>;
+  const slice = text.slice(start, end + 1);
+  try {
+    return JSON.parse(slice) as Record<string, unknown>;
+  } catch (parseErr) {
+    // The actor occasionally drops a comma between two elements of a large
+    // multi-candidate array ("Expected ',' or ']' after array element"). Recover
+    // with jsonrepair before forcing a fresh 32K-token re-call. If repair can't
+    // make it valid, rethrow the ORIGINAL SyntaxError so the corrective retry in
+    // generateActorAttempt still engages (isActorJsonParseError keys off it).
+    try {
+      return JSON.parse(jsonrepair(slice)) as Record<string, unknown>;
+    } catch {
+      throw parseErr;
+    }
+  }
+}
+
+function actorJsonCorrection(err: unknown): string {
+  return [
+    "Your previous response could not be parsed as JSON:",
+    `  ${errorMessage(err)}`,
+    "Re-send the ENTIRE response as a single valid JSON object — identical content, corrected syntax (most often a missing comma between two array elements). Output JSON only: no prose, no markdown code fences.",
+  ].join("\n");
 }
 
 function recordValue(value: unknown, field: string): Record<string, unknown> {

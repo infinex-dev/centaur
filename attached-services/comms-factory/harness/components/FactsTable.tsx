@@ -9,11 +9,13 @@ import { useEffect, useState, useTransition } from 'react';
 import {
   addManualFact,
   approveResearch,
+  askGrounder,
   decideFact,
   runGrounder,
 } from '@/app/actions/research';
 import type { GrounderRun } from '@/lib/queries';
 import type { HarnessFact } from '@/lib/types';
+import { FactModal, type FactModalMode, type FactModalResult } from './FactModal';
 
 const STATUS_GLYPH: Record<HarnessFact['status'], string> = {
   pending: '◌',
@@ -47,6 +49,8 @@ export function FactsTable({
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [liveGrounderRun, setLiveGrounderRun] = useState<GrounderRun | null>(null);
+  const [modal, setModal] = useState<{ mode: FactModalMode; fact?: HarnessFact } | null>(null);
+  const [askPrompt, setAskPrompt] = useState('');
   const [pending, startTransition] = useTransition();
 
   function run(action: () => Promise<unknown>) {
@@ -94,6 +98,29 @@ export function FactsTable({
     });
   }
 
+  function submitAskGrounder() {
+    const prompt = askPrompt.trim();
+    if (!prompt) return;
+    setError(null);
+    setMessage('Grounder researching your ask. This can take 10-60s, longer with web search.');
+    setLiveGrounderRun(null);
+    startTransition(async () => {
+      try {
+        const result = await askGrounder(cardId, prompt);
+        setAskPrompt('');
+        const gaps = result.unverifiable.length
+          ? ` Unverifiable: ${result.unverifiable.map((u) => `${u.claim}: ${u.reason}`).join(' | ')}`
+          : '';
+        setMessage(`Grounder added ${result.verified} fact${result.verified === 1 ? '' : 's'}.${gaps}`);
+        router.refresh();
+      } catch (err) {
+        setMessage(null);
+        setError(err instanceof Error ? err.message : String(err));
+        router.refresh();
+      }
+    });
+  }
+
   function approveResearchAction() {
     if (
       researchApprovedAt &&
@@ -104,66 +131,53 @@ export function FactsTable({
     run(() => approveResearch(cardId));
   }
 
-  function editFact(fact: HarnessFact) {
-    const raw = window.prompt(
-      'Edit fact JSON',
-      JSON.stringify(
-        {
-          category: fact.category,
-          claim: fact.claim,
-          value: fact.value,
-          source_ref: fact.source_ref,
-          confidence: fact.confidence,
-        },
-        null,
-        2,
-      ),
-    );
-    if (!raw) return;
-    run(() => decideFact(fact.id, 'edit', JSON.parse(raw)));
-  }
-
-  function rejectFact(fact: HarnessFact) {
-    const reason = window.prompt('Rejection reason') ?? '';
-    run(() => decideFact(fact.id, 'reject', { rejection_reason: reason }));
-  }
-
-  function newFact() {
-    const raw = window.prompt(
-      'New fact JSON',
-      JSON.stringify(
-        {
-          category: 'capability',
-          claim: '',
-          value: '',
+  function submitModal(result: FactModalResult) {
+    if (!modal) return;
+    const { mode, fact } = modal;
+    if (mode === 'edit' && fact) {
+      run(() =>
+        decideFact(fact.id, 'edit', {
+          category: result.category,
+          claim: result.claim,
+          value: result.value,
+          source_ref: result.source_ref,
+          confidence: result.confidence,
+        }),
+      );
+    } else if (mode === 'reject' && fact) {
+      run(() => decideFact(fact.id, 'reject', { rejection_reason: result.rejection_reason }));
+    } else if (mode === 'new') {
+      run(() =>
+        addManualFact(cardId, {
+          category: result.category,
+          claim: result.claim,
+          value: result.value,
           source: 'operator-input',
-          source_ref: 'operator',
-          confidence: 1,
+          source_ref: result.source_ref || 'operator',
+          confidence: result.confidence,
           rejection_reason: null,
-        },
-        null,
-        2,
-      ),
-    );
-    if (!raw) return;
-    run(() => addManualFact(cardId, JSON.parse(raw)));
+        }),
+      );
+    }
+    setModal(null);
   }
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
+      if (modal) return;
       if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
       const fact = facts[selected];
       if (event.key === 'j') setSelected((idx) => Math.min(facts.length - 1, idx + 1));
       if (event.key === 'k') setSelected((idx) => Math.max(0, idx - 1));
-      if (event.key === 'n') newFact();
+      if (event.key === 'n') setModal({ mode: 'new' });
       if (!fact) return;
       if (event.key === 'a') run(() => decideFact(fact.id, 'approve'));
-      if (event.key === 'e') editFact(fact);
-      if (event.key === 'x') rejectFact(fact);
+      if (event.key === 'e') setModal({ mode: 'edit', fact });
+      if (event.key === 'x') setModal({ mode: 'reject', fact });
     }
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [facts, selected]);
+  }, [facts, selected, modal]);
 
   useEffect(() => {
     if (!pending) return;
@@ -199,7 +213,7 @@ export function FactsTable({
           </button>
           <button
             disabled={pending}
-            onClick={newFact}
+            onClick={() => setModal({ mode: 'new' })}
             className="text-state-edited disabled:text-ink-4 hover:underline"
           >
             add fact
@@ -211,6 +225,26 @@ export function FactsTable({
           className="text-xs font-mono text-state-approved disabled:text-ink-4 hover:underline"
         >
           {researchApprovedAt ? 're-approve research' : 'approve research'}
+        </button>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <input
+          className="rg-prompt flex-1"
+          placeholder="ask the grounder to add facts — e.g. 'ground the recent ZEC incident: what happened, when, scale'"
+          value={askPrompt}
+          disabled={pending}
+          onChange={(e) => setAskPrompt(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') submitAskGrounder();
+          }}
+        />
+        <button
+          disabled={pending || !askPrompt.trim()}
+          onClick={submitAskGrounder}
+          className="text-xs font-mono text-state-running disabled:text-ink-4 hover:underline whitespace-nowrap"
+        >
+          ask grounder
         </button>
       </div>
 
@@ -262,14 +296,14 @@ export function FactsTable({
                     </button>
                     <button
                       disabled={pending}
-                      onClick={() => editFact(f)}
+                      onClick={() => setModal({ mode: 'edit', fact: f })}
                       className="text-state-edited disabled:text-ink-4 hover:underline"
                     >
                       ✏
                     </button>
                     <button
                       disabled={pending}
-                      onClick={() => rejectFact(f)}
+                      onClick={() => setModal({ mode: 'reject', fact: f })}
                       className="text-state-rejected disabled:text-ink-4 hover:underline"
                     >
                       ✗
@@ -292,6 +326,16 @@ export function FactsTable({
       {error && <p className="text-xs text-state-rejected">{error}</p>}
       {(liveGrounderRun ?? latestGrounderRun) && (
         <GrounderTrace run={(liveGrounderRun ?? latestGrounderRun)!} />
+      )}
+
+      {modal && (
+        <FactModal
+          mode={modal.mode}
+          fact={modal.fact}
+          pending={pending}
+          onSubmit={submitModal}
+          onCancel={() => setModal(null)}
+        />
       )}
     </div>
   );

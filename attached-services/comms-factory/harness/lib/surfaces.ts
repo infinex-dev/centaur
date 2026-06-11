@@ -19,7 +19,7 @@ export type SurfaceKind = Channel;
 export type StructuredOutput =
   | { kind: 'web-card'; subheading: string; title: string; caption: string }
   | { kind: 'carousel'; slides: { name: string; body: string }[] }
-  | { kind: 'thread'; tweets: string[] };
+  | { kind: 'thread'; tweets: string[]; media?: (string | null)[] };
 
 export interface SurfaceMeta {
   glyph: string;
@@ -37,6 +37,7 @@ export const SURFACE_META: Record<SurfaceKind, SurfaceMeta> = {
   modal: { glyph: '▢', label: 'Modal', role: 'in-app dialog', limit: 400 },
   blog: { glyph: '¶', label: 'Blog', role: 'long-form post', limit: null },
   carousel: { glyph: '⬚', label: 'Carousel', role: 'numbered slides', limit: 240 },
+  'image-brief': { glyph: '▧', label: 'Image brief', role: 'art-direction for the designer', limit: null },
 };
 
 /** Order surfaces appear in filters / grids. */
@@ -48,6 +49,7 @@ export const SURFACE_ORDER: SurfaceKind[] = [
   'modal',
   'blog',
   'carousel',
+  'image-brief',
 ];
 
 /**
@@ -80,7 +82,11 @@ export function parseStructured(structuredJson: string | null | undefined): Stru
       return { kind: 'web-card', subheading: obj.subheading, title: obj.title, caption: obj.caption };
     }
     if (obj.kind === 'thread' && Array.isArray(obj.tweets)) {
-      return { kind: 'thread', tweets: obj.tweets.filter((t): t is string => typeof t === 'string') };
+      const tweets = obj.tweets.filter((t): t is string => typeof t === 'string');
+      const media = Array.isArray(obj.media)
+        ? obj.media.map((m) => (typeof m === 'string' ? m : null))
+        : undefined;
+      return { kind: 'thread', tweets, ...(media ? { media } : {}) };
     }
     if (obj.kind === 'carousel' && Array.isArray(obj.slides)) {
       const slides = obj.slides.flatMap((s) => {
@@ -95,6 +101,18 @@ export function parseStructured(structuredJson: string | null | undefined): Stru
   } catch {
     return null;
   }
+}
+
+/**
+ * Flat-text rendering of a StructuredOutput, used as the pick's `final_text`
+ * when the operator edits a structured surface. The validator, history guard,
+ * Slack ship, and recent-copy corpus all read flat text, so structured edits
+ * must round-trip to a coherent string — not just sit in structured_json.
+ */
+export function flattenStructured(s: StructuredOutput): string {
+  if (s.kind === 'web-card') return [s.subheading, s.title, s.caption].filter(Boolean).join('\n');
+  if (s.kind === 'thread') return s.tweets.join('\n\n');
+  return s.slides.map((sl) => `${sl.name}\n${sl.body}`).join('\n\n');
 }
 
 /**

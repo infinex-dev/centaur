@@ -1,0 +1,13 @@
+{
+  "label": "after3",
+  "channel": "x",
+  "n_per_card": 3,
+  "candidates": 15,
+  "director_pass": 15,
+  "director_copy_voice_pass": 15,
+  "director_legal": 15,
+  "director_tempo_counts": {
+    "practical": 7,
+    "commanding": 8
+  }
+}

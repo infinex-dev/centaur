@@ -5,9 +5,12 @@ import {
   auditCandidateWithDirector,
   actorOutputToCandidates,
   buildActorAssignmentMessage,
+  buildActorTranscript,
   buildDirectorNotesMessage,
+  type DirectorNotes,
   buildDirectorUserMessage,
   detectVersionTag,
+  extractJsonObject,
   generateActorAttempt,
   prewarmDirectorCache,
   parseDirectorAudit,
@@ -18,6 +21,7 @@ import {
 import { buildActorMemoryPack, buildDirectorMemoryPack } from "../actor-memory.js";
 import type { Channel } from "../generator.js";
 import {
+  channelMaxLen,
   collectChannelFailureFeedback,
   collectFactRequests,
   dedupeNewRequests,
@@ -232,6 +236,26 @@ describe("actor/director architecture", () => {
 	    expect(structured).toContain('"subheading"');
 	  });
 
+  it("injects Director notes into the fresh assignment when no previous transcript exists", () => {
+    const notes: DirectorNotes = {
+      attempt: 1,
+      summary: "Missing valid performances for channels: x.",
+      notes: ["x: regex/format rejected \"Spot is live...\" because x-opening-link — drop the link."],
+    };
+    const transcript = buildActorTranscript(CARD, ["x"], 2, "scene_rehearsal", undefined, notes);
+    expect(transcript).toHaveLength(1);
+    expect(transcript[0]?.role).toBe("user");
+    expect(transcript[0]?.content).toContain("Director notes after attempt 1");
+    expect(transcript[0]?.content).toContain("x-opening-link");
+  });
+
+  it("tells the actor up front that X copy cannot carry links", () => {
+    const msg = buildActorAssignmentMessage(CARD, ["x", "x-thread"], 2);
+    expect(msg).toContain("must not contain a URL");
+    expect(msg).toContain("Tweet 1 must not contain a URL");
+    expect(msg).toContain("not_said");
+  });
+
   it("does not provide fake Actor output in stub mode", async () => {
     await expect(generateActorAttempt(CARD, {
       channels: ["x"],
@@ -308,6 +332,61 @@ describe("actor/director architecture", () => {
     expect(directorRequests).toHaveLength(20);
     expect(result.attempts[1]?.director_notes_in?.notes.length).toBeGreaterThan(0);
     expect(JSON.stringify(actorRequests[1])).toContain("Director notes after attempt 1");
+  });
+
+  it("keeps retrying unsettled candidates after every channel has a pick, narrowing the wave and pooling earlier passers", async () => {
+    // Wave 1: all 5 x candidates pass; web option 1 passes but options 2-5 fail.
+    // Old contract would stop here ("one pick per channel = done"). New contract:
+    // wave 2 regenerates ONLY web; the x pick survives from the wave-1 pool.
+    const actorRequests: unknown[] = [];
+    let directorCalls = 0;
+    const actorClient = {
+      messages: {
+        create: async (params: unknown) => {
+          actorRequests.push(params);
+          return {
+            content: [{
+              type: "text",
+              text: JSON.stringify(actorOutput("The wall moved.", "The bank wall is gone.", {
+                xOptions: ["The wall moved.", "The wall moved off.", "The wall moved away.", "The wall moved aside.", "The wall moved on."],
+                webOptions: ["The bank wall is gone.", "The wall slipped aside.", "The wall slipped away.", "The wall slipped past.", "The wall slipped off."],
+              })),
+            }],
+          };
+        },
+      },
+    };
+    const directorClient = {
+      messages: {
+        create: async (params: unknown) => {
+          directorCalls += 1;
+          const user = JSON.stringify(params);
+          const isLaterWave = actorRequests.length > 1;
+          const isFailingWebOption = user.includes("slipped");
+          const passed = isLaterWave || !isFailingWebOption;
+          return {
+            content: [{ type: "text", text: JSON.stringify(directorOutput(passed)) }],
+          };
+        },
+      },
+    };
+
+    const result = await orchestrateActorDirectorWithRetries(CARD, ["x", "web"], {
+      n: 5,
+      mode: "live",
+      actor_client: actorClient as never,
+      director_client: directorClient as never,
+      maxAttempts: 3,
+    });
+
+    expect(result.exhausted).toBe(false);
+    expect(result.attempts).toHaveLength(2);
+    expect(actorRequests).toHaveLength(2);
+    // Wave 1 audits 10 candidates (5 per channel); wave 2 audits only web's 5.
+    expect(directorCalls).toBe(15);
+    // The x pick survives from the wave-1 pool even though wave 2 had no x records.
+    expect(result.picks.map((pick) => pick.channel).sort()).toEqual(["web", "x"]);
+    expect(result.picks.find((pick) => pick.channel === "x")?.text).toContain("The wall moved");
   });
 
   it("seeds attempt 1 from seed_transcript + seed_notes for manual regenerate-with-notes", async () => {
@@ -810,6 +889,31 @@ describe("actor/director architecture", () => {
     expect(buildActorAssignmentMessage(NON_CHANGELOG_BLOG_CARD, ["blog"], 1)).not.toContain("Blog changelog format scaffold");
   });
 
+  it("gives thesis cards an essay scaffold and a no-CTA constraint instead of the changelog scaffold", () => {
+    const thesisCard = {
+      ...CHANGELOG_CARD,
+      id: "infinex-security-thesis",
+      audience: ["blog", "x-thread", "x"],
+      category: "thesis",
+    } as ReleaseCard;
+
+    const message = buildActorAssignmentMessage(thesisCard, ["blog", "x-thread"], 1);
+    expect(message).toContain("Thesis blog scaffold");
+    expect(message).not.toContain("Blog changelog format scaffold");
+    expect(message).toContain("THESIS PIECE");
+    expect(message).toContain("No calls to action");
+    expect(message).toContain("900-1400 words");
+
+    expect(buildActorAssignmentMessage(CHANGELOG_CARD, ["blog"], 1)).not.toContain("Thesis blog scaffold");
+  });
+
+  it("raises the blog length ceiling for thesis cards only", () => {
+    const thesisCard = { ...CHANGELOG_CARD, category: "thesis" } as ReleaseCard;
+    expect(channelMaxLen("blog", thesisCard)).toBe(12000);
+    expect(channelMaxLen("blog", CHANGELOG_CARD)).toBe(3600);
+    expect(channelMaxLen("x", thesisCard)).toBe(280);
+  });
+
   it("generates structure-bearing blog changelog output through the Actor path with an injected client", async () => {
     const actorRequests: unknown[] = [];
     const changelog = minimalChangelogText();
@@ -1115,10 +1219,12 @@ describe("actor/director architecture", () => {
 
   it("runs the AUDIT-triggered back-edge as a backstop when the Director finds a hole", async () => {
     let actorCalls = 0;
+    const actorRequests: unknown[] = [];
     const actorClient = {
       messages: {
-        create: async () => {
+        create: async (params: unknown) => {
           actorCalls += 1;
+          actorRequests.push(params);
           // No table-work request, so the eager round never fires; the hole is
           // only surfaced by the Director audit below. One option per channel.
           return { content: [{ type: "text", text: JSON.stringify(actorOutput("Spot is live in Infinex.", "Spot is live in Infinex.", { xOptions: ["Spot is live in Infinex."] })) }] };
@@ -1167,6 +1273,10 @@ describe("actor/director architecture", () => {
     expect(events.some((e) => e.trigger === "eager")).toBe(false);
     expect(result.attempts.length).toBeGreaterThanOrEqual(2); // regenerated against the augmented card
     expect(result.picks.length).toBe(1);
+    // The back-edge resets the transcript for fresh table work, but the
+    // Director's failure feedback must still reach the next attempt.
+    expect(result.attempts[1]?.director_notes_in).toBeDefined();
+    expect(JSON.stringify(actorRequests[1])).toContain("Director notes after attempt 1");
   });
 
   it("caps total grounder rounds at 2 per run and dedupes the same question across rounds", async () => {
@@ -1262,6 +1372,54 @@ describe("actor/director architecture", () => {
       maxAttempts: 1,
     });
     expect(result.picks.every((pick) => pick.prompt_variant === "outwards-in")).toBe(true);
+  });
+});
+
+describe("actor JSON resilience", () => {
+  it("repairs a dropped comma between array elements without a re-call", () => {
+    // The launch-day failure: model emits two array elements with no comma between
+    // them ("Expected ',' or ']' after array element"). jsonrepair recovers it.
+    const obj = extractJsonObject('noise {"arr": [{"x": 1} {"y": 2}], "ok": true} trailing');
+    expect(obj.ok).toBe(true);
+    expect((obj.arr as unknown[]).length).toBe(2);
+  });
+
+  it("parses already-valid JSON unchanged", () => {
+    expect(extractJsonObject('{"a": [1, 2, 3]}').a).toEqual([1, 2, 3]);
+  });
+
+  it("throws when no JSON object is present (so the corrective retry engages)", () => {
+    expect(() => extractJsonObject("nothing parseable here")).toThrow(/No JSON object/);
+  });
+
+  it("re-asks the actor with a correction turn after an unparseable response, then succeeds", async () => {
+    const actorRequests: unknown[] = [];
+    let call = 0;
+    const actorClient = {
+      messages: {
+        create: async (params: unknown) => {
+          actorRequests.push(params);
+          call += 1;
+          // 1st call: prose with no JSON object (repair can't help). 2nd: valid.
+          const text = call === 1
+            ? "I cannot comply; here is prose only."
+            : JSON.stringify(actorOutput("The wall moved.", "The wall moved."));
+          return { content: [{ type: "text", text }] };
+        },
+      },
+    };
+
+    const result = await generateActorAttempt(CARD, {
+      channels: ["x"],
+      n: 1,
+      mode: "live",
+      client: actorClient as never,
+    });
+
+    expect(result.candidates.length).toBeGreaterThan(0);
+    expect(actorRequests).toHaveLength(2);
+    // The retry must show the model what broke, not blindly re-send the transcript.
+    expect(JSON.stringify(actorRequests[1])).toContain("could not be parsed as JSON");
   });
 });
 

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getDb } from '@/lib/db';
 import { renderNewsArticle } from '@/lib/news-render';
+import { EditableArticle } from './EditableArticle';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,6 +40,19 @@ const NEWS_CSS = `
   .nv-body details.toggle summary::before{ content:"+ "; color:var(--accent) }
   .nv-body details.toggle[open] summary::before{ content:"– " }
   .nv-body .toggle-body{ padding:0 0 14px; color:var(--ink2) }
+  .nv-cover-img{ width:100%; border-radius:14px; margin-bottom:40px; display:block }
+  .nv-edit-note{ font-size:13px; color:var(--ink3); border:1px solid var(--rule); border-radius:8px; padding:10px 14px; margin-bottom:28px }
+  .nv-toast{ position:sticky; top:64px; z-index:5; background:#13203d; border:1px solid var(--accent); color:var(--ink);
+    border-radius:8px; padding:10px 14px; margin-bottom:20px; font-size:14px }
+  .nv-toast-err{ background:#2a1416; border-color:#7a2630; cursor:pointer }
+  .nv-toast-x{ float:right; color:var(--ink3) }
+  .nv-cover-slot{ display:block }
+  /* editable affordance: any [data-slot] becomes a click target */
+  .nv-editable [data-slot]{ position:relative; cursor:pointer; outline:2px solid transparent; outline-offset:4px; border-radius:14px; transition:outline-color .12s }
+  .nv-editable [data-slot]:hover{ outline-color:var(--accent) }
+  .nv-editable [data-slot]:hover::after{ content:attr(data-hint); position:absolute; top:10px; right:10px; z-index:4;
+    background:var(--accent); color:#fff; font-size:11px; letter-spacing:.04em; text-transform:uppercase;
+    padding:4px 9px; border-radius:6px; pointer-events:none }
 `;
 
 export default async function NewsPreviewPage({
@@ -60,7 +74,13 @@ export default async function NewsPreviewPage({
     );
   }
 
-  const article = renderNewsArticle(row.text);
+  // Prefer the final pick's (possibly operator-edited) copy — that's what ships.
+  const pick = db
+    .prepare('SELECT final_text FROM final_picks WHERE card_id = ? AND candidate_id = ?')
+    .get(id, candidateId) as { final_text: string } | undefined;
+
+  const article = renderNewsArticle(pick?.final_text ?? row.text);
+  const editable = row.channel === 'blog' && !!pick;
 
   return (
     <div className="nv-root">
@@ -81,11 +101,14 @@ export default async function NewsPreviewPage({
         <div className="nv-meta">
           {article.date} · Infinex News
         </div>
-        <div className="nv-cover">
-          <span className="t">cover image</span>
-          <span className="a">{article.coverAlt}</span>
-        </div>
-        <div className="nv-body" dangerouslySetInnerHTML={{ __html: article.bodyHtml }} />
+        <EditableArticle
+          cardId={id}
+          candidateId={candidateId}
+          editable={editable}
+          coverSrc={article.coverSrc}
+          coverAlt={article.coverAlt}
+          bodyHtml={article.bodyHtml}
+        />
       </div>
     </div>
   );

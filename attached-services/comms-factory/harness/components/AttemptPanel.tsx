@@ -22,7 +22,22 @@ const CHANNEL_LABEL: Record<Channel, string> = {
   modal: 'modal',
   blog: 'blog',
   carousel: 'carousel',
+  'image-brief': 'image brief',
 };
+
+/** SQLite datetime('now') is UTC without a zone marker; render as local time. */
+function formatAttemptTime(iso: string | undefined): string | null {
+  if (!iso) return null;
+  const date = new Date(iso.includes('T') || iso.endsWith('Z') ? iso : `${iso.replace(' ', 'T')}Z`);
+  if (Number.isNaN(date.getTime())) return null;
+  const today = new Date();
+  const sameDay =
+    date.getFullYear() === today.getFullYear() &&
+    date.getMonth() === today.getMonth() &&
+    date.getDate() === today.getDate();
+  const time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  return sameDay ? time : `${date.toLocaleDateString([], { month: 'short', day: 'numeric' })} ${time}`;
+}
 
 export function AttemptPanel({
   cardId,
@@ -32,6 +47,7 @@ export function AttemptPanel({
   actorAttempt,
   candidates,
   operatorFeedback,
+  pickedTextByCandidate,
 }: {
   cardId: string;
   channel: Channel;
@@ -40,6 +56,7 @@ export function AttemptPanel({
   actorAttempt: HarnessActorAttempt | null;
   candidates: HarnessCandidate[];
   operatorFeedback: HarnessOperatorFeedback[];
+  pickedTextByCandidate?: Map<string, string>;
 }) {
   const passCount = candidates.filter(
     (c) => c.validation_passed && c.active_validation_passed !== false,
@@ -90,6 +107,15 @@ export function AttemptPanel({
           )}
           <span className="text-ink-4">·</span>
           <span className="text-ink-4">{architecture}</span>
+          {(() => {
+            const at = formatAttemptTime(actorAttempt?.created_at ?? attemptRow?.created_at);
+            return at ? (
+              <>
+                <span className="text-ink-4">·</span>
+                <span className="text-ink-4">{at}</span>
+              </>
+            ) : null;
+          })()}
         </div>
         <AttemptResetButton cardId={cardId} channel={channel} attempt={attempt} />
       </summary>
@@ -177,6 +203,7 @@ export function AttemptPanel({
               channel={channel}
               candidates={candidates}
               operatorFeedback={operatorFeedback}
+              pickedTextByCandidate={pickedTextByCandidate}
             />
           )}
         </section>

@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { ACTOR_MEMORY_VERSION } from '@pipeline/actor-memory';
+import { RestartDevButton } from '@/components/RestartDevButton';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -34,7 +36,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span>·</span>
               <span>ANTHROPIC_API_KEY {hasKey ? '✓' : '✕'}</span>
               <span>·</span>
+              <span>{ACTOR_MEMORY_VERSION}</span>
+              <span>·</span>
               <span>v0.4 phase-1</span>
+              <RestartDevButton />
             </div>
           </div>
         </header>

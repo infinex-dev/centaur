@@ -319,6 +319,7 @@ export function getMockCardDetail(cardId: string): CardDetailView | null {
       ship: STAGE_STATES.ship,
     },
     facts,
+    expected_channels: ['x', 'x-thread', 'web', 'in-product', 'modal', 'blog', 'carousel', 'image-brief'],
     candidates_by_channel: {
       x: candidates.filter((c) => c.channel === 'x'),
       'x-thread': candidates.filter((c) => c.channel === 'x-thread'),
@@ -327,6 +328,7 @@ export function getMockCardDetail(cardId: string): CardDetailView | null {
       modal: candidates.filter((c) => c.channel === 'modal'),
       blog: candidates.filter((c) => c.channel === 'blog'),
       carousel: candidates.filter((c) => c.channel === 'carousel'),
+      'image-brief': candidates.filter((c) => c.channel === 'image-brief'),
     },
     attempts_by_channel: {
       x: [],
@@ -336,6 +338,7 @@ export function getMockCardDetail(cardId: string): CardDetailView | null {
       modal: [],
       blog: [],
       carousel: [],
+      'image-brief': [],
     },
     actor_attempts: [],
     operator_feedback: [],

@@ -110,13 +110,28 @@ interface DirectorAudit {
 export function CandidateCard({
   candidate,
   operatorFeedback = [],
+  pickedFinalText = null,
 }: {
   candidate: HarnessCandidate;
   operatorFeedback?: HarnessOperatorFeedback[];
+  /** This candidate's pick copy, if it's the approved pick — may differ from
+   *  candidate.text when the operator edited it. Lets the card show the saved
+   *  edit in place instead of the immutable generated draft. */
+  pickedFinalText?: string | null;
 }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const [editing, setEditing] = useState(false);
+  // Local echo of the just-saved edit, so the change shows instantly without a
+  // round-trip; `pickedFinalText` carries it across reloads.
+  const [savedText, setSavedText] = useState<string | null>(null);
+
+  // The copy actually in effect for this candidate: the just-saved edit, else
+  // the persisted pick edit (when it diverges from the generated draft).
+  const effectiveEdit =
+    savedText ?? (pickedFinalText && pickedFinalText !== candidate.text ? pickedFinalText : null);
+  const [draftText, setDraftText] = useState(candidate.text);
   const beatAudit = parseJson<BeatAudit[]>(candidate.beat_audit_json, []);
   const failures = parseJson<Array<{ rule: string; reason: string }>>(
     candidate.validation_failures_json,
@@ -159,11 +174,33 @@ export function CandidateCard({
   }
 
   function edit() {
-    const edited = window.prompt('Edit candidate text', candidate.text);
-    if (!edited) return;
-    run(async () => {
-      await decideCandidate(candidate.id, 'edit', { edited_text: edited });
-      await approvePick(candidate.id, edited);
+    setError(null);
+    setDraftText(effectiveEdit ?? candidate.text);
+    setEditing(true);
+  }
+
+  function cancelEdit() {
+    setEditing(false);
+    setDraftText(candidate.text);
+  }
+
+  function saveEdit() {
+    const edited = draftText.trim();
+    if (!edited) {
+      setError('Copy cannot be empty.');
+      return;
+    }
+    setError(null);
+    startTransition(async () => {
+      try {
+        await decideCandidate(candidate.id, 'edit', { edited_text: edited });
+        await approvePick(candidate.id, edited);
+        setSavedText(edited);
+        setEditing(false);
+        router.refresh();
+      } catch (err) {
+        setError(err instanceof Error ? err.message : String(err));
+      }
     });
   }
 
@@ -228,7 +265,7 @@ export function CandidateCard({
           <button disabled={pending} onClick={approve} className="text-state-approved disabled:text-ink-4 hover:underline">
             approve
           </button>
-          <button disabled={pending} onClick={edit} className="text-state-edited disabled:text-ink-4 hover:underline">
+          <button disabled={pending || editing} onClick={edit} className="text-state-edited disabled:text-ink-4 hover:underline">
             edit
           </button>
           <button disabled={pending} onClick={retry} className="text-state-running disabled:text-ink-4 hover:underline">
@@ -250,10 +287,44 @@ export function CandidateCard({
         </div>
       </header>
       <div className="px-4 py-4">
-        <SurfacePreview
-          surface={surfaceOfCandidate(candidate)}
-          data={{ text: candidate.text, structuredJson: candidate.structured_json }}
-        />
+        {editing ? (
+          <div className="space-y-2">
+            <textarea
+              value={draftText}
+              onChange={(e) => setDraftText(e.target.value)}
+              rows={Math.min(20, Math.max(6, draftText.split('\n').length + 1))}
+              spellCheck={false}
+              autoFocus
+              className="w-full bg-canvas border border-rule rounded p-3 text-sm font-mono text-ink resize-y"
+            />
+            <div className="space-x-3 text-xs font-mono">
+              <button disabled={pending} onClick={saveEdit} className="text-state-approved disabled:text-ink-4 hover:underline">
+                {pending ? 'saving…' : 'save → pick'}
+              </button>
+              <button disabled={pending} onClick={cancelEdit} className="text-ink-3 disabled:text-ink-4 hover:underline">
+                cancel
+              </button>
+              <span className="text-ink-4">{draftText.length} chars · saves this candidate as the {candidate.channel} pick</span>
+            </div>
+          </div>
+        ) : effectiveEdit ? (
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-xs font-mono text-state-edited">
+              <span className="px-1.5 py-0.5 rounded bg-state-edited/15">✎ edited</span>
+              <span className="text-ink-4">
+                saved as the {candidate.channel} pick — differs from the generated draft · {effectiveEdit.length} chars
+              </span>
+            </div>
+            <div className="whitespace-pre-wrap text-sm text-ink rounded border border-state-edited/40 bg-canvas p-3">
+              {effectiveEdit}
+            </div>
+          </div>
+        ) : (
+          <SurfacePreview
+            surface={surfaceOfCandidate(candidate)}
+            data={{ text: candidate.text, structuredJson: candidate.structured_json }}
+          />
+        )}
       </div>
       <footer className="border-t border-rule bg-canvas px-4 py-3">
         <details className="group">

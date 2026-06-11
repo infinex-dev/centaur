@@ -6,13 +6,13 @@
  * thread, web card, …). The pipeline persists all seven channels natively, so
  * the surface is the channel (with the one fallback where an `x` candidate
  * with no structured payload but multi-tweet text is shown as a thread — see
- * surfaceOfCandidate). Surfaces with no candidates are reported "missing", not
- * faked.
+ * surfaceOfCandidate). Surfaces with no candidates get no row at all — only
+ * what the operator generated appears on the card.
  */
 
 import type { CardDetailView, HarnessCandidate } from './types';
 import { CHANNELS } from './queries';
-import { surfaceOfCandidate, type SurfaceKind } from './surfaces';
+import { SURFACE_ORDER, surfaceOfCandidate, type SurfaceKind } from './surfaces';
 
 export type SurfaceState = 'shippable' | 'blocked' | 'missing';
 
@@ -63,6 +63,9 @@ export function buildPackageView(detail: CardDetailView): PackageView {
     bySurface.set(surf, bucket);
   }
 
+  // Only surfaces the operator actually generated get rows. Card-audience
+  // channels with zero candidates stay invisible — fabricating "missing" rows
+  // for them put never-requested surfaces (e.g. web) on every card.
   const rows: SurfaceRow[] = [];
   for (const [surface, candidates] of bySurface) {
     candidates.sort((a, b) => b.attempt - a.attempt || b.created_at.localeCompare(a.created_at));
@@ -78,7 +81,7 @@ export function buildPackageView(detail: CardDetailView): PackageView {
     });
   }
 
-  rows.sort((a, b) => a.surface.localeCompare(b.surface));
+  rows.sort((a, b) => SURFACE_ORDER.indexOf(a.surface) - SURFACE_ORDER.indexOf(b.surface));
   const shippable = rows.filter((r) => r.state === 'shippable').length;
   return {
     rows,

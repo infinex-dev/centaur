@@ -1,0 +1,247 @@
+[
+  {
+    "id": "bridge-fiat-deposit-2026-06-05-x-1",
+    "card": "bridge-fiat-deposit-2026-06-05",
+    "channel": "x",
+    "text": "Your money and your wallet used to live in different buildings. As of today they share an address, and the doors I'm watching aren't the ones we just opened.",
+    "rationale": "Plays 'to dissolve' through the metaphor of two buildings becoming one address; leaks the lining via the narrator's gaze already shifted to the next doors.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "practical",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "primary_tempo=practical is one of the five primary allowed tempi for Infinex (commanding, practical, sombre, irradiant, sociable). Drive reads as resting Spell, which is the secondary formative drive for stable|penetrating|flow and is explicitly legal as contained surface for single-beat web/X copy. Lining (the banker-turned-trailblazer watching the next doors) is not surfaced as explicit thesis — it leaks through the posture of 'the doors I'm watching' without being named. No urgency, no FOMO, no Passion foregrounding. Factor shape matches the Infinex character: Stable baseline, Flexible spatial attention, Bound flow (watching/containing rather than releasing)."
+    }
+  },
+  {
+    "id": "bridge-fiat-deposit-2026-06-05-x-2",
+    "card": "bridge-fiat-deposit-2026-06-05",
+    "channel": "x",
+    "text": "For most of my career, your bank held the money and somewhere else did the work. Send from your bank to Infinex now and that line isn't there. The interesting question is what we open next.",
+    "rationale": "Plays 'to dissolve' as a line that simply isn't there anymore; leaks the lining through the banker-voice's autobiographical 'most of my career' and the forward gaze.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "primary_tempo = commanding (Strong + Direct, Stable). Commanding is a primary allowed Infinex tempo. Drive reads as Spell with Doing surface and a Vision aperture at close — consistent with stable|penetrating|flow cell (primary=spell, secondary=doing, extravert=vision). Lining (passion/banker interiority) is correctly submerged. No urgency, FOMO, or scarcity vocabulary. The through-action (folding the two places into one) is carried. Not-the-point constraints respected: no naming of rails/plumbing/fees/super-objective."
+    }
+  },
+  {
+    "id": "bridge-fiat-deposit-2026-06-05-x-3",
+    "card": "bridge-fiat-deposit-2026-06-05",
+    "channel": "x",
+    "text": "The chore of moving money from where it sits to where it works was always yours. Starting today it isn't a move, and it isn't a chore. Bigger doors after this one.",
+    "rationale": "Plays 'to dissolve' by negating the chore itself rather than describing a new path; leaks the lining via 'bigger doors after this one' as quiet certainty about what comes next.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "Primary tempo is commanding (Stable, Strong + Direct), which is in the five primary allowed tempi for Infinex. Drive read is Spell, which is the primary (resting) drive for stable|penetrating|flow. Single X copy need not project Vision; Spell as visible surface is explicitly legal per the placement rules. No passion/urgency/FOMO vocabulary present. No off-spec tempo."
+    }
+  },
+  {
+    "id": "hyperliquid-spot-unified-2026-05-29-x-1",
+    "card": "hyperliquid-spot-unified-2026-05-29",
+    "channel": "x",
+    "text": "Spot trading on Hyperliquid is coming to Infinex, and the wall between spot and perps is coming down with it — one account, one balance, one click to switch sides.",
+    "rationale": "Names the wall directly and folds the consequence (one account/balance/click) into a single trailing clause; leaks that the partition was already removed upstream.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "Primary tempo is commanding, one of the five primary allowed tempi. Drive surface is Spell (legal resting energy for stable|penetrating|flow). No urgency, FOMO, or Passion foregrounding. The 'wall coming down' image is forceful but structural — it reads as Spell-binding transformation, not pressure-theatre. Super-objective is served: the copy takes responsibility for the infrastructure change ('the wall is coming down') so the user only has to want ('one click to switch sides'). Single X post; Vision not required per-line."
+    }
+  },
+  {
+    "id": "hyperliquid-spot-unified-2026-05-29-x-2",
+    "card": "hyperliquid-spot-unified-2026-05-29",
+    "channel": "x",
+    "text": "Hyperliquid spot is coming to Infinex without the second wallet, without the transfer step, without the tab-juggling — spot and perps share the same balance now, and switching is a click.",
+    "rationale": "Refuses the reader's prior by negation — names the things that are absent rather than the thing being added.",
+    "director": {
+      "passed": false,
+      "copy_voice_passed": false,
+      "legal": false,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.62,
+      "voice_issues": [
+        "Drive surface reads Doing rather than Spell. The triple-'without' elimination list makes the product the actor (it removes friction) rather than the character (who has already shaped a world the reader can enter). Spell surface requires visible shaping intelligence — the sense that someone decided this architecture, not that features happened to arrive.",
+        "The closing beat ('switching is a click') executes the Pressing → Punching arc correctly in terms of motor, but delivers a feature-claim payoff rather than a character-stance payoff. The Quick release needs to land the character's already-taken position, not a UX specification.",
+        "The copy reads as changelog register: authoritative, accurate, but impersonal. Infinex commanding copy should carry the character's penetrating quality — the shaping gaze — not just the weight of the announcement.",
+        "whole (single tweet): Drive surface reads Doing (feature enumeration) rather than Spell (shaping intelligence). The tripartite elimination list is motorically correct (Pressing build) but character-vocally misplaced for the Infinex X channel.; Publication gate: PR #14581 not yet merged; copy is forward-tensed ('coming to') which is correct, but merge confirmation required before publish."
+      ],
+      "infinex_fit_reason": "commanding is a primary allowed tempo and is not disqualified by its factor shape. The failure is register: the copy reads as a Doing-surfaced feature announcement. The Infinex character (stable|penetrating|flow, Spell → Vision axis) calls for the sense of a shaping intelligence behind the architecture — the 'banker-turned-trailblazer who has already decided, now mapping.' The current prose enumerates removed friction points at Strong/Direct weight, which is structurally commanding but vocally closer to a product changelog than to a character who holds a world. Specifically: (1) The triple 'without…without…without' structure foregrounds the elimination list as the news event, making the product the actor rather than the character. (2) The closing 'switching is a click' is a feature claim — accurate and well-prepared by the Pressing arc — but it does not carry Spell surface: no sense of designed inevitability, no enfolding of the reader into the character's already-settled orientation. (3) Drive reads as Doing (functional accomplishment as the visible projection), which is the secondary drive of the placement, not the primary (Spell). A single web or UI line at resting Spell is legal; a full X-post that reads purely as Doing-surfaced feature copy is a missed projection for the channel. This is a voice issue, not a tempo issue."
+    }
+  },
+  {
+    "id": "hyperliquid-spot-unified-2026-05-29-x-3",
+    "card": "hyperliquid-spot-unified-2026-05-29",
+    "channel": "x",
+    "text": "Hyperliquid spot is coming to Infinex on the same account as your perps — same balance, no transfer in between, one click to move between them. The seam is just gone.",
+    "rationale": "Inverts the order: leads with the shared account, lets the closing sentence name the absence directly as the leak of work-already-done.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "commanding is a primary allowed tempo for Infinex (Strong + Direct, Stable). Pressing → Punching is the canonical motor. Drive reads as Doing (visible surface of Spell primary) — legal for a single contained beat. No Passion/urgency vocabulary surfaces as visible projection. Lining remains hidden. The copy reads as the banker-turned-trailblazer who has already made the decision and is now mapping it for the reader — consistent with the character image."
+    }
+  },
+  {
+    "id": "infinex-synthetix-perps-2026-05-29-x-1",
+    "card": "infinex-synthetix-perps-2026-05-29",
+    "channel": "x",
+    "text": "Synthetix takes a seat on the perps bench inside Infinex, sitting alongside Hyperliquid. Pick a market; the routing is already handled.",
+    "rationale": "Plays 'to seat' literally — Synthetix takes a seat — and closes with the user's only remaining decision.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "practical",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "practical is a primary allowed tempo for Infinex (Strong + Flexible, Stable). Drive read is Spell at rest, which is legal for the stable|penetrating|flow cell — primary drive is Spell, and resting Spell without visible Vision projection is explicitly permitted for single-line or web/X copy. No urgency, FOMO, or passion-forward vocabulary. No off-spec markers. Tone is settled, lateral, fait-accompli — consistent with the banker-turned-trailblazer who has already decided and is now mapping."
+    }
+  },
+  {
+    "id": "infinex-synthetix-perps-2026-05-29-x-2",
+    "card": "infinex-synthetix-perps-2026-05-29",
+    "channel": "x",
+    "text": "The perps floor inside Infinex now has a second venue under it: Synthetix sits next to Hyperliquid, and which one carries the trade is no longer the user's problem.",
+    "rationale": "Plays 'to seat' as a structural widening — two venues under one floor — and leaks the lining by naming whose problem the routing isn't.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.68,
+      "voice_issues": [],
+      "infinex_fit_reason": "commanding is a primary allowed Infinex tempo; Spell as visible surface is legal for stable|penetrating|flow placement; no Passion/urgency/FOMO foregrounded; drive axis not violated. Resting Spell in a single web/X line is explicitly not a fail condition per Director rules."
+    }
+  },
+  {
+    "id": "infinex-synthetix-perps-2026-05-29-x-3",
+    "card": "infinex-synthetix-perps-2026-05-29",
+    "channel": "x",
+    "text": "Hyperliquid is no longer the only perps venue underneath Infinex. Synthetix is seated next to it; the user picks a market, the platform handles where it goes.",
+    "rationale": "Opens from the prior state and names the addition by contrast, leaking the lining through the closing division of labor.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.68,
+      "voice_issues": [],
+      "infinex_fit_reason": "Primary tempo commanding is one of the five primary allowed tempi for Infinex. Drive read is Spell at rest — the legal resting drive for the stable|penetrating|flow cell. No off-spec markers (no urgency vocabulary, no FOMO, no scarcity theatre, no passion foregrounding). The Lining (passion/introvert) is not surfaced. The copy does not assert 'live' status. Facts used are traceable to deployed_facts. Tempo, drive, and register are all within spec."
+    }
+  },
+  {
+    "id": "swidge-bridge-2026-05-20-x-1",
+    "card": "swidge-bridge-2026-05-20",
+    "channel": "x",
+    "text": "Twenty-plus chains, one motion. The seam where you used to stop and choose a route is closed; the quotes have been compared, the slippage set, the path picked. You move. That's swidge.",
+    "rationale": "Leads with the spatial dissolution of the seam; the leak is in the past-tense passives that signal decisions already taken before the user arrives.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "Primary tempo commanding is one of the five primary allowed tempi (commanding, practical, sombre, irradiant, sociable). Drive read is Spell, the locked primary drive for stable|penetrating|flow. No passion/urgency/FOMO vocabulary is foregrounded. The Lining (passion = introvert slot) does not surface as explicit thesis. 'You move.' is a bold resolve in the commanding shorthand — 'Commanding demonstration or acceptance of a bold resolve' — which fits the Infinex character image (decisions already taken, now mapping). Pressing -> Punching motor arc is legal for commanding. No off-spec markers detected."
+    }
+  },
+  {
+    "id": "swidge-bridge-2026-05-20-x-2",
+    "card": "swidge-bridge-2026-05-20",
+    "channel": "x",
+    "text": "There used to be two verbs and two interfaces between any token here and any token there. Now there's one motion across twenty-plus chains, with the routing, the quotes, and the slippage already decided. Swidge.",
+    "rationale": "Names the old two-step prior to disarm it, then lands the collapse; the leak is the inventory of decisions in the second clause that the user no longer has to make.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "Primary tempo commanding is on the primary allowed list (commanding, practical, sombre, irradiant, sociable). Drive reads as resting Spell — legal for Infinex single-beat copy. No passion/urgency/FOMO is foregrounded. The through-action is declarative-stable, not hype. The closing 'Swidge.' is a product name placement, not a call-to-action pressure beat. Lining (Passion/depth of engagement behind the builder's mapping) remains correctly hidden — not surfaced as thesis."
+    }
+  },
+  {
+    "id": "swidge-bridge-2026-05-20-x-3",
+    "card": "swidge-bridge-2026-05-20",
+    "channel": "x",
+    "text": "Any token, any of twenty-plus chains, to any token, any chain — in one motion. The routing's been solved, the quotes compared, the slippage set. You arrive where you meant to. Swidge.",
+    "rationale": "Mirrors the card's from/to shape to fold the two halves into one trajectory; the leak is the matter-of-fact closure of work the reader didn't see happen.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "Primary tempo commanding (Strong + Direct, Stable) is in the five primary allowed tempi for Infinex. Drive reads Spell (formative), which is the locked primary for stable|penetrating|flow. No passion/urgency vocabulary foregrounded. No FOMO or scarcity markers. The copy presents the solved state — consistent with 'decisions already taken, now mapping.' Lining (passion) is not surfaced as explicit meaning. The post is a legal contained beat; it need not project Vision to pass."
+    }
+  },
+  {
+    "id": "trezor-2026-05-19-x-1",
+    "card": "trezor-2026-05-19",
+    "channel": "x",
+    "text": "Trezor is in the portfolio, sitting next to Ledger. Same view, same surface, signing on its own device.\n\nWhich brand of cold key you hold stops deciding where you spend your day.",
+    "rationale": "Plain seating — the device is described as already in the view; the dissolve beat names the tradeoff and lets it fall away without flagging it as resolved.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "Primary tempo commanding (Strong+Direct) is on the primary-allowed list. Drive read Spell is the legal resting surface for stable|penetrating|flow. No urgency, FOMO, or Passion markers present. Lining (Passion / introvert slot) does not surface. The copy does not manufacture scarcity or time pressure. Two-beat structure (seat → liberation) enacts the Pressing preparation without forcing a Punching release — correct for a Spell-primary character who does not need to punch the reader into action."
+    }
+  },
+  {
+    "id": "trezor-2026-05-19-x-2",
+    "card": "trezor-2026-05-19",
+    "channel": "x",
+    "text": "Open the portfolio. Trezor is there, next to Ledger, the device still holding the keys and signing each transaction itself.\n\nThe surface bends to whichever one you brought.",
+    "rationale": "Second-person entry — invites the reader to look rather than be told; the dissolve beat reframes the surface as the thing accommodating, not the user.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "practical",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "practical is a primary allowed tempo for Infinex. Stable baseline is canonical for the character (banker-turned-trailblazer, decisions already taken, now mapping). Resting Spell without visible Vision projection is legal for single-beat web/x copy per role definition. No passion, urgency, or FOMO foregrounded. No off-spec markers. Beat-only read is appropriate for a launch-announcement tweet."
+    }
+  },
+  {
+    "id": "trezor-2026-05-19-x-3",
+    "card": "trezor-2026-05-19",
+    "channel": "x",
+    "text": "A Trezor in the portfolio reads the same as a Ledger. Balances on the surface, keys on the device, every signature still made there.\n\nCold storage no longer picks the app for you.",
+    "rationale": "Equivalence framing — opens by treating the two devices as already interchangeable in the view; the dissolve beat states the structural shift in flat declarative.",
+    "director": {
+      "passed": true,
+      "copy_voice_passed": true,
+      "legal": true,
+      "primary_tempo": "commanding",
+      "primary_confidence": 0.72,
+      "voice_issues": [],
+      "infinex_fit_reason": "Tempo reads commanding (Strong + Direct), which is a primary allowed Infinex tempo. Drive surface is Spell, which is legal for Stable + Penetrating + Flow placement. No urgency, FOMO, or scarcity vocabulary. No off-character register markers. The copy is a structural declaration, not a hype gesture."
+    }
+  }
+]

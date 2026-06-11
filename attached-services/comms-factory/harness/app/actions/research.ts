@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { groundFacts, discoverSources, fetchRef, extractFeatureSubject, type GrounderTraceEvent, type VerifiedFact } from '@pipeline/fact-grounder-llm';
 import { centaurResearchExecutorFromEnv, hasCentaurResearchEnv } from '@pipeline/centaur-research';
 import { getDb, newId, nowIso, writeTx } from '@/lib/db';
+import { askGrounder as askGrounderCore } from '@/lib/reground';
 import { listApprovedApiHosts, listApprovedFacts, requireCard, requireFact } from '@/lib/queries';
 import { makeFieldDiff } from '@/lib/diff';
 import { clearResearchDownstream } from '@/lib/stage-reset';
@@ -198,6 +199,25 @@ export async function runGrounder(
   revalidatePath('/');
   revalidatePath(`/cards/${card_id}`);
   return { facts: inserted, unverifiable: result.unverifiable };
+}
+
+/** Operator ask: supplemental targeted grounding on top of whatever the card
+ * already has. Does not clear or re-discover anything — just adds facts. */
+export async function askGrounder(
+  card_id: string,
+  prompt: string,
+): Promise<{ verified: number; unverifiable: { claim: string; reason: string }[] }> {
+  const trimmed = prompt.trim();
+  if (!trimmed) throw new Error('A question for the grounder is required.');
+  if (!process.env.ANTHROPIC_API_KEY) {
+    throw new Error('ANTHROPIC_API_KEY is required to run the fact grounder in the harness.');
+  }
+  const db = getDb();
+  requireCard(card_id, db);
+  const result = await askGrounderCore(card_id, trimmed);
+  revalidatePath('/');
+  revalidatePath(`/cards/${card_id}`);
+  return { verified: result.verified, unverifiable: result.unverifiable };
 }
 
 function errorMessage(err: unknown): string {

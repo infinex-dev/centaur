@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 import type { CharacterSpec, TempoName } from "./voice/types.js";
 import { ALL_TEMPO_NAMES } from "./voice/types.js";
 
-export const ACTOR_MEMORY_VERSION = "actor-memory-v1";
+export const ACTOR_MEMORY_VERSION = "actor-memory-v2";
 export const DIRECTOR_MEMORY_VERSION = "director-memory-v2";
 
 export interface CanonicalMirodanSource {
@@ -162,6 +162,7 @@ export function buildActorMemoryPack(voice: CharacterSpec): ActorMemoryPack {
     actorMethodBlock(),
     fullTempoTaxonomyBlock(),
     infinexPlacementBlock(voice),
+    placementRangeBlock(voice),
     channelGrammarBlock(),
     "## Output discipline",
     "- Never use the em-dash character (—). It is auto-rejected as AI-slop, zero tolerance. Use a period or a comma; recast the sentence if needed.",
@@ -382,6 +383,38 @@ function infinexPlacementBlock(voice: CharacterSpec): string {
     "- Passion/time-pressure drift is the common failure mode: urgency, deadline pressure, FOMO, and scarcity-of-attention foreground Passion as the visible projection.",
     "",
   ].join("\n");
+}
+
+/**
+ * Range of the placement — ACTOR PACK ONLY. The Director's read must stay
+ * forensic: telling the Director where the character "should" rest would bias
+ * its blind classification, so this block is never added to the Director pack.
+ * Framed at attitude/factor/motor level (no tempo names) because the Actor
+ * must not name or target tempi.
+ */
+function placementRangeBlock(voice: CharacterSpec): string {
+  const lines: string[] = [
+    "## Range of the placement (Mirodan vol 2 pp. 553-558)",
+    "- Action-Attitude formation rule (pp. 553-554): Outer Action = Stress + the Aspect's main Inner Participation; Inner Action = Stress + the secondary one.",
+  ];
+  if (voice.inner_attitude === "stable" && voice.aspect === "penetrating" && voice.stress === "flow") {
+    lines.push(
+      "- For this placement: baseline Stable (Weight + Space); visible Outer-Action flashes read as Remote (Space + Flow); the hidden Inner Action lives in Adream (Weight + Flow). The Flow stress is the placement's reach — the character is BUILT to move across these three attitudes.",
+      "- A performance that never leaves Strong+Direct will-assertion is presenting a Doing-dominant character, not this one. Light, Free, and Bound qualities are not departures from character; they are the stress made audible.",
+      "- The inverse trap: dropping Intending entirely and reporting settled fact (Direct + Sustained, no Weight, no Flow) presents an Awake observer — also not this character. Every line either carries the trace of a decision already taken or yields into the Flow stress; it is never a neutral report of someone else's release.",
+    );
+  }
+  if (voice.drive_primary === "spell") {
+    lines.push(
+      "- Spell tempo signature (p. 537): Spell-resting characters 'generally display a Sustained tempo... dream-like: almost, but not literally, in slow motion.' Pressing -> Punching is the marked move, spent deliberately, not the resting motor.",
+    );
+  }
+  lines.push(
+    "- A character has all four Variations of its Attitude at its disposal; one tends to occur less often (the Aspect's mark), 'but the other three are used to a large extent and their use makes for variety and interest in performance' (p. 558). Do not camp in one register across beats or across candidates.",
+    "- Stress and energy order track the immediate circumstance of the scene (p. 552 fn), never the artifact type. There is no canonical motor arc per post kind; sequence beats by what the through-action must do next.",
+    "",
+  );
+  return lines.join("\n");
 }
 
 function channelGrammarBlock(): string {

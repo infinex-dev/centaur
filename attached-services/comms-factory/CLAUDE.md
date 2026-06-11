@@ -40,6 +40,8 @@ Each stage has one job and exactly one job:
 - **`launch-tier`** — reserved template, ~4x/year. Berachain's lesson: scarcity is the signal.
 - **`split`** — semantic two-color split (bridge from/to, in/out, principal/yield). Pendle's lesson.
 
+Orthogonal to `kind`, cards carry an optional editorial **`category`** (the genus, not the template): absent/`changelog` = release/changelog behavior (blog changelog scaffold + format gate); `thesis` = long-form positioning essay — no CTA anywhere (validator rule `thesis-cta`), essay-length blog cap (12k chars vs 3600), ships to X via the ship-gate X-article transform, audience typically `["blog","x-thread","x"]`. Thesis pieces do NOT consume a launch-tier slot; `kind` is renderer-only for them. Don't add a fifth `kind` for editorial genera — extend `category`.
+
 Every card carries `deployed_facts: string[]` — the load-bearing claims the release actually makes. **The caption cannot assert anything not in deployed_facts.** This is the fact-check anchor. If the release says "yields up to 18.94% APY", that string is in deployed_facts; if the generator writes "20% APY", the validator catches the drift (TODO: fact-check rule pending; for now, prompt-level only).
 
 Cards live in `cards/<release-id>.json` (created at ship time by whatever emits the release event). The CLI consumes them.

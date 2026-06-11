@@ -22,6 +22,22 @@ const KIND_META = {
 type Kind = keyof typeof KIND_META;
 const KINDS = Object.keys(KIND_META) as Kind[];
 
+/**
+ * Editorial genus, orthogonal to kind. "changelog" (or absent) = release
+ * behavior; "thesis" = positioning essay — no CTA, essay-length blog,
+ * ships to X as an article.
+ */
+const CATEGORY_META = [
+  { value: 'changelog', label: 'Release / changelog', hint: 'changelog scaffold + format gate' },
+  { value: 'thesis', label: 'Thesis piece', hint: 'positioning essay · no CTA · X article' },
+] as const;
+type Category = (typeof CATEGORY_META)[number]['value'];
+
+function currentCategoryOf(parsed: Record<string, unknown> | null): Category {
+  const raw = parsed?.category;
+  return raw === 'thesis' ? 'thesis' : 'changelog';
+}
+
 export function CardEditor({
   cardId,
   releaseCardJson,
@@ -45,6 +61,11 @@ export function CardEditor({
   function selectKind(kind: Kind) {
     if (!parsed) return;
     setText(JSON.stringify({ ...parsed, kind }, null, 2));
+  }
+
+  function selectCategory(category: Category) {
+    if (!parsed) return;
+    setText(JSON.stringify({ ...parsed, category }, null, 2));
   }
 
   function run(action: () => Promise<unknown>) {
@@ -159,6 +180,32 @@ export function CardEditor({
             })}
           </div>
           <TierDetail kind={currentKind} parsed={parsed} />
+          <p className="text-xs font-mono uppercase tracking-wider text-ink-3 pt-2">
+            category (editorial genus){' '}
+            <span className="text-ink-4 normal-case">· save edits to apply</span>
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {CATEGORY_META.map((cat) => {
+              const on = currentCategoryOf(parsed) === cat.value;
+              return (
+                <button
+                  key={cat.value}
+                  disabled={pending}
+                  onClick={() => selectCategory(cat.value)}
+                  title={cat.hint}
+                  className={`text-xs font-mono px-2.5 py-1 rounded border transition-colors disabled:opacity-50 ${
+                    on
+                      ? 'border-state-running text-state-running bg-state-running/10'
+                      : 'border-rule text-ink-4 hover:text-ink-3'
+                  }`}
+                >
+                  {on ? '✓ ' : ''}
+                  {cat.label}
+                  <span className="text-ink-4"> · {cat.hint}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       )}
       {releaseCardJson ? (

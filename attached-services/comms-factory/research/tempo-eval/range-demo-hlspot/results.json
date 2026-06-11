@@ -1,0 +1,110 @@
+{
+  "inner_work": {
+    "thesis": "Spot trading on Infinex begins, and it begins on the venue that already settled the question of where spot liquidity lives.",
+    "through_action": "to seat Hyperliquid spot inside the Infinex Perps interface as something the user can already use, not something being announced at them",
+    "obstacle": "the reader expects either a launch-hype shout ('SPOT IS LIVE 🚀') or a feature-list rundown; both flatten the move into a product update instead of a structural turn",
+    "lining": "on the surface: a quiet note that the spot route is open. underneath: the decision to take spot on at all has already been taken, the second venue is already wired, and the operator is showing the reader the room they're now standing in",
+    "reader_prior": "Infinex Perps is for perps; spot lives elsewhere (CEX, Hyperliquid native UI); a 'spot launch' tweet will be a hype beat with a token list and a rocket",
+    "not_the_point": "The draft must NOT list market pairs as a row (no 'HYPE, UBTC, UETH, PURR'-style enumeration), must NOT cite the $144M or any other dollar/volume figure, must NOT name 'Spot V1' or 'unified account' as jargon, must NOT use launch-hype shapes ('live now', 'is here', rockets, 'let's go', 'wagmi'), must NOT antagonize or name CEXes, and must NOT explain the multi-venue architecture or feature-flag mechanics. The Lighter mention, if it appears at all, is a one-clause acknowledgment of what comes next — not a roadmap pitch.",
+    "beat_plan": [
+      {
+        "verb": "to seat",
+        "working_action": "pressing",
+        "micro_objective": "make the reader register that spot now has a place inside the Perps app — a settled fact carried with weight, not announced",
+        "obstacle_local": "the reader's reflex to read any first sentence as a launch shout",
+        "shadow_move": "the decision to expand beyond perps was taken long before this sentence"
+      },
+      {
+        "verb": "to open",
+        "working_action": "floating",
+        "micro_objective": "let the reader feel the room widen — one interface, the order book already there, nothing to migrate to",
+        "obstacle_local": "the assumption that spot means a separate venue, a separate login, a separate context",
+        "shadow_move": "the operator already knows what it costs to keep two surfaces; the user won't have to"
+      },
+      {
+        "verb": "to mark",
+        "working_action": "dabbing",
+        "preparation_from": "gliding",
+        "micro_objective": "name Lighter-next as the same gesture continuing, not as a teaser — the through-line is visible",
+        "obstacle_local": "the reader expecting either silence about what's next or a roadmap pitch",
+        "shadow_move": "the architecture for the second venue is already in the building"
+      }
+    ],
+    "rationale": "Pressing into floating into a dabbing mark moves the post across the placement's range — Weight present in the opening (decision already taken), Flow carrying the middle (the room opening), and a light quick-release naming what comes next without hype. This refuses both the launch-shout collapse and the reporter-of-facts collapse, and lets the spell→vision axis read as a turn the operator has already made on the user's behalf.",
+    "source": "anthropic"
+  },
+  "results": [
+    {
+      "variant": "unsteered",
+      "id": "unsteered-1",
+      "text": "Spot has a seat in the Perps app now. Hyperliquid's order book runs underneath it.\n\nOne interface. The book the market already chose. Nothing to migrate to, nothing to log into twice.\n\nLighter spot follows.",
+      "director_primary": "commanding",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "Tempo reads commanding (Strong + Direct, Stable) — a primary allowed tempo for Infinex. Drive reads Spell at rest, consistent with stable|penetrating|flow cell (primary=spell, secondary=doing). No off-spec markers: no urgency vocabulary, no FOMO, no scarcity pressure, no hype register. 'Lighter spot follows' is a contained forward signal that does not escalate to Passion. Lining (Passion/introvert) does not surface. The copy does not project Vision explicitly — permissible for a single-beat web/X line per Director method."
+    },
+    {
+      "variant": "unsteered",
+      "id": "unsteered-2",
+      "text": "Spot is wired into the Perps app. It runs on Hyperliquid's book.\n\nThe room widened without anyone having to move. Same interface, deeper surface.\n\nLighter is the next venue on the same rail.",
+      "director_primary": "commanding",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "Primary tempo reads commanding (Strong + Direct), which is in the primary allowed tempi list for Infinex (commanding, practical, sombre, irradiant, sociable). Drive reads Spell — legal resting surface for stable|penetrating|flow placement. No passion/urgency/FOMO markers foregrounded. No off-spec drive surfacing. The copy does not project Vision, but the Director rule states Spell resting state is acceptable for single-channel x copy; Vision is a cumulative arc target, not a per-line requirement. Lining (passion) is not surfaced as explicit meaning. Register is settled, not hyped."
+    },
+    {
+      "variant": "irradiant-aim",
+      "id": "irradiant-aim-1",
+      "text": "Spot opens on Infinex Perps today, on Hyperliquid's order book, from the same room you already trade in.\n\nThe markets that actually move are the ones now in reach — eighteen of them, quoted in USDC, routed on-chain.\n\nLighter spot follows. The room keeps widening.",
+      "director_primary": "practical",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "practical is a primary allowed tempo for Infinex. Drive reads as resting Spell, which is the legal primary for stable|penetrating|flow. Vision is not required per-line. No urgency/FOMO/passion-forward surface detected. Lining (Passion/introvert) is not surfaced as explicit meaning. Beat-only reserve tempi are not in play. Three-beat arc holds together as a single contained post."
+    },
+    {
+      "variant": "irradiant-aim",
+      "id": "irradiant-aim-2",
+      "text": "The Perps app holds spot now. Hyperliquid's book, same interface, nothing relocates.\n\nWhat surfaces is the part of that book worth trading — eighteen live markets, USDC-quoted, on-chain.\n\nLighter is wired for spot next, and the floor keeps extending under you.",
+      "director_primary": "commanding",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "commanding (Strong + Direct, Stable) is a primary allowed Infinex tempo. Drive reads as resting Spell, which is legal for stable|penetrating|flow on a single-beat surface. No passion/urgency vocabulary is foregrounded. No off-spec markers present. Tempo, drive, and character stance are within the declared placement."
+    },
+    {
+      "variant": "sombre-aim",
+      "id": "sombre-aim-1",
+      "text": "Spot, for years, has lived on a different surface than the book it actually trades against.\n\nThat split closes inside the Perps app: Hyperliquid spot now executes on its own order book, from the same interface.\n\nLighter follows on the same route. The room is built for more than one venue.",
+      "director_primary": "practical",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "Primary tempo practical (Strong + Flexible / Stable) is on the primary allowed list. Drive reads as Spell (primary for stable|penetrating|flow). Resting at Spell without visible Vision projection is legal for single-tweet copy per the corpus rule. No urgency, FOMO, or scarcity vocabulary. No passion foreground. Wringing -> Slashing motor pair is consistent with practical tempo. Weight is in the Stable baseline and correctly not named as the stress. Flow (Bound) is present as the stress activating the Stable baseline, consistent with stable|penetrating|flow placement."
+    },
+    {
+      "variant": "sombre-aim",
+      "id": "sombre-aim-2",
+      "text": "For a long time, taking a spot fill on Hyperliquid meant leaving the desk you were already trading from.\n\nIt doesn't anymore. The same book, reached from inside the Perps app.\n\nLighter spot is wired on the same route. One room, more doors opening.",
+      "director_primary": "practical",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "practical (Strong + Flexible / Stable) is a primary allowed tempo for Infinex. Drive read is Spell at rest — legal for stable|penetrating|flow placement. No Passion/urgency surface. No off-spec markers. Spatial mapping and structural 'one room, more doors opening' figure is consistent with the banker-turned-trailblazer character who has already decided and is now describing the new terrain. Wringing → Slashing motor pair is intact."
+    },
+    {
+      "variant": "sociable-aim",
+      "id": "sociable-aim-1",
+      "text": "Hyperliquid's spot book opens inside the Perps app today. Same door you already use.\n\nThe order book is theirs, on-chain, USDC-quoted. You're trading it from where you're already standing.\n\nLighter spot follows. The room is being set with more than one seat.",
+      "director_primary": "commanding",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "commanding is a primary allowed tempo for Infinex. Spell as visible drive surface is legal for the stable|penetrating|flow character. Single x-post resting at Spell without a Vision projection is explicitly permitted by the Director method for one-line/short-form copy. No passion-urgency or FOMO surfacing detected. Lining (passion) remains hidden."
+    },
+    {
+      "variant": "sociable-aim",
+      "id": "sociable-aim-2",
+      "text": "Spot opens at Hyperliquid's book, inside the Perps app you're already in.\n\nThe matching is theirs, on-chain. The route is ours. You don't change venues to use it.\n\nA second venue, Lighter, is wired up behind it. The table goes on getting longer.",
+      "director_primary": "commanding",
+      "director_pass": true,
+      "director_legal": true,
+      "fit_reason": "Commanding is a primary allowed tempo for Infinex. Drive read is Spell — resting primary drive for the stable|penetrating|flow cell — which is legal for contained beat or single-post copy. No off-spec urgency, FOMO, or Passion-forward vocabulary present. Spell without visible Vision projection does not fail a single-post surface by rule."
+    }
+  ]
+}

@@ -27,6 +27,47 @@ export interface SurfaceData {
   structuredJson?: string | null;
 }
 
+/**
+ * Edit handlers for in-card editing. When passed, the primary text nodes of the
+ * card become contentEditable and report changes through these callbacks. Nodes
+ * are UNCONTROLLED — they render their initial value once and never re-read from
+ * state during typing — so the operator's cursor never jumps. SurfaceEditor reads
+ * the working values on save, not per keystroke.
+ */
+export interface SurfaceEditHandlers {
+  setText?: (value: string) => void;
+  setWebField?: (field: 'subheading' | 'title' | 'caption', value: string) => void;
+  setTweet?: (index: number, value: string) => void;
+  setSlide?: (index: number, field: 'name' | 'body', value: string) => void;
+}
+
+function readText(el: HTMLElement): string {
+  return el.textContent ?? '';
+}
+
+/** Uncontrolled contentEditable text node. `value` is initial-only. */
+function Editable({
+  value,
+  onInput,
+  className,
+}: {
+  value: string;
+  onInput: (value: string) => void;
+  className?: string;
+}) {
+  return (
+    <span
+      className={`pv-edit ${className ?? ''}`}
+      contentEditable
+      suppressContentEditableWarning
+      spellCheck={false}
+      onInput={(e) => onInput(readText(e.currentTarget))}
+    >
+      {value}
+    </span>
+  );
+}
+
 function CharCount({ n, limit, label }: { n: number; limit?: number | null; label?: string }) {
   const over = limit != null && n > limit;
   const near = limit != null && !over && n > limit * 0.9;
@@ -54,7 +95,7 @@ function richText(text: string) {
   });
 }
 
-function TweetPreview({ text, variant }: { text: string; variant: string }) {
+function TweetPreview({ text, variant, edit }: { text: string; variant: string; edit?: SurfaceEditHandlers }) {
   return (
     <div className={`pv pv-x ${variant}`}>
       <div className="pv-x-head">
@@ -65,7 +106,9 @@ function TweetPreview({ text, variant }: { text: string; variant: string }) {
         </div>
         <span className="pv-x-glyph">𝕏</span>
       </div>
-      <div className="pv-x-body">{richText(text)}</div>
+      <div className="pv-x-body">
+        {edit?.setText ? <Editable value={text} onInput={edit.setText} /> : richText(text)}
+      </div>
       <div className="pv-x-foot">
         <span className="mono muted-2">single tweet</span>
         <CharCount n={text.length} limit={280} />
@@ -74,9 +117,80 @@ function TweetPreview({ text, variant }: { text: string; variant: string }) {
   );
 }
 
-function ThreadPreview({ tweets, variant }: { tweets: string[]; variant: string }) {
+function ImageBriefPreview({ text, variant }: { text: string; variant: string }) {
+  const sections = text.split(/\n(?=##\s+)/).map((section) => section.trim()).filter(Boolean);
+  return (
+    <div className={`pv pv-brief ${variant}`}>
+      <div className="pv-brief-head">
+        <span className="mono muted-2">designer surface</span>
+        <CharCount n={text.length} limit={null} />
+      </div>
+      <div className="pv-brief-body">
+        {sections.length > 1 ? (
+          sections.map((section, i) => {
+            const lines = section.split('\n').filter(Boolean);
+            const title = lines[0]?.replace(/^##\s*/, '') ?? `section ${i + 1}`;
+            return (
+              <section key={`${title}-${i}`} className="pv-brief-section">
+                <h4>{title}</h4>
+                <div className="pv-brief-lines">
+                  {lines.slice(1).map((line, j) => (
+                    <p key={j}>{richText(line)}</p>
+                  ))}
+                </div>
+              </section>
+            );
+          })
+        ) : (
+          <pre>{text}</pre>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function TweetMedia({
+  index,
+  url,
+  busy,
+  onPick,
+}: {
+  index: number;
+  url: string | null;
+  busy: boolean;
+  onPick: (i: number) => void;
+}) {
+  if (busy) return <div className="pv-tw-media-slot mono">uploading…</div>;
+  if (url) {
+    return (
+      <button type="button" className="pv-tw-media-wrap" onClick={() => onPick(index)} title="click to replace image">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="pv-tw-media" src={url} alt={`tweet ${index + 1} media`} />
+        <span className="pv-tw-media-hint">replace</span>
+      </button>
+    );
+  }
+  return (
+    <button type="button" className="pv-tw-media-slot is-empty mono" onClick={() => onPick(index)}>
+      + add image
+    </button>
+  );
+}
+
+function ThreadPreview({
+  tweets,
+  variant,
+  edit,
+  image,
+}: {
+  tweets: string[];
+  variant: string;
+  edit?: SurfaceEditHandlers;
+  image?: ThreadImageControls;
+}) {
   const [expanded, setExpanded] = useState(false);
-  const collapsed = variant === 'compact' && !expanded;
+  // While editing, never collapse — every tweet must be reachable.
+  const collapsed = variant === 'compact' && !expanded && !edit;
   const shown = collapsed ? tweets.slice(0, 2) : tweets;
   return (
     <div className={`pv pv-thread ${variant}`}>
@@ -94,8 +208,11 @@ function ThreadPreview({ tweets, variant }: { tweets: string[]; variant: string 
                 {i + 1}/{tweets.length}
               </span>
             </div>
-            <div className="pv-tw-text">{richText(tw)}</div>
+            <div className="pv-tw-text">
+              {edit?.setTweet ? <Editable value={tw} onInput={(v) => edit.setTweet!(i, v)} /> : richText(tw)}
+            </div>
             <CharCount n={tw.length} limit={280} />
+            {image && <TweetMedia index={i} url={image.media[i] ?? null} busy={image.busyIndex === i} onPick={image.onPick} />}
           </div>
         </div>
       ))}
@@ -111,16 +228,24 @@ function ThreadPreview({ tweets, variant }: { tweets: string[]; variant: string 
 function WebPreview({
   card,
   variant,
+  edit,
 }: {
   card: { subheading: string; title: string; caption: string };
   variant: string;
+  edit?: SurfaceEditHandlers;
 }) {
   return (
     <div className={`pv pv-web ${variant}`}>
       <div className="pv-web-card">
-        <div className="pv-web-sub">{card.subheading}</div>
-        <div className="pv-web-title">{card.title}</div>
-        <div className="pv-web-cap">{card.caption}</div>
+        <div className="pv-web-sub">
+          {edit?.setWebField ? <Editable value={card.subheading} onInput={(v) => edit.setWebField!('subheading', v)} /> : card.subheading}
+        </div>
+        <div className="pv-web-title">
+          {edit?.setWebField ? <Editable value={card.title} onInput={(v) => edit.setWebField!('title', v)} /> : card.title}
+        </div>
+        <div className="pv-web-cap">
+          {edit?.setWebField ? <Editable value={card.caption} onInput={(v) => edit.setWebField!('caption', v)} /> : card.caption}
+        </div>
         <div className="pv-web-art" aria-hidden="true">
           <span className="mono">product shot</span>
         </div>
@@ -136,7 +261,7 @@ function WebPreview({
   );
 }
 
-function InProductPreview({ text, variant }: { text: string; variant: string }) {
+function InProductPreview({ text, variant, edit }: { text: string; variant: string; edit?: SurfaceEditHandlers }) {
   return (
     <div className={`pv pv-ip ${variant}`}>
       <div className="pv-ip-chrome">
@@ -147,7 +272,9 @@ function InProductPreview({ text, variant }: { text: string; variant: string }) 
       </div>
       <div className="pv-ip-notice">
         <span className="pv-ip-mark">◧</span>
-        <span className="pv-ip-text">{text}</span>
+        <span className="pv-ip-text">
+          {edit?.setText ? <Editable value={text} onInput={edit.setText} /> : text}
+        </span>
         <span className="pv-ip-x mono">×</span>
       </div>
       <div className="pv-x-foot">
@@ -216,18 +343,16 @@ function BlogPreview({ text, variant }: { text: string; variant: string }) {
         })}
       </article>
       {collapsed && <div className="pv-blog-fade" />}
-      {variant !== 'compact' && (
-        <button className="pv-blog-toggle mono" onClick={() => setOpen(!open)}>
-          {open ? '▴ collapse' : '▾ expand full post'}
-        </button>
-      )}
+      <button className="pv-blog-toggle mono" onClick={() => setOpen(!open)}>
+        {open ? '▴ collapse' : '▾ expand full post'}
+      </button>
     </div>
   );
 }
 
-function CarouselPreview({ slides, variant }: { slides: { name: string; body: string }[]; variant: string }) {
+function CarouselPreview({ slides, variant, edit }: { slides: { name: string; body: string }[]; variant: string; edit?: SurfaceEditHandlers }) {
   const [expanded, setExpanded] = useState(false);
-  const collapsed = variant === 'compact' && !expanded;
+  const collapsed = variant === 'compact' && !expanded && !edit;
   const shown = collapsed ? slides.slice(0, 2) : slides;
   return (
     <div className={`pv pv-carousel ${variant}`}>
@@ -241,8 +366,12 @@ function CarouselPreview({ slides, variant }: { slides: { name: string; body: st
               </span>
               <span className="pv-avatar xs">ix</span>
             </div>
-            <div className="pv-slide-name">{sl.name}</div>
-            <div className="pv-slide-body">{sl.body}</div>
+            <div className="pv-slide-name">
+              {edit?.setSlide ? <Editable value={sl.name} onInput={(v) => edit.setSlide!(i, 'name', v)} /> : sl.name}
+            </div>
+            <div className="pv-slide-body">
+              {edit?.setSlide ? <Editable value={sl.body} onInput={(v) => edit.setSlide!(i, 'body', v)} /> : sl.body}
+            </div>
             <CharCount n={sl.body.length} limit={240} />
           </div>
         ))}
@@ -262,30 +391,43 @@ function webCardFromText(text: string): StructuredOutput & { kind: 'web-card' } 
   return { kind: 'web-card', subheading: '', title: first ?? text, caption: rest.join(' ') };
 }
 
+/** Per-tweet image controls for an x-thread surface (operator delivery-time asset). */
+export interface ThreadImageControls {
+  media: (string | null)[];
+  busyIndex: number | null;
+  onPick: (tweetIndex: number) => void;
+}
+
 export function SurfacePreview({
   surface,
   data,
   variant = 'full',
+  edit,
+  threadImage,
 }: {
   surface: SurfaceKind;
   data: SurfaceData;
   variant?: 'full' | 'compact';
+  edit?: SurfaceEditHandlers;
+  threadImage?: ThreadImageControls;
 }) {
   const structured = parseStructured(data.structuredJson);
 
   // Structured payload renders by its own kind, regardless of channel label.
-  if (structured?.kind === 'thread') return <ThreadPreview tweets={structured.tweets} variant={variant} />;
-  if (structured?.kind === 'carousel') return <CarouselPreview slides={structured.slides} variant={variant} />;
-  if (structured?.kind === 'web-card') return <WebPreview card={structured} variant={variant} />;
+  if (structured?.kind === 'thread')
+    return <ThreadPreview tweets={structured.tweets} variant={variant} edit={edit} image={threadImage} />;
+  if (structured?.kind === 'carousel') return <CarouselPreview slides={structured.slides} variant={variant} edit={edit} />;
+  if (structured?.kind === 'web-card') return <WebPreview card={structured} variant={variant} edit={edit} />;
 
   // No structured payload — fall back to the surface label.
-  if (surface === 'x-thread') return <ThreadPreview tweets={splitTweets(data.text)} variant={variant} />;
-  if (surface === 'carousel') return <CarouselPreview slides={[]} variant={variant} />;
-  if (surface === 'web') return <WebPreview card={webCardFromText(data.text)} variant={variant} />;
+  if (surface === 'x-thread') return <ThreadPreview tweets={splitTweets(data.text)} variant={variant} edit={edit} />;
+  if (surface === 'carousel') return <CarouselPreview slides={[]} variant={variant} edit={edit} />;
+  if (surface === 'web') return <WebPreview card={webCardFromText(data.text)} variant={variant} edit={edit} />;
+  if (surface === 'image-brief') return <ImageBriefPreview text={data.text} variant={variant} />;
   if (surface === 'modal') return <ModalPreview text={data.text} variant={variant} />;
   if (surface === 'blog') return <BlogPreview text={data.text} variant={variant} />;
-  if (surface === 'in-product') return <InProductPreview text={data.text} variant={variant} />;
-  return <TweetPreview text={data.text} variant={variant} />;
+  if (surface === 'in-product') return <InProductPreview text={data.text} variant={variant} edit={edit} />;
+  return <TweetPreview text={data.text} variant={variant} edit={edit} />;
 }
 
 // `SURFACE_META` re-export kept available for callers that import it alongside.

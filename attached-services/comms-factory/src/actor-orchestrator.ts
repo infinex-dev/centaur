@@ -9,6 +9,7 @@ import type { CharacterSpec, QuickAction, WorkingAction } from "./voice/types.js
 import {
   auditCandidateWithDirector,
   generateActorAttempt,
+  isThesisCard,
   prewarmDirectorCache,
   type ActorAttemptResult,
   type ActorTranscriptMessage,
@@ -229,7 +230,17 @@ const CHANNEL_MAX_LEN: Record<Channel, number> = {
   // these bound the readable rendering as a backstop.
   "x-thread": 1800,
   carousel: 1600,
+  "image-brief": 4000,
 };
+
+// Thesis pieces are essays (~900-1400 words); the changelog-sized blog cap
+// would reject them at the gate.
+const THESIS_BLOG_MAX_LEN = 12000;
+
+export function channelMaxLen(channel: Channel, card: ReleaseCard): number {
+  if (channel === "blog" && isThesisCard(card)) return THESIS_BLOG_MAX_LEN;
+  return CHANNEL_MAX_LEN[channel];
+}
 
 const OUTWARD_CHANNELS: Channel[] = ["x", "x-thread", "web", "carousel"];
 
@@ -257,6 +268,14 @@ export async function orchestrateActorDirectorWithRetries(
   const askedQuestions = new Set<string>();
   const MAX_GROUNDER_ROUNDS = 2;
   const targetedRetriedChannels = new Set<Channel>();
+  // Every failed candidate is taken to its logical conclusion: retry waves
+  // continue while ANY candidate in the latest wave failed (up to maxAttempts),
+  // not merely until each channel has one passing pick. Waves narrow to the
+  // channels that still have failures; channels whose candidates all passed are
+  // never regenerated. Final picks are drawn from the POOLED records of all
+  // waves, so a wave-1 passer is never churned by a later wave.
+  let waveChannels: Channel[] = channels;
+  const pooledRecords: ActorDirectorCandidateRecord[] = [];
 
   await emitRunEvent(opts.onEvent, {
     event_type: "run_started",
@@ -271,10 +290,10 @@ export async function orchestrateActorDirectorWithRetries(
         attempt: attemptNo,
         event_type: "actor_started",
         message: `Actor attempt ${attemptNo} started`,
-        payload: { channels, has_director_notes: notesIn !== undefined },
+        payload: { channels: waveChannels, has_director_notes: notesIn !== undefined },
       });
       const runActor = (): Promise<ActorAttemptResult> => actor(currentCard, {
-        channels,
+        channels: waveChannels,
         ...(opts.n !== undefined ? { n: opts.n } : {}),
         ...(opts.warmup_mode !== undefined ? { warmup_mode: opts.warmup_mode } : {}),
         ...(opts.flow_direction !== undefined ? { flow_direction: opts.flow_direction } : {}),
@@ -380,7 +399,9 @@ export async function orchestrateActorDirectorWithRetries(
         records.push(record);
       }
 
-      const auditable = records.filter((record) => record.script_validation.passed);
+      const auditable = records.filter((record) =>
+        record.script_validation.passed && record.candidate.channel !== "image-brief"
+      );
       const usingRealDirector =
         opts.director === undefined &&
         opts.director_client === undefined &&
@@ -450,8 +471,28 @@ export async function orchestrateActorDirectorWithRetries(
         Array.from({ length: Math.min(concurrency, auditable.length) }, () => runWorker()),
       );
 
-      const { picks, rationales } = pickRankedPassingByChannel(records, channels, opts.operator_preferences ?? []);
-      notes = summarizeDirectorNotes(attemptNo, channels, records, picks, opts.feedback_wave_regime ?? "two-tier");
+      pooledRecords.push(...records);
+      // Picks come from the POOL across all waves — a later, narrower wave
+      // cannot displace an earlier channel's passing winner by omission.
+      const { picks, rationales } = pickRankedPassingByChannel(pooledRecords, channels, opts.operator_preferences ?? []);
+      // A candidate is settled when it passed regex AND the Director. Channels
+      // with any unsettled candidate in THIS wave get another wave.
+      const recordSettled = (record: ActorDirectorCandidateRecord): boolean =>
+        record.candidate.channel === "image-brief"
+          ? record.script_validation.passed
+          : record.script_validation.passed &&
+        record.director_audit !== undefined &&
+        directorDraftPassed(record.director_audit);
+      const failedChannels = waveChannels.filter((channel) =>
+        records.some((record) => record.candidate.channel === channel && !recordSettled(record)),
+      );
+      notes = summarizeDirectorNotes(
+        attemptNo,
+        failedChannels.length > 0 ? failedChannels : waveChannels,
+        records,
+        picks,
+        opts.feedback_wave_regime ?? "two-tier",
+      );
       const completedAttempt: ActorDirectorAttempt = {
         attempt: attemptNo,
         ...(notesIn !== undefined ? { director_notes_in: notesIn } : {}),
@@ -475,13 +516,27 @@ export async function orchestrateActorDirectorWithRetries(
             notes,
           },
       });
-      if (picks.length >= channels.length) {
+      // Done only when EVERY candidate of the latest wave settled (passed both
+      // gates) — not when each channel merely has one passing pick. Failed
+      // candidates are taken to their logical conclusion (pass or maxAttempts).
+      if (failedChannels.length === 0) {
         await emitRunEvent(opts.onEvent, {
           event_type: "run_completed",
-          message: "Actor/Director run completed",
+          message: "Actor/Director run completed — all candidates settled",
           payload: { exhausted: false, pick_count: picks.length },
         });
         return { attempts, picks, selection_rationales: rationales, exhausted: false };
+      }
+
+      if (attemptNo < maxAttempts) {
+        // Next wave regenerates ONLY the channels that still carry failures.
+        waveChannels = failedChannels;
+        await emitRunEvent(opts.onEvent, {
+          attempt: attemptNo,
+          event_type: "failure_wave_targeted",
+          message: `Retry wave ${attemptNo + 1} targets channel(s) with unsettled candidates: ${failedChannels.join(", ")}`,
+          payload: { channels: failedChannels },
+        });
       }
 
       // ── Targeted regeneration for zero-pick channels ─────────────────────────
@@ -526,10 +581,11 @@ export async function orchestrateActorDirectorWithRetries(
           grounderRounds += 1;
           if (merged) {
             currentCard = merged;
-            // Clear the transcript + notes so the next attempt re-does table work
-            // against the augmented card rather than patching the prior draft.
+            // Clear the transcript so the next attempt re-does table work against
+            // the augmented card rather than patching the prior draft. KEEP the
+            // notes — the regex/Director failure feedback rides into the fresh
+            // assignment; dropping it made retry waves repeat the same failures.
             transcript = undefined;
-            notes = undefined;
           }
         }
       }
@@ -565,6 +621,9 @@ async function emitRunEvent(
 }
 
 function validateCandidate(candidate: Candidate, card: ReleaseCard, voice: CharacterSpec): ValidationResult {
+  if (candidate.channel === "image-brief") {
+    return { passed: true, failures: [] };
+  }
   const result = validate(candidate.text, {
     card,
     channel: candidate.channel,
@@ -572,7 +631,7 @@ function validateCandidate(candidate: Candidate, card: ReleaseCard, voice: Chara
     ...(candidate.deployed_facts_used !== undefined ? { deployed_facts_used: candidate.deployed_facts_used } : {}),
     ...(candidate.not_said !== undefined ? { not_said: candidate.not_said } : {}),
   });
-  const max = CHANNEL_MAX_LEN[candidate.channel];
+  const max = channelMaxLen(candidate.channel, card);
   if (candidate.text.length > max) {
     result.failures.push({
       rule: "length",
@@ -717,8 +776,9 @@ function pickRankedPassingByChannel(
     const passing = records.filter((candidateRecord) =>
       candidateRecord.candidate.channel === channel &&
       candidateRecord.script_validation.passed &&
-      candidateRecord.director_audit !== undefined &&
-      directorDraftPassed(candidateRecord.director_audit),
+      (channel === "image-brief" ||
+        (candidateRecord.director_audit !== undefined &&
+          directorDraftPassed(candidateRecord.director_audit))),
     );
     if (passing.length === 0) continue;
     const clusterCounts = clusterCountsFor(passing);

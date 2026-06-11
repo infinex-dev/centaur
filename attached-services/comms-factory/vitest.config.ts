@@ -10,6 +10,8 @@ export default defineConfig({
       "**/.next/**",
       "**/.claude/**",
       "**/coverage/**",
+      // harness tests are tsx-runner scripts; run them via harness/lib/run-tests.ts
+      "harness/**",
     ],
   },
 });

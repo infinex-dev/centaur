@@ -1,5 +1,5 @@
 import type { ReleaseCard } from "./card.js";
-import { generateForChannels } from "./generator.js";
+import { generateForChannels, type Channel } from "./generator.js";
 import {
   MAX_ATTEMPTS,
   orchestrateWithRetries,
@@ -48,7 +48,7 @@ export async function runVoiceEval(cases: VoiceEvalCase[]): Promise<VoiceEvalRes
 }
 
 export async function runVoiceEvalCase(testCase: VoiceEvalCase): Promise<VoiceEvalResult> {
-  const channels = testCase.channels ?? testCase.card.audience.filter(isPickChannel);
+  const channels: Channel[] = testCase.channels ?? testCase.card.audience.filter(isAudiencePickChannel);
   const beats: BeatSequence = testCase.beats ?? { beats: testCase.defaultBeats(testCase.card.kind) };
   const generateAttempt =
     testCase.generateAttempt ??
@@ -114,4 +114,8 @@ function isPickChannel(s: string): s is Pick["channel"] {
     s === "blog" ||
     s === "carousel"
   );
+}
+
+function isAudiencePickChannel(s: string): s is Exclude<Channel, "image-brief"> {
+  return isPickChannel(s);
 }

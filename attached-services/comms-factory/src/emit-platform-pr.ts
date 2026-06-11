@@ -1,6 +1,6 @@
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { promisify } from "node:util";
@@ -29,6 +29,15 @@ export type EmitOpts = {
 export type EmitResult = {
   prUrl: string | null;
   plannedDiff: string;
+  prDescription: string;
+  roadmapChanges: RoadmapChangeSummary[];
+};
+
+export type RoadmapChangeSummary = {
+  path: string;
+  from: string | null;
+  to: "done";
+  reason: "selected" | "parent-rollup";
 };
 
 type CommandResult = {
@@ -68,6 +77,10 @@ async function emitLaunchPRWithRunner(
   runCommand: CommandRunner,
 ): Promise<EmitResult> {
   assertLaunchPackage(pkg);
+  const emitPkg: LaunchPackage = {
+    ...pkg,
+    changelogMd: markChangelogPublished(pkg.changelogMd),
+  };
 
   const platformRoot = resolve(opts.platformRoot ?? process.env.PLATFORM_ROOT ?? DEFAULT_PLATFORM_ROOT);
   if (!existsSync(platformRoot)) {
@@ -75,11 +88,12 @@ async function emitLaunchPRWithRunner(
   }
 
   const dryRun = opts.dryRun ?? true;
-  const branch = opts.branch ?? defaultBranchName(pkg.changelogSlug);
+  const branch = opts.branch ?? defaultBranchName(emitPkg.changelogSlug);
   assertSafeBranch(branch);
 
   const worktreePath = join("/tmp", `cf-emit-${Date.now()}-${process.pid}`);
   const touchedPaths: string[] = [];
+  let roadmapChanges: RoadmapChangeSummary[] = [];
   let worktreeCreated = false;
 
   try {
@@ -97,27 +111,29 @@ async function emitLaunchPRWithRunner(
     ]);
     worktreeCreated = true;
 
-    const blogPath = join(BLOG_DIR, `${pkg.changelogSlug}.md`);
-    await writeNewFile(join(worktreePath, blogPath), ensureTrailingNewline(pkg.changelogMd));
+    const blogPath = join(BLOG_DIR, `${emitPkg.changelogSlug}.md`);
+    const blogMd = await applyInternalNumber(emitPkg.changelogMd, join(worktreePath, BLOG_DIR));
+    await writeNewFile(join(worktreePath, blogPath), ensureTrailingNewline(blogMd));
     touchedPaths.push(blogPath);
 
-    if (pkg.roadmapTick) {
+    if (emitPkg.roadmapTick) {
       const roadmapPath = join(worktreePath, ROADMAP_DATA_PATH);
       const roadmapSource = await readFile(roadmapPath, "utf8");
+      roadmapChanges = describeRoadmapChanges(roadmapSource, emitPkg.roadmapTick);
       await writeFile(
         roadmapPath,
-        markRoadmapNodeDone(roadmapSource, pkg.roadmapTick),
+        markRoadmapNodeDone(roadmapSource, emitPkg.roadmapTick),
         "utf8",
       );
       touchedPaths.push(ROADMAP_DATA_PATH);
     }
 
-    if (pkg.featureCard) {
+    if (emitPkg.featureCard) {
       const featuresPath = join(worktreePath, FEATURES_DATA_PATH);
       const featuresSource = await readFile(featuresPath, "utf8");
       await writeFile(
         featuresPath,
-        appendFeatureCopyEntry(featuresSource, pkg.featureCard.dataTsEntry),
+        appendFeatureCopyEntry(featuresSource, emitPkg.featureCard.dataTsEntry),
         "utf8",
       );
       touchedPaths.push(FEATURES_DATA_PATH);
@@ -130,16 +146,18 @@ async function emitLaunchPRWithRunner(
       "--",
       ...touchedPaths,
     ]);
+    const prDescription = buildPrBody(emitPkg, roadmapChanges);
 
     if (dryRun) {
-      return { prUrl: null, plannedDiff };
+      return { prUrl: null, plannedDiff, prDescription, roadmapChanges };
     }
 
     await runGit(runCommand, worktreePath, ["add", "--", ...touchedPaths]);
     await runGit(runCommand, worktreePath, [
       "commit",
+      "--no-verify",
       "-m",
-      `Emit ${extractChangelogTitle(pkg.changelogMd, pkg.changelogSlug)} launch comms`,
+      `Emit ${extractChangelogTitle(emitPkg.changelogMd, emitPkg.changelogSlug)} launch comms`,
     ]);
     await runGit(runCommand, worktreePath, ["push", "-u", "origin", branch]);
 
@@ -151,12 +169,12 @@ async function emitLaunchPRWithRunner(
       "--head",
       branch,
       "--title",
-      extractChangelogTitle(pkg.changelogMd, pkg.changelogSlug),
+      extractChangelogTitle(emitPkg.changelogMd, emitPkg.changelogSlug),
       "--body",
-      buildPrBody(pkg),
+      prDescription,
     ], { cwd: worktreePath, maxBuffer: 1024 * 1024 })).stdout.trim();
 
-    return { prUrl: prUrl.length > 0 ? prUrl : null, plannedDiff };
+    return { prUrl: prUrl.length > 0 ? prUrl : null, plannedDiff, prDescription, roadmapChanges };
   } finally {
     if (worktreeCreated) {
       await runGitBestEffort(runCommand, platformRoot, ["worktree", "remove", "--force", worktreePath]);
@@ -167,6 +185,213 @@ async function emitLaunchPRWithRunner(
       await runGitBestEffort(runCommand, platformRoot, ["branch", "-D", branch]);
     }
   }
+}
+
+export type RenumberDirective = { slug: string; internalNumber: number };
+
+export type BatchEmitOpts = EmitOpts & { renumber?: readonly RenumberDirective[] };
+
+export type BatchItemSummary = {
+  slug: string;
+  action: "create" | "renumber";
+  internalNumber: number | null;
+  roadmapChanges: RoadmapChangeSummary[];
+};
+
+export type BatchEmitResult = {
+  prUrl: string | null;
+  plannedDiff: string;
+  prDescription: string;
+  items: BatchItemSummary[];
+};
+
+// Batch sibling of emitLaunchPR: stamps internalNumber onto already-shipped
+// posts (`renumber`) and/or creates new launch posts, all in ONE worktree ->
+// ONE branch -> ONE PR. The motivating case: stamp the existing #63 and emit
+// the new #64 in a single PR instead of two. Renumbers run first so each new
+// post auto-derives its number from the freshly-stamped state. Reuses every
+// git-safety guard from the single-emit path; never edits the real checkout.
+export async function emitBatchLaunchPR(
+  packages: readonly LaunchPackage[],
+  opts: BatchEmitOpts = {},
+): Promise<BatchEmitResult> {
+  return emitBatchLaunchPRWithRunner(packages, opts, defaultCommandRunner);
+}
+
+async function emitBatchLaunchPRWithRunner(
+  packages: readonly LaunchPackage[],
+  opts: BatchEmitOpts,
+  runCommand: CommandRunner,
+): Promise<BatchEmitResult> {
+  const renumber = opts.renumber ?? [];
+  if (packages.length === 0 && renumber.length === 0) {
+    throw new Error("batch emit requires at least one package or renumber directive");
+  }
+  for (const pkg of packages) assertLaunchPackage(pkg);
+  for (const directive of renumber) {
+    if (!isSafeSlug(directive.slug)) throw new Error(`unsafe renumber slug: ${directive.slug}`);
+    if (!Number.isInteger(directive.internalNumber) || directive.internalNumber <= 0) {
+      throw new Error(`renumber internalNumber must be a positive integer: ${directive.internalNumber}`);
+    }
+  }
+
+  const platformRoot = resolve(opts.platformRoot ?? process.env.PLATFORM_ROOT ?? DEFAULT_PLATFORM_ROOT);
+  if (!existsSync(platformRoot)) {
+    throw new Error(`platform root does not exist: ${platformRoot}`);
+  }
+
+  const dryRun = opts.dryRun ?? true;
+  const branch = opts.branch ?? defaultBatchBranchName();
+  assertSafeBranch(branch);
+
+  const worktreePath = join("/tmp", `cf-emit-batch-${Date.now()}-${process.pid}`);
+  const touchedPaths: string[] = [];
+  const items: BatchItemSummary[] = [];
+  let worktreeCreated = false;
+
+  try {
+    if (!dryRun) {
+      await runGit(runCommand, platformRoot, ["fetch", "origin", "main"]);
+    }
+    await runGit(runCommand, platformRoot, ["worktree", "add", worktreePath, "-b", branch, "origin/main"]);
+    worktreeCreated = true;
+
+    for (const directive of renumber) {
+      const blogPath = join(BLOG_DIR, `${directive.slug}.md`);
+      const absPath = join(worktreePath, blogPath);
+      if (!existsSync(absPath)) {
+        throw new Error(`cannot renumber: ${blogPath} not found on origin/main`);
+      }
+      const current = await readFile(absPath, "utf8");
+      const stamped = stampInternalNumber(current, directive.internalNumber);
+      if (stamped !== current) {
+        await writeFile(absPath, stamped, "utf8");
+        touchedPaths.push(blogPath);
+      }
+      items.push({
+        slug: directive.slug,
+        action: "renumber",
+        internalNumber: parseChangelogNumber(stamped),
+        roadmapChanges: [],
+      });
+    }
+
+    for (const pkg of packages) {
+      const emitPkg: LaunchPackage = { ...pkg, changelogMd: markChangelogPublished(pkg.changelogMd) };
+      const blogPath = join(BLOG_DIR, `${emitPkg.changelogSlug}.md`);
+      const blogMd = await applyInternalNumber(emitPkg.changelogMd, join(worktreePath, BLOG_DIR));
+      await writeNewFile(join(worktreePath, blogPath), ensureTrailingNewline(blogMd));
+      touchedPaths.push(blogPath);
+
+      let roadmapChanges: RoadmapChangeSummary[] = [];
+      if (emitPkg.roadmapTick) {
+        const roadmapAbs = join(worktreePath, ROADMAP_DATA_PATH);
+        const roadmapSource = await readFile(roadmapAbs, "utf8");
+        roadmapChanges = describeRoadmapChanges(roadmapSource, emitPkg.roadmapTick);
+        await writeFile(roadmapAbs, markRoadmapNodeDone(roadmapSource, emitPkg.roadmapTick), "utf8");
+        touchedPaths.push(ROADMAP_DATA_PATH);
+      }
+      if (emitPkg.featureCard) {
+        const featuresAbs = join(worktreePath, FEATURES_DATA_PATH);
+        const featuresSource = await readFile(featuresAbs, "utf8");
+        await writeFile(featuresAbs, appendFeatureCopyEntry(featuresSource, emitPkg.featureCard.dataTsEntry), "utf8");
+        touchedPaths.push(FEATURES_DATA_PATH);
+      }
+
+      items.push({
+        slug: emitPkg.changelogSlug,
+        action: "create",
+        internalNumber: parseChangelogNumber(blogMd),
+        roadmapChanges,
+      });
+    }
+
+    const uniquePaths = [...new Set(touchedPaths)];
+    if (uniquePaths.length === 0) {
+      throw new Error("batch emit produced no file changes (every target already up to date)");
+    }
+
+    await runGit(runCommand, worktreePath, ["add", "--intent-to-add", "--", ...uniquePaths]);
+    const plannedDiff = await gitStdout(runCommand, worktreePath, ["diff", "--no-ext-diff", "--", ...uniquePaths]);
+    const prDescription = buildBatchPrBody(items);
+
+    if (dryRun) {
+      return { prUrl: null, plannedDiff, prDescription, items };
+    }
+
+    await runGit(runCommand, worktreePath, ["add", "--", ...uniquePaths]);
+    await runGit(runCommand, worktreePath, ["commit", "--no-verify", "-m", batchCommitMessage(items)]);
+    await runGit(runCommand, worktreePath, ["push", "-u", "origin", branch]);
+
+    const prUrl = (await runCommand("gh", [
+      "pr",
+      "create",
+      "--base",
+      "main",
+      "--head",
+      branch,
+      "--title",
+      batchPrTitle(items),
+      "--body",
+      prDescription,
+    ], { cwd: worktreePath, maxBuffer: 1024 * 1024 })).stdout.trim();
+
+    return { prUrl: prUrl.length > 0 ? prUrl : null, plannedDiff, prDescription, items };
+  } finally {
+    if (worktreeCreated) {
+      await runGitBestEffort(runCommand, platformRoot, ["worktree", "remove", "--force", worktreePath]);
+    } else {
+      await rm(worktreePath, { recursive: true, force: true });
+    }
+    if (dryRun) {
+      await runGitBestEffort(runCommand, platformRoot, ["branch", "-D", branch]);
+    }
+  }
+}
+
+function defaultBatchBranchName(): string {
+  return `cf-emit-batch/${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function batchCountLabel(items: readonly BatchItemSummary[]): string {
+  const created = items.filter((item) => item.action === "create").length;
+  const renumbered = items.filter((item) => item.action === "renumber").length;
+  const parts: string[] = [];
+  if (created > 0) parts.push(`${created} new entr${created === 1 ? "y" : "ies"}`);
+  if (renumbered > 0) parts.push(`${renumbered} renumber${renumbered === 1 ? "" : "s"}`);
+  return parts.join(" + ");
+}
+
+function batchCommitMessage(items: readonly BatchItemSummary[]): string {
+  return `Emit launch comms batch (${batchCountLabel(items)})`;
+}
+
+function batchPrTitle(items: readonly BatchItemSummary[]): string {
+  return `Launch comms batch: ${batchCountLabel(items)}`;
+}
+
+function buildBatchPrBody(items: readonly BatchItemSummary[]): string {
+  const lines = [
+    "Emitted by comms-factory as a batch from approved launch packages.",
+    "",
+    "## PR contents",
+    "",
+  ];
+  for (const item of items) {
+    if (item.action === "create") {
+      const numberSuffix = item.internalNumber !== null ? ` (№ ${item.internalNumber})` : "";
+      lines.push(`- New changelog: \`${BLOG_DIR}/${item.slug}.md\`${numberSuffix}`);
+      lines.push("  - Publish status: `published: true`");
+      for (const change of item.roadmapChanges) {
+        const reason = change.reason === "parent-rollup" ? " (auto parent roll-up)" : "";
+        lines.push(`  - Roadmap \`${change.path}\`: \`${formatRoadmapStatus(change.from)}\` -> \`${change.to}\`${reason}`);
+      }
+    } else {
+      lines.push(`- Renumber: \`${BLOG_DIR}/${item.slug}.md\` -> \`internalNumber: ${item.internalNumber}\``);
+    }
+  }
+  lines.push("", "human-approve, DO NOT merge");
+  return lines.join("\n");
 }
 
 export function markRoadmapNodeDone(
@@ -273,6 +498,140 @@ export function appendFeatureCopyEntry(source: string, dataTsEntry: string): str
   return `${source.slice(0, insertionStart)}${insertion}${source.slice(closeBracket)}`;
 }
 
+export function markChangelogPublished(markdown: string): string {
+  const match = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---(\r?\n|$)/);
+  if (!match) {
+    throw new Error("changelogMd must include YAML frontmatter so emit can set published: true");
+  }
+
+  const fullFrontmatter = match[0];
+  const frontmatter = match[1];
+  if (frontmatter === undefined) throw new Error("changelog frontmatter parse failed");
+
+  const publishedRe = /^published:\s*(?:true|false)\s*$/m;
+  const nextFrontmatter = publishedRe.test(frontmatter)
+    ? frontmatter.replace(publishedRe, "published: true")
+    : insertPublishedFlag(frontmatter);
+
+  return `${fullFrontmatter.replace(frontmatter, nextFrontmatter)}${markdown.slice(fullFrontmatter.length)}`;
+}
+
+function insertPublishedFlag(frontmatter: string): string {
+  const lines = frontmatter.split(/\r?\n/);
+  const dateIndex = lines.findIndex((line) => /^date:\s*/.test(line));
+  const insertAt = dateIndex >= 0 ? dateIndex + 1 : lines.length;
+  lines.splice(insertAt, 0, "published: true");
+  return lines.join("\n");
+}
+
+// Internal changelog numbering. The № lives only in `internalNumber` frontmatter
+// — deliberately NOT in the public title or the content package whitelist, so it
+// stays an operator-only tracking number (visible in Keystatic admin, never on
+// /news or in-app). We derive the next number from the freshest origin/main blog
+// snapshot inside the worktree, so concurrent local state can't desync it.
+export function parseChangelogNumber(markdown: string): number | null {
+  const frontmatter = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---(\r?\n|$)/)?.[1];
+  if (!frontmatter) return null;
+  const internal = frontmatter.match(/^internalNumber:\s*(\d+)\s*$/m)?.[1];
+  if (internal) return Number(internal);
+  const title = frontmatter.match(/^title:\s*(.+?)\s*$/m)?.[1];
+  const titled = title?.match(/№\s*(\d+)/)?.[1];
+  return titled ? Number(titled) : null;
+}
+
+export function nextChangelogNumber(markdowns: readonly string[]): number {
+  let max = 0;
+  for (const markdown of markdowns) {
+    const n = parseChangelogNumber(markdown);
+    if (n !== null && n > max) max = n;
+  }
+  return max + 1;
+}
+
+export function stampInternalNumber(markdown: string, n: number): string {
+  const match = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---(\r?\n|$)/);
+  if (!match) {
+    throw new Error("changelogMd must include YAML frontmatter so emit can set internalNumber");
+  }
+  const fullFrontmatter = match[0];
+  const frontmatter = match[1];
+  if (frontmatter === undefined) throw new Error("changelog frontmatter parse failed");
+  if (/^internalNumber:\s*\d+\s*$/m.test(frontmatter)) {
+    return markdown;
+  }
+  const nextFrontmatter = insertInternalNumber(frontmatter, n);
+  return `${fullFrontmatter.replace(frontmatter, nextFrontmatter)}${markdown.slice(fullFrontmatter.length)}`;
+}
+
+function insertInternalNumber(frontmatter: string, n: number): string {
+  const lines = frontmatter.split(/\r?\n/);
+  const categoryIndex = lines.findIndex((line) => /^category:\s*/.test(line));
+  const dateIndex = lines.findIndex((line) => /^date:\s*/.test(line));
+  const anchor = categoryIndex >= 0 ? categoryIndex : dateIndex;
+  const insertAt = anchor >= 0 ? anchor + 1 : lines.length;
+  lines.splice(insertAt, 0, `internalNumber: ${n}`);
+  return lines.join("\n");
+}
+
+async function applyInternalNumber(markdown: string, blogDir: string): Promise<string> {
+  if (!/^category:\s*changelogs\s*$/m.test(markdown)) return markdown;
+  const existing = await readExistingChangelogMarkdowns(blogDir);
+  return stampInternalNumber(markdown, nextChangelogNumber(existing));
+}
+
+async function readExistingChangelogMarkdowns(blogDir: string): Promise<string[]> {
+  let entries: string[];
+  try {
+    entries = await readdir(blogDir);
+  } catch {
+    return [];
+  }
+  const mdFiles = entries.filter((name) => name.endsWith(".md"));
+  return Promise.all(mdFiles.map((name) => readFile(join(blogDir, name), "utf8")));
+}
+
+export function describeRoadmapChanges(
+  source: string,
+  tick: { nodeName: string; parentName?: string },
+): RoadmapChangeSummary[] {
+  const sourceFile = parseTypeScriptSource(source, ROADMAP_DATA_PATH);
+  const root = findRoadmapRoot(sourceFile);
+  const allNodes = collectRoadmapNodes(root, null);
+  const matches = allNodes.filter((node) =>
+    node.name === tick.nodeName &&
+    (tick.parentName === undefined || node.parent?.name === tick.parentName));
+
+  if (matches.length === 0) {
+    const parentSuffix = tick.parentName ? ` under parent "${tick.parentName}"` : "";
+    throw new Error(`roadmap node not found: "${tick.nodeName}"${parentSuffix}`);
+  }
+  if (matches.length > 1) {
+    throw new Error(`roadmap node is ambiguous: "${tick.nodeName}". Provide parentName.`);
+  }
+
+  const target = matches[0];
+  if (!target) throw new Error("roadmap node selection failed");
+
+  const changes: RoadmapChangeSummary[] = [];
+  if (target.parent && target.parent.status !== "done") {
+    changes.push({
+      path: roadmapPath(target.parent),
+      from: target.parent.status,
+      to: "done",
+      reason: "parent-rollup",
+    });
+  }
+  if (target.status !== "done") {
+    changes.push({
+      path: roadmapPath(target),
+      from: target.status,
+      to: "done",
+      reason: "selected",
+    });
+  }
+  return changes;
+}
+
 export function extractChangelogTitle(markdown: string, fallbackSlug: string): string {
   const frontmatterTitle = markdown.match(/^title:\s*(.+?)\s*$/m)?.[1];
   if (frontmatterTitle && !frontmatterTitle.startsWith("|") && !frontmatterTitle.startsWith(">")) {
@@ -326,13 +685,19 @@ async function runGitBestEffort(
 }
 
 function guardGitArgs(args: readonly string[]): void {
-  const verb = args[0];
+  const verb = gitVerb(args);
   if (verb === "merge") {
     throw new Error("emitLaunchPR is not allowed to merge");
   }
   if (verb === "push" && args.some((arg) => arg === "main" || arg === "master" || arg === "origin/main")) {
     throw new Error("emitLaunchPR is not allowed to push main");
   }
+}
+
+function gitVerb(args: readonly string[]): string | undefined {
+  let i = 0;
+  while (args[i] === "-c") i += 2;
+  return args[i];
 }
 
 async function writeNewFile(path: string, content: string): Promise<void> {
@@ -385,20 +750,41 @@ function assertSafeBranch(branch: string): void {
   }
 }
 
-function buildPrBody(pkg: LaunchPackage): string {
+function buildPrBody(pkg: LaunchPackage, roadmapChanges: RoadmapChangeSummary[]): string {
   const lines = [
     "Emitted by comms-factory from an approved launch package.",
     "",
+    "## PR contents",
+    "",
     `- Changelog: \`${BLOG_DIR}/${pkg.changelogSlug}.md\``,
+    "  - Publish status: `published: true`",
   ];
-  if (pkg.roadmapTick) {
-    lines.push(`- Roadmap tick: \`${pkg.roadmapTick.parentName ? `${pkg.roadmapTick.parentName} / ` : ""}${pkg.roadmapTick.nodeName}\``);
+  if (roadmapChanges.length > 0) {
+    lines.push("- Roadmap:");
+    for (const change of roadmapChanges) {
+      const reason = change.reason === "parent-rollup" ? " (auto parent roll-up)" : "";
+      lines.push(`  - \`${change.path}\`: \`${formatRoadmapStatus(change.from)}\` -> \`${change.to}\`${reason}`);
+    }
+  } else if (pkg.roadmapTick) {
+    lines.push(`- Roadmap: \`${pkg.roadmapTick.parentName ? `${pkg.roadmapTick.parentName} / ` : ""}${pkg.roadmapTick.nodeName}\` already done`);
   }
   if (pkg.featureCard) {
     lines.push("- Feature card: appended to `FEATURES_COPY[]`");
   }
   lines.push("", "human-approve, DO NOT merge");
   return lines.join("\n");
+}
+
+function roadmapPath(node: RoadmapNode): string {
+  const parts: string[] = [];
+  for (let current: RoadmapNode | null = node; current?.parent; current = current.parent) {
+    parts.unshift(current.name);
+  }
+  return parts.join(" / ") || node.name;
+}
+
+function formatRoadmapStatus(status: string | null): string {
+  return status ?? "unset";
 }
 
 function ensureTrailingNewline(value: string): string {
@@ -622,5 +1008,6 @@ function unquoteYamlScalar(value: string): string {
 
 export const _test = {
   emitLaunchPRWithRunner,
+  emitBatchLaunchPRWithRunner,
   assertSafeBranch,
 };

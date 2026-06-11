@@ -2,7 +2,7 @@
 
 **Purpose:** the MD-first lookup so we don't re-read the 52MB PDF or the 65KB chapter extracts every time. Everything here has been verified against `mirodan-ch{1,2}-*.md` (vol 1 extracts) or `Mirodan-PhD-1997-Vol2.pdf`. Page refs are to the primary source. If you need something NOT here, see `mirodan-ch{1,2,3,4}-*.md`, then the PDF (per the `mirodan-grounding` skill).
 
-Last updated 2026-06-04 (Weight re-root). Maintainers: append, don't silently rewrite — keep the citation log honest.
+Last updated 2026-06-10 (placement range + variety + Spell tempo signature, §11-12). Maintainers: append, don't silently rewrite — keep the citation log honest.
 
 ---
 
@@ -130,3 +130,41 @@ A Drive is a three-factor activation named by the latent/subdued fourth factor:
 - Ch2 p.474 ("Awake… no Intending component… sensuously cold"): the word "Weightless" is **our coinage**, not Mirodan's — say "Weight non-constitutive / latent."
 - Ch2 p.481 (certain = Direct/Sustained, motor Pressing/Gliding): **verbatim**; note Pressing = Strong, so certain's motor reaches into Strong-Weight.
 - Tempo table (§6) page refs: mirror of `MIRODAN_24_TEMPI` in `src/actor-memory.ts`, sourced to Mirodan Vol. 2.
+- Ch3 p. 558 (all four Variations at the character's disposal / variety in performance): **verbatim**, load-bearing for §12.
+- Ch3 p. 537 (Spell Sustained "dream-like" tempo signature): **verbatim**, load-bearing for §12.
+- Ch3 pp. 553-554 (Outer Action = Stress + Aspect's main IP; Inner Action = Stress + secondary IP): **paraphrase** of the ch3 extract's formation rule + Adream worked example; the Infinex Stable derivation in §11 is **our application**, consistent with the locked drive table.
+- Ch3 p. 552 fn (drive order flips with scene circumstance): **verbatim** in the ch3 extract §9d.
+
+## 11. Action-Attitude formation rule — how a placement's RANGE is derived (Ch3, added 2026-06-10)
+
+Stress is added to BOTH Inner Participations of an Attitude (Ch3 p. 553). The Action Attitudes a
+placement can reach (pp. 553-554):
+- **Outer Action Attitude = Stress + the Aspect's main Inner Participation.**
+- **Inner Action Attitude = Stress + the secondary Inner Participation.**
+
+Worked for Infinex (Stable, Penetrating/Space-led, Flow-stress): Outer Action = Flow+Space =
+**Remote**; Inner Action = Flow+Weight = **Adream**. So the locked five tempi spanning
+Stable/Adream/Remote is the mechanical output of the placement, not a taste choice. Order of
+formative drives also tracks Stress (p. 557: "the order of Drives is determined by the Stress"),
+and flips with scene circumstance (p. 552 fn) — never with artifact/genre type.
+
+## 12. Variety is canonical; Spell rests Sustained (added 2026-06-10)
+
+- **All four Variations are at the character's disposal** (p. 558): "a Character has at its
+  disposal all four Variations given to its Inner Attitude. In practice, we find that one of these
+  variations tends to occur less often, reflecting the character's Aspect... But the other three
+  are used to a large extent and their use makes for variety and interest in performance."
+  → A corpus camped in ONE variation is off-canon regardless of placement.
+- **Spell tempo signature** (p. 537): "Spell characters generally display a Sustained tempo...
+  dream-like: almost, but not literally, in slow motion"; magnetic, chant-like. A Spell-primary
+  character presenting wall-to-wall Strong+Direct will-assertion is presenting Doing-dominance.
+- Consequence for generators: a tempo label is not playable (Ch1 pp. 350-351); pre-assigned
+  per-post-kind tempo arcs are therefore doubly off-canon (unplayable target + genre-keyed energy).
+- 2026-06-10 instrument note: on `research/tempo-eval/before/` the Director read 12/15 candidates
+  as commanding while the v2 classifier read 0/15 commanding (6 certain, 4 self-contained) on
+  identical texts — the two rule homes disagree on the commanding-vs-certain discriminator.
+  **Operator adjudication (2026-06-10): the Director is the senior instrument** ("the Director is
+  like V3"); do not port the classifier's reads into it. Open question runs the OTHER way: the
+  classifier's certain/self-contained-heavy reads may be trap #2 over-correction (§9.2 — will
+  stripped, everything collapses toward certain). Resolution path: calibrate both instruments
+  against a known-answer sample set before trusting either's fine-grained distribution.

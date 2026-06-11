@@ -17,11 +17,13 @@ export function CandidateRegenPanel({
   channel,
   candidates,
   operatorFeedback,
+  pickedTextByCandidate,
 }: {
   cardId: string;
   channel: Channel;
   candidates: HarnessCandidate[];
   operatorFeedback: HarnessOperatorFeedback[];
+  pickedTextByCandidate?: Map<string, string>;
 }) {
   const router = useRouter();
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -39,14 +41,28 @@ export function CandidateRegenPanel({
     });
   }
 
+  const failedIds = candidates
+    .filter((c) => !(c.validation_passed && c.active_validation_passed !== false))
+    .map((c) => c.id);
+
+  /** One-click Director→Actor handback: every failed candidate goes back with
+   * the Director's own stored notes (no operator typing required). */
+  function passBackFailed() {
+    if (failedIds.length === 0) return;
+    runRegen(failedIds, undefined, failedIds.length);
+  }
+
   function regenerate() {
     if (selected.size === 0) return;
+    runRegen([...selected], notes.trim() || undefined, selected.size);
+  }
+
+  function runRegen(ids: string[], operatorNotes: string | undefined, count: number) {
     setError(null);
     setStarted(null);
-    const count = selected.size;
     startTransition(async () => {
       try {
-        const res = await regenerateWithNotes(cardId, channel, [...selected], notes.trim() || undefined);
+        const res = await regenerateWithNotes(cardId, channel, ids, operatorNotes);
         setSelected(new Set());
         setNotes('');
         setStarted(
@@ -76,7 +92,11 @@ export function CandidateRegenPanel({
                 className="mt-3 h-4 w-4 shrink-0"
               />
               <div className={`min-w-0 flex-1 ${checked ? 'ring-1 ring-state-running rounded-md' : ''}`}>
-                <CandidateCard candidate={c} operatorFeedback={operatorFeedback} />
+                <CandidateCard
+                  candidate={c}
+                  operatorFeedback={operatorFeedback}
+                  pickedFinalText={pickedTextByCandidate?.get(c.id) ?? null}
+                />
               </div>
             </div>
           );
@@ -102,6 +122,15 @@ export function CandidateRegenPanel({
             className="text-xs font-mono text-state-running disabled:text-ink-4 hover:underline"
           >
             {pending ? 'regenerating…' : `regenerate selected (${selected.size})`}
+          </button>
+          <button
+            type="button"
+            disabled={pending || failedIds.length === 0}
+            onClick={passBackFailed}
+            title="Send every failed candidate back to the Actor with the Director's stored notes"
+            className="text-xs font-mono text-state-rejected disabled:text-ink-4 hover:underline"
+          >
+            {`↩ pass back failed (${failedIds.length})`}
           </button>
           {error && <span className="text-xs text-state-rejected">{error}</span>}
         </div>

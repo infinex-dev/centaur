@@ -13,6 +13,7 @@ import type {
   HarnessCard,
   HarnessFact,
   HarnessGeneratorAttempt,
+  HandbackPrompt,
   HarnessOperatorFeedback,
   HarnessPipelineRun,
   PendingApiRequest,
@@ -25,7 +26,7 @@ import type {
 } from './types';
 import { getDb } from './db';
 
-export const CHANNELS: Channel[] = ['x', 'x-thread', 'web', 'in-product', 'modal', 'blog', 'carousel'];
+export const CHANNELS: Channel[] = ['x', 'x-thread', 'web', 'in-product', 'modal', 'blog', 'carousel', 'image-brief'];
 
 const CANDIDATE_SELECT = `
   SELECT c.*,
@@ -499,6 +500,38 @@ export function listOperatorFeedback(
     .map(rowToOperatorFeedback);
 }
 
+export function getLatestHandbackPrompt(
+  cardId: string,
+  channel: Channel,
+  db: Database.Database = getDb(),
+): HandbackPrompt | null {
+  const exists = db
+    .prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name='handback_prompts'")
+    .get();
+  if (!exists) return null;
+  const row = db
+    .prepare(
+      'SELECT * FROM handback_prompts WHERE card_id = ? AND channel = ? ORDER BY created_at DESC, rowid DESC LIMIT 1',
+    )
+    .get(cardId, channel);
+  return row ? rowToHandbackPrompt(row) : null;
+}
+
+function rowToHandbackPrompt(row: unknown): HandbackPrompt {
+  const r = row as Record<string, unknown>;
+  return {
+    id: stringField(r, 'id'),
+    card_id: stringField(r, 'card_id'),
+    channel: stringField(r, 'channel') as Channel,
+    reground_prompt: nullableStringField(r, 'reground_prompt'),
+    regenerate_prompt: nullableStringField(r, 'regenerate_prompt'),
+    scope: nullableStringField(r, 'scope'),
+    run_id: nullableStringField(r, 'run_id'),
+    status: stringField(r, 'status'),
+    created_at: stringField(r, 'created_at'),
+  };
+}
+
 export function listPicks(cardId: string, db: Database.Database = getDb()): FinalPick[] {
   return db
     .prepare('SELECT * FROM final_picks WHERE card_id = ? ORDER BY channel ASC')
@@ -600,10 +633,12 @@ export function getCardDetail(cardId: string, db: Database.Database = getDb()): 
   const operatorFeedback = listOperatorFeedback(cardId, db);
   const pipelineRun = getLatestPipelineRun(cardId, db);
   const releaseCardJson = getReleaseCardJson(cardId, db);
+  const expectedChannels = expectedChannelsForCard(cardId, db);
   return {
     card,
     stages: buildStageStates(card, facts, releaseCardJson, candidates, picks, db),
     facts,
+    expected_channels: expectedChannels,
     candidates_by_channel: Object.fromEntries(
       CHANNELS.map((ch) => [ch, candidates.filter((c) => c.channel === ch)]),
     ) as Record<Channel, HarnessCandidate[]>,
@@ -624,13 +659,22 @@ export function expectedChannelsForCard(cardId: string, db: Database.Database = 
   try {
     const parsed = safeParseReleaseCard(JSON.parse(json));
     if (!parsed.success) return CHANNELS;
-    const channels = parsed.data.audience.filter((a): a is Channel =>
-      (CHANNELS as string[]).includes(a),
-    );
-    return channels.length > 0 ? channels : CHANNELS;
+    const channels = parsed.data.audience.filter(isAudienceChannel);
+    const base = channels.length > 0 ? channels : CHANNELS.filter((channel) => channel !== 'image-brief');
+    return [...new Set<Channel>([...base, 'image-brief'])];
   } catch {
     return CHANNELS;
   }
+}
+
+function isAudienceChannel(value: string): value is Exclude<Channel, 'image-brief'> {
+  return value === 'x' ||
+    value === 'x-thread' ||
+    value === 'web' ||
+    value === 'in-product' ||
+    value === 'modal' ||
+    value === 'blog' ||
+    value === 'carousel';
 }
 
 function buildStageStates(
@@ -906,6 +950,7 @@ function rowToPick(row: unknown): FinalPick {
     channel: stringField(r, 'channel') as Channel,
     candidate_id: stringField(r, 'candidate_id'),
     final_text: stringField(r, 'final_text'),
+    final_structured_json: nullableStringField(r, 'final_structured_json'),
     shipped_at: nullableStringField(r, 'shipped_at'),
     shipped_to: nullableStringField(r, 'shipped_to') as FinalPick['shipped_to'],
   };

@@ -58,6 +58,7 @@ const CHANNEL_MAX_LEN: Record<Channel, number> = {
   // these caps bound the readable rendering as a backstop.
   "x-thread": 1800,
   carousel: 1600,
+  "image-brief": 4000,
 };
 
 export interface OrchestrateOptions {
@@ -156,6 +157,18 @@ export async function orchestrateLLM(
 
     let chosen: HybridPick | null = null;
     for (const c of pool) {
+      if (channel === "image-brief") {
+        chosen = {
+          channel,
+          candidate: c,
+          verdict: {
+            passed: true,
+            deterministic: { passed: true, failures: [] },
+            reason: "image brief art-direction surface",
+          },
+        };
+        break;
+      }
       const auditOpts: Parameters<typeof auditTextHybrid>[1] = { ...baseAuditOpts, channel };
       if (c.deployed_facts_used !== undefined) auditOpts.deployed_facts_used = c.deployed_facts_used;
       if (c.not_said !== undefined) auditOpts.not_said = c.not_said;
@@ -213,6 +226,21 @@ export async function orchestrateActive(
 
     let chosen: ActivePick | null = null;
     for (const c of pool) {
+      if (channel === "image-brief") {
+        chosen = {
+          channel,
+          candidate: c,
+          verdict: {
+            passed: true,
+            deterministic: { passed: true, failures: [] },
+            research_trace: [],
+            active_turns: 0,
+            reason: "image brief art-direction surface",
+          },
+          history: { passed: true, failures: [], compared_against: [] },
+        };
+        break;
+      }
       const verdict = await auditTextActive(c.text, {
         ...(opts.active_opts ?? {}),
         card,
@@ -294,6 +322,10 @@ export function orchestrate(
 
     let chosen: Pick | null = null;
     for (const c of pool) {
+      if (channel === "image-brief") {
+        chosen = { channel, candidate: c, validation: { passed: true, failures: [] } };
+        break;
+      }
       const candidateValidateOpts: Parameters<typeof validate>[1] = { ...validateOpts, channel };
       if (c.deployed_facts_used !== undefined) {
         candidateValidateOpts.deployed_facts_used = c.deployed_facts_used;
