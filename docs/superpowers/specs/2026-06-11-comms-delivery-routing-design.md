@@ -164,8 +164,12 @@ Read from the code, not assumed:
    file the site renders.
 3. **`COMMS_GITHUB_TOKEN`** with PR + contents write scope on `infinex-xyz/platform`,
    provisioned as a secret (separate from the read-only cache token).
-4. **Typefully draft API** — endpoint, auth header, threadify field — confirmed against current
-   docs; `TYPEFULLY_API_KEY` provisioned.
+4. **Typefully** — the API contract is now RESOLVED (org-proven v2 contract from
+   `infinex-xyz/agents/content-pipeline`'s production `typefully.js`; see §1). Remaining:
+   provision `TYPEFULLY_API_KEY` + pick the `social_set_id` (the marketing X account — discover
+   via `GET /social-sets`; config as `TYPEFULLY_SOCIAL_SET_ID`), and decide vendor-vs-port of
+   `typefully.js`. Note the same key/account likely serves the content-pipeline agent — confirm
+   sharing it is acceptable (drafts from both pipelines land in the same Typefully workspace).
 5. **`DISPLAYDEV_API_KEY` (`sk_live_`)** scoped to the existing `infinex` display.dev org,
    provisioned as a comms-pod secret (env, not a disk session). Confirm CLI-vs-REST invoke path
    (CLI is validated); the `cssPath` anchor strategy for bot comments (trial used coarse `"h3"`);
@@ -198,18 +202,32 @@ real revision route) but is otherwise independent of the delivery targets.
 
 ### 1. Typefully client + `/typefully-draft` route
 
-`src/typefully.ts` — thin client reading `TYPEFULLY_API_KEY` from env (endpoint/auth/threadify
-pinned per open-verification #4):
-- `createDraft({content, threadify}) → {id, share_url}`.
-- solo `x`: `content = final_by_channel["x"].text`, `threadify=false`.
-- `x-thread`: rebuild the tweet array from the chosen candidate's `candidate.structured.tweets`
-  (via `candidate_id`), join with the Typefully thread delimiter (4 newlines), `threadify=true`
-  (or post the structured tweets per the confirmed API). Fall back to `.text` only if structured
-  is unavailable.
+The wire contract is **org-proven** — `infinex-xyz/agents/content-pipeline` ships a
+zero-dependency Typefully CLI (`content-agent/skills/typefully/scripts/typefully.js`) already
+used in production by the podcast pipeline. Contract (Typefully API **v2**):
+- Base `https://api.typefully.com/v2`, auth `Authorization: Bearer <TYPEFULLY_API_KEY>`.
+- Create: `POST /social-sets/{social_set_id}/drafts` with body
+  `{platforms: {x: {enabled: true, posts: [{text, media_ids?}, …]}}, draft_title?, share?,
+  scratchpad_text?, tags?}` — **a thread is the `posts` array, one entry per tweet** (no
+  "threadify" flag, no delimiter blob; those were v1-isms). `share: true` returns a public
+  review URL; the editor URL is `https://typefully.com/?a=<social_set_id>&d=<draft_id>`.
+- `social_set_id` is **required** (no default account server-side); also
+  `GET /social-sets?limit=50` to discover, `GET …/drafts/{id}` returns `x_published_url` once a
+  human publishes — the future publish-detection hook.
+
+`src/typefully.ts` — thin client implementing exactly that (or vendor/adapt the proven
+`typefully.js` from the agents repo — decide at implementation; the contract is identical):
+- solo `x`: `posts = [{text: final_by_channel["x"].text}]`.
+- `x-thread`: `posts` mapped 1:1 from the chosen candidate's `candidate.structured.tweets`
+  (via `candidate_id`) — the structured array IS the wire shape. Fall back to splitting `.text`
+  only if structured is unavailable.
+- Always `share: true` (reviewable URL) and `scratchpad_text` carrying the run id/card title for
+  traceability. Never set `publish_at` — drafts only.
 
 `POST /typefully-draft` (registered in `services/api/http.ts`): `{channel, text|tweets}` →
-`{ok, share_url, draft_id}` or `{ok:false, error:"typefully_not_configured"}` when the key is
-absent.
+`{ok, share_url, draft_id, draft_url}` or `{ok:false, error:"typefully_not_configured"}` when
+the key is absent (also requires `TYPEFULLY_SOCIAL_SET_ID` config — same not-configured
+handling).
 
 ### 2. REST `/emit` route + LaunchPackage mapper
 
