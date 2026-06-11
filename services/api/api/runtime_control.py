@@ -140,7 +140,11 @@ def _jsonb_safe(value: Any) -> Any:
     if isinstance(value, str):
         return value.replace("\x00", "") if "\x00" in value else value
     if isinstance(value, dict):
-        return {_jsonb_safe(key): _jsonb_safe(val) for key, val in value.items()}
+        sanitized = {_jsonb_safe(key): _jsonb_safe(val) for key, val in value.items()}
+        if len(sanitized) < len(value):
+            # Keys that differed only by NUL collided after stripping; last wins.
+            log.warning("jsonb_safe_key_collision", dropped=len(value) - len(sanitized))
+        return sanitized
     if isinstance(value, (list, tuple)):
         return [_jsonb_safe(item) for item in value]
     if isinstance(value, float) and not math.isfinite(value):
