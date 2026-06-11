@@ -106,6 +106,29 @@ describe("actor/director architecture", () => {
 	  expect(director.source_index.some((entry) => entry.id === "source-location-memory" && entry.exists)).toBe(true);
 	});
 
+  it("carries release economy (Actor) and motor uniformity (Director) with the shared example pair", () => {
+    const actor = buildActorMemoryPack(INFINEX_VOICE);
+    const director = buildDirectorMemoryPack(INFINEX_VOICE);
+
+    expect(actor.version).toBe("actor-memory-v2.1");
+    expect(actor.system_prompt).toContain("## Release economy");
+    expect(actor.system_prompt).toContain("AT MOST ONE beat per piece");
+    expect(actor.system_prompt).toContain("Antithesis grammar");
+
+    expect(director.version).toBe("director-memory-v2.1");
+    expect(director.system_prompt).toContain("## Motor uniformity");
+    expect(director.system_prompt).toContain("assigned, not decided");
+    expect(director.system_prompt).toContain("naming WHICH closes should end Sustained");
+
+    // The general example pair (button vs Sustained close) must be in BOTH packs
+    // — a fresh Director has never seen any past run's prose, so the contrast
+    // travels with the prompt.
+    for (const prompt of [actor.system_prompt, director.system_prompt]) {
+      expect(prompt).toContain("The machine is not impressive. It is finished.");
+      expect(prompt).toContain("the next inspection is in March");
+    }
+  });
+
   it("gives the Director all 24 tempi and evidence requirements", () => {
     const director = buildDirectorMemoryPack(INFINEX_VOICE);
     for (const tempo of ALL_TEMPO_NAMES) {
