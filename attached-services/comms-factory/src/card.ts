@@ -19,6 +19,10 @@ import { z } from "zod";
  *   - split:              semantic two-color split (bridge from/to, in/out, etc.)
  */
 
+// "carousel" is RETIRED (2026-06-11): its in-app surface (appAlert / What's-New
+// dialog) is formally deprecated platform-side (docs/content-pipeline.md) and
+// renders nowhere. Kept in the enum so historical cards still parse; the
+// harness no longer offers it and the card-builder prompt excludes it.
 const Audience = z.enum(["web", "x", "x-thread", "telegram", "in-product", "modal", "blog", "carousel", "email", "press", "internal"]);
 export type Audience = z.infer<typeof Audience>;
 

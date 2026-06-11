@@ -36,7 +36,8 @@ export const SURFACE_META: Record<SurfaceKind, SurfaceMeta> = {
   'in-product': { glyph: '◧', label: 'In-product', role: '“What’s new” microcopy', limit: 90 },
   modal: { glyph: '▢', label: 'Modal', role: 'in-app dialog', limit: 400 },
   blog: { glyph: '¶', label: 'Blog', role: 'long-form post', limit: null },
-  carousel: { glyph: '⬚', label: 'Carousel', role: 'numbered slides', limit: 240 },
+  // retired 2026-06-11 (appAlert deprecated platform-side); meta + order kept so historical picks render
+  carousel: { glyph: '⬚', label: 'Carousel (retired)', role: 'numbered slides', limit: 240 },
   'image-brief': { glyph: '▧', label: 'Image brief', role: 'art-direction for the designer', limit: null },
 };
 
