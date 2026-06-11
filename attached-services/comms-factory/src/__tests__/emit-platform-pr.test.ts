@@ -9,6 +9,7 @@ import {
   describeRoadmapChanges,
   emitBatchLaunchPR,
   emitLaunchPR,
+  extractPublishedFrom,
   markChangelogPublished,
   markRoadmapNodeDone,
   nextChangelogNumber,
@@ -274,8 +275,47 @@ describe("emitLaunchPR dry-run", () => {
     expect(result.prDescription).toContain("- Roadmap:");
     expect(result.prDescription).toContain("`Trading`: `unset` -> `done` (auto parent roll-up)");
     expect(result.prDescription).toContain("`Trading / NFT`: `in_progress` -> `done`");
+    expect(result.prDescription).toContain("## Go-live (per platform `docs/content-pipeline.md`)");
+    expect(result.prDescription).toContain("In-app changelog popout: NOT live on merge");
+    expect(result.prDescription).not.toContain("is scheduled");
     expect(git(platformRoot, ["status", "--short"])).toBe("");
     expect(git(platformRoot, ["branch", "--list", "cf-emit/test-prediction-markets"])).toBe("");
+  });
+
+  it("warns in the PR body when publishedFrom is in the future", async () => {
+    const platformRoot = makePlatformFixture();
+    const pkg: LaunchPackage = {
+      changelogSlug: "scheduled-launch",
+      changelogMd: [
+        "---",
+        "title: Scheduled launch",
+        "date: 2026-06-05",
+        "published: false",
+        "publishedFrom: 2999-01-01T09:00:00.000Z",
+        "category: changelogs",
+        "---",
+        "### Scheduled launch",
+      ].join("\n"),
+    };
+
+    const result = await emitLaunchPR(pkg, {
+      platformRoot,
+      dryRun: true,
+      branch: "cf-emit/test-scheduled",
+    });
+
+    expect(result.prDescription).toContain("`scheduled-launch` is scheduled");
+    expect(result.prDescription).toContain("publishedFrom: 2999-01-01T09:00:00.000Z");
+    expect(result.prDescription).toContain("needs a deploy AFTER that time");
+  });
+
+  it("extracts publishedFrom from frontmatter, tolerating quotes and absence", () => {
+    expect(extractPublishedFrom("---\ntitle: X\npublishedFrom: 2026-07-01\n---\nBody")).toBe("2026-07-01");
+    expect(extractPublishedFrom('---\ntitle: X\npublishedFrom: "2026-07-01T09:00:00.000Z"\n---\nBody')).toBe(
+      "2026-07-01T09:00:00.000Z",
+    );
+    expect(extractPublishedFrom("---\ntitle: X\npublished: true\n---\nBody")).toBeNull();
+    expect(extractPublishedFrom("no frontmatter here")).toBeNull();
   });
 
   it("auto-stamps the next internal number on a changelog, derived from existing posts", async () => {
@@ -451,8 +491,8 @@ describe("emitBatchLaunchPR", () => {
     expect(result.plannedDiff).toContain("+published: true");
 
     expect(result.items).toEqual([
-      { slug: "fiat-bank-deposits-live-via-bridge-xyz", action: "renumber", internalNumber: 63, roadmapChanges: [] },
-      { slug: "next-thing-live", action: "create", internalNumber: 64, roadmapChanges: [] },
+      { slug: "fiat-bank-deposits-live-via-bridge-xyz", action: "renumber", internalNumber: 63, roadmapChanges: [], publishedFrom: null },
+      { slug: "next-thing-live", action: "create", internalNumber: 64, roadmapChanges: [], publishedFrom: null },
     ]);
 
     expect(result.prDescription).toContain("Renumber: `apps/content-app/content/blog/fiat-bank-deposits-live-via-bridge-xyz.md` -> `internalNumber: 63`");

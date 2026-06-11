@@ -21,9 +21,11 @@ Both = we shipped against a preview that wasn't telling the truth about the real
 
 **Fix.** No code. Deploy `apps/web-app` from current main; the bundle picks up the latest blog markdown.
 
+> **Correction 2026-06-11** (per platform `docs/content-pipeline.md`, PR #14812 — now the canonical pipeline reference): a `main` deploy only refreshes the **test** web-app. Platform envs are branch-mapped (`main` → test, `prod` → production), so the production popup updates on the **next platform release (`prod` branch update)**. Also: the website is statically rendered, not request-time SSR — it's fresh on merge because it auto-deploys straight to prod on content-affecting `main` pushes.
+
 **Status.** ⚠️ **STILL OPEN.** This is the one outstanding launch-day action. Acceptance: desktop sidebar → "What's new" shows *"Fiat bank deposits live via Bridge.xyz"* as the latest entry.
 
-**Caveat for next time.** This is structural, not a one-off — every launch that relies on the in-app popup needs a web-app deploy *after* the content merges, or the popup lags the website by one deploy cycle. The handoff doc (`research/whats-new-inapp-handoff-2026-06-10.md`) has the full surface map.
+**Caveat for next time.** This is structural, not a one-off — every launch that relies on the in-app popup lags production until the next platform release. By design (content rides in the app bundle), not a bug. comms-factory's emit PRs now state per-surface go-live semantics in the PR body (`src/emit-platform-pr.ts`); the handoff doc (`research/whats-new-inapp-handoff-2026-06-10.md`) has the full surface map.
 
 ---
 
