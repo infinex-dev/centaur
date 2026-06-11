@@ -17,6 +17,7 @@ from comms_shared import (
     call_comms_tool,
     candidates_from_generation,
     card_from_result,
+    chunked_markdown_blocks,
     common_service_envelope,
     context_block,
     DEFAULT_CHANNELS,
@@ -32,6 +33,7 @@ from comms_shared import (
     post_gate_message,
     render_fact_review_blocks,
     render_release_card_blocks,
+    STRUCTURED_CHANNELS,
     target_gate_correlation_id,
     tool_plane_ref,
     update_gate_message,
@@ -846,6 +848,116 @@ def _picks_from_generation(generation: Any) -> list[dict[str, Any]]:
     source = out if isinstance(out, dict) else generation
     picks = source.get("picks")
     return [p for p in picks if isinstance(p, dict)] if isinstance(picks, list) else []
+
+
+EDITABLE_CHANNELS = tuple(c for c in GENERATED_CHANNELS if c not in STRUCTURED_CHANNELS)
+MAX_CANDIDATE_ROUNDS = 30
+
+
+def _seed_final_by_channel(
+    channels: list[str],
+    candidates: list[dict[str, Any]],
+    picks: list[dict[str, Any]],
+) -> dict[str, dict[str, Any] | None]:
+    """Director pick per channel (flat picks: top-level id/text/channel), else the
+    first candidate of that channel, else None (missing)."""
+    state: dict[str, dict[str, Any] | None] = {}
+    for channel in channels:
+        pick = next((p for p in picks if p.get("channel") == channel), None)
+        if pick and str(pick.get("text") or "").strip():
+            state[channel] = {
+                "text": str(pick.get("text")),
+                "candidate_id": pick.get("id"),
+                "edited": False,
+            }
+            continue
+        candidate = next(
+            (
+                c
+                for c in candidates
+                if c.get("channel") == channel and str(c.get("text") or "").strip()
+            ),
+            None,
+        )
+        state[channel] = (
+            {
+                "text": str(candidate.get("text")),
+                "candidate_id": candidate.get("id"),
+                "edited": False,
+            }
+            if candidate
+            else None
+        )
+    return state
+
+
+def _candidate_by_id(
+    candidates: list[dict[str, Any]], candidate_id: Any
+) -> dict[str, Any] | None:
+    if candidate_id is None:
+        return None
+    return next((c for c in candidates if c.get("id") == candidate_id), None)
+
+
+def _candidate_gate_blocks(
+    gate: Gate,
+    channels: list[str],
+    state: dict[str, dict[str, Any] | None],
+    candidates: list[dict[str, Any]],
+    *,
+    retry_available: bool,
+    audit_line: str,
+    terminal: bool,
+) -> list[dict[str, Any]]:
+    blocks: list[dict[str, Any]] = [
+        markdown_block(
+            "*Choose final copy per format.* This only marks copy ready in Slack."
+        )
+    ]
+    for channel in channels:
+        entry = state.get(channel)
+        if entry is None:
+            blocks.append(markdown_block(f"*{channel}* — ⚠️ no candidates generated"))
+            continue
+        candidate = _candidate_by_id(candidates, entry.get("candidate_id"))
+        header = f"*{channel}*"
+        if entry.get("edited"):
+            header += " _(edited by operator)_"
+        elif candidate is not None:
+            header += "  ⭐ Director's pick"
+        lines = [header]
+        if isinstance((candidate or {}).get("director_audit"), dict) and not entry.get(
+            "edited"
+        ):
+            audit = candidate["director_audit"]
+            lines.append(_verdict_line(audit))
+            lines.extend(f"⚠️ {issue}" for issue in _collect_issues(audit))
+        blocks.append(markdown_block("\n".join(lines)))
+        blocks.extend(chunked_markdown_blocks(f">{entry['text']}"))
+        if not terminal and channel in EDITABLE_CHANNELS:
+            blocks.append(
+                actions_block(
+                    gate,
+                    [
+                        (
+                            f"Edit {channel}",
+                            "edit_candidate",
+                            None,
+                            channel,
+                            f"r{gate.gate_version} · Edit {channel}",
+                        )
+                    ],
+                )
+            )
+    if audit_line:
+        blocks.append(context_block(audit_line))
+    if not terminal:
+        global_actions: list[Any] = [("Mark ready", "approve", "primary")]
+        if retry_available:
+            global_actions.append(("Retry", "retry", None))
+        global_actions.append(("Abandon", "abandon", "danger"))
+        blocks.append(actions_block(gate, global_actions))
+    return blocks
 
 
 def _recommended_candidate(

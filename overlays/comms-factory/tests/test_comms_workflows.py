@@ -1404,3 +1404,72 @@ def test_format_generation_failure_non_transient_gives_generic_guidance():
     assert "bad_request" in out
     assert "{" not in out
     assert "service logs" in out
+
+
+def test_seed_final_by_channel_prefers_director_pick_and_falls_back():
+    import comms_release
+
+    candidates = [
+        {"id": "c1", "channel": "x", "text": "x copy 1"},
+        {"id": "c2", "channel": "x", "text": "x copy 2"},
+        {"id": "b1", "channel": "blog", "text": "blog copy"},
+    ]
+    picks = [
+        {"id": "c2", "channel": "x", "text": "x copy 2"}
+    ]  # flat, like the live route
+    state = comms_release._seed_final_by_channel(
+        ["x", "blog", "modal"], candidates, picks
+    )
+    assert state["x"] == {"text": "x copy 2", "candidate_id": "c2", "edited": False}
+    # no blog pick → first blog candidate
+    assert state["blog"] == {"text": "blog copy", "candidate_id": "b1", "edited": False}
+    # no modal candidates at all → missing (None entry)
+    assert state["modal"] is None
+
+
+def test_candidate_gate_blocks_render_per_channel_with_scoped_buttons():
+    import comms_release
+
+    gate = Gate("run_1", "candidate", 3, "U123", ("U999",))
+    candidates = [
+        {
+            "id": "c1",
+            "channel": "x",
+            "text": "x copy",
+            "director_audit": {"publication_gate_passed": True},
+        },
+        {"id": "t1", "channel": "x-thread", "text": "tweet1\n\ntweet2"},
+    ]
+    state = {
+        "x": {"text": "x copy", "candidate_id": "c1", "edited": False},
+        "x-thread": {"text": "tweet1\n\ntweet2", "candidate_id": "t1", "edited": False},
+        "blog": None,
+    }
+    blocks = comms_release._candidate_gate_blocks(
+        gate,
+        ["x", "x-thread", "blog"],
+        state,
+        candidates,
+        retry_available=True,
+        audit_line="",
+        terminal=False,
+    )
+    flat = str(blocks)
+    assert "*x*" in flat and "*x-thread*" in flat
+    assert "no candidates generated" in flat  # blog missing
+    assert '"target_id":"x"' in flat  # Edit x carries its channel
+    assert '"label":"r3 · Edit x"' in flat  # round-stamped modal label
+    assert '"target_id":"x-thread"' not in flat  # structured: pick-or-retry only
+    assert flat.count('"action":"edit_candidate"') == 1  # only the one editable channel
+    assert '"action":"retry"' in flat and '"action":"approve"' in flat
+
+    terminal_blocks = comms_release._candidate_gate_blocks(
+        gate,
+        ["x"],
+        state,
+        candidates,
+        retry_available=False,
+        audit_line="done",
+        terminal=True,
+    )
+    assert '"type": "actions"' not in str(terminal_blocks).replace("'", '"')
