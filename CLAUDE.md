@@ -32,7 +32,7 @@ uv run pytest                       # all tests
 uv run pytest path/to/test_x.py::test_name   # single test
 ```
 
-`services/slackbot` is Next.js + Slack Bolt and uses **`pnpm`** (it's the one workspace member in the root `pnpm-workspace.yaml`). The repo has a **second, standalone Node project** at `attached-services/comms-factory/` (its own `pnpm-lock.yaml`, **not** a workspace member) — see Overlays below.
+`services/slackbot` is Next.js + Slack Bolt and uses **`pnpm`** (it's the one workspace member in the root `pnpm-workspace.yaml`). The repo has a **second, standalone Node project** at `attached-services/comms-factory/` (its own `pnpm-lock.yaml`, **not** a workspace member) — see Overlays below. It carries its own `pnpm-workspace.yaml` marker so a bare `pnpm install` inside it resolves standalone instead of walking up to the centaur root workspace and silently installing the wrong project (symptom: tests fail with "Failed to load url <new-dep>"; note a project-level `.npmrc ignore-workspace=true` does NOT fix this in pnpm 10).
 
 Migrations use dbmate against both core and overlay migration sets:
 
