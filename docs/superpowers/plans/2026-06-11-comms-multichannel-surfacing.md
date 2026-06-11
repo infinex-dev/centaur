@@ -16,7 +16,11 @@
 - The live `/generate` route returns **flat** picks: `Candidate[]` with top-level `id`/`text`/`channel` (NOT the nested `Pick {channel, candidate}` from `src/orchestrator.ts` — that module is not the HTTP path).
 - Duplicate `action_id`s across *separate* actions blocks in one message are proven in production (facts gate); per-channel Edit buttons therefore each get their own actions block.
 
-**Branch:** create `feat/comms-multichannel-surfacing` off the current branch HEAD before Task 1.
+**Branch:** create `feat/comms-multichannel-surfacing` off **`origin/main`** before Task 1
+(main includes the plan/specs via PR #12 and the launch-week comms-factory sync via PR #13 —
+verified against this plan: the route allowlist, overlay Python, flat picks, and blog cap are
+all unchanged by the sync). TS deps in `attached-services/comms-factory` install with
+`pnpm install --ignore-workspace` (it is intentionally outside the root workspace).
 
 ---
 

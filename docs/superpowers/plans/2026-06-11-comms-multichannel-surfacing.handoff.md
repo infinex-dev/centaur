@@ -11,8 +11,11 @@ Implement the comms multi-channel surfacing feature by executing the plan at
 - Use the superpowers:executing-plans skill (or superpowers:subagent-driven-development
   if dispatching a subagent per task). The plan is 8 tasks of bite-sized TDD steps with
   exact code — follow it task-by-task, in order, checking off steps as you go.
-- First action: create branch `feat/comms-multichannel-surfacing` off the current HEAD
-  of `feat/comms-grounder-self-derived-repo-routing` (the plan + specs live there).
+- First action: create branch `feat/comms-multichannel-surfacing` off **`origin/main`**
+  (the plan + specs are on main via PR #12; the PR #13 launch-week comms-factory sync is
+  also on main and has been verified NOT to move any anchor this plan relies on).
+- TS deps: `cd attached-services/comms-factory && pnpm install --ignore-workspace`
+  (intentionally outside the root pnpm workspace).
 - Commit after every task exactly as the plan's commit steps specify.
 
 ## Context you need (read before Task 1)
