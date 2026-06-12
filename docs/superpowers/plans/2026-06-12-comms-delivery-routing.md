@@ -1068,9 +1068,16 @@ export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Pr
   } catch (error) {
     // Transport rejections (and any other stray throw in the network phases)
     // resolve to the typed failure envelope — callers never see a raw throw.
+    const typed = error as { status?: number };
+    if (typed.status === undefined) {
+      // Unexpected programmer-error throw (not a typed transport failure) — log it so
+      // it doesn't silently masquerade as a soft GitHub failure.
+      const detail = error instanceof Error ? error.message.slice(0, 400) : String(error);
+      console.error(JSON.stringify({ timestamp: new Date().toISOString(), level: "error", service: "comms-factory-api", event: "github_emit_unexpected", detail }));
+    }
     return failResult(
       opts.branch,
-      (error as { status?: number }).status ?? 500,
+      typed.status ?? 500,
       error instanceof Error ? error.message.slice(0, 200) : undefined,
     );
   }

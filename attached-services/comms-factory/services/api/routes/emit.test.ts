@@ -139,6 +139,8 @@ describe("handleEmit", () => {
       branch: "cf-emit/perps-launch-run_1",
       slug: "perps-launch",
     });
+    // date_changes must be present as an array in the response envelope.
+    expect(Array.isArray((result.body as Record<string, unknown>).date_changes)).toBe(true);
   });
 
   it("defaults to dry-run: only GET requests, planned_diff present, pr_url null", async () => {
@@ -187,6 +189,12 @@ describe("handleEmit", () => {
         expect(e).toMatchObject({ status: 400, code: "invalid_branch" });
       }
     }
+  });
+
+  it("rejects a cf-emit/-prefixed but git-unsafe branch (assertSafeBranch path)", async () => {
+    await expect(
+      handleEmit(ctx(emitBody({ dry_run: false, branch: "cf-emit/../evil" }))),
+    ).rejects.toThrow();
   });
 
   it("merges emit skips into notes: features file absent at ref => note, PR still opens", async () => {
