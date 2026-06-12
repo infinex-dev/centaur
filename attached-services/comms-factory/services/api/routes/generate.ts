@@ -5,7 +5,20 @@ import type { Channel } from "../../../src/generator.js";
 import { validate, type NotSaidFact } from "../../../src/validator.js";
 import { assertRecord, boundedInteger, HttpError, stringArray, type JsonResponse, type RequestContext } from "../http.js";
 
-const CHANNELS = new Set(["x", "web", "in-product"]);
+// The route-level generation contract. Mirrors the Channel union
+// (src/generator.ts) minus `image-brief` (art direction, not a posting
+// surface) — CHANNEL_GENERATION_PROFILES covers every member, so the
+// allowlist exists only to 400 typos early. Mirrored Python-side as
+// GENERATED_CHANNELS in overlays/comms-factory/workflows/comms_shared.py.
+export const CHANNELS = new Set<string>([
+  "x",
+  "x-thread",
+  "web",
+  "carousel",
+  "modal",
+  "in-product",
+  "blog",
+]);
 
 export async function handleGenerate(ctx: RequestContext): Promise<JsonResponse> {
   const body = assertRecord(ctx.body);
@@ -78,7 +91,7 @@ function hasApprovedFacts(body: Record<string, unknown>, card: ReleaseCard): boo
   return deployedFactClaims(card).every((fact) => approved.has(fact));
 }
 
-function normalizeChannels(value: unknown, card: ReleaseCard): Channel[] {
+export function normalizeChannels(value: unknown, card: ReleaseCard): Channel[] {
   const raw = value === undefined ? card.audience : value;
   const requested = stringArray(raw);
   const normalized = requested.map((item) => (item === "tweet" ? "x" : item));

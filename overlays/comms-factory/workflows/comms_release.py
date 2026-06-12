@@ -17,18 +17,23 @@ from comms_shared import (
     call_comms_tool,
     candidates_from_generation,
     card_from_result,
+    chunked_markdown_blocks,
     common_service_envelope,
     context_block,
+    DEFAULT_CHANNELS,
     evidence_for_approved_facts,
     extract_action,
     extract_modal_value,
     fact_review_complete,
+    GENERATED_CHANNELS,
     MAX_FACT_REVIEW_ITEMS,
     markdown_block,
+    normalize_channels,
     normalize_grounded_fact_review,
     post_gate_message,
     render_fact_review_blocks,
     render_release_card_blocks,
+    STRUCTURED_CHANNELS,
     target_gate_correlation_id,
     tool_plane_ref,
     update_gate_message,
@@ -59,14 +64,46 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             ctx, inp.delivery, "Comms release needs a brief to generate from."
         )
         return {"status": "failed", "error": "missing_brief"}
-    channels = inp.channels or _parse_channels(brief) or ["x"]
+    requested = inp.channels or _parse_channels(brief) or list(DEFAULT_CHANNELS)
+    channels, planning_only, unknown = normalize_channels(requested)
+    if unknown:
+        await _post_simple(
+            ctx,
+            inp.delivery,
+            "*Comms release blocked*: unknown format(s): "
+            + ", ".join(f"`{name}`" for name in unknown)
+            + ".\nValid formats: "
+            + ", ".join(GENERATED_CHANNELS)
+            + ".",
+        )
+        return {
+            "status": "blocked",
+            "stage": "channels",
+            "error": "unknown_channels",
+            "unknown_channels": unknown,
+        }
+    selection_note = ""
+    if planning_only:
+        selection_note = (
+            "\n_Note: "
+            + ", ".join(f"`{name}`" for name in planning_only)
+            + " are planning-only touchpoints — not auto-generated; they stay on the"
+            " release card for human adaptation._"
+        )
+    if not channels:
+        channels = list(DEFAULT_CHANNELS)
+        selection_note += "\n_Falling back to the default format: x._"
 
     # No brief-level validation gate. The service `validate` runs publishable-copy
     # allergen rules (cliché, em-dash/ai-slop) and ignores `surface`, so validating
     # the operator's brief rejected legitimate instructions (e.g. "leverage", an
     # em-dash). Copy quality is enforced where it belongs — on the generated
     # candidates (the generate path strips em-dashes and runs the rules + Director).
-    await _post_simple(ctx, inp.delivery, "Grounding comms facts…")
+    await _post_simple(
+        ctx,
+        inp.delivery,
+        f"*Generating for:* {', '.join(channels)}{selection_note}\nGrounding comms facts…",
+    )
     tool_plane = tool_plane_ref(ctx, stage="ground", gate_version=1)
     if tool_plane is None:
         await _post_simple(
@@ -110,7 +147,9 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
     fact_review = normalize_grounded_fact_review(grounding)
     facts = fact_review["facts"]
     approver_user_ids = tuple(inp.approver_user_ids)
-    facts_gate = Gate(ctx.run_id, "facts", 1, inp.user_id, approver_user_ids, per_item=True)
+    facts_gate = Gate(
+        ctx.run_id, "facts", 1, inp.user_id, approver_user_ids, per_item=True
+    )
     blocked_reason = ""
     if not facts:
         blocked_reason = "Facts gate blocked: no verifiable facts were returned."
@@ -167,7 +206,11 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
                 )
                 return {"status": "abandoned", "stage": "facts", "facts": facts}
             facts = apply_fact_review_action(facts, facts_event)
-            slack = facts_event.get("slack") if isinstance(facts_event.get("slack"), dict) else {}
+            slack = (
+                facts_event.get("slack")
+                if isinstance(facts_event.get("slack"), dict)
+                else {}
+            )
             facts_approved_by = str(slack.get("user_id") or facts_approved_by)
         except GateValidationError as exc:
             await _mark_gate(
@@ -200,7 +243,12 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             inp.delivery,
             "*Comms release blocked*: no approved facts remain after review.",
         )
-        return {"status": "blocked", "stage": "facts", "error": "no_approved_facts", "facts": facts}
+        return {
+            "status": "blocked",
+            "stage": "facts",
+            "error": "no_approved_facts",
+            "facts": facts,
+        }
     evidence = evidence_for_approved_facts(facts)
 
     card_result = await call_comms_tool(
@@ -279,17 +327,26 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "update_card_gate",
             complete=True,
         )
-        return {"status": "abandoned", "stage": "card", "facts": approved_facts, "card": card}
+        return {
+            "status": "abandoned",
+            "stage": "card",
+            "facts": approved_facts,
+            "card": card,
+        }
     card_edit = extract_modal_value(card_event)
     if card_edit:
         card = _apply_card_edit(card, card_edit)
-    card_slack = card_event.get("slack") if isinstance(card_event.get("slack"), dict) else {}
+    card_slack = (
+        card_event.get("slack") if isinstance(card_event.get("slack"), dict) else {}
+    )
     approval = {
         "workflow_run_id": ctx.run_id,
         "facts_gate_version": 1,
         "card_gate_version": 1,
         "facts_approved_by": facts_approved_by,
-        "approved_by": str(card_slack.get("user_id") or facts_approved_by or inp.user_id),
+        "approved_by": str(
+            card_slack.get("user_id") or facts_approved_by or inp.user_id
+        ),
     }
     card = _with_card_approval(card, approval, approved_facts)
     await _update_card_gate_message(
@@ -337,201 +394,265 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             "card": card,
         }
     candidates = candidates_from_generation(generation)
-    candidate_gate = Gate(ctx.run_id, "candidate", 1, inp.user_id, approver_user_ids)
-    candidate_message = await post_gate_message(
-        ctx,
-        name="post_candidate_gate",
-        delivery=inp.delivery,
-        text="Choose final comms copy. This only marks copy ready in Slack.",
-        blocks=[
-            markdown_block(
-                "*Choose final copy*\n"
-                + _format_candidates(candidates, _picks_from_generation(generation))
-            ),
-            actions_block(
-                candidate_gate,
-                [
-                    ("Mark ready", "approve", "primary"),
-                    ("Edit final", "edit_candidate", None),
-                    ("Retry", "retry", None),
-                    ("Abandon", "abandon", "danger"),
-                ],
-            ),
-        ],
-        metadata={
-            "event_type": "comms_gate",
-            "event_payload": {"run_id": ctx.run_id, "stage": "candidate"},
-        },
+    final_by_channel = _seed_final_by_channel(
+        channels, candidates, _picks_from_generation(generation)
     )
-    try:
-        candidate_event = await wait_for_gate_action(
-            ctx,
-            "wait_candidate_gate",
-            candidate_gate,
-            {"approve", "edit_candidate", "retry", "abandon"},
-        )
-    except GateValidationError as exc:
-        await _mark_gate(
-            ctx,
-            candidate_message,
-            f"Candidate gate rejected: {exc.reason}.",
-            "update_candidate_gate",
-        )
+    attempts = 1
+    audit_line = ""
+    gate_message: dict[str, Any] = {}
+    outcome = ""
+    outcome_error = ""
+
+    def _state_payload() -> dict[str, Any]:
         return {
-            "status": "rejected",
-            "stage": "candidate",
-            "error": exc.reason,
-            "facts": approved_facts,
-            "card": card,
-            "candidates": candidates,
-        }
-    await _mark_gate(
-        ctx, candidate_message, "Candidate gate completed.", "update_candidate_gate"
-    )
-    action = extract_action(candidate_event)
-    if action == "abandon":
-        return {
-            "status": "abandoned",
-            "stage": "candidate",
-            "facts": approved_facts,
-            "card": card,
-            "candidates": candidates,
-        }
-    if action == "retry":
-        retry_notes = extract_modal_value(candidate_event)
-        generation = await call_comms_tool(
-            ctx,
-            "generate_candidates_attempt_2",
-            "generate",
-            {
-                "release_card": card,
-                "approved": True,
-                "approved_facts": approved_facts,
-                "approval": approval,
-                "channels": channels,
-                "voice_id": inp.voice_id,
-                "run_id": ctx.run_id,
-                "stage": "generate",
-                "gate_version": 2,
-                "feedback": retry_notes,
-                **common_service_envelope(
-                    ctx,
-                    inp,
-                    stage="generate",
-                    gate_version=2,
-                    workflow_name=WORKFLOW_NAME,
-                ),
-            },
-        )
-        generation_error = _generation_result_error(generation)
-        if generation_error:
-            await _post_simple(
-                ctx, inp.delivery, _format_generation_failure(generation, generation_error)
-            )
-            return {
-                "status": "blocked",
-                "stage": "generate",
-                "gate_version": 2,
-                "error": generation_error,
-                "generation": _sanitize_tool_result(generation),
-                "facts": approved_facts,
-                "card": card,
-                "candidates": candidates,
-            }
-        candidates = candidates_from_generation(generation)
-        retry_gate = Gate(ctx.run_id, "candidate", 2, inp.user_id, approver_user_ids)
-        retry_message = await post_gate_message(
-            ctx,
-            name="post_candidate_retry_gate",
-            delivery=inp.delivery,
-            text="Choose final comms copy after retry. This only marks copy ready in Slack.",
-            blocks=[
-                markdown_block(
-                    "*Choose final copy after retry*\n"
-                    + _format_candidates(candidates, _picks_from_generation(generation))
-                ),
-                actions_block(
-                    retry_gate,
-                    [
-                        ("Mark ready", "approve", "primary"),
-                        ("Edit final", "edit_candidate", None),
-                        ("Abandon", "abandon", "danger"),
-                    ],
-                ),
+            "channels": channels,
+            "final_by_channel": final_by_channel,
+            "missing_channels": [
+                c for c in channels if final_by_channel.get(c) is None
             ],
-            metadata={
-                "event_type": "comms_gate",
-                "event_payload": {"run_id": ctx.run_id, "stage": "candidate"},
-            },
+            "facts": approved_facts,
+            "card": card,
+            "candidates": candidates,
+        }
+
+    async def _render(
+        gate: Gate, name: str, *, retry_available: bool, terminal: bool, text: str
+    ) -> None:
+        nonlocal gate_message
+        blocks = _candidate_gate_blocks(
+            gate,
+            channels,
+            final_by_channel,
+            candidates,
+            retry_available=retry_available,
+            audit_line=audit_line,
+            terminal=terminal,
+        )
+        if not gate_message:
+            gate_message = await post_gate_message(
+                ctx,
+                name=name,
+                delivery=inp.delivery,
+                text=text,
+                blocks=blocks,
+                metadata={
+                    "event_type": "comms_gate",
+                    "event_payload": {"run_id": ctx.run_id, "stage": "candidate"},
+                },
+            )
+        else:
+            await update_gate_message(
+                ctx,
+                name=name,
+                channel=str(gate_message.get("channel") or ""),
+                ts=str(gate_message.get("ts") or ""),
+                text=text,
+                blocks=blocks,
+            )
+
+    for round_n in range(1, MAX_CANDIDATE_ROUNDS + 1):
+        gate = Gate(ctx.run_id, "candidate", round_n, inp.user_id, approver_user_ids)
+        await _render(
+            gate,
+            f"render_candidate_gate_r{round_n}",
+            retry_available=attempts < 2,
+            terminal=False,
+            text="Choose final comms copy per format.",
         )
         try:
-            candidate_event = await wait_for_gate_action(
+            event = await wait_for_gate_action(
                 ctx,
-                "wait_candidate_retry_gate",
-                retry_gate,
-                {"approve", "edit_candidate", "abandon"},
+                f"wait_candidate_gate_r{round_n}",
+                gate,
+                {"approve", "edit_candidate", "retry", "abandon"},
             )
         except GateValidationError as exc:
             await _mark_gate(
                 ctx,
-                retry_message,
-                f"Candidate retry gate rejected: {exc.reason}.",
-                "update_candidate_retry_gate",
+                gate_message,
+                f"Candidate gate rejected: {exc.reason}.",
+                f"update_candidate_gate_rejected_r{round_n}",
             )
             return {
                 "status": "rejected",
                 "stage": "candidate",
                 "error": exc.reason,
-                "facts": approved_facts,
-                "card": card,
-                "candidates": candidates,
+                **_state_payload(),
             }
-        await _mark_gate(
-            ctx,
-            retry_message,
-            "Candidate retry gate completed.",
-            "update_candidate_retry_gate",
+
+        action = extract_action(event)
+        slack = event.get("slack") if isinstance(event.get("slack"), dict) else {}
+        actor = str(slack.get("user_id") or "")
+        audit_line = (
+            f"Round {round_n} consumed: `{action}` by <@{actor}>. Any round-{round_n} "
+            "edit modal submitted after this was NOT applied — re-open Edit to re-apply."
         )
-        if extract_action(candidate_event) == "abandon":
-            return {
-                "status": "abandoned",
-                "stage": "candidate",
-                "facts": approved_facts,
-                "card": card,
-                "candidates": candidates,
-            }
-    final_copy = extract_modal_value(candidate_event) or _director_pick_text(
-        candidates, _picks_from_generation(generation)
+
+        if action == "approve":
+            if all(final_by_channel.get(c) is None for c in channels):
+                outcome, outcome_error = "blocked", "no_shippable_channels"
+            else:
+                outcome = "approve"
+            break
+        if action == "abandon":
+            outcome = "abandoned"
+            break
+        if action == "edit_candidate":
+            ref = event.get("ref") if isinstance(event.get("ref"), dict) else {}
+            channel = str(ref.get("target_id") or "")
+            value = extract_modal_value(event)
+            if (
+                channel not in channels
+                or channel in STRUCTURED_CHANNELS
+                or final_by_channel.get(channel) is None
+            ):
+                audit_line += f" (edit for `{channel or '?'}` ignored — not editable)"
+            elif not value:
+                audit_line += f" Edit for {channel} was empty — previous copy kept."
+            else:
+                previous = final_by_channel.get(channel) or {}
+                final_by_channel[channel] = {
+                    "text": value,
+                    # Provenance preserved (harness pattern: candidates are
+                    # immutable; edits are recorded against them — keeping the id
+                    # lets consumers derive the diff from the result's candidates).
+                    "candidate_id": previous.get("candidate_id"),
+                    "edited": True,
+                    "pick": bool(previous.get("pick")),
+                }
+                # Re-check the edited copy through the existing /validate route
+                # (allergen/slop + standalone-X link rejection). Non-blocking:
+                # warnings surface in the gate render; the edit still stands.
+                # Response shape (routes/validate.ts spreads ValidationResult):
+                # {ok, passed: bool, failures: [{rule, reason}], ...}
+                check = await call_comms_tool(
+                    ctx,
+                    f"validate_edit_{channel}_r{round_n}",
+                    "validate",
+                    {"text": value, "surface": channel},
+                )
+                failures = check.get("failures")
+                if check.get("passed") is False and isinstance(failures, list):
+                    audit_line += (
+                        f" ⚠️ {channel} edit flagged by validator: "
+                        + "; ".join(
+                            f"{f.get('rule')}: {str(f.get('reason'))[:100]}"
+                            for f in failures[:3]
+                            if isinstance(f, dict)
+                        )
+                    )
+        elif action == "retry":
+            feedback = extract_modal_value(event)
+            retry_gen = await call_comms_tool(
+                ctx,
+                f"generate_candidates_r{round_n}",
+                "generate",
+                {
+                    "release_card": card,
+                    "approved": True,
+                    "approved_facts": approved_facts,
+                    "approval": approval,
+                    "channels": channels,
+                    "voice_id": inp.voice_id,
+                    "run_id": ctx.run_id,
+                    "stage": "generate",
+                    "gate_version": round_n,
+                    "feedback": feedback,
+                    **common_service_envelope(
+                        ctx,
+                        inp,
+                        stage="generate",
+                        gate_version=round_n,
+                        workflow_name=WORKFLOW_NAME,
+                    ),
+                },
+            )
+            retry_error = _generation_result_error(retry_gen)
+            if retry_error:
+                audit_line += f" Retry failed: {retry_error} — keeping previous copy."
+            else:
+                attempts = 2
+                new_candidates = candidates_from_generation(retry_gen)
+                new_state = _seed_final_by_channel(
+                    channels, new_candidates, _picks_from_generation(retry_gen)
+                )
+                for channel in channels:
+                    if new_state.get(channel) is None and final_by_channel.get(channel):
+                        new_state[channel] = final_by_channel[channel]
+                        audit_line += (
+                            f" {channel}: kept from previous round — retry produced"
+                            f" no {channel} candidates."
+                        )
+                candidates = new_candidates
+                final_by_channel = new_state
+    else:
+        outcome, outcome_error = "blocked", "candidate_gate_limit"
+
+    terminal_text = {
+        "approve": "Candidate gate completed.",
+        "abandoned": "Candidate gate abandoned.",
+        "blocked": (
+            "No shippable channels."
+            if outcome_error == "no_shippable_channels"
+            else f"Candidate gate limit reached ({MAX_CANDIDATE_ROUNDS} rounds)."
+        ),
+    }[outcome]
+    terminal_gate = Gate(ctx.run_id, "candidate", 0, inp.user_id, approver_user_ids)
+    await _render(
+        terminal_gate,
+        "render_candidate_gate_terminal",
+        retry_available=False,
+        terminal=True,
+        text=terminal_text,
     )
-    if not final_copy:
-        await _post_simple(
-            ctx,
-            inp.delivery,
-            "*Comms release blocked*: no final copy was selected or edited.",
-        )
+
+    if outcome == "abandoned":
+        return {"status": "abandoned", "stage": "candidate", **_state_payload()}
+    if outcome == "blocked":
         return {
             "status": "blocked",
             "stage": "candidate",
-            "error": "missing_final_copy",
-            "channels": channels,
-            "facts": approved_facts,
-            "card": card,
-            "candidates": candidates,
+            "error": outcome_error,
+            **_state_payload(),
         }
-    ship_message = "*Ready to ship in Slack (no external posting performed)*\n" + final_copy
-    holds = _publication_holds(_candidate_for_text(candidates, final_copy))
-    if holds:
-        ship_message += "\n\n⚠️ *Publication holds (verify before posting):*\n" + "\n".join(
-            f"• {hold}" for hold in holds
+
+    # ---- ship (per-channel) ----
+    ship_blocks: list[dict[str, Any]] = [
+        markdown_block("*Ready to ship in Slack (no external posting performed)*")
+    ]
+    for channel in channels:
+        entry = final_by_channel.get(channel)
+        if entry is None:
+            ship_blocks.append(markdown_block(f"⚠️ {channel}: no candidates generated"))
+            continue
+        marker = " (edited)" if entry.get("edited") else ""
+        ship_blocks.append(markdown_block(f"*{channel}*{marker}"))
+        ship_blocks.extend(chunked_markdown_blocks(entry["text"]))
+        holds = _publication_holds(
+            _candidate_by_id(candidates, entry.get("candidate_id"))
         )
-    await _post_simple(ctx, inp.delivery, ship_message)
+        if holds and not entry.get("edited"):
+            ship_blocks.append(
+                markdown_block(
+                    "⚠️ *Publication holds (verify before posting):*\n"
+                    + "\n".join(f"• {hold}" for hold in holds)
+                )
+            )
+    ship_blocks.append(
+        context_block(
+            "Full untruncated copy lives in the workflow result's final_by_channel."
+        )
+    )
+    await post_gate_message(
+        ctx,
+        name="post_ready_to_ship",
+        delivery=inp.delivery,
+        text="Ready to ship in Slack (no external posting performed)",
+        blocks=ship_blocks,
+    )
     return {
         "status": "ready_to_ship",
-        "channels": channels,
-        "facts": approved_facts,
-        "card": card,
-        "candidates": candidates,
-        "final_copy": final_copy,
+        **_state_payload(),
         "no_external_posting": True,
     }
 
@@ -683,7 +804,9 @@ async def _update_facts_gate_message(
             channel=channel,
             ts=ts,
             text=text,
-            blocks=render_fact_review_blocks(gate, facts, unverifiable, complete=complete),
+            blocks=render_fact_review_blocks(
+                gate, facts, unverifiable, complete=complete
+            ),
         )
 
 
@@ -754,7 +877,9 @@ def _format_generation_failure(result: dict[str, Any], error: str) -> str:
     if isinstance(response, dict):
         message = str(response.get("message") or response.get("error") or "").strip()
     if not message:
-        message = str(result.get("message") or "").strip() if isinstance(result, dict) else ""
+        message = (
+            str(result.get("message") or "").strip() if isinstance(result, dict) else ""
+        )
     label = f"{error}" + (f" — {message}" if message and message != error else "")
     lines.append(f"• {label}" if label else "• generation failed")
     status = result.get("status_code") if isinstance(result, dict) else None
@@ -768,7 +893,9 @@ def _format_generation_failure(result: dict[str, Any], error: str) -> str:
             "Re-run the command — it typically succeeds on retry."
         )
     else:
-        lines.append("Re-run the command; if it persists, check the comms-factory service logs.")
+        lines.append(
+            "Re-run the command; if it persists, check the comms-factory service logs."
+        )
     return "\n".join(lines)
 
 
@@ -782,18 +909,117 @@ def _picks_from_generation(generation: Any) -> list[dict[str, Any]]:
     return [p for p in picks if isinstance(p, dict)] if isinstance(picks, list) else []
 
 
-def _recommended_candidate(
-    candidates: list[dict[str, Any]], picks: list[dict[str, Any]] | None
+EDITABLE_CHANNELS = tuple(c for c in GENERATED_CHANNELS if c not in STRUCTURED_CHANNELS)
+MAX_CANDIDATE_ROUNDS = 30
+
+
+def _seed_final_by_channel(
+    channels: list[str],
+    candidates: list[dict[str, Any]],
+    picks: list[dict[str, Any]],
+) -> dict[str, dict[str, Any] | None]:
+    """Director pick per channel (flat picks: top-level id/text/channel), else the
+    first candidate of that channel, else None (missing); `pick` flags which path
+    seeded the entry so renders can distinguish picks from fallbacks."""
+    state: dict[str, dict[str, Any] | None] = {}
+    for channel in channels:
+        pick = next((p for p in picks if p.get("channel") == channel), None)
+        if pick and str(pick.get("text") or "").strip():
+            state[channel] = {
+                "text": str(pick.get("text")),
+                "candidate_id": pick.get("id"),
+                "edited": False,
+                "pick": True,
+            }
+            continue
+        candidate = next(
+            (
+                c
+                for c in candidates
+                if c.get("channel") == channel and str(c.get("text") or "").strip()
+            ),
+            None,
+        )
+        state[channel] = (
+            {
+                "text": str(candidate.get("text")),
+                "candidate_id": candidate.get("id"),
+                "edited": False,
+                "pick": False,
+            }
+            if candidate
+            else None
+        )
+    return state
+
+
+def _candidate_by_id(
+    candidates: list[dict[str, Any]], candidate_id: Any
 ) -> dict[str, Any] | None:
-    """The candidate the Director ranked first, matched by id. None when unresolvable."""
-    if not picks:
+    if candidate_id is None:
         return None
-    pick_id = picks[0].get("id")
-    if pick_id is not None:
-        for candidate in candidates:
-            if candidate.get("id") == pick_id:
-                return candidate
-    return None
+    return next((c for c in candidates if c.get("id") == candidate_id), None)
+
+
+def _candidate_gate_blocks(
+    gate: Gate,
+    channels: list[str],
+    state: dict[str, dict[str, Any] | None],
+    candidates: list[dict[str, Any]],
+    *,
+    retry_available: bool,
+    audit_line: str,
+    terminal: bool,
+) -> list[dict[str, Any]]:
+    blocks: list[dict[str, Any]] = [
+        markdown_block(
+            "*Choose final copy per format.* This only marks copy ready in Slack."
+        )
+    ]
+    for channel in channels:
+        entry = state.get(channel)
+        if entry is None:
+            blocks.append(markdown_block(f"*{channel}* — ⚠️ no candidates generated"))
+            continue
+        candidate = _candidate_by_id(candidates, entry.get("candidate_id"))
+        header = f"*{channel}*"
+        if entry.get("edited"):
+            header += " _(edited by operator)_"
+        elif candidate is not None and entry.get("pick"):
+            header += "  ⭐ Director's pick"
+        lines = [header]
+        if isinstance((candidate or {}).get("director_audit"), dict) and not entry.get(
+            "edited"
+        ):
+            audit = candidate["director_audit"]
+            lines.append(_verdict_line(audit))
+            lines.extend(f"⚠️ {issue}" for issue in _collect_issues(audit))
+        blocks.append(markdown_block("\n".join(lines)))
+        blocks.extend(chunked_markdown_blocks(f">{entry['text']}"))
+        if not terminal and channel in EDITABLE_CHANNELS:
+            blocks.append(
+                actions_block(
+                    gate,
+                    [
+                        (
+                            f"Edit {channel}",
+                            "edit_candidate",
+                            None,
+                            channel,
+                            f"r{gate.gate_version} · Edit {channel}",
+                        )
+                    ],
+                )
+            )
+    if audit_line:
+        blocks.append(context_block(audit_line))
+    if not terminal:
+        global_actions: list[Any] = [("Mark ready", "approve", "primary")]
+        if retry_available:
+            global_actions.append(("Retry", "retry", None))
+        global_actions.append(("Abandon", "abandon", "danger"))
+        blocks.append(actions_block(gate, global_actions))
+    return blocks
 
 
 def _collect_issues(audit: dict[str, Any]) -> list[str]:
@@ -814,7 +1040,11 @@ def _publication_holds(candidate: dict[str, Any] | None) -> list[str]:
     if not isinstance(audit, dict) or audit.get("publication_gate_passed") is not False:
         return []
     issues = audit.get("publication_gate_issues")
-    return [str(i).strip() for i in issues if str(i).strip()] if isinstance(issues, list) else []
+    return (
+        [str(i).strip() for i in issues if str(i).strip()]
+        if isinstance(issues, list)
+        else []
+    )
 
 
 def _verdict_line(audit: dict[str, Any]) -> str:
@@ -830,63 +1060,3 @@ def _verdict_line(audit: dict[str, Any]) -> str:
         f"factual {badge(audit.get('factual_passed'))} · "
         f"publish {badge(audit.get('publication_gate_passed'))}_"
     )
-
-
-def _format_candidates(
-    candidates: list[dict[str, Any]], picks: list[dict[str, Any]] | None = None
-) -> str:
-    if not candidates:
-        return "_No candidates returned._"
-    recommended = _recommended_candidate(candidates, picks)
-    rec_id = recommended.get("id") if recommended else None
-    blocks = []
-    for idx, candidate in enumerate(candidates[:8], 1):
-        text = str(candidate.get("text") or candidate)[:500]
-        channel = candidate.get("channel") or candidate.get("surface") or "copy"
-        star = (
-            " ⭐ Director's pick"
-            if rec_id is not None and candidate.get("id") == rec_id
-            else ""
-        )
-        lines = [f"*{idx}. {channel}*{star}"]
-        audit = candidate.get("director_audit")
-        if isinstance(audit, dict):
-            lines.append(_verdict_line(audit))
-            lines.extend(f"⚠️ {issue}" for issue in _collect_issues(audit))
-        lines.append(f">{text}")
-        blocks.append("\n".join(lines))
-    return "\n\n".join(blocks)
-
-
-def _first_candidate_text(candidates: list[dict[str, Any]]) -> str:
-    for candidate in candidates:
-        text = str(candidate.get("text") or "").strip()
-        if text:
-            return text
-    return ""
-
-
-def _candidate_for_text(
-    candidates: list[dict[str, Any]], text: str
-) -> dict[str, Any] | None:
-    target = str(text).strip()
-    for candidate in candidates:
-        if str(candidate.get("text") or "").strip() == target:
-            return candidate
-    return None
-
-
-def _director_pick_text(
-    candidates: list[dict[str, Any]], picks: list[dict[str, Any]] | None
-) -> str:
-    """Ship the Director's recommended copy: matched candidate text, else pick text, else #1."""
-    recommended = _recommended_candidate(candidates, picks)
-    if recommended:
-        text = str(recommended.get("text") or "").strip()
-        if text:
-            return text
-    if picks:
-        pick_text = str(picks[0].get("text") or "").strip()
-        if pick_text:
-            return pick_text
-    return _first_candidate_text(candidates)

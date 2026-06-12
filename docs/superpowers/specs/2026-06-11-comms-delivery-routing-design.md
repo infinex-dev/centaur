@@ -45,9 +45,44 @@ gate renders them with a "deliver manually" note.
 
 **Out of scope (deferred):** `carousel` (app-alert — dropped); video (Remotion renders
 locally, never uploaded); image/asset hosting (blog ships the existing
-`{% cloud-image src="<designer-cover-url>" %}` placeholder for a human to fill at PR review);
+`{% cloud-image src="<designer-cover-url>" %}` placeholder for a human to fill at PR review —
+note the PR #13 sync added the future path: `harness/lib/cloudinary-upload.ts` does signed
+direct Cloudinary upload and `harness/lib/news-image-patch.ts` patches cloud-image URLs into
+blog markdown; lifting those into the service is the natural cover-image follow-on);
 auto-merging any PR; auto-publishing Typefully drafts (a human publishes); self-serve
 production-deploy ergonomics (separate org decision).
+
+## Flow accounting: every flow in the system, and where it's covered
+
+Two operator surfaces drive the same comms-factory engine: the **Centaur Slack workflow**
+(durable, multi-operator — these two specs) and the **harness web UI** (local, single-operator,
+runs on an operator laptop against `harness/.env.local`). The service API — Centaur's only door
+into the engine — exposes exactly five routes (`/validate /audit /ground /build-card
+/generate`, `services/api/server.ts:23-27`), so **nothing harness-side is reachable from the
+Slack flow today**; the PR #13 launch-week sync added engine + harness capability but changed
+no service route (verified against post-sync main).
+
+| Flow | Surface | Covered by |
+|---|---|---|
+| Channel selection / validation / echo | Slack | surfacing plan T4 |
+| Grounding + facts gate | Slack | existing (PR #13 improved grounder *quality* engine-side — flow unchanged, benefit free) |
+| Card gate | Slack | existing (`kind` union unchanged; new `category` — incl. `thesis` — is orthogonal and passes through) |
+| Multi-channel generation (7 formats) | Slack | surfacing plan T1 + existing call |
+| Per-channel review / edit / retry | Slack | surfacing plan T5–T6 |
+| Per-channel ship (`final_by_channel`) | Slack | surfacing plan T6 |
+| Blog draft review (publish → comment → revise) | Slack + display.dev | §6 |
+| blog + web + roadmap → platform PR | Slack → GitHub | §2/§4 (REST) |
+| x / x-thread → Typefully drafts | Slack → Typefully | §1 (lifting the harness client) |
+| in-product / modal | Slack | copy-only, "deliver manually" note (§ Goal) |
+| typefullyUrl cross-link into blog | Slack | §2 mapper + §4 ordering |
+| Inline surface editing w/ autosave; pick revisions | harness only | parallel local UX — the Slack analog is the candidate gate; no plan change |
+| Operator handback + **reground** gate | harness only | **no Slack analog** — the facts gate can edit/reject but not re-ground with feedback; known future-work item, deliberately not in scope |
+| Typefully push from ship panel | harness only | break-glass twin of §1 |
+| emit-PR child process (`emit-process.ts`) | harness only | break-glass twin of §2 (laptop + local checkout) |
+| Cloudinary cover upload + crop previews + news-image-patch | harness only | deferred — named as the cover-image follow-on above |
+| Image briefs (hero / in-app-mobile / feature-detail, `src/brief.ts`) | harness only | not a service route; potential future deliverable type, out of scope |
+| X-article rich-HTML transform (`harness/lib/x-article.ts`) | harness only | potential future 8th channel, out of scope |
+| Engine-level behavior shifts (thesis-cta validator, standalone-X link rejection, essay-length blog, tempo scoring) | both | flow-neutral copy-quality changes; surfacing's chunked rendering already handles essay-length blog text |
 
 ## Why REST, not git/gh-in-pod (the review's central finding)
 
@@ -80,12 +115,15 @@ local break-glass path.
 
 Read from the code, not assumed:
 
-- **`emitLaunchPR` is complete, tested, and invoked only by a local-dev CLI** — exported
-  (`src/emit-platform-pr.ts:61`) and driven by `scripts/emit-pr.ts` (`pnpm emit-pr
-  --package=<file> [--platform-root] [--branch] [--live]`, `package.json:14`) against a
-  developer's local checkout. No deployed route/workflow calls it; `cmdShip` (`src/cli.ts:441`)
-  is a `TODO` stub. The new REST `/emit` mirrors the CLI's contract (`--branch` ↔ deterministic
-  branch, `--live` ↔ real emit, `--package` ↔ `buildLaunchPackage`); the CLI is kept as
+- **`emitLaunchPR` is complete, tested, and invoked from operator machines only** —
+  exported (`src/emit-platform-pr.ts:61`), driven by `scripts/emit-pr.ts` (`pnpm emit-pr`),
+  and — since the PR #13 launch-week sync — by the **harness ship panel as a tracked child
+  process** (`harness/lib/emit-process.ts`: `tsx scripts/emit-pr.ts --package=… --platform-root=…
+  [--live]`, with `GIT_TERMINAL_PROMPT=0`/SSH-BatchMode hardening). Both paths run on an
+  operator laptop **with a local platform checkout** — exactly the in-pod constraint the REST
+  `/emit` route exists to remove. No deployed route/workflow calls it; `cmdShip` is a `TODO`
+  stub. The new REST `/emit` mirrors the CLI's contract (`--branch` ↔ deterministic branch,
+  `--live` ↔ real emit, `--package` ↔ `buildLaunchPackage`); CLI + harness path are kept as
   break-glass.
 - **It writes exactly three surfaces**: blog md → `apps/content-app/content/blog`
   (`emit-platform-pr.ts:13`), roadmap tick → `apps/public-website/src/app/(site)/roadmap/data.ts`
@@ -186,12 +224,12 @@ Read from the code, not assumed:
    file the site renders.
 3. **`COMMS_GITHUB_TOKEN`** with PR + contents write scope on `infinex-xyz/platform`,
    provisioned as a secret (separate from the read-only cache token).
-4. **Typefully** — the API contract is now RESOLVED (org-proven v2 contract from
-   `infinex-xyz/agents/content-pipeline`'s production `typefully.js`; see §1). Remaining:
-   provision `TYPEFULLY_API_KEY` + pick the `social_set_id` (the marketing X account — discover
-   via `GET /social-sets`; config as `TYPEFULLY_SOCIAL_SET_ID`), and decide vendor-vs-port of
-   `typefully.js`. Note the same key/account likely serves the content-pipeline agent — confirm
-   sharing it is acceptable (drafts from both pipelines land in the same Typefully workspace).
+4. **Typefully** — the API contract is RESOLVED and the client EXISTS IN-REPO since PR #13
+   (`harness/lib/typefully.ts`, live-verified 2026-06-09; see §1 — lift it into the service).
+   Remaining: provision `TYPEFULLY_API_KEY` into the comms pod and confirm the social set
+   (harness convention: `TYPEFULLY_SOCIAL_SET` env, id or name, default "Infinex"). Note the
+   same key/workspace serves the harness ship panel and likely the content-pipeline agent —
+   confirm sharing is acceptable (drafts from all pipelines land in one Typefully workspace).
 5. **`DISPLAYDEV_API_KEY` (`sk_live_`)** scoped to the existing `infinex` display.dev org,
    provisioned as a comms-pod secret (env, not a disk session). Confirm CLI-vs-REST invoke path
    (CLI is validated); the `cssPath` anchor strategy for bot comments (trial used coarse `"h3"`);
@@ -224,21 +262,28 @@ real revision route) but is otherwise independent of the delivery targets.
 
 ### 1. Typefully client + `/typefully-draft` route
 
-The wire contract is **org-proven** — `infinex-xyz/agents/content-pipeline` ships a
-zero-dependency Typefully CLI (`content-agent/skills/typefully/scripts/typefully.js`) already
-used in production by the podcast pipeline. Contract (Typefully API **v2**):
-- Base `https://api.typefully.com/v2`, auth `Authorization: Bearer <TYPEFULLY_API_KEY>`.
-- Create: `POST /social-sets/{social_set_id}/drafts` with body
+The wire contract is **proven twice over, including in this repo**. Since the PR #13
+launch-week sync, `attached-services/comms-factory/harness/lib/typefully.ts` (+
+`typefully.test.ts`) is a v2 client **verified against the live API (2026-06-09)** and used by
+the harness ship panel; `infinex-xyz/agents/content-pipeline`'s production `typefully.js`
+agrees. Contract (Typefully API **v2**):
+- Base `https://api.typefully.com`, auth `Authorization: Bearer <TYPEFULLY_API_KEY>`
+  (**v1 `X-API-KEY` auth dies 2026-06-15** — per the harness client header).
+- Create: `POST /v2/social-sets/{social_set_id}/drafts` with body
   `{platforms: {x: {enabled: true, posts: [{text, media_ids?}, …]}}, draft_title?, share?,
   scratchpad_text?, tags?}` — **a thread is the `posts` array, one entry per tweet** (no
   "threadify" flag, no delimiter blob; those were v1-isms). `share: true` returns a public
   review URL; the editor URL is `https://typefully.com/?a=<social_set_id>&d=<draft_id>`.
-- `social_set_id` is **required** (no default account server-side); also
-  `GET /social-sets?limit=50` to discover, `GET …/drafts/{id}` returns `x_published_url` once a
-  human publishes — the future publish-detection hook.
+- Social-set resolution: the harness client resolves by `TYPEFULLY_SOCIAL_SET` env (numeric id
+  or name), defaulting to the set named **"Infinex"** via `GET /v2/social-sets`. Reuse that
+  convention. `GET …/drafts/{id}` returns `x_published_url` once a human publishes — the
+  future publish-detection hook.
+- Media (future, for covers/clips): `POST /media/upload` → presigned raw-byte PUT →
+  poll `GET /media/{id}` until ready → reference via `posts[].media_ids[]` (already
+  implemented in the harness client).
 
-`src/typefully.ts` — thin client implementing exactly that (or vendor/adapt the proven
-`typefully.js` from the agents repo — decide at implementation; the contract is identical):
+The service client: **lift/adapt `harness/lib/typefully.ts` into `src/typefully.ts`** (it is
+in-repo, tested, draft-only by construction — never sets `publish_at`). Mapping:
 - solo `x`: `posts = [{text: final_by_channel["x"].text}]`.
 - `x-thread`: `posts` mapped 1:1 from the chosen candidate's `candidate.structured.tweets`
   (via `candidate_id`) — the structured array IS the wire shape. Fall back to splitting `.text`
@@ -248,7 +293,7 @@ used in production by the podcast pipeline. Contract (Typefully API **v2**):
 
 `POST /typefully-draft` (registered in `services/api/http.ts`): `{channel, text|tweets}` →
 `{ok, share_url, draft_id, draft_url}` or `{ok:false, error:"typefully_not_configured"}` when
-the key is absent (also requires `TYPEFULLY_SOCIAL_SET_ID` config — same not-configured
+the key is absent (`TYPEFULLY_SOCIAL_SET` resolution failure gets the same not-configured
 handling).
 
 ### 2. REST `/emit` route + LaunchPackage mapper
@@ -264,9 +309,13 @@ git-path design):
 - `changelogMd` — `final_by_channel["blog"].text` (the actor fills the house changelog
   scaffold). Omitted if blog not approved. The mapper **validates/normalizes the frontmatter
   against the Keystatic blog schema** (see verified mechanics: `title`, `date`, `published:
-  true`, `category: changelogs`, `coverImage` placeholder) and, when the same run already
-  created a Typefully draft, **injects its URL into `typefullyUrl`** — the cross-link the org
-  already maintains by hand.
+  true`, `category: changelogs`, `coverImage` placeholder), **freshens dates via the PR #13
+  harness lib** (`harness/lib/freshen.ts` `freshenDates` — deterministic: anchors on the
+  `date:` frontmatter and bumps it plus any verbatim echo to emit-day, leaving genuine
+  historical dates alone, and reports what changed so it's never silent; lift it into the
+  emit module — copy generated on Tuesday must not ship Friday with a stale date), and, when
+  the same run already created a Typefully draft, **injects its URL into `typefullyUrl`** —
+  the cross-link the org already maintains by hand.
 - `featureCard.dataTsEntry` — built by `featureCardEntry(candidate.structured)` (subheading/
   title/caption → real `FEATURES_COPY` fields, **PROVISIONAL** pending open-verification #1),
   from the web candidate looked up by `candidate_id`. Omitted if web not approved.

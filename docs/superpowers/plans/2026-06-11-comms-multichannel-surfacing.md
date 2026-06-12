@@ -16,7 +16,11 @@
 - The live `/generate` route returns **flat** picks: `Candidate[]` with top-level `id`/`text`/`channel` (NOT the nested `Pick {channel, candidate}` from `src/orchestrator.ts` — that module is not the HTTP path).
 - Duplicate `action_id`s across *separate* actions blocks in one message are proven in production (facts gate); per-channel Edit buttons therefore each get their own actions block.
 
-**Branch:** create `feat/comms-multichannel-surfacing` off the current branch HEAD before Task 1.
+**Branch:** create `feat/comms-multichannel-surfacing` off **`origin/main`** before Task 1
+(main includes the plan/specs via PR #12 and the launch-week comms-factory sync via PR #13 —
+verified against this plan: the route allowlist, overlay Python, flat picks, and blog cap are
+all unchanged by the sync). TS deps in `attached-services/comms-factory` install with
+`pnpm install --ignore-workspace` (it is intentionally outside the root workspace).
 
 ---
 
@@ -710,7 +714,13 @@ Model each on the existing happy-path test's fakes (`test_comms_workflows.py:404
 
 # 2. Edit round: events = [edit_candidate(target_id="blog", values={"v": "better blog"}),
 #    approve]. Assert final_by_channel["blog"] == {"text": "better blog",
-#    "candidate_id": None, "edited": True} and x is untouched.
+#    "candidate_id": "b1", "edited": True} and x is untouched — candidate_id is
+#    PRESERVED on edit (provenance: the harness records edits as diffs against
+#    immutable candidates; keeping the id lets result consumers derive the diff
+#    since candidates ride in the result). Also assert the post-edit gate update
+#    contains a "validate" warning line when the scripted validate result has
+#    failures (see step 3 — edited copy is re-checked via the existing /validate
+#    route, non-blocking).
 
 # 3. Empty edit is a no-op: events = [edit_candidate(target_id="blog", values={}),
 #    approve]. Assert blog kept the pick text, edited is False, and the updated gate
@@ -844,9 +854,34 @@ Replace `comms_release.py:339-527` with:
             elif not value:
                 audit_line += f" Edit for {channel} was empty — previous copy kept."
             else:
+                previous = final_by_channel.get(channel) or {}
                 final_by_channel[channel] = {
-                    "text": value, "candidate_id": None, "edited": True,
+                    "text": value,
+                    # Provenance preserved (harness pattern: candidates are
+                    # immutable; edits are recorded against them — keeping the id
+                    # lets consumers derive the diff from the result's candidates).
+                    "candidate_id": previous.get("candidate_id"),
+                    "edited": True,
                 }
+                # Re-check the edited copy through the existing /validate route
+                # (allergen/slop + standalone-X link rejection). Non-blocking:
+                # warnings surface in the gate render; the edit still stands.
+                # Response shape (routes/validate.ts spreads ValidationResult):
+                # {ok, passed: bool, failures: [{rule, reason}], ...}
+                check = await call_comms_tool(
+                    ctx, f"validate_edit_{channel}_r{round_n}", "validate",
+                    {"text": value, "surface": channel},
+                )
+                failures = check.get("failures")
+                if check.get("passed") is False and isinstance(failures, list):
+                    audit_line += (
+                        f" ⚠️ {channel} edit flagged by validator: "
+                        + "; ".join(
+                            f"{f.get('rule')}: {str(f.get('reason'))[:100]}"
+                            for f in failures[:3]
+                            if isinstance(f, dict)
+                        )
+                    )
         elif action == "retry":
             feedback = extract_modal_value(event)
             retry_gen = await call_comms_tool(
