@@ -33,7 +33,9 @@ GitHub REST API (global `fetch`), Typefully API v2, `@displaydev/cli` (`dsp`), P
       `infinex-xyz/platform`, via GitHub API — no local checkout exists)
 - [x] Operator prerequisites collected: tokens + test destinations (answers below)
 - [x] Task-by-task TDD plan written below (superpowers:writing-plans)
-- [ ] Document review run on the plan
+- [x] Document review run on the plan (6-persona ce-doc-review, 2026-06-12: 31 raw
+      findings → 5 auto-fixes + 24 reviewed fixes applied + 3 deferred to
+      "Deferred / Open Questions" below; zero spec contradictions)
 - [ ] Operator approval received → Stage B may begin
 
 ## Resolved open verifications (2026-06-12, read live from `infinex-xyz/platform@main`)
@@ -361,7 +363,9 @@ describe("createTypefullyDraft", () => {
 
 Also assert (same file, brief cases): empty/whitespace tweets are filtered and an
 all-empty input rejects with `"typefully_no_posts"`; a social-set list with no match
-throws `"typefully_social_set_not_found"`.
+throws `"typefully_social_set_not_found"`; a mock 401 whose body contains the literal
+API key value produces an error message that does NOT contain the key (sanitized to
+`[redacted]`).
 
 - [ ] **Step 2: Run — verify failure**
 
@@ -411,7 +415,10 @@ async function tf(path: string, init?: RequestInit): Promise<Record<string, unkn
   });
   if (!res.ok) {
     const detail = await res.text().catch(() => "");
-    throw new Error(`typefully_http_${res.status}: ${detail.slice(0, 200)}`);
+    // Upstream error bodies are third-party controlled and http.ts echoes error
+    // messages into responses/logs unsanitized — strip the key before throwing.
+    const safeDetail = detail.split(key).join("[redacted]");
+    throw new Error(`typefully_http_${res.status}: ${safeDetail.slice(0, 200)}`);
   }
   return (await res.json()) as Record<string, unknown>;
 }
@@ -529,10 +536,15 @@ export async function handleTypefullyDraft(ctx: RequestContext): Promise<JsonRes
   const text = optionalString(body, "text");
   const posts = tweets.length > 0 ? tweets : text ? [text] : [];
   if (posts.length === 0) throw new HttpError(400, "missing_text", "text or tweets is required");
+  // Hoisted consts: under exactOptionalPropertyTypes, repeated optionalString()
+  // calls in a conditional spread type as `string | undefined` (calls aren't
+  // narrowed) — consts narrow correctly.
+  const title = optionalString(body, "title");
+  const scratchpad = optionalString(body, "scratchpad");
   try {
     const draft = await createTypefullyDraft(posts, {
-      ...(optionalString(body, "title") ? { title: optionalString(body, "title") } : {}),
-      ...(optionalString(body, "scratchpad") ? { scratchpad: optionalString(body, "scratchpad") } : {}),
+      ...(title ? { title } : {}),
+      ...(scratchpad ? { scratchpad } : {}),
     });
     return {
       body: {
@@ -898,9 +910,11 @@ pnpm add --ignore-workspace -D @types/diff
 //    GET  /repos/o/r/git/ref/heads/main                          (returns sha "base123")
 //    POST /repos/o/r/git/refs          body {ref: "refs/heads/cf-emit/slug-run1", sha: "base123"}
 //    GET  /repos/o/r/contents/...blog path...?ref=cf-emit/slug-run1   (404 — new file)
-//    PUT  /repos/o/r/contents/...blog path...    body {branch, content(b64), message} — NO sha
 //    GET  /repos/o/r/contents/...features path...?ref=...        (200, content b64 + sha "feat1")
+//    PUT  /repos/o/r/contents/...blog path...    body {branch, content(b64), message} — NO sha
 //    PUT  /repos/o/r/contents/...features path... body includes sha "feat1"
+//    (reads-then-writes: the implementation computes ALL reads in the changes-building
+//     loop, then PUTs in a second loop — assert THIS order, or per-file relative order)
 //    POST /repos/o/r/pulls             body {title, head, base: "main"} → returns html_url
 //    Result: {ok: true, prUrl: "<html_url>", existing: undefined}.
 //    Every request carries authorization "Bearer test-token"; no URL contains "test-token".
@@ -912,7 +926,10 @@ pnpm add --ignore-workspace -D @types/diff
 //    JSON.stringify(result) does not contain "test-token".
 // 7. features idempotency: branch features content already contains the entry title →
 //    that PUT is skipped (absent from the request log), blog still written.
-// 8. paths with parens are URL-encoded: the features URL contains "%28site%29".
+// 8. paths with parens survive per-segment encoding: the features URL contains the
+//    raw "(site)" segment (encodeURIComponent leaves parens unescaped per ECMA-262;
+//    they are legal URI sub-delims and GitHub accepts them) and spaces/specials in
+//    other segments WOULD be escaped.
 ```
 
 Write each as a real `it(...)` with full assertions against the recorded request log.
@@ -1178,9 +1195,11 @@ export async function handleEmit(ctx: RequestContext): Promise<JsonResponse> {
   const runId = requiredString(body, "run_id");
   const dryRun = body.dry_run !== false; // default TRUE — mutations require explicit dry_run:false
 
+  // Hoisted const: exactOptionalPropertyTypes — see the same pattern in Task 3.
+  const typefullyUrl = optionalString(body, "typefully_url");
   const built = buildLaunchPackage(card, finalByChannel, candidates, {
     today: new Date().toISOString().slice(0, 10),
-    ...(optionalString(body, "typefully_url") ? { typefullyUrl: optionalString(body, "typefully_url") } : {}),
+    ...(typefullyUrl ? { typefullyUrl } : {}),
   });
   if (!built.pkg.changelogMd && !built.pkg.featureCard) {
     return { body: { ok: false, error: "nothing_to_emit" } };
@@ -1260,7 +1279,7 @@ textQuote + root id + `createdOnVersion`). Record what you found in the commit m
 
 ```ts
 import { describe, expect, it } from "vitest";
-import { deleteArtifact, listComments, publishArtifact, resolveThread, stripFrontmatter, type DspRunner } from "../display.js";
+import { deleteArtifact, listComments, publishArtifact, redactDisplayKey, resolveThread, stripFrontmatter, type DspRunner } from "../display.js";
 
 function fakeRunner(stdout: string): { runner: DspRunner; calls: Array<{ args: readonly string[]; stdin?: string }> } {
   const calls: Array<{ args: readonly string[]; stdin?: string }> = [];
@@ -1329,6 +1348,19 @@ describe("resolveThread / deleteArtifact", () => {
     expect(b.calls[0]?.args.join(" ")).toContain("delete abc123 --confirm");
   });
 });
+
+describe("redactDisplayKey", () => {
+  it("strips the API key from CLI output before it can reach an Error message", () => {
+    process.env.DISPLAYDEV_API_KEY = "sk_live_secret";
+    try {
+      expect(redactDisplayKey("auth failed for sk_live_secret (expired)")).toBe(
+        "auth failed for [redacted] (expired)",
+      );
+    } finally {
+      delete process.env.DISPLAYDEV_API_KEY;
+    }
+  });
+});
 ```
 
 - [ ] **Step 4: Run — verify failure**, then **implement `src/display.ts`**:
@@ -1351,6 +1383,14 @@ export function displayConfigured(): boolean {
   return Boolean(process.env.DISPLAYDEV_API_KEY?.trim());
 }
 
+/** Third-party CLI stderr may echo the key in auth-failure diagnostics — strip
+ *  it before the text can reach an Error message (http.ts echoes messages into
+ *  500 bodies and logs unsanitized). Exported for direct testing. */
+export function redactDisplayKey(text: string): string {
+  const key = process.env.DISPLAYDEV_API_KEY?.trim();
+  return key ? text.split(key).join("[redacted]") : text;
+}
+
 export const defaultRunner: DspRunner = (args, opts) =>
   new Promise((resolve, reject) => {
     const child = spawn("pnpm", ["exec", "dsp", ...args], {
@@ -1366,7 +1406,7 @@ export const defaultRunner: DspRunner = (args, opts) =>
     child.on("close", (code) => {
       clearTimeout(timer);
       if (code === 0) resolve({ stdout, stderr });
-      else reject(new Error(`dsp ${args[0]} exited ${code}: ${stderr.slice(0, 300)}`));
+      else reject(new Error(`dsp ${args[0]} exited ${code}: ${redactDisplayKey(stderr).slice(0, 300)}`));
     });
     if (opts?.stdin !== undefined) child.stdin.end(opts.stdin);
     else child.stdin.end();
@@ -1608,6 +1648,7 @@ import { buildReviseSeeds, makeDisplayReviseHandler } from "./display.js";
 const CARD = {
   kind: "launch-tier",
   title: "Perps launch",
+  headline: "Perps launch", // required by the LaunchTier zod schema (card.ts:146)
   audience: ["blog"],
   deployed_facts: ["perps are live"],
   tier_reason: "test",
@@ -1676,6 +1717,15 @@ describe("handleDisplayRevise", () => {
         body: { markdown: MARKDOWN, comments: [], release_card: { nope: true }, run_id: "r" } }),
     ).rejects.toMatchObject({ status: 400 });
   });
+
+  it("returns display_not_configured when the capability is off (no LLM call)", async () => {
+    const captured: { opts?: Record<string, unknown> } = {};
+    const handler = makeDisplayReviseHandler(fakeOrchestrate(captured) as never, () => false);
+    const result = await handler({ request: {} as never, method: "POST", url: new URL("http://x"), requestId: "t",
+      body: { markdown: MARKDOWN, comments: COMMENTS, release_card: CARD, run_id: "run_1" } });
+    expect(result.body).toMatchObject({ ok: false, error: "display_not_configured" });
+    expect(captured.opts).toBeUndefined(); // the orchestrator was never invoked
+  });
 });
 ```
 
@@ -1714,8 +1764,14 @@ export function buildReviseSeeds(markdown: string, comments: ReviseComment[]): {
 
 type OrchestrateFn = typeof orchestrateActorDirectorWithRetries;
 
-export function makeDisplayReviseHandler(orchestrate: OrchestrateFn = orchestrateActorDirectorWithRetries): Handler {
+export function makeDisplayReviseHandler(
+  orchestrate: OrchestrateFn = orchestrateActorDirectorWithRetries,
+  configured: typeof displayConfigured = displayConfigured,
+): Handler {
   return async (ctx: RequestContext) => {
+    // Same capability gate as makeDisplayHandlers — without it an authenticated
+    // caller could trigger a full LLM generation cycle while display is "off".
+    if (!configured()) return NOT_CONFIGURED;
     const body = assertRecord(ctx.body);
     const markdown = requiredString(body, "markdown");
     const parsed = safeParseReleaseCard(body.release_card ?? body.card);
@@ -1753,13 +1809,14 @@ export function makeDisplayReviseHandler(orchestrate: OrchestrateFn = orchestrat
 }
 ```
 
-Register in `server.ts` (inside the display registration added in Task 8):
+Register by adding the route to `makeDisplayHandlers`' returned record in
+`routes/display.ts` (ONE registration pattern for all five display routes —
+Task 8's `server.ts` loop then picks it up with no separate `routes.set`;
+function declarations hoist, so the reference below the factory is fine):
 
 ```ts
-routes.set("POST /display/revise", async (ctx) => {
-  requirePostAuth(ctx.request);
-  return makeDisplayReviseHandler()(ctx);
-});
+// inside makeDisplayHandlers' return object:
+    "/display/revise": makeDisplayReviseHandler(),
 ```
 
   **Implementer note:** the exact types on `result.picks`/`attempts` come from
@@ -1933,6 +1990,10 @@ Expected: FAIL — `capabilities` attribute missing.
             },
         }
 
+    # NOTE: no **kwargs on the delivery methods — the tool manager skips its
+    # unknown-arg rejection for VAR_KEYWORD signatures, which would silently
+    # forward mis-typed workflow args instead of raising
+    # tool_argument_validation_failed.
     def emit_platform_pr(
         self,
         release_card: dict[str, Any],
@@ -1943,7 +2004,6 @@ Expected: FAIL — `capabilities` attribute missing.
         branch: str | None = None,
         run_id: str | None = None,
         typefully_url: str | None = None,
-        **kwargs: Any,
     ) -> dict[str, Any]:
         payload: dict[str, Any] = {
             "release_card": release_card,
@@ -1951,7 +2011,6 @@ Expected: FAIL — `capabilities` attribute missing.
             "candidates": candidates,
             "dry_run": dry_run,
             "run_id": run_id,
-            **kwargs,
         }
         if branch:
             payload["branch"] = branch
@@ -1967,9 +2026,8 @@ Expected: FAIL — `capabilities` attribute missing.
         tweets: list[str] | None = None,
         title: str | None = None,
         scratchpad: str | None = None,
-        **kwargs: Any,
     ) -> dict[str, Any]:
-        payload: dict[str, Any] = {"channel": channel, **kwargs}
+        payload: dict[str, Any] = {"channel": channel}
         if text is not None:
             payload["text"] = text
         if tweets is not None:
@@ -2105,6 +2163,7 @@ from comms_delivery import (  # noqa: E402  (after the sys.path bootstrap)
     deliveries_made,
     destination_groups,
     empty_deliveries,
+    fenced_diff_blocks,
     tweets_for_channel,
 )
 from comms_shared import Gate  # noqa: E402
@@ -2142,14 +2201,41 @@ def test_delivery_gate_blocks_states():
     gate = Gate("r1", "deliver", 1, "U1")
     groups = {"platform_pr": ["blog"], "typefully": ["x"], "copy_only": ["modal"]}
     enabled = {"platform_pr": True, "typefully": True}
-    idle = str(delivery_gate_blocks(gate, groups, enabled, {"pr": "idle", "typefully": "idle"}, empty_deliveries()))
+    final = {"modal": {"text": "EMERGENCY: deposits paused"}}
+    idle = str(delivery_gate_blocks(gate, groups, enabled, {"pr": "idle", "typefully": "idle"}, empty_deliveries(), final_by_channel=final))
     assert "Preview platform PR" in idle and "Create Typefully drafts" in idle and "Finish" in idle
     assert "Create PR" not in idle  # only after preview
     assert "deliver manually" in idle  # copy_only note
+    assert "EMERGENCY: deposits paused" in idle  # copy-only text inlined
     previewed = str(delivery_gate_blocks(gate, groups, enabled, {"pr": "previewed", "typefully": "idle"}, empty_deliveries()))
-    assert "Create PR" in previewed and "Cancel PR" in previewed
+    # typefully still idle -> Create PR announces its draft-creation side effect
+    assert "Create Typefully drafts + PR" in previewed and "Cancel PR" in previewed
+    assert "typefullyUrl" in previewed  # ordering note rendered
+    previewed_after_tf = str(delivery_gate_blocks(gate, groups, enabled, {"pr": "previewed", "typefully": "created"}, empty_deliveries()))
+    assert "Create PR" in previewed_after_tf and "Create Typefully drafts + PR" not in previewed_after_tf
+    failed = str(delivery_gate_blocks(gate, groups, enabled, {"pr": "create_failed", "typefully": "created"}, empty_deliveries()))
+    assert "creation FAILED" in failed and "Create PR" in failed and "Cancel PR" in failed
     terminal = str(delivery_gate_blocks(gate, groups, enabled, {"pr": "created", "typefully": "created"}, empty_deliveries(), terminal=True))
     assert "'type': 'actions'" not in terminal  # terminal is buttonless
+
+
+def test_delivery_gate_blocks_single_group():
+    # Finish is always valid: it means "done — accept the current delivery state".
+    gate = Gate("r1", "deliver", 1, "U1")
+    groups = {"platform_pr": [], "typefully": ["x"], "copy_only": []}
+    enabled = {"platform_pr": False, "typefully": True}
+    only_tf = str(delivery_gate_blocks(gate, groups, enabled, {"pr": "idle", "typefully": "idle"}, empty_deliveries()))
+    assert "Create Typefully drafts" in only_tf and "Finish" in only_tf
+    assert "Platform PR" not in only_tf
+
+
+def test_fenced_diff_blocks_every_chunk_is_fenced():
+    long_diff = "\n".join(f"+ line {i}" for i in range(400))  # > one 2800-char chunk
+    blocks = fenced_diff_blocks(long_diff)
+    assert len(blocks) > 1
+    for block in blocks:
+        text = block["text"]["text"]
+        assert text.startswith("```") and text.rstrip("…").rstrip().endswith("```")
 
 
 def test_deliveries_made_flips_only_on_created():
@@ -2182,21 +2268,17 @@ from __future__ import annotations
 
 from typing import Any
 
-from api.workflow_engine import WorkflowContext
-
+# Task 11 imports ONLY what the pure helpers use — ruff F401 (unused import)
+# fails the lint gate otherwise. Task 12 extends this import block when
+# run_delivery_gate lands (WorkflowContext, GateValidationError,
+# SlackWorkflowInput, call_comms_tool, extract_action, post_gate_message,
+# update_gate_message, wait_for_gate_action).
 from comms_shared import (
     Gate,
-    GateValidationError,
-    SlackWorkflowInput,
     actions_block,
-    call_comms_tool,
     chunked_markdown_blocks,
     context_block,
-    extract_action,
     markdown_block,
-    post_gate_message,
-    update_gate_message,
-    wait_for_gate_action,
 )
 
 PR_CHANNELS = ("blog", "web")
@@ -2265,6 +2347,29 @@ def deliveries_made(deliveries: dict[str, Any]) -> bool:
     return any(item.get("status") == "created" for item in deliveries["typefully"])
 
 
+def fenced_diff_blocks(diff: str, limit: int = 2800) -> list[dict[str, Any]]:
+    """Render a unified diff as Slack blocks, fencing EACH chunk individually.
+
+    chunked_markdown_blocks splits on line boundaries with no fence awareness —
+    wrapping the whole diff in one ``` fence leaves middle chunks unfenced (raw
+    +/- lines render as mrkdwn). Chunk first, then fence each chunk."""
+    lines = str(diff or "").split("\n")
+    chunks: list[str] = []
+    current: list[str] = []
+    size = 0
+    for line in lines:
+        addition = len(line) + (1 if current else 0)
+        if current and size + addition > limit:
+            chunks.append("\n".join(current))
+            current, size = [line], len(line)
+            continue
+        current.append(line)
+        size += addition
+    if current:
+        chunks.append("\n".join(current))
+    return [markdown_block(f"```\n{chunk}\n```") for chunk in chunks]
+
+
 def delivery_gate_blocks(
     gate: Gate,
     groups: dict[str, list[str]],
@@ -2272,6 +2377,7 @@ def delivery_gate_blocks(
     state: dict[str, str],
     deliveries: dict[str, Any],
     *,
+    final_by_channel: dict[str, Any] | None = None,
     audit_line: str = "",
     terminal: bool = False,
 ) -> list[dict[str, Any]]:
@@ -2279,29 +2385,58 @@ def delivery_gate_blocks(
         markdown_block(
             "*Delivery* — route approved copy to its real destinations. Nothing"
             " auto-publishes: the PR is human-merged; Typefully drafts are"
-            " human-published."
+            " human-published. *Finish* always means: done — accept the current"
+            " delivery state."
         )
     ]
     for channel in groups["copy_only"]:
         blocks.append(
             markdown_block(
-                f"_{channel}: no automated destination — copy is ready above;"
-                " deliver manually._"
+                f"_{channel}: no automated destination — copy below; deliver"
+                " manually._"
             )
         )
+        # Inline the copy so the operator doesn't have to scroll back for it
+        # (modal especially: the exact text is what gets posted by hand).
+        entry = (final_by_channel or {}).get(channel) or {}
+        if entry.get("text"):
+            blocks.extend(chunked_markdown_blocks(f">{entry['text']}"))
     actions: list[Any] = []
     if enabled["platform_pr"]:
         chans = " + ".join(groups["platform_pr"])
+        # The typefully-first ordering is a side effect of Create PR — say so on
+        # the button itself, never silently.
+        drafts_pending = bool(enabled["typefully"] and state["typefully"] == "idle")
+        create_label = "Create Typefully drafts + PR" if drafts_pending else "Create PR"
         if state["pr"] == "idle":
             blocks.append(
                 markdown_block(f"*Platform PR* ({chans}) — preview the diff first.")
             )
             actions.append(("Preview platform PR", "preview_pr", None))
         elif state["pr"] == "previewed":
-            blocks.append(
-                markdown_block(f"*Platform PR* ({chans}) — planned diff posted above.")
+            note = (
+                "\n_Typefully drafts are created first so the draft URL lands in"
+                " the blog frontmatter's typefullyUrl._"
+                if drafts_pending
+                else ""
             )
-            actions.append(("Create PR", "create_pr", "primary"))
+            blocks.append(
+                markdown_block(
+                    f"*Platform PR* ({chans}) — planned diff posted above.{note}"
+                )
+            )
+            actions.append((create_label, "create_pr", "primary"))
+            actions.append(("Cancel PR", "cancel_pr", None))
+        elif state["pr"] == "create_failed":
+            blocks.append(
+                markdown_block(
+                    f"*Platform PR* ({chans}) — creation FAILED (see the context"
+                    " line). Any Typefully drafts already created are listed"
+                    " below. Retry is safe: the route pre-flight finds an"
+                    " existing PR and contents PUTs are idempotent."
+                )
+            )
+            actions.append((create_label, "create_pr", "primary"))
             actions.append(("Cancel PR", "cancel_pr", None))
         elif state["pr"] == "created":
             blocks.append(
@@ -2414,9 +2549,22 @@ async def test_delivery_preview_create_finish_with_typefully_first_ordering(monk
      render posted.
   7. **gate validation rejection** (wait raises `GateValidationError`): delivery exits
      `rejected`, terminal render posted, `deliveries` carried in result.
+  8. **failed create_pr is retryable**: first `create_pr` returns `ok: False` → the next
+     render contains "creation FAILED" + a Create PR button (state `create_failed`,
+     `create_pr` still in the allowed set); a second `create_pr` succeeds and
+     `deliveries.platform_pr` flips to created.
+  9. **all-failed typefully is retryable**: first `typefully` action returns `ok: False`
+     for every channel → button still rendered next round (state stays idle); second
+     attempt succeeds. Also assert every posted preview block starts AND ends with a
+     ``` fence (`fenced_diff_blocks`).
 
 - [ ] **Step 2: Run — verify failure**, then **implement `run_delivery_gate`** in
-  `comms_delivery.py`:
+  `comms_delivery.py`. First extend the module's imports (Task 11 deliberately kept
+  them minimal for ruff F401): add `from api.workflow_engine import WorkflowContext`
+  and extend the `comms_shared` import with `GateValidationError`,
+  `SlackWorkflowInput`, `call_comms_tool`, `chunked_markdown_blocks`,
+  `extract_action`, `post_gate_message`, `update_gate_message`,
+  `wait_for_gate_action`. Then:
 
 ```python
 async def run_delivery_gate(
@@ -2445,6 +2593,7 @@ async def run_delivery_gate(
         nonlocal gate_message
         blocks = delivery_gate_blocks(
             gate, groups, enabled, state, deliveries,
+            final_by_channel=final_by_channel,
             audit_line=audit_line, terminal=terminal,
         )
         if not gate_message:
@@ -2494,7 +2643,11 @@ async def run_delivery_gate(
                 "url": result.get("share_url") or result.get("draft_url"),
             })
         deliveries["typefully"] = results
-        state["typefully"] = "created"
+        # Only leave "idle" when EVERY draft failed — the button re-renders next
+        # round so a transient Typefully outage stays retryable within the gate
+        # (fresh per-round step names keep the retry replay-safe).
+        if any(item["status"] == "created" for item in results):
+            state["typefully"] = "created"
         return results
 
     outcome = ""
@@ -2507,7 +2660,7 @@ async def run_delivery_gate(
         allowed = {"finish"}
         if enabled["platform_pr"] and state["pr"] == "idle":
             allowed.add("preview_pr")
-        if enabled["platform_pr"] and state["pr"] == "previewed":
+        if enabled["platform_pr"] and state["pr"] in ("previewed", "create_failed"):
             allowed.update({"create_pr", "cancel_pr"})
         if enabled["typefully"] and state["typefully"] == "idle":
             allowed.add("typefully")
@@ -2541,9 +2694,9 @@ async def run_delivery_gate(
                 await post_gate_message(
                     ctx, name=f"post_pr_preview_r{round_n}", delivery=inp.delivery,
                     text="Planned platform PR diff",
-                    blocks=chunked_markdown_blocks(
-                        f"```\n{preview['planned_diff']}\n```"
-                    ),
+                    # Per-chunk fences — one fence around the whole diff breaks
+                    # when the chunker splits it (middle chunks render unfenced).
+                    blocks=fenced_diff_blocks(str(preview["planned_diff"])),
                 )
             else:
                 audit_line += f" Preview failed: {preview.get('error') or 'unknown'}."
@@ -2586,6 +2739,9 @@ async def run_delivery_gate(
                     text="Platform PR created", blocks=[markdown_block(note)],
                 )
             else:
+                # Distinct render state: the operator must see the failure AND
+                # know any Typefully drafts already exist before retrying.
+                state["pr"] = "create_failed"
                 deliveries["platform_pr"] = {"status": "failed", "url": None}
                 audit_line += f" Create PR failed: {emit.get('error') or 'unknown'}."
     else:
@@ -2605,8 +2761,12 @@ async def run_delivery_gate(
 
 - [ ] **Step 3: Splice into `comms_release.py`.** Add to the imports block
   (`from comms_delivery import deliveries_made, empty_deliveries, run_delivery_gate`).
-  Then, immediately BEFORE the `# ---- ship (per-channel) ----` section (current :619),
-  insert the capabilities probe; and replace the final return (:653-657):
+  Then, immediately BEFORE the `# ---- ship (per-channel) ----` section, insert the
+  capabilities probe; and replace **the handler's final return — the one returning
+  `{"status": "ready_to_ship", …}`** (anchor by content, not line number; the cited
+  :619/:653-657 were the positions at planning time). Final handler order:
+  capabilities probe → blog review loop (Task 13 inserts there) → ship blocks +
+  `post_ready_to_ship` (unchanged) → delivery gate → final return:
 
 ```python
     # ---- delivery routing (phase 2) ----
@@ -2614,6 +2774,8 @@ async def run_delivery_gate(
     caps_result = await call_comms_tool(ctx, "probe_capabilities", "capabilities", {})
     caps_raw = caps_result.get("capabilities")
     caps = caps_raw if isinstance(caps_raw, dict) else {}
+
+    # …Task 13's blog review loop inserts HERE (after the probe, before ship)…
 
     # …existing ship_blocks rendering + post_ready_to_ship stay unchanged here…
 
@@ -2670,9 +2832,12 @@ delivery PR). First publish is `visibility: private` + reviewer allowlist. The
 **revision-round budget** (10) counts successful revisions; failed revisions don't
 consume it (spec: "does not consume the round") — but every gate wait still uses a fresh
 `gate_version` (first-write-wins: a correlation is never reused), with a hard wait cap
-of 30. **Interpretation flagged for review:** "Abandon" abandons the REVIEW (artifact
-unpublished); the approved blog copy survives unchanged and the delivery gate still
-offers the PR — review-abandon ≠ release-abandon.
+of 30. **Already-addressed feedback** is excluded via `resolved_ids` + the route's
+stale-anchor check — NOT the spec's `createdOnVersion` filter (dropped: it strands a
+comment left on a stale page view, and the dsp text-output fallback can't reliably
+recover the field — recorded as deviation #10). **Interpretation flagged for review:**
+"Abandon" abandons the REVIEW (artifact unpublished); the approved blog copy survives
+unchanged and the delivery gate still offers the PR — review-abandon ≠ release-abandon.
 
 - [ ] **Step 1: Write the failing tests** (handler-driven, same harness as Task 12;
   `fake_call_comms_tool` additionally answers `display_publish`, `display_comments`,
@@ -2686,11 +2851,13 @@ offers the PR — review-abandon ≠ release-abandon.
      "url": …, "version": 1}`; **no `display_unpublish`** (artifact retained as review
      record); flow continues into the delivery gate.
   3. **pull & revise round**: events `pull_revise` then `approve`. `display_comments`
-     returns one comment `created_on_version: 1` + one with `created_on_version: 0`
-     (already addressed — must NOT be fed). `display_revise` returns
+     returns one NEW comment + one whose id was already resolved in a prior round
+     (in `resolved_ids` — must NOT be re-fed; there is NO `created_on_version`
+     filtering). `display_revise` returns
      `{ok, markdown: "REVISED", director_audit: {...}, stale_anchors: [...]}` →
      republish call carries `id` + `base_version: 1`; `display_resolve` called for the
-     fed comment id; the re-render mentions the director audit and "anchor stale";
+     fed comment id ONLY after the republish succeeded; the re-render mentions the
+     director audit and the stale-anchor note appears as its own block;
      final `final_by_channel["blog"]["text"] == "REVISED"` flows into the emit args.
   4. **failed revise doesn't consume the budget**: `display_revise` returns
      `{ok: False, error: "boom"}` → version unchanged, next render says revision
@@ -2701,7 +2868,18 @@ offers the PR — review-abandon ≠ release-abandon.
      `approve_anyway` exits approved.
   6. **abandon**: event `abandon` → `display_unpublish` called;
      `deliveries.blog_review.status == "abandoned"`; delivery gate still runs.
-  7. **wait-cap exhaustion** → `display_unpublish` + status `"exhausted"`.
+  7. **wait-cap exhaustion** → `display_unpublish` + status `"abandoned"` with
+     `exhaustion_reason: "max_waits_reached"` (spec's status enum is
+     approved|abandoned|skipped — never widened).
+  8. **failed republish discards the revision**: `display_revise` succeeds but the
+     follow-up `display_publish` returns `{ok: False}` → NO `display_resolve` calls,
+     `version` unchanged, budget not consumed, and a later `approve` ships the
+     ORIGINAL text (the discarded revision never reaches `final_by_channel`).
+  9. **processing renders**: after `pull_revise` and `approve` click-events, an
+     update with no actions blocks (the ⏳ processing render) is posted BEFORE the
+     comments/revise tool calls; abandon-after-revisions records
+     `deliveries.blog_review.discarded_revision` and the terminal render warns the
+     PR uses the pre-review text.
 
 - [ ] **Step 2: Run — verify failure**, then **implement `run_blog_review_loop`** in
   `comms_delivery.py`:
@@ -2727,6 +2905,8 @@ def blog_review_blocks(
     version: int,
     audit_line: str = "",
     pending_confirm: int = 0,
+    processing: str = "",
+    stale_note: str = "",
     terminal: bool = False,
 ) -> list[dict[str, Any]]:
     blocks = [
@@ -2738,8 +2918,17 @@ def blog_review_blocks(
             " styling is approximate."
         )
     ]
+    if stale_note:
+        # In the render proper, not just the context line: reviewers checking
+        # display.dev will otherwise wonder why these threads stay open.
+        blocks.append(markdown_block(stale_note))
     if audit_line:
         blocks.append(context_block(audit_line))
+    if processing and not terminal:
+        # Buttonless while a slow durable step runs (revise ≈ minutes): the
+        # click is acknowledged and the double-click window is closed.
+        blocks.append(markdown_block(f"⏳ _{processing}_"))
+        return blocks
     if not terminal:
         if pending_confirm:
             blocks.append(
@@ -2812,19 +3001,22 @@ async def run_blog_review_loop(
     short_id = str(publish.get("short_id") or "")
     url = str(publish.get("url") or "")
     version = int(publish.get("version") or 1)
-    last_revised_version = version
     resolved_ids: set[str] = set()
     gate_message: dict[str, Any] = {}
     audit_line = ""
     pending_confirm = 0
+    stale_note = ""
     rounds_used = 0
     outcome = ""
 
-    async def _render(gate: Gate, name: str, *, terminal: bool, text: str) -> None:
+    async def _render(
+        gate: Gate, name: str, *, terminal: bool, text: str, processing: str = ""
+    ) -> None:
         nonlocal gate_message
         blocks = blog_review_blocks(
             gate, url=url, version=version, audit_line=audit_line,
-            pending_confirm=pending_confirm, terminal=terminal,
+            pending_confirm=pending_confirm, processing=processing,
+            stale_note=stale_note, terminal=terminal,
         )
         if not gate_message:
             gate_message = await post_gate_message(
@@ -2873,6 +3065,11 @@ async def run_blog_review_loop(
             outcome = "approved"
             break
         if action == "approve":
+            await _render(
+                gate, f"render_blog_review_checking_r{wait_n}", terminal=False,
+                text="Checking for open comments…",
+                processing="Checking for open comments…",
+            )
             open_check = await call_comms_tool(
                 ctx, f"display_comments_approve_r{wait_n}", "display_comments",
                 {"short_id": short_id, "status": "open"},
@@ -2893,14 +3090,24 @@ async def run_blog_review_loop(
             break
         if action == "pull_revise":
             pending_confirm = 0
+            await _render(
+                gate, f"render_blog_review_revising_r{wait_n}", terminal=False,
+                text="Revising the draft…",
+                processing="Pulling comments and revising the draft — this takes"
+                " a few minutes.",
+            )
             pulled = await call_comms_tool(
                 ctx, f"display_comments_r{wait_n}", "display_comments",
                 {"short_id": short_id, "status": "open"},
             )
+            # Already-addressed feedback is excluded via resolved_ids (fed
+            # comments are resolved below) + the route's stale-anchor check.
+            # NO createdOnVersion filter: it strands a comment left on a stale
+            # page view, and the dsp text-output fallback can't always recover
+            # the field (defaulting to 0 would disable the mechanic entirely).
             fresh = [
                 c for c in (pulled.get("comments") or [])
                 if str(c.get("id")) not in resolved_ids
-                and int(c.get("created_on_version") or 0) >= last_revised_version
             ]
             if not fresh:
                 audit_line = "No new open comments — approve when ready."
@@ -2923,11 +3130,11 @@ async def run_blog_review_loop(
                 # consume the revision budget (mirrors the surfacing failed-retry rule).
                 audit_line = f"Revision failed: {error} — keeping v{version}."
                 continue
-            markdown = str(revise.get("markdown"))
+            revised_markdown = str(revise.get("markdown"))
             republished = await call_comms_tool(
                 ctx, f"display_publish_r{wait_n + 1}", "display_publish",
                 {
-                    "markdown": markdown,
+                    "markdown": revised_markdown,
                     "name": f"comms-blog-{ctx.run_id}",
                     "visibility": "private",
                     "share": list(reviewer_emails),
@@ -2935,9 +3142,18 @@ async def run_blog_review_loop(
                     "base_version": version,
                 },
             )
-            if republished.get("ok"):
-                version = int(republished.get("version") or version + 1)
-                last_revised_version = version
+            if not republished.get("ok"):
+                # Republish failed (base-version conflict / dsp error): the
+                # reviewers still see the OLD rendering, so the revision must
+                # NOT take effect — discard it, leave comments open, keep the
+                # budget intact (same shape as the failed-revise branch above).
+                audit_line = (
+                    f"Republish failed: {republished.get('error') or 'unknown'}"
+                    f" — keeping v{version}; revision discarded."
+                )
+                continue
+            markdown = revised_markdown
+            version = int(republished.get("version") or version + 1)
             for comment in fresh:
                 cid = str(comment.get("id"))
                 await call_comms_tool(
@@ -2954,10 +3170,13 @@ async def run_blog_review_loop(
                     + ", ".join(f"{k}={v}" for k, v in list(audit.items())[:4])
                 )
             stale = revise.get("stale_anchors") or []
-            if stale:
-                audit_bits.append(
-                    f"{len(stale)} comment(s) anchor stale — addressed or removed."
-                )
+            stale_note = (
+                f"_{len(stale)} comment(s) reference spans that were rewritten or"
+                " removed — they stay open on display.dev but are treated as"
+                " addressed and will not be re-fed to the reviser._"
+                if stale
+                else ""
+            )
             audit_line = (
                 f"Revised → v{version}; {len(fresh)} comment(s) addressed. "
                 + " ".join(audit_bits)
@@ -2973,18 +3192,39 @@ async def run_blog_review_loop(
             "status": "approved", "url": url, "version": version,
         }
         # Artifact retained as the review record until the PR merges.
+        terminal_text = f"Blog review approved at v{version}."
     else:
         await call_comms_tool(
             ctx, "display_unpublish", "display_unpublish", {"short_id": short_id}
         )
+        # Spec §6 result enum is approved|abandoned|skipped — exhaustion maps to
+        # "abandoned" with a distinct reason rather than widening the enum.
         deliveries["blog_review"] = {
-            "status": "abandoned" if outcome == "abandoned" else "exhausted",
-            "url": None, "version": version,
+            "status": "abandoned",
+            "url": None,
+            "version": version,
+            **(
+                {"exhaustion_reason": "max_waits_reached"}
+                if outcome == "exhausted"
+                else {}
+            ),
+            # Human-reviewed revisions are never silently destroyed: the latest
+            # revised markdown survives in the durable result even though the
+            # PR will ship the PRE-review text.
+            **({"discarded_revision": markdown} if markdown != original else {}),
         }
+        terminal_text = (
+            "Blog review abandoned."
+            if markdown == original
+            else "Blog review abandoned — ⚠️ the delivery PR will use the"
+            f" PRE-review text; {rounds_used} revision round(s) were discarded"
+            " (recoverable from the workflow result's"
+            " deliveries.blog_review.discarded_revision)."
+        )
     await _render(
         Gate(ctx.run_id, "blog_review", 0, inp.user_id, approvers),
         "render_blog_review_terminal", terminal=True,
-        text=f"Blog review {outcome}.",
+        text=terminal_text,
     )
     return final_by_channel, deliveries
 ```
@@ -3036,11 +3276,26 @@ iron-proxy), and comms sets `proxy.enabled: false`.
 
 ```yaml
 {{- range ($svc.egressPorts | default list) }}
-    - ports:
+    # Internet-only: a bare ports rule would also open every in-cluster service
+    # on this port. The except list blocks the RFC-1918 ranges (in-cluster pod
+    # and service CIDRs live there), so this grants internet egress only —
+    # narrower than the repo-cache precedent, deliberately.
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+      ports:
         - protocol: TCP
           port: {{ . }}
 {{- end }}
 ```
+
+  (Task 15 Step 2 verifies the CNI actually enforces `ipBlock` — k3s ships
+  kube-router for NetworkPolicy, which supports it; if a target CNI ever doesn't,
+  fall back to the bare-ports form and record it in the runsheet.)
 
 - [ ] **Step 2: Schema.** In `values.schema.json`, inside the attachedServices
   per-service `properties` (alongside `proxy`):
@@ -3095,7 +3350,7 @@ iron-proxy), and comms sets `proxy.enabled: false`.
 ```bash
   DELIVERY_KEYS_JSON=""
   for key in GITHUB_TOKEN TYPEFULLY_API_KEY DISPLAYDEV_API_KEY; do
-    value="${(P)key:-}"  # zsh-style indirection — in bash use: value="${!key:-}"
+    value="${!key:-}"  # bash indirect expansion (the script is bash, not zsh)
     [[ -z "$value" ]] && continue
     DELIVERY_KEYS_JSON+=",\"${key}\":$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1]))' "$value")"
   done
@@ -3116,8 +3371,9 @@ helm template centaur contrib/chart -f overlays/comms-factory/values.production.
   --set attachedServices.comms-factory.image.repository=x \
   --set attachedServices.comms-factory.image.tag=y \
   | awk '/kind: NetworkPolicy/,0' | grep -B2 -A3 'port: 443'
-# EXPECT: a bare "- ports:" egress rule with port 443 inside the
-# centaur-centaur-attached-comms-factory policy (and the api/slackbot 443 rules).
+# EXPECT: an egress rule with ipBlock cidr 0.0.0.0/0 + the three RFC-1918 excepts
+# and port 443 inside the centaur-centaur-attached-comms-factory policy
+# (plus the pre-existing api/slackbot 443 rules).
 
 helm template centaur contrib/chart --set attachedServices.x.enabled=true \
   --set attachedServices.x.image.repository=r --set attachedServices.x.image.tag=t 2>/dev/null \
@@ -3209,8 +3465,10 @@ git commit -m "test(comms): delivery-routing local-k8s E2E observations (real de
 - Modify: `contrib/docs/deploy-env-runsheet.md` (or the runsheet the repo actually
   uses — check `contrib/docs/`): document the three delivery tokens (incl. the
   GITHUB_TOKEN write-scope requirement + the operator decision to reuse it), the
-  `egressPorts: [443]` hook, `TYPEFULLY_SOCIAL_SET`, and the
-  `reviewer_emails` workflow input.
+  `egressPorts: [443]` hook (internet-only via ipBlock-except), `TYPEFULLY_SOCIAL_SET`,
+  the `reviewer_emails` workflow input, and `COMMS_PLATFORM_REPO` (defaults to
+  `infinex-xyz/platform`; the escape hatch for a staging/fork target if org fork
+  policy ever changes).
 - Modify: `CLAUDE.md` / `AGENTS.md` ONLY if something discovered during Stage B
   contradicts them (per the "keep this file current" rule). Expected delta: none.
 
@@ -3250,6 +3508,17 @@ git commit -m "docs(comms): delivery-routing deploy runsheet (tokens, egress, re
    (review URL) and was spec-verified.
 8. **`dsp --json` output flag is assumed, verify-and-adapt** (Task 7 Step 2 probes
    `--help`; text-parse fallback specified).
+9. **`/display/revise` body carries `release_card`** (spec §3 defined
+   `{markdown, comments, run_id}` only): `orchestrateActorDirectorWithRetries`
+   requires a valid ReleaseCard and there is no other way to supply it — the route
+   and the Python client both add the field (review finding, 2026-06-12).
+10. **Spec §6's `createdOnVersion` comment filtering is dropped** in favor of
+    `resolved_ids` + the route's stale-anchor reporting: the version filter strands
+    any comment left on a stale page view after a republish, and the dsp
+    text-output fallback can't reliably recover the field (a 0-default would
+    disable the revision mechanic entirely). Same goal — "a comment already
+    addressed in a prior round is not re-fed" — different, fail-safe mechanism
+    (review finding, 2026-06-12).
 
 ## Execution notes for Stage B
 
@@ -3263,4 +3532,34 @@ git commit -m "docs(comms): delivery-routing deploy runsheet (tokens, egress, re
 - Never push to main; PR #22 stays draft; do NOT mark ready without operator go-ahead.
 - If a verified anchor has drifted by the time a task runs, trust the tree, fix the
   plan in the same commit.
+
+## Deferred / Open Questions
+
+### From 2026-06-12 review
+
+- **[P1][adversarial] Phase-0 E2E contradicts the GITHUB_TOKEN reuse wiring.** The
+  comms pod reads the SAME secret key repo-cache needs for grounding, so any local
+  stack where a release can actually run reports `platform_pr: true` — Task 15
+  Step 1's "deploy WITHOUT the delivery tokens" check can't isolate the token while
+  grounding works. And in production, `/health` flips `platform_pr: true` the moment
+  Task 14's chart change deploys, whether or not the token's scope was upgraded —
+  capability means *token present*, not *push-capable*; "Create PR" would 403 only
+  after the operator walked the preview flow. **Operator question:** accept Phase 0
+  as a grounding-crippled smoke (or assert via the gate's absence on a run with no
+  blog/web/x channels), and make "upgrade the token scope BEFORE merging the chart
+  change" an explicit Stage B rollout precondition?
+- **[P2][adversarial] The blog review loop is unreachable from Slack-started
+  releases.** `reviewer_emails` only arrives via API-started runs (the
+  `SLACK_WORKFLOW_COMMANDS` regex carries just `brief`). Tasks 7–9 + 13 ship as code
+  no Slack-initiated release can execute. **Operator question:** accept
+  "API-start-only for now" as recorded scope, or add an affordance (e.g., a
+  `COMMS_REVIEWER_EMAILS` env default in the chart, or parsing
+  `reviewers: a@x.com,b@x.com` from the brief)?
+- **[P2][security] Write-capable token + internet egress compounding.** The reused
+  `GITHUB_TOKEN` (push on the platform repo) now lives in a pod with 443 internet
+  egress — token exfiltration becomes directly actionable (push access), which the
+  spec's separate-token rule existed to prevent. The ipBlock restriction narrows
+  destinations but GitHub itself is necessarily reachable. **Operator question:**
+  accept (current decision), or revisit a separate fine-grained write token
+  (contents+PR on `infinex-xyz/platform` only) once convenient?
 
