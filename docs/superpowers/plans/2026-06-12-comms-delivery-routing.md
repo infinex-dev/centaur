@@ -1950,8 +1950,7 @@ actor-director.ts:160-163) and `opts.seed_notes` (`DirectorNotes`, :180-199);
 **seed_notes requires seed_transcript** (actor-orchestrator.ts:215-217).
 
 **Files:**
-- Modify: `attached-services/comms-factory/services/api/routes/display.ts` (add handler + pure seed builder)
-- Modify: `attached-services/comms-factory/services/api/server.ts` (register `/display/revise`)
+- Modify: `attached-services/comms-factory/services/api/routes/display.ts` (add handler + pure seed builder; registration lives inside `makeDisplayHandlers`' returned record, so `server.ts` needs NO change — its Task 8 loop picks the route up)
 - Test: `attached-services/comms-factory/services/api/routes/display-revise.test.ts`
 
 - [ ] **Step 0 (read-first):** read `buildActorTranscript` (src/actor-director.ts:725) and
@@ -1966,6 +1965,8 @@ import { buildReviseSeeds, makeDisplayReviseHandler } from "./display.js";
 
 const CARD = {
   kind: "launch-tier",
+  id: "rel_1", // Base schema requires id + ship_date (card.ts Base)
+  ship_date: "2026-06-12",
   title: "Perps launch",
   headline: "Perps launch", // required by the LaunchTier zod schema (card.ts:146)
   audience: ["blog"],
@@ -2011,7 +2012,9 @@ describe("handleDisplayRevise", () => {
 
   it("feeds seeds + blog channel to the orchestrator and returns revised markdown + audit + stale anchors", async () => {
     const captured: { opts?: Record<string, unknown>; channels?: string[] } = {};
-    const handler = makeDisplayReviseHandler(fakeOrchestrate(captured) as never);
+    // configured() must be injected as true: the default displayConfigured reads
+    // DISPLAYDEV_API_KEY, which is unset in the test env — the gate would fire first.
+    const handler = makeDisplayReviseHandler(fakeOrchestrate(captured) as never, () => true);
     const result = await handler({
       request: {} as never, method: "POST", url: new URL("http://x/display/revise"), requestId: "t",
       body: { markdown: MARKDOWN, comments: COMMENTS, release_card: CARD, run_id: "run_1" },
@@ -2030,11 +2033,19 @@ describe("handleDisplayRevise", () => {
   });
 
   it("400s on an invalid release card", async () => {
-    const handler = makeDisplayReviseHandler(fakeOrchestrate({}) as never);
+    const handler = makeDisplayReviseHandler(fakeOrchestrate({}) as never, () => true);
     await expect(
       handler({ request: {} as never, method: "POST", url: new URL("http://x"), requestId: "t",
         body: { markdown: MARKDOWN, comments: [], release_card: { nope: true }, run_id: "r" } }),
     ).rejects.toMatchObject({ status: 400 });
+  });
+
+  it("400s no_actionable_comments when every anchor is stale", async () => {
+    const handler = makeDisplayReviseHandler(fakeOrchestrate({}) as never, () => true);
+    await expect(
+      handler({ request: {} as never, method: "POST", url: new URL("http://x"), requestId: "t",
+        body: { markdown: MARKDOWN, comments: [{ text_quote: "gone span", body: "stale" }], release_card: CARD, run_id: "r" } }),
+    ).rejects.toMatchObject({ status: 400, code: "no_actionable_comments" });
   });
 
   it("returns display_not_configured when the capability is off (no LLM call)", async () => {
@@ -2147,7 +2158,7 @@ function declarations hoist, so the reference below the factory is fine):
 - [ ] **Step 4: Commit**
 
 ```bash
-git add attached-services/comms-factory/services/api/routes/display.ts attached-services/comms-factory/services/api/routes/display-revise.test.ts attached-services/comms-factory/services/api/server.ts
+git add attached-services/comms-factory/services/api/routes/display.ts attached-services/comms-factory/services/api/routes/display-revise.test.ts
 git commit -m "feat(comms): /display/revise — seeded single-channel blog revision (actor-director seed path)"
 ```
 

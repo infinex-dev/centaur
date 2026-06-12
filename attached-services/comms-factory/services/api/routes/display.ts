@@ -1,3 +1,6 @@
+import type { ActorTranscriptMessage, DirectorNotes } from "../../../src/actor-director.js";
+import { orchestrateActorDirectorWithRetries } from "../../../src/actor-orchestrator.js";
+import { safeParseReleaseCard } from "../../../src/card.js";
 import {
   deleteArtifact,
   displayConfigured,
@@ -8,6 +11,7 @@ import {
 import {
   assertRecord,
   HttpError,
+  log,
   optionalString,
   requiredString,
   stringArray,
@@ -88,8 +92,14 @@ export function makeDisplayHandlers(deps: DisplayDeps = realDeps): Record<string
       const id = requiredString(body, "root_comment_id");
       try {
         await deps.resolveThread(id);
-      } catch {
-        /* resolving a resolved thread is a no-op */
+      } catch (error) {
+        // Teardown stays idempotent ({ok:true} regardless), but runner
+        // timeouts/auth failures must not vanish unlogged. Runner messages
+        // are already key-redacted (src/display.ts redactDisplayKey).
+        log("warn", "display_teardown_swallowed", {
+          route: "resolve",
+          detail: error instanceof Error ? error.message.slice(0, 200) : String(error),
+        });
       }
       return { body: { ok: true } };
     },
@@ -100,10 +110,110 @@ export function makeDisplayHandlers(deps: DisplayDeps = realDeps): Record<string
       const shortId = requiredString(body, "short_id");
       try {
         await deps.deleteArtifact(shortId);
-      } catch {
-        /* teardown is idempotent */
+      } catch (error) {
+        log("warn", "display_teardown_swallowed", {
+          route: "unpublish",
+          detail: error instanceof Error ? error.message.slice(0, 200) : String(error),
+        });
       }
       return { body: { ok: true } };
     },
+
+    "/display/revise": makeDisplayReviseHandler(),
+  };
+}
+
+export interface ReviseComment {
+  textQuote: string;
+  body: string;
+}
+
+/** Pure seed builder for the actor-director seed path: the prior turn carries
+ *  the current markdown VERBATIM as the assistant's own output, and reviewer
+ *  comments become DirectorNotes — so the Actor revises in place instead of
+ *  regenerating from scratch (buildActorTranscript appends the notes as the
+ *  next user turn when a previous transcript exists). */
+export function buildReviseSeeds(
+  markdown: string,
+  comments: ReviseComment[],
+): {
+  seed_transcript: ActorTranscriptMessage[];
+  seed_notes: DirectorNotes;
+} {
+  return {
+    seed_transcript: [
+      {
+        role: "user",
+        content:
+          "You previously drafted the blog post below. Human reviewers have now left inline comments on the rendered draft. Revise the SAME post against their notes — do not start over.",
+      },
+      { role: "assistant", content: markdown },
+    ],
+    seed_notes: {
+      attempt: 1,
+      summary: `Human reviewers left ${comments.length} inline comment(s) on the published draft. Address each one; keep everything they did not flag.`,
+      notes: comments.map((c) => `On the passage "${c.textQuote}": ${c.body}`),
+      preserve: { through_action: true, beat_plan: true },
+      change: { copy: comments.map((c) => c.body) },
+    },
+  };
+}
+
+type OrchestrateFn = typeof orchestrateActorDirectorWithRetries;
+
+export function makeDisplayReviseHandler(
+  orchestrate: OrchestrateFn = orchestrateActorDirectorWithRetries,
+  configured: typeof displayConfigured = displayConfigured,
+): Handler {
+  return async (ctx: RequestContext) => {
+    // Same capability gate as makeDisplayHandlers — without it an authenticated
+    // caller could trigger a full LLM generation cycle while display is "off".
+    if (!configured()) return NOT_CONFIGURED;
+    const body = assertRecord(ctx.body);
+    const markdown = requiredString(body, "markdown");
+    const parsed = safeParseReleaseCard(body.release_card ?? body.card);
+    if (!parsed.success) {
+      throw new HttpError(
+        400,
+        "invalid_release_card",
+        "revise requires a valid ReleaseCard",
+        parsed.error.flatten(),
+      );
+    }
+    const rawComments = (Array.isArray(body.comments) ? body.comments : []) as Array<
+      Record<string, unknown>
+    >;
+    const all = rawComments
+      .map((c) => ({
+        textQuote: String(c.text_quote ?? c.textQuote ?? ""),
+        body: String(c.body ?? ""),
+      }))
+      .filter((c) => c.body);
+    // A comment whose anchored span no longer appears in the current text is
+    // "anchor stale — addressed or removed": reported, never re-fed.
+    const live = all.filter((c) => c.textQuote && markdown.includes(c.textQuote));
+    const stale = all.filter((c) => !c.textQuote || !markdown.includes(c.textQuote));
+    if (live.length === 0) {
+      throw new HttpError(400, "no_actionable_comments", "no comment anchors match the current draft");
+    }
+    const seeds = buildReviseSeeds(markdown, live);
+    const result = await orchestrate(parsed.data, ["blog"], {
+      mode: "live",
+      maxAttempts: 2,
+      n: 1,
+      seed_transcript: seeds.seed_transcript,
+      seed_notes: seeds.seed_notes,
+    });
+    const pick = result.picks.find((p) => p.channel === "blog");
+    if (!pick?.text) return { body: { ok: false, error: "revise_produced_no_blog_candidate" } };
+    const record = result.attempts.at(-1)?.records.find((r) => r.candidate.id === pick.id);
+    return {
+      body: {
+        ok: true,
+        markdown: pick.text,
+        director_audit: record?.director_audit ?? null,
+        stale_anchors: stale.map((c) => ({ text_quote: c.textQuote, body: c.body })),
+      },
+    };
   };
 }
