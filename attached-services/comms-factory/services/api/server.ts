@@ -5,6 +5,7 @@ import { handleAudit } from "./routes/audit.js";
 import { handleBuildCard } from "./routes/build-card.js";
 import { handleGenerate } from "./routes/generate.js";
 import { handleGround } from "./routes/ground.js";
+import { handleTypefullyDraft } from "./routes/typefully-draft.js";
 import { handleValidate } from "./routes/validate.js";
 const packageJson = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version?: string };
 
@@ -30,6 +31,7 @@ for (const [path, handler] of [
   ["/ground", handleGround],
   ["/build-card", handleBuildCard],
   ["/generate", handleGenerate],
+  ["/typefully-draft", handleTypefullyDraft],
 ] as const) {
   routes.set(`POST ${path}`, async (ctx) => {
     requirePostAuth(ctx.request);
