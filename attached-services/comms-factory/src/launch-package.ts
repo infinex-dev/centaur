@@ -59,20 +59,27 @@ export function normalizeBlogFrontmatter(
 ): { text: string; dateChanges: DateChange[]; notes: string[] } {
   const notes: string[] = [];
   let text = markdown;
-  if (!/^---\n/.test(text)) {
+  if (!/^---\r?\n/.test(text)) {
     text = `---\ntitle: ${JSON.stringify(opts.title)}\ndate: ${opts.today}\npublished: true\ncategory: changelogs\n---\n\n${text}`;
     notes.push("frontmatter synthesized (none present)");
   } else {
     const end = text.indexOf("\n---", 3);
+    if (end === -1) {
+      throw new Error("normalizeBlogFrontmatter: unterminated frontmatter (no closing '---')");
+    }
     let fm = text.slice(0, end);
     if (!/^title:/m.test(fm)) { fm += `\ntitle: ${JSON.stringify(opts.title)}`; notes.push("title added"); }
     if (!/^date:/m.test(fm)) { fm += `\ndate: ${opts.today}`; notes.push("date added"); }
     if (!/^category:/m.test(fm)) { fm += `\ncategory: changelogs`; notes.push("category: changelogs added"); }
     text = fm + text.slice(end);
   }
+  const frontmatterEnd = (value: string): number => value.indexOf("\n---", 3);
   text = markChangelogPublished(text); // existing exported helper — sets/inserts published: true
   if (opts.typefullyUrl) {
-    const end = text.indexOf("\n---", 3);
+    const end = frontmatterEnd(text);
+    if (end === -1) {
+      throw new Error("normalizeBlogFrontmatter: unterminated frontmatter (no closing '---')");
+    }
     let fm = text.slice(0, end);
     if (/^typefullyUrl:/m.test(fm)) fm = fm.replace(/^typefullyUrl:.*$/m, `typefullyUrl: ${opts.typefullyUrl}`);
     else fm += `\ntypefullyUrl: ${opts.typefullyUrl}`;

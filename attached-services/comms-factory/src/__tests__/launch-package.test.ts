@@ -71,6 +71,25 @@ describe("normalizeBlogFrontmatter", () => {
     const { text } = normalizeBlogFrontmatter(BLOG_MD, { title: "t", today: "2026-06-12" });
     expect(text).toContain("published: true");
   });
+
+  it("adds date field when existing frontmatter is missing date:", () => {
+    const noDate = `---\ntitle: "Something"\ncategory: changelogs\n---\n\nBody text.\n`;
+    const { text } = normalizeBlogFrontmatter(noDate, { title: "Something", today: "2026-06-12" });
+    expect(text).toContain("date: 2026-06-12");
+  });
+
+  it("throws on unterminated frontmatter (no closing ---)", () => {
+    expect(() =>
+      normalizeBlogFrontmatter("---\ntitle: x\nno close", { title: "x", today: "2026-06-12" }),
+    ).toThrow("unterminated frontmatter");
+  });
+
+  it("does not duplicate published: when it already exists", () => {
+    const alreadyPublished = `---\ntitle: "t"\ndate: 2026-06-12\ncategory: changelogs\npublished: true\n---\n\nBody.\n`;
+    const { text } = normalizeBlogFrontmatter(alreadyPublished, { title: "t", today: "2026-06-12" });
+    const matches = text.match(/^published:/gm);
+    expect(matches).toHaveLength(1);
+  });
 });
 
 describe("buildLaunchPackage", () => {
