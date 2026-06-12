@@ -97,10 +97,13 @@ describe("handleTypefullyDraft", () => {
 
   it("missing text/tweets: throws HttpError 400 missing_text", async () => {
     const { HttpError } = await import("../http.js");
-    await expect(
-      handleTypefullyDraft(ctx({ channel: "x" })),
-    ).rejects.toMatchObject({ status: 400, code: "missing_text" });
-    await expect(handleTypefullyDraft(ctx({ channel: "x" }))).rejects.toBeInstanceOf(HttpError);
+    try {
+      await handleTypefullyDraft(ctx({ channel: "x" }));
+      expect.unreachable("should have thrown");
+    } catch (e) {
+      expect(e).toBeInstanceOf(HttpError);
+      expect(e).toMatchObject({ status: 400, code: "missing_text" });
+    }
   });
 
   it("social-set resolution failure: returns ok:false error:typefully_not_configured", async () => {

@@ -41,7 +41,10 @@ export async function handleTypefullyDraft(ctx: RequestContext): Promise<JsonRes
       },
     };
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
+    const message =
+      error instanceof Error ? error.message
+      : typeof error === "string" ? error
+      : JSON.stringify(error)?.slice(0, 200) ?? "unknown_error";
     if (
       message.startsWith("typefully_not_configured") ||
       message.startsWith("typefully_social_set_not_found")
