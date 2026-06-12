@@ -5,14 +5,19 @@ import { createTypefullyDraft } from "../typefully.js";
 let mock: ReturnType<typeof createServer>;
 let requests: Array<{ url: string | undefined; method: string | undefined; body: unknown }>;
 let base = "";
+// Tests may set this to intercept requests before default handler runs.
+// Return true = request fully handled; return false = fall through to default.
+let respondWith: ((req: IncomingMessage, res: ServerResponse) => boolean) | null = null;
 
 beforeEach(async () => {
   requests = [];
+  respondWith = null;
   mock = createServer(async (req, res) => {
     const chunks: Buffer[] = [];
     for await (const c of req) chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c));
     const body = chunks.length ? JSON.parse(Buffer.concat(chunks).toString("utf8")) : undefined;
     requests.push({ url: req.url, method: req.method, body });
+    if (respondWith?.(req, res)) return;
     if (req.url === "/v2/social-sets") {
       res.writeHead(200, { "content-type": "application/json" });
       res.end(JSON.stringify([{ id: 7, name: "Infinex" }, { id: 9, name: "Test Set" }]));
@@ -104,34 +109,17 @@ describe("createTypefullyDraft", () => {
   });
 
   it("sanitizes the API key from a 401 error body before throwing", async () => {
-    // Override mock to return 401 with body that includes the API key
-    await new Promise<void>((resolve, reject) => mock.close((e) => (e ? reject(e) : resolve())));
-
     const key = "tf-test-key";
-    mock = createServer(async (req: IncomingMessage, res: ServerResponse) => {
-      const chunks: Buffer[] = [];
-      for await (const c of req) chunks.push(Buffer.isBuffer(c) ? c : Buffer.from(c));
-      const body = chunks.length ? JSON.parse(Buffer.concat(chunks).toString("utf8")) : undefined;
-      requests.push({ url: req.url, method: req.method, body });
-      if (req.url === "/v2/social-sets") {
-        res.writeHead(200, { "content-type": "application/json" });
-        res.end(JSON.stringify([{ id: 7, name: "Infinex" }]));
-        return;
+    // Use the respondWith hook to serve a 401 with the key in the body for the
+    // drafts POST only; social-sets falls through to the default handler.
+    respondWith = (req, res) => {
+      if (req.url?.startsWith("/v2/social-sets/") && req.method === "POST") {
+        res.writeHead(401, { "content-type": "application/json" });
+        res.end(JSON.stringify({ error: `Invalid key: ${key}` }));
+        return true;
       }
-      // 401 response body that echoes the key
-      res.writeHead(401, { "content-type": "application/json" });
-      res.end(JSON.stringify({ error: `Invalid key: ${key}` }));
-    });
-
-    base = await new Promise<string>((resolve) => {
-      mock.listen(0, "127.0.0.1", () => {
-        const a = mock.address();
-        if (!a || typeof a === "string") throw new Error("no addr");
-        resolve(`http://127.0.0.1:${a.port}`);
-      });
-    });
-    process.env.TYPEFULLY_BASE_URL = base;
-    process.env.TYPEFULLY_API_KEY = key;
+      return false;
+    };
 
     let caughtMessage = "";
     try {

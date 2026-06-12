@@ -3,7 +3,9 @@
  * publishes). Adapted from harness/lib/typefully.ts (live-verified 2026-06-09),
  * which remains the operator-laptop break-glass twin. Differences: no media
  * support (future), share:true + scratchpad_text for review URLs/traceability,
- * TYPEFULLY_BASE_URL override for tests, typed error codes.
+ * TYPEFULLY_BASE_URL override for tests, typed error codes; social-set lookup
+ * throws typefully_social_set_not_found on no-match (harness silently falls
+ * back to sets[0] via `?? sets[0]` — do NOT propagate that fallback here).
  * Auth: `Authorization: Bearer <TYPEFULLY_API_KEY>` — header only, never URL/argv.
  */
 
