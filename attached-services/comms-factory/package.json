@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",
+    "@displaydev/cli": "^0.26.0",
     "@remotion/bundler": "^4.0.460",
     "@remotion/cli": "^4.0.0",
     "@remotion/media": "^4.0.0",

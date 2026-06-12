@@ -1390,19 +1390,56 @@ pnpm exec dsp publish --help
 pnpm exec dsp comment list --help
 ```
 
-Look for a `--json` (or `--output json`) flag. If present, pass it on every invocation
-and parse stdout as JSON. If not, adapt the `parse*` functions below to the human
-output the trial produced (`short_id`, URL, `version`; comment list rows with body +
-textQuote + root id + `createdOnVersion`). Record what you found in the commit message.
+**PROBE RESULT (2026-06-12, `@displaydev/cli@0.26.0` — help text + `dist/main.js`
+inspection + the 2026-06-11 trial's captured output; no live service calls):**
+
+- **There is NO `--json` / `--output json` flag** on publish/comment/thread/delete
+  (only `dsp login --json` exists). The original draft of this task assumed `--json`
+  everywhere; the code below is the ADAPTED version that landed.
+- **`publish` (authenticated)** prints two human lines on stdout:
+  `<url>` then `Published|Updated <name> (<shortId>) v<n>` → parsed by regex.
+- **`publish -` (stdin) REQUIRES `--id`** (exit 2: "Reading from stdin (-) requires
+  --id <shortId>."). So the CREATE path cannot use stdin: it writes the stripped
+  markdown to a temp `.md` file (the extension drives the CLI's md/html format
+  detection) and publishes by path; only the UPDATE path streams via stdin.
+- **`comment list`** natively prints pretty JSON: a `{ data: [...], nextCursor,
+  totalCount }` wrapper (NOT a bare array). Rows carry `anchor.textQuote` as an
+  OBJECT (`{ exact, prefix, suffix }` — use `.exact`) and `createdOnVersion` as a
+  STRING (`"1"`). This is the real shape captured in the 2026-06-11 trial session.
+- **`thread resolve`** prints the resolved comment as pretty JSON (treated as opaque).
+- **`delete --confirm`** prints `Deleted <name> (<shortId>)` human text (opaque).
+- **Fail-closed bonus:** the client always passes `--visibility`, which the CLI
+  rejects when unauthenticated — so a missing/empty key can never fall through to
+  the CLI's ANONYMOUS public-publish path (public URL + 30-day expiry).
+- The CLI's npm update-notice writes to **stderr only**, so stdout stays parse-safe.
 
 - [ ] **Step 3: Write the failing tests** — `src/__tests__/display.test.ts` with a fake
-  runner (no real CLI calls):
+  runner (no real CLI calls). As landed (fixtures match the probed contract):
 
 ```ts
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { deleteArtifact, listComments, publishArtifact, redactDisplayKey, resolveThread, stripFrontmatter, type DspRunner } from "../display.js";
+import {
+  deleteArtifact,
+  listComments,
+  publishArtifact,
+  redactDisplayKey,
+  resolveThread,
+  stripFrontmatter,
+  type DspRunner,
+} from "../display.js";
 
-function fakeRunner(stdout: string): { runner: DspRunner; calls: Array<{ args: readonly string[]; stdin?: string }> } {
+// Probed contract (v0.26.0, 2026-06-12): the dsp CLI has NO --json flag on
+// publish/comment/thread/delete. publish prints two human lines (url, then
+// "Published|Updated <name> (<shortId>) v<n>"); comment list / thread resolve
+// natively print pretty JSON ({ data: [...] } wrapper); delete prints
+// "Deleted <name> (<shortId>)". `publish -` (stdin) REQUIRES --id, so the
+// create path publishes a temp .md file by path instead.
+
+function fakeRunner(stdout: string): {
+  runner: DspRunner;
+  calls: Array<{ args: readonly string[]; stdin?: string }>;
+} {
   const calls: Array<{ args: readonly string[]; stdin?: string }> = [];
   return {
     calls,
@@ -1413,7 +1450,8 @@ function fakeRunner(stdout: string): { runner: DspRunner; calls: Array<{ args: r
   };
 }
 
-const PUBLISH_JSON = JSON.stringify({ short_id: "abc123", url: "https://dsp.so/a/abc123", version: 1 });
+const PUBLISH_V1_STDOUT = "https://infinex.dsp.so/a/abc123\nPublished perps-launch-blog (abc123) v1\n";
+const PUBLISH_V2_STDOUT = "https://infinex.dsp.so/a/abc123\nUpdated perps-launch-blog (abc123) v2\n";
 
 describe("stripFrontmatter", () => {
   it("removes a leading YAML block (display renders it literally)", () => {
@@ -1423,48 +1461,102 @@ describe("stripFrontmatter", () => {
 });
 
 describe("publishArtifact", () => {
-  it("publishes v1 private with reviewer allowlist, markdown via stdin, no key in argv", async () => {
-    const { runner, calls } = fakeRunner(PUBLISH_JSON);
+  it("publishes v1 private via a temp .md path (stdin requires --id), reviewer allowlist, no key in argv", async () => {
+    // `dsp publish -` exits 2 without --id, so the create path must hand the
+    // CLI a real file path; capture its content at call time (it is deleted after).
+    const calls: Array<{ args: readonly string[]; stdin?: string; fileContent?: string }> = [];
+    const runner: DspRunner = async (args, opts) => {
+      calls.push({
+        args,
+        ...(opts?.stdin !== undefined ? { stdin: opts.stdin } : {}),
+        fileContent: readFileSync(String(args[1]), "utf8"),
+      });
+      return { stdout: PUBLISH_V1_STDOUT, stderr: "" };
+    };
     const result = await publishArtifact(
       { markdown: "---\ntitle: t\n---\n\nDraft body", name: "perps-launch-blog", share: ["a@x.com", "b@x.com"] },
       runner,
     );
-    expect(calls[0]?.args.slice(0, 2)).toEqual(["publish", "-"]);
+    expect(calls[0]?.args[0]).toBe("publish");
+    expect(calls[0]?.args[1]).toMatch(/\.md$/); // temp file path, .md drives format detection
+    expect(calls[0]?.args[1]).not.toBe("-");
     expect(calls[0]?.args).toContain("--visibility");
     expect(calls[0]?.args).toContain("private");
+    expect(calls[0]?.args.join(" ")).toContain("--theme github");
     expect(calls[0]?.args.join(" ")).toContain("--share a@x.com");
     expect(calls[0]?.args.join(" ")).toContain("--share b@x.com");
-    expect(calls[0]?.stdin).toBe("Draft body"); // frontmatter stripped
+    expect(calls[0]?.stdin).toBeUndefined();
+    expect(calls[0]?.fileContent).toBe("Draft body"); // frontmatter stripped
     expect(calls[0]?.args.join(" ")).not.toContain("sk_live"); // env-auth only
-    expect(result).toEqual({ shortId: "abc123", url: "https://dsp.so/a/abc123", version: 1 });
+    expect(result).toEqual({ shortId: "abc123", url: "https://infinex.dsp.so/a/abc123", version: 1 });
   });
 
-  it("updates the same artifact with --id --base-version --reload", async () => {
-    const { runner, calls } = fakeRunner(JSON.stringify({ short_id: "abc123", url: "u", version: 2 }));
-    await publishArtifact({ markdown: "v2", name: "n", id: "abc123", baseVersion: 1 }, runner);
+  it("updates the same artifact via stdin with --id --base-version --reload", async () => {
+    const { runner, calls } = fakeRunner(PUBLISH_V2_STDOUT);
+    const result = await publishArtifact({ markdown: "v2", name: "n", id: "abc123", baseVersion: 1 }, runner);
+    expect(calls[0]?.args.slice(0, 2)).toEqual(["publish", "-"]);
     expect(calls[0]?.args.join(" ")).toContain("--id abc123");
     expect(calls[0]?.args.join(" ")).toContain("--base-version 1");
     expect(calls[0]?.args).toContain("--reload");
+    expect(calls[0]?.stdin).toBe("v2");
+    expect(result).toEqual({ shortId: "abc123", url: "https://infinex.dsp.so/a/abc123", version: 2 });
+  });
+
+  it("throws (redacted) on output that does not match the publish contract", async () => {
+    process.env.DISPLAYDEV_API_KEY = "sk_live_secret";
+    try {
+      const { runner } = fakeRunner('{"previewUrl":"x sk_live_secret"}\n'); // anonymous-path shape
+      await expect(
+        publishArtifact({ markdown: "v2", name: "n", id: "abc123", baseVersion: 1 }, runner),
+      ).rejects.toThrow(/unexpected dsp publish output(?!.*sk_live_secret)/);
+    } finally {
+      delete process.env.DISPLAYDEV_API_KEY;
+    }
   });
 });
 
 describe("listComments", () => {
-  it("parses open threads into {id, body, textQuote, createdOnVersion}", async () => {
-    const { runner, calls } = fakeRunner(JSON.stringify([
-      { id: "c1", body: "tighten this", anchor: { textQuote: "perps are live" }, createdOnVersion: 1 },
-    ]));
+  it("parses the { data: [...] } wrapper into {id, body, textQuote, createdOnVersion}", async () => {
+    // Real shape captured from the 2026-06-11 trial: textQuote is an object
+    // ({ exact, prefix, suffix }) and createdOnVersion is a STRING.
+    const { runner, calls } = fakeRunner(
+      JSON.stringify(
+        {
+          data: [
+            {
+              id: "c1",
+              parentId: null,
+              anchor: { cssPath: "h3", textQuote: { exact: "perps are live", prefix: "", suffix: "" } },
+              body: "tighten this",
+              createdOnVersion: "1",
+              replies: [],
+            },
+          ],
+          nextCursor: null,
+          totalCount: 1,
+        },
+        null,
+        2,
+      ),
+    );
     const comments = await listComments("abc123", { status: "open" }, runner);
     expect(calls[0]?.args.join(" ")).toContain("comment list --artifact abc123 --status open");
+    expect(calls[0]?.args).not.toContain("--json"); // no such flag in v0.26.0
     expect(comments).toEqual([{ id: "c1", body: "tighten this", textQuote: "perps are live", createdOnVersion: 1 }]);
+  });
+
+  it("returns [] for an empty thread list", async () => {
+    const { runner } = fakeRunner(JSON.stringify({ data: [], nextCursor: null, totalCount: 0 }));
+    expect(await listComments("abc123", {}, runner)).toEqual([]);
   });
 });
 
 describe("resolveThread / deleteArtifact", () => {
   it("resolves a thread and deletes with --confirm", async () => {
-    const a = fakeRunner("{}");
+    const a = fakeRunner(JSON.stringify({ data: { id: "c1", resolvedAt: "2026-06-12T00:00:00Z" } }, null, 2));
     await resolveThread("c1", a.runner);
     expect(a.calls[0]?.args.join(" ")).toContain("thread resolve c1");
-    const b = fakeRunner("{}");
+    const b = fakeRunner("Deleted perps-launch-blog (abc123)\n");
     await deleteArtifact("abc123", b.runner);
     expect(b.calls[0]?.args.join(" ")).toContain("delete abc123 --confirm");
   });
@@ -1484,7 +1576,7 @@ describe("redactDisplayKey", () => {
 });
 ```
 
-- [ ] **Step 4: Run — verify failure**, then **implement `src/display.ts`**:
+- [ ] **Step 4: Run — verify failure**, then **implement `src/display.ts`** (as landed):
 
 ```ts
 /**
@@ -1493,12 +1585,33 @@ describe("redactDisplayKey", () => {
  * resolve/delete). Auth is the DISPLAYDEV_API_KEY env var (the CLI reads it
  * natively — verified against the published package); the key NEVER appears in
  * argv. DISPLAYDEV_SKIP_BROWSER=1 keeps the CLI headless in-pod.
- * If Step 2's probe found no --json flag, adapt the parse* helpers to the
- * trial's text output and update the fake-runner fixtures to match.
+ *
+ * Output contract probed against v0.26.0 (2026-06-12) — there is NO --json
+ * flag on these commands (only `dsp login --json` exists):
+ * - `publish` (authenticated) prints two human lines on stdout:
+ *   `<url>\nPublished|Updated <name> (<shortId>) v<n>` → parsed by regex.
+ * - `publish -` (stdin) REQUIRES --id, so the CREATE path writes the markdown
+ *   to a temp `.md` file (extension drives the CLI's format detection) and
+ *   publishes by path; the UPDATE path streams via stdin.
+ * - `comment list` prints pretty JSON: `{ data: [...], nextCursor, totalCount }`;
+ *   rows carry `anchor.textQuote` as an OBJECT ({ exact, prefix, suffix }) and
+ *   `createdOnVersion` as a STRING (real trial output 2026-06-11).
+ * - `thread resolve` prints the resolved comment as pretty JSON (opaque here).
+ * - `delete --confirm` prints `Deleted <name> (<shortId>)` (opaque here).
+ * Unauthenticated runs FAIL CLOSED: we always pass `--visibility`, which the
+ * CLI rejects without auth — the anonymous public-publish fallback can't fire.
+ * The CLI's update-notice writes to stderr only, so stdout stays parse-safe.
  */
 import { spawn } from "node:child_process";
+import { randomUUID } from "node:crypto";
+import { rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 
-export type DspRunner = (args: readonly string[], opts?: { stdin?: string }) => Promise<{ stdout: string; stderr: string }>;
+export type DspRunner = (
+  args: readonly string[],
+  opts?: { stdin?: string },
+) => Promise<{ stdout: string; stderr: string }>;
 
 export function displayConfigured(): boolean {
   return Boolean(process.env.DISPLAYDEV_API_KEY?.trim());
@@ -1520,10 +1633,17 @@ export const defaultRunner: DspRunner = (args, opts) =>
     });
     let stdout = "";
     let stderr = "";
-    child.stdout.on("data", (d: Buffer) => { stdout += d.toString("utf8"); });
-    child.stderr.on("data", (d: Buffer) => { stderr += d.toString("utf8"); });
+    child.stdout.on("data", (d: Buffer) => {
+      stdout += d.toString("utf8");
+    });
+    child.stderr.on("data", (d: Buffer) => {
+      stderr += d.toString("utf8");
+    });
     const timer = setTimeout(() => child.kill("SIGTERM"), 60_000);
-    child.on("error", (err) => { clearTimeout(timer); reject(err); });
+    child.on("error", (err) => {
+      clearTimeout(timer);
+      reject(err);
+    });
     child.on("close", (code) => {
       clearTimeout(timer);
       if (code === 0) resolve({ stdout, stderr });
@@ -1547,64 +1667,101 @@ export interface PublishOptions {
   baseVersion?: number;
 }
 
-export interface PublishResult { shortId: string; url: string; version: number }
-
-export async function publishArtifact(opts: PublishOptions, runner: DspRunner = defaultRunner): Promise<PublishResult> {
-  const args = [
-    "publish", "-",
-    "--name", opts.name,
-    "--visibility", opts.visibility ?? "private",
-    "--theme", "github",
-    "--json",
-  ];
-  for (const email of opts.share ?? []) args.push("--share", email);
-  if (opts.id) args.push("--id", opts.id, "--base-version", String(opts.baseVersion ?? 1), "--reload");
-  const { stdout } = await runner(args, { stdin: stripFrontmatter(opts.markdown) });
-  const parsed = JSON.parse(stdout) as { short_id?: string; id?: string; url?: string; version?: number };
-  return {
-    shortId: String(parsed.short_id ?? parsed.id ?? ""),
-    url: String(parsed.url ?? ""),
-    version: Number(parsed.version ?? 1),
-  };
+export interface PublishResult {
+  shortId: string;
+  url: string;
+  version: number;
 }
 
-export interface DisplayComment { id: string; body: string; textQuote: string; createdOnVersion: number }
+/** Authenticated publish prints `<url>` then `Published|Updated <name> (<shortId>) v<n>`. */
+function parsePublishOutput(stdout: string): PublishResult {
+  const lines = stdout
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
+  const tail = lines[lines.length - 1] ?? "";
+  const match = /^(?:Published|Updated) .* \(([\w-]+)\) v(\d+)$/.exec(tail);
+  if (lines.length < 2 || !match) {
+    throw new Error(`unexpected dsp publish output: ${redactDisplayKey(stdout).slice(0, 200)}`);
+  }
+  return { shortId: match[1] ?? "", url: lines[0] ?? "", version: Number(match[2]) };
+}
+
+export async function publishArtifact(
+  opts: PublishOptions,
+  runner: DspRunner = defaultRunner,
+): Promise<PublishResult> {
+  const body = stripFrontmatter(opts.markdown);
+  const flags = ["--name", opts.name, "--visibility", opts.visibility ?? "private", "--theme", "github"];
+  for (const email of opts.share ?? []) flags.push("--share", email);
+  if (opts.id) {
+    // Update path: stdin re-publish (the only stdin mode the CLI allows).
+    const args = ["publish", "-", ...flags, "--id", opts.id, "--base-version", String(opts.baseVersion ?? 1), "--reload"];
+    const { stdout } = await runner(args, { stdin: body });
+    return parsePublishOutput(stdout);
+  }
+  // Create path: `publish -` exits 2 without --id, so publish a temp .md by path.
+  const tmpPath = join(tmpdir(), `dsp-publish-${randomUUID()}.md`);
+  await writeFile(tmpPath, body, "utf8");
+  try {
+    const { stdout } = await runner(["publish", tmpPath, ...flags]);
+    return parsePublishOutput(stdout);
+  } finally {
+    await rm(tmpPath, { force: true });
+  }
+}
+
+export interface DisplayComment {
+  id: string;
+  body: string;
+  textQuote: string;
+  createdOnVersion: number;
+}
+
+interface CommentRow {
+  id?: string;
+  body?: string;
+  anchor?: { textQuote?: { exact?: string } | string };
+  createdOnVersion?: number | string;
+}
 
 export async function listComments(
   artifactId: string,
   opts: { status?: "open" | "resolved" } = {},
   runner: DspRunner = defaultRunner,
 ): Promise<DisplayComment[]> {
-  const { stdout } = await runner(["comment", "list", "--artifact", artifactId, "--status", opts.status ?? "open", "--json"]);
-  const rows = JSON.parse(stdout) as Array<{ id?: string; body?: string; anchor?: { textQuote?: string }; createdOnVersion?: number }>;
-  return (Array.isArray(rows) ? rows : []).map((r) => ({
-    id: String(r.id ?? ""),
-    body: String(r.body ?? ""),
-    textQuote: String(r.anchor?.textQuote ?? ""),
-    createdOnVersion: Number(r.createdOnVersion ?? 0),
-  }));
+  const { stdout } = await runner(["comment", "list", "--artifact", artifactId, "--status", opts.status ?? "open"]);
+  const parsed = JSON.parse(stdout) as { data?: CommentRow[] } | CommentRow[];
+  const rows = Array.isArray(parsed) ? parsed : (parsed?.data ?? []);
+  return rows.map((r) => {
+    const quote = r.anchor?.textQuote;
+    return {
+      id: String(r.id ?? ""),
+      body: String(r.body ?? ""),
+      textQuote: typeof quote === "string" ? quote : String(quote?.exact ?? ""),
+      createdOnVersion: Number(r.createdOnVersion ?? 0),
+    };
+  });
 }
 
 export async function resolveThread(rootCommentId: string, runner: DspRunner = defaultRunner): Promise<void> {
-  await runner(["thread", "resolve", rootCommentId, "--json"]);
+  await runner(["thread", "resolve", rootCommentId]);
 }
 
 export async function deleteArtifact(shortId: string, runner: DspRunner = defaultRunner): Promise<void> {
-  await runner(["delete", shortId, "--confirm", "--json"]);
+  await runner(["delete", shortId, "--confirm"]);
 }
 ```
-
-  (If the probe in Step 2 found no `--json`: remove the flag and swap `JSON.parse` for
-  text parsing matched to real output — keep the tests' fake-runner fixtures in sync.)
 
 - [ ] **Step 5: Run tests + typecheck — verify green.** `pnpm test && pnpm typecheck`
 
 - [ ] **Step 6: Commit** (lockfile included)
 
 ```bash
-git add attached-services/comms-factory/package.json attached-services/comms-factory/pnpm-lock.yaml attached-services/comms-factory/src/display.ts attached-services/comms-factory/src/__tests__/display.test.ts
+git add attached-services/comms-factory/package.json attached-services/comms-factory/pnpm-lock.yaml attached-services/comms-factory/src/display.ts attached-services/comms-factory/src/__tests__/display.test.ts docs/superpowers/plans/2026-06-12-comms-delivery-routing.md
 git commit -m "feat(comms): display.dev client wrapping dsp CLI (env auth, headless, injectable runner)"
 ```
+
 
 ---
 
