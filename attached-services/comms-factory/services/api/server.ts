@@ -3,6 +3,7 @@ import { startManifestRefresh } from "../../src/fact-grounder/sources/repo-manif
 import { makeJsonServer, requirePostAuth, type Handler } from "./http.js";
 import { handleAudit } from "./routes/audit.js";
 import { handleBuildCard } from "./routes/build-card.js";
+import { makeDisplayHandlers } from "./routes/display.js";
 import { handleEmit } from "./routes/emit.js";
 import { handleGenerate } from "./routes/generate.js";
 import { handleGround } from "./routes/ground.js";
@@ -38,6 +39,13 @@ for (const [path, handler] of [
   routes.set(`POST ${path}`, async (ctx) => {
     requirePostAuth(ctx.request);
     return handler(ctx as never) as never;
+  });
+}
+
+for (const [path, handler] of Object.entries(makeDisplayHandlers())) {
+  routes.set(`POST ${path}`, async (ctx) => {
+    requirePostAuth(ctx.request);
+    return handler(ctx);
   });
 }
 
