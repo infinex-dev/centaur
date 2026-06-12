@@ -19,14 +19,23 @@ const COMMENTS = [
 
 describe("buildReviseSeeds", () => {
   it("builds a prior-turn transcript carrying the current markdown verbatim", () => {
-    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }]);
+    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }], CARD);
     expect(seeds.seed_transcript).toHaveLength(2);
     expect(seeds.seed_transcript[0]?.role).toBe("user");
     expect(seeds.seed_transcript[1]).toEqual({ role: "assistant", content: MARKDOWN });
   });
 
+  it("framing turn carries the JSON output contract + the release card's deployed_facts", () => {
+    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }], CARD);
+    const framing = seeds.seed_transcript[0]?.content ?? "";
+    // The seed path replaces the normal assignment message — the contract and
+    // the card (deployed_facts) must travel in the framing turn instead.
+    expect(framing).toContain("JSON");
+    expect(framing).toContain("perps are live"); // a deployed_facts string from CARD
+  });
+
   it("turns comments into DirectorNotes that quote the anchored span", () => {
-    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }]);
+    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }], CARD);
     expect(seeds.seed_notes.attempt).toBe(1);
     expect(seeds.seed_notes.notes.join(" ")).toContain("perps are live");
     expect(seeds.seed_notes.notes.join(" ")).toContain("cite the venue");
@@ -42,7 +51,12 @@ describe("handleDisplayRevise", () => {
       return {
         picks: [{ id: "rev_1", channel: "blog", text: "REVISED MARKDOWN" }],
         selection_rationales: {},
-        attempts: [{ records: [{ candidate: { id: "rev_1", channel: "blog" }, director_audit: { publication_gate: "pass" } }] }],
+        // The pick's record lives in attempt 1, NOT the last attempt: picks
+        // pool across attempts, so the handler must search ALL of them.
+        attempts: [
+          { records: [{ candidate: { id: "rev_1", channel: "blog" }, director_audit: { publication_gate: "pass" } }] },
+          { records: [] },
+        ],
         exhausted: false,
       };
     };
@@ -63,7 +77,8 @@ describe("handleDisplayRevise", () => {
     expect(result.body).toMatchObject({
       ok: true,
       markdown: "REVISED MARKDOWN",
-      director_audit: { publication_gate: "pass" },
+      director_audit: { publication_gate: "pass" }, // found in attempt 1, not the last attempt
+      exhausted: false,
       stale_anchors: [{ text_quote: "this span was rewritten away", body: "stale one" }],
     });
   });

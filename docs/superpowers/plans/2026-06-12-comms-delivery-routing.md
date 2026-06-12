@@ -1981,14 +1981,23 @@ const COMMENTS = [
 
 describe("buildReviseSeeds", () => {
   it("builds a prior-turn transcript carrying the current markdown verbatim", () => {
-    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }]);
+    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }], CARD);
     expect(seeds.seed_transcript).toHaveLength(2);
     expect(seeds.seed_transcript[0]?.role).toBe("user");
     expect(seeds.seed_transcript[1]).toEqual({ role: "assistant", content: MARKDOWN });
   });
 
+  it("framing turn carries the JSON output contract + the release card's deployed_facts", () => {
+    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }], CARD);
+    const framing = seeds.seed_transcript[0]?.content ?? "";
+    // The seed path replaces the normal assignment message — the contract and
+    // the card (deployed_facts) must travel in the framing turn instead.
+    expect(framing).toContain("JSON");
+    expect(framing).toContain("perps are live"); // a deployed_facts string from CARD
+  });
+
   it("turns comments into DirectorNotes that quote the anchored span", () => {
-    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }]);
+    const seeds = buildReviseSeeds(MARKDOWN, [{ textQuote: "perps are live", body: "cite the venue" }], CARD);
     expect(seeds.seed_notes.attempt).toBe(1);
     expect(seeds.seed_notes.notes.join(" ")).toContain("perps are live");
     expect(seeds.seed_notes.notes.join(" ")).toContain("cite the venue");
@@ -2004,7 +2013,12 @@ describe("handleDisplayRevise", () => {
       return {
         picks: [{ id: "rev_1", channel: "blog", text: "REVISED MARKDOWN" }],
         selection_rationales: {},
-        attempts: [{ records: [{ candidate: { id: "rev_1", channel: "blog" }, director_audit: { publication_gate: "pass" } }] }],
+        // The pick's record lives in attempt 1, NOT the last attempt: picks
+        // pool across attempts, so the handler must search ALL of them.
+        attempts: [
+          { records: [{ candidate: { id: "rev_1", channel: "blog" }, director_audit: { publication_gate: "pass" } }] },
+          { records: [] },
+        ],
         exhausted: false,
       };
     };
@@ -2027,7 +2041,8 @@ describe("handleDisplayRevise", () => {
     expect(result.body).toMatchObject({
       ok: true,
       markdown: "REVISED MARKDOWN",
-      director_audit: { publication_gate: "pass" },
+      director_audit: { publication_gate: "pass" }, // found in attempt 1, not the last attempt
+      exhausted: false,
       stale_anchors: [{ text_quote: "this span was rewritten away", body: "stale one" }],
     });
   });
@@ -2069,7 +2084,16 @@ import { HttpError } from "../http.js";
 
 export interface ReviseComment { textQuote: string; body: string }
 
-export function buildReviseSeeds(markdown: string, comments: ReviseComment[]): {
+// The framing turn must ALSO carry the output contract + the release card: on
+// the seed path the normal assignment message (which states the JSON-only
+// contract and embeds the card) is never built, so without these a live Actor
+// answers in plain markdown (parse failures the correction turn can't fix) and
+// fact-seeking comments can't be answered — deployed_facts never reach the Actor.
+export function buildReviseSeeds(
+  markdown: string,
+  comments: ReviseComment[],
+  card: Record<string, unknown>,
+): {
   seed_transcript: ActorTranscriptMessage[];
   seed_notes: DirectorNotes;
 } {
@@ -2077,8 +2101,15 @@ export function buildReviseSeeds(markdown: string, comments: ReviseComment[]): {
     seed_transcript: [
       {
         role: "user",
-        content:
+        content: [
           "You previously drafted the blog post below. Human reviewers have now left inline comments on the rendered draft. Revise the SAME post against their notes — do not start over.",
+          "Your revision MUST be returned in the same JSON candidates format as the original assignment — JSON only, no prose outside the JSON.",
+          "",
+          "Release card (source of truth — deployed_facts bound your claims):",
+          "```json",
+          JSON.stringify(card, null, 2),
+          "```",
+        ].join("\n"),
       },
       { role: "assistant", content: markdown },
     ],
@@ -2116,7 +2147,7 @@ export function makeDisplayReviseHandler(
     const live = all.filter((c) => c.textQuote && markdown.includes(c.textQuote));
     const stale = all.filter((c) => !c.textQuote || !markdown.includes(c.textQuote));
     if (live.length === 0) throw new HttpError(400, "no_actionable_comments", "no comment anchors match the current draft");
-    const seeds = buildReviseSeeds(markdown, live);
+    const seeds = buildReviseSeeds(markdown, live, parsed.data);
     const result = await orchestrate(parsed.data, ["blog"], {
       mode: "live",
       maxAttempts: 2,
@@ -2126,12 +2157,18 @@ export function makeDisplayReviseHandler(
     });
     const pick = result.picks.find((p) => p.channel === "blog");
     if (!pick?.text) return { body: { ok: false, error: "revise_produced_no_blog_candidate" } };
-    const record = result.attempts.at(-1)?.records.find((r) => r.candidate.id === pick.id);
+    // Picks pool across ALL attempts (actor-orchestrator pooledRecords), so a
+    // wave-1 pick in a 2-wave exhausted run is absent from attempts.at(-1) —
+    // search every attempt for the pick's record or director_audit goes null.
+    const record = result.attempts
+      .flatMap((a) => a.records)
+      .find((r) => r.candidate.id === pick.id);
     return {
       body: {
         ok: true,
         markdown: pick.text,
         director_audit: record?.director_audit ?? null,
+        exhausted: result.exhausted,
         stale_anchors: stale.map((c) => ({ text_quote: c.textQuote, body: c.body })),
       },
     };
@@ -3801,8 +3838,10 @@ x-thread ≈ 20+ min. Budget an hour per full pass.
   reviewer: open it (logged in with the allowlisted email), leave one inline comment.
   Click "Pull comments & revise" (inject the `comms.action` event). EXPECT: revised
   v2 at the same URL, the comment resolved, director audit + version in the gate
-  message. Then "Approve → open PR" (with a second open comment left deliberately →
-  EXPECT the confirm round first; then approve anyway).
+  message. Also validate the live revise path returns JSON-parsed candidates (the
+  seed framing carries the output contract — watch for actor_json parse retries in
+  service logs). Then "Approve → open PR" (with a second open comment left
+  deliberately → EXPECT the confirm round first; then approve anyway).
 - [ ] **Step 5 — delivery gate.** "Preview platform PR" → EXPECT chunked unified diff
   (blog file + FEATURES_COPY append), no branch/PR on GitHub yet (`gh api
   'repos/infinex-xyz/platform/git/ref/heads/cf-emit/<slug>-<run_id>'` → 404).
