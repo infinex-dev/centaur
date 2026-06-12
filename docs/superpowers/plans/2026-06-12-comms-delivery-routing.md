@@ -940,6 +940,17 @@ pnpm add --ignore-workspace -D @types/diff
 //    raw "(site)" segment (encodeURIComponent leaves parens unescaped per ECMA-262;
 //    they are legal URI sub-delims and GitHub accepts them) and spaces/specials in
 //    other segments WOULD be escaped.
+// --- Hardenings deferred from the Task 5 review (implemented with Task 6) ---
+// 9. transport rejection (mock server torn down before the call) => the TYPED envelope
+//    {ok:false, error:"github_emit_failed", status:502, detail:"github_unreachable"} —
+//    a fetch-level ECONNREFUSED/DNS failure must never escape as a raw throw.
+// 10. transform error (roadmapTick names a missing node; mock serves a parseable
+//     roadmap data.ts) => ok:false with detail containing the actionable message
+//     ('roadmap node not found: "Missing"') — repo-shape/user-input messages are
+//     token-safe by construction and must not be swallowed.
+// 11. features file 404 at the ref => result.skipped is
+//     ["<features path> not found at <ref> — change skipped"], ok:true, the blog PUT
+//     and the PR still happen — a skip never silently vanishes an approved channel.
 ```
 
 Write each as a real `it(...)` with full assertions against the recorded request log.
@@ -987,10 +998,18 @@ export interface GithubEmitResult {
   ok: boolean;
   error?: "github_permission_denied" | "github_emit_failed";
   status?: number;
+  /**
+   * Token-safe failure context: repo-shape/user-input transform messages
+   * ("roadmap node not found: X") or the "github_unreachable" transport
+   * marker. The token only ever lives in a request header, never a message.
+   */
+  detail?: string;
   prUrl: string | null;
   plannedDiff: string | null;
   branch: string;
   existing?: boolean;
+  /** Per-file skips (target absent at the ref) — surfaced, never silently dropped. */
+  skipped: string[];
 }
 
 type Gh = (path: string, init?: RequestInit) => Promise<{ status: number; json: unknown }>;
@@ -999,15 +1018,22 @@ function makeGh(opts: GithubEmitOptions): Gh {
   const base = (opts.baseUrl ?? process.env.GITHUB_API_BASE_URL ?? "https://api.github.com").replace(/\/$/, "");
   const doFetch = opts.fetchImpl ?? fetch;
   return async (path, init) => {
-    const res = await doFetch(`${base}${path}`, {
-      ...init,
-      headers: {
-        Authorization: `Bearer ${opts.token}`,
-        Accept: "application/vnd.github+json",
-        "Content-Type": "application/json",
-        ...(init?.headers ?? {}),
-      },
-    });
+    let res: Response;
+    try {
+      res = await doFetch(`${base}${path}`, {
+        ...init,
+        headers: {
+          Authorization: `Bearer ${opts.token}`,
+          Accept: "application/vnd.github+json",
+          "Content-Type": "application/json",
+          ...(init?.headers ?? {}),
+        },
+      });
+    } catch {
+      // Transport-level rejection (DNS, ECONNREFUSED, reset): keep the typed
+      // contract — a constant message, never the raw cause (token-safe).
+      throw Object.assign(new Error("github_unreachable"), { status: 502 });
+    }
     let json: unknown = null;
     try { json = await res.json(); } catch { /* empty body */ }
     return { status: res.status, json };
@@ -1023,24 +1049,46 @@ const b64decode = (s: string) => Buffer.from(s, "base64").toString("utf8");
 
 interface FileChange { path: string; before: string | null; after: string; sha: string | null; skip: boolean }
 
-export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Promise<GithubEmitResult> {
-  const gh = makeGh(opts);
-  const [owner] = opts.repo.split("/");
-  const fail = (status: number): GithubEmitResult => ({
+function failResult(branch: string, status: number, detail?: string): GithubEmitResult {
+  return {
     ok: false,
     error: status === 401 || status === 403 ? "github_permission_denied" : "github_emit_failed",
     status,
+    ...(detail ? { detail } : {}),
     prUrl: null,
     plannedDiff: null,
-    branch: opts.branch,
-  });
+    branch,
+    skipped: [],
+  };
+}
+
+export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Promise<GithubEmitResult> {
+  try {
+    return await emitViaRestInner(pkg, opts);
+  } catch (error) {
+    // Transport rejections (and any other stray throw in the network phases)
+    // resolve to the typed failure envelope — callers never see a raw throw.
+    return failResult(
+      opts.branch,
+      (error as { status?: number }).status ?? 500,
+      error instanceof Error ? error.message.slice(0, 200) : undefined,
+    );
+  }
+}
+
+async function emitViaRestInner(pkg: EmitPackage, opts: GithubEmitOptions): Promise<GithubEmitResult> {
+  const gh = makeGh(opts);
+  const [owner] = opts.repo.split("/");
+  const skipped: string[] = [];
+  const fail = (status: number, detail?: string): GithubEmitResult =>
+    failResult(opts.branch, status, detail);
 
   // 1. Pre-flight idempotency — BEFORE any mutation (double-click / crash-retry).
   const preflight = await gh(`/repos/${opts.repo}/pulls?head=${encodeURIComponent(`${owner}:${opts.branch}`)}&state=open`);
   if (preflight.status >= 400) return fail(preflight.status);
   const existingPr = Array.isArray(preflight.json) ? (preflight.json[0] as { html_url?: string } | undefined) : undefined;
   if (existingPr?.html_url) {
-    return { ok: true, prUrl: existingPr.html_url, plannedDiff: null, branch: opts.branch, existing: true };
+    return { ok: true, prUrl: existingPr.html_url, plannedDiff: null, branch: opts.branch, existing: true, skipped };
   }
 
   // 2. Base sha.
@@ -1087,6 +1135,9 @@ export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Pr
         roadmapChanges = describeRoadmapChanges(current.content, pkg.roadmapTick);
         const after = markRoadmapNodeDone(current.content, pkg.roadmapTick);
         changes.push({ path: ROADMAP_DATA_PATH, before: current.content, after, sha: current.sha, skip: after === current.content });
+      } else {
+        // Surfaced, never silently dropped: an approved channel must not vanish.
+        skipped.push(`${ROADMAP_DATA_PATH} not found at ${readRef} — change skipped`);
       }
     }
     if (pkg.featureCard) {
@@ -1102,17 +1153,24 @@ export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Pr
         const alreadyApplied = Boolean(marker && current.content.includes(marker));
         const after = alreadyApplied ? current.content : appendFeatureCopyEntry(current.content, pkg.featureCard.dataTsEntry);
         changes.push({ path: FEATURES_DATA_PATH, before: current.content, after, sha: current.sha, skip: alreadyApplied });
+      } else {
+        skipped.push(`${FEATURES_DATA_PATH} not found at ${readRef} — change skipped`);
       }
     }
   } catch (error) {
-    return fail((error as { status?: number }).status ?? 500);
+    // Transform errors here are repo-shape/user-input messages ("roadmap node
+    // not found: X") — actionable and token-safe by construction.
+    return fail(
+      (error as { status?: number }).status ?? 500,
+      error instanceof Error ? error.message.slice(0, 200) : undefined,
+    );
   }
 
   if (opts.dryRun) {
     const plannedDiff = changes
       .map((c) => createTwoFilesPatch(c.path, c.path, c.before ?? "", c.after))
       .join("\n");
-    return { ok: true, prUrl: null, plannedDiff, branch: opts.branch };
+    return { ok: true, prUrl: null, plannedDiff, branch: opts.branch, skipped };
   }
 
   // 5. PUT contents (blob sha => clean replace), skipping already-applied files.
@@ -1144,11 +1202,11 @@ export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Pr
   if (pr.status === 422) {
     const again = await gh(`/repos/${opts.repo}/pulls?head=${encodeURIComponent(`${owner}:${opts.branch}`)}&state=open`);
     const found = Array.isArray(again.json) ? (again.json[0] as { html_url?: string } | undefined) : undefined;
-    if (found?.html_url) return { ok: true, prUrl: found.html_url, plannedDiff: null, branch: opts.branch, existing: true };
+    if (found?.html_url) return { ok: true, prUrl: found.html_url, plannedDiff: null, branch: opts.branch, existing: true, skipped };
     return fail(422);
   }
   if (pr.status >= 400) return fail(pr.status);
-  return { ok: true, prUrl: (pr.json as { html_url?: string })?.html_url ?? null, plannedDiff: null, branch: opts.branch };
+  return { ok: true, prUrl: (pr.json as { html_url?: string })?.html_url ?? null, plannedDiff: null, branch: opts.branch, skipped };
 }
 ```
 
@@ -1168,10 +1226,19 @@ git commit -m "feat(comms): GitHub REST emit (pre-flight idempotent branch+conte
 
 ### Task 6: `POST /emit` route
 
+Also carries the three hardenings the Task 5 review deferred here (small edits to
+`src/github-emit.ts`): (A) transport rejections resolve to the typed envelope
+(`status:502, detail:"github_unreachable"`) instead of throwing raw; (B) transform
+errors surface as `detail` instead of being swallowed; (C) absent-file skips are
+recorded in `skipped: string[]` and merged into the route's `notes` — see Task 5
+test cases 9–11 and the updated Task 5 code block.
+
 **Files:**
 - Create: `attached-services/comms-factory/services/api/routes/emit.ts`
 - Modify: `attached-services/comms-factory/services/api/server.ts` (register `/emit`)
+- Modify: `attached-services/comms-factory/src/github-emit.ts` (hardenings A/B/C above)
 - Test: `attached-services/comms-factory/services/api/routes/emit.test.ts`
+- Test: `attached-services/comms-factory/src/__tests__/github-emit.test.ts` (cases 9–11)
 
 - [ ] **Step 1: Write the failing tests** — `routes/emit.test.ts`, calling `handleEmit`
   directly with a fake `RequestContext` (Task 3 pattern) against the Task 5 mock GitHub
@@ -1190,6 +1257,13 @@ git commit -m "feat(comms): GitHub REST emit (pre-flight idempotent branch+conte
   6. **explicit branch override**: `branch: "cf-emit/custom-run_1"` is used verbatim;
      an unsafe branch (`"main"` or `"content/x"`) throws 400 (assertSafeBranch + an
      explicit `cf-emit/` prefix guard — Keystatic automation owns `content/*` branches).
+  7. **skips become notes** (hardening C, route side): features file 404 at the ref
+     (web approved with a structured web-card candidate, `dry_run: false`) → response
+     `ok: true`, `notes` contains `"<features path> not found at <branch> — change
+     skipped"`, and the blog PUT + PR still happen.
+  8. **transport failure is typed** (hardening A, route side): mock torn down before
+     the call → response `{ok:false, error:"github_emit_failed", status:502,
+     detail:"github_unreachable"}` — never a raw throw; no token in the body.
 
 - [ ] **Step 2: Run — verify failure.**
 
@@ -1198,8 +1272,19 @@ git commit -m "feat(comms): GitHub REST emit (pre-flight idempotent branch+conte
 ```ts
 import { assertSafeBranch } from "../../../src/emit-platform-pr.js";
 import { emitViaRest } from "../../../src/github-emit.js";
-import { buildLaunchPackage, type CandidateLike, type FinalByChannel } from "../../../src/launch-package.js";
-import { assertRecord, HttpError, optionalString, requiredString, type JsonResponse, type RequestContext } from "../http.js";
+import {
+  buildLaunchPackage,
+  type CandidateLike,
+  type FinalByChannel,
+} from "../../../src/launch-package.js";
+import {
+  assertRecord,
+  HttpError,
+  optionalString,
+  requiredString,
+  type JsonResponse,
+  type RequestContext,
+} from "../http.js";
 
 export async function handleEmit(ctx: RequestContext): Promise<JsonResponse> {
   const body = assertRecord(ctx.body);
@@ -1236,14 +1321,22 @@ export async function handleEmit(ctx: RequestContext): Promise<JsonResponse> {
   return {
     body: {
       ok: result.ok,
-      ...(result.error ? { error: result.error, status: result.status } : {}),
+      ...(result.error
+        ? {
+            error: result.error,
+            status: result.status,
+            // Token-safe by construction (transform/transport messages only).
+            ...(result.detail ? { detail: result.detail } : {}),
+          }
+        : {}),
       pr_url: result.prUrl,
       planned_diff: result.plannedDiff,
       existing: result.existing ?? false,
       branch,
       slug: built.pkg.changelogSlug,
       date_changes: built.dateChanges,
-      notes: built.notes,
+      // Per-file emit skips never vanish an approved channel silently.
+      notes: [...built.notes, ...result.skipped],
     },
   };
 }
@@ -1256,8 +1349,8 @@ Register in `server.ts`'s POST list: `["/emit", handleEmit],`.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add attached-services/comms-factory/services/api/routes/emit.ts attached-services/comms-factory/services/api/routes/emit.test.ts attached-services/comms-factory/services/api/server.ts
-git commit -m "feat(comms): POST /emit route (dry-run default, deterministic cf-emit/ branch)"
+git add attached-services/comms-factory/services/api/routes/emit.ts attached-services/comms-factory/services/api/routes/emit.test.ts attached-services/comms-factory/services/api/server.ts attached-services/comms-factory/src/github-emit.ts attached-services/comms-factory/src/__tests__/github-emit.test.ts
+git commit -m "feat(comms): POST /emit route (dry-run default, deterministic cf-emit/ branch) + emit hardenings (typed 502 transport envelope, transform-error detail, skip notes)"
 ```
 
 ---

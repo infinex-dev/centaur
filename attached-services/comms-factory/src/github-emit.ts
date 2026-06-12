@@ -36,10 +36,18 @@ export interface GithubEmitResult {
   ok: boolean;
   error?: "github_permission_denied" | "github_emit_failed";
   status?: number;
+  /**
+   * Token-safe failure context: repo-shape/user-input transform messages
+   * ("roadmap node not found: X") or the "github_unreachable" transport
+   * marker. The token only ever lives in a request header, never a message.
+   */
+  detail?: string;
   prUrl: string | null;
   plannedDiff: string | null;
   branch: string;
   existing?: boolean;
+  /** Per-file skips (target absent at the ref) — surfaced, never silently dropped. */
+  skipped: string[];
 }
 
 type Gh = (path: string, init?: RequestInit) => Promise<{ status: number; json: unknown }>;
@@ -48,15 +56,22 @@ function makeGh(opts: GithubEmitOptions): Gh {
   const base = (opts.baseUrl ?? process.env.GITHUB_API_BASE_URL ?? "https://api.github.com").replace(/\/$/, "");
   const doFetch = opts.fetchImpl ?? fetch;
   return async (path, init) => {
-    const res = await doFetch(`${base}${path}`, {
-      ...init,
-      headers: {
-        Authorization: `Bearer ${opts.token}`,
-        Accept: "application/vnd.github+json",
-        "Content-Type": "application/json",
-        ...(init?.headers ?? {}),
-      },
-    });
+    let res: Response;
+    try {
+      res = await doFetch(`${base}${path}`, {
+        ...init,
+        headers: {
+          Authorization: `Bearer ${opts.token}`,
+          Accept: "application/vnd.github+json",
+          "Content-Type": "application/json",
+          ...(init?.headers ?? {}),
+        },
+      });
+    } catch {
+      // Transport-level rejection (DNS, ECONNREFUSED, reset): keep the typed
+      // contract — a constant message, never the raw cause (token-safe).
+      throw Object.assign(new Error("github_unreachable"), { status: 502 });
+    }
     let json: unknown = null;
     try { json = await res.json(); } catch { /* empty body */ }
     return { status: res.status, json };
@@ -72,24 +87,46 @@ const b64decode = (s: string) => Buffer.from(s, "base64").toString("utf8");
 
 interface FileChange { path: string; before: string | null; after: string; sha: string | null; skip: boolean }
 
-export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Promise<GithubEmitResult> {
-  const gh = makeGh(opts);
-  const [owner] = opts.repo.split("/");
-  const fail = (status: number): GithubEmitResult => ({
+function failResult(branch: string, status: number, detail?: string): GithubEmitResult {
+  return {
     ok: false,
     error: status === 401 || status === 403 ? "github_permission_denied" : "github_emit_failed",
     status,
+    ...(detail ? { detail } : {}),
     prUrl: null,
     plannedDiff: null,
-    branch: opts.branch,
-  });
+    branch,
+    skipped: [],
+  };
+}
+
+export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Promise<GithubEmitResult> {
+  try {
+    return await emitViaRestInner(pkg, opts);
+  } catch (error) {
+    // Transport rejections (and any other stray throw in the network phases)
+    // resolve to the typed failure envelope — callers never see a raw throw.
+    return failResult(
+      opts.branch,
+      (error as { status?: number }).status ?? 500,
+      error instanceof Error ? error.message.slice(0, 200) : undefined,
+    );
+  }
+}
+
+async function emitViaRestInner(pkg: EmitPackage, opts: GithubEmitOptions): Promise<GithubEmitResult> {
+  const gh = makeGh(opts);
+  const [owner] = opts.repo.split("/");
+  const skipped: string[] = [];
+  const fail = (status: number, detail?: string): GithubEmitResult =>
+    failResult(opts.branch, status, detail);
 
   // 1. Pre-flight idempotency — BEFORE any mutation (double-click / crash-retry).
   const preflight = await gh(`/repos/${opts.repo}/pulls?head=${encodeURIComponent(`${owner}:${opts.branch}`)}&state=open`);
   if (preflight.status >= 400) return fail(preflight.status);
   const existingPr = Array.isArray(preflight.json) ? (preflight.json[0] as { html_url?: string } | undefined) : undefined;
   if (existingPr?.html_url) {
-    return { ok: true, prUrl: existingPr.html_url, plannedDiff: null, branch: opts.branch, existing: true };
+    return { ok: true, prUrl: existingPr.html_url, plannedDiff: null, branch: opts.branch, existing: true, skipped };
   }
 
   // 2. Base sha.
@@ -136,6 +173,9 @@ export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Pr
         roadmapChanges = describeRoadmapChanges(current.content, pkg.roadmapTick);
         const after = markRoadmapNodeDone(current.content, pkg.roadmapTick);
         changes.push({ path: ROADMAP_DATA_PATH, before: current.content, after, sha: current.sha, skip: after === current.content });
+      } else {
+        // Surfaced, never silently dropped: an approved channel must not vanish.
+        skipped.push(`${ROADMAP_DATA_PATH} not found at ${readRef} — change skipped`);
       }
     }
     if (pkg.featureCard) {
@@ -151,17 +191,24 @@ export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Pr
         const alreadyApplied = Boolean(marker && current.content.includes(marker));
         const after = alreadyApplied ? current.content : appendFeatureCopyEntry(current.content, pkg.featureCard.dataTsEntry);
         changes.push({ path: FEATURES_DATA_PATH, before: current.content, after, sha: current.sha, skip: alreadyApplied });
+      } else {
+        skipped.push(`${FEATURES_DATA_PATH} not found at ${readRef} — change skipped`);
       }
     }
   } catch (error) {
-    return fail((error as { status?: number }).status ?? 500);
+    // Transform errors here are repo-shape/user-input messages ("roadmap node
+    // not found: X") — actionable and token-safe by construction.
+    return fail(
+      (error as { status?: number }).status ?? 500,
+      error instanceof Error ? error.message.slice(0, 200) : undefined,
+    );
   }
 
   if (opts.dryRun) {
     const plannedDiff = changes
       .map((c) => createTwoFilesPatch(c.path, c.path, c.before ?? "", c.after))
       .join("\n");
-    return { ok: true, prUrl: null, plannedDiff, branch: opts.branch };
+    return { ok: true, prUrl: null, plannedDiff, branch: opts.branch, skipped };
   }
 
   // 5. PUT contents (blob sha => clean replace), skipping already-applied files.
@@ -193,9 +240,9 @@ export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Pr
   if (pr.status === 422) {
     const again = await gh(`/repos/${opts.repo}/pulls?head=${encodeURIComponent(`${owner}:${opts.branch}`)}&state=open`);
     const found = Array.isArray(again.json) ? (again.json[0] as { html_url?: string } | undefined) : undefined;
-    if (found?.html_url) return { ok: true, prUrl: found.html_url, plannedDiff: null, branch: opts.branch, existing: true };
+    if (found?.html_url) return { ok: true, prUrl: found.html_url, plannedDiff: null, branch: opts.branch, existing: true, skipped };
     return fail(422);
   }
   if (pr.status >= 400) return fail(pr.status);
-  return { ok: true, prUrl: (pr.json as { html_url?: string })?.html_url ?? null, plannedDiff: null, branch: opts.branch };
+  return { ok: true, prUrl: (pr.json as { html_url?: string })?.html_url ?? null, plannedDiff: null, branch: opts.branch, skipped };
 }

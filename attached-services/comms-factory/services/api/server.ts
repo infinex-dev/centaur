@@ -3,6 +3,7 @@ import { startManifestRefresh } from "../../src/fact-grounder/sources/repo-manif
 import { makeJsonServer, requirePostAuth, type Handler } from "./http.js";
 import { handleAudit } from "./routes/audit.js";
 import { handleBuildCard } from "./routes/build-card.js";
+import { handleEmit } from "./routes/emit.js";
 import { handleGenerate } from "./routes/generate.js";
 import { handleGround } from "./routes/ground.js";
 import { handleTypefullyDraft } from "./routes/typefully-draft.js";
@@ -32,6 +33,7 @@ for (const [path, handler] of [
   ["/build-card", handleBuildCard],
   ["/generate", handleGenerate],
   ["/typefully-draft", handleTypefullyDraft],
+  ["/emit", handleEmit],
 ] as const) {
   routes.set(`POST ${path}`, async (ctx) => {
     requirePostAuth(ctx.request);

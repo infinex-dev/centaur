@@ -1,6 +1,11 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { appendFeatureCopyEntry, BLOG_DIR, FEATURES_DATA_PATH } from "../emit-platform-pr.js";
+import {
+  appendFeatureCopyEntry,
+  BLOG_DIR,
+  FEATURES_DATA_PATH,
+  ROADMAP_DATA_PATH,
+} from "../emit-platform-pr.js";
 import { emitViaRest, type GithubEmitOptions } from "../github-emit.js";
 import type { EmitPackage } from "../launch-package.js";
 
@@ -47,6 +52,19 @@ const CHANGELOG_MD = [
 ].join("\n");
 
 const FEATURE_ENTRY = '{\n  title: "Launch X",\n  description: "Launch X is live.",\n},';
+
+// Minimal parseable roadmap data.ts — used to provoke a transform error
+// ("roadmap node not found") that must surface as result.detail.
+const ROADMAP_FIXTURE = [
+  "export const infinexTreeData: TreeNode = {",
+  "  id: '1',",
+  "  name: 'Infinex',",
+  "  children: [",
+  "    { id: '2', name: 'Perps', status: 'in_progress' },",
+  "  ],",
+  "};",
+  "",
+].join("\n");
 
 const BLOG_PATH = `${BLOG_DIR}/launch-x.md`;
 
@@ -128,7 +146,8 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  await new Promise<void>((resolve, reject) => mock.close((e) => (e ? reject(e) : resolve())));
+  // Resolve regardless: the transport-failure test tears the server down in-test.
+  await new Promise<void>((resolve) => mock.close(() => resolve()));
 });
 
 describe("emitViaRest", () => {
@@ -317,6 +336,65 @@ describe("emitViaRest", () => {
     const putContent = Buffer.from(String(featuresPut?.body?.content), "base64").toString("utf8");
     expect(putContent).toContain('title: "Launch X"');
     expect(putContent).toContain('title: "Something Else"');
+  });
+
+  it("returns the typed 502 envelope when GitHub is unreachable (transport rejection)", async () => {
+    // Tear the mock down BEFORE the call: fetch rejects at the socket level
+    // (ECONNREFUSED) — the typed contract must hold instead of a raw throw.
+    await new Promise<void>((resolve) => mock.close(() => resolve()));
+
+    const result = await emitViaRest(fixturePkg(), emitOpts());
+
+    expect(result).toMatchObject({
+      ok: false,
+      error: "github_emit_failed",
+      status: 502,
+      detail: "github_unreachable",
+      prUrl: null,
+      plannedDiff: null,
+    });
+    expect(JSON.stringify(result)).not.toContain("test-token");
+  });
+
+  it("surfaces actionable transform errors as detail (roadmap node not found)", async () => {
+    respondWith = (req, res) => {
+      const path = decodeURIComponent(new URL(req.url ?? "/", "http://mock").pathname);
+      if (req.method === "GET" && path === `/repos/o/r/contents/${ROADMAP_DATA_PATH}`) {
+        reply(res, 200, { content: b64(ROADMAP_FIXTURE), sha: "road1" });
+        return true;
+      }
+      return false;
+    };
+    const pkg = fixturePkg();
+    pkg.roadmapTick = { nodeName: "Missing" };
+
+    const result = await emitViaRest(pkg, emitOpts());
+
+    expect(result).toMatchObject({ ok: false, error: "github_emit_failed", status: 500 });
+    expect(result.detail).toContain('roadmap node not found: "Missing"');
+    expect(JSON.stringify(result)).not.toContain("test-token");
+  });
+
+  it("records a skip when the features file is absent at the ref; PR still opens for blog", async () => {
+    respondWith = (req, res) => {
+      const path = decodeURIComponent(new URL(req.url ?? "/", "http://mock").pathname);
+      if (req.method === "GET" && path === `/repos/o/r/contents/${FEATURES_DATA_PATH}`) {
+        reply(res, 404, { message: "Not Found" });
+        return true;
+      }
+      return false;
+    };
+
+    const result = await emitViaRest(fixturePkg(), emitOpts());
+
+    expect(result.ok).toBe(true);
+    expect(result.prUrl).toBe("https://github.com/o/r/pull/7");
+    expect(result.skipped).toEqual([
+      `${FEATURES_DATA_PATH} not found at cf-emit/launch-x-run1 — change skipped`,
+    ]);
+    const puts = requests.filter((r) => r.method === "PUT");
+    expect(puts).toHaveLength(1); // blog only — the skip never vanishes the channel silently
+    expect(decodeURIComponent(puts[0]?.url ?? "")).toContain(BLOG_PATH);
   });
 
   it("encodes paths per segment: '(site)' stays raw, spaces/specials escape", async () => {
