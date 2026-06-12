@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   deleteArtifact,
   listComments,
+  makeRunner,
   publishArtifact,
   redactDisplayKey,
   resolveThread,
@@ -94,6 +95,21 @@ describe("publishArtifact", () => {
       delete process.env.DISPLAYDEV_API_KEY;
     }
   });
+
+  it("throws when the first output line is not a URL (even if the tail line parses)", async () => {
+    const { runner } = fakeRunner("not-a-url\nPublished perps-launch-blog (abc123) v1\n");
+    await expect(
+      publishArtifact({ markdown: "x", name: "n", id: "abc123", baseVersion: 1 }, runner),
+    ).rejects.toThrow(/unexpected dsp publish output/);
+  });
+
+  it("requires baseVersion on the update path (lost-update guard) without invoking the CLI", async () => {
+    const { runner, calls } = fakeRunner(PUBLISH_V2_STDOUT);
+    await expect(publishArtifact({ markdown: "v2", name: "n", id: "abc123" }, runner)).rejects.toThrow(
+      /display_base_version_required/,
+    );
+    expect(calls).toHaveLength(0);
+  });
 });
 
 describe("listComments", () => {
@@ -130,6 +146,18 @@ describe("listComments", () => {
     const { runner } = fakeRunner(JSON.stringify({ data: [], nextCursor: null, totalCount: 0 }));
     expect(await listComments("abc123", {}, runner)).toEqual([]);
   });
+
+  it("throws (redacted) on non-JSON output instead of leaking SyntaxError's raw snippet", async () => {
+    process.env.DISPLAYDEV_API_KEY = "sk_live_secret";
+    try {
+      const { runner } = fakeRunner("Error: invalid token sk_live_secret\n");
+      await expect(listComments("abc123", {}, runner)).rejects.toThrow(
+        /unexpected dsp comment list output(?!.*sk_live_secret)/,
+      );
+    } finally {
+      delete process.env.DISPLAYDEV_API_KEY;
+    }
+  });
 });
 
 describe("resolveThread / deleteArtifact", () => {
@@ -153,5 +181,38 @@ describe("redactDisplayKey", () => {
     } finally {
       delete process.env.DISPLAYDEV_API_KEY;
     }
+  });
+});
+
+// makeRunner is the seam that lets these tests exercise the REAL spawn path
+// (exit-code rejection, stderr redaction, stdin EPIPE guard) against `node -e`
+// stubs; defaultRunner is just makeRunner("pnpm", ["exec", "dsp"]).
+describe("makeRunner (real spawn path)", () => {
+  it("redacts the API key from a failing child's stderr in the rejection message", async () => {
+    process.env.DISPLAYDEV_API_KEY = "sk_live_secret";
+    try {
+      const runner = makeRunner("node", [
+        "-e",
+        "console.error('auth failed for ' + process.env.DISPLAYDEV_API_KEY); process.exit(1)",
+      ]);
+      const rejection = await runner(["comment", "list"]).then(
+        () => {
+          throw new Error("expected rejection");
+        },
+        (err: unknown) => String(err),
+      );
+      expect(rejection).toContain("exited 1");
+      expect(rejection).toContain("[redacted]");
+      expect(rejection).not.toContain("sk_live_secret");
+    } finally {
+      delete process.env.DISPLAYDEV_API_KEY;
+    }
+  });
+
+  it("rejects (not crashes) when the child exits before draining a large stdin — EPIPE guard", async () => {
+    // Without child.stdin.on("error", ...) the buffered write's EPIPE is an
+    // uncaught exception that kills the process instead of this clean rejection.
+    const runner = makeRunner("node", ["-e", "process.exit(2)"]);
+    await expect(runner(["publish", "-"], { stdin: "x".repeat(1 << 20) })).rejects.toThrow(/exited 2/);
   });
 });

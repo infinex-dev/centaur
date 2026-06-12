@@ -44,33 +44,53 @@ export function redactDisplayKey(text: string): string {
   return key ? text.split(key).join("[redacted]") : text;
 }
 
-export const defaultRunner: DspRunner = (args, opts) =>
-  new Promise((resolve, reject) => {
-    const child = spawn("pnpm", ["exec", "dsp", ...args], {
-      env: { ...process.env, DISPLAYDEV_SKIP_BROWSER: "1" },
-      stdio: ["pipe", "pipe", "pipe"],
+/** Build a DspRunner around any command. Exported as the test seam: the suite
+ *  exercises the REAL spawn/redaction/EPIPE/timeout path against `node -e`
+ *  stubs instead of the dsp binary. defaultRunner = makeRunner("pnpm", ["exec", "dsp"]). */
+export function makeRunner(cmd: string, baseArgs: readonly string[]): DspRunner {
+  return (args, opts) =>
+    new Promise((resolve, reject) => {
+      const child = spawn(cmd, [...baseArgs, ...args], {
+        env: { ...process.env, DISPLAYDEV_SKIP_BROWSER: "1" },
+        stdio: ["pipe", "pipe", "pipe"],
+      });
+      let stdout = "";
+      let stderr = "";
+      child.stdout.on("data", (d: Buffer) => {
+        stdout += d.toString("utf8");
+      });
+      child.stderr.on("data", (d: Buffer) => {
+        stderr += d.toString("utf8");
+      });
+      let timedOut = false;
+      const timer = setTimeout(() => {
+        timedOut = true;
+        child.kill("SIGTERM");
+      }, 60_000);
+      child.on("error", (err) => {
+        clearTimeout(timer);
+        reject(err);
+      });
+      child.on("close", (code) => {
+        clearTimeout(timer);
+        if (code === 0 && !timedOut) {
+          resolve({ stdout, stderr });
+          return;
+        }
+        const reason = timedOut ? `timed out after 60s (exited ${code})` : `exited ${code}`;
+        reject(new Error(`dsp ${args[0]} ${reason}: ${redactDisplayKey(stderr).slice(0, 300)}`));
+      });
+      // EPIPE guard: if the child exits before draining stdin (e.g. dsp fails
+      // fast on bad auth), the buffered write emits 'error' on stdin — which,
+      // unlistened, is an uncaught exception that kills the whole process. The
+      // real failure already surfaces via the non-zero close above.
+      child.stdin.on("error", () => {});
+      if (opts?.stdin !== undefined) child.stdin.end(opts.stdin);
+      else child.stdin.end();
     });
-    let stdout = "";
-    let stderr = "";
-    child.stdout.on("data", (d: Buffer) => {
-      stdout += d.toString("utf8");
-    });
-    child.stderr.on("data", (d: Buffer) => {
-      stderr += d.toString("utf8");
-    });
-    const timer = setTimeout(() => child.kill("SIGTERM"), 60_000);
-    child.on("error", (err) => {
-      clearTimeout(timer);
-      reject(err);
-    });
-    child.on("close", (code) => {
-      clearTimeout(timer);
-      if (code === 0) resolve({ stdout, stderr });
-      else reject(new Error(`dsp ${args[0]} exited ${code}: ${redactDisplayKey(stderr).slice(0, 300)}`));
-    });
-    if (opts?.stdin !== undefined) child.stdin.end(opts.stdin);
-    else child.stdin.end();
-  });
+}
+
+export const defaultRunner: DspRunner = makeRunner("pnpm", ["exec", "dsp"]);
 
 export function stripFrontmatter(markdown: string): string {
   const match = markdown.match(/^---\n[\s\S]*?\n---\n+/);
@@ -100,7 +120,7 @@ function parsePublishOutput(stdout: string): PublishResult {
     .filter(Boolean);
   const tail = lines[lines.length - 1] ?? "";
   const match = /^(?:Published|Updated) .* \(([\w-]+)\) v(\d+)$/.exec(tail);
-  if (lines.length < 2 || !match) {
+  if (lines.length < 2 || !match || !/^https?:\/\//.test(lines[0] ?? "")) {
     throw new Error(`unexpected dsp publish output: ${redactDisplayKey(stdout).slice(0, 200)}`);
   }
   return { shortId: match[1] ?? "", url: lines[0] ?? "", version: Number(match[2]) };
@@ -114,8 +134,13 @@ export async function publishArtifact(
   const flags = ["--name", opts.name, "--visibility", opts.visibility ?? "private", "--theme", "github"];
   for (const email of opts.share ?? []) flags.push("--share", email);
   if (opts.id) {
+    // Lost-update guard: a silent default base version would mask concurrent
+    // edits, so updates must state the version they were derived from.
+    if (opts.baseVersion === undefined) {
+      throw new Error("display_base_version_required: updating an artifact (id set) requires baseVersion");
+    }
     // Update path: stdin re-publish (the only stdin mode the CLI allows).
-    const args = ["publish", "-", ...flags, "--id", opts.id, "--base-version", String(opts.baseVersion ?? 1), "--reload"];
+    const args = ["publish", "-", ...flags, "--id", opts.id, "--base-version", String(opts.baseVersion), "--reload"];
     const { stdout } = await runner(args, { stdin: body });
     return parsePublishOutput(stdout);
   }
@@ -150,7 +175,14 @@ export async function listComments(
   runner: DspRunner = defaultRunner,
 ): Promise<DisplayComment[]> {
   const { stdout } = await runner(["comment", "list", "--artifact", artifactId, "--status", opts.status ?? "open"]);
-  const parsed = JSON.parse(stdout) as { data?: CommentRow[] } | CommentRow[];
+  let parsed: { data?: CommentRow[] } | CommentRow[];
+  try {
+    parsed = JSON.parse(stdout) as { data?: CommentRow[] } | CommentRow[];
+  } catch {
+    // Node's SyntaxError embeds raw input snippets — never let it escape unredacted.
+    throw new Error(`unexpected dsp comment list output: ${redactDisplayKey(stdout).slice(0, 200)}`);
+  }
+  // nextCursor is ignored: known single-page limit, fine for gate-loop comment volumes.
   const rows = Array.isArray(parsed) ? parsed : (parsed?.data ?? []);
   return rows.map((r) => {
     const quote = r.anchor?.textQuote;
