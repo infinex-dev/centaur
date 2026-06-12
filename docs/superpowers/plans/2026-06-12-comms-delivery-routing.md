@@ -36,7 +36,9 @@ GitHub REST API (global `fetch`), Typefully API v2, `@displaydev/cli` (`dsp`), P
 - [x] Document review run on the plan (6-persona ce-doc-review, 2026-06-12: 31 raw
       findings → 5 auto-fixes + 24 reviewed fixes applied + 3 deferred to
       "Deferred / Open Questions" below; zero spec contradictions)
-- [ ] Operator approval received → Stage B may begin
+- [x] Operator approval received 2026-06-12 ("approve, but answer OQs first" — all
+      three Open Questions answered + encoded: token reuse w/ branch-protection
+      guarantee, copy-only Phase 0, brief-parsed reviewers) → Stage B may begin
 
 ## Resolved open verifications (2026-06-12, read live from `infinex-xyz/platform@main`)
 
@@ -93,7 +95,7 @@ GitHub REST API (global `fetch`), Typefully API v2, `@displaydev/cli` (`dsp`), P
 | GitHub token | **Upgrade the existing infra `GITHUB_TOKEN` (one token everywhere) — FINAL, operator-confirmed twice with full mechanics verified.** The token in `centaur-infra-env` is a fine-grained PAT from the `ramboinfinex` account (verified live 2026-06-12); the operator flips **Contents → Read and write** and adds **Pull requests → Read and write** on it BEFORE Stage B's E2E (done up-front, so the rollout-sequencing concern is moot). Comms pod reads `process.env.GITHUB_TOKEN` — same secret key repo-cache mounts. The operator's "PRs only, never lands code" requirement is enforced by the REPO, not the token (verified live + against GitHub docs): there is no PR-only permission (PR creation requires contents:write for the `cf-emit/*` head branch — community discussion #106661; forking is org-disabled), and platform `main` carries a `pull_request` ruleset (enforcement: everyone) + required checks + signatures — direct pushes to main are rejected for ANY write token. ⚠️ Two recorded caveats the operator accepted: (a) DEVIATION from the spec's separate-token rule (repo-cache now mounts a write-capable token); (b) fine-grained PAT permissions are token-wide — contents:write applies to EVERY repo on the token's access list (platform, agent-platform, context), not just platform. PRs will author as `ramboinfinex`. `COMMS_PLATFORM_REPO` stays the repo escape hatch. |
 | E2E PR target | **`infinex-xyz/platform` directly.** E2E PR is closed unmerged + branch deleted afterwards. The platform repo's automatic AI content review (`content--review.yaml`) will fire on it — expected, harmless. |
 | Typefully E2E | **Separate test social set** (operator provisions; E2E sets `TYPEFULLY_SOCIAL_SET` to it). Production uses the default `"Infinex"` set; sharing the prod workspace across pipelines is acceptable. |
-| display.dev reviewers | **Explicit `reviewer_emails` workflow input** supplied when starting a release; no Slack-profile email lookup. |
+| display.dev reviewers | **Explicit `reviewer_emails` workflow input, plus inline brief parsing for Slack-started runs** (decided 2026-06-12, resolving OQ2): a Slack brief may carry `reviewers: a@x.com, b@x.com` — same inline-metadata convention as channel selection (`_parse_channels`). Explicit input overrides; well-formed emails only; no Slack-profile lookup. |
 | Tokens availability | All three (GitHub write, Typefully, display.dev) available before Stage B's E2E task. |
 
 ## Verified anchors (2026-06-12 audit — all spec behaviors confirmed; drifted line numbers corrected below)
@@ -2833,9 +2835,12 @@ git commit -m "feat(comms): human-confirmed delivery gate (preview->confirm PR, 
 - Test: `overlays/comms-factory/tests/test_comms_delivery.py`
 
 **Encoded decisions (from spec §6 + operator):** entry requires blog approved AND
-`caps.display` AND non-empty `inp.reviewer_emails` (explicit-emails decision — when
-emails are absent the loop is skipped with a context note, blog goes straight to the
-delivery PR). First publish is `visibility: private` + reviewer allowlist. The
+`caps.display` AND a non-empty reviewer list — resolved as `inp.reviewer_emails`
+(explicit input wins) falling back to **emails parsed inline from the Slack brief**
+(`reviewers: a@x.com, b@x.com` — operator decision resolving OQ2; same convention as
+`_parse_channels`, and like it, the line is parsed but NOT stripped from the brief).
+When neither yields emails the loop is skipped with a context note and blog goes
+straight to the delivery PR. First publish is `visibility: private` + reviewer allowlist. The
 **revision-round budget** (10) counts successful revisions; failed revisions don't
 consume it (spec: "does not consume the round") — but every gate wait still uses a fresh
 `gate_version` (first-write-wins: a correlation is never reused), with a hard wait cap
@@ -2887,6 +2892,13 @@ unchanged and the delivery gate still offers the PR — review-abandon ≠ relea
      comments/revise tool calls; abandon-after-revisions records
      `deliveries.blog_review.discarded_revision` and the terminal render warns the
      PR uses the pre-review text.
+  10. **brief-parsed reviewers**: with `Input.reviewer_emails` empty, a brief of
+      `"for blog: perps launch. reviewers: a@x.com, B@x.com, notanemail, a@x.com"`
+      still triggers the loop and `display_publish` receives
+      `share == ["a@x.com", "B@x.com"]` (malformed dropped, case-insensitive
+      dedupe, order kept); explicit `reviewer_emails` input overrides the brief;
+      neither present → loop skipped. Plus direct unit tests on
+      `_parse_reviewer_emails` for the no-match and multi-line cases.
 
 - [ ] **Step 2: Run — verify failure**, then **implement `run_blog_review_loop`** in
   `comms_delivery.py`:
@@ -3237,22 +3249,48 @@ async def run_blog_review_loop(
 ```
 
 - [ ] **Step 3: Wire into `comms_release.py`.** `Input` gains
-  `reviewer_emails: list[str] = field(default_factory=list)`. In the splice from
-  Task 12, between the capabilities probe and the ship section:
+  `reviewer_emails: list[str] = field(default_factory=list)`. Add the brief parser
+  next to `_parse_channels` (same inline-metadata convention):
 
 ```python
+_EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+
+
+def _parse_reviewer_emails(brief: str) -> list[str]:
+    """Slack briefs carry reviewers inline ('reviewers: a@x.com, b@x.com') —
+    the Slack command path has no structured input field for emails. Returns
+    well-formed emails only (malformed entries are dropped — display.dev's
+    --share would reject them at publish), deduped, first-seen order. Like
+    _parse_channels, the line is parsed but not stripped from the brief."""
+    match = re.search(r"\breviewers?\s*:\s*([^\n]+)", brief, flags=re.I)
+    if not match:
+        return []
+    emails: list[str] = []
+    seen: set[str] = set()
+    for candidate in _EMAIL_RE.findall(match.group(1)):
+        if candidate.lower() not in seen:
+            seen.add(candidate.lower())
+            emails.append(candidate)
+    return emails
+```
+
+  In the splice from Task 12, between the capabilities probe and the ship section:
+
+```python
+    reviewer_emails = list(inp.reviewer_emails) or _parse_reviewer_emails(brief)
     if (
         final_by_channel.get("blog") is not None
         and caps.get("display")
-        and inp.reviewer_emails
+        and reviewer_emails
     ):
         final_by_channel, deliveries = await run_blog_review_loop(
             ctx, inp, card=card, final_by_channel=final_by_channel,
-            deliveries=deliveries, reviewer_emails=list(inp.reviewer_emails),
+            deliveries=deliveries, reviewer_emails=reviewer_emails,
         )
 ```
 
-  (import `run_blog_review_loop` alongside the Task 12 imports).
+  (import `run_blog_review_loop` alongside the Task 12 imports; `brief` is the
+  handler's existing local from its first lines.)
 
 - [ ] **Step 4: Run the FULL Python suite + lint — verify green.** Same commands as Task 12.
 
@@ -3481,7 +3519,8 @@ git commit -m "test(comms): delivery-routing local-k8s E2E observations (real de
   uses — check `contrib/docs/`): document the three delivery tokens (incl. the
   GITHUB_TOKEN write-scope requirement + the operator decision to reuse it), the
   `egressPorts: [443]` hook (internet-only via ipBlock-except), `TYPEFULLY_SOCIAL_SET`,
-  the `reviewer_emails` workflow input, and `COMMS_PLATFORM_REPO` (defaults to
+  the `reviewer_emails` workflow input + the Slack brief syntax
+  (`reviewers: a@x.com, b@x.com`), and `COMMS_PLATFORM_REPO` (defaults to
   `infinex-xyz/platform`; the escape hatch for a staging/fork target if org fork
   policy ever changes).
 - Modify: `CLAUDE.md` / `AGENTS.md` ONLY if something discovered during Stage B
@@ -3565,12 +3604,11 @@ git commit -m "docs(comms): delivery-routing deploy runsheet (tokens, egress, re
   up-front, before Stage B's E2E, so `platform_pr: true` is honest from the first
   deploy.
 - **[P2][adversarial] The blog review loop is unreachable from Slack-started
-  releases.** `reviewer_emails` only arrives via API-started runs (the
-  `SLACK_WORKFLOW_COMMANDS` regex carries just `brief`). Tasks 7–9 + 13 ship as code
-  no Slack-initiated release can execute. **Operator question:** accept
-  "API-start-only for now" as recorded scope, or add an affordance (e.g., a
-  `COMMS_REVIEWER_EMAILS` env default in the chart, or parsing
-  `reviewers: a@x.com,b@x.com` from the brief)?
+  releases — ✅ RESOLVED 2026-06-12: parse from the brief** (operator decision).
+  Slack briefs carry `reviewers: a@x.com, b@x.com` inline — same convention as
+  channel selection; explicit `reviewer_emails` input still overrides. Encoded in
+  Task 13 Step 3 (`_parse_reviewer_emails`) + test case 10; runsheet documents the
+  syntax (Task 16).
 - **[P2][security] Write-capable token + internet egress compounding —
   ✅ RESOLVED 2026-06-12: accepted by the operator** after verifying the mechanics
   online + live (no PR-only permission exists; platform main's `pull_request`
