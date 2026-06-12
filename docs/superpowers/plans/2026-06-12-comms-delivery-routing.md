@@ -67,7 +67,10 @@ GitHub REST API (global `fetch`), Typefully API v2, `@displaydev/cli` (`dsp`), P
    Note: `coingecko/page.tsx` also imports the same `FEATURES_COPY`, and entries feed the
    features page's JSON-LD — an appended entry shows in three places, all tolerant of
    missing images. **Web delivery is unblocked; it ships in the same PR as blog.**
-3. **GitHub token — operator decision (DEVIATION from spec, recorded below).**
+3. **GitHub token — resolved: upgrade the existing infra `GITHUB_TOKEN`** (fine-grained
+   PAT, Contents+PR write added; "PRs only, never lands code" is enforced by platform's
+   verified `main` branch protection, not the token — see Operator decisions below).
+   ⚠️ Deviation from spec rule #3's separate-token requirement, operator-confirmed.
 4. **Typefully — key available.** `TYPEFULLY_SOCIAL_SET` convention kept (id or name,
    default `"Infinex"`). Workspace sharing across pipelines: operator-approved.
 5. **display.dev — key available.** `@displaydev/cli@0.26.0` natively reads
@@ -87,7 +90,7 @@ GitHub REST API (global `fetch`), Typefully API v2, `@displaydev/cli` (`dsp`), P
 
 | Topic | Decision |
 |---|---|
-| GitHub token | **Reuse the existing `GITHUB_TOKEN` value** (centaur infra token in `centaur-infra-env`, ensured push-capable on `infinex-xyz/platform` by the operator). Same secret key feeds repo-cache and the comms pod. ⚠️ DEVIATION from the spec's "separate `COMMS_GITHUB_TOKEN`" hard rule — operator-approved with the trade-off surfaced (repo-cache will hold a write-capable token). Service code reads `process.env.GITHUB_TOKEN`. **Fork-flow alternative considered and BLOCKED** (2026-06-12): a fork-head PR would need zero write on platform, but the repo has `allow_forking: false` and the org sets `members_can_fork_private_repositories: false`. The emit module parameterizes the repo via `COMMS_PLATFORM_REPO`, so a fork variant stays a small follow-on if org policy ever changes. |
+| GitHub token | **Upgrade the existing infra `GITHUB_TOKEN` (one token everywhere) — FINAL, operator-confirmed twice with full mechanics verified.** The token in `centaur-infra-env` is a fine-grained PAT from the `ramboinfinex` account (verified live 2026-06-12); the operator flips **Contents → Read and write** and adds **Pull requests → Read and write** on it BEFORE Stage B's E2E (done up-front, so the rollout-sequencing concern is moot). Comms pod reads `process.env.GITHUB_TOKEN` — same secret key repo-cache mounts. The operator's "PRs only, never lands code" requirement is enforced by the REPO, not the token (verified live + against GitHub docs): there is no PR-only permission (PR creation requires contents:write for the `cf-emit/*` head branch — community discussion #106661; forking is org-disabled), and platform `main` carries a `pull_request` ruleset (enforcement: everyone) + required checks + signatures — direct pushes to main are rejected for ANY write token. ⚠️ Two recorded caveats the operator accepted: (a) DEVIATION from the spec's separate-token rule (repo-cache now mounts a write-capable token); (b) fine-grained PAT permissions are token-wide — contents:write applies to EVERY repo on the token's access list (platform, agent-platform, context), not just platform. PRs will author as `ramboinfinex`. `COMMS_PLATFORM_REPO` stays the repo escape hatch. |
 | E2E PR target | **`infinex-xyz/platform` directly.** E2E PR is closed unmerged + branch deleted afterwards. The platform repo's automatic AI content review (`content--review.yaml`) will fire on it — expected, harmless. |
 | Typefully E2E | **Separate test social set** (operator provisions; E2E sets `TYPEFULLY_SOCIAL_SET` to it). Production uses the default `"Infinex"` set; sharing the prod workspace across pipelines is acceptable. |
 | display.dev reviewers | **Explicit `reviewer_emails` workflow input** supplied when starting a release; no Slack-profile email lookup. |
@@ -195,7 +198,7 @@ The workflow (API pod) cannot read the comms pod's env — `GET /health` reports
     const prevGh = process.env.GITHUB_TOKEN;
     const prevTf = process.env.TYPEFULLY_API_KEY;
     const prevDsp = process.env.DISPLAYDEV_API_KEY;
-    process.env.GITHUB_TOKEN = "ghp_secret_value";
+    process.env.GITHUB_TOKEN = "github_pat_secret_value";
     delete process.env.TYPEFULLY_API_KEY;
     process.env.DISPLAYDEV_API_KEY = "sk_live_secret";
     try {
@@ -203,7 +206,7 @@ The workflow (API pod) cannot read the comms pod's env — `GET /health` reports
       const body = await response.json();
       expect(response.status).toBe(200);
       expect(body.capabilities).toEqual({ platform_pr: true, typefully: false, display: true });
-      expect(JSON.stringify(body)).not.toContain("ghp_secret_value");
+      expect(JSON.stringify(body)).not.toContain("github_pat_secret_value");
       expect(JSON.stringify(body)).not.toContain("sk_live_secret");
     } finally {
       restoreEnv("GITHUB_TOKEN", prevGh);
@@ -1186,6 +1189,10 @@ import { assertRecord, HttpError, optionalString, requiredString, type JsonRespo
 
 export async function handleEmit(ctx: RequestContext): Promise<JsonResponse> {
   const body = assertRecord(ctx.body);
+  // The shared infra fine-grained PAT, upgraded to Contents+PR write (operator
+  // decision). "PRs only, never lands code" is enforced by platform's main
+  // branch protection (pull_request ruleset, enforcement: everyone) — verified
+  // 2026-06-12 — not by the token.
   const token = process.env.GITHUB_TOKEN?.trim();
   if (!token) return { body: { ok: false, error: "github_not_configured" } };
 
@@ -3324,9 +3331,11 @@ iron-proxy), and comms sets `proxy.enabled: false`.
   /health capabilities probe):
 
 ```yaml
-      # Delivery tokens (phase 2). GITHUB_TOKEN reuses the centaur infra token
-      # (operator decision 2026-06-12 — see the delivery-routing plan's deviation
-      # log; the token must have push + PR scope on infinex-xyz/platform).
+      # Delivery tokens (phase 2). GITHUB_TOKEN is the SAME infra fine-grained
+      # PAT repo-cache mounts, upgraded by the operator to Contents+PR write
+      # (decision 2026-06-12 — see the plan's deviation log). "PRs only, never
+      # lands code" is enforced by platform main's pull_request ruleset, not
+      # the token.
       GITHUB_TOKEN:
         secretName: centaur-infra-env
         key: GITHUB_TOKEN
@@ -3404,11 +3413,17 @@ bootstrapped `SLACKBOT_API_KEY` from `centaur-infra-env`, inspect Slack blocks v
 history). Timing: grounding ~2 min; generation ~5 min/channel sequential — blog+web+x+
 x-thread ≈ 20+ min. Budget an hour per full pass.
 
-- [ ] **Step 1 — Phase 0 (no tokens): additive-behavior check.** Deploy WITHOUT the
-  delivery tokens (`contrib/scripts/deploy-local.sh --services api --with-comms-factory`),
-  run a release (`comms release for blog: …` shape), drive facts → card → candidate
-  gates to approve. EXPECT: ready-to-ship message; NO delivery gate; result
-  `no_external_posting: true`, `deliveries.platform_pr.status == "skipped"`. Record.
+- [ ] **Step 1 — Phase 0: additive-behavior check (copy-only run).** The GitHub token
+  cannot be absent locally without crippling grounding (it is the same infra
+  `GITHUB_TOKEN` repo-cache mounts — operator decision), so the no-destination
+  fall-through is proven with a run whose approved channels have NO destination:
+  deploy with `TYPEFULLY_API_KEY`/`DISPLAYDEV_API_KEY` unset, run
+  `comms release for in-product: …`, drive facts → card → candidate gates to
+  approve. EXPECT: ready-to-ship message with the copy-only note; NO delivery
+  gate posted (`run_delivery_gate` exits `no_destinations`); result
+  `no_external_posting: true`, `deliveries.platform_pr.status == "skipped"`.
+  (The tokens-absent capability fall-through itself is covered by the Python
+  suite — Task 12 test 1.) Record.
 - [ ] **Step 2 — deploy with tokens.**
   `GITHUB_TOKEN=… TYPEFULLY_API_KEY=… DISPLAYDEV_API_KEY=… TYPEFULLY_SOCIAL_SET="<test set>" contrib/scripts/deploy-local.sh --services api --with-comms-factory`.
   Secrets do NOT hot-reload: `kubectl rollout restart deploy -n centaur -l app.kubernetes.io/component=attached-comms-factory`
@@ -3486,8 +3501,13 @@ git commit -m "docs(comms): delivery-routing deploy runsheet (tokens, egress, re
 
 ## Spec deviations & interpretations (for the reviewer)
 
-1. **`COMMS_GITHUB_TOKEN` → `GITHUB_TOKEN` reuse** (operator decision 2026-06-12;
-   fork-flow alternative verified blocked — org forbids forking private repos).
+1. **`COMMS_GITHUB_TOKEN` → `GITHUB_TOKEN` reuse** (operator decision 2026-06-12,
+   re-confirmed same day after the full mechanics were verified live + against
+   GitHub docs: no PR-only permission exists; "never lands code" comes from
+   platform main's `pull_request` ruleset, not the token. Fork-flow alternative
+   verified blocked — org forbids forking private repos. Caveats accepted:
+   write-capable token in the repo-cache mount path; token-wide contents:write
+   across the PAT's repo list; PRs author as `ramboinfinex`).
 2. **`EmitPackage.changelogMd` optional** (spec's `LaunchPackage` requires it):
    web-only PRs are legal per the spec's own group definition (`platform_pr` =
    approved {blog, web}), so the REST path uses a superset type and composes the PR
@@ -3537,17 +3557,13 @@ git commit -m "docs(comms): delivery-routing deploy runsheet (tokens, egress, re
 
 ### From 2026-06-12 review
 
-- **[P1][adversarial] Phase-0 E2E contradicts the GITHUB_TOKEN reuse wiring.** The
-  comms pod reads the SAME secret key repo-cache needs for grounding, so any local
-  stack where a release can actually run reports `platform_pr: true` — Task 15
-  Step 1's "deploy WITHOUT the delivery tokens" check can't isolate the token while
-  grounding works. And in production, `/health` flips `platform_pr: true` the moment
-  Task 14's chart change deploys, whether or not the token's scope was upgraded —
-  capability means *token present*, not *push-capable*; "Create PR" would 403 only
-  after the operator walked the preview flow. **Operator question:** accept Phase 0
-  as a grounding-crippled smoke (or assert via the gate's absence on a run with no
-  blog/web/x channels), and make "upgrade the token scope BEFORE merging the chart
-  change" an explicit Stage B rollout precondition?
+- **[P1][adversarial] Phase-0 E2E contradicts the GITHUB_TOKEN reuse wiring —
+  ✅ RESOLVED 2026-06-12.** Phase 0 redefined as a copy-only-channel run (proves the
+  no-destination fall-through without needing the token absent — Task 15 Step 1
+  updated); the tokens-absent capability path stays covered by the Python suite.
+  Rollout sequencing is moot: the operator upgrades the token's permissions
+  up-front, before Stage B's E2E, so `platform_pr: true` is honest from the first
+  deploy.
 - **[P2][adversarial] The blog review loop is unreachable from Slack-started
   releases.** `reviewer_emails` only arrives via API-started runs (the
   `SLACK_WORKFLOW_COMMANDS` regex carries just `brief`). Tasks 7–9 + 13 ship as code
@@ -3555,11 +3571,11 @@ git commit -m "docs(comms): delivery-routing deploy runsheet (tokens, egress, re
   "API-start-only for now" as recorded scope, or add an affordance (e.g., a
   `COMMS_REVIEWER_EMAILS` env default in the chart, or parsing
   `reviewers: a@x.com,b@x.com` from the brief)?
-- **[P2][security] Write-capable token + internet egress compounding.** The reused
-  `GITHUB_TOKEN` (push on the platform repo) now lives in a pod with 443 internet
-  egress — token exfiltration becomes directly actionable (push access), which the
-  spec's separate-token rule existed to prevent. The ipBlock restriction narrows
-  destinations but GitHub itself is necessarily reachable. **Operator question:**
-  accept (current decision), or revisit a separate fine-grained write token
-  (contents+PR on `infinex-xyz/platform` only) once convenient?
+- **[P2][security] Write-capable token + internet egress compounding —
+  ✅ RESOLVED 2026-06-12: accepted by the operator** after verifying the mechanics
+  online + live (no PR-only permission exists; platform main's `pull_request`
+  ruleset blocks any direct push, so the worst-case is unwanted branches/PRs, all
+  human-reviewed). Caveats recorded in the Operator decisions row: token-wide
+  contents:write across the PAT's repo list; write-capable token in the repo-cache
+  mount path. Revisit only if circumstances change.
 
