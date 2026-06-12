@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import sys
 
+import pytest
+
 OVERLAY_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(OVERLAY_ROOT / "tools" / "comms_factory"))
 
@@ -65,9 +67,15 @@ def test_capabilities_is_a_get_to_health_with_bearer_auth(monkeypatch):
     }
 
 
-def test_capabilities_without_base_url_is_a_safe_error():
-    result = CommsFactoryClient(base_url="", token="").capabilities()
+def test_capabilities_without_base_url_is_a_safe_error(monkeypatch):
+    monkeypatch.delenv("COMMS_FACTORY_BASE_URL", raising=False)
+    c = CommsFactoryClient(base_url="", token="")
+    # capabilities() is safe (no network call, ok=False)
+    result = c.capabilities()
     assert result["ok"] is False
+    # the underlying _get/_post guard returns the specific sentinel error
+    raw = c._get("/health")
+    assert raw["error"] == "comms_factory_base_url_not_configured"
 
 
 def _capture_post(monkeypatch, client):
@@ -124,3 +132,16 @@ def test_display_method_envelopes(monkeypatch):
     assert captured["payload"] == {"root_comment_id": "c1"}
     c.display_unpublish("abc")
     assert captured["payload"] == {"short_id": "abc"}
+
+
+def test_display_publish_requires_base_version_when_short_id_given(monkeypatch):
+    c = CommsFactoryClient(base_url="http://x", token="t")
+    captured: dict = {}
+    monkeypatch.setattr(
+        c,
+        "_post",
+        lambda path, payload, **kwargs: captured.update({"path": path}) or {"ok": True},
+    )
+    with pytest.raises(ValueError, match="display_base_version_required"):
+        c.display_publish("md", name="n", short_id="abc")
+    assert not captured  # _post must not have been called
