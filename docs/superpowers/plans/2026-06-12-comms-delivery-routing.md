@@ -931,6 +931,11 @@ pnpm add --ignore-workspace -D @types/diff
 //    JSON.stringify(result) does not contain "test-token".
 // 7. features idempotency: branch features content already contains the entry title →
 //    that PUT is skipped (absent from the request log), blog still written.
+//    The fixture MUST be the re-indented spliced form — compute it with the real
+//    appendFeatureCopyEntry(baseFixture, dataTsEntry), not a raw-pasted entry —
+//    because the splice re-indents every line and a raw paste would not match
+//    what a crash-retry actually reads back from the branch. Also add the
+//    negative: branch features content WITHOUT the title marker → PUT happens.
 // 8. paths with parens survive per-segment encoding: the features URL contains the
 //    raw "(site)" segment (encodeURIComponent leaves parens unescaped per ECMA-262;
 //    they are legal URI sub-delims and GitHub accepts them) and spaces/specials in
@@ -1087,7 +1092,14 @@ export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Pr
     if (pkg.featureCard) {
       const current = await readFileAt(FEATURES_DATA_PATH, readRef);
       if (current) {
-        const alreadyApplied = current.content.includes(pkg.featureCard.dataTsEntry.trim().slice(0, 60));
+        // Replay-safe skip: appendFeatureCopyEntry re-indents the entry when
+        // splicing, so raw-prefix matching can never hit. Intra-line content
+        // survives — match on the trimmed title property line instead.
+        const marker = pkg.featureCard.dataTsEntry
+          .split("\n")
+          .map((line) => line.trim())
+          .find((line) => line.startsWith("title:"));
+        const alreadyApplied = Boolean(marker && current.content.includes(marker));
         const after = alreadyApplied ? current.content : appendFeatureCopyEntry(current.content, pkg.featureCard.dataTsEntry);
         changes.push({ path: FEATURES_DATA_PATH, before: current.content, after, sha: current.sha, skip: alreadyApplied });
       }

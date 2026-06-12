@@ -1,6 +1,6 @@
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { BLOG_DIR, FEATURES_DATA_PATH } from "../emit-platform-pr.js";
+import { appendFeatureCopyEntry, BLOG_DIR, FEATURES_DATA_PATH } from "../emit-platform-pr.js";
 import { emitViaRest, type GithubEmitOptions } from "../github-emit.js";
 import type { EmitPackage } from "../launch-package.js";
 
@@ -282,17 +282,10 @@ describe("emitViaRest", () => {
   });
 
   it("skips the features PUT when the branch content already carries the entry (replay)", async () => {
-    featuresContent = [
-      "type FeatureCopyOptions = { title: string; description?: string };",
-      "export const FEATURES_COPY: FeatureCopyOptions[] = [",
-      "  {",
-      "    title: 'Homepage',",
-      "    description: 'A command center view.',",
-      "  },",
-      FEATURE_ENTRY,
-      "];",
-      "",
-    ].join("\n");
+    // The branch fixture must be the entry AS appendFeatureCopyEntry WOULD HAVE
+    // written it — the real splice re-indents every line, so a raw-pasted entry
+    // would not exercise the replay path the way a crash-retry actually sees it.
+    featuresContent = appendFeatureCopyEntry(FEATURES_FIXTURE, FEATURE_ENTRY);
 
     const result = await emitViaRest(fixturePkg(), emitOpts());
 
@@ -303,6 +296,27 @@ describe("emitViaRest", () => {
     expect(
       requests.filter((r) => r.method === "POST" && r.url === "/repos/o/r/pulls"),
     ).toHaveLength(1);
+  });
+
+  it("writes the features PUT when the branch content lacks the entry's title marker", async () => {
+    // Negative: an unrelated entry on the branch must NOT trip the replay skip.
+    featuresContent = appendFeatureCopyEntry(
+      FEATURES_FIXTURE,
+      '{\n  title: "Something Else",\n  description: "Not our launch.",\n},',
+    );
+
+    const result = await emitViaRest(fixturePkg(), emitOpts());
+
+    expect(result.ok).toBe(true);
+    const puts = requests.filter((r) => r.method === "PUT");
+    expect(puts).toHaveLength(2); // blog AND features
+    const featuresPut = puts.find(
+      (r) => decodeURIComponent(r.url).includes(FEATURES_DATA_PATH),
+    );
+    expect(featuresPut).toBeDefined();
+    const putContent = Buffer.from(String(featuresPut?.body?.content), "base64").toString("utf8");
+    expect(putContent).toContain('title: "Launch X"');
+    expect(putContent).toContain('title: "Something Else"');
   });
 
   it("encodes paths per segment: '(site)' stays raw, spaces/specials escape", async () => {

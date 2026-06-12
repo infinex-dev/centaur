@@ -141,7 +141,14 @@ export async function emitViaRest(pkg: EmitPackage, opts: GithubEmitOptions): Pr
     if (pkg.featureCard) {
       const current = await readFileAt(FEATURES_DATA_PATH, readRef);
       if (current) {
-        const alreadyApplied = current.content.includes(pkg.featureCard.dataTsEntry.trim().slice(0, 60));
+        // Replay-safe skip: appendFeatureCopyEntry re-indents the entry when
+        // splicing, so raw-prefix matching can never hit. Intra-line content
+        // survives — match on the trimmed title property line instead.
+        const marker = pkg.featureCard.dataTsEntry
+          .split("\n")
+          .map((line) => line.trim())
+          .find((line) => line.startsWith("title:"));
+        const alreadyApplied = Boolean(marker && current.content.includes(marker));
         const after = alreadyApplied ? current.content : appendFeatureCopyEntry(current.content, pkg.featureCard.dataTsEntry);
         changes.push({ path: FEATURES_DATA_PATH, before: current.content, after, sha: current.sha, skip: alreadyApplied });
       }
