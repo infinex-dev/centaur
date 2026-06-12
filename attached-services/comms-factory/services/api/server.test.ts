@@ -333,6 +333,27 @@ describe("comms-factory service API", () => {
     expect(unsupported.status).toBe(400);
     expect(await unsupported.json()).toMatchObject({ ok: false, error: "unsupported_channels" });
   });
+
+  it("reports delivery capabilities from env without leaking values", async () => {
+    const prevGh = process.env.GITHUB_TOKEN;
+    const prevTf = process.env.TYPEFULLY_API_KEY;
+    const prevDsp = process.env.DISPLAYDEV_API_KEY;
+    process.env.GITHUB_TOKEN = "github_pat_secret_value";
+    delete process.env.TYPEFULLY_API_KEY;
+    process.env.DISPLAYDEV_API_KEY = "sk_live_secret";
+    try {
+      const response = await fetch(`${baseUrl}/health`);
+      const body = await response.json();
+      expect(response.status).toBe(200);
+      expect(body.capabilities).toEqual({ platform_pr: true, typefully: false, display: true });
+      expect(JSON.stringify(body)).not.toContain("github_pat_secret_value");
+      expect(JSON.stringify(body)).not.toContain("sk_live_secret");
+    } finally {
+      restoreEnv("GITHUB_TOKEN", prevGh);
+      restoreEnv("TYPEFULLY_API_KEY", prevTf);
+      restoreEnv("DISPLAYDEV_API_KEY", prevDsp);
+    }
+  });
 });
 
 function restoreEnv(name: string, value: string | undefined): void {

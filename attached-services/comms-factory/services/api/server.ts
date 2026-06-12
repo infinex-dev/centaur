@@ -16,6 +16,11 @@ routes.set("GET /health", () => ({
     service: "comms-factory-api",
     version: packageJson.version,
     commit: process.env.COMMIT_SHA ?? "local",
+    capabilities: {
+      platform_pr: Boolean(process.env.GITHUB_TOKEN?.trim()),
+      typefully: Boolean(process.env.TYPEFULLY_API_KEY?.trim()),
+      display: Boolean(process.env.DISPLAYDEV_API_KEY?.trim()),
+    },
   },
 }));
 
