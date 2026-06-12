@@ -7,6 +7,7 @@ from typing import Any
 
 from api.workflow_engine import WorkflowContext
 
+from comms_delivery import deliveries_made, empty_deliveries, run_delivery_gate
 from comms_shared import (
     Gate,
     GateValidationError,
@@ -616,6 +617,14 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             **_state_payload(),
         }
 
+    # ---- delivery routing (phase 2) ----
+    deliveries = empty_deliveries()
+    caps_result = await call_comms_tool(ctx, "probe_capabilities", "capabilities", {})
+    caps_raw = caps_result.get("capabilities")
+    caps = caps_raw if isinstance(caps_raw, dict) else {}
+
+    # …Task 13's blog review loop inserts HERE (after the probe, before ship)…
+
     # ---- ship (per-channel) ----
     ship_blocks: list[dict[str, Any]] = [
         markdown_block("*Ready to ship in Slack (no external posting performed)*")
@@ -650,10 +659,22 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         text="Ready to ship in Slack (no external posting performed)",
         blocks=ship_blocks,
     )
+
+    deliveries, _delivery_outcome = await run_delivery_gate(
+        ctx,
+        inp,
+        card=card,
+        channels=channels,
+        final_by_channel=final_by_channel,
+        candidates=candidates,
+        caps=caps,
+        deliveries=deliveries,
+    )
     return {
         "status": "ready_to_ship",
         **_state_payload(),
-        "no_external_posting": True,
+        "deliveries": deliveries,
+        "no_external_posting": not deliveries_made(deliveries),
     }
 
 

@@ -15,17 +15,21 @@ from __future__ import annotations
 
 from typing import Any
 
-# Task 11 imports ONLY what the pure helpers use — ruff F401 (unused import)
-# fails the lint gate otherwise. Task 12 extends this import block when
-# run_delivery_gate lands (WorkflowContext, GateValidationError,
-# SlackWorkflowInput, call_comms_tool, extract_action, post_gate_message,
-# update_gate_message, wait_for_gate_action).
+from api.workflow_engine import WorkflowContext
+
 from comms_shared import (
     Gate,
+    GateValidationError,
+    SlackWorkflowInput,
     actions_block,
+    call_comms_tool,
     chunked_markdown_blocks,
     context_block,
+    extract_action,
     markdown_block,
+    post_gate_message,
+    update_gate_message,
+    wait_for_gate_action,
 )
 
 PR_CHANNELS = ("blog", "web")
@@ -214,3 +218,225 @@ def delivery_gate_blocks(
         actions.append(("Finish", "finish", None))
         blocks.append(actions_block(gate, actions))
     return blocks
+
+
+async def run_delivery_gate(
+    ctx: WorkflowContext,
+    inp: SlackWorkflowInput,
+    *,
+    card: dict[str, Any],
+    channels: list[str],
+    final_by_channel: dict[str, Any],
+    candidates: list[dict[str, Any]],
+    caps: dict[str, Any],
+    deliveries: dict[str, Any],
+) -> tuple[dict[str, Any], str]:
+    groups = destination_groups(channels, final_by_channel)
+    enabled = deliverable_groups(groups, caps)
+    deliveries["copy_only"] = groups["copy_only"]
+    if not (enabled["platform_pr"] or enabled["typefully"]):
+        return deliveries, "no_destinations"
+
+    approvers = tuple(inp.approver_user_ids)
+    state = {"pr": "idle", "typefully": "idle"}
+    gate_message: dict[str, Any] = {}
+    audit_line = ""
+
+    async def _render(gate: Gate, name: str, *, terminal: bool, text: str) -> None:
+        nonlocal gate_message
+        blocks = delivery_gate_blocks(
+            gate,
+            groups,
+            enabled,
+            state,
+            deliveries,
+            final_by_channel=final_by_channel,
+            audit_line=audit_line,
+            terminal=terminal,
+        )
+        if not gate_message:
+            gate_message = await post_gate_message(
+                ctx,
+                name=name,
+                delivery=inp.delivery,
+                text=text,
+                blocks=blocks,
+                metadata={
+                    "event_type": "comms_gate",
+                    "event_payload": {"run_id": ctx.run_id, "stage": "deliver"},
+                },
+            )
+        else:
+            await update_gate_message(
+                ctx,
+                name=name,
+                channel=str(gate_message.get("channel") or ""),
+                ts=str(gate_message.get("ts") or ""),
+                text=text,
+                blocks=blocks,
+            )
+
+    def _emit_args(dry_run: bool, typefully_url: str | None = None) -> dict[str, Any]:
+        args: dict[str, Any] = {
+            "release_card": card,
+            "final_by_channel": final_by_channel,
+            "candidates": candidates,
+            "dry_run": dry_run,
+            "run_id": ctx.run_id,
+        }
+        if typefully_url:
+            args["typefully_url"] = typefully_url
+        return args
+
+    async def _create_typefully_drafts(round_n: int) -> list[dict[str, Any]]:
+        results: list[dict[str, Any]] = []
+        for channel in groups["typefully"]:
+            posts = tweets_for_channel(
+                candidates, final_by_channel.get(channel), channel
+            )
+            result = await call_comms_tool(
+                ctx,
+                f"typefully_{channel}_r{round_n}",
+                "typefully_draft",
+                {
+                    "channel": channel,
+                    "tweets": posts,
+                    "title": str(card.get("title") or "")[:80],
+                    "scratchpad": f"comms_release {ctx.run_id}",
+                },
+            )
+            results.append(
+                {
+                    "channel": channel,
+                    "status": "created" if result.get("ok") else "failed",
+                    "url": result.get("share_url") or result.get("draft_url"),
+                }
+            )
+        deliveries["typefully"] = results
+        # Only leave "idle" when EVERY draft failed — the button re-renders next
+        # round so a transient Typefully outage stays retryable within the gate
+        # (fresh per-round step names keep the retry replay-safe).
+        if any(item["status"] == "created" for item in results):
+            state["typefully"] = "created"
+        return results
+
+    outcome = ""
+    for round_n in range(1, MAX_DELIVERY_ROUNDS + 1):
+        gate = Gate(ctx.run_id, "deliver", round_n, inp.user_id, approvers)
+        await _render(
+            gate,
+            f"render_delivery_gate_r{round_n}",
+            terminal=False,
+            text="Deliver approved copy.",
+        )
+        allowed = {"finish"}
+        if enabled["platform_pr"] and state["pr"] == "idle":
+            allowed.add("preview_pr")
+        if enabled["platform_pr"] and state["pr"] in ("previewed", "create_failed"):
+            allowed.update({"create_pr", "cancel_pr"})
+        if enabled["typefully"] and state["typefully"] == "idle":
+            allowed.add("typefully")
+        try:
+            event = await wait_for_gate_action(
+                ctx, f"wait_delivery_gate_r{round_n}", gate, allowed
+            )
+        except GateValidationError as exc:
+            audit_line = f"Delivery gate rejected: {exc.reason}."
+            outcome = "rejected"
+            break
+        action = extract_action(event)
+        slack = event.get("slack") if isinstance(event.get("slack"), dict) else {}
+        audit_line = f"Round {round_n}: `{action}` by <@{slack.get('user_id') or '?'}>."
+
+        if action == "finish":
+            outcome = "finished"
+            break
+        if action == "preview_pr":
+            preview = await call_comms_tool(
+                ctx, f"emit_preview_r{round_n}", "emit_platform_pr", _emit_args(True)
+            )
+            if preview.get("ok") and preview.get("existing"):
+                # crash-retry: this run's branch already has an open PR
+                state["pr"] = "created"
+                deliveries["platform_pr"] = {
+                    "status": "created",
+                    "url": preview.get("pr_url"),
+                }
+            elif preview.get("ok") and preview.get("planned_diff") is not None:
+                state["pr"] = "previewed"
+                await post_gate_message(
+                    ctx,
+                    name=f"post_pr_preview_r{round_n}",
+                    delivery=inp.delivery,
+                    text="Planned platform PR diff",
+                    # Per-chunk fences — one fence around the whole diff breaks
+                    # when the chunker splits it (middle chunks render unfenced).
+                    blocks=fenced_diff_blocks(str(preview["planned_diff"])),
+                )
+            else:
+                audit_line += f" Preview failed: {preview.get('error') or 'unknown'}."
+        elif action == "cancel_pr":
+            state["pr"] = "cancelled"
+        elif action == "typefully":
+            await _create_typefully_drafts(round_n)
+        elif action == "create_pr":
+            # ORDERING: run Typefully first so the draft URL lands in the blog
+            # frontmatter's typefullyUrl (the cross-link the org maintains by hand).
+            typefully_url = None
+            if enabled["typefully"] and state["typefully"] == "idle":
+                results = await _create_typefully_drafts(round_n)
+                typefully_url = next(
+                    (item["url"] for item in results if item.get("url")), None
+                )
+            elif deliveries["typefully"]:
+                typefully_url = next(
+                    (i["url"] for i in deliveries["typefully"] if i.get("url")), None
+                )
+            emit = await call_comms_tool(
+                ctx,
+                f"emit_pr_r{round_n}",
+                "emit_platform_pr",
+                _emit_args(False, typefully_url),
+            )
+            if emit.get("ok") and emit.get("pr_url"):
+                state["pr"] = "created"
+                deliveries["platform_pr"] = {
+                    "status": "created",
+                    "url": emit.get("pr_url"),
+                }
+                note = (
+                    f"*Platform PR created:* {emit['pr_url']}\n"
+                    f"Rendered preview: https://infinex.xyz/preview/start?branch="
+                    f"{emit.get('branch')}&to=/news/{emit.get('slug')}\n"
+                    "_Merging publishes to infinex.xyz/news automatically; the in-app"
+                    " changelog popout follows the next platform prod release. The PR"
+                    " gets the platform repo's automatic AI content review._"
+                )
+                await post_gate_message(
+                    ctx,
+                    name=f"post_pr_created_r{round_n}",
+                    delivery=inp.delivery,
+                    text="Platform PR created",
+                    blocks=[markdown_block(note)],
+                )
+            else:
+                # Distinct render state: the operator must see the failure AND
+                # know any Typefully drafts already exist before retrying.
+                state["pr"] = "create_failed"
+                deliveries["platform_pr"] = {"status": "failed", "url": None}
+                audit_line += f" Create PR failed: {emit.get('error') or 'unknown'}."
+    else:
+        outcome = "exhausted"
+
+    terminal_text = {
+        "finished": "Delivery complete.",
+        "rejected": "Delivery gate rejected.",
+        "exhausted": f"Delivery gate limit reached ({MAX_DELIVERY_ROUNDS} rounds).",
+    }[outcome]
+    await _render(
+        Gate(ctx.run_id, "deliver", 0, inp.user_id, approvers),
+        "render_delivery_gate_terminal",
+        terminal=True,
+        text=terminal_text,
+    )
+    return deliveries, outcome

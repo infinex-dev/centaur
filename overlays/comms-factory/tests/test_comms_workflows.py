@@ -56,6 +56,15 @@ def _event(
     return event
 
 
+def _caps_off() -> dict:
+    """capabilities probe result with every delivery token absent — the
+    delivery gate stays disengaged and pre-phase-2 behavior is preserved."""
+    return {
+        "ok": True,
+        "capabilities": {"platform_pr": False, "typefully": False, "display": False},
+    }
+
+
 def test_normalize_channels_passes_known_channels_in_order():
     generated, planning, unknown = normalize_channels(["Blog", "x", "x-thread"])
     assert generated == ["blog", "x", "x-thread"]
@@ -440,6 +449,7 @@ def test_card_from_result_does_not_fabricate_invalid_release_card_kind():
 
 @pytest.mark.asyncio
 async def test_release_workflow_never_calls_external_publishing(monkeypatch):
+    import comms_delivery
     import comms_release
 
     calls: list[tuple[str, str]] = []
@@ -452,6 +462,10 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
         calls.append(("comms_factory", method))
         if method == "validate":
             return {"ok": True, "passed": True}
+        if method == "capabilities":
+            # All delivery tokens absent → the delivery gate never engages and
+            # the no-external-publishing property still holds.
+            return _caps_off()
         if method == "ground_from_tools":
             assert args["workflow_run_id"] == "run_test"
             assert args["job_id"] == "comms:comms_release:run_test"
@@ -514,6 +528,11 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
         async def step(self, _name, fn, **_kwargs):
             return await fn()
 
+    async def unexpected_delivery_wait(*_args, **_kwargs):
+        raise AssertionError(
+            "delivery gate must not wait when every capability is False"
+        )
+
     monkeypatch.setattr(comms_release, "call_comms_tool", fake_call_comms_tool)
     monkeypatch.setattr(
         comms_release,
@@ -527,6 +546,14 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
     )
     monkeypatch.setattr(
         comms_release, "wait_for_gate_action_at_correlation", fake_wait_for_gate_action
+    )
+    # The delivery gate resolves helpers in comms_delivery's namespace — patch
+    # them there too so any unexpected engagement hits the fakes, not real infra.
+    monkeypatch.setattr(comms_delivery, "call_comms_tool", fake_call_comms_tool)
+    monkeypatch.setattr(comms_delivery, "post_gate_message", fake_post_gate_message)
+    monkeypatch.setattr(comms_delivery, "update_gate_message", fake_update_gate_message)
+    monkeypatch.setattr(
+        comms_delivery, "wait_for_gate_action", unexpected_delivery_wait
     )
 
     result = await comms_release.handler(
@@ -554,6 +581,7 @@ async def test_release_workflow_never_calls_external_publishing(monkeypatch):
         ("comms_factory", "ground_from_tools"),
         ("comms_factory", "build_card"),
         ("comms_factory", "generate"),
+        ("comms_factory", "capabilities"),
     ]
 
 
@@ -564,6 +592,8 @@ async def test_release_workflow_filters_rejected_and_edited_facts(monkeypatch):
     async def fake_call_comms_tool(_ctx, _name, method, args):
         if method == "validate":
             return {"ok": True, "passed": True}
+        if method == "capabilities":
+            return _caps_off()
         if method == "ground_from_tools":
             return {
                 "ok": True,
@@ -999,6 +1029,8 @@ async def test_release_drops_planning_only_channels_with_note(monkeypatch):
     async def fake_call_comms_tool(_ctx, _name, method, args):
         if method == "validate":
             return {"ok": True, "passed": True}
+        if method == "capabilities":
+            return _caps_off()
         if method == "ground_from_tools":
             assert args["workflow_run_id"] == "run_test"
             assert args["job_id"] == "comms:comms_release:run_test"
@@ -1345,6 +1377,8 @@ async def _run_release(
         tool_calls.append((name, method))
         if method == "validate":
             return validate_result or {"ok": True, "passed": True}
+        if method == "capabilities":
+            return _caps_off()
         if method == "ground_from_tools":
             return {"ok": True, "facts": [{"claim": "A", "value": "Fact A"}]}
         if method == "build_card":
@@ -1656,6 +1690,8 @@ async def test_candidate_gate_constructs_fresh_gate_each_round(monkeypatch):
     async def fake_call_comms_tool(_ctx, name, method, _args):
         if method == "validate":
             return {"ok": True, "passed": True}
+        if method == "capabilities":
+            return _caps_off()
         if method == "ground_from_tools":
             return {"ok": True, "facts": [{"claim": "A", "value": "Fact A"}]}
         if method == "build_card":
