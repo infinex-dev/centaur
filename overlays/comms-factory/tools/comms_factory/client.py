@@ -136,6 +136,163 @@ class CommsFactoryClient:
             timeout=_LONG_TIMEOUT,
         )
 
+    def capabilities(self) -> dict[str, Any]:
+        """Probe delivery capabilities — the ONE GET (server matches 'GET /health')."""
+        result = self._get("/health")
+        raw = result.get("capabilities")
+        caps = raw if isinstance(raw, dict) else {}
+        return {
+            "ok": bool(result.get("ok")),
+            "capabilities": {
+                "platform_pr": bool(caps.get("platform_pr")),
+                "typefully": bool(caps.get("typefully")),
+                "display": bool(caps.get("display")),
+            },
+        }
+
+    # NOTE: no **kwargs on the delivery methods — the tool manager skips its
+    # unknown-arg rejection for VAR_KEYWORD signatures, which would silently
+    # forward mis-typed workflow args instead of raising
+    # tool_argument_validation_failed.
+    def emit_platform_pr(
+        self,
+        release_card: dict[str, Any],
+        final_by_channel: dict[str, Any],
+        candidates: list[dict[str, Any]],
+        *,
+        dry_run: bool = True,
+        branch: str | None = None,
+        run_id: str | None = None,
+        typefully_url: str | None = None,
+    ) -> dict[str, Any]:
+        payload: dict[str, Any] = {
+            "release_card": release_card,
+            "final_by_channel": final_by_channel,
+            "candidates": candidates,
+            "dry_run": dry_run,
+            "run_id": run_id,
+        }
+        if branch:
+            payload["branch"] = branch
+        if typefully_url:
+            payload["typefully_url"] = typefully_url
+        return self._post("/emit", payload, timeout=_LONG_TIMEOUT)
+
+    def typefully_draft(
+        self,
+        channel: str,
+        *,
+        text: str | None = None,
+        tweets: list[str] | None = None,
+        title: str | None = None,
+        scratchpad: str | None = None,
+    ) -> dict[str, Any]:
+        payload: dict[str, Any] = {"channel": channel}
+        if text is not None:
+            payload["text"] = text
+        if tweets is not None:
+            payload["tweets"] = tweets
+        if title:
+            payload["title"] = title
+        if scratchpad:
+            payload["scratchpad"] = scratchpad
+        return self._post("/typefully-draft", payload, timeout=_LONG_TIMEOUT)
+
+    def display_publish(
+        self,
+        markdown: str,
+        *,
+        name: str,
+        visibility: str = "private",
+        share: list[str] | None = None,
+        short_id: str | None = None,
+        base_version: int | None = None,
+    ) -> dict[str, Any]:
+        payload: dict[str, Any] = {
+            "markdown": markdown,
+            "name": name,
+            "visibility": visibility,
+        }
+        if share:
+            payload["share"] = share
+        if short_id:
+            # Lost-update guard: the route 400s (missing_base_version) without it.
+            if base_version is None:
+                raise ValueError("display_base_version_required")
+            payload["id"] = short_id
+            payload["base_version"] = base_version
+        return self._post("/display/publish", payload, timeout=_LONG_TIMEOUT)
+
+    def display_comments(
+        self, short_id: str, *, status: str = "open", since: Any = None
+    ) -> dict[str, Any]:
+        payload: dict[str, Any] = {"short_id": short_id, "status": status}
+        if since is not None:
+            payload["since"] = since
+        return self._post("/display/comments", payload)
+
+    def display_revise(
+        self,
+        markdown: str,
+        comments: list[dict[str, Any]],
+        *,
+        run_id: str | None = None,
+        release_card: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        return self._post(
+            "/display/revise",
+            {
+                "markdown": markdown,
+                "comments": comments,
+                "run_id": run_id,
+                "release_card": release_card,
+            },
+            timeout=_LONG_TIMEOUT,
+        )
+
+    def display_resolve(self, root_comment_id: str) -> dict[str, Any]:
+        return self._post("/display/resolve", {"root_comment_id": root_comment_id})
+
+    def display_unpublish(self, short_id: str) -> dict[str, Any]:
+        return self._post("/display/unpublish", {"short_id": short_id})
+
+    def _get(
+        self,
+        path: str,
+        *,
+        timeout: httpx.Timeout = _DEFAULT_TIMEOUT,
+    ) -> dict[str, Any]:
+        # Mirrors _post exactly minus the JSON body (base-url guard, ok-default,
+        # status->error mapping, redaction, Bearer auth).
+        if not self.base_url:
+            return {"ok": False, "error": "comms_factory_base_url_not_configured"}
+        try:
+            headers: dict[str, str] = {}
+            if self.token:
+                headers["Authorization"] = f"Bearer {self.token}"
+            with httpx.Client(timeout=timeout, trust_env=True) as client:
+                response = client.get(f"{self.base_url}{path}", headers=headers)
+            data = _read_json(response)
+            if response.is_success:
+                if isinstance(data, dict):
+                    data.setdefault("ok", True)
+                    return data
+                return {"ok": True, "data": data}
+            return {
+                "ok": False,
+                "error": "comms_factory_http_error",
+                "status_code": response.status_code,
+                "response": _redact_sensitive(data, self.token),
+            }
+        except httpx.TimeoutException:
+            return {"ok": False, "error": "comms_factory_timeout"}
+        except httpx.HTTPError as exc:
+            return {
+                "ok": False,
+                "error": "comms_factory_request_failed",
+                "detail": _redact_sensitive(str(exc), self.token),
+            }
+
     def _post(
         self,
         path: str,
