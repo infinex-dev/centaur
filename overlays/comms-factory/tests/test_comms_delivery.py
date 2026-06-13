@@ -10,6 +10,7 @@ sys.path.insert(0, str(OVERLAY_ROOT / "workflows"))
 sys.path.insert(0, str(OVERLAY_ROOT))
 
 from comms_delivery import (  # noqa: E402  (after the sys.path bootstrap)
+    _revise_result_error,
     delivery_gate_blocks,
     deliverable_groups,
     deliveries_made,
@@ -18,6 +19,7 @@ from comms_delivery import (  # noqa: E402  (after the sys.path bootstrap)
     fenced_diff_blocks,
     tweets_for_channel,
 )
+from comms_release import _parse_reviewer_emails  # noqa: E402
 from comms_shared import Gate, GateValidationError  # noqa: E402
 
 
@@ -173,6 +175,7 @@ def test_deliveries_made_flips_only_on_created():
 
 
 PR_URL = "https://github.com/infinex/platform/pull/42"
+DISPLAY_URL = "https://display.dev/d/abc123"
 LONG_DIFF = "\n".join(f"+ planned line {i}" for i in range(400))
 
 
@@ -204,6 +207,10 @@ def _deliver(action: str, round_n: int) -> dict:
     return _event(stage="deliver", gate_version=round_n, action=action)
 
 
+def _review(action: str, wait_n: int) -> dict:
+    return _event(stage="blog_review", gate_version=wait_n, action=action)
+
+
 def _generation_for(channels: list[str]) -> dict:
     candidates = []
     for channel in channels:
@@ -227,11 +234,20 @@ async def _run_delivery(
     caps: dict,
     overrides: dict | None = None,
     delivery_wait_error: Exception | None = None,
+    wait_log: list | None = None,
+    blog_review_events: list[dict] | None = None,
+    reviewer_emails: list[str] | None = None,
+    brief: str | None = None,
+    timeline: list | None = None,
 ):
     """Drive comms_release.handler end-to-end (facts/card/candidate approve)
-    into the delivery gate. Monkeypatches BOTH comms_release and comms_delivery
-    module attributes. Returns (result, posts, updates, calls) where calls is
-    the ordered [(step_name, method, args)] tool-call log."""
+    into the blog review loop + delivery gate. Monkeypatches BOTH comms_release
+    and comms_delivery module attributes. Returns (result, posts, updates,
+    calls) where calls is the ordered [(step_name, method, args)] tool-call
+    log. wait_log (if given) records (step_name, gate_version, allowed) per
+    comms_delivery wait — the fresh-gate-version invariant. timeline (if
+    given) records ("post"|"update"|"call", name) in true execution order so
+    render-before-tool-call ordering is assertable."""
     import comms_delivery
     import comms_release
 
@@ -242,6 +258,8 @@ async def _run_delivery(
 
     async def fake_call_comms_tool(_ctx, name, method, args):
         calls.append((name, method, dict(args)))
+        if timeline is not None:
+            timeline.append(("call", name))
         if method in overrides:
             return overrides[method](name, args)
         if method == "validate":
@@ -271,14 +289,38 @@ async def _run_delivery(
                 "ok": True,
                 "share_url": f"https://typefully.com/t/{args['channel']}",
             }
+        if method == "display_publish":
+            return {
+                "ok": True,
+                "short_id": "abc123",
+                "url": DISPLAY_URL,
+                "version": int(args.get("base_version") or 0) + 1,
+            }
+        if method == "display_comments":
+            return {"ok": True, "comments": []}
+        if method == "display_revise":
+            return {
+                "ok": True,
+                "markdown": "REVISED",
+                "director_audit": {"verdict": "pass"},
+                "stale_anchors": [],
+            }
+        if method == "display_resolve":
+            return {"ok": True}
+        if method == "display_unpublish":
+            return {"ok": True}
         raise AssertionError(method)
 
     async def fake_post_gate_message(_ctx, **kwargs):
         posts.append(kwargs)
+        if timeline is not None:
+            timeline.append(("post", kwargs["name"]))
         return {"channel": "C123", "ts": kwargs["name"]}
 
     async def fake_update_gate_message(_ctx, **kwargs):
         updates.append(kwargs)
+        if timeline is not None:
+            timeline.append(("update", kwargs["name"]))
         return {"ok": True}
 
     fact_events = iter(
@@ -291,6 +333,7 @@ async def _run_delivery(
         ]
     )
     deliver_events = iter(delivery_events)
+    review_events = iter(blog_review_events or [])
 
     async def fake_wait_for_fact_action(*_args, **_kwargs):
         return next(fact_events)
@@ -298,7 +341,11 @@ async def _run_delivery(
     async def fake_release_wait(*_args, **_kwargs):
         return next(release_events)
 
-    async def fake_delivery_wait(*_args, **_kwargs):
+    async def fake_delivery_wait(_ctx, name, gate, allowed):
+        if wait_log is not None:
+            wait_log.append((name, gate.gate_version, set(allowed)))
+        if gate.stage == "blog_review":
+            return next(review_events)
         if delivery_wait_error is not None:
             raise delivery_wait_error
         return next(deliver_events)
@@ -328,9 +375,10 @@ async def _run_delivery(
 
     result = await comms_release.handler(
         comms_release.Input(
-            brief=f"for {', '.join(channels)}: launch Fact A",
+            brief=brief or f"for {', '.join(channels)}: launch Fact A",
             user_id="U123",
             delivery={"platform": "slack"},
+            reviewer_emails=list(reviewer_emails or []),
         ),
         Ctx(),
     )
@@ -364,6 +412,7 @@ async def test_tokens_absent_falls_through_to_ready_to_ship(monkeypatch):
 async def test_delivery_preview_create_finish_with_typefully_first_ordering(
     monkeypatch,
 ):
+    wait_log: list = []
     result, posts, updates, calls = await _run_delivery(
         monkeypatch,
         channels=["x", "x-thread", "blog"],
@@ -373,9 +422,17 @@ async def test_delivery_preview_create_finish_with_typefully_first_ordering(
             _deliver("finish", 3),
         ],
         caps={"platform_pr": True, "typefully": True, "display": False},
+        wait_log=wait_log,
     )
 
     assert result["status"] == "ready_to_ship"
+    # Fresh-gate invariant (first-write-wins durable events): each round waits
+    # on a distinct, strictly-increasing (step_name, gate_version) pair.
+    assert [(name, version) for name, version, _ in wait_log] == [
+        ("wait_delivery_gate_r1", 1),
+        ("wait_delivery_gate_r2", 2),
+        ("wait_delivery_gate_r3", 3),
+    ]
     emits = [(i, c) for i, c in enumerate(calls) if c[1] == "emit_platform_pr"]
     assert len(emits) == 2
     assert emits[0][1][2]["dry_run"] is True
@@ -605,3 +662,571 @@ async def test_delivery_all_failed_typefully_is_retryable(monkeypatch):
         text = block["text"]["text"]
         assert text.startswith("```")
         assert text.rstrip("…").rstrip().endswith("```")
+
+
+@pytest.mark.asyncio
+async def test_delivery_typefully_mixed_failure_is_visible(monkeypatch):
+    """One draft created, one failed: the failure must be VISIBLE — in the
+    audit line and in the created-state render — not silently filtered out.
+    State still flips to created (one succeeded; existing semantics)."""
+
+    def typefully_override(_name, args):
+        if args["channel"] == "x":
+            return {"ok": True, "share_url": "https://typefully.com/t/x"}
+        return {"ok": False, "error": "typefully_429"}
+
+    result, _posts, updates, _calls = await _run_delivery(
+        monkeypatch,
+        channels=["x", "x-thread"],
+        delivery_events=[_deliver("typefully", 1), _deliver("finish", 2)],
+        caps={"platform_pr": False, "typefully": True, "display": False},
+        overrides={"typefully_draft": typefully_override},
+    )
+
+    assert result["status"] == "ready_to_ship"
+    # State flipped to created → round 2 has no retry button; the render lists
+    # BOTH the created URL and the failed entry with its error.
+    round_2 = [u for u in updates if u.get("name") == "render_delivery_gate_r2"]
+    assert len(round_2) == 1
+    flat = str(round_2[0]["blocks"])
+    assert "https://typefully.com/t/x" in flat
+    assert "x-thread: FAILED (typefully_429)" in flat
+    assert '"action":"typefully"' not in flat.replace("'", '"')
+    # The audit line names the failed channel + error.
+    assert "Typefully failed for x-thread: typefully_429" in flat
+    assert result["deliveries"]["typefully"] == [
+        {"channel": "x", "status": "created", "url": "https://typefully.com/t/x"},
+        {
+            "channel": "x-thread",
+            "status": "failed",
+            "url": None,
+            "error": "typefully_429",
+        },
+    ]
+    assert result["no_external_posting"] is False
+
+
+# --- blog draft-review loop on display.dev (run_blog_review_loop spliced
+# between the capabilities probe and the ship section) ---
+
+
+def test_revise_result_error_envelope_semantics():
+    assert _revise_result_error("nope") == "invalid_tool_response"
+    assert _revise_result_error({"ok": False, "error": "boom"}) == "boom"
+    assert _revise_result_error({"ok": False}) == "tool_call_failed"
+    assert _revise_result_error({"ok": True, "error": "warn"}) == "warn"
+    assert (
+        _revise_result_error({"ok": True, "markdown": "  "})
+        == "revise_response_missing_markdown"
+    )
+    assert _revise_result_error({"ok": True, "markdown": "text"}) == ""
+
+
+def test_parse_reviewer_emails():
+    # No reviewers line at all.
+    assert _parse_reviewer_emails("for blog: perps launch") == []
+    # Line present but no well-formed email on it.
+    assert _parse_reviewer_emails("reviewers: nobody, at-all") == []
+    # Malformed dropped, case-insensitive dedupe, first-seen order kept.
+    assert _parse_reviewer_emails(
+        "for blog: perps launch. reviewers: a@x.com, B@x.com, notanemail, A@X.COM"
+    ) == ["a@x.com", "B@x.com"]
+    # Multi-line briefs: only the reviewers line is parsed (not later lines),
+    # and 'reviewer:' singular matches case-insensitively.
+    assert _parse_reviewer_emails(
+        "launch brief\nReviewer: c@z.dev d@z.dev\nother@line.com ignored"
+    ) == ["c@z.dev", "d@z.dev"]
+
+
+@pytest.mark.asyncio
+async def test_blog_review_skipped_without_capability_or_reviewers(monkeypatch):
+    # caps.display False → no publish even with reviewers present.
+    result, _posts, _updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        caps={"platform_pr": True, "typefully": False, "display": False},
+        reviewer_emails=["a@x.com"],
+    )
+    assert result["status"] == "ready_to_ship"
+    assert "display_publish" not in [m for _, m, _ in calls]
+    assert result["deliveries"]["blog_review"] == {
+        "status": "skipped",
+        "url": None,
+        "version": None,
+    }
+
+    # caps.display True but NO reviewers (input empty, brief has no line) →
+    # loop skipped; the delivery gate still proceeds normally.
+    result, _posts, _updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+    )
+    assert result["status"] == "ready_to_ship"
+    assert "display_publish" not in [m for _, m, _ in calls]
+    assert result["deliveries"]["blog_review"]["status"] == "skipped"
+
+
+@pytest.mark.asyncio
+async def test_blog_review_publish_and_clean_approve(monkeypatch):
+    result, posts, _updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("approve", 1)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+    )
+
+    assert result["status"] == "ready_to_ship"
+    publishes = [c for c in calls if c[1] == "display_publish"]
+    assert len(publishes) == 1
+    assert publishes[0][2]["visibility"] == "private"
+    assert publishes[0][2]["share"] == ["a@x.com"]
+    # A posted message carries the artifact URL for reviewers.
+    assert DISPLAY_URL in str(posts)
+    assert result["deliveries"]["blog_review"] == {
+        "status": "approved",
+        "url": DISPLAY_URL,
+        "version": 1,
+    }
+    # Artifact retained as the review record — never unpublished on approve.
+    assert "display_unpublish" not in [m for _, m, _ in calls]
+    # Flow continues into the delivery gate.
+    assert "render_delivery_gate_r1" in [p.get("name") for p in posts]
+
+
+@pytest.mark.asyncio
+async def test_blog_review_pull_and_revise_round(monkeypatch):
+    comments_responses = iter(
+        [
+            # r1 pull: one open comment.
+            [{"id": "c1", "body": "fix intro", "text_quote": "intro"}],
+            # r2 pull: c1 already resolved in r1 (must NOT be re-fed) + a NEW
+            # comment left on a stale page view (created_on_version 1 < current
+            # version 2) — still fed: there is NO created_on_version filtering.
+            [
+                {"id": "c1", "body": "fix intro", "text_quote": "intro"},
+                {
+                    "id": "c2",
+                    "body": "tighten ending",
+                    "text_quote": "ending",
+                    "created_on_version": 1,
+                },
+            ],
+            # r3 approve check: everything resolved → clean approve.
+            [
+                {"id": "c1", "body": "fix intro", "text_quote": "intro"},
+                {"id": "c2", "body": "tighten ending", "text_quote": "ending"},
+            ],
+        ]
+    )
+    revise_responses = iter(
+        [
+            {
+                "ok": True,
+                "markdown": "REVISED-1",
+                "director_audit": {"verdict": "pass"},
+                "stale_anchors": [],
+            },
+            {
+                "ok": True,
+                "markdown": "REVISED",
+                "director_audit": {"verdict": "pass", "tempo": "calm"},
+                "stale_anchors": ["c1-anchor"],
+            },
+        ]
+    )
+    wait_log: list = []
+    result, _posts, updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[
+            _deliver("preview_pr", 1),
+            _deliver("create_pr", 2),
+            _deliver("finish", 3),
+        ],
+        blog_review_events=[
+            _review("pull_revise", 1),
+            _review("pull_revise", 2),
+            _review("approve", 3),
+        ],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+        wait_log=wait_log,
+        overrides={
+            "display_comments": lambda _n, _a: {
+                "ok": True,
+                "comments": next(comments_responses),
+            },
+            "display_revise": lambda _n, _a: next(revise_responses),
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    # Round 2's revise was fed ONLY the new comment (c1 not re-fed; c2 fed
+    # despite its stale created_on_version).
+    revises = [c for c in calls if c[1] == "display_revise"]
+    assert len(revises) == 2
+    assert revises[1][2]["comments"] == [
+        {"text_quote": "ending", "body": "tighten ending"}
+    ]
+    # Republish carries short_id + base_version (1 then 2).
+    publishes = [c for c in calls if c[1] == "display_publish"]
+    assert len(publishes) == 3
+    assert "base_version" not in publishes[0][2]
+    assert publishes[1][2]["short_id"] == "abc123"
+    assert publishes[1][2]["base_version"] == 1
+    assert publishes[2][2]["base_version"] == 2
+    # display_resolve for the fed id only AFTER its republish succeeded.
+    indexed = list(enumerate(calls))
+    republish_1 = next(i for i, c in indexed if c[0] == "display_publish_r2")
+    resolve_c1 = next(i for i, c in indexed if c[1] == "display_resolve")
+    assert calls[resolve_c1][2] == {"root_comment_id": "c1"}
+    assert resolve_c1 > republish_1
+    assert [c[2]["root_comment_id"] for c in calls if c[1] == "display_resolve"] == [
+        "c1",
+        "c2",
+    ]
+    # Re-render mentions the director audit; the stale-anchor note is its own block.
+    flat_updates = str(updates)
+    assert "Director audit:" in flat_updates
+    round_3 = next(u for u in updates if u.get("name") == "render_blog_review_r3")
+    stale_blocks = [
+        b for b in round_3["blocks"] if "reference spans that were rewritten" in str(b)
+    ]
+    assert len(stale_blocks) == 1
+    # The revised text replaced the blog entry and flowed into the emit args.
+    assert result["final_by_channel"]["blog"]["text"] == "REVISED"
+    assert result["final_by_channel"]["blog"]["edited"] is True
+    emits = [c for c in calls if c[1] == "emit_platform_pr"]
+    for emit in emits:
+        assert emit[2]["final_by_channel"]["blog"]["text"] == "REVISED"
+    assert result["deliveries"]["blog_review"] == {
+        "status": "approved",
+        "url": DISPLAY_URL,
+        "version": 3,
+    }
+    # Fresh-gate invariant across BOTH loops: blog_review waits then deliver
+    # waits, each strictly increasing.
+    assert [(name, version) for name, version, _ in wait_log] == [
+        ("wait_blog_review_r1", 1),
+        ("wait_blog_review_r2", 2),
+        ("wait_blog_review_r3", 3),
+        ("wait_delivery_gate_r1", 1),
+        ("wait_delivery_gate_r2", 2),
+        ("wait_delivery_gate_r3", 3),
+    ]
+
+
+@pytest.mark.asyncio
+async def test_blog_review_failed_revise_does_not_consume_budget(monkeypatch):
+    """10 failed revisions then a successful one: if failures consumed the
+    MAX_BLOG_REVIEW_ROUNDS budget the 11th round would exit 'exhausted'
+    before the success. They don't (spec: failed revision 'does not consume
+    the round') — but each wait still used a fresh gate_version."""
+    revise_calls = {"n": 0}
+
+    def revise_override(_name, _args):
+        revise_calls["n"] += 1
+        if revise_calls["n"] <= 10:
+            return {"ok": False, "error": "boom"}
+        return {
+            "ok": True,
+            "markdown": "REVISED",
+            "director_audit": {"verdict": "pass"},
+            "stale_anchors": [],
+        }
+
+    comment_state = {"resolved": False}
+
+    def comments_override(_name, _args):
+        if comment_state["resolved"]:
+            return {"ok": True, "comments": []}
+        return {
+            "ok": True,
+            "comments": [{"id": "c1", "body": "fix it", "text_quote": "span"}],
+        }
+
+    def resolve_override(_name, _args):
+        comment_state["resolved"] = True
+        return {"ok": True}
+
+    result, _posts, updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("pull_revise", n) for n in range(1, 12)]
+        + [_review("approve", 12)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+        overrides={
+            "display_revise": revise_override,
+            "display_comments": comments_override,
+            "display_resolve": resolve_override,
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    assert len([c for c in calls if c[1] == "display_revise"]) == 11
+    # Version stayed 1 through every failure: the one republish based off v1.
+    publishes = [c for c in calls if c[1] == "display_publish"]
+    assert len(publishes) == 2
+    assert publishes[1][2]["base_version"] == 1
+    # A post-failure render said the revision failed and kept the version.
+    assert "Revision failed: boom — keeping v1." in str(updates)
+    assert result["deliveries"]["blog_review"] == {
+        "status": "approved",
+        "url": DISPLAY_URL,
+        "version": 2,
+    }
+
+
+@pytest.mark.asyncio
+async def test_blog_review_approve_with_open_comments_requires_confirm(monkeypatch):
+    wait_log: list = []
+    result, _posts, updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("approve", 1), _review("approve_anyway", 2)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+        wait_log=wait_log,
+        overrides={
+            "display_comments": lambda _n, _a: {
+                "ok": True,
+                "comments": [{"id": "c9", "body": "wait", "text_quote": "span"}],
+            }
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    # The confirm round's allowed actions include approve_anyway (and the
+    # render warns + offers the button).
+    review_waits = [w for w in wait_log if w[0].startswith("wait_blog_review")]
+    assert [(name, version) for name, version, _ in review_waits] == [
+        ("wait_blog_review_r1", 1),
+        ("wait_blog_review_r2", 2),
+    ]
+    assert "approve_anyway" in review_waits[1][2]
+    assert "approve_anyway" not in review_waits[0][2]
+    round_2 = next(u for u in updates if u.get("name") == "render_blog_review_r2")
+    flat = str(round_2["blocks"]).replace("'", '"')
+    assert "open comment(s) not yet addressed" in flat
+    assert '"action":"approve_anyway"' in flat
+    assert result["deliveries"]["blog_review"] == {
+        "status": "approved",
+        "url": DISPLAY_URL,
+        "version": 1,
+    }
+    assert "display_unpublish" not in [m for _, m, _ in calls]
+
+
+@pytest.mark.asyncio
+async def test_blog_review_abandon_unpublishes_and_delivery_gate_still_runs(
+    monkeypatch,
+):
+    result, posts, _updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("abandon", 1)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+    )
+
+    assert result["status"] == "ready_to_ship"
+    assert "display_unpublish" in [m for _, m, _ in calls]
+    # Review-abandon != release-abandon: the approved copy survives and the
+    # delivery gate still offers the PR.
+    assert result["deliveries"]["blog_review"] == {
+        "status": "abandoned",
+        "url": None,
+        "version": 1,
+    }
+    assert result["final_by_channel"]["blog"]["text"] == "blog approved copy"
+    assert "render_delivery_gate_r1" in [p.get("name") for p in posts]
+
+
+@pytest.mark.asyncio
+async def test_blog_review_wait_cap_exhaustion_maps_to_abandoned(monkeypatch):
+    # 30 pull_revise rounds that find no new comments: no budget consumed,
+    # but every round burns a wait — the hard cap trips.
+    result, _posts, updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("pull_revise", n) for n in range(1, 31)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+    )
+
+    assert result["status"] == "ready_to_ship"
+    assert len([c for c in calls if c[1] == "display_comments"]) == 30
+    assert "display_unpublish" in [m for _, m, _ in calls]
+    # Spec status enum stays approved|abandoned|skipped — exhaustion is
+    # "abandoned" plus a distinct reason, never a widened enum.
+    assert result["deliveries"]["blog_review"] == {
+        "status": "abandoned",
+        "url": None,
+        "version": 1,
+        "exhaustion_reason": "max_waits_reached",
+    }
+    terminal = [u for u in updates if u.get("name") == "render_blog_review_terminal"]
+    assert len(terminal) == 1
+    assert '"type": "actions"' not in str(terminal[0]["blocks"]).replace("'", '"')
+    # Delivery gate still runs after review exhaustion.
+    assert any(u.get("name") == "render_delivery_gate_terminal" for u in updates)
+
+
+@pytest.mark.asyncio
+async def test_blog_review_failed_republish_discards_revision(monkeypatch):
+    comments_responses = iter(
+        [
+            [{"id": "c1", "body": "fix intro", "text_quote": "intro"}],
+            [],  # approve-path check: exit clean
+        ]
+    )
+    publish_calls = {"n": 0}
+
+    def publish_override(_name, args):
+        publish_calls["n"] += 1
+        if publish_calls["n"] == 1:
+            return {"ok": True, "short_id": "abc123", "url": DISPLAY_URL, "version": 1}
+        return {"ok": False, "error": "version_conflict"}
+
+    result, _posts, updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[
+            _deliver("preview_pr", 1),
+            _deliver("create_pr", 2),
+            _deliver("finish", 3),
+        ],
+        blog_review_events=[_review("pull_revise", 1), _review("approve", 2)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+        overrides={
+            "display_publish": publish_override,
+            "display_comments": lambda _n, _a: {
+                "ok": True,
+                "comments": next(comments_responses),
+            },
+            "display_revise": lambda _n, _a: {
+                "ok": True,
+                "markdown": "REVISED-DISCARDED",
+                "director_audit": {"verdict": "pass"},
+                "stale_anchors": [],
+            },
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    # Republish failed → the revision is discarded: no resolve, version
+    # unchanged, the later approve ships the ORIGINAL text.
+    assert "display_resolve" not in [m for _, m, _ in calls]
+    assert "revision discarded" in str(updates)
+    assert result["deliveries"]["blog_review"] == {
+        "status": "approved",
+        "url": DISPLAY_URL,
+        "version": 1,
+    }
+    assert result["final_by_channel"]["blog"]["text"] == "blog approved copy"
+    assert result["final_by_channel"]["blog"].get("edited") is not True
+    emits = [c for c in calls if c[1] == "emit_platform_pr"]
+    for emit in emits:
+        assert emit[2]["final_by_channel"]["blog"]["text"] == "blog approved copy"
+    assert "REVISED-DISCARDED" not in str(emits)
+
+
+@pytest.mark.asyncio
+async def test_blog_review_processing_renders_and_abandon_after_revision(monkeypatch):
+    comments_responses = iter(
+        [
+            [{"id": "c1", "body": "fix intro", "text_quote": "intro"}],  # r1 pull
+            [{"id": "c2", "body": "more", "text_quote": "span"}],  # r2 approve check
+        ]
+    )
+    timeline: list = []
+    result, _posts, updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[
+            _review("pull_revise", 1),
+            _review("approve", 2),
+            _review("abandon", 3),
+        ],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+        timeline=timeline,
+        overrides={
+            "display_comments": lambda _n, _a: {
+                "ok": True,
+                "comments": next(comments_responses),
+            },
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    # The ⏳ processing render lands BEFORE the slow tool calls it announces.
+    assert timeline.index(
+        ("update", "render_blog_review_revising_r1")
+    ) < timeline.index(("call", "display_comments_r1"))
+    assert timeline.index(("call", "display_comments_r1")) < timeline.index(
+        ("call", "display_revise_r1")
+    )
+    assert timeline.index(
+        ("update", "render_blog_review_checking_r2")
+    ) < timeline.index(("call", "display_comments_approve_r2"))
+    # Processing renders are buttonless and show the spinner.
+    for name in ("render_blog_review_revising_r1", "render_blog_review_checking_r2"):
+        render = next(u for u in updates if u.get("name") == name)
+        flat = str(render["blocks"]).replace("'", '"')
+        assert '"type": "actions"' not in flat
+        assert "⏳" in flat
+    # Abandon AFTER a successful revision: the revision is persisted in the
+    # result and the terminal render warns the PR uses the pre-review text.
+    assert "display_unpublish" in [m for _, m, _ in calls]
+    assert result["deliveries"]["blog_review"] == {
+        "status": "abandoned",
+        "url": None,
+        "version": 2,
+        "discarded_revision": "REVISED",
+    }
+    terminal = next(
+        u for u in updates if u.get("name") == "render_blog_review_terminal"
+    )
+    assert "PRE-review text" in str(terminal["text"])
+
+
+@pytest.mark.asyncio
+async def test_blog_review_reviewers_parsed_from_brief_and_input_override(monkeypatch):
+    # Brief-parsed: malformed dropped, case-insensitive dedupe, order kept.
+    result, _posts, _updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("approve", 1)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        brief="for blog: perps launch. reviewers: a@x.com, B@x.com, notanemail, a@x.com",
+    )
+    assert result["status"] == "ready_to_ship"
+    publish = next(c for c in calls if c[1] == "display_publish")
+    assert publish[2]["share"] == ["a@x.com", "B@x.com"]
+
+    # Explicit reviewer_emails input overrides the brief's line.
+    result, _posts, _updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("approve", 1)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["z@y.com"],
+        brief="for blog: perps launch. reviewers: a@x.com",
+    )
+    publish = next(c for c in calls if c[1] == "display_publish")
+    assert publish[2]["share"] == ["z@y.com"]
