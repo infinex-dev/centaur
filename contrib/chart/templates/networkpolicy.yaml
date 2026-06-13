@@ -212,6 +212,22 @@ spec:
         - protocol: TCP
           port: {{ $.Values.ironProxy.service.proxyPort }}
 {{- end }}
+{{- range ($svc.egressPorts | default list) }}
+    # Internet-only: a bare ports rule would also open every in-cluster service
+    # on this port. The except list blocks the RFC-1918 ranges (in-cluster pod
+    # and service CIDRs live there), so this grants internet egress only —
+    # narrower than the repo-cache precedent, deliberately.
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 172.16.0.0/12
+              - 192.168.0.0/16
+      ports:
+        - protocol: TCP
+          port: {{ . }}
+{{- end }}
 ---
 {{- end }}
 {{- end }}

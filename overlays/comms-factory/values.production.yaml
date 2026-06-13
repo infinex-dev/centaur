@@ -31,6 +31,10 @@ attachedServices:
     # not through iron-proxy (matches the validated local wiring).
     proxy:
       enabled: false
+    # Delivery routing (phase 2): GitHub REST + Typefully + display.dev are
+    # direct HTTPS calls (proxy.enabled is false) — open port-443 egress.
+    egressPorts:
+      - 443
     # Bootstraps the least-privilege `service:comms-factory` API key (research
     # bundle only) from the COMMS_FACTORY_CAPABILITY_API_KEY secret-env token via
     # the generic attached-service key mechanism — no hardcoded base api_keys entry.
@@ -55,6 +59,23 @@ attachedServices:
       CENTAUR_TOKEN:
         secretName: centaur-infra-env
         key: COMMS_FACTORY_CAPABILITY_API_KEY
+      # Delivery tokens (phase 2). GITHUB_TOKEN is the SAME infra fine-grained
+      # PAT repo-cache mounts, upgraded by the operator to Contents+PR write
+      # (decision 2026-06-12 — see the plan's deviation log). "PRs only, never
+      # lands code" is enforced by platform main's pull_request ruleset, not
+      # the token.
+      GITHUB_TOKEN:
+        secretName: centaur-infra-env
+        key: GITHUB_TOKEN
+        optional: true
+      TYPEFULLY_API_KEY:
+        secretName: centaur-infra-env
+        key: TYPEFULLY_API_KEY
+        optional: true
+      DISPLAYDEV_API_KEY:
+        secretName: centaur-infra-env
+        key: DISPLAYDEV_API_KEY
+        optional: true
 
 # Read-only repo cache the comms grounder reads real product facts from. Uses the
 # agent image (repoCache.image defaults to sandbox.image, which the script --sets)
