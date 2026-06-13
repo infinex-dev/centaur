@@ -1422,6 +1422,16 @@ def test_render_hmac_sign_separate_transforms_for_distinct_schemes() -> None:
     }
 
 
+def test_render_header_allowlist_passes_user_agent() -> None:
+    # Cloudflare-fronted upstreams (e.g. Kinovi) 403 requests without a
+    # browser User-Agent, so the rendered config must let the header through.
+    cfg = yaml.safe_load(render_proxy_yaml([]))
+    allowlist = next(
+        t for t in cfg["transforms"] if t["name"] == "header_allowlist"
+    )
+    assert "user-agent" in allowlist["config"]["headers"]
+
+
 def test_render_omits_managed_transforms_when_no_matching_secrets() -> None:
     cfg = yaml.safe_load(render_proxy_yaml([]))
     assert [t["name"] for t in cfg["transforms"]] == [

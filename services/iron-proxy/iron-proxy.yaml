@@ -28,6 +28,7 @@ transforms:
         - "accept"
         - "accept-encoding"
         - "accept-language"
+        - "user-agent"
         - "authorization"
         - "jwt"
         - "anthropic-version"
