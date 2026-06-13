@@ -482,6 +482,7 @@ def blog_review_blocks(
     pending_confirm: int = 0,
     processing: str = "",
     stale_note: str = "",
+    budget_exhausted: bool = False,
     terminal: bool = False,
 ) -> list[dict[str, Any]]:
     blocks = [
@@ -505,6 +506,15 @@ def blog_review_blocks(
         blocks.append(markdown_block(f"⏳ _{processing}_"))
         return blocks
     if not terminal:
+        if budget_exhausted:
+            # Budget exhaustion is NOT an auto-abandon: the operator still gets
+            # a final round, just without the revise button.
+            blocks.append(
+                markdown_block(
+                    f"_Revision budget ({MAX_BLOG_REVIEW_ROUNDS}) exhausted —"
+                    " approve or abandon._"
+                )
+            )
         if pending_confirm:
             blocks.append(
                 markdown_block(
@@ -512,27 +522,19 @@ def blog_review_blocks(
                     " approve anyway?"
                 )
             )
-            blocks.append(
-                actions_block(
-                    gate,
-                    [
-                        ("Approve anyway", "approve_anyway", "primary"),
-                        ("Pull comments & revise", "pull_revise", None),
-                        ("Abandon", "abandon", "danger"),
-                    ],
-                )
-            )
+            actions = [("Approve anyway", "approve_anyway", "primary")]
+            if not budget_exhausted:
+                actions.append(("Pull comments & revise", "pull_revise", None))
+            actions.append(("Abandon", "abandon", "danger"))
         else:
-            blocks.append(
-                actions_block(
-                    gate,
-                    [
-                        ("Pull comments & revise", "pull_revise", None),
-                        ("Approve → open PR", "approve", "primary"),
-                        ("Abandon", "abandon", "danger"),
-                    ],
-                )
+            actions = (
+                []
+                if budget_exhausted
+                else [("Pull comments & revise", "pull_revise", None)]
             )
+            actions.append(("Approve → open PR", "approve", "primary"))
+            actions.append(("Abandon", "abandon", "danger"))
+        blocks.append(actions_block(gate, actions))
     return blocks
 
 
@@ -600,6 +602,7 @@ async def run_blog_review_loop(
             pending_confirm=pending_confirm,
             processing=processing,
             stale_note=stale_note,
+            budget_exhausted=rounds_used >= MAX_BLOG_REVIEW_ROUNDS,
             terminal=terminal,
         )
         if not gate_message:
@@ -625,9 +628,11 @@ async def run_blog_review_loop(
             )
 
     for wait_n in range(1, MAX_BLOG_REVIEW_WAITS + 1):
-        if rounds_used >= MAX_BLOG_REVIEW_ROUNDS:
-            outcome = "exhausted"
-            break
+        # Budget exhaustion is NOT an auto-exit: the operator gets a final
+        # approve/abandon round (pull_revise withheld in the render AND the
+        # allowed set). The wait cap on this loop stays the only hard
+        # exhaustion exit (exhaustion_reason: max_waits_reached).
+        budget_exhausted = rounds_used >= MAX_BLOG_REVIEW_ROUNDS
         gate = Gate(ctx.run_id, "blog_review", wait_n, inp.user_id, approvers)
         await _render(
             gate,
@@ -640,6 +645,8 @@ async def run_blog_review_loop(
             if pending_confirm
             else {"pull_revise", "approve", "abandon"}
         )
+        if budget_exhausted:
+            allowed.discard("pull_revise")
         try:
             event = await wait_for_gate_action(
                 ctx, f"wait_blog_review_r{wait_n}", gate, allowed
@@ -670,6 +677,16 @@ async def run_blog_review_loop(
                 "display_comments",
                 {"short_id": short_id, "status": "open"},
             )
+            if open_check.get("ok") is not True:
+                # A failed comments check must NOT masquerade as "no comments"
+                # (core invariant: feedback is never silently shipped) — do not
+                # approve; the next round re-offers the buttons.
+                err = str(open_check.get("error") or "unknown")[:200]
+                audit_line = (
+                    f"Comments check failed: {err} — cannot verify open"
+                    " feedback; retry or abandon."
+                )
+                continue
             open_comments = [
                 c
                 for c in (open_check.get("comments") or [])
@@ -699,6 +716,13 @@ async def run_blog_review_loop(
                 "display_comments",
                 {"short_id": short_id, "status": "open"},
             )
+            if pulled.get("ok") is not True:
+                # Same honesty rule as the approve-path check: a failed pull is
+                # not "no new comments" — nothing reaches the reviser, the
+                # version is kept, and the revision budget stays intact.
+                err = str(pulled.get("error") or "unknown")[:200]
+                audit_line = f"Comments pull failed: {err} — keeping v{version}."
+                continue
             # Already-addressed feedback is excluded via resolved_ids (fed
             # comments are resolved below) + the route's stale-anchor check.
             # NO createdOnVersion filter: it strands a comment left on a stale

@@ -630,19 +630,32 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
     caps = caps_raw if isinstance(caps_raw, dict) else {}
 
     reviewer_emails = list(inp.reviewer_emails) or _parse_reviewer_emails(brief)
-    if (
-        final_by_channel.get("blog") is not None
-        and caps.get("display")
-        and reviewer_emails
-    ):
-        final_by_channel, deliveries = await run_blog_review_loop(
-            ctx,
-            inp,
-            card=card,
-            final_by_channel=final_by_channel,
-            deliveries=deliveries,
-            reviewer_emails=reviewer_emails,
-        )
+    if final_by_channel.get("blog") is not None and caps.get("display"):
+        if reviewer_emails:
+            final_by_channel, deliveries = await run_blog_review_loop(
+                ctx,
+                inp,
+                card=card,
+                final_by_channel=final_by_channel,
+                deliveries=deliveries,
+                reviewer_emails=reviewer_emails,
+            )
+        else:
+            # The capability is live but there is nobody to share with — say
+            # so: a silently-skipped review loop reads as a bug to the operator.
+            await post_gate_message(
+                ctx,
+                name="post_blog_review_no_reviewers",
+                delivery=inp.delivery,
+                text="blog review loop skipped — no reviewer emails.",
+                blocks=[
+                    context_block(
+                        "blog review loop skipped — no reviewer emails (add"
+                        " `reviewers: a@x.com` to the brief or pass"
+                        " reviewer_emails)."
+                    )
+                ],
+            )
 
     # ---- ship (per-channel) ----
     ship_blocks: list[dict[str, Any]] = [

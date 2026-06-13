@@ -3205,7 +3205,13 @@ straight to the delivery PR. First publish is `visibility: private` + reviewer a
 **revision-round budget** (10) counts successful revisions; failed revisions don't
 consume it (spec: "does not consume the round") — but every gate wait still uses a fresh
 `gate_version` (first-write-wins: a correlation is never reused), with a hard wait cap
-of 30. **Already-addressed feedback** is excluded via `resolved_ids` + the route's
+of 30. **Budget exhaustion is NOT an auto-abandon** (review fix 2026-06-13): the
+operator gets a final round with `pull_revise` withheld (button AND allowed set) plus a
+"_Revision budget (10) exhausted — approve or abandon._" note; only the wait cap
+hard-exits (`exhaustion_reason: "max_waits_reached"`). **A failed `display_comments`
+never masquerades as "no comments"** (review fix 2026-06-13 — feedback is never
+silently shipped): the approve path refuses to approve and re-offers the buttons on
+the next round; the pull path keeps the version and the budget intact. **Already-addressed feedback** is excluded via `resolved_ids` + the route's
 stale-anchor check — NOT the spec's `createdOnVersion` filter (dropped: it strands a
 comment left on a stale page view, and the dsp text-output fallback can't reliably
 recover the field — recorded as deviation #10). **Interpretation flagged for review:**
@@ -3260,6 +3266,27 @@ unchanged and the delivery gate still offers the PR — review-abandon ≠ relea
       dedupe, order kept); explicit `reviewer_emails` input overrides the brief;
       neither present → loop skipped. Plus direct unit tests on
       `_parse_reviewer_emails` for the no-match and multi-line cases.
+  11. **comments-failure honesty** (review fix 2026-06-13): override
+      `display_comments` → `{ok: False, error: "dsp_down"}` on BOTH paths —
+      approve does NOT exit the loop (a second wait happens with the full button
+      set; the render says "Comments check failed: dsp_down — cannot verify open
+      feedback"); pull_revise never calls `display_revise` (audit "Comments pull
+      failed: dsp_down — keeping v1.", version + budget intact).
+  12. **budget exhaustion offers a final round** (review fix 2026-06-13):
+      monkeypatch `comms_delivery.MAX_BLOG_REVIEW_ROUNDS` to 1 (module attr);
+      after one successful revision the next render lacks `pull_revise` and notes
+      the exhausted budget, the allowed set is exactly `{approve, abandon}`
+      (`approve_anyway` never granted without pending comments), and approve
+      still exits approved — no auto-abandon, no `exhaustion_reason`.
+  13. **publish failure** (review fix 2026-06-13): first `display_publish` →
+      `{ok: False, error: "dsp_down"}` → context note posted
+      (`post_blog_review_unavailable`), `blog_review` stays `"skipped"`, no
+      review gate ever waits/unpublishes, and the delivery gate still renders
+      with the original copy.
+  14. **reviewers-missing note** (review fix 2026-06-13): caps.display True +
+      no reviewer emails → one context note (`post_blog_review_no_reviewers`)
+      telling the operator to add `reviewers: a@x.com` to the brief or pass
+      `reviewer_emails`; NOT posted when caps.display is False.
 
 - [ ] **Step 2: Run — verify failure**, then **implement `run_blog_review_loop`** in
   `comms_delivery.py`:
@@ -3287,6 +3314,7 @@ def blog_review_blocks(
     pending_confirm: int = 0,
     processing: str = "",
     stale_note: str = "",
+    budget_exhausted: bool = False,
     terminal: bool = False,
 ) -> list[dict[str, Any]]:
     blocks = [
@@ -3310,6 +3338,15 @@ def blog_review_blocks(
         blocks.append(markdown_block(f"⏳ _{processing}_"))
         return blocks
     if not terminal:
+        if budget_exhausted:
+            # Budget exhaustion is NOT an auto-abandon: the operator still gets
+            # a final round, just without the revise button.
+            blocks.append(
+                markdown_block(
+                    f"_Revision budget ({MAX_BLOG_REVIEW_ROUNDS}) exhausted —"
+                    " approve or abandon._"
+                )
+            )
         if pending_confirm:
             blocks.append(
                 markdown_block(
@@ -3317,27 +3354,19 @@ def blog_review_blocks(
                     " approve anyway?"
                 )
             )
-            blocks.append(
-                actions_block(
-                    gate,
-                    [
-                        ("Approve anyway", "approve_anyway", "primary"),
-                        ("Pull comments & revise", "pull_revise", None),
-                        ("Abandon", "abandon", "danger"),
-                    ],
-                )
-            )
+            actions = [("Approve anyway", "approve_anyway", "primary")]
+            if not budget_exhausted:
+                actions.append(("Pull comments & revise", "pull_revise", None))
+            actions.append(("Abandon", "abandon", "danger"))
         else:
-            blocks.append(
-                actions_block(
-                    gate,
-                    [
-                        ("Pull comments & revise", "pull_revise", None),
-                        ("Approve → open PR", "approve", "primary"),
-                        ("Abandon", "abandon", "danger"),
-                    ],
-                )
+            actions = (
+                []
+                if budget_exhausted
+                else [("Pull comments & revise", "pull_revise", None)]
             )
+            actions.append(("Approve → open PR", "approve", "primary"))
+            actions.append(("Abandon", "abandon", "danger"))
+        blocks.append(actions_block(gate, actions))
     return blocks
 
 
@@ -3396,7 +3425,9 @@ async def run_blog_review_loop(
         blocks = blog_review_blocks(
             gate, url=url, version=version, audit_line=audit_line,
             pending_confirm=pending_confirm, processing=processing,
-            stale_note=stale_note, terminal=terminal,
+            stale_note=stale_note,
+            budget_exhausted=rounds_used >= MAX_BLOG_REVIEW_ROUNDS,
+            terminal=terminal,
         )
         if not gate_message:
             gate_message = await post_gate_message(
@@ -3415,9 +3446,11 @@ async def run_blog_review_loop(
             )
 
     for wait_n in range(1, MAX_BLOG_REVIEW_WAITS + 1):
-        if rounds_used >= MAX_BLOG_REVIEW_ROUNDS:
-            outcome = "exhausted"
-            break
+        # Budget exhaustion is NOT an auto-exit: the operator gets a final
+        # approve/abandon round (pull_revise withheld in the render AND the
+        # allowed set). The wait cap on this loop stays the only hard
+        # exhaustion exit (exhaustion_reason: max_waits_reached).
+        budget_exhausted = rounds_used >= MAX_BLOG_REVIEW_ROUNDS
         gate = Gate(ctx.run_id, "blog_review", wait_n, inp.user_id, approvers)
         await _render(
             gate, f"render_blog_review_r{wait_n}", terminal=False,
@@ -3428,6 +3461,8 @@ async def run_blog_review_loop(
             if pending_confirm
             else {"pull_revise", "approve", "abandon"}
         )
+        if budget_exhausted:
+            allowed.discard("pull_revise")
         try:
             event = await wait_for_gate_action(
                 ctx, f"wait_blog_review_r{wait_n}", gate, allowed
@@ -3454,6 +3489,16 @@ async def run_blog_review_loop(
                 ctx, f"display_comments_approve_r{wait_n}", "display_comments",
                 {"short_id": short_id, "status": "open"},
             )
+            if open_check.get("ok") is not True:
+                # A failed comments check must NOT masquerade as "no comments"
+                # (core invariant: feedback is never silently shipped) — do not
+                # approve; the next round re-offers the buttons.
+                err = str(open_check.get("error") or "unknown")[:200]
+                audit_line = (
+                    f"Comments check failed: {err} — cannot verify open"
+                    " feedback; retry or abandon."
+                )
+                continue
             open_comments = [
                 c for c in (open_check.get("comments") or [])
                 if str(c.get("id")) not in resolved_ids
@@ -3480,6 +3525,13 @@ async def run_blog_review_loop(
                 ctx, f"display_comments_r{wait_n}", "display_comments",
                 {"short_id": short_id, "status": "open"},
             )
+            if pulled.get("ok") is not True:
+                # Same honesty rule as the approve-path check: a failed pull is
+                # not "no new comments" — nothing reaches the reviser, the
+                # version is kept, and the revision budget stays intact.
+                err = str(pulled.get("error") or "unknown")[:200]
+                audit_line = f"Comments pull failed: {err} — keeping v{version}."
+                continue
             # Already-addressed feedback is excluded via resolved_ids (fed
             # comments are resolved below) + the route's stale-anchor check.
             # NO createdOnVersion filter: it strands a comment left on a stale
@@ -3639,15 +3691,26 @@ def _parse_reviewer_emails(brief: str) -> list[str]:
 
 ```python
     reviewer_emails = list(inp.reviewer_emails) or _parse_reviewer_emails(brief)
-    if (
-        final_by_channel.get("blog") is not None
-        and caps.get("display")
-        and reviewer_emails
-    ):
-        final_by_channel, deliveries = await run_blog_review_loop(
-            ctx, inp, card=card, final_by_channel=final_by_channel,
-            deliveries=deliveries, reviewer_emails=reviewer_emails,
-        )
+    if final_by_channel.get("blog") is not None and caps.get("display"):
+        if reviewer_emails:
+            final_by_channel, deliveries = await run_blog_review_loop(
+                ctx, inp, card=card, final_by_channel=final_by_channel,
+                deliveries=deliveries, reviewer_emails=reviewer_emails,
+            )
+        else:
+            # The capability is live but there is nobody to share with — say
+            # so: a silently-skipped review loop reads as a bug to the operator.
+            await post_gate_message(
+                ctx, name="post_blog_review_no_reviewers", delivery=inp.delivery,
+                text="blog review loop skipped — no reviewer emails.",
+                blocks=[
+                    context_block(
+                        "blog review loop skipped — no reviewer emails (add"
+                        " `reviewers: a@x.com` to the brief or pass"
+                        " reviewer_emails)."
+                    )
+                ],
+            )
 ```
 
   (import `run_blog_review_loop` alongside the Task 12 imports; `brief` is the
@@ -3923,7 +3986,10 @@ git commit -m "docs(comms): delivery-routing deploy runsheet (tokens, egress, re
    `no_external_posting` carry the delivery truth (spec §5 defines no new status).
 6. **Failed blog revision "does not consume the round"** implemented as a
    revision-budget counter (10) separate from gate waits (hard cap 30) — a
-   correlation/`gate_version` is still never reused (first-write-wins).
+   correlation/`gate_version` is still never reused (first-write-wins). Budget
+   exhaustion withholds `pull_revise` but still offers a final approve/abandon
+   round (review fix 2026-06-13); only the wait cap hard-exits, with
+   `exhaustion_reason: "max_waits_reached"`.
 7. **`scratchpad_text`/`share:true`** are spec'd v2 API fields the in-repo harness
    client doesn't send; Task 2 adds them. If the live API rejects them, drop
    `scratchpad_text` (traceability nice-to-have) — `share:true` is load-bearing

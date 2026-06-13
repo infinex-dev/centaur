@@ -740,8 +740,9 @@ def test_parse_reviewer_emails():
 
 @pytest.mark.asyncio
 async def test_blog_review_skipped_without_capability_or_reviewers(monkeypatch):
-    # caps.display False → no publish even with reviewers present.
-    result, _posts, _updates, calls = await _run_delivery(
+    # caps.display False → no publish even with reviewers present, and NO
+    # reviewers-missing note (that note is reserved for the display-on case).
+    result, posts, _updates, calls = await _run_delivery(
         monkeypatch,
         channels=["blog"],
         delivery_events=[_deliver("finish", 1)],
@@ -755,10 +756,12 @@ async def test_blog_review_skipped_without_capability_or_reviewers(monkeypatch):
         "url": None,
         "version": None,
     }
+    assert "post_blog_review_no_reviewers" not in [p.get("name") for p in posts]
 
     # caps.display True but NO reviewers (input empty, brief has no line) →
-    # loop skipped; the delivery gate still proceeds normally.
-    result, _posts, _updates, calls = await _run_delivery(
+    # loop skipped WITH a context note saying how to enable it; the delivery
+    # gate still proceeds normally.
+    result, posts, _updates, calls = await _run_delivery(
         monkeypatch,
         channels=["blog"],
         delivery_events=[_deliver("finish", 1)],
@@ -767,6 +770,43 @@ async def test_blog_review_skipped_without_capability_or_reviewers(monkeypatch):
     assert result["status"] == "ready_to_ship"
     assert "display_publish" not in [m for _, m, _ in calls]
     assert result["deliveries"]["blog_review"]["status"] == "skipped"
+    note = next(p for p in posts if p.get("name") == "post_blog_review_no_reviewers")
+    flat = str(note["blocks"])
+    assert "no reviewer emails" in flat
+    assert "reviewers: a@x.com" in flat
+    assert "render_delivery_gate_r1" in [p.get("name") for p in posts]
+
+
+@pytest.mark.asyncio
+async def test_blog_review_publish_failure_posts_note_and_skips_loop(monkeypatch):
+    """First display_publish fails → a context note is posted, no review gate
+    ever waits, blog_review stays "skipped", and the delivery gate still runs
+    with the original copy."""
+    result, posts, _updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+        overrides={
+            "display_publish": lambda _n, _a: {"ok": False, "error": "dsp_down"}
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    note = next(p for p in posts if p.get("name") == "post_blog_review_unavailable")
+    assert "dsp_down" in str(note["blocks"])
+    assert result["deliveries"]["blog_review"] == {
+        "status": "skipped",
+        "url": None,
+        "version": None,
+    }
+    # No review gate rendered or unpublished — the loop never started.
+    assert "display_unpublish" not in [m for _, m, _ in calls]
+    assert "render_blog_review_r1" not in [p.get("name") for p in posts]
+    # The delivery gate still renders and the blog copy is unchanged.
+    assert "render_delivery_gate_r1" in [p.get("name") for p in posts]
+    assert result["final_by_channel"]["blog"]["text"] == "blog approved copy"
 
 
 @pytest.mark.asyncio
@@ -985,6 +1025,65 @@ async def test_blog_review_failed_revise_does_not_consume_budget(monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test_blog_review_budget_exhaustion_offers_final_approve_round(monkeypatch):
+    """Burning the revision budget must NOT auto-abandon: the next round drops
+    pull_revise (from the render AND the allowed set), notes the exhaustion,
+    and approve still works. Only the wait cap hard-exits (max_waits_reached)."""
+    import comms_delivery
+
+    monkeypatch.setattr(comms_delivery, "MAX_BLOG_REVIEW_ROUNDS", 1)
+
+    comment_state = {"resolved": False}
+
+    def comments_override(_name, _args):
+        if comment_state["resolved"]:
+            return {"ok": True, "comments": []}
+        return {
+            "ok": True,
+            "comments": [{"id": "c1", "body": "fix it", "text_quote": "span"}],
+        }
+
+    def resolve_override(_name, _args):
+        comment_state["resolved"] = True
+        return {"ok": True}
+
+    wait_log: list = []
+    result, _posts, updates, _calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("pull_revise", 1), _review("approve", 2)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+        wait_log=wait_log,
+        overrides={
+            "display_comments": comments_override,
+            "display_resolve": resolve_override,
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    review_waits = [w for w in wait_log if w[0].startswith("wait_blog_review")]
+    # Round 1: full set. Round 2 (budget spent): pull_revise withheld, and
+    # approve_anyway is never granted without pending comments.
+    assert review_waits[0][2] == {"pull_revise", "approve", "abandon"}
+    assert review_waits[1][2] == {"approve", "abandon"}
+    round_2 = next(u for u in updates if u.get("name") == "render_blog_review_r2")
+    flat = str(round_2["blocks"]).replace("'", '"')
+    assert "Revision budget (1) exhausted" in flat
+    assert '"action":"pull_revise"' not in flat
+    assert '"action":"approve"' in flat
+    assert '"action":"abandon"' in flat
+    # Approve on the final round exits approved — no auto-abandon, no
+    # exhaustion_reason.
+    assert result["deliveries"]["blog_review"] == {
+        "status": "approved",
+        "url": DISPLAY_URL,
+        "version": 2,
+    }
+
+
+@pytest.mark.asyncio
 async def test_blog_review_approve_with_open_comments_requires_confirm(monkeypatch):
     wait_log: list = []
     result, _posts, updates, calls = await _run_delivery(
@@ -1023,6 +1122,67 @@ async def test_blog_review_approve_with_open_comments_requires_confirm(monkeypat
         "version": 1,
     }
     assert "display_unpublish" not in [m for _, m, _ in calls]
+
+
+@pytest.mark.asyncio
+async def test_blog_review_failed_comments_check_does_not_approve(monkeypatch):
+    """A failed display_comments on the approve path must NOT masquerade as
+    "no comments" (feedback is never silently shipped): approve does NOT exit
+    the loop, the audit names the failure, and the next round re-offers the
+    full button set."""
+    wait_log: list = []
+    result, _posts, updates, _calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("approve", 1), _review("abandon", 2)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+        wait_log=wait_log,
+        overrides={
+            "display_comments": lambda _n, _a: {"ok": False, "error": "dsp_down"}
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    # approve did NOT exit the loop: a second blog_review wait happened, with
+    # the full button set (no pending_confirm was fabricated from the failure).
+    review_waits = [w for w in wait_log if w[0].startswith("wait_blog_review")]
+    assert [(name, version) for name, version, _ in review_waits] == [
+        ("wait_blog_review_r1", 1),
+        ("wait_blog_review_r2", 2),
+    ]
+    assert review_waits[1][2] == {"pull_revise", "approve", "abandon"}
+    round_2 = next(u for u in updates if u.get("name") == "render_blog_review_r2")
+    flat = str(round_2["blocks"])
+    assert "Comments check failed: dsp_down" in flat
+    assert "cannot verify open feedback" in flat
+    # The run only ended via the explicit abandon — never approved.
+    assert result["deliveries"]["blog_review"]["status"] == "abandoned"
+
+
+@pytest.mark.asyncio
+async def test_blog_review_failed_comments_pull_skips_revise(monkeypatch):
+    """A failed display_comments on the pull_revise path is not "no new
+    comments": nothing reaches the reviser, the version is kept, and the
+    revision budget stays intact."""
+    result, _posts, updates, calls = await _run_delivery(
+        monkeypatch,
+        channels=["blog"],
+        delivery_events=[_deliver("finish", 1)],
+        blog_review_events=[_review("pull_revise", 1), _review("abandon", 2)],
+        caps={"platform_pr": True, "typefully": False, "display": True},
+        reviewer_emails=["a@x.com"],
+        overrides={
+            "display_comments": lambda _n, _a: {"ok": False, "error": "dsp_down"}
+        },
+    )
+
+    assert result["status"] == "ready_to_ship"
+    assert "display_revise" not in [m for _, m, _ in calls]
+    assert "Comments pull failed: dsp_down — keeping v1." in str(updates)
+    assert result["deliveries"]["blog_review"]["status"] == "abandoned"
+    assert result["deliveries"]["blog_review"]["version"] == 1
 
 
 @pytest.mark.asyncio
