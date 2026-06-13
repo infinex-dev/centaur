@@ -42,6 +42,10 @@ Migrations use dbmate against both core and overlay migration sets:
 ./scripts/dbmate up                 # apply (status / migrate also available)
 ```
 
+The overlay migration set lives at `overlays/comms-factory/services/api/db/migrations/` and is applied at API startup by `services/api/api/db.py` against a separate `schema_migrations_overlay` table — discovered via **`CENTAUR_OVERLAY_DIR`** (the *runtime* container path `/app/overlay/org`, baked into the overlay image), NOT `CENTAUR_OVERLAY_HOST_DIR` (that's only the dbmate *authoring* wrapper's host-side var). The local overlay is shipped as the trivial `comms-factory-centaur-overlay:local` image (`alpine + COPY . /overlay`); to land new overlay migrations on local k3s, rebuild+import that image and `kubectl rollout restart deploy/centaur-centaur-api` (the init container re-copies `/overlay`, then `db.py` runs dbmate). Local DB is `ai_v2` (user `tempo`).
+
+**Running DB-backed pytest locally:** the `pg` conftest fixture needs `initdb`/`pg_ctl` or `docker`, neither of which is on this Mac (it's podman). Workaround: run your own throwaway PG and point the suite at it — `podman run -d --name t-pg -e POSTGRES_HOST_AUTH_METHOD=trust -e POSTGRES_DB=postgres -p 15432:5432 docker.io/paradedb/paradedb:0.23.0-pg16 -c shared_preload_libraries=pg_search,pg_cron`, then `CENTAUR_TEST_DATABASE_URL=postgresql://postgres@127.0.0.1:15432/postgres?sslmode=disable uv run --project services/api pytest …`. **Drop the `centaur_test` DB between runs** (`DROP DATABASE IF EXISTS centaur_test WITH (FORCE)`) — the fixture re-applies all *core* migrations every run and core is not idempotent, so a reused DB fails (e.g. `column "is_member" does not exist`). Never point this at the shared cluster Postgres.
+
 ## Architecture (the big picture)
 
 The end-to-end flow crosses several services that each speak a defined interface, so layers can be swapped independently:
