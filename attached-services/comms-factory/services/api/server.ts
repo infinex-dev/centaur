@@ -3,8 +3,11 @@ import { startManifestRefresh } from "../../src/fact-grounder/sources/repo-manif
 import { makeJsonServer, requirePostAuth, type Handler } from "./http.js";
 import { handleAudit } from "./routes/audit.js";
 import { handleBuildCard } from "./routes/build-card.js";
+import { makeDisplayHandlers } from "./routes/display.js";
+import { handleEmit } from "./routes/emit.js";
 import { handleGenerate } from "./routes/generate.js";
 import { handleGround } from "./routes/ground.js";
+import { handleTypefullyDraft } from "./routes/typefully-draft.js";
 import { handleValidate } from "./routes/validate.js";
 const packageJson = JSON.parse(readFileSync(new URL("../../package.json", import.meta.url), "utf8")) as { version?: string };
 
@@ -16,6 +19,11 @@ routes.set("GET /health", () => ({
     service: "comms-factory-api",
     version: packageJson.version,
     commit: process.env.COMMIT_SHA ?? "local",
+    capabilities: {
+      platform_pr: Boolean(process.env.GITHUB_TOKEN?.trim()),
+      typefully: Boolean(process.env.TYPEFULLY_API_KEY?.trim()),
+      display: Boolean(process.env.DISPLAYDEV_API_KEY?.trim()),
+    },
   },
 }));
 
@@ -25,10 +33,19 @@ for (const [path, handler] of [
   ["/ground", handleGround],
   ["/build-card", handleBuildCard],
   ["/generate", handleGenerate],
+  ["/typefully-draft", handleTypefullyDraft],
+  ["/emit", handleEmit],
 ] as const) {
   routes.set(`POST ${path}`, async (ctx) => {
     requirePostAuth(ctx.request);
     return handler(ctx as never) as never;
+  });
+}
+
+for (const [path, handler] of Object.entries(makeDisplayHandlers())) {
+  routes.set(`POST ${path}`, async (ctx) => {
+    requirePostAuth(ctx.request);
+    return handler(ctx);
   });
 }
 

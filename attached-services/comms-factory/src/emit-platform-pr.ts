@@ -8,9 +8,9 @@ import ts from "typescript";
 
 const execFileAsync = promisify(execFile);
 
-const ROADMAP_DATA_PATH = "apps/public-website/src/app/(site)/roadmap/data.ts";
-const FEATURES_DATA_PATH = "apps/public-website/src/app/(site)/features/data.ts";
-const BLOG_DIR = "apps/content-app/content/blog";
+export const ROADMAP_DATA_PATH = "apps/public-website/src/app/(site)/roadmap/data.ts";
+export const FEATURES_DATA_PATH = "apps/public-website/src/app/(site)/features/data.ts";
+export const BLOG_DIR = "apps/content-app/content/blog";
 const DEFAULT_PLATFORM_ROOT = resolve(homedir(), "Sites/infinex-xyz/platform");
 
 export type LaunchPackage = {
@@ -722,7 +722,7 @@ function defaultBranchName(slug: string): string {
   return `cf-emit/${slug}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
-function assertSafeBranch(branch: string): void {
+export function assertSafeBranch(branch: string): void {
   const lastSegment = branch.split("/").at(-1);
   if (!branch || branch.trim() !== branch) throw new Error(`unsafe branch name: ${branch}`);
   if (
@@ -750,7 +750,7 @@ function assertSafeBranch(branch: string): void {
   }
 }
 
-function buildPrBody(pkg: LaunchPackage, roadmapChanges: RoadmapChangeSummary[]): string {
+export function buildPrBody(pkg: LaunchPackage, roadmapChanges: RoadmapChangeSummary[]): string {
   const lines = [
     "Emitted by comms-factory from an approved launch package.",
     "",
@@ -787,7 +787,7 @@ function formatRoadmapStatus(status: string | null): string {
   return status ?? "unset";
 }
 
-function ensureTrailingNewline(value: string): string {
+export function ensureTrailingNewline(value: string): string {
   return value.endsWith("\n") ? value : `${value}\n`;
 }
 

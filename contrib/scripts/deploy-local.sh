@@ -45,7 +45,7 @@ while [[ $# -gt 0 ]]; do
       echo "       contrib/scripts/deploy-local.sh [--services api,slackbot] [--with-comms-factory] [--skip-comms-factory-build]"
       echo "Deploys onto k3s inside the podman machine VM (no docker). See contrib/docs/deploy-local-runsheet.md."
       echo "Required env: SLACK_BOT_TOKEN SLACK_SIGNING_SECRET SLACK_APP_TOKEN OPENAI_API_KEY"
-      echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY DEEP_RESEARCH_MODEL COMMS_FACTORY_SERVICE_TOKEN LOCAL_DEV_API_KEY"
+      echo "Optional env: ANTHROPIC_API_KEY AMP_API_KEY EXA_API_KEY DEEP_RESEARCH_MODEL COMMS_FACTORY_SERVICE_TOKEN LOCAL_DEV_API_KEY GITHUB_TOKEN TYPEFULLY_API_KEY DISPLAYDEV_API_KEY TYPEFULLY_SOCIAL_SET"
       echo "--only rebuilds + reimports a single Centaur image (the rest stay as-is) for fast iteration."
       echo "--services rebuilds + reimports a comma-separated subset of Centaur images."
       echo "--with-comms-factory builds/imports the in-repo comms-factory image (attached-services/comms-factory), builds/mounts the comms overlay, patches local secrets, and enables attachedServices.comms-factory."
@@ -197,6 +197,19 @@ if [[ "$WITH_COMMS_FACTORY" == "1" ]]; then
 {"stringData":{"COMMS_FACTORY_SERVICE_TOKEN":"${COMMS_FACTORY_SERVICE_TOKEN_VALUE}","LOCAL_DEV_API_KEY":"${LOCAL_DEV_API_KEY_VALUE}","COMMS_FACTORY_CAPABILITY_API_KEY":"${COMMS_FACTORY_CAPABILITY_API_KEY_VALUE}"}}
 JSON
 )" >/dev/null
+
+  # Delivery tokens (phase 2): pass through when set in the caller's environment.
+  # Uses bash indirect expansion (${!key:-}) — this script is bash, not zsh.
+  DELIVERY_KEYS_JSON=""
+  for key in GITHUB_TOKEN TYPEFULLY_API_KEY DISPLAYDEV_API_KEY; do
+    value="${!key:-}"
+    [[ -z "$value" ]] && continue
+    DELIVERY_KEYS_JSON+=",\"${key}\":$(python3 -c 'import json,sys; print(json.dumps(sys.argv[1]))' "$value")"
+  done
+  if [[ -n "$DELIVERY_KEYS_JSON" ]]; then
+    kubectl -n "$NAMESPACE" patch secret "$SECRET_NAME" -p "{\"stringData\":{${DELIVERY_KEYS_JSON#,}}}" >/dev/null
+    echo ">> patched delivery token keys on $SECRET_NAME"
+  fi
 fi
 
 # 5. Firewall CA secrets (mounted at /firewall-certs/ca-cert.pem). Create once;
@@ -264,6 +277,10 @@ attachedServices:
       port: 8080
     proxy:
       enabled: false
+    # Delivery routing (phase 2): GitHub REST + Typefully + display.dev are
+    # direct HTTPS calls (proxy.enabled is false) — open port-443 egress.
+    egressPorts:
+      - 443
     # Bootstraps service:comms-factory (bundle:research, least-privilege) from the
     # COMMS_FACTORY_CAPABILITY_API_KEY secret-env token via the generic
     # attached-service key mechanism — no hardcoded entry in base api_keys.py.
@@ -278,6 +295,7 @@ attachedServices:
       # so callbacks are governed by the outer workflow/tool budget instead of
       # failing early inside the attached service.
       CENTAUR_TIMEOUT_MS: "90000"
+      TYPEFULLY_SOCIAL_SET: "${TYPEFULLY_SOCIAL_SET:-Infinex}"
     secretEnv:
       COMMS_FACTORY_SERVICE_TOKEN:
         secretName: $SECRET_NAME
@@ -289,6 +307,18 @@ attachedServices:
       CENTAUR_TOKEN:
         secretName: $SECRET_NAME
         key: COMMS_FACTORY_CAPABILITY_API_KEY
+      GITHUB_TOKEN:
+        secretName: $SECRET_NAME
+        key: GITHUB_TOKEN
+        optional: true
+      TYPEFULLY_API_KEY:
+        secretName: $SECRET_NAME
+        key: TYPEFULLY_API_KEY
+        optional: true
+      DISPLAYDEV_API_KEY:
+        secretName: $SECRET_NAME
+        key: DISPLAYDEV_API_KEY
+        optional: true
 
 api:
   defaultHarness: $COMMS_FACTORY_DEFAULT_HARNESS

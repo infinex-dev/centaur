@@ -7,6 +7,12 @@ from typing import Any
 
 from api.workflow_engine import WorkflowContext
 
+from comms_delivery import (
+    deliveries_made,
+    empty_deliveries,
+    run_blog_review_loop,
+    run_delivery_gate,
+)
 from comms_shared import (
     Gate,
     GateValidationError,
@@ -55,6 +61,7 @@ class Input(SlackWorkflowInput):
     brief: str = ""
     channels: list[str] = field(default_factory=list)
     voice_id: str = "infinex"
+    reviewer_emails: list[str] = field(default_factory=list)
 
 
 async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
@@ -616,6 +623,40 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
             **_state_payload(),
         }
 
+    # ---- delivery routing (phase 2) ----
+    deliveries = empty_deliveries()
+    caps_result = await call_comms_tool(ctx, "probe_capabilities", "capabilities", {})
+    caps_raw = caps_result.get("capabilities")
+    caps = caps_raw if isinstance(caps_raw, dict) else {}
+
+    reviewer_emails = list(inp.reviewer_emails) or _parse_reviewer_emails(brief)
+    if final_by_channel.get("blog") is not None and caps.get("display"):
+        if reviewer_emails:
+            final_by_channel, deliveries = await run_blog_review_loop(
+                ctx,
+                inp,
+                card=card,
+                final_by_channel=final_by_channel,
+                deliveries=deliveries,
+                reviewer_emails=reviewer_emails,
+            )
+        else:
+            # The capability is live but there is nobody to share with — say
+            # so: a silently-skipped review loop reads as a bug to the operator.
+            await post_gate_message(
+                ctx,
+                name="post_blog_review_no_reviewers",
+                delivery=inp.delivery,
+                text="blog review loop skipped — no reviewer emails.",
+                blocks=[
+                    context_block(
+                        "blog review loop skipped — no reviewer emails (add"
+                        " `reviewers: a@x.com` to the brief or pass"
+                        " reviewer_emails)."
+                    )
+                ],
+            )
+
     # ---- ship (per-channel) ----
     ship_blocks: list[dict[str, Any]] = [
         markdown_block("*Ready to ship in Slack (no external posting performed)*")
@@ -650,10 +691,22 @@ async def handler(inp: Input, ctx: WorkflowContext) -> dict[str, Any]:
         text="Ready to ship in Slack (no external posting performed)",
         blocks=ship_blocks,
     )
+
+    deliveries, _delivery_outcome = await run_delivery_gate(
+        ctx,
+        inp,
+        card=card,
+        channels=channels,
+        final_by_channel=final_by_channel,
+        candidates=candidates,
+        caps=caps,
+        deliveries=deliveries,
+    )
     return {
         "status": "ready_to_ship",
         **_state_payload(),
-        "no_external_posting": True,
+        "deliveries": deliveries,
+        "no_external_posting": not deliveries_made(deliveries),
     }
 
 
@@ -867,6 +920,27 @@ def _parse_channels(brief: str) -> list[str]:
     if not match:
         return []
     return [part.strip().lower() for part in match.group(1).split(",") if part.strip()]
+
+
+_EMAIL_RE = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+
+
+def _parse_reviewer_emails(brief: str) -> list[str]:
+    """Slack briefs carry reviewers inline ('reviewers: a@x.com, b@x.com') —
+    the Slack command path has no structured input field for emails. Returns
+    well-formed emails only (malformed entries are dropped — display.dev's
+    --share would reject them at publish), deduped, first-seen order. Like
+    _parse_channels, the line is parsed but not stripped from the brief."""
+    match = re.search(r"\breviewers?\s*:\s*([^\n]+)", brief, flags=re.I)
+    if not match:
+        return []
+    emails: list[str] = []
+    seen: set[str] = set()
+    for candidate in _EMAIL_RE.findall(match.group(1)):
+        if candidate.lower() not in seen:
+            seen.add(candidate.lower())
+            emails.append(candidate)
+    return emails
 
 
 def _format_generation_failure(result: dict[str, Any], error: str) -> str:

@@ -154,8 +154,19 @@ kubectl -n centaur-system create secret generic centaur-infra-env \
   --from-literal=OPENAI_API_KEY="$OPENAI_API_KEY" \
   --from-literal=ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}" \
   --from-literal=AMP_API_KEY="${AMP_API_KEY:-}" \
+  --from-literal=GITHUB_TOKEN="${GITHUB_TOKEN:-}" \
+  --from-literal=TYPEFULLY_API_KEY="${TYPEFULLY_API_KEY:-}" \
+  --from-literal=DISPLAYDEV_API_KEY="${DISPLAYDEV_API_KEY:-}" \
   | kubectl apply -f -
 ```
+
+> `GITHUB_TOKEN`, `TYPEFULLY_API_KEY`, and `DISPLAYDEV_API_KEY` are the comms
+> delivery-routing tokens — see "Comms delivery routing (phase 2)" below for what
+> each unlocks and the GITHUB_TOKEN scope requirement. All three are optional; omit
+> any you have not provisioned yet (`--from-literal=…="${VAR:-}"` writes an empty
+> string, which the service reports as a disabled capability — the corresponding
+> delivery buttons simply don't appear). `GITHUB_TOKEN` is also read by the
+> read-only repo-cache; the comms pod shares the same key (see below).
 
 Restart workloads after patching credentials:
 
@@ -197,3 +208,111 @@ kubectl exec -n centaur-system deploy/centaur-centaur-api -- \
 
 curl -k https://centaur.inx.local/health
 ```
+
+## Comms delivery routing (phase 2)
+
+After a comms release reaches `ready_to_ship`, the delivery phase routes each
+approved channel to its real destination behind a human-confirmed gate:
+blog/web → a platform PR (GitHub REST), x/x-thread → Typefully drafts, and an
+optional display.dev draft-review loop for the blog. All of it is **additive and
+opt-in** — a deploy with none of the tokens below behaves exactly as before
+(the delivery gate never appears).
+
+### Tokens (all optional, all in `centaur-infra-env`)
+
+The comms-factory service reports each as a capability on `GET /health`
+(`capabilities: {platform_pr, typefully, display}` — booleans computed from env
+presence, never the values). The Centaur workflow probes that once per run and
+only renders a delivery group's buttons when its token is present. An absent
+token = a hidden button, never a hard failure.
+
+| Secret key | Unlocks | Notes |
+|---|---|---|
+| `GITHUB_TOKEN` | blog/web → platform PR ("Preview platform PR" / "Create PR") | **Shared with the read-only repo-cache.** Must be a fine-grained PAT with **Contents: Read and write + Pull requests: Read and write** on `infinex-xyz/platform`. See the scope note below. |
+| `TYPEFULLY_API_KEY` | x / x-thread → Typefully drafts | v2 Bearer key. Drafts only — never auto-published. Pair with `TYPEFULLY_SOCIAL_SET` (below). |
+| `DISPLAYDEV_API_KEY` | the blog draft-review loop on display.dev (`sk_live_…`) | Read from env by the `dsp` CLI in-pod (no on-disk login session). When absent, blog skips straight to the delivery PR. |
+
+**GITHUB_TOKEN scope — important.** The token is reused from the existing
+repo-cache secret, upgraded by the operator to Contents+PR write. There is no
+"PRs only" GitHub permission (opening a PR requires `Contents: write` to create
+the `cf-emit/*` head branch; forking is org-disabled). The "never lands code"
+guarantee comes from **platform `main`'s branch protection** (a `pull_request`
+ruleset enforced for everyone + required checks/signatures), not from the token:
+any write token can only open PRs that a human merges. Caveats accepted by the
+operator (2026-06-12): the token is fine-grained PAT-wide, so its Contents:write
+applies to every repo on its access list; and the repo-cache pod now mounts a
+write-capable token.
+
+### NetworkPolicy egress (the one base-chart change)
+
+The comms pod is default-deny egress except api:8000. The delivery path needs
+outbound HTTPS to `api.github.com`, Typefully, and display.dev, so the chart
+adds a per-attached-service `egressPorts` knob, set for comms-factory in
+`overlays/comms-factory/values.production.yaml`:
+
+```yaml
+attachedServices:
+  comms-factory:
+    egressPorts:
+      - 443
+```
+
+This renders an **internet-only** egress rule (`ipBlock: 0.0.0.0/0` excepting
+the three RFC-1918 ranges, so in-cluster services on 443 stay unreachable). It
+is opt-in: an attached service that sets no `egressPorts` gets no 443 rule.
+
+### Env knobs (non-secret, in the attached-service `env:`)
+
+| Env var | Default | Purpose |
+|---|---|---|
+| `TYPEFULLY_SOCIAL_SET` | `Infinex` | The Typefully social set to create drafts in — numeric id or name. Point it at a private test set for non-production drafting. |
+| `COMMS_PLATFORM_REPO` | `infinex-xyz/platform` | Target repo for emitted PRs. The escape hatch for a staging/fork target if org fork policy ever changes; leave unset in production. |
+
+### Reviewer emails for the display.dev loop
+
+The blog review loop publishes a **private** display.dev artifact shared with an
+explicit reviewer allowlist (the `--share` list is emails, not Slack IDs). Two
+ways to supply them:
+
+- **Workflow input** `reviewer_emails: ["a@x.com", "b@x.com"]` (API-started runs).
+- **Slack brief syntax** — add a `reviewers:` line to the brief, parsed inline
+  the same way channel selection is: `comms release for blog: <brief>. reviewers: a@x.com, b@x.com`.
+  Explicit workflow input wins; malformed addresses are dropped. When neither
+  yields an email, the loop is skipped (a context note says so) and the blog goes
+  straight to the delivery PR.
+
+### After patching tokens
+
+Secrets are read from `envFrom` at startup and do **not** hot-reload. Restart the
+attached service after adding or changing any delivery token:
+
+```bash
+kubectl -n centaur-system rollout restart deploy/centaur-centaur-attached-comms-factory
+```
+
+Then confirm the capabilities flipped (from inside the API pod, no key needed):
+
+```bash
+kubectl exec -n centaur-system deploy/centaur-centaur-api -- \
+  curl -fsS http://centaur-centaur-attached-comms-factory:8080/health | jq .capabilities
+```
+
+### Outward-write etiquette
+
+Delivery performs real external writes — all reversible, all human-gated:
+
+- **PRs are never auto-merged.** Every emitted PR opens on `cf-emit/<slug>-<run_id>`
+  with body "human-approve, DO NOT merge" and receives platform's automatic AI
+  content review. A human merges (or closes) it. The emit path is idempotent: a
+  re-run with the same `run_id` short-circuits to the existing PR rather than
+  opening a second one.
+- **Typefully creates drafts only** — a human publishes from the Typefully
+  workspace. (No idempotency key exists, so a crash between the API call and the
+  durable checkpoint can leave a duplicate *draft* — low stakes; delete the extra
+  by hand.)
+- **display.dev artifacts are private and torn down** on every non-approval exit
+  (`dsp delete`); on approval the artifact is retained as the review record until
+  the PR merges, after which the operator may delete it.
+- When validating against the real `infinex-xyz/platform`, **close the test PR
+  unmerged and delete its branch** (`gh pr close <url> --delete-branch`) and remove
+  any test Typefully drafts and the display artifact afterward.

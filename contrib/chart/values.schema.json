@@ -55,6 +55,10 @@
               "enabled": { "type": "boolean" }
             }
           },
+          "egressPorts": {
+            "type": "array",
+            "items": { "type": "integer", "minimum": 1, "maximum": 65535 }
+          },
           "serviceKey": {
             "type": "object",
             "description": "Centaur callback API key this attached service uses to call /tools. Bootstrapped from the secret-env token named by envVar.",
